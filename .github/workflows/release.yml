@@ -4,10 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@main
-      with:
-        type: 'zip'
-        filename: 'starwars-data.zip'
-        exclusions: '*.git*'
+      - uses: actions/checkout@master
+      - name: Archive Release
+        uses: thedoctor0/zip-release@main
+        with:
+          type: 'zip'
+          filename: 'starwars-data.zip'
+          exclusions: '*.git*'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "starwars-data.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
