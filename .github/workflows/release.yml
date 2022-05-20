@@ -1,5 +1,8 @@
 name: Create Archive
-on: [push]
+on:
+ push:
+  tags:
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
           filename: 'starwars-data.zip'
           exclusions: '*.git*'
       - name: Upload Release
-        uses: ncipollo/release-action@v1
+        uses: actions/release@v1
         with:
           artifacts: "starwars-data.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
