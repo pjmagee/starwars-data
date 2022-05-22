@@ -15,7 +15,7 @@ jobs:
           filename: 'starwars-data.zip'
           exclusions: '*.git*'
       - name: Upload Release
-        uses: actions/release@v1
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "starwars-data.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
