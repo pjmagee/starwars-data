@@ -1,0 +1,71 @@
+services:
+  
+  database:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - C:\temp\starwarsdata\mongodb:/data/db
+
+  # Web API
+  # https://docs.microsoft.com/en-us/aspnet/core/security/docker-compose-https?view=aspnetcore-6.0
+  # dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p "password"
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    image: pjmagee/starwars-data-api:latest
+    ports:
+      - 9999:80
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      # ASPNETCORE_Kestrel__Certificates__Default__Password: password
+      # ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      Settings__MongoDbUri: mongodb://admin:password@database:27017
+    # volumes:
+      # - ~/.aspnet/https:/https:ro
+
+  # Download infobox data
+  download:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: cli
+    image: pjmagee/starwars-data-download:latest
+    environment:
+      SWDATA_Settings__DataDirectory: /data
+      SWDATA_Settings__PageNamespace: 0
+      SWDATA_Settings__PageLimit: 500
+      SWDATA_Settings__PageStart: 1
+      SWDATA_Settings__FirstPageOnly: "true"
+    command: download
+    volumes:
+      - C:\temp\starwarsdata\data:/data
+
+  # Attach relationships to all the records
+  process:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: cli
+    image: pjmagee/starwars-data-process:latest
+    environment:
+      SWDATA_Settings__DataDirectory: /data
+    command: process
+    volumes:
+      - C:\temp\starwarsdata\data:/data
+
+  populate:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: cli
+    image: pjmagee/starwars-data-extractor:latest
+    environment:
+      SWDATA_Settings__DataDirectory: /data
+      SWDATA_Settings__MongoDbUri: mongodb://admin:password@database:27017
+    command: populate
+    volumes:
+      - C:\temp\starwarsdata\data:/data

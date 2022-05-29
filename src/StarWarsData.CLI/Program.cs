@@ -1,0 +1,86 @@
+﻿using System.CommandLine;
+using System.CommandLine.Builder;
+using System.CommandLine.Hosting;
+using System.CommandLine.NamingConventionBinder;
+using System.CommandLine.Parsing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using Polly;
+using StarWarsData.Models;
+using StarWarsData.Services;
+
+CommandLineBuilder BuildCommandLine()
+{
+    var root = new RootCommand();
+    root.AddCommand(new Command("download") { Handler = CommandHandler.Create<IHost, CancellationToken>(DownloadInfoboxes) });
+    root.AddCommand(new Command("process") { Handler = CommandHandler.Create<IHost, CancellationToken>(ProcessRelationships) });
+    root.AddCommand(new Command("populate") { Handler = CommandHandler.Create<IHost, CancellationToken>(PopulateDatabase) });
+    return new CommandLineBuilder(root);
+}
+
+async Task DownloadInfoboxes(IHost host, CancellationToken token)
+{
+    using var scope = host.Services.CreateScope();
+    var service = scope.ServiceProvider.GetRequiredService<InfoboxDownloader>();
+    await service.ExecuteAsync(token);
+}
+
+async Task PopulateDatabase(IHost host, CancellationToken token)
+{
+    using var scope = host.Services.CreateScope();
+    var service = scope.ServiceProvider.GetRequiredService<RecordsService>();
+    await service.PopulateAsync(token);
+}
+
+async Task ProcessRelationships(IHost host, CancellationToken token)
+{
+    using var scope = host.Services.CreateScope();
+    var service = scope.ServiceProvider.GetRequiredService<InfoboxRelationshipProcessor>();
+    await service.ExecuteAsync(token);
+}
+
+await BuildCommandLine()
+    .UseHost(_ => Host.CreateDefaultBuilder(), hostBuilder =>
+    {
+        hostBuilder
+            .ConfigureHostConfiguration(builder =>
+            {
+                builder.AddJsonFile("hostsettings.json", optional: false);
+            })
+            .ConfigureAppConfiguration((context, builder) =>
+            {
+                builder
+                    .AddJsonFile("appsettings.json", optional: false)
+                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)
+                    .AddEnvironmentVariables(source => source.Prefix = "SWDATA_");
+            })
+            .ConfigureLogging((context, builder) =>
+            {
+                builder.AddConfiguration(context.Configuration.GetRequiredSection("Logging"));
+                builder.AddConsole();
+            })
+            .ConfigureServices((context, services) =>
+            {
+                var settings = context.Configuration.GetSection(nameof(Settings)).Get<Settings>()!;
+
+                services
+                    .AddSingleton(settings)
+                    .AddSingleton<InfoboxDownloader>()
+                    .AddSingleton<InfoboxRelationshipProcessor>()
+                    .AddSingleton<RecordsService>()
+                    .AddSingleton(new MongoClient(new MongoUrl(settings.MongoDbUri)))
+                    .AddHttpClient();
+
+                services
+                    .AddHttpClient<InfoboxDownloader>()
+                    .ConfigureHttpClient(client => client.BaseAddress = new Uri(settings.StarWarsBaseUrl))
+                    .AddTransientHttpErrorPolicy(policyBuilder => policyBuilder.RetryAsync())
+                    .SetHandlerLifetime(TimeSpan.FromMinutes(10));
+            });
+    })
+    .UseDefaults()
+    .Build()
+    .InvokeAsync(args);

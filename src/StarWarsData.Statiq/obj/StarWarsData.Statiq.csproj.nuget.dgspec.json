@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Statiq\\StarWarsData.Statiq.csproj": {}
+  },
+  "projects": {
+    "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\StarWarsData.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\StarWarsData.Models.csproj",
+        "projectName": "StarWarsData.Models",
+        "projectPath": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\StarWarsData.Models.csproj",
+        "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.15.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100-preview.4.22252.9\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Statiq\\StarWarsData.Statiq.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Statiq\\StarWarsData.Statiq.csproj",
+        "projectName": "StarWarsData.Statiq",
+        "projectPath": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Statiq\\StarWarsData.Statiq.csproj",
+        "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Statiq\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\StarWarsData.Models.csproj": {
+                "projectPath": "C:\\Projects\\github\\pjmagee\\starwars-data\\src\\StarWarsData.Models\\StarWarsData.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Statiq.Web": {
+              "target": "Package",
+              "version": "[1.0.0-beta.47, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100-preview.4.22252.9\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
