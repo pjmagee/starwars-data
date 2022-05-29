@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Statiq.Web" Version="1.0.0-beta.47" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StarWarsData.Models\StarWarsData.Models.csproj" />
+    </ItemGroup>
+
+</Project>

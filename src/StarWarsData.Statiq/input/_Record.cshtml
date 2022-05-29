@@ -1,0 +1,70 @@
+@{
+    Layout = null;
+}
+
+@model StarWarsData.Models.Record
+
+<table>
+    <thead>
+    <tr>
+        <th>Field</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var data in Model.Data)
+    {
+        <tr>
+            <td>
+                @data.Label
+            </td>
+            <td>
+                <ul class="data-values">
+                    @foreach (var item in data.Values)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+
+                <ul class="data-links">
+                    @foreach (var item in data.Links)
+                    {
+                        <li>
+                            <a href="@item.Href">@item.Content</a>
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Star Wars Wiki</th>
+        <th>Star Wars Statiq</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var relationship in Model.Relationships)
+    {
+        <tr>
+            <td>
+                <a href="@relationship.PageUrl">
+                    @relationship.PageId - @relationship.PageTitle
+                </a>
+            </td>
+            <td>
+                <a href="/@relationship.TemplateUrl/@relationship.PageId - @relationship.TemplateUrl - @(relationship.PageTitle + ".html")">
+                    @relationship.PageTitle
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
