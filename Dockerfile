@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/runtime:7.0 AS runtime
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-jammy AS aspnet
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS aspnet
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS sdk

@@ -1,5 +1,5 @@
 services:
-  
+
   database:
     image: mongo:latest
     environment:
@@ -8,62 +8,72 @@ services:
     volumes:
       - C:\temp\starwarsdata\mongodb:/data/db
 
-  # Web API
-  # https://docs.microsoft.com/en-us/aspnet/core/security/docker-compose-https?view=aspnetcore-6.0
-  # dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p "password"
   api:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       target: api
     image: pjmagee/starwars-data-api:latest
     ports:
-      - 9999:80
+      - 7051:7051
+      - 5051:5051
+    entrypoint: ["dotnet", "StarWarsData.API.dll"]
+    expose:
+      - 7051
+      - 5051
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      # ASPNETCORE_Kestrel__Certificates__Default__Password: password
-      # ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
-      Settings__MongoDbUri: mongodb://admin:password@database:27017
-    # volumes:
-      # - ~/.aspnet/https:/https:ro
+      ASPNETCORE_HTTPS: 7051
+      ASPNETCORE_URLS: https://*:7051;http://*:5051
+      ASPNETCORE_Kestrel__Certificates__Default__Password: password
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      SWDATA_Settings__MongoDbUri: mongodb://admin:password@database:27017
+    volumes:
+     - ~/.aspnet/https:/https:ro
 
-  # Download infobox data
   download:
     build:
       context: .
       dockerfile: Dockerfile
       target: cli
-    image: pjmagee/starwars-data-download:latest
+    image: pjmagee/starwars-data-cli:latest
+    entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
+      DOTNET_ENVIRONMENT: Production
       SWDATA_Settings__DataDirectory: /data
       SWDATA_Settings__PageNamespace: 0
       SWDATA_Settings__PageLimit: 500
       SWDATA_Settings__PageStart: 1
-      SWDATA_Settings__FirstPageOnly: "true"
+      SWDATA_Settings__FirstPageOnly: "false"
     command: download
     volumes:
-      - C:\temp\starwarsdata\data:/data
+      #- C:\temp\starwarsdata\data:/data
+      - C:\Projects\github\pjmagee\starwars-data\data:/data
 
-  # Attach relationships to all the records
   process:
     build: 
       context: .
       dockerfile: Dockerfile
       target: cli
-    image: pjmagee/starwars-data-process:latest
+    image: pjmagee/starwars-data-cli:latest
+    entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
+      DOTNET_ENVIRONMENT: Development
       SWDATA_Settings__DataDirectory: /data
     command: process
     volumes:
-      - C:\temp\starwarsdata\data:/data
+      #- C:\temp\starwarsdata\data:/data
+      - C:\Projects\github\pjmagee\starwars-data\data:/data
 
   populate:
     build: 
       context: .
       dockerfile: Dockerfile
       target: cli
-    image: pjmagee/starwars-data-extractor:latest
+    image: pjmagee/starwars-data-cli:latest
+    entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
+      DOTNET_ENVIRONMENT: Development
       SWDATA_Settings__DataDirectory: /data
       SWDATA_Settings__MongoDbUri: mongodb://admin:password@database:27017
     command: populate

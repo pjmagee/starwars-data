@@ -48,14 +48,15 @@ await BuildCommandLine()
         hostBuilder
             .ConfigureHostConfiguration(builder =>
             {
-                builder.AddJsonFile("hostsettings.json", optional: false);
+                builder.AddJsonFile("hostsettings.json", optional: false)
+                    .AddEnvironmentVariables(prefix: "DOTNET_");
             })
             .ConfigureAppConfiguration((context, builder) =>
             {
                 builder
                     .AddJsonFile("appsettings.json", optional: false)
                     .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)
-                    .AddEnvironmentVariables(source => source.Prefix = "SWDATA_");
+                    .AddEnvironmentVariables(prefix: "SWDATA_");
             })
             .ConfigureLogging((context, builder) =>
             {
