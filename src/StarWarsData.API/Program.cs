@@ -1,11 +1,13 @@
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using StarWarsData.Models;
 using StarWarsData.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 
 builder.Configuration.AddEnvironmentVariables("SWDATA_");
 
+builder.Services.AddResponseCompression();
+builder.Services.AddResponseCaching();
+builder.Services.AddHttpsRedirection(options => options.HttpsPort = 5001);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
@@ -24,11 +26,13 @@ if (app.Environment.IsDevelopment())
     
     app.UseSwaggerUI(options =>
     {
-
+        
     });
 }
 
-// app.UseHttpsRedirection();
+app.UseResponseCompression();
+app.UseResponseCaching();
+app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
