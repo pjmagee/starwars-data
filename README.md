@@ -1,4 +1,4 @@
-# Starwars Data
+# Star Wars Data
 
 Extracted infobox data from the https://starwars.fandom.com/ API in json format using [pjmagee/starwars-data-extractor](https://github.com/pjmagee/starwars-data-extractor)
 
@@ -8,9 +8,13 @@ in the most generic way possible and both text and links are stored for each pro
 ## Docker
 
 ```sh
-docker compose up -f starwars-data.yml -d
+docker compose build # build the projects
+docker compose up download # download the data
+docker compose up process # process relationships
+docker compose up database # start mongodb
+docker compose up populate # populate mongodb
+docker compose up api # serve api and swagger
 ```
-
 
 ## Data folder JSON Structure
 
