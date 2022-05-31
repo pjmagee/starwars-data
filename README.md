@@ -1,6 +1,6 @@
 # Star Wars Data
 
-Extracted infobox data from the https://starwars.fandom.com/ API in json format using [pjmagee/starwars-data-extractor](https://github.com/pjmagee/starwars-data-extractor)
+Extracted infobox data from the https://starwars.fandom.com/.
 
 This repository contains various categories of data related to Star Wars by grouping and extracting page content based on pages that have an infobox template. The structure of the infobox is parsed 
 in the most generic way possible and both text and links are stored for each property of the infobox.
