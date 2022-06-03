@@ -6,13 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="appsettings.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
         <None Update="hostsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
@@ -25,7 +21,7 @@
       <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.0-preview.4.22251.1" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0-preview.4.22229.4" />
       <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
-      <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22114.1" />
+      <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22272.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,15 +31,22 @@
     <ItemGroup>
       <Content Include="appsettings.Development.json">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
       <Content Include="appsettings.Production.json">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="appsettings.json" />
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
 

@@ -8,7 +8,10 @@ namespace StarWarsData.Models;
 [Serializable]
 public class Relationship
 {
-    [JsonIgnore,  BsonIgnore] public string PageTitle => HttpUtility.UrlDecode(PageUrl!.Split("/wiki/").Last()).Replace("_", " ");
+    [JsonIgnore,  BsonIgnore] public string PageTitle => 
+        HttpUtility
+            .UrlDecode(PageUrl!.Split(new[]{ "/wiki/" }, StringSplitOptions.RemoveEmptyEntries).Last())
+            .Replace("_", " ");
 
     [JsonIgnore,  BsonIgnore] public string Template => TemplateUrl!.Split(':').LastOrDefault() ?? string.Empty;
     

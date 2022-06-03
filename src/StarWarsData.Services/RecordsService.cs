@@ -1,7 +1,6 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using StarWarsData.Models;
 
@@ -33,6 +32,34 @@ public class RecordsService
         return results;
     }
 
+    public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50, CancellationToken token = default)
+    {
+        var results = new ConcurrentBag<Record>();
+        
+        var collectionNames = await (await _mongoDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
+        
+        await Parallel.ForEachAsync(collectionNames, new ParallelOptions(){ CancellationToken = token }, async (name, t) =>
+        {
+            var collection =  _mongoDb.GetCollection<Record>(name);
+            
+            var cursor = await collection.FindAsync(new FilterDefinitionBuilder<Record>().Text(query), cancellationToken: t);
+            var collectionResults = await cursor.ToListAsync(t);
+
+            foreach (var result in collectionResults)
+            {
+                results.Add(result);    
+            }
+        });
+        
+        return new PagedResult
+        {
+            Total = results.Count,
+            Size = pageSize,
+            Page = page,
+            Items = results.Skip((page - 1) * pageSize).Take(pageSize)
+        };
+    }
+
     public async Task<PagedResult> GetCollectionResult(string collectionName, int page = 1, int pageSize = 50, CancellationToken token = default)
     {
         return await GetPagerResultAsync(page, pageSize, _mongoDb.GetCollection<Record>(collectionName), token);
@@ -40,6 +67,8 @@ public class RecordsService
 
     private static async Task<PagedResult> GetPagerResultAsync(int page, int pageSize, IMongoCollection<Record> collection, CancellationToken token)
     {
+        var total = await collection.CountDocumentsAsync(record => true, cancellationToken: token);
+        
         var dataFacet = AggregateFacet.Create("dataFacet", PipelineDefinition<Record, Record>.Create(new[]
         {		
             PipelineStageDefinitionBuilder.Skip<Record>((page - 1) * pageSize),
@@ -56,7 +85,7 @@ public class RecordsService
 
         return new PagedResult
         {
-            Count = await collection.CountDocumentsAsync(record => true, cancellationToken: token),
+            Total = (int) total,
             Size = pageSize,
             Page = page,
             Items = data
@@ -71,6 +100,7 @@ public class RecordsService
         {
             _logger.LogInformation($"Populating {templateDirectoryInfo.Name}");
             
+            
             await starWars.DropCollectionAsync(templateDirectoryInfo.Name, cancellationToken);
             await starWars.CreateCollectionAsync(templateDirectoryInfo.Name, cancellationToken: cancellationToken);
             
@@ -83,20 +113,20 @@ public class RecordsService
                 await using var jsonStream = file.OpenRead();
                 
                 Record record = (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
-                var filter = Builders<Record>.Filter.Eq(f => f.PageId, record.PageId);
-                var options = new FindOneAndReplaceOptions<Record>() { IsUpsert = true };
-                        
-                await collection.FindOneAndReplaceAsync(filter, record, options, token);
+                
+                await collection.InsertOneAsync(record, new InsertOneOptions(){ BypassDocumentValidation = false },  token);
             });
             
-            var indexModel = new CreateIndexModel<Record>(Builders<Record>.IndexKeys
-                .Text("Data.Values")
-                .Text("Data.Links.Content")
-                .Text("Data.Label"));
-                
-            await collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
+            var indexModel = new CreateIndexModel<Record>(
+                Builders<Record>.IndexKeys
+                    .Text(x => x.Data.First().Label)
+                    .Text(x => x.Data.First().Links)
+                    .Text(x => x.Data.First().Values)
+                    .Text(x => x.Relationships));
             
-            _logger.LogInformation($"Indexed {templateDirectoryInfo.Name}");
+            var index = await collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
+            
+            _logger.LogInformation($"Index: {index} created for {templateDirectoryInfo.Name}");
         }
         
         _logger.LogInformation($"Db Populated");
