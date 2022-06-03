@@ -4,6 +4,21 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace StarWarsData.Models;
 
+
+[Serializable]
+[BsonIgnoreExtraElements]
+public class NoRelationshipRecord
+{
+    [BsonIgnore] public string PageTitle => HttpUtility.UrlDecode(PageUrl!.Split(new[] { "/wiki/" }, StringSplitOptions.None).Last()).Replace("_", " ");
+    [BsonIgnore] public string Template => TemplateUrl.Split(':').Last();
+    
+    [BsonId, BsonElement("_id")] public int PageId { get; set; }
+    [BsonElement] public string PageUrl { get; set; } = null!;
+    [BsonElement] public string TemplateUrl { get; set; } = null!;
+    [BsonElement] public string? ImageUrl { get; set; }
+    [BsonElement] public List<InfoboxProperty> Data { get; set; } = new();
+}
+
 [Serializable]
 public class Record
 {
