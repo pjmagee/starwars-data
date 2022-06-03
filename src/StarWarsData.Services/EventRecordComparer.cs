@@ -4,6 +4,11 @@ namespace StarWarsData.Services;
 
 public class EventRecordComparer : IComparer<Record>
 {
+    // Compare should be based on the Template Structure
+    // If it's an Event: "Date"
+    // If it's a Treaty: "Date established"
+    // If it's a Law: "Date"
+    // If it's a Campaign: "Begin" and "End"
     public int Compare(Record? x, Record? y)
     {
         // We expect the first Data[0].Label = Values
@@ -37,8 +42,8 @@ public class EventRecordComparer : IComparer<Record>
             return yYear.CompareTo(xYear);
         
         if(xValue.Contains("BBY") && yValue.Contains("ABY"))
-            return xYear.CompareTo(yYear);
+            return yYear.CompareTo(xYear);
 
-        return yYear.CompareTo(xYear);
+        return xYear.CompareTo(yYear);
     }
 }

@@ -48,6 +48,10 @@ public class RecordsService
         // Well, i dont know how to sort this complicated structure in mongodb sort
         // So we'll have to sort it using IComparer<T>
         events.Sort(new EventRecordComparer());
+        
+        // TODO:
+        // Add Battles, Missions, Campaigns, Duels, Treaty
+        
 
         return new PagedResult
         {
