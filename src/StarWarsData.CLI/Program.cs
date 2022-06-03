@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Polly;
 using StarWarsData.Models;
@@ -48,14 +49,15 @@ await BuildCommandLine()
         hostBuilder
             .ConfigureHostConfiguration(builder =>
             {
-                builder.AddJsonFile("hostsettings.json", optional: false)
+                builder
+                    .AddJsonFile("hostsettings.json", optional: false)
                     .AddEnvironmentVariables(prefix: "DOTNET_");
             })
             .ConfigureAppConfiguration((context, builder) =>
             {
                 builder
                     .AddJsonFile("appsettings.json", optional: false)
-                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)
+                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: false)
                     .AddEnvironmentVariables(prefix: "SWDATA_");
             })
             .ConfigureLogging((context, builder) =>
@@ -80,6 +82,8 @@ await BuildCommandLine()
                     .ConfigureHttpClient(client => client.BaseAddress = new Uri(settings.StarWarsBaseUrl))
                     .AddTransientHttpErrorPolicy(policyBuilder => policyBuilder.RetryAsync())
                     .SetHandlerLifetime(TimeSpan.FromMinutes(10));
+
+                BsonClassMap.RegisterClassMap(new RecordClassMap());
             });
     })
     .UseDefaults()

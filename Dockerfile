@@ -22,15 +22,22 @@ RUN dotnet restore "src/StarWarsData.API/StarWarsData.API.csproj"
 COPY ["src/StarWarsData.Statiq/StarWarsData.Statiq.csproj", "src/StarWarsData.Statiq/"]
 RUN dotnet restore "src/StarWarsData.Statiq/StarWarsData.Statiq.csproj"
 
+# COPY ["src/StarWarsData.Web/StarWarsData.Web.csproj", "src/StarWarsData.Web/"]
+# RUN dotnet restore "src/StarWarsData.Web/StarWarsData.Web.csproj"
+
 COPY ["src/", "."]
 
 WORKDIR /src/
 
-RUN dotnet restore
-RUN dotnet build -c Release -o /app/build
+# RUN dotnet build src/StarWarsData.Web/StarWarsData.Web.csproj -c Release -o /app/build
+RUN dotnet build src/StarWarsData.API/StarWarsData.API.csproj -c Release -o /app/build
+RUN dotnet build src/StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/build
 
 FROM sdk AS publish
-RUN dotnet publish -c Release -o /app/publish
+
+# RUN dotnet publish src/StarWarsData.Web/StarWarsData.Web.csproj -c Release -o /app/publish
+RUN dotnet publish src/StarWarsData.API/StarWarsData.API.csproj -c Release -o /app/publish
+RUN dotnet publish src/StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/publish
 
 FROM runtime AS cli
 WORKDIR /app

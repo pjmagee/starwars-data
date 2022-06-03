@@ -1,0 +1,161 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Star Wars Data</PageTitle>
+
+@if (_categories == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true"/>
+}
+else
+{
+    <MudSelect T="string" ValueChanged="@ValueChanged" Class="mb-8" Placeholder="Select a Star wars Data category">
+        @foreach (var item in _categories)
+        {
+            <MudSelectItem Value="@item" T="string">@item</MudSelectItem>
+        }
+    </MudSelect>
+}
+
+@if (_category is not null)
+{
+    <MudTable ServerData="@(new Func<TableState, Task<TableData<Record>>>(ServerReload))" FixedHeader="true" FixedFooter="true" Height="1000px" ReadOnly="true" Dense="true" @ref="_table" Bordered="true" Striped="true" HorizontalScrollbar="true">
+        <HeaderContent>
+            <MudTh>Id</MudTh>
+            <MudTh>Page</MudTh>
+            <MudTh>Image</MudTh>
+            @foreach (var item in DynamicHeaders)
+            {
+                <MudTh>@item</MudTh>
+            }
+            <MudTh>Relationships</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.PageId</MudTd>
+            <MudTd DataLabel="Page">
+                <MudLink Href="@context.PageUrl">@context.PageTitle</MudLink>
+            </MudTd>
+            <MudTd DataLabel="Image">
+                @if (!string.IsNullOrEmpty(context.ImageUrl))
+                {
+                    <MudImage Src="@context.ImageUrl.Split("/revision", StringSplitOptions.RemoveEmptyEntries)[0]"/>
+                }
+            </MudTd>
+            @foreach (var label in DynamicHeaders)
+            {
+                var data = context.Data.FirstOrDefault(d => d.Label == label);
+
+                <MudTd DataLabel="@label">
+                    @if (data is not null)
+                    {
+                        <MudList Dense="true" DisablePadding="true" DisableGutters="true" Class="mb-4">
+                            @foreach (var link in data.Links)
+                            {
+                                <MudListItem Dense="true" DisableGutters="true" DisableRipple="true">
+                                    <MudLink Class="ma-1" Href="@link.Href">@link.Content</MudLink>
+                                </MudListItem>
+                            }
+                            @foreach (var value in data.Values.Where(v => !data.Links.Any(l => l.Content.Equals(v, StringComparison.OrdinalIgnoreCase))))
+                            {
+                                <MudListItem Dense="true" DisableGutters="true" DisableRipple="true">@value</MudListItem>
+                            }
+                        </MudList>
+                    }
+                </MudTd>
+            }
+            <MudTh DataLabel="Relationships">
+                @if (context.Relationships.Any())
+                {
+                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context))">@(context.ShowRelationships ? "Hide" : "Show")</MudButton>    
+                }
+            </MudTh>
+        </RowTemplate>
+        <ChildRowContent>
+            @if (context.ShowRelationships)
+            {
+                <MudTr>
+                    <td colspan="@(DynamicHeaders.Count() + 4)">
+                        <MudCard Elevation="0">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">Mentioned</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent Class="pa-0">
+                                <MudTable Items="@context.Relationships" Context="Relationship" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="0">
+                                    <HeaderContent>
+                                        <MudTh>Page</MudTh>
+                                        <MudTh>Template</MudTh>
+                                    </HeaderContent>
+                                    <RowTemplate>
+                                        <MudTd DataLabel="Page">@Relationship.PageTitle</MudTd>
+                                        <MudTd DataLabel="Template">@Relationship.Template</MudTd>
+                                    </RowTemplate>
+                                </MudTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </td>
+                </MudTr>
+            }
+        </ChildRowContent>
+        <NoRecordsContent>
+            <MudText>No matching records found</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Loading...</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <MudTablePager/>
+        </PagerContent>
+    </MudTable>
+}
+
+@code {
+
+    private string[]? _categories;
+    private string? _category;
+
+    private MudTable<Record> _table;
+    private PagedResult? _pagedResult;
+
+    private IEnumerable<string> DynamicHeaders
+    {
+        get
+        {
+            if (_pagedResult is not null)
+            {
+                foreach (var item in _pagedResult.Items.SelectMany(record => record.Data.Select(property => property.Label).OrderBy(v => v)).Distinct())
+                {
+                    yield return item;
+                }
+            }
+        }
+    }
+
+    private void ShowBtnPress(Record record)
+    {
+        record.ShowRelationships = !record.ShowRelationships;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _categories = (await Http.GetFromJsonAsync<string[]>("Categories")).OrderBy(x => x).ToArray();
+    }
+
+    private async Task<TableData<Record>> ServerReload(TableState state)
+    {
+        if (_category == null)
+            return new TableData<Record>() { Items = Enumerable.Empty<Record>(), TotalItems = 0 };
+
+        _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Categories/{_category}?Page={(state.Page + 1)}&PageSize={state.PageSize}");
+
+        return new TableData<Record>() { TotalItems = _pagedResult.Total, Items = _pagedResult.Items };
+    }
+
+    private Task ValueChanged(string arg)
+    {
+        _category = arg;
+        return _table.ReloadServerData();
+    }
+
+}
