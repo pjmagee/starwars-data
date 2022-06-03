@@ -1,0 +1,52 @@
+﻿@page "/events"
+@inject HttpClient Http
+
+<PageTitle>Star Wars Data</PageTitle>
+
+@if (_pagedResult == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true"/>
+}
+else
+{
+    <MudPagination @ref="_pagination" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="mt-4" SelectedChanged="Paginate"  />
+    
+    <MudTimeline>
+        @foreach (var item in _pagedResult.Items)
+        {
+            <MudTimelineItem Color="Color.Info" Size="Size.Small">
+                <ItemOpposite>
+                    <MudText Color="Color.Info" Typo="Typo.h5">
+                        @item.Data.Find(f => f.Label.Equals("Date")).Values.FirstOrDefault()
+                    </MudText>
+                </ItemOpposite>
+                <ItemContent>
+                    <MudText Align="Align.Center">
+                        @item.Data.Find(f => f.Label.Equals("Titles")).Values.FirstOrDefault()
+                        @* Add additional details in modal or toggle *@
+                    </MudText>
+                </ItemContent>
+            </MudTimelineItem>
+        }
+    </MudTimeline>
+}
+
+@code {
+    
+    private PagedResult? _pagedResult;
+
+    private int _pages = 1;
+    private int _pageSize = 20;
+    private MudPagination _pagination;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Paginate(1);
+    }
+
+    private async Task Paginate(int page)
+    {
+        _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Timeline?Page={page}&PageSize={_pageSize}");
+        _pages = _pagedResult.Total / _pagedResult.Size;
+    }
+}

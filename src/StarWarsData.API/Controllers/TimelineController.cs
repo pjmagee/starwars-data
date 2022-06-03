@@ -6,13 +6,13 @@ namespace StarWarsData.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SearchController : ControllerBase
+public class TimelineController : ControllerBase
 {
-    private readonly ILogger<SearchController> _logger;
+    private readonly ILogger<TimelineController> _logger;
     private readonly RecordsService _recordsService;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public SearchController(ILogger<SearchController> logger, RecordsService recordsService, IHttpContextAccessor contextAccessor)
+    public TimelineController(ILogger<TimelineController> logger, RecordsService recordsService, IHttpContextAccessor contextAccessor)
     {
         _logger = logger;
         _recordsService = recordsService;
@@ -22,6 +22,6 @@ public class SearchController : ControllerBase
     [HttpGet]
     public async Task<PagedResult> Get([FromQuery] QueryParams queryParams)
     {
-        return await _recordsService.GetSearchResult(queryParams.Search, queryParams.Page, queryParams.PageSize, _contextAccessor.HttpContext!.RequestAborted);
+        return await _recordsService.GetTimelineEvents(queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }
 }

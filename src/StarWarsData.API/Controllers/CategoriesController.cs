@@ -20,14 +20,14 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<string>> GetCategories()
+    public async Task<IEnumerable<string>> Get()
     {
         return await _recordsService.GetCollections(_contextAccessor.HttpContext!.RequestAborted);
     }
 
-    [HttpGet("{collection}")]
-    public async Task<PagedResult> GetCollection(string collection, [FromQuery] Paging paging)
+    [HttpGet("{category}")]
+    public async Task<PagedResult> Get(string category, [FromQuery] QueryParams queryParams)
     {
-        return await _recordsService.GetCollectionResult(collection, paging.Page, paging.PageSize, _contextAccessor.HttpContext!.RequestAborted);
+        return await _recordsService.GetCollectionResult(category, searchText: queryParams.Search, queryParams.Page, queryParams.PageSize, _contextAccessor.HttpContext!.RequestAborted);
     }
 }

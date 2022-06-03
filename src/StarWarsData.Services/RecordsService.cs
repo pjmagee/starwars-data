@@ -24,12 +24,38 @@ public class RecordsService
 
     public async Task<List<string>> GetCollections(CancellationToken cancellationToken)
     {
-        List<string>? results = await (await _mongoClient
+        List<string>? results = (await (await _mongoClient
                 .GetDatabase(_settings.MongoDbName)
                 .ListCollectionNamesAsync(options: null, cancellationToken: cancellationToken))
-            .ToListAsync(cancellationToken);
+            .ToListAsync(cancellationToken)).OrderBy(x => x).ToList();
 
         return results;
+    }
+    
+    // Relationships are HUGE because so many category records reference the Star Wars Timeline / Events
+    // This is a slim cutdown record to load for the Timeline page...
+    public async Task<PagedResult> GetTimelineEvents(int page = 1, int pageSize = 50)
+    {
+        var events = await _mongoDb.GetCollection<Record>("Event")
+            .Find(FilterDefinition<Record>.Empty)
+            .ToListAsync();
+        
+        // We can only display Events on a Timeline that have specified a Date and in a format we can parse
+        events.RemoveAll(e => 
+            !e.Data.Exists(d => d.Label!.Equals("Date", StringComparison.Ordinal) && 
+                                d.Links.Exists(l => l.Content.Contains("BBY") || l.Content.Contains("ABY"))));
+        
+        // Well, i dont know how to sort this complicated structure in mongodb sort
+        // So we'll have to sort it using IComparer<T>
+        events.Sort(new EventRecordComparer());
+
+        return new PagedResult
+        {
+            Total = events.Count,
+            Size = pageSize,
+            Page = page,
+            Items = events.Skip((page - 1) * pageSize).Take(pageSize)
+        };
     }
 
     public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50, CancellationToken token = default)
@@ -60,29 +86,21 @@ public class RecordsService
         };
     }
 
-    public async Task<PagedResult> GetCollectionResult(string collectionName, int page = 1, int pageSize = 50, CancellationToken token = default)
+    public async Task<PagedResult> GetCollectionResult(string collectionName, string? searchText = null, int page = 1, int pageSize = 50, CancellationToken token = default)
     {
-        return await GetPagerResultAsync(page, pageSize, _mongoDb.GetCollection<Record>(collectionName), token);
+        return await GetPagerResultAsync(page, pageSize, _mongoDb.GetCollection<Record>(collectionName), searchText, token);
     }
 
-    private static async Task<PagedResult> GetPagerResultAsync(int page, int pageSize, IMongoCollection<Record> collection, CancellationToken token)
+    private static async Task<PagedResult> GetPagerResultAsync(int page, int pageSize, IMongoCollection<Record> collection, string? searchText, CancellationToken token = default)
     {
         var total = await collection.CountDocumentsAsync(record => true, cancellationToken: token);
         
-        var dataFacet = AggregateFacet.Create("dataFacet", PipelineDefinition<Record, Record>.Create(new[]
-        {		
-            PipelineStageDefinitionBuilder.Skip<Record>((page - 1) * pageSize),
-            PipelineStageDefinitionBuilder.Limit<Record>(pageSize),
-        }));
-
-        var aggregation = await collection
-            .Aggregate()
-            .Match(Builders<Record>.Filter.Empty)
-            .Facet(dataFacet)
+        var data = await collection
+            .Find(searchText is null ? FilterDefinition<Record>.Empty : new FilterDefinitionBuilder<Record>().Text(searchText))
+            .Skip((page - 1) * pageSize)
+            .Limit(pageSize)
             .ToListAsync(token);
-
-        var data = aggregation.First().Facets.First(x => x.Name == "dataFacet").Output<Record>();
-
+        
         return new PagedResult
         {
             Total = (int) total,
@@ -119,10 +137,12 @@ public class RecordsService
             
             var indexModel = new CreateIndexModel<Record>(
                 Builders<Record>.IndexKeys
-                    .Text(x => x.Data.First().Label)
-                    .Text(x => x.Data.First().Links)
-                    .Text(x => x.Data.First().Values)
-                    .Text(x => x.Relationships));
+                    .Text("$**")
+                    // .Text(x => x.Data.First().Label)
+                    // .Text(x => x.Data.First().Links)
+                    // .Text(x => x.Data.First().Values)
+                    // .Text(x => x.Relationships)
+                );
             
             var index = await collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
             
