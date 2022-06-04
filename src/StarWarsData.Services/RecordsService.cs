@@ -1,23 +1,34 @@
 using System.Collections.Concurrent;
 using System.Text.Json;
+using AngleSharp.Common;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using StarWarsData.Models;
 
 namespace StarWarsData.Services;
 
+public abstract class RecordTransformer
+{
+    // Expand for Events that have a beginning and an End
+    // So they become two event items
+    public abstract IEnumerable<TimelineEvent> Transform(Record r);
+}
+
+
 public class RecordsService
 {
     private readonly ILogger<RecordsService> _logger;
     private readonly Settings _settings;
+    private readonly EventTransformer _transformer;
     private readonly MongoClient _mongoClient;
 
     private IMongoDatabase _mongoDb;
 
-    public RecordsService(ILogger<RecordsService> logger, Settings settings)
+    public RecordsService(ILogger<RecordsService> logger, Settings settings, EventTransformer transformer)
     {
         _logger = logger;
         _settings = settings;
+        _transformer = transformer;
         _mongoClient = new MongoClient(settings.MongoDbUri);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
     }
@@ -34,31 +45,39 @@ public class RecordsService
     
     // Relationships are HUGE because so many category records reference the Star Wars Timeline / Events
     // This is a slim cutdown record to load for the Timeline page...
-    public async Task<PagedResult> GetTimelineEvents(int page = 1, int pageSize = 50)
+    public async Task<PagedResult<TimelineEvent>> GetTimelineEvents(int page = 1, int pageSize = 20)
     {
         var events = await _mongoDb.GetCollection<Record>("Event")
             .Find(FilterDefinition<Record>.Empty)
             .ToListAsync();
-        
-        // We can only display Events on a Timeline that have specified a Date and in a format we can parse
-        events.RemoveAll(e => 
-            !e.Data.Exists(d => d.Label!.Equals("Date", StringComparison.Ordinal) && 
-                                d.Links.Exists(l => l.Content.Contains("BBY") || l.Content.Contains("ABY"))));
-        
-        // Well, i dont know how to sort this complicated structure in mongodb sort
-        // So we'll have to sort it using IComparer<T>
-        events.Sort(new EventRecordComparer());
-        
-        // TODO:
-        // Add Battles, Missions, Campaigns, Duels, Treaty
-        
 
-        return new PagedResult
+        var wars = await _mongoDb.GetCollection<Record>("War")
+            .Find(FilterDefinition<Record>.Empty)
+            .ToListAsync();
+
+        var laws = await _mongoDb.GetCollection<Record>("Law")
+            .Find(FilterDefinition<Record>.Empty)
+            .ToListAsync();
+        
+        var campaigns = await _mongoDb.GetCollection<Record>("Campaign")
+            .Find(FilterDefinition<Record>.Empty)
+            .ToListAsync();
+        
+        var battles = await _mongoDb.GetCollection<Record>("Battle")
+            .Find(FilterDefinition<Record>.Empty)
+            .ToListAsync();
+        
+        var all = events.Concat(wars).Concat(laws).Concat(campaigns).Concat(battles);
+        var timelineEvents = all.AsParallel().SelectMany(r => _transformer.Transform(r)).ToList();
+        
+        timelineEvents.Sort();
+        
+        return new PagedResult<TimelineEvent>
         {
-            Total = events.Count,
+            Total = timelineEvents.Count,
             Size = pageSize,
             Page = page,
-            Items = events.Skip((page - 1) * pageSize).Take(pageSize)
+            Items = timelineEvents.Skip((page - 1) * pageSize).Take(pageSize)
         };
     }
 
