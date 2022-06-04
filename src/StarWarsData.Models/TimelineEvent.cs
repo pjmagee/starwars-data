@@ -16,7 +16,8 @@ public class TimelineEvent : IComparable<TimelineEvent>
     public double Year { get; set; }
     
     public List<string> Values { get; set; }
-    public EventSpan Span { get; set; }
+    
+    public string? EventType { get; set; }
     
     public int CompareTo(TimelineEvent? other)
     {
