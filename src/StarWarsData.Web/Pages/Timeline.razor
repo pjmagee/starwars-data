@@ -1,21 +1,23 @@
 ﻿@page "/events"
+@using System.Web
 @inject HttpClient Http
 
 <PageTitle>Star Wars Data</PageTitle>
 
-@if (_pagedResult == null)
+ @if (_categories is not null)
 {
-    <MudProgressCircular Color="Color.Default" Indeterminate="true"/>
+    <MudSelect T="string" MultiSelection="true" SelectedValues="_selectedCategories" SelectedValuesChanged="SelectedValuesChanged">
+        @foreach (var category in _categories)
+        {
+            <MudSelectItem T="string" Value="category">@category</MudSelectItem>
+        }
+    </MudSelect>    
 }
-else
+
+@if(_pagedResult is not null)
 {
     <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate" />
-    
-    @* <MudSelect T="string" MultiSelection="true"> *@
-    @*     <MudSelectItem T="string">Example A</MudSelectItem> *@
-    @*     <MudSelectItem T="string">Example B</MudSelectItem> *@
-    @* </MudSelect> *@
-    
+
     <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4">
         
         @{
@@ -63,6 +65,8 @@ else
 @code {
 
     private PagedResult<TimelineEvent>? _pagedResult;
+    private string[]? _categories;
+    private List<string>? _selectedCategories;
 
     private int _pages = 1;
     private int _pageSize = 15;
@@ -70,12 +74,28 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Paginate(1);
+        await LoadCategories();
+    }
+
+    private async Task LoadCategories()
+    {
+        _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
+        StateHasChanged();
     }
 
     private async Task Paginate(int page)
     {
-        _pagedResult = await Http.GetFromJsonAsync<PagedResult<TimelineEvent>>($"Timeline?Page={page}&PageSize={_pageSize}");
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        
+        query.Add("Page", $"{page}");
+        query.Add("PageSize", $"{_pageSize}");
+       
+        foreach (var c in _selectedCategories ?? Enumerable.Empty<string>())
+        {
+            query.Add("Categories", $"{c}");
+        }
+        
+        _pagedResult = await Http.GetFromJsonAsync<PagedResult<TimelineEvent>>($"Timeline?{query}");
         _pages = _pagedResult.Total / _pagedResult.Size;
     }
 
@@ -88,27 +108,43 @@ else
     {
         return timelineEvent.Template switch 
         {
-            "Event" => Colors.LightBlue.Default,
+            "Event" => Colors.LightBlue.Lighten1,
+
+            "Campaign" => Colors.Shades.Black,
+            "Mission" => Colors.Grey.Darken4,
             
-            "War" => Colors.Red.Darken2,
+            "War" => Colors.Red.Darken4,
             "Battle" => Colors.Red.Darken3,
-            "Duel" => Colors.Red.Darken4,
+            "Duel" => Colors.Red.Darken2,
+            "Fleet" => Colors.Red.Lighten1,
             
-            "Law" => Colors.Orange.Darken1,
-            "Treaty" => Colors.Orange.Darken4,
-            "Election" => Colors.Yellow.Darken2,
+            "Disease" => Colors.Green.Darken4,
             
-            "Campaign" => Colors.Purple.Default,
+            "Location" => Colors.Blue.Lighten1,
+            "City" => Colors.Blue.Default,
+            "Law" => Colors.Blue.Darken1,
+            "Treaty" => Colors.Blue.Darken2,
+            "Election" => Colors.Blue.Darken3,
             
             "Character" => Colors.Green.Default,
             
-            "Organization" => Colors.Amber.Default,
+            "Government" => Colors.Amber.Darken1,
+            "Organization" => Colors.Amber.Darken2,
+            "Company" => Colors.Amber.Darken3,
             
-            "Lightsaber" => Colors.BlueGrey.Darken1,
-            "Droid" => Colors.Grey.Darken2,
-            
+            "Lightsaber" => Colors.Purple.Darken1,
+            "Droid" => Colors.BlueGrey.Darken2,
+            "Artifact" => Colors.BlueGrey.Darken3,
             
             _ => Colors.Blue.Default
         };
+    }
+
+    private async Task SelectedValuesChanged(IEnumerable<string> selectedCategories)
+    {
+        _selectedCategories = new List<string>(selectedCategories);
+        
+        await Paginate(1);
+        StateHasChanged();
     }
 }

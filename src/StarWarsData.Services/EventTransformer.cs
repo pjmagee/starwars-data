@@ -40,7 +40,10 @@ public class EventTransformer : RecordTransformer
 
     private static bool IsValid(HyperLink link)
     {
-        var containsYear =  char.IsDigit(link.Content[0]);
+        if (string.IsNullOrWhiteSpace(link.Content))
+            return false;
+        
+        var containsYear =  char.IsDigit(link.Content.First());
         var containsDemarcation = link.Content.Contains("BBY") || link.Content.Contains("ABY");
         var linkContainsDemarcation = link.Href.Contains("_BBY") || link.Href.Contains("_ABY"); 
         
