@@ -23,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<RecordsService>();
+builder.Services.AddScoped<EventTransformer>();
 builder.Services.AddSingleton(builder.Configuration.GetSection("Settings").Get<Settings>()!);
 BsonClassMap.RegisterClassMap(new RecordClassMap());
 

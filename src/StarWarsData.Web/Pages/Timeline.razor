@@ -11,19 +11,25 @@ else
 {
     <MudPagination @ref="_pagination" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="mt-4" SelectedChanged="Paginate"  />
     
-    <MudTimeline>
+    <MudTimeline
+        TimelineOrientation="TimelineOrientation.Vertical"
+        TimelinePosition="TimelinePosition.Alternate">
         @foreach (var item in _pagedResult.Items)
         {
-            <MudTimelineItem Color="Color.Info" Size="Size.Small">
+            <MudTimelineItem Color="Color.Info" Size="Size.Small" TimelineAlign="TimelineAlign.Default">
                 <ItemOpposite>
                     <MudText Color="Color.Info" Typo="Typo.h5">
-                        @item.Data.Find(f => f.Label.Equals("Date")).Values.FirstOrDefault()
+                         @item.Year.ToString("#,###") @item.Demarcation.ToString()
                     </MudText>
                 </ItemOpposite>
                 <ItemContent>
-                    <MudText Align="Align.Center">
-                        @item.Data.Find(f => f.Label.Equals("Titles")).Values.FirstOrDefault()
-                        @* Add additional details in modal or toggle *@
+                    <MudText Color="Color.Info" Typo="Typo.h6" GutterBottom="true">@item.Title</MudText>
+                    <MudText Class="mud-text-secondary">
+                        @foreach (var value  in item.Values)
+                        {
+                            @(value)
+                            <br/>
+                        }
                     </MudText>
                 </ItemContent>
             </MudTimelineItem>
@@ -33,7 +39,7 @@ else
 
 @code {
     
-    private PagedResult? _pagedResult;
+    private PagedResult<TimelineEvent>? _pagedResult;
 
     private int _pages = 1;
     private int _pageSize = 20;
@@ -46,7 +52,7 @@ else
 
     private async Task Paginate(int page)
     {
-        _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Timeline?Page={page}&PageSize={_pageSize}");
+        _pagedResult = await Http.GetFromJsonAsync<PagedResult<TimelineEvent>>($"Timeline?Page={page}&PageSize={_pageSize}");
         _pages = _pagedResult.Total / _pagedResult.Size;
     }
 }
