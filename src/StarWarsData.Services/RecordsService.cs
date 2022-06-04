@@ -53,7 +53,7 @@ public class RecordsService
     
     // Relationships are HUGE because so many category records reference the Star Wars Timeline / Events
     // This is a slim cutdown record to load for the Timeline page...
-    public async Task<PagedResult<TimelineEvent>> GetTimelineEvents(IEnumerable<string> collections, int page = 1, int pageSize = 20)
+    public async Task<GroupedTimelineResult> GetTimelineEvents(IEnumerable<string> collections, int page = 1, int pageSize = 20)
     {
         List<Record> records = new List<Record>();
 
@@ -76,13 +76,19 @@ public class RecordsService
             .ToList();
         
         timelineEvents.Sort();
+
+        var groupedByYear = timelineEvents
+            .GroupBy(x => x.YearDisplay)
+            .Select(x => new GroupedTimelines() { Events = x.ToList(), Key = x.Key });
+
+        var total = groupedByYear.Count();
         
-        return new PagedResult<TimelineEvent>
+        return new GroupedTimelineResult
         {
-            Total = timelineEvents.Count,
+            Total = total,
             Size = pageSize,
             Page = page,
-            Items = timelineEvents.Skip((page - 1) * pageSize).Take(pageSize)
+            Items = groupedByYear.Skip((page - 1) * pageSize).Take(pageSize)
         };
     }
 

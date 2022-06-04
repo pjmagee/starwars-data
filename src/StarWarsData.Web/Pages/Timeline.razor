@@ -24,35 +24,39 @@
             var isStart = true;
         }
         
-        @foreach (var item in _pagedResult.Items)
+        @foreach (var timelineEvents in _pagedResult.Items)
         {
-            var color = GetColor(item);
+            // var color = GetColor(timelineEvents);
             var contentAlign = isStart ? Align.Left : Align.Right;
             var yearAlign = isStart ? Align.Right : Align.Left;
-            var title = $"{GetTitle(item)} - ({item.Template})";
+            // var title = $"{GetTitle(timelineEvents)} - ({timelineEvents.Template})";
            
-
             <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
-                @* <ItemDot> *@
-                @*     <MudIcon Size="Size.Medium" Icon="@"/> *@
-                @* </ItemDot> *@
                  <ItemOpposite>
-                    <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">
-                       @item.Year.ToString("#,###") @Enum.GetName(typeof(Demarcation), item.Demarcation)
-                   </MudText>
+                     <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">
+                         @timelineEvents.Key
+                         @* @item.Year.ToString("#,###") @Enum.GetName(typeof(Demarcation), item.Demarcation) *@
+                     </MudText>
                 </ItemOpposite>
                 <ItemContent>
-                     <MudExpansionPanels>
-                         <MudExpansionPanel Text="@title" MaxHeight="1000" Style="@($"color:{color}; text-align:{contentAlign};")">
-                             <MudText Class="mud-text-secondary" Align="contentAlign">
-                                 @foreach (var value  in item.Values)
-                                 {
-                                     @(value)
-                                     <br/>
-                                 }
-                             </MudText>
-                         </MudExpansionPanel>
-                     </MudExpansionPanels>
+                    <MudExpansionPanels>
+                        
+                        @foreach (var timelineEvent in timelineEvents.Events)
+                        {
+                            var color = GetColor(timelineEvent);
+                            
+                            <MudExpansionPanel Text="@timelineEvent.DisplayTitle" MaxHeight="1000" Style="@($"color:{color}; text-align:{contentAlign};")">
+                                <MudText Class="mud-text-secondary" Align="contentAlign">
+                                    @foreach (var value  in timelineEvent.Values)
+                                    {
+                                        @(value)
+                                        <br/>
+                                    }
+                                </MudText>
+                            </MudExpansionPanel>    
+                        }
+                        
+                    </MudExpansionPanels>
                 </ItemContent>
                
             </MudTimelineItem>
@@ -64,7 +68,7 @@
 
 @code {
 
-    private PagedResult<TimelineEvent>? _pagedResult;
+    private GroupedTimelineResult? _pagedResult;
     private string[]? _categories;
     private List<string>? _selectedCategories;
 
@@ -95,7 +99,7 @@
             query.Add("Categories", $"{c}");
         }
         
-        _pagedResult = await Http.GetFromJsonAsync<PagedResult<TimelineEvent>>($"Timeline?{query}");
+        _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline?{query}");
         _pages = _pagedResult.Total / _pagedResult.Size;
     }
 

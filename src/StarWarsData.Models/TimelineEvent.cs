@@ -11,10 +11,12 @@ public class TimelineEvent : IComparable<TimelineEvent>
 {
     public string Title { get; set; }
     public string Template { get; set; }
+
+    public string DisplayTitle => $"{Title} ({Template})";
    
     public Demarcation Demarcation { get; set; }
     public double Year { get; set; }
-    
+    public string YearDisplay => $"{Year:##,###} {Demarcation}";
     public List<string> Values { get; set; }
     
     public string? EventType { get; set; }

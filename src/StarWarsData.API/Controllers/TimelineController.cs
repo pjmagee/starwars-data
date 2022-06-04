@@ -22,7 +22,7 @@ public class TimelineController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<PagedResult<TimelineEvent>> Get([FromQuery] TimelineQueryParams queryParams)
+    public async Task<GroupedTimelineResult> Get([FromQuery] TimelineQueryParams queryParams)
     {
         return await _recordsService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }
