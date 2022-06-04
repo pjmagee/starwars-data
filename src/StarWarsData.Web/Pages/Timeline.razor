@@ -88,12 +88,26 @@ else
     {
         return timelineEvent.Template switch 
         {
-            "War" => Colors.Red.Darken1,
-            "Battle" => Colors.Red.Darken2,
             "Event" => Colors.LightBlue.Default,
-            "Law" => Colors.Orange.Default,
+            
+            "War" => Colors.Red.Darken2,
+            "Battle" => Colors.Red.Darken3,
+            "Duel" => Colors.Red.Darken4,
+            
+            "Law" => Colors.Orange.Darken1,
+            "Treaty" => Colors.Orange.Darken4,
+            "Election" => Colors.Yellow.Darken2,
+            
             "Campaign" => Colors.Purple.Default,
+            
             "Character" => Colors.Green.Default,
+            
+            "Organization" => Colors.Amber.Default,
+            
+            "Lightsaber" => Colors.BlueGrey.Darken1,
+            "Droid" => Colors.Grey.Darken2,
+            
+            
             _ => Colors.Blue.Default
         };
     }

@@ -109,7 +109,7 @@ public class RecordsService
             .As<Record>()
             .ToListAsync();
         
-        var organisations = await _mongoDb.GetCollection<BsonDocument>("Organization ")
+        var organisations = await _mongoDb.GetCollection<BsonDocument>("Organization")
             .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date founded"))
             .As<Record>()
             .ToListAsync();
