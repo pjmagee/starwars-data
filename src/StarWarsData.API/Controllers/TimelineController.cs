@@ -10,18 +10,26 @@ public class TimelineController : ControllerBase
 {
     private readonly ILogger<TimelineController> _logger;
     private readonly RecordsService _recordsService;
+    private readonly CollectionFilters _collectionFilters;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public TimelineController(ILogger<TimelineController> logger, RecordsService recordsService, IHttpContextAccessor contextAccessor)
+    public TimelineController(ILogger<TimelineController> logger, RecordsService recordsService, CollectionFilters collectionFilters, IHttpContextAccessor contextAccessor)
     {
         _logger = logger;
         _recordsService = recordsService;
+        _collectionFilters = collectionFilters;
         _contextAccessor = contextAccessor;
     }
 
     [HttpGet]
-    public async Task<PagedResult<TimelineEvent>> Get([FromQuery] QueryParams queryParams)
+    public async Task<PagedResult<TimelineEvent>> Get([FromQuery] TimelineQueryParams queryParams)
     {
-        return await _recordsService.GetTimelineEvents(queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
+        return await _recordsService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
+    }
+
+    [HttpGet("categories")]
+    public IEnumerable<string> GetTimelineCategories()
+    {
+        return _collectionFilters.Keys;
     }
 }

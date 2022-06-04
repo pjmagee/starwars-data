@@ -17,20 +17,26 @@ public abstract class RecordTransformer
 }
 
 
+// TODO: Process Transformations into their own MongoDB collection and 
+// directly pull from the seperate collection with a Collection field for filtering
+// This will improve performance significantly instead of having to do transformations realtime in the API
+
 public class RecordsService
 {
     private readonly ILogger<RecordsService> _logger;
     private readonly Settings _settings;
     private readonly EventTransformer _transformer;
+    private readonly CollectionFilters _collectionFilters;
     private readonly MongoClient _mongoClient;
 
     private IMongoDatabase _mongoDb;
 
-    public RecordsService(ILogger<RecordsService> logger, Settings settings, EventTransformer transformer)
+    public RecordsService(ILogger<RecordsService> logger, Settings settings, EventTransformer transformer, CollectionFilters collectionFilters)
     {
         _logger = logger;
         _settings = settings;
         _transformer = transformer;
+        _collectionFilters = collectionFilters;
         _mongoClient = new MongoClient(settings.MongoDbUri);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
     }
@@ -47,90 +53,24 @@ public class RecordsService
     
     // Relationships are HUGE because so many category records reference the Star Wars Timeline / Events
     // This is a slim cutdown record to load for the Timeline page...
-    public async Task<PagedResult<TimelineEvent>> GetTimelineEvents(int page = 1, int pageSize = 20)
+    public async Task<PagedResult<TimelineEvent>> GetTimelineEvents(IEnumerable<string> collections, int page = 1, int pageSize = 20)
     {
-        var events = await _mongoDb.GetCollection<BsonDocument>("Event")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
+        List<Record> records = new List<Record>();
 
-        var wars = await _mongoDb.GetCollection<BsonDocument>("War")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Beginning"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var elections = await _mongoDb.GetCollection<BsonDocument>("Election")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
-
-        var laws = await _mongoDb.GetCollection<BsonDocument>("Law")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var campaigns = await _mongoDb.GetCollection<BsonDocument>("Campaign")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Begin"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var battles = await _mongoDb.GetCollection<BsonDocument>("Battle")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var duels = await _mongoDb.GetCollection<BsonDocument>("Duel")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var characters = await _mongoDb.GetCollection<BsonDocument>("Character")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Born"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var droids = await _mongoDb.GetCollection<BsonDocument>("Droid")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date created"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var missions = await _mongoDb.GetCollection<BsonDocument>("Mission")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var lightsabers = await _mongoDb.GetCollection<BsonDocument>("Lightsaber")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date discovered"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var treaties = await _mongoDb.GetCollection<BsonDocument>("Treaty")
-            .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date established"))
-            .As<Record>()
-            .ToListAsync();
-        
-        var organisations = await _mongoDb.GetCollection<BsonDocument>("Organization")
-            .Find(Builders<BsonDocument>.Filter.Or(
-                Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date founded"),
-                Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Formed from")))
-            .As<Record>()
-            .ToListAsync();
-        
-        var all = events
-            .Concat(wars)
-            .Concat(laws)
-            .Concat(campaigns)
-            .Concat(battles)
-            .Concat(elections)
-            .Concat(lightsabers)
-            .Concat(treaties)
-            .Concat(organisations)
-            .Concat(duels)
-            .Concat(missions)
-            .Concat(droids)
-            .Concat(characters);
-        
-        var timelineEvents = all
+        foreach (var collection in collections)
+        {
+            if (_collectionFilters.ContainsKey(collection))
+            {
+                var filter = _collectionFilters[collection];
+                
+                records.AddRange(await _mongoDb.GetCollection<BsonDocument>(collection)
+                    .Find(filter)
+                    .As<Record>()
+                    .ToListAsync());
+            }
+        }
+       
+        var timelineEvents = records
             .AsParallel()
             .SelectMany(r => _transformer.Transform(r))
             .ToList();

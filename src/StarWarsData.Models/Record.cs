@@ -16,14 +16,14 @@ public class NoRelationshipRecord
     [BsonElement] public string PageUrl { get; set; } = null!;
     [BsonElement] public string TemplateUrl { get; set; } = null!;
     [BsonElement] public string? ImageUrl { get; set; }
-    [BsonElement] public List<InfoboxProperty> Data { get; set; } = new();
+    [BsonElement] public List<InfoboxProperty> Data { get; set; } = new(); 
 }
 
 [Serializable]
 public class Record
 {
     [JsonIgnore, BsonIgnore] public string PageTitle => HttpUtility.UrlDecode(PageUrl!.Split(new[] { "/wiki/" }, StringSplitOptions.None).Last()).Replace("_", " ");
-    [JsonIgnore, BsonIgnore] public string Template => TemplateUrl.Split(':').Last();
+    [JsonIgnore, BsonIgnore] public string Template => TemplateUrl.Split(':').Last().Replace("_infobox", string.Empty);
     [JsonInclude, BsonId, BsonElement("_id")] public int PageId { get; set; }
     [JsonInclude, BsonElement] public string PageUrl { get; set; } = null!;
     [JsonInclude, BsonElement] public string TemplateUrl { get; set; } = null!;
