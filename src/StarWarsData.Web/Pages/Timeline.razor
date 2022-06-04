@@ -9,40 +9,63 @@
 }
 else
 {
-    <MudPagination @ref="_pagination" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="mt-4" SelectedChanged="Paginate"  />
+    <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate" />
     
-    <MudTimeline
-        TimelineOrientation="TimelineOrientation.Vertical"
-        TimelinePosition="TimelinePosition.Alternate">
+    @* <MudSelect T="string" MultiSelection="true"> *@
+    @*     <MudSelectItem T="string">Example A</MudSelectItem> *@
+    @*     <MudSelectItem T="string">Example B</MudSelectItem> *@
+    @* </MudSelect> *@
+    
+    <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4">
+        
+        @{
+            var isStart = true;
+        }
+        
         @foreach (var item in _pagedResult.Items)
         {
-            <MudTimelineItem Color="Color.Info" Size="Size.Small" TimelineAlign="TimelineAlign.Default">
-                <ItemOpposite>
-                    <MudText Color="Color.Info" Typo="Typo.h5">
-                         @item.Year.ToString("#,###") @item.Demarcation.ToString()
-                    </MudText>
+            var color = GetColor(item);
+            var contentAlign = isStart ? Align.Left : Align.Right;
+            var yearAlign = isStart ? Align.Right : Align.Left;
+            var title = $"{GetTitle(item)} - ({item.Template})";
+           
+
+            <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
+                @* <ItemDot> *@
+                @*     <MudIcon Size="Size.Medium" Icon="@"/> *@
+                @* </ItemDot> *@
+                 <ItemOpposite>
+                    <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">
+                       @item.Year.ToString("#,###") @Enum.GetName(typeof(Demarcation), item.Demarcation)
+                   </MudText>
                 </ItemOpposite>
                 <ItemContent>
-                    <MudText Color="Color.Info" Typo="Typo.h6" GutterBottom="true">@item.Title</MudText>
-                    <MudText Class="mud-text-secondary">
-                        @foreach (var value  in item.Values)
-                        {
-                            @(value)
-                            <br/>
-                        }
-                    </MudText>
+                     <MudExpansionPanels>
+                         <MudExpansionPanel Text="@title" MaxHeight="1000" Style="@($"color:{color}; text-align:{contentAlign};")">
+                             <MudText Class="mud-text-secondary" Align="contentAlign">
+                                 @foreach (var value  in item.Values)
+                                 {
+                                     @(value)
+                                     <br/>
+                                 }
+                             </MudText>
+                         </MudExpansionPanel>
+                     </MudExpansionPanels>
                 </ItemContent>
+               
             </MudTimelineItem>
+
+            isStart = !isStart;
         }
     </MudTimeline>
 }
 
 @code {
-    
+
     private PagedResult<TimelineEvent>? _pagedResult;
 
     private int _pages = 1;
-    private int _pageSize = 20;
+    private int _pageSize = 15;
     private MudPagination _pagination;
 
     protected override async Task OnInitializedAsync()
@@ -54,5 +77,24 @@ else
     {
         _pagedResult = await Http.GetFromJsonAsync<PagedResult<TimelineEvent>>($"Timeline?Page={page}&PageSize={_pageSize}");
         _pages = _pagedResult.Total / _pagedResult.Size;
+    }
+
+    private string GetTitle(TimelineEvent timelineEvent)
+    {
+        return string.IsNullOrWhiteSpace(timelineEvent.EventType) ? timelineEvent.Title : $"{timelineEvent.EventType} - {timelineEvent.Title}";
+    }
+
+    private string GetColor(TimelineEvent timelineEvent)
+    {
+        return timelineEvent.Template switch 
+        {
+            "War" => Colors.Red.Darken1,
+            "Battle" => Colors.Red.Darken2,
+            "Event" => Colors.LightBlue.Default,
+            "Law" => Colors.Orange.Default,
+            "Campaign" => Colors.Purple.Default,
+            "Character" => Colors.Green.Default,
+            _ => Colors.Blue.Default
+        };
     }
 }

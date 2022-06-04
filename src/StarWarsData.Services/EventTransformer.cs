@@ -5,12 +5,6 @@ namespace StarWarsData.Services;
 
 public class EventTransformer : RecordTransformer
 {
-    private string[] StartTerms = { "Beginning", "Start", "Begin" };
-    
-    private string[] EndTerms = { "End", "Ended" };
-
-    private string[] OnceTerms = { "Date established", "Date" };
-
     public override IEnumerable<TimelineEvent> Transform(Record r)
     {
         foreach (var data in r.Data)
@@ -20,14 +14,23 @@ public class EventTransformer : RecordTransformer
                 yield return new TimelineEvent()
                 {
                     Title = r.PageTitle,
-                    Span = OnceTerms.Contains(data.Label) ? EventSpan.Once : StartTerms.Contains(data.Label) ? EventSpan.Start : EndTerms.Contains(data.Label) ? EventSpan.End : EventSpan.Unknown,
+                    EventType = GetEventType(data),
                     Demarcation = link.Content.Contains("ABY") ? Demarcation.ABY : link.Content.Contains("BBY") ? Demarcation.BBY : Demarcation.Unset,
                     Year = ParseYear(link.Content),
                     Template = r.Template,
-                    Values = r.Data.SelectMany(r => r.Values).ToList()
+                    Values = r.Data.Where(x => !x.Label!.Equals("Titles")).SelectMany(d => d.Values).Distinct().ToList()
                 };
             }
         }
+    }
+
+    private string? GetEventType(InfoboxProperty data)
+    {
+        return data.Label switch
+        {
+            "Date" => String.Empty,
+            _ => data.Label
+        };
     }
 
     private double ParseYear(string text)
