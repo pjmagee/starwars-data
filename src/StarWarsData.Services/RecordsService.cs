@@ -78,8 +78,8 @@ public class RecordsService
         timelineEvents.Sort();
 
         var groupedByYear = timelineEvents
-            .GroupBy(x => x.YearDisplay)
-            .Select(x => new GroupedTimelines() { Events = x.ToList(), Key = x.Key });
+            .GroupBy(x => x.DisplayYear)
+            .Select(x => new GroupedTimelines() { Events = x.ToList(), Year = x.Key });
 
         var total = groupedByYear.Count();
         

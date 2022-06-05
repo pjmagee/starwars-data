@@ -14,29 +14,20 @@ public class EventTransformer : RecordTransformer
                 yield return new TimelineEvent()
                 {
                     Title = r.PageTitle,
-                    EventType = GetEventType(data),
+                    DateEvent = GetDateEvent(data),
                     Demarcation = link.Content.Contains("ABY") ? Demarcation.ABY : link.Content.Contains("BBY") ? Demarcation.BBY : Demarcation.Unset,
                     Year = ParseYear(link.Content),
                     Template = r.Template,
-                    Values = r.Data.Where(x => !x.Label!.Equals("Titles")).SelectMany(d => d.Values).Distinct().ToList()
+                    ImageUrl = r.ImageUrl,
+                    Properties = r.Data,
                 };
             }
         }
     }
 
-    private string? GetEventType(InfoboxProperty data)
-    {
-        return data.Label switch
-        {
-            "Date" => String.Empty,
-            _ => data.Label
-        };
-    }
+    private string? GetDateEvent(InfoboxProperty data) => data.Label switch { "Date" => String.Empty, _ => data.Label };
 
-    private double ParseYear(string text)
-    {
-        return double.Parse(new String(text.Split(' ', '-')[0].Where(c => !char.IsLetter(c)).ToArray()), NumberStyles.Any);
-    }
+    private double ParseYear(string text) => double.Parse(new String(text.Split(' ', '-')[0].Where(c => !char.IsLetter(c)).ToArray()), NumberStyles.Any);
 
     private static bool IsValid(HyperLink link)
     {

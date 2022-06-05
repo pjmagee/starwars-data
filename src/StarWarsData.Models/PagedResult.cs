@@ -26,6 +26,6 @@ public class GroupedTimelineResult
 
 public class GroupedTimelines
 {
-    public string Key { get; set; }
+    public string Year { get; set; }
     public List<TimelineEvent> Events { get; set; }
 }
