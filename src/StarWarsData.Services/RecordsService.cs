@@ -37,7 +37,7 @@ public class RecordsService
         _settings = settings;
         _transformer = transformer;
         _collectionFilters = collectionFilters;
-        _mongoClient = new MongoClient(settings.MongoDbUri);
+        _mongoClient = new MongoClient(settings.MongoConnectionString);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
     }
 

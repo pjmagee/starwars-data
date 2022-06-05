@@ -4,48 +4,55 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS aspnet
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS cli-build
 WORKDIR /src/
 
-COPY ["src/StarWarsData.Models/StarWarsData.Models.csproj", "src/StarWarsData.Models/"]
-RUN dotnet restore "src/StarWarsData.Models/StarWarsData.Models.csproj"
+COPY ["src/global.json", "."]
 
-COPY ["src/StarWarsData.Services/StarWarsData.Services.csproj", "src/StarWarsData.Services/"]
-RUN dotnet restore "src/StarWarsData.Services/StarWarsData.Services.csproj"
+COPY ["src/StarWarsData.Models/StarWarsData.Models.csproj", "StarWarsData.Models/"]
+RUN dotnet restore "StarWarsData.Models/StarWarsData.Models.csproj"
+COPY ["src/StarWarsData.Services/StarWarsData.Services.csproj", "StarWarsData.Services/"]
+RUN dotnet restore "StarWarsData.Services/StarWarsData.Services.csproj"
 
-COPY ["src/StarWarsData.CLI/StarWarsData.CLI.csproj", "src/StarWarsData.CLI/"]
-RUN dotnet restore "src/StarWarsData.CLI/StarWarsData.CLI.csproj"
-
-COPY ["src/StarWarsData.API/StarWarsData.API.csproj", "src/StarWarsData.API/"]
-RUN dotnet restore "src/StarWarsData.API/StarWarsData.API.csproj"
-
-COPY ["src/StarWarsData.Statiq/StarWarsData.Statiq.csproj", "src/StarWarsData.Statiq/"]
-RUN dotnet restore "src/StarWarsData.Statiq/StarWarsData.Statiq.csproj"
-
-# COPY ["src/StarWarsData.Web/StarWarsData.Web.csproj", "src/StarWarsData.Web/"]
-# RUN dotnet restore "src/StarWarsData.Web/StarWarsData.Web.csproj"
+COPY ["src/StarWarsData.CLI/StarWarsData.CLI.csproj", "StarWarsData.CLI/"]
+RUN dotnet restore "StarWarsData.CLI/StarWarsData.CLI.csproj"
 
 COPY ["src/", "."]
+RUN dotnet build StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/build
 
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS web-build
 WORKDIR /src/
 
-# RUN dotnet build src/StarWarsData.Web/StarWarsData.Web.csproj -c Release -o /app/build
-RUN dotnet build src/StarWarsData.API/StarWarsData.API.csproj -c Release -o /app/build
-RUN dotnet build src/StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/build
+COPY ["src/global.json", "."]
 
-FROM sdk AS publish
+COPY ["src/StarWarsData.Models/StarWarsData.Models.csproj", "StarWarsData.Models/"]
+RUN dotnet restore "StarWarsData.Models/StarWarsData.Models.csproj"
+COPY ["src/StarWarsData.Services/StarWarsData.Services.csproj", "StarWarsData.Services/"]
+RUN dotnet restore "StarWarsData.Services/StarWarsData.Services.csproj"
 
-# RUN dotnet publish src/StarWarsData.Web/StarWarsData.Web.csproj -c Release -o /app/publish
-RUN dotnet publish src/StarWarsData.API/StarWarsData.API.csproj -c Release -o /app/publish
-RUN dotnet publish src/StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/publish
+COPY ["src/StarWarsData.Server/StarWarsData.Server.csproj", "StarWarsData.Server/"]
+RUN dotnet restore "StarWarsData.Server/StarWarsData.Server.csproj"
+
+COPY ["src/StarWarsData.Client/StarWarsData.Client.csproj", "StarWarsData.Client/"]
+RUN dotnet workload restore "StarWarsData.Client/StarWarsData.Client.csproj"
+RUN dotnet restore "StarWarsData.Client/StarWarsData.Client.csproj"
+
+COPY ["src/", "."]
+RUN dotnet build StarWarsData.Server/StarWarsData.Server.csproj -c Release -o /app/build
+
+FROM cli-build AS cli-publish
+RUN dotnet publish StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/publish
+
+FROM web-build as web-publish
+RUN dotnet publish StarWarsData.Server/StarWarsData.Server.csproj -c Release -o /app/publish
 
 FROM runtime AS cli
 WORKDIR /app
 RUN mkdir /data
-COPY --from=publish /app/publish .
+COPY --from=cli-publish /app/publish .
 ENTRYPOINT ["dotnet", "StarWarsData.CLI.dll"]
 
-FROM aspnet AS api
+FROM aspnet AS web
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "StarWarsData.API.dll"]
+COPY --from=web-publish /app/publish .
+ENTRYPOINT ["dotnet", "StarWarsData.Server.dll"]

@@ -45,5 +45,6 @@ public class CollectionFilters : Dictionary<string, FilterDefinition<BsonDocumen
         Add("Weapon", _discoveredOrDestroyed);
         Add("Device", _dateCreated);
         Add("Religion ", Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date founded"));
+        Add("Trade_route ", Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date founded"));
     }
 }
