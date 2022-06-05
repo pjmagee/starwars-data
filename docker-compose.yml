@@ -2,31 +2,29 @@ services:
 
   database:
     image: mongo:latest
-    profiles: ["api"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - starwars-db:/data/db
 
-  api:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
-      target: api
-    image: pjmagee/starwars-data-api:latest
-    profiles: ["api"]
+      target: web
+    image: pjmagee/starwars-data-web
     ports:
       - "7051:7051"
       - "5051:5051"
-    entrypoint: ["dotnet", "StarWarsData.API.dll"]
+    entrypoint: ["dotnet", "StarWarsData.Server.dll"]
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_HTTPS: 7051
       ASPNETCORE_URLS: https://*:7051;http://*:5051
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
-      SWDATA_Settings__MongoDbUri: mongodb://admin:password@database:27017
+      SWDATA_Settings__MongoConnectionString: "mongodb://admin:password@database:27017"
     volumes:
      - ~/.aspnet/https:/https:ro
 
@@ -35,7 +33,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: cli
-    image: pjmagee/starwars-data-cli:latest
+    image: pjmagee/starwars-data-cli
     profiles: ["process"]
     entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
@@ -47,14 +45,15 @@ services:
       SWDATA_Settings__FirstPageOnly: "false"
     command: download
     volumes:
-      - starwars-data:/data
+      # - starwars-data:/data
+        - .\data:/data
 
   process:
     build: 
       context: .
       dockerfile: Dockerfile
       target: cli
-    image: pjmagee/starwars-data-cli:latest
+    image: pjmagee/starwars-data-cli
     profiles: ["process"]
     entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
@@ -62,7 +61,8 @@ services:
       SWDATA_Settings__DataDirectory: /data
     command: process
     volumes:
-      - starwars-data:/data
+      # - starwars-data:/data
+      - .\data:/data
 
   populate:
     build: 
@@ -72,12 +72,13 @@ services:
     image: pjmagee/starwars-data-cli:latest
     entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
-      DOTNET_ENVIRONMENT: Development
-      SWDATA_Settings__DataDirectory: /data
-      SWDATA_Settings__MongoDbUri: mongodb://admin:password@database:27017
+      DOTNET_ENVIRONMENT: "Development"
+      SWDATA_Settings__DataDirectory: "/data"
+      SWDATA_Settings__MongoConnectionString: "mongodb://admin:password@database:27017"
     command: populate
     volumes:
-      - starwars-data:/data
+      # - starwars-data:/data
+      - .\data:/data
 
 volumes:
   starwars-data:

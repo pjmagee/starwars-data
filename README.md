@@ -13,7 +13,7 @@ docker compose up download # download the data
 docker compose up process # process relationships
 docker compose up database # start mongodb
 docker compose up populate # populate mongodb
-docker compose up api # serve api and swagger
+docker compose up web # serve api, swagger and blazor wasm app
 ```
 
 ## Data folder JSON Structure

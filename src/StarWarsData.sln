@@ -1,16 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Statiq", "StarWarsData.Statiq\StarWarsData.Statiq.csproj", "{04B7A1A1-1ED1-47B5-A4B3-ABA1835C1AEE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Models", "StarWarsData.Models\StarWarsData.Models.csproj", "{FD8081E9-F69C-4F79-A519-B984C17C580B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Services", "StarWarsData.Services\StarWarsData.Services.csproj", "{596CE9A4-1D7F-4D05-9A75-4A486DF5AC92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.CLI", "StarWarsData.CLI\StarWarsData.CLI.csproj", "{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.API", "StarWarsData.API\StarWarsData.API.csproj", "{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Server", "StarWarsData.Server\StarWarsData.Server.csproj", "{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Web", "StarWarsData.Web\StarWarsData.Web.csproj", "{EF7683AA-368E-4254-8A1C-19473C04DAE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Client", "StarWarsData.Client\StarWarsData.Client.csproj", "{EF7683AA-368E-4254-8A1C-19473C04DAE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +16,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{04B7A1A1-1ED1-47B5-A4B3-ABA1835C1AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04B7A1A1-1ED1-47B5-A4B3-ABA1835C1AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04B7A1A1-1ED1-47B5-A4B3-ABA1835C1AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04B7A1A1-1ED1-47B5-A4B3-ABA1835C1AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD8081E9-F69C-4F79-A519-B984C17C580B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD8081E9-F69C-4F79-A519-B984C17C580B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD8081E9-F69C-4F79-A519-B984C17C580B}.Release|Any CPU.ActiveCfg = Release|Any CPU

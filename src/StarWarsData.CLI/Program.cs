@@ -74,7 +74,9 @@ await BuildCommandLine()
                     .AddSingleton<InfoboxDownloader>()
                     .AddSingleton<InfoboxRelationshipProcessor>()
                     .AddSingleton<RecordsService>()
-                    .AddSingleton(new MongoClient(new MongoUrl(settings.MongoDbUri)))
+                    .AddSingleton<EventTransformer>()
+                    .AddSingleton<CollectionFilters>()
+                    .AddSingleton(new MongoClient(new MongoUrl(settings.MongoConnectionString)))
                     .AddHttpClient();
 
                 services
