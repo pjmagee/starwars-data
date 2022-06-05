@@ -6,7 +6,7 @@
 
  @if (_categories is not null)
 {
-    <MudSelect T="string" MultiSelection="true" SelectedValues="_selectedCategories" SelectedValuesChanged="SelectedValuesChanged">
+    <MudSelect T="string" MultiSelection="true" Dense="true" SelectedValues="_selectedCategories" SelectedValuesChanged="SelectedValuesChanged">
         @foreach (var category in _categories)
         {
             <MudSelectItem T="string" Value="category">@category</MudSelectItem>
@@ -18,7 +18,7 @@
 {
     <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate" />
 
-    <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4">
+    <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" DisableModifiers="true">
         
         @{
             var isStart = true;
@@ -26,36 +26,49 @@
         
         @foreach (var timelineEvents in _pagedResult.Items)
         {
-            // var color = GetColor(timelineEvents);
             var contentAlign = isStart ? Align.Left : Align.Right;
             var yearAlign = isStart ? Align.Right : Align.Left;
-            // var title = $"{GetTitle(timelineEvents)} - ({timelineEvents.Template})";
            
             <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
                  <ItemOpposite>
-                     <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">
-                         @timelineEvents.Key
-                         @* @item.Year.ToString("#,###") @Enum.GetName(typeof(Demarcation), item.Demarcation) *@
-                     </MudText>
+                     <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">@timelineEvents.Year</MudText>
                 </ItemOpposite>
                 <ItemContent>
-                    <MudExpansionPanels>
-                        
+                    <MudExpansionPanels Dense="true" MultiExpansion="true">
                         @foreach (var timelineEvent in timelineEvents.Events)
                         {
                             var color = GetColor(timelineEvent);
                             
                             <MudExpansionPanel Text="@timelineEvent.DisplayTitle" MaxHeight="1000" Style="@($"color:{color}; text-align:{contentAlign};")">
-                                <MudText Class="mud-text-secondary" Align="contentAlign">
-                                    @foreach (var value  in timelineEvent.Values)
+                                <MudCard>
+                                    @if (timelineEvent.DisplayImageWithoutRevision is not null)
                                     {
-                                        @(value)
-                                        <br/>
+                                        <MudImage Fluid="true" Src="@timelineEvent.DisplayImageWithoutRevision" Alt="" Class="rounded-lg"/>
                                     }
-                                </MudText>
+                                    <MudCardContent>
+                                        @foreach (var item in timelineEvent.Properties)
+                                        {
+                                            if (item.Values.Count > 0)
+                                            {
+                                                <MudText Typo="Typo.body2">
+                                                    <b>@item.Label values: </b> @string.Join(", ", item.Values)
+                                                </MudText>
+                                            }
+                                            @if (item.Links.Count > 0)
+                                            {
+                                                <MudText Typo="Typo.body2">
+                                                    <b>@item.Label links: </b>
+                                                    @foreach (var link in item.Links)
+                                                    {
+                                                        <MudLink Class="mr-2" Href="@link.Href">@link.Content</MudLink>
+                                                    }
+                                                </MudText>
+                                            }
+                                        }
+                                    </MudCardContent>
+                                </MudCard>
                             </MudExpansionPanel>    
                         }
-                        
                     </MudExpansionPanels>
                 </ItemContent>
                
@@ -105,7 +118,7 @@
 
     private string GetTitle(TimelineEvent timelineEvent)
     {
-        return string.IsNullOrWhiteSpace(timelineEvent.EventType) ? timelineEvent.Title : $"{timelineEvent.EventType} - {timelineEvent.Title}";
+        return string.IsNullOrWhiteSpace(timelineEvent.DateEvent) ? timelineEvent.Title : $"{timelineEvent.DateEvent} - {timelineEvent.Title}";
     }
 
     private string GetColor(TimelineEvent timelineEvent)
@@ -113,33 +126,25 @@
         return timelineEvent.Template switch 
         {
             "Event" => Colors.LightBlue.Lighten1,
-
             "Campaign" => Colors.Shades.Black,
             "Mission" => Colors.Grey.Darken4,
-            
             "War" => Colors.Red.Darken4,
             "Battle" => Colors.Red.Darken3,
             "Duel" => Colors.Red.Darken2,
             "Fleet" => Colors.Red.Lighten1,
-            
             "Disease" => Colors.Green.Darken4,
-            
             "Location" => Colors.Blue.Lighten1,
             "City" => Colors.Blue.Default,
             "Law" => Colors.Blue.Darken1,
             "Treaty" => Colors.Blue.Darken2,
             "Election" => Colors.Blue.Darken3,
-            
             "Character" => Colors.Green.Default,
-            
             "Government" => Colors.Amber.Darken1,
             "Organization" => Colors.Amber.Darken2,
             "Company" => Colors.Amber.Darken3,
-            
             "Lightsaber" => Colors.Purple.Darken1,
             "Droid" => Colors.BlueGrey.Darken2,
             "Artifact" => Colors.BlueGrey.Darken3,
-            
             _ => Colors.Blue.Default
         };
     }
