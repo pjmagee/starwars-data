@@ -28,8 +28,10 @@ public class TimelineController : ControllerBase
     }
 
     [HttpGet("categories")]
-    public IEnumerable<string> GetTimelineCategories()
+    public async Task<IEnumerable<string>> GetTimelineCategories()
     {
+        // Not every category has dates for ABY/BBY format
+        // return await _recordsService.GetCollections(CancellationToken.None);
         return _collectionFilters.Keys;
     }
 }

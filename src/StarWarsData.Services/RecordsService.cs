@@ -61,10 +61,8 @@ public class RecordsService
         {
             if (_collectionFilters.ContainsKey(collection))
             {
-                var filter = _collectionFilters[collection];
-                
                 records.AddRange(await _mongoDb.GetCollection<BsonDocument>(collection)
-                    .Find(filter)
+                    .Find(_collectionFilters[collection])
                     .As<Record>()
                     .ToListAsync());
             }
