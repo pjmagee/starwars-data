@@ -9,14 +9,14 @@ namespace StarWarsData.Server.Controllers;
 public class TimelineController : ControllerBase
 {
     private readonly ILogger<TimelineController> _logger;
-    private readonly RecordsService _recordsService;
+    private readonly TimelineService _timelineService;
     private readonly CollectionFilters _collectionFilters;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public TimelineController(ILogger<TimelineController> logger, RecordsService recordsService, CollectionFilters collectionFilters, IHttpContextAccessor contextAccessor)
+    public TimelineController(ILogger<TimelineController> logger, TimelineService timelineService, CollectionFilters collectionFilters, IHttpContextAccessor contextAccessor)
     {
         _logger = logger;
-        _recordsService = recordsService;
+        _timelineService = timelineService;
         _collectionFilters = collectionFilters;
         _contextAccessor = contextAccessor;
     }
@@ -24,14 +24,9 @@ public class TimelineController : ControllerBase
     [HttpGet]
     public async Task<GroupedTimelineResult> Get([FromQuery] TimelineQueryParams queryParams)
     {
-        return await _recordsService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
+        return await _timelineService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }
 
     [HttpGet("categories")]
-    public async Task<IEnumerable<string>> GetTimelineCategories()
-    {
-        // Not every category has dates for ABY/BBY format
-        // return await _recordsService.GetCollections(CancellationToken.None);
-        return _collectionFilters.Keys;
-    }
+    public async Task<IEnumerable<string>> GetTimelineCategories() => _collectionFilters.Keys;
 }

@@ -3,9 +3,9 @@ using StarWarsData.Models;
 
 namespace StarWarsData.Services;
 
-public class EventTransformer : RecordTransformer
+public class EventTransformer
 {
-    public override IEnumerable<TimelineEvent> Transform(Record r)
+    public IEnumerable<TimelineEvent> Transform(Record r)
     {
         foreach (var data in r.Data)
         {

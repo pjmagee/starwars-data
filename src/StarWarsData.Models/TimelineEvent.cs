@@ -18,7 +18,6 @@ public class TimelineEvent : IComparable<TimelineEvent>
     public string? ImageUrl { get; set; }
     public Demarcation Demarcation { get; set; }
     public double Year { get; set; }
-    
     public List<InfoboxProperty> Properties { get; set; }
     public string? DateEvent { get; set; }
     

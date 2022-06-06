@@ -21,22 +21,3 @@ public class RecordClassMap : BsonClassMap<Record>
         this.MapProperty(x => x.Relationships);
     }
 }
-
-public class NoRelationshipRecordClassMap : BsonClassMap<NoRelationshipRecord>
-{
-    public NoRelationshipRecordClassMap()
-    {
-        this.MapIdProperty(x => x.PageId);
-        
-        this.MapProperty(x => x.PageUrl);
-        this.MapProperty(x => x.TemplateUrl);
-        this.MapProperty(x => x.ImageUrl);
-        
-        this.MapProperty(x => x.Data);
-        
-        this.UnmapProperty(x => x.Template);
-        this.UnmapProperty(x => x.PageTitle);
-        
-        this.SetIgnoreExtraElements(true);
-    }
-}
