@@ -21,8 +21,8 @@ public class CharacterService
             _mongoClient = new MongoClient(settings.MongoConnectionString);
             _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
         }
-    
-        public async Task<PagedChartData> GetChartData(int page = 1, int pageSize = 20)
+
+        public async Task<PagedChartData> GetLifespanData(int page = 1, int pageSize = 20)
         {
             List<BsonDocument> results = await _mongoDb
                 .GetCollection<BsonDocument>("Character")
@@ -31,8 +31,52 @@ public class CharacterService
                     (
                         Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Born"),
                         Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Died"),
-                        Builders<BsonDocument>.Filter.SizeGt("Data.Links", 0),
-                        Builders<BsonDocument>.Filter.Exists("Data.Links.Content"),
+                        Builders<BsonDocument>.Filter.Regex("Data.Links.Content", new BsonRegularExpression(new Regex("\\d.*\\s+(ABY|BBY)"))),
+                        Builders<BsonDocument>.Filter.Regex("Data.Links.Href", new BsonRegularExpression(new Regex("_(ABY|BBY)")))
+                    )
+                )
+                .Project(Builders<BsonDocument>.Projection.Exclude(doc => doc["Relationships"]))
+                .ToListAsync();
+            
+            var characters = results
+                .Select(CharacterAge.From)
+                .Where(x => x is not null)
+                .Distinct()
+                .OrderByDescending(x => x.Years)
+                .ToList();
+
+
+            var items = characters.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new PagedChartData
+            {
+                Page = page,
+                PageSize = pageSize,
+                Total = characters.Count,
+                ChartData = new ChartData
+                {
+                    Labels = items.Select(characterAge => characterAge.Name).ToArray(),
+                    Series = new List<Series<int>>(new []
+                    {
+                         new Series<int>()
+                         {
+                             Data = items.Select(x => (int) x.Years).ToList(),
+                             Name = "Ages"
+                         }
+                    })
+                }
+            };
+        }
+    
+        public async Task<PagedChartData> GetBirthsDeathsData(int page = 1, int pageSize = 20)
+        {
+            List<BsonDocument> results = await _mongoDb
+                .GetCollection<BsonDocument>("Character")
+                .Find(
+                    Builders<BsonDocument>.Filter.And
+                    (
+                        Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Born"),
+                        Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Died"),
                         Builders<BsonDocument>.Filter.Regex("Data.Links.Content", new BsonRegularExpression(new Regex("\\d.*\\s+(ABY|BBY)"))),
                         Builders<BsonDocument>.Filter.Regex("Data.Links.Href", new BsonRegularExpression(new Regex("_(ABY|BBY)")))
                     )

@@ -20,8 +20,8 @@ public class CharactersController : ControllerBase
     }
 
     [HttpGet("charts/births-deaths")]
-    public async Task<PagedChartData> GetBirthDeaths([FromQuery] QueryParams query)
-    {
-        return await _characterService.GetChartData(query.Page, query.PageSize);
-    }
+    public async Task<PagedChartData> GetBirthDeaths([FromQuery] QueryParams query) => await _characterService.GetBirthsDeathsData(query.Page, query.PageSize);
+
+    [HttpGet("charts/lifespans")]
+    public async Task<PagedChartData> GetLifespans([FromQuery] QueryParams query) => await _characterService.GetLifespanData(query.Page, query.PageSize);
 }
