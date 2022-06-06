@@ -21,13 +21,19 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod());
 });
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<RecordsService>();
-builder.Services.AddSingleton<CollectionFilters>();
-builder.Services.AddScoped<EventTransformer>();
-builder.Services.AddSingleton(builder.Configuration.GetSection("Settings").Get<Settings>()!);
+builder.Services
+    .AddEndpointsApiExplorer()
+    .AddHttpContextAccessor()
+    .AddSwaggerGen();
+
+builder.Services
+    .AddSingleton(builder.Configuration.GetSection("Settings").Get<Settings>()!)
+    .AddScoped<RecordsService>()
+    .AddSingleton<CollectionFilters>()
+    .AddScoped<EventTransformer>()
+    .AddScoped<TimelineService>()
+    .AddScoped<CharactersService>();
+
 BsonClassMap.RegisterClassMap(new RecordClassMap());
 
 var app = builder.Build();
