@@ -32,7 +32,7 @@ public class InfoboxDownloader
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
     
-    private bool _shouldContinue = false;
+    private bool _shouldContinue;
     private int _pwpcontinue = 1;
     
     public InfoboxDownloader(ILogger<InfoboxDownloader> logger, Settings settings, HttpClient httpClient)
@@ -53,7 +53,7 @@ public class InfoboxDownloader
         queryString.Add("pwpprop", "ids|title|value");
         queryString.Add("pwplimit", $"{_settings.PageLimit}");
         queryString.Add("pwpcontinue", $"{_pwpcontinue}");
-        queryString.Add("format", $"json");
+        queryString.Add("format", "json");
         return queryString.ToString()!;
     }
 	
@@ -61,7 +61,7 @@ public class InfoboxDownloader
     {
         do
         {
-            using (var pages = await JsonDocument.ParseAsync(await _httpClient.GetStreamAsync($"?" + GetPagesWithInfoboxes(), token)))
+            using (var pages = await JsonDocument.ParseAsync(await _httpClient.GetStreamAsync("?" + GetPagesWithInfoboxes(), token)))
             {
                 _shouldContinue = pages.RootElement.TryGetProperty("continue", out var continueElement);
 
@@ -79,7 +79,7 @@ public class InfoboxDownloader
                 {
                     var wikiPages = pagesWithPropElement.EnumerateArray().Where(x => x.GetProperty("ns").GetInt32().Equals(_settings.PageNamespace)).ToList();
 
-                    var options = new ParallelOptions() { CancellationToken = token };
+                    var options = new ParallelOptions { CancellationToken = token };
 
                     await Parallel.ForEachAsync(wikiPages, options, async (wikiPage, t) =>
                     {

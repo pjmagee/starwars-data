@@ -53,7 +53,7 @@ public class TimelineService
 
         var groupedByYear = timelineEvents
             .GroupBy(x => x.DisplayYear)
-            .Select(x => new GroupedTimelines() { Events = x.ToList(), Year = x.Key });
+            .Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
 
         var total = groupedByYear.Count();
 

@@ -28,11 +28,12 @@ builder.Services
 
 builder.Services
     .AddSingleton(builder.Configuration.GetSection("Settings").Get<Settings>()!)
-    .AddScoped<RecordsService>()
+    .AddScoped<RecordService>()
     .AddSingleton<CollectionFilters>()
     .AddScoped<EventTransformer>()
     .AddScoped<TimelineService>()
-    .AddScoped<CharactersService>();
+    .AddScoped<BattleService>()
+    .AddScoped<CharacterService>();
 
 BsonClassMap.RegisterClassMap(new RecordClassMap());
 

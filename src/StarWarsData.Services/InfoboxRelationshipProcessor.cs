@@ -1,6 +1,5 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Web;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models;
 

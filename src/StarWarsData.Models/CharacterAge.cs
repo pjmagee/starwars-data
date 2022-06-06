@@ -2,6 +2,14 @@ using MongoDB.Bson;
 
 namespace StarWarsData.Models;
 
+public class Victory
+{
+    public string Name { get; set; }
+    public string Date { get; set; }
+    public string Outcome { get; set; }
+    public string Link { get; set; }
+}
+
 public class CharacterAge
 {
     public string Name { get; set; }
