@@ -11,7 +11,7 @@ public class EventTransformer
         {
             foreach (var link in data.Links.Where(IsValid))
             {
-                yield return new TimelineEvent()
+                yield return new TimelineEvent
                 {
                     Title = r.PageTitle,
                     DateEvent = GetDateEvent(data),

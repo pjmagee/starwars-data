@@ -32,7 +32,7 @@ async Task DownloadInfoboxes(IHost host, CancellationToken token)
 async Task PopulateDatabase(IHost host, CancellationToken token)
 {
     using var scope = host.Services.CreateScope();
-    var service = scope.ServiceProvider.GetRequiredService<RecordsService>();
+    var service = scope.ServiceProvider.GetRequiredService<RecordService>();
     await service.PopulateAsync(token);
 }
 
@@ -73,7 +73,7 @@ await BuildCommandLine()
                     .AddSingleton(settings)
                     .AddSingleton<InfoboxDownloader>()
                     .AddSingleton<InfoboxRelationshipProcessor>()
-                    .AddSingleton<RecordsService>()
+                    .AddSingleton<RecordService>()
                     .AddSingleton<EventTransformer>()
                     .AddSingleton<CollectionFilters>()
                     .AddSingleton(new MongoClient(new MongoUrl(settings.MongoConnectionString)))

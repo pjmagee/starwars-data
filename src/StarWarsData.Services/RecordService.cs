@@ -1,15 +1,14 @@
 using System.Collections.Concurrent;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 
 namespace StarWarsData.Services;
 
-public class RecordsService
+public class RecordService
 {
-    private readonly ILogger<RecordsService> _logger;
+    private readonly ILogger<RecordService> _logger;
     private readonly Settings _settings;
     private readonly EventTransformer _transformer;
     private readonly CollectionFilters _collectionFilters;
@@ -17,7 +16,7 @@ public class RecordsService
 
     private IMongoDatabase _mongoDb;
 
-    public RecordsService(ILogger<RecordsService> logger, Settings settings, EventTransformer transformer,
+    public RecordService(ILogger<RecordService> logger, Settings settings, EventTransformer transformer,
         CollectionFilters collectionFilters)
     {
         _logger = logger;
@@ -46,7 +45,7 @@ public class RecordsService
         var collectionNames =
             await (await _mongoDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
 
-        await Parallel.ForEachAsync(collectionNames, new ParallelOptions() { CancellationToken = token },
+        await Parallel.ForEachAsync(collectionNames, new ParallelOptions { CancellationToken = token },
             async (name, t) =>
             {
                 var collection = _mongoDb.GetCollection<Record>(name);
@@ -113,14 +112,14 @@ public class RecordsService
             await collection.Indexes.DropAllAsync(cancellationToken);
 
             await Parallel.ForEachAsync(templateDirectoryInfo.EnumerateFiles(),
-                new ParallelOptions() { CancellationToken = cancellationToken }, async (file, token) =>
+                new ParallelOptions { CancellationToken = cancellationToken }, async (file, token) =>
                 {
                     await using var jsonStream = file.OpenRead();
 
                     Record record =
                         (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
 
-                    await collection.InsertOneAsync(record, new InsertOneOptions() { BypassDocumentValidation = false },
+                    await collection.InsertOneAsync(record, new InsertOneOptions { BypassDocumentValidation = false },
                         token);
                 });
 
@@ -138,6 +137,6 @@ public class RecordsService
             _logger.LogInformation($"Index: {index} created for {templateDirectoryInfo.Name}");
         }
 
-        _logger.LogInformation($"Db Populated");
+        _logger.LogInformation("Db Populated");
     }
 }
