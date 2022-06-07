@@ -1,0 +1,29 @@
+@page "/powers"
+@inject HttpClient Http
+
+<PageTitle>Force powers</PageTitle>
+
+@if (_chartData is not null)
+{
+    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" XAxisLabels="@Labels" Width="100%" Height="800px" LegendPosition="Position.Top" />
+}
+
+@code {
+
+    private ChartData<double>? _chartData;
+    public string[] Labels => _chartData!.Labels;
+
+    public List<ChartSeries> Series => _chartData.Series.Select(x =>
+    {
+        return new ChartSeries()
+        {
+            Name = x.Name,
+            Data = x.Data.ToArray()
+        };
+    }).ToList();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _chartData = await Http.GetFromJsonAsync<ChartData<double>>($"powers/charts/categories");
+    }
+}
