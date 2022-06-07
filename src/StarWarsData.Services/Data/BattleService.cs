@@ -52,8 +52,10 @@ public class BattleService
                 Builders<BsonDocument>.Filter.And(
                     Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Date"),
                     Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Outcome"),
-                    Builders<BsonDocument>.Filter.Regex("Data.Links.Content", new BsonRegularExpression(new Regex("\\d.*\\s+(ABY|BBY)"))),
-                    Builders<BsonDocument>.Filter.Regex("Data.Links.Href", new BsonRegularExpression(new Regex("_(ABY|BBY)")))
+                    Builders<BsonDocument>.Filter.Regex("Data.Links.Content",
+                        new BsonRegularExpression(new Regex("\\d.*\\s+(ABY|BBY)"))),
+                    Builders<BsonDocument>.Filter.Regex("Data.Links.Href",
+                        new BsonRegularExpression(new Regex("_(ABY|BBY)")))
                 )
             )
             .Project(Builders<BsonDocument>.Projection.Exclude(doc => doc["Relationships"]))
@@ -79,7 +81,7 @@ public class BattleService
             }
         }
 
-        return new ()
+        return new()
         {
             Page = page,
             PageSize = pageSize,
@@ -102,7 +104,8 @@ public class BattleService
         if (_yearHelper.IsValidLink(date))
         {
             return outcomes.AsBsonArray.Where(x => x.AsString.Contains("victory", StringComparison.OrdinalIgnoreCase))
-                .Select(x => new Victory { Date = date["Content"].AsString, Name = name, Outcome = MapToFaction(x.AsString), Link = link });
+                .Select(x => new Victory
+                    { Date = date["Content"].AsString, Name = name, Outcome = MapToFaction(x.AsString), Link = link });
         }
 
         return Enumerable.Empty<Victory>();

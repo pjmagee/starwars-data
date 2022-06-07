@@ -39,6 +39,7 @@ builder.Services
     .AddScoped<TimelineService>()
     .AddScoped<BattleService>()
     .AddScoped<WarService>()
+    .AddScoped<PowerService>()
     .AddScoped<CharacterService>();
 
 BsonClassMap.RegisterClassMap(new RecordClassMap());
