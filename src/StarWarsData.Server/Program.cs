@@ -1,6 +1,8 @@
 using MongoDB.Bson.Serialization;
 using StarWarsData.Models;
-using StarWarsData.Services;
+using StarWarsData.Services.Data;
+using StarWarsData.Services.Helpers;
+using StarWarsData.Services.Mongo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,11 +30,15 @@ builder.Services
 
 builder.Services
     .AddSingleton(builder.Configuration.GetSection("Settings").Get<Settings>()!)
-    .AddScoped<RecordService>()
+    .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
-    .AddScoped<EventTransformer>()
+    .AddSingleton<YearComparer>()
+    .AddSingleton<YearHelper>()
+    .AddScoped<RecordToEventsTransformer>()
+    .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
     .AddScoped<BattleService>()
+    .AddScoped<WarService>()
     .AddScoped<CharacterService>();
 
 BsonClassMap.RegisterClassMap(new RecordClassMap());

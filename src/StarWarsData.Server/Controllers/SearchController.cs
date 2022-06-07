@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using StarWarsData.Models;
-using StarWarsData.Services;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Mongo;
 
 namespace StarWarsData.Server.Controllers;
 

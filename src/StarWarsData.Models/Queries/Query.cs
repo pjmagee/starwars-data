@@ -1,4 +1,4 @@
-namespace StarWarsData.Models;
+namespace StarWarsData.Models.Queries;
 
 public class QueryParams
 {

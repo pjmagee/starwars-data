@@ -1,7 +1,7 @@
-@page "/lifespans"
+@page "/wars"
 @inject HttpClient Http
 
-<PageTitle>Lifespans</PageTitle>
+<PageTitle>Wars by Duration</PageTitle>
 
 @if (_pagedResult is not null)
 {
@@ -9,7 +9,7 @@
     <MudChart 
         ChartType="ChartType.Line" 
         ChartSeries="SeriesData"
-        XAxisLabels="Labels" 
+        XAxisLabels="Labels"
         Width="100%" 
         Height="800px"  
         LegendPosition="Position.Top" 
@@ -22,10 +22,10 @@
     private int _pages = 1;
     private int _pageSize = 5;
     private MudPagination _pagination = null!;
-    private readonly ChartOptions _options = new() { DisableLegend = true, XAxisLines = true, YAxisLines = true, YAxisFormat = "##,###0 years", MaxNumYAxisTicks = 25 };
+    private readonly ChartOptions _options = new() { DisableLegend = false, XAxisLines = true, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
 
     private string[] Labels => _pagedResult!.ChartData.Labels;
-    private List<ChartSeries> SeriesData => _pagedResult!.ChartData.Series.Take(1).Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = "Ages" }).ToList();
+    private List<ChartSeries> SeriesData => _pagedResult!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -39,7 +39,7 @@
         query.Add("Page", $"{page}");
         query.Add("PageSize", $"{_pageSize}");
 
-        _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"characters/charts/lifespans?{query}");
+        _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"wars/charts/duration?{query}");
         _pages = _pagedResult.Total / _pagedResult.PageSize;
     }
 }

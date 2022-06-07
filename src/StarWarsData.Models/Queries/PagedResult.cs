@@ -1,4 +1,6 @@
-namespace StarWarsData.Models;
+using StarWarsData.Models.Mongo;
+
+namespace StarWarsData.Models.Queries;
 
 public class PagedResult
 {

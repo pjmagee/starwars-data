@@ -1,8 +1,7 @@
-@page "/births-and-deaths"
-@using System.Web
+@page "/battles"
 @inject HttpClient Http
 
-<PageTitle>Character Births and Deaths</PageTitle>
+<PageTitle>Battles</PageTitle>
 
 @if (_pagedResult is not null)
 {
@@ -12,11 +11,10 @@
 
 @code {
 
-    private PagedChartData? _pagedResult;
+    private PagedChartData<double>? _pagedResult;
     private int _pages = 1;
     private int _pageSize = 10;
     private MudPagination _pagination = null!;
-
 
     public string[] Labels => _pagedResult!.ChartData.Labels;
 
@@ -25,7 +23,7 @@
         return new ChartSeries()
         {
             Name = x.Name,
-            Data = x.Data.Select(i => (double)i).ToArray()
+            Data = x.Data.ToArray()
         };
     }).ToList();
 
@@ -41,7 +39,7 @@
         query.Add("Page", $"{page}");
         query.Add("PageSize", $"{_pageSize}");
 
-        _pagedResult = await Http.GetFromJsonAsync<PagedChartData>($"characters/charts/births-deaths?{query}");
+        _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"battles/charts/battle-victories?{query}");
         _pages = _pagedResult.Total / _pagedResult.PageSize;
     }
 

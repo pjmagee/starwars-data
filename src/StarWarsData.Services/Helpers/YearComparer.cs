@@ -1,6 +1,6 @@
-using StarWarsData.Models;
+using StarWarsData.Models.Queries;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Helpers;
 
 public class YearComparer : Comparer<string>
 {
@@ -12,8 +12,8 @@ public class YearComparer : Comparer<string>
         var xDemarcation = x.Contains("BBY") ? Demarcation.BBY : Demarcation.ABY;
         var yDemarcation = y.Contains("BBY") ? Demarcation.BBY : Demarcation.ABY;
         
-        var xYear = float.Parse(x.Split(' ')[0]);
-        var yYear = float.Parse(y.Split(' ')[0]);
+        var xYear = double.Parse(x.Split(' ')[0]);
+        var yYear = double.Parse(y.Split(' ')[0]);
 
         return xDemarcation switch
         {

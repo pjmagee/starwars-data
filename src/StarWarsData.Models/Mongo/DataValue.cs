@@ -1,4 +1,4 @@
-namespace StarWarsData.Models;
+namespace StarWarsData.Models.Mongo;
 
 public class DataValue
 {

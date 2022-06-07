@@ -1,7 +1,7 @@
 using MongoDB.Bson.Serialization;
-using StarWarsData.Models;
+using StarWarsData.Models.Mongo;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Mongo;
 
 public class RecordClassMap : BsonClassMap<Record>
 {

@@ -11,7 +11,8 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Polly;
 using StarWarsData.Models;
-using StarWarsData.Services;
+using StarWarsData.Services.Mongo;
+using StarWarsData.Services.Wiki;
 
 CommandLineBuilder BuildCommandLine()
 {
@@ -74,8 +75,6 @@ await BuildCommandLine()
                     .AddSingleton<InfoboxDownloader>()
                     .AddSingleton<InfoboxRelationshipProcessor>()
                     .AddSingleton<RecordService>()
-                    .AddSingleton<EventTransformer>()
-                    .AddSingleton<CollectionFilters>()
                     .AddSingleton(new MongoClient(new MongoUrl(settings.MongoConnectionString)))
                     .AddHttpClient();
 

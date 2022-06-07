@@ -3,20 +3,24 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Helpers;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Data;
 
-public partial class BattleService
+public class BattleService
 {
     private readonly ILogger<BattleService> _logger;
+    private readonly YearHelper _yearHelper;
     private readonly Settings _settings;
     private readonly MongoClient _mongoClient;
 
     private IMongoDatabase _mongoDb;
 
-    public BattleService(ILogger<BattleService> logger, Settings settings)
+    public BattleService(ILogger<BattleService> logger, YearHelper yearHelper, Settings settings)
     {
         _logger = logger;
+        _yearHelper = yearHelper;
         _settings = settings;
         _mongoClient = new MongoClient(settings.MongoConnectionString);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
@@ -40,22 +44,7 @@ public partial class BattleService
         return "Other factions";
     }
 
-    private bool IsValidDate(BsonValue value)
-    {
-        if (string.IsNullOrWhiteSpace(value["Content"].AsString))
-            return false;
-
-        var content = value["Content"].AsString;
-        var link = value["Href"].AsString;
-
-        var containsYear = char.IsDigit(value["Content"].AsString.First());
-        var containsDemarcation = content.Contains("BBY") || content.Contains("ABY");
-        var linkContainsDemarcation = link.Contains("_BBY") || link.Contains("_ABY");
-
-        return containsYear && containsDemarcation && linkContainsDemarcation;
-    }
-
-    public async Task<PagedChartData> GetChartData(int page = 1, int pageSize = 20)
+    public async Task<PagedChartData<int>> GetBattlesByYear(int page = 1, int pageSize = 20)
     {
         List<BsonDocument> results = await _mongoDb
             .GetCollection<BsonDocument>("Battle")
@@ -70,35 +59,9 @@ public partial class BattleService
             .Project(Builders<BsonDocument>.Projection.Exclude(doc => doc["Relationships"]))
             .ToListAsync();
 
-        var victories = results.SelectMany(x =>
-            {
-                var name = x["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].AsString;
-                var date = x["Data"].AsBsonArray.First(i => i["Label"] == "Date")["Links"][0].AsBsonValue;
-                var outcomes = x["Data"].AsBsonArray.First(i => i["Label"] == "Outcome")["Values"];
-                var link = x["PageUrl"].AsString;
-
-                if (IsValidDate(date))
-                {
-                    return outcomes
-                        .AsBsonArray
-                        .Where(x => x.AsString.Contains("victory", StringComparison.OrdinalIgnoreCase))
-                        .Select(x => new Victory
-                        {
-                            Date = date["Content"].AsString,
-                            Name = name,
-                            Outcome = MapToFaction(x.AsString),
-                            Link = link
-                        });
-                }
-
-                return Enumerable.Empty<Victory>();
-            })
-            .Distinct()
-            .ToList();
-
+        var victories = results.SelectMany(ToVictories).Distinct().ToList();
         var factions = victories.GroupBy(x => x.Outcome);
-        var years = victories.Select(v => v.Date).Distinct().OrderBy(x => x, new YearComparer()).ToList();
-
+        var years = victories.Select(v => v.Date).Distinct().OrderBy(date => date, _yearHelper.YearComparer).ToList();
         var items = years.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         var seriesList = new List<Series<int>>();
 
@@ -106,7 +69,8 @@ public partial class BattleService
         {
             var series = new Series<int>()
             {
-                Data = items.Select(year => faction.Count(f => f.Date == year)).ToList(), Name = faction.Key
+                Name = faction.Key,
+                Data = items.Select(year => faction.Count(f => f.Date == year)).ToList()
             };
 
             if (series.Data.Any())
@@ -115,16 +79,32 @@ public partial class BattleService
             }
         }
 
-        return new PagedChartData
+        return new ()
         {
             Page = page,
             PageSize = pageSize,
             Total = years.Count,
-            ChartData = new ChartData
+            ChartData = new()
             {
                 Labels = items.ToArray(),
                 Series = seriesList
             }
         };
+    }
+
+    private IEnumerable<Victory> ToVictories(BsonDocument document)
+    {
+        var name = document["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].AsString;
+        var date = document["Data"].AsBsonArray.First(i => i["Label"] == "Date")["Links"][0].AsBsonValue;
+        var outcomes = document["Data"].AsBsonArray.First(i => i["Label"] == "Outcome")["Values"];
+        var link = document["PageUrl"].AsString;
+
+        if (_yearHelper.IsValidLink(date))
+        {
+            return outcomes.AsBsonArray.Where(x => x.AsString.Contains("victory", StringComparison.OrdinalIgnoreCase))
+                .Select(x => new Victory { Date = date["Content"].AsString, Name = name, Outcome = MapToFaction(x.AsString), Link = link });
+        }
+
+        return Enumerable.Empty<Victory>();
     }
 }

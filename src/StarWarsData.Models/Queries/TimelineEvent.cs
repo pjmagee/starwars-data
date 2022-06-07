@@ -1,11 +1,6 @@
-namespace StarWarsData.Models;
+using StarWarsData.Models.Mongo;
 
-public enum Demarcation
-{
-    Unset,
-    ABY,
-    BBY
-}
+namespace StarWarsData.Models.Queries;
 
 public class TimelineEvent : IComparable<TimelineEvent>
 {

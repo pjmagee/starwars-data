@@ -2,33 +2,35 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
+using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Mongo;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Data;
 
 public class TimelineService
 {
     private readonly ILogger<TimelineService> _logger;
     private readonly Settings _settings;
     private readonly MongoClient _mongoClient;
-    private readonly EventTransformer _transformer;
+    private readonly RecordToEventsTransformer _transformer;
+    private readonly MongoDefinitions _mongoDefinitions;
     private readonly CollectionFilters _collectionFilters;
 
     private IMongoDatabase _mongoDb;
 
-    public TimelineService(ILogger<TimelineService> logger, Settings settings, EventTransformer transformer, CollectionFilters collectionFilters)
+    public TimelineService(ILogger<TimelineService> logger, Settings settings, RecordToEventsTransformer transformer, MongoDefinitions mongoDefinitions, CollectionFilters collectionFilters)
     {
         _logger = logger;
         _settings = settings;
         _transformer = transformer;
+        _mongoDefinitions = mongoDefinitions;
         _collectionFilters = collectionFilters;
         _mongoClient = new MongoClient(settings.MongoConnectionString);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
     }
     
-    // Relationships are HUGE because so many category records reference the Star Wars Timeline / Events
-    // This is a slim cutdown record to load for the Timeline page...
-    public async Task<GroupedTimelineResult> GetTimelineEvents(IEnumerable<string> collections, int page = 1,
-        int pageSize = 20)
+    public async Task<GroupedTimelineResult> GetTimelineEvents(IEnumerable<string> collections, int page = 1, int pageSize = 20)
     {
         List<Record> records = new List<Record>();
 
@@ -38,7 +40,7 @@ public class TimelineService
             {
                 records.AddRange(await _mongoDb.GetCollection<BsonDocument>(collection)
                     .Find(_collectionFilters[collection])
-                    .Project(Builders<BsonDocument>.Projection.Exclude(doc => doc["Relationships"]))
+                    .Project(_mongoDefinitions.ExcludeRelationships)
                     .As<Record>()
                     .ToListAsync());
             }
@@ -47,9 +49,8 @@ public class TimelineService
         var timelineEvents = records
             .AsParallel()
             .SelectMany(r => _transformer.Transform(r))
+            .OrderBy(x => x)
             .ToList();
-
-        timelineEvents.Sort();
 
         var groupedByYear = timelineEvents
             .GroupBy(x => x.DisplayYear)
