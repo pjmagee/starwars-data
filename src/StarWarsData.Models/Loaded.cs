@@ -1,3 +1,5 @@
+using StarWarsData.Models.Mongo;
+
 namespace StarWarsData.Models;
 
 public class Loaded

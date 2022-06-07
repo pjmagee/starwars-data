@@ -3,26 +3,22 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using StarWarsData.Models;
+using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Queries;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Mongo;
 
 public class RecordService
 {
     private readonly ILogger<RecordService> _logger;
     private readonly Settings _settings;
-    private readonly EventTransformer _transformer;
-    private readonly CollectionFilters _collectionFilters;
     private readonly MongoClient _mongoClient;
+    private readonly IMongoDatabase _mongoDb;
 
-    private IMongoDatabase _mongoDb;
-
-    public RecordService(ILogger<RecordService> logger, Settings settings, EventTransformer transformer,
-        CollectionFilters collectionFilters)
+    public RecordService(ILogger<RecordService> logger, Settings settings)
     {
         _logger = logger;
         _settings = settings;
-        _transformer = transformer;
-        _collectionFilters = collectionFilters;
         _mongoClient = new MongoClient(settings.MongoConnectionString);
         _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
     }
@@ -37,16 +33,13 @@ public class RecordService
         return results;
     }
 
-    public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50,
-        CancellationToken token = default)
+    public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50, CancellationToken token = default)
     {
         var results = new ConcurrentBag<Record>();
 
-        var collectionNames =
-            await (await _mongoDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
+        var collectionNames = await (await _mongoDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
 
-        await Parallel.ForEachAsync(collectionNames, new ParallelOptions { CancellationToken = token },
-            async (name, t) =>
+        await Parallel.ForEachAsync(collectionNames, new ParallelOptions { CancellationToken = token }, async (name, t) =>
             {
                 var collection = _mongoDb.GetCollection<Record>(name);
 
@@ -79,9 +72,7 @@ public class RecordService
         var total = await collection.CountDocumentsAsync(record => true, cancellationToken: token);
 
         var data = await collection
-            .Find(searchText is null
-                ? FilterDefinition<Record>.Empty
-                : new FilterDefinitionBuilder<Record>().Text(searchText))
+            .Find(searchText is null ? FilterDefinition<Record>.Empty : new FilterDefinitionBuilder<Record>().Text(searchText))
             .Skip((page - 1) * pageSize)
             .Limit(pageSize)
             .ToListAsync(token);
@@ -103,34 +94,20 @@ public class RecordService
         {
             _logger.LogInformation($"Populating {templateDirectoryInfo.Name}");
 
-
             await starWars.DropCollectionAsync(templateDirectoryInfo.Name, cancellationToken);
             await starWars.CreateCollectionAsync(templateDirectoryInfo.Name, cancellationToken: cancellationToken);
 
             var collection = starWars.GetCollection<Record>(templateDirectoryInfo.Name);
-
             await collection.Indexes.DropAllAsync(cancellationToken);
 
-            await Parallel.ForEachAsync(templateDirectoryInfo.EnumerateFiles(),
-                new ParallelOptions { CancellationToken = cancellationToken }, async (file, token) =>
+            await Parallel.ForEachAsync(templateDirectoryInfo.EnumerateFiles(), new ParallelOptions { CancellationToken = cancellationToken }, async (file, token) =>
                 {
                     await using var jsonStream = file.OpenRead();
-
-                    Record record =
-                        (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
-
-                    await collection.InsertOneAsync(record, new InsertOneOptions { BypassDocumentValidation = false },
-                        token);
+                    Record record = (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
+                    await collection.InsertOneAsync(record, new InsertOneOptions { BypassDocumentValidation = false }, token);
                 });
 
-            var indexModel = new CreateIndexModel<Record>(
-                Builders<Record>.IndexKeys
-                    .Text("$**")
-                // .Text(x => x.Data.First().Label)
-                // .Text(x => x.Data.First().Links)
-                // .Text(x => x.Data.First().Values)
-                // .Text(x => x.Relationships)
-            );
+            var indexModel = new CreateIndexModel<Record>(Builders<Record>.IndexKeys.Text("$**"));
 
             var index = await collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
 

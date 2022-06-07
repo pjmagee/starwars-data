@@ -1,15 +1,24 @@
 using System.Globalization;
-using StarWarsData.Models;
+using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Helpers;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Data;
 
-public class EventTransformer
+public class RecordToEventsTransformer
 {
+    private readonly YearHelper _yearHelper;
+
+    public RecordToEventsTransformer(YearHelper yearHelper)
+    {
+        _yearHelper = yearHelper;
+    }
+    
     public IEnumerable<TimelineEvent> Transform(Record r)
     {
         foreach (var data in r.Data)
         {
-            foreach (var link in data.Links.Where(IsValid))
+            foreach (var link in data.Links.Where(_yearHelper.IsValidLink))
             {
                 yield return new TimelineEvent
                 {
@@ -28,16 +37,4 @@ public class EventTransformer
     private string? GetDateEvent(InfoboxProperty data) => data.Label switch { "Date" => String.Empty, _ => data.Label };
 
     private double ParseYear(string text) => double.Parse(new String(text.Split(' ', '-')[0].Where(c => !char.IsLetter(c)).ToArray()), NumberStyles.Any);
-
-    private static bool IsValid(HyperLink link)
-    {
-        if (string.IsNullOrWhiteSpace(link.Content))
-            return false;
-        
-        var containsYear =  char.IsDigit(link.Content.First());
-        var containsDemarcation = link.Content.Contains("BBY") || link.Content.Contains("ABY");
-        var linkContainsDemarcation = link.Href.Contains("_BBY") || link.Href.Contains("_ABY"); 
-        
-        return containsYear && containsDemarcation && linkContainsDemarcation;
-    }
 }

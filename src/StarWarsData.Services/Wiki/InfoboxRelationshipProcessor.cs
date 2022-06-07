@@ -2,8 +2,9 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models;
+using StarWarsData.Models.Mongo;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.Wiki;
 
 public class InfoboxRelationshipProcessor
 {

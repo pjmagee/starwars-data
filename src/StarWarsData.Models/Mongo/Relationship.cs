@@ -1,9 +1,8 @@
 using System.Text.Json.Serialization;
 using System.Web;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace StarWarsData.Models;
+namespace StarWarsData.Models.Mongo;
 
 [Serializable]
 public class Relationship

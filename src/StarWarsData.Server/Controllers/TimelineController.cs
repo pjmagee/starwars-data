@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using StarWarsData.Models;
-using StarWarsData.Services;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Data;
+using StarWarsData.Services.Mongo;
 
 namespace StarWarsData.Server.Controllers;
 
@@ -22,7 +23,7 @@ public class TimelineController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<GroupedTimelineResult> Get([FromQuery] TimelineQueryParams queryParams)
+    public async Task<GroupedTimelineResult> GetTimelineEvents([FromQuery] TimelineQueryParams queryParams)
     {
         return await _timelineService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }

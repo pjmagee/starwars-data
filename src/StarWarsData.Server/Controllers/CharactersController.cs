@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using StarWarsData.Models;
-using StarWarsData.Services;
+using StarWarsData.Models.Queries;
+using StarWarsData.Services.Data;
 
 namespace StarWarsData.Server.Controllers;
 
@@ -20,8 +20,8 @@ public class CharactersController : ControllerBase
     }
 
     [HttpGet("charts/births-deaths")]
-    public async Task<PagedChartData> GetBirthDeaths([FromQuery] QueryParams query) => await _characterService.GetBirthsDeathsData(query.Page, query.PageSize);
+    public async Task<PagedChartData<int>> GetBirthDeaths([FromQuery] QueryParams query) => await _characterService.GetBirthAndDeathsByYear(query.Page, query.PageSize);
 
     [HttpGet("charts/lifespans")]
-    public async Task<PagedChartData> GetLifespans([FromQuery] QueryParams query) => await _characterService.GetLifespanData(query.Page, query.PageSize);
+    public async Task<PagedChartData<double>> GetLifespans([FromQuery] QueryParams query) => await _characterService.GetLifeSpans(query.Page, query.PageSize);
 }
