@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Mongo;

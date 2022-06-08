@@ -1,45 +1,83 @@
 @page "/wars"
 @inject HttpClient Http
 
-<PageTitle>Wars by Duration</PageTitle>
+<PageTitle>Wars</PageTitle>
 
-@if (_pagedResult is not null)
-{
-    <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate"  />
-    <MudChart 
-        ChartType="ChartType.Line" 
-        ChartSeries="SeriesData"
-        XAxisLabels="Labels"
-        Width="100%" 
-        Height="800px"  
-        LegendPosition="Position.Top" 
-        ChartOptions="_options" />
-}
+<MudGrid>
+    <MudItem xs="6">
+         @if (_durations is not null)
+         {
+             <MudStack>
+                 <MudPagination Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_durationsPages" SelectedChanged="Durations"  />
+                 <MudChart
+                     ChartType="ChartType.Line" 
+                     ChartSeries="DurationsData" 
+                     XAxisLabels="_durations!.ChartData.Labels" 
+                     Width="100%"
+                     Height="500px"
+                     LegendPosition="Position.Bottom"
+                     ChartOptions="_duratonOptions" />    
+             </MudStack>
+         }
+    </MudItem>
+    <MudItem xs="6">
+         @if(_battles is not null)
+         {
+             <MudStack>
+                 <MudPagination Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_battlesPages" SelectedChanged="Battles"/>  
+                 <MudChart 
+                     ChartType="ChartType.Bar"
+                     ChartSeries="@BattlesData" 
+                     XAxisLabels="_battles!.ChartData.Labels" 
+                     Width="100%" 
+                     Height="500px"
+                     LegendPosition="Position.Bottom" />
+             </MudStack>
+         }
+    </MudItem>
+</MudGrid>
 
 @code {
 
-    private PagedChartData<double>? _pagedResult;
-    private int _pages = 1;
-    private int _pageSize = 5;
-    private MudPagination _pagination = null!;
-    private readonly ChartOptions _options = new() { DisableLegend = false, XAxisLines = true, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
+    private PagedChartData<double>? _durations;
+    private int _durationsPages = 1;
+    
+     
+    private PagedChartData<double>? _battles;
+    private int _battlesPages = 1;
 
-    private string[] Labels => _pagedResult!.ChartData.Labels;
-    private List<ChartSeries> SeriesData => _pagedResult!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
+    
+    private int _pageSize = 5;
+    
+    private readonly ChartOptions _duratonOptions = new() { DisableLegend = false, XAxisLines = false, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
+    private readonly ChartOptions _battlesOptions = new() { DisableLegend = false, XAxisLines = false, YAxisLines = true, YAxisTicks = 100 };
+
+    private List<ChartSeries> DurationsData => _durations!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
+    private List<ChartSeries> BattlesData => _battles!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
 
     protected override async Task OnInitializedAsync()
     {
-        await Paginate(1);
+        await Durations(1);
+        await Battles(1);
     }
 
-    private async Task Paginate(int page)
+    private async Task Durations(int page)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
-
         query.Add("Page", $"{page}");
         query.Add("PageSize", $"{_pageSize}");
 
-        _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"wars/charts/duration?{query}");
-        _pages = _pagedResult.Total / _pagedResult.PageSize;
+        _durations = await Http.GetFromJsonAsync<PagedChartData<double>>($"wars/charts/duration?{query}");
+        _durationsPages = _durations.Total / _durations.PageSize;
+    }
+    
+    private async Task Battles(int page)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        query.Add("Page", $"{page}");
+        query.Add("PageSize", $"{_pageSize}");
+
+        _battles = await Http.GetFromJsonAsync<PagedChartData<double>>($"wars/charts/battles?{query}");
+        _battlesPages = _battles.Total / _battles.PageSize;
     }
 }
