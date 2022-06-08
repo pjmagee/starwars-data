@@ -21,4 +21,7 @@ public class WarsController : ControllerBase
     
     [HttpGet("charts/duration")]
     public async Task<PagedChartData<double>> GetWarsByDuration([FromQuery] QueryParams query) => await _service.GetWarsByDuration(query.Page, query.PageSize);
+    
+    [HttpGet("charts/battles")]
+    public async Task<PagedChartData<int>> GetWarsByBattles([FromQuery] QueryParams query) => await _service.GetWarsByBattles(query.Page, query.PageSize);
 }

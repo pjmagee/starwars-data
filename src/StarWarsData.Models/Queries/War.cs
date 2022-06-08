@@ -8,6 +8,8 @@ public class War
     public string Beginning { get; set; }
     public string End { get; set; }
     public double Years { get; set; }
+
+    public int Battles { get; set; } = 0;
     
     public static War? Map(BsonDocument document)
     {
@@ -26,8 +28,17 @@ public class War
             {
                 years = Math.Abs(double.Parse(end.Split(' ')[0]) - double.Parse(start.Split(' ')[0]));
             }
+            
+            var majorBattlesData = document["Data"].AsBsonArray.FirstOrDefault(i => i["Label"].AsString.Contains("Major battles"));
 
-            return new War { Name = name, Beginning = start, End = end, Years = years };
+            int battles = 0;
+            
+            if (majorBattlesData is not null)
+            {
+                battles = majorBattlesData.AsBsonValue["Values"].AsBsonArray.Count;
+            }
+
+            return new War { Name = name, Beginning = start, End = end, Years = years, Battles = battles };
         }
         catch
         {

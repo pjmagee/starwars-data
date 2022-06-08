@@ -130,25 +130,40 @@
         return timelineEvent.Template switch 
         {
             "Event" => Colors.LightBlue.Lighten1,
+            
+            "Trade_route" => Colors.Cyan.Default,
+            
             "Campaign" => Colors.Shades.Black,
             "Mission" => Colors.Grey.Darken4,
-            "War" => Colors.Red.Darken4,
-            "Battle" => Colors.Red.Darken3,
+            
+            "Battle" => Colors.Red.Darken1,
             "Duel" => Colors.Red.Darken2,
-            "Fleet" => Colors.Red.Lighten1,
+            "Fleet" => Colors.Red.Darken3,
+            "War" => Colors.Red.Darken4,
+            
             "Disease" => Colors.Green.Darken4,
+            
             "Location" => Colors.Blue.Lighten1,
-            "City" => Colors.Blue.Default,
-            "Law" => Colors.Blue.Darken1,
-            "Treaty" => Colors.Blue.Darken2,
+            "City" => Colors.Blue.Darken1,
+            
+            "Law" => Colors.Green .Darken1,
+            "Treaty" => Colors.Green .Darken2,
+            
             "Election" => Colors.Blue.Darken3,
-            "Character" => Colors.Green.Default,
+            
+            "Character" => Colors.Brown.Default,
+            
             "Government" => Colors.Amber.Darken1,
-            "Organization" => Colors.Amber.Darken2,
+            "Organization" => Colors.Amber.Lighten1,
             "Company" => Colors.Amber.Darken3,
-            "Lightsaber" => Colors.Purple.Darken1,
+            
+            "Religion" => Colors.Purple.Lighten1,
+            "Holocron" => Colors.Purple.Darken1,
+            "Lightsaber" => Colors.Purple.Darken2,
+            
             "Droid" => Colors.BlueGrey.Darken2,
             "Artifact" => Colors.BlueGrey.Darken3,
+            
             _ => Colors.Blue.Default
             };
     }

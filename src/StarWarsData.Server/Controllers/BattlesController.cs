@@ -19,6 +19,6 @@ public class BattlesController : ControllerBase
         _contextAccessor = contextAccessor;
     }
     
-    [HttpGet("charts/battle-victories")]
+    [HttpGet("charts/victories")]
     public async Task<PagedChartData<int>> GetBirthsDeathsByYear([FromQuery] QueryParams query) => await _service.GetBattlesByYear(query.Page, query.PageSize);
 }
