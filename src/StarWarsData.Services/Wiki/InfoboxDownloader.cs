@@ -146,12 +146,12 @@ public class InfoboxDownloader
                                     .EnumerateArray()
                                     .Where(x => x.TryGetProperty("type", out var t) &&
                                                 t.ValueKind == JsonValueKind.String && t.ValueEquals("data") &&
-                                                x.TryGetProperty("data", out var d) && d.ValueKind == JsonValueKind.Object);
+                                                x.TryGetProperty("data", out var d) &&
+                                                d.ValueKind == JsonValueKind.Object);
                                 
                                 foreach (var dataValueItem in dataValues)
                                 {
-                                    if (dataValueItem.TryGetProperty("data", out var dataValueItemData) &&
-                                        dataValueItemData.ValueKind == JsonValueKind.Object)
+                                    if (dataValueItem.TryGetProperty("data", out var dataValueItemData) && dataValueItemData.ValueKind == JsonValueKind.Object)
                                     {
                                         if (dataValueItemData.TryGetProperty("label", out var label) &&
                                             label.ValueKind == JsonValueKind.String && !label.ValueEquals(string.Empty) &&
@@ -175,8 +175,6 @@ public class InfoboxDownloader
 
         await Save(record, cancellationToken);
     }
-    
- 
 
     private async Task<string> GetLabelValue(string label)
     {
@@ -256,6 +254,6 @@ public class InfoboxDownloader
             await File.WriteAllTextAsync(path, JsonSerializer.Serialize(record, Options), token);
         }
         
-        _logger.LogInformation($"Saved {path}");
+        _logger.LogInformation("Saved {Path}", path);
     }
 }

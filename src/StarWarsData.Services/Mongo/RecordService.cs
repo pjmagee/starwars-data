@@ -41,18 +41,17 @@ public class RecordService
         var collectionNames = await (await _mongoDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
 
         await Parallel.ForEachAsync(collectionNames, new ParallelOptions { CancellationToken = token }, async (name, t) =>
+        {
+            var collection = _mongoDb.GetCollection<Record>(name);
+
+            var cursor = await collection.FindAsync(new FilterDefinitionBuilder<Record>().Text(query), cancellationToken: t);
+            var collectionResults = await cursor.ToListAsync(t);
+
+            foreach (var result in collectionResults)
             {
-                var collection = _mongoDb.GetCollection<Record>(name);
-
-                var cursor = await collection.FindAsync(new FilterDefinitionBuilder<Record>().Text(query),
-                    cancellationToken: t);
-                var collectionResults = await cursor.ToListAsync(t);
-
-                foreach (var result in collectionResults)
-                {
-                    results.Add(result);
-                }
-            });
+                results.Add(result);
+            }
+        });
 
         return new PagedResult
         {
@@ -93,7 +92,7 @@ public class RecordService
 
         foreach (var templateDirectoryInfo in new DirectoryInfo(_settings.DataDirectory).EnumerateDirectories())
         {
-            _logger.LogInformation($"Populating {templateDirectoryInfo.Name}");
+            _logger.LogInformation("Populating {Name}", templateDirectoryInfo.Name);
 
             await starWars.DropCollectionAsync(templateDirectoryInfo.Name, cancellationToken);
             await starWars.CreateCollectionAsync(templateDirectoryInfo.Name, cancellationToken: cancellationToken);
@@ -102,17 +101,17 @@ public class RecordService
             await collection.Indexes.DropAllAsync(cancellationToken);
 
             await Parallel.ForEachAsync(templateDirectoryInfo.EnumerateFiles(), new ParallelOptions { CancellationToken = cancellationToken }, async (file, token) =>
-                {
-                    await using var jsonStream = file.OpenRead();
-                    Record record = (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
-                    await collection.InsertOneAsync(record, new InsertOneOptions { BypassDocumentValidation = false }, token);
-                });
+            {
+                await using var jsonStream = file.OpenRead();
+                Record record = (await JsonSerializer.DeserializeAsync<Record>(jsonStream, cancellationToken: token))!;
+                await collection.InsertOneAsync(record, new InsertOneOptions { BypassDocumentValidation = false }, token);
+            });
 
             var indexModel = new CreateIndexModel<Record>(Builders<Record>.IndexKeys.Text("$**"));
 
             var index = await collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
 
-            _logger.LogInformation($"Index: {index} created for {templateDirectoryInfo.Name}");
+            _logger.LogInformation("Index: {Index} created for {Name}", index, templateDirectoryInfo.Name);
         }
 
         _logger.LogInformation("Db Populated");
