@@ -2,6 +2,7 @@
   "PageId": 542714,
   "PageUrl": "https://starwars.fandom.com/wiki/Maratelle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Hux family",
@@ -33,7 +34,25 @@
       "Values": [
         "Hux family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Brendol Hux",
+          "Href": "https://starwars.fandom.com/wiki/Brendol_Hux"
+        }
+      ],
+      "Values": [
+        "Brendol Hux"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 513972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brendol_Hux",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

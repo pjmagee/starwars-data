@@ -32,7 +32,8 @@
         }
       ],
       "Values": [
-        "Light"
+        "Light",
+        "Tan"
       ]
     },
     {
@@ -46,23 +47,27 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Orange"
+        "Orange",
+        "Red",
+        "Yellow"
       ]
     },
     {
       "Label": "Distinctions",
       "Links": [
         {
-          "Content": "limbs",
-          "Href": "https://starwars.fandom.com/wiki/Limb"
-        },
-        {
           "Content": "mouths",
           "Href": "https://starwars.fandom.com/wiki/Mouth"
+        },
+        {
+          "Content": "limbs",
+          "Href": "https://starwars.fandom.com/wiki/Limb"
         }
       ],
       "Values": [
-        "Long limbs, round bodies, big mouths"
+        "Big mouths",
+        "Long limbs",
+        "Round bodies"
       ]
     },
     {
@@ -104,24 +109,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 657969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pako",
+      "PageId": 501966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wam_Lufba",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 597575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 621572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 716052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roasted_\"rugger\"",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 471694,
@@ -129,14 +119,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 621572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 597575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum_wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 518564,
       "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum_(language)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 501966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wam_Lufba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 510037,
@@ -144,14 +139,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
+      "PageId": 456136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 716052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roasted_\"rugger\"",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 657965,
       "PageUrl": "https://starwars.fandom.com/wiki/Bantha_sludge_stew",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 456136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 657969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pako_(Yuzzum)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

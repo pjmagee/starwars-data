@@ -62,7 +62,52 @@
       "Values": [
         "Blue"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Tivva's father",
+          "Href": "https://starwars.fandom.com/wiki/Tivva%27s_father"
+        }
+      ],
+      "Values": [
+        "Tivva's father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Tivva",
+          "Href": "https://starwars.fandom.com/wiki/Tivva"
+        },
+        {
+          "Content": "Vette",
+          "Href": "https://starwars.fandom.com/wiki/Vette"
+        }
+      ],
+      "Values": [
+        "Tivva",
+        "Vette"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 305431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vette",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 436046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tivva",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tivva's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

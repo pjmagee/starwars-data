@@ -2,6 +2,7 @@
   "PageId": 721167,
   "PageUrl": "https://starwars.fandom.com/wiki/Teemank",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
         }
       ],
       "Values": [
-        "c. 232 BBY, Kur Nebula"
+        "232 BBY, Kur Nebula"
       ]
     },
     {
@@ -51,6 +52,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Beesar Tal-Apurna",
+          "Href": "https://starwars.fandom.com/wiki/Beesar_Tal-Apurna"
+        }
+      ],
+      "Values": [
+        "Beesar Tal-Apurna"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -68,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 721157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beesar_Tal-Apurna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

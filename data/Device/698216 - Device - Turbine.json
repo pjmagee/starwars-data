@@ -13,7 +13,12 @@
     },
     {
       "Label": "Locations",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Zeffo",
+          "Href": "https://starwars.fandom.com/wiki/Zeffo"
+        }
+      ],
       "Values": [
         "Zeffo"
       ]
@@ -26,5 +31,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 641831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zephyr-G_swoop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 752339,
+      "PageUrl": "https://starwars.fandom.com/wiki/LX-990_Whirlwind_turbine_engine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    }
+  ]
 }

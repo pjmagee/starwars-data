@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Organization type",
+      "Links": [
+        {
+          "Content": "Sphere of Influence",
+          "Href": "https://starwars.fandom.com/wiki/Spheres_of_Influence"
+        }
+      ],
+      "Values": [
+        "Sphere of Influence"
+      ]
+    },
+    {
       "Label": "Leader(s)",
       "Links": [
         {
@@ -21,16 +33,28 @@
         {
           "Content": "Darth Rictus",
           "Href": "https://starwars.fandom.com/wiki/Darth_Rictus"
-        },
-        {
-          "Content": "Darth Anathel",
-          "Href": "https://starwars.fandom.com/wiki/Darth_Anathel"
         }
       ],
       "Values": [
         "Dark Councilor",
-        "Darth Rictus",
-        "Darth Anathel"
+        "Darth Rictus"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Red Legion",
+          "Href": "https://starwars.fandom.com/wiki/Red_Legion"
+        },
+        {
+          "Content": "Dread Executioners",
+          "Href": "https://starwars.fandom.com/wiki/Dread_Executioners"
+        }
+      ],
+      "Values": [
+        "Red Legion",
+        "Dread Executioners"
       ]
     },
     {
@@ -46,6 +70,22 @@
       ]
     },
     {
+      "Label": "Date reorganized",
+      "Links": [
+        {
+          "Content": "3630 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3630_BBY"
+        },
+        {
+          "Content": "Sphere of Sith Doctrine",
+          "Href": "https://starwars.fandom.com/wiki/Sphere_of_Sith_Doctrine"
+        }
+      ],
+      "Values": [
+        "c. 3630 BBY, into Sphere of Sith Doctrine"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -53,32 +93,17 @@
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         },
         {
-          "Content": "Spheres of Influence",
-          "Href": "https://starwars.fandom.com/wiki/Spheres_of_Influence"
-        },
-        {
-          "Content": "Red Legion",
-          "Href": "https://starwars.fandom.com/wiki/Red_Legion"
-        },
-        {
-          "Content": "Dread Executioners",
-          "Href": "https://starwars.fandom.com/wiki/Dread_Executioners"
+          "Content": "Dark Council",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Council"
         }
       ],
       "Values": [
         "Sith Empire",
-        "Spheres of Influence",
-        "Red Legion",
-        "Dread Executioners (disbanded)"
+        "Dark Council"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 431696,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dread_Executioners",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
     {
       "PageId": 406942,
       "PageUrl": "https://starwars.fandom.com/wiki/Magras",
@@ -90,19 +115,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 363075,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anathemos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 396110,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Rictus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 431696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dread_Executioners",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 633718,
       "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Sith_Doctrine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 363075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anathemos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 363079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_assassin_(Anathemos)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

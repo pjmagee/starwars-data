@@ -2,7 +2,7 @@
   "PageId": 479439,
   "PageUrl": "https://starwars.fandom.com/wiki/RX-200_Falchion-class_assault_tank",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/81/StunTank-TCWs2BR3.png/revision/latest?cb=20200313060241",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d2/StunTank2-TCWs2BR3.png/revision/latest?cb=20230917154341",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Tank",
@@ -60,10 +60,14 @@
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "28.6 meters"
+        "28.6 meters (93 ft, 6 in)"
       ]
     },
     {
@@ -76,6 +80,49 @@
       ],
       "Values": [
         "90 kilometers per hour"
+      ]
+    },
+    {
+      "Label": "Power output",
+      "Links": [],
+      "Values": [
+        "High"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Reactor"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "armored",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        }
+      ],
+      "Values": [
+        "Lightly-armored"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Long-range sensors"
       ]
     },
     {
@@ -92,7 +139,7 @@
       ],
       "Values": [
         "NNJ-40 \"Thunderbolt\" long-range ion cannon (1)",
-        "Light auto-blasters (2)"
+        "Light auto-blasters (2; one port, one starboard)"
       ]
     },
     {
@@ -103,12 +150,16 @@
           "Href": "https://starwars.fandom.com/wiki/Pilot"
         },
         {
+          "Content": "gunner",
+          "Href": "https://starwars.fandom.com/wiki/Gunner"
+        },
+        {
           "Content": "Vehicle commander",
           "Href": "https://starwars.fandom.com/wiki/Vehicle_commander"
         }
       ],
       "Values": [
-        "Pilots (2)",
+        "Pilots (2; 1 pilot, 1 gunner)",
         "Vehicle commander (1) (optional)"
       ]
     },
@@ -129,6 +180,18 @@
       ],
       "Values": [
         "25 tons"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Repulsorlift generator",
+          "Href": "https://starwars.fandom.com/wiki/Repulsorlift_generator"
+        }
+      ],
+      "Values": [
+        "Repulsorlift generator"
       ]
     },
     {
@@ -174,11 +237,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 713927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tank_battery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 586467,
       "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Blaster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
@@ -187,6 +245,16 @@
       "PageId": 475413,
       "PageUrl": "https://starwars.fandom.com/wiki/Low_Altitude_Assault_Transport_carrier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 713927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tank_battery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 514429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

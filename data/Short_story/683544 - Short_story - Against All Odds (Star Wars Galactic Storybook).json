@@ -2,6 +2,7 @@
   "PageId": 683544,
   "PageUrl": "https://starwars.fandom.com/wiki/Against_All_Odds_(Star_Wars_Galactic_Storybook)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ee/AgainstAllOdds.png/revision/latest?cb=20221207220203",
   "Data": [
     {
       "Label": "Titles",
@@ -92,7 +93,42 @@
       "Values": [
         "4 ABY"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "The Battle Continues",
+          "Href": "https://starwars.fandom.com/wiki/The_Battle_Continues"
+        }
+      ],
+      "Values": [
+        "The Battle Continues"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "New Heroes for the Galaxy",
+          "Href": "https://starwars.fandom.com/wiki/New_Heroes_for_the_Galaxy"
+        }
+      ],
+      "Values": [
+        "New Heroes for the Galaxy"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683539,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Battle_Continues",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 683548,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Heroes_for_the_Galaxy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

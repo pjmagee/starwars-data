@@ -31,55 +31,30 @@
           "Href": "https://starwars.fandom.com/wiki/Ambria_system"
         },
         {
-          "Content": "Ambria",
-          "Href": "https://starwars.fandom.com/wiki/Ambria/Legends"
-        },
-        {
           "Content": "Aweris system",
           "Href": "https://starwars.fandom.com/wiki/Aweris_system"
         },
         {
-          "Content": "Taboon",
-          "Href": "https://starwars.fandom.com/wiki/Taboon"
-        },
-        {
-          "Content": "Stenness system",
-          "Href": "https://starwars.fandom.com/wiki/Stenness_system"
-        },
-        {
-          "Content": "Kamsul",
-          "Href": "https://starwars.fandom.com/wiki/Kamsul"
-        },
-        {
           "Content": "Ithull system",
           "Href": "https://starwars.fandom.com/wiki/Ithull_system"
-        },
-        {
-          "Content": "Ithull",
-          "Href": "https://starwars.fandom.com/wiki/Ithull"
         }
       ],
       "Values": [
         "Ambria system",
-        "Ambria",
         "Aweris system",
-        "Taboon",
-        "Stenness system",
-        "Kamsul",
-        "Ithull system",
-        "Ithull"
+        "Ithull system"
       ]
     },
     {
       "Label": "Other planets",
       "Links": [
         {
-          "Content": "Amar",
-          "Href": "https://starwars.fandom.com/wiki/Amar"
+          "Content": "Kamsul",
+          "Href": "https://starwars.fandom.com/wiki/Kamsul"
         }
       ],
       "Values": [
-        "Amar"
+        "Kamsul"
       ]
     },
     {
@@ -115,17 +90,30 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Lesser Lantillian Route",
+          "Href": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route"
+        },
+        {
           "Content": "Whitebeam Run",
           "Href": "https://starwars.fandom.com/wiki/Whitebeam_Run"
         }
       ],
       "Values": [
+        "Lesser Lantillian Route",
         "Whitebeam Run"
       ]
     },
     {
       "Label": "Native species",
       "Links": [
+        {
+          "Content": "humanoid",
+          "Href": "https://starwars.fandom.com/wiki/Humanoid/Legends"
+        },
+        {
+          "Content": "species",
+          "Href": "https://starwars.fandom.com/wiki/Species/Legends"
+        },
         {
           "Content": "Nessies",
           "Href": "https://starwars.fandom.com/wiki/Nessie"
@@ -140,10 +128,9 @@
         }
       ],
       "Values": [
-        "Nessies",
+        "25 humanoid species collectively known as the \"Nessies",
         "Amarans",
-        "Ithullans",
-        "23 others"
+        "Ithullans"
       ]
     },
     {
@@ -167,7 +154,7 @@
         },
         {
           "Content": "Stenness Node",
-          "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Ithullian_ore_hauler"
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Ithullan_ore_hauler"
         },
         {
           "Content": "Ambria",
@@ -191,7 +178,7 @@
       ]
     },
     {
-      "Label": "New Sith Wars",
+      "Label": "Light and Darkness War",
       "Links": [
         {
           "Content": "Ambria",
@@ -249,6 +236,51 @@
   ],
   "Relationships": [
     {
+      "PageId": 17252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Awer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 17249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aweris_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 202426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mev_(moon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 301255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogga's_criminal_empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 9428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dreebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 66416,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Rig",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 16238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamsul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 203828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finhead_Stonebone's_pirate_gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 12731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airon_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 2997,
       "PageUrl": "https://starwars.fandom.com/wiki/Ambria/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -257,16 +289,6 @@
       "PageId": 9427,
       "PageUrl": "https://starwars.fandom.com/wiki/Taboon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 202426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mev_(moon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 17249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aweris_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 15434,
@@ -282,26 +304,6 @@
       "PageId": 15437,
       "PageUrl": "https://starwars.fandom.com/wiki/Voth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 66416,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Rig",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 301255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogga's_criminal_empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 17252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Awer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 14294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merson",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

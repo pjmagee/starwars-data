@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -60,14 +65,26 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-15"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Duros Space Run",
+          "Href": "https://starwars.fandom.com/wiki/Duros_Space_Run"
+        }
+      ],
+      "Values": [
+        "Duros Space Run"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -88,19 +105,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 30389,
-      "PageUrl": "https://starwars.fandom.com/wiki/B'rknaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 6012,
-      "PageUrl": "https://starwars.fandom.com/wiki/26_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
       "PageId": 13713,
       "PageUrl": "https://starwars.fandom.com/wiki/Kalarba/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalarba_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 6012,
+      "PageUrl": "https://starwars.fandom.com/wiki/26_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 30389,
+      "PageUrl": "https://starwars.fandom.com/wiki/B'rknaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 402309,

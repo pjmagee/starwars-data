@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Elite-class vessel",
@@ -79,24 +79,29 @@
         }
       ],
       "Values": [
-        "c. 231 BBY, Valo"
+        "c. 231 BBY, Valo (repaired)"
       ]
     },
     {
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Attack on Cyclor",
-          "Href": "https://starwars.fandom.com/wiki/Attack_on_Cyclor"
+          "Content": "First Battle of Cyclor",
+          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Cyclor"
         },
         {
-          "Content": "Attack on Valo",
-          "Href": "https://starwars.fandom.com/wiki/Attack_on_Valo"
+          "Content": "Valo Atrocity",
+          "Href": "https://starwars.fandom.com/wiki/Valo_Atrocity"
+        },
+        {
+          "Content": "Raid of the Innovator",
+          "Href": "https://starwars.fandom.com/wiki/Raid_of_the_Innovator"
         }
       ],
       "Values": [
-        "Attack on Cyclor",
-        "Attack on Valo"
+        "First Battle of Cyclor",
+        "Valo Atrocity",
+        "Raid of the Innovator"
       ]
     },
     {
@@ -105,12 +110,38 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Republic Science Corps",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Science_Corps"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic",
+        "Republic Science Corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 793006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grendrek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 792233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vark_Tarpalin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 792910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_of_the_Innovator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 700443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Idrax_Snat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

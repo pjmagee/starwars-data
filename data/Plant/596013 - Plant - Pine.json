@@ -2,7 +2,7 @@
   "PageId": 596013,
   "PageUrl": "https://starwars.fandom.com/wiki/Pine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/38/ShiliTrees-LaD.png/revision/latest?cb=20221027035317",
   "Data": [
     {
       "Label": "Titles",
@@ -29,10 +29,20 @@
         {
           "Content": "Chandrila",
           "Href": "https://starwars.fandom.com/wiki/Chandrila"
+        },
+        {
+          "Content": "Endor",
+          "Href": "https://starwars.fandom.com/wiki/Endor"
+        },
+        {
+          "Content": "Shili",
+          "Href": "https://starwars.fandom.com/wiki/Shili"
         }
       ],
       "Values": [
-        "Chandrila"
+        "Chandrila",
+        "Endor",
+        "Shili"
       ]
     },
     {
@@ -46,12 +56,35 @@
       "Values": [
         "Forest"
       ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown bark",
+        "Green needles"
+      ]
     }
   ],
   "Relationships": [
     {
       "PageId": 712494,
       "PageUrl": "https://starwars.fandom.com/wiki/Rei'izu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 703339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 501105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shili",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

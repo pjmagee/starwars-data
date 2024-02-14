@@ -2,6 +2,7 @@
   "PageId": 629282,
   "PageUrl": "https://starwars.fandom.com/wiki/WSW_Mk_III_\"Harrier\"_Combat_Remote",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -64,6 +65,10 @@
         {
           "Content": "Repeating blaster",
           "Href": "https://starwars.fandom.com/wiki/Repeating_blaster"
+        },
+        {
+          "Content": "Stun blaster",
+          "Href": "https://starwars.fandom.com/wiki/Stun_blaster"
         }
       ],
       "Values": [
@@ -79,5 +84,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 482965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cybot_Galactica",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

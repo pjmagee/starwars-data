@@ -17,10 +17,20 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier",
+        "Occlusion Zone"
       ]
     },
     {
@@ -33,6 +43,18 @@
       ],
       "Values": [
         "Ab Dalis system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-17",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-17"
       ]
     },
     {
@@ -67,7 +89,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamps",
@@ -136,34 +158,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 703323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ground_Defense_Command",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 703324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Seven_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 679921,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ab_Dalis_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 683463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 703415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rendezvous_Point_Lambda-Four",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 686693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sparkfly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 680158,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Emergence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 702037,
@@ -176,24 +173,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 705922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Ab_Dalis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 680020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garello_Technologies",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 703325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geological_survey_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 685105,
       "PageUrl": "https://starwars.fandom.com/wiki/Ab_Dalisian_government",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 703415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rendezvous_Point_Lambda-Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 679921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ab_Dalis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 686693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sparkfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 703323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ground_Defense_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 703324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Seven_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 681035,
@@ -201,9 +208,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 680158,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Emergence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 703325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geological_survey_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 680020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garello_Technologies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 683463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hyperlane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 705922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ab_Dalis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

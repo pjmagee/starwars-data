@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -126,7 +131,7 @@
         "Shallow March system",
         "Vestral system",
         "Yalln system",
-        "Yutusk systemAlmanian subsector",
+        "Yutusk systemAlmanian sector",
         "Almanian system",
         "Yutusk system"
       ]
@@ -144,12 +149,30 @@
       ]
     },
     {
-      "Label": "Trade routes",
+      "Label": "Stations",
       "Links": [
         {
-          "Content": "Shaltin Tunnels",
-          "Href": "https://starwars.fandom.com/wiki/Shaltin_Tunnels/Legends"
+          "Content": "Fangol's artificial moon",
+          "Href": "https://starwars.fandom.com/wiki/Fangol%27s_artificial_moon"
         },
+        {
+          "Content": "Meliflar Station",
+          "Href": "https://starwars.fandom.com/wiki/Meliflar_Station"
+        },
+        {
+          "Content": "Refrax Spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Refrax_Spaceport"
+        }
+      ],
+      "Values": [
+        "Fangol's artificial moon",
+        "Meliflar Station",
+        "Refrax Spaceport"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
         {
           "Content": "Hyperlane GG734",
           "Href": "https://starwars.fandom.com/wiki/Hyperlane_GG734"
@@ -157,12 +180,16 @@
         {
           "Content": "Hyperlane GH972",
           "Href": "https://starwars.fandom.com/wiki/Hyperlane_GH972"
+        },
+        {
+          "Content": "Shaltin Tunnels",
+          "Href": "https://starwars.fandom.com/wiki/Shaltin_Tunnels/Legends"
         }
       ],
       "Values": [
-        "Shaltin Tunnels",
         "Hyperlane GG734",
-        "Hyperlane GH972"
+        "Hyperlane GH972",
+        "Shaltin Tunnels"
       ]
     },
     {
@@ -181,10 +208,6 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Fromirian quegs",
-          "Href": "https://starwars.fandom.com/wiki/Fromirian_queg"
-        },
-        {
           "Content": "Long-necked gundarks",
           "Href": "https://starwars.fandom.com/wiki/Long-necked_gundark"
         },
@@ -198,7 +221,6 @@
         }
       ],
       "Values": [
-        "Fromirian quegs",
         "Long-necked gundarks",
         "Palarians",
         "Pydyrians"
@@ -247,256 +269,156 @@
       ]
     },
     {
-      "Label": "Xim's Expansionist Period",
+      "Label": "Before the Republic",
       "Links": [
         {
-          "Content": "Battle of Ranroon",
+          "Content": "Xim's Expansionist Period",
+          "Href": "https://starwars.fandom.com/wiki/Xim%27s_Expansionist_Period"
+        },
+        {
+          "Content": "Ranroon",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Ranroon"
         }
       ],
       "Values": [
-        "Battle of Ranroon"
+        "Xim's Expansionist PeriodRanroon",
+        "Xim's Expansionist Period"
       ]
     },
     {
-      "Label": "Local conflicts",
+      "Label": "Old Republic era",
       "Links": [
         {
-          "Content": "Battle on Dakot Seven",
-          "Href": "https://starwars.fandom.com/wiki/Battle_on_Dakot_Seven"
+          "Content": "Hundred-Year Darkness",
+          "Href": "https://starwars.fandom.com/wiki/Hundred-Year_Darkness/Legends"
         },
         {
-          "Content": "Fluwhaka revolt",
+          "Content": "Fluwhaka",
+          "Href": "https://starwars.fandom.com/wiki/Trap_at_Fluwhaka"
+        },
+        {
+          "Content": "Dakot Seven",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Dakot_Seven"
+        }
+      ],
+      "Values": [
+        "Hundred-Year DarknessFluwhaka",
+        "Local conflictDakot Seven",
+        "Hundred-Year Darkness",
+        "Local conflict"
+      ]
+    },
+    {
+      "Label": "Rise of the Empire era",
+      "Links": [
+        {
+          "Content": "Fluwhaka",
           "Href": "https://starwars.fandom.com/wiki/Fluwhaka_revolt"
         },
         {
-          "Content": "Almanian sector invasion",
+          "Content": "Almanian sector",
           "Href": "https://starwars.fandom.com/wiki/Almanian_sector_invasion"
         }
       ],
       "Values": [
-        "Battle on Dakot Seven",
-        "Fluwhaka revolt",
-        "Almanian sector invasion"
+        "Local conflictFluwhaka",
+        "Local conflictAlmanian sector",
+        "Local conflict"
       ]
     },
     {
-      "Label": "Galactic Civil War",
+      "Label": "Rebellion era",
       "Links": [
         {
-          "Content": "Mission to Lotide",
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+        },
+        {
+          "Content": "Lotide",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Lotide"
         },
         {
-          "Content": "Battle for Black Ice",
+          "Content": "Refrax",
           "Href": "https://starwars.fandom.com/wiki/Battle_for_Black_Ice"
         },
         {
-          "Content": "Blitz on Fangol",
+          "Content": "Fangol",
           "Href": "https://starwars.fandom.com/wiki/Blitz_on_Fangol"
         }
       ],
       "Values": [
-        "Mission to Lotide",
-        "Battle for Black Ice",
-        "Blitz on Fangol"
+        "Galactic Civil WarLotide - Refrax - Fangol",
+        "Galactic Civil War"
       ]
     },
     {
-      "Label": "Almanian Uprising",
+      "Label": "New Republic era",
       "Links": [
         {
-          "Content": "Bombing of Pydyr",
+          "Content": "Almanian Uprising",
+          "Href": "https://starwars.fandom.com/wiki/Almanian_Uprising"
+        },
+        {
+          "Content": "Pydyr (I)",
           "Href": "https://starwars.fandom.com/wiki/Bombing_of_Pydyr"
         },
         {
-          "Content": "Bombing of Auyemesh",
+          "Content": "Auyemesh",
           "Href": "https://starwars.fandom.com/wiki/Bombing_of_Auyemesh"
         },
         {
-          "Content": "Duel on Pydyr",
+          "Content": "Pydyr (II)",
           "Href": "https://starwars.fandom.com/wiki/Duel_on_Pydyr"
         },
         {
-          "Content": "Battle of Almania",
+          "Content": "Almania",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Almania"
         }
       ],
       "Values": [
-        "Bombing of Pydyr",
-        "Bombing of Auyemesh",
-        "Duel on Pydyr",
-        "Battle of Almania"
+        "Almanian UprisingPydyr (I) - Auyemesh - Pydyr (II) - Almania",
+        "Almanian Uprising"
       ]
     },
     {
-      "Label": "Local conflict",
+      "Label": "Legacy era",
       "Links": [
         {
-          "Content": "Insurrection of Iliabath",
+          "Content": "Iliabath",
           "Href": "https://starwars.fandom.com/wiki/Insurrection_of_Iliabath"
-        }
-      ],
-      "Values": [
-        "Insurrection of Iliabath"
-      ]
-    },
-    {
-      "Label": "Second Galactic Civil War",
-      "Links": [
+        },
         {
-          "Content": "Mission for the Amulet of Kalara",
+          "Content": "Second Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Second_Galactic_Civil_War"
+        },
+        {
+          "Content": "Drewwa",
           "Href": "https://starwars.fandom.com/wiki/Mission_for_the_Amulet_of_Kalara"
-        }
-      ],
-      "Values": [
-        "Mission for the Amulet of Kalara"
-      ]
-    },
-    {
-      "Label": "Lost Tribe of Sith emergence",
-      "Links": [
+        },
         {
-          "Content": "Battle in the Fallanassi village",
+          "Content": "Lost Tribe of Sith emergence",
+          "Href": "https://starwars.fandom.com/wiki/Lost_Tribe_of_Sith_emergence"
+        },
+        {
+          "Content": "Pydyr",
           "Href": "https://starwars.fandom.com/wiki/Battle_in_the_Fallanassi_village"
         },
         {
-          "Content": "Skirmish in Meliflar Station",
+          "Content": "Mendenbatt system",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_in_Meliflar_Station"
         }
       ],
       "Values": [
-        "Battle in the Fallanassi village",
-        "Skirmish in Meliflar Station"
+        "Local conflictIliabath",
+        "Second Galactic Civil WarDrewwa",
+        "Lost Tribe of Sith emergencePydyr - Mendenbatt system",
+        "Local conflict",
+        "Second Galactic Civil War",
+        "Lost Tribe of Sith emergence"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 304005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iliabath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 394475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Refrax_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 307911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fislan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 353935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fluwhaka_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shallow_March",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auyemesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 272033,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yutusk_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 9353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lotide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 280307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ranroon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almania/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 344068,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mendenbatt_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 278160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaltin_Tunnels/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 163580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malkii/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 21797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dakot_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 91494,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 344065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meliflar_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 394414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hyperlane_GH972",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 394415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hyperlane_GG734",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 338999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kestel_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drewwa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 14429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kharzet_III",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 23622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yutusk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 337446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_overgrown_mudball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 164270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dakot_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
     {
       "PageId": 362596,
       "PageUrl": "https://starwars.fandom.com/wiki/Choah_system",
@@ -553,24 +475,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 26287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fangol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 367156,
       "PageUrl": "https://starwars.fandom.com/wiki/Vestral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 336105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kharzet_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 250740,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_sector_invasion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 362611,
@@ -583,9 +490,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 344065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meliflar_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 272169,
       "PageUrl": "https://starwars.fandom.com/wiki/Yalln_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 9353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 43590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trans-Hydian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 26287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fangol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 26569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fluwhaka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 397069,
@@ -593,14 +525,119 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 23605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yalln",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 23622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yutusk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shallow_March",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 336105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kharzet_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 353935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fluwhaka_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 280307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranroon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 91494,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 13894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lotide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 394414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hyperlane_GH972",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 394415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hyperlane_GG734",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 338999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kestel_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kharzet_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 250740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_sector_invasion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 272033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yutusk_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 278160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaltin_Tunnels/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 3999,
       "PageUrl": "https://starwars.fandom.com/wiki/Pydyr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 23605,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yalln",
+      "PageId": 21797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dakot_Seven",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almania/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 394475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Refrax_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 337446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_overgrown_mudball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 163580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malkii/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 304005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iliabath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 164270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dakot_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 323669,
@@ -608,9 +645,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 26569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fluwhaka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 344068,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mendenbatt_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 307911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fislan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 16796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drewwa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 16797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auyemesh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

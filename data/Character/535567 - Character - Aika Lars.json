@@ -2,6 +2,7 @@
   "PageId": 535567,
   "PageUrl": "https://starwars.fandom.com/wiki/Aika_Lars",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Lars family",
@@ -57,7 +58,46 @@
       "Values": [
         "Lars family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Cliegg Lars",
+          "Href": "https://starwars.fandom.com/wiki/Cliegg_Lars"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Cliegg Lars (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Owen Lars",
+          "Href": "https://starwars.fandom.com/wiki/Owen_Lars"
+        }
+      ],
+      "Values": [
+        "Owen Lars"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 471279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliegg_Lars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 457261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Owen_Lars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

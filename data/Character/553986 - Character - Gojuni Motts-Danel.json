@@ -2,6 +2,7 @@
   "PageId": 553986,
   "PageUrl": "https://starwars.fandom.com/wiki/Gojuni_Motts-Danel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,25 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Tantagru Motts-Danel",
+          "Href": "https://starwars.fandom.com/wiki/Tantagru_Motts-Danel"
+        }
+      ],
+      "Values": [
+        "Tantagru Motts-Danel"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 553960,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantagru_Motts-Danel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

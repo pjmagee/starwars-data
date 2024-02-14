@@ -41,7 +41,35 @@
       "Values": [
         "House Dooku"
       ]
+    },
+    {
+      "Label": "Owner(s)",
+      "Links": [
+        {
+          "Content": "Adan Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Adan_Dooku"
+        },
+        {
+          "Content": "Bron Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Bron_Dooku"
+        }
+      ],
+      "Values": [
+        "Adan Dooku",
+        "Bron Dooku"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 783983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_security_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 783182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku_regency_conclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

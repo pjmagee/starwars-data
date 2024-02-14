@@ -17,10 +17,15 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "Stenness Node",
+          "Href": "https://starwars.fandom.com/wiki/Stenness_Node"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "Stenness Node"
       ]
     },
     {
@@ -29,15 +34,10 @@
         {
           "Content": "Airon sector",
           "Href": "https://starwars.fandom.com/wiki/Airon_sector"
-        },
-        {
-          "Content": "Stenness Node",
-          "Href": "https://starwars.fandom.com/wiki/Stenness_Node"
         }
       ],
       "Values": [
-        "Airon sector",
-        "Stenness Node"
+        "Airon sector"
       ]
     },
     {
@@ -65,22 +65,69 @@
       ]
     },
     {
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [
+        {
+          "Content": "moons",
+          "Href": "https://starwars.fandom.com/wiki/Moon/Legends"
+        },
         {
           "Content": "Vo Dasha",
           "Href": "https://starwars.fandom.com/wiki/Vo_Dasha"
         }
       ],
       "Values": [
-        "1: Vo Dasha"
+        "Many moons, including Vo Dasha"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-10"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Lesser Lantillian Route",
+          "Href": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route"
+        }
+      ],
+      "Values": [
+        "Lesser Lantillian Route"
+      ]
+    },
+    {
+      "Label": "Rotation period",
+      "Links": [
+        {
+          "Content": "standard hours",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
+        }
+      ],
+      "Values": [
+        "46 standard hours"
+      ]
+    },
+    {
+      "Label": "Orbital period",
+      "Links": [
+        {
+          "Content": "local days",
+          "Href": "https://starwars.fandom.com/wiki/Local_day/Legends"
+        }
+      ],
+      "Values": [
+        "516 local days"
       ]
     },
     {
@@ -96,38 +143,92 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Taboon hardwood",
-          "Href": "https://starwars.fandom.com/wiki/Taboon_hardwood"
+          "Content": "Type IV",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends#Type_IV_atmospheres"
+        },
+        {
+          "Content": "environment suit",
+          "Href": "https://starwars.fandom.com/wiki/Enviro-suit"
         }
       ],
       "Values": [
-        "Taboon hardwood"
+        "Type IV (environment suit required)"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [
+        {
+          "Content": "Searing",
+          "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
+        },
+        {
+          "Content": "hydrosphere",
+          "Href": "https://starwars.fandom.com/wiki/Hydrosphere/Legends"
+        }
+      ],
+      "Values": [
+        "Searing",
+        "Arid hydrosphere"
+      ]
+    },
+    {
+      "Label": "Gravity",
+      "Links": [
+        {
+          "Content": "Heavy",
+          "Href": "https://starwars.fandom.com/wiki/Gravity/Legends"
+        }
+      ],
+      "Values": [
+        "Heavy"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Gaseous",
+          "Href": "https://starwars.fandom.com/wiki/Gas/Legends"
+        }
+      ],
+      "Values": [
+        "Gaseous oceans and rivers"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Red Shadow",
+          "Href": "https://starwars.fandom.com/wiki/Red_Shadow"
+        }
+      ],
+      "Values": [
+        "Red Shadow"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "None"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 17252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Awer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
       "PageId": 17249,
       "PageUrl": "https://starwars.fandom.com/wiki/Aweris_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 36131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mageye",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stenness_Node",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 271353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 14004,
@@ -135,14 +236,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 17252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Awer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 39784,
       "PageUrl": "https://starwars.fandom.com/wiki/Red_Shadow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 271353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 36131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mageye",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

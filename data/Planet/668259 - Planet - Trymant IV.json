@@ -2,7 +2,7 @@
   "PageId": 668259,
   "PageUrl": "https://starwars.fandom.com/wiki/Trymant_IV",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d6/Trymant4.jpg/revision/latest?cb=20210204092922",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/fe/TrymantIV-THRA2.png/revision/latest?cb=20240122025443",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,25 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier",
+        "Occlusion Zone",
+        "Western Reaches"
       ]
     },
     {
@@ -57,14 +72,42 @@
         {
           "Content": "Praknat 3",
           "Href": "https://starwars.fandom.com/wiki/Praknat_3"
+        },
+        {
+          "Content": "232 BBY",
+          "Href": "https://starwars.fandom.com/wiki/232_BBY"
+        },
+        {
+          "Content": "Korbatal",
+          "Href": "https://starwars.fandom.com/wiki/Korbatal"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
+        },
+        {
+          "Content": "Ost Molkar",
+          "Href": "https://starwars.fandom.com/wiki/Ost_Molkar"
+        },
+        {
+          "Content": "Taz Molkar",
+          "Href": "https://starwars.fandom.com/wiki/Taz_Molkar"
+        },
+        {
+          "Content": "Trymant III",
+          "Href": "https://starwars.fandom.com/wiki/Trymant_III"
         }
       ],
       "Values": [
-        "Several, including Praknat 3"
+        "Praknat 3 (—232 BBY)",
+        "Korbatal (—232 BBY)",
+        "Ost Molkar (—232 BBY)",
+        "Taz Molkar (—232 BBY)",
+        "Trymant III (—232 BBY)"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-20",
@@ -76,6 +119,18 @@
       ]
     },
     {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "hyperspace route",
+          "Href": "https://starwars.fandom.com/wiki/Hyperspace_route"
+        }
+      ],
+      "Values": [
+        "At least one hyperspace route"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -83,15 +138,41 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Trees",
-          "Href": "https://starwars.fandom.com/wiki/Tree"
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         },
         {
-          "Content": "lakes",
-          "Href": "https://starwars.fandom.com/wiki/Water"
+          "Content": "breath mask",
+          "Href": "https://starwars.fandom.com/wiki/Breath_mask"
+        }
+      ],
+      "Values": [
+        "Type I (breathable) (—232 BBY)",
+        "Type II (breath mask required) (232 BBY—)"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [
+        {
+          "Content": "Temperate",
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
+        }
+      ],
+      "Values": [
+        "Temperate (—232 BBY)",
+        "Hot (232 BBY—)"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
         },
         {
           "Content": "Desert",
@@ -99,8 +180,126 @@
         }
       ],
       "Values": [
-        "Trees, lakes and rivers",
+        "Forests (—232 BBY)",
         "Desert"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Lakes",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        },
+        {
+          "Content": "ocean",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
+        }
+      ],
+      "Values": [
+        "Lakes (—232 BBY)",
+        "Rivers (—232 BBY)",
+        "An ocean (—232 BBY)"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Elders of the Path compound",
+          "Href": "https://starwars.fandom.com/wiki/Elders_of_the_Path_compound"
+        }
+      ],
+      "Values": [
+        "Elders of the Path compound"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
+        },
+        {
+          "Content": "vegetation",
+          "Href": "https://starwars.fandom.com/wiki/Plant"
+        }
+      ],
+      "Values": [
+        "Trees (—232 BBY)",
+        "Ground vegetation (—232 BBY)"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Birds",
+          "Href": "https://starwars.fandom.com/wiki/Bird"
+        },
+        {
+          "Content": "Cru",
+          "Href": "https://starwars.fandom.com/wiki/Cru"
+        }
+      ],
+      "Values": [
+        "Birds",
+        "Cru"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Abednedo",
+          "Href": "https://starwars.fandom.com/wiki/Abednedo"
+        },
+        {
+          "Content": "Gran",
+          "Href": "https://starwars.fandom.com/wiki/Gran"
+        },
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Mikkian",
+          "Href": "https://starwars.fandom.com/wiki/Mikkian"
+        },
+        {
+          "Content": "Mon Calamari",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari"
+        },
+        {
+          "Content": "Onodone",
+          "Href": "https://starwars.fandom.com/wiki/Onodone"
+        },
+        {
+          "Content": "Zabrak",
+          "Href": "https://starwars.fandom.com/wiki/Zabrak"
+        }
+      ],
+      "Values": [
+        "Abednedo",
+        "Gran",
+        "Human",
+        "Mikkian",
+        "Mon Calamari",
+        "Onodone",
+        "Zabrak"
+      ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Galactic Basic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard"
+        }
+      ],
+      "Values": [
+        "Galactic Basic"
       ]
     },
     {
@@ -109,55 +308,43 @@
         {
           "Content": "Bralanak City",
           "Href": "https://starwars.fandom.com/wiki/Bralanak_City"
-        }
-      ],
-      "Values": [
-        "Bralanak City"
-      ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
+        },
         {
-          "Content": "Nihil",
-          "Href": "https://starwars.fandom.com/wiki/Nihil"
+          "Content": "cities",
+          "Href": "https://starwars.fandom.com/wiki/City"
         }
       ],
       "Values": [
-        "Nihil (briefly)"
+        "Bralanak City",
+        "Other cities"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 668266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Trymant_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 674632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meeting_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 673544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 791797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elders_of_the_Path_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 683207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elders_of_the_Path",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 700072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system's_second_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 674428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Security_Zone_Monitoring_Satellite_777B-Alpha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 668261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zeen_Mrala",
+      "PageId": 775674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hunched_Disciple",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 775675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zabrak_Disciple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 699976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praknat_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 700005,
@@ -165,19 +352,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 673544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 668261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeen_Mrala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 668266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Trymant_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 674429,
       "PageUrl": "https://starwars.fandom.com/wiki/Bralanak_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 674632,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meeting_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 674428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Security_Zone_Monitoring_Satellite_777B-Alpha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 699976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praknat_3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 700072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system's_second_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 683207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elders_of_the_Path",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     }
   ]
 }

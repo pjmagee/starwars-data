@@ -17,10 +17,15 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Interior"
       ]
     },
     {
@@ -31,45 +36,43 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
-        }
-      ],
-      "Values": [
-        "Humans"
-      ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
+        },
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+          "Content": "Mon Calamari",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic"
+        "Humans",
+        "Mon Calamari"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 756690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Has's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 469797,
       "PageUrl": "https://starwars.fandom.com/wiki/Derek_Klivian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 580386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pharl_McQuarrie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 469537,
       "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 580386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pharl_McQuarrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

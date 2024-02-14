@@ -2,6 +2,7 @@
   "PageId": 665295,
   "PageUrl": "https://starwars.fandom.com/wiki/Surveyor-class_reconnaissance_frigate",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -30,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -277,5 +278,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

@@ -17,10 +17,15 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Negs",
+          "Href": "https://starwars.fandom.com/wiki/The_Negs"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Negs"
       ]
     },
     {
@@ -36,35 +41,67 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-10"
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Climate",
       "Links": [
         {
-          "Content": "Cold",
+          "Content": "Frigid",
           "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
         }
       ],
       "Values": [
-        "Cold"
+        "Frigid"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Frozen",
+          "Content": "coniferous",
+          "Href": "https://starwars.fandom.com/wiki/Conifer/Legends"
+        },
+        {
+          "Content": "forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        },
+        {
+          "Content": "Ice",
           "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        },
+        {
+          "Content": "wastes",
+          "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
         }
       ],
       "Values": [
-        "Frozen tundra",
-        "Ice sheet"
+        "Equatorial coniferous forests",
+        "Ice wastes",
+        "Tundra"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree/Legends"
+        }
+      ],
+      "Values": [
+        "Coniferous trees"
       ]
     },
     {
@@ -82,11 +119,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 391195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ensolica_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 128105,
       "PageUrl": "https://starwars.fandom.com/wiki/Enso/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -95,6 +127,11 @@
       "PageId": 102790,
       "PageUrl": "https://starwars.fandom.com/wiki/Teyora_Rekab",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 391195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ensolica_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

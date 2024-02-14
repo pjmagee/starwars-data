@@ -2,7 +2,7 @@
   "PageId": 407952,
   "PageUrl": "https://starwars.fandom.com/wiki/Orto_Norwe_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bd/OrtoNorwe-TheSithHunters.jpg/revision/latest?cb=20130213131743",
   "Data": [
     {
       "Label": "Titles",
@@ -36,14 +36,31 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-7"
       ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Orto Norwe",
+          "Href": "https://starwars.fandom.com/wiki/Orto_Norwe"
+        }
+      ],
+      "Values": [
+        "Orto Norwe"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 760076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orto_Norwe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 338926,
       "PageUrl": "https://starwars.fandom.com/wiki/Trans-Vulta_sector",

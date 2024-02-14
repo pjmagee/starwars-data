@@ -2,7 +2,7 @@
   "PageId": 571151,
   "PageUrl": "https://starwars.fandom.com/wiki/City_Municipal_Authorities_Building",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d6/Cityhall.jpg/revision/latest?cb=20101231212836",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0e/CityMunicipalAuthoritiesBuilding-CL.png/revision/latest?cb=20230426104651",
   "Data": [
     {
       "Label": "Titles",
@@ -15,14 +15,24 @@
       "Label": "Location",
       "Links": [
         {
+          "Content": "Federal District",
+          "Href": "https://starwars.fandom.com/wiki/Federal_District"
+        },
+        {
           "Content": "Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Coruscant"
         }
       ],
       "Values": [
-        "Coruscant"
+        "Federal District, Coruscant"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 568247,
   "PageUrl": "https://starwars.fandom.com/wiki/Ann_Gella",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a8/Ann_Gella.png/revision/latest?cb=20170410122142",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a8/Ann_Gella.png/revision/latest?cb=20220820090011",
   "Data": [
     {
       "Label": "Titles",
@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -71,17 +78,40 @@
       ]
     },
     {
-      "Label": "Masters",
+      "Label": "Sibling(s)",
       "Links": [
+        {
+          "Content": "Tann Gella",
+          "Href": "https://starwars.fandom.com/wiki/Tann_Gella"
+        }
+      ],
+      "Values": [
+        "Tann Gella"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Jabba Desilijic Tiure",
+          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure"
+        },
         {
           "Content": "Sebulba",
           "Href": "https://starwars.fandom.com/wiki/Sebulba"
         }
       ],
       "Values": [
+        "Jabba Desilijic Tiure",
         "Sebulba"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 570675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tann_Gella",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

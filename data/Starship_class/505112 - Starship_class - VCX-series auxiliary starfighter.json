@@ -2,7 +2,7 @@
   "PageId": 505112,
   "PageUrl": "https://starwars.fandom.com/wiki/VCX-series_auxiliary_starfighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6b/Phantom-HPF.png/revision/latest?cb=20220222043646",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6b/Phantom-HPF.png/revision/latest?cb=20230722150456",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -164,25 +164,40 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
         }
       ],
       "Values": [
         "Spectres",
         "Phoenix Cell",
-        "Alliance to Restore the Republic"
+        "Alliance to Restore the Republic",
+        "Rebel Alliance Navy"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 507983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
     {
       "PageId": 676096,
       "PageUrl": "https://starwars.fandom.com/wiki/VCX_series",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 507983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+      "PageId": 461647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 483311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 442373,
@@ -195,9 +210,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 483311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

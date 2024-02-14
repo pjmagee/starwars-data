@@ -2,7 +2,7 @@
   "PageId": 399019,
   "PageUrl": "https://starwars.fandom.com/wiki/Zosha",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Zosha.png/revision/latest?cb=20141215155322",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Zosha.png/revision/latest?cb=20230713215813",
   "Data": [
     {
       "Label": "Titles",
@@ -36,19 +36,54 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "F-6"
       ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 393725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_above_Zosha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
     {
       "PageId": 393726,
       "PageUrl": "https://starwars.fandom.com/wiki/Javis_Koldor",
@@ -58,6 +93,11 @@
       "PageId": 404622,
       "PageUrl": "https://starwars.fandom.com/wiki/Zosha_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 393725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_above_Zosha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

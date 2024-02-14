@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Cruiser",
@@ -82,7 +82,7 @@
       "Label": "Maximum acceleration",
       "Links": [],
       "Values": [
-        "2,800 G"
+        "2,800 G (linear in space)"
       ]
     },
     {
@@ -102,6 +102,46 @@
       "Links": [],
       "Values": [
         "7.7 × 10 W"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Main reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor/Legends"
+        },
+        {
+          "Content": "tons",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton/Legends"
+        },
+        {
+          "Content": "fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel/Legends"
+        },
+        {
+          "Content": "second",
+          "Href": "https://starwars.fandom.com/wiki/Standard_second"
+        }
+      ],
+      "Values": [
+        "Main reactor (8,600 tons of fuel annihilated per second)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Electromagnetic sensor",
+          "Href": "https://starwars.fandom.com/wiki/Electromagnetic_sensor"
+        },
+        {
+          "Content": "antennae",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Electromagnetic sensor antennae"
       ]
     },
     {
@@ -132,18 +172,18 @@
           "Href": "https://starwars.fandom.com/wiki/Cannon/Legends"
         },
         {
-          "Content": "Point-defense",
+          "Content": "point-defense laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_cannon"
         }
       ],
       "Values": [
-        "Prow heavy turbolaser (1)",
-        "Heavy turbolaser cannons (4)",
-        "Heavy turbolaser turrets (6)",
-        "Turbolaser cannons (5)",
-        "Dual laser cannons (30)",
-        "Dual light laser cannons (12)",
-        "Point-defense laser cannons (60)"
+        "One prow heavy turbolaser",
+        "Four heavy turbolaser cannons",
+        "Six heavy turbolaser turrets",
+        "Five turbolaser cannons",
+        "Thirty dual laser cannons",
+        "Twelve dual light laser cannons",
+        "Sixty point-defense laser cannons"
       ]
     },
     {
@@ -163,6 +203,20 @@
       ],
       "Values": [
         "40,000 deactivated battle droids"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Neutrino radiator",
+          "Href": "https://starwars.fandom.com/wiki/Neutrino_radiator/Legends"
+        }
+      ],
+      "Values": [
+        "Internal transit shafts",
+        "Ionization chambers",
+        "Neutrino radiator"
       ]
     },
     {

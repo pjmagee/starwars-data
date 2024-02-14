@@ -2,7 +2,7 @@
   "PageId": 497751,
   "PageUrl": "https://starwars.fandom.com/wiki/Bolla_Ropal",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cb/Bolla_Ropal_DB.png/revision/latest?cb=20150402215013",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cb/Bolla_Ropal_DB.png/revision/latest?cb=20221201045220",
   "Data": [
     {
       "Label": "Titles",
@@ -106,6 +106,10 @@
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
         {
+          "Content": "Bolla Ropal's Jedi Initiate Clan",
+          "Href": "https://starwars.fandom.com/wiki/Bolla_Ropal%27s_Jedi_Initiate_Clan"
+        },
+        {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
@@ -116,21 +120,39 @@
       ],
       "Values": [
         "Jedi Order",
+        "Bolla Ropal's Jedi Initiate Clan",
         "Galactic Republic",
         "Grand Army of the Republic"
+      ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Bolla Ropal's Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Bolla_Ropal%27s_Jedi_Master"
+        }
+      ],
+      "Values": [
+        "Bolla Ropal's Jedi Master"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 528609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_memory_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
     {
       "PageId": 504344,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Devaron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 528609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_memory_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 761591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bolla_Ropal's_Jedi_Master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

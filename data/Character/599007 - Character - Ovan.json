@@ -2,13 +2,25 @@
   "PageId": 599007,
   "PageUrl": "https://starwars.fandom.com/wiki/Ovan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/99/Ovan.png/revision/latest?cb=20220411032348",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/83/OvanFlashbacks.png/revision/latest?cb=20220810164355",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ovan"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "24 BBY",
+          "Href": "https://starwars.fandom.com/wiki/24_BBY"
+        }
+      ],
+      "Values": [
+        "24 BBY"
       ]
     },
     {
@@ -36,48 +48,64 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Skin color",
       "Links": [
         {
-          "Content": "White",
+          "Content": "Light",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "White"
-      ]
-    },
-    {
-      "Label": "Eye color",
-      "Links": [],
-      "Values": [
-        "Green"
-      ]
-    },
-    {
-      "Label": "Skin color",
-      "Links": [],
-      "Values": [
         "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Solo family",
+          "Href": "https://starwars.fandom.com/wiki/Solo_family"
+        }
+      ],
+      "Values": [
+        "Solo family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo"
+        }
+      ],
+      "Values": [
+        "Han Solo"
       ]
     },
     {
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Solo family",
-          "Href": "https://starwars.fandom.com/wiki/Solo_family"
-        },
-        {
           "Content": "Corellian Engineering Corporation",
           "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
         }
       ],
       "Values": [
-        "Solo family",
         "Corellian Engineering Corporation"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 255665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo's_dice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    }
+  ]
 }

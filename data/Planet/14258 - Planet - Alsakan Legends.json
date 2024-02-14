@@ -2,7 +2,7 @@
   "PageId": 14258,
   "PageUrl": "https://starwars.fandom.com/wiki/Alsakan/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/AlsakanCanon.png/revision/latest?cb=20210906182228",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/AlsakanCanon.png/revision/latest?cb=20221130024959",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -121,7 +121,7 @@
         },
         {
           "Content": "Rakata",
-          "Href": "https://starwars.fandom.com/wiki/Rakata/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Rakata"
         }
       ],
       "Values": [
@@ -158,26 +158,15 @@
       "Label": "Population",
       "Links": [],
       "Values": [
-        "1 trillon"
+        "1 trillion"
       ]
     },
     {
       "Label": "Demonym",
       "Links": [],
       "Values": [
+        "Alsakanese",
         "Alsakani"
-      ]
-    },
-    {
-      "Label": "Major cities",
-      "Links": [
-        {
-          "Content": "Xenvaer",
-          "Href": "https://starwars.fandom.com/wiki/Xenvaer"
-        }
-      ],
-      "Values": [
-        "Xenvaer (capital)"
       ]
     },
     {
@@ -202,6 +191,14 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Yuuzhan Vong Empire",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
+        },
+        {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
@@ -209,20 +206,67 @@
         "Killiks",
         "Galactic Republic",
         "Galactic Empire",
-        "New Republic"
+        "New Republic",
+        "Yuuzhan Vong Empire",
+        "Galactic Federation of Free Alliances"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 8533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cornelius_Evazan/Legends",
+      "PageId": 375280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cleansing_of_Rucapar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 30547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Titus_Klev",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 272805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uviuy_Exen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 269306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rucapar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 22974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whelm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 447144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 13693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dachat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 411304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Refugee_Relief_Movement_fundraiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 298208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hirken",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 376026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atgeir-class_battlecruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 754567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Killik_hive_mound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 22796,
@@ -235,29 +279,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 11278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jilst_Bindalin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 16173,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uviuy_Exen/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 256231,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fird",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 190562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Follnor_Callat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 292564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_Tessent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 138124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xenvaer_Civic_Auditorium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 82008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 14854,
@@ -265,53 +294,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 272805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uviuy_Exen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16173,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uviuy_Exen/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 270989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 375280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cleansing_of_Rucapar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 411304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_RRM_fundraiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 14893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Archais_(kingdom)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 355122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Matter_of_Creating_an_Outer_Expansion_Zone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 13693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dachat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 112296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Killik_Sith_warrior",
+      "PageId": 8533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cornelius_Evazan/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 24056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yabol_Opa/Legends",
+      "PageId": 438481,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_above_Alsakan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 256231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 3975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallt/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -320,34 +319,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 447144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 24056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yabol_Opa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 377459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hirken_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 374848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Panthac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 671759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Tionese_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 355122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Matter_of_Creating_an_Outer_Expansion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
-      "PageId": 298208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hirken",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 14893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Archais_(kingdom)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 269306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rucapar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 438481,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_above_Alsakan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 292564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_Tessent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 377354,
@@ -355,19 +349,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 376026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atgeir-class_battlecruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 442056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Alsakan_noblewoman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 30547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Titus_Klev",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 671759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Tionese_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 404024,
@@ -375,9 +359,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 82008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Alsakan_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 112296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Killik_Sith_warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 377459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hirken_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 269313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_Mosaics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 138124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xenvaer_Civic_Auditorium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 270989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 11278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jilst_Bindalin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 442056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Alsakan_noblewoman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 190562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Follnor_Callat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

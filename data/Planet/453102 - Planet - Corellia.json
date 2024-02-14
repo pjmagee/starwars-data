@@ -2,7 +2,7 @@
   "PageId": 453102,
   "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d7/Corellia-SWCT.png/revision/latest?cb=20180927231048",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d7/Corellia-SWCT.png/revision/latest?cb=20231206040152",
   "Data": [
     {
       "Label": "Titles",
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-11",
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -209,6 +209,10 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Bottoms",
+          "Href": "https://starwars.fandom.com/wiki/Bottoms"
+        },
+        {
           "Content": "Gilded Descent Casino",
           "Href": "https://starwars.fandom.com/wiki/Gilded_Descent_Casino"
         },
@@ -221,15 +225,21 @@
           "Href": "https://starwars.fandom.com/wiki/Navigation_institute"
         },
         {
-          "Content": "Santhe shipyards",
-          "Href": "https://starwars.fandom.com/wiki/Santhe_shipyards"
+          "Content": "Santhe Shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Santhe_Shipyards"
+        },
+        {
+          "Content": "Unidentified Corellian Neo-Imperial shipyard",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Corellian_Neo-Imperial_shipyard"
         }
       ],
       "Values": [
+        "Bottoms",
         "Gilded Descent Casino",
         "Imperial training center",
         "Navigation institute",
-        "Santhe shipyards"
+        "Santhe Shipyards",
+        "Unidentified Corellian Neo-Imperial shipyard"
       ]
     },
     {
@@ -248,12 +258,20 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Bay squid",
+          "Href": "https://starwars.fandom.com/wiki/Bay_squid"
+        },
+        {
           "Content": "Bluevev glider",
           "Href": "https://starwars.fandom.com/wiki/Bluevev_glider"
         },
         {
           "Content": "Coppergrin",
           "Href": "https://starwars.fandom.com/wiki/Coppergrin"
+        },
+        {
+          "Content": "Corellian gluttonbug",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_gluttonbug"
         },
         {
           "Content": "Corellian hound",
@@ -314,11 +332,17 @@
         {
           "Content": "Spukami",
           "Href": "https://starwars.fandom.com/wiki/Spukami"
+        },
+        {
+          "Content": "Starlow",
+          "Href": "https://starwars.fandom.com/wiki/Starlow"
         }
       ],
       "Values": [
+        "Bay squid",
         "Bluevev glider",
         "Coppergrin",
+        "Corellian gluttonbug",
         "Corellian hound",
         "Creedok",
         "Corellian sand panther",
@@ -333,7 +357,8 @@
         "Scalefin fish",
         "Screerat",
         "Snomat",
-        "Spukami"
+        "Spukami",
+        "Starlow"
       ]
     },
     {
@@ -354,7 +379,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Arcona",
@@ -551,13 +576,1393 @@
   ],
   "Relationships": [
     {
+      "PageId": 600274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chates'_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 634121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 767098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Grand_Leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 767099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_member_(eye_patch)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 533250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_whiskey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 538030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_buckwheat_noodles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 538193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Port_in_a_Storm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 538598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_ale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 599215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 599531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bottoms",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 599534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra's_safe_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 599973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Den_of_the_White_Worms",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 600018,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Sinkhole",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 600698,
+      "PageUrl": "https://starwars.fandom.com/wiki/CorSec_Plaza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 602122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narro_Sienar_Boulevard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 91813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spukami",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 317417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shoan_Kilian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 640190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothgar_Deng",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 737045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dubat_Krom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nibbles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 760938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_orphanage_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 608939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commander_of_Staves_(staff)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 613629,
+      "PageUrl": "https://starwars.fandom.com/wiki/\"Snubble_special\"_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 721781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atchapat_Family_Galan-Kalank_Orchestra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 664786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quek_Rai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 711809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hadrios's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_Mining_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 635113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shu_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 714583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 518834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 708791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rieve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 695778,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Corellian_Engineering_Corporation_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 696378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 591741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_hound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 464469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denetrius_Vidian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skelly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relva_Jace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 697186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klaus_Vandangante",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ema",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 635125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dormitory_F",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 635129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cell_8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 644883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 644884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mourner's_Wail_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 724605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bundar_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 779038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Corellia_(New_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 658858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krynthia's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 745969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat's_grandmother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 745970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 745971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 746415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 686097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 635960,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 635961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 696363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Decommissioning_facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 512607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mercy_(human)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 744907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skormarra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 755871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_line_of_the_Unbroken_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 500460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 599274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fleek_eel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 599276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coppergrin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 599277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Needlegawp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 599279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garsmelt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 599268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 599280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet-SFS-14",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 647439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 594729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moloch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fastidima",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezvangolt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanizma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zazima",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 724032,
+      "PageUrl": "https://starwars.fandom.com/wiki/Graim_Torv",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 576300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Navigation_institute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 576301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_training_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 790841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarkin_estate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 793709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_comms_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 644885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khamus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 644886,
+      "PageUrl": "https://starwars.fandom.com/wiki/T'ongor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_command_crew_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_command_crew_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 555130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Coronet_City_museum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 588089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 682017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Detonite_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dengar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 596468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebolt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 674686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gann_(queen)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dizcaro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 722472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viktor_Hel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xyla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crescent_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 525554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 599246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scrumrat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 599441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_royalty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 678321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_fisher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 573148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_insurgency",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 551081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odair_Bel-Opis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 551095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viera_Creel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 551976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dannl_Faytonni",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 621064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ellias_Gorlin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 638489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desalination_tank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 615456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cistern_of_Discipline",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 616247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freighter_boneyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 725677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_of_the_Unbroken_Clan_Grand_Leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 725772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 729648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 313299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gadren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mercurial_Swift",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spob_Rydel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lexi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 687563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hadrios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 524426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 723979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Montalsian_ale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 715391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gus_Talon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 720646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gus_(moon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 719354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 720184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_safe_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 723978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Augustus_Graves'_penthouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 724022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_building_(Coronet_City)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 724024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 724033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_U",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 652817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 555125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 555127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Remi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 583011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Vella",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 96089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Biscuit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 696709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_dockyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 716391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Coronet_City_Diplomat_Protection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 716418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_Team_Twelve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 716425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ground_Team_Six",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 720797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_Chapter_of_the_Galactic_Society_of_Creature_Enthusiasts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 724297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dizcaro's_bodyguard_company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 724965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Independent_Media_Network",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 721006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 724013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beeta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 724015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sibak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 736922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purry_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 635743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 588408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Annali_Bissa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 714203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alys_Ongwa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 620708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tyrena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 784121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_Chew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 716411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Subsector_seven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 682010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eim'ir's_Bakery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
       "PageId": 453540,
       "PageUrl": "https://starwars.fandom.com/wiki/Wedge_Antilles",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 581643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viktor_Hel/Legends",
+      "PageId": 498430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalifa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 725844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_doctor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_soldier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 541096,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Gauntlet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 555484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_revolution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 601473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 601894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hallro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 601933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Waria_Junus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 634998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Winshur_Bratt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monti_Calay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yama_Dex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hasadar_Shu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Genial",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pilot_(Collective)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Winshur_Bratt's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 767466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_member_(camtono)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 92160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalla_Suul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 600002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 638972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treasure_Ship_Row",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 508340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 566170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 731678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Union_dispute_on_Gus_Talon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 731676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 529142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adea_Rite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 629220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skaak_Tippers_(slicer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 719348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_majordomo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 679728,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Agents'_Handbook",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 778972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Corellian_Neo-Imperial_shipyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 782434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ugyir_River",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 472936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 696421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_a_droid_decommissioning_facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 555745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Academy_of_Sciences",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 586074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fingerlip_garpon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 538679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ledaney's_partner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ront_Byrnloo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finance_Ball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 607624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cell_3B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 623994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_a_First_Order_train",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 729647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Regional_Headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 733638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kasdan_Place",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 739061,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-Series_Warranty_and_Repair_Shipyard_B33",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 556995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nozzo_Naytaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 557010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attico_Wred",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 627465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hethra_Mcgrrrr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 715395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nomar_Tralmat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 716398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovarto_Bitolo-Bash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 716400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barchibar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 716404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prybolt_Garavult",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 634996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doaba_Guerfel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 634999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bela_Vistal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 783708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Corellia_shipyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 785309,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Cap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 747242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eiram's_western_isles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 783709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_a_Corellia_shipyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 607283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tivoche_Bilure's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jonashe_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tivoche_Bilure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 624678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnamon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 624883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_red",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 635114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gadje",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 635700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salted_squid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 647799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keen's_Grotto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 647800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orik's_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 647801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Beaches",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 647802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorismus_Athenaeum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 647803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corona_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 595196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 596114,
+      "PageUrl": "https://starwars.fandom.com/wiki/White_Worms",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 606338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilgefrog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 607160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Screerat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 607245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scalefin_fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 608525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bluevev_glider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 613943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gilded_Descent_Casino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 617897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temple_of_the_True_Vine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 618100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buckell_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 618101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obsidian_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 618104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 696380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 255665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo's_dice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 693923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Locris_Syndicated_Securities",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 646033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Space_Battles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 760937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ugyir_river",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 471705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droid_Gotra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 571724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peace_and_Security_Headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 504824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malakili",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 504935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ecclessis_Figg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 18844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Horn_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 682012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sweet_roll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 682677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 644888,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_Quadrant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 644889,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Quadrant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 697259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 599163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia's_nearest_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 599162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 600080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_factory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 640306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Accellerite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 635472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 502536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bob_Hudsol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Remy_(smuggler)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honesty_Weft's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taradon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 794360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hostage_situation_in_Coronet_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 647452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Ryshcate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 635020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 635086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Records_Department",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 635094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Employment_Department",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 635138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reform_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 611905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 635595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pulsar_skate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 644887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 509438,
+      "PageUrl": "https://starwars.fandom.com/wiki/BoShek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sammie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scraps_(Utai)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 769821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydro_transfer_conduit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 734502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiza's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 660754,
+      "PageUrl": "https://starwars.fandom.com/wiki/Financial_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_gluttonbug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 758273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bay_squid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 758275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starlow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 719957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Corellian_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 707464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabata_Krill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 751568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Personal_Defense",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 599463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 56387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backstabber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -616,453 +2021,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599748,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 619397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mustache_Guy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 695778,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Corellian_Engineering_Corporation_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 696378,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Corellia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 647877,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anzellan_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 683335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonbreez",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 697259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 599246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scrumrat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 599441,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_royalty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 586910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_sap-wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 613625,
       "PageUrl": "https://starwars.fandom.com/wiki/Mottled_hexskip_paddler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 91813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spukami",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 576300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Navigation_institute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 576301,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_training_center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 594729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moloch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 697186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Klaus_Vandangante",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 722472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viktor_Hel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 634996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doaba_Guerfel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 634999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bela_Vistal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 459030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 638489,
-      "PageUrl": "https://starwars.fandom.com/wiki/Desalination_tank",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 634049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antilles_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 531680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_rum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 533250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_whiskey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 538030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_buckwheat_noodles",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 538193,
-      "PageUrl": "https://starwars.fandom.com/wiki/Port_in_a_Storm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 538598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_ale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 544499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teeno_Village_district",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 544500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diadem_Square",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 544501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Juni_Street_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 635125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dormitory_F",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 635129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cell_8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 623994,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_a_First_Order_train",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 588408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Annali_Bissa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 627465,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hethra_Mcgrrrr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 640190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rothgar_Deng",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 715395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nomar_Tralmat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 625877,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_Mining_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 721070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Finance_Ball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 722257,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dearic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 723786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loomar_Alley",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 723946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pearl_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 724263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalamu_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 724418,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Green",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 725870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veneto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 711478,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Society_of_Creature_Enthusiasts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 716391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Coronet_City_Diplomat_Protection",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 716418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_Team_Twelve",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 716425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ground_Team_Six",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 599463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Way",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 586074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fingerlip_garpon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 591741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_hound",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 596976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Short-range_assassin's_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 317417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shoan_Kilian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 538679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ledaney's_partner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 541096,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Gauntlet_(starship_race)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 555484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_revolution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 647452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Ryshcate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 599268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 599280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet-SFS-14",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 600080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_factory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 714583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards_office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 540617,
-      "PageUrl": "https://starwars.fandom.com/wiki/EE-4_carbine_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 556995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nozzo_Naytaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 557010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attico_Wred",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 716398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovarto_Bitolo-Bash",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 716404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prybolt_Garavult",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shu_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 723979,
-      "PageUrl": "https://starwars.fandom.com/wiki/Montalsian_ale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 644887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_sanctuary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 573148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_insurgency",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 512607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mercy_(slave)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shreen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mursey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relva_Jace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 577350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Finmos_Tagge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720938,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deklar_Graf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720945,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovus_Buckell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 721197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dizcaro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 620708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tyrena",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 693923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Locris_Syndicated_Securities",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 599199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solo_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 602049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xoczuko_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 613482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kiza's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 525554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 696709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_dockyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 599256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Highway_Patrol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 599163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia's_nearest_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 678321,
-      "PageUrl": "https://starwars.fandom.com/wiki/Night_fisher",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -1091,304 +2056,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 682017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Detonite_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 647439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 596468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebolt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 674686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gann_(queen)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fastidima",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezvangolt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanizma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zazima",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 481321,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ubrikkian_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 555130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Coronet_City_museum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 638972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Treasure_Ship_Row",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 721716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Musician"
-    },
-    {
-      "PageId": 500136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 599274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fleek_eel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 599276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coppergrin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 599277,
-      "PageUrl": "https://starwars.fandom.com/wiki/Needlegawp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 599278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lancepyke",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 599279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garsmelt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 613629,
-      "PageUrl": "https://starwars.fandom.com/wiki/\"Snubble_special\"_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 452714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dengar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Petro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalifa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 725844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_doctor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 510809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 586910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_sap-wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 464548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 644888,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_Quadrant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 644889,
-      "PageUrl": "https://starwars.fandom.com/wiki/West_Quadrant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 647799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keen's_Grotto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 647800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orik's_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 647801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Beaches",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 647802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dorismus_Athenaeum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 647803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corona_House",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 696421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_a_droid_decommissioning_facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 595196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_trooper",
+      "PageId": 675510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_forces",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 596114,
-      "PageUrl": "https://starwars.fandom.com/wiki/White_Worms",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 607160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Screerat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 607245,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scalefin_fish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 608525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bluevev_glider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 571724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peace_and_Security_Headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 531745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 566170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 635743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 600274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chates'_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 621064,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ellias_Gorlin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 634121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 634998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Winshur_Bratt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Monti_Calay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yama_Dex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 658858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_Grand_Leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607965,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 472936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 725677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_of_the_Unbroken_Clan_Grand_Leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 725772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 729648,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 720797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_Chapter_of_the_Galactic_Society_of_Creature_Enthusiasts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 724297,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dizcaro's_bodyguard_company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 724965,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Independent_Media_Network",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 611905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 485018,
@@ -1406,9 +2076,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 640306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Accellerite",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 706046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_University",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 596976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Short-range_assassin's_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 599487,
@@ -1416,53 +2091,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 608939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commander_of_Staves_(staff)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 544491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_Info",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 568692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ront_Byrnloo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 599199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solo_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 682015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Remy_(smuggler)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 602049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xoczuko_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 682176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Honesty_Weft's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 682507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taradon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 708791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rieve",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 624883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_red",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 635114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gadje",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 635700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salted_squid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 471705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Droid_Gotra",
+      "PageId": 711478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Society_of_Creature_Enthusiasts",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -1471,269 +2116,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 508340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grass",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 635595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pulsar_skate",
+      "PageId": 457998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 588089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 706046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_University",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 509438,
-      "PageUrl": "https://starwars.fandom.com/wiki/BoShek",
+      "PageId": 19445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crix_Madine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 610953,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO",
+      "PageId": 581643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viktor_Hel/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 644885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khamus",
+      "PageId": 619397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mustache_Guy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 644886,
-      "PageUrl": "https://starwars.fandom.com/wiki/T'ongor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531413,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 615456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cistern_of_Discipline",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 616247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freighter_boneyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 619395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Town_(Corellia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 715391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gus_Talon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 720646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gus_(moon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 555745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Academy_of_Sciences",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 599162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 518834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 255665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo's_dice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 551081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odair_Bel-Opis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viera_Creel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dannl_Faytonni",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 601473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 601894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hallro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 601933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Waria_Junus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hasadar_Shu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635029,
-      "PageUrl": "https://starwars.fandom.com/wiki/Genial",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635082,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pilot_(Collective)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Winshur_Bratt's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_Info",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 624678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnamon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 660754,
-      "PageUrl": "https://starwars.fandom.com/wiki/Financial_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 644883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 644884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mourner's_Wail_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 617897,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temple_of_the_True_Vine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 618100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Buckell_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 618101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obsidian_Room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 618104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_(Corellia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 723978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Augustus_Graves'_penthouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_building_(Coronet_City)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hotel_Feather",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Cathedral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 725406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sana_Starros'_crash_pad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 464469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Denetrius_Vidian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 464476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skelly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 529142,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adea_Rite",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 629220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skaak_Tippers_(slicer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 719348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Unbroken_Clan_Grand_Leader's_majordomo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_(Corellia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 583011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Vella",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 646033,
-      "PageUrl": "https://starwars.fandom.com/wiki/Space_Battles",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 679728,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Agents'_Handbook",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 716411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Subsector_seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 720155,
@@ -1751,44 +2151,94 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 635960,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 722257,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dearic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 635961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 723783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tombtok_Road",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 457998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 723786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loomar_Alley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 652817,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 723946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pearl_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 504824,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malakili",
+      "PageId": 723986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syllain_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 724263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalamu_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 724418,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Green",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 746708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Corellia_university",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 762351,
+      "PageUrl": "https://starwars.fandom.com/wiki/War_on_Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 720421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_(Corellia)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 504935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ecclessis_Figg",
+      "PageId": 720937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finmos_Tagge",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 605856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo's_mother",
+      "PageId": 720938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deklar_Graf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 600002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 720945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovus_Buckell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 544499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teeno_Village_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 544500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diadem_Square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 544501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Juni_Street_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 725870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veneto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 36962,
@@ -1796,229 +2246,124 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 635020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Collective",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 531413,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 635086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Records_Department",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 647877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anzellan_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
-      "PageId": 635094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Employment_Department",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 683335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonbreez",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
-      "PageId": 635138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reform_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 710550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aurebesh_script_(Jedha)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
-      "PageId": 721006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serenata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 619395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Town_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 724013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beeta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 599256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Highway_Patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 724015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sibak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 762075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Corellia_(IG-88)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 613943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gilded_Descent_Casino",
+      "PageId": 785935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_urn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 472545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Petro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 544235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shreen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 544237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mursey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 577350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 740783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bruckman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 481321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ubrikkian_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 613482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiza's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 634049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antilles_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 500136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 724400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hotel_Feather",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 719354,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_Palace",
+      "PageId": 724586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Cathedral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 720184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan_safe_house",
+      "PageId": 724596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finance_Tower",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 695464,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
+      "PageId": 725406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sana_Starros'_crash_pad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 540617,
+      "PageUrl": "https://starwars.fandom.com/wiki/EE-4_carbine_rifle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 696380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_energy_bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 719957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 313299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gadren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 540819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mercurial_Swift",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kiza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Remi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 572085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spob_Rydel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 572087,
-      "PageUrl": "https://starwars.fandom.com/wiki/Erno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tivoche_Bilure's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jonashe_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tivoche_Bilure",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lexi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 664786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quek_Rai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 687563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hadrios",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 711809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hadrios's_brother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 682012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sweet_roll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 682677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 599215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 682010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eim'ir's_Bakery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 696363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Decommissioning_facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 721781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atchapat_Family_Galan-Kalank_Orchestra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
-    },
-    {
-      "PageId": 635472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 19445,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crix_Madine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 714203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alys_Ongwa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 92160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalla_Suul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 599531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bottoms",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 599534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra's_safe_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 599973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Den_of_the_White_Worms",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 600018,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Sinkhole",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 600698,
-      "PageUrl": "https://starwars.fandom.com/wiki/CorSec_Plaza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 602122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Narro_Sienar_Boulevard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 607624,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cell_3B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 686097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 729647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Regional_Headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

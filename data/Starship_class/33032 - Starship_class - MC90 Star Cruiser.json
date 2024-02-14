@@ -17,20 +17,10 @@
         {
           "Content": "Mon Calamari Shipyards",
           "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends"
-        },
-        {
-          "Content": "Sluis Van Shipyards",
-          "Href": "https://starwars.fandom.com/wiki/Sluis_Van_Shipyards"
-        },
-        {
-          "Content": "Hast Shipyards",
-          "Href": "https://starwars.fandom.com/wiki/Hast_Shipyards"
         }
       ],
       "Values": [
-        "Mon Calamari Shipyards",
-        "Sluis Van Shipyards",
-        "Hast Shipyards"
+        "Mon Calamari Shipyards"
       ]
     },
     {
@@ -48,7 +38,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -181,11 +171,11 @@
         }
       ],
       "Values": [
-        "Heavy turbolaser batteries (75)Fire arc: 30 front, 15 each left/right/backCrew: 3Atmospheric range: 150 km",
+        "Light turbolaser batteries (75)Fire arc: 30 front, 15 each left/right/backCrew: 3Atmospheric range: 150 km",
         "Heavy ion cannon batteries (30 - 35)Fire arc: 10 front, 8/10 each left/right, 4/5 backCrew: 7Atmospheric range: 100 km",
         "Heavy proton torpedo/missile tubes (6)Fire arc: forwardAmmunition: 16 missiles eachCrew: 15Atmospheric range: 6 km",
         "Tractor beam projectors (8)Fire arc: 5 forward, 1 starboard, 1 portside, 1 aftCrew: 10Atmospheric range: 60 km",
-        "Heavy turbolaser batteries (75)",
+        "Light turbolaser batteries (75)",
         "Heavy ion cannon batteries (30 - 35)",
         "Heavy proton torpedo/missile tubes (6)",
         "Tractor beam projectors (8)"
@@ -319,6 +309,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 24642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 39503,
       "PageUrl": "https://starwars.fandom.com/wiki/Defiance_(MC90_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -332,11 +332,6 @@
       "PageId": 41740,
       "PageUrl": "https://starwars.fandom.com/wiki/Startide",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 24642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

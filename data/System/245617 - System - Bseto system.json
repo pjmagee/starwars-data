@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-7"
@@ -94,7 +94,12 @@
     },
     {
       "Label": "Other objects",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Governor's palace",
+          "Href": "https://starwars.fandom.com/wiki/Governor%27s_palace_(Bseto_system)"
+        }
+      ],
       "Values": [
         "Governor's palace"
       ]
@@ -102,19 +107,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 342928,
-      "PageUrl": "https://starwars.fandom.com/wiki/Msst_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 16311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lweilot_Asteroid_Belt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 2080,
       "PageUrl": "https://starwars.fandom.com/wiki/Sarahwiee",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bseto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 342928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Msst_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 16856,
@@ -127,9 +132,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 16855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bseto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 16311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lweilot_Asteroid_Belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

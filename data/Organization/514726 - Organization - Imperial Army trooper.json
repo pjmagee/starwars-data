@@ -2,7 +2,7 @@
   "PageId": 514726,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army_trooper",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8b/E-22_Blaster_Mudtrooper.png/revision/latest?cb=20180630185003",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4f/Danith-Nodar-full.png/revision/latest?cb=20231222000616",
   "Data": [
     {
       "Label": "Titles",
@@ -27,11 +27,16 @@
       "Label": "Sub-group(s)",
       "Links": [
         {
+          "Content": "Imperial security troopers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_security_trooper"
+        },
+        {
           "Content": "Swamp troopers",
           "Href": "https://starwars.fandom.com/wiki/Swamp_trooper"
         }
       ],
       "Values": [
+        "Imperial security troopers",
         "Swamp troopers"
       ]
     },
@@ -39,22 +44,32 @@
       "Label": "Location(s)",
       "Links": [
         {
+          "Content": "Aldhani",
+          "Href": "https://starwars.fandom.com/wiki/Aldhani"
+        },
+        {
+          "Content": "Ferrix",
+          "Href": "https://starwars.fandom.com/wiki/Ferrix"
+        },
+        {
+          "Content": "Marca",
+          "Href": "https://starwars.fandom.com/wiki/Marca"
+        },
+        {
           "Content": "Mimban",
           "Href": "https://starwars.fandom.com/wiki/Mimban"
         },
         {
           "Content": "Ryloth",
           "Href": "https://starwars.fandom.com/wiki/Ryloth"
-        },
-        {
-          "Content": "Marca",
-          "Href": "https://starwars.fandom.com/wiki/Marca"
         }
       ],
       "Values": [
+        "Aldhani",
+        "Ferrix",
+        "Marca",
         "Mimban",
-        "Ryloth",
-        "Marca"
+        "Ryloth"
       ]
     },
     {
@@ -89,9 +104,54 @@
   ],
   "Relationships": [
     {
+      "PageId": 747317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_security_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 591027,
       "PageUrl": "https://starwars.fandom.com/wiki/Swamp_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 741352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldhani_Garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 742573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Low_Road_Unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 453546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 771568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_One_(Aldhani)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 771569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Two_(Aldhani)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 771570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Four_(Aldhani)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 771572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Three_(Aldhani)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 599088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Mimban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

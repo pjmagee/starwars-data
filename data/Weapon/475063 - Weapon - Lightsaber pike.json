@@ -2,7 +2,7 @@
   "PageId": 475063,
   "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_pike",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3c/Lightsaber_pike_canon.png/revision/latest?cb=20160428234837",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/08/JediTempleGuardPyke-TLC.png/revision/latest?cb=20221004202653",
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Type",
+      "Label": "Model",
       "Links": [
         {
           "Content": "Lightsaber",
@@ -24,15 +24,33 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Double-bladed",
+          "Href": "https://starwars.fandom.com/wiki/Double-bladed_lightsaber"
+        }
+      ],
+      "Values": [
+        "Double-bladed",
+        "Single-blade"
+      ]
+    },
+    {
       "Label": "Culture",
       "Links": [
         {
           "Content": "Jedi",
           "Href": "https://starwars.fandom.com/wiki/Jedi"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
-        "Jedi"
+        "Jedi",
+        "Sith"
       ]
     },
     {
@@ -67,7 +85,14 @@
       "Label": "Shape",
       "Links": [],
       "Values": [
-        "Staff"
+        "Staff-like"
+      ]
+    },
+    {
+      "Label": "Size",
+      "Links": [],
+      "Values": [
+        "Longer hilt with much shorter blades than a double-bladed lightsaber"
       ]
     },
     {
@@ -92,13 +117,29 @@
         {
           "Content": "Jedi Temple Guard",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Temple_Guard"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
         "Jedi Order",
-        "Jedi Temple Guard"
+        "Jedi Temple Guard",
+        "Sith Order"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Bane's_Sith_lightsaber_pike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 671443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_yellow_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

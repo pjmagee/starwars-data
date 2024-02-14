@@ -17,14 +17,19 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "K-13",
@@ -43,7 +48,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungle",
@@ -69,11 +74,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 628499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_(loralora_bird)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
       "PageId": 498762,
       "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
@@ -82,6 +82,11 @@
       "PageId": 629234,
       "PageUrl": "https://starwars.fandom.com/wiki/Loralora_bird",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 628499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_(loralora_bird)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]
 }

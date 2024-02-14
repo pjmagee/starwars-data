@@ -66,6 +66,42 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mira's father",
+          "Href": "https://starwars.fandom.com/wiki/Mira%27s_father"
+        }
+      ],
+      "Values": [
+        "Mira's father"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Eeth Koth",
+          "Href": "https://starwars.fandom.com/wiki/Eeth_Koth"
+        }
+      ],
+      "Values": [
+        "Eeth Koth"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Eeth Koth's daughter",
+          "Href": "https://starwars.fandom.com/wiki/Eeth_Koth%27s_daughter"
+        }
+      ],
+      "Values": [
+        "Eeth Koth's daughter"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -78,5 +114,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 465432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 604992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_daughter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mira's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

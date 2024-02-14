@@ -2,7 +2,7 @@
   "PageId": 680107,
   "PageUrl": "https://starwars.fandom.com/wiki/Arkoff",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c9/Arkoff.jpg/revision/latest?cb=20210127214451",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6d/Arkoff-EdgeOfBalance-Vol2.png/revision/latest?cb=20231016092156",
   "Data": [
     {
       "Label": "Titles",
@@ -36,6 +36,43 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "2.49 meters (8 ft, 2 in)"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [],
+      "Values": [
+        "Brown-gray"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Gray"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -48,22 +85,54 @@
       ]
     },
     {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Ravna Abronsa",
+          "Href": "https://starwars.fandom.com/wiki/Ravna_Abronsa"
+        }
+      ],
+      "Values": [
+        "Ravna Abronsa"
+      ]
+    },
+    {
       "Label": "Apprentices",
       "Links": [
+        {
+          "Content": "Azlin Rell",
+          "Href": "https://starwars.fandom.com/wiki/Azlin_Rell"
+        },
         {
           "Content": "Lily Tora-Asi",
           "Href": "https://starwars.fandom.com/wiki/Lily_Tora-Asi"
         }
       ],
       "Values": [
+        "Azlin Rell",
         "Lily Tora-Asi"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 741846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azlin_Rell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 682314,
       "PageUrl": "https://starwars.fandom.com/wiki/Lily_Tora-Asi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 754874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkoff's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 742958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravna_Abronsa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

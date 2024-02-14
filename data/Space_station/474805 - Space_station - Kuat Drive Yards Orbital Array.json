@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space stations",
@@ -72,6 +72,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "M-10"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [
         {
@@ -93,11 +100,78 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Alliance",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic",
+        "Galactic Alliance"
+      ]
+    },
+    {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+        },
+        {
+          "Content": "Space Battle at Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Space_Battle_at_Kuat"
+        },
+        {
+          "Content": "Mission to Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Kuat_(Darth_Vader)"
+        },
+        {
+          "Content": "Bombing of the Kuat shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Bombing_of_the_Kuat_shipyards_(4_ABY)"
+        },
+        {
+          "Content": "Battle for the Eclipse",
+          "Href": "https://starwars.fandom.com/wiki/Battle_for_the_Eclipse"
+        },
+        {
+          "Content": "Battle of Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Kuat_(Hunt_for_Zsinj)"
+        },
+        {
+          "Content": "Taking of Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Taking_of_Kuat"
+        },
+        {
+          "Content": "Undercover attack on Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Undercover_attack_on_Kuat"
+        },
+        {
+          "Content": "Yuuzhan Vong War",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_War"
+        },
+        {
+          "Content": "Attack on Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_Kuat"
+        }
+      ],
+      "Values": [
+        "Galactic Civil War",
+        "Space Battle at Kuat",
+        "Mission to Kuat",
+        "Bombing of the Kuat shipyards",
+        "Battle for the Eclipse",
+        "Battle of Kuat",
+        "Taking of Kuat",
+        "Undercover attack on Kuat",
+        "Yuuzhan Vong War",
+        "Attack on Kuat"
       ]
     },
     {
@@ -110,6 +184,18 @@
       ],
       "Values": [
         "Kuat Drive Yards"
+      ]
+    },
+    {
+      "Label": "Commander(s)",
+      "Links": [
+        {
+          "Content": "Kuat of Kuat",
+          "Href": "https://starwars.fandom.com/wiki/Kuat_of_Kuat"
+        }
+      ],
+      "Values": [
+        "Kuat of Kuat "
       ]
     },
     {
@@ -142,6 +228,10 @@
         {
           "Content": "Maw Shipyards",
           "Href": "https://starwars.fandom.com/wiki/Maw_Shipyards"
+        },
+        {
+          "Content": "Military space station",
+          "Href": "https://starwars.fandom.com/wiki/Military_space_station"
         }
       ],
       "Values": [
@@ -149,23 +239,23 @@
         "Deponn Shipyards",
         "Kuat Main Spaceport",
         "Kuati Security Forces Headquarters",
-        "Kuati military space station",
         "Kuati residential space station",
         "Kuati supply space station",
-        "Maw Shipyards"
+        "Maw Shipyards",
+        "Military space station"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 562638,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kuat_(Darth_Vader)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 646943,
       "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_the_Kuat_shipyards_(4_ABY)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 562638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kuat_(Darth_Vader)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

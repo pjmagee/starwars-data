@@ -14,8 +14,7 @@ public class BattleService
     private readonly YearHelper _yearHelper;
     private readonly Settings _settings;
     private readonly MongoClient _mongoClient;
-
-    private IMongoDatabase _mongoDb;
+    private readonly IMongoDatabase _mongoDb;
 
     public BattleService(ILogger<BattleService> logger, YearHelper yearHelper, Settings settings)
     {

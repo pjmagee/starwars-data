@@ -15,20 +15,12 @@
       "Label": "Date",
       "Links": [
         {
-          "Content": "Thousands",
-          "Href": "https://starwars.fandom.com/wiki/Millennium"
-        },
-        {
-          "Content": "years",
-          "Href": "https://starwars.fandom.com/wiki/Standard_year"
-        },
-        {
-          "Content": "Clone Wars",
-          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+          "Content": "5000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/5000_BBY"
         }
       ],
       "Values": [
-        "Thousands of years before the Clone Wars"
+        "c. 5000 BBY"
       ]
     },
     {
@@ -49,28 +41,43 @@
         {
           "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
+        },
+        {
+          "Content": "Sith Wars",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Wars"
         }
       ],
       "Values": [
-        "Creation of the Sith"
+        "Creation of the Sith",
+        "Beginning of the Sith Wars"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 554282,
+      "PageUrl": "https://starwars.fandom.com/wiki/5000_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 665684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 599452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic-era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
     {
       "PageId": 709076,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_splinter_group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 565202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 452601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 452576,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_High_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

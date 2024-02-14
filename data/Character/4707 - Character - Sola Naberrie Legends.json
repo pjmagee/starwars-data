@@ -2,7 +2,7 @@
   "PageId": 4707,
   "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/df/SolaNaberrieFuneral.jpg/revision/latest?cb=20130321125146",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4f/SolaNaberrie-SWCTP.png/revision/latest?cb=20221101021537",
   "Data": [
     {
       "Label": "Titles",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Naberrie",
@@ -112,7 +112,96 @@
       "Values": [
         "House Naberrie"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jobal Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends"
+        },
+        {
+          "Content": "Ruwee Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Jobal Naberrie",
+        "Ruwee Naberrie"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Darred Janren Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Darred_Janren_Naberrie"
+        }
+      ],
+      "Values": [
+        "Darred Janren Naberrie"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Padmé Amidala",
+          "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala/Legends"
+        }
+      ],
+      "Values": [
+        "Padmé Amidala"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ryoo Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ryoo_Naberrie/Legends"
+        },
+        {
+          "Content": "Pooja Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Pooja_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Ryoo Naberrie",
+        "Pooja Naberrie"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pooja_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darred_Janren_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

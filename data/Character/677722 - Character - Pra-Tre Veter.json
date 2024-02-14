@@ -2,13 +2,29 @@
   "PageId": 677722,
   "PageUrl": "https://starwars.fandom.com/wiki/Pra-Tre_Veter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/GrandMasterVeter.png/revision/latest?cb=20210108110718",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8c/GrandmasterVeter-SoS-3.png/revision/latest?cb=20240115122741",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Pra-Tre Veter"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "229 BBY",
+          "Href": "https://starwars.fandom.com/wiki/229_BBY"
+        },
+        {
+          "Content": "Gaze Electric",
+          "Href": "https://starwars.fandom.com/wiki/Gaze_Electric"
+        }
+      ],
+      "Values": [
+        "229 BBY, Gaze Electric"
       ]
     },
     {
@@ -33,6 +49,29 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.70 meters (5 ft, 7 in)"
       ]
     },
     {
@@ -79,5 +118,26 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 789611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi-Republic_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 788716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_edge_of_the_Stormwall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 785623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pra-Tre_Veter's_execution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 770084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pra-Tre_Veter's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

@@ -2,23 +2,29 @@
   "PageId": 628327,
   "PageUrl": "https://starwars.fandom.com/wiki/Ithorian_herd_ship",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Ithorian Herdship"
+        "Ithorian herd ship"
       ]
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ithorian SkyYards",
+          "Href": "https://starwars.fandom.com/wiki/Ithorian_SkyYards"
+        }
+      ],
       "Values": [
         "Ithorian SkyYards"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "City-ship",
@@ -161,5 +167,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 732937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ithorian_SkyYards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

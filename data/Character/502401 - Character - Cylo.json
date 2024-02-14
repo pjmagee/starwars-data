@@ -15,6 +15,10 @@
       "Label": "Died",
       "Links": [
         {
+          "Content": "0 BBY",
+          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        },
+        {
           "Content": "0 ABY",
           "Href": "https://starwars.fandom.com/wiki/0_ABY"
         },
@@ -27,16 +31,16 @@
           "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
         },
         {
-          "Content": "1 ABY",
-          "Href": "https://starwars.fandom.com/wiki/1_ABY"
-        },
-        {
           "Content": "Executor",
           "Href": "https://starwars.fandom.com/wiki/Executor"
         },
         {
           "Content": "Kuat system",
           "Href": "https://starwars.fandom.com/wiki/Kuat_system"
+        },
+        {
+          "Content": "ABY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_standard_calendar"
         },
         {
           "Content": "whale-ship",
@@ -52,10 +56,11 @@
         }
       ],
       "Values": [
+        "By 0 BBY, unknown locations (First three bodies)",
         "0 ABY, Ark Angel (Cylo-IV)",
-        "Between 0 ABY and 1 ABY, Executor, Kuat system (Cylo-V)",
-        "Between 0 ABY and 1 ABY, whale-ship, Kuat system (Multiple clones)",
-        "Between 0 ABY and 1 ABY, whale-ship, a star in the Kuat system (Final body)"
+        "0 ABY, Executor, Kuat system (Cylo-V)",
+        "0 ABY, whale-ship, Kuat system (Multiple clones)",
+        "0 ABY, whale-ship, a star in the Kuat system (Final body)"
       ]
     },
     {
@@ -129,40 +134,30 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Cylo Directive",
-          "Href": "https://starwars.fandom.com/wiki/Cylo_Directive"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Tarkin Initiative",
-          "Href": "https://starwars.fandom.com/wiki/Tarkin_Initiative"
+          "Content": "Cylo Directive",
+          "Href": "https://starwars.fandom.com/wiki/Cylo_Directive"
         }
       ],
       "Values": [
-        "Cylo Directive",
         "Galactic Empire",
-        "Tarkin Initiative"
+        "Cylo Directive"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 572752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cylo_Directive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 465595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 503276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karbin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 503628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tulon_Voidgazer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 554597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hijacking_of_the_Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 540576,
@@ -175,14 +170,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     },
     {
-      "PageId": 554597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hijacking_of_the_Executor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 572752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cylo_Directive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 465595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 634446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cylo's_whale_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 501543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morit_Astarte",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karbin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tulon_Voidgazer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 502617,
@@ -198,16 +208,6 @@
       "PageId": 539925,
       "PageUrl": "https://starwars.fandom.com/wiki/Greatcoat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 501543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morit_Astarte",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 634446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cylo's_whale_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

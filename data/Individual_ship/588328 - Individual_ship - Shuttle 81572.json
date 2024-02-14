@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shuttle",
@@ -146,6 +146,23 @@
       ]
     },
     {
+      "Label": "Navy",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems Navy",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
+        },
+        {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems Navy",
+        "Galactic Republic Navy"
+      ]
+    },
+    {
       "Label": "Commander(s)",
       "Links": [
         {
@@ -163,12 +180,28 @@
         {
           "Content": "OOM-10",
           "Href": "https://starwars.fandom.com/wiki/OOM-10"
+        },
+        {
+          "Content": "Unidentified B1 battle droid",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_(R2-D2)"
+        },
+        {
+          "Content": "Unidentified B1 battle droid 2",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(R2-D2)"
         }
       ],
       "Values": [
-        "OOM-10"
+        "OOM-10",
+        "Unidentified B1 battle droid",
+        "Unidentified B1 battle droid 2"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 788654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_strike_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

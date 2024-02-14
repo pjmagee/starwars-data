@@ -15,11 +15,20 @@
       "Label": "Location(s)",
       "Links": [
         {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
+        },
+        {
+          "Content": "Castilon",
+          "Href": "https://starwars.fandom.com/wiki/Castilon"
+        },
+        {
           "Content": "Varkana",
           "Href": "https://starwars.fandom.com/wiki/Varkana"
         }
       ],
       "Values": [
+        "Colossus, Castilon",
         "Varkana"
       ]
     },
@@ -41,5 +50,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 619483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thunderer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

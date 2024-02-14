@@ -78,28 +78,42 @@
       "Values": [
         "Naboo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [],
+      "Values": [
+        "Grasslands"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Herbivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Herbivore"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 11238,
-      "PageUrl": "https://starwars.fandom.com/wiki/T'iil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 7456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 329327,
       "PageUrl": "https://starwars.fandom.com/wiki/Shaak_pot_roast",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 40080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Grass_Plains/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 7456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 40899,
@@ -112,9 +126,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 40080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Grass_Plains/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 11238,
+      "PageUrl": "https://starwars.fandom.com/wiki/T'iil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     }
   ]
 }

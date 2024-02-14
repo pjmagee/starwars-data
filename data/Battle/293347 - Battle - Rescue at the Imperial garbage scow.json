@@ -2,6 +2,7 @@
   "PageId": 293347,
   "PageUrl": "https://starwars.fandom.com/wiki/Rescue_at_the_Imperial_garbage_scow",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +44,7 @@
         },
         {
           "Content": "garbage scow",
-          "Href": "https://starwars.fandom.com/wiki/Garbage_scow"
+          "Href": "https://starwars.fandom.com/wiki/Garbage_scow/Legends"
         }
       ],
       "Values": [
@@ -64,5 +65,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 293350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saadoon-Kauldi's_anti-slaver_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    }
+  ]
 }

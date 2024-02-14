@@ -78,7 +78,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-9"
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -199,11 +199,21 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Ambrosial Fogs",
+          "Href": "https://starwars.fandom.com/wiki/Ambrosial_Fogs"
+        },
+        {
+          "Content": "Cretlin Lake",
+          "Href": "https://starwars.fandom.com/wiki/Cretlin_Lake"
+        },
+        {
           "Content": "Silver Forest of Dreams",
           "Href": "https://starwars.fandom.com/wiki/Silver_Forest_of_Dreams"
         }
       ],
       "Values": [
+        "Ambrosial Fogs",
+        "Cretlin Lake",
         "Silver Forest of Dreams"
       ]
     },
@@ -240,8 +250,8 @@
           "Href": "https://starwars.fandom.com/wiki/Aquabeast"
         },
         {
-          "Content": "Decalegs",
-          "Href": "https://starwars.fandom.com/wiki/Decalegs"
+          "Content": "Decaleg",
+          "Href": "https://starwars.fandom.com/wiki/Decaleg"
         },
         {
           "Content": "Fieldhopper",
@@ -280,7 +290,7 @@
         "Antz",
         "Silver ant",
         "Aquabeast",
-        "Decalegs",
+        "Decaleg",
         "Fieldhopper",
         "Ghost spider",
         "Greenfly",
@@ -304,7 +314,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Yuuzhan Vong",
@@ -352,6 +362,23 @@
       ]
     },
     {
+      "Label": "Major cities",
+      "Links": [
+        {
+          "Content": "Bizzin Uz's village",
+          "Href": "https://starwars.fandom.com/wiki/Bizzin_Uz%27s_village"
+        },
+        {
+          "Content": "Zabin Hive",
+          "Href": "https://starwars.fandom.com/wiki/Zabin_Hive"
+        }
+      ],
+      "Values": [
+        "Bizzin Uz's village",
+        "Zabin Hive"
+      ]
+    },
+    {
       "Label": "Major imports",
       "Links": [],
       "Values": [
@@ -390,49 +417,44 @@
   ],
   "Relationships": [
     {
-      "PageId": 38768,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thwim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 93790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Forest_of_Dreams",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 421768,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalro_Mear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 93772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuret",
+      "PageId": 2466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kubaz/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 93773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sun_beetle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 93776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_spider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 236583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Schnil_Hakoon",
+      "PageId": 443078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Larindaz",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 21653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Team_Kubindi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 769099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cretlin_Lake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 13208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 769101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambrosial_Fogs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 18112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ku'Bakai_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 48902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kubazian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 723556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thickwood_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 723557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silvertree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
       "PageId": 174600,
@@ -480,14 +502,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 102735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kubindi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 421768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalro_Mear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 3001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garindan",
+      "PageId": 300021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantys",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 593391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 21653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Team_Kubindi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 687551,
+      "PageUrl": "https://starwars.fandom.com/wiki/Altuur_zok_Adon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 93772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuret",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 93773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sun_beetle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 93776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_spider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 236583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Schnil_Hakoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 268337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hive_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 174589,
@@ -500,24 +562,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 268337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hive_Wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 2466,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kubaz/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 687551,
-      "PageUrl": "https://starwars.fandom.com/wiki/Altuur_zok_Adon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 174603,
       "PageUrl": "https://starwars.fandom.com/wiki/Wroche",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 102533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zabin_Hive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 227495,
@@ -525,19 +577,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 443078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Larindaz",
+      "PageId": 18112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ku'Bakai_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 3001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garindan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 723556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thickwood_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 13208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 723557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silvertree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 38768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thwim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 102735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kubindi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 769100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bizzin_Uz's_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

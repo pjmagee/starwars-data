@@ -2,7 +2,7 @@
   "PageId": 311071,
   "PageUrl": "https://starwars.fandom.com/wiki/Far_Indosa_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a3/FarIndosa-TEA.jpg/revision/latest?cb=20221001083544",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -29,17 +34,34 @@
         {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
+        },
+        {
+          "Content": "Loop Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Loop_Worlds"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Gordian Reach",
+        "Loop Worlds"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-6"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "worlds",
+          "Href": "https://starwars.fandom.com/wiki/Planet/Legends"
+        }
+      ],
+      "Values": [
+        "2 worlds"
       ]
     }
   ],

@@ -2,6 +2,7 @@
   "PageId": 23046,
   "PageUrl": "https://starwars.fandom.com/wiki/Jodelle_Foxtrain",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -16,14 +17,10 @@
         {
           "Content": "Ord Mantell",
           "Href": "https://starwars.fandom.com/wiki/Ord_Mantell/Legends"
-        },
-        {
-          "Content": "Delphon",
-          "Href": "https://starwars.fandom.com/wiki/Delphon/Legends"
         }
       ],
       "Values": [
-        "Ord Mantell, Delphon"
+        "Ord Mantell"
       ]
     },
     {
@@ -51,6 +48,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Amaiza Foxtrain",
+          "Href": "https://starwars.fandom.com/wiki/Amaiza_Foxtrain/Legends"
+        }
+      ],
+      "Values": [
+        "Amaiza Foxtrain"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -68,5 +77,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 19797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaiza_Foxtrain/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

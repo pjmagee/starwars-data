@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
       "Links": [
         {
           "Content": "Chiss patrol cruiser",
@@ -24,7 +24,31 @@
       ]
     },
     {
-      "Label": "Hyperdrive system",
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Patrol cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Patrol_cruiser"
+        }
+      ],
+      "Values": [
+        "Patrol cruiser"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Hyperdrive rating",
       "Links": [
         {
           "Content": "Equipped",
@@ -33,6 +57,52 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "Nyix-alloy",
+          "Href": "https://starwars.fandom.com/wiki/Nyix-alloy"
+        }
+      ],
+      "Values": [
+        "Nyix-alloy"
+      ]
+    },
+    {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Electrostatic barrier",
+          "Href": "https://starwars.fandom.com/wiki/Electrostatic_barrier"
+        }
+      ],
+      "Values": [
+        "Electrostatic barrier"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Spectrum lasers",
+          "Href": "https://starwars.fandom.com/wiki/Spectrum_laser"
+        },
+        {
+          "Content": "Plasma spheres",
+          "Href": "https://starwars.fandom.com/wiki/Plasma_sphere"
+        },
+        {
+          "Content": "Breachers",
+          "Href": "https://starwars.fandom.com/wiki/Breacher"
+        }
+      ],
+      "Values": [
+        "Spectrum lasers",
+        "Plasma spheres",
+        "Breachers"
       ]
     },
     {
@@ -95,6 +165,7 @@
       ],
       "Values": [
         "Irizi'ar'alani",
+        "Unidentified Parala commander",
         "Csap'ro'strob"
       ]
     },
@@ -104,17 +175,22 @@
         {
           "Content": "Mitth'raw'nuru",
           "Href": "https://starwars.fandom.com/wiki/Mitth%27raw%27nuruodo"
+        },
+        {
+          "Content": "Clarr'os'culry",
+          "Href": "https://starwars.fandom.com/wiki/Clarr%27os%27culry"
         }
       ],
       "Values": [
-        "Mitth'raw'nuru"
+        "Mitth'raw'nuru",
+        "Clarr'os'culry"
       ]
     }
   ],
   "Relationships": [
     {
       "PageId": 714754,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Sunrise)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]

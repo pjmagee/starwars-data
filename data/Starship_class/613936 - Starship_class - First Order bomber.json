@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Line",
+      "Links": [
+        {
+          "Content": "TIE line",
+          "Href": "https://starwars.fandom.com/wiki/TIE_line"
+        }
+      ],
+      "Values": [
+        "TIE line"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Bomber",
@@ -31,15 +43,21 @@
           "Href": "https://starwars.fandom.com/wiki/First_Order"
         },
         {
-          "Content": "First Order Navy",
-          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
+          "Content": "First Order starfighter corps",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_starfighter_corps"
         }
       ],
       "Values": [
         "First Order",
-        "First Order Navy"
+        "First Order starfighter corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 590745,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_starfighter_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

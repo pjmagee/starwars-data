@@ -2,12 +2,25 @@
   "PageId": 664862,
   "PageUrl": "https://starwars.fandom.com/wiki/Mafole",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Mafole"
+      ]
+    },
+    {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Chiss",
+          "Href": "https://starwars.fandom.com/wiki/Chiss"
+        }
+      ],
+      "Values": [
+        "Chiss"
       ]
     },
     {
@@ -23,17 +36,35 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Chiss Ascendancy",
           "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy"
+        },
+        {
+          "Content": "Chiss Defense Force",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Defense_Force"
         }
       ],
       "Values": [
-        "Chiss Ascendancy"
+        "Chiss Ascendancy",
+        "Chiss Defense Force"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 664859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

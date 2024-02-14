@@ -29,10 +29,15 @@
         {
           "Content": "Assassin droid",
           "Href": "https://starwars.fandom.com/wiki/Assassin_droid"
+        },
+        {
+          "Content": "War droid",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
         }
       ],
       "Values": [
-        "Assassin droid"
+        "Assassin droid",
+        "War droid"
       ]
     },
     {
@@ -65,9 +70,26 @@
       "Values": [
         "Gray"
       ]
+    },
+    {
+      "Label": "Date introduced",
+      "Links": [
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        }
+      ],
+      "Values": [
+        "Shortly after the Clone Wars"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 674936,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88C",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 681022,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-88A",
@@ -79,19 +101,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 674936,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88C",
+      "PageId": 781484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Laboratories_massacre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 380455,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88B",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 496690,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-series",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 380455,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

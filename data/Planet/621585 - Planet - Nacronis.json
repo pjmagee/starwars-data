@@ -2,7 +2,7 @@
   "PageId": 621585,
   "PageUrl": "https://starwars.fandom.com/wiki/Nacronis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/11/Nacronis-SWT.jpg/revision/latest?cb=20231222184429",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Mid Rim Territories"
+        "Mid Rim Territories",
+        "New Territories"
       ]
     },
     {
@@ -36,6 +41,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-7"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -46,20 +63,16 @@
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
-        },
-        {
-          "Content": "humans",
-          "Href": "https://starwars.fandom.com/wiki/Human"
         }
       ],
       "Values": [
-        "Breathable for humans"
+        "Type I (breathable)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Marshland",
@@ -71,35 +84,47 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
       "Links": [],
+      "Values": [
+        "Ancient citadels"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
       "Values": [
         "Humans"
       ]
     },
     {
       "Label": "Population",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "destruction",
+          "Href": "https://starwars.fandom.com/wiki/Destruction_of_Nacronis"
+        }
+      ],
       "Values": [
-        "Several million"
+        "Several million (Prior to destruction)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 624907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nacronis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 624852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 624586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nacronis_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 624908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vortex_detonator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 624853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nosteen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 621589,
@@ -112,19 +137,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 624852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 624907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nacronis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 624853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nosteen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 624908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vortex_detonator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 621651,
       "PageUrl": "https://starwars.fandom.com/wiki/Nacronis_ground_control",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 624586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nacronis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

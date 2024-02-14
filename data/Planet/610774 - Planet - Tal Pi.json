@@ -2,7 +2,7 @@
   "PageId": 610774,
   "PageUrl": "https://starwars.fandom.com/wiki/Tal_Pi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/TalPi-SWT.jpg/revision/latest?cb=20220610213331",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-5",
@@ -33,6 +38,13 @@
       ],
       "Values": [
         "P-5"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -50,14 +62,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 556194,
-      "PageUrl": "https://starwars.fandom.com/wiki/Weeteef_Cyu-Bee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 556829,
       "PageUrl": "https://starwars.fandom.com/wiki/Talpini",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 556194,
+      "PageUrl": "https://starwars.fandom.com/wiki/Weeteef_Cyu-Bee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

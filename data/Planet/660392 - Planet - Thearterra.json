@@ -2,13 +2,25 @@
   "PageId": 660392,
   "PageUrl": "https://starwars.fandom.com/wiki/Thearterra",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/42/ThearterraCanon.jpg/revision/latest?cb=20211117112755",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/54/Thearterra-LesserEvil.png/revision/latest?cb=20230606125728",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Thearterra"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Unknown Regions",
+          "Href": "https://starwars.fandom.com/wiki/Unknown_Regions"
+        }
+      ],
+      "Values": [
+        "Unknown Regions"
       ]
     },
     {
@@ -22,12 +34,34 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Thearterra mining field",
+          "Content": "carnival",
+          "Href": "https://starwars.fandom.com/wiki/Thearterra_carnival"
+        },
+        {
+          "Content": "mining field",
           "Href": "https://starwars.fandom.com/wiki/Thearterra_mining_field"
+        },
+        {
+          "Content": "Thearterra center",
+          "Href": "https://starwars.fandom.com/wiki/Thearterra_center"
         }
       ],
       "Values": [
-        "Thearterra mining field"
+        "A carnival",
+        "A mining field",
+        "Thearterra center"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Chiss",
+          "Href": "https://starwars.fandom.com/wiki/Chiss"
+        }
+      ],
+      "Values": [
+        "Chiss"
       ]
     },
     {
@@ -45,9 +79,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 765149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thearterra_carnival",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 660377,
       "PageUrl": "https://starwars.fandom.com/wiki/Thearterra_mining_field",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 741370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thearterra_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

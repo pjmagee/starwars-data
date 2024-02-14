@@ -2,7 +2,7 @@
   "PageId": 371472,
   "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches_Operation",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f2/Western_Reaches_Operation.jpg/revision/latest?cb=20120715121705",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f2/Western_Reaches_Operation.jpg/revision/latest?cb=20230606071552",
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +15,7 @@
       "Label": "Conflict",
       "Links": [
         {
-          "Content": "Imperial Period conflicts",
+          "Content": "Imperial Period",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Period"
         },
         {
@@ -81,7 +81,7 @@
       "Links": [
         {
           "Content": "Battle of Ord Vaug",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug_(Imperial_Period)"
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug"
         },
         {
           "Content": "Battle of Halm",
@@ -98,10 +98,6 @@
         {
           "Content": "Battle of Ogoth Tiir",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Ogoth_Tiir/Legends"
-        },
-        {
-          "Content": "Shrouded Offensive",
-          "Href": "https://starwars.fandom.com/wiki/Shrouded_Offensive"
         }
       ],
       "Values": [
@@ -109,16 +105,25 @@
         "Battle of Halm",
         "Battle of Pendaxa",
         "Battle of Ichtor",
-        "Battle of Ogoth Tiir",
-        "Shrouded Offensive"
+        "Battle of Ogoth Tiir"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 269520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 375841,
       "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches_Superiority_Force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 376041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kelrodo-Ai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 387514,
@@ -127,7 +132,7 @@
     },
     {
       "PageId": 387519,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug_(Imperial_Period)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -161,29 +166,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 443487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shrouded_Offensive",
+      "PageId": 387526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ogoth_Tiir/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 377683,
       "PageUrl": "https://starwars.fandom.com/wiki/Reconquest_of_the_Rim",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 387526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ogoth_Tiir/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 376041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kelrodo-Ai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 269520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

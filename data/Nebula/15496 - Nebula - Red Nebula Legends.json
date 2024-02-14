@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "G-21"
@@ -108,6 +108,23 @@
       ]
     },
     {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Untouched Valley",
+          "Href": "https://starwars.fandom.com/wiki/Untouched_Valley"
+        },
+        {
+          "Content": "Red Nebula temple",
+          "Href": "https://starwars.fandom.com/wiki/Red_Nebula_temple"
+        }
+      ],
+      "Values": [
+        "Untouched Valley",
+        "Red Nebula temple"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -123,41 +140,24 @@
       "Label": "Galactic Civil War",
       "Links": [
         {
-          "Content": "Attack on the Red Nebula temple",
+          "Content": "Red Nebula (I)",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Red_Nebula_temple"
         },
         {
-          "Content": "Mission to the Red Nebula",
+          "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_the_Red_Nebula"
         },
         {
-          "Content": "Skirmish aboard the Mining Explorer",
+          "Content": "(III)",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Mining_Explorer"
         }
       ],
       "Values": [
-        "Attack on the Red Nebula temple",
-        "Mission to the Red Nebula",
-        "Skirmish aboard the Mining Explorer"
+        "Red Nebula (I) (II) (III)"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 629186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Red_Nebula_temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 629197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Mining_Explorer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 323663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Red_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
     {
       "PageId": 169846,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_Life_Jewels",
@@ -174,9 +174,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 629186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Red_Nebula_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 629197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Mining_Explorer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 316700,
       "PageUrl": "https://starwars.fandom.com/wiki/Red_Nebula_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 323663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Red_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "transport",
@@ -255,12 +255,20 @@
           "Href": "https://starwars.fandom.com/wiki/Republic_Correctional_Authority/Legends"
         },
         {
-          "Content": "Ohnaka Gang",
-          "Href": "https://starwars.fandom.com/wiki/Ohnaka_Gang/Legends"
+          "Content": "Bounty hunters",
+          "Href": "https://starwars.fandom.com/wiki/Bounty_hunter/Legends"
         },
         {
-          "Content": "Mercenaries",
-          "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+          "Content": "Civilian Protection Guild",
+          "Href": "https://starwars.fandom.com/wiki/Civilian_Protection_Guild"
+        },
+        {
+          "Content": "Corellian Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Security_Force"
+        },
+        {
+          "Content": "Hidden Daggers",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
         },
         {
           "Content": "Mandalorians",
@@ -271,56 +279,58 @@
           "Href": "https://starwars.fandom.com/wiki/Mandalorian_Protectors/Legends"
         },
         {
-          "Content": "Bounty hunters",
-          "Href": "https://starwars.fandom.com/wiki/Bounty_hunter/Legends"
+          "Content": "Mercenaries",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        },
+        {
+          "Content": "CDMC",
+          "Href": "https://starwars.fandom.com/wiki/Corellia_Deep_Mining_Company"
+        },
+        {
+          "Content": "Ohnaka Gang",
+          "Href": "https://starwars.fandom.com/wiki/Ohnaka_Gang/Legends"
         },
         {
           "Content": "Royal Naboo Security Forces",
           "Href": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces/Legends"
-        },
-        {
-          "Content": "Hidden Daggers",
-          "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
-        },
-        {
-          "Content": "Civilian Protection Guild",
-          "Href": "https://starwars.fandom.com/wiki/Civilian_Protection_Guild"
         }
       ],
       "Values": [
         "Republic Correctional Authority",
         "Various other law enforcement agencies",
-        "Ohnaka Gang",
-        "Mercenaries",
+        "Bounty hunters",
+        "Civilian Protection Guild",
+        "Corellian Security Force",
+        "Hidden Daggers",
         "Mandalorians",
         "Mandalorian Protectors",
-        "Bounty hunters",
-        "Royal Naboo Security Forces",
-        "Hidden Daggers",
-        "Civilian Protection Guild"
+        "Mercenaries",
+        "CDMC's mercenaries",
+        "Ohnaka Gang",
+        "Royal Naboo Security Forces"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 464428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unearthed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 15538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andrasta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 4435,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Systems_Engineering/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 70026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Indenture",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 419799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kath_Scarlet's_Firespray-31-class_patrol_and_attack_craft",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 464428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unearthed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 395420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Target_Acquired",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 253,
@@ -333,18 +343,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 70026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Indenture",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 397674,
       "PageUrl": "https://starwars.fandom.com/wiki/Slave_I_Expansion_Pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 395420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Target_Acquired",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 15538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andrasta",
+      "PageId": 419799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kath_Scarlet's_Firespray-31-class_patrol_and_attack_craft",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

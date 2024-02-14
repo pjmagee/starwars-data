@@ -2,7 +2,7 @@
   "PageId": 675406,
   "PageUrl": "https://starwars.fandom.com/wiki/Lang",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/66/Lang-TMCh13.png/revision/latest?cb=20201127182132",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/18/Lang-TMH.png/revision/latest?cb=20230805221023",
   "Data": [
     {
       "Label": "Titles",
@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -76,23 +83,48 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Hair color",
       "Links": [
         {
-          "Content": "Morgan Elsbeth's army",
-          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_army"
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Morgan Elsbeth's army"
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Morgan Elsbeth's forces",
+          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_forces"
+        },
+        {
+          "Content": "Elsbeth's regime",
+          "Href": "https://starwars.fandom.com/wiki/Elsbeth%27s_regime"
+        }
+      ],
+      "Values": [
+        "Morgan Elsbeth's forces",
+        "Elsbeth's regime"
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 675510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    }
-  ]
+  "Relationships": []
 }

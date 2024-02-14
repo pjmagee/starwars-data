@@ -2,7 +2,7 @@
   "PageId": 714099,
   "PageUrl": "https://starwars.fandom.com/wiki/Sharb",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/10/Schesa.jpg/revision/latest?cb=20211117004312",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/Sharb.png/revision/latest?cb=20230506191441",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,13 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -36,5 +43,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 690837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xodlak_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

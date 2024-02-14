@@ -2,7 +2,7 @@
   "PageId": 636218,
   "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Brood",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/79/Haxion_Brood_symbol.svg/revision/latest?cb=20220127041326",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a2/Haxion_Brood_symbol-SWJS.svg/revision/latest?cb=20240104224613",
   "Data": [
     {
       "Label": "Titles",
@@ -34,12 +34,14 @@
       "Label": "Sub-group(s)",
       "Links": [
         {
-          "Content": "Haxion Brood Bounty Droids",
+          "Content": "Haxion Brood Bounty Droid",
           "Href": "https://starwars.fandom.com/wiki/Haxion_Brood_Bounty_Droid"
         }
       ],
       "Values": [
-        "Haxion Brood Bounty Droids"
+        "Haxion Brood Bounty Hunter",
+        "Haxion Brood Commando",
+        "Haxion Brood Bounty Droid"
       ]
     },
     {
@@ -76,6 +78,22 @@
         {
           "Content": "Zeffo",
           "Href": "https://starwars.fandom.com/wiki/Zeffo"
+        },
+        {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
+        },
+        {
+          "Content": "Jedha",
+          "Href": "https://starwars.fandom.com/wiki/Jedha"
+        },
+        {
+          "Content": "Nova Garon",
+          "Href": "https://starwars.fandom.com/wiki/II-0810_Satellite_Station"
+        },
+        {
+          "Content": "Shattered Moon",
+          "Href": "https://starwars.fandom.com/wiki/Shattered_Moon"
         }
       ],
       "Values": [
@@ -83,46 +101,15 @@
         "Dathomir",
         "Ilum",
         "Kashyyyk",
-        "Zeffo"
+        "Zeffo",
+        "Koboh",
+        "Jedha",
+        "Nova Garon",
+        "Shattered Moon"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 650306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Fight_Pit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 650308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gelid_Dungeon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 640862,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Droid_Hunter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flatakk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pango_Two-Teeth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636571,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hela_Enn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 637248,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deedot_Irepip",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
     {
       "PageId": 456298,
       "PageUrl": "https://starwars.fandom.com/wiki/Bounty_hunter",
@@ -189,9 +176,149 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 654888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Zeffo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 637502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Brood_Bounty_Droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 756103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Brood_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 764497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korej_Lim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kip_Ostar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selfin_Jook",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caij_Vanda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masi_Finau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaslyn_Martz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blorp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 764689,
+      "PageUrl": "https://starwars.fandom.com/wiki/KLE-0",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 764694,
+      "PageUrl": "https://starwars.fandom.com/wiki/PR-85T",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 764695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jo_(bounty_droid)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 636455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oovo_Adnan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nohogg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bad_Fran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broonsie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dunya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636461,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Kindie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flatakk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pango_Two-Teeth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636571,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hela_Enn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 637248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deedot_Irepip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorc_Tormo's_predecessor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 701558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_for_Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 514379,
+      "PageUrl": "https://starwars.fandom.com/wiki/A280C_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 756110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Haxion_Brood_bounty_hunter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 650306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Fight_Pit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 650308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gelid_Dungeon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 636121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ordo_Eris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 636123,
@@ -244,64 +371,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 636455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oovo_Adnan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nohogg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bad_Fran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broonsie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dunya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636461,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Kindie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 682649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sorc_Tormo's_predecessor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ordo_Eris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 514379,
-      "PageUrl": "https://starwars.fandom.com/wiki/A280C_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
       "PageId": 469902,
       "PageUrl": "https://starwars.fandom.com/wiki/Crime_lord",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 637502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Haxion_Brood_Bounty_Droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 766138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gatt_Medo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 701558,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_for_Han_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 654888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Zeffo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 640862,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Droid_Hunter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 766611,
+      "PageUrl": "https://starwars.fandom.com/wiki/MA-55H",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 767313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuhong",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 767314,
+      "PageUrl": "https://starwars.fandom.com/wiki/RZ-12",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

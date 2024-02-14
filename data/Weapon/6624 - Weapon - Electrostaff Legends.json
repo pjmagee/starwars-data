@@ -12,6 +12,23 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Baktoid Armor Workshop",
+          "Href": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop/Legends"
+        },
+        {
+          "Content": "Arakyd Industries",
+          "Href": "https://starwars.fandom.com/wiki/Arakyd_Industries/Legends"
+        }
+      ],
+      "Values": [
+        "Baktoid Armor Workshop",
+        "Arakyd Industries"
+      ]
+    },
+    {
       "Label": "Type",
       "Links": [
         {
@@ -32,21 +49,21 @@
         }
       ],
       "Values": [
-        "3000 credits"
+        "3000 - 4,500 credits"
       ]
     },
     {
       "Label": "Shape",
       "Links": [],
       "Values": [
-        "A long staff"
+        "Two-handed staff"
       ]
     },
     {
       "Label": "Size",
       "Links": [],
       "Values": [
-        "Two-handed weapon"
+        "Just over two meters"
       ]
     },
     {
@@ -65,7 +82,7 @@
       "Label": "Weight",
       "Links": [],
       "Values": [
-        "2 kg"
+        "2 kilograms"
       ]
     },
     {
@@ -77,14 +94,14 @@
         }
       ],
       "Values": [
-        "Lightsaber-resistant, weak blaster bolts"
+        "Lightsaber-resistant"
       ]
     },
     {
       "Label": "Purpose",
       "Links": [],
       "Values": [
-        "Melee weapon, occasionally torture device"
+        "Melee weapon, crowd control"
       ]
     },
     {
@@ -101,6 +118,10 @@
         {
           "Content": "IG-100 MagnaGuard",
           "Href": "https://starwars.fandom.com/wiki/IG-100_MagnaGuard/Legends"
+        },
+        {
+          "Content": "Dugs",
+          "Href": "https://starwars.fandom.com/wiki/Dug/Legends"
         },
         {
           "Content": "Galactic Republic",
@@ -122,6 +143,7 @@
       "Values": [
         "Separatist battle droids",
         "IG-100 MagnaGuard",
+        "Dugs",
         "Galactic Republic",
         "Clone shock trooper",
         "Sith Empire",
@@ -130,6 +152,56 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 539529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_IG-100_MagnaGuard_(Gold)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 539530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_IG-100_MagnaGuard_(Green)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 298833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dug_electrostaff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 392316,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-113",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 1199,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-100_MagnaGuard/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 54212,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-153",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 54213,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-182",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 54216,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-179",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 54249,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-138",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 54460,
+      "PageUrl": "https://starwars.fandom.com/wiki/NK-3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 438661,
       "PageUrl": "https://starwars.fandom.com/wiki/A-20_assault_staff",
@@ -191,6 +263,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
+      "PageId": 373314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Training_droid_(Umbaran_Sith_Academy)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 53161,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-109",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
       "PageId": 502170,
       "PageUrl": "https://starwars.fandom.com/wiki/Prototype_A-14",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
@@ -201,49 +283,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 53161,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-109",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 54212,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-153",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 54213,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-182",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 54216,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-179",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 54249,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-138",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 54460,
-      "PageUrl": "https://starwars.fandom.com/wiki/NK-3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 539529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_IG-100_MagnaGuard_(Gold)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 539530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_IG-100_MagnaGuard_(Green)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 373314,
-      "PageUrl": "https://starwars.fandom.com/wiki/Training_droid_(Umbaran_Sith_Academy)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 76577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gand_shockstaff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 37427,
@@ -253,16 +295,6 @@
     {
       "PageId": 37428,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-101/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 1199,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-100_MagnaGuard/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 392316,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-113",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

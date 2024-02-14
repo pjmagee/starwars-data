@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -29,22 +29,58 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Tamarin sector",
           "Href": "https://starwars.fandom.com/wiki/Tamarin_sector"
         }
       ],
       "Values": [
-        "Outer Rim Territories",
         "Tamarin sector"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Dravian Starport system",
+          "Href": "https://starwars.fandom.com/wiki/Dravian_Starport_system"
+        }
+      ],
+      "Values": [
+        "Dravian Starport system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "N-18"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 12623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tamarin_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 99335,
       "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa_Shipping",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 57884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jontz_Freight",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
@@ -58,29 +94,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 509095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brefest_Torr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 23491,
       "PageUrl": "https://starwars.fandom.com/wiki/Sanrafsix_Corridor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
+      "PageId": 509095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brefest_Torr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 310005,
       "PageUrl": "https://starwars.fandom.com/wiki/Dravian_Starport_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 57884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jontz_Freight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 12623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tamarin_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

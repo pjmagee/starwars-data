@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.37 meters (4 ft, 6 in)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -48,5 +71,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 787005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nima's_training_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

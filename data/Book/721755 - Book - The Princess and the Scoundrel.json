@@ -25,7 +25,12 @@
     },
     {
       "Label": "Cover artist",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Oliver Cuthbertson",
+          "Href": "https://starwars.fandom.com/wiki/Oliver_Cuthbertson"
+        }
+      ],
       "Values": [
         "Oliver Cuthbertson"
       ]
@@ -36,10 +41,15 @@
         {
           "Content": "Del Rey",
           "Href": "https://starwars.fandom.com/wiki/Del_Rey"
+        },
+        {
+          "Content": "Random House Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Random_House_Worlds"
         }
       ],
       "Values": [
-        "Del Rey"
+        "Del Rey",
+        "Random House Worlds"
       ]
     },
     {
@@ -56,6 +66,15 @@
       ],
       "Values": [
         "August 16, 2022"
+      ]
+    },
+    {
+      "Label": "Media type",
+      "Links": [],
+      "Values": [
+        "Hardcover",
+        "Paperback",
+        "eBook"
       ]
     },
     {
@@ -86,7 +105,7 @@
         }
       ],
       "Values": [
-        "c. 4 ABY"
+        "4 ABY"
       ]
     }
   ],

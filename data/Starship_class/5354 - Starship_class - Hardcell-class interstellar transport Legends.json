@@ -2,7 +2,7 @@
   "PageId": 5354,
   "PageUrl": "https://starwars.fandom.com/wiki/Hardcell-class_interstellar_transport/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6d/Hardcell-class.jpg/revision/latest?cb=20080501144131",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bd/TechnoUnionStarship-SWCTP.png/revision/latest?cb=20230910182009",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -152,14 +152,15 @@
           "Href": "https://starwars.fandom.com/wiki/Cannon/Legends"
         },
         {
-          "Content": "Missile launchers",
-          "Href": "https://starwars.fandom.com/wiki/Missile_launcher/Legends"
+          "Content": "Assault concussion missile",
+          "Href": "https://starwars.fandom.com/wiki/Assault_concussion_missile"
         }
       ],
       "Values": [
         "Turreted laser cannon batteries (2)",
         "Foreward laser cannons (3)",
-        "Missile launchers (some models)"
+        "Assault concussion missile tubes (2)",
+        "15 missiles total"
       ]
     },
     {
@@ -249,5 +250,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 55607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Special_Task_Force_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

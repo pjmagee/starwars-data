@@ -53,7 +53,8 @@
       "Label": "Distinctions",
       "Links": [],
       "Values": [
-        "Violent natureGreat strength"
+        "Violent nature",
+        "Great strength"
       ]
     },
     {
@@ -67,9 +68,26 @@
       "Values": [
         "Zav Alox"
       ]
+    },
+    {
+      "Label": "Language",
+      "Links": [
+        {
+          "Content": "Aloxian",
+          "Href": "https://starwars.fandom.com/wiki/Aloxian_(language)"
+        }
+      ],
+      "Values": [
+        "Aloxian"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 710902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zav_Alox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 722544,
       "PageUrl": "https://starwars.fandom.com/wiki/Zint",
@@ -79,11 +97,6 @@
       "PageId": 668258,
       "PageUrl": "https://starwars.fandom.com/wiki/Qort",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 710902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zav_Alox",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

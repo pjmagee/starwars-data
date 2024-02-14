@@ -29,7 +29,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-5",
@@ -39,23 +39,40 @@
       "Values": [
         "L-5"
       ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Canyons",
+          "Href": "https://starwars.fandom.com/wiki/Canyon"
+        },
+        {
+          "Content": "Cliffs",
+          "Href": "https://starwars.fandom.com/wiki/Cliff"
+        },
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        }
+      ],
+      "Values": [
+        "Canyons",
+        "Cliffs",
+        "Forests"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 585072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dorin_Bell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
       "PageId": 574829,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Horuz",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 585072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorin_Bell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

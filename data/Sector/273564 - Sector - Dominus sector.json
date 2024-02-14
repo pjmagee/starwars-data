@@ -129,6 +129,30 @@
       ]
     },
     {
+      "Label": "Galactic War",
+      "Links": [
+        {
+          "Content": "Baros system",
+          "Href": "https://starwars.fandom.com/wiki/Battle_in_the_Baros_system"
+        }
+      ],
+      "Values": [
+        "Baros system"
+      ]
+    },
+    {
+      "Label": "Imperial Period conflicts",
+      "Links": [
+        {
+          "Content": "Baros",
+          "Href": "https://starwars.fandom.com/wiki/Occupation_of_Baros"
+        }
+      ],
+      "Values": [
+        "Baros"
+      ]
+    },
+    {
       "Label": "Great Jedi Purge",
       "Links": [
         {
@@ -187,34 +211,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 15347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trailia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 92675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dornean_Navy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 14608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dornea/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baros_system",
+      "PageId": 362329,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruac_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 273565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trailia_system",
+      "PageId": 362330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solay_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 314613,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prously's_Rim_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 270672,
@@ -222,8 +226,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
-      "PageId": 220755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dominus_system",
+      "PageId": 92675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dornean_Navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 17409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 17405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baros_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
@@ -237,31 +251,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 362329,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruac_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 362330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solay_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 17409,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bari",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 15284,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 405160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dominus_III",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 308140,
       "PageUrl": "https://starwars.fandom.com/wiki/Dornean_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -270,6 +259,41 @@
       "PageId": 308144,
       "PageUrl": "https://starwars.fandom.com/wiki/Solanus_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 273565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trailia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 220755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dominus_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dornea/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 405160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dominus_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trailia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 314613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prously's_Rim_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

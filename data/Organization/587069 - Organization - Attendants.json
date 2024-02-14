@@ -2,7 +2,7 @@
   "PageId": 587069,
   "PageUrl": "https://starwars.fandom.com/wiki/Attendants",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/01/Snokes_attendants.png/revision/latest?cb=20171229083206",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/01/Snokes_attendants.png/revision/latest?cb=20230725234904",
   "Data": [
     {
       "Label": "Titles",
@@ -43,12 +43,17 @@
           "Href": "https://starwars.fandom.com/wiki/Unknown_Regions"
         },
         {
+          "Content": "FateSpinner",
+          "Href": "https://starwars.fandom.com/wiki/FateSpinner"
+        },
+        {
           "Content": "Supremacy",
           "Href": "https://starwars.fandom.com/wiki/Supremacy"
         }
       ],
       "Values": [
-        "Unknown Regions",
+        "Unknown Regions (Point of origin)",
+        "FateSpinner",
         "Supremacy"
       ]
     },
@@ -71,6 +76,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 577769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supremacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 589819,
       "PageUrl": "https://starwars.fandom.com/wiki/Oculus_(device)",

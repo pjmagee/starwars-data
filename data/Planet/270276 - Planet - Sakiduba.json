@@ -2,29 +2,42 @@
   "PageId": 270276,
   "PageUrl": "https://starwars.fandom.com/wiki/Sakiduba",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/BootanaHutta-TEA.jpg/revision/latest?cb=20230624095811",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Sakiduba"
+        "Sakiduba",
+        "(The Bootana Hutta region, with Sakiduba represented by the number 21)"
       ]
     },
     {
       "Label": "Region",
       "Links": [
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
           "Content": "Hutt Space",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "The Slice",
+        "Hutt Space"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Bootana Hutta",
           "Href": "https://starwars.fandom.com/wiki/Bootana_Hutta"
         }
       ],
       "Values": [
-        "Hutt Space",
         "Bootana Hutta"
       ]
     },
@@ -41,7 +54,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-11"
@@ -49,13 +62,18 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Foundries",
+          "Href": "https://starwars.fandom.com/wiki/Factory/Legends"
+        }
+      ],
       "Values": [
         "Foundries"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Sakiyans",
@@ -68,9 +86,14 @@
     },
     {
       "Label": "Major exports",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Repulsorlift",
+          "Href": "https://starwars.fandom.com/wiki/Repulsorlift/Legends"
+        }
+      ],
       "Values": [
-        "Raw materials"
+        "Repulsorlift technology components"
       ]
     },
     {
@@ -91,11 +114,6 @@
       "PageId": 390989,
       "PageUrl": "https://starwars.fandom.com/wiki/Sakiduba_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sakiya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

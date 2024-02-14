@@ -2,7 +2,7 @@
   "PageId": 625339,
   "PageUrl": "https://starwars.fandom.com/wiki/Abrion_Major",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/09/Abrion_Major_-_Obi-Wan_3.jpg/revision/latest?cb=20220926153925",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -33,6 +38,32 @@
       ],
       "Values": [
         "Abrion sector"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Islands"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Abrion Bridge",
+          "Href": "https://starwars.fandom.com/wiki/Abrion_Bridge"
+        }
+      ],
+      "Values": [
+        "Abrion Bridge"
       ]
     },
     {
@@ -67,14 +98,39 @@
   ],
   "Relationships": [
     {
-      "PageId": 519471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 592024,
+      "PageUrl": "https://starwars.fandom.com/wiki/442nd_Siege_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 735554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oron_(lieutenant)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 735926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 625144,
       "PageUrl": "https://starwars.fandom.com/wiki/Esu_Rotsino",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 727036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Abrion_Bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 519471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 743421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_Bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

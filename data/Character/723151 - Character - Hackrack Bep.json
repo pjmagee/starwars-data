@@ -2,6 +2,7 @@
   "PageId": 723151,
   "PageUrl": "https://starwars.fandom.com/wiki/Hackrack_Bep",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.73 meters (5 ft, 8 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -66,17 +90,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Partner(s)",
       "Links": [
         {
-          "Content": "Dalnans",
-          "Href": "https://starwars.fandom.com/wiki/Dalnan"
+          "Content": "Zian",
+          "Href": "https://starwars.fandom.com/wiki/Zian"
         }
       ],
       "Values": [
-        "Dalnans"
+        "Zian"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Theo",
+          "Href": "https://starwars.fandom.com/wiki/Theo"
+        }
+      ],
+      "Values": [
+        "Theo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Dalnan government",
+          "Href": "https://starwars.fandom.com/wiki/Dalnan_government"
+        }
+      ],
+      "Values": [
+        "Dalnan government"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 723148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

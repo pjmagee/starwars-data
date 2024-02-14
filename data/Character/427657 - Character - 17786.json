@@ -24,15 +24,15 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Parent(s)",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
+          "Content": "Nial Declann",
+          "Href": "https://starwars.fandom.com/wiki/Nial_Declann"
         }
       ],
       "Values": [
-        "Male"
+        "Nial Declann"
       ]
     },
     {
@@ -43,15 +43,21 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Zaarin splinter government",
-          "Href": "https://starwars.fandom.com/wiki/Zaarin_splinter_government"
+          "Content": "Zaarin coup forces",
+          "Href": "https://starwars.fandom.com/wiki/Zaarin_coup_forces"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Zaarin splinter government"
+        "Zaarin coup forces"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nial_Declann",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-10"
@@ -91,6 +91,18 @@
       ]
     },
     {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "anchorpoints",
+          "Href": "https://starwars.fandom.com/wiki/Anchorpoint"
+        }
+      ],
+      "Values": [
+        "Marasan anchorpoints"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -106,14 +118,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 13835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marasai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 391382,
       "PageUrl": "https://starwars.fandom.com/wiki/Marasai_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 13835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marasai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

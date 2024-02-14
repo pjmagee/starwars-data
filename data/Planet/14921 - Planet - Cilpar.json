@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-13"
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -87,8 +87,8 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Spacer's Street",
-          "Href": "https://starwars.fandom.com/wiki/Spacer%27s_Street"
+          "Content": "Cilpar native temple",
+          "Href": "https://starwars.fandom.com/wiki/Cilpar_native_temple"
         },
         {
           "Content": "Docking Bay 66",
@@ -103,15 +103,20 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_garrison_(Cilpar)"
         },
         {
+          "Content": "Spacer's Street",
+          "Href": "https://starwars.fandom.com/wiki/Spacer%27s_Street"
+        },
+        {
           "Content": "The barn",
-          "Href": "https://starwars.fandom.com/wiki/The_barn"
+          "Href": "https://starwars.fandom.com/wiki/Rogue_Squadron_Base"
         }
       ],
       "Values": [
-        "Spacer's Street",
+        "Cilpar native temple",
         "Docking Bay 66",
         "Docking Bay 68",
         "Imperial base",
+        "Spacer's Street",
         "The barn"
       ]
     },
@@ -120,7 +125,7 @@
       "Links": [
         {
           "Content": "Ronk",
-          "Href": "https://starwars.fandom.com/wiki/Ronk"
+          "Href": "https://starwars.fandom.com/wiki/Ronk/Legends"
         }
       ],
       "Values": [
@@ -128,19 +133,7 @@
       ]
     },
     {
-      "Label": "Native species",
-      "Links": [
-        {
-          "Content": "extinct species",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Cilpar_species"
-        }
-      ],
-      "Values": [
-        "Formerly: an extinct species"
-      ]
-    },
-    {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Trandoshans",
@@ -219,44 +212,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 216159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Cilpar_species",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 33443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ronk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 91457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Cliffs",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 63319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kiidan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 97188,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Squadron_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 356714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Cilpar)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 556357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elscol_Loro's_sister",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 738512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cilpar_native_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 556441,
@@ -264,14 +222,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 380612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cilpar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 51907,
       "PageUrl": "https://starwars.fandom.com/wiki/Throm_Loro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 356714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Cilpar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 96964,
@@ -279,9 +237,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 130531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cilpar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 91457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 661411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 97188,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Squadron_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 556357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elscol_Loro's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 96962,
@@ -289,9 +262,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 661411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 30821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elscol_Loro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 213911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cilpari_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 63319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiidan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 96952,
@@ -319,18 +302,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 213911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cilpari_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 380612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cilpar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 33443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronk/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 130531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cilpar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 33419,
       "PageUrl": "https://starwars.fandom.com/wiki/Vance_Rego",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 30821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elscol_Loro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

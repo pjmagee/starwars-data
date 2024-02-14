@@ -2,7 +2,7 @@
   "PageId": 507799,
   "PageUrl": "https://starwars.fandom.com/wiki/Core_ship",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/Coreship.png/revision/latest?cb=20140908041618",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/Coreship.png/revision/latest?cb=20230910180637",
   "Data": [
     {
       "Label": "Titles",
@@ -24,15 +24,21 @@
       ]
     },
     {
-      "Label": "Model",
+      "Label": "Line",
       "Links": [],
       "Values": [
-        "Core ship",
         "Lucrehulk-class"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
+      "Links": [],
+      "Values": [
+        "Lucrehulk-class freighter core"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Lander"
@@ -74,37 +80,50 @@
       ]
     },
     {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Unequipped"
+      ]
+    },
+    {
+      "Label": "Power output",
+      "Links": [],
+      "Values": [
+        "Massive energy generation"
+      ]
+    },
+    {
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "Hypermatter annihilation reactor",
+          "Content": "Hypermatter-annihilation main-reactor core",
           "Href": "https://starwars.fandom.com/wiki/Hypermatter_annihilation_reactor"
         },
         {
-          "Content": "Power generator",
-          "Href": "https://starwars.fandom.com/wiki/Power_generator"
+          "Content": "reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
         }
       ],
       "Values": [
-        "Hypermatter annihilation reactor",
-        "Power generator"
+        "Hypermatter-annihilation main-reactor core",
+        "Several auxiliary reactors"
       ]
     },
     {
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Deflector shield generator",
           "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         },
         {
-          "Content": "Particle shield",
+          "Content": "particle shielding",
           "Href": "https://starwars.fandom.com/wiki/Particle_shield"
         }
       ],
       "Values": [
-        "Equipped",
-        "Particle shield"
+        "Deflector shield generator (particle shielding)"
       ]
     },
     {
@@ -123,34 +142,59 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Point-defense light laser cannons",
+          "Content": "point-defense",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+        },
+        {
+          "Content": "laser batteries",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "laser",
+          "Href": "https://starwars.fandom.com/wiki/Laser"
+        },
+        {
+          "Content": "cannons",
+          "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         }
       ],
       "Values": [
-        "Point-defense light laser cannons (280)"
+        "21 quad point-defense laser batteries",
+        "280 point-defense laser cannons",
+        "48 assault laser cannons",
+        "3 turbolasers"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "Armored Assault Tank Mk Is",
+          "Content": "Armored Assault Tanks",
           "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
-        },
-        {
-          "Content": "C-9979 landing craft",
-          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
         },
         {
           "Content": "Multi-Troop Transports",
           "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
+        },
+        {
+          "Content": "Platoon Attack Craft",
+          "Href": "https://starwars.fandom.com/wiki/Platoon_Attack_Craft"
+        },
+        {
+          "Content": "C-9979 landing craft",
+          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
         }
       ],
       "Values": [
-        "Armored Assault Tank Mk Is",
+        "100+ Armored Assault Tanks",
+        "40+ Multi-Troop Transports",
+        "Platoon Attack Craft",
         "C-9979 landing craft",
-        "Multi-Troop Transports"
+        "1,000+ support vehicles"
       ]
     },
     {
@@ -162,6 +206,7 @@
         }
       ],
       "Values": [
+        "Several vehicle bays",
         "Escape pod bay"
       ]
     },
@@ -198,8 +243,16 @@
       "Label": "Passengers",
       "Links": [
         {
-          "Content": "B1-series battle droids",
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        },
+        {
+          "Content": "B1-series models",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
+        },
+        {
+          "Content": "battalions",
+          "Href": "https://starwars.fandom.com/wiki/Battalion"
         },
         {
           "Content": "Security droids",
@@ -208,8 +261,15 @@
       ],
       "Values": [
         "60,000 Trade Federation representatives",
-        "Numerous B1-series battle droids",
+        "1,000+ battle droids, including B1-series models (battalions)",
         "Security droids"
+      ]
+    },
+    {
+      "Label": "Cargo handling systems",
+      "Links": [],
+      "Values": [
+        "Heavy cargo lift"
       ]
     },
     {
@@ -222,10 +282,20 @@
         {
           "Content": "rectenna",
           "Href": "https://starwars.fandom.com/wiki/Rectenna"
+        },
+        {
+          "Content": "transmitter",
+          "Href": "https://starwars.fandom.com/wiki/Transmitter"
+        },
+        {
+          "Content": "hyperwave transceiver",
+          "Href": "https://starwars.fandom.com/wiki/Hyperwave_transceiver"
         }
       ],
       "Values": [
-        "Military droid-feedback rectenna"
+        "Military droid-feedback rectenna",
+        "Military-grade transmitter mast",
+        "Superluminal hyperwave transceiver"
       ]
     },
     {
@@ -240,29 +310,40 @@
           "Href": "https://starwars.fandom.com/wiki/Repulsorlift"
         },
         {
-          "Content": "Scanner",
+          "Content": "Central computer",
+          "Href": "https://starwars.fandom.com/wiki/Central_Control_Computer"
+        },
+        {
+          "Content": "Scanner array",
           "Href": "https://starwars.fandom.com/wiki/Scanner"
+        },
+        {
+          "Content": "Thermal exhaust-vent",
+          "Href": "https://starwars.fandom.com/wiki/Thermal_exhaust_port"
+        },
+        {
+          "Content": "radiator",
+          "Href": "https://starwars.fandom.com/wiki/Radiator"
         }
       ],
       "Values": [
         "Antigravity repulsorlift suspensors",
-        "Scanner array"
+        "Central computer",
+        "Scanner array",
+        "Thermal exhaust-vent",
+        "Transmission generator radiator"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Command vessel",
-          "Href": "https://starwars.fandom.com/wiki/Command_ship"
-        },
-        {
           "Content": "Container ship",
           "Href": "https://starwars.fandom.com/wiki/Container_ship"
         },
         {
-          "Content": "Listening post",
-          "Href": "https://starwars.fandom.com/wiki/Listening_post"
+          "Content": "army",
+          "Href": "https://starwars.fandom.com/wiki/Army"
         },
         {
           "Content": "Tanker",
@@ -270,10 +351,16 @@
         }
       ],
       "Values": [
-        "Command vessel",
         "Container ship",
-        "Listening post (converted)",
+        "Droid army coordination",
         "Tanker"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [],
+      "Values": [
+        "c. 122 BBY"
       ]
     },
     {
@@ -284,18 +371,43 @@
           "Href": "https://starwars.fandom.com/wiki/Trade_Federation"
         },
         {
+          "Content": "Trade Federation fleet",
+          "Href": "https://starwars.fandom.com/wiki/Trade_Federation_fleet"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
         {
           "Content": "Confederacy of Independent Systems Navy",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
+          "Content": "Bedlam Raiders",
+          "Href": "https://starwars.fandom.com/wiki/Bedlam_Raiders"
+        },
+        {
+          "Content": "Kiza's droid army",
+          "Href": "https://starwars.fandom.com/wiki/Kiza%27s_droid_army"
         }
       ],
       "Values": [
         "Trade Federation",
+        "Trade Federation fleet",
         "Confederacy of Independent Systems",
-        "Confederacy of Independent Systems Navy"
+        "Confederacy of Independent Systems Navy",
+        "Galactic Republic (stolen)",
+        "Galactic Republic Navy (stolen)",
+        "Bedlam Raiders",
+        "Kiza's droid army"
       ]
     }
   ],
@@ -306,14 +418,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 671352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
+      "PageId": 453383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saak'ak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 780398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Primacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 775314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship_(Kiza)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 601744,
       "PageUrl": "https://starwars.fandom.com/wiki/Battlesphere",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 60634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_LH-3210_cargo_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 671352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

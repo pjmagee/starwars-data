@@ -2,6 +2,7 @@
   "PageId": 428203,
   "PageUrl": "https://starwars.fandom.com/wiki/Jabe_Calwell",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
         }
       ],
       "Values": [
-        "35 BBY, Tatooine"
+        "c.35 BBY, Tatooine"
       ]
     },
     {
@@ -59,6 +60,42 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Dannar Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Dannar_Calwell"
+        },
+        {
+          "Content": "Annileen Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Annileen_Calwell"
+        }
+      ],
+      "Values": [
+        "Dannar Calwell",
+        "Annileen Calwell"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Kallie Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Kallie_Calwell"
+        }
+      ],
+      "Values": [
+        "Kallie Calwell"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +108,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 428194,
+      "PageUrl": "https://starwars.fandom.com/wiki/Annileen_Calwell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

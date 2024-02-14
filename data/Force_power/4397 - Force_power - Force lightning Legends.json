@@ -33,6 +33,10 @@
         {
           "Content": "Light side of the Force",
           "Href": "https://starwars.fandom.com/wiki/Light_side_of_the_Force/Legends"
+        },
+        {
+          "Content": "Electric Judgment",
+          "Href": "https://starwars.fandom.com/wiki/Electric_Judgment"
         }
       ],
       "Values": [
@@ -41,9 +45,19 @@
     },
     {
       "Label": "Area",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Body",
+          "Href": "https://starwars.fandom.com/wiki/Body"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith/Legends"
+        }
+      ],
       "Values": [
-        "Alter"
+        "Alter",
+        "Body (Sith)"
       ]
     },
     {
@@ -57,12 +71,12 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Je'daii Rangers",
-          "Href": "https://starwars.fandom.com/wiki/Je%27daii_Ranger"
+          "Content": "Force wielders",
+          "Href": "https://starwars.fandom.com/wiki/Celestial/Legends"
         },
         {
-          "Content": "Jedi Order",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
+          "Content": "Eternal Empire",
+          "Href": "https://starwars.fandom.com/wiki/Eternal_Empire"
         },
         {
           "Content": "New Jedi Order",
@@ -71,23 +85,14 @@
         {
           "Content": "Nightsisters",
           "Href": "https://starwars.fandom.com/wiki/Nightsisters/Legends"
-        },
-        {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith/Legends"
-        },
-        {
-          "Content": "Baran Do",
-          "Href": "https://starwars.fandom.com/wiki/Baran_Do/Legends"
         }
       ],
       "Values": [
-        "Je'daii Rangers",
-        "Jedi Order",
-        "New Jedi Order",
-        "Nightsisters",
+        "Force wielders",
         "Sith",
-        "Baran Do"
+        "Eternal Empire",
+        "New Jedi Order",
+        "Nightsisters"
       ]
     }
   ],

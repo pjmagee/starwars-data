@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -62,12 +69,71 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Cybernetics",
+      "Links": [
+        {
+          "Content": "Cybernetic implant",
+          "Href": "https://starwars.fandom.com/wiki/Cybernetics"
+        }
+      ],
+      "Values": [
+        "Cybernetic implant"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Tagge",
           "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
+        }
+      ],
+      "Values": [
+        "House of Tagge"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Killian Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Killian_Tagge"
         },
+        {
+          "Content": "Sanya Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Sanya_Tagge"
+        }
+      ],
+      "Values": [
+        "Killian Tagge",
+        "Sanya Tagge"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Orman Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Orman_Tagge"
+        },
+        {
+          "Content": "Silas Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Silas_Tagge"
+        },
+        {
+          "Content": "Ulric Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Ulric_Tagge"
+        }
+      ],
+      "Values": [
+        "Orman Tagge",
+        "Silas Tagge",
+        "Ulric Tagge"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Tagge Corporation",
           "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
@@ -78,7 +144,6 @@
         }
       ],
       "Values": [
-        "House of Tagge",
         "Tagge Corporation",
         "Galactic Empire"
       ]
@@ -86,9 +151,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 708980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Acquisitor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 708897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silas_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orman_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ulric_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 752732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_attempt_on_Domina_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 84685,
@@ -96,9 +176,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 709387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Honor_Guard_(Domina_Tagge)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 761950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tagge_prototype_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 675297,
@@ -106,8 +186,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 708980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Acquisitor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 784700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Casus_Belli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 749962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Silas_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 752762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tagge_Corporation_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
       "PageId": 172221,
       "PageUrl": "https://starwars.fandom.com/wiki/Executive_Board",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 778430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Killian_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 778431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanya_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 709387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honor_Guard_(Domina_Tagge)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {

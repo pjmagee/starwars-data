@@ -2,7 +2,7 @@
   "PageId": 481208,
   "PageUrl": "https://starwars.fandom.com/wiki/Marlo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/dc/MarloTheHutt-SWBlog.png/revision/latest?cb=20131003205728",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/dc/MarloTheHutt-SWBlog.png/revision/latest?cb=20220906031004",
   "Data": [
     {
       "Label": "Titles",
@@ -25,7 +25,12 @@
     },
     {
       "Label": "Born",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "997 BBY",
+          "Href": "https://starwars.fandom.com/wiki/997_BBY"
+        }
+      ],
       "Values": [
         "c. 997 BBY"
       ]
@@ -38,16 +43,12 @@
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
         },
         {
-          "Content": "4 ABY",
-          "Href": "https://starwars.fandom.com/wiki/4_ABY"
-        },
-        {
           "Content": "Jekara system",
           "Href": "https://starwars.fandom.com/wiki/Jekara_system"
         }
       ],
       "Values": [
-        "Between 3 ABY and 4 ABY, Jekara system"
+        "3 ABY, Jekara system"
       ]
     },
     {
@@ -133,11 +134,6 @@
     }
   ],
   "Relationships": [
-    {
-      "PageId": 22194,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Ruling_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
     {
       "PageId": 553958,
       "PageUrl": "https://starwars.fandom.com/wiki/Codenka_Mafurias",

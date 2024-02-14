@@ -2,7 +2,7 @@
   "PageId": 573404,
   "PageUrl": "https://starwars.fandom.com/wiki/Oliu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/78/Oliu.png/revision/latest?cb=20210623182450",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/24/Storm.jpg/revision/latest?cb=20221129215128",
   "Data": [
     {
       "Label": "Titles",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungle",
@@ -39,23 +39,38 @@
       "Label": "Flora",
       "Links": [
         {
+          "Content": "Mushrooms",
+          "Href": "https://starwars.fandom.com/wiki/Mushroom"
+        },
+        {
           "Content": "Trees",
           "Href": "https://starwars.fandom.com/wiki/Tree"
+        },
+        {
+          "Content": "Vines",
+          "Href": "https://starwars.fandom.com/wiki/Vine"
         }
       ],
       "Values": [
-        "Trees"
+        "Mushrooms",
+        "Trees",
+        "Vines"
       ]
     },
     {
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Birds",
+          "Href": "https://starwars.fandom.com/wiki/Bird"
+        },
+        {
           "Content": "Insects",
           "Href": "https://starwars.fandom.com/wiki/Insect"
         }
       ],
       "Values": [
+        "Birds",
         "Insects"
       ]
     }

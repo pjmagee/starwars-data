@@ -2,12 +2,37 @@
   "PageId": 528835,
   "PageUrl": "https://starwars.fandom.com/wiki/Vulpinus_Nebula",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f4/Stennaros-SWT.jpg/revision/latest?cb=20220611211233",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Vulpinus Nebula"
+      ]
+    },
+    {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        }
+      ],
+      "Values": [
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-16",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-16"
       ]
     },
     {
@@ -29,12 +54,28 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Unknown Regions Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Unknown_Regions_Imperial_remnant"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Unknown Regions Imperial remnant"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 761429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unknown_Regions_Imperial_remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 783340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulpinus_Nebula_Imperial_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

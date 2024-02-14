@@ -13,7 +13,12 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pancakes",
+          "Href": "https://starwars.fandom.com/wiki/Pancake/LEGO"
+        }
+      ],
       "Values": [
         "Pancakes"
       ]
@@ -55,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 763088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pancake/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

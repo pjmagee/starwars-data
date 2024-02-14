@@ -2,6 +2,7 @@
   "PageId": 558737,
   "PageUrl": "https://starwars.fandom.com/wiki/Skysitter_Restaurant",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5c/SkysitterRestaurant-CL.png/revision/latest?cb=20221021145423",
   "Data": [
     {
       "Label": "Titles",
@@ -14,8 +15,8 @@
       "Label": "Location",
       "Links": [
         {
-          "Content": "Galactic City",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_City"
+          "Content": "Federal District",
+          "Href": "https://starwars.fandom.com/wiki/Federal_District"
         },
         {
           "Content": "Coruscant",
@@ -23,9 +24,31 @@
         }
       ],
       "Values": [
-        "Galactic City, Coruscant"
+        "Federal District, Coruscant"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1000 meters (3,280 ft)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

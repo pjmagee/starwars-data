@@ -2,6 +2,7 @@
   "PageId": 86433,
   "PageUrl": "https://starwars.fandom.com/wiki/Goran_Beviin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -28,10 +29,14 @@
         {
           "Content": "19 BBY",
           "Href": "https://starwars.fandom.com/wiki/19_BBY/Legends"
+        },
+        {
+          "Content": "16 BBY",
+          "Href": "https://starwars.fandom.com/wiki/16_BBY/Legends"
         }
       ],
       "Values": [
-        "c. 19 BBY"
+        "Between 19 BBY-16 BBY"
       ]
     },
     {
@@ -59,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -68,6 +80,30 @@
       ],
       "Values": [
         "Gray"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Clan Beviin",
+          "Href": "https://starwars.fandom.com/wiki/Clan_Beviin"
+        }
+      ],
+      "Values": [
+        "Clan Beviin"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Medrit Vasur",
+          "Href": "https://starwars.fandom.com/wiki/Medrit_Vasur"
+        }
+      ],
+      "Values": [
+        "Medrit Vasur"
       ]
     },
     {
@@ -88,5 +124,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 98082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dinua_Jeban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

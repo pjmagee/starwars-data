@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-17"
@@ -62,40 +62,53 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Climate",
       "Links": [
         {
-          "Content": "Jungle",
-          "Href": "https://starwars.fandom.com/wiki/Jungle/Legends"
+          "Content": "Temperate",
+          "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
         }
       ],
       "Values": [
-        "Jungle"
+        "Tropical",
+        "Temperate"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        }
+      ],
+      "Values": [
+        "Forests"
       ]
     },
     {
       "Label": "Fauna",
       "Links": [
         {
-          "Content": "Bha'lir",
+          "Content": "Black Bha'lir",
           "Href": "https://starwars.fandom.com/wiki/Bha%27lir"
         }
       ],
       "Values": [
-        "Bha'lir"
+        "Black Bha'lir"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 87367,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bha'lir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 362173,
       "PageUrl": "https://starwars.fandom.com/wiki/Iyred_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 87367,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bha'lir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

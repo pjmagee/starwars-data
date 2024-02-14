@@ -13,7 +13,12 @@
     },
     {
       "Label": "Family type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Great Family",
+          "Href": "https://starwars.fandom.com/wiki/Great_Families"
+        }
+      ],
       "Values": [
         "Great Family"
       ]
@@ -36,10 +41,6 @@
         {
           "Content": "Chiss Ascendancy",
           "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy"
-        },
-        {
-          "Content": "Great Families",
-          "Href": "https://starwars.fandom.com/wiki/Great_Families"
         }
       ],
       "Values": [
@@ -49,6 +50,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 739764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kiwu_syndic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 660358,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_Families",

@@ -40,18 +40,6 @@
       ]
     },
     {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human"
-        }
-      ],
-      "Values": [
-        "Human"
-      ]
-    },
-    {
       "Label": "Gender",
       "Links": [
         {
@@ -64,12 +52,55 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Wexley family",
           "Href": "https://starwars.fandom.com/wiki/Wexley_family"
+        }
+      ],
+      "Values": [
+        "Wexley family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Norra Wexley",
+          "Href": "https://starwars.fandom.com/wiki/Norra_Wexley"
         },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Norra Wexley (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Temmin Wexley",
+          "Href": "https://starwars.fandom.com/wiki/Temmin_Wexley"
+        }
+      ],
+      "Values": [
+        "Temmin Wexley"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
@@ -84,7 +115,6 @@
         }
       ],
       "Values": [
-        "Wexley family",
         "Alliance to Restore the Republic",
         "Gallius Rax (Unknowingly)",
         "New Republic"
@@ -92,6 +122,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 513517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 505924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 499302,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",

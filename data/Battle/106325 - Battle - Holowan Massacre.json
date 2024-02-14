@@ -43,17 +43,25 @@
       "Label": "Place",
       "Links": [
         {
+          "Content": "Holowan Laboratories",
+          "Href": "https://starwars.fandom.com/wiki/Holowan_Laboratories_(facility)"
+        },
+        {
           "Content": "Halowan",
           "Href": "https://starwars.fandom.com/wiki/Halowan"
         }
       ],
       "Values": [
-        "Halowan"
+        "Holowan Laboratories, Halowan"
       ]
     },
     {
       "Label": "Outcome",
       "Links": [
+        {
+          "Content": "lab personnel",
+          "Href": "https://starwars.fandom.com/wiki/Scientist/Legends"
+        },
         {
           "Content": "assassin droids",
           "Href": "https://starwars.fandom.com/wiki/Assassin_droid/Legends"
@@ -66,14 +74,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 12736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fakir_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 31372,
       "PageUrl": "https://starwars.fandom.com/wiki/Droid_Revolution",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 12736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fakir_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

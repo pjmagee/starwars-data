@@ -40,22 +40,36 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Gray",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Gray"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
       ]
     },
     {
@@ -76,21 +90,26 @@
       ],
       "Values": [
         "Oviedo Engineering",
-        "Galactic Republic (formerly)",
+        "Galactic Republic",
         "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 61763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oviedo_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 237283,
       "PageUrl": "https://starwars.fandom.com/wiki/Action_on_Asturias",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 61763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oviedo_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 759729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conference_on_Aviles_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

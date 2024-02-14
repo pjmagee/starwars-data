@@ -2,6 +2,7 @@
   "PageId": 496299,
   "PageUrl": "https://starwars.fandom.com/wiki/Jorem_Yange",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,18 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Unnamed wife",
+          "Href": "https://starwars.fandom.com/wiki/Jorem_Yange%27s_wife"
+        }
+      ],
+      "Values": [
+        "Unnamed wife"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -40,5 +53,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 496301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jorem_Yange's_wife",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

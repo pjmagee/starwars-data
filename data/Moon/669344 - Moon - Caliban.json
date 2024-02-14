@@ -24,31 +24,72 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
       "Label": "Climate",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Cold",
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
+        }
+      ],
       "Values": [
         "Cold"
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
       "Values": [
-        "Frozen wasteland",
-        "Canyons",
-        "Mountains"
+        "Frozen tundra",
+        "Mountains",
+        "Ravines"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Ice",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "Ice and snow"
+      ]
+    },
+    {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Lunar ice bridge",
+          "Href": "https://starwars.fandom.com/wiki/Lunar_ice_bridge"
+        }
+      ],
+      "Values": [
+        "Lunar ice bridge"
       ]
     },
     {
@@ -62,18 +103,55 @@
       "Values": [
         "Qubey"
       ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Qubey language",
+          "Href": "https://starwars.fandom.com/wiki/Qubey_language"
+        }
+      ],
+      "Values": [
+        "Qubey language"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 706863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Caliban",
+      "PageId": 771833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lunar_ice_bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 775743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Caliban",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 775740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Qubey_parent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 771821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qubey_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 669348,
       "PageUrl": "https://starwars.fandom.com/wiki/Qubey",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 771830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Qubey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 706863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Caliban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

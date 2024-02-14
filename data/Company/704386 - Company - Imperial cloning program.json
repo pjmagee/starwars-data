@@ -23,6 +23,18 @@
           "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
         },
         {
+          "Content": "Chief Scientist",
+          "Href": "https://starwars.fandom.com/wiki/Chief_Scientist"
+        },
+        {
+          "Content": "Dr",
+          "Href": "https://starwars.fandom.com/wiki/Doctor"
+        },
+        {
+          "Content": "Royce Hemlock",
+          "Href": "https://starwars.fandom.com/wiki/Royce_Hemlock"
+        },
+        {
           "Content": "Moff",
           "Href": "https://starwars.fandom.com/wiki/Moff"
         },
@@ -33,6 +45,7 @@
       ],
       "Values": [
         "Galactic Emperor Sheev Palpatine",
+        "Chief Scientist Dr. Royce Hemlock",
         "Moff Gideon"
       ]
     },
@@ -48,6 +61,10 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Military_Department_of_Advanced_Weapons_Research"
         },
         {
+          "Content": "Advanced Science Division",
+          "Href": "https://starwars.fandom.com/wiki/Advanced_Science_Division"
+        },
+        {
           "Content": "Sith Eternal",
           "Href": "https://starwars.fandom.com/wiki/Sith_Eternal"
         }
@@ -55,6 +72,7 @@
       "Values": [
         "Tarkin Initiative",
         "Imperial Military Department of Advanced Weapons Research",
+        "Advanced Science Division",
         "Sith Eternal"
       ]
     },
@@ -62,20 +80,24 @@
       "Label": "Headquarters",
       "Links": [
         {
-          "Content": "Tipoca City Military Complex",
+          "Content": "Military Complex",
           "Href": "https://starwars.fandom.com/wiki/Tipoca_City_Military_Complex"
+        },
+        {
+          "Content": "Tipoca City",
+          "Href": "https://starwars.fandom.com/wiki/Tipoca_City"
         },
         {
           "Content": "Kamino",
           "Href": "https://starwars.fandom.com/wiki/Kamino"
         },
         {
-          "Content": "Mount Tantiss",
-          "Href": "https://starwars.fandom.com/wiki/Mount_Tantiss"
+          "Content": "Weyland facility",
+          "Href": "https://starwars.fandom.com/wiki/Weyland_facility"
         },
         {
-          "Content": "facility",
-          "Href": "https://starwars.fandom.com/wiki/Weyland_facility"
+          "Content": "Mount Tantiss",
+          "Href": "https://starwars.fandom.com/wiki/Mount_Tantiss"
         },
         {
           "Content": "Weyland",
@@ -83,16 +105,16 @@
         }
       ],
       "Values": [
-        "Tipoca City Military Complex, Kamino",
-        "Mount Tantiss facility, Weyland"
+        "Military Complex, Tipoca City, Kamino",
+        "Weyland facility, Mount Tantiss, Weyland"
       ]
     },
     {
       "Label": "Location(s)",
       "Links": [
         {
-          "Content": "Sith Citadel laboratory",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Citadel_laboratory"
+          "Content": "Dark science laboratory",
+          "Href": "https://starwars.fandom.com/wiki/Dark_science_laboratory"
         },
         {
           "Content": "Exegol",
@@ -111,19 +133,28 @@
           "Href": "https://starwars.fandom.com/wiki/Hivebase-1"
         },
         {
-          "Content": "Imperial base",
+          "Content": "Nevarro Imperial base",
           "Href": "https://starwars.fandom.com/wiki/Nevarro_Imperial_base"
         },
         {
           "Content": "Nevarro",
           "Href": "https://starwars.fandom.com/wiki/Nevarro"
+        },
+        {
+          "Content": "Mandalore Imperial base",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore_Imperial_base"
+        },
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
         }
       ],
       "Values": [
-        "Sith Citadel laboratory, Exegol",
+        "Dark science laboratory, Exegol",
         "Research facility, Dandoran",
         "Hivebase-1",
-        "Imperial base, Nevarro"
+        "Nevarro Imperial base, Nevarro",
+        "Mandalore Imperial base, Mandalore"
       ]
     },
     {
@@ -187,12 +218,22 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Advanced Science Division",
+          "Href": "https://starwars.fandom.com/wiki/Advanced_Science_Division"
+        },
+        {
+          "Content": "Shadow Council",
+          "Href": "https://starwars.fandom.com/wiki/Shadow_Council"
+        },
+        {
           "Content": "Gideon's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
         }
       ],
       "Values": [
         "Galactic Empire",
+        "Advanced Science Division",
+        "Shadow Council",
         "Gideon's Imperial remnant",
         "Sith Eternal (unofficially)"
       ]
@@ -200,29 +241,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 705211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_royal_guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 705209,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 496289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nala_Se",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_medical_officer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704683,
-      "PageUrl": "https://starwars.fandom.com/wiki/Weyland_facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 631177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_Imperial_remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

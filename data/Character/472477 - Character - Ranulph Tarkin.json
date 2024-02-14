@@ -28,14 +28,10 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
-        },
-        {
-          "Content": "Eriaduan",
-          "Href": "https://starwars.fandom.com/wiki/Eriaduan"
         }
       ],
       "Values": [
-        "Human (Eriaduan)"
+        "Human"
       ]
     },
     {
@@ -51,12 +47,20 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tarkin family",
           "Href": "https://starwars.fandom.com/wiki/Tarkin_family"
-        },
+        }
+      ],
+      "Values": [
+        "Tarkin family"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
@@ -67,7 +71,6 @@
         }
       ],
       "Values": [
-        "Tarkin family",
         "Galactic Republic",
         "Outland Regions Security Force"
       ]

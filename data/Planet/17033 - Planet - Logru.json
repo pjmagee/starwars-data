@@ -74,7 +74,14 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "T-10"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Molten",
@@ -95,14 +102,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 114915,
-      "PageUrl": "https://starwars.fandom.com/wiki/Honoghr_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 7300,
       "PageUrl": "https://starwars.fandom.com/wiki/Honoghr_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 114915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honoghr_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

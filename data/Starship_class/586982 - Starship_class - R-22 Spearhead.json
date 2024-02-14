@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -48,19 +48,39 @@
       ]
     },
     {
+      "Label": "Shielding",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Laser cannon",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Missile launcher",
+          "Href": "https://starwars.fandom.com/wiki/Missile_launcher"
+        }
+      ],
+      "Values": [
+        "Laser cannon (2)",
+        "Missile launcher"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Tammuz-an royalty",
-          "Href": "https://starwars.fandom.com/wiki/Tammuz-an_royalty"
+          "Content": "Kingdom of Tammuz-an",
+          "Href": "https://starwars.fandom.com/wiki/Kingdom_of_Tammuz-an"
         },
         {
           "Content": "Tammuz-an planetary defense fleet",
           "Href": "https://starwars.fandom.com/wiki/Tammuz-an_planetary_defense_fleet"
-        },
-        {
-          "Content": "Yellow Seven",
-          "Href": "https://starwars.fandom.com/wiki/Yellow_Seven_(Rebel_group)"
         },
         {
           "Content": "Alliance to Restore the Republic",
@@ -76,9 +96,8 @@
         }
       ],
       "Values": [
-        "Tammuz-an royalty",
+        "Kingdom of Tammuz-an",
         "Tammuz-an planetary defense fleet",
-        "Yellow Seven",
         "Alliance to Restore the Republic",
         "New Republic",
         "New Republic Starfighter Corps"
@@ -87,14 +106,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 641722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yellow_Seven_(Rebel_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 499428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Systems_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 499674,
+      "PageUrl": "https://starwars.fandom.com/wiki/A-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
       "PageId": 685331,
@@ -102,9 +116,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 499674,
-      "PageUrl": "https://starwars.fandom.com/wiki/A-wing_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+      "PageId": 499428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Systems_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

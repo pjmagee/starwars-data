@@ -2,6 +2,7 @@
   "PageId": 44563,
   "PageUrl": "https://starwars.fandom.com/wiki/Rehtul_Minnau",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,35 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Teckla Minnau",
+          "Href": "https://starwars.fandom.com/wiki/Teckla_Minnau/Legends"
+        },
+        {
+          "Content": "Nandi",
+          "Href": "https://starwars.fandom.com/wiki/Nandi"
+        }
+      ],
+      "Values": [
+        "Teckla Minnau",
+        "Nandi"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 122100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nandi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 48402,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

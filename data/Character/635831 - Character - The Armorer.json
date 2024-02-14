@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Human"
+      ]
+    },
+    {
       "Label": "Gender",
       "Links": [
         {
@@ -33,6 +45,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -52,6 +71,18 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "The Tribe",
+          "Href": "https://starwars.fandom.com/wiki/The_Tribe"
+        }
+      ],
+      "Values": [
+        "The Tribe"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -59,21 +90,31 @@
           "Href": "https://starwars.fandom.com/wiki/Mandalorian"
         },
         {
-          "Content": "The Tribe",
-          "Href": "https://starwars.fandom.com/wiki/The_Tribe"
+          "Content": "Children of the Watch",
+          "Href": "https://starwars.fandom.com/wiki/Children_of_the_Watch"
         }
       ],
       "Values": [
         "Mandalorians",
-        "The Tribe"
+        "Children of the Watch"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 720526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Din_Grogu's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
       "PageId": 665471,
       "PageUrl": "https://starwars.fandom.com/wiki/Din_Djarin's_armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 757634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_outside_a_Mandalorian_covert",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 635868,
@@ -81,9 +122,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 720526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grogu's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 757735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_Gauntlet_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

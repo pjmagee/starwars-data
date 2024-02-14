@@ -29,8 +29,13 @@
       ]
     },
     {
-      "Label": "Material type",
-      "Links": [],
+      "Label": "Substance type",
+      "Links": [
+        {
+          "Content": "Metal",
+          "Href": "https://starwars.fandom.com/wiki/Metal"
+        }
+      ],
       "Values": [
         "Metal"
       ]
@@ -75,14 +80,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 499122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jakku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 526446,
       "PageUrl": "https://starwars.fandom.com/wiki/Jakku_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 499122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jakku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

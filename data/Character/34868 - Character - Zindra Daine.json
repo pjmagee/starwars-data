@@ -2,6 +2,7 @@
   "PageId": 34868,
   "PageUrl": "https://starwars.fandom.com/wiki/Zindra_Daine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Cubber Daine",
+          "Href": "https://starwars.fandom.com/wiki/Cubber_Daine"
+        }
+      ],
+      "Values": [
+        "Cubber Daine"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -76,5 +89,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 54614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cubber_Daine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

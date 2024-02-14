@@ -2,7 +2,7 @@
   "PageId": 307215,
   "PageUrl": "https://starwars.fandom.com/wiki/Humbarine_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Humbarine.jpg/revision/latest?cb=20220901152128",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -36,10 +46,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Humbarine",
+          "Href": "https://starwars.fandom.com/wiki/Humbarine/Legends"
+        }
+      ],
+      "Values": [
+        "Humbarine"
       ]
     },
     {
@@ -55,28 +77,57 @@
       ]
     },
     {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [
+        {
+          "Content": "25 ABY",
+          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
+        }
+      ],
+      "Values": [
+        "10–100 million (c. 25 ABY)"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 12755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Humbarine_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 5269,
       "PageUrl": "https://starwars.fandom.com/wiki/Humbarine/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Humbarine_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

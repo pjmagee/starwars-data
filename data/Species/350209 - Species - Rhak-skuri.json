@@ -46,11 +46,16 @@
     },
     {
       "Label": "Distinctions",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "hallucinations",
+          "Href": "https://starwars.fandom.com/wiki/Hallucination/Legends"
+        }
+      ],
       "Values": [
         "Six legs with hooks, multisectioned body, mandibles, antennae and two-pronged tail extension with pincers on each",
         "Acid slaver and Carapace which resists to lightsabers energy",
-        "Production of pheromones which create terrorizing hallucinations"
+        "Production of pheromones which create terrifying hallucinations"
       ]
     },
     {
@@ -81,16 +86,11 @@
         }
       ],
       "Values": [
-        "Telepathy : Sith"
+        "Sith telepathy"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 350208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Upekzar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
     {
       "PageId": 350210,
       "PageUrl": "https://starwars.fandom.com/wiki/Circle_of_Visions",
@@ -100,6 +100,11 @@
       "PageId": 688944,
       "PageUrl": "https://starwars.fandom.com/wiki/High_Rites_cave_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 350208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Upekzar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

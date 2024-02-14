@@ -68,6 +68,14 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him",
+        "It/its"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -93,9 +101,15 @@
     },
     {
       "Label": "Eye color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        }
+      ],
       "Values": [
-        "Blue"
+        "Blue",
+        "Purple (under Scourge infection)"
       ]
     },
     {
@@ -110,6 +124,35 @@
       "Links": [],
       "Values": [
         "Majority of body and organs"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Valance family",
+          "Href": "https://starwars.fandom.com/wiki/Valance_family"
+        }
+      ],
+      "Values": [
+        "Valance family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Beilert Valance's father",
+          "Href": "https://starwars.fandom.com/wiki/Beilert_Valance%27s_father"
+        },
+        {
+          "Content": "Beilert Valance's mother",
+          "Href": "https://starwars.fandom.com/wiki/Beilert_Valance%27s_mother"
+        }
+      ],
+      "Values": [
+        "Beilert Valance's father",
+        "Beilert Valance's mother"
       ]
     },
     {
@@ -150,6 +193,10 @@
         {
           "Content": "Vader's crew",
           "Href": "https://starwars.fandom.com/wiki/Vader%27s_crew"
+        },
+        {
+          "Content": "T'onga's crew",
+          "Href": "https://starwars.fandom.com/wiki/T%27onga%27s_crew"
         }
       ],
       "Values": [
@@ -161,25 +208,21 @@
         "Nakano Lash's crew",
         "Bounty Hunters' Guild",
         "Beilert Valance's crew",
-        "Vader's crew"
+        "Vader's crew",
+        "T'onga's crew"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 715235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 766333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beilert_Valance's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 638095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shootout_at_BG-RT's_Tavern_and_Spirits",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 643755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Home_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 726924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 679643,
@@ -192,9 +235,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 734722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Imperial_engineers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 762076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_at_Depatar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 643755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Home_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 628981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beilert_Valance's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 696352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Shaddaa_(War_of_the_Bounty_Hunters)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 658861,
       "PageUrl": "https://starwars.fandom.com/wiki/Starskimmer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 638095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shootout_at_BG-RT's_Tavern_and_Spirits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 755200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Valance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 745043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 788744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Beilert_Valance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 791646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Jabba's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 750305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Lowik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 715235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 779590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerebral_processor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

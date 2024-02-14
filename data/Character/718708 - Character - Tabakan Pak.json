@@ -2,7 +2,7 @@
   "PageId": 718708,
   "PageUrl": "https://starwars.fandom.com/wiki/Tabakan_Pak",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e2/Master_Tabakan_Pak.png/revision/latest?cb=20220210211926",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c5/TakabanPak-THRA2021-13.png/revision/latest?cb=20240123153542",
   "Data": [
     {
       "Label": "Titles",
@@ -24,13 +24,43 @@
       ]
     },
     {
-      "Label": "Skin color",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Pale",
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.09 meters (3 ft, 7 in)"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "Brown",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
       "Values": [
         "Pale"
       ]
@@ -62,14 +92,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 723415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_task_force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
       "PageId": 668258,
       "PageUrl": "https://starwars.fandom.com/wiki/Qort",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

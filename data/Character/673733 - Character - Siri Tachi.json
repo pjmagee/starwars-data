@@ -2,12 +2,25 @@
   "PageId": 673733,
   "PageUrl": "https://starwars.fandom.com/wiki/Siri_Tachi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Siri Tachi"
+      ]
+    },
+    {
+      "Label": "Gender",
+      "Links": [
+        {
+          "Content": "Female",
+          "Href": "https://starwars.fandom.com/wiki/Gender"
+        }
+      ],
+      "Values": [
+        "Female"
       ]
     },
     {
@@ -26,7 +39,25 @@
         "Jedi Order",
         "Galactic Republic"
       ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Siri Tachi's Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Siri_Tachi%27s_Jedi_Master"
+        }
+      ],
+      "Values": [
+        "Siri Tachi's Jedi Master"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 734931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siri_Tachi's_Jedi_Master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

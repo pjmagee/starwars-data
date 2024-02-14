@@ -2,7 +2,7 @@
   "PageId": 386324,
   "PageUrl": "https://starwars.fandom.com/wiki/Dulok_Village_(south)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/DulokVillageSouth.jpg/revision/latest?cb=20120716181436",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ee/Dulok_Village_east.jpg/revision/latest?cb=20230108200223",
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Location",
+      "Label": "Moon",
       "Links": [
         {
           "Content": "Endor",
@@ -24,17 +24,35 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Location",
       "Links": [
         {
-          "Content": "Pubams",
-          "Href": "https://starwars.fandom.com/wiki/Pubam"
+          "Content": "Fersal Hills",
+          "Href": "https://starwars.fandom.com/wiki/Fersal_Hills"
         }
       ],
       "Values": [
-        "Pubams"
+        "Fersal Hills"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Dulok",
+          "Href": "https://starwars.fandom.com/wiki/Dulok/Legends"
+        }
+      ],
+      "Values": [
+        "Dulok outcasts"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 751064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fersal_Hills",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

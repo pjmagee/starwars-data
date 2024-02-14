@@ -67,7 +67,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-5"
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caves",
@@ -214,7 +214,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -312,84 +312,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 331318,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Darth_Desolous_conflict)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 610,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Intelligence/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 340314,
       "PageUrl": "https://starwars.fandom.com/wiki/K220_heavy-duty_peripheral_processor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 29230,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_(species)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 18593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 10085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 24493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Yuuzhan_Vong_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 55532,
-      "PageUrl": "https://starwars.fandom.com/wiki/Preparation_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 332357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Entralla_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 109354,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Desolous",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 685611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masterline-70_OcTerminal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 47981,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_Minor_shipyards/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 396472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_drone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 5644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ubiqtorate/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 317805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merilang-1221",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 417372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Jorj_Car'das",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 18596,
@@ -397,9 +322,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
+      "PageId": 55532,
+      "PageUrl": "https://starwars.fandom.com/wiki/Preparation_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 417372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Jorj_Car'das",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 331318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Darth_Desolous_conflict)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 5644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ubiqtorate/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 29230,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_(species)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 685611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masterline-70_OcTerminal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 109354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Desolous",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 24493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Yuuzhan_Vong_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 317805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merilang-1221",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 332357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Entralla_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 47981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_Minor_shipyards/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 18593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 7732,
       "PageUrl": "https://starwars.fandom.com/wiki/Caamas_Document_Crisis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 10085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yaga_Minor_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 396472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yaga_drone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Intelligence/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

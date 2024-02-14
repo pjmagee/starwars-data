@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Rakata",
-          "Href": "https://starwars.fandom.com/wiki/Rakata/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Rakata"
         }
       ],
       "Values": [
@@ -59,8 +59,33 @@
       ]
     },
     {
+      "Label": "Owners",
+      "Links": [
+        {
+          "Content": "Xesh",
+          "Href": "https://starwars.fandom.com/wiki/Xesh"
+        },
+        {
+          "Content": "Xesh's Forcesaber",
+          "Href": "https://starwars.fandom.com/wiki/Xesh%27s_Forcesaber"
+        },
+        {
+          "Content": "Adas",
+          "Href": "https://starwars.fandom.com/wiki/Adas"
+        }
+      ],
+      "Values": [
+        "Xesh (Xesh's Forcesaber)",
+        "Adas"
+      ]
+    },
+    {
       "Label": "Material(s)",
       "Links": [
+        {
+          "Content": "Ebon",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        },
         {
           "Content": "crystal",
           "Href": "https://starwars.fandom.com/wiki/Crystal/Legends"
@@ -84,15 +109,25 @@
         {
           "Content": "Infinite Empire",
           "Href": "https://starwars.fandom.com/wiki/Infinite_Empire"
+        },
+        {
+          "Content": "Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Pre-Republic)"
         }
       ],
       "Values": [
         "Infinite Empire",
-        "Je'daii Order"
+        "Je'daii Order",
+        "Sith Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 776307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_rare_Krev_Coeur_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
     {
       "PageId": 379764,
       "PageUrl": "https://starwars.fandom.com/wiki/Xesh's_Forcesaber",

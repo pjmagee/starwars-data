@@ -99,6 +99,10 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Intelligence",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Intelligence"
         }
       ],
       "Values": [
@@ -107,19 +111,20 @@
         "Rebel Alliance Intelligence Service",
         "Lina Graf's crew",
         "Endor strike team",
-        "New Republic"
+        "New Republic",
+        "New Republic Intelligence"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 608756,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lina_Graf's_crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 608655,
       "PageUrl": "https://starwars.fandom.com/wiki/Auric",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 566190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Herald",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -128,9 +133,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 608756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lina_Graf's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 610176,
       "PageUrl": "https://starwars.fandom.com/wiki/Journal_of_Lina_Graf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 673023,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_staging_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

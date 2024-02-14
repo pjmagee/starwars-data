@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Dreadnought",
@@ -103,6 +103,14 @@
       ]
     },
     {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped",
+        "Hyperdrive generator"
+      ]
+    },
+    {
       "Label": "Shielding",
       "Links": [
         {
@@ -118,11 +126,7 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "orbital autocannons",
-          "Href": "https://starwars.fandom.com/wiki/Orbital_autocannon"
-        },
-        {
-          "Content": "point-defense",
+          "Content": "Point-defense",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         },
         {
@@ -132,12 +136,16 @@
         {
           "Content": "Tractor beam projectors",
           "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+        },
+        {
+          "Content": "Orbital autocannons",
+          "Href": "https://starwars.fandom.com/wiki/Orbital_autocannon"
         }
       ],
       "Values": [
-        "2 orbital autocannons",
-        "26 point-defense anti-aircraft cannons",
-        "6 Tractor beam projectors"
+        "Point-defense anti-aircraft cannons (26)",
+        "Tractor beam projectors (6)",
+        "Orbital autocannons (2)"
       ]
     },
     {
@@ -161,18 +169,47 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "officers",
-          "Href": "https://starwars.fandom.com/wiki/Officer"
+          "Content": "First Order officers",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_officer"
         },
         {
-          "Content": "stormtroopers",
+          "Content": "First Order TIE Fighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_TIE_Fighter_Pilot"
+        },
+        {
+          "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
         }
       ],
       "Values": [
-        "53,000 officers",
-        "140,000 enlisted",
-        "22,000 stormtroopers"
+        "First Order officers (53,000)",
+        "Enlisted (140,000)",
+        "First Order TIE Fighter Pilots",
+        "Stormtroopers (22,000)"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Holoprojector",
+          "Href": "https://starwars.fandom.com/wiki/Holoprojector"
+        }
+      ],
+      "Values": [
+        "Holoprojector"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Orbital bombardment",
+          "Href": "https://starwars.fandom.com/wiki/Orbital_bombardment"
+        }
+      ],
+      "Values": [
+        "Orbital bombardment"
       ]
     },
     {
@@ -264,14 +301,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 633265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_over_D'Qar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 585863,
       "PageUrl": "https://starwars.fandom.com/wiki/Moden_Canady",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 633265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_over_D'Qar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 574842,
@@ -282,6 +319,11 @@
       "PageId": 585960,
       "PageUrl": "https://starwars.fandom.com/wiki/Suday_Bascus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 612326,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_fleet_engineer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

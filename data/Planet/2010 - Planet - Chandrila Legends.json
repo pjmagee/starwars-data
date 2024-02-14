@@ -2,7 +2,7 @@
   "PageId": 2010,
   "PageUrl": "https://starwars.fandom.com/wiki/Chandrila/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9b/Chandrila_AoRCR.png/revision/latest?cb=20170222012047",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0c/Chandrila-AoRCR.png/revision/latest?cb=20170222012047",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,30 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
+        },
+        {
+          "Content": "Sector 3",
+          "Href": "https://starwars.fandom.com/wiki/Sector_3_(Oversector)"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "Northern Dependencies",
+        "The Slice",
+        "Arrowhead",
+        "Sector 3"
       ]
     },
     {
@@ -78,7 +98,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
@@ -160,8 +180,7 @@
         }
       ],
       "Values": [
-        "Temperate",
-        "Dry hydrosphere"
+        "Temperate"
       ]
     },
     {
@@ -177,7 +196,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -244,6 +263,10 @@
       "Label": "Flora",
       "Links": [
         {
+          "Content": "A variety of tree",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_tree"
+        },
+        {
           "Content": "Balmgrass",
           "Href": "https://starwars.fandom.com/wiki/Balmgrass/Legends"
         },
@@ -262,24 +285,24 @@
         {
           "Content": "Tintolive tree",
           "Href": "https://starwars.fandom.com/wiki/Tintolive_tree/Legends"
-        },
-        {
-          "Content": "Unidentified tree",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_tree"
         }
       ],
       "Values": [
+        "A variety of tree",
         "Balmgrass",
         "Bristing",
         "Chandrilan grappaberry",
         "Sienta tree",
-        "Tintolive tree",
-        "Unidentified tree"
+        "Tintolive tree"
       ]
     },
     {
       "Label": "Fauna",
       "Links": [
+        {
+          "Content": "An avian",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_avian"
+        },
         {
           "Content": "Blackback",
           "Href": "https://starwars.fandom.com/wiki/Blackback"
@@ -306,6 +329,7 @@
         }
       ],
       "Values": [
+        "An avian",
         "Blackback",
         "Cairnmog",
         "Crustaceans",
@@ -315,15 +339,25 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
+        {
+          "Content": "Calian",
+          "Href": "https://starwars.fandom.com/wiki/Calian"
+        },
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Wookiee",
+          "Href": "https://starwars.fandom.com/wiki/Wookiee/Legends"
         }
       ],
       "Values": [
-        "Human"
+        "Calian",
+        "Human",
+        "Wookiee"
       ]
     },
     {
@@ -347,12 +381,12 @@
       "Label": "Government",
       "Links": [
         {
-          "Content": "democracy",
-          "Href": "https://starwars.fandom.com/wiki/Democracy/Legends"
+          "Content": "Chandrilan House",
+          "Href": "https://starwars.fandom.com/wiki/Chandrilan_House"
         }
       ],
       "Values": [
-        "Participatory democracy"
+        "Chandrilan House"
       ]
     },
     {
@@ -369,7 +403,8 @@
       "Links": [],
       "Values": [
         "Chandrilan",
-        "Chandrilese"
+        "Chandrilese",
+        "Chandrilian"
       ]
     },
     {
@@ -390,12 +425,17 @@
         {
           "Content": "Nayli",
           "Href": "https://starwars.fandom.com/wiki/Nayli"
+        },
+        {
+          "Content": "Salline",
+          "Href": "https://starwars.fandom.com/wiki/Salline/Legends"
         }
       ],
       "Values": [
         "Emita",
         "Hanna City (capital)",
-        "Nayli"
+        "Nayli",
+        "Salline"
       ]
     },
     {
@@ -439,10 +479,6 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
-        },
-        {
-          "Content": "Darth Krayt's Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Darth_Krayt%27s_Galactic_Empire"
         }
       ],
       "Values": [
@@ -450,21 +486,45 @@
         "Galactic Empire",
         "Alliance to Restore the Republic",
         "Alliance of Free Planets",
-        "New Republic",
-        "Darth Krayt's Galactic Empire"
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 31107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tanis_Mothma",
+      "PageId": 91269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triv_Pothman",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 364684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_conference/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 32107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 9249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Sea/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 9250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Sah'ot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 476676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacification_of_Salline",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 404727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kell_Bircher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 42957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ratambo_Gale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 32114,
@@ -477,49 +537,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 600563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_herb_tea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 71719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Chandrila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 440876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Orbital_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 34352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardax",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 360478,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Ikoral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 122247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Balmgrass/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 227134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackback",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 94433,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cairnmog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 55716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_Institute_of_Antiquities/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 6988,
@@ -527,54 +547,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 1232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 672699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gladean_Arboretum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 183215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morvis_(senator)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 673167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gladean_Gardens_Botanical_Park_of_Chandrila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 236941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Halbard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 675354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Comark_Orchards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 274268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omar_Zook",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 423601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 274269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kai_Zook",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 379520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Samoc_and_Toryn_Farr's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 393369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Harva",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 42957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ratambo_Gale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 443590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Artar_Mothma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 93401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maximillian_Seerdon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 227134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackback",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 4650,
@@ -587,99 +582,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 722228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Library_of_Chandrila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 25261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emita/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 223130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agents_of_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 25262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nayli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 55026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sector_3_(Imperial_Priority_Sector)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 700116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 55716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_Institute_of_Antiquities/Legends",
+      "PageId": 715047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bristing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 673113,
+      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_headquarters_spire",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 112442,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Chandrila_(New_Sith_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 673168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Expatriate_Club",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 166276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pira_Bland",
+      "PageId": 675978,
+      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_warehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 675980,
+      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_main_factory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 675981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nayli_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 360478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Ikoral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 21818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Savuud_Thimram",
+      "PageId": 703673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dem_Keval",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 583634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tagge_Holographic_Museum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 661387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienta_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 667224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ananta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 668434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emerald_Ocean",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 668435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila's_eastern_continent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 109040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 147763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jesco_Comark",
+      "PageId": 656247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brionelle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 147773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amber_Comark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 357282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hella_Cordoni",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 3575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dev_Sibwarra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 404727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kell_Bircher",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 509236,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suljo_Warde",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 152888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Canyons",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 677614,
@@ -692,23 +657,368 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 92933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Datadagger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 449562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Chandrila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 513693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guildhead's_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 1275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kohl_Seerdon",
+      "PageId": 34352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardax",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 222376,
-      "PageUrl": "https://starwars.fandom.com/wiki/Herron_Morvis",
+      "PageId": 364684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_conference/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 320910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Chandrila_(First_Great_Schism)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 347712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seerdon_Campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 21818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savuud_Thimram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 436417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maarisa_Zsinj",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 51413,
+      "PageUrl": "https://starwars.fandom.com/wiki/Avan_Post",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 543004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jyn_Freila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 612622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Birrge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 501684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormstrike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 367152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_City_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 370411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Embassy/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 452250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zal_Artha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_community",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 122247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Balmgrass/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 224238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tintolive_tree/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 43278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 6207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hiram_Drayson",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 726011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Governing_council_of_Salline",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 94433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cairnmog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 265073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Jedi_tomb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 112442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Chandrila_(New_Sith_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 393369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Harva",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 443590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Artar_Mothma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 666465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_House_(location)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 666466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Debate_Rotunda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 20514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toryn_Farr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 273390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaro_Fonteen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 72534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Kether",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 133490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylan_DuPre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 134151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaori_Batta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 600563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_herb_tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 295715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 326313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 327569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 541628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 541629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrakant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 541632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_grappaberry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 152963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jovive_Centi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 152966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tristan_Pex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Far_Mothma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finna_Mothma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 71719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Chandrila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 364971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydians_Auction_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 382286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Chandrila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 12291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Octa_Ramis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 183215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morvis_(senator)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 301443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Cascader_BPEA-IA",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 732263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_spice_plant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 131962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma's_father/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 306522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gelod_Vothran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Canna_Omonda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 583634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tagge_Holographic_Museum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 23850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Daily_Messenger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 667222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghorla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 1232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 236941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halbard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 32102,
+      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 118566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gowan_Ch'lessan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 370418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Irem_Gehldon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 440881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Security_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 562646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Chandrila_(Darth_Vader)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 109040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 32112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brionelle_Memorial_Military_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 12249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keval_Raffaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 63860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reina_Faleur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 303946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Comark_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 55026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_3_(Oversector)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 270896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gen_Tiraan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 93401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maximillian_Seerdon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 185652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Den_Skeenah",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -727,208 +1037,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 370418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Irem_Gehldon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 436417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maarisa_Zsinj",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zal_Artha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 51413,
-      "PageUrl": "https://starwars.fandom.com/wiki/Avan_Post",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8286,
-      "PageUrl": "https://starwars.fandom.com/wiki/Canna_Omonda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Sea/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 9250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Sah'ot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 24298,
-      "PageUrl": "https://starwars.fandom.com/wiki/Legislative_Youth_Program/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 423601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Security_Bureau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 590716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sisterhood_of_Ta'fan-jirah",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 443601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mothma_estate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 673113,
-      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_headquarters_spire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 673168,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Expatriate_Club",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 347712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seerdon_Campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 133490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylan_DuPre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 134151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaori_Batta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 325665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zurel_Hoban",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 656247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brionelle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 72534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Kether",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 440881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Security_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 19656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squall_(species)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 675978,
-      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_warehouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 675980,
-      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech_main_factory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 675981,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nayli_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 36312,
-      "PageUrl": "https://starwars.fandom.com/wiki/Samoc_Farr/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 6207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hiram_Drayson",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 703673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dem_Keval",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 295715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 326313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 327569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 23850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Daily_Messenger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 726011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Governing_council_of_Salline",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 667223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emita_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 269553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bormea/Darpa_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 12249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keval_Raffaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 12291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Octa_Ramis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 273390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amaro_Fonteen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 440865,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kherus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 666488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jhanjaari_River",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 666490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shashwaat_Mountains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 370411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Embassy",
+      "PageId": 700117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_villa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -937,109 +1047,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 118566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gowan_Ch'lessan",
+      "PageId": 440865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kherus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 131962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma's_father/Legends",
+      "PageId": 32116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gladean_State_Parks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 440876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Orbital_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 274268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omar_Zook",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 152963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jovive_Centi",
+      "PageId": 274269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kai_Zook",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 152966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tristan_Pex",
+      "PageId": 31107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tanis_Mothma",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 562646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Chandrila_(Darth_Vader)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 269553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bormea/Darpa_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 449562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Chandrila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 20514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toryn_Farr/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 270896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gen_Tiraan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 25261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emita/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 25262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nayli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 540461,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Securities",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 661387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienta_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 726012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Government_center_(Salline)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 382286,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Chandrila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 543004,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jyn_Freila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 591495,
-      "PageUrl": "https://starwars.fandom.com/wiki/Far_Mothma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 591497,
-      "PageUrl": "https://starwars.fandom.com/wiki/Finna_Mothma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 612622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Birrge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 32102,
-      "PageUrl": "https://starwars.fandom.com/wiki/ChandrilTech",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 265073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Jedi_tomb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 661389,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Imperial_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 92933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Datadagger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 33650,
@@ -1052,9 +1097,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 63860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reina_Faleur",
+      "PageId": 357282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hella_Cordoni",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 3575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dev_Sibwarra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 509236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suljo_Warde",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540461,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Securities",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 666258,
@@ -1062,33 +1122,83 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 501684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormstrike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 672699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gladean_Arboretum",
+      "PageId": 666488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jhanjaari_River",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 673167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gladean_Gardens_Botanical_Park_of_Chandrila",
+      "PageId": 666490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shashwaat_Mountains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 675354,
-      "PageUrl": "https://starwars.fandom.com/wiki/Comark_Orchards",
+      "PageId": 667224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ananta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 13879,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 668434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emerald_Ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 185652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Den_Skeenah",
+      "PageId": 668435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila's_eastern_continent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 443601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mothma_estate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 667223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emita_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 36312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Samoc_Farr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 152888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Canyons",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 513693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guildhead's_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 722228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Library_of_Chandrila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 246262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Blue_'439",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 243913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_Wild_Game_Reserve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 1275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kohl_Seerdon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 147763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jesco_Comark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 147773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amber_Comark",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -1097,69 +1207,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 91269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triv_Pothman",
+      "PageId": 24298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Legislative_Youth_Program/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 590716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sisterhood_of_Ta'fan-jirah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 122249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fecklen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 661389,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrila_Imperial_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 166276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pira_Bland",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 224238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tintolive_tree/Legends",
+      "PageId": 325665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zurel_Hoban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 366753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaquira_fruit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 364971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydians_Auction_House",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 700117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_villa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 320910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Chandrila_(First_Great_Schism)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 476676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pacification_of_Salline",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 301443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Cascader_BPEA-IA",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 246262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_Blue_'439",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 541628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 541629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrakant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 700116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 715047,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bristing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 667222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghorla",
+      "PageId": 19656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squall_(species)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 732317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_avian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 726012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Government_center_(Salline)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

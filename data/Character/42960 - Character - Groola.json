@@ -68,7 +68,12 @@
     },
     {
       "Label": "Eye color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Yellow"
       ]
@@ -86,5 +91,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 75009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Groola's_Place",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

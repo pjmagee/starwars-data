@@ -29,6 +29,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Dalnan sector",
+          "Href": "https://starwars.fandom.com/wiki/Dalnan_sector"
+        }
+      ],
+      "Values": [
+        "Dalnan sector"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -45,6 +57,30 @@
       "Links": [],
       "Values": [
         "1"
+      ]
+    },
+    {
+      "Label": "Moons",
+      "Links": [
+        {
+          "Content": "Eirie",
+          "Href": "https://starwars.fandom.com/wiki/Eirie"
+        }
+      ],
+      "Values": [
+        "1: Eirie"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-19"
       ]
     },
     {
@@ -67,6 +103,18 @@
       ]
     },
     {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
+        }
+      ],
+      "Values": [
+        "Oceans"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [],
       "Values": [
@@ -77,6 +125,18 @@
     },
     {
       "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Krel sharks",
+          "Href": "https://starwars.fandom.com/wiki/Krel_shark"
+        }
+      ],
+      "Values": [
+        "Krel sharks"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -92,7 +152,7 @@
       "Links": [
         {
           "Content": "Monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Monarchy"
+          "Href": "https://starwars.fandom.com/wiki/Eiram_government"
         }
       ],
       "Values": [
@@ -101,16 +161,32 @@
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Eirami",
+          "Href": "https://starwars.fandom.com/wiki/Eirami"
+        }
+      ],
       "Values": [
+        "Eirami",
         "Eiramian"
       ]
     },
     {
       "Label": "Major cities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Barraza",
+          "Href": "https://starwars.fandom.com/wiki/Barraza"
+        },
+        {
+          "Content": "Erasmus Capital City",
+          "Href": "https://starwars.fandom.com/wiki/Erasmus_Capital_City"
+        }
+      ],
       "Values": [
-        "Barraza"
+        "Barraza",
+        "Erasmus Capital City"
       ]
     },
     {
@@ -128,9 +204,179 @@
   ],
   "Relationships": [
     {
+      "PageId": 791390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_the_Children_of_E'ronoh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 777940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Docking_Bay_26",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 778030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrostatic_dome_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 777404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 748758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thylefire_scorpion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 752550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krel_shark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 756697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agopie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 456303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 649066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eirami_girl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nhivan_Lao",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_royal_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 791608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rev_Ferrol's_drill_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 744913,
+      "PageUrl": "https://starwars.fandom.com/wiki/397_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 755048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krel_(deity)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 748436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rayes_Canal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 791746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_desalination_plant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 763787,
+      "PageUrl": "https://starwars.fandom.com/wiki/357_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 777625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_the_wedding_of_Phan-tu_Zenn_and_Xiri_A'lbaran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 778018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Eiram's_southern_rain_forest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 748433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erasmus_Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 747150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_Eiram_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 766575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Eiram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 752543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erasmus_City_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 677752,
       "PageUrl": "https://starwars.fandom.com/wiki/Eiram_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 777132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protein_square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 758727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 760784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sea_wood_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 791566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Eiram–E'ronoh_peace_treaty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 718302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 758701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pell_(navigator)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 759067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigo_(Eiram)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greatest_Age",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 777943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 726763,
@@ -143,19 +389,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 456303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 792333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen_Xiri's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 718548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ram'bucha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 649066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
+      "PageId": 756685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eirami_soldier_(mining_loader)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Eiram's_western_isles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 748346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Summit_on_Jedha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 749394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Summit_aboard_the_Paxion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 749397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Phan-tu_Zenn_and_Xiri_A'lbaran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 786100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klytobacter_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 792351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_Burryaga_Agaburry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 643764,
@@ -163,9 +434,229 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 718302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 718311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ar_Prace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paternok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plana_Van",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758698,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otto_(Plana_Van)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ailee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lunnto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 759069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plana_Van's_home_island",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 758341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Salamento_Bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 768525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rardal_Balnar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 677771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 758643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirami_poison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 777395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Linenfiber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 778029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrostatic_dome",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 762742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jawfish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 748259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phan-tu_Zenn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adrialla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Laan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Niko_A'lbaran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phan-tu_Zenn's_biological_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odelia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adrialla's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nolan_(Eiram)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eiram_councilor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 790035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eirami_soldier_(Lian_Cerox)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 790091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toworn_Chordata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erasmus_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 756891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram's_western_isles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 758723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orra_Lagoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 677820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bibs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 718548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ram'bucha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 756682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram's_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 777624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coral_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 778796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saltwater_bush",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 758730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slek_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 710901,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jedha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 762054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 751364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barraza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 757068,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirami",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Cultural_group"
+    },
+    {
+      "PageId": 777134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirami_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 749705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rev_Ferrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lian_Cerox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ferrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 793532,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bettyjill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 777462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eiram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 783480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_mission_to_Eiram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

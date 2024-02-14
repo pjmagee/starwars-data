@@ -2,7 +2,7 @@
   "PageId": 636841,
   "PageUrl": "https://starwars.fandom.com/wiki/Amban_phase-pulse_blaster",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/18/Amban_sniper_rifle.jpg/revision/latest?cb=20191122141234",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/AmbanSniperRifle-SW100Objects.png/revision/latest?cb=20230419205034",
   "Data": [
     {
       "Label": "Titles",
@@ -12,15 +12,31 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Amban Arms Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Amban_Arms_Corporation"
+        }
+      ],
+      "Values": [
+        "Amban Arms Corporation"
+      ]
+    },
+    {
       "Label": "Type",
       "Links": [
         {
-          "Content": "Sniper rifle",
+          "Content": "Disruptor",
+          "Href": "https://starwars.fandom.com/wiki/Disruptor"
+        },
+        {
+          "Content": "sniper rifle",
           "Href": "https://starwars.fandom.com/wiki/Sniper_rifle"
         }
       ],
       "Values": [
-        "Sniper rifle"
+        "Disruptor sniper rifle"
       ]
     },
     {
@@ -54,7 +70,41 @@
         "Tatooine",
         "Corvus"
       ]
+    },
+    {
+      "Label": "Weight",
+      "Links": [
+        {
+          "Content": "kilograms",
+          "Href": "https://starwars.fandom.com/wiki/Kilogram"
+        },
+        {
+          "Content": "lbs",
+          "Href": "https://starwars.fandom.com/wiki/Pound"
+        }
+      ],
+      "Values": [
+        "3.65 kilograms (8 lbs)"
+      ]
+    },
+    {
+      "Label": "Capacity",
+      "Links": [
+        {
+          "Content": "Notimo-6 power cell",
+          "Href": "https://starwars.fandom.com/wiki/Notimo-6_power_cell"
+        }
+      ],
+      "Values": [
+        "Notimo-6 power cell"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amban_Arms_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

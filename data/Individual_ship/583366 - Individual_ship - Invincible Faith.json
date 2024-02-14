@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -72,6 +72,14 @@
       ]
     },
     {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped",
+        "Hyperdrive control bay"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -81,6 +89,123 @@
       ],
       "Values": [
         "Port-side ion cannons (3)"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "T-65B X-wing starfighters",
+          "Href": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter"
+        },
+        {
+          "Content": "BTL-A4 Y-wing assault starfighter/bombers",
+          "Href": "https://starwars.fandom.com/wiki/BTL-A4_Y-wing_assault_starfighter/bomber"
+        },
+        {
+          "Content": "UT-60D U-wing starfighter/support craft",
+          "Href": "https://starwars.fandom.com/wiki/UT-60D_U-wing_starfighter/support_craft"
+        },
+        {
+          "Content": "RZ-1 A-wing interceptors",
+          "Href": "https://starwars.fandom.com/wiki/RZ-1_A-wing_interceptor"
+        }
+      ],
+      "Values": [
+        "T-65B X-wing starfighters",
+        "BTL-A4 Y-wing assault starfighter/bombers",
+        "At least 1 UT-60D U-wing starfighter/support craft",
+        "At least 2 RZ-1 A-wing interceptors"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "Airlock",
+          "Href": "https://starwars.fandom.com/wiki/Airlock"
+        }
+      ],
+      "Values": [
+        "At least 1 Airlock"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Alliance officers",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_officer"
+        },
+        {
+          "Content": "Rebel",
+          "Href": "https://starwars.fandom.com/wiki/Rebel"
+        },
+        {
+          "Content": "technicians",
+          "Href": "https://starwars.fandom.com/wiki/Technician"
+        },
+        {
+          "Content": "Rebel troopers",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_trooper"
+        },
+        {
+          "Content": "Heavy Soldiers",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_Soldier"
+        },
+        {
+          "Content": "3PO-series protocol droids",
+          "Href": "https://starwars.fandom.com/wiki/3PO-series_protocol_droid"
+        },
+        {
+          "Content": "WED Treadwell repair droids",
+          "Href": "https://starwars.fandom.com/wiki/WED_Treadwell_repair_droid"
+        },
+        {
+          "Content": "R-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R-series_astromech_droid"
+        },
+        {
+          "Content": "R4 astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R4_astromech_droid"
+        },
+        {
+          "Content": "R5-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R5-series_astromech_droid"
+        }
+      ],
+      "Values": [
+        "Alliance officers",
+        "Rebel technicians",
+        "Rebel troopers",
+        "Heavy Soldiers",
+        "3PO-series protocol droids",
+        "WED Treadwell repair droids",
+        "R-series astromech droids",
+        "R4 astromech droids",
+        "R5-series astromech droids"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Communications center"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Databanks",
+          "Href": "https://starwars.fandom.com/wiki/Databank"
+        }
+      ],
+      "Values": [
+        "Internal secuirty protocols",
+        "Systems control",
+        "Lockdown sytstem",
+        "Databanks"
       ]
     },
     {
@@ -149,11 +274,16 @@
         {
           "Content": "Unidentified Sullustan Rebel technician",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Sullustan_Rebel_technician"
+        },
+        {
+          "Content": "Unidentified protocol droid",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_protocol_droid_(Invincible_Faith)"
         }
       ],
       "Values": [
         "Unidentified Invincible Faith lieutenant",
-        "Unidentified Sullustan Rebel technician"
+        "Unidentified Sullustan Rebel technician",
+        "Unidentified protocol droid"
       ]
     }
   ],

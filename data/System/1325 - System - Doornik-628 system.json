@@ -15,12 +15,12 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Deep Core",
-          "Href": "https://starwars.fandom.com/wiki/Deep_Core/Legends"
+          "Content": "Core Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
         }
       ],
       "Values": [
-        "Deep Core"
+        "Core Worlds"
       ]
     },
     {
@@ -29,14 +29,19 @@
         {
           "Content": "Farlax sector",
           "Href": "https://starwars.fandom.com/wiki/Farlax_sector"
+        },
+        {
+          "Content": "Koornacht Cluster",
+          "Href": "https://starwars.fandom.com/wiki/Koornacht_Cluster/Legends"
         }
       ],
       "Values": [
-        "Farlax sector"
+        "Farlax sector",
+        "Koornacht Cluster"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-10"
@@ -106,7 +111,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Galandan",
@@ -119,6 +124,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 1041,
+      "PageUrl": "https://starwars.fandom.com/wiki/J't'p'tan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 958,
       "PageUrl": "https://starwars.fandom.com/wiki/Doornik-628",
@@ -168,11 +178,6 @@
       "PageId": 61,
       "PageUrl": "https://starwars.fandom.com/wiki/Koornacht_Cluster/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 1041,
-      "PageUrl": "https://starwars.fandom.com/wiki/J't'p'tan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

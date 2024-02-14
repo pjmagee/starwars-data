@@ -2,7 +2,7 @@
   "PageId": 58968,
   "PageUrl": "https://starwars.fandom.com/wiki/LIN_demolitionmech_autonomous_minelayer/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2a/LIN-demomech_negtd.jpg/revision/latest?cb=20071012175439",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/60/LINDemolitionmech-NEGTD.png/revision/latest?cb=20221028022210",
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +39,18 @@
       ]
     },
     {
+      "Label": "Degree",
+      "Links": [
+        {
+          "Content": "Fifth-degree droid",
+          "Href": "https://starwars.fandom.com/wiki/Fifth-degree_droid"
+        }
+      ],
+      "Values": [
+        "Fifth-degree droid"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -47,12 +59,17 @@
         }
       ],
       "Values": [
-        "0.56 meters"
+        "0.7 meters"
       ]
     },
     {
       "Label": "Sensor color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Yellow"
       ]
@@ -113,14 +130,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cybot_Galactica/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 173784,
       "PageUrl": "https://starwars.fandom.com/wiki/LIN-D2D",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cybot_Galactica/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 560764,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Beast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 74330,
@@ -130,11 +152,6 @@
     {
       "PageId": 74331,
       "PageUrl": "https://starwars.fandom.com/wiki/LIN-V8M",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 560764,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Beast",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

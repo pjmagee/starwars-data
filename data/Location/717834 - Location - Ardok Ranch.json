@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Ranch"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -21,6 +28,18 @@
       ],
       "Values": [
         "Ool"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Seekers' Shadehouse",
+          "Href": "https://starwars.fandom.com/wiki/Seekers%27_Shadehouse"
+        }
+      ],
+      "Values": [
+        "Seekers' Shadehouse"
       ]
     },
     {
@@ -43,9 +62,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 714293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ool",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 719742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seekers'_Shadehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 723977,
       "PageUrl": "https://starwars.fandom.com/wiki/Seekers_program",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 714466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cohbo_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

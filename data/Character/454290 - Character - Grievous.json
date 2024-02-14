@@ -2,7 +2,7 @@
   "PageId": 454290,
   "PageUrl": "https://starwars.fandom.com/wiki/Grievous",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/de/Grievoushead.jpg/revision/latest?cb=20100630082056",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/Grievoushead-OP.png/revision/latest?cb=20221116061150",
   "Data": [
     {
       "Label": "Titles",
@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -112,18 +119,51 @@
     },
     {
       "Label": "Cybernetics",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "cybernetic",
+          "Href": "https://starwars.fandom.com/wiki/Cybernetics"
+        },
+        {
+          "Content": "brain",
+          "Href": "https://starwars.fandom.com/wiki/Brain"
+        },
+        {
+          "Content": "eyes",
+          "Href": "https://starwars.fandom.com/wiki/Eye"
+        }
+      ],
       "Values": [
         "Completely cybernetic except for the brain, some vital organs, and parts of the head including the eyes"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Grievous's family",
           "Href": "https://starwars.fandom.com/wiki/Grievous%27s_family"
-        },
+        }
+      ],
+      "Values": [
+        "Grievous's family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Grievous's father",
+          "Href": "https://starwars.fandom.com/wiki/Grievous%27s_father"
+        }
+      ],
+      "Values": [
+        "Grievous's father"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "InterGalactic Banking Clan",
           "Href": "https://starwars.fandom.com/wiki/InterGalactic_Banking_Clan"
@@ -138,7 +178,7 @@
         }
       ],
       "Values": [
-        "Grievous's family",
+        "Kaleesh",
         "InterGalactic Banking Clan",
         "Confederacy of Independent Systems",
         "Confederacy military"
@@ -175,29 +215,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 504673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 600484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_Campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 504694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Adi_Gallia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 595998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_over_Duro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 3986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scimitar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 288927,
-      "PageUrl": "https://starwars.fandom.com/wiki/General_Grievous's_theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 790633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 507793,
@@ -205,39 +230,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
+      "PageId": 630996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Army_infantry_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 458220,
       "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Vizsla_Keep_09",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 563273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer",
+      "PageId": 466804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 709479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_DH-Omni_Support_Vessel",
+      "PageId": 474180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 479480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 503737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 546403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neebo's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 571408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 503961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 483006,
@@ -245,33 +260,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 504241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 499933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 720336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sheathipede-class_transport_shuttle_(Grievous)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 728115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 504233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504378,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Saleucami",
+      "PageId": 464643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -280,24 +270,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 628066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievance_Striker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 723130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabotage_of_Grievous'_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 455593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 288927,
+      "PageUrl": "https://starwars.fandom.com/wiki/General_Grievous's_theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
-      "PageId": 600484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_Campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 608293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skytop_Station_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 644568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 597987,
@@ -315,46 +300,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 455962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Droid_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 535676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 452575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 466804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 474180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 477162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 614395,
-      "PageUrl": "https://starwars.fandom.com/wiki/LX-44_robotic_leg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 644568,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_blockade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
       "PageId": 601550,
       "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Providence-class_Dreadnought_(Kamino)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -365,24 +310,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 503484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 507715,
       "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 517456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_fortress",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 628066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievance_Striker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 630996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Army_infantry_corps",
+      "PageId": 529665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_Battle_of_Mygeeto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 614395,
+      "PageUrl": "https://starwars.fandom.com/wiki/LX-44_robotic_leg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 455962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Droid_Army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 504378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Saleucami",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 746142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_mask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 503484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 453632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bothawui",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 455593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 781559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_The_Haven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 720336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sheathipede-class_transport_shuttle_(Grievous)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 546403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neebo's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 552176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nahdar_Vebb's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 571408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 603337,
@@ -400,19 +400,104 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
+      "PageId": 721792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_first_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 743225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saber_of_Scardont",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 517456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_fortress",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 595998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_over_Duro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 504241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 504315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vassek_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 504694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Adi_Gallia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 535676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 504673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 580121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 3986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scimitar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 709479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_DH-Omni_Support_Vessel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 503737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 705518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Izvoshra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 499933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 477162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 462533,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 464643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau",
+      "PageId": 563273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 504233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 529665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_Battle_of_Mygeeto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 728115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 683509,
@@ -420,14 +505,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 721792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous'_first_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 624940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_Punitive_Security_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 503961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 625740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Home_Defense_Legions",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

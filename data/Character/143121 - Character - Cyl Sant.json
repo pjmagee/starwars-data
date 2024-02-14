@@ -2,6 +2,7 @@
   "PageId": 143121,
   "PageUrl": "https://starwars.fandom.com/wiki/Cyl_Sant",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,32 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Rystáll Sant",
+          "Href": "https://starwars.fandom.com/wiki/Rystáll_Sant/Legends"
+        }
+      ],
+      "Values": [
+        "Rystáll Sant"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rystáll_Sant/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

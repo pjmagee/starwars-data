@@ -2,7 +2,7 @@
   "PageId": 461214,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperial_shock_trooper",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Imperial_Shock_Trooper_canon.png/revision/latest?cb=20151106024630",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Imperial_Shock_Trooper_canon.png/revision/latest?cb=20230723043951",
   "Data": [
     {
       "Label": "Titles",
@@ -14,18 +14,6 @@
     {
       "Label": "Organization type",
       "Links": [
-        {
-          "Content": "Elite forces",
-          "Href": "https://starwars.fandom.com/wiki/Special_forces"
-        },
-        {
-          "Content": "stormtrooper",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
-        },
-        {
-          "Content": "Imperial Era",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
-        },
         {
           "Content": "clone trooper",
           "Href": "https://starwars.fandom.com/wiki/Clone_trooper"
@@ -41,12 +29,24 @@
         {
           "Content": "Clone",
           "Href": "https://starwars.fandom.com/wiki/Cloning"
+        },
+        {
+          "Content": "Elite forces",
+          "Href": "https://starwars.fandom.com/wiki/Special_forces"
+        },
+        {
+          "Content": "stormtrooper",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Imperial Era",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
         }
       ],
       "Values": [
-        "Elite forces stormtrooper (Imperial Era)",
         "Specialized clone trooper (Clone Wars)",
-        "Security police (Clone Wars)"
+        "Security police (Clone Wars)",
+        "Elite forces stormtrooper (Imperial Era)"
       ]
     },
     {
@@ -175,11 +175,27 @@
         "Galactic Republic",
         "Coruscant Guard",
         "Republic Correctional Authority",
-        "Galactic Empire"
+        "Galactic Empire",
+        "Coruscant Guard<"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 586490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 458564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 557927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Project_War-Mantle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 725457,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Senate_Building_detachment",
@@ -191,19 +207,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 586490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 652022,
       "PageUrl": "https://starwars.fandom.com/wiki/Tribunal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 774931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shock_trooper_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

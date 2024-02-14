@@ -13,21 +13,14 @@
     },
     {
       "Label": "Model",
-      "Links": [],
-      "Values": [
-        "Hammerhead-class cruiser"
-      ]
-    },
-    {
-      "Label": "Class",
       "Links": [
         {
-          "Content": "Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Cruiser/Legends"
+          "Content": "Hammerhead-class cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Hammerhead-class_cruiser"
         }
       ],
       "Values": [
-        "Cruiser"
+        "Hammerhead-class cruiser"
       ]
     },
     {
@@ -48,10 +41,14 @@
         {
           "Content": "19 BBY",
           "Href": "https://starwars.fandom.com/wiki/19_BBY/Legends"
+        },
+        {
+          "Content": "Mustafar",
+          "Href": "https://starwars.fandom.com/wiki/Mustafar/Legends"
         }
       ],
       "Values": [
-        "Before 19 BBY"
+        "Before 19 BBY, Mustafar"
       ]
     },
     {
@@ -67,5 +64,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 170690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_volcano/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

@@ -53,16 +53,28 @@
     },
     {
       "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Dark brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Dark brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Dark Brown"
+        "Brown"
       ]
     },
     {
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Light Dark"
+        "Light dark"
       ]
     },
     {
@@ -71,10 +83,15 @@
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Korriban Sith Academy",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Academy_(Korriban)"
         }
       ],
       "Values": [
-        "Sith Empire"
+        "Sith Empire",
+        "Korriban Sith Academy"
       ]
     }
   ],

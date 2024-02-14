@@ -48,7 +48,7 @@
         },
         {
           "Content": "DS-1 Orbital Battle Station",
-          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station/Legends"
+          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station"
         }
       ],
       "Values": [
@@ -77,6 +77,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -118,12 +125,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Marek",
           "Href": "https://starwars.fandom.com/wiki/House_of_Marek"
+        }
+      ],
+      "Values": [
+        "House of Marek"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kento Marek",
+          "Href": "https://starwars.fandom.com/wiki/Kento_Marek"
         },
+        {
+          "Content": "Mallie Marek",
+          "Href": "https://starwars.fandom.com/wiki/Mallie_Marek"
+        }
+      ],
+      "Values": [
+        "Kento Marek",
+        "Mallie Marek"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
@@ -135,38 +167,28 @@
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
-        },
-        {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
         }
       ],
       "Values": [
-        "House of Marek",
         "Galactic Empire",
         "Order of the Sith Lords",
-        "Jedi Order",
-        "Alliance to Restore the Republic"
+        "Jedi Order"
       ]
     },
     {
       "Label": "Masters",
       "Links": [
         {
-          "Content": "Darth Sidious",
-          "Href": "https://starwars.fandom.com/wiki/Palpatine/Legends"
+          "Content": "Darth Vader",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
         },
         {
           "Content": "Sith Master",
           "Href": "https://starwars.fandom.com/wiki/Sith_Master/Legends"
         },
         {
-          "Content": "Darth Vader",
-          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
-        },
-        {
           "Content": "Rahm Kota",
-          "Href": "https://starwars.fandom.com/wiki/Rahm_Kota"
+          "Href": "https://starwars.fandom.com/wiki/Rahm_Kota/Legends"
         },
         {
           "Content": "Jedi Master",
@@ -174,36 +196,15 @@
         }
       ],
       "Values": [
-        "Darth Sidious (Sith Master)",
-        "Darth Vader (proxy)",
+        "Darth Vader (Sith Master)",
         "Rahm Kota (Jedi Master)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 135192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rahm_Kota",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 216704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kashyyyk_(c._18_BBY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 4107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Treaty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
-    },
-    {
-      "PageId": 5441,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaiburr_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 144705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends",
+      "PageId": 126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -212,9 +213,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 360453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kazdan_Paratus's_lightsaber_pike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 144705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaiburr_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 4107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Treaty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
     },
     {
       "PageId": 219973,
@@ -222,14 +233,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 228885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kento's_robe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 198386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kento_Marek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 216868,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Death_Star_I",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
-      "PageId": 228885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kento's_robe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+      "PageId": 541043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Shaddaa_(Galen_Marek)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 135192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rahm_Kota/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 329370,
@@ -242,18 +268,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine/Legends",
+      "PageId": 360453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kazdan_Paratus's_lightsaber_pike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 216704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kashyyyk_(c._18_BBY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 221759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mallie_Marek",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 222190,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_aboard_the_Empirical",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 541043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Shaddaa_(Galen_Marek)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]

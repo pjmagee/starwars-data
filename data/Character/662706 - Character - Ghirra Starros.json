@@ -2,7 +2,7 @@
   "PageId": 662706,
   "PageUrl": "https://starwars.fandom.com/wiki/Ghirra_Starros",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4c/Ghirra-starros.png/revision/latest?cb=20211117223848",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/GhirraStarrosNihil-Concept.png/revision/latest?cb=20240125024538",
   "Data": [
     {
       "Label": "Titles",
@@ -48,6 +48,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.68 meters"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,12 +93,44 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Starros Clan",
           "Href": "https://starwars.fandom.com/wiki/Starros_Clan"
-        },
+        }
+      ],
+      "Values": [
+        "Starros Clan"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Avon Starros' father",
+          "Href": "https://starwars.fandom.com/wiki/Avon_Starros%27_father"
+        }
+      ],
+      "Values": [
+        "Avon Starros' father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Avon Starros",
+          "Href": "https://starwars.fandom.com/wiki/Avon_Starros"
+        }
+      ],
+      "Values": [
+        "Avon Starros"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
@@ -98,12 +149,42 @@
         }
       ],
       "Values": [
-        "Starros Clan",
         "Galactic Republic",
         "Galactic Senate (eventually as a spy)",
         "Nihil"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 660082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Avon_Starros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Minister_of_Information_(Nihil)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 680299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Avon_Starros'_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 790365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ministry_of_Information_(Nihil)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 780792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_trip_to_Mon_Cala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 785623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pra-Tre_Veter's_execution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 687124,
   "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e0/Electrobaton-JFO.png/revision/latest?cb=20200416165144",
   "Data": [
     {
       "Label": "Titles",
@@ -26,12 +27,47 @@
       "Label": "Locations",
       "Links": [
         {
+          "Content": "Bracca",
+          "Href": "https://starwars.fandom.com/wiki/Bracca"
+        },
+        {
+          "Content": "Bogano",
+          "Href": "https://starwars.fandom.com/wiki/Bogano"
+        },
+        {
+          "Content": "Ilum",
+          "Href": "https://starwars.fandom.com/wiki/Ilum"
+        },
+        {
+          "Content": "Kashyyyk",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk"
+        },
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
+        },
+        {
           "Content": "Nur",
           "Href": "https://starwars.fandom.com/wiki/Nur"
+        },
+        {
+          "Content": "Fortress Inquisitorius",
+          "Href": "https://starwars.fandom.com/wiki/Fortress_Inquisitorius"
+        },
+        {
+          "Content": "Zeffo",
+          "Href": "https://starwars.fandom.com/wiki/Zeffo"
         }
       ],
       "Values": [
-        "Nur"
+        "Bracca",
+        "Bogano",
+        "Ilum",
+        "Kashyyyk",
+        "Mandalore",
+        "Nur",
+        "Fortress Inquisitorius",
+        "Zeffo"
       ]
     },
     {
@@ -47,12 +83,23 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Gideon's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Gideon's Imperial remnant"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 555575,
+      "PageUrl": "https://starwars.fandom.com/wiki/KX-series_security_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    }
+  ]
 }

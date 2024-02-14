@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -71,6 +78,80 @@
       "Links": [],
       "Values": [
         "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Wexley family",
+          "Href": "https://starwars.fandom.com/wiki/Wexley_family"
+        },
+        {
+          "Content": "Antilles family",
+          "Href": "https://starwars.fandom.com/wiki/Antilles_family"
+        }
+      ],
+      "Values": [
+        "Wexley family",
+        "Antilles family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Norra Wexley's mother",
+          "Href": "https://starwars.fandom.com/wiki/Norra_Wexley%27s_mother"
+        }
+      ],
+      "Values": [
+        "Norra Wexley's mother"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Brentin Lore Wexley",
+          "Href": "https://starwars.fandom.com/wiki/Brentin_Lore_Wexley"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        },
+        {
+          "Content": "Wedge Antilles",
+          "Href": "https://starwars.fandom.com/wiki/Wedge_Antilles"
+        }
+      ],
+      "Values": [
+        "Brentin Lore Wexley (spouse)",
+        "Wedge Antilles (spouse)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Esmelle",
+          "Href": "https://starwars.fandom.com/wiki/Esmelle"
+        }
+      ],
+      "Values": [
+        "Esmelle"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Temmin Wexley",
+          "Href": "https://starwars.fandom.com/wiki/Temmin_Wexley"
+        }
+      ],
+      "Values": [
+        "Temmin Wexley"
       ]
     },
     {
@@ -118,34 +199,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 571358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley's_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 539571,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 499302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 536605,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moth_(freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 565548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_near_Wild_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 635695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley's_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 635703,
@@ -153,9 +209,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 524319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brentin_Lore_Wexley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 524337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Esmelle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley's_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 513517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 571358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley's_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 780290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Violet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 530811,
       "PageUrl": "https://starwars.fandom.com/wiki/Halo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 536605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moth_(freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedge_Antilles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norra_Wexley's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 791047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Brentin_Lore_Wexley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 565548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_near_Wild_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 499302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

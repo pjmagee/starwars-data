@@ -2,12 +2,25 @@
   "PageId": 726426,
   "PageUrl": "https://starwars.fandom.com/wiki/Rhigar_System_Patrol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Rhigar System Patrol"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "System Patrol",
+          "Href": "https://starwars.fandom.com/wiki/System_Patrol"
+        }
+      ],
+      "Values": [
+        "System Patrol"
       ]
     },
     {
@@ -36,5 +49,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 774373,
+      "PageUrl": "https://starwars.fandom.com/wiki/System_Patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

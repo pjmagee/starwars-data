@@ -2,6 +2,7 @@
   "PageId": 542556,
   "PageUrl": "https://starwars.fandom.com/wiki/Lomus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -40,6 +41,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Unit Cresh",
+          "Href": "https://starwars.fandom.com/wiki/Unit_Cresh"
         }
       ],
       "Values": [
@@ -48,5 +53,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

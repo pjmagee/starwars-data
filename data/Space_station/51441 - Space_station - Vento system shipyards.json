@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shipyards",
@@ -45,6 +45,13 @@
       ],
       "Values": [
         "Vento system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "L-9"
       ]
     },
     {
@@ -81,14 +88,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 26807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vento_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 413332,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Vento_system_shipyards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 26807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vento_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -52,14 +52,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-17"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -83,12 +83,20 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Government",
       "Links": [
         {
-          "Content": "Induparan Crown Worlds",
-          "Href": "https://starwars.fandom.com/wiki/Induparan_Crown_Worlds"
-        },
+          "Content": "Induparan Monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Induparan_Monarchy"
+        }
+      ],
+      "Values": [
+        "Induparan Monarchy"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
@@ -99,7 +107,6 @@
         }
       ],
       "Values": [
-        "Induparan Crown Worlds",
         "Confederacy of Independent Systems",
         "Galactic Empire"
       ]
@@ -107,19 +114,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 135017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dahon_Indupar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 13241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ado_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 13331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Induparan_Crown_Worlds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 272276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Indupar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 473045,
@@ -127,9 +124,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 272276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Indupar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 135017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dahon_Indupar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 13331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Induparan_Crown_Worlds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 13241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ado_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 453669,
   "PageUrl": "https://starwars.fandom.com/wiki/Munificent-class_star_frigate",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/Munificent_TCW.jpg/revision/latest?cb=20090311013715",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a7/CISMunificent-TCW.png/revision/latest?cb=20231010233644",
   "Data": [
     {
       "Label": "Titles",
@@ -42,11 +42,15 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Cruiser",
           "Href": "https://starwars.fandom.com/wiki/Cruiser"
+        },
+        {
+          "Content": "pocket cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Pocket_cruiser"
         },
         {
           "Content": "Frigate",
@@ -54,7 +58,7 @@
         }
       ],
       "Values": [
-        "Cruiser",
+        "Cruiser (pocket cruiser)",
         "Frigate"
       ]
     },
@@ -104,58 +108,68 @@
       "Label": "Maximum acceleration",
       "Links": [
         {
-          "Content": "kilometers per hour",
-          "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
-        },
-        {
           "Content": "G",
           "Href": "https://starwars.fandom.com/wiki/G_(unit)"
         }
       ],
       "Values": [
-        "950 kilometers per hour/2,500 G"
+        "2,500 G"
+      ]
+    },
+    {
+      "Label": "Maximum atmospheric speed",
+      "Links": [
+        {
+          "Content": "kilometers per hour",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
+        }
+      ],
+      "Values": [
+        "950 kilometers per hour"
       ]
     },
     {
       "Label": "Engine unit(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "ion drive",
+          "Href": "https://starwars.fandom.com/wiki/Ion_drive"
+        }
+      ],
       "Values": [
         "7 ion drive thrusters"
       ]
     },
     {
       "Label": "Hyperdrive rating",
-      "Links": [
-        {
-          "Content": "Class 1",
-          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Class 1",
         "Class 10 (backup)"
       ]
     },
     {
-      "Label": "Power plant",
+      "Label": "Hyperdrive system",
       "Links": [
         {
-          "Content": "reactor",
-          "Href": "https://starwars.fandom.com/wiki/Reactor"
-        },
-        {
-          "Content": "Energy cell",
-          "Href": "https://starwars.fandom.com/wiki/Energy_cell"
-        },
-        {
-          "Content": "Power cells",
-          "Href": "https://starwars.fandom.com/wiki/Power_cell"
+          "Content": "hyperdrive units",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
         }
       ],
       "Values": [
-        "Main reactor",
-        "Energy cell",
-        "Power cells"
+        "Multiple hyperdrive units"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "main reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Twin main reactors"
       ]
     },
     {
@@ -173,6 +187,13 @@
       "Values": [
         "Deflector shield generator",
         "Ray shield generator"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [],
+      "Values": [
+        "Lightly armored"
       ]
     },
     {
@@ -204,6 +225,26 @@
       ]
     },
     {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Hyperwave",
+          "Href": "https://starwars.fandom.com/wiki/Hyperwave"
+        },
+        {
+          "Content": "sensor",
+          "Href": "https://starwars.fandom.com/wiki/Sensor_jammer"
+        },
+        {
+          "Content": "jammers",
+          "Href": "https://starwars.fandom.com/wiki/Signal_jammer"
+        }
+      ],
+      "Values": [
+        "Hyperwave, sensor and targeting jammers"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -223,58 +264,34 @@
           "Href": "https://starwars.fandom.com/wiki/Turret"
         },
         {
-          "Content": "Point-defense",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
-        },
-        {
-          "Content": "laser cannon",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
-        },
-        {
-          "Content": "flak guns",
+          "Content": "flak cannons",
           "Href": "https://starwars.fandom.com/wiki/Flak_gun"
-        },
-        {
-          "Content": "Hyperwave",
-          "Href": "https://starwars.fandom.com/wiki/Hyperwave"
         }
       ],
       "Values": [
-        "Heavy turbolaser cannons (2)",
-        "Long-range heavy ion cannons (2)",
-        "Twin light turbolaser cannons (26)",
-        "Light turbolaser turrets (20)",
-        "Point-defense twin light laser cannon turrets (38 - 40)",
-        "Medium flak guns (8 - 12)",
-        "At least 33 shells each",
-        "Ordnance launchers",
-        "Hyperwave jammer"
+        "2 heavy turbolaser cannons",
+        "2 heavy ion cannons",
+        "26 twin light turbolasers",
+        "20 light turbolaser turrets",
+        "12 medium flak cannons",
+        "40 twin light turbolaser turrets (retractable)",
+        "Ordnance launchers"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "vulture droids",
+          "Content": "Vulture-class droid starfighters",
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
           "Content": "squadrons",
           "Href": "https://starwars.fandom.com/wiki/Squadron"
-        },
-        {
-          "Content": "Sheathipede-class shuttles",
-          "Href": "https://starwars.fandom.com/wiki/Sheathipede-class_transport_shuttle"
-        },
-        {
-          "Content": "DSD1 dwarf spider droids",
-          "Href": "https://starwars.fandom.com/wiki/DSD1_dwarf_spider_droid"
         }
       ],
       "Values": [
-        "48 vulture droids (4 squadrons)",
-        "Sheathipede-class shuttles",
-        "DSD1 dwarf spider droids"
+        "48 Vulture-class droid starfighters (4 squadrons)"
       ]
     },
     {
@@ -293,12 +310,24 @@
       "Label": "Crew",
       "Links": [
         {
+          "Content": "droid brain",
+          "Href": "https://starwars.fandom.com/wiki/Droid_brain"
+        }
+      ],
+      "Values": [
+        "Largely automated and controlled by droid brain"
+      ]
+    },
+    {
+      "Label": "Minimum crew",
+      "Links": [
+        {
           "Content": "battle droids",
           "Href": "https://starwars.fandom.com/wiki/Battle_droid"
         }
       ],
       "Values": [
-        "200 battle droids (required)"
+        "200 battle droids"
       ]
     },
     {
@@ -317,8 +346,7 @@
         }
       ],
       "Values": [
-        "10,000 tons (encumbrance)",
-        "2,300 tons of fuel"
+        "10,000 tons"
       ]
     },
     {
@@ -335,55 +363,73 @@
     },
     {
       "Label": "Communication systems",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "hyperwave supralight transceivers",
+          "Href": "https://starwars.fandom.com/wiki/Hyperwave_transceiver"
+        }
+      ],
       "Values": [
-        "Long-range hyperwave transceiver masts (2)"
+        "2 hyperwave supralight transceivers"
       ]
     },
     {
       "Label": "Other systems",
       "Links": [
         {
+          "Content": "Inertial compensator",
+          "Href": "https://starwars.fandom.com/wiki/Acceleration_compensator"
+        },
+        {
           "Content": "Neutrino radiator",
           "Href": "https://starwars.fandom.com/wiki/Neutrino_radiator"
+        },
+        {
+          "Content": "Tensor field generator",
+          "Href": "https://starwars.fandom.com/wiki/Tensor_field_generator"
         }
       ],
       "Values": [
-        "Neutrino radiator"
+        "Inertial compensator",
+        "Neutrino radiator",
+        "Tensor field generator"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "frigate",
-          "Href": "https://starwars.fandom.com/wiki/Frigate"
+          "Content": "Flagship",
+          "Href": "https://starwars.fandom.com/wiki/Flagship"
         },
         {
-          "Content": "Pocket cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Pocket_cruiser"
-        },
-        {
-          "Content": "Battleship",
-          "Href": "https://starwars.fandom.com/wiki/Battleship"
-        },
-        {
-          "Content": "Battlecruiser",
-          "Href": "https://starwars.fandom.com/wiki/Battlecruiser"
-        },
-        {
-          "Content": "Command ship",
-          "Href": "https://starwars.fandom.com/wiki/Command_ship"
+          "Content": "Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Fleet"
         }
       ],
       "Values": [
-        "Heavy frigate",
         "Multi-role",
-        "Pocket cruiser",
-        "Battleship",
-        "Battlecruiser",
-        "Command ship",
-        "Escort"
+        "Combat-communications vessel",
+        "Corporate asset protection",
+        "Flagship",
+        "Fleet coordination and navigation",
+        "Squadron command"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "Decades",
+          "Href": "https://starwars.fandom.com/wiki/Standard_decade"
+        },
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        }
+      ],
+      "Values": [
+        "Decades before the Clone Wars"
       ]
     },
     {
@@ -426,53 +472,23 @@
   ],
   "Relationships": [
     {
-      "PageId": 518899,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 741011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Level_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 590385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_19",
+      "PageId": 466280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crashed_Munificent-class_star_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 590386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_17",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 788999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Company_326",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 591057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cad_Bane's_Munificent-class_star_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 703511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gruk's_Munificent-class_star_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 674281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sa_Nalaor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 663341,
-      "PageUrl": "https://starwars.fandom.com/wiki/Munificent-class_command,_control,_and_communications_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 701063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gwori_Revolutionary_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 663339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tide_of_Progress_XII",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 725617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Munificent-class_star_frigate_(Crombach_Nebula)",
+      "PageId": 507803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Count_Dooku's_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -491,14 +507,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 466280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crashed_Munificent-class_star_frigate",
+      "PageId": 674281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sa_Nalaor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 507803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Count_Dooku's_frigate",
+      "PageId": 590385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_19",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 590386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_17",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 591057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cad_Bane's_Munificent-class_star_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tide_of_Progress_XII",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Munificent-class_command,_control,_and_communications_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 701063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gwori_Revolutionary_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 703511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gruk's_Munificent-class_star_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 704051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Graceful_Promising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 518899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forest",
@@ -60,6 +60,18 @@
       ]
     },
     {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Habo village",
+          "Href": "https://starwars.fandom.com/wiki/Habo_village"
+        }
+      ],
+      "Values": [
+        "Habo village"
+      ]
+    },
+    {
       "Label": "Fauna",
       "Links": [
         {
@@ -72,7 +84,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -86,19 +98,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 709609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vamga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 749522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Habo_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 705494,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Elder",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 724569,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Elder's_lightsabers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
       "PageId": 724540,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Habo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 709609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vamga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

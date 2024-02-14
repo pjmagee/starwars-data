@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Near-Human",
+          "Href": "https://starwars.fandom.com/wiki/Near-Human"
+        }
+      ],
+      "Values": [
+        "Near-Human"
+      ]
+    },
+    {
       "Label": "Average height",
       "Links": [
         {
@@ -82,16 +94,11 @@
       "Label": "Distinctions",
       "Links": [
         {
-          "Content": "Near-Human",
-          "Href": "https://starwars.fandom.com/wiki/Near-Human"
-        },
-        {
           "Content": "Force-sensitivity",
           "Href": "https://starwars.fandom.com/wiki/Force-sensitive/Legends"
         }
       ],
       "Values": [
-        "Near-Human",
         "Force-sensitivity, cartilaginous skeletons"
       ]
     },
@@ -112,7 +119,7 @@
       "Links": [
         {
           "Content": "Vahla",
-          "Href": "https://starwars.fandom.com/wiki/Vahla_language"
+          "Href": "https://starwars.fandom.com/wiki/Vahla_(language)"
         }
       ],
       "Values": [
@@ -120,5 +127,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 248261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vahla_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    }
+  ]
 }

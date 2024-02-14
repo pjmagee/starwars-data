@@ -41,10 +41,15 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "First Order"
       ]
     },
     {
@@ -53,10 +58,15 @@
         {
           "Content": "Proclamation of the New Order",
           "Href": "https://starwars.fandom.com/wiki/Proclamation_of_the_New_Order"
+        },
+        {
+          "Content": "Imperial Charter",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Charter"
         }
       ],
       "Values": [
-        "Proclamation of the New Order"
+        "Proclamation of the New Order",
+        "Imperial Charter"
       ]
     },
     {
@@ -69,6 +79,30 @@
       ],
       "Values": [
         "Empire Day"
+      ]
+    },
+    {
+      "Label": "Date founded",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        }
+      ],
+      "Values": [
+        "19 BBY"
+      ]
+    },
+    {
+      "Label": "Planet of origin",
+      "Links": [
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant"
+        }
+      ],
+      "Values": [
+        "Coruscant"
       ]
     },
     {
@@ -86,11 +120,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 718634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neo-Imperialism",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
       "PageId": 488221,
       "PageUrl": "https://starwars.fandom.com/wiki/Proclamation_of_the_New_Order",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
@@ -99,6 +128,11 @@
       "PageId": 452495,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Empire",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 718634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neo-Imperialism",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     }
   ]
 }

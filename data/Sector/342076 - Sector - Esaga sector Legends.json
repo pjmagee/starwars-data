@@ -76,6 +76,18 @@
       ]
     },
     {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
+        }
+      ],
+      "Values": [
+        "Oktos Route"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -148,90 +160,24 @@
       "Label": "Galactic Civil War",
       "Links": [
         {
-          "Content": "Battle of the Rettna system",
+          "Content": "Rettna system",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Rettna_system"
         },
         {
-          "Content": "First",
+          "Content": "Miko (I)",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Miko"
         },
         {
-          "Content": "Second Battle of Miko",
+          "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Second_Battle_of_Miko"
         }
       ],
       "Values": [
-        "Battle of the Rettna system",
-        "First / Second Battle of Miko"
+        "Rettna system - Miko (I) (II)"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 14183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jante",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rett_I",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14230,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rett_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 379971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Yndar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 18296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rettna_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 350085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aloxor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 61730,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peridon's_Folly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 398094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Esaga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 25927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Miko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freda_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 20375,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_B_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 17555,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jante_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
     {
       "PageId": 366479,
       "PageUrl": "https://starwars.fandom.com/wiki/Miko_system",
@@ -253,9 +199,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 20375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_B_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 350085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aloxor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 61730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peridon's_Folly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rett_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14230,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rett_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 398094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Esaga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jante_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 17579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freda_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 380093,
       "PageUrl": "https://starwars.fandom.com/wiki/Peridon's_Folly_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 18296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rettna_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jante",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 270431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oktos_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 379971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Yndar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 25927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

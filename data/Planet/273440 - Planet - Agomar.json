@@ -52,10 +52,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-18"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Rimma Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Rimma_Trade_Route/Legends"
+        }
+      ],
+      "Values": [
+        "Rimma Trade Route"
       ]
     },
     {
@@ -85,14 +97,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 270614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agomar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 287244,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Agomar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rimma_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 270614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agomar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

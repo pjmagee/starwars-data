@@ -2,6 +2,7 @@
   "PageId": 664293,
   "PageUrl": "https://starwars.fandom.com/wiki/Weft",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -48,10 +49,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Dalnan",
+          "Href": "https://starwars.fandom.com/wiki/Dalnan"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Dalnan)"
       ]
     },
     {
@@ -64,6 +69,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -86,17 +98,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Partner(s)",
       "Links": [
         {
-          "Content": "Dalnans",
-          "Href": "https://starwars.fandom.com/wiki/Dalnan"
+          "Content": "Honesty Weft's mother",
+          "Href": "https://starwars.fandom.com/wiki/Honesty_Weft%27s_mother"
         }
       ],
       "Values": [
-        "Dalnans"
+        "Honesty Weft's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Honesty Weft",
+          "Href": "https://starwars.fandom.com/wiki/Honesty_Weft"
+        }
+      ],
+      "Values": [
+        "Honesty Weft"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Dalnan ambassadorial corps",
+          "Href": "https://starwars.fandom.com/wiki/Dalnan_ambassadorial_corps"
+        }
+      ],
+      "Values": [
+        "Dalnan ambassadorial corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 682176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honesty_Weft's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 664292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honesty_Weft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

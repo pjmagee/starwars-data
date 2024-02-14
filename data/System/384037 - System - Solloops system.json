@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
@@ -45,14 +55,14 @@
   ],
   "Relationships": [
     {
+      "PageId": 60259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solloops_hairstyle/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
       "PageId": 867,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuat_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 60259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solloops",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     }
   ]
 }

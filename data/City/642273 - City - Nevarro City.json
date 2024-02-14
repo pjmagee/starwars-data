@@ -2,13 +2,44 @@
   "PageId": 642273,
   "PageUrl": "https://starwars.fandom.com/wiki/Nevarro_City",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cc/NevarroCity-TMCh12.png/revision/latest?cb=20220306004917",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e9/NevarroCityChapter17.png/revision/latest?cb=20230301220610",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Nevarro City"
+      ]
+    },
+    {
+      "Label": "Destroyed",
+      "Links": [
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+        }
+      ],
+      "Values": [
+        "c. 9 ABY"
+      ]
+    },
+    {
+      "Label": "Rebuilt",
+      "Links": [],
+      "Values": [
+        "c. 9 ABY"
+      ]
+    },
+    {
+      "Label": "Mayor",
+      "Links": [
+        {
+          "Content": "Greef Karga",
+          "Href": "https://starwars.fandom.com/wiki/Greef_Karga"
+        }
+      ],
+      "Values": [
+        "Greef Karga (as High Magistrate)"
       ]
     },
     {
@@ -31,8 +62,28 @@
           "Href": "https://starwars.fandom.com/wiki/Cara_Dune%27s_office"
         },
         {
+          "Content": "Droidsmith workshop",
+          "Href": "https://starwars.fandom.com/wiki/Droidsmith_workshop"
+        },
+        {
+          "Content": "East Court",
+          "Href": "https://starwars.fandom.com/wiki/East_Court"
+        },
+        {
           "Content": "Imperial Remnant safe house",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant_safe_house"
+        },
+        {
+          "Content": "Landing yard",
+          "Href": "https://starwars.fandom.com/wiki/Landing_yard"
+        },
+        {
+          "Content": "Nevarro bazaar",
+          "Href": "https://starwars.fandom.com/wiki/Nevarro_bazaar"
+        },
+        {
+          "Content": "Nevarro City cafe",
+          "Href": "https://starwars.fandom.com/wiki/Nevarro_City_cafe"
         },
         {
           "Content": "Nevarro school",
@@ -51,8 +102,20 @@
           "Href": "https://starwars.fandom.com/wiki/Office_of_the_Magistrate_of_Nevarro"
         },
         {
+          "Content": "Pol Kushin",
+          "Href": "https://starwars.fandom.com/wiki/Pol_Kushin"
+        },
+        {
+          "Content": "Shipping terminals",
+          "Href": "https://starwars.fandom.com/wiki/Shipping_terminals"
+        },
+        {
           "Content": "Statue of IG-11",
           "Href": "https://starwars.fandom.com/wiki/Statue_of_IG-11"
+        },
+        {
+          "Content": "Trade district",
+          "Href": "https://starwars.fandom.com/wiki/Trade_district"
         },
         {
           "Content": "Twi'lek healing baths",
@@ -61,12 +124,20 @@
       ],
       "Values": [
         "Cara Dune's office",
+        "Droidsmith workshop",
+        "East Court",
         "Imperial Remnant safe house",
+        "Landing yard",
+        "Nevarro bazaar",
+        "Nevarro City cafe",
         "Nevarro school",
         "Nevarro sewer",
         "Mandalorian covert",
         "Office of the Magistrate of Nevarro",
+        "Pol Kushin",
+        "Shipping terminals",
         "Statue of IG-11",
+        "Trade district",
         "Twi'lek healing baths"
       ]
     },
@@ -78,17 +149,52 @@
           "Href": "https://starwars.fandom.com/wiki/Bounty_Hunters%27_Guild"
         },
         {
+          "Content": "Nevarro Hunters",
+          "Href": "https://starwars.fandom.com/wiki/Nevarro_Hunters"
+        },
+        {
           "Content": "Gideon's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
+        },
+        {
+          "Content": "Gorian Shard's gang",
+          "Href": "https://starwars.fandom.com/wiki/Gorian_Shard%27s_gang"
         }
       ],
       "Values": [
         "Bounty Hunters' Guild",
-        "Gideon's Imperial remnant"
+        "Nevarro Hunters",
+        "Gideon's Imperial remnant",
+        "Gorian Shard's gang"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 675084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Statue_of_IG-11",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 756945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anzellan_Droidsmiths",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 760365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro_City_cafe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 671898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Armorer's_workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 636950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 635862,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_covert",
@@ -100,13 +206,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 609691,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marshal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 681908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_the_Magistrate_of_Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 640678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro_sewer",
+      "PageId": 631177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_Imperial_remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 741525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro_bazaar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -115,24 +226,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 671898,
-      "PageUrl": "https://starwars.fandom.com/wiki/Armorer's_workshop",
+      "PageId": 794024,
+      "PageUrl": "https://starwars.fandom.com/wiki/East_Court",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 675084,
-      "PageUrl": "https://starwars.fandom.com/wiki/Statue_of_IG-11",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 681908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_the_Magistrate_of_Nevarro",
+      "PageId": 794025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pol_Kushin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 636950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 794027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shipping_terminals",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 794028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 609691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marshal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 760657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_design_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 760662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Landing_yard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Showdown_on_Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 760209,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pirate_siege_on_Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 640678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nevarro_sewer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droidsmith_workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

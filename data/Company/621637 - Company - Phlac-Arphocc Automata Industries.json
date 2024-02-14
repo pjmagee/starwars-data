@@ -12,19 +12,27 @@
       ]
     },
     {
-      "Label": "Primary role(s)",
+      "Label": "Associations",
       "Links": [
         {
-          "Content": "Droid",
-          "Href": "https://starwars.fandom.com/wiki/Droid"
-        },
-        {
-          "Content": "starfighter",
-          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+          "Content": "Colla Designs",
+          "Href": "https://starwars.fandom.com/wiki/Colla_Designs"
         }
       ],
       "Values": [
-        "Droid starfighter  manufacturer"
+        "Colla Designs"
+      ]
+    },
+    {
+      "Label": "Primary role(s)",
+      "Links": [
+        {
+          "Content": "Droid starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Droid_starfighter"
+        }
+      ],
+      "Values": [
+        "Droid starfighter manufacturer and designer"
       ]
     },
     {
@@ -33,14 +41,53 @@
         {
           "Content": "Droid tri-fighter",
           "Href": "https://starwars.fandom.com/wiki/Droid_tri-fighter"
+        },
+        {
+          "Content": "fightercraft",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
         }
       ],
       "Values": [
-        "Droid tri-fighter"
+        "Droid tri-fighter",
+        "Other fightercraft"
+      ]
+    },
+    {
+      "Label": "Founding",
+      "Links": [
+        {
+          "Content": "Republic Era",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Era"
+        }
+      ],
+      "Values": [
+        "During the Republic Era"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 782543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 666675,
+      "PageUrl": "https://starwars.fandom.com/wiki/DIS-T81",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 469183,
       "PageUrl": "https://starwars.fandom.com/wiki/Droid_tri-fighter",

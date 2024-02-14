@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Incom Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
-        }
-      ],
-      "Values": [
-        "Incom Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,6 +24,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Incom Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
+        }
+      ],
+      "Values": [
+        "Incom Corporation"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -119,7 +119,7 @@
       "Label": "Hyperdrive system",
       "Links": [],
       "Values": [
-        "None (can be equipped as an upgrade)"
+        "None"
       ]
     },
     {
@@ -263,14 +263,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 201204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 2201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dreadnaught-class_heavy_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 409,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 126349,
@@ -278,9 +278,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 2201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dreadnaught-class_heavy_cruiser",
+      "PageId": 409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 201204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

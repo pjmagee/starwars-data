@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "11 BBY",
+          "Href": "https://starwars.fandom.com/wiki/11_BBY"
+        }
+      ],
+      "Values": [
+        "By 11 BBY"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -49,6 +61,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -83,12 +102,28 @@
         {
           "Content": "Hunters of the Outer Rim",
           "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
-        "Hunters of the Outer Rim"
+        "Hunters of the Outer Rim",
+        "Sith (In character)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia's_Not_Dead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 757341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rieve's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

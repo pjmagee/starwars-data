@@ -36,6 +36,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-3",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-3"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -55,10 +67,11 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
-        "Islands"
+        "Sandy Islands",
+        "Rocky Caverns"
       ]
     },
     {
@@ -81,13 +94,18 @@
           "Href": "https://starwars.fandom.com/wiki/Aeos_Prime_rebel_outpost"
         },
         {
-          "Content": "Unidentified Aeosian village",
+          "Content": "Aeosian village",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_village"
+        },
+        {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
         }
       ],
       "Values": [
         "Aeos Prime rebel outpost",
-        "Unidentified Aeosian village"
+        "An Aeosian village",
+        "Colossus"
       ]
     },
     {
@@ -136,14 +154,54 @@
   ],
   "Relationships": [
     {
+      "PageId": 685005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aeos_Prime_rebel_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 641669,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1_(Colossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 618741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Team_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 628936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aeosian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 642690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Aeos_Prime",
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Aeos_Prime_(Aeosian_village)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 642692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Aeos_Prime",
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Aeos_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 643430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suppression_of_the_Aeos_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 642266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krakavora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 629021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_Queen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 556491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 643885,
@@ -151,9 +209,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 641669,
-      "PageUrl": "https://starwars.fandom.com/wiki/B1_(Colossus)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 685254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_healer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 686684,
@@ -164,36 +222,6 @@
       "PageId": 642222,
       "PageUrl": "https://starwars.fandom.com/wiki/Aeos_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 629021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_Queen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 685254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_healer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 642266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krakavora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 643430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suppression_of_the_Aeos_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 628936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aeosian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 685005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aeos_Prime_rebel_outpost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

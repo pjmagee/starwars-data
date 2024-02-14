@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -50,6 +50,18 @@
       ],
       "Values": [
         "Besh Gorgon system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-7"
       ]
     },
     {
@@ -94,36 +106,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 566762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_the_Wheel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 556115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 538027,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 538028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zander_Freemaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544033,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blazemaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 476092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 553737,
       "PageUrl": "https://starwars.fandom.com/wiki/Upper_Ring/LEGO",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -134,44 +116,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 619611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Besh_Gorgon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 665208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Yoda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 499796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 546642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freemaker_Salvage_and_Repair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 619653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doughnut",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 619621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cosmo_Lounge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 619623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ashton_Stadium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 619622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_level",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 544033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blazemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 715115,
@@ -197,6 +144,76 @@
       "PageId": 619638,
       "PageUrl": "https://starwars.fandom.com/wiki/Nova_Crime_Syndicate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 499796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 538027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zander_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rowan_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 619653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doughnut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 566762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_the_Wheel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 619621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cosmo_Lounge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 619623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ashton_Stadium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 665208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Yoda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 546642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freemaker_Salvage_and_Repair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 619611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Besh_Gorgon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 619622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_level",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 476092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 556115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -56,14 +56,26 @@
       "Label": "Suns",
       "Links": [],
       "Values": [
-        "2"
+        "2, the first sun and second sun"
       ]
     },
     {
       "Label": "Moons",
       "Links": [],
       "Values": [
-        "2"
+        "2, including the smallest moon"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-19"
       ]
     },
     {
@@ -93,13 +105,13 @@
           "Href": "https://starwars.fandom.com/wiki/Military_compound"
         },
         {
-          "Content": "Temple on Dalna",
-          "Href": "https://starwars.fandom.com/wiki/Temple_on_Dalna"
+          "Content": "Dalna temple",
+          "Href": "https://starwars.fandom.com/wiki/Dalna_temple"
         }
       ],
       "Values": [
         "Military compound",
-        "Temple on Dalna"
+        "Dalna temple"
       ]
     },
     {
@@ -118,12 +130,20 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Boolsa",
+          "Href": "https://starwars.fandom.com/wiki/Boolsa"
+        },
+        {
           "Content": "Flutterbug",
           "Href": "https://starwars.fandom.com/wiki/Flutterbug"
         },
         {
           "Content": "Ice gator",
           "Href": "https://starwars.fandom.com/wiki/Ice_gator"
+        },
+        {
+          "Content": "Snipe",
+          "Href": "https://starwars.fandom.com/wiki/Snipe"
         },
         {
           "Content": "Trappu",
@@ -144,15 +164,27 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Aqualish",
           "Href": "https://starwars.fandom.com/wiki/Aqualish"
         },
         {
+          "Content": "Chagrian",
+          "Href": "https://starwars.fandom.com/wiki/Chagrian"
+        },
+        {
+          "Content": "Gran",
+          "Href": "https://starwars.fandom.com/wiki/Gran"
+        },
+        {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Mon Calamari",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari"
         },
         {
           "Content": "Ongree",
@@ -177,22 +209,35 @@
         {
           "Content": "Weequay",
           "Href": "https://starwars.fandom.com/wiki/Weequay"
+        },
+        {
+          "Content": "Wookiee",
+          "Href": "https://starwars.fandom.com/wiki/Wookiee"
         }
       ],
       "Values": [
         "Aqualish",
+        "Chagrian",
+        "Gran",
         "Human",
+        "Mon Calamari",
         "Ongree",
         "Pantoran",
         "Theelin",
         "Trandoshan",
         "Twi'lek",
-        "Weequay"
+        "Weequay",
+        "Wookiee"
       ]
     },
     {
       "Label": "Government",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Dalnan government",
+          "Href": "https://starwars.fandom.com/wiki/Dalnan_government"
+        }
+      ],
       "Values": [
         "Dalnan government"
       ]
@@ -220,29 +265,134 @@
       "Label": "Major cities",
       "Links": [
         {
+          "Content": "Ferdan",
+          "Href": "https://starwars.fandom.com/wiki/Ferdan"
+        },
+        {
           "Content": "Saludad",
           "Href": "https://starwars.fandom.com/wiki/Saludad"
         },
         {
           "Content": "capital",
           "Href": "https://starwars.fandom.com/wiki/Capital"
+        },
+        {
+          "Content": "West Platt",
+          "Href": "https://starwars.fandom.com/wiki/West_Platt"
         }
       ],
       "Values": [
-        "Saludad (capital)"
+        "Ferdan",
+        "Saludad (capital)",
+        "West Platt"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 699873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saludad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 759844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Littles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 719462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dalna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 748142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_of_Elders_(Path_of_the_Open_Hand)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 757469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hansibel_Island_emergency_shelter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 711337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruusstha_Vidyarvrikt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 690601,
+      "PageUrl": "https://starwars.fandom.com/wiki/War_on_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 749408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fe_Isle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fe_Remine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fe_Tale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 741886,
+      "PageUrl": "https://starwars.fandom.com/wiki/Char-Ryl-Roy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 690605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Summer_melon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 723143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lompop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 778705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 682101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_bush",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 791659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurin's_stall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 697168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Military_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 742103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rod_of_Seasons",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 759775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fel_Ix's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 741902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binkberry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 741905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_cracker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 742003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sun_apple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 723606,
+      "PageUrl": "https://starwars.fandom.com/wiki/430_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 723037,
@@ -253,6 +403,466 @@
       "PageId": 723151,
       "PageUrl": "https://starwars.fandom.com/wiki/Hackrack_Bep",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 724047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sha'nai_Plouth's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 762826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pom_Gornay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 763202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Werla_Cayn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 718249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_of_Sorrow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 742013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ferdan_market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 742014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ashrow_volcano",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 743049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Path_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 760985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lu_Sweet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 741903,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ferdan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 746920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aida_Forte",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 719462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 723040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hygge_nectar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 719279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kara_Xoo's_Tempest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 700004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Leveler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 740859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemmy_(tooka)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 757308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rascal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 757307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalna_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 741907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 741909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torinda_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 746000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whispering_fern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 760787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_corn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 764536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Willow_(tree)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 690604,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flutterbug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 724594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 759618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Teevan_man",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 759777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fe_Fer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 699873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saludad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 719464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_evacuation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 162442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Children_of_the_Open_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 757123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orin_Darhga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yulon_Onning",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 782829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Port_Mackie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 783735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doc_Nindle's_place",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 783736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lady_Jara's_boarding_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 783814,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Mother's_cottage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 783866,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Mother's_listening_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 784030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marda_Ro's_cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 784031,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honeycomb_cells",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 784035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nesting_chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 784036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cincey's_work_hut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 784039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yana_Ro's_cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 741871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dalna_(Macri_and_Zink)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 750459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dalna_(Sun_and_Forte)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 774674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rilly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pin_dice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 760795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Underground_caverns",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 681858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nameless_control_rods",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 733057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Werth_Plouth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 733058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elecia_Zeveron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry_wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 682209,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 682211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry_juice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 782314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 739421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zallah_Macri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kevmo_Zink",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 685662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ro_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 757314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boolsa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moon_fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snipe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 762825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_bear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 762928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_sylbeetle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 699875,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temple_on_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 748376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binnot_Ullo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 790483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Pantoran_Path_of_the_Closed_Fist_member's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749491,
+      "PageUrl": "https://starwars.fandom.com/wiki/QN-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 757465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hansibel_Island",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bragh_Ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalna_temple_archives",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meditation_garden",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalna_temple_brook",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil_encampment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 766283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gluth_Andoi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 726773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Path_of_the_Open_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 761176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Path_of_the_Closed_Fist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 742146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sun_opal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 783315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rod_of_Power",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 742958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravna_Abronsa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 791337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Micro-gyro_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 721185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Durga_berry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 720232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ice_gator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Groundquake_machine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 760785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Communications_buoy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 782005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plouth_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 756714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bar-fish_gelatin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 723245,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_meadowlands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 737261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_ambassadorial_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 784679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brikal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 784681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Honey_glider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 742111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rod_of_Daybreak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 759023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalna_farm_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 778025,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Platt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 726449,
@@ -275,64 +885,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 719464,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_evacuation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 723245,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_meadowlands",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 720232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ice_gator",
+      "PageId": 742007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grass_frog",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 723606,
-      "PageUrl": "https://starwars.fandom.com/wiki/430_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 721185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Durga_berry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 723040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hygge_nectar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 690604,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flutterbug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 724047,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sha'nai_Plouth's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 719279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kara_Xoo's_Tempest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 726773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Path_of_the_Open_Hand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 726473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trappu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 690601,
-      "PageUrl": "https://starwars.fandom.com/wiki/War_on_Dalna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 664292,
@@ -345,59 +900,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 711337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruusstha_Vidyarvrikt",
+      "PageId": 777796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_mission_to_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 781838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ric_Farazi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 718249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Night_of_Sorrow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 682126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 682209,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 682211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_berry_juice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 697168,
-      "PageUrl": "https://starwars.fandom.com/wiki/Military_compound",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 699875,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temple_on_Dalna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 682101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnostra_bush",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 690605,
-      "PageUrl": "https://starwars.fandom.com/wiki/Summer_melon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 723143,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lompop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 726473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trappu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

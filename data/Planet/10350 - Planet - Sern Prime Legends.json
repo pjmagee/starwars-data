@@ -25,7 +25,12 @@
     },
     {
       "Label": "Sector",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Sern sector",
+          "Href": "https://starwars.fandom.com/wiki/Sern_sector/Legends"
+        }
+      ],
       "Values": [
         "Sern sector"
       ]
@@ -43,14 +48,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-13"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Ice",
@@ -62,7 +67,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -110,14 +115,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 351217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sern_Prime_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 9053,
       "PageUrl": "https://starwars.fandom.com/wiki/Fang_Zar/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 351217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sern_Prime_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

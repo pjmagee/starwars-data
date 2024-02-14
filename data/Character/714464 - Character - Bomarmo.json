@@ -2,6 +2,7 @@
   "PageId": 714464,
   "PageUrl": "https://starwars.fandom.com/wiki/Bomarmo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,18 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Cohbo'rik'ardok",
+          "Href": "https://starwars.fandom.com/wiki/Cohbo%27rik%27ardok"
+        }
+      ],
+      "Values": [
+        "Cohbo'rik'ardok"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -52,5 +65,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 666676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cohbo'rik'ardok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

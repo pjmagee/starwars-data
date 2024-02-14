@@ -30,7 +30,12 @@
     },
     {
       "Label": "Model",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "WA-series service droid",
+          "Href": "https://starwars.fandom.com/wiki/WA-series_service_droid"
+        }
+      ],
       "Values": [
         "WA-series service droid"
       ]
@@ -89,14 +94,41 @@
         {
           "Content": "Yellow",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Yellow"
+        "Yellow",
+        "Purple (Under Scourge infection)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic",
+        "Scourge (As a vessel)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 541878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marwigo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 514056,
       "PageUrl": "https://starwars.fandom.com/wiki/Bobbie",
@@ -105,11 +137,6 @@
     {
       "PageId": 531440,
       "PageUrl": "https://starwars.fandom.com/wiki/FLO",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 541878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marwigo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

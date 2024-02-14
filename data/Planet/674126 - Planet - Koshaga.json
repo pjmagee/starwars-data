@@ -12,35 +12,79 @@
       ]
     },
     {
-      "Label": "Points of interest",
+      "Label": "Class",
       "Links": [],
       "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Lowlands",
+          "Href": "https://starwars.fandom.com/wiki/Lowlands_(Koshaga)"
+        }
+      ],
+      "Values": [
         "Lowlands"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [
+        {
+          "Content": "Koshagan",
+          "Href": "https://starwars.fandom.com/wiki/Koshagan"
+        }
+      ],
+      "Values": [
+        "Koshagan"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Koshaga's ruling class",
+          "Href": "https://starwars.fandom.com/wiki/Koshaga%27s_ruling_class"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
+        "Koshaga's ruling class",
         "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 674128,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koshagan_People's_Movement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 780106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koshaga's_ruling_class",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 780107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lowlands_(Koshaga)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 780109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koshagan_uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 669721,
       "PageUrl": "https://starwars.fandom.com/wiki/Emon_Kref",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 674128,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koshagan_People's_Movement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

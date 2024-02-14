@@ -2,7 +2,7 @@
   "PageId": 13796,
   "PageUrl": "https://starwars.fandom.com/wiki/Yvara",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/Yvara.jpg/revision/latest?cb=20230414143104",
   "Data": [
     {
       "Label": "Titles",
@@ -28,16 +28,21 @@
       "Links": [
         {
           "Content": "Kathol sector",
-          "Href": "https://starwars.fandom.com/wiki/Kathol_sector"
+          "Href": "https://starwars.fandom.com/wiki/Kathol_sector/Legends"
         },
         {
           "Content": "Kathol Rift",
           "Href": "https://starwars.fandom.com/wiki/Kathol_Rift/Legends"
+        },
+        {
+          "Content": "Blue Swirl",
+          "Href": "https://starwars.fandom.com/wiki/Blue_Swirl"
         }
       ],
       "Values": [
         "Kathol sector",
-        "Kathol Rift"
+        "Kathol Rift",
+        "Blue Swirl"
       ]
     },
     {
@@ -53,7 +58,26 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "star",
+          "Href": "https://starwars.fandom.com/wiki/Star/Legends"
+        }
+      ],
+      "Values": [
+        "Blue-white star"
+      ]
+    },
+    {
+      "Label": "Moons",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-21"
@@ -127,33 +151,61 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Fungal",
-          "Href": "https://starwars.fandom.com/wiki/Fungus/Legends"
+          "Content": "Desert",
+          "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
         },
         {
-          "Content": "Mountains",
+          "Content": "mountain",
           "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
+        },
+        {
+          "Content": "ice",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        },
+        {
+          "Content": "fungal",
+          "Href": "https://starwars.fandom.com/wiki/Fungus/Legends"
         }
       ],
       "Values": [
-        "Fungal plains",
-        "Mountains"
+        "Desert plains",
+        "Red mountain ranges",
+        "White ice-caps",
+        "Yellow-green fungal plains"
       ]
     },
     {
       "Label": "Surface water",
       "Links": [
         {
-          "Content": "Oceans",
+          "Content": "oceans",
           "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
         }
       ],
       "Values": [
-        "Oceans",
+        "Deep blue oceans",
+        "Lakes",
         "River networks"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Owr'apa",
+          "Href": "https://starwars.fandom.com/wiki/Owr%27apa"
+        },
+        {
+          "Content": "Zeebuck",
+          "Href": "https://starwars.fandom.com/wiki/Zeebuck"
+        }
+      ],
+      "Values": [
+        "Owr'apa",
+        "Zeebuck"
       ]
     },
     {
@@ -166,6 +218,13 @@
       ],
       "Values": [
         "Yvarema"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [],
+      "Values": [
+        "Yvarema hive-mind"
       ]
     },
     {
@@ -199,6 +258,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 271934,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yvara_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 161620,
       "PageUrl": "https://starwars.fandom.com/wiki/Gunthar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -207,11 +271,6 @@
       "PageId": 29089,
       "PageUrl": "https://starwars.fandom.com/wiki/Yvarema",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 271934,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yvara_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 382612,

@@ -2,6 +2,7 @@
   "PageId": 418962,
   "PageUrl": "https://starwars.fandom.com/wiki/Yanila_Zavros",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -63,6 +64,47 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Zavros family",
+          "Href": "https://starwars.fandom.com/wiki/Zavros_family"
+        }
+      ],
+      "Values": [
+        "Zavros family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Rolend Zavros",
+          "Href": "https://starwars.fandom.com/wiki/Rolend_Zavros"
+        }
+      ],
+      "Values": [
+        "Rolend Zavros"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ashara Zavros",
+          "Href": "https://starwars.fandom.com/wiki/Ashara_Zavros"
+        },
+        {
+          "Content": "Asher Zavros",
+          "Href": "https://starwars.fandom.com/wiki/Asher_Zavros"
+        }
+      ],
+      "Values": [
+        "Ashara Zavros",
+        "Asher Zavros"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -80,5 +122,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 402731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asher_Zavros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 415279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rolend_Zavros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 360133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ashara_Zavros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

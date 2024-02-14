@@ -55,6 +55,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-5",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-5"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
@@ -79,7 +91,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -97,10 +109,16 @@
         {
           "Content": "Main Vault fortress",
           "Href": "https://starwars.fandom.com/wiki/Main_Vault_fortress"
+        },
+        {
+          "Content": "Rush Clovis's chalet",
+          "Href": "https://starwars.fandom.com/wiki/Rush_Clovis%27s_chalet"
         }
       ],
       "Values": [
-        "Main Vault fortress"
+        "Frigia Canyons",
+        "Main Vault fortress",
+        "Rush Clovis's chalet"
       ]
     },
     {
@@ -116,7 +134,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -157,9 +175,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 532587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bec_Lawise",
+      "PageId": 507850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Albarrio_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 465424,
+      "PageUrl": "https://starwars.fandom.com/wiki/San_Hill",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 475588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 496633,
@@ -172,9 +200,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 475588,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 574871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clovis'_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 496571,
@@ -182,9 +210,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 505200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 452432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 586490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 665703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scipio_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 505203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Scipio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 532789,
@@ -197,24 +240,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 465424,
-      "PageUrl": "https://starwars.fandom.com/wiki/San_Hill",
+      "PageId": 505200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 532587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bec_Lawise",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 473911,
-      "PageUrl": "https://starwars.fandom.com/wiki/InterGalactic_Banking_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 574871,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clovis'_office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 476112,
@@ -222,14 +255,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 665703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scipio_blockade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 547142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Main_Vault_power_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 532813,
@@ -237,24 +265,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 547142,
-      "PageUrl": "https://starwars.fandom.com/wiki/Main_Vault_power_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 507850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Albarrio_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 505203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Scipio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 586490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 473911,
+      "PageUrl": "https://starwars.fandom.com/wiki/InterGalactic_Banking_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

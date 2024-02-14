@@ -27,12 +27,8 @@
       "Label": "Born",
       "Links": [
         {
-          "Content": "3",
+          "Content": "3 BBY",
           "Href": "https://starwars.fandom.com/wiki/3_BBY"
-        },
-        {
-          "Content": "BBY",
-          "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
         }
       ],
       "Values": [
@@ -81,7 +77,25 @@
       "Values": [
         "Orange"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Oora",
+          "Href": "https://starwars.fandom.com/wiki/Oora"
+        }
+      ],
+      "Values": [
+        "Oora"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 519482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

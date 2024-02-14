@@ -2,7 +2,7 @@
   "PageId": 271003,
   "PageUrl": "https://starwars.fandom.com/wiki/Alui_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d0/Alui-TEA.jpg/revision/latest?cb=20220928104225",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -36,23 +41,47 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-17"
+      ]
+    },
+    {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Shipyard",
+          "Href": "https://starwars.fandom.com/wiki/Shipyard/Legends"
+        }
+      ],
+      "Values": [
+        "Shipyard"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Duros Space Run",
+          "Href": "https://starwars.fandom.com/wiki/Duros_Space_Run"
+        }
+      ],
+      "Values": [
+        "Duros Space Run"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 15954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duros_Space_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 340954,
       "PageUrl": "https://starwars.fandom.com/wiki/Alui_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 15954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duros_Space_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

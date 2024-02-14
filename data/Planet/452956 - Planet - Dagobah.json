@@ -19,13 +19,30 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
           "Content": "Western Reaches",
           "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
         "Outer Rim Territories",
+        "Galactic Frontier",
         "Western Reaches"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sluis sector",
+          "Href": "https://starwars.fandom.com/wiki/Sluis_sector"
+        }
+      ],
+      "Values": [
+        "Sluis sector"
       ]
     },
     {
@@ -41,6 +58,18 @@
       ]
     },
     {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Darlo",
+          "Href": "https://starwars.fandom.com/wiki/Darlo"
+        }
+      ],
+      "Values": [
+        "Darlo"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [],
       "Values": [
@@ -48,7 +77,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-19",
@@ -140,7 +169,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamp",
@@ -194,12 +223,20 @@
           "Href": "https://starwars.fandom.com/wiki/Blackvine"
         },
         {
+          "Content": "Fungus",
+          "Href": "https://starwars.fandom.com/wiki/Fungus"
+        },
+        {
           "Content": "Gnarltree",
           "Href": "https://starwars.fandom.com/wiki/Gnarltree"
         },
         {
           "Content": "Lahdia plant",
           "Href": "https://starwars.fandom.com/wiki/Lahdia_plant"
+        },
+        {
+          "Content": "Rootleaf",
+          "Href": "https://starwars.fandom.com/wiki/Rootleaf"
         },
         {
           "Content": "Stickle tree",
@@ -219,10 +256,13 @@
         }
       ],
       "Values": [
+        "Adder moss",
         "Blackvine",
+        "Fungus",
         "Gnarltree",
         "Herbs",
         "Lahdia plant",
+        "Rootleaf",
         "Stickle tree",
         "Swamp squash",
         "Yarum seed",
@@ -261,8 +301,8 @@
           "Href": "https://starwars.fandom.com/wiki/Elephoth"
         },
         {
-          "Content": "Flying leaf-tail",
-          "Href": "https://starwars.fandom.com/wiki/Flying_leaf-tail"
+          "Content": "Leaf-tail",
+          "Href": "https://starwars.fandom.com/wiki/Leaf-tail"
         },
         {
           "Content": "Jubba bird",
@@ -338,7 +378,7 @@
         "Dagobah python",
         "Dragonsnake",
         "Elephoth",
-        "Flying leaf-tail",
+        "Leaf-tail",
         "Jubba bird",
         "Knobby white spider",
         "Marsh spider",
@@ -371,7 +411,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Yoda's species",
@@ -397,6 +437,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 732597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jagged_Place_(Dagobah)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 780458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bright-Eyes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 716355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ancient_texts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 512748,
       "PageUrl": "https://starwars.fandom.com/wiki/Elephoth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -407,174 +462,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 515457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_python",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 515692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sleen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 515696,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vine_snake",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 515703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_slug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 624074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nudj",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 625415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tash",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 711055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Halka_Four-Den's_Alpha_Team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 695256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darlo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 120752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_Hut",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 452382,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 512746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rootleaf_stew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 567491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Accipiptero",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 453273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 498755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jubba_bird",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 452890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 685858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yuletide_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 611649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver-nape_beetle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 611650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scrange",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 611651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spotlight_sloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 457373,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cave_of_Evil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 478743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragonsnake",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 625957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnarltree_wattle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 716355,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ancient_texts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 635974,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sohli_bark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 501771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gnarltree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 518575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marsh_fungi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 518579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lahdia_plant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 694919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Halka_Four-Den",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 725327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rootleaf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 694922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knobby_white_spider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 536716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 618492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_Slug_Slinger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 650724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_squash",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
       "PageId": 653577,
@@ -582,24 +472,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
+      "PageId": 536716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 113842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Dagger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 501770,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragonsnake_Bog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 694919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halka_Four-Den",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 512746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rootleaf_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 501768,
       "PageUrl": "https://starwars.fandom.com/wiki/Yarum_seed",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 158271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yogurt",
+      "PageId": 725327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rootleaf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 611652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stickle_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 641000,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_quadruped_(Dagobah)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 519155,
@@ -617,18 +527,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 113842,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Dagger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 748584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_dragonsnake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 501770,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragonsnake_Bog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 567491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Accipiptero",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnarltree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 518575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marsh_fungi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 518579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lahdia_plant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 641000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_quadruped_(Dagobah)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 618492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_Slug_Slinger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 671036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flying_leaf-tail",
+      "PageUrl": "https://starwars.fandom.com/wiki/Leaf-tail",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -644,6 +579,171 @@
     {
       "PageId": 671191,
       "PageUrl": "https://starwars.fandom.com/wiki/Smooka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 635974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sohli_bark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 748708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Dagobah_(3_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 158271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yogurt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 685858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuletide_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 625957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gnarltree_wattle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 611652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stickle_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 650724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_squash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 457373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cave_of_Evil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 515457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_python",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sleen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vine_snake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_slug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 453273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 624074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nudj",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 625415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 695256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darlo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 611649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver-nape_beetle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 611650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scrange",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 611651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spotlight_sloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 735109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah-Bog-Be-Gone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 478743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragonsnake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 120752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_Hut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 711055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halka_Four-Den's_Alpha_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 694922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knobby_white_spider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 743929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mud_and_Bug_Soup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 743932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_Stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 744028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloud-tree_root_tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 742349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blissl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 738644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Dagobah_creature",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 744030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bog_slug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 783920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galaxy_mission",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 498755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jubba_bird",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

@@ -43,11 +43,16 @@
       "Label": "Place",
       "Links": [
         {
+          "Content": "Corporate Sector",
+          "Href": "https://starwars.fandom.com/wiki/Corporate_Sector/Legends"
+        },
+        {
           "Content": "Pondut",
           "Href": "https://starwars.fandom.com/wiki/Pondut"
         }
       ],
       "Values": [
+        "Corporate Sector",
         "Pondut"
       ]
     },
@@ -66,6 +71,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 172281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arms_Race",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 30229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glory_(Imperial-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 891,
       "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
@@ -74,16 +89,6 @@
       "PageId": 65550,
       "PageUrl": "https://starwars.fandom.com/wiki/Pondut",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 172281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arms_Race",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 30229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Glory_(Imperial-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

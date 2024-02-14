@@ -2,12 +2,33 @@
   "PageId": 700443,
   "PageUrl": "https://starwars.fandom.com/wiki/Idrax_Snat",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Idrax Snat"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "229 BBY",
+          "Href": "https://starwars.fandom.com/wiki/229_BBY"
+        },
+        {
+          "Content": "Innovator",
+          "Href": "https://starwars.fandom.com/wiki/Innovator"
+        },
+        {
+          "Content": "Valo",
+          "Href": "https://starwars.fandom.com/wiki/Valo"
+        }
+      ],
+      "Values": [
+        "229 BBY, Innovator, Valo"
       ]
     },
     {
@@ -36,11 +57,32 @@
     },
     {
       "Label": "Affiliation(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Valo Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Valo_Security_Force"
+        },
+        {
+          "Content": "Second division",
+          "Href": "https://starwars.fandom.com/wiki/Second_division"
+        },
+        {
+          "Content": "Nihil",
+          "Href": "https://starwars.fandom.com/wiki/Nihil"
+        }
+      ],
       "Values": [
-        "Valo Security Force"
+        "Valo Security Force",
+        "Second division",
+        "Nihil"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 792229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Fair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

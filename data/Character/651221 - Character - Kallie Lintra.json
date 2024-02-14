@@ -2,6 +2,7 @@
   "PageId": 651221,
   "PageUrl": "https://starwars.fandom.com/wiki/Kallie_Lintra",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +40,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Tallissan Lintra",
+          "Href": "https://starwars.fandom.com/wiki/Tallissan_Lintra"
+        }
+      ],
+      "Values": [
+        "Tallissan Lintra"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -56,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 580734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tallissan_Lintra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 679860,
   "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Begamor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -18,24 +19,24 @@
           "Href": "https://starwars.fandom.com/wiki/President"
         },
         {
-          "Content": "Jamie Brasen",
-          "Href": "https://starwars.fandom.com/wiki/Jamie_Brasen"
+          "Content": "Jamie Brasson",
+          "Href": "https://starwars.fandom.com/wiki/Jamie_Brasson"
         }
       ],
       "Values": [
-        "Stop President Jamie Brasen and his schemes"
+        "Stop President Jamie Brasson and his schemes"
       ]
     },
     {
       "Label": "Date",
       "Links": [
         {
-          "Content": "82 BBY",
-          "Href": "https://starwars.fandom.com/wiki/82_BBY"
+          "Content": "200 BBY",
+          "Href": "https://starwars.fandom.com/wiki/200_BBY"
         }
       ],
       "Values": [
-        "82 BBY"
+        "200 BBY"
       ]
     },
     {
@@ -51,5 +52,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 554104,
+      "PageUrl": "https://starwars.fandom.com/wiki/200_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    }
+  ]
 }

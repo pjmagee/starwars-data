@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Hoersch-Kessel Drive Inc",
-          "Href": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc."
-        }
-      ],
-      "Values": [
-        "Hoersch-Kessel Drive Inc"
-      ]
-    },
-    {
       "Label": "Model",
       "Links": [
         {
@@ -32,7 +20,26 @@
         }
       ],
       "Values": [
-        "Lucrehulk-class Battleship"
+        "Custom-fitted Lucrehulk-class Battleship"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        }
+      ],
+      "Values": [
+        "Battleship"
+      ]
+    },
+    {
+      "Label": "Modified systems",
+      "Links": [],
+      "Values": [
+        "Extensive system additions"
       ]
     },
     {
@@ -62,6 +69,36 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Proton 2",
+          "Href": "https://starwars.fandom.com/wiki/Proton_2"
+        },
+        {
+          "Content": "engines",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "3 Proton 2 drive engines",
+        "12 Proton sublight drives"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "main reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Two main reactors",
+        "Additional reactors"
+      ]
+    },
+    {
       "Label": "Shielding",
       "Links": [
         {
@@ -74,26 +111,68 @@
       ]
     },
     {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "antenna",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Exotic alloy (antenna array)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "main sensor rectenna",
+          "Href": "https://starwars.fandom.com/wiki/Rectenna"
+        },
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        },
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "1 main sensor rectenna",
+        "4 auxiliary sensors",
+        "Monitor sensors"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "Targeting sensors",
+          "Href": "https://starwars.fandom.com/wiki/Targeting_sensor"
+        }
+      ],
+      "Values": [
+        "Targeting sensors"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Quad turbolaser cannons",
+          "Content": "quad turbolaser emplacements",
           "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
         }
       ],
       "Values": [
-        "42 Quad turbolaser cannons"
+        "42 quad turbolaser emplacements"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "C-9979 landing craft",
-          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
-        },
-        {
-          "Content": "Vulture-class starfighters",
+          "Content": "Vulture-class droid starfighters",
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
@@ -103,13 +182,23 @@
         {
           "Content": "Armored Assault Tanks",
           "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
+        },
+        {
+          "Content": "Platoon Attack Craft",
+          "Href": "https://starwars.fandom.com/wiki/Platoon_Attack_Craft"
+        },
+        {
+          "Content": "C-9979 landing craft",
+          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
         }
       ],
       "Values": [
-        "C-9979 landing craft (50)",
-        "Vulture-class starfighters (1,500)",
-        "Multi-Troop Transports (550)",
-        "Armored Assault Tanks (6,520)"
+        "1,500 Vulture-class droid starfighters",
+        "550 Multi-Troop Transports",
+        "6,250 Armored Assault Tanks",
+        "1,500 Platoon Attack Craft",
+        "50 C-9979 landing craft",
+        "Other smaller vessels"
       ]
     },
     {
@@ -120,19 +209,62 @@
       ]
     },
     {
+      "Label": "Crew",
+      "Links": [],
+      "Values": [
+        "203,060"
+      ]
+    },
+    {
       "Label": "Passengers",
       "Links": [
         {
           "Content": "battle droids",
           "Href": "https://starwars.fandom.com/wiki/Battle_droid"
-        },
-        {
-          "Content": "B1-series battle droids",
-          "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
         }
       ],
       "Values": [
-        "139,000 battle droids (typically B1-series battle droids)"
+        "10,000+ battle droids",
+        "Other droid models"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "signal receiver",
+          "Href": "https://starwars.fandom.com/wiki/Signal_receiver"
+        },
+        {
+          "Content": "transmitters",
+          "Href": "https://starwars.fandom.com/wiki/Transmitter"
+        }
+      ],
+      "Values": [
+        "2 main communications antennae (16,500 kilometer broadcast range)",
+        "6 auxiliary antennae",
+        "16 signal receiver dishes",
+        "Other transmitters (post-fitting)"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Central Control Computer",
+          "Href": "https://starwars.fandom.com/wiki/Central_Control_Computer"
+        }
+      ],
+      "Values": [
+        "Central Control Computer",
+        "Control Brain Network"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [],
+      "Values": [
+        "Control ship"
       ]
     },
     {
@@ -157,15 +289,10 @@
         {
           "Content": "Invasion of Naboo",
           "Href": "https://starwars.fandom.com/wiki/Invasion_of_Naboo"
-        },
-        {
-          "Content": "Battle of Naboo",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Naboo"
         }
       ],
       "Values": [
-        "Invasion of Naboo",
-        "Battle of Naboo"
+        "Invasion of Naboo"
       ]
     },
     {
@@ -202,11 +329,15 @@
         {
           "Content": "Daultay Dofine",
           "Href": "https://starwars.fandom.com/wiki/Daultay_Dofine"
+        },
+        {
+          "Content": "Saak'ak",
+          "Href": "https://starwars.fandom.com/wiki/Saak%27ak"
         }
       ],
       "Values": [
         "Nute Gunray",
-        "Daultay Dofine"
+        "Daultay Dofine (transferred from Saak'ak)"
       ]
     },
     {
@@ -218,11 +349,16 @@
         }
       ],
       "Values": [
-        "Tey How"
+        "Tey How (transferred from Saak'ak)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 606512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 498400,
       "PageUrl": "https://starwars.fandom.com/wiki/Daultay_Dofine",
@@ -237,11 +373,6 @@
       "PageId": 497876,
       "PageUrl": "https://starwars.fandom.com/wiki/TC-14",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 606512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

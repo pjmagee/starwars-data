@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light freighter",
@@ -172,10 +172,19 @@
         {
           "Content": "Rubicon navicomputer",
           "Href": "https://starwars.fandom.com/wiki/Rubicon_navicomputer"
+        },
+        {
+          "Content": "Incom Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation"
+        },
+        {
+          "Content": "AH 1701 gyrocomputer",
+          "Href": "https://starwars.fandom.com/wiki/AH_1701_gyrocomputer"
         }
       ],
       "Values": [
-        "Microaxial Rubicon navicomputer"
+        "Microaxial Rubicon navicomputer",
+        "Incom Corporation AH 1701 gyrocomputer"
       ]
     },
     {
@@ -301,19 +310,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 459030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 702362,
-      "PageUrl": "https://starwars.fandom.com/wiki/Last_Chance_(YT-1300_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 524248,
       "PageUrl": "https://starwars.fandom.com/wiki/YT-series",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 774592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pikka's_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 473587,
@@ -321,9 +330,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "PageId": 702362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Last_Chance_(YT-1300_light_freighter)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

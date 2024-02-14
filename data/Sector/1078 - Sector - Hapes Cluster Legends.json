@@ -135,6 +135,10 @@
           "Href": "https://starwars.fandom.com/wiki/Lovola_system"
         },
         {
+          "Content": "Luuhar system",
+          "Href": "https://starwars.fandom.com/wiki/Luuhar_system"
+        },
+        {
           "Content": "Maad system",
           "Href": "https://starwars.fandom.com/wiki/Maad_system"
         },
@@ -284,6 +288,7 @@
         "Lalmy'ash system",
         "Lemmi system",
         "Lovola system",
+        "Luuhar system",
         "Maad system",
         "Maires system",
         "Millinar system",
@@ -317,6 +322,18 @@
       ]
     },
     {
+      "Label": "Nebulae",
+      "Links": [
+        {
+          "Content": "Transitory Mists",
+          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
+        }
+      ],
+      "Values": [
+        "Transitory Mists"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -338,6 +355,10 @@
         {
           "Content": "Rynmar Trail",
           "Href": "https://starwars.fandom.com/wiki/Rynmar_Trail"
+        },
+        {
+          "Content": "The Throat",
+          "Href": "https://starwars.fandom.com/wiki/The_Throat"
         }
       ],
       "Values": [
@@ -345,7 +366,8 @@
         "Great Rim Route",
         "Hapan Spine",
         "Lorell Route",
-        "Rynmar Trail"
+        "Rynmar Trail",
+        "The Throat"
       ]
     },
     {
@@ -374,10 +396,6 @@
         {
           "Content": "Rifle Worlds",
           "Href": "https://starwars.fandom.com/wiki/Rifle_Worlds"
-        },
-        {
-          "Content": "Transitory Mists",
-          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
@@ -386,8 +404,7 @@
         "Hapan Rim Worlds",
         "Interior Region",
         "Lorelli Reach",
-        "Rifle Worlds",
-        "Transitory Mists"
+        "Rifle Worlds"
       ]
     },
     {
@@ -400,10 +417,6 @@
         {
           "Content": "Baldavian",
           "Href": "https://starwars.fandom.com/wiki/Baldavian"
-        },
-        {
-          "Content": "Farnican",
-          "Href": "https://starwars.fandom.com/wiki/Farnican"
         },
         {
           "Content": "Gallinorean",
@@ -449,7 +462,6 @@
       "Values": [
         "Arabanthan",
         "Baldavian",
-        "Farnican",
         "Gallinorean",
         "Hapan",
         "Jeby",
@@ -526,8 +538,24 @@
       "Label": "Yuuzhan Vong War",
       "Links": [
         {
-          "Content": "Hapes",
+          "Content": "Hapes (I)",
+          "Href": "https://starwars.fandom.com/wiki/Honor_duel_on_Hapes"
+        },
+        {
+          "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Hapes_(Yuuzhan_Vong_War)"
+        }
+      ],
+      "Values": [
+        "Hapes (I) (II)"
+      ]
+    },
+    {
+      "Label": "Dark Nest Crisis",
+      "Links": [
+        {
+          "Content": "Hapes",
+          "Href": "https://starwars.fandom.com/wiki/Attempted_assassination_of_Allana_Solo"
         }
       ],
       "Values": [
@@ -574,384 +602,24 @@
       "Label": "Lost Tribe of Sith emergence",
       "Links": [
         {
-          "Content": "Hapes Consortium",
+          "Content": "Hapes Cluster",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Queen_project"
         }
       ],
       "Values": [
-        "Hapes Consortium"
+        "Hapes Cluster"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 21925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lemmi_VI",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapes/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 271124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arabanth_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Archais_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baldavia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carlania_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ediorung_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271284,
-      "PageUrl": "https://starwars.fandom.com/wiki/Farnica_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 35235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Terephon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 356868,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maires_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 22265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stalsinek_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maires/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13660,
-      "PageUrl": "https://starwars.fandom.com/wiki/Olanji",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Terephon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13662,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrakia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13664,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vergill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reboam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13668,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dreena",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 155741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kavan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 206803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uluq",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 206804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qogo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 118968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Telkur_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 118985,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roqoo_Depot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 9344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orelon_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 287347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tinta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 289381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrakia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 338507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talcharaim_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 1081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorell_Raiders",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 131263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knot_Holes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 117277,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roqoo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 272023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zalori_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 272026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zadaria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sivoria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363119,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sennex_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sargon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rainboh_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363146,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lalmy'ash_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363147,
-      "PageUrl": "https://starwars.fandom.com/wiki/K'Farri_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jovaria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jodaka_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363150,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cheruba_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 193114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shedu_Maad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 18460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stalsinek_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 273015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tumani_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 12966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Selab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 12968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charubah",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 12969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arabanth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 12972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ut",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
     {
       "PageId": 183903,
       "PageUrl": "https://starwars.fandom.com/wiki/Jodaka",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 65429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rainboh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 363323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorelli_Reach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 363422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gateworlds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 363443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corsair_Outback",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 272819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ut_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 210976,
-      "PageUrl": "https://starwars.fandom.com/wiki/K'Farri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 6174,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 21779,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calfa-5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 270743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Algnadesh_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 271056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andalia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 303178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millinar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 363155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 363165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore_Reach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 363167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorell_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 363274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar_Trail",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 124274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Megos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 16046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 43285,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millinar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 237548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maad_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 289453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theselon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 289474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calfa_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 24654,
-      "PageUrl": "https://starwars.fandom.com/wiki/Olanji/Charubah",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 202436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar",
+      "PageId": 193114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shedu_Maad",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -960,64 +628,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 25750,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ediorung",
+      "PageId": 21925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lemmi_VI",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 272368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wodan_system",
+      "PageId": 272819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ut_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 6943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore",
+      "PageId": 155741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kavan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 52630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rifle_Worlds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 6175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 308095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Olanji_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 122380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relephon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 266627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nantuker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 266636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chosper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 266691,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harterra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 266698,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sivoria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 272595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vergill_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 314609,
@@ -1117,6 +740,451 @@
     {
       "PageId": 314663,
       "PageUrl": "https://starwars.fandom.com/wiki/Reboam_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 272368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wodan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 6943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maires/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13660,
+      "PageUrl": "https://starwars.fandom.com/wiki/Olanji",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Terephon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrakia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vergill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reboam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dreena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 206803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uluq",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 206804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qogo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 206802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uroro_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 117277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roqoo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 124274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Megos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 266627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nantuker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 266636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chosper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 266691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harterra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 266698,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sivoria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 363323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorelli_Reach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 363327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Rim_Worlds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 363422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gateworlds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 363443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corsair_Outback",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 761256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 9344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orelon_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 289453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theselon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 289474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calfa_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sivoria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sennex_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sargon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rainboh_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lalmy'ash_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363147,
+      "PageUrl": "https://starwars.fandom.com/wiki/K'Farri_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jovaria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jodaka_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cheruba_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andalia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arabanth_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Archais_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baldavia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carlania_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ediorung_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farnica_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 35235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Terephon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 356868,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maires_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 1077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transitory_Mists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 16046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 308095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Olanji_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 210976,
+      "PageUrl": "https://starwars.fandom.com/wiki/K'Farri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 43285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millinar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 706160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luuhar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 118968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Telkur_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 118985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roqoo_Depot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 706340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luuhar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallinore_Reach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 363167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorell_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 363274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar_Trail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 539008,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Throat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 273015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tumani_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 24654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Olanji/Charubah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 202436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rynmar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 65429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rainboh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 237548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maad_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 272595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vergill_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 1081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorell_Raiders",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 272023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zalori_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 272026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zadaria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 52630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rifle_Worlds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 6175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 303178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millinar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 363155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 21779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calfa-5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 131263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knot_Holes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 164077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interior_Region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 287347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tinta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 289381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrakia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 22265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stalsinek_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 18460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stalsinek_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 270743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Algnadesh_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 122380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relephon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charubah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arabanth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 6174,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 25750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ediorung",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapes/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 338507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talcharaim_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]

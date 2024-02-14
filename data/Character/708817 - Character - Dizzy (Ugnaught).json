@@ -2,7 +2,7 @@
   "PageId": 708817,
   "PageUrl": "https://starwars.fandom.com/wiki/Dizzy_(Ugnaught)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/57/Dizzy-SWHunters.png/revision/latest?cb=20210915003019",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/57/Dizzy-SWHunters.png/revision/latest?cb=20220812031501",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,13 @@
       ],
       "Values": [
         "Ugnaught"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -48,7 +55,30 @@
       "Values": [
         "Light"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Hunters of the Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
+        },
+        {
+          "Content": "Slingshot",
+          "Href": "https://starwars.fandom.com/wiki/Slingshot_(team)"
+        }
+      ],
+      "Values": [
+        "Hunters of the Outer Rim",
+        "Slingshot"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 781307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prototype_E-Web",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

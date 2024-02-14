@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Manufacturing district",
+          "Href": "https://starwars.fandom.com/wiki/Manufacturing_district"
+        }
+      ],
+      "Values": [
+        "Manufacturing district"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Unidentified Sterdic IV species",
@@ -29,10 +41,19 @@
         {
           "Content": "Cawa City",
           "Href": "https://starwars.fandom.com/wiki/Cawa_City"
+        },
+        {
+          "Content": "Sterdic IV's capital city",
+          "Href": "https://starwars.fandom.com/wiki/Sterdic_IV%27s_capital_city"
+        },
+        {
+          "Content": "capital",
+          "Href": "https://starwars.fandom.com/wiki/Capital"
         }
       ],
       "Values": [
-        "Cawa City"
+        "Cawa City",
+        "Sterdic IV's capital city (capital)"
       ]
     },
     {
@@ -55,9 +76,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 514774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cawa_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 737479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manufacturing_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 514055,
@@ -65,9 +86,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 737483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sterdic_IV's_capital_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 514126,
       "PageUrl": "https://starwars.fandom.com/wiki/Feral_Group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 583792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sterdic_IV_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 514774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cawa_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

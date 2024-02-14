@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -60,7 +67,46 @@
       "Values": [
         "Light brown"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Haru",
+          "Href": "https://starwars.fandom.com/wiki/Haru"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Haru (spouse)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Saku",
+          "Href": "https://starwars.fandom.com/wiki/Saku"
+        }
+      ],
+      "Values": [
+        "Saku (sister-in-law)"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 710130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 710131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

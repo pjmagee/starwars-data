@@ -27,12 +27,16 @@
       "Label": "Born",
       "Links": [
         {
-          "Content": "44 BBY",
-          "Href": "https://starwars.fandom.com/wiki/44_BBY"
+          "Content": "51 BBY",
+          "Href": "https://starwars.fandom.com/wiki/51_BBY"
+        },
+        {
+          "Content": "45 BBY",
+          "Href": "https://starwars.fandom.com/wiki/45_BBY"
         }
       ],
       "Values": [
-        "By 44 BBY"
+        "Between 51 BBY and 45 BBY"
       ]
     },
     {
@@ -61,6 +65,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -107,26 +118,51 @@
         {
           "Content": "Amidalans",
           "Href": "https://starwars.fandom.com/wiki/Amidalans"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
         "Royal House of Naboo",
         "Naboo Royal Handmaidens",
         "Galactic Republic",
-        "Amidalans"
+        "Amidalans",
+        "Galactic Empire",
+        "Sith"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 754593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_Jul's_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 754586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Levitating_boot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 619456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
     {
       "PageId": 605804,
       "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 619456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 750964,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Fedalle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Sulon",
-          "Href": "https://starwars.fandom.com/wiki/Sulon"
+          "Href": "https://starwars.fandom.com/wiki/Sulon/Legends"
         }
       ],
       "Values": [
@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -94,7 +101,48 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Katarn family",
+          "Href": "https://starwars.fandom.com/wiki/Katarn_family"
+        }
+      ],
+      "Values": [
+        "Katarn family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Morgan Katarn",
+          "Href": "https://starwars.fandom.com/wiki/Morgan_Katarn"
+        },
+        {
+          "Content": "Patricia Katarn",
+          "Href": "https://starwars.fandom.com/wiki/Patricia_Katarn"
+        }
+      ],
+      "Values": [
+        "Morgan Katarn",
+        "Patricia Katarn"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Jan Ors",
+          "Href": "https://starwars.fandom.com/wiki/Jan_Ors"
+        }
+      ],
+      "Values": [
+        "Jan Ors"
       ]
     },
     {
@@ -115,10 +163,6 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
-        },
-        {
-          "Content": "Alliance of Free Planets",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_of_Free_Planets"
         },
         {
           "Content": "New Jedi Order",
@@ -146,7 +190,6 @@
         "Galactic Empire",
         "Stormtrooper Corps",
         "Alliance to Restore the Republic",
-        "Alliance of Free Planets",
         "New Jedi Order",
         "Jedi High Council",
         "New Republic",
@@ -167,7 +210,7 @@
         },
         {
           "Content": "Qu Rahn",
-          "Href": "https://starwars.fandom.com/wiki/Qu_Rahn"
+          "Href": "https://starwars.fandom.com/wiki/Qu_Rahn/Legends"
         },
         {
           "Content": "Luke Skywalker",
@@ -206,44 +249,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 5308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qu_Rahn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 39302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tal_(Jedi)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 419718,
       "PageUrl": "https://starwars.fandom.com/wiki/HWK-290_Expansion_Pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaden_Korr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 169847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Mara_Jade_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 5797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moldy_Crow/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 28461,
@@ -256,9 +264,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
     },
     {
-      "PageId": 69187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Shaddaa_(Dark_Trooper_campaign)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 5308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qu_Rahn/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 52643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Artus_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 7760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Katarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 9272,
@@ -266,9 +284,94 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 39302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tal_(Jedi)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jan_Ors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rosh_Penin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 169847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Mara_Jade_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 69187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Shaddaa_(Dark_Trooper_campaign)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 71075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cairn_Installation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 456259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Aces_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
+    {
+      "PageId": 775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaden_Korr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 83306,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Sulon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 5797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moldy_Crow/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 563988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dromund_Kaas_(New_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 11988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patricia_Katarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 344116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(New_Jedi_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 34334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yavin_4_(Empire_Reborn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 39639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spy_Primer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 33254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Truly_Sorry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 388654,
@@ -286,34 +389,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 456259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Aces_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 563988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dromund_Kaas_(New_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 344116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(New_Jedi_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 39639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spy_Primer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 7595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rosh_Penin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 33254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Truly_Sorry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 150523,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Altyr_V_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

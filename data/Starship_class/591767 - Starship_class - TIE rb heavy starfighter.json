@@ -2,13 +2,20 @@
   "PageId": 591767,
   "PageUrl": "https://starwars.fandom.com/wiki/TIE/rb_heavy_starfighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/da/TIE_Brute.png/revision/latest?cb=20200120062452",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d0/TIEBrute.png/revision/latest?cb=20220915051430",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "TIE/rb heavy starfighter"
+      ]
+    },
+    {
+      "Label": "Designer",
+      "Links": [],
+      "Values": [
+        "SFS"
       ]
     },
     {
@@ -21,13 +28,6 @@
       ],
       "Values": [
         "Sienar Fleet Systems"
-      ]
-    },
-    {
-      "Label": "Designer",
-      "Links": [],
-      "Values": [
-        "SFS"
       ]
     },
     {
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -166,6 +166,18 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Close range sensors"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -203,7 +215,11 @@
       "Label": "Other systems",
       "Links": [
         {
-          "Content": "Droid intelligence system",
+          "Content": "MGK-300",
+          "Href": "https://starwars.fandom.com/wiki/MGK-300"
+        },
+        {
+          "Content": "droid",
           "Href": "https://starwars.fandom.com/wiki/Droid"
         },
         {
@@ -216,7 +232,7 @@
         }
       ],
       "Values": [
-        "Droid intelligence system",
+        "MGK-300 droid intelligence",
         "Solar collectors",
         "Ejector seat"
       ]

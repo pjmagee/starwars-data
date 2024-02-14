@@ -13,9 +13,14 @@
     },
     {
       "Label": "Conflict",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Outbound Flight Project",
+          "Href": "https://starwars.fandom.com/wiki/Outbound_Flight_Project"
+        }
+      ],
       "Values": [
-        "Outbound Flight"
+        "Outbound Flight Project"
       ]
     },
     {
@@ -32,20 +37,55 @@
     },
     {
       "Label": "Place",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Unknown Regions",
+          "Href": "https://starwars.fandom.com/wiki/Unknown_Regions/Legends"
+        },
+        {
+          "Content": "Unidentified star system",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Unknown_Regions_star_system_(destruction_of_Special_Task_Force_One)"
+        }
+      ],
       "Values": [
-        "Unknown Regions"
+        "Unknown Regions",
+        "Unidentified star system"
       ]
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Chiss Ascendancy",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy/Legends"
+        },
+        {
+          "Content": "Special Task Force One",
+          "Href": "https://starwars.fandom.com/wiki/Special_Task_Force_One"
+        }
+      ],
       "Values": [
-        "Complete destruction and disbandment of Special Task Force One"
+        "Chiss Ascendancy victory",
+        "Complete destruction of Special Task Force One"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 777047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 55607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Special_Task_Force_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 50445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Springhawk/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 54882,
       "PageUrl": "https://starwars.fandom.com/wiki/Whirlwind_(Chiss)/Legends",

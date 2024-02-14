@@ -2,7 +2,7 @@
   "PageId": 451699,
   "PageUrl": "https://starwars.fandom.com/wiki/Breha_Organa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6e/Breha_Organa_Kenobi.png/revision/latest?cb=20220528014938",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/BrehaOrgana-DoRTVG.png/revision/latest?cb=20230803015032",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,22 @@
       ],
       "Values": [
         "Alderaan"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "56 BBY",
+          "Href": "https://starwars.fandom.com/wiki/56_BBY"
+        },
+        {
+          "Content": "53 BBY",
+          "Href": "https://starwars.fandom.com/wiki/53_BBY"
+        }
+      ],
+      "Values": [
+        "Between 56 BBY and 53 BBY"
       ]
     },
     {
@@ -64,6 +80,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -102,7 +125,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Elder Houses",
@@ -111,6 +134,76 @@
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
+        }
+      ],
+      "Values": [
+        "Elder Houses",
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Breha Organa's father",
+          "Href": "https://starwars.fandom.com/wiki/Breha_Organa%27s_father"
+        },
+        {
+          "Content": "Breha Organa's mother",
+          "Href": "https://starwars.fandom.com/wiki/Breha_Organa%27s_mother"
+        }
+      ],
+      "Values": [
+        "Breha Organa's father",
+        "Breha Organa's mother"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Bail Prestor Organa",
+          "Href": "https://starwars.fandom.com/wiki/Bail_Prestor_Organa"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Bail Prestor Organa (spouse)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Celly Organa",
+          "Href": "https://starwars.fandom.com/wiki/Celly_Organa"
+        }
+      ],
+      "Values": [
+        "Celly Organa"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Leia Skywalker Organa Solo",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo"
+        }
+      ],
+      "Values": [
+        "Leia Skywalker Organa Solo (adoptive daughter)"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Alderaanian monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian_monarchy"
         },
         {
           "Content": "Alliance to Restore the Republic",
@@ -118,13 +211,37 @@
         }
       ],
       "Values": [
-        "Elder Houses",
-        "House of Organa",
+        "Alderaanian monarchy",
         "Alliance to Restore the Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 457823,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 452285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Prestor_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 738602,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_accident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 730411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celly_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 576528,
       "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_Day_of_Demand",
@@ -134,11 +251,6 @@
       "PageId": 503256,
       "PageUrl": "https://starwars.fandom.com/wiki/Chalcedony_waves",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 457823,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Disaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

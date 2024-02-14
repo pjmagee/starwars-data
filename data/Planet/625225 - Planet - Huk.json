@@ -24,7 +24,31 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Huk sector",
+          "Href": "https://starwars.fandom.com/wiki/Huk_sector"
+        }
+      ],
+      "Values": [
+        "Huk sector"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "system",
+          "Href": "https://starwars.fandom.com/wiki/Star_system"
+        }
+      ],
+      "Values": [
+        "a system"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "J-4",
@@ -49,6 +73,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 625229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaleesh-Yam'rii_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 734763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huk_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 618932,
       "PageUrl": "https://starwars.fandom.com/wiki/Yam'rii",

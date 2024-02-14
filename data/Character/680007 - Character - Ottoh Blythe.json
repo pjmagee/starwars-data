@@ -52,7 +52,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Blythe family",
@@ -62,9 +69,57 @@
       "Values": [
         "Blythe family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Erika Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Erika_Blythe"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Erika Blythe (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ronn Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Ronn_Blythe"
+        },
+        {
+          "Content": "Bailen Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Bailen_Blythe"
+        }
+      ],
+      "Values": [
+        "Ronn Blythe",
+        "Bailen Blythe"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 680015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bailen_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronn_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erika_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 680093,
       "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Elphrona",

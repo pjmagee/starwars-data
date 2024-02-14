@@ -51,7 +51,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -132,18 +132,6 @@
       ],
       "Values": [
         "Humans"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Royal Script of Grizmallt",
-          "Href": "https://starwars.fandom.com/wiki/Royal_Script_of_Grizmallt"
-        }
-      ],
-      "Values": [
-        "Royal Script of Grizmallt"
       ]
     },
     {
@@ -185,6 +173,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
+          "Content": "Alsakan",
+          "Href": "https://starwars.fandom.com/wiki/Alsakan/Legends"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
@@ -195,32 +187,13 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Alsakan",
         "Galactic Empire",
         "New Republic"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 309374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Quarter_(Grizmallt)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 307273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Script_of_Grizmallt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 127070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallt_nerf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
     {
       "PageId": 309371,
       "PageUrl": "https://starwars.fandom.com/wiki/Palazzo_Reina",
@@ -232,9 +205,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 40898,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elsinoré_den_Tasia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 709349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti_civil_war/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 127070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallt_nerf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 727771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slipthroat_Grizmallt_Liquor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 309374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Quarter_(Grizmallt)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 307273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Script_of_Grizmallt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
     },
     {
       "PageId": 540086,
@@ -247,24 +240,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 137196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Vima",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 391435,
       "PageUrl": "https://starwars.fandom.com/wiki/Grizmallt_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 727771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slipthroat_Grizmallt_Liquor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 709349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti_civil_war/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 412393,
@@ -272,9 +250,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 151657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beneficent_Tasia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 40898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elsinoré_den_Tasia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

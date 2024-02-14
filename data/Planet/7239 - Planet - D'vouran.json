@@ -12,30 +12,47 @@
     },
     {
       "Label": "Region",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "0 ABY",
+          "Href": "https://starwars.fandom.com/wiki/0_ABY/Legends"
+        },
+        {
+          "Content": "Mid Rim",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        }
+      ],
       "Values": [
-        "Mobile"
+        "Varied",
+        "0 ABY: Mid Rim"
       ]
     },
     {
       "Label": "Sector",
       "Links": [],
       "Values": [
-        "Mobile"
+        "Varied"
       ]
     },
     {
       "Label": "System",
       "Links": [],
       "Values": [
-        "Mobile"
+        "Varied"
       ]
     },
     {
       "Label": "Suns",
       "Links": [],
       "Values": [
-        "Varies"
+        "Varied"
+      ]
+    },
+    {
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "Varied"
       ]
     },
     {
@@ -43,6 +60,14 @@
       "Links": [],
       "Values": [
         "None"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "Varied",
+        "0 ABY: P-15"
       ]
     },
     {
@@ -58,7 +83,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Forests",
@@ -74,17 +99,27 @@
           "Href": "https://starwars.fandom.com/wiki/Don%27t_Go_Inn"
         },
         {
+          "Content": "D'vouran Imperial laboratory",
+          "Href": "https://starwars.fandom.com/wiki/D%27vouran_Imperial_laboratory"
+        },
+        {
           "Content": "Heart of D'vouran",
           "Href": "https://starwars.fandom.com/wiki/Heart_of_D%27vouran"
+        },
+        {
+          "Content": "Smada's stronghold",
+          "Href": "https://starwars.fandom.com/wiki/Smada%27s_stronghold"
         }
       ],
       "Values": [
         "Don't Go Inn",
-        "Heart of D'vouran"
+        "D'vouran Imperial laboratory",
+        "Heart of D'vouran",
+        "Smada's stronghold"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Enzeen",

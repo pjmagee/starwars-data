@@ -2,6 +2,7 @@
   "PageId": 186068,
   "PageUrl": "https://starwars.fandom.com/wiki/Loranda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,42 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Hetton's family",
+          "Href": "https://starwars.fandom.com/wiki/Hetton%27s_family"
+        }
+      ],
+      "Values": [
+        "Hetton's family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Hetton",
+          "Href": "https://starwars.fandom.com/wiki/Hetton"
+        }
+      ],
+      "Values": [
+        "Hetton"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 186040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hetton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hetton's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

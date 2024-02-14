@@ -2,24 +2,13 @@
   "PageId": 10867,
   "PageUrl": "https://starwars.fandom.com/wiki/Winama_Naberrie",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Winama Naberrie"
-      ]
-    },
-    {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Naboo",
-          "Href": "https://starwars.fandom.com/wiki/Naboo/Legends"
-        }
-      ],
-      "Values": [
-        "Naboo"
       ]
     },
     {
@@ -35,18 +24,6 @@
       ]
     },
     {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Human"
-      ]
-    },
-    {
       "Label": "Gender",
       "Links": [
         {
@@ -59,7 +36,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Naberrie",
@@ -69,7 +53,25 @@
       "Values": [
         "House Naberrie"
       ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ruwee Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Ruwee Naberrie"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 693740,
   "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector_uprising",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,15 +12,19 @@
       ]
     },
     {
-      "Label": "Conflict",
+      "Label": "Date",
       "Links": [
         {
-          "Content": "Galactic Civil War",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+          "Content": "2 BBY",
+          "Href": "https://starwars.fandom.com/wiki/2_BBY/Legends"
+        },
+        {
+          "Content": "0 ABY",
+          "Href": "https://starwars.fandom.com/wiki/0_ABY/Legends"
         }
       ],
       "Values": [
-        "Galactic Civil War"
+        "Between 2 BBY and 0 ABY"
       ]
     },
     {
@@ -35,5 +40,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

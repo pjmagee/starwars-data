@@ -24,6 +24,30 @@
       ]
     },
     {
+      "Label": "Begin",
+      "Links": [
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        }
+      ],
+      "Values": [
+        "4 ABY"
+      ]
+    },
+    {
+      "Label": "Place",
+      "Links": [
+        {
+          "Content": "The galaxy",
+          "Href": "https://starwars.fandom.com/wiki/The_galaxy"
+        }
+      ],
+      "Values": [
+        "The galaxy"
+      ]
+    },
+    {
       "Label": "Outcome",
       "Links": [
         {
@@ -41,6 +65,10 @@
         {
           "Content": "Battle of Jakku",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Jakku"
+        },
+        {
+          "Content": "Imperial Remnants",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
         },
         {
           "Content": "New Republic",
@@ -62,7 +90,7 @@
       "Values": [
         "Partially successful",
         "Death of Counselor to the Empire Gallius Rax",
-        "Plot to destroy Jakku during the Battle of Jakku fails, allowing a small number of Imperial remnants and the New Republic to survive the Contingency",
+        "Plot to destroy Jakku during the Battle of Jakku fails, allowing a small number of Imperial Remnants and the New Republic to survive the Contingency",
         "Establishment of the First Order in the Unknown Regions in order to rebuild the Empire"
       ]
     },
@@ -162,6 +190,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 677326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Burnin_Konn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 516102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 583556,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pillio",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -170,26 +208,6 @@
       "PageId": 583624,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Vardos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 624907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nacronis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 499302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 594304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Abednedo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 697540,
@@ -202,9 +220,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 515258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Theed",
+      "PageId": 787947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sentinel_(Imperalis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 624907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nacronis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 514123,
+      "PageUrl": "operation:_Cinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 675820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dauntless_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 631439,
@@ -217,14 +250,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 677326,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Burnin_Konn",
+      "PageId": 594304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Abednedo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 514123,
-      "PageUrl": "operation:_Cinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 583374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eviscerator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 515258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Theed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 775328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Versio's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 499302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 452818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

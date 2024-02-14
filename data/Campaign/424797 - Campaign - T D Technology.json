@@ -15,29 +15,26 @@
       "Label": "Conflict",
       "Links": [
         {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+        },
+        {
           "Content": "Zaarin insurrection",
           "Href": "https://starwars.fandom.com/wiki/Zaarin_insurrection"
         }
       ],
       "Values": [
-        "Zaarin insurrection"
+        "Galactic Civil War (Zaarin insurrection)"
       ]
     },
     {
-      "Label": "Begin",
+      "Label": "Date",
       "Links": [
         {
           "Content": "3.5 ABY",
           "Href": "https://starwars.fandom.com/wiki/3_ABY/Legends"
         }
       ],
-      "Values": [
-        "3.5 ABY"
-      ]
-    },
-    {
-      "Label": "End",
-      "Links": [],
       "Values": [
         "3.5 ABY"
       ]
@@ -84,21 +81,36 @@
         {
           "Content": "Second Battle of Parmel",
           "Href": "https://starwars.fandom.com/wiki/Second_Battle_of_Parmel"
+        },
+        {
+          "Content": "Ambush on Hashim",
+          "Href": "https://starwars.fandom.com/wiki/Ambush_on_Hashim"
         }
       ],
       "Values": [
         "Capture of Research",
         "Defense of Research",
         "Evacuation of Research",
-        "Second Battle of Parmel"
+        "Second Battle of Parmel",
+        "Ambush on Hashim"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 357223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Parmel",
+      "PageId": 538634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Hashim",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 212728,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zaarin_insurrection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 538449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 212736,
@@ -116,19 +128,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 538449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pacho",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 212728,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zaarin_insurrection",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 538634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Hashim",
+      "PageId": 357223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Parmel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 5518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Parmel_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

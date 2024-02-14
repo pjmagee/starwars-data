@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -65,25 +75,25 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Legions of Lettow",
-          "Href": "https://starwars.fandom.com/wiki/Legions_of_Lettow"
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "Legions of Lettow"
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 27392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Legions_of_Lettow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 375239,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Lettow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 381393,
+      "PageUrl": "https://starwars.fandom.com/wiki/Legionnaire_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 391432,
@@ -91,9 +101,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 381393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Legionnaire_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 27392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Legions_of_Lettow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -106,7 +113,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Vizsla",
@@ -120,6 +127,18 @@
       "Values": [
         "House Vizsla",
         "Clan Saxon"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Tiber Saxon",
+          "Href": "https://starwars.fandom.com/wiki/Tiber_Saxon"
+        }
+      ],
+      "Values": [
+        "Tiber Saxon"
       ]
     },
     {
@@ -138,7 +157,7 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Super Commando",
+          "Content": "Imperial Super Commandos",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Super_Commando"
         }
       ],
@@ -146,11 +165,16 @@
         "Shadow Collective",
         "Mandalorian super commandos",
         "Galactic Empire",
-        "Imperial Super Commando"
+        "Imperial Super Commandos"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 554055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_the_third_moon_of_Concord_Dawn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 567163,
       "PageUrl": "https://starwars.fandom.com/wiki/Clan_Saxon",
@@ -162,24 +186,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 567160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
       "PageId": 564519,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Krownest",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 554055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_the_third_moon_of_Concord_Dawn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 581570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 459349,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_super_commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 567160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

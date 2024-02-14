@@ -2,7 +2,7 @@
   "PageId": 14169,
   "PageUrl": "https://starwars.fandom.com/wiki/Dagary_Minor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/06/DagaryMinor-TEA.jpg/revision/latest?cb=20230817181545",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "Northern Dependencies"
       ]
     },
     {
@@ -36,23 +41,42 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-8"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 23562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dagary_Minor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 315607,
       "PageUrl": "https://starwars.fandom.com/wiki/Dagary_Minor_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 23562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dagary_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

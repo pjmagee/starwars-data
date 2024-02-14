@@ -72,18 +72,11 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
-      "Values": [
-        "None"
-      ]
-    },
-    {
       "Label": "Eye color",
       "Links": [
         {
           "Content": "Red",
-          "Href": "https://starwars.fandom.com/wiki/Red"
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
@@ -91,22 +84,54 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Secura",
           "Href": "https://starwars.fandom.com/wiki/Clan_Secura"
-        },
-        {
-          "Content": "Twi'lek Clan Council",
-          "Href": "https://starwars.fandom.com/wiki/Twi%27lek_Clan_Council"
         }
       ],
       "Values": [
-        "Clan Secura",
-        "Twi'lek Clan Council"
+        "Clan Secura"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Lon Secura",
+          "Href": "https://starwars.fandom.com/wiki/Lon_Secura"
+        }
+      ],
+      "Values": [
+        "Lon Secura"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Twi'lek Ruling Council",
+          "Href": "https://starwars.fandom.com/wiki/Twi%27lek_Ruling_Council"
+        }
+      ],
+      "Values": [
+        "Twi'lek Ruling Council"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 27605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lon_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

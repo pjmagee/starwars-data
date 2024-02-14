@@ -53,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-12",
@@ -62,6 +62,31 @@
       ],
       "Values": [
         "N-12"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Trade Route"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "60%",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "60% (cold seasons)",
+        ">60% (warm seasons)"
       ]
     },
     {
@@ -77,7 +102,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Gossam",
@@ -118,13 +143,23 @@
   ],
   "Relationships": [
     {
-      "PageId": 551949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 472583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antar_Atrocity",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 576538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_Assembly_for_Separation",
+      "PageId": 469089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gotal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 563398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roshu_Sune",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -133,24 +168,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 472583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antar_Atrocity",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 509365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salikk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 563398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roshu_Sune",
+      "PageId": 576538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_Assembly_for_Separation",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 469089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gotal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 476358,
@@ -158,9 +178,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 509365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salikk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 652159,
       "PageUrl": "https://starwars.fandom.com/wiki/Antarian_Rangers",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 768088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Antar_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 551949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

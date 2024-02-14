@@ -12,29 +12,32 @@
       ]
     },
     {
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Non-sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience/Legends"
+        }
+      ],
+      "Values": [
+        "Non-sentient"
+      ]
+    },
+    {
       "Label": "Classification",
       "Links": [
         {
-          "Content": "Spider",
+          "Content": "Arachnid",
           "Href": "https://starwars.fandom.com/wiki/Spider/Legends"
         }
       ],
       "Values": [
-        "Spider"
+        "Arachnid"
       ]
     },
     {
       "Label": "Races",
-      "Links": [
-        {
-          "Content": "King Venom Nightspider",
-          "Href": "https://starwars.fandom.com/wiki/King_Venom_Nightspider"
-        },
-        {
-          "Content": "Poison Spitter",
-          "Href": "https://starwars.fandom.com/wiki/Poison_Spitter"
-        }
-      ],
+      "Links": [],
       "Values": [
         "King Venom Nightspider",
         "Poison Spitter"
@@ -46,18 +49,23 @@
         {
           "Content": "Naboo",
           "Href": "https://starwars.fandom.com/wiki/Naboo/Legends"
+        },
+        {
+          "Content": "Rori",
+          "Href": "https://starwars.fandom.com/wiki/Rori/Legends"
         }
       ],
       "Values": [
-        "Naboo"
+        "Naboo",
+        "Rori"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 648116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Noctur'lan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 257723,
@@ -70,9 +78,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 648116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noctur'lan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

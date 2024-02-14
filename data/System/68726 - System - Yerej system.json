@@ -2,7 +2,7 @@
   "PageId": 68726,
   "PageUrl": "https://starwars.fandom.com/wiki/Yerej_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/70/Drekker.jpg/revision/latest?cb=20060419160525",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -36,10 +36,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-18"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Yerej",
+          "Href": "https://starwars.fandom.com/wiki/Yerej"
+        }
+      ],
+      "Values": [
+        "Yerej"
       ]
     },
     {
@@ -52,18 +64,6 @@
       ],
       "Values": [
         "Drekker"
-      ]
-    },
-    {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Humans"
       ]
     },
     {
@@ -81,6 +81,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 12629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tungra_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 792833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yerej",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 68097,
       "PageUrl": "https://starwars.fandom.com/wiki/Drekker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
@@ -89,11 +99,6 @@
       "PageId": 288333,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yerej",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 12629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tungra_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 289464,
   "PageUrl": "https://starwars.fandom.com/wiki/Mirial_system/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4a/Mirial_system.jpg/revision/latest?cb=20220712015128",
   "Data": [
     {
       "Label": "Titles",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-4"
@@ -55,6 +55,18 @@
       ]
     },
     {
+      "Label": "Asteroids",
+      "Links": [
+        {
+          "Content": "Unidentified asteroid field",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_asteroid_field_(Mirial)"
+        }
+      ],
+      "Values": [
+        "Unidentified asteroid field"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -70,12 +82,29 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Mirialans",
+          "Content": "Mirialan",
           "Href": "https://starwars.fandom.com/wiki/Mirialan/Legends"
         }
       ],
       "Values": [
-        "Mirialans"
+        "Mirialan"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Beldon",
+          "Href": "https://starwars.fandom.com/wiki/Beldon/Legends"
+        },
+        {
+          "Content": "Ugnaught",
+          "Href": "https://starwars.fandom.com/wiki/Ugnaught/Legends"
+        }
+      ],
+      "Values": [
+        "Beldon",
+        "Ugnaught"
       ]
     },
     {
@@ -100,6 +129,18 @@
       ],
       "Values": [
         "100 million to 500 million (c. 25 ABY)"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Tibanna",
+          "Href": "https://starwars.fandom.com/wiki/Tibanna/Legends"
+        }
+      ],
+      "Values": [
+        "Tibanna"
       ]
     },
     {
@@ -142,8 +183,23 @@
   ],
   "Relationships": [
     {
+      "PageId": 430043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Republic_mining_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 5816,
       "PageUrl": "https://starwars.fandom.com/wiki/Mirial/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 430045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_mining_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 430044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_asteroid_field_(Mirial)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {

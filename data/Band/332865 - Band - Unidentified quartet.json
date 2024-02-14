@@ -2,6 +2,7 @@
   "PageId": 332865,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_quartet",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,25 @@
       "Values": [
         "Euceron"
       ]
+    },
+    {
+      "Label": "Formed",
+      "Links": [
+        {
+          "Content": "27 BBY",
+          "Href": "https://starwars.fandom.com/wiki/27_BBY"
+        }
+      ],
+      "Values": [
+        "27 BBY"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 20099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jizz-wail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    }
+  ]
 }

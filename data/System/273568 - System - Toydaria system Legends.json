@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-11"
@@ -113,23 +113,25 @@
         "The Scattering asteroid field",
         "The Chase asteroid field"
       ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
+        }
+      ],
+      "Values": [
+        "Oktos Route"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 278601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toydar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 278602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Little_Toydar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 2099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 2528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 278603,
@@ -167,14 +169,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 2528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 2099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 278601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toydar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 278602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Toydar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 475974,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Toydaria_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 270431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oktos_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

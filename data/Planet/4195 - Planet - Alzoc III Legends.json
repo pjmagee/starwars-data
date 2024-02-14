@@ -69,7 +69,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-19"
@@ -79,12 +79,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "16,431 km"
+        "16,431 kilometers"
       ]
     },
     {
@@ -100,10 +100,10 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Frozen wastelands",
+          "Content": "Frozen",
           "Href": "https://starwars.fandom.com/wiki/Water/Legends"
         },
         {
@@ -175,11 +175,11 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Rakata",
-          "Href": "https://starwars.fandom.com/wiki/Rakata/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Rakata"
         },
         {
           "Content": "Human",
@@ -253,33 +253,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 36214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Alzoc_III_(Empire_Reborn)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 7456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 9365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snow_slug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 177460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_III_mines",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 4042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muftak/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 277014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Alzoc_III",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 188761,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gar_(Talz)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 444526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broonmark's_father",
+      "PageId": 1645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foul_Moudama",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -288,29 +273,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 1863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talz/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 176646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valley_of_Blizzards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 7456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 1645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foul_Moudama",
+      "PageId": 188761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gar_(Talz)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 133410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_III_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 277014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Alzoc_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 412115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Cold_Weather_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 9365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snow_slug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 444526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broonmark's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muftak/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 381695,
@@ -318,8 +308,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 177460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_III_mines",
+      "PageId": 1863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talz/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 36214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_at_Alzoc_III_(Empire_Reborn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 412115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Cold_Weather_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 133410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alzoc_III_Base",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

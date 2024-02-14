@@ -2,12 +2,13 @@
   "PageId": 683516,
   "PageUrl": "https://starwars.fandom.com/wiki/A_Jedi_Tale",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2a/AJediTale.png/revision/latest?cb=20221207215150",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "A Jedi's Tale"
+        "A Jedi Tale"
       ]
     },
     {
@@ -94,9 +95,27 @@
         }
       ],
       "Values": [
-        "32 BBY - 19 BBY"
+        "32 BBY–19 BBY"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "A New Adventure",
+          "Href": "https://starwars.fandom.com/wiki/A_New_Adventure"
+        }
+      ],
+      "Values": [
+        "A New Adventure"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683538,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_New_Adventure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

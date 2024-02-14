@@ -2,6 +2,7 @@
   "PageId": 31621,
   "PageUrl": "https://starwars.fandom.com/wiki/Griggen_Sylo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Sylo family",
@@ -45,7 +46,54 @@
       "Values": [
         "Sylo family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Tashna Sylo",
+          "Href": "https://starwars.fandom.com/wiki/Tashna_Sylo"
+        }
+      ],
+      "Values": [
+        "Tashna Sylo"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Paxi Sylo",
+          "Href": "https://starwars.fandom.com/wiki/Paxi_Sylo"
+        },
+        {
+          "Content": "children",
+          "Href": "https://starwars.fandom.com/wiki/Youngling/Legends"
+        }
+      ],
+      "Values": [
+        "Paxi Sylo",
+        "Six children"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Sylo farm",
+          "Href": "https://starwars.fandom.com/wiki/Sylo_farm"
+        }
+      ],
+      "Values": [
+        "Sylo farm"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 31622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tashna_Sylo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

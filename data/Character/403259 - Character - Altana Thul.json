@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Thul",
@@ -84,7 +84,42 @@
       "Values": [
         "House Thul"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Markus Andarius Thul",
+          "Href": "https://starwars.fandom.com/wiki/Markus_Andarius_Thul"
+        }
+      ],
+      "Values": [
+        "Markus Andarius Thul"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Valyn Thul",
+          "Href": "https://starwars.fandom.com/wiki/Valyn_Thul"
+        }
+      ],
+      "Values": [
+        "Valyn Thul"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 388989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Markus_Andarius_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valyn_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

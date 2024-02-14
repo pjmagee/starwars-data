@@ -48,6 +48,18 @@
       ]
     },
     {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "star system",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_star_system_(Rothana)"
+        }
+      ],
+      "Values": [
+        "A star system"
+      ]
+    },
+    {
       "Label": "Planet",
       "Links": [
         {
@@ -57,6 +69,18 @@
       ],
       "Values": [
         "Rothana"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "T-15",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "T-15"
       ]
     },
     {
@@ -77,15 +101,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
-        },
-        {
-          "Content": "Sienar Fleet Systems",
-          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
         }
       ],
       "Values": [
-        "Galactic Empire",
-        "Sienar Fleet Systems"
+        "Galactic Empire"
       ]
     },
     {
@@ -111,9 +130,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 509404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rothana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 731614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_system_(Rothana)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 576143,
@@ -126,9 +145,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 509404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 554367,
       "PageUrl": "https://starwars.fandom.com/wiki/Corlac",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 460134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -69,12 +69,56 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Fel family",
           "Href": "https://starwars.fandom.com/wiki/Fel_dynasty"
-        },
+        }
+      ],
+      "Values": [
+        "Fel family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ajai Fel",
+          "Href": "https://starwars.fandom.com/wiki/Ajai_Fel"
+        }
+      ],
+      "Values": [
+        "Ajai Fel"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Soontir Fel",
+          "Href": "https://starwars.fandom.com/wiki/Soontir_Fel/Legends"
+        }
+      ],
+      "Values": [
+        "Soontir Fel"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Fyric Fel",
+          "Href": "https://starwars.fandom.com/wiki/Fyric_Fel"
+        }
+      ],
+      "Values": [
+        "Fyric Fel"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
@@ -85,11 +129,16 @@
         }
       ],
       "Values": [
-        "Fel family",
         "Galactic Empire",
         "New Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 3312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soontir_Fel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

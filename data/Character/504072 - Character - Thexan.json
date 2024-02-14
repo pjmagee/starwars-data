@@ -29,10 +29,14 @@
         {
           "Content": "3636 BBY",
           "Href": "https://starwars.fandom.com/wiki/3636_BBY"
+        },
+        {
+          "Content": "the Spire",
+          "Href": "https://starwars.fandom.com/wiki/Spire_(Zakuul)"
         }
       ],
       "Values": [
-        "3636 BBY"
+        "3636 BBY, the Spire, Zakuul"
       ]
     },
     {
@@ -64,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -85,6 +96,40 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Tenebrae",
+          "Href": "https://starwars.fandom.com/wiki/Tenebrae"
+        },
+        {
+          "Content": "Senya Tirall",
+          "Href": "https://starwars.fandom.com/wiki/Senya_Tirall"
+        }
+      ],
+      "Values": [
+        "Tenebrae",
+        "Senya Tirall"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Arcann",
+          "Href": "https://starwars.fandom.com/wiki/Arcann"
+        },
+        {
+          "Content": "Vaylin",
+          "Href": "https://starwars.fandom.com/wiki/Vaylin"
+        }
+      ],
+      "Values": [
+        "Arcann (twin brother)",
+        "Vaylin"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -97,5 +142,31 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 226112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tenebrae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arcann",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaylin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 761147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thexan's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 515464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senya_Tirall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

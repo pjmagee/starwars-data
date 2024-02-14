@@ -12,10 +12,27 @@
       ]
     },
     {
-      "Label": "Classification",
-      "Links": [],
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Non-sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience"
+        }
+      ],
       "Values": [
-        "Dragon"
+        "Non-sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Reptile",
+          "Href": "https://starwars.fandom.com/wiki/Reptile"
+        }
+      ],
+      "Values": [
+        "Reptile"
       ]
     },
     {
@@ -27,7 +44,9 @@
         }
       ],
       "Values": [
-        "Blue and pink"
+        "Blue",
+        "Pink",
+        "Purple"
       ]
     },
     {
@@ -50,8 +69,20 @@
       ]
     },
     {
-      "Label": "Diet",
+      "Label": "Habitat",
       "Links": [],
+      "Values": [
+        "Rocky plains"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Energy",
+          "Href": "https://starwars.fandom.com/wiki/Diet"
+        }
+      ],
       "Values": [
         "Energy"
       ]

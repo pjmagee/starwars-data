@@ -2,6 +2,7 @@
   "PageId": 604892,
   "PageUrl": "https://starwars.fandom.com/wiki/Grapnel-harpoon_launcher",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,12 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pharr Co",
+          "Href": "https://starwars.fandom.com/wiki/Pharr_Co."
+        }
+      ],
       "Values": [
         "Pharr Co"
       ]
@@ -21,12 +27,17 @@
       "Label": "Type",
       "Links": [],
       "Values": [
-        "Ascension tool/Non-lethal snare tool"
+        "Ascension tool and non-lethal snare tool"
       ]
     },
     {
       "Label": "Cost",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Credit"
+        }
+      ],
       "Values": [
         "450 credits"
       ]
@@ -42,9 +53,20 @@
       "Label": "Range",
       "Links": [],
       "Values": [
-        "Medium"
+        "Medium-ranged"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 751320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pharr_Co.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 751475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pharr_Co._weapons_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

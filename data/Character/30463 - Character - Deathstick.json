@@ -78,6 +78,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Shelish",
+          "Href": "https://starwars.fandom.com/wiki/Shelish"
+        }
+      ],
+      "Values": [
+        "Shelish"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -93,6 +105,14 @@
           "Href": "https://starwars.fandom.com/wiki/Assassin"
         },
         {
+          "Content": "T'onga's crew",
+          "Href": "https://starwars.fandom.com/wiki/T%27onga%27s_crew"
+        },
+        {
+          "Content": "Khel Tanna's crew",
+          "Href": "https://starwars.fandom.com/wiki/Khel_Tanna%27s_crew"
+        },
+        {
           "Content": "Kouhun",
           "Href": "https://starwars.fandom.com/wiki/Kouhun_(order)"
         }
@@ -100,20 +120,27 @@
       "Values": [
         "Nightsisters",
         "Crimson Dawn (as an assassin)",
+        "T'onga's crew",
+        "Khel Tanna's crew",
         "Kouhun"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 720564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Panisia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 530506,
       "PageUrl": "https://starwars.fandom.com/wiki/Kouhun_(order)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 720564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Panisia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 529379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shelish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

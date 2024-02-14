@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -67,6 +67,10 @@
         {
           "Content": "Ion drive",
           "Href": "https://starwars.fandom.com/wiki/Ion_engine"
+        },
+        {
+          "Content": "thrusters",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
         }
       ],
       "Values": [
@@ -98,6 +102,22 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensor",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        },
+        {
+          "Content": "antennas",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "High-performance sensor antennas"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -114,9 +134,9 @@
         }
       ],
       "Values": [
-        "Heavy turbolaser cannons (2)",
-        "Long-range heavy ion cannons (2)",
-        "Twin light turbolaser cannons (34)"
+        "2 heavy turbolaser cannons",
+        "2 heavy ion cannons",
+        "34 twin light turbolaser cannons"
       ]
     },
     {
@@ -127,12 +147,16 @@
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron"
+        },
+        {
           "Content": "Soulless One",
           "Href": "https://starwars.fandom.com/wiki/Soulless_One"
         }
       ],
       "Values": [
-        "Vulture-class droid starfighters",
+        "48 Vulture-class droid starfighters (4 squadrons; maximum load)",
         "Soulless One"
       ]
     },
@@ -140,24 +164,52 @@
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "hangar",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
+        },
+        {
+          "Content": "Docking rings",
+          "Href": "https://starwars.fandom.com/wiki/Docking_ring"
         }
       ],
       "Values": [
-        "Equipped"
+        "1 hangar bay",
+        "Docking rings"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
+          "Content": "OOM command battle droid",
+          "Href": "https://starwars.fandom.com/wiki/OOM_command_battle_droid"
+        },
+        {
           "Content": "B1-series battle droids",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
+        },
+        {
+          "Content": "OOM pilot battle droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM_pilot_battle_droid"
         }
       ],
       "Values": [
-        "B1-series battle droids"
+        "200",
+        "1 OOM command battle droid",
+        "B1-series battle droids",
+        "OOM pilot battle droids"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [
+        {
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        }
+      ],
+      "Values": [
+        "150,000 battle droids (maximum load)"
       ]
     },
     {
@@ -166,10 +218,21 @@
         {
           "Content": "hyperwave",
           "Href": "https://starwars.fandom.com/wiki/Hyperwave"
+        },
+        {
+          "Content": "transceivers",
+          "Href": "https://starwars.fandom.com/wiki/Subspace_transceiver"
         }
       ],
       "Values": [
-        "Long-range hyperwave transceiver masts (2)"
+        "2 hyperwave supralight transceivers"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [],
+      "Values": [
+        "Superdense reactant tanks"
       ]
     },
     {
@@ -178,10 +241,15 @@
         {
           "Content": "Flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
+        },
+        {
+          "Content": "Warship",
+          "Href": "https://starwars.fandom.com/wiki/Warship"
         }
       ],
       "Values": [
-        "Flagship"
+        "Flagship",
+        "Warship"
       ]
     },
     {
@@ -204,11 +272,16 @@
       "Label": "Present for battles/events",
       "Links": [
         {
+          "Content": "Battle of Falleen",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Falleen"
+        },
+        {
           "Content": "Battle of Bothawui",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Bothawui"
         }
       ],
       "Values": [
+        "Battle of Falleen",
         "Battle of Bothawui"
       ]
     },

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Attack hydrofoil"
@@ -146,14 +146,24 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Dark Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 227116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snopps'_Touring_Vessel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Aquatic_vehicle"
+    },
     {
       "PageId": 24575,
       "PageUrl": "https://starwars.fandom.com/wiki/Hydrospeare_Corporation",
@@ -163,11 +173,6 @@
       "PageId": 1367,
       "PageUrl": "https://starwars.fandom.com/wiki/World_Devastator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 227116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snopps'_Touring_Vessel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Aquatic_vehicle"
     }
   ]
 }

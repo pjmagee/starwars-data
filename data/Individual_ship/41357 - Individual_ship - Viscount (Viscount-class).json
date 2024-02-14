@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Product line",
+      "Links": [
+        {
+          "Content": "Mon Calamari Star Cruisers",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Star_Cruiser"
+        }
+      ],
+      "Values": [
+        "Mon Calamari Star Cruisers"
+      ]
+    },
+    {
+      "Label": "Model",
       "Links": [
         {
           "Content": "Viscount-class Star Defender",
@@ -24,6 +36,18 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Star Defender",
+          "Href": "https://starwars.fandom.com/wiki/Star_Defender"
+        }
+      ],
+      "Values": [
+        "Star Defender"
+      ]
+    },
+    {
       "Label": "Length",
       "Links": [
         {
@@ -32,7 +56,7 @@
         }
       ],
       "Values": [
-        "3,000 meters or 17,000 meters"
+        "3,000 meters"
       ]
     },
     {
@@ -107,14 +131,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 13270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mediator-class_battle_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 43942,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_First_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 13270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mediator-class_battle_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

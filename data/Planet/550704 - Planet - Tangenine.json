@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -32,7 +44,37 @@
         }
       ],
       "Values": [
+        "A school",
         "Lauren Mel Coelho's family's farmhouse"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Norango",
+          "Href": "https://starwars.fandom.com/wiki/Norango"
+        }
+      ],
+      "Values": [
+        "Norango"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Falleen",
+          "Href": "https://starwars.fandom.com/wiki/Falleen"
+        },
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Falleen",
+        "Humans"
       ]
     },
     {
@@ -50,6 +92,31 @@
   ],
   "Relationships": [
     {
+      "PageId": 375324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 469537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 768327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norango",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 591143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Remba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 582744,
       "PageUrl": "https://starwars.fandom.com/wiki/Lauren_Mel_Coelho's_family's_farmhouse",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -63,26 +130,6 @@
       "PageId": 591140,
       "PageUrl": "https://starwars.fandom.com/wiki/Malandro_syndicate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 469537,
-      "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 375324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 591143,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kelven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 591144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Remba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -73,6 +73,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
+          "Content": "Emperor's Hand",
+          "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Hand/Legends"
+        },
+        {
           "Content": "Dark Empire",
           "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         },
@@ -83,6 +87,7 @@
       ],
       "Values": [
         "Galactic Empire",
+        "Emperor's Hand",
         "Dark Empire",
         "Second Imperium"
       ]
@@ -100,5 +105,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 88959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Shadow_(shuttle)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

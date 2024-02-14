@@ -2,6 +2,7 @@
   "PageId": 401512,
   "PageUrl": "https://starwars.fandom.com/wiki/Maykia_Grell",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Sarkhai",
-          "Href": "https://starwars.fandom.com/wiki/Sarkhai"
+          "Href": "https://starwars.fandom.com/wiki/Sarkhai/Legends"
         }
       ],
       "Values": [
@@ -39,7 +40,7 @@
       "Links": [
         {
           "Content": "Sarkhai",
-          "Href": "https://starwars.fandom.com/wiki/Sarkhai_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Sarkhai_(species)/Legends"
         }
       ],
       "Values": [
@@ -57,7 +58,42 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Tobas Grell",
+          "Href": "https://starwars.fandom.com/wiki/Tobas_Grell"
+        }
+      ],
+      "Values": [
+        "Tobas Grell"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Nadia Grell",
+          "Href": "https://starwars.fandom.com/wiki/Nadia_Grell"
+        }
+      ],
+      "Values": [
+        "Nadia Grell"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 363837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tobas_Grell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 354237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nadia_Grell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

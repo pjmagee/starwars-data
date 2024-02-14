@@ -2,7 +2,7 @@
   "PageId": 21366,
   "PageUrl": "https://starwars.fandom.com/wiki/Domina_Tagge/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/19/Domina.jpg/revision/latest?cb=20090518125804",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/19/Domina.jpg/revision/latest?cb=20231116155434",
   "Data": [
     {
       "Label": "Titles",
@@ -25,9 +25,14 @@
     },
     {
       "Label": "Born",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
+        }
+      ],
       "Values": [
-        "Two years before the death of her parents"
+        "22 BBY, two years before the death of her parents"
       ]
     },
     {
@@ -55,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,12 +86,47 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Tagge",
           "Href": "https://starwars.fandom.com/wiki/House_of_Tagge/Legends"
+        }
+      ],
+      "Values": [
+        "House of Tagge"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Orman Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Orman_Tagge/Legends"
         },
+        {
+          "Content": "Silas Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Silas_Tagge/Legends"
+        },
+        {
+          "Content": "Ulric Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Ulric_Tagge/Legends"
+        },
+        {
+          "Content": "Cassio Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Cassio_Tagge/Legends"
+        }
+      ],
+      "Values": [
+        "Orman Tagge",
+        "Silas Tagge",
+        "Ulric Tagge",
+        "Cassio Tagge"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
@@ -94,7 +141,6 @@
         }
       ],
       "Values": [
-        "House of Tagge",
         "Galactic Empire",
         "Order of the Sacred Circle",
         "Tagge Company"
@@ -103,9 +149,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 629197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Mining_Explorer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 21129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orman_Tagge/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 169846,
@@ -113,14 +159,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 120046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Domina_Tagge's_starship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 11381,
       "PageUrl": "https://starwars.fandom.com/wiki/Tagge_Company",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 629197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Mining_Explorer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 120046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domina_Tagge's_starship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

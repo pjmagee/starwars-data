@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Super Star Destroyer",
@@ -33,6 +33,18 @@
       ],
       "Values": [
         "Super Star Destroyer (dreadnought)"
+      ]
+    },
+    {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
+      "Values": [
+        "2,500,000,000 credits"
       ]
     },
     {
@@ -191,11 +203,16 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
           "Content": "Imperial Remnant",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
         }
       ],
       "Values": [
+        "Galactic Empire",
         "Imperial Remnant"
       ]
     }

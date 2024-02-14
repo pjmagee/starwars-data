@@ -2,6 +2,7 @@
   "PageId": 196560,
   "PageUrl": "https://starwars.fandom.com/wiki/Veré",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,32 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Set",
+          "Href": "https://starwars.fandom.com/wiki/Set"
+        }
+      ],
+      "Values": [
+        "Set"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 196561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Set",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

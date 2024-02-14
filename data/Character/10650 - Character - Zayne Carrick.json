@@ -60,8 +60,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -78,6 +90,35 @@
       "Links": [],
       "Values": [
         "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Carrick family",
+          "Href": "https://starwars.fandom.com/wiki/Carrick_family"
+        }
+      ],
+      "Values": [
+        "Carrick family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Arvan Carrick",
+          "Href": "https://starwars.fandom.com/wiki/Arvan_Carrick"
+        },
+        {
+          "Content": "Reiva Carrick",
+          "Href": "https://starwars.fandom.com/wiki/Reiva_Carrick"
+        }
+      ],
+      "Values": [
+        "Arvan Carrick",
+        "Reiva Carrick"
       ]
     },
     {
@@ -156,34 +197,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 237098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hot_Prospect",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 269962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cargryph_Capital_Management",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 333213,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_Koornacht_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 282535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trial_of_Demagol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 35116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucien_Draay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 49542,
       "PageUrl": "https://starwars.fandom.com/wiki/Padawan_Massacre",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 183219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reciprocity",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 132895,
@@ -191,9 +212,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 183219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reciprocity",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 269962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cargryph_Capital_Management",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 129390,
@@ -206,6 +227,36 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 237098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hot_Prospect",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 333213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_Koornacht_Cluster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 35116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucien_Draay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 2648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vandar_Tokare",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 124213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arvan_Carrick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 282535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trial_of_Demagol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 625043,
       "PageUrl": "https://starwars.fandom.com/wiki/Zayne_Carrick's_first_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
@@ -214,11 +265,6 @@
       "PageId": 625044,
       "PageUrl": "https://starwars.fandom.com/wiki/Zayne_Carrick's_second_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 2648,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vandar_Tokare",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

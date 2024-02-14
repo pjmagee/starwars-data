@@ -15,12 +15,12 @@
       "Label": "Born",
       "Links": [
         {
-          "Content": "11 ABY",
-          "Href": "https://starwars.fandom.com/wiki/11_ABY"
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
         }
       ],
       "Values": [
-        "11 ABY"
+        "9 ABY"
       ]
     },
     {
@@ -29,10 +29,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Batuuan",
+          "Href": "https://starwars.fandom.com/wiki/Batuuan"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Batuuan)"
       ]
     },
     {
@@ -45,6 +49,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -80,6 +91,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 630404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 590441,
       "PageUrl": "https://starwars.fandom.com/wiki/Black_Spire_Station",

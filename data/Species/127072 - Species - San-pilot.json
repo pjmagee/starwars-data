@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Classification",
+      "Label": "Designation",
       "Links": [
         {
           "Content": "Non-sentient",
@@ -21,6 +21,18 @@
       ],
       "Values": [
         "Non-sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Parasite",
+          "Href": "https://starwars.fandom.com/wiki/Parasite/Legends"
+        }
+      ],
+      "Values": [
+        "Parasite"
       ]
     },
     {
@@ -48,18 +60,30 @@
       "Values": [
         "Naboo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
+      "Values": [
+        "Oceans"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 239916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Abyss/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 17274,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 239916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Abyss/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

@@ -36,6 +36,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.87 meters"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -44,7 +63,14 @@
         }
       ],
       "Values": [
-        "Black"
+        "Black (graying)"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Brown"
       ]
     },
     {
@@ -65,7 +91,36 @@
       "Values": [
         "Jedi Order"
       ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Grogu",
+          "Href": "https://starwars.fandom.com/wiki/Din_Grogu"
+        }
+      ],
+      "Values": [
+        "Many",
+        "Grogu"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 103570,
+      "PageUrl": "operation:_Knightfall/Canon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 635808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Din_Grogu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 781214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelleran_Beq's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

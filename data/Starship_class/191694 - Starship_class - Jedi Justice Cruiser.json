@@ -23,7 +23,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -36,15 +36,25 @@
     },
     {
       "Label": "Cost",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
       "Values": [
-        "New: 775,000",
+        "New: 775,000 credits",
         "Used: 525,000"
       ]
     },
     {
       "Label": "Length",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "68 meters"
       ]
@@ -53,7 +63,7 @@
       "Label": "Maximum atmospheric speed",
       "Links": [],
       "Values": [
-        "1,050km/h"
+        "1,050 km/h"
       ]
     },
     {

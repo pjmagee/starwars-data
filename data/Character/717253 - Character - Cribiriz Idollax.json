@@ -2,6 +2,7 @@
   "PageId": 717253,
   "PageUrl": "https://starwars.fandom.com/wiki/Cribiriz_Idollax",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0e/Cribiriz.png/revision/latest?cb=20230610015839",
   "Data": [
     {
       "Label": "Titles",
@@ -18,16 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
         },
         {
-          "Content": "4 ABY",
-          "Href": "https://starwars.fandom.com/wiki/4_ABY"
-        },
-        {
           "Content": "Nar Shaddaa",
           "Href": "https://starwars.fandom.com/wiki/Nar_Shaddaa"
         }
       ],
       "Values": [
-        "Between 3 ABY and 4 ABY, Nar Shaddaa"
+        "3 ABY, Nar Shaddaa"
       ]
     },
     {
@@ -55,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -79,7 +83,25 @@
       "Values": [
         "Pink and yellow"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Sribiriz",
+          "Href": "https://starwars.fandom.com/wiki/Sribiriz"
+        }
+      ],
+      "Values": [
+        "Sribiriz"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 740935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sribiriz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

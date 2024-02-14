@@ -2,6 +2,7 @@
   "PageId": 555708,
   "PageUrl": "https://starwars.fandom.com/wiki/Bonnie_Wild",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -16,7 +17,30 @@
       "Values": [
         "Editor, voice actor"
       ]
+    },
+    {
+      "Label": "Companies",
+      "Links": [
+        {
+          "Content": "Skywalker Sound",
+          "Href": "https://starwars.fandom.com/wiki/Skywalker_Sound"
+        }
+      ],
+      "Values": [
+        "Skywalker Sound"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 553650,
+      "PageUrl": "https://starwars.fandom.com/wiki/An_Inside_Man",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    },
+    {
+      "PageId": 563822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Secret_Cargo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    }
+  ]
 }

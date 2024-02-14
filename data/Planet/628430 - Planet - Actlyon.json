@@ -2,7 +2,7 @@
   "PageId": 628430,
   "PageUrl": "https://starwars.fandom.com/wiki/Actlyon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/42/Actlyon.png/revision/latest?cb=20200629121910",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e8/Actlyon-SWGalaxyMap.jpg/revision/latest?cb=20231222173404",
   "Data": [
     {
       "Label": "Titles",
@@ -29,6 +29,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-19"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -39,16 +51,16 @@
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -57,6 +69,28 @@
       ],
       "Values": [
         "Mountains"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Rodians",
+          "Href": "https://starwars.fandom.com/wiki/Rodian"
+        },
+        {
+          "Content": "Trandoshans",
+          "Href": "https://starwars.fandom.com/wiki/Trandoshan"
+        },
+        {
+          "Content": "Twi'leks",
+          "Href": "https://starwars.fandom.com/wiki/Twi%27lek"
+        }
+      ],
+      "Values": [
+        "Rodians",
+        "Trandoshans",
+        "Twi'leks"
       ]
     },
     {
@@ -74,24 +108,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 778748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Actlyon_City_port",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 645582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pall_Gopal's_package",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 630851,
       "PageUrl": "https://starwars.fandom.com/wiki/Actlyon_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 645343,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cocktail",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 639247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Actlyon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 628440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sentient_7_and_the_Clankers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+      "PageId": 778749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Actlyon_City_lower_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 639223,
@@ -109,14 +143,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 645343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cocktail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 645582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pall_Gopal's_package",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 628440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentient_7_and_the_Clankers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 639247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Actlyon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

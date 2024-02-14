@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "The Slice"
       ]
     },
     {
@@ -48,22 +53,34 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-14"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
       "Links": [
         {
-          "Content": "Oceans",
-          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+          "Content": "water world",
+          "Href": "https://starwars.fandom.com/wiki/Waterworld/Legends"
         }
       ],
       "Values": [
-        "Oceans"
+        "Terrestrial water world"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Water",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        }
+      ],
+      "Values": [
+        "Water"
       ]
     },
     {
@@ -75,27 +92,20 @@
         }
       ],
       "Values": [
-        "None; formerly: Nejma"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [],
-      "Values": [
-        "None"
+        "Nejma"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 380331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriscot_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 35898,
       "PageUrl": "https://starwars.fandom.com/wiki/Nejma",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 380331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriscot_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

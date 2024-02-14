@@ -15,7 +15,7 @@
       "Label": "Conflict",
       "Links": [
         {
-          "Content": "Imperial Period conflicts",
+          "Content": "Imperial Period",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Period"
         }
       ],
@@ -48,10 +48,35 @@
         {
           "Content": "Kwymar sector",
           "Href": "https://starwars.fandom.com/wiki/Kwymar_sector/Legends"
+        },
+        {
+          "Content": "Picutorion",
+          "Href": "https://starwars.fandom.com/wiki/Picutorion/Legends"
+        },
+        {
+          "Content": "Protazk",
+          "Href": "https://starwars.fandom.com/wiki/Protazk"
+        },
+        {
+          "Content": "Doniphon",
+          "Href": "https://starwars.fandom.com/wiki/Doniphon"
+        },
+        {
+          "Content": "Kestos Minor",
+          "Href": "https://starwars.fandom.com/wiki/Kestos_Minor/Legends"
+        },
+        {
+          "Content": "Telos IV",
+          "Href": "https://starwars.fandom.com/wiki/Telos_IV"
         }
       ],
       "Values": [
-        "Kwymar sector"
+        "Kwymar sector",
+        "Picutorion",
+        "Protazk",
+        "Doniphon",
+        "Kestos Minor",
+        "Telos IV"
       ]
     },
     {
@@ -70,14 +95,6 @@
       "Label": "Battles",
       "Links": [
         {
-          "Content": "Assault on Doniphon",
-          "Href": "https://starwars.fandom.com/wiki/Assault_on_Doniphon"
-        },
-        {
-          "Content": "Battle of Kestos Minor",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Kestos_Minor"
-        },
-        {
           "Content": "Raid on Picutorion",
           "Href": "https://starwars.fandom.com/wiki/Raid_on_Picutorion"
         },
@@ -86,30 +103,28 @@
           "Href": "https://starwars.fandom.com/wiki/Assault_on_Protazk"
         },
         {
+          "Content": "Assault on Doniphon",
+          "Href": "https://starwars.fandom.com/wiki/Assault_on_Doniphon"
+        },
+        {
+          "Content": "Battle of Kestos Minor",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Kestos_Minor"
+        },
+        {
           "Content": "Battle of Telos IV",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Telos_IV_(Kwymar_Suppressions)"
         }
       ],
       "Values": [
-        "Assault on Doniphon",
-        "Battle of Kestos Minor",
         "Raid on Picutorion",
         "Assault on Protazk",
+        "Assault on Doniphon",
+        "Battle of Kestos Minor",
         "Battle of Telos IV"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 34752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Doniphon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 34753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kestos_Minor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
     {
       "PageId": 34754,
       "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Picutorion",
@@ -129,6 +144,16 @@
       "PageId": 8873,
       "PageUrl": "https://starwars.fandom.com/wiki/Kwymar_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 34752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Doniphon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 34753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kestos_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

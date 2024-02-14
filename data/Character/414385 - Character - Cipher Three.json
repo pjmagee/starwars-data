@@ -2,6 +2,7 @@
   "PageId": 414385,
   "PageUrl": "https://starwars.fandom.com/wiki/Cipher_Three",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,17 +48,57 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Raina Temple's mother",
+          "Href": "https://starwars.fandom.com/wiki/Raina_Temple%27s_mother"
+        }
+      ],
+      "Values": [
+        "Raina Temple's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Raina Temple",
+          "Href": "https://starwars.fandom.com/wiki/Raina_Temple"
+        }
+      ],
+      "Values": [
+        "Raina Temple"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
+        {
+          "Content": "Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
         {
           "Content": "Imperial Intelligence",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Intelligence_(Sith_Empire)"
         }
       ],
       "Values": [
+        "Sith Empire",
         "Imperial Intelligence"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 360138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raina_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 414399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raina_Temple's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

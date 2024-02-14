@@ -33,7 +33,7 @@
       "Links": [
         {
           "Content": "Jospro sector",
-          "Href": "https://starwars.fandom.com/wiki/Jospro_sector"
+          "Href": "https://starwars.fandom.com/wiki/Jospro_sector/Legends"
         }
       ],
       "Values": [
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-7"
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Canyons"
@@ -107,13 +107,13 @@
           "Href": "https://starwars.fandom.com/wiki/Enclave"
         },
         {
-          "Content": "Sensor array",
+          "Content": "sensor array",
           "Href": "https://starwars.fandom.com/wiki/Sensor_array/Legends"
         }
       ],
       "Values": [
         "Enclave",
-        "Sensor array"
+        "A sensor array"
       ]
     },
     {
@@ -131,6 +131,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 173652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 12592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jospro_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 289520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kile_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 36221,
       "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Kile_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -139,21 +154,6 @@
       "PageId": 15727,
       "PageUrl": "https://starwars.fandom.com/wiki/Salin_Corridor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 289520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kile_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 173652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enclave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 12592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jospro_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

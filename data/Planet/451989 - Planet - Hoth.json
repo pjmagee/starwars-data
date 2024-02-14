@@ -19,12 +19,17 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
           "Content": "Western Reaches",
           "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
         "Outer Rim Territories",
+        "Galactic Frontier",
         "Western Reaches"
       ]
     },
@@ -79,7 +84,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "K-18",
@@ -158,12 +163,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer"
         }
       ],
       "Values": [
-        "7,200 km (4,474 miles)"
+        "7,200 kilometers (4,474 miles)"
       ]
     },
     {
@@ -191,7 +196,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "ice",
@@ -273,6 +278,10 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Dragon Slug",
+          "Href": "https://starwars.fandom.com/wiki/Dragon_Slug"
+        },
+        {
           "Content": "Fork-nosed ice worm",
           "Href": "https://starwars.fandom.com/wiki/Fork-nosed_ice_worm"
         },
@@ -298,7 +307,9 @@
         }
       ],
       "Values": [
+        "Dragon Slug",
         "Fork-nosed ice worm",
+        "Hoth spider",
         "Ice scrabbler",
         "Rayboo",
         "Sapphire ice worm",
@@ -347,8 +358,393 @@
   ],
   "Relationships": [
     {
-      "PageId": 453826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adon_Fox's_wife",
+      "PageId": 536124,
+      "PageUrl": "https://starwars.fandom.com/wiki/OL701",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 642825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Insulated_watch_cap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 642866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_military_uniform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 539132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 553693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clabburn_Range",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 553774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nev_Ice_Flow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 170598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 554499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perimeter_Outpost_Delta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 547977,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth_(Iron_Blockade)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 483074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zev_Senesca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 227165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Slug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 754620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glacier_fly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 518753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Micha_Evon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 589257,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snow_mouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 589259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ice_scrabbler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 589266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_Hedgehog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 648408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tubleek_Ruz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 452382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 512127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mindak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 512300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bohento_Splinth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 539549,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 679051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ice_fungus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 695443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_05-92",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_5-4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 469581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dak_Ralter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 469797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Derek_Klivian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 518840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Power_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 536716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 709852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unkajo's_lair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 134571,
+      "PageUrl": "https://starwars.fandom.com/wiki/Polcyc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_cave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 512485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_High_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 653221,
+      "PageUrl": "https://starwars.fandom.com/wiki/XJ9-CS14",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 555730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zone_Twelve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 561550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kesin_Ommis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 597113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purpruff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 645226,
+      "PageUrl": "https://starwars.fandom.com/wiki/DSS-02_shield_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 679048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_02-91",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 679049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_04-21",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 679050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_03-31",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starck",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Cold_weather_assault_stormtrooper_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Cold_weather_assault_stormtrooper_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 585080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 695747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun_bull_musk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 724760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_Icebreaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 748920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aquamarine_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 519157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sapphire_ice_worm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 767244,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_Hog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 722267,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 722269,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 660254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Proximity_mine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 566801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hoth_(Kyber_Saber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 695672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tova",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 695680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murra's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 707657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buck_(tauntaun)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 526761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roja",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 526762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beak_(individual)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 666998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_female_rebel_soldier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 667023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_alien_rebel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 539569,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_Ridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 540022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unkajo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 452024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wampa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 507442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 510453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corona_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 512713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blizzard_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 515811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Intelligence_Service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 516991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Special_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 744762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_swimsuit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 594786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 518602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lichen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 784034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snowball_launcher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 453451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 473968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 584763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Station_3-8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 596341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zaloriis_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 683138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ozgurk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -357,14 +753,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 594786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 555076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marine_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 444242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_cave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 556491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 533262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_5-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 509352,
+      "PageUrl": "https://starwars.fandom.com/wiki/V-150_Planet_Defender",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 452545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 578840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Corps_of_Engineers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 653479,
@@ -392,136 +808,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 679048,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_02-91",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 679049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_04-21",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 679050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_03-31",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 469581,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dak_Ralter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 679621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wampa's_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 660254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Proximity_mine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 526761,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roja",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 526762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beak_(individual)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 539569,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_Ridge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 170598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 518753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Micha_Evon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 683138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ozgurk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 539132,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 503243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_3-T-8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 718825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jogan_fruit_pie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 539549,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 610986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blizzard_Force_unit_two-two-eight-seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 533262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_5-7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 452382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 512127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mindak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 512300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bohento_Splinth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 648408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tubleek_Ruz",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 718199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sithmas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
-    },
-    {
-      "PageId": 509104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shyloah's_Crest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 509105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_Mountain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 606772,
       "PageUrl": "https://starwars.fandom.com/wiki/Group_7",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -532,74 +818,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 453547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 469797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Derek_Klivian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 513764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Penrie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 561550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kesin_Ommis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 597113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purpruff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 645226,
-      "PageUrl": "https://starwars.fandom.com/wiki/DSS-02_shield_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 653221,
-      "PageUrl": "https://starwars.fandom.com/wiki/XJ9-CS14",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 553693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clabburn_Range",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 553774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nev_Ice_Flow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 668779,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Base_High_Command",
+      "PageId": 610986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blizzard_Force_unit_two-two-eight-seven",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 591605,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jetpack_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 591847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arctic_Jetpack_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 591850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun_Rider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 676923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wampa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 581267,
@@ -607,99 +828,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 555730,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zone_Twelve",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 507239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rayboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 453782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun_bull_musk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 518840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Power_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
       "PageId": 562484,
       "PageUrl": "https://starwars.fandom.com/wiki/Ceyan_Range",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 453451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 473968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 578840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Corps_of_Engineers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 584929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arctic_Jumptrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 596341,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zaloriis_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 602213,
-      "PageUrl": "https://starwars.fandom.com/wiki/Culroon_III_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 642825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Insulated_watch_cap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 642866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_military_uniform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 452545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 510453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corona_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 512713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blizzard_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 515811,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Intelligence_Service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 516991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Special_Forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 566719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cirque_Glacier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 471057,
@@ -712,34 +848,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 518602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lichen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 572665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 707511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_7",
+      "PageId": 567542,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Valent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 718199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sithmas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 679621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wampa's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 668779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Base_High_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 518712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outpost_Beta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 547977,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth_(Iron_Blockade)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 453547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 695422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boz_(tauntaun)",
+      "PageId": 453826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adon_Fox's_wife",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 695423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arno_(tauntaun)",
+      "PageId": 676923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wampa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 709852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unkajo's_lair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 550526,
@@ -752,84 +903,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 452024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wampa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 453832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 718825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jogan_fruit_pie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 572665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 536124,
-      "PageUrl": "https://starwars.fandom.com/wiki/OL701",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 552111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starck",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 567542,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Valent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 536716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 566719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cirque_Glacier",
+      "PageId": 678105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Icefall_Plains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 478543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Search_and_Recovery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 679634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_Twelve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 507442,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 455627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cold_weather_assault_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 512485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_High_Command",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 722267,
-      "PageUrl": "https://starwars.fandom.com/wiki/West_Corridor",
+      "PageId": 707511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_7",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 722269,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 509352,
-      "PageUrl": "https://starwars.fandom.com/wiki/V-150_Planet_Defender",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 695680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Murra's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 704153,
@@ -837,34 +933,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 554499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perimeter_Outpost_Delta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 453832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 566801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hoth_(Kyber_Saber)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 504829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moorsh_Moraine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 519630,
-      "PageUrl": "https://starwars.fandom.com/wiki/JA189",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 509104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shyloah's_Crest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 519634,
-      "PageUrl": "https://starwars.fandom.com/wiki/CR978",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marine_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 556491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 509105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_Mountain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 669766,
@@ -882,6 +968,21 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
+      "PageId": 693900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunshine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 695422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 695423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arno_(tauntaun)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
       "PageId": 695425,
       "PageUrl": "https://starwars.fandom.com/wiki/Keelak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
@@ -892,14 +993,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 695672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tova",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 455627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cold_weather_assault_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 707657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Buck_(tauntaun)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 507239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rayboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 519630,
+      "PageUrl": "https://starwars.fandom.com/wiki/JA189",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519634,
+      "PageUrl": "https://starwars.fandom.com/wiki/CR978",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galaxy_mission",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 584929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arctic_Jumptrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 591605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jetpack_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 591847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arctic_Jetpack_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 591850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun_Rider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 652802,
@@ -907,63 +1043,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 678105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Icefall_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 602213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Culroon_III_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 679634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sector_Twelve",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 585080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 540022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unkajo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 519157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sapphire_ice_worm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 584763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Station_3-8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tunnel_05-92",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_5-4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 483074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zev_Senesca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 504829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moorsh_Moraine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 679051,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ice_fungus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 518712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outpost_Beta",
+      "PageId": 503243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Station_3-T-8",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

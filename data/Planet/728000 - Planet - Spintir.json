@@ -2,6 +2,7 @@
   "PageId": 728000,
   "PageUrl": "https://starwars.fandom.com/wiki/Spintir",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,12 @@
     },
     {
       "Label": "Fauna",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Spintiri glowbat",
+          "Href": "https://starwars.fandom.com/wiki/Spintiri_glowbat"
+        }
+      ],
       "Values": [
         "Icewolf",
         "Spintiri lynx",
@@ -27,5 +33,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 735635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spintiri_glowbat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    }
+  ]
 }

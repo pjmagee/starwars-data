@@ -2,7 +2,7 @@
   "PageId": 153732,
   "PageUrl": "https://starwars.fandom.com/wiki/Tartaglia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ac/Tartaglia-EGTW.jpg/revision/latest?cb=20220922153424",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "New Territories"
       ]
     },
     {
@@ -48,17 +53,55 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-7"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Deep holes"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Nova Vaults of Kakitai bel Toyouin",
+          "Href": "https://starwars.fandom.com/wiki/Nova_Vaults_of_Kakitai_bel_Toyouin"
+        }
+      ],
+      "Values": [
+        "Nova Vaults of Kakitai bel Toyouin (rumored)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
       "PageId": 269513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nova_Vaults",
+      "PageUrl": "https://starwars.fandom.com/wiki/Nova_Vaults_of_Kakitai_bel_Toyouin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {

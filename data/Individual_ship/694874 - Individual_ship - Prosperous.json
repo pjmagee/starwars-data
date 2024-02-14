@@ -2,6 +2,7 @@
   "PageId": 694874,
   "PageUrl": "https://starwars.fandom.com/wiki/Prosperous",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Destroyer",
@@ -93,5 +94,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

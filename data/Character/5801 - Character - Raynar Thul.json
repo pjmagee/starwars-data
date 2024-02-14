@@ -78,12 +78,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Thul",
           "Href": "https://starwars.fandom.com/wiki/House_of_Thul"
+        }
+      ],
+      "Values": [
+        "House of Thul"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Bornan Thul",
+          "Href": "https://starwars.fandom.com/wiki/Bornan_Thul"
         },
+        {
+          "Content": "Aryn Dro Thul",
+          "Href": "https://starwars.fandom.com/wiki/Aryn_Dro_Thul"
+        }
+      ],
+      "Values": [
+        "Bornan Thul",
+        "Aryn Dro Thul"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
@@ -110,7 +135,6 @@
         }
       ],
       "Values": [
-        "House of Thul",
         "New Republic",
         "The Colony (As Unu, under the influence of Dark Nest)",
         "New Jedi Order",
@@ -120,14 +144,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 235555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moon_Swarm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 12556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aryn_Dro_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 23766,
       "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Ackbar_(Victory-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235555,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moon_Swarm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 7081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bornan_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

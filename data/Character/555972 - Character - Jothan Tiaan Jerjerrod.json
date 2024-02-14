@@ -74,12 +74,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Jerjerrod family",
           "Href": "https://starwars.fandom.com/wiki/Jerjerrod_family"
+        }
+      ],
+      "Values": [
+        "Jerjerrod family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jax Jerjerrod",
+          "Href": "https://starwars.fandom.com/wiki/Jax_Jerjerrod"
         },
+        {
+          "Content": "Jul Jerjerrod",
+          "Href": "https://starwars.fandom.com/wiki/Jul_Jerjerrod"
+        }
+      ],
+      "Values": [
+        "Jax Jerjerrod",
+        "Jul Jerjerrod"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
@@ -106,7 +131,6 @@
         }
       ],
       "Values": [
-        "Jerjerrod family",
         "First Order",
         "New Republic",
         "New Republic Academy",
@@ -118,14 +142,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 515102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 566373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jax_Jerjerrod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 566374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jul_Jerjerrod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 561214,
       "PageUrl": "https://starwars.fandom.com/wiki/J-Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 515102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

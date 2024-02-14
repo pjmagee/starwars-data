@@ -24,7 +24,7 @@
         }
       ],
       "Values": [
-        "4 ABY, aboard Flurry"
+        "4 ABY, Flurry"
       ]
     },
     {
@@ -40,15 +40,22 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Eye color",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
+          "Content": "Red",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
-        "Male"
+        "Red"
       ]
     },
     {
@@ -57,10 +64,25 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "Alliance Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Fleet"
+        },
+        {
+          "Content": "Virgillian Free Alignment",
+          "Href": "https://starwars.fandom.com/wiki/Virgillian_Free_Alignment/Legends"
+        },
+        {
+          "Content": "Virgillian Free Alignment Starfleet",
+          "Href": "https://starwars.fandom.com/wiki/Virgillian_Free_Alignment_Starfleet"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic"
+        "Alliance to Restore the Republic",
+        "Alliance Fleet",
+        "Virgillian Free Alignment",
+        "Virgillian Free Alignment Starfleet"
       ]
     }
   ],

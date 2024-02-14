@@ -2,7 +2,7 @@
   "PageId": 45604,
   "PageUrl": "https://starwars.fandom.com/wiki/Praven_Prime",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/75/PravenPrime-TEA.jpg/revision/latest?cb=20240102163832",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
       ]
     },
     {
@@ -48,10 +53,17 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-6"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -60,15 +72,10 @@
         {
           "Content": "L'Xing",
           "Href": "https://starwars.fandom.com/wiki/L%27Xing"
-        },
-        {
-          "Content": "Gu-vandi",
-          "Href": "https://starwars.fandom.com/wiki/Gu-vandi"
         }
       ],
       "Values": [
-        "L'Xing",
-        "Gu-vandi"
+        "L'Xing"
       ]
     },
     {
@@ -76,47 +83,46 @@
       "Links": [
         {
           "Content": "L'Xing",
-          "Href": "https://starwars.fandom.com/wiki/L%27Xing"
-        },
-        {
-          "Content": "Gu-vandi",
-          "Href": "https://starwars.fandom.com/wiki/Gu-vandi"
+          "Href": "https://starwars.fandom.com/wiki/L%27Xing_(language)"
         }
       ],
       "Values": [
-        "L'Xing",
-        "Gu-vandi"
+        "L'Xing"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Old Republic",
+          "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "Old Republic",
-        "Independent"
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 369776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praven_Prime_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 790255,
+      "PageUrl": "https://starwars.fandom.com/wiki/L'Xing_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
       "PageId": 45605,
       "PageUrl": "https://starwars.fandom.com/wiki/L'Xing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 45606,
       "PageUrl": "https://starwars.fandom.com/wiki/Gu-vandi_Collective",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 369776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praven_Prime_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

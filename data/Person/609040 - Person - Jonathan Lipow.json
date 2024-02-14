@@ -2,6 +2,7 @@
   "PageId": 609040,
   "PageUrl": "https://starwars.fandom.com/wiki/Jonathan_Lipow",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cc/JonathanLipow.jpg/revision/latest?cb=20240213055026",
   "Data": [
     {
       "Label": "Titles",
@@ -27,19 +28,35 @@
       ]
     },
     {
-      "Label": "Nationality",
-      "Links": [],
-      "Values": [
-        "American"
-      ]
-    },
-    {
       "Label": "Occupation",
       "Links": [],
       "Values": [
-        "Actor"
+        "Voice actor"
+      ]
+    },
+    {
+      "Label": "Official website",
+      "Links": [
+        {
+          "Content": "jonathanlipow.com",
+          "Href": "http://www.jonathanlipow.com/"
+        }
+      ],
+      "Values": [
+        "jonathanlipow.com"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 776860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Young_Jedi_Adventures_Season_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
+    },
+    {
+      "PageId": 730534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Young_Jedi_Adventures",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_series"
+    }
+  ]
 }

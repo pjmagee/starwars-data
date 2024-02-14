@@ -2,7 +2,7 @@
   "PageId": 704909,
   "PageUrl": "https://starwars.fandom.com/wiki/Proton_2",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/Lucrehulk_battleship_TCW.jpg/revision/latest?cb=20090311015214",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bc/CISLucrehulkBattleship-TCW.png/revision/latest?cb=20231010233338",
   "Data": [
     {
       "Label": "Titles",
@@ -53,26 +53,51 @@
         {
           "Content": "Confederacy of Independent Systems Navy",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
+        },
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
         }
       ],
       "Values": [
         "Trade Federation",
         "Trade Federation fleet",
         "Confederacy of Independent Systems",
-        "Confederacy of Independent Systems Navy"
+        "Confederacy of Independent Systems Navy",
+        "Alliance to Restore the Republic",
+        "Rebel Alliance Navy"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 6229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
     {
       "PageId": 681889,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Battleship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 6229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
+      "PageId": 60634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_LH-3210_cargo_freighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 596870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 746132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Battleship_(Pantora)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

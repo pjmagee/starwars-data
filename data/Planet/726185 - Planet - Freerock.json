@@ -2,7 +2,7 @@
   "PageId": 726185,
   "PageUrl": "https://starwars.fandom.com/wiki/Freerock",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/Freerock-SWT.jpg/revision/latest?cb=20220712174544",
   "Data": [
     {
       "Label": "Titles",
@@ -15,38 +15,65 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Outer Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
+        },
+        {
+          "Content": "Wild Space",
+          "Href": "https://starwars.fandom.com/wiki/Wild_Space"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Expansion Region",
+        "The Interior",
+        "Wild Space"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "H-13",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "H-13"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Unidentified outpost",
+          "Content": "outpost",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_outpost"
-        },
-        {
-          "Content": "Rim's Edge cantina",
-          "Href": "https://starwars.fandom.com/wiki/Rim%27s_Edge_cantina"
-        },
-        {
-          "Content": "Roderick's",
-          "Href": "https://starwars.fandom.com/wiki/Roderick%27s"
         }
       ],
       "Values": [
-        "Unidentified outpost",
-        "Rim's Edge cantina",
-        "Roderick's"
+        "An outpost"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 784971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rim's_Edge_(beverage)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 726191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 734777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bansu_Ro's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
     {
       "PageId": 726186,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_outpost",
@@ -59,13 +86,8 @@
     },
     {
       "PageId": 726206,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rim's_Edge_cantina",
+      "PageUrl": "https://starwars.fandom.com/wiki/Rim's_Edge",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 726191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent's_crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

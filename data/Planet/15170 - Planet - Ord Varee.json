@@ -2,7 +2,7 @@
   "PageId": 15170,
   "PageUrl": "https://starwars.fandom.com/wiki/Ord_Varee",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6b/OrdVareeOrindaCampaign-EGTW.jpg/revision/latest?cb=20230727153453",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,28 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
+        },
+        {
+          "Content": "Wild Space",
+          "Href": "https://starwars.fandom.com/wiki/Wild_Space/Legends"
+        },
+        {
+          "Content": "12,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/12,000_BBY/Legends"
+        },
+        {
+          "Content": "11,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/11,000_BBY"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "New Territories",
+        "Wild Space (c. 12,000 BBY–c. 11,000 BBY)"
       ]
     },
     {
@@ -48,7 +66,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-7"
@@ -68,14 +86,9 @@
     },
     {
       "Label": "Population",
-      "Links": [
-        {
-          "Content": "22 BBY",
-          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "3.1 billion (22 BBY)"
+        "3.1 billion"
       ]
     },
     {
@@ -86,26 +99,31 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
-          "Content": "Refugee Relief Coalition",
+          "Content": "Refugee Resettlement Coalition",
           "Href": "https://starwars.fandom.com/wiki/Refugee_Relief_Movement/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Refugee Relief Coalition"
+        "Refugee Resettlement Coalition",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 23490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 369992,
       "PageUrl": "https://starwars.fandom.com/wiki/Ord_Varee_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 23490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

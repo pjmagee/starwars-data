@@ -2,7 +2,7 @@
   "PageId": 272772,
   "PageUrl": "https://starwars.fandom.com/wiki/Vanjervalis_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/49/Vanjervalis-TEA.jpg/revision/latest?cb=20210308205846",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/49/Vanjervalis-TEA.jpg/revision/latest?cb=20230514064422",
   "Data": [
     {
       "Label": "Titles",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-11"
@@ -37,6 +37,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 3840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonies/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
     {
       "PageId": 223,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends",
@@ -46,11 +51,6 @@
       "PageId": 223072,
       "PageUrl": "https://starwars.fandom.com/wiki/Vanjervalis_Systems",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 3840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonies/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

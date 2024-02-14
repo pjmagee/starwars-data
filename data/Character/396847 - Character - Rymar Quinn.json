@@ -2,6 +2,7 @@
   "PageId": 396847,
   "PageUrl": "https://starwars.fandom.com/wiki/Rymar_Quinn",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -55,6 +56,30 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Quinn family",
+          "Href": "https://starwars.fandom.com/wiki/Quinn_family"
+        }
+      ],
+      "Values": [
+        "Quinn family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Malavai Quinn",
+          "Href": "https://starwars.fandom.com/wiki/Malavai_Quinn"
+        }
+      ],
+      "Values": [
+        "Malavai Quinn"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -72,5 +97,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 359213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malavai_Quinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 715227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quinn_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

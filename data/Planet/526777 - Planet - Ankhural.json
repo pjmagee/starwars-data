@@ -2,7 +2,7 @@
   "PageId": 526777,
   "PageUrl": "https://starwars.fandom.com/wiki/Ankhural",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/90/Ankhural-SWT.jpg/revision/latest?cb=20220603115936",
   "Data": [
     {
       "Label": "Titles",
@@ -19,17 +19,34 @@
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space"
         },
         {
-          "Content": "Outer Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
         "Hutt Space",
-        "Outer Rim Territories"
+        "Mid Rim Territories",
+        "The Slice"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-9"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Silicon",
@@ -58,7 +75,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Umbaran",
@@ -84,21 +101,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 554603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ankhural_podracing_track",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Racing_track"
-    },
-    {
-      "PageId": 554607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_city_(Ankhural)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 453790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 554605,
       "PageUrl": "https://starwars.fandom.com/wiki/Ankhural_cantina",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -107,6 +109,31 @@
       "PageId": 554608,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_curio_shop",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 554607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_city_(Ankhural)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 483302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 660285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rehydrated_powdered_egg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 554603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ankhural_podracing_track",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Racing_track"
+    },
+    {
+      "PageId": 453790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

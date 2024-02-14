@@ -12,19 +12,27 @@
       ]
     },
     {
-      "Label": "Born",
+      "Label": "Homeworld",
       "Links": [
         {
-          "Content": "years",
-          "Href": "https://starwars.fandom.com/wiki/Standard_year"
-        },
-        {
-          "Content": "Quest for the Kyber Saber Crystals",
-          "Href": "https://starwars.fandom.com/wiki/Quest_for_the_Kyber_Saber_Crystals"
+          "Content": "The Wheel",
+          "Href": "https://starwars.fandom.com/wiki/The_Wheel"
         }
       ],
       "Values": [
-        "12 years before the Quest for the Kyber Saber Crystals"
+        "The Wheel"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "9 BBY",
+          "Href": "https://starwars.fandom.com/wiki/9_BBY"
+        }
+      ],
+      "Values": [
+        "c. 9 BBY"
       ]
     },
     {
@@ -78,12 +86,54 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Freemakers",
           "Href": "https://starwars.fandom.com/wiki/Freemakers/LEGO"
+        }
+      ],
+      "Values": [
+        "Freemakers"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Pace Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO"
         },
+        {
+          "Content": "Lena Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Lena_Freemaker"
+        }
+      ],
+      "Values": [
+        "Pace Freemaker",
+        "Lena Freemaker"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Zander Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Zander_Freemaker"
+        },
+        {
+          "Content": "Kordi Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO"
+        }
+      ],
+      "Values": [
+        "Zander Freemaker",
+        "Kordi Freemaker"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
@@ -94,7 +144,6 @@
         }
       ],
       "Values": [
-        "Freemakers",
         "Alliance to Restore the Republic",
         "New Republic"
       ]
@@ -129,23 +178,43 @@
   ],
   "Relationships": [
     {
-      "PageId": 576187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Rowan_Freemaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 576332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Rowan_Freemaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 568002,
       "PageUrl": "https://starwars.fandom.com/wiki/Arrowhead_(Freemakers)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 538147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naare",
+      "PageId": 576332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Rowan_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 576681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_save_the_Rebel_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 566874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Tatooine_(Kyber_Saber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 538338,
+      "PageUrl": "https://starwars.fandom.com/wiki/StarScavenger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 539549,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 576187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Rowan_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 627099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lena_Freemaker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -154,9 +223,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 575885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Mygeeto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 538027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zander_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naare",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 566875,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cloud_City_(Kyber_Saber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 538402,
@@ -174,29 +258,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 539549,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 610953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 538338,
-      "PageUrl": "https://starwars.fandom.com/wiki/StarScavenger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 566875,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cloud_City_(Kyber_Saber)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 576681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_save_the_Rebel_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 566874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Tatooine_(Kyber_Saber)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 575885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Mygeeto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

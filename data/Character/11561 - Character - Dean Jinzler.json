@@ -2,6 +2,7 @@
   "PageId": 11561,
   "PageUrl": "https://starwars.fandom.com/wiki/Dean_Jinzler",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,18 @@
       ]
     },
     {
+      "Label": "Mass",
+      "Links": [
+        {
+          "Content": "Bearsh",
+          "Href": "https://starwars.fandom.com/wiki/Bearsh"
+        }
+      ],
+      "Values": [
+        "Fifteen kilos more than Bearsh"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -85,25 +98,51 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
+          "Content": "Senate Support Services",
+          "Href": "https://starwars.fandom.com/wiki/Senate_Support_Services"
+        },
+        {
           "Content": "Jinzler family",
           "Href": "https://starwars.fandom.com/wiki/Jinzler_family"
         },
         {
-          "Content": "Smugglers' Alliance",
-          "Href": "https://starwars.fandom.com/wiki/Smugglers%27_Alliance"
+          "Content": "Car'das",
+          "Href": "https://starwars.fandom.com/wiki/Car%27das_smugglers"
         },
         {
           "Content": "Empire of the Hand",
           "Href": "https://starwars.fandom.com/wiki/Empire_of_the_Hand"
+        },
+        {
+          "Content": "Outbound Flight Colony",
+          "Href": "https://starwars.fandom.com/wiki/Outbound_Flight_Colony"
         }
       ],
       "Values": [
         "Galactic Republic",
+        "Senate Support Services",
         "Jinzler family",
-        "Smugglers' Alliance",
-        "Empire of the Hand"
+        "Car'das",
+        "Empire of the Hand",
+        "Outbound Flight Colony"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 775113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight_remembrance_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 779717,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_night's_reception_dinner_(Chaf_Envoy)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 11568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorana_Jinzler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

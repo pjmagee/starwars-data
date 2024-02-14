@@ -2,6 +2,7 @@
   "PageId": 23923,
   "PageUrl": "https://starwars.fandom.com/wiki/Barukka",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -70,7 +71,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Nightsisters",
@@ -109,5 +110,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 30590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allaya_Djo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kara'Teel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Augwynne_Djo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

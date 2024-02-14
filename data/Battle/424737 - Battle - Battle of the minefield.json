@@ -41,9 +41,14 @@
     },
     {
       "Label": "Place",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Parmel system",
+          "Href": "https://starwars.fandom.com/wiki/Parmel_system"
+        }
+      ],
       "Values": [
-        "A minefield in space"
+        "Parmel system"
       ]
     },
     {
@@ -62,14 +67,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 474891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harkov's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
       "PageId": 172188,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_Honor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 474891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Harkov's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 5518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Parmel_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

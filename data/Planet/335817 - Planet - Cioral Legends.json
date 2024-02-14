@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "F-8"
@@ -67,14 +67,14 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Urban"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chiss",
@@ -87,17 +87,23 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "House Csapla",
+          "Href": "https://starwars.fandom.com/wiki/Csapla_family"
+        }
+      ],
       "Values": [
-        "Chiss Ascendancy"
+        "Chiss Ascendancy",
+        "House Csapla"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 34682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csapla_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 335882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cioral_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 336392,
@@ -105,9 +111,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 335882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cioral_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 34682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csapla_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

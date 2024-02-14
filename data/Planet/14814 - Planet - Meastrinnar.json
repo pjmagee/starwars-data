@@ -2,7 +2,7 @@
   "PageId": 14814,
   "PageUrl": "https://starwars.fandom.com/wiki/Meastrinnar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c4/Meastrinnar-TEA.jpg/revision/latest?cb=20230521155924",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "Northern Dependencies"
       ]
     },
     {
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-8"
@@ -52,6 +57,25 @@
       ],
       "Values": [
         "Namadii Corridor"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "orphanage",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_orphanage_(Meastrinnar)"
+        }
+      ],
+      "Values": [
+        "An orphanage"
       ]
     },
     {
@@ -77,14 +101,24 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 536810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacification_of_Meastrinnar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 245908,
       "PageUrl": "https://starwars.fandom.com/wiki/Vondrol",
@@ -96,19 +130,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 23490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 536810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pacification_of_Meastrinnar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 391367,
       "PageUrl": "https://starwars.fandom.com/wiki/Meastrinnar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 23490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -13,18 +13,13 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Wookiees",
-          "Href": "https://starwars.fandom.com/wiki/Wookiee"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Wookiees"
+        "Uurbahhahvoovv Joiners & Artisans"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Escape pod",
@@ -36,10 +31,36 @@
       ]
     },
     {
+      "Label": "Width",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "2.3 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "3.4 meters"
+      ]
+    },
+    {
       "Label": "Engine unit(s)",
       "Links": [],
       "Values": [
         "3"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [],
+      "Values": [
+        "None"
       ]
     },
     {
@@ -69,5 +90,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 466034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

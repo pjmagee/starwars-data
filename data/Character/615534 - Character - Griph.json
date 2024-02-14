@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Hair color",
       "Links": [
         {
@@ -60,9 +48,26 @@
       "Values": [
         "Green"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Twi'lek",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Twi%27lek_(Ord_Mantell)"
+        }
+      ],
+      "Values": [
+        "A Twi'lek"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 615541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_(Ord_Mantell)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 615618,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ord_Mantell_(Jango_Fett)",

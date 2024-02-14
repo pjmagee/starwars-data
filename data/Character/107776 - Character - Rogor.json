@@ -2,7 +2,7 @@
   "PageId": 107776,
   "PageUrl": "https://starwars.fandom.com/wiki/Rogor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/53/Rogor_web.jpg/revision/latest?cb=20061008011026",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/53/Rogor_web.jpg/revision/latest?cb=20221227053957",
   "Data": [
     {
       "Label": "Titles",
@@ -37,7 +37,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -50,15 +55,37 @@
       ]
     },
     {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Alliance Military",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Military/Legends"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Alliance to Restore the Republic (as a Spy)",
+        "Alliance Military (as a Spy)",
+        "Galactic Empire",
+        "Imperial Military"
       ]
     }
   ],

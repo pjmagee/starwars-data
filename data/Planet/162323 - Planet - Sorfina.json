@@ -2,6 +2,7 @@
   "PageId": 162323,
   "PageUrl": "https://starwars.fandom.com/wiki/Sorfina",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,12 +36,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-8"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 390947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorfina_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

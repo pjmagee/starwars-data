@@ -51,6 +51,10 @@
           "Href": "https://starwars.fandom.com/wiki/Great_Assembly_House"
         },
         {
+          "Content": "Fellidrone's Apartment",
+          "Href": "https://starwars.fandom.com/wiki/Fellidrone%27s_Apartment"
+        },
+        {
           "Content": "Trannon district",
           "Href": "https://starwars.fandom.com/wiki/Trannon_district"
         }
@@ -59,11 +63,39 @@
         "Belsallian Cantina",
         "Carannia Spaceport",
         "Great Assembly House",
+        "Fellidrone's Apartment",
         "Trannon district"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Serenno government",
+          "Href": "https://starwars.fandom.com/wiki/Serenno_government"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        }
+      ],
+      "Values": [
+        "Serenno government",
+        "Galactic Republic",
+        "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 754910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 632299,
       "PageUrl": "https://starwars.fandom.com/wiki/Trannon_district",
@@ -75,9 +107,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 469808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 754314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 422525,
@@ -88,6 +120,16 @@
       "PageId": 707650,
       "PageUrl": "https://starwars.fandom.com/wiki/Celebration_on_Serenno",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 755557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fellidrone's_Apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 469808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 622210,

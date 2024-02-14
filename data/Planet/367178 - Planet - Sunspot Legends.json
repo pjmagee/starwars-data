@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sector 5",
+          "Href": "https://starwars.fandom.com/wiki/Sector_5"
+        }
+      ],
+      "Values": [
+        "Sector 5"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -62,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-10"
@@ -111,7 +123,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Volcanoes",
@@ -127,19 +139,24 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Mines",
-          "Href": "https://starwars.fandom.com/wiki/Mine/Legends"
+          "Content": "mining",
+          "Href": "https://starwars.fandom.com/wiki/Mining/Legends"
         }
       ],
       "Values": [
-        "Mines"
+        "Scattered mining colonies"
       ]
     },
     {
       "Label": "Major cities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ran Dan's Folly",
+          "Href": "https://starwars.fandom.com/wiki/Ran_Dan%27s_Folly"
+        }
+      ],
       "Values": [
-        "Scattered mining colonies"
+        "Ran Dan's Folly"
       ]
     },
     {
@@ -172,9 +189,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 367177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 456150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Dan's_Folly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 272975,
@@ -190,6 +207,11 @@
       "PageId": 663086,
       "PageUrl": "https://starwars.fandom.com/wiki/Marionium",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 367177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

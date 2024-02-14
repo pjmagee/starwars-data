@@ -29,10 +29,15 @@
         {
           "Content": "Farlax sector",
           "Href": "https://starwars.fandom.com/wiki/Farlax_sector"
+        },
+        {
+          "Content": "Koornacht Cluster",
+          "Href": "https://starwars.fandom.com/wiki/Koornacht_Cluster/Legends"
         }
       ],
       "Values": [
-        "Farlax sector"
+        "Farlax sector",
+        "Koornacht Cluster"
       ]
     },
     {
@@ -60,6 +65,13 @@
       ]
     },
     {
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "5"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [],
       "Values": [
@@ -67,7 +79,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-10"
@@ -153,7 +165,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -190,7 +202,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Galandans",
@@ -235,7 +247,12 @@
     },
     {
       "Label": "Government",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Theocracy",
+          "Href": "https://starwars.fandom.com/wiki/Theocracy"
+        }
+      ],
       "Values": [
         "None/Theocracy"
       ]

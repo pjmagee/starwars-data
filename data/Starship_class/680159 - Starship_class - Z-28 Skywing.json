@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -39,12 +39,36 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Equipped",
-          "Href": "https://starwars.fandom.com/wiki/Engine"
+          "Content": "Sublight engines",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
         }
       ],
       "Values": [
-        "Equipped"
+        "Sublight engines (2)"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        }
+      ],
+      "Values": [
+        "Laser cannons (2)"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        }
+      ],
+      "Values": [
+        "Pilot"
       ]
     },
     {
@@ -67,14 +91,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 680166,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacifier-class_sector_patrol_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 673854,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_Defense_Coalition",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 680166,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pacifier-class_sector_patrol_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 761615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

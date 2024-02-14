@@ -2,7 +2,7 @@
   "PageId": 636245,
   "PageUrl": "https://starwars.fandom.com/wiki/Oggdo_Bogdo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6a/Oggdo_Bogdo_Jedi_Fallen_Order.jpg/revision/latest?cb=20191117095515",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9b/OgdoBogdo.png/revision/latest?cb=20230617181646",
   "Data": [
     {
       "Label": "Titles",
@@ -20,14 +20,16 @@
         }
       ],
       "Values": [
-        "Brown, with orange speckles"
+        "Brown, with orange speckles",
+        "Green, with yellow speckles"
       ]
     },
     {
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Green"
+        "Green",
+        "Red"
       ]
     },
     {
@@ -58,10 +60,15 @@
         {
           "Content": "Bogano",
           "Href": "https://starwars.fandom.com/wiki/Bogano"
+        },
+        {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
         }
       ],
       "Values": [
-        "Bogano"
+        "Bogano",
+        "Koboh (force echo)"
       ]
     },
     {
@@ -79,19 +86,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 634107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogano",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 637671,
       "PageUrl": "https://starwars.fandom.com/wiki/Bogdo_Sinkholes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 754459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koboh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 636208,
       "PageUrl": "https://starwars.fandom.com/wiki/Oggdo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 634107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogano",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

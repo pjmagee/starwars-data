@@ -2,6 +2,7 @@
   "PageId": 497570,
   "PageUrl": "https://starwars.fandom.com/wiki/Goliath",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Carrier",
@@ -40,6 +41,10 @@
         {
           "Content": "Taim & Bak",
           "Href": "https://starwars.fandom.com/wiki/Taim_%26_Bak"
+        },
+        {
+          "Content": "H-eights",
+          "Href": "https://starwars.fandom.com/wiki/H-eight"
         },
         {
           "Content": "Krupx",
@@ -120,5 +125,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 744083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

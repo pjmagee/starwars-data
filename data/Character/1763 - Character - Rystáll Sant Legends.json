@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -94,6 +101,23 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Cyl Sant",
+          "Href": "https://starwars.fandom.com/wiki/Cyl_Sant"
+        },
+        {
+          "Content": "Rystáll Sant's father",
+          "Href": "https://starwars.fandom.com/wiki/Rystáll_Sant%27s_father"
+        }
+      ],
+      "Values": [
+        "Cyl Sant",
+        "Rystáll Sant's father"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -102,7 +126,7 @@
         },
         {
           "Content": "Jabba Desilijic Tiure's criminal empire",
-          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_criminal_empire/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_criminal_empire"
         },
         {
           "Content": "Max Rebo Band",
@@ -121,5 +145,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 143121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cyl_Sant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

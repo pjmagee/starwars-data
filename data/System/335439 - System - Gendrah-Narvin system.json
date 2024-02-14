@@ -2,6 +2,7 @@
   "PageId": 335439,
   "PageUrl": "https://starwars.fandom.com/wiki/Gendrah-Narvin_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,12 +24,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-13"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 92394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Gendrah-Narvin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

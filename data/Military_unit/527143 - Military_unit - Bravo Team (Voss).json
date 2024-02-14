@@ -2,12 +2,41 @@
   "PageId": 527143,
   "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Team_(Voss)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Bravo Team"
+      ]
+    },
+    {
+      "Label": "Military unit type",
+      "Links": [
+        {
+          "Content": "Platoon",
+          "Href": "https://starwars.fandom.com/wiki/Platoon/Legends"
+        }
+      ],
+      "Values": [
+        "Platoon"
+      ]
+    },
+    {
+      "Label": "Commanding officer(s)",
+      "Links": [
+        {
+          "Content": "Lieutenant",
+          "Href": "https://starwars.fandom.com/wiki/Lieutenant/Legends"
+        },
+        {
+          "Content": "Kadriss",
+          "Href": "https://starwars.fandom.com/wiki/Kadriss"
+        }
+      ],
+      "Values": [
+        "Lieutenant Kadriss"
       ]
     },
     {
@@ -40,12 +69,23 @@
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Imperial Army",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Army_(Sith_Empire)"
         }
       ],
       "Values": [
-        "Sith Empire"
+        "Sith Empire",
+        "Imperial Army"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 527144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kadriss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

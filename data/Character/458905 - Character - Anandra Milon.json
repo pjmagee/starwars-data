@@ -52,15 +52,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Female"
+        "She/her"
       ]
     },
     {
@@ -88,7 +83,42 @@
       "Values": [
         "Fair"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Anandra Milon's father",
+          "Href": "https://starwars.fandom.com/wiki/Anandra_Milon%27s_father"
+        },
+        {
+          "Content": "Anandra Milon's mother",
+          "Href": "https://starwars.fandom.com/wiki/Anandra_Milon%27s_mother"
+        }
+      ],
+      "Values": [
+        "Anandra Milon's father",
+        "Anandra Milon's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Santigo Milon",
+          "Href": "https://starwars.fandom.com/wiki/Santigo_Milon"
+        }
+      ],
+      "Values": [
+        "Santigo Milon"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 458910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anandra_Milon's_uncle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

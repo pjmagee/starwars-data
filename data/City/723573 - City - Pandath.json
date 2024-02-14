@@ -2,6 +2,7 @@
   "PageId": 723573,
   "PageUrl": "https://starwars.fandom.com/wiki/Pandath",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,5 +36,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 472035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taanab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 723577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_chapterhouse_(Taanab)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

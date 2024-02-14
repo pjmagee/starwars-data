@@ -22,7 +22,30 @@
       "Values": [
         "Melee weapon"
       ]
+    },
+    {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Credit"
+        }
+      ],
+      "Values": [
+        "8 credits"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 639369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guard_shoto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 523824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z6_riot_control_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

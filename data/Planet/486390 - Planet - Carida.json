@@ -36,7 +36,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "2"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-9",
@@ -60,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -83,6 +90,10 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy_Deepdock_Facility_Two"
         },
         {
+          "Content": "Ryleel Imperial Base",
+          "Href": "https://starwars.fandom.com/wiki/Ryleel_Imperial_Base"
+        },
+        {
           "Content": "Valor",
           "Href": "https://starwars.fandom.com/wiki/Valor_(space_station)"
         }
@@ -90,11 +101,12 @@
       "Values": [
         "Carida Academy",
         "Imperial Navy Deepdock Facility Two",
+        "Ryleel Imperial Base",
         "Valor"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -142,6 +154,71 @@
   ],
   "Relationships": [
     {
+      "PageId": 515776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 535078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_Deepdock_Facility_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 734777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bansu_Ro's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 695796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 712273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Carida",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 722180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anti-military_protest_at_the_Carida_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 556739,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-32028",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 556889,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cassian_Jeron_Andor's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 465089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 533342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 685217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel's_fiancée",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valor_(space_station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 5642,
       "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -152,24 +229,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 497395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valor_(space_station)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 535078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_Deepdock_Facility_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 556739,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-32028",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 722180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anti-military_protest_at_the_Carida_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 642057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryleel_Imperial_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 714168,
@@ -177,49 +239,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 556889,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cassian_Jeron_Andor's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 641294,
       "PageUrl": "https://starwars.fandom.com/wiki/RJ-909",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 642057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryleel_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 465089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 515776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 685217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel's_fiancée",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 712273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Carida",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 533342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 766616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ozzel_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

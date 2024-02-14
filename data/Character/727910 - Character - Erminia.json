@@ -2,6 +2,7 @@
   "PageId": 727910,
   "PageUrl": "https://starwars.fandom.com/wiki/Erminia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f5/Erminia.png/revision/latest?cb=20230610104141",
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,44 @@
       ]
     },
     {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Red",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Red"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Black"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Fair"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Erminia's mother",
+          "Href": "https://starwars.fandom.com/wiki/Erminia%27s_mother"
+        }
+      ],
+      "Values": [
+        "Erminia's mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -35,5 +74,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 727917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erminia's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

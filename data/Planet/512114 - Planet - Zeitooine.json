@@ -24,6 +24,13 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
@@ -48,7 +55,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungle",
@@ -60,22 +67,63 @@
       ]
     },
     {
-      "Label": "Government",
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Monarchy"
+          "Content": "spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_spaceport_(Zeitooine)"
         }
       ],
       "Values": [
-        "Monarchy"
+        "A spaceport"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
+        }
+      ],
+      "Values": [
+        "Trees"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [
+        {
+          "Content": "Zeit royalty",
+          "Href": "https://starwars.fandom.com/wiki/Zeit_royalty"
+        }
+      ],
+      "Values": [
+        "Zeit royalty"
       ]
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Zeit",
+          "Href": "https://starwars.fandom.com/wiki/Zeit"
+        }
+      ],
       "Values": [
         "Zeit"
+      ]
+    },
+    {
+      "Label": "Major cities",
+      "Links": [
+        {
+          "Content": "city",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_city_(Zeitooine)"
+        }
+      ],
+      "Values": [
+        "A city"
       ]
     },
     {
@@ -93,9 +141,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 736379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_city_(Zeitooine)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 544360,
       "PageUrl": "https://starwars.fandom.com/wiki/Arrests_on_Zeitooine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 718304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeit_royalty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 737250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_spaceport_(Zeitooine)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 677834,
@@ -108,9 +171,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 718304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zeit_royalty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 745901,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

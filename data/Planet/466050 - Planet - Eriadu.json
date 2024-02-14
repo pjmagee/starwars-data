@@ -2,7 +2,7 @@
   "PageId": 466050,
   "PageUrl": "https://starwars.fandom.com/wiki/Eriadu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/75/Eriadu_AoRGMT.png/revision/latest?cb=20190412011258",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/dc/Eriadu_TEA.jpg/revision/latest?cb=20200822092400",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Greater Seswenna",
+          "Href": "https://starwars.fandom.com/wiki/Greater_Seswenna"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Greater Seswenna",
+        "Galactic Frontier"
       ]
     },
     {
@@ -72,7 +82,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-18",
@@ -132,7 +142,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungles",
@@ -151,6 +161,10 @@
     {
       "Label": "Points of interest",
       "Links": [
+        {
+          "Content": "Bri Phrang city",
+          "Href": "https://starwars.fandom.com/wiki/Bri_Phrang_city"
+        },
         {
           "Content": "Carrion Plateau",
           "Href": "https://starwars.fandom.com/wiki/Carrion_Plateau"
@@ -172,22 +186,33 @@
           "Href": "https://starwars.fandom.com/wiki/Orrineswa_River"
         },
         {
+          "Content": "Raven's Peak",
+          "Href": "https://starwars.fandom.com/wiki/Raven%27s_Peak"
+        },
+        {
           "Content": "Rivoche Ranges",
           "Href": "https://starwars.fandom.com/wiki/Rivoche_Ranges"
         },
         {
           "Content": "Tarkin family compound",
           "Href": "https://starwars.fandom.com/wiki/Tarkin_family_compound"
+        },
+        {
+          "Content": "Safe House",
+          "Href": "https://starwars.fandom.com/wiki/Safe_House"
         }
       ],
       "Values": [
+        "Bri Phrang city",
         "Carrion Plateau",
         "Carrion Spike",
         "Mount Veermok",
         "Jova Tarkin's cabin",
         "Orrineswa River",
+        "Raven's Peak",
         "Rivoche Ranges",
-        "Tarkin family compound"
+        "Tarkin family compound",
+        "Safe House"
       ]
     },
     {
@@ -215,6 +240,14 @@
           "Href": "https://starwars.fandom.com/wiki/Bird"
         },
         {
+          "Content": "feline creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_creature_(Eriadu)"
+        },
+        {
+          "Content": "horned creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_horned_creature"
+        },
+        {
           "Content": "Rodents",
           "Href": "https://starwars.fandom.com/wiki/Rodent"
         },
@@ -229,13 +262,15 @@
       ],
       "Values": [
         "Birds",
+        "A feline creature",
+        "A horned creature",
         "Rodents",
         "Veermok",
         "Eriadu veermok"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -338,208 +373,33 @@
   ],
   "Relationships": [
     {
-      "PageId": 680042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 451737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bedal_Cerroux",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 581650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 556731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harb_Binli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 540251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_air_scrubber_farm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 662812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_University",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 662813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_University_Archive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 553949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Byno_Doubton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 695127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan_flotilla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 469321,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Plateau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 532707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_veermok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 509055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 541504,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Patriots",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 540252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 647922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jhorstek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 547241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin's_grandfather",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472477,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ranulph_Tarkin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jova_Tarkin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 646693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_Port",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 646694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Safe_House",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 518433,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 554967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rimma_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 465089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 660347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Veermok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 481546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Septoid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 477721,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lord_(veermok)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 537012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_(veermok)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 537015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zellit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 477641,
       "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Conference",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 578350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rivoche_Ranges",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 554694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jova_Tarkin's_cabin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 472781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Mining_and_Shipping",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 760327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raven's_Peak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 625116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nebula_Front",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 540165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 680141,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu's_inhabited_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 499733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Greater_Seswenna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 698562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_creature_(Eriadu)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 679043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 680135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mural_Veen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 661021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike_(location)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 784977,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salted_wuli_nut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 514914,
       "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 581650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_Spaceport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -553,19 +413,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 688570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system_Emergence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 784981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_commissary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 451737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bri_Phrang_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 531425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bedal_Cerroux",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 477721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lord_(veermok)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 472480,
       "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 540175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 680141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu's_inhabited_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 702235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 695127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan_flotilla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 553320,
@@ -573,14 +463,114 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 554694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jova_Tarkin's_cabin",
+      "PageId": 680042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 556731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harb_Binli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_air_scrubber_farm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 679043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 592930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orrineswa_River",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 541504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Patriots",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 761752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raven's_Peak_starfighter_depot",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 528500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vibro-lance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 500599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 680135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mural_Veen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 518433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 554967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rimma_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 578350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rivoche_Ranges",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 770299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_horned_creature",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 499733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greater_Seswenna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 760272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_summit_on_Eriadu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 465089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 646694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Safe_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 760995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raven's_Peak_Sky_Rail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 761956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doubton_family_estate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 472781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Mining_and_Shipping",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 781762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkorayal_Cabaret_Cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 540130,
@@ -608,14 +598,134 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 592930,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orrineswa_River",
+      "PageId": 625116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nebula_Front",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 540175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 537012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_(veermok)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 537015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zellit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 660347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Veermok",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 688570,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system_Emergence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 661021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike_(location)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 547241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin's_grandfather",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 784185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon_Tarkin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 469321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Plateau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 481546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Septoid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 703640,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 698562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_creature_(Eriadu)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 702235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 532707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_veermok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 540252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 528500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vibro-lance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 553949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byno_Doubton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 509055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 540165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 760254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Raven's_Peak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 662812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_University",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 662813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelar_University_Archive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 472477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranulph_Tarkin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jova_Tarkin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 647922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jhorstek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 741164,
+      "PageUrl": "https://starwars.fandom.com/wiki/Radicaz_Dobbs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

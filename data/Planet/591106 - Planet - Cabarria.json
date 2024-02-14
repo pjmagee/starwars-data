@@ -17,52 +17,71 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-13",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-13"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Corellian Trade Spine",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine"
+        }
+      ],
+      "Values": [
+        "Corellian Trade Spine"
       ]
     },
     {
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Unidentified bar",
+          "Content": "bar",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_bar_(Cabarria)"
         }
       ],
       "Values": [
-        "Unidentified bar"
+        "A bar"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 591616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tractor_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 591483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_attempts_on_Darth_Vader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 573952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kirak_Infil'a's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 498762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 591485,
@@ -70,9 +89,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 498762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 591483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_attempts_on_Darth_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 591486,
@@ -83,6 +107,21 @@
       "PageId": 591487,
       "PageUrl": "https://starwars.fandom.com/wiki/Ramat_Cha",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tractor_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 573952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kirak_Infil'a's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 769879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cabarria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

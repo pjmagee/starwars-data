@@ -65,7 +65,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -85,5 +90,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 292331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerra_Holt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

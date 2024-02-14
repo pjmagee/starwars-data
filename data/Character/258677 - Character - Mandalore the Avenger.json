@@ -2,7 +2,7 @@
   "PageId": 258677,
   "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_the_Avenger",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/Shae_Vizla_unmasked.png/revision/latest?cb=20150830040619",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/46/Mandalore_the_Avenger.png/revision/latest?cb=20161011141346",
   "Data": [
     {
       "Label": "Titles",
@@ -10,6 +10,18 @@
       "Values": [
         "Mandalore the Avenger",
         "Shae Vizla"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "3667 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3667_BBY"
+        }
+      ],
+      "Values": [
+        "Before 3667 BBY"
       ]
     },
     {
@@ -70,7 +82,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Vizla",
@@ -79,6 +91,18 @@
       ],
       "Values": [
         "Vizla"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Shae Vizla's brother",
+          "Href": "https://starwars.fandom.com/wiki/Shae_Vizla%27s_brother"
+        }
+      ],
+      "Values": [
+        "Shae Vizla's brother"
       ]
     },
     {
@@ -99,27 +123,22 @@
         {
           "Content": "Eternal Alliance",
           "Href": "https://starwars.fandom.com/wiki/Eternal_Alliance"
-        },
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "Task Force Nova",
-          "Href": "https://starwars.fandom.com/wiki/Task_Force_Nova"
         }
       ],
       "Values": [
         "Mandalorians",
         "Mandalore the Avenger's faction",
         "Sith Empire",
-        "Eternal Alliance",
-        "Galactic Republic",
-        "Task Force Nova"
+        "Eternal Alliance"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 559212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hashar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 677133,
       "PageUrl": "https://starwars.fandom.com/wiki/Spirit_of_Vengeance_II",
@@ -141,14 +160,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 559212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hashar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 677748,
       "PageUrl": "https://starwars.fandom.com/wiki/Clan_Cadera_banner",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 386966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shae_Vizla's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

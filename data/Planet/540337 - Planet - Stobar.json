@@ -15,12 +15,24 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Outer Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-15",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-15"
       ]
     },
     {
@@ -43,14 +55,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 572299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
       "PageId": 545196,
       "PageUrl": "https://starwars.fandom.com/wiki/Sassi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 559930,
@@ -61,6 +73,11 @@
       "PageId": 429690,
       "PageUrl": "https://starwars.fandom.com/wiki/Stobar_Spaceport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 687357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_battle_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     }
   ]
 }

@@ -49,25 +49,20 @@
     },
     {
       "Label": "Suns",
-      "Links": [
-        {
-          "Content": "Patriim",
-          "Href": "https://starwars.fandom.com/wiki/Patriim/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "1: Patriim"
+        "1"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-18"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Hills"
@@ -79,14 +74,19 @@
         {
           "Content": "Hockaleg spaceport",
           "Href": "https://starwars.fandom.com/wiki/Hockaleg_spaceport"
+        },
+        {
+          "Content": "Patriim shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Patriim_shipyards"
         }
       ],
       "Values": [
-        "Hockaleg spaceport"
+        "Hockaleg spaceport",
+        "Patriim shipyards"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -129,26 +129,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 4574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_(superweapon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 71397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Patriim/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 357843,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-813",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 357844,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-529",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 265481,
       "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Tarkin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -169,9 +149,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 224515,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-4981/Legends",
+      "PageId": 357843,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-813",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 357844,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-529",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 224515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Contrail/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_(superweapon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

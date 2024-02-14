@@ -2,7 +2,7 @@
   "PageId": 456434,
   "PageUrl": "https://starwars.fandom.com/wiki/Tanivos_Exantor_Divo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bd/TanivosExantorDivo.png/revision/latest?cb=20190704211231",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bd/TanivosExantorDivo.png/revision/latest?cb=20230808231736",
   "Data": [
     {
       "Label": "Titles",
@@ -68,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -110,15 +117,51 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Divo family",
           "Href": "https://starwars.fandom.com/wiki/Divo_family"
-        },
+        }
+      ],
+      "Values": [
+        "Divo family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "A father",
+          "Href": "https://starwars.fandom.com/wiki/Tanivos_Exantor_Divo%27s_father"
+        }
+      ],
+      "Values": [
+        "A father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Andressa Divo",
+          "Href": "https://starwars.fandom.com/wiki/Andressa_Divo"
+        }
+      ],
+      "Values": [
+        "Andressa Divo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Federal District Police Academy",
+          "Href": "https://starwars.fandom.com/wiki/Federal_District_Police_Academy"
         },
         {
           "Content": "Coruscant Security Force",
@@ -130,8 +173,8 @@
         }
       ],
       "Values": [
-        "Divo family",
         "Galactic Republic",
+        "Federal District Police Academy",
         "Coruscant Security Force",
         "Galactic Empire"
       ]
@@ -139,14 +182,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 496147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_the_Papanoida_daughters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 485410,
       "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
-      "PageId": 496147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_the_Papanoida_daughters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 611142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andressa_Divo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tanivos_Exantor_Divo's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

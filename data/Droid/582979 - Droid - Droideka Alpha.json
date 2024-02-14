@@ -72,8 +72,20 @@
       ]
     },
     {
-      "Label": "Sensor color",
+      "Label": "Gender",
       "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Sensor color",
+      "Links": [
+        {
+          "Content": "Red",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Red"
       ]

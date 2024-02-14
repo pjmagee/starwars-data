@@ -2,7 +2,7 @@
   "PageId": 20580,
   "PageUrl": "https://starwars.fandom.com/wiki/Anantapar/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c3/Anantapar-TEA.jpg/revision/latest?cb=20231202144152",
   "Data": [
     {
       "Label": "Titles",
@@ -19,28 +19,48 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         },
         {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
+        },
+        {
           "Content": "Greater Javin",
           "Href": "https://starwars.fandom.com/wiki/Greater_Javin/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories; Greater Javin"
+        "Outer Rim Territories",
+        "Western Reaches",
+        "Greater Javin"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
-          "Content": "Yarith sector",
-          "Href": "https://starwars.fandom.com/wiki/Yarith_sector/Legends"
+          "Content": "Javin sector",
+          "Href": "https://starwars.fandom.com/wiki/Javin_sector"
         },
         {
-          "Content": "Ivax Nebula",
-          "Href": "https://starwars.fandom.com/wiki/Ivax_Nebula/Legends"
+          "Content": "400 BBY",
+          "Href": "https://starwars.fandom.com/wiki/400_BBY/Legends"
+        },
+        {
+          "Content": "Anoat sector",
+          "Href": "https://starwars.fandom.com/wiki/Anoat_sector/Legends"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Standard_Calendar"
+        },
+        {
+          "Content": "Yarith sector",
+          "Href": "https://starwars.fandom.com/wiki/Yarith_sector/Legends"
         }
       ],
       "Values": [
-        "Yarith sector; Ivax Nebula"
+        "Javin sector (prior to c. 400 BBY)",
+        "Anoat sector (c. 400 BBY—)",
+        "Yarith sector (generations after c. 400 BBY)"
       ]
     },
     {
@@ -56,7 +76,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-18"
@@ -78,23 +98,35 @@
       "Label": "Class",
       "Links": [
         {
-          "Content": "ocean",
+          "Content": "waterworld",
+          "Href": "https://starwars.fandom.com/wiki/Waterworld/Legends"
+        }
+      ],
+      "Values": [
+        "Terrestrial waterworld"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [],
+      "Values": [
+        "Tropical"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "sea",
           "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
         }
       ],
       "Values": [
-        "Terrestrial ocean world"
+        "At least one sea"
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
-      "Values": [
-        "Tropical oceans"
-      ]
-    },
-    {
-      "Label": "Native species",
+      "Label": "Fauna",
       "Links": [
         {
           "Content": "Shellfish",
@@ -104,30 +136,18 @@
       "Values": [
         "Shellfish"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Darth Krayt's Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Darth_Krayt%27s_Galactic_Empire"
-        }
-      ],
-      "Values": [
-        "Darth Krayt's Galactic Empire"
-      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 271028,
       "PageUrl": "https://starwars.fandom.com/wiki/Anantapar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

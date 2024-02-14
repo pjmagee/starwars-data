@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -48,14 +53,43 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-13"
       ]
     },
     {
-      "Label": "Points of interest",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Sepan",
+          "Href": "https://starwars.fandom.com/wiki/Sepan"
+        },
+        {
+          "Content": "Dimok",
+          "Href": "https://starwars.fandom.com/wiki/Dimok_(people)"
+        },
+        {
+          "Content": "Ripoblus",
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(people)"
+        }
+      ],
+      "Values": [
+        "Sepan",
+        "Dimok",
+        "Ripoblus"
+      ]
+    },
+    {
+      "Label": "Major cities",
       "Links": [
         {
           "Content": "Unidentified Kuthard village",
@@ -67,24 +101,24 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Dimok",
-          "Href": "https://starwars.fandom.com/wiki/Dimok_(species)"
-        },
-        {
-          "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(species)"
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
-        "Dimok",
-        "Ripoblus"
+        "Galactic Federation of Free Alliances"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 787629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 18483,
       "PageUrl": "https://starwars.fandom.com/wiki/Sepan_system",

@@ -2,6 +2,7 @@
   "PageId": 593391,
   "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Han_Solo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -54,8 +55,8 @@
           "Href": "https://starwars.fandom.com/wiki/Zabin_Hive"
         },
         {
-          "Content": "Kubaz",
-          "Href": "https://starwars.fandom.com/wiki/Kubaz/Legends"
+          "Content": "Kubindi",
+          "Href": "https://starwars.fandom.com/wiki/Kubindi/Legends"
         },
         {
           "Content": "Tafanda Bay",
@@ -76,7 +77,7 @@
       ],
       "Values": [
         "Dune Sea/Mos Eisley, Tatooine",
-        "Zabin Hive, Kubaz",
+        "Zabin Hive, Kubindi",
         "Tafanda Bay, Ithor",
         "Caross, Togoria"
       ]
@@ -101,7 +102,35 @@
         "Grubba the Hutt returned to Tatooine",
         "Bounty hunters fail to claim the bounty on Han Solo"
       ]
+    },
+    {
+      "Label": "Battles",
+      "Links": [
+        {
+          "Content": "Battle of Ithor",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ithor_(0_ABY)"
+        }
+      ],
+      "Values": [
+        "Battle of Ithor"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 174835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ithor_(0_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 12570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calaron_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 12711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taldot_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

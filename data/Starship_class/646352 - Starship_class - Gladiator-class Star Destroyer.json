@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Kuat Drive Yards",
-          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
-        }
-      ],
-      "Values": [
-        "Kuat Drive Yards"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,14 +24,19 @@
       ]
     },
     {
-      "Label": "Model",
-      "Links": [],
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Kuat Drive Yards",
+          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
+        }
+      ],
       "Values": [
-        "Gladiator-class Star Destroyer"
+        "Kuat Drive Yards"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -51,7 +44,19 @@
         }
       ],
       "Values": [
-        "Star Destroyer"
+        "Gladiator-class Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "frigate",
+          "Href": "https://starwars.fandom.com/wiki/Frigate"
+        }
+      ],
+      "Values": [
+        "Escort frigate-classed Star Destroyer"
       ]
     },
     {
@@ -272,14 +277,6 @@
         {
           "Content": "Orbital bombardment",
           "Href": "https://starwars.fandom.com/wiki/Orbital_bombardment"
-        },
-        {
-          "Content": "Star",
-          "Href": "https://starwars.fandom.com/wiki/Star"
-        },
-        {
-          "Content": "Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Destroyer"
         }
       ],
       "Values": [
@@ -312,16 +309,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 665726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blood_Ambition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 666024,
       "PageUrl": "https://starwars.fandom.com/wiki/Gladiator_I",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
@@ -330,6 +317,16 @@
       "PageId": 646353,
       "PageUrl": "https://starwars.fandom.com/wiki/Hoplite",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 665726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blood_Ambition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

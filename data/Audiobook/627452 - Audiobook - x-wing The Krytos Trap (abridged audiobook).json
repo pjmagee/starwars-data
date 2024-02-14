@@ -78,18 +78,6 @@
       ]
     },
     {
-      "Label": "Cassettes",
-      "Links": [
-        {
-          "Content": "https://starwars.fandom.com/wiki/Special:RecentChanges",
-          "Href": "https://starwars.fandom.com/wiki/Special:RecentChanges"
-        }
-      ],
-      "Values": [
-        "https://starwars.fandom.com/wiki/Special:RecentChanges"
-      ]
-    },
-    {
       "Label": "",
       "Links": [
         {
@@ -118,7 +106,7 @@
       "Links": [
         {
           "Content": "X-Wing: Wedge's Gamble",
-          "Href": "https://starwars.fandom.com/wiki/X-Wing:_Wedge%27s_Gamble_(audiobook)"
+          "Href": "https://starwars.fandom.com/wiki/X-Wing:_Wedge%27s_Gamble_(abridged_audiobook)"
         }
       ],
       "Values": [
@@ -130,7 +118,7 @@
       "Links": [
         {
           "Content": "X-Wing: The Bacta War",
-          "Href": "https://starwars.fandom.com/wiki/X-Wing:_The_Bacta_War_(audiobook)"
+          "Href": "https://starwars.fandom.com/wiki/X-Wing:_The_Bacta_War_(abridged_audiobook)"
         }
       ],
       "Values": [
@@ -138,5 +126,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 627449,
+      "PageUrl": "x-wing:_Wedge's_Gamble_(abridged_audiobook)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Audiobook"
+    },
+    {
+      "PageId": 627453,
+      "PageUrl": "x-wing:_The_Bacta_War_(abridged_audiobook)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Audiobook"
+    }
+  ]
 }

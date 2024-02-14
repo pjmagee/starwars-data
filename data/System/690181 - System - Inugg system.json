@@ -2,7 +2,7 @@
   "PageId": 690181,
   "PageUrl": "https://starwars.fandom.com/wiki/Inugg_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c1/Banchii.png/revision/latest?cb=20210831211358",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e3/GoBanchii.jpg/revision/latest?cb=20230811173122",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,27 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-19"
       ]
     },
     {
@@ -53,7 +70,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -82,13 +99,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 708020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hon-Tallos",
+      "PageId": 690182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Banchii",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 690182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Banchii",
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 708020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hon-Tallos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

@@ -2,7 +2,7 @@
   "PageId": 595792,
   "PageUrl": "https://starwars.fandom.com/wiki/Ardennian",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b7/Rio_Durant_SoloTOCE.png/revision/latest?cb=20181205061821",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b7/Rio_Durant_SoloTOCE.png/revision/latest?cb=20230812161458",
   "Data": [
     {
       "Label": "Titles",
@@ -41,17 +41,13 @@
       "Label": "Hair color",
       "Links": [],
       "Values": [
-        "Gray"
+        "Gray",
+        "Purple"
       ]
     },
     {
       "Label": "Eye color",
-      "Links": [
-        {
-          "Content": "Brown",
-          "Href": "https://starwars.fandom.com/wiki/Color"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Brown",
         "Green"
@@ -96,24 +92,34 @@
   ],
   "Relationships": [
     {
+      "PageId": 708572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 595217,
       "PageUrl": "https://starwars.fandom.com/wiki/Rio_Durant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 763169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 755225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Begamorian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Cultural_group"
+    },
+    {
+      "PageId": 625709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chio_Fain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 599038,
       "PageUrl": "https://starwars.fandom.com/wiki/Ardennia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 708572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 625709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chio_Fain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

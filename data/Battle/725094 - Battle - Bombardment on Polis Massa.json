@@ -26,12 +26,16 @@
       "Label": "Date",
       "Links": [
         {
+          "Content": "Years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year"
+        },
+        {
           "Content": "3 ABY",
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
         }
       ],
       "Values": [
-        "By 3 ABY"
+        "Years before 3 ABY"
       ]
     },
     {
@@ -52,9 +56,14 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
       "Values": [
-        "Base bombarded"
+        "The Galactic Empire bombards the base"
       ]
     }
   ],

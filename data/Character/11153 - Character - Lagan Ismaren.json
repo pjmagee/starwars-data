@@ -2,6 +2,7 @@
   "PageId": 11153,
   "PageUrl": "https://starwars.fandom.com/wiki/Lagan_Ismaren",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -20,6 +21,18 @@
       ],
       "Values": [
         "Alderaan"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "Great Jedi Purge",
+          "Href": "https://starwars.fandom.com/wiki/Great_Jedi_Purge/Legends"
+        }
+      ],
+      "Values": [
+        "During the Great Jedi Purge"
       ]
     },
     {
@@ -64,5 +77,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 11150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roganda_Ismaren/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

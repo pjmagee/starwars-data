@@ -36,7 +36,8 @@
         }
       ],
       "Values": [
-        "Corellian sector; Outlier systems"
+        "Corellian sector",
+        "Outlier systems"
       ]
     },
     {
@@ -52,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -97,28 +98,32 @@
       "Values": [
         "Slag",
         "Arcadia",
+        "1 moon",
         "Sacorria",
         "Sarcophagus",
         "Noleria",
+        "2 moons",
         "Titanicus",
         "14 moons",
         "Leviathan",
         "16 moons",
         "Vo"
       ]
+    },
+    {
+      "Label": "Class",
+      "Links": [
+        {
+          "Content": "Orange giant",
+          "Href": "https://starwars.fandom.com/wiki/Orange_giant"
+        }
+      ],
+      "Values": [
+        "Orange giant"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 6217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacorrian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 2077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacorria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
     {
       "PageId": 17261,
       "PageUrl": "https://starwars.fandom.com/wiki/Slag",
@@ -148,6 +153,21 @@
       "PageId": 17270,
       "PageUrl": "https://starwars.fandom.com/wiki/Leviathan_(planet)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 791489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orange_giant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star_type"
+    },
+    {
+      "PageId": 2077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacorria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 6217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacorrian_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

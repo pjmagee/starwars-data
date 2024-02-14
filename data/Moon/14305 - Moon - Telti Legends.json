@@ -36,14 +36,45 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-10"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Rotation period",
+      "Links": [
+        {
+          "Content": "standard hours",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
+        }
+      ],
+      "Values": [
+        "22 standard hours"
+      ]
+    },
+    {
+      "Label": "Orbital period",
+      "Links": [
+        {
+          "Content": "local days",
+          "Href": "https://starwars.fandom.com/wiki/Local_day/Legends"
+        }
+      ],
+      "Values": [
+        "309 local days"
+      ]
+    },
+    {
+      "Label": "Gravity",
+      "Links": [],
+      "Values": [
+        "Standard"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Barren",
@@ -51,7 +82,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -80,10 +111,37 @@
       ]
     },
     {
+      "Label": "Government",
+      "Links": [],
+      "Values": [
+        "Corporate"
+      ]
+    },
+    {
       "Label": "Major cities",
       "Links": [],
       "Values": [
         "Dome 1"
+      ]
+    },
+    {
+      "Label": "Major imports",
+      "Links": [],
+      "Values": [
+        "Industrial raw materials"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Droids",
+          "Href": "https://starwars.fandom.com/wiki/Droid/Legends"
+        }
+      ],
+      "Values": [
+        "Droids",
+        "Technology"
       ]
     },
     {
@@ -121,14 +179,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 8382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 97869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 10647,
+      "PageUrl": "https://starwars.fandom.com/wiki/EV-9D9.2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 229426,
@@ -136,9 +189,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 76191,
-      "PageUrl": "https://starwars.fandom.com/wiki/MD-1_medical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 97869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 101800,
@@ -146,29 +199,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 10647,
-      "PageUrl": "https://starwars.fandom.com/wiki/EV-9D9.2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 8382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 76191,
+      "PageUrl": "https://starwars.fandom.com/wiki/MD-1_medical_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 176218,
       "PageUrl": "https://starwars.fandom.com/wiki/MD-2_medical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 221158,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Telti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 17595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sistooine_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 176219,
@@ -179,6 +222,21 @@
       "PageId": 176220,
       "PageUrl": "https://starwars.fandom.com/wiki/MD-4_medical_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 17595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sistooine_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 221158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Telti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

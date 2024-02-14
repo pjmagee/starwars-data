@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Line",
+      "Links": [
+        {
+          "Content": "Nebulon-series",
+          "Href": "https://starwars.fandom.com/wiki/Nebulon-series_(starship)"
+        }
+      ],
+      "Values": [
+        "Nebulon-series"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -102,12 +114,29 @@
       "Label": "Hyperdrive system",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Hyperdrive",
           "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
         }
       ],
       "Values": [
-        "Equipped"
+        "Hyperdrive generator"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "power generator",
+          "Href": "https://starwars.fandom.com/wiki/Power_generator"
+        },
+        {
+          "Content": "power cells",
+          "Href": "https://starwars.fandom.com/wiki/Power_cell"
+        }
+      ],
+      "Values": [
+        "Auxiliary power generator",
+        "Backup engine power cells"
       ]
     },
     {
@@ -156,7 +185,8 @@
         }
       ],
       "Values": [
-        "Long-range sensor"
+        "Long-range sensor",
+        "Forward sensor array"
       ]
     },
     {
@@ -228,9 +258,21 @@
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Officers",
+          "Href": "https://starwars.fandom.com/wiki/Officer"
+        },
+        {
+          "Content": "Medical personnel",
+          "Href": "https://starwars.fandom.com/wiki/Doctor"
+        }
+      ],
       "Values": [
-        "850"
+        "850 - 920",
+        "Officers (77)",
+        "Enlisted crew (773)",
+        "Medical personnel (80)"
       ]
     },
     {
@@ -273,7 +315,8 @@
         }
       ],
       "Values": [
-        "Long-range communications array"
+        "Long-range multi-frequency communications array",
+        "Short-range communications array"
       ]
     },
     {
@@ -351,43 +394,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 567171,
       "PageUrl": "https://starwars.fandom.com/wiki/Vanguard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 495931,
-      "PageUrl": "https://starwars.fandom.com/wiki/Patience",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 624565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hellion's_Dare",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 551180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Massassi_Group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 601729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chelli_Lona_Aphra's_squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 666909,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_protocol_droid_(Accresker_Jail)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 585535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Opportunity_(Nebulon-B)",
+      "PageId": 500140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redemption",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -396,9 +409,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 500140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redemption",
+      "PageId": 779839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nebulon-series_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 624565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hellion's_Dare",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 666909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_protocol_droid_(Accresker_Jail)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 512477,
@@ -406,9 +429,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 601663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Convict_2317",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 551180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massassi_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 585535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Opportunity_(Nebulon-B)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 641186,
       "PageUrl": "https://starwars.fandom.com/wiki/Tyvarex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 495931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patience",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 601729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chelli_Lona_Aphra's_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

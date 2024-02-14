@@ -2,6 +2,7 @@
   "PageId": 705298,
   "PageUrl": "https://starwars.fandom.com/wiki/Trade_Blockade_Stackade_of_Pancakes",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,12 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pancake",
+          "Href": "https://starwars.fandom.com/wiki/Pancake"
+        }
+      ],
       "Values": [
         "Pancake"
       ]
@@ -30,5 +36,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 763088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pancake/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

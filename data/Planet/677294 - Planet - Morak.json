@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Rainforests",
@@ -60,7 +72,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -78,7 +90,12 @@
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Moraki",
+          "Href": "https://starwars.fandom.com/wiki/Moraki"
+        }
+      ],
       "Values": [
         "Moraki"
       ]
@@ -109,30 +126,30 @@
         {
           "Content": "Morak Imperial remnants",
           "Href": "https://starwars.fandom.com/wiki/Morak_Imperial_remnants"
+        },
+        {
+          "Content": "Shydopp pirates",
+          "Href": "https://starwars.fandom.com/wiki/Shydopp_pirates"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Security Bureau",
-        "Morak Imperial remnants"
+        "Morak Imperial remnants",
+        "Shydopp pirates"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 677289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valin_Hess",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 677362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Morak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 638441,
       "PageUrl": "https://starwars.fandom.com/wiki/MK_sniper_rifle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 677308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Juggernaut_Pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 677358,
@@ -145,9 +162,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 539537,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coastal_defender_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 676251,
+      "PageUrl": "https://starwars.fandom.com/wiki/IB-94_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 471541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhydonium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
       "PageId": 677635,
@@ -155,14 +177,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 678039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_platoon_(Morak)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 677321,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morak_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 677395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shydopp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 677316,
@@ -170,19 +187,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 676251,
-      "PageUrl": "https://starwars.fandom.com/wiki/IB-94_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 539537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coastal_defender_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 677362,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Morak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 678039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_platoon_(Morak)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 471541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhydonium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 677321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morak_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 677289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valin_Hess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 677308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Juggernaut_Pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 741679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moraki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 533158,

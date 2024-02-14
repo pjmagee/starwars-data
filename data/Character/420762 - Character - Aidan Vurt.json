@@ -2,6 +2,7 @@
   "PageId": 420762,
   "PageUrl": "https://starwars.fandom.com/wiki/Aidan_Vurt",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +40,18 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Leontyne Saresh",
+          "Href": "https://starwars.fandom.com/wiki/Leontyne_Saresh"
+        }
+      ],
+      "Values": [
+        "Leontyne Saresh"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -51,5 +64,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 363605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leontyne_Saresh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

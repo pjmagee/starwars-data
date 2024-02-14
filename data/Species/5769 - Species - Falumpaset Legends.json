@@ -98,8 +98,30 @@
       ]
     },
     {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        },
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Forests",
+        "Swamps"
+      ]
+    },
+    {
       "Label": "Diet",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Omnivorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
       "Values": [
         "Omnivorous"
       ]
@@ -107,9 +129,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 40076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
+      "PageId": 27296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 698543,
@@ -122,24 +149,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 257724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Great_Grass_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 27296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 20112,
       "PageUrl": "https://starwars.fandom.com/wiki/Gungan_battle_wagon/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 40076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 257724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Great_Grass_Plains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

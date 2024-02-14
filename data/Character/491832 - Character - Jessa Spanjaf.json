@@ -48,28 +48,74 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Spanjaf family",
           "Href": "https://starwars.fandom.com/wiki/Spanjaf_family"
-        },
+        }
+      ],
+      "Values": [
+        "Spanjaf family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Gandr Spanjaf",
+          "Href": "https://starwars.fandom.com/wiki/Gandr_Spanjaf"
+        }
+      ],
+      "Values": [
+        "Gandr Spanjaf"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Merei Spanjaf",
+          "Href": "https://starwars.fandom.com/wiki/Merei_Spanjaf"
+        }
+      ],
+      "Values": [
+        "Merei Spanjaf"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Garel City cell",
           "Href": "https://starwars.fandom.com/wiki/Garel_City_cell"
         }
       ],
       "Values": [
-        "Spanjaf family",
         "Garel City cell"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 526078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spanjaf_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 482369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merei_Spanjaf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 529427,
       "PageUrl": "https://starwars.fandom.com/wiki/Transportation_Ministry_data_breach",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 491833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gandr_Spanjaf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

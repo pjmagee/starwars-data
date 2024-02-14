@@ -2,7 +2,7 @@
   "PageId": 535897,
   "PageUrl": "https://starwars.fandom.com/wiki/Metalorn",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/SarkaMetalornTFABG.png/revision/latest?cb=20180408172437",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/60/Metalorn-SWT.jpg/revision/latest?cb=20220726105645",
   "Data": [
     {
       "Label": "Titles",
@@ -19,22 +19,26 @@
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
         },
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
+        },
+        {
           "Content": "Foundry of the Confederacy",
           "Href": "https://starwars.fandom.com/wiki/Foundry_of_the_Confederacy"
         },
         {
-          "Content": "The Slice",
-          "Href": "https://starwars.fandom.com/wiki/The_Slice"
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
         }
       ],
       "Values": [
         "Mid Rim Territories",
-        "Foundry of the Confederacy",
-        "The Slice"
+        "The Slice",
+        "Foundry of the Confederacy (Clone Wars)"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-8",
@@ -43,6 +47,13 @@
       ],
       "Values": [
         "R-8"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -58,15 +69,15 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Skakoan",
+          "Content": "Skakoans",
           "Href": "https://starwars.fandom.com/wiki/Skakoan"
         }
       ],
       "Values": [
-        "Skakoan"
+        "Skakoans"
       ]
     },
     {
@@ -99,6 +110,26 @@
   ],
   "Relationships": [
     {
+      "PageId": 712646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_of_the_Confederacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 479522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 664626,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unreal_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 469709,
+      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 725186,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Metalorn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -107,26 +138,6 @@
       "PageId": 475917,
       "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 469709,
-      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 664626,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unreal_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 479522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 712646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_of_the_Confederacy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

@@ -56,6 +56,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -82,12 +89,44 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Fel dynasty",
           "Href": "https://starwars.fandom.com/wiki/Fel_dynasty"
-        },
+        }
+      ],
+      "Values": [
+        "Fel dynasty"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Elliah Fel",
+          "Href": "https://starwars.fandom.com/wiki/Elliah_Fel"
+        }
+      ],
+      "Values": [
+        "Elliah Fel"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Marasiah Fel",
+          "Href": "https://starwars.fandom.com/wiki/Marasiah_Fel"
+        }
+      ],
+      "Values": [
+        "Marasiah Fel"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Fel Empire",
           "Href": "https://starwars.fandom.com/wiki/Fel_Empire"
@@ -102,26 +141,48 @@
         }
       ],
       "Values": [
-        "Fel dynasty",
         "Fel Empire",
         "Empire-in-exile",
         "Imperial Knights"
       ]
-    },
-    {
-      "Label": "Apprentices",
-      "Links": [
-        {
-          "Content": "Antares Draco",
-          "Href": "https://starwars.fandom.com/wiki/Antares_Draco"
-        }
-      ],
-      "Values": [
-        "Antares Draco"
-      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 80207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marasiah_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 80316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fel_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 329036,
+      "PageUrl": "https://starwars.fandom.com/wiki/138_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 196071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_The_Wheel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 15264,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Bakstre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 109379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Imperial_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 286598,
+      "PageUrl": "operation:_Thunderstroke",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 344379,
       "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Roan_Fel",
@@ -133,44 +194,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 291723,
-      "PageUrl": "https://starwars.fandom.com/wiki/132_ABY",
+      "PageId": 64409,
+      "PageUrl": "https://starwars.fandom.com/wiki/127_ABY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 329036,
-      "PageUrl": "https://starwars.fandom.com/wiki/138_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 341998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jagged_Fel_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 371131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_(Second_Imperial_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 196071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_The_Wheel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 135780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mohrgan_Fel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 341948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Second_Imperial_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 109379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Imperial_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 64410,
@@ -183,14 +209,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 15264,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Bakstre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 341948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Second_Imperial_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 286598,
-      "PageUrl": "operation:_Thunderstroke",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 135780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mohrgan_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 297809,
@@ -198,9 +224,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 371131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_(Second_Imperial_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 170910,
       "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Bastion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 341998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jagged_Fel_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 315894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elliah_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 291723,
+      "PageUrl": "https://starwars.fandom.com/wiki/132_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     }
   ]
 }

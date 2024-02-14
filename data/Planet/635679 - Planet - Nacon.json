@@ -2,7 +2,7 @@
   "PageId": 635679,
   "PageUrl": "https://starwars.fandom.com/wiki/Nacon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a0/Nacon-SWT.jpg/revision/latest?cb=20220614153059",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Deep Core",
           "Href": "https://starwars.fandom.com/wiki/Deep_Core"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Deep Core"
+        "Deep Core",
+        "The Interior"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-10",
@@ -36,19 +41,27 @@
       ]
     },
     {
-      "Label": "Atmosphere",
+      "Label": "Trade routes",
       "Links": [
         {
-          "Content": "Type II",
-          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
-        },
-        {
-          "Content": "breath mask",
-          "Href": "https://starwars.fandom.com/wiki/Breath_mask"
+          "Content": "Koros Trunk Line",
+          "Href": "https://starwars.fandom.com/wiki/Koros_Trunk_Line"
         }
       ],
       "Values": [
-        "Type II (breath mask suggested)"
+        "Koros Trunk Line"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Ammonia",
+          "Href": "https://starwars.fandom.com/wiki/Ammonia"
+        }
+      ],
+      "Values": [
+        "Ammonia-rich"
       ]
     },
     {
@@ -74,6 +87,11 @@
       "PageId": 599732,
       "PageUrl": "https://starwars.fandom.com/wiki/Elnacon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 665398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

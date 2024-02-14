@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Kesh",
-          "Href": "https://starwars.fandom.com/wiki/Kesh"
+          "Href": "https://starwars.fandom.com/wiki/Kesh/Legends"
         }
       ],
       "Values": [
@@ -74,6 +74,35 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Hilts family",
+          "Href": "https://starwars.fandom.com/wiki/Hilts_family"
+        }
+      ],
+      "Values": [
+        "Hilts family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Varner Hilts",
+          "Href": "https://starwars.fandom.com/wiki/Varner_Hilts"
+        },
+        {
+          "Content": "Iliana Hilts",
+          "Href": "https://starwars.fandom.com/wiki/Iliana_Hilts"
+        }
+      ],
+      "Values": [
+        "Varner Hilts",
+        "Iliana Hilts"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -93,14 +122,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 401003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tahv_Constabulary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 338339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varner_Hilts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 407978,
       "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Eshkrene",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 401003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tahv_Constabulary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

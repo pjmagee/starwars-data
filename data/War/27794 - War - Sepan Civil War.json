@@ -15,6 +15,14 @@
       "Label": "Beginning",
       "Links": [
         {
+          "Content": "Centuries",
+          "Href": "https://starwars.fandom.com/wiki/Standard_century/Legends"
+        },
+        {
+          "Content": "137 ABY",
+          "Href": "https://starwars.fandom.com/wiki/137_ABY"
+        },
+        {
           "Content": "Decades",
           "Href": "https://starwars.fandom.com/wiki/Standard_decade/Legends"
         },
@@ -24,6 +32,7 @@
         }
       ],
       "Values": [
+        "Centuries prior to 137 ABY",
         "Decades prior to 22 BBY"
       ]
     },
@@ -42,6 +51,10 @@
     {
       "Label": "Major battles",
       "Links": [
+        {
+          "Content": "Third mission to the Sepan sector",
+          "Href": "https://starwars.fandom.com/wiki/Third_mission_to_the_Sepan_sector"
+        },
         {
           "Content": "Sepan campaign",
           "Href": "https://starwars.fandom.com/wiki/Sepan_campaign"
@@ -65,28 +78,49 @@
         {
           "Content": "Raid on the Tropsobor",
           "Href": "https://starwars.fandom.com/wiki/Raid_on_the_Tropsobor"
+        },
+        {
+          "Content": "Peacekeeping mission to the Sepan sector",
+          "Href": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector"
         }
       ],
       "Values": [
+        "Third mission to the Sepan sector",
         "Sepan campaign",
         "First Battle of the Sepan system",
         "Battle of Science Station Youst",
         "Second Battle of the Sepan system",
         "Battle of Sepan 8",
-        "Raid on the Tropsobor"
+        "Raid on the Tropsobor",
+        "Peacekeeping mission to the Sepan sector"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 6098,
+      "PageUrl": "https://starwars.fandom.com/wiki/23_BBY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
     {
       "PageId": 217298,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sepan_8",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 27969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 109147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 787626,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 787629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 385818,
@@ -104,14 +138,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 6098,
-      "PageUrl": "https://starwars.fandom.com/wiki/23_BBY/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 109147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 27969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 223393,

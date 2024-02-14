@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-15"
@@ -50,12 +55,22 @@
           "Href": "https://starwars.fandom.com/wiki/Kalarba/Legends"
         },
         {
+          "Content": "Hosk",
+          "Href": "https://starwars.fandom.com/wiki/Hosk"
+        },
+        {
+          "Content": "Indobok",
+          "Href": "https://starwars.fandom.com/wiki/Indobok"
+        },
+        {
           "Content": "Keriba VI",
           "Href": "https://starwars.fandom.com/wiki/Keriba_VI"
         }
       ],
       "Values": [
         "Kalarba",
+        "Hosk",
+        "Indobok",
         "Keriba VI"
       ]
     },
@@ -75,16 +90,40 @@
       "Label": "Asteroids",
       "Links": [
         {
-          "Content": "Kalarba asteroid belts",
+          "Content": "Asteroid belts",
           "Href": "https://starwars.fandom.com/wiki/Kalarba_asteroid_belts"
         }
       ],
       "Values": [
-        "Kalarba asteroid belts"
+        "Asteroid belts"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Duros Space Run",
+          "Href": "https://starwars.fandom.com/wiki/Duros_Space_Run"
+        }
+      ],
+      "Values": [
+        "Duros Space Run"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "B'rknaa",
+          "Href": "https://starwars.fandom.com/wiki/B%27rknaa"
+        }
+      ],
+      "Values": [
+        "B'rknaa"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -108,43 +147,80 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Population",
       "Links": [
         {
-          "Content": "Confederacy of Independent Systems",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
+        },
+        {
+          "Content": "25 ABY",
+          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
+        },
+        {
+          "Content": "26 ABY",
+          "Href": "https://starwars.fandom.com/wiki/26_ABY/Legends"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "22 BBY: At least 750 million",
+        "25 ABY: 500 million to 1 billion",
+        "After 26 ABY: None"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Yuuzhan Vong empire",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
+        }
+      ],
+      "Values": [
+        "Galactic Republic",
+        "Confederacy of Independent Systems",
+        "Galactic Empire",
+        "New Republic",
+        "Yuuzhan Vong empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 421323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_junk_trader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 133446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Indobok_Pirates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 12796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hevvrol_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 72534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Kether",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 13713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalarba/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 270275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 46270,
       "PageUrl": "https://starwars.fandom.com/wiki/Champion_(Bothan_Assault_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalarba/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 13714,
@@ -157,9 +233,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 270275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 72534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ran_Kether",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 9659,
@@ -167,9 +243,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 133446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Indobok_Pirates",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 12796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hevvrol_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 421323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_junk_trader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

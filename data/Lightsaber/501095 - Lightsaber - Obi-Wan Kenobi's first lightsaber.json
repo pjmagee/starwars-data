@@ -2,7 +2,7 @@
   "PageId": 501095,
   "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_first_lightsaber",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1b/Obi-Wan_Kenobis_first_lightsaber_-_SW_Card_Trader.png/revision/latest?cb=20160710021446",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6d/OWKFirstLightsaber-SWYBYNE.png/revision/latest?cb=20231108234718",
   "Data": [
     {
       "Label": "Titles",
@@ -55,26 +55,17 @@
       ]
     },
     {
-      "Label": "Date destroyed",
-      "Links": [
-        {
-          "Content": "32 BBY",
-          "Href": "https://starwars.fandom.com/wiki/32_BBY"
-        },
-        {
-          "Content": "Naboo",
-          "Href": "https://starwars.fandom.com/wiki/Naboo"
-        }
-      ],
-      "Values": [
-        "32 BBY, Naboo"
-      ]
-    },
-    {
       "Label": "Owners",
       "Links": [],
       "Values": [
         "Obi-Wan Kenobi"
+      ]
+    },
+    {
+      "Label": "Hilt shape",
+      "Links": [],
+      "Values": [
+        "Cylindrical, straight"
       ]
     },
     {
@@ -91,9 +82,14 @@
     },
     {
       "Label": "Hilt material",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Silver",
+          "Href": "https://starwars.fandom.com/wiki/Silver"
+        }
+      ],
       "Values": [
-        "Alloy metal"
+        "Silver alloy metal"
       ]
     },
     {
@@ -139,11 +135,23 @@
       ]
     },
     {
+      "Label": "Capacity",
+      "Links": [
+        {
+          "Content": "Diatium power cell",
+          "Href": "https://starwars.fandom.com/wiki/Diatium_power_cell"
+        }
+      ],
+      "Values": [
+        "Diatium power cell"
+      ]
+    },
+    {
       "Label": "Design",
       "Links": [
         {
-          "Content": "Qui-Gon Jinn",
-          "Href": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn"
+          "Content": "Qui-Gon Jinn's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn%27s_lightsaber"
         }
       ],
       "Values": [
@@ -166,6 +174,10 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Kenobi family",
+          "Href": "https://starwars.fandom.com/wiki/Kenobi_family"
+        },
+        {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
@@ -175,6 +187,7 @@
         }
       ],
       "Values": [
+        "Kenobi family",
         "Jedi Order",
         "Galactic Republic"
       ]

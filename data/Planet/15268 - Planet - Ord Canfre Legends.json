@@ -2,7 +2,7 @@
   "PageId": 15268,
   "PageUrl": "https://starwars.fandom.com/wiki/Ord_Canfre/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8f/OrdCanfre-TEA.png/revision/latest?cb=20220925153833",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
       ]
     },
     {
@@ -29,10 +34,15 @@
         {
           "Content": "Cassander sector",
           "Href": "https://starwars.fandom.com/wiki/Cassander_sector/Legends"
+        },
+        {
+          "Content": "Cassander subsector",
+          "Href": "https://starwars.fandom.com/wiki/Cassander_subsector"
         }
       ],
       "Values": [
-        "Cassander sector"
+        "Cassander sector",
+        "Cassander subsector"
       ]
     },
     {
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-5"
@@ -58,12 +68,24 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "ExplorCorps",
+          "Content": "Exploration Corps",
           "Href": "https://starwars.fandom.com/wiki/Exploration_Corps/Legends"
         }
       ],
       "Values": [
-        "ExplorCorps outpost"
+        "Exploration Corps outpost"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Akk dog",
+          "Href": "https://starwars.fandom.com/wiki/Akk_dog/Legends"
+        }
+      ],
+      "Values": [
+        "Akk dog"
       ]
     },
     {
@@ -82,23 +104,23 @@
           "Href": "https://starwars.fandom.com/wiki/Pentastar_Alignment"
         },
         {
-          "Content": "Yuuzhan Vong empire",
-          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
+          "Content": "Imperial Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
         }
       ],
       "Values": [
         "Galactic Republic",
         "Confederacy of Independent Systems",
         "Pentastar Alignment",
-        "Yuuzhan Vong empire"
+        "Imperial Remnant"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 348931,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Canfre_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 27484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Canfre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 22696,
@@ -106,9 +128,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 27484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Canfre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 348931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Canfre_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 623883,
   "PageUrl": "https://starwars.fandom.com/wiki/Pandem_Nai",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/96/Pandem-Nai-SWT.jpg/revision/latest?cb=20220603123842",
   "Data": [
     {
       "Label": "Titles",
@@ -15,11 +15,16 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
+        },
+        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         }
       ],
       "Values": [
+        "New Territories",
         "Outer Rim Territories"
       ]
     },
@@ -57,6 +62,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "P-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "P-6"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -88,7 +105,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mesas",
@@ -155,8 +172,38 @@
   ],
   "Relationships": [
     {
+      "PageId": 624619,
+      "PageUrl": "https://starwars.fandom.com/wiki/D6-L",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
       "PageId": 658651,
       "PageUrl": "https://starwars.fandom.com/wiki/Draige",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 624972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Pandem_Nai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 624607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Induchron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 624610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 624587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pandem_Nai_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 624533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Char",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -165,44 +212,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 624607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Induchron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 624972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Pandem_Nai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 624587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pandem_Nai_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 624610,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 624809,
       "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Four_(Shadow_Wing)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 621586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shakara_Nuress",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 624619,
-      "PageUrl": "https://starwars.fandom.com/wiki/D6-L",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 624533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Char",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

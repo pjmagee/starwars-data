@@ -2,7 +2,7 @@
   "PageId": 393004,
   "PageUrl": "https://starwars.fandom.com/wiki/Eshkrene",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/41/Eshkrene.jpg/revision/latest?cb=20131201233442",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/41/Eshkrene.jpg/revision/latest?cb=20231110144629",
   "Data": [
     {
       "Label": "Titles",
@@ -12,11 +12,18 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Continent"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
           "Content": "Kesh",
-          "Href": "https://starwars.fandom.com/wiki/Kesh"
+          "Href": "https://starwars.fandom.com/wiki/Kesh/Legends"
         }
       ],
       "Values": [
@@ -60,6 +67,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 401541,
+      "PageUrl": "https://starwars.fandom.com/wiki/City_of_the_Doomed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 254498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kesh/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 407973,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Eshkrene",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -68,16 +85,6 @@
       "PageId": 407978,
       "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Eshkrene",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 254498,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 401541,
-      "PageUrl": "https://starwars.fandom.com/wiki/City_of_the_Doomed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

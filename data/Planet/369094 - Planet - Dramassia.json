@@ -2,7 +2,7 @@
   "PageId": 369094,
   "PageUrl": "https://starwars.fandom.com/wiki/Dramassia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/dc/Dramassia-TEA.jpg/revision/latest?cb=20220919085307",
   "Data": [
     {
       "Label": "Titles",
@@ -17,21 +17,31 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Senex-Juvex",
+          "Href": "https://starwars.fandom.com/wiki/Senex-Juvex/Legends"
+        },
+        {
           "Content": "Juvex sector",
           "Href": "https://starwars.fandom.com/wiki/Juvex_sector/Legends"
         }
       ],
       "Values": [
+        "Senex-Juvex",
         "Juvex sector"
       ]
     },
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-18"
@@ -74,8 +84,13 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Urban",
+          "Href": "https://starwars.fandom.com/wiki/Ecumenopolis/Legends"
+        }
+      ],
       "Values": [
         "Urban"
       ]
@@ -93,15 +108,10 @@
         {
           "Content": "Dramassian shimmersilk",
           "Href": "https://starwars.fandom.com/wiki/Dramassian_shimmersilk"
-        },
-        {
-          "Content": "Mining",
-          "Href": "https://starwars.fandom.com/wiki/Mining/Legends"
         }
       ],
       "Values": [
-        "Dramassian shimmersilk",
-        "Mining equipment"
+        "Dramassian shimmersilk"
       ]
     },
     {
@@ -119,19 +129,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 36052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Són_Halliikeenovich",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 370096,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dramassia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 109514,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Halliikeenovich",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 370096,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dramassia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 348202,

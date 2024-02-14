@@ -2,7 +2,7 @@
   "PageId": 677077,
   "PageUrl": "https://starwars.fandom.com/wiki/Rass_Ordo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/RassOrdoNoHelmet.png/revision/latest?cb=20201211064223",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/RassOrdoNoHelmet.png/revision/latest?cb=20230217102951",
   "Data": [
     {
       "Label": "Titles",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Ordo",
@@ -71,6 +71,23 @@
       ],
       "Values": [
         "Clan Ordo"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jekiah Ordo",
+          "Href": "https://starwars.fandom.com/wiki/Jekiah_Ordo"
+        },
+        {
+          "Content": "Layla Ordo",
+          "Href": "https://starwars.fandom.com/wiki/Layla_Ordo"
+        }
+      ],
+      "Values": [
+        "Jekiah Ordo",
+        "Layla Ordo"
       ]
     },
     {
@@ -91,5 +108,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 678326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Layla_Ordo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jekiah_Ordo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

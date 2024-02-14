@@ -21,11 +21,21 @@
         {
           "Content": "Brain worm",
           "Href": "https://starwars.fandom.com/wiki/Brain_worm"
+        },
+        {
+          "Content": "Gloam monster",
+          "Href": "https://starwars.fandom.com/wiki/Gloam_monster"
+        },
+        {
+          "Content": "Undead Troopers",
+          "Href": "https://starwars.fandom.com/wiki/Undead_Trooper"
         }
       ],
       "Values": [
         "Abersyn symbiote",
-        "Brain worm"
+        "Brain worm",
+        "Gloam monster",
+        "Undead Troopers"
       ]
     },
     {
@@ -46,17 +56,32 @@
         {
           "Content": "Geonosis",
           "Href": "https://starwars.fandom.com/wiki/Geonosis"
+        },
+        {
+          "Content": "Gloam",
+          "Href": "https://starwars.fandom.com/wiki/Gloam"
+        },
+        {
+          "Content": "Peridea",
+          "Href": "https://starwars.fandom.com/wiki/Peridea"
         }
       ],
       "Values": [
         "Dandoran",
         "Dathomir",
         "Ktath'atn",
-        "Geonosis"
+        "Geonosis",
+        "Gloam",
+        "Peridea"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 747650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gloam_monster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
     {
       "PageId": 475337,
       "PageUrl": "https://starwars.fandom.com/wiki/Army_of_the_Dead",

@@ -56,9 +56,19 @@
     },
     {
       "Label": "Area",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Alter",
+          "Href": "https://starwars.fandom.com/wiki/Alter"
+        },
+        {
+          "Content": "Offense",
+          "Href": "https://starwars.fandom.com/wiki/Offense"
+        }
+      ],
       "Values": [
-        "Alter"
+        "Alter",
+        "Offense"
       ]
     },
     {
@@ -67,26 +77,9 @@
       "Values": [
         "Lifting, moving, pushing, or crushing objects or people"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [],
-      "Values": [
-        "Force-Sensitives"
-      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 23943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Laboi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 536212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Crassus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
     {
       "PageId": 704197,
       "PageUrl": "https://starwars.fandom.com/wiki/Tiger's_Eye_crystal",
@@ -96,6 +89,16 @@
       "PageId": 560607,
       "PageUrl": "https://starwars.fandom.com/wiki/Herder's_Gauntlets",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 536212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Crassus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 23943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Laboi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

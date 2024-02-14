@@ -2,7 +2,7 @@
   "PageId": 547266,
   "PageUrl": "https://starwars.fandom.com/wiki/Bravais",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b1/Bravais-SWT.jpg/revision/latest?cb=20220614103227",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Inner Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Inner Rim Territories"
+        "Inner Rim Territories",
+        "The Slice"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-9",
@@ -36,15 +41,63 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Climate",
       "Links": [
         {
           "Content": "Hot",
-          "Href": "https://starwars.fandom.com/wiki/Temperance"
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
         }
       ],
       "Values": [
         "Hot"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Deserts",
+          "Href": "https://starwars.fandom.com/wiki/Desert"
+        }
+      ],
+      "Values": [
+        "Deserts"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "plants",
+          "Href": "https://starwars.fandom.com/wiki/Plant"
+        }
+      ],
+      "Values": [
+        "Desert plants"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Bravaisian precursor species",
+          "Href": "https://starwars.fandom.com/wiki/Bravaisian_precursor_species"
+        },
+        {
+          "Content": "Insects",
+          "Href": "https://starwars.fandom.com/wiki/Insect"
+        }
+      ],
+      "Values": [
+        "Bravaisian precursor species",
+        "Insects"
       ]
     },
     {
@@ -62,11 +115,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 547261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bravaisian_precursor_species",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 542617,
       "PageUrl": "https://starwars.fandom.com/wiki/Bravaisian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -80,6 +128,11 @@
       "PageId": 524182,
       "PageUrl": "https://starwars.fandom.com/wiki/Sonsigo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 547261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravaisian_precursor_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Organization type",
+      "Links": [],
+      "Values": [
+        "Logistical oversight"
+      ]
+    },
+    {
       "Label": "Leader(s)",
       "Links": [
         {
@@ -36,6 +43,28 @@
         "Shullis Khamarr",
         "Davidge",
         "Gelmid Lorman"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Imperial Citizenship Bureau",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Citizenship_Bureau"
+        },
+        {
+          "Content": "Imperial Treasury Department",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Treasury_Department"
+        },
+        {
+          "Content": "Imperial Logistics",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Logistics"
+        }
+      ],
+      "Values": [
+        "Imperial Citizenship Bureau",
+        "Imperial Treasury Department",
+        "Imperial Logistics"
       ]
     },
     {
@@ -75,14 +104,6 @@
           "Href": "https://starwars.fandom.com/wiki/Sphere_of_Production_and_Logistics"
         },
         {
-          "Content": "Imperial Citizenship Bureau",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Citizenship_Bureau"
-        },
-        {
-          "Content": "Imperial Treasury Department",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Treasury_Department"
-        },
-        {
           "Content": "Sphere of Defense of the Empire",
           "Href": "https://starwars.fandom.com/wiki/Sphere_of_Defense_of_the_Empire"
         }
@@ -90,46 +111,39 @@
       "Values": [
         "Sith Empire",
         "Sphere of Production and Logistics",
-        "Imperial Citizenship Bureau",
-        "Imperial Treasury Department",
         "Sphere of Defense of the Empire (unofficially)"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 367741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kunoa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 727003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Logistics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 472105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Defense_Command_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 731610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorman_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
       "PageId": 421599,
       "PageUrl": "https://starwars.fandom.com/wiki/Katha_Niar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 398396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Production_and_Logistics",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 5186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ziost/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 394507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yed'ore'shenai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 400531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gelmid_Lorman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 413601,
       "PageUrl": "https://starwars.fandom.com/wiki/Davidge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 367741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kunoa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -148,9 +162,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 472105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Defense_Command_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 407336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Citizenship_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 400531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gelmid_Lorman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 394507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yed'ore'shenai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ziost/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 633726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Civil_Administration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 398396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Production_and_Logistics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 430752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Treasury_Department",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 367913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Minister_of_Logistics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     }
   ]
 }

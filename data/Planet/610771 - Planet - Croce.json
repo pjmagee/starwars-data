@@ -2,7 +2,7 @@
   "PageId": 610771,
   "PageUrl": "https://starwars.fandom.com/wiki/Croce",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/Croce-SWT.jpg/revision/latest?cb=20220609121319",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "S-14",
@@ -36,20 +41,46 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [
+        {
+          "Content": "cool",
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
+        }
+      ],
+      "Values": [
+        "Relatively cool"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caverns",
           "Href": "https://starwars.fandom.com/wiki/Cave"
-        },
+        }
+      ],
+      "Values": [
+        "Caverns"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
         {
-          "Content": "Water",
+          "Content": "Present",
           "Href": "https://starwars.fandom.com/wiki/Water"
         }
       ],
       "Values": [
-        "Caverns",
-        "Water"
+        "Present"
       ]
     },
     {
@@ -63,9 +94,26 @@
       "Values": [
         "Crocin"
       ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Croci",
+          "Href": "https://starwars.fandom.com/wiki/Croci"
+        }
+      ],
+      "Values": [
+        "Croci"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 594733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karjj",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 609601,
       "PageUrl": "https://starwars.fandom.com/wiki/Crocin",

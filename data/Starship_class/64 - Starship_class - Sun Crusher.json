@@ -2,7 +2,7 @@
   "PageId": 64,
   "PageUrl": "https://starwars.fandom.com/wiki/Sun_Crusher",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8e/Sun_Crusher-NEGWT.jpg/revision/latest?cb=20060801173208",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/SunCrusher-NEGWT.png/revision/latest?cb=20221022151505",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Superweapon"
@@ -61,13 +61,6 @@
       "Links": [],
       "Values": [
         "1,300 km/h"
-      ]
-    },
-    {
-      "Label": "Maneuverability rating",
-      "Links": [],
-      "Values": [
-        "3D+2"
       ]
     },
     {
@@ -93,9 +86,15 @@
     },
     {
       "Label": "Hull",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Quantum-crystalline armor",
+          "Href": "https://starwars.fandom.com/wiki/Quantum-crystalline_armor"
+        }
+      ],
       "Values": [
-        "50D"
+        "50D",
+        "Quantum-crystalline armor"
       ]
     },
     {
@@ -116,7 +115,7 @@
       ],
       "Values": [
         "Resonance torpedo launcher (1)",
-        "11 resonance torpedoes",
+        "Resonance torpedoes (11)",
         "Laser cannons (5)",
         "Tractor beam projector (1)"
       ]
@@ -188,9 +187,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 400352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daala_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 12891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cauldron_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
       "PageId": 24580,
@@ -198,9 +197,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 12891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cauldron_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+      "PageId": 400352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daala_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

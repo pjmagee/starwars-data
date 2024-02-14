@@ -2,7 +2,7 @@
   "PageId": 614041,
   "PageUrl": "https://starwars.fandom.com/wiki/AA-1_VerboBrain",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4e/ProtocolDroidHead-SW100Objects.png/revision/latest?cb=20230422014944",
   "Data": [
     {
       "Label": "Titles",
@@ -13,9 +13,14 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "SyntheTech",
+          "Href": "https://starwars.fandom.com/wiki/SyntheTech"
+        }
+      ],
       "Values": [
-        "SynthTech"
+        "SyntheTech"
       ]
     },
     {
@@ -33,14 +38,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 556561,
-      "PageUrl": "https://starwars.fandom.com/wiki/K-OHN",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
       "PageId": 599273,
       "PageUrl": "https://starwars.fandom.com/wiki/L-1g_general_purpose_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 775230,
+      "PageUrl": "https://starwars.fandom.com/wiki/SyntheTech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 556561,
+      "PageUrl": "https://starwars.fandom.com/wiki/K-OHN",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

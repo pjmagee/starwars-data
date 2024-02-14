@@ -60,6 +60,22 @@
       ]
     },
     {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meters"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "More than 2 meters (6ft, 7in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -86,6 +102,30 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Torben's mother",
+          "Href": "https://starwars.fandom.com/wiki/Torben%27s_mother"
+        }
+      ],
+      "Values": [
+        "Torben's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Torben's brother",
+          "Href": "https://starwars.fandom.com/wiki/Torben%27s_brother"
+        }
+      ],
+      "Values": [
+        "Torben's brother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -98,5 +138,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 578120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torben's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

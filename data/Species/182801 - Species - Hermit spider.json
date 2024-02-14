@@ -12,15 +12,27 @@
       ]
     },
     {
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Non-sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience/Legends"
+        }
+      ],
+      "Values": [
+        "Non-sentient"
+      ]
+    },
+    {
       "Label": "Classification",
       "Links": [
         {
-          "Content": "Spider",
+          "Content": "Arachnid",
           "Href": "https://starwars.fandom.com/wiki/Spider/Legends"
         }
       ],
       "Values": [
-        "Spider"
+        "Arachnid"
       ]
     },
     {
@@ -39,9 +51,26 @@
         "Naboo",
         "Rori"
       ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Carnivorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Carnivorous"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 684016,
       "PageUrl": "https://starwars.fandom.com/wiki/Madyn_Plains",
@@ -51,11 +80,6 @@
       "PageId": 684315,
       "PageUrl": "https://starwars.fandom.com/wiki/Narmle_Swamp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

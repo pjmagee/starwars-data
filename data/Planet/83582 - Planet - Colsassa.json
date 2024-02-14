@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -74,13 +79,18 @@
     },
     {
       "Label": "Moons",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Colsassan moons",
+          "Href": "https://starwars.fandom.com/wiki/Colsassan_moons"
+        }
+      ],
       "Values": [
-        "11"
+        "11: Colsassan moons"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-6"
@@ -101,6 +111,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 3782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 83573,
       "PageUrl": "https://starwars.fandom.com/wiki/Adega_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
@@ -111,9 +126,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 3782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 759944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colsassan_moons",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

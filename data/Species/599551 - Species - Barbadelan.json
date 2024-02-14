@@ -42,9 +42,36 @@
       "Values": [
         "Black"
       ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Barbadel",
+          "Href": "https://starwars.fandom.com/wiki/Barbadel"
+        }
+      ],
+      "Values": [
+        "Barbadel"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 518834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 453102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 609732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barbadel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 599542,
       "PageUrl": "https://starwars.fandom.com/wiki/Dobarn_Tren",
@@ -54,16 +81,6 @@
       "PageId": 609736,
       "PageUrl": "https://starwars.fandom.com/wiki/Karamu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 453102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 518834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

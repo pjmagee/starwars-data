@@ -2,7 +2,7 @@
   "PageId": 499898,
   "PageUrl": "https://starwars.fandom.com/wiki/Haidoral_Prime",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f0/Haidoral-SWT.jpg/revision/latest?cb=20231222170626",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Mid Rim Territories"
+        "Mid Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -36,6 +41,53 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-10",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-10"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Crystalline",
+          "Href": "https://starwars.fandom.com/wiki/Crystal"
+        },
+        {
+          "Content": "mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
+      "Values": [
+        "Crystalline mountains"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -45,6 +97,23 @@
       ],
       "Values": [
         "Governor's mansion"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Felinx",
+          "Href": "https://starwars.fandom.com/wiki/Felinx"
+        },
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Felinx",
+        "Human"
       ]
     },
     {
@@ -74,24 +143,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 530413,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 531742,
       "PageUrl": "https://starwars.fandom.com/wiki/Brandy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 508489,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Haidoral_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 613632,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kontahr_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 554542,
+      "PageUrl": "https://starwars.fandom.com/wiki/Governor's_mansion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 554541,
@@ -99,14 +158,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
+      "PageId": 530413,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 508489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Haidoral_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 479522,
       "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
-      "PageId": 554542,
-      "PageUrl": "https://starwars.fandom.com/wiki/Governor's_mansion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 732832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Magnetic_grappling_gun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 732834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_colonel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 613632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kontahr_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

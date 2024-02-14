@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
@@ -48,14 +48,24 @@
         {
           "Content": "Sarapin",
           "Href": "https://starwars.fandom.com/wiki/Sarapin/Legends"
+        },
+        {
+          "Content": "Sarapin Four",
+          "Href": "https://starwars.fandom.com/wiki/Sarapin_Four"
         }
       ],
       "Values": [
-        "Sarapin"
+        "Sarapin",
+        "Sarapin Four"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 506834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarapin_Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 6677,
       "PageUrl": "https://starwars.fandom.com/wiki/Sarapin_system",
@@ -64,11 +74,6 @@
     {
       "PageId": 3195,
       "PageUrl": "https://starwars.fandom.com/wiki/Sarapin/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 506834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarapin_Four",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

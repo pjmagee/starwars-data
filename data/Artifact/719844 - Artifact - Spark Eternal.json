@@ -2,6 +2,7 @@
   "PageId": 719844,
   "PageUrl": "https://starwars.fandom.com/wiki/Spark_Eternal",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8f/Doctor_Aphra_21_textless_cover.jpg/revision/latest?cb=20220308043308",
   "Data": [
     {
       "Label": "Titles",
@@ -11,15 +12,32 @@
       ]
     },
     {
-      "Label": "Creators",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "The Ascendant",
-          "Href": "https://starwars.fandom.com/wiki/The_Ascendant"
+          "Content": "Artificial intelligence",
+          "Href": "https://starwars.fandom.com/wiki/Artificial_intelligence"
         }
       ],
       "Values": [
-        "The Ascendant"
+        "Artificial intelligence"
+      ]
+    },
+    {
+      "Label": "Creators",
+      "Links": [
+        {
+          "Content": "Ilith",
+          "Href": "https://starwars.fandom.com/wiki/Ilith"
+        },
+        {
+          "Content": "Miril",
+          "Href": "https://starwars.fandom.com/wiki/Miril"
+        }
+      ],
+      "Values": [
+        "Ilith",
+        "Miril"
       ]
     },
     {
@@ -40,11 +58,52 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ascendant",
+          "Href": "https://starwars.fandom.com/wiki/Ascendant"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        }
+      ],
       "Values": [
-        "The Ascendant"
+        "Ascendant",
+        "Scourge (As a progenitor and part of it)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 735546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slaughter_of_the_Ascendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 749385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Null_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 756712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_the_Amaxine_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 496766,
+      "PageUrl": "https://starwars.fandom.com/wiki/0-0-0",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 496768,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    }
+  ]
 }

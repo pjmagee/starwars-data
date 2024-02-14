@@ -2,6 +2,7 @@
   "PageId": 631911,
   "PageUrl": "https://starwars.fandom.com/wiki/Arra_Somori",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,25 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Thissa Somori",
+          "Href": "https://starwars.fandom.com/wiki/Thissa_Somori"
+        }
+      ],
+      "Values": [
+        "Thissa Somori (mother)"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 631910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thissa_Somori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

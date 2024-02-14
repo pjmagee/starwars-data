@@ -12,15 +12,15 @@
       ]
     },
     {
-      "Label": "Designation",
+      "Label": "Classification",
       "Links": [
         {
-          "Content": "Sentient",
-          "Href": "https://starwars.fandom.com/wiki/Sentience"
+          "Content": "Noghri",
+          "Href": "https://starwars.fandom.com/wiki/Noghri/Legends"
         }
       ],
       "Values": [
-        "Sentient"
+        "Noghri"
       ]
     },
     {
@@ -36,18 +36,30 @@
       "Values": [
         "Crocodilian heads filled with flesh-tearing teeth"
       ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Tulpaa",
+          "Href": "https://starwars.fandom.com/wiki/Tulpaa"
+        }
+      ],
+      "Values": [
+        "Tulpaa"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 299473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tulpaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 1719,
       "PageUrl": "https://starwars.fandom.com/wiki/Noghri/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 299473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tulpaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

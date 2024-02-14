@@ -60,6 +60,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-10",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-10"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -69,11 +81,16 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
         "Kuat Drive Yards",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     },
     {
@@ -106,23 +123,8 @@
   ],
   "Relationships": [
     {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 546409,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 576243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Kuat_shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 499939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_the_Kuat_shipyards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -136,9 +138,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
+      "PageId": 788634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_command_hub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 545066,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuat_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 576243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Kuat_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 499939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_the_Kuat_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

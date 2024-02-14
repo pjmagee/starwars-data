@@ -25,7 +25,12 @@
     },
     {
       "Label": "Born",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "237 BBY",
+          "Href": "https://starwars.fandom.com/wiki/237_BBY"
+        }
+      ],
       "Values": [
         "c. 237 BBY"
       ]
@@ -95,14 +100,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 43135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Seed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Disease"
-    },
-    {
       "PageId": 126349,
       "PageUrl": "https://starwars.fandom.com/wiki/Reliant_(I-7_Howlrunner)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 43135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Seed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Disease"
     }
   ]
 }

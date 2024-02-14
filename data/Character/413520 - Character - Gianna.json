@@ -60,7 +60,42 @@
       "Values": [
         "Fair"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Kendrel",
+          "Href": "https://starwars.fandom.com/wiki/Kendrel"
+        }
+      ],
+      "Values": [
+        "Kendrel"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Zi'am",
+          "Href": "https://starwars.fandom.com/wiki/Zi%27am"
+        }
+      ],
+      "Values": [
+        "Zi'am"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 413606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zi'am",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 413638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendrel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

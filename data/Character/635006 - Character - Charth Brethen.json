@@ -2,6 +2,7 @@
   "PageId": 635006,
   "PageUrl": "https://starwars.fandom.com/wiki/Charth_Brethen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -66,6 +67,30 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Yendor",
+          "Href": "https://starwars.fandom.com/wiki/Yendor"
+        }
+      ],
+      "Values": [
+        "Yendor"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Hahnee Brethen",
+          "Href": "https://starwars.fandom.com/wiki/Hahnee_Brethen"
+        }
+      ],
+      "Values": [
+        "Hahnee Brethen"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -93,5 +118,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 512622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yendor_Brethen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 673685,
   "PageUrl": "https://starwars.fandom.com/wiki/Keyser_Salm",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Horton Salm",
+          "Href": "https://starwars.fandom.com/wiki/Horton_Salm"
+        }
+      ],
+      "Values": [
+        "Horton Salm"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -40,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 545766,
+      "PageUrl": "https://starwars.fandom.com/wiki/Horton_Salm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

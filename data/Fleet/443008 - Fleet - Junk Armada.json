@@ -2,6 +2,7 @@
   "PageId": 443008,
   "PageUrl": "https://starwars.fandom.com/wiki/Junk_Armada",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,11 +13,22 @@
     },
     {
       "Label": "Commanding officer(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Junk Armada's \"admiral",
+          "Href": "https://starwars.fandom.com/wiki/Junk_Armada%27s_\"admiral\""
+        }
+      ],
       "Values": [
-        "Junk Armada's Admiral"
+        "Junk Armada's \"admiral"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junk_Armada's_\"admiral\"",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

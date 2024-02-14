@@ -2,7 +2,7 @@
   "PageId": 452217,
   "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3d/LukeSkywalker.png/revision/latest?cb=20201218190434",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3d/LukeSkywalker.png/revision/latest?cb=20231102230825",
   "Data": [
     {
       "Label": "Titles",
@@ -88,6 +88,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -100,7 +107,7 @@
         }
       ],
       "Values": [
-        "1.72 meters (5ft 8in)"
+        "1.72 meters (5 ft, 8 in)"
       ]
     },
     {
@@ -121,10 +128,24 @@
         {
           "Content": "Blond",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "0 BBY",
+          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        },
+        {
+          "Content": "21 ABY",
+          "Href": "https://starwars.fandom.com/wiki/21_ABY"
+        },
+        {
+          "Content": "34 ABY",
+          "Href": "https://starwars.fandom.com/wiki/34_ABY"
         }
       ],
       "Values": [
-        "Blond, later gray and white"
+        "Blond (0 BBY)",
+        "Ash-brown (21 ABY)",
+        "Gray and white (34 ABY)"
       ]
     },
     {
@@ -158,7 +179,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Skywalker family",
@@ -167,7 +188,54 @@
         {
           "Content": "Lars family",
           "Href": "https://starwars.fandom.com/wiki/Lars_family"
+        }
+      ],
+      "Values": [
+        "Skywalker family",
+        "Lars family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Anakin Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
         },
+        {
+          "Content": "Padmé Amidala",
+          "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala"
+        }
+      ],
+      "Values": [
+        "Anakin Skywalker",
+        "Padmé Amidala"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Leia Skywalker Organa Solo",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo"
+        },
+        {
+          "Content": "twin",
+          "Href": "https://starwars.fandom.com/wiki/Twin"
+        },
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo"
+        }
+      ],
+      "Values": [
+        "Leia Skywalker Organa Solo (twin sister)",
+        "Han Solo (brother-in-law)"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
@@ -202,8 +270,6 @@
         }
       ],
       "Values": [
-        "Skywalker family",
-        "Lars family",
         "Alliance to Restore the Republic",
         "Red Squadron",
         "Heroes of Yavin",
@@ -235,12 +301,8 @@
       "Label": "Apprentices",
       "Links": [
         {
-          "Content": "Leia Organa",
-          "Href": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo"
-        },
-        {
           "Content": "Grogu",
-          "Href": "https://starwars.fandom.com/wiki/Grogu"
+          "Href": "https://starwars.fandom.com/wiki/Din_Grogu"
         },
         {
           "Content": "Ben Solo",
@@ -277,13 +339,8 @@
   ],
   "Relationships": [
     {
-      "PageId": 586223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Crusader_pendant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 577480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_an_unidentified_ocean_planet",
+      "PageId": 478185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Cloud_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -292,38 +349,78 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 722693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Tempes",
+      "PageId": 642822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Command_gauntlet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 642825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Insulated_watch_cap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 457069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 483640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Award_Ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 518225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Luke_Skywalker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 678278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_hut",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 536487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ovanis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 49780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 566673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(X-wing_starfighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 600008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_exile_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 719090,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sacred_Jedi_text",
+      "PageId": 628546,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Secrets_of_the_Jedi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 556611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ark_Angel_II",
+      "PageId": 566190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Herald",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 566673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(T-65B_X-wing_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 554113,
+      "PageUrl": "https://starwars.fandom.com/wiki/21_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 515246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antarra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 583608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_star_compass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 585847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Jedi_texts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 586223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Crusader_pendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 544759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Imperial_I-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -337,14 +434,94 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 606834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_recover_Imperial_communication_logs",
+      "PageId": 719090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sacred_Jedi_text",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 452382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 568021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manhunt_on_the_Wheel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 577480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_an_unidentified_ocean_planet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 528473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mechno-arm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 630182,
+      "PageUrl": "https://starwars.fandom.com/wiki/16_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 615528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Hubin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 452298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 442294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Han_Solo_and_Leia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 619924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 678278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_hut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 722693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Tempes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 114780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_and_Leia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 733175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Lars_Homestead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 572973,
@@ -352,14 +529,209 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 478185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Cloud_City",
+      "PageId": 541060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hopeful_Padawan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 526837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_of_Luke_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 482597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Medal_of_Bravery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+    },
+    {
+      "PageId": 114780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_and_Leia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 514306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Servomotor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 641183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 512104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 680053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 678178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_rescue_of_Grogu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 524062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 602351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(MC80A_Home_One_Type_Heavy_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 518950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 640149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasaana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 598152,
+      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 732572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Jabiim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 453451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 538029,
       "PageUrl": "https://starwars.fandom.com/wiki/Rowan_Freemaker/LEGO",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 560957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 606834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_recover_Imperial_communication_logs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 733629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke's_hut_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 593206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aionomica",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 593207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rammahgon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 83627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 741962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 747930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_reveal_the_Death_Star_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 638895,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hennix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 638896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 766779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Award_Ceremony_afterparty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 653247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Grogu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 635808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Din_Grogu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 733936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_T-16_skyhopper_model",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 720891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_second_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 515248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vetine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 651203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poetics_of_a_Jedi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 596019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarka_trade_summit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 593195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lanai's_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 576065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_Yavin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 465760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 49780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
       "PageId": 466866,
@@ -377,39 +749,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 515248,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vetine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 600008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_exile_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
-      "PageId": 536487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ovanis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 593206,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aionomica",
+      "PageId": 640302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Brus-bu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 593207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rammahgon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 651203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poetics_of_a_Jedi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 452382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 478325,
+      "PageUrl": "https://starwars.fandom.com/wiki/ST_321",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 720979,
       "PageUrl": "https://starwars.fandom.com/wiki/Cozler",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 556611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ark_Angel_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 536509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 457829,
@@ -422,44 +789,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
-      "PageId": 526837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_of_Luke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 669107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ark_Angel_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 598152,
-      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 452298,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 83627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 640149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasaana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 680053,
-      "PageUrl": "https://starwars.fandom.com/wiki/May_the_Force_Be_with_You",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 452890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 16466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 472915,
@@ -472,164 +809,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 593195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lanai's_language",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 482597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Medal_of_Bravery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
-    },
-    {
-      "PageId": 518225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Luke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 514306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Servomotor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 528473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mechno-arm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 453451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 653247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Grogu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 642822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Command_gauntlet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 642825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Insulated_watch_cap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 483640,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Award_Ceremony",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 524062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Jedi_Temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 478325,
-      "PageUrl": "https://starwars.fandom.com/wiki/ST_321",
+      "PageId": 744896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skyfarer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 518950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 554113,
-      "PageUrl": "https://starwars.fandom.com/wiki/21_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 544759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Imperial_I-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 619924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 640302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Brus-bu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 678178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_rescue_of_Grogu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 536509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 635808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grogu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 457069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 641183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 602351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(MC80A_Home_One_Type_Heavy_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 452741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 583608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_star_compass",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 585847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Jedi_texts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 628546,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Secrets_of_the_Jedi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 568021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Manhunt_on_the_Wheel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 638895,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hennix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 638896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 596019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarka_trade_summit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 639603,
@@ -640,51 +822,6 @@
       "PageId": 671443,
       "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_yellow_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 560957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 693203,
-      "PageUrl": "https://starwars.fandom.com/wiki/6-2Aug2_hunting_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 606695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantel_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 615528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Hubin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 541060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hopeful_Padawan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 512104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Y_4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 515246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antarra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 720891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_second_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 576065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_Yavin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

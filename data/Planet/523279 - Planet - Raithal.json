@@ -12,6 +12,42 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Colonies",
+          "Href": "https://starwars.fandom.com/wiki/Colonies"
+        }
+      ],
+      "Values": [
+        "Colonies"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-9"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Perlemian Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Perlemian Trade Route"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -37,6 +73,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 519741,
       "PageUrl": "https://starwars.fandom.com/wiki/Raithal_Academy",

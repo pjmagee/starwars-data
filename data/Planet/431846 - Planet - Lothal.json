@@ -72,6 +72,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "U-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "U-7"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -88,6 +100,18 @@
       "Links": [],
       "Values": [
         "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Diameter",
+      "Links": [
+        {
+          "Content": "km",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer"
+        }
+      ],
+      "Values": [
+        "11,345 km (7,169 miles)"
       ]
     },
     {
@@ -108,13 +132,18 @@
     },
     {
       "Label": "Climate",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Temperate",
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
+        }
+      ],
       "Values": [
         "Temperate"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountainous",
@@ -201,10 +230,6 @@
           "Href": "https://starwars.fandom.com/wiki/Lothal_cliff_dwelling"
         },
         {
-          "Content": "Lothal Jedi Temple",
-          "Href": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple"
-        },
-        {
           "Content": "Lothal re-settlement camp 43",
           "Href": "https://starwars.fandom.com/wiki/Lothal_re-settlement_camp_43"
         },
@@ -227,6 +252,14 @@
         {
           "Content": "Morad Sumar's farm",
           "Href": "https://starwars.fandom.com/wiki/Morad_Sumar%27s_farm"
+        },
+        {
+          "Content": "Northern tundra",
+          "Href": "https://starwars.fandom.com/wiki/Northern_tundra"
+        },
+        {
+          "Content": "Lothal Jedi Temple",
+          "Href": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple"
         },
         {
           "Content": "Pelamir Gorge",
@@ -270,13 +303,14 @@
         "Krai family farm",
         "Lando Calrissian's farm",
         "Lothal cliff dwelling",
-        "Lothal Jedi Temple",
         "Lothal re-settlement camp 43",
         "Lothal resistance camp",
         "Lothal wolf den",
         "LothalNet comm tower E-272",
         "Monad Outpost",
         "Morad Sumar's farm",
+        "Northern tundra",
+        "Lothal Jedi Temple",
         "Pelamir Gorge",
         "Pretor Flats",
         "Ryder's camp",
@@ -378,7 +412,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Anx",
@@ -509,6 +543,13 @@
       ]
     },
     {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "285 million"
+      ]
+    },
+    {
       "Label": "Demonym",
       "Links": [
         {
@@ -539,18 +580,13 @@
         {
           "Content": "Kothal",
           "Href": "https://starwars.fandom.com/wiki/Kothal"
-        },
-        {
-          "Content": "Tarkintown",
-          "Href": "https://starwars.fandom.com/wiki/Tarkintown"
         }
       ],
       "Values": [
         "Capital City",
         "Jalath",
         "Jhothal",
-        "Kothal",
-        "Tarkintown"
+        "Kothal"
       ]
     },
     {
@@ -606,8 +642,8 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "occupation",
-          "Href": "https://starwars.fandom.com/wiki/Occupation_of_Lothal"
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         },
         {
           "Content": "First Order",
@@ -617,7 +653,8 @@
       "Values": [
         "Jedi Order",
         "Galactic Republic",
-        "Galactic Empire (occupation)",
+        "Galactic Empire (Occupation)",
+        "New Republic",
         "First Order"
       ]
     }
@@ -629,109 +666,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 583320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 484076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 503226,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moisture_vaporator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 504540,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masking_transponder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 458582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Jho's_Pit_Stop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 458938,
-      "PageUrl": "https://starwars.fandom.com/wiki/LothalNet_comm_tower_E-272",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 461654,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ake's_Tavern",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 461718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Academy_for_Young_Imperials",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 575894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City_police_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 576155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Substation_9K",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 576925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining's_corporate_building",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 577600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Comm_Tower_E-234",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 577643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ollet_homestead",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 73963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 466157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morad_Sumar",
+      "PageId": 502213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Janus_Fhurek",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 467336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gregor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 461872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arena_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 469451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kratchell_twin_(blaster_pistols)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 469452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kratchell_twin_(disruptor_rifle)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 460134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 470650,
-      "PageUrl": "https://starwars.fandom.com/wiki/RQ_protocol_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 504795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Empire_Day_parade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 534722,
@@ -759,64 +706,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 472172,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Basic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 654191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan's_guard",
+      "PageId": 541501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Besh",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 532429,
-      "PageUrl": "https://starwars.fandom.com/wiki/ICM-092792",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 555731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Imperial_Armory_Complex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 562864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andre's_Fruit-in-a-Cup",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 465762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_City_Capitol_Building",
+      "PageId": 565361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stel's_uncle's_repair_shop",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 468179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morad_Sumar's_farm",
+      "PageId": 566121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau_headquarters",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 582738,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Imperial_airfield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583312,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_resistance_camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_hideout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_City_fuel_depot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sector_5-1-5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 461650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Angrigo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 476768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fire_ruby",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 461668,
@@ -829,19 +741,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 483680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beck_Ollet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 507228,
       "PageUrl": "https://starwars.fandom.com/wiki/Holshef",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 626742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bansu_Ro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 555956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 514436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Far_Hiradne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 514437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pelamir_Gorge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 453307,
@@ -869,19 +786,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 592092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sinrich_optical_dephaser",
+      "PageId": 503412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jalath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 503767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dinar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 562146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paralyzing_dart",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 593190,
-      "PageUrl": "https://starwars.fandom.com/wiki/R1-D1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 573195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_family_mine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 322087,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 576125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wholesale_food_market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 582307,
@@ -894,24 +821,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 568160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper",
+      "PageId": 505063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_weapons_technician",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 471393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nerf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 505996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Mining_Institute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 472151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Edgehawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 506447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 474779,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loth-wolf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 506694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Academy_Screening_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 532429,
+      "PageUrl": "https://starwars.fandom.com/wiki/ICM-092792",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 591352,
@@ -919,179 +856,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 555956,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Zone",
+      "PageId": 577600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Comm_Tower_E-234",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 551867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Greel-wood",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 568805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doonium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 564346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Systems_Advanced_Projects_Laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 570385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 554820,
-      "PageUrl": "https://starwars.fandom.com/wiki/R3-A3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 569597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_broadcast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 593366,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal's_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 483444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebels_TIE_fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 583307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_wolf_den",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 583308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_cliff_dwelling",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 541501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Besh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 497002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Haven",
+      "PageId": 577643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ollet_homestead",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 500950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_farm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 501664,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy_of_Applied_Sciences",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 502534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Monad_Outpost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 503733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Technical_Institute_for_Agricultural_Research",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Protocol_13",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
-    },
-    {
-      "PageId": 497291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Lando_Calrissian's_farm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 498735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trap_in_the_Old_Republic_Senate_Building",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 498834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_near_Jalath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 462821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsoklo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 462822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maketh_Tua",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 508027,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hench_Sina",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 508334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frid_Kelio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 556910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 503412,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jalath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 503767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dinar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 723172,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spine_Tree_Spear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 504535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Lothal_(4_BBY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 127622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabercat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 575559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothalite",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 575758,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prairie-fowl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 539419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krai_family_farm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 496050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 592514,
@@ -1109,6 +881,46 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 464106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moreena_Krai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moreena_Krai's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riding_Ham",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 654191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan's_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 461073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vilmarh's_Revenge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 461075,
+      "PageUrl": "https://starwars.fandom.com/wiki/DLT-18_laser_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 461084,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-7_ion_disruptor_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 466157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morad_Sumar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 512223,
       "PageUrl": "https://starwars.fandom.com/wiki/Berisse_Sai",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -1119,14 +931,264 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 592991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jacen_Syndulla",
+      "PageId": 427493,
+      "PageUrl": "https://starwars.fandom.com/wiki/7th_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 531790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kinpany_Gap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 682458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_GL-44",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 471393,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nerf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 472151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Edgehawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 474779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loth-wolf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 468179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morad_Sumar's_farm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 475760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 475997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 476603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bistro_De_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695093,
+      "PageUrl": "https://starwars.fandom.com/wiki/East_crosstown_tunnel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_security_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Checkpoint_Five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 490115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utility_vibroblade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 467336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gregor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 590381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_family",
+      "PageId": 469451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kratchell_twin_(blaster_pistols)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 469452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kratchell_twin_(disruptor_rifle)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 534812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 536716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 734777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bansu_Ro's_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 748493,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Ones",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 506696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ferrocrete",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 517589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemstone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 551867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greel-wood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 551868,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 466192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_in_Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 466279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_steal_Imperial_weapons",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 469574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_destroy_a_kyber_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 475259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 477427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 479967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Imperial_interrogator_droids",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 482706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action_at_Mustafar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 135282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 14520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 472172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Basic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 575559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothalite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 575758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prairie-fowl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 575894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City_police_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 576155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Substation_9K",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 576925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining's_corporate_building",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protocol_13",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 471859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tseebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 513764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Penrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 161255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 564346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Systems_Advanced_Projects_Laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 570385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 484076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 555453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kothal_market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 555834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 556110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pretor_Flats",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 496866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_clay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 650332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Communications_relay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 512741,
@@ -1154,219 +1216,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 514436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Far_Hiradne",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 514437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pelamir_Gorge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 469574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_destroy_a_kyber_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 477427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 479967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Imperial_interrogator_droids",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 482706,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action_at_Mustafar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 530685,
-      "PageUrl": "https://starwars.fandom.com/wiki/East_City_Brawlers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531711,
-      "PageUrl": "https://starwars.fandom.com/wiki/West_Cap_City_Carvers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Green_Dragons",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrashers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 532054,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_Capital_City_Volunteers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 532131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forked_River_Mavericks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 532336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kothal_Roughnecks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 536493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Education_Ministry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 530097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Depot",
+      "PageId": 458582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Jho's_Pit_Stop",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 476644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Disruptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 471859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tseebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 513764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Penrie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 476092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 477311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Logistics_Limited",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 480727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 650332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Communications_relay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 555453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kothal_market",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 500412,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bloodfly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 565361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stel's_uncle's_repair_shop",
+      "PageId": 458938,
+      "PageUrl": "https://starwars.fandom.com/wiki/LothalNet_comm_tower_E-272",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 566121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau_headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 161255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 507959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Bulletin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 503427,
-      "PageUrl": "https://starwars.fandom.com/wiki/W1-LE",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 497189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_astromech_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 577598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Science_dip",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 464548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 555834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 556110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pretor_Flats",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 593136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Ministry_of_Information",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 593139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Housing_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 593148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_pilgrims",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 595949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Azmorigan's_henchmen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 8323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seatrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loth-bat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 500970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_trade_route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 593268,
       "PageUrl": "https://starwars.fandom.com/wiki/Lothal_campaign",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 475449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marida_Sumar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 582828,
@@ -1377,306 +1239,6 @@
       "PageId": 583266,
       "PageUrl": "https://starwars.fandom.com/wiki/Proach",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 683924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wrench",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 605037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riding_Ham",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 565714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leonis_family_apartment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 566122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Northern_market_district",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 461647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 472314,
-      "PageUrl": "https://starwars.fandom.com/wiki/LRC077",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 575892,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_police",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 576154,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Imperial_Spaceport_Authority",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 560480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Droid_shack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 568616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rukh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545121,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-70",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 461872,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arena_Day",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 504795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Empire_Day_parade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 508116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gladiator_Night",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 528614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_bombing_attempt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 528618,
-      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_massacre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 529427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Transportation_Ministry_data_breach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 576125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_wholesale_food_market",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 468505,
-      "PageUrl": "https://starwars.fandom.com/wiki/AppSci_SaberCats",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 476195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Information_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 593973,
-      "PageUrl": "https://starwars.fandom.com/wiki/White_Loth-cat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 478558,
-      "PageUrl": "https://starwars.fandom.com/wiki/Green_daisy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 529241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crickbeet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 481887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Communications_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 483583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 461073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vilmarh's_Revenge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 461075,
-      "PageUrl": "https://starwars.fandom.com/wiki/DLT-18_laser_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 461084,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-7_ion_disruptor_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 481503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_communications_tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 463621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ugnaught_salesman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kinpany_Gap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 555731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Imperial_Armory_Complex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 561459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kaller",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 565995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_recover_Imperial_codes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 555407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rocket_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 555436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_combat_assault_tank_commander",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 500966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 518571,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 566471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_heavy_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 500126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 502213,
-      "PageUrl": "https://starwars.fandom.com/wiki/Janus_Fhurek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 583657,
-      "PageUrl": "https://starwars.fandom.com/wiki/LS-757",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twin_Horns_Storage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 534812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 536716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 573195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_family_mine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 495014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Forn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 497718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Aurek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 457328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 461060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broken_Horn_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 470535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Imperial_Troop_Transports",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 464106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moreena_Krai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 464109,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moreena_Krai's_sister",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 592055,
-      "PageUrl": "https://starwars.fandom.com/wiki/LS-261",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 592511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 592575,
-      "PageUrl": "https://starwars.fandom.com/wiki/White_Loth-wolf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_technician_(Lothal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 471344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leonis_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 526078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spanjaf_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 533635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bridger_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 470614,
@@ -1739,54 +1301,464 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 567627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_the_Twin_Horns_Storage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 568160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 452741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 506007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad_leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 461282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loth-cat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 540253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_shopkeeper_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 461283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loth-rat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 545121,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-70",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 465585,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tooka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 471344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leonis_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 496866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_clay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 514714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 517589,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gemstone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 526078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spanjaf_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 476768,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fire_ruby",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 723172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spine_Tree_Spear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 501019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_an_Imperial_convoy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 530097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Depot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 720028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_2-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 652816,
       "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Lothal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 442353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 442415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 523230,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryder_Azadi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 587491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_nek_owner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 560550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 483680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beck_Ollet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 626742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bansu_Ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503226,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moisture_vaporator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 504540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masking_transponder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 780745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_peach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 562864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andre's_Fruit-in-a-Cup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 672019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Posting_agency_(Capital_City_spaceport)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 481503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_communications_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 583320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 508116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gladiator_Night",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 528614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_bombing_attempt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 528618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_massacre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 529427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transportation_Ministry_data_breach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 592059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 545304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_combat_assault_tank_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 509903,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ancient_script",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 760136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huttese_(alternative_writing_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 560480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droid_shack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 500126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 683924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wrench",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 620556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Senate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_trade_route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 528642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_skirmish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 528825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 592055,
+      "PageUrl": "https://starwars.fandom.com/wiki/LS-261",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_technician_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 461647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 472314,
+      "PageUrl": "https://starwars.fandom.com/wiki/LRC077",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 582738,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Imperial_airfield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_resistance_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_hideout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_City_fuel_depot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_5-1-5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 755725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thermo-grenade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 568616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rukh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 555755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_resistance_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 525986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Agricultural_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crickbeet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 593066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple_key_stone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 556910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 592092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sinrich_optical_dephaser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 322087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 593366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal's_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 583307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_wolf_den",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 583308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_cliff_dwelling",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 495014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Forn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 497718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unit_Aurek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 754655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Lothal_(Jedi_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 575892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_police",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 576154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Imperial_Spaceport_Authority",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 127622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabercat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 461654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ake's_Tavern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 461718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Academy_for_Young_Imperials",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 465762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_City_Capitol_Building",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 461650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Angrigo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domus_Renking",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 593136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Ministry_of_Information",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 593139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Housing_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 593148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_pilgrims",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 595949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azmorigan's_henchmen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 568805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doonium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 784142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Imperial_supply_convoys",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 565714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leonis_family_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 566122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Northern_market_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 561459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kaller",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 565995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_recover_Imperial_codes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 567627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_the_Twin_Horns_Storage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 468505,
+      "PageUrl": "https://starwars.fandom.com/wiki/AppSci_SaberCats",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 476195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Information_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 476232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Intelligence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 8323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seatrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 787456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City_Casino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 476644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Disruptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 458124,
@@ -1814,14 +1786,144 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 458493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jai_Kell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 540130,
       "PageUrl": "https://starwars.fandom.com/wiki/TK-462",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 540253,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_shopkeeper_(Lothal)",
+      "PageId": 503427,
+      "PageUrl": "https://starwars.fandom.com/wiki/W1-LE",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 470650,
+      "PageUrl": "https://starwars.fandom.com/wiki/RQ_protocol_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 518571,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 568577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elainye_Pryce",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talmoor_Pryce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres_mural_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 785508,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_County_Fair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 470535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Imperial_Troop_Transports",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 463621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ugnaught_salesman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 578774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jenkes'_RA-7_protocol_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 519261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pretor_Flats_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 519742,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Well",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 519745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bridger_household",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 581593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus's_DL-18_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 778991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 504535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Lothal_(4_BBY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 530685,
+      "PageUrl": "https://starwars.fandom.com/wiki/East_City_Brawlers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 531711,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Cap_City_Carvers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 531712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_Dragons",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 531859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrashers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 532054,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_Capital_City_Volunteers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 532131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forked_River_Mavericks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 532336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kothal_Roughnecks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 536493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Education_Ministry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 569597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_broadcast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 582748,
@@ -1835,128 +1937,18 @@
     },
     {
       "PageId": 593407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Lothal",
+      "PageUrl": "https://starwars.fandom.com/wiki/Takeover_of_Lothal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 471483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barchetta_River",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 476769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_pavilion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 555755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_resistance_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 577598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Science_dip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 564593,
       "PageUrl": "https://starwars.fandom.com/wiki/Lothal_garrison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 505063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_weapons_technician",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 505996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Mining_Institute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Academy_Screening_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Go-Lothal_Hotel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 507854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Armory_Complex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 508115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wallaway's_Pawn_Shop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 508534,
-      "PageUrl": "https://starwars.fandom.com/wiki/1044_Chapel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 720028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_2-7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 490115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utility_vibroblade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 528642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Westhills_skirmish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 528825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 442353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 442415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 458493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jai_Kell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 506007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad_leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 523230,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryder_Azadi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 578774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jenkes'_RA-7_protocol_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 592059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce's_office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 682458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sector_GL-44",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 576150,
@@ -1989,114 +1981,304 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 135282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
+      "PageId": 555407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rocket_stormtrooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 620556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Senate",
+      "PageId": 555436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_combat_assault_tank_commander",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 672019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Posting_agency_(Capital_City_spaceport)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+      "PageId": 73963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 475760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple",
+      "PageId": 507959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Bulletin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 471483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barchetta_River",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 476769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_pavilion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 675510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 481887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Communications_Center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 475997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City_spaceport",
+      "PageId": 483583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_camp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 476603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bistro_De_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 496050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 695093,
-      "PageUrl": "https://starwars.fandom.com/wiki/East_crosstown_tunnel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_security_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Checkpoint_Five",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 593066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple_key_stone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 475259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 572885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Domus_Renking",
+      "PageId": 462821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsoklo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 587491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_nek_owner",
+      "PageId": 462822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maketh_Tua",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 466192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_in_Capital_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 462895,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 466279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_steal_Imperial_weapons",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 508027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hench_Sina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 14520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 508334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frid_Kelio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 525986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Agricultural_Collective",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 778786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 560550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cat",
+      "PageId": 545113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twin_Horns_Storage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 593190,
+      "PageUrl": "https://starwars.fandom.com/wiki/R1-D1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 533635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bridger_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 590381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 593973,
+      "PageUrl": "https://starwars.fandom.com/wiki/White_Loth-cat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 461282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loth-cat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 519261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pretor_Flats_Academy",
+      "PageId": 461283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loth-rat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 465585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tooka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_an_Imperial_convoy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 475449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marida_Sumar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 483444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebels_TIE_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 539419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krai_family_farm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 519742,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Well",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 519745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bridger_household",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 581593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus's_DL-18_blaster_pistol",
+      "PageId": 566471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_heavy_blaster_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 498735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trap_in_the_Old_Republic_Senate_Building",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 498834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_near_Jalath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 592511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 592575,
+      "PageUrl": "https://starwars.fandom.com/wiki/White_Loth-wolf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 592991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jacen_Syndulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 457328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 461060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broken_Horn_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 506227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loth-bat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 503733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Technical_Institute_for_Agricultural_Research",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 506695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Go-Lothal_Hotel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 507854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Armory_Complex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 508115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wallaway's_Pawn_Shop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 508534,
+      "PageUrl": "https://starwars.fandom.com/wiki/1044_Chapel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 733510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alternative_Aurebesh_numerals",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 497291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Lando_Calrissian's_farm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 460134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 476092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 477311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Logistics_Limited",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 480727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 755719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravity_seal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 755722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Security_arch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 554820,
+      "PageUrl": "https://starwars.fandom.com/wiki/R3-A3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 497189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_astromech_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 478558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_daisy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 500412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bloodfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 497002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 500950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_farm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 501664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy_of_Applied_Sciences",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 502534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monad_Outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

@@ -15,6 +15,14 @@
       "Label": "Writer",
       "Links": [
         {
+          "Content": "Chris Avellone",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Avellone"
+        },
+        {
+          "Content": "Jeremy Barlow",
+          "Href": "https://starwars.fandom.com/wiki/Jeremy_Barlow"
+        },
+        {
           "Content": "Matthew Fillbach",
           "Href": "https://starwars.fandom.com/wiki/Matthew_Fillbach"
         },
@@ -25,46 +33,83 @@
         {
           "Content": "Jason Hall",
           "Href": "https://starwars.fandom.com/wiki/Jason_Hall"
-        },
-        {
-          "Content": "Jeremy Barlow",
-          "Href": "https://starwars.fandom.com/wiki/Jeremy_Barlow"
         }
       ],
       "Values": [
-        "Matthew Fillbach, Shawn Fillbach, Jason Hall, Jeremy Barlow"
+        "Chris Avellone",
+        "Jeremy Barlow",
+        "Matthew Fillbach",
+        "Shawn Fillbach",
+        "Jason Hall"
       ]
     },
     {
       "Label": "Penciller",
       "Links": [
         {
-          "Content": "Matthew Fillbach",
-          "Href": "https://starwars.fandom.com/wiki/Matthew_Fillbach"
-        },
-        {
-          "Content": "Shawn Fillbach",
-          "Href": "https://starwars.fandom.com/wiki/Shawn_Fillbach"
+          "Content": "Ethan Beavers",
+          "Href": "https://starwars.fandom.com/wiki/Ethan_Beavers"
         }
       ],
       "Values": [
-        "Matthew Fillbach, Shawn Fillbach"
+        "Ethan Beavers",
+        "Matthew Fillbach",
+        "Shawn Fillbach"
       ]
     },
     {
-      "Label": "Cover artist",
+      "Label": "Letterer",
       "Links": [
+        {
+          "Content": "Michael Heisler",
+          "Href": "https://starwars.fandom.com/wiki/Michael_Heisler"
+        }
+      ],
+      "Values": [
+        "Michael Heisler"
+      ]
+    },
+    {
+      "Label": "Colorist",
+      "Links": [
+        {
+          "Content": "Tony Avina",
+          "Href": "https://starwars.fandom.com/wiki/Tony_Avina"
+        },
         {
           "Content": "Dan Jackson",
           "Href": "https://starwars.fandom.com/wiki/Dan_Jackson"
         },
         {
-          "Content": "Fillbach Brothers",
-          "Href": "https://starwars.fandom.com/wiki/Fillbach_Brothers"
+          "Content": "Ronda Pattison",
+          "Href": "https://starwars.fandom.com/wiki/Ronda_Pattison"
+        },
+        {
+          "Content": "Pamela Rambo",
+          "Href": "https://starwars.fandom.com/wiki/Pamela_Rambo"
         }
       ],
       "Values": [
-        "Dan Jackson, The Fillbach Brothers"
+        "Tony Avina",
+        "Dan Jackson",
+        "Ronda Pattison",
+        "Pamela Rambo"
+      ]
+    },
+    {
+      "Label": "Cover artist",
+      "Links": [],
+      "Values": [
+        "Matthew Fillbach",
+        "Shawn Fillbach",
+        "Dan Jackson"
+      ]
+    },
+    {
+      "Label": "Editor",
+      "Links": [],
+      "Values": [
+        "Jeremy Barlow"
       ]
     },
     {
@@ -148,16 +193,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 156976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pathways",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
-    },
-    {
-      "PageId": 160023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Scores",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
-    },
-    {
       "PageId": 155353,
       "PageUrl": "https://starwars.fandom.com/wiki/Versus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
@@ -168,13 +203,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
     },
     {
-      "PageId": 139094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Clone_Wars_Adventures_Volume_9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+      "PageId": 156976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pathways",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
+    },
+    {
+      "PageId": 160023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Scores",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
     },
     {
       "PageId": 92344,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Clone_Wars_Adventures_Volume_7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 139094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Clone_Wars_Adventures_Volume_9",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
     }
   ]

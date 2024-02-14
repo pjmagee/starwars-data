@@ -52,8 +52,20 @@
       ]
     },
     {
-      "Label": "Eye color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Yellow"
       ]
@@ -62,16 +74,36 @@
       "Label": "Skin color",
       "Links": [
         {
-          "Content": "Red with black",
-          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
-        },
-        {
-          "Content": "tattoos",
+          "Content": "Sith tattoos",
           "Href": "https://starwars.fandom.com/wiki/Sith_tattoo"
         }
       ],
       "Values": [
-        "Red with black tattoos"
+        "Red with black Sith tattoos"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Darth Wyyrlok (II)",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Wyyrlok_(II)"
+        }
+      ],
+      "Values": [
+        "Darth Wyyrlok (II)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Saarai",
+          "Href": "https://starwars.fandom.com/wiki/Saarai_(Chagrian)"
+        }
+      ],
+      "Values": [
+        "Saarai"
       ]
     },
     {
@@ -99,24 +131,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 205545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_spellbook/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
       "PageId": 714079,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Wyyrlok's_library",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 329094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_the_Temple_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 220327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Prakith_(Darth_Wyyrlok)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 64420,
@@ -124,9 +141,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 74948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt's_Galactic_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 329094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_the_Temple_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 81613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Wyyrlok_(II)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 220327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Prakith_(Darth_Wyyrlok)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 205545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_spellbook/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

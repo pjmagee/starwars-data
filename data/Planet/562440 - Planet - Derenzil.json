@@ -2,6 +2,7 @@
   "PageId": 562440,
   "PageUrl": "https://starwars.fandom.com/wiki/Derenzil",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamp",
@@ -23,5 +24,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 778634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Derenzil_civil_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    }
+  ]
 }

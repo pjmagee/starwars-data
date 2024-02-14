@@ -13,7 +13,12 @@
     },
     {
       "Label": "Homeworld",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pria",
+          "Href": "https://starwars.fandom.com/wiki/Pria/Legends"
+        }
+      ],
       "Values": [
         "Pria"
       ]
@@ -79,27 +84,22 @@
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
-        },
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "Jedi Order",
-        "Galactic Republic"
+        "Jedi Order"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 40826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Sea_Flower",
+      "PageId": 247128,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coral_Fin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 247128,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coral_Fin",
+      "PageId": 40826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Sea_Flower",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

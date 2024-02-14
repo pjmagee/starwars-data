@@ -2,7 +2,7 @@
   "PageId": 703946,
   "PageUrl": "https://starwars.fandom.com/wiki/Catriona_Graf",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6d/CatrionaGraf_TAOSWTHR.jpg/revision/latest?cb=20221119141727",
   "Data": [
     {
       "Label": "Titles",
@@ -36,19 +36,56 @@
       ]
     },
     {
-      "Label": "Skin color",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Brown",
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.60 meters (5 ft, 3 in)"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Grey",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
+      "Values": [
+        "Grey"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
       "Values": [
         "Brown"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Graf family",
@@ -56,12 +93,35 @@
         }
       ],
       "Values": [
-        "Graf family",
+        "Graf family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Xylan Graf's mother",
+          "Href": "https://starwars.fandom.com/wiki/Xylan_Graf%27s_mother"
+        }
+      ],
+      "Values": [
+        "Xylan Graf's mother"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [],
+      "Values": [
         "Graf Holdings, Incorporated"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 725015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xylan_Graf's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 703777,
       "PageUrl": "https://starwars.fandom.com/wiki/Everbloom",

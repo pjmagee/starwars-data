@@ -2,7 +2,7 @@
   "PageId": 636118,
   "PageUrl": "https://starwars.fandom.com/wiki/Nur",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/09/Nur.png/revision/latest?cb=20191118084758",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7b/Nur-DoRTVG.png/revision/latest?cb=20230921010124",
   "Data": [
     {
       "Label": "Titles",
@@ -15,16 +15,17 @@
       "Label": "Region(s)",
       "Links": [
         {
-          "Content": "Western Reaches",
-          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
-        },
-        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Western Reaches, Outer Rim Territories"
+        "Outer Rim Territories",
+        "Western Reaches"
       ]
     },
     {
@@ -52,7 +53,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Planet",
+      "Links": [
+        {
+          "Content": "Mustafar",
+          "Href": "https://starwars.fandom.com/wiki/Mustafar"
+        }
+      ],
+      "Values": [
+        "Mustafar"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-19",
@@ -64,7 +77,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Diameter",
+      "Links": [
+        {
+          "Content": "km",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer"
+        }
+      ],
+      "Values": [
+        "4,000 km (2,485 miles)"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -129,18 +154,83 @@
   ],
   "Relationships": [
     {
-      "PageId": 637639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrobaton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
       "PageId": 637655,
       "PageUrl": "https://starwars.fandom.com/wiki/Electrohammer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
+      "PageId": 768477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prison_Block",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 615745,
       "PageUrl": "https://starwars.fandom.com/wiki/Second_Sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 685744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defensive_Perimeter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 534812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 749384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inquisitor_meeting_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 135282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 512133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 453226,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mustafar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 731699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Leia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 636295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Secret_mission_to_rebuild_the_Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 789682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_hangar_bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 636094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 729015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Obi-Wan_Kenobi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 731701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wade_Resselian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 731712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_terminal_officer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -154,14 +244,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 597584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 10914,
       "PageUrl": "https://starwars.fandom.com/wiki/Inquisitorius",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 687124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 636387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775778,
+      "PageUrl": "https://starwars.fandom.com/wiki/Security_scanner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 555407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rocket_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 555420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_ground_crew",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 636114,
       "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Inquisitorius",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 676370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airlock_8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 481685,
@@ -174,59 +304,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
-      "PageId": 636094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 749387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_tomb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 597584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 608525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bluevev_glider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 555407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rocket_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 534812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 512133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 636387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 687124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 676370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Airlock_8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 135282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 685744,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defensive_Perimeter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 733510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alternative_Aurebesh_numerals",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

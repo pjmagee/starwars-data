@@ -2,7 +2,7 @@
   "PageId": 464977,
   "PageUrl": "https://starwars.fandom.com/wiki/Mas_Amedda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/37/Mas_Amedda_SWCT.png/revision/latest?cb=20160630051412",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/37/Mas_Amedda_SWCT.png/revision/latest?cb=20221203003736",
   "Data": [
     {
       "Label": "Titles",
@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -61,6 +68,18 @@
       ],
       "Values": [
         "1.96 meters (6 ft, 5 in)"
+      ]
+    },
+    {
+      "Label": "Mass",
+      "Links": [
+        {
+          "Content": "kg",
+          "Href": "https://starwars.fandom.com/wiki/Kilogram"
+        }
+      ],
+      "Values": [
+        "91 kg"
       ]
     },
     {
@@ -106,6 +125,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Imperial Senate",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Senate"
+        },
+        {
           "Content": "Imperial Ruling Council",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Ruling_Council"
         },
@@ -114,8 +137,8 @@
           "Href": "https://starwars.fandom.com/wiki/Sith"
         },
         {
-          "Content": "Coruscant provisional government",
-          "Href": "https://starwars.fandom.com/wiki/Coruscant_provisional_government"
+          "Content": "Coruscant's provisional government",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant%27s_provisional_government"
         }
       ],
       "Values": [
@@ -124,27 +147,38 @@
         "Office of the Chancellor",
         "Strategic Advisory Cell",
         "Galactic Empire",
+        "Imperial Senate",
         "Imperial Ruling Council",
         "Sith",
-        "Coruscant provisional government"
+        "Coruscant's provisional government"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 496346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Onaconda_Farr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 500636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light_(847th)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 505207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_the_Jedi_Temple_bombing_victims",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 554026,
+      "PageUrl": "https://starwars.fandom.com/wiki/5_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
       "PageId": 566806,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Instruments_of_Surrender",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 573117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Celebration_of_the_eradication_of_the_Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 594131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Court",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 485410,
@@ -172,24 +206,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
-      "PageId": 496346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Onaconda_Farr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 751001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Defense_Recruitment_Bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
-      "PageId": 500636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light_(847th)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 505207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_the_Jedi_Temple_bombing_victims",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 452495,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 594131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Court",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 470749,
@@ -197,14 +221,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 553977,
-      "PageUrl": "https://starwars.fandom.com/wiki/4_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 573117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celebration_of_the_Jedi_Order's_eradication",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 554026,
-      "PageUrl": "https://starwars.fandom.com/wiki/5_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 453241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Senate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

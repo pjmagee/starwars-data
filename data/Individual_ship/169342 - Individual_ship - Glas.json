@@ -2,7 +2,7 @@
   "PageId": 169342,
   "PageUrl": "https://starwars.fandom.com/wiki/Glas",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1e/Glas_spc.jpg/revision/latest?cb=20080426062909",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ce/Glas-TF.png/revision/latest?cb=20220704220921",
   "Data": [
     {
       "Label": "Titles",
@@ -37,14 +37,24 @@
     },
     {
       "Label": "Length",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "150 meters"
       ]
     },
     {
-      "Label": "Maximum speed (atmosphere)",
-      "Links": [],
+      "Label": "MGLT",
+      "Links": [
+        {
+          "Content": "MGLT",
+          "Href": "https://starwars.fandom.com/wiki/Megalight"
+        }
+      ],
       "Values": [
         "80 MGLT"
       ]
@@ -58,14 +68,24 @@
     },
     {
       "Label": "Shielding",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "SBD",
+          "Href": "https://starwars.fandom.com/wiki/SBD"
+        }
+      ],
       "Values": [
         "150 SBD"
       ]
     },
     {
       "Label": "Hull",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "RU",
+          "Href": "https://starwars.fandom.com/wiki/RU"
+        }
+      ],
       "Values": [
         "50 RU"
       ]
@@ -88,29 +108,24 @@
       ]
     },
     {
-      "Label": "Crew",
-      "Links": [],
-      "Values": [
-        "4"
-      ]
-    },
-    {
-      "Label": "Passengers",
-      "Links": [],
-      "Values": [
-        "10"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Ripoblus government",
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_government"
+        },
+        {
           "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(government)"
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(people)"
+        },
+        {
+          "Content": "refugees",
+          "Href": "https://starwars.fandom.com/wiki/Refugee/Legends"
         }
       ],
       "Values": [
-        "Ripoblus"
+        "Ripoblus government",
+        "Ripoblus refugees"
       ]
     }
   ],

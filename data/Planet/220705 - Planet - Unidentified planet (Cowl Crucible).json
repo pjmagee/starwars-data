@@ -55,6 +55,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "M-5"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -86,7 +93,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -98,5 +105,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cowl_Crucible",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    }
+  ]
 }

@@ -43,22 +43,32 @@
           "Href": "https://starwars.fandom.com/wiki/Umbaran_government"
         },
         {
-          "Content": "Confederacy of Independent Systems",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
-        },
-        {
           "Content": "Umbaran Militia",
           "Href": "https://starwars.fandom.com/wiki/Umbaran_Militia"
+        },
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         }
       ],
       "Values": [
         "Umbaran government",
-        "Confederacy of Independent Systems",
-        "Umbaran Militia"
+        "Umbaran Militia",
+        "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 648466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umbaran_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 471291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Umbara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 356442,
       "PageUrl": "https://starwars.fandom.com/wiki/Umbaran_Militia",
@@ -68,11 +78,6 @@
       "PageId": 465210,
       "PageUrl": "https://starwars.fandom.com/wiki/Umbara",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 648466,
-      "PageUrl": "https://starwars.fandom.com/wiki/Umbaran_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     }
   ]
 }

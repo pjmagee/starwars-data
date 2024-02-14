@@ -2,6 +2,7 @@
   "PageId": 700732,
   "PageUrl": "https://starwars.fandom.com/wiki/Red_Group",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -54,13 +55,13 @@
       "Label": "Notable battles",
       "Links": [
         {
-          "Content": "Attack on Grizal",
-          "Href": "https://starwars.fandom.com/wiki/Attack_on_Grizal"
+          "Content": "Battle of Grizal",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Grizal"
         }
       ],
       "Values": [
         "Skirmish over Cyclor",
-        "Attack on Grizal"
+        "Battle of Grizal"
       ]
     },
     {
@@ -81,5 +82,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 649066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 646138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Burryaga_Agaburry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 648286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imri_Cantaros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -52,6 +52,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.65 meters (5 ft 5 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -78,22 +101,86 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Ros",
-          "Href": "https://starwars.fandom.com/wiki/Ros_(family)"
-        },
+          "Content": "Ro family",
+          "Href": "https://starwars.fandom.com/wiki/Ro_family"
+        }
+      ],
+      "Values": [
+        "Ro family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Marda Ro",
+          "Href": "https://starwars.fandom.com/wiki/Marda_Ro"
+        }
+      ],
+      "Values": [
+        "Marda Ro"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Asgar Ro's father",
+          "Href": "https://starwars.fandom.com/wiki/Asgar_Ro%27s_father"
+        }
+      ],
+      "Values": [
+        "Asgar Ro's father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Asgar Ro",
+          "Href": "https://starwars.fandom.com/wiki/Asgar_Ro"
+        }
+      ],
+      "Values": [
+        "Asgar Ro"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Nihil",
           "Href": "https://starwars.fandom.com/wiki/Nihil"
         }
       ],
       "Values": [
-        "Ros",
         "Nihil"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 643796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 724668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asgar_Ro's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 724914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marda_Ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 679932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asgar_Ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

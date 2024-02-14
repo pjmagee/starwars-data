@@ -79,15 +79,64 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Kira",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Kira"
+        },
+        {
+          "Content": "Onderon Royal Family",
+          "Href": "https://starwars.fandom.com/wiki/Onderon_Royal_Family"
+        }
+      ],
+      "Values": [
+        "House of Kira",
+        "Onderon Royal Family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Modon Kira",
+          "Href": "https://starwars.fandom.com/wiki/Modon_Kira"
+        }
+      ],
+      "Values": [
+        "Modon Kira"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Galia",
+          "Href": "https://starwars.fandom.com/wiki/Galia"
+        }
+      ],
+      "Values": [
+        "Galia"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Talia",
+          "Href": "https://starwars.fandom.com/wiki/Talia_(Onderon)"
+        }
+      ],
+      "Values": [
+        "Talia"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Beast Riders",
           "Href": "https://starwars.fandom.com/wiki/Beast_Riders"
-        },
-        {
-          "Content": "Onderon Royal Family",
-          "Href": "https://starwars.fandom.com/wiki/Onderon_Royal_Family"
         },
         {
           "Content": "Galactic Republic",
@@ -96,16 +145,30 @@
       ],
       "Values": [
         "Beast Riders",
-        "Onderon Royal Family",
         "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 46009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrasher_(drexl)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 8215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Modon_Kira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 186184,
       "PageUrl": "https://starwars.fandom.com/wiki/Beast_Warrior_Commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 9616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 211236,
@@ -116,11 +179,6 @@
       "PageId": 221520,
       "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Amanoa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 46009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrasher_(drexl)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]
 }

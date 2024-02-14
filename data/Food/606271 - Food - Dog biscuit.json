@@ -2,6 +2,7 @@
   "PageId": 606271,
   "PageUrl": "https://starwars.fandom.com/wiki/Dog_biscuit",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Biscuit",
-          "Href": "https://starwars.fandom.com/wiki/Bread"
+          "Href": "https://starwars.fandom.com/wiki/Biscuit"
         }
       ],
       "Values": [
@@ -64,5 +65,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 96089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Biscuit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

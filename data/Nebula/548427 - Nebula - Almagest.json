@@ -2,12 +2,37 @@
   "PageId": 548427,
   "PageUrl": "https://starwars.fandom.com/wiki/Almagest",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Almagest"
+      ]
+    },
+    {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Inner Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Inner Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "J-13",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "J-13"
       ]
     },
     {
@@ -35,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almagest_Imperial_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

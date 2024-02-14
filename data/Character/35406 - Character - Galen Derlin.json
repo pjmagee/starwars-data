@@ -2,6 +2,7 @@
   "PageId": 35406,
   "PageUrl": "https://starwars.fandom.com/wiki/Galen_Derlin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Bren Derlin",
+          "Href": "https://starwars.fandom.com/wiki/Bren_Derlin/Legends"
+        }
+      ],
+      "Values": [
+        "Bren Derlin"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -74,5 +94,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 5345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bren_Derlin/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -13,7 +13,12 @@
     },
     {
       "Label": "Formation type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Operations Group",
+          "Href": "https://starwars.fandom.com/wiki/Operations_Group"
+        }
+      ],
       "Values": [
         "Operations Group"
       ]
@@ -35,15 +40,31 @@
       ]
     },
     {
-      "Label": "Location(s)",
+      "Label": "Headquarters",
       "Links": [
+        {
+          "Content": "Imperial frontline camp",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_frontline_camp"
+        },
         {
           "Content": "Belsavis",
           "Href": "https://starwars.fandom.com/wiki/Belsavis/Legends"
         }
       ],
       "Values": [
-        "Belsavis"
+        "Imperial frontline camp, Belsavis"
+      ]
+    },
+    {
+      "Label": "Notable battles",
+      "Links": [
+        {
+          "Content": "Invasion of Belsavis",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Belsavis"
+        }
+      ],
+      "Values": [
+        "Invasion of Belsavis"
       ]
     },
     {
@@ -61,13 +82,23 @@
   ],
   "Relationships": [
     {
-      "PageId": 414429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Haddon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 467034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_frontline_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 790614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operations_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 505948,
       "PageUrl": "https://starwars.fandom.com/wiki/Grang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 414429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haddon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

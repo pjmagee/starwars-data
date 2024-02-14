@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -102,55 +102,60 @@
       "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "sensor",
           "Href": "https://starwars.fandom.com/wiki/Sensor"
         }
       ],
       "Values": [
-        "Equipped"
+        "Long-range sensor suite"
       ]
     },
     {
       "Label": "Navigation system",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Navigation computer",
           "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
         }
       ],
       "Values": [
-        "Equipped"
+        "Navigation computer"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "turbolaser",
+          "Content": "turbolasers",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "Concussion missile launchers",
+          "Href": "https://starwars.fandom.com/wiki/Concussion_missile_launcher"
+        },
+        {
+          "Content": "tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         },
         {
           "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
-          "Content": "Hull",
-          "Href": "https://starwars.fandom.com/wiki/Hull"
-        },
-        {
-          "Content": "tractor beam projectors",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+          "Content": "tractor beam",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam"
         }
       ],
       "Values": [
-        "Quad light turbolaser batteries (10)",
-        "5 port",
-        "5 starboard",
-        "Twin medium turbolasers (20)",
-        "10 forward",
-        "10 dorsal",
-        "Assault concussion missile launchers (20) or ion cannons",
-        "Hull-mounted heavy tractor beam projectors (10)"
+        "Configuration 1 (original Victory I-class armament)",
+        "128 turbolasers (12 × 4, 40 × 2)",
+        "Concussion missile launchers",
+        "10 tractor beam projectorsConfiguration 2",
+        "40 medium turbolasers (20 × 2)",
+        "40 light turbolasers (10 × 4)",
+        "20 assault concussion missile launchers, or ion cannons",
+        "10 heavy tractor beam projectors",
+        "10 tractor beam projectors"
       ]
     },
     {
@@ -195,12 +200,12 @@
       "Label": "Escape craft",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Escape pods",
           "Href": "https://starwars.fandom.com/wiki/Escape_pod"
         }
       ],
       "Values": [
-        "Equipped"
+        "Escape pods"
       ]
     },
     {
@@ -229,6 +234,18 @@
       ],
       "Values": [
         "1,600 stormtroopers"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [
+        {
+          "Content": "metric tons",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        }
+      ],
+      "Values": [
+        "6,500 metric tons"
       ]
     },
     {

@@ -2,6 +2,7 @@
   "PageId": 718406,
   "PageUrl": "https://starwars.fandom.com/wiki/Guidance_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,14 +13,9 @@
     },
     {
       "Label": "Purpose",
-      "Links": [
-        {
-          "Content": "droid",
-          "Href": "https://starwars.fandom.com/wiki/Droid"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Aid a droid's guidance"
+        "Aid a machine's guidance"
       ]
     },
     {
@@ -32,13 +28,24 @@
         {
           "Content": "Confederacy military",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_military"
+        },
+        {
+          "Content": "Clone Force 99",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Force_99"
         }
       ],
       "Values": [
         "Confederacy of Independent Systems",
-        "Confederacy military"
+        "Confederacy military",
+        "Clone Force 99"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 751434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rocket_guidance_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    }
+  ]
 }

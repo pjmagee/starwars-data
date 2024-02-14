@@ -48,14 +48,31 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-7"
       ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Demigue Terror",
+          "Href": "https://starwars.fandom.com/wiki/Demigue_Terror"
+        }
+      ],
+      "Values": [
+        "Demigue Terror"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 362323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Demigue_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 129083,
       "PageUrl": "https://starwars.fandom.com/wiki/Demigue_Terror",
@@ -65,11 +82,6 @@
       "PageId": 496376,
       "PageUrl": "https://starwars.fandom.com/wiki/Prime_Minister_(Demigue)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 362323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Demigue_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

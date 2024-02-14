@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Constructed",
-      "Links": [
-        {
-          "Content": "22 BBY",
-          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
-        }
-      ],
-      "Values": [
-        "22 BBY"
-      ]
-    },
-    {
       "Label": "Destroyed",
       "Links": [
         {
@@ -39,12 +27,28 @@
       "Label": "Location",
       "Links": [
         {
+          "Content": "Mining Fields",
+          "Href": "https://starwars.fandom.com/wiki/Mining_Fields"
+        },
+        {
           "Content": "Mustafar",
           "Href": "https://starwars.fandom.com/wiki/Mustafar/Legends"
         }
       ],
       "Values": [
-        "Mustafar"
+        "Mining Fields, Mustafar"
+      ]
+    },
+    {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Separatist Council War Room",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_Council_War_Room"
+        }
+      ],
+      "Values": [
+        "Separatist Council War Room"
       ]
     },
     {
@@ -67,8 +71,8 @@
           "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts/Legends"
         },
         {
-          "Content": "Gizor Dellso",
-          "Href": "https://starwars.fandom.com/wiki/Gizor_Dellso"
+          "Content": "Gizor Dellso's army",
+          "Href": "https://starwars.fandom.com/wiki/Gizor_Dellso%27s_army"
         }
       ],
       "Values": [
@@ -76,15 +80,40 @@
         "Klegger Corporation",
         "Confederacy of Independent Systems",
         "Separatist holdouts",
-        "Gizor Dellso"
+        "Gizor Dellso's army"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 26480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Council_War_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 752934,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Fields",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 143972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gizor_Dellso's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 162277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Separatist_script",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
       "PageId": 28088,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mustafar_(Imperial_Period)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 8886,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 77478,
@@ -97,9 +126,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
-      "PageId": 8886,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mustafar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 56087,
@@ -107,14 +136,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 341,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mustafar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 143972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gizor_Dellso's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 54633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Council_Conference_Room/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

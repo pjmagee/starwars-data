@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Fortress",
+          "Href": "https://starwars.fandom.com/wiki/Fortress"
+        }
+      ],
+      "Values": [
+        "Fortress"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -27,6 +39,18 @@
       "Label": "Point(s) of interest",
       "Links": [
         {
+          "Content": "Fortress Citadel",
+          "Href": "https://starwars.fandom.com/wiki/Fortress_Citadel"
+        },
+        {
+          "Content": "Inquisitor meeting room",
+          "Href": "https://starwars.fandom.com/wiki/Inquisitor_meeting_room"
+        },
+        {
+          "Content": "Jedi tomb",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_tomb"
+        },
+        {
           "Content": "Defensive Perimeter",
           "Href": "https://starwars.fandom.com/wiki/Defensive_Perimeter"
         },
@@ -35,8 +59,8 @@
           "Href": "https://starwars.fandom.com/wiki/Airlock_8"
         },
         {
-          "Content": "Fortress Citadel",
-          "Href": "https://starwars.fandom.com/wiki/Fortress_Citadel"
+          "Content": "Prison Block",
+          "Href": "https://starwars.fandom.com/wiki/Prison_Block"
         },
         {
           "Content": "Interrogation Chamber",
@@ -44,11 +68,15 @@
         }
       ],
       "Values": [
+        "Fortress Citadel",
+        "Tower Transit Passage",
+        "Inquisitor meeting room",
+        "Jedi tomb",
         "Defensive Perimeter",
         "Airlock 8",
-        "Fortress Citadel",
-        "Interrogation Chamber",
-        "Prison Block"
+        "Prison Block",
+        "Inquisitor Sanctum",
+        "Interrogation Chamber"
       ]
     },
     {
@@ -71,14 +99,44 @@
   ],
   "Relationships": [
     {
-      "PageId": 637639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrobaton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
       "PageId": 637655,
       "PageUrl": "https://starwars.fandom.com/wiki/Electrohammer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 768477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prison_Block",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 685744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defensive_Perimeter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 534812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 749384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inquisitor_meeting_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 731699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Leia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 789682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_hangar_bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 636094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 685759,
@@ -91,9 +149,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 597584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 10914,
       "PageUrl": "https://starwars.fandom.com/wiki/Inquisitorius",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 687124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 636118,
@@ -101,23 +169,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 656412,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eno_Cordova's_holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 636094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 597584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 534812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
+      "PageId": 775778,
+      "PageUrl": "https://starwars.fandom.com/wiki/Security_scanner",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
@@ -126,9 +179,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 685744,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defensive_Perimeter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 656412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eno_Cordova's_holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 749387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_tomb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-5",
@@ -48,29 +48,63 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Caves",
+          "Href": "https://starwars.fandom.com/wiki/Cave"
+        }
+      ],
+      "Values": [
+        "Crop fields",
+        "Rocky outcrops",
+        "Desolate hills",
+        "Caves"
+      ]
+    },
+    {
       "Label": "Point(s) of interest",
       "Links": [
         {
-          "Content": "Imperial base",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_base_(Raada)"
-        },
-        {
-          "Content": "Unidentified settlement",
+          "Content": "A settlement",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_settlement_(Raada)"
         },
         {
           "Content": "Selda's cantina",
           "Href": "https://starwars.fandom.com/wiki/Selda%27s_cantina"
+        },
+        {
+          "Content": "Raada Imperial base",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_base_(Raada)"
         }
       ],
       "Values": [
-        "Imperial base",
-        "Unidentified settlement",
-        "Selda's cantina"
+        "A settlement",
+        "Selda's cantina",
+        "Raada Imperial base"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -123,6 +157,13 @@
       ]
     },
     {
+      "Label": "Major exports",
+      "Links": [],
+      "Values": [
+        "Nutrients"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -137,9 +178,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 554933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crokin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+      "PageId": 553167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_settlement_(Raada)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 683363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_plant_(nutritional_supplement)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 536716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 552693,
@@ -147,9 +198,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 483523,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano's_white_lightsabers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 552561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_base_(Raada)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selda's_cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_planet_(Raada)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 560019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raada_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 582461,
@@ -157,9 +223,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 552623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_planet_(Raada)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 552299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sixth_Brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 552376,
@@ -182,39 +248,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 553167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_settlement_(Raada)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 552299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sixth_Brother",
+      "PageId": 743309,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_crew_lead",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 536716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 483523,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano's_white_lightsabers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 552561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_base_(Raada)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 552680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Selda's_cantina",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 560019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raada_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 683363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_plant_(nutritional_supplement)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 554933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crokin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
     }
   ]
 }

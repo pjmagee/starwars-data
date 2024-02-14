@@ -60,6 +60,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "G-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "G-7"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [],
       "Values": [
@@ -67,7 +79,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rock"
@@ -76,14 +88,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 501246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ilum_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 590797,
       "PageUrl": "https://starwars.fandom.com/wiki/Asar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 501246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ilum_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

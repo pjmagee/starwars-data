@@ -13,7 +13,12 @@
     },
     {
       "Label": "Conflict",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Campaign against the Shadow Collective",
+          "Href": "https://starwars.fandom.com/wiki/Campaign_against_the_Shadow_Collective/Legends"
+        }
+      ],
       "Values": [
         "Campaign against the Shadow Collective"
       ]
@@ -81,5 +86,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 277868,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Jewel_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 760520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Campaign_against_the_Shadow_Collective/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    }
+  ]
 }

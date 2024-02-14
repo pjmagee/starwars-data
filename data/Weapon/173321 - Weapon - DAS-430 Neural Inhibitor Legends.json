@@ -85,7 +85,7 @@
       "Links": [
         {
           "Content": "darts",
-          "Href": "https://starwars.fandom.com/wiki/Dart"
+          "Href": "https://starwars.fandom.com/wiki/Dart/Legends"
         }
       ],
       "Values": [
@@ -94,7 +94,12 @@
     },
     {
       "Label": "Range",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meter",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "150 meter (rifle)",
         "50 meter (pistol)"
@@ -127,16 +132,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 19390,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 104049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mennotor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 1579,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-88_assassin_droid/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
@@ -145,6 +140,16 @@
       "PageId": 38850,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-88B/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 19390,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 104049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mennotor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

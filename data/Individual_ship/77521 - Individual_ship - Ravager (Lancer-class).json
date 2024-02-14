@@ -2,6 +2,7 @@
   "PageId": 77521,
   "PageUrl": "https://starwars.fandom.com/wiki/Ravager_(Lancer-class)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -75,7 +76,7 @@
       "Links": [
         {
           "Content": "Battle of Vladet",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Vladet"
+          "Href": "https://starwars.fandom.com/wiki/Defense_of_Vladet"
         }
       ],
       "Values": [
@@ -123,5 +124,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raschuk_Sector_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

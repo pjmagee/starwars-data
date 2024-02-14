@@ -2,12 +2,53 @@
   "PageId": 142379,
   "PageUrl": "https://starwars.fandom.com/wiki/Freelance_Mercenary_Corps/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Freelance Mercenary Corps"
+      ]
+    },
+    {
+      "Label": "Organization type",
+      "Links": [
+        {
+          "Content": "Mercenary",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        }
+      ],
+      "Values": [
+        "Mercenary unit"
+      ]
+    },
+    {
+      "Label": "Leader(s)",
+      "Links": [
+        {
+          "Content": "Colonel",
+          "Href": "https://starwars.fandom.com/wiki/Colonel/Legends"
+        },
+        {
+          "Content": "Sar Omant",
+          "Href": "https://starwars.fandom.com/wiki/Sar_Omant"
+        }
+      ],
+      "Values": [
+        "Colonel Sar Omant"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Sar Omant's strike force",
+          "Href": "https://starwars.fandom.com/wiki/Sar_Omant%27s_strike_force"
+        }
+      ],
+      "Values": [
+        "Sar Omant's strike force"
       ]
     },
     {
@@ -23,5 +64,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 734764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sar_Omant's_strike_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 95537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sar_Omant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

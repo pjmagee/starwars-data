@@ -12,6 +12,34 @@
       ]
     },
     {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Hyperkarn",
+          "Href": "https://starwars.fandom.com/wiki/Hyperkarn"
+        }
+      ],
+      "Values": [
+        "Hyperkarn"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "6 BBY",
+          "Href": "https://starwars.fandom.com/wiki/6_BBY"
+        },
+        {
+          "Content": "Hyperkarn",
+          "Href": "https://starwars.fandom.com/wiki/Hyperkarn"
+        }
+      ],
+      "Values": [
+        "6 BBY, Hyperkarn"
+      ]
+    },
+    {
       "Label": "Died",
       "Links": [
         {
@@ -21,10 +49,14 @@
         {
           "Content": "Bestoon Legacy",
           "Href": "https://starwars.fandom.com/wiki/Bestoon_Legacy"
+        },
+        {
+          "Content": "Jakku system",
+          "Href": "https://starwars.fandom.com/wiki/Jakku_system"
         }
       ],
       "Values": [
-        "21 ABY, Bestoon Legacy"
+        "21 ABY, Bestoon Legacy, Jakku system"
       ]
     },
     {
@@ -52,15 +84,22 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Brown",
+          "Content": "Blonde",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Brown"
+        "Blonde"
       ]
     },
     {
@@ -76,7 +115,68 @@
       "Values": [
         "Light"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Miramir's family",
+          "Href": "https://starwars.fandom.com/wiki/Miramir%27s_family"
+        },
+        {
+          "Content": "Palpatine family",
+          "Href": "https://starwars.fandom.com/wiki/Palpatine_family"
+        },
+        {
+          "Content": "marriage",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Miramir's family",
+        "Palpatine family (through marriage)"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Dathan",
+          "Href": "https://starwars.fandom.com/wiki/Dathan"
+        }
+      ],
+      "Values": [
+        "Dathan (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Rey",
+          "Href": "https://starwars.fandom.com/wiki/Rey_Skywalker"
+        }
+      ],
+      "Values": [
+        "Rey"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 748628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_amulet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 639597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

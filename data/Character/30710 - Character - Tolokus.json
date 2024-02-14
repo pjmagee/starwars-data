@@ -2,6 +2,7 @@
   "PageId": 30710,
   "PageUrl": "https://starwars.fandom.com/wiki/Tolokus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,5 +48,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 30684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Task_Force_Bellbright",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 30692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Task_Force_Token",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

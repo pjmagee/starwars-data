@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caverns",
@@ -99,11 +99,16 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Cliff worm",
+          "Href": "https://starwars.fandom.com/wiki/Cliff_worm"
+        },
+        {
           "Content": "Keeradak",
           "Href": "https://starwars.fandom.com/wiki/Keeradak"
         }
       ],
       "Values": [
+        "Cliff worm",
         "Keeradak"
       ]
     },
@@ -120,7 +125,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Skakoan",
@@ -141,6 +146,23 @@
       ],
       "Values": [
         "Poletec language"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [
+        {
+          "Content": "Ruling Council",
+          "Href": "https://starwars.fandom.com/wiki/Ruling_Council_(Skako_Minor)"
+        },
+        {
+          "Content": "Skakoan Council",
+          "Href": "https://starwars.fandom.com/wiki/Skakoan_Council"
+        }
+      ],
+      "Values": [
+        "Ruling Council",
+        "Skakoan Council"
       ]
     },
     {
@@ -180,29 +202,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 532827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qin_Yazal",
+      "PageId": 751179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jul_Tambor's_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 586881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hallio_Bas",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 646548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poletec_language",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 650232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Poletec_scout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 574007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Purkoll_citizen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 594433,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor_(Son-tuul_Pride)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 501248,
@@ -210,14 +217,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 646699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purkoll_Tower_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 650232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Poletec_scout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 465422,
       "PageUrl": "https://starwars.fandom.com/wiki/Wat_Tambor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tambors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 594344,
@@ -231,8 +243,143 @@
     },
     {
       "PageId": 500574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor",
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor_(Clone_Wars)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 586421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wat_Tambor's_workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 747312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wat_Tambor_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hellhulk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 584881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 750963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Skako_Minor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 532835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poletec_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 586358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flufto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 743323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skakoan_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 747356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruling_Council_(Skako_Minor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 732183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Skako_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 592209,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glahst_Ombra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 590457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chthonic_worm_god",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 594433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor_(Son-tuul_Pride)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 743384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Skako_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 746862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Skako_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 743232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor_(Darth_Vader)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 743344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skako_Minor_(Darth_Vader_and_Sabé)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 747355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Brentaal_IV_(Sabé)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 715333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gee-Ninety",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 646699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purkoll_Tower_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 532827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qin_Yazal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 574007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Purkoll_citizen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 737548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jul_Tambor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 504177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeradak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 646548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poletec_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 620204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_village_(Skako_Minor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 646985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Poletec_test_subject",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 475917,
@@ -243,56 +390,6 @@
       "PageId": 500790,
       "PageUrl": "https://starwars.fandom.com/wiki/Poletec",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 590457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chthonic_worm_god",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
-    },
-    {
-      "PageId": 504177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeradak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 586358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flufto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 592209,
-      "PageUrl": "https://starwars.fandom.com/wiki/Glahst_Ombra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 646985,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Poletec_test_subject",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 532835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poletec_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 620204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_village_(Skako_Minor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 586881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hallio_Bas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 584881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 586421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wat_Tambor's_workshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

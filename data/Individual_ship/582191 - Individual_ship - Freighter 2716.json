@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
       "Links": [
         {
           "Content": "Orca-class freighter",
@@ -21,6 +21,149 @@
       ],
       "Values": [
         "Orca-class freighter"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Freighter",
+          "Href": "https://starwars.fandom.com/wiki/Freighter"
+        }
+      ],
+      "Values": [
+        "Freighter"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Sublight engines",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
+        }
+      ],
+      "Values": [
+        "Sublight engines (6)"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "Lambda-class T-4a shuttle",
+          "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
+        }
+      ],
+      "Values": [
+        "At least 1 Lambda-class T-4a shuttle"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [],
+      "Values": [
+        "At least 1 cargo bay",
+        "Hold 12"
+      ]
+    },
+    {
+      "Label": "Escape craft",
+      "Links": [
+        {
+          "Content": "Escape pods",
+          "Href": "https://starwars.fandom.com/wiki/Escape_pod"
+        }
+      ],
+      "Values": [
+        "Escape pods"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "DT-F16's squad",
+          "Href": "https://starwars.fandom.com/wiki/DT-F16%27s_squad"
+        },
+        {
+          "Content": "Death troopers",
+          "Href": "https://starwars.fandom.com/wiki/Death_trooper"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        }
+      ],
+      "Values": [
+        "At least 3 Imperial officers",
+        "DT-F16's squad",
+        "5 Death troopers",
+        "Stormtroopers"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [
+        {
+          "Content": "prisoners",
+          "Href": "https://starwars.fandom.com/wiki/Prisoner"
+        },
+        {
+          "Content": "Mich Matt",
+          "Href": "https://starwars.fandom.com/wiki/Mich_Matt"
+        },
+        {
+          "Content": "Unidentified Ithorian",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Ithorian_(Freighter_2716)"
+        },
+        {
+          "Content": "Unidentified Theelin",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Theelin_(Freighter_2716)"
+        }
+      ],
+      "Values": [
+        "At least 8 prisoners",
+        "Mich Matt",
+        "Unidentified Ithorian",
+        "Unidentified Theelin"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [],
+      "Values": [
+        "Multiple large containers"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "transport",
+          "Href": "https://starwars.fandom.com/wiki/Transport"
+        }
+      ],
+      "Values": [
+        "Cargo transport"
       ]
     },
     {
@@ -36,7 +179,7 @@
         }
       ],
       "Values": [
-        "c. 1 BBY, Tonnis sector"
+        "1 BBY, Tonnis sector"
       ]
     },
     {
@@ -97,15 +240,35 @@
         {
           "Content": "3-6",
           "Href": "https://starwars.fandom.com/wiki/3-6"
+        },
+        {
+          "Content": "Unidentified death trooper",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_death_trooper"
+        },
+        {
+          "Content": "Unidentified Stormtrooper",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Stormtrooper_1_(Freighter_2716)"
         }
       ],
       "Values": [
         "DT-F16",
-        "3-6"
+        "3-6",
+        "Unidentified death trooper",
+        "Unidentified Stormtrooper"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 582189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Faos_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 584214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_death_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 582180,
       "PageUrl": "https://starwars.fandom.com/wiki/DT-F16",
@@ -122,16 +285,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 566471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_heavy_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 584214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_death_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 715367,
       "PageUrl": "https://starwars.fandom.com/wiki/Hold_6",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -142,9 +295,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 582189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Faos_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 566471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_heavy_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

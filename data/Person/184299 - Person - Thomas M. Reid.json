@@ -13,9 +13,14 @@
     },
     {
       "Label": "Born",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "December 23",
+          "Href": "https://starwars.fandom.com/wiki/December_23"
+        }
+      ],
       "Values": [
-        " , , "
+        "December 23, , , "
       ]
     },
     {
@@ -27,25 +32,25 @@
       "Label": "Official website",
       "Links": [
         {
-          "Content": "http://www.thomasmreid.com/",
-          "Href": "http://www.thomasmreid.com/"
+          "Content": "http://www.thomasmreid.com",
+          "Href": "http://www.thomasmreid.com"
         }
       ],
       "Values": [
-        "http://www.thomasmreid.com/"
+        "http://www.thomasmreid.com"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 207179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shipbuilding_Secrets",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    },
+    {
       "PageId": 145336,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Gamer_Special_Edition",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine"
-    },
-    {
-      "PageId": 207179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shipbuilding_Secrets",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
     }
   ]
 }

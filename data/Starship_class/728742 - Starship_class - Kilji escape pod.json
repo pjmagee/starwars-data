@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Escape pod",
@@ -27,12 +27,12 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "thrusters",
+          "Content": "Equipped",
           "Href": "https://starwars.fandom.com/wiki/Engine"
         }
       ],
       "Values": [
-        "At least two thrusters"
+        "Equipped"
       ]
     },
     {
@@ -48,29 +48,25 @@
       ]
     },
     {
-      "Label": "Passengers",
-      "Links": [],
-      "Values": [
-        "At least one"
-      ]
-    },
-    {
-      "Label": "Cargo capacity",
-      "Links": [],
-      "Values": [
-        "At least one passenger"
-      ]
-    },
-    {
       "Label": "Life support",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "hours",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour"
+        }
+      ],
       "Values": [
         "Several hours"
       ]
     },
     {
       "Label": "Communication systems",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "automatic beacon",
+          "Href": "https://starwars.fandom.com/wiki/Comm_unit"
+        }
+      ],
       "Values": [
         "An automatic beacon"
       ]
@@ -88,15 +84,10 @@
         {
           "Content": "Kilji Illumine",
           "Href": "https://starwars.fandom.com/wiki/Kilji_Illumine"
-        },
-        {
-          "Content": "Illumine Kilhorde",
-          "Href": "https://starwars.fandom.com/wiki/Illumine_Kilhorde"
         }
       ],
       "Values": [
-        "Kilji Illumine",
-        "Illumine Kilhorde"
+        "Kilji Illumine"
       ]
     }
   ],
@@ -105,6 +96,11 @@
       "PageId": 712956,
       "PageUrl": "https://starwars.fandom.com/wiki/Kilji_war_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 714117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anvil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

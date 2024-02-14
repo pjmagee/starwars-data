@@ -60,14 +60,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "U-6"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceanic",
@@ -84,14 +84,19 @@
         {
           "Content": "Mon Calamari Shipyards",
           "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends"
+        },
+        {
+          "Content": "Krinemonen III shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Krinemonen_III_shipyards"
         }
       ],
       "Values": [
-        "Mon Calamari Shipyards"
+        "Mon Calamari Shipyards",
+        "Krinemonen III shipyards"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Mon Calamari",
@@ -127,6 +132,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 314597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krinemonen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 345523,
       "PageUrl": "https://starwars.fandom.com/wiki/Tam_(Iyra)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -140,11 +150,6 @@
       "PageId": 19808,
       "PageUrl": "https://starwars.fandom.com/wiki/Krinemonen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 314597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krinemonen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

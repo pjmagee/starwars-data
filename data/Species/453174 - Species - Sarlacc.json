@@ -15,12 +15,12 @@
       "Label": "Designation",
       "Links": [
         {
-          "Content": "Non-sentient",
+          "Content": "Sentient",
           "Href": "https://starwars.fandom.com/wiki/Sentience"
         }
       ],
       "Values": [
-        "Non-sentient"
+        "Sentient"
       ]
     },
     {
@@ -73,6 +73,10 @@
           "Href": "https://starwars.fandom.com/wiki/I%27vorcia_Prime"
         },
         {
+          "Content": "Pasaana",
+          "Href": "https://starwars.fandom.com/wiki/Pasaana"
+        },
+        {
           "Content": "Tatooine",
           "Href": "https://starwars.fandom.com/wiki/Tatooine"
         },
@@ -84,6 +88,7 @@
       "Values": [
         "Felucia",
         "I'vorcia Prime",
+        "Pasaana",
         "Tatooine",
         "Vodran"
       ]
@@ -99,9 +104,51 @@
       "Values": [
         "Carnivorous"
       ]
+    },
+    {
+      "Label": "Language",
+      "Links": [
+        {
+          "Content": "Sarlacc language",
+          "Href": "https://starwars.fandom.com/wiki/Sarlacc_language"
+        }
+      ],
+      "Values": [
+        "Sarlacc language"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 623453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pasaana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 672374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abandoned_sarlacc_pit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 734748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarlacc_Scarers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 452688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 502106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Form_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber_form"
+    },
+    {
+      "PageId": 714833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessa-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
     {
       "PageId": 621959,
       "PageUrl": "https://starwars.fandom.com/wiki/I'vorcia_Prime",
@@ -113,29 +160,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 452688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 465003,
       "PageUrl": "https://starwars.fandom.com/wiki/Felucia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 714833,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lessa-7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 537922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vodran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 672374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abandoned_sarlacc_pit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 645963,
@@ -143,9 +170,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 502106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Form_I",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber_form"
+      "PageId": 22125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almighty_Sarlacc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plot_to_assassinate_Jabba_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 537922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vodran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

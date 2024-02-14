@@ -27,15 +27,15 @@
       "Label": "Model",
       "Links": [],
       "Values": [
-        "Dreadnaught-class heavy cruiser"
+        "Dreadnaught-class"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Cruiser/Legends"
+          "Content": "Heavy cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_cruiser/Legends"
         }
       ],
       "Values": [
@@ -229,7 +229,7 @@
         "Light quad turbolaser cannons (20)",
         "10 port",
         "10 starboard",
-        "Heavy laser cannons (10)",
+        "Heavy laser cannons (20)",
         "10 starboardCommon modification",
         "Ion cannon",
         "Warhead launcher (1)",
@@ -395,6 +395,14 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
+          "Content": "Judicial Forces",
+          "Href": "https://starwars.fandom.com/wiki/Judicial_Forces/Legends"
+        },
+        {
+          "Content": "Republic Outland Regions Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force"
+        },
+        {
           "Content": "Corporate Sector Authority",
           "Href": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority/Legends"
         },
@@ -437,10 +445,16 @@
         {
           "Content": "Chiss",
           "Href": "https://starwars.fandom.com/wiki/Chiss/Legends"
+        },
+        {
+          "Content": "Airam Clans",
+          "Href": "https://starwars.fandom.com/wiki/Airam_Clans"
         }
       ],
       "Values": [
         "Galactic Republic",
+        "Judicial Forces",
+        "Republic Outland Regions Security Force",
         "Corporate Sector Authority",
         "Sons and Daughters of Freedom",
         "Utapau",
@@ -451,14 +465,20 @@
         "Imperial Remnant",
         "Galactic Federation of Free Alliances",
         "Hutts",
-        "Chiss"
+        "Chiss",
+        "Airam Clans"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 11697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Famulus",
+      "PageId": 61075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vendetta_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 168753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doomer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -467,58 +487,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 39650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight",
+      "PageId": 180636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reprisal_(Dreadnaught-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 396977,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarissa",
+      "PageId": 180910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flash_Fire",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 1968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_carrier/destroyer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 172520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anat",
+      "PageId": 30989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abrogator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 54499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_the_Katana_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 417814,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baxel_sector_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 62140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starsider",
+      "PageId": 4878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Katana_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 793645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nicodemus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 359031,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leviathan_(Dreadnaught-class)",
+      "PageId": 793646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lupo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 66799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vigiliance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 67404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Braxant_Bonecrusher",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 73973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 74410,
-      "PageUrl": "https://starwars.fandom.com/wiki/By'ynium",
+      "PageId": 793647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Topol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -547,38 +552,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 42046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Destiny",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 417814,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baxel_sector_fleet",
+      "PageId": 51268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rendili_Home_Defense_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 4878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Katana_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 10076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_Frigate_Mark_I",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 61075,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vendetta_(Dreadnaught-class)",
+      "PageId": 62140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starsider",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 180636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reprisal_(Dreadnaught-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 180910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flash_Fire",
+      "PageId": 62819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_the_Senate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -592,8 +577,88 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 172520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 159179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kala'din_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 159926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karei",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 162104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Disorver",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 50823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeper_(Dreadnaught-class_heavy_cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 513372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agrelcu_Haalta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 60447,
       "PageUrl": "https://starwars.fandom.com/wiki/Mersel_Kebir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 359031,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leviathan_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 67404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Braxant_Bonecrusher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 54499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_the_Katana_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 1968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_carrier/destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 69708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tal'cara_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 69820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mercury_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 69824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Longshot_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_Frigate_Mark_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 11697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Famulus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 42046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Destiny",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -627,43 +692,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 69708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tal'cara_(Dreadnaught-class)",
+      "PageId": 33187,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Hope",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 62819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_the_Senate",
+      "PageId": 39650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 159179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kala'din_(starship)",
+      "PageId": 66799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigiliance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 162104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Disorver",
+      "PageId": 73973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harrier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 30989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abrogator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 50823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeper_(Dreadnaught-class_heavy_cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 513372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agrelcu_Haalta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 168753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doomer",
+      "PageId": 74410,
+      "PageUrl": "https://starwars.fandom.com/wiki/By'ynium",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

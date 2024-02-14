@@ -2,7 +2,7 @@
   "PageId": 41199,
   "PageUrl": "https://starwars.fandom.com/wiki/Grakchawwaa/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6e/Grakchawwaa-ROTS.png/revision/latest?cb=20200516194108",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6e/Grakchawwaa-ROTS.png/revision/latest?cb=20230603171500",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Kashyyyk Royal Families",
@@ -58,7 +58,25 @@
       "Values": [
         "Kashyyyk Royal Families"
       ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Rikummee",
+          "Href": "https://starwars.fandom.com/wiki/Rikummee"
+        }
+      ],
+      "Values": [
+        "Rikummee"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 41200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rikummee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 431855,
   "PageUrl": "https://starwars.fandom.com/wiki/VCX-100_light_freighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ab/Ghost.png/revision/latest?cb=20140215201047",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f7/Ghost-RO.png/revision/latest?cb=20220430183550",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light freighter",
@@ -72,24 +72,33 @@
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "43.9 meters"
+        "43.7 meters (143 ft 4 in)"
       ]
     },
     {
       "Label": "Width",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
       "Values": [
-        "34.2 meters"
+        "13.26 meters (43 ft 6 in)"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "14.5 meters"
+        "33.84 meters (111 ft)"
       ]
     },
     {
@@ -131,6 +140,18 @@
         {
           "Content": "Equipped",
           "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         }
       ],
       "Values": [
@@ -278,9 +299,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 424062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 507983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
       "PageId": 676096,
@@ -293,24 +314,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 459030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 551180,
       "PageUrl": "https://starwars.fandom.com/wiki/Massassi_Group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 507983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
       "PageId": 483311,
       "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 424062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

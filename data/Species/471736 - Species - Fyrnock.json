@@ -56,6 +56,19 @@
       ]
     },
     {
+      "Label": "Distinctions",
+      "Links": [
+        {
+          "Content": "Silicon",
+          "Href": "https://starwars.fandom.com/wiki/Silicon"
+        }
+      ],
+      "Values": [
+        "Constant growth, able to grow to gargantuan sizes",
+        "Silicon-based"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
@@ -89,18 +102,24 @@
     },
     {
       "Label": "Diet",
-      "Links": [
-        {
-          "Content": "Predator",
-          "Href": "https://starwars.fandom.com/wiki/Diet"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Predator"
+        "Bioelectricity",
+        "Electrical energy"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 508361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 581592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
     {
       "PageId": 495824,
       "PageUrl": "https://starwars.fandom.com/wiki/PM-1203",
@@ -117,9 +136,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 508361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 632677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azure_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

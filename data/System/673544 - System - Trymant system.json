@@ -19,17 +19,27 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
+        },
+        {
           "Content": "Western Reaches",
           "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
         "Outer Rim Territories",
+        "Galactic Frontier",
+        "Occlusion Zone",
         "Western Reaches"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-20",
@@ -115,6 +125,31 @@
   ],
   "Relationships": [
     {
+      "PageId": 668259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 731041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occlusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 683381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_IV_disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 699976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praknat_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 701129,
       "PageUrl": "https://starwars.fandom.com/wiki/Trymant_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -130,11 +165,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 700072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system's_second_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 674428,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_Security_Zone_Monitoring_Satellite_777B-Alpha",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
@@ -145,19 +175,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 699976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praknat_3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 668259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 683381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_IV_disaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 700072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trymant_system's_second_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

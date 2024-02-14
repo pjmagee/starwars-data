@@ -2,6 +2,7 @@
   "PageId": 585840,
   "PageUrl": "https://starwars.fandom.com/wiki/Torbi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
         }
       ],
       "Values": [
-        "24 ABY, Parnassos"
+        "c. 24 ABY, Parnassos"
       ]
     },
     {
@@ -57,7 +58,25 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Siv",
+          "Href": "https://starwars.fandom.com/wiki/Siv"
+        }
+      ],
+      "Values": [
+        "Siv"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 578904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siv",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

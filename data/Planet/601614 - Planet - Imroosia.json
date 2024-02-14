@@ -2,7 +2,7 @@
   "PageId": 601614,
   "PageUrl": "https://starwars.fandom.com/wiki/Imroosia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/15/Imroosia-SWT.jpg/revision/latest?cb=20220614165512",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,50 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Inner Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Inner Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-9"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Climate",
       "Links": [
         {
-          "Content": "Extremely hot",
+          "Content": "hot",
           "Href": "https://starwars.fandom.com/wiki/Temperature"
         }
       ],
       "Values": [
-        "Extremely hot"
+        "Searing hot"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Volcanic",
@@ -46,6 +77,18 @@
       "Values": [
         "Imroosian"
       ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Imroosian",
+          "Href": "https://starwars.fandom.com/wiki/Imroosian_(language)"
+        }
+      ],
+      "Values": [
+        "Imroosian"
+      ]
     }
   ],
   "Relationships": [
@@ -57,6 +100,11 @@
     {
       "PageId": 601605,
       "PageUrl": "https://starwars.fandom.com/wiki/Margo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agira",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

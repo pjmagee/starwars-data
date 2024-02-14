@@ -166,7 +166,7 @@
       ]
     },
     {
-      "Label": "Local conflict",
+      "Label": "Great Galactic War",
       "Links": [
         {
           "Content": "Vulta",
@@ -185,31 +185,51 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Null_(Crimson_Nova)"
         },
         {
-          "Content": "(II)",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Null"
-        },
-        {
           "Content": "Nyriaan (I)",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Nyriaan"
         },
         {
+          "Content": "Orto Norwe (I)",
+          "Href": "https://starwars.fandom.com/wiki/Massacre_in_Yellowblade%27s_Landing"
+        },
+        {
           "Content": "(II)",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Orto_Norwe"
+        },
+        {
+          "Content": "Null (II)",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Null"
+        },
+        {
+          "Content": "Nyriaan (II)",
           "Href": "https://starwars.fandom.com/wiki/Second_Battle_of_Nyriaan"
         }
       ],
       "Values": [
-        "Null (I) (II) - Nyriaan (I) (II)"
+        "Null (I) - Nyriaan (I) - Orto Norwe (I) (II) - Null (II) - Nyriaan (II)"
+      ]
+    },
+    {
+      "Label": "Imperial Period conflicts",
+      "Links": [
+        {
+          "Content": "Skorrupon",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Skorrupon"
+        },
+        {
+          "Content": "Nyriaan",
+          "Href": "https://starwars.fandom.com/wiki/Operation_Cloudfall"
+        }
+      ],
+      "Values": [
+        "Skorrupon - Nyriaan"
       ]
     },
     {
       "Label": "Galactic Civil War",
       "Links": [
         {
-          "Content": "Skorrupon (I)",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Skorrupon"
-        },
-        {
-          "Content": "(II)",
+          "Content": "Skorrupon",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Skorrupon_(Galactic_Civil_War)"
         },
         {
@@ -218,7 +238,7 @@
         }
       ],
       "Values": [
-        "Skorrupon (I) (II) - Null"
+        "Skorrupon - Null"
       ]
     },
     {
@@ -248,21 +268,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 17426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atreyis_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 365070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Surcaris_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 185669,
       "PageUrl": "https://starwars.fandom.com/wiki/Geris_VI",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -273,29 +278,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 291734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 13902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Null/Legends",
+      "PageId": 3998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryyk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 291733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luire_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 306528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Road",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 152688,
       "PageUrl": "https://starwars.fandom.com/wiki/Ryyk_Nebula",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 322731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gerinia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 17426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atreyis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 407952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orto_Norwe_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 365070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Surcaris_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 269531,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Territories/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 43590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trans-Hydian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 14342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 289491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skorrupon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skorrupon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 305637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Null_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 760076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orto_Norwe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 291734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 306528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Road",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 291476,
@@ -308,8 +363,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 305637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Null_system",
+      "PageId": 13902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Null/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 291733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luire_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
@@ -318,34 +378,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 289491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skorrupon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 3998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryyk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 322731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gerinia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 407952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orto_Norwe_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 14342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skorrupon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

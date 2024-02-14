@@ -19,12 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/7_ABY/Legends"
         },
         {
-          "Content": "10 ABY",
-          "Href": "https://starwars.fandom.com/wiki/10_ABY/Legends"
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY/Legends"
         }
       ],
       "Values": [
-        "7 ABY/10 ABY"
+        "c. 7 ABY—9 ABY"
       ]
     },
     {
@@ -52,8 +52,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
       ]
@@ -81,16 +93,20 @@
           "Href": "https://starwars.fandom.com/wiki/Empire_of_the_Hand"
         },
         {
-          "Content": "Household Phalanx",
-          "Href": "https://starwars.fandom.com/wiki/Household_Phalanx"
+          "Content": "Syndic Mitth'raw'nuruodo's Household Phalanx",
+          "Href": "https://starwars.fandom.com/wiki/Syndic_Mitth%27raw%27nuruodo%27s_Household_Phalanx"
         },
         {
-          "Content": "Force Spike",
-          "Href": "https://starwars.fandom.com/wiki/Force_Spike"
+          "Content": "Spike Squadron",
+          "Href": "https://starwars.fandom.com/wiki/Spike_Squadron_(Empire_of_the_Hand)"
         },
         {
           "Content": "Vanguard Squadron",
           "Href": "https://starwars.fandom.com/wiki/Vanguard_Squadron_(Hapes)"
+        },
+        {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         },
         {
           "Content": "Twin Suns Squadron",
@@ -101,12 +117,39 @@
         "Chiss Ascendancy",
         "House Nuruodo",
         "Empire of the Hand",
-        "Household Phalanx",
-        "Force Spike",
+        "Syndic Mitth'raw'nuruodo's Household Phalanx",
+        "Spike Squadron",
         "Vanguard Squadron",
+        "Galactic Federation of Free Alliances",
         "Twin Suns Squadron"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 33993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndic_Mitth'raw'nuruodo's_Household_Phalanx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 23909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_Squadron_(Hapes)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 56649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Force_Spike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 772844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shawnkyr's_clawcraft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 773170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spike_Squadron_(Empire_of_the_Hand)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 594782,
   "PageUrl": "https://starwars.fandom.com/wiki/Minecraft_Star_Wars",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3f/MinecraftSW.png/revision/latest?cb=20210122005355",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/84/MinecraftStarWars-Poster.png/revision/latest?cb=20230523064440",
   "Data": [
     {
       "Label": "Titles",
@@ -13,30 +13,57 @@
     },
     {
       "Label": "Developer(s)",
-      "Links": [],
-      "Values": []
+      "Links": [
+        {
+          "Content": "Mojang Studios",
+          "Href": "https://starwars.fandom.com/wiki/Mojang_Studios"
+        }
+      ],
+      "Values": [
+        "Mojang Studios"
+      ]
     },
     {
       "Label": "Publisher(s)",
       "Links": [],
-      "Values": []
+      "Values": [
+        "Microsoft"
+      ]
     },
     {
       "Label": "Release date",
       "Links": [
         {
-          "Content": "November 18",
-          "Href": "https://starwars.fandom.com/wiki/November_18"
+          "Content": "November 16",
+          "Href": "https://starwars.fandom.com/wiki/November_16"
         },
         {
-          "Content": "2011",
-          "Href": "https://starwars.fandom.com/wiki/2011"
+          "Content": "2020",
+          "Href": "https://starwars.fandom.com/wiki/2020"
         }
       ],
       "Values": [
-        "November 18, 2011"
+        "November 16, 2020"
+      ]
+    },
+    {
+      "Label": "Base game",
+      "Links": [
+        {
+          "Content": "Minecraft",
+          "Href": "https://starwars.fandom.com/wiki/Minecraft"
+        }
+      ],
+      "Values": [
+        "Minecraft"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 681712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Minecraft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    }
+  ]
 }

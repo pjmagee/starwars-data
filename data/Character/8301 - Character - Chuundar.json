@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -76,6 +83,30 @@
       "Links": [],
       "Values": [
         "Yellow"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Freyyr",
+          "Href": "https://starwars.fandom.com/wiki/Freyyr"
+        }
+      ],
+      "Values": [
+        "Freyyr"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Zaalbar",
+          "Href": "https://starwars.fandom.com/wiki/Zaalbar"
+        }
+      ],
+      "Values": [
+        "Zaalbar"
       ]
     },
     {
@@ -103,19 +134,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 4170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zaalbar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 10359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freyyr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 176607,
       "PageUrl": "https://starwars.fandom.com/wiki/Wookiee_collaborators",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 6130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bacca's_Ceremonial_Blade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
       "PageId": 158333,
       "PageUrl": "https://starwars.fandom.com/wiki/Chuundar's_bowcaster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 6130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bacca's_Ceremonial_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

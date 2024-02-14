@@ -28,18 +28,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Eye color",
       "Links": [
         {
@@ -55,7 +43,31 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Light"
+        "Tan"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Nipaltoo's mother",
+          "Href": "https://starwars.fandom.com/wiki/Nipaltoo%27s_mother"
+        }
+      ],
+      "Values": [
+        "Nipaltoo's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Palabee",
+          "Href": "https://starwars.fandom.com/wiki/Palabee"
+        }
+      ],
+      "Values": [
+        "Palabee"
       ]
     },
     {
@@ -69,7 +81,25 @@
       "Values": [
         "Ferren Barr's disciples"
       ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Ferren Barr",
+          "Href": "https://starwars.fandom.com/wiki/Ferren_Barr"
+        }
+      ],
+      "Values": [
+        "Ferren Barr"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 597767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nipaltoo's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

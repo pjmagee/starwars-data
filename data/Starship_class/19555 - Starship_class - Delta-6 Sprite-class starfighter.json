@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Walex Blissex",
+          "Href": "https://starwars.fandom.com/wiki/Walex_Blissex/Legends"
+        }
+      ],
+      "Values": [
+        "Walex Blissex"
+      ]
+    },
+    {
       "Label": "Manufacturer",
       "Links": [
         {
@@ -25,9 +37,14 @@
     },
     {
       "Label": "Line",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Delta-series fighter",
+          "Href": "https://starwars.fandom.com/wiki/Delta-series_fighter/Legends"
+        }
+      ],
       "Values": [
-        "Delta-series"
+        "Delta-series fighter"
       ]
     },
     {
@@ -38,7 +55,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -47,6 +64,20 @@
       ],
       "Values": [
         "Starfighter"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [],
+      "Values": [
+        "None"
       ]
     },
     {
@@ -75,6 +106,25 @@
       ],
       "Values": [
         "Pilot (1)"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "day",
+          "Href": "https://starwars.fandom.com/wiki/Standard_day/Legends"
+        }
+      ],
+      "Values": [
+        "1 day"
       ]
     },
     {
@@ -107,5 +157,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 764757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta-series_fighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    }
+  ]
 }

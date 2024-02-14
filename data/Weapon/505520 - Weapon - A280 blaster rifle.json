@@ -2,7 +2,7 @@
   "PageId": 505520,
   "PageUrl": "https://starwars.fandom.com/wiki/A280_blaster_rifle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/A280BlasterRifle-CVD.png/revision/latest?cb=20211218033223",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/A280BlasterRifle-CVD.png/revision/latest?cb=20221114064346",
   "Data": [
     {
       "Label": "Titles",
@@ -46,6 +46,10 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
@@ -55,6 +59,7 @@
         }
       ],
       "Values": [
+        "Galactic Empire",
         "Alliance to Restore the Republic",
         "New Republic"
       ]
@@ -62,14 +67,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 466335,
-      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 530238,
       "PageUrl": "https://starwars.fandom.com/wiki/RN-18",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 781314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firestorm_Rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 466335,
+      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

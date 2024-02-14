@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Born",
-      "Links": [
-        {
-          "Content": "19 BBY",
-          "Href": "https://starwars.fandom.com/wiki/19_BBY/Legends"
-        }
-      ],
-      "Values": [
-        "Pre–19 BBY"
-      ]
-    },
-    {
       "Label": "Died",
       "Links": [
         {
@@ -102,28 +90,79 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Borgin",
           "Href": "https://starwars.fandom.com/wiki/House_Borgin/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House Borgin"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Cretia Malvern",
+          "Href": "https://starwars.fandom.com/wiki/Cretia_Borgin"
+        }
+      ],
+      "Values": [
+        "Cretia Malvern"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Pero Borgin",
+          "Href": "https://starwars.fandom.com/wiki/Pero_Borgin"
+        }
+      ],
+      "Values": [
+        "Pero Borgin"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "House Borgin",
         "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 783983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_security_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 408247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cretia_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku_regency_conclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 403638,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Borgin/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 408958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pero_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

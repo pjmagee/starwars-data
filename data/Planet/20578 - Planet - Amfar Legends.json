@@ -17,14 +17,10 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
-        },
-        {
-          "Content": "The Slice",
-          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Inner Rim; The Slice"
+        "Inner Rim"
       ]
     },
     {
@@ -40,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-8"
@@ -70,7 +66,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -82,45 +78,47 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Fauna",
       "Links": [
         {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        },
-        {
           "Content": "Redfish",
-          "Href": "https://starwars.fandom.com/wiki/Redfish"
+          "Href": "https://starwars.fandom.com/wiki/Redfish/Legends"
         }
       ],
       "Values": [
-        "Humans",
         "Redfish"
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Native species",
       "Links": [
         {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Human"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Amfarian"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 151893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redfish/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 271021,
       "PageUrl": "https://starwars.fandom.com/wiki/Amfar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 151893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redfish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

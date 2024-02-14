@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Freighter",
@@ -64,6 +64,19 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Valarian Syndicate",
+          "Href": "https://starwars.fandom.com/wiki/Valarian_Syndicate"
+        }
+      ],
+      "Values": [
+        "Civilian",
+        "Valarian Syndicate"
+      ]
+    },
+    {
+      "Label": "Owner(s)",
+      "Links": [
+        {
           "Content": "Lady",
           "Href": "https://starwars.fandom.com/wiki/Lord/Legends"
         },
@@ -73,19 +86,16 @@
         }
       ],
       "Values": [
-        "Civilian",
-        "Lady Valarian"
-      ]
-    },
-    {
-      "Label": "Owner(s)",
-      "Links": [],
-      "Values": [
         "Lady Valarian"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 38670,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Chamber_Café",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 38768,
       "PageUrl": "https://starwars.fandom.com/wiki/Thwim",
@@ -95,11 +105,6 @@
       "PageId": 429683,
       "PageUrl": "https://starwars.fandom.com/wiki/Valarian_Syndicate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 38670,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Chamber_Café",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

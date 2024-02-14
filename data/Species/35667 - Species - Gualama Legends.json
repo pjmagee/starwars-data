@@ -12,8 +12,13 @@
       ]
     },
     {
-      "Label": "Skin color",
-      "Links": [],
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "White",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "White"
       ]
@@ -29,13 +34,37 @@
       "Values": [
         "Naboo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Grassland",
+          "Href": "https://starwars.fandom.com/wiki/Grass/Legends"
+        }
+      ],
+      "Values": [
+        "Grassland"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Herbivorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Herbivorous"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 533847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Graywind",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 683966,
@@ -53,9 +82,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 533847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Graywind",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]
 }

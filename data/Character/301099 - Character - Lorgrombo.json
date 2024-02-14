@@ -2,6 +2,7 @@
   "PageId": 301099,
   "PageUrl": "https://starwars.fandom.com/wiki/Lorgrombo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,30 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [],
+      "Values": [
+        "Lorgrombo's horde"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 39337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Minnisiat/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 302700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rammocate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 303207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebruchese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    }
+  ]
 }

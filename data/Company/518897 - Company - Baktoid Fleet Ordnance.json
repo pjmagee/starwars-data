@@ -12,6 +12,23 @@
       ]
     },
     {
+      "Label": "Associations",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Haor Chall Engineering",
+          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering_Corporation"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems",
+        "Haor Chall Engineering"
+      ]
+    },
+    {
       "Label": "Parent company",
       "Links": [
         {
@@ -25,12 +42,7 @@
     },
     {
       "Label": "Primary role(s)",
-      "Links": [
-        {
-          "Content": "Droid",
-          "Href": "https://starwars.fandom.com/wiki/Droid"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Droid manufacturer"
       ]
@@ -41,18 +53,47 @@
         {
           "Content": "HMP droid gunship",
           "Href": "https://starwars.fandom.com/wiki/HMP_droid_gunship"
+        },
+        {
+          "Content": "weaponry",
+          "Href": "https://starwars.fandom.com/wiki/Weapon"
         }
       ],
       "Values": [
-        "HMP droid gunship"
+        "HMP droid gunship",
+        "Other automated droid weaponry"
+      ]
+    },
+    {
+      "Label": "Founding",
+      "Links": [
+        {
+          "Content": "Republic Era",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Era"
+        }
+      ],
+      "Values": [
+        "Republic Era"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Techno Union",
+          "Href": "https://starwars.fandom.com/wiki/Techno_Union"
+        }
+      ],
+      "Values": [
+        "Techno Union"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 505882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 664472,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT-series_ordnance_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 4944,
@@ -60,9 +101,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 664472,
-      "PageUrl": "https://starwars.fandom.com/wiki/BT-series_ordnance_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 505882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 475917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

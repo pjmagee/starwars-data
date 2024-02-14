@@ -38,7 +38,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Space Station"
@@ -46,7 +46,12 @@
     },
     {
       "Label": "Length",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "1,600 meters"
       ]
@@ -82,7 +87,12 @@
     },
     {
       "Label": "Consumables",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "month",
+          "Href": "https://starwars.fandom.com/wiki/Standard_month/Legends"
+        }
+      ],
       "Values": [
         "1 month"
       ]

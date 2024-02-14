@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -111,6 +111,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "sector",
+          "Href": "https://starwars.fandom.com/wiki/Castell%27s_sector"
+        }
+      ],
+      "Values": [
+        "A sector"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -132,6 +144,18 @@
       ],
       "Values": [
         "Castell"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-9"
       ]
     },
     {
@@ -215,6 +239,26 @@
   ],
   "Relationships": [
     {
+      "PageId": 517860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Castell_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 752364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Castell's_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 505885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pasqual",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 502584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Castell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 519043,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_Sienar_Systems",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
@@ -223,16 +267,6 @@
       "PageId": 460134,
       "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 517860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Castell_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 505885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pasqual",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

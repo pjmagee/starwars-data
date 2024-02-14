@@ -2,7 +2,7 @@
   "PageId": 452884,
   "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Endor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/65/Battle_of_Endor.png/revision/latest?cb=20201009183855",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/91/BattleofEndor.png/revision/latest?cb=20201009183855",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Galactic Civil War",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
+        },
+        {
+          "Content": "Occupation of Endor",
+          "Href": "https://starwars.fandom.com/wiki/Occupation_of_Endor"
         }
       ],
       "Values": [
-        "Galactic Civil War"
+        "Galactic Civil War",
+        "Occupation of Endor"
       ]
     },
     {
@@ -85,6 +90,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Remnants",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
         }
       ],
       "Values": [
@@ -93,31 +102,13 @@
         "Redemption and death of Anakin Skywalker",
         "Destruction of the second Death Star and the Executor",
         "The Alliance to Restore the Republic begins to reform into the New Republic",
-        "Beginning of the fall of the Galactic Empire"
+        "End of the Occupation of Endor",
+        "Beginning of the fall of the Galactic Empire",
+        "The Galactic Empire begins to fracture into various Imperial Remnants"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 424062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 444194,
-      "PageUrl": "https://starwars.fandom.com/wiki/Equatorial_trench",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 701370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scimitar_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 705363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star's_shield_generator_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
     {
       "PageId": 568002,
       "PageUrl": "https://starwars.fandom.com/wiki/Arrowhead_(Freemakers)",
@@ -129,64 +120,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 514958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Tector-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 515795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_Tarlandia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 516528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mighty_Oak_Apocalypse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 518077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Annihilator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 545192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nautilian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 636933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luminous",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Imperial-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 657619,
       "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 662480,
-      "PageUrl": "https://starwars.fandom.com/wiki/181st_Imperial_Fighter_Wing",
+      "PageId": 453238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 472088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tydirium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 476422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 781255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Lancers",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 526099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karé_Kun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 628955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auto-fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 587969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anna_Seertay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 697096,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     },
     {
-      "PageId": 540414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 146790,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Forest_Battle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 685152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial-Royalist_coalition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 1481,
       "PageUrl": "https://starwars.fandom.com/wiki/DS-2_Death_Star_II_Mobile_Battle_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 698410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chadawan_navy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 576759,
-      "PageUrl": "https://starwars.fandom.com/wiki/M-OC's_lightsabers/LEGO",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 515292,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Yellow_Moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 542600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_Imperial_Promotion,_Galactic_Truth,_and_Fact_Correction",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 452818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 512712,
@@ -199,43 +210,93 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 512726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Throne_Room",
+      "PageId": 500140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redemption",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 746007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overbridge_(Death_Star_II)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 496528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Era",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+      "PageId": 585080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 578287,
-      "PageUrl": "https://starwars.fandom.com/wiki/L'ulo_L'ampar's_A-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 578340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey's_A-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 675476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trap_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 453198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adon_Fox",
+      "PageId": 541307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bokwarro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 666411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Golden_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 583374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eviscerator",
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 748487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tempest_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 698410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chadawan_navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 146790,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Forest_Battle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 643765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Starlight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 526099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karé_Kun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 587969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anna_Seertay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 509998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 510429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 510534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 512627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Subjugator_(Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 513167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vehement",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -249,69 +310,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
     },
     {
-      "PageId": 694902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scythe_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 453198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adon_Fox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 453238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 595034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defiance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 595035,
-      "PageUrl": "https://starwars.fandom.com/wiki/Independence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 453203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 453275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 464644,
-      "PageUrl": "https://starwars.fandom.com/wiki/501st_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 473587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 476138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 515225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_at_the_Wretch_of_Tayron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 472088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tydirium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 476422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 478325,
-      "PageUrl": "https://starwars.fandom.com/wiki/ST_321",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 685898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chadawan_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 510453,
@@ -321,6 +327,11 @@
     {
       "PageId": 512098,
       "PageUrl": "https://starwars.fandom.com/wiki/Gray_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 515794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sapphire_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -344,53 +355,63 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 638054,
-      "PageUrl": "https://starwars.fandom.com/wiki/Victory_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 542600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_Imperial_Promotion,_Galactic_Truth,_and_Fact_Correction",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 545192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nautilian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 666411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Golden_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
     },
     {
-      "PageId": 624501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riot_Squadron",
+      "PageId": 496528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 453203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 550125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Tree_tribe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 453275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 550231,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_tribe_(Romba)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 453451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 537069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incom-FreiTek_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 464644,
+      "PageUrl": "https://starwars.fandom.com/wiki/501st_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 539820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aratech-Loratus_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 473587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "PageId": 476138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 560957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 595034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defiance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 453229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "PageId": 595035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Independence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -399,19 +420,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 455627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cold_weather_assault_stormtrooper",
+      "PageId": 638054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Victory_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 766619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 578287,
+      "PageUrl": "https://starwars.fandom.com/wiki/L'ulo_L'ampar's_A-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 578340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey's_A-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 583374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eviscerator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 470749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Ruling_Council",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 457328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 576759,
+      "PageUrl": "https://starwars.fandom.com/wiki/M-OC's_lightsabers/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 619972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_receiving_area",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 694902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scythe_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 701370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scimitar_Squadron_(Imperial)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 510037,
@@ -419,24 +470,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 685152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial-Royalist_coalition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 685898,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chadawan_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 500140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redemption",
+      "PageId": 424062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 560957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
+      "PageId": 662480,
+      "PageUrl": "https://starwars.fandom.com/wiki/181st_Imperial_Fighter_Wing",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 515225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_at_the_Wretch_of_Tayron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 723620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moddell_sector_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 515292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Yellow_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 452601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
       "PageId": 562994,
@@ -449,49 +510,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 697096,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slash",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+      "PageId": 550125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Tree_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 541307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bokwarro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 509998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Imperial_II-class_Star_Destroyer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 510534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 512627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Subjugator_(Star_Destroyer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 513167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vehement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 514958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Tector-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 636933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luminous",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 585080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 550231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 553977,
@@ -499,24 +525,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 515795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_Tarlandia",
+      "PageId": 537069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom-FreiTek_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 539820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aratech-Loratus_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 675476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trap_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 478325,
+      "PageUrl": "https://starwars.fandom.com/wiki/ST_321",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 516528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mighty_Oak_Apocalypse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 512726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Throne_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 518077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Annihilator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 455627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cold_weather_assault_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 628955,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auto-fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 457328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 452818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 619972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_receiving_area",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 624501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riot_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

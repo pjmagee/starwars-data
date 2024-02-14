@@ -31,12 +31,12 @@
       "Label": "Species",
       "Links": [
         {
-          "Content": "Unknown species",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_species"
+          "Content": "Storm-hair",
+          "Href": "https://starwars.fandom.com/wiki/Storm-hair"
         }
       ],
       "Values": [
-        "Unknown species"
+        "Storm-hair"
       ]
     },
     {
@@ -49,6 +49,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -81,47 +88,40 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Nuso Esva's Empire",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_Empire"
+          "Content": "Nuso Esva's realm",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_realm"
         },
         {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
-        }
-      ],
-      "Values": [
-        "Nuso Esva's Empire",
-        "Galactic Empire (As Lord Odo, Secretly)"
-      ]
-    },
-    {
-      "Label": "Apprentices",
-      "Links": [
-        {
-          "Content": "The Chosen",
+          "Content": "Chosen",
           "Href": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)"
+        },
+        {
+          "Content": "Nuso Esva's battle fleet",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_battle_fleet"
+        },
+        {
+          "Content": "Quesoth",
+          "Href": "https://starwars.fandom.com/wiki/Quesoth"
         }
       ],
       "Values": [
-        "The Chosen (Followers)"
+        "Nuso Esva's realm",
+        "Chosen",
+        "Nuso Esva's battle fleet",
+        "Quesoth"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 356944,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Quethold",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 355784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_battle_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 636163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 356948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 355879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 358610,
@@ -139,14 +139,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 358613,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mikks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 358615,
       "PageUrl": "https://starwars.fandom.com/wiki/Spikes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 356948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 739333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorro's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 2277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 746056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_against_Nuso_Esva's_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 745825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_script_(Nuso_Esva's_warship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 387444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Engagement_at_Teptixii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 357105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dwelling_of_Guests",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 356944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Red_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 754390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poln_Major_Chosen_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 737631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Chosen_(Poln_Major)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 738016,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Chosen_(Quethold)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_conquests",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 746144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_campaign_against_the_Galactic_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 746414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva–Empire_of_the_Hand_conflict",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 349450,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salaban's_Hope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

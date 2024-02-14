@@ -17,10 +17,20 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Outer Expansion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Outer Expansion Zone",
+        "Northern Dependencies"
       ]
     },
     {
@@ -83,30 +93,18 @@
         "New Republic",
         "Darth Krayt's Galactic Empire"
       ]
-    },
-    {
-      "Label": "Waymancy Storm",
-      "Links": [
-        {
-          "Content": "Upper Brightday",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Upper_Brightday"
-        }
-      ],
-      "Values": [
-        "Upper Brightday"
-      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 269471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 96671,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Renliss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 321201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muzara_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 448376,
@@ -132,6 +130,11 @@
       "PageId": 505610,
       "PageUrl": "https://starwars.fandom.com/wiki/Upper_Brightday",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 321201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muzara_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

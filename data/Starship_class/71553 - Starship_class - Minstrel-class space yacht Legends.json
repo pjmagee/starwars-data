@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Yacht",
@@ -81,7 +81,16 @@
     },
     {
       "Label": "Engine unit(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "N2 ion engines",
+          "Href": "https://starwars.fandom.com/wiki/N2_ion_engine"
+        },
+        {
+          "Content": "T-c40 ion engines",
+          "Href": "https://starwars.fandom.com/wiki/T-c40_ion_engine"
+        }
+      ],
       "Values": [
         "2 N2 ion engines",
         "3 T-c40 ion engines"
@@ -259,6 +268,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 660482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta_Jewel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 56077,
       "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Pearl",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -266,11 +280,6 @@
     {
       "PageId": 3545,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Jewel/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 660482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta_Jewel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

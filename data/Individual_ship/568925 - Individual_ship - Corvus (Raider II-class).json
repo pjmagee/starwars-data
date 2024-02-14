@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -118,6 +118,10 @@
       "Label": "Present for battles/events",
       "Links": [
         {
+          "Content": "Hunt for Valance",
+          "Href": "https://starwars.fandom.com/wiki/Hunt_for_Valance"
+        },
+        {
           "Content": "Escape from the Invincible Faith",
           "Href": "https://starwars.fandom.com/wiki/Escape_from_the_Invincible_Faith"
         },
@@ -126,8 +130,8 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Endor"
         },
         {
-          "Content": "Battle of Fondor",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Fondor_(Galactic_Civil_War)"
+          "Content": "Attack on Fondor",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_Fondor"
         },
         {
           "Content": "Skirmish on Vardos",
@@ -151,9 +155,10 @@
         }
       ],
       "Values": [
+        "Hunt for Valance",
         "Escape from the Invincible Faith",
         "Battle of Endor",
-        "Battle of Fondor",
+        "Attack on Fondor",
         "Skirmish on Vardos",
         "Battle of Jakku",
         "Mission to Pillio",
@@ -179,12 +184,17 @@
         {
           "Content": "Inferno Squad",
           "Href": "https://starwars.fandom.com/wiki/Inferno_Squad_(Resistance)"
+        },
+        {
+          "Content": "Resistance",
+          "Href": "https://starwars.fandom.com/wiki/Resistance"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Inferno Squad",
-        "New Republic"
+        "New Republic",
+        "Resistance"
       ]
     },
     {
@@ -193,10 +203,20 @@
         {
           "Content": "Imperial Navy",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
+        },
+        {
+          "Content": "Resistance navy",
+          "Href": "https://starwars.fandom.com/wiki/Resistance_navy"
         }
       ],
       "Values": [
-        "Imperial Navy"
+        "Imperial Navy",
+        "New Republic Defense Fleet",
+        "Resistance navy"
       ]
     },
     {
@@ -260,11 +280,6 @@
     }
   ],
   "Relationships": [
-    {
-      "PageId": 574351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Del_Meeko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
     {
       "PageId": 564460,
       "PageUrl": "https://starwars.fandom.com/wiki/Inferno_Squad",

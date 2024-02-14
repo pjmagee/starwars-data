@@ -17,10 +17,15 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
       ]
     },
     {
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-8",
@@ -58,16 +63,16 @@
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountainous",
@@ -93,6 +98,26 @@
   ],
   "Relationships": [
     {
+      "PageId": 633079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Base_354-23X",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 633127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_moon_of_Avedot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 622015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendoh_Gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 656992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Avedot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 633078,
       "PageUrl": "https://starwars.fandom.com/wiki/Basso_Mak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -101,26 +126,6 @@
       "PageId": 633381,
       "PageUrl": "https://starwars.fandom.com/wiki/Tonkins",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 633127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_moon_of_Avedot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 656992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Avedot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 633079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Base_354-23X",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 622015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendoh_Gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

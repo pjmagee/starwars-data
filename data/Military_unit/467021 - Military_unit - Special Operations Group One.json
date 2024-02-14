@@ -13,7 +13,12 @@
     },
     {
       "Label": "Formation type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Operations Group",
+          "Href": "https://starwars.fandom.com/wiki/Operations_Group"
+        }
+      ],
       "Values": [
         "Operations Group"
       ]
@@ -22,12 +27,16 @@
       "Label": "Commanding officer(s)",
       "Links": [
         {
+          "Content": "Lord",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Lord/Legends"
+        },
+        {
           "Content": "Andreaus Thos",
           "Href": "https://starwars.fandom.com/wiki/Andreaus_Thos"
         }
       ],
       "Values": [
-        "Andreaus Thos"
+        "Lord Andreaus Thos"
       ]
     },
     {
@@ -43,6 +52,30 @@
       ]
     },
     {
+      "Label": "Notable battles",
+      "Links": [
+        {
+          "Content": "Invasion of Belsavis",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Belsavis"
+        }
+      ],
+      "Values": [
+        "Invasion of Belsavis"
+      ]
+    },
+    {
+      "Label": "Date fragmented",
+      "Links": [
+        {
+          "Content": "3640 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3640_BBY"
+        }
+      ],
+      "Values": [
+        "3640 BBY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -55,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operations_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

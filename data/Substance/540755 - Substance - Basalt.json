@@ -19,6 +19,10 @@
           "Href": "https://starwars.fandom.com/wiki/Iego"
         },
         {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
+        },
+        {
           "Content": "Mustafar",
           "Href": "https://starwars.fandom.com/wiki/Mustafar"
         },
@@ -29,12 +33,13 @@
       ],
       "Values": [
         "Iego",
+        "Koboh",
         "Mustafar",
         "Pamarthe"
       ]
     },
     {
-      "Label": "Material type",
+      "Label": "Substance type",
       "Links": [],
       "Values": [
         "Rock"
@@ -54,6 +59,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 770007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlandia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 474682,
       "PageUrl": "https://starwars.fandom.com/wiki/Iego",

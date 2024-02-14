@@ -2,6 +2,7 @@
   "PageId": 513377,
   "PageUrl": "https://starwars.fandom.com/wiki/Bizu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,25 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Yendor Brethen",
+          "Href": "https://starwars.fandom.com/wiki/Yendor_Brethen"
+        }
+      ],
+      "Values": [
+        "Yendor Brethen"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 512622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yendor_Brethen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

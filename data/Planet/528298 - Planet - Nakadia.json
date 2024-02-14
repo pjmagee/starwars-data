@@ -2,7 +2,7 @@
   "PageId": 528298,
   "PageUrl": "https://starwars.fandom.com/wiki/Nakadia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/63/Nakadia-SWT.jpg/revision/latest?cb=20230826103320",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Trailing Sectors"
       ]
     },
     {
@@ -31,7 +36,31 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-15",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-15"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "forests",
@@ -40,6 +69,7 @@
       ],
       "Values": [
         "Hills",
+        "Fields",
         "forests"
       ]
     },
@@ -64,6 +94,7 @@
         }
       ],
       "Values": [
+        "Nakadia's northernmost spaceport",
         "Plastoid factories",
         "Quell's apartment",
         "Unidentified café",
@@ -78,6 +109,13 @@
           "Href": "https://starwars.fandom.com/wiki/Nakadian"
         }
       ],
+      "Values": [
+        "Nakadian"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
       "Values": [
         "Nakadian"
       ]
@@ -123,29 +161,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 641311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bioweapon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 455635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garbage_compactor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 686699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quell's_apartment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 535080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Key_Raiders",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 565176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nakadian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 529110,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Defense_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 565814,
@@ -158,19 +176,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 641311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bioweapon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 565815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quarrow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 548385,
       "PageUrl": "https://starwars.fandom.com/wiki/Maediyu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 499345,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 548394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Nakadia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 510551,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Senate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 616866,
@@ -178,18 +201,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 565176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakadian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 584685,
       "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Nakadia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 453908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 510551,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Senate",
+      "PageId": 539148,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_soldier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -198,14 +221,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 565815,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quarrow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 553487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 499345,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 686699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quell's_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 548394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Nakadia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 763087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_poma-club",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 572271,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nakadia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 762497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bubbling_poma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 535080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Key_Raiders",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 548204,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 455635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garbage_compactor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 763648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deprivation_chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 453908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 687501,

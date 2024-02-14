@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Sienar Fleet Systems",
-          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
-        }
-      ],
-      "Values": [
-        "Sienar Fleet Systems"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Raith Sienar"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Sienar Fleet Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
+        }
+      ],
+      "Values": [
+        "Sienar Fleet Systems"
       ]
     },
     {
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -166,10 +166,46 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "I-a2b solar ionization reactor",
+          "Href": "https://starwars.fandom.com/wiki/I-a2b_solar_ionization_reactor"
+        },
+        {
+          "Content": "I-s3a solar ionization reactor",
+          "Href": "https://starwars.fandom.com/wiki/I-s3a_solar_ionization_reactor"
+        }
+      ],
+      "Values": [
+        "I-a2b solar ionization reactor (standard)",
+        "I-s3a solar ionization reactor (upgraded)"
+      ]
+    },
+    {
       "Label": "Shielding",
       "Links": [],
       "Values": [
         "None"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [],
+      "Values": [
+        "Thin"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensor",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Close range sensor"
       ]
     },
     {
@@ -209,7 +245,7 @@
         }
       ],
       "Values": [
-        "SFS L-s1 laser cannons (2)(Replaced by L-s7.2 laser cannons 3 ABY)",
+        "SFS L-s1 laser cannons (2) (Replaced by L-s7.2 laser cannons 3 ABY)",
         "SFS L-s7.2 laser cannons (2)"
       ]
     },
@@ -312,7 +348,7 @@
         }
       ],
       "Values": [
-        "During or prior to 18 BBY"
+        "18 BBY"
       ]
     },
     {
@@ -343,6 +379,10 @@
           "Href": "https://starwars.fandom.com/wiki/Gratloe%27s_faction"
         },
         {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
           "Content": "Ubrik Adelhard's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Ubrik_Adelhard%27s_Imperial_remnant"
         },
@@ -351,12 +391,20 @@
           "Href": "https://starwars.fandom.com/wiki/Uprising"
         },
         {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
           "Content": "Imperial territory G5-623",
           "Href": "https://starwars.fandom.com/wiki/Imperial_territory_G5-623"
         },
         {
           "Content": "Kenner Loring's faction",
           "Href": "https://starwars.fandom.com/wiki/Kenner_Loring%27s_faction"
+        },
+        {
+          "Content": "Visler Korda's faction",
+          "Href": "https://starwars.fandom.com/wiki/Visler_Korda%27s_faction"
         },
         {
           "Content": "Queluhan Nebula Imperial remnant",
@@ -371,6 +419,10 @@
           "Href": "https://starwars.fandom.com/wiki/Morak_Imperial_remnants"
         },
         {
+          "Content": "Thrawn's forces",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_forces"
+        },
+        {
           "Content": "Amaxine warriors",
           "Href": "https://starwars.fandom.com/wiki/Amaxine_warriors_(New_Republic_Era)"
         },
@@ -379,8 +431,8 @@
           "Href": "https://starwars.fandom.com/wiki/Ace_Squadron"
         },
         {
-          "Content": "Ranc gang",
-          "Href": "https://starwars.fandom.com/wiki/Ranc_gang"
+          "Content": "Ranc Gang",
+          "Href": "https://starwars.fandom.com/wiki/Ranc_Gang"
         }
       ],
       "Values": [
@@ -390,29 +442,38 @@
         "Spectres (stolen)",
         "Alliance to Restore the Republic (stolen)",
         "Gratloe's faction",
+        "Scourge (corrupted)",
         "Ubrik Adelhard's Imperial remnant",
         "Uprising (stolen)",
+        "New Republic (stolen)",
         "Imperial territory G5-623",
         "Kenner Loring's faction",
+        "Visler Korda's faction",
         "Queluhan Nebula Imperial remnant",
         "Gideon's Imperial remnant",
         "Morak Imperial remnants",
+        "Thrawn's forces",
         "Amaxine warriors",
         "Ace Squadron",
-        "Ranc gang"
+        "Ranc Gang"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 589319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iden_Versio's_TIE/ln_space_superiority_starfighter",
+      "PageId": 480585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_an_Imperial_supply_yard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 607367,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Ace",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 453101,
-      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 530941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Banshee_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 514698,
@@ -420,34 +481,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 657619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 565553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scythe_(Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 657995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fighter_wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 458392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 658702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Three_(Shadow_Wing)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 515760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 660804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 516102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 665371,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obsidian_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 544759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Imperial_I-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 665652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Eadu)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 546190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dread_Omen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 532429,
@@ -460,69 +526,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 531227,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/mg_Mining_Guild_starfighter",
+      "PageId": 582018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor-class_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 565553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scythe_(Star_Destroyer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 651600,
-      "PageUrl": "https://starwars.fandom.com/wiki/C-patrol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 480585,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_an_Imperial_supply_yard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 483081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 483444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebels_TIE_fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 497322,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrum_(Venator-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 497806,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executrix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 624612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aerie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 530941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Banshee_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 543464,
-      "PageUrl": "https://starwars.fandom.com/wiki/68th_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 547745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Flight_Squad_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 553527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_territory_G5-623",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 585160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quasar_Fire_I-class_Cruiser-Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 589386,
@@ -535,8 +546,98 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 670458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exigent",
+      "PageId": 595181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cantwell-class_Arrestor_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 735115,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE_pilot_loyalty_card",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 632547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Formidable",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 633595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin's_Will",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 651600,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 657619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 657995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bellicose's_fighter_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 658702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Three_(Shadow_Wing)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 518980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Assault_Carrier_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
+    {
+      "PageId": 465837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 466452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_651",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 471818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 472514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relentless",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 787994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial-class_Star_Destroyer_(smuggler)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 477427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 497322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrum_(Venator-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 497806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executrix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 499762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inflictor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 505725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Storm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -550,6 +651,76 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 620129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beta_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 621551,
+      "PageUrl": "https://starwars.fandom.com/wiki/204th_Imperial_Fighter_Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 623122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gratloe's_faction",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 624612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aerie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 625610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firedrake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 627545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormbird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 678411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class_546_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 776718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scourge_01",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 778714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elk's_Cantwell-class_Arrestor_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 741352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldhani_Garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 746531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Segra-Milo_Imperial_patrol's_air_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 750240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Spira)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 534788,
       "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Nest",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -560,88 +731,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 602141,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Five_(Nar_Shaddaa)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 603546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Three",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 603547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Five",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 603787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Four",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 477427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 579276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Requiem",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 669255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Helix_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 674004,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theta_Squadron_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 458392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "PageId": 531227,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/mg_Mining_Guild_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 585135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vector",
+      "PageId": 509998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Imperial-class_Star_Destroyer)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 686791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 471509,
-      "PageUrl": "https://starwars.fandom.com/wiki/EF76_Nebulon-B_escort_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 482545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 726024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fighter_wing_(Ultima_II)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 726072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fighter_wing_(Jekara_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 465837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forager",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 466452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Transport_651",
+      "PageId": 513793,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Executor-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -660,28 +761,83 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 546190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dread_Omen",
+      "PageId": 539181,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/sk_x1_experimental_air_superiority_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 674860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_light_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 620129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beta_Squadron",
+      "PageId": 675820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dauntless_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 674004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theta_Squadron_(Galactic_Empire)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 621551,
-      "PageUrl": "https://starwars.fandom.com/wiki/204th_Imperial_Fighter_Wing",
+      "PageId": 589319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iden_Versio's_TIE/ln_space_superiority_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 572954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Harbor_Control_space_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 584541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fondor_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 596632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aerial_landing_platform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 658135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overseer_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 543464,
+      "PageUrl": "https://starwars.fandom.com/wiki/68th_Legion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 623122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gratloe's_faction",
+      "PageId": 547745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Flight_Squad_Seven",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 624621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent's_squadron",
+      "PageId": 553527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_territory_G5-623",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 504490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squadron_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Three",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squadron_Four",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -695,34 +851,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "PageId": 579276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Requiem",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 607367,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Ace",
+      "PageId": 581695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon's_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 504490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squadron_(Lothal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 583374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eviscerator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 678411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Class_546_Cruiser",
+      "PageId": 585135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 585168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pursuant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 471509,
+      "PageUrl": "https://starwars.fandom.com/wiki/EF76_Nebulon-B_escort_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 505725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Storm",
+      "PageId": 482545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 686791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 669326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Remitik_system_munitions_depot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 703074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vendetta_(Freemarker_Adventures)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 632547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Formidable",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 726024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fighter_wing_(Ultima_II)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 726072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fighter_wing_(Jekara_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 660804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 665371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obsidian_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 665652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Eadu)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 669255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helix_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 453101,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 564460,
@@ -740,21 +951,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 596632,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aerial_landing_platform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 513793,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Executor-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 633595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin's_Will",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 582179,
       "PageUrl": "https://starwars.fandom.com/wiki/Black_Squadron_(Galactic_Empire)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -770,29 +966,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 572954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Harbor_Control_space_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 584541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fondor_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 539181,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/sk_x1_experimental_air_superiority_fighter",
+      "PageId": 701098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemini-class_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 518980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Assault_Carrier_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+      "PageId": 483081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 515760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
+      "PageId": 483444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebels_TIE_fighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 554936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 666089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Victorum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 670458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exigent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 602141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Five_(Nar_Shaddaa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 624621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent's_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

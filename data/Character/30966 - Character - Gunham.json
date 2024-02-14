@@ -65,12 +65,28 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
+        },
+        {
+          "Content": "Imperial Navy Recruitment",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy_Recruitment"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Imperial Navy",
+        "Imperial Navy Recruitment"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 773974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_Recruitment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

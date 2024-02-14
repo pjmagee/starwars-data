@@ -76,13 +76,6 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
-      "Values": [
-        "None"
-      ]
-    },
-    {
       "Label": "Eye color",
       "Links": [
         {
@@ -103,22 +96,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
-        {
-          "Content": "Je'daii Order",
-          "Href": "https://starwars.fandom.com/wiki/Je%27daii_Order"
-        },
         {
           "Content": "Clan Ryo",
           "Href": "https://starwars.fandom.com/wiki/Clan_Ryo"
         }
       ],
       "Values": [
-        "Je'daii Order",
         "Clan Ryo"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Volnos Ryo",
+          "Href": "https://starwars.fandom.com/wiki/Volnos_Ryo"
+        },
+        {
+          "Content": "Kora Ryo",
+          "Href": "https://starwars.fandom.com/wiki/Kora_Ryo"
+        }
+      ],
+      "Values": [
+        "Volnos Ryo",
+        "Kora Ryo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Je'daii Order",
+          "Href": "https://starwars.fandom.com/wiki/Je%27daii_Order"
+        }
+      ],
+      "Values": [
+        "Je'daii Order"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 355292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kora_Ryo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

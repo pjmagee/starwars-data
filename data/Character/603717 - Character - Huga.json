@@ -2,6 +2,7 @@
   "PageId": 603717,
   "PageUrl": "https://starwars.fandom.com/wiki/Huga",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,32 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Cimy",
+          "Href": "https://starwars.fandom.com/wiki/Cimy"
+        }
+      ],
+      "Values": [
+        "Cimy"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 603716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cimy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

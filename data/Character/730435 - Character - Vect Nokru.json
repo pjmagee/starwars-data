@@ -2,13 +2,25 @@
   "PageId": 730435,
   "PageUrl": "https://starwars.fandom.com/wiki/Vect_Nokru",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e6/Vect-KenobiPartI.jpg/revision/latest?cb=20220527163043",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/86/VectNokru-SWCT.png/revision/latest?cb=20240127051925",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Vect Nokru"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Alderaan",
+          "Href": "https://starwars.fandom.com/wiki/Alderaan"
+        }
+      ],
+      "Values": [
+        "Alderaan"
       ]
     },
     {
@@ -33,10 +45,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Alderaanian",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Alderaanian)"
       ]
     },
     {
@@ -88,24 +104,17 @@
       "Values": [
         "Head implants"
       ]
-    },
-    {
-      "Label": "Affiliation(s)",
-      "Links": [
-        {
-          "Content": "Inquisitorius",
-          "Href": "https://starwars.fandom.com/wiki/Inquisitorius"
-        }
-      ],
-      "Values": [
-        "Inquisitorius (as mercenary)"
-      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 747816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Mask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 730529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_Leia_Organa",
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Alderaan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]

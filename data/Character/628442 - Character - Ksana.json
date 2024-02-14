@@ -2,6 +2,7 @@
   "PageId": 628442,
   "PageUrl": "https://starwars.fandom.com/wiki/Ksana",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -19,7 +20,7 @@
         }
       ],
       "Values": [
-        "c. 30 ABY"
+        "30 ABY"
       ]
     },
     {
@@ -47,24 +48,59 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
-          "Content": "Black",
+          "Content": "Beetle-black",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Black"
+        "Beetle-black"
       ]
     },
     {
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Green"
+        "Pond-green"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Ksana's father",
+          "Href": "https://starwars.fandom.com/wiki/Ksana%27s_father"
+        },
+        {
+          "Content": "Ksana's mother",
+          "Href": "https://starwars.fandom.com/wiki/Ksana%27s_mother"
+        }
+      ],
+      "Values": [
+        "Ksana's father",
+        "Ksana's mother"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 744797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ksana's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 628572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ksana's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

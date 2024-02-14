@@ -2,7 +2,7 @@
   "PageId": 15144,
   "PageUrl": "https://starwars.fandom.com/wiki/Haven_(planetoid)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/64/Rendezvous_Point.jpg/revision/latest?cb=20230522141828",
   "Data": [
     {
       "Label": "Titles",
@@ -21,11 +21,16 @@
         {
           "Content": "galactic",
           "Href": "https://starwars.fandom.com/wiki/The_galaxy/Legends"
+        },
+        {
+          "Content": "Galactic Rim",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Rim"
         }
       ],
       "Values": [
         "Outer Rim Territories",
-        "Above the galactic plane"
+        "Above the galactic plane",
+        "Beyond the Galactic Rim"
       ]
     },
     {
@@ -53,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-20"
@@ -74,14 +79,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 369788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Haven_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 170064,
       "PageUrl": "https://starwars.fandom.com/wiki/Haven_(rendezvous_point)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 369788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haven_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

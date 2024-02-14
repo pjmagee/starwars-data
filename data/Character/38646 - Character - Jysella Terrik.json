@@ -2,6 +2,7 @@
   "PageId": 38646,
   "PageUrl": "https://starwars.fandom.com/wiki/Jysella_Terrik",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,46 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Booster Terrik",
+          "Href": "https://starwars.fandom.com/wiki/Booster_Terrik"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage/Legends"
+        }
+      ],
+      "Values": [
+        "Booster Terrik (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Mirax Terrik",
+          "Href": "https://starwars.fandom.com/wiki/Mirax_Terrik_Horn"
+        }
+      ],
+      "Values": [
+        "Mirax Terrik"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Booster_Terrik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 11212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mirax_Terrik_Horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,28 +24,45 @@
       ]
     },
     {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Red"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
           "Content": "Makeb",
           "Href": "https://starwars.fandom.com/wiki/Makeb"
+        },
+        {
+          "Content": "Onderon",
+          "Href": "https://starwars.fandom.com/wiki/Onderon"
         }
       ],
       "Values": [
-        "Makeb"
+        "Makeb",
+        "Onderon"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 381699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Makeb",
+      "PageId": 417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 443801,
       "PageUrl": "https://starwars.fandom.com/wiki/Dantooine_cane_syrup",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 381699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Makeb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

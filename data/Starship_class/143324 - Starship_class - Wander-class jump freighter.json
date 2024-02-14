@@ -24,14 +24,7 @@
       ]
     },
     {
-      "Label": "Model",
-      "Links": [],
-      "Values": [
-        "Wander-class jump freighter"
-      ]
-    },
-    {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Freighter",
@@ -40,18 +33,6 @@
       ],
       "Values": [
         "Freighter"
-      ]
-    },
-    {
-      "Label": "Cost",
-      "Links": [
-        {
-          "Content": "credits",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
-        }
-      ],
-      "Values": [
-        "85,000 credits"
       ]
     },
     {
@@ -70,8 +51,12 @@
       "Label": "Maximum atmospheric speed",
       "Links": [
         {
-          "Content": "kmh",
+          "Content": "km",
           "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour/Legends"
+        },
+        {
+          "Content": "h",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
         }
       ],
       "Values": [
@@ -80,28 +65,79 @@
     },
     {
       "Label": "Hyperdrive rating",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Class 2",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive/Legends"
+        },
+        {
+          "Content": "Class 12",
+          "Href": "https://starwars.fandom.com/wiki/Backup_hyperdrive"
+        }
+      ],
       "Values": [
-        "x2"
+        "Class 2",
+        "Class 12"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator/Legends"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Sensor/Legends"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer/Legends"
+        }
+      ],
+      "Values": [
+        "Equipped"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Laser cannon",
+          "Content": "double laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon/Legends"
         }
       ],
       "Values": [
-        "Laser cannon"
+        "2 double laser cannons"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "gunners",
+          "Href": "https://starwars.fandom.com/wiki/Gunner/Legends"
+        }
+      ],
       "Values": [
-        "1 or 2"
+        "1; 2 gunners"
       ]
     },
     {
@@ -132,7 +168,7 @@
         }
       ],
       "Values": [
-        "2 months"
+        "1 months"
       ]
     }
   ],

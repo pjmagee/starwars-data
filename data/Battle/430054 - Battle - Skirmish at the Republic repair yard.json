@@ -39,12 +39,16 @@
       "Label": "Place",
       "Links": [
         {
-          "Content": "Republic repair yard",
+          "Content": "abandoned repair yard",
           "Href": "https://starwars.fandom.com/wiki/Republic_repair_yard"
+        },
+        {
+          "Content": "Sulon",
+          "Href": "https://starwars.fandom.com/wiki/Sulon/Legends"
         }
       ],
       "Values": [
-        "Republic repair yard"
+        "An abandoned repair yard near Sulon"
       ]
     },
     {
@@ -60,5 +64,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 343056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_repair_yard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 5515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brema_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

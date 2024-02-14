@@ -2,6 +2,7 @@
   "PageId": 443773,
   "PageUrl": "https://starwars.fandom.com/wiki/Adronik_Hyllus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,30 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Vector Hyllus's mother",
+          "Href": "https://starwars.fandom.com/wiki/Vector_Hyllus%27s_mother"
+        }
+      ],
+      "Values": [
+        "Vector Hyllus's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Vector Hyllus",
+          "Href": "https://starwars.fandom.com/wiki/Vector_Hyllus"
+        }
+      ],
+      "Values": [
+        "Vector Hyllus"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -52,5 +77,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 360139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vector_Hyllus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 443794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vector_Hyllus's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

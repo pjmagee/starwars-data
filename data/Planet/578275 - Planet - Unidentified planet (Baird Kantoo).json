@@ -2,7 +2,7 @@
   "PageId": 578275,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_planet_(Baird_Kantoo)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cc/UnknownPlanetBairdKantoo.jpg/revision/latest?cb=20220719185052",
   "Data": [
     {
       "Label": "Titles",
@@ -25,16 +25,21 @@
     },
     {
       "Label": "Sector",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "F-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
       "Values": [
         "F-19"
       ]
     },
     {
-      "Label": "System",
+      "Label": "Suns",
       "Links": [],
       "Values": [
-        "Unidentified system"
+        "1"
       ]
     },
     {
@@ -62,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caves",
@@ -124,14 +129,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 576190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_obtain_a_Kyber_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 578167,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple_(Baird_Kantoo)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 576190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_obtain_a_Kyber_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 578274,

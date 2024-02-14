@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.85 meters (6 ft, 1 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -58,7 +81,19 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Tan"
+        "Dark"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Pikka Adren",
+          "Href": "https://starwars.fandom.com/wiki/Pikka_Adren"
+        }
+      ],
+      "Values": [
+        "Pikka Adren"
       ]
     },
     {
@@ -76,9 +111,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 674234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pikka_Adren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 680154,
       "PageUrl": "https://starwars.fandom.com/wiki/Aurora_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 785045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

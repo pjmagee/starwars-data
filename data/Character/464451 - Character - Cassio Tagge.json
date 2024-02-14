@@ -31,10 +31,6 @@
           "Href": "https://starwars.fandom.com/wiki/0_ABY"
         },
         {
-          "Content": "1 ABY",
-          "Href": "https://starwars.fandom.com/wiki/1_ABY"
-        },
-        {
           "Content": "Executor",
           "Href": "https://starwars.fandom.com/wiki/Executor"
         },
@@ -44,7 +40,7 @@
         }
       ],
       "Values": [
-        "Between 0 ABY and 1 ABY, Executor, Kuat system"
+        "0 ABY, Executor, Kuat system"
       ]
     },
     {
@@ -72,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -94,16 +97,24 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Tagge",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
+        }
+      ],
+      "Values": [
+        "House of Tagge"
       ]
     },
     {
       "Label": "Affiliation(s)",
       "Links": [
-        {
-          "Content": "House of Tagge",
-          "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
-        },
         {
           "Content": "Tagge Corporation",
           "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
@@ -117,8 +128,8 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
         },
         {
-          "Content": "Joint Chiefs",
-          "Href": "https://starwars.fandom.com/wiki/Joint_Chiefs"
+          "Content": "Joint Chiefs of the Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Joint_Chiefs_of_the_Imperial_Military"
         },
         {
           "Content": "Imperial Army",
@@ -126,24 +137,28 @@
         }
       ],
       "Values": [
-        "House of Tagge",
         "Tagge Corporation",
         "Galactic Empire",
         "Imperial Officer Corps",
-        "Joint Chiefs",
+        "Joint Chiefs of the Imperial Military",
         "Imperial Army"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 483081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 533901,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_High_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 785519,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tagge's_starfleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 8830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -152,13 +167,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 453546,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "PageId": 453101,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 483081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {

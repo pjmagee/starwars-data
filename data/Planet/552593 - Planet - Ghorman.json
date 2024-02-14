@@ -17,14 +17,31 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sern sector",
+          "Href": "https://starwars.fandom.com/wiki/Sern_sector"
+        }
+      ],
+      "Values": [
+        "Sern sector"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-13",
@@ -46,9 +63,57 @@
       "Values": [
         "Rimma Trade Route"
       ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [
+        {
+          "Content": "Ghorman",
+          "Href": "https://starwars.fandom.com/wiki/Ghorman_(people)"
+        }
+      ],
+      "Values": [
+        "Ghorman"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
+      "Values": [
+        "Galactic Empire"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 498762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
     {
       "PageId": 557285,
       "PageUrl": "https://starwars.fandom.com/wiki/Ghorman_Massacre",
@@ -60,14 +125,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
+      "PageId": 774106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fennro_Drogan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 557858,
       "PageUrl": "https://starwars.fandom.com/wiki/Magva_Yarro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 498762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 757710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacha-Lo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

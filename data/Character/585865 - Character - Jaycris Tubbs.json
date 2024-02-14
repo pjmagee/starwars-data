@@ -2,7 +2,7 @@
   "PageId": 585865,
   "PageUrl": "https://starwars.fandom.com/wiki/Jaycris_Tubbs",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f0/Jaycris_Tubbs.png/revision/latest?cb=20171218122510",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f0/Jaycris_Tubbs.png/revision/latest?cb=20230725030020",
   "Data": [
     {
       "Label": "Titles",
@@ -64,6 +64,35 @@
       ]
     },
     {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Phi",
+          "Href": "https://starwars.fandom.com/wiki/Phi"
+        },
+        {
+          "Content": "Ted",
+          "Href": "https://starwars.fandom.com/wiki/Ted"
+        },
+        {
+          "Content": "Stella",
+          "Href": "https://starwars.fandom.com/wiki/Stella"
+        }
+      ],
+      "Values": [
+        "Phi",
+        "Ted",
+        "Stella"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -81,5 +110,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 589731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 589732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ted",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 589733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stella",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 565940,
   "PageUrl": "https://starwars.fandom.com/wiki/Iggs",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Iggs' fathers",
+          "Href": "https://starwars.fandom.com/wiki/Iggs%27_fathers"
+        }
+      ],
+      "Values": [
+        "Iggs' fathers"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -59,5 +72,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 791076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iggs'_fathers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

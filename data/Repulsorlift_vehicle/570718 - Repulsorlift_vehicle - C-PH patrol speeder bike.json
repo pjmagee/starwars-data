@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Speeder bike",
@@ -96,14 +96,9 @@
     },
     {
       "Label": "Crew",
-      "Links": [
-        {
-          "Content": "Patrol trooper",
-          "Href": "https://starwars.fandom.com/wiki/Patrol_trooper"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Patrol trooper (1)"
+        "1"
       ]
     },
     {
@@ -128,6 +123,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 744250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ferrix_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 647017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Law_Enforcement_Technology_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 599256,
       "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Highway_Patrol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -135,11 +140,6 @@
     {
       "PageId": 480727,
       "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 647017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Law_Enforcement_Technology_Division",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]

@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Empress Acina",
-          "Href": "https://starwars.fandom.com/wiki/Acina"
+          "Href": "https://starwars.fandom.com/wiki/Darth_Acina"
         }
       ],
       "Values": [
@@ -39,12 +39,29 @@
       "Label": "Leader(s)",
       "Links": [
         {
+          "Content": "Dark Councilor",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Council"
+        },
+        {
           "Content": "Darth Krovos",
           "Href": "https://starwars.fandom.com/wiki/Darth_Krovos"
         }
       ],
       "Values": [
+        "Dark Councilor",
         "Darth Krovos"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military_(Sith_Empire)"
+        }
+      ],
+      "Values": [
+        "Imperial Military"
       ]
     },
     {
@@ -101,9 +118,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 396130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Military_Strategy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 396831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Defense_of_the_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 452911,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krovos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 371853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Military_Offense",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

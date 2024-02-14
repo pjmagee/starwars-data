@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -78,12 +85,44 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Draay family",
           "Href": "https://starwars.fandom.com/wiki/Draay_family"
-        },
+        }
+      ],
+      "Values": [
+        "Draay family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Krynda Draay",
+          "Href": "https://starwars.fandom.com/wiki/Krynda_Draay"
+        }
+      ],
+      "Values": [
+        "Krynda Draay"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Lucien Draay",
+          "Href": "https://starwars.fandom.com/wiki/Lucien_Draay"
+        }
+      ],
+      "Values": [
+        "Lucien Draay"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Draay Trust",
           "Href": "https://starwars.fandom.com/wiki/Draay_Trust"
@@ -98,7 +137,6 @@
         }
       ],
       "Values": [
-        "Draay family",
         "Draay Trust",
         "Jedi Order",
         "Galactic Republic"
@@ -118,6 +156,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 734536,
+      "PageUrl": "https://starwars.fandom.com/wiki/4006_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
     {
       "PageId": 223345,
       "PageUrl": "https://starwars.fandom.com/wiki/Ambush_in_the_Ansharii_Caverns",

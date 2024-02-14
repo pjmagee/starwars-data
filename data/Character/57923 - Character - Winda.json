@@ -2,6 +2,7 @@
   "PageId": 57923,
   "PageUrl": "https://starwars.fandom.com/wiki/Winda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,57 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Warrick family",
+          "Href": "https://starwars.fandom.com/wiki/Warrick_family"
+        }
+      ],
+      "Values": [
+        "Warrick family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Deej",
+          "Href": "https://starwars.fandom.com/wiki/Deej"
+        },
+        {
+          "Content": "Wicket Wystri Warrick's mother",
+          "Href": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick%27s_mother"
+        }
+      ],
+      "Values": [
+        "Deej",
+        "Wicket Wystri Warrick's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Weechee",
+          "Href": "https://starwars.fandom.com/wiki/Weechee_(Ewok)"
+        },
+        {
+          "Content": "Widdle Warrick",
+          "Href": "https://starwars.fandom.com/wiki/Widdle_Warrick"
+        },
+        {
+          "Content": "Wicket Wystri Warrick",
+          "Href": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick"
+        }
+      ],
+      "Values": [
+        "Weechee",
+        "Widdle Warrick",
+        "Wicket Wystri Warrick"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +99,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 175334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deej",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

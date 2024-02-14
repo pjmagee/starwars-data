@@ -112,27 +112,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Sensor color",
       "Links": [
         {
-          "Content": "Black",
+          "Content": "Red",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Black"
+        "Red"
       ]
     },
     {
       "Label": "Plating color",
-      "Links": [
-        {
-          "Content": "inoxium",
-          "Href": "https://starwars.fandom.com/wiki/Inoxium"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Stainless inoxium"
+        "White and orange"
       ]
     },
     {
@@ -182,6 +184,10 @@
           "Href": "https://starwars.fandom.com/wiki/Black_Squadron_(Resistance)"
         },
         {
+          "Content": "Resistance spy droid network",
+          "Href": "https://starwars.fandom.com/wiki/Resistance_spy_droid_network"
+        },
+        {
           "Content": "Exegol landing team",
           "Href": "https://starwars.fandom.com/wiki/Exegol_landing_team"
         }
@@ -191,25 +197,51 @@
         "Rapier Squadron",
         "Resistance",
         "Black Squadron",
+        "Resistance spy droid network",
         "Exegol landing team"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 594223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liquid-cable_launcher",
+      "PageId": 662400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bherring-24_blinkcode_processing_indicator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 569275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_L'ulo_L'ampar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 663402,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ollisteep-4D_nanopin_data_port",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 608351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 691607,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Mirrin_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 524089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 525166,
+      "PageUrl": "https://starwars.fandom.com/wiki/Towerslee-15_accelerometer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 606372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 555890,
+      "PageUrl": "https://starwars.fandom.com/wiki/31_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 598152,
@@ -222,49 +254,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 662400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bherring-24_blinkcode_processing_indicator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 663402,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ollisteep-4D_nanopin_data_port",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 586220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Libertine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 519066,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Takodana",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 525166,
-      "PageUrl": "https://starwars.fandom.com/wiki/Towerslee-15_accelerometer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 608351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 555890,
-      "PageUrl": "https://starwars.fandom.com/wiki/31_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 606372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 580603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snap_and_Karé's_wedding",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 611682,
@@ -272,14 +264,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
+      "PageId": 586220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Libertine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 472926,
       "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Jakku",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 524089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 569275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_L'ulo_L'ampar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 580603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snap_and_Karé's_wedding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 594223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liquid-cable_launcher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-6"
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -70,7 +70,8 @@
         }
       ],
       "Values": [
-        "Oceans, landmasses"
+        "Oceans",
+        "Landmasses"
       ]
     },
     {
@@ -81,5 +82,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 771512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_museum_(Indiana_Jones)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 63993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Indiana_Jones",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 344784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Earth_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

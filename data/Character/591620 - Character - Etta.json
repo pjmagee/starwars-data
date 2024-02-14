@@ -2,6 +2,7 @@
   "PageId": 591620,
   "PageUrl": "https://starwars.fandom.com/wiki/Etta",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tico family",
@@ -45,7 +46,42 @@
       "Values": [
         "Tico family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Storm",
+          "Href": "https://starwars.fandom.com/wiki/Storm"
+        }
+      ],
+      "Values": [
+        "Storm"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Hue Tico",
+          "Href": "https://starwars.fandom.com/wiki/Hue_Tico"
+        }
+      ],
+      "Values": [
+        "Hue Tico"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 585837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hue_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Storm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

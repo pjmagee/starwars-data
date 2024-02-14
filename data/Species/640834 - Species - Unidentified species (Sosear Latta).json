@@ -2,7 +2,7 @@
   "PageId": 640834,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_species_(Sosear_Latta)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/38/Sosear_Latta.png/revision/latest?cb=20171218091459",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/38/Sosear_Latta.png/revision/latest?cb=20230813051540",
   "Data": [
     {
       "Label": "Titles",
@@ -25,19 +25,20 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
-        "Brown"
+        "Brown",
+        "Purple"
       ]
     },
     {
       "Label": "Hair color",
-      "Links": [
-        {
-          "Content": "Gray",
-          "Href": "https://starwars.fandom.com/wiki/Color"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Gray"
       ]
@@ -46,7 +47,8 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Black"
+        "Black",
+        "Brown"
       ]
     },
     {
@@ -61,6 +63,11 @@
     {
       "PageId": 585721,
       "PageUrl": "https://starwars.fandom.com/wiki/Sosear_Latta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grock",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

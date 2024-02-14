@@ -2,6 +2,7 @@
   "PageId": 61686,
   "PageUrl": "https://starwars.fandom.com/wiki/Greni",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,5 +46,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 316641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hettsk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 728627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hettsk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    }
+  ]
 }

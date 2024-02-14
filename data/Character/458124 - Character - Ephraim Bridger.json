@@ -29,22 +29,10 @@
         {
           "Content": "3 BBY",
           "Href": "https://starwars.fandom.com/wiki/3_BBY"
-        },
-        {
-          "Content": "revolt",
-          "Href": "https://starwars.fandom.com/wiki/Revolt_in_an_Imperial_prison"
-        },
-        {
-          "Content": "Imperial",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
-        },
-        {
-          "Content": "prison",
-          "Href": "https://starwars.fandom.com/wiki/Prison"
         }
       ],
       "Values": [
-        "Approximately 3 BBY, during a revolt in an Imperial prison"
+        "3 BBY"
       ]
     },
     {
@@ -76,15 +64,22 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Dark Blue",
+          "Content": "Blue-black",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Dark Blue"
+        "Blue-black"
       ]
     },
     {
@@ -102,7 +97,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Bridger family",
@@ -112,14 +107,37 @@
       "Values": [
         "Bridger family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Mira Bridger",
+          "Href": "https://starwars.fandom.com/wiki/Mira_Bridger"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Mira Bridger (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ezra Bridger",
+          "Href": "https://starwars.fandom.com/wiki/Ezra_Bridger"
+        }
+      ],
+      "Values": [
+        "Ezra Bridger"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 574043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sunburst",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 523233,
       "PageUrl": "https://starwars.fandom.com/wiki/Revolt_in_an_Imperial_prison",
@@ -129,6 +147,26 @@
       "PageId": 554188,
       "PageUrl": "https://starwars.fandom.com/wiki/12_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 574043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunburst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 442353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 458125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mira_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 533635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bridger_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

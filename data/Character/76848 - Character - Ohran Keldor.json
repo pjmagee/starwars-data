@@ -2,6 +2,7 @@
   "PageId": 76848,
   "PageUrl": "https://starwars.fandom.com/wiki/Ohran_Keldor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -78,7 +79,7 @@
         },
         {
           "Content": "Roganda Ismaren",
-          "Href": "https://starwars.fandom.com/wiki/Roganda_Ismaren"
+          "Href": "https://starwars.fandom.com/wiki/Roganda_Ismaren/Legends"
         }
       ],
       "Values": [
@@ -87,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2871,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 24258,
   "PageUrl": "https://starwars.fandom.com/wiki/Erel_Kersos",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -50,14 +51,25 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Kersos",
+          "Href": "https://starwars.fandom.com/wiki/Kersos"
+        },
+        {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
+        "Kersos",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 52414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

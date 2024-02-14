@@ -8,7 +8,7 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Project Celestial Power Complex"
+        "Project Celestial Power complex"
       ]
     },
     {
@@ -28,6 +28,23 @@
       ]
     },
     {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Galen Erso's Office",
+          "Href": "https://starwars.fandom.com/wiki/Galen_Erso%27s_Office"
+        },
+        {
+          "Content": "Ersos' apartment",
+          "Href": "https://starwars.fandom.com/wiki/Ersos%27_apartment"
+        }
+      ],
+      "Values": [
+        "Galen Erso's Office",
+        "Ersos' apartment"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -35,17 +52,22 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Project Celestial Power",
-          "Href": "https://starwars.fandom.com/wiki/Project_Celestial_Power"
+          "Content": "B'ankora division",
+          "Href": "https://starwars.fandom.com/wiki/B%27ankora_division"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Project Celestial Power"
+        "B'ankora division"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 603216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galen_Erso's_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 555595,
       "PageUrl": "https://starwars.fandom.com/wiki/B'ankor_Refuge",
@@ -55,6 +77,11 @@
       "PageId": 563884,
       "PageUrl": "https://starwars.fandom.com/wiki/Project_Celestial_Power",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 756483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ersos'_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

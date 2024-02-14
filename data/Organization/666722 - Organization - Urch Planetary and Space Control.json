@@ -2,6 +2,7 @@
   "PageId": 666722,
   "PageUrl": "https://starwars.fandom.com/wiki/Urch_Planetary_and_Space_Control",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,16 @@
     },
     {
       "Label": "Organization type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Planetary",
+          "Href": "https://starwars.fandom.com/wiki/Planet"
+        },
+        {
+          "Content": "space",
+          "Href": "https://starwars.fandom.com/wiki/Realspace"
+        }
+      ],
       "Values": [
         "Planetary and space traffic control"
       ]
@@ -42,5 +52,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 745364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Urchiv-ki_traffic_controller",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

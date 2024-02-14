@@ -86,22 +86,47 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Corwin",
+          "Href": "https://starwars.fandom.com/wiki/Corwin"
+        }
+      ],
+      "Values": [
+        "Corwin"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "House of Organa",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 391819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corwin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

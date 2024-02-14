@@ -2,7 +2,7 @@
   "PageId": 370107,
   "PageUrl": "https://starwars.fandom.com/wiki/Ossiathora_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/14/Ossiathora-TEA.png/revision/latest?cb=20200220163046",
   "Data": [
     {
       "Label": "Titles",
@@ -17,26 +17,36 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Senex-Juvex",
+          "Href": "https://starwars.fandom.com/wiki/Senex-Juvex/Legends"
+        },
+        {
           "Content": "Juvex sector",
           "Href": "https://starwars.fandom.com/wiki/Juvex_sector/Legends"
         }
       ],
       "Values": [
+        "Senex-Juvex",
         "Juvex sector"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-17"
@@ -57,14 +67,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 344837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossiathora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 12689,
       "PageUrl": "https://starwars.fandom.com/wiki/Juvex_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 344837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossiathora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

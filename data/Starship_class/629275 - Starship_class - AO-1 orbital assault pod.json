@@ -2,6 +2,7 @@
   "PageId": 629275,
   "PageUrl": "https://starwars.fandom.com/wiki/AO-1_orbital_assault_pod",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Orbital assault pod",
@@ -64,5 +65,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 477722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

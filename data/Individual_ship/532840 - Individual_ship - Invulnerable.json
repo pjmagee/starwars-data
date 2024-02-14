@@ -32,11 +32,11 @@
         }
       ],
       "Values": [
-        "Providence-class Dreadnought"
+        "Modified Providence-class Dreadnought"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Dreadnought",
@@ -45,6 +45,25 @@
       ],
       "Values": [
         "Dreadnought"
+      ]
+    },
+    {
+      "Label": "Modified by",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems"
+      ]
+    },
+    {
+      "Label": "Modified systems",
+      "Links": [],
+      "Values": [
+        "Communications vault added"
       ]
     },
     {
@@ -133,12 +152,17 @@
         {
           "Content": "BX-series droid commandos",
           "Href": "https://starwars.fandom.com/wiki/BX-series_droid_commando"
+        },
+        {
+          "Content": "OOM-series security droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM-series_security_droid"
         }
       ],
       "Values": [
         "B1-series battle droids",
         "B2-series super battle droids",
-        "BX-series droid commandos"
+        "BX-series droid commandos",
+        "OOM-series security droids"
       ]
     },
     {
@@ -207,12 +231,7 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Confederacy of Independent Systems",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Confederacy of Independent Systems"
       ]
@@ -227,6 +246,18 @@
       ],
       "Values": [
         "Confederacy of Independent Systems Navy"
+      ]
+    },
+    {
+      "Label": "Fleet",
+      "Links": [
+        {
+          "Content": "Trench's fleet",
+          "Href": "https://starwars.fandom.com/wiki/Trench%27s_fleet"
+        }
+      ],
+      "Values": [
+        "Trench's fleet"
       ]
     },
     {
@@ -256,14 +287,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 453411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trench",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 790636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trench's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 603165,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ST-series_military_strategic_analysis_and_tactics_droid_(Anaxes)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 453411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trench",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

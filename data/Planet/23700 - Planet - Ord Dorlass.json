@@ -2,7 +2,7 @@
   "PageId": 23700,
   "PageUrl": "https://starwars.fandom.com/wiki/Ord_Dorlass",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/21/OrdDorlass-EGTW.jpg/revision/latest?cb=20230518073331",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-16"
@@ -62,15 +67,44 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Pius Dea",
-          "Href": "https://starwars.fandom.com/wiki/Pius_Dea"
+          "Content": "jail",
+          "Href": "https://starwars.fandom.com/wiki/Prison/Legends"
+        },
+        {
+          "Content": "nightclub",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_nightclub"
         }
       ],
       "Values": [
-        "Pius Dea"
+        "A jail",
+        "A nightclub"
+      ]
+    },
+    {
+      "Label": "Major cities",
+      "Links": [
+        {
+          "Content": "capital city",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_capital_city"
+        }
+      ],
+      "Values": [
+        "A capital city"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
       ]
     }
   ],

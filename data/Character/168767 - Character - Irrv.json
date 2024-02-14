@@ -2,6 +2,7 @@
   "PageId": 168767,
   "PageUrl": "https://starwars.fandom.com/wiki/Irrv",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,16 +15,16 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "0 BBY",
-          "Href": "https://starwars.fandom.com/wiki/0_BBY/Legends"
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY/Legends"
         },
         {
-          "Content": "Culroon III",
-          "Href": "https://starwars.fandom.com/wiki/Culroon_III/Legends"
+          "Content": "9 BBY",
+          "Href": "https://starwars.fandom.com/wiki/9_BBY/Legends"
         }
       ],
       "Values": [
-        "Prior to 0 BBY, Culroon III"
+        "Between 19 BBY and 9 BBY"
       ]
     },
     {
@@ -39,17 +40,35 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Imperial Army",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Army/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Imperial Army"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 733593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naval_sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

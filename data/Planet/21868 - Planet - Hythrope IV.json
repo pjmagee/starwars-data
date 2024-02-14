@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Trailing Sectors"
       ]
     },
     {
@@ -48,23 +53,30 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-15"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 380497,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hythrope_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 625351,
       "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Hythrope_IV",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 380497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hythrope_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

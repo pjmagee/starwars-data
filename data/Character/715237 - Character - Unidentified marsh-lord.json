@@ -2,6 +2,7 @@
   "PageId": 715237,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_marsh-lord",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,17 +36,40 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Children",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "son",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_marsh-lord%27s_son"
         }
       ],
       "Values": [
-        "Male"
+        "A son"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "clan",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Safrifa_clan"
+        }
+      ],
+      "Values": [
+        "A clan"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 715239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_marsh-lord's_son",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Extraction_on_Safrifa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    }
+  ]
 }

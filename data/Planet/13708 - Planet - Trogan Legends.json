@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Jospro sector",
-          "Href": "https://starwars.fandom.com/wiki/Jospro_sector"
+          "Href": "https://starwars.fandom.com/wiki/Jospro_sector/Legends"
         }
       ],
       "Values": [
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-7"
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Plateau"
@@ -165,7 +165,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -237,6 +237,10 @@
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
         },
         {
+          "Content": "Smugglers' Alliance",
+          "Href": "https://starwars.fandom.com/wiki/Smugglers%27_Alliance"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
@@ -249,6 +253,7 @@
         "Xim's Empire",
         "Galactic Republic",
         "Confederacy of Independent Systems",
+        "Smugglers' Alliance",
         "Galactic Empire",
         "Yuuzhan Vong empire"
       ]
@@ -256,24 +261,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 251406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drinking_Cup",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 15727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salin_Corridor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 344300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Trogan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 79505,
       "PageUrl": "https://starwars.fandom.com/wiki/Whistler's_Whirlpool_Tapcafe",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 17623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trogan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 132725,
@@ -286,9 +281,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 17623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trogan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 15727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salin_Corridor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 251406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drinking_Cup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 344300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Trogan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

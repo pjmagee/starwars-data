@@ -2,12 +2,13 @@
   "PageId": 683538,
   "PageUrl": "https://starwars.fandom.com/wiki/A_New_Adventure",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a4/ANewAdventure.png/revision/latest?cb=20221207215510",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "A Jedi's Tale"
+        "A New Adventure"
       ]
     },
     {
@@ -87,12 +88,51 @@
         {
           "Content": "0 BBY",
           "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        },
+        {
+          "Content": "0 ABY",
+          "Href": "https://starwars.fandom.com/wiki/0_ABY"
         }
       ],
       "Values": [
-        "0 BBY"
+        "0 BBY–0 ABY"
+      ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "A Jedi Tale",
+          "Href": "https://starwars.fandom.com/wiki/A_Jedi_Tale"
+        }
+      ],
+      "Values": [
+        "A Jedi Tale"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "The Battle Continues",
+          "Href": "https://starwars.fandom.com/wiki/The_Battle_Continues"
+        }
+      ],
+      "Values": [
+        "The Battle Continues"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683516,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Jedi_Tale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 683539,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Battle_Continues",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

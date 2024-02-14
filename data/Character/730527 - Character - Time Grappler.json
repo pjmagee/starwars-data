@@ -2,6 +2,7 @@
   "PageId": 730527,
   "PageUrl": "https://starwars.fandom.com/wiki/Time_Grappler",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/TimeGrappler.png/revision/latest?cb=20220907201219",
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -47,7 +55,25 @@
       "Values": [
         "Light"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Ferrix resistance movement",
+          "Href": "https://starwars.fandom.com/wiki/Ferrix_resistance_movement"
+        }
+      ],
+      "Values": [
+        "Ferrix resistance movement"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 747223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maarva's_funeral_procession",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

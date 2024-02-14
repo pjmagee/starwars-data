@@ -71,34 +71,24 @@
       "Label": "",
       "Links": [],
       "Values": [
-        "E (Everyone)"
+        "Everyone (E)"
       ]
     },
     {
       "Label": "Platform(s)",
       "Links": [
         {
-          "Content": "iPhone",
-          "Href": "https://starwars.fandom.com/wiki/IPhone"
+          "Content": "iOS",
+          "Href": "https://starwars.fandom.com/wiki/IOS"
         },
         {
           "Content": "Android",
           "Href": "https://starwars.fandom.com/wiki/Android_(operating_system)"
-        },
-        {
-          "Content": "Mac",
-          "Href": "https://starwars.fandom.com/wiki/Mac"
-        },
-        {
-          "Content": "Personal computer",
-          "Href": "https://starwars.fandom.com/wiki/Personal_computer"
         }
       ],
       "Values": [
-        "iPhone",
-        "Android",
-        "Mac",
-        "Personal computer"
+        "iOS",
+        "Android"
       ]
     },
     {
@@ -108,10 +98,27 @@
     },
     {
       "Label": "Timeline",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "32 BBY",
+          "Href": "https://starwars.fandom.com/wiki/32_BBY/Legends"
+        },
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY/Legends"
+        },
+        {
+          "Content": "5 BBY",
+          "Href": "https://starwars.fandom.com/wiki/5_BBY"
+        },
+        {
+          "Content": "4 BBY",
+          "Href": "https://starwars.fandom.com/wiki/4_BBY"
+        }
+      ],
       "Values": [
-        "32 BBY - 19 BBY",
-        "5 BBY - 4 BBY"
+        "32 BBY-19 BBY",
+        "5 BBY-4 BBY"
       ]
     },
     {
@@ -129,14 +136,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 52348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_of_the_Fates",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
       "PageId": 395958,
       "PageUrl": "https://starwars.fandom.com/wiki/Angry_Birds_Star_Wars",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 52348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_of_the_Fates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     }
   ]
 }

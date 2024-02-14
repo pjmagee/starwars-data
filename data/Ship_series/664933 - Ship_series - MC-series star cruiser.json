@@ -31,11 +31,15 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
           "Href": "https://starwars.fandom.com/wiki/Frigate"
+        },
+        {
+          "Content": "Heavy cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_cruiser"
         },
         {
           "Content": "Light cruiser",
@@ -48,6 +52,7 @@
       ],
       "Values": [
         "Frigate",
+        "Heavy cruiser",
         "Light cruiser",
         "Star Cruiser"
       ]
@@ -56,12 +61,12 @@
       "Label": "Models",
       "Links": [
         {
-          "Content": "MC30C Frigate",
-          "Href": "https://starwars.fandom.com/wiki/MC30C_Frigate"
+          "Content": "MC30C frigate",
+          "Href": "https://starwars.fandom.com/wiki/MC30C_frigate"
         },
         {
-          "Content": "MC40A Light Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/MC40A_Light_Cruiser"
+          "Content": "MC40a light cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC40a_light_cruiser"
         },
         {
           "Content": "MC75 Star Cruiser",
@@ -108,8 +113,8 @@
           "Href": "https://starwars.fandom.com/wiki/MC95A_Star_Cruiser"
         },
         {
-          "Content": "MC95B Star Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/MC95B_Star_Cruiser"
+          "Content": "MC95B",
+          "Href": "https://starwars.fandom.com/wiki/MC95B"
         },
         {
           "Content": "MC95C Star Cruiser",
@@ -125,8 +130,8 @@
         }
       ],
       "Values": [
-        "MC30C Frigate",
-        "MC40A Light Cruiser",
+        "MC30C frigate",
+        "MC40a light cruiser",
         "MC75 Star Cruiser",
         "MC75 Armored Cruiser",
         "MC75 Ordnance Cruiser",
@@ -160,8 +165,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Galactic Empire",
@@ -185,7 +190,7 @@
         }
       ],
       "Values": [
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Galactic Empire",
         "Alliance to Restore the Republic",
         "New Republic",
@@ -196,14 +201,79 @@
   ],
   "Relationships": [
     {
+      "PageId": 580497,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80A_Home_One_Type_Heavy_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 585834,
       "PageUrl": "https://starwars.fandom.com/wiki/MC85_Star_Cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 669330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Coronet",
+      "PageId": 587944,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Ordnance_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 587945,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Armored_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 634978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aftab_Ackbar's_MC95_Star_Cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 633762,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_Type_Heavy_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 471046,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 556308,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 658136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temperance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 592528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aspiration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663573,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC95B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 646273,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC40a_light_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 646587,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC30C_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 647457,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC95C_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 733817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_near_Polaar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 663243,
@@ -236,28 +306,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 647457,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC95C_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 471046,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
-    },
-    {
-      "PageId": 634978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aftab_Ackbar's_MC95_Star_Cruiser",
+      "PageId": 712653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardency",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 556308,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 658136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temperance",
+      "PageId": 669330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Coronet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

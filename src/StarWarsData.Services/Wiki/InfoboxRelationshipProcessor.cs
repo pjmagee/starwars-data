@@ -46,10 +46,7 @@ public class InfoboxRelationshipProcessor
             })
             .ToList();
 
-        await Parallel.ForEachAsync(allFiles, new ParallelOptions { MaxDegreeOfParallelism = -1, CancellationToken = cancellationToken }, async (file, token) => 
-        {
-            await ProcessMentions(file, allFiles, token);
-        });
+        await Parallel.ForEachAsync(allFiles, new ParallelOptions { MaxDegreeOfParallelism = -1, CancellationToken = cancellationToken }, (file, token) => ProcessMentions(file, allFiles, token));
     }
     
     private async ValueTask ProcessMentions(Loaded loaded, List<Loaded> files, CancellationToken token)

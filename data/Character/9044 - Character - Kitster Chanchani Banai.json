@@ -88,7 +88,7 @@
       "Links": [
         {
           "Content": "Black",
-          "Href": "https://starwars.fandom.com/wiki/Black"
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
@@ -97,14 +97,9 @@
     },
     {
       "Label": "Eye color",
-      "Links": [
-        {
-          "Content": "Brown",
-          "Href": "https://starwars.fandom.com/wiki/Brown"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Dark Brown"
+        "Dark brown"
       ]
     },
     {
@@ -113,7 +108,74 @@
       "Values": [
         "Tan"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Rakir Banai",
+          "Href": "https://starwars.fandom.com/wiki/Rakir_Banai"
+        }
+      ],
+      "Values": [
+        "Rakir Banai"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ulda",
+          "Href": "https://starwars.fandom.com/wiki/Ulda"
+        },
+        {
+          "Content": "Tamora Spice",
+          "Href": "https://starwars.fandom.com/wiki/Tamora_Spice"
+        }
+      ],
+      "Values": [
+        "Ulda",
+        "Tamora Spice"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Elly Banai",
+          "Href": "https://starwars.fandom.com/wiki/Elly_Banai"
+        },
+        {
+          "Content": "Ji Banai",
+          "Href": "https://starwars.fandom.com/wiki/Ji_Banai"
+        }
+      ],
+      "Values": [
+        "Elly Banai",
+        "Ji Banai"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 155563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tamora_Spice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rakir_Banai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ji_Banai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elly_Banai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-7"
@@ -48,10 +48,27 @@
         {
           "Content": "Acherin",
           "Href": "https://starwars.fandom.com/wiki/Acherin"
+        },
+        {
+          "Content": "Deneter",
+          "Href": "https://starwars.fandom.com/wiki/Deneter"
         }
       ],
       "Values": [
-        "Acherin"
+        "Acherin",
+        "Deneter"
+      ]
+    },
+    {
+      "Label": "Space stations",
+      "Links": [
+        {
+          "Content": "Red Twins spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Red_Twins_spaceport"
+        }
+      ],
+      "Values": [
+        "Red Twins spaceport"
       ]
     },
     {
@@ -69,24 +86,34 @@
   ],
   "Relationships": [
     {
-      "PageId": 24423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Acherin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 93395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_asteroid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 4255,
       "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
+      "PageId": 19588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Twins_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 93395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_asteroid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 16614,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Red_Twins/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 24346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deneter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 24423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Acherin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

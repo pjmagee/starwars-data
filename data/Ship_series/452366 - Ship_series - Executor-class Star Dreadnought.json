@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Kuat Drive Yards",
-          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
-        }
-      ],
-      "Values": [
-        "Kuat Drive Yards"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,6 +24,23 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Fondor Shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Fondor_Shipyards"
+        },
+        {
+          "Content": "Kuat Drive Yards",
+          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
+        }
+      ],
+      "Values": [
+        "Fondor Shipyards",
+        "Kuat Drive Yards"
+      ]
+    },
+    {
       "Label": "Line",
       "Links": [],
       "Values": [
@@ -43,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Dreadnought",
@@ -52,10 +57,15 @@
         {
           "Content": "Star Destroyer",
           "Href": "https://starwars.fandom.com/wiki/Star_Destroyer"
+        },
+        {
+          "Content": "Super Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Super_Star_Destroyer"
         }
       ],
       "Values": [
-        "Star Dreadnought-classed Star Destroyer"
+        "Star Dreadnought-classed Star Destroyer",
+        "Super Star Destroyer"
       ]
     },
     {
@@ -81,10 +91,27 @@
         {
           "Content": "Command ship",
           "Href": "https://starwars.fandom.com/wiki/Command_ship"
+        },
+        {
+          "Content": "Flagship",
+          "Href": "https://starwars.fandom.com/wiki/Flagship"
         }
       ],
       "Values": [
-        "Command ship"
+        "Command ship",
+        "Flagship"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "0 ABY",
+          "Href": "https://starwars.fandom.com/wiki/0_ABY"
+        }
+      ],
+      "Values": [
+        "Around 0 ABY"
       ]
     },
     {
@@ -112,33 +139,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 483081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 542469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arbitrator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 609839,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Dreadnought_Assault_Prototype",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "PageId": 515760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 604593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Dreadnought_Command_Prototype",
+      "PageId": 542469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arbitrator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -152,8 +164,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 694953,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lusankya",
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -162,14 +174,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 604593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Dreadnought_Command_Prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 694953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lusankya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 646288,
       "PageUrl": "https://starwars.fandom.com/wiki/Oppressor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 515760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
+      "PageId": 483081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

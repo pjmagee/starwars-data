@@ -29,10 +29,15 @@
         {
           "Content": "X-wing starfighter",
           "Href": "https://starwars.fandom.com/wiki/X-wing_starfighter"
+        },
+        {
+          "Content": "T-65 X-wing starfighter",
+          "Href": "https://starwars.fandom.com/wiki/T-65_X-wing_starfighter"
         }
       ],
       "Values": [
-        "X-wing starfighter"
+        "X-wing starfighter",
+        "T-65 X-wing starfighter"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Space superiority starfighter"
@@ -200,14 +205,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 542593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phantom_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 170598,
       "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 542593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phantom_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 575947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley's_T-65C-A2_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 788806,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 472997,
+      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
       "PageId": 551180,
@@ -218,16 +238,6 @@
       "PageId": 553487,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 575947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley's_T-65C-A2_X-wing_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 472997,
-      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     }
   ]
 }

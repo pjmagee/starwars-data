@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -105,33 +112,48 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Stormtrooper Corps",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps"
+        },
+        {
           "Content": "Howzer's squad",
           "Href": "https://starwars.fandom.com/wiki/Howzer%27s_squad"
+        },
+        {
+          "Content": "Clone Underground",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Underground"
         }
       ],
       "Values": [
         "Galactic Republic",
         "Grand Army of the Republic",
         "Galactic Empire",
-        "Howzer's squad"
+        "Stormtrooper Corps",
+        "Howzer's squad",
+        "Clone Underground"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 701997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 759377,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_prisoner_transport_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 702011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_battalion",
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_battalion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 702095,
       "PageUrl": "https://starwars.fandom.com/wiki/Howzer's_squad",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 701997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Cham_and_Eleni_Syndulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

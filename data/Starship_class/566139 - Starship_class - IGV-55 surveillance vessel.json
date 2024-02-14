@@ -37,11 +37,43 @@
       ]
     },
     {
-      "Label": "Class",
-      "Links": [],
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Surveillance vessel",
+          "Href": "https://starwars.fandom.com/wiki/Surveillance"
+        }
+      ],
       "Values": [
         "Jamming ship",
-        "Listener ship"
+        "Listener ship",
+        "Surveillance vessel"
+      ]
+    },
+    {
+      "Label": "Modified systems",
+      "Links": [
+        {
+          "Content": "Electromagnetically",
+          "Href": "https://starwars.fandom.com/wiki/Electromagnetic_field"
+        },
+        {
+          "Content": "bridge",
+          "Href": "https://starwars.fandom.com/wiki/Bridge"
+        },
+        {
+          "Content": "hull",
+          "Href": "https://starwars.fandom.com/wiki/Hull"
+        },
+        {
+          "Content": "sublight drive",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_drive"
+        }
+      ],
+      "Values": [
+        "Electromagnetically-insulated bridge module",
+        "Signal leak-minimizing composite hull coating",
+        "Insulated sublight drive turbines"
       ]
     },
     {
@@ -53,14 +85,21 @@
         }
       ],
       "Values": [
-        "64 meters"
+        "62.75 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "36.66 meters"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "23.57 meters"
+        "21.95 meters"
       ]
     },
     {
@@ -92,6 +131,28 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "dedicated energy receptor",
+          "Href": "https://starwars.fandom.com/wiki/Dedicated_energy_receptor"
+        },
+        {
+          "Content": "full-spectrum transceiver",
+          "Href": "https://starwars.fandom.com/wiki/Full-spectrum_transceiver"
+        },
+        {
+          "Content": "hyperspectral imaging",
+          "Href": "https://starwars.fandom.com/wiki/Hyperspectral_imaging"
+        }
+      ],
+      "Values": [
+        "Passive dedicated energy receptor (DER) array",
+        "Active phased full-spectrum transceiver (FST) array",
+        "High-resolution hyperspectral imaging (HSI) receiver"
       ]
     },
     {
@@ -163,14 +224,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 618116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enduring_Pride",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 565994,
+      "PageUrl": "https://starwars.fandom.com/wiki/LT-319",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 460272,
       "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 618116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enduring_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 476195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Information_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -40,15 +40,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Female"
+        "She/her"
       ]
     },
     {
@@ -89,6 +84,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
+          "Content": "Black Legions",
+          "Href": "https://starwars.fandom.com/wiki/Black_Legions"
+        },
+        {
           "Content": "Exiles",
           "Href": "https://starwars.fandom.com/wiki/Exiles"
         },
@@ -104,6 +103,7 @@
       "Values": [
         "Jedi Order",
         "Galactic Republic",
+        "Black Legions",
         "Exiles",
         "Sith Empire",
         "Sith Council"
@@ -113,25 +113,20 @@
       "Label": "Apprentices",
       "Links": [
         {
-          "Content": "A'Sharad Hett",
+          "Content": "Darth Krayt",
           "Href": "https://starwars.fandom.com/wiki/Darth_Krayt"
         }
       ],
       "Values": [
-        "A'Sharad Hett"
+        "Darth Krayt"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 182761,
-      "PageUrl": "https://starwars.fandom.com/wiki/XoXaan's_holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 66876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 221848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoke_of_Seeming",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 368056,
@@ -139,9 +134,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 221848,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoke_of_Seeming",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 66876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 182761,
+      "PageUrl": "https://starwars.fandom.com/wiki/XoXaan's_holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     }
   ]
 }

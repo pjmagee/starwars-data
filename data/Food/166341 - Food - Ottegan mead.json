@@ -2,12 +2,25 @@
   "PageId": 166341,
   "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_mead",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ottegan mead"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Ottega",
+          "Href": "https://starwars.fandom.com/wiki/Ottega/Legends"
+        }
+      ],
+      "Values": [
+        "Ottega"
       ]
     },
     {
@@ -21,7 +34,25 @@
       "Values": [
         "Mead"
       ]
+    },
+    {
+      "Label": "Other ingredients",
+      "Links": [
+        {
+          "Content": "Honey",
+          "Href": "https://starwars.fandom.com/wiki/Honey/Legends"
+        }
+      ],
+      "Values": [
+        "Honey"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 275914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottega/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

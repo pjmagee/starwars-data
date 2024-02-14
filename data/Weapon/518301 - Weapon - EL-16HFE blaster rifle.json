@@ -2,7 +2,7 @@
   "PageId": 518301,
   "PageUrl": "https://starwars.fandom.com/wiki/EL-16HFE_blaster_rifle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7b/EL-16HFE_blaster_rifle.png/revision/latest?cb=20151120011312",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7b/EL-16HFE_blaster_rifle.png/revision/latest?cb=20221126013347",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,13 @@
       ]
     },
     {
+      "Label": "Model",
+      "Links": [],
+      "Values": [
+        "EL-16 HFE"
+      ]
+    },
+    {
       "Label": "Type",
       "Links": [
         {
@@ -39,6 +46,14 @@
       "Label": "Locations",
       "Links": [
         {
+          "Content": "Tuanul",
+          "Href": "https://starwars.fandom.com/wiki/Tuanul"
+        },
+        {
+          "Content": "Jakku",
+          "Href": "https://starwars.fandom.com/wiki/Jakku"
+        },
+        {
           "Content": "Crait",
           "Href": "https://starwars.fandom.com/wiki/Crait"
         },
@@ -49,21 +64,13 @@
         {
           "Content": "Spalex",
           "Href": "https://starwars.fandom.com/wiki/Spalex"
-        },
-        {
-          "Content": "Tuanul",
-          "Href": "https://starwars.fandom.com/wiki/Tuanul"
-        },
-        {
-          "Content": "Jakku",
-          "Href": "https://starwars.fandom.com/wiki/Jakku"
         }
       ],
       "Values": [
+        "Tuanul, Jakku",
         "Crait",
         "Megalox",
-        "Spalex",
-        "Tuanul, Jakku"
+        "Spalex"
       ]
     },
     {
@@ -86,14 +93,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 466335,
-      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 560622,
       "PageUrl": "https://starwars.fandom.com/wiki/Poe's_blaster_rifle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 466335,
+      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

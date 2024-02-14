@@ -12,7 +12,31 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "G-16",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "G-16"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caves",
@@ -53,7 +77,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -89,24 +113,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 279980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 536487,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ovanis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 538275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ravenous",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 586991,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_jet_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 551896,
@@ -114,9 +123,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 536509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 538275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravenous",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 551897,
@@ -127,6 +136,21 @@
       "PageId": 536680,
       "PageUrl": "https://starwars.fandom.com/wiki/Crèche",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 536509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 586991,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_jet_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 279980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

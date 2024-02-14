@@ -32,9 +32,14 @@
     },
     {
       "Label": "Orbits",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "planet",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_planet_(quadruple_star_system)"
+        }
+      ],
       "Values": [
-        "At least 1"
+        "A planet"
       ]
     }
   ],
@@ -48,6 +53,11 @@
       "PageId": 666408,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Void_Guide",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_planet_(quadruple_star_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

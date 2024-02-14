@@ -36,8 +36,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
       ]
@@ -53,11 +65,11 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Tan"
+        "Light brown"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Vos",
@@ -66,7 +78,50 @@
         {
           "Content": "Skywalker family",
           "Href": "https://starwars.fandom.com/wiki/Skywalker_family/Legends"
+        }
+      ],
+      "Values": [
+        "Clan Vos",
+        "Skywalker family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Nat Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Rawk"
+        }
+      ],
+      "Values": [
+        "Nat Skywalker"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ahnah Rawk",
+          "Href": "https://starwars.fandom.com/wiki/Ahnah_Rawk"
         },
+        {
+          "Content": "Skeeto Rawk",
+          "Href": "https://starwars.fandom.com/wiki/Skeeto_Rawk"
+        },
+        {
+          "Content": "Micah",
+          "Href": "https://starwars.fandom.com/wiki/Micah"
+        }
+      ],
+      "Values": [
+        "Ahnah Rawk",
+        "Skeeto Rawk (adopted)",
+        "Micah (adopted)"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Kiffu Guardians",
           "Href": "https://starwars.fandom.com/wiki/Kiffu_Guardians"
@@ -81,13 +136,17 @@
         }
       ],
       "Values": [
-        "Clan Vos",
-        "Skywalker family",
         "Kiffu Guardians",
         "New Jedi Order",
         "Galactic Federation of Free Alliances"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 50797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

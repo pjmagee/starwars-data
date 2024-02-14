@@ -2,7 +2,7 @@
   "PageId": 269525,
   "PageUrl": "https://starwars.fandom.com/wiki/Keitum_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/66/KeitumNewRepublic-EGTW.jpg/revision/latest?cb=20220927084952",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "New Territories"
       ]
     },
     {
@@ -36,10 +41,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-6"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Keitum",
+          "Href": "https://starwars.fandom.com/wiki/Keitum/Legends"
+        }
+      ],
+      "Values": [
+        "Keitum"
       ]
     },
     {
@@ -55,15 +72,15 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Population",
       "Links": [
         {
-          "Content": "Keitumites",
-          "Href": "https://starwars.fandom.com/wiki/Keitumite"
+          "Content": "25 ABY",
+          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
         }
       ],
       "Values": [
-        "Keitumites"
+        "100–500 million (c. 25 ABY)"
       ]
     },
     {
@@ -72,23 +89,43 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Imperial Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic",
+        "Galactic Empire",
+        "New Republic",
+        "Imperial Remnant"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 23823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rago_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 768871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keitum/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 340462,
       "PageUrl": "https://starwars.fandom.com/wiki/Ariarch_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 23823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rago_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

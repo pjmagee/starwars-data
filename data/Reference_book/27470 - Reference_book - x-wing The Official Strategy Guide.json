@@ -2,7 +2,7 @@
   "PageId": 27470,
   "PageUrl": "x-wing:_The_Official_Strategy_Guide",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/08/X-wing_Prima.jpg/revision/latest?cb=20070618230851",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f3/X-wing-Prima.jpg/revision/latest?cb=20070618230851",
   "Data": [
     {
       "Label": "Titles",
@@ -28,6 +28,23 @@
       "Links": [],
       "Values": [
         "Martin Cameron"
+      ]
+    },
+    {
+      "Label": "Illustrator(s)",
+      "Links": [
+        {
+          "Content": "John Bell",
+          "Href": "https://starwars.fandom.com/wiki/John_Bell"
+        }
+      ],
+      "Values": [
+        "Marian Hartsough Associates (Book Design and Layout)",
+        "Rusel DeMaria (Book Design and Layout)",
+        "Ocean Quigley (Special Image Processing and Interior Art)",
+        "Martin Cameron (3D Modeling)",
+        "John Bell (3D Modeling)",
+        "The Dunlavey Studio (Cover Adaptation)"
       ]
     },
     {
@@ -78,23 +95,6 @@
       ]
     },
     {
-      "Label": "Illustrator(s)",
-      "Links": [
-        {
-          "Content": "John Bell",
-          "Href": "https://starwars.fandom.com/wiki/John_Bell"
-        }
-      ],
-      "Values": [
-        "Marian Hartsough Associates (Book Design and Layout)",
-        "Rusel DeMaria (Book Design and Layout)",
-        "Ocean Quigley (Special Image Processing and Interior Art)",
-        "Martin Cameron (3D Modeling)",
-        "John Bell (3D Modeling)",
-        "The Dunlavey Studio (Cover Adaptation)"
-      ]
-    },
-    {
       "Label": "Publisher",
       "Links": [
         {
@@ -110,8 +110,8 @@
       "Label": "Publication date",
       "Links": [
         {
-          "Content": "June 1",
-          "Href": "https://starwars.fandom.com/wiki/June_1"
+          "Content": "June",
+          "Href": "https://starwars.fandom.com/wiki/June"
         },
         {
           "Content": "1993",
@@ -119,7 +119,7 @@
         }
       ],
       "Values": [
-        "June 1, 1993"
+        "June 1993"
       ]
     },
     {
@@ -170,5 +170,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785343,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Farlander_Papers_(Expanded)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

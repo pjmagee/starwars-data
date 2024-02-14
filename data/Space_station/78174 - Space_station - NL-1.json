@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Telgorn Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Telgorn_Corporation/Legends"
-        }
-      ],
-      "Values": [
-        "Telgorn Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Xizor Transport Systems"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Telgorn Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Telgorn_Corporation/Legends"
+        }
+      ],
+      "Values": [
+        "Telgorn Corporation"
       ]
     },
     {
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -170,6 +170,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "T-6"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -241,14 +248,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 14565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pakuuni/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 88015,
       "PageUrl": "https://starwars.fandom.com/wiki/Pakuuni_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pakuuni/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

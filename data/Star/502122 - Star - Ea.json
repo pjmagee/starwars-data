@@ -53,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-16",
@@ -74,24 +74,34 @@
         {
           "Content": "moons",
           "Href": "https://starwars.fandom.com/wiki/Moon"
+        },
+        {
+          "Content": "Bahryn",
+          "Href": "https://starwars.fandom.com/wiki/Bahryn"
+        },
+        {
+          "Content": "Geonosis' largest moon",
+          "Href": "https://starwars.fandom.com/wiki/Geonosis%27_largest_moon"
         }
       ],
       "Values": [
         "Geonosis",
-        "15 moons"
+        "15 moons",
+        "Bahryn",
+        "Geonosis' largest moon"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 457990,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 515181,
       "PageUrl": "https://starwars.fandom.com/wiki/Geonosis_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 457990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

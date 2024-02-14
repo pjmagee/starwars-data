@@ -24,15 +24,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
@@ -80,6 +75,7 @@
       ],
       "Values": [
         "Hutt Clan",
+        "Grakkus's criminal empire",
         "Grakks"
       ]
     }
@@ -91,64 +87,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 577694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grakkus'_safe_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 465760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 574861,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_of_Eldra_Kaitis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 553246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kreel's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 632987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Hardshell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 545876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grakks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 612001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Smuggler's_Guide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 518225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Luke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 518018,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_lightsaber_thief_(Nar_Shaddaa)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 608351,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 544327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Megalox_Beta",
+      "PageId": 518225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Luke_Skywalker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 546530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_of_Grakkus_the_Hutt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 544327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Megalox_Beta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 512922,
@@ -161,8 +112,53 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
+      "PageId": 577694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grakkus'_safe_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 612633,
       "PageUrl": "https://starwars.fandom.com/wiki/Grakkus_Arena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 612001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Smuggler's_Guide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 553246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kreel's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 518018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_lightsaber_thief_(Nar_Shaddaa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 574861,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_of_Eldra_Kaitis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 545876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grakks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 465760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 632987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Hardshell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 546530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_of_Grakkus_the_Hutt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

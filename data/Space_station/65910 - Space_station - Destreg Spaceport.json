@@ -2,7 +2,7 @@
   "PageId": 65910,
   "PageUrl": "https://starwars.fandom.com/wiki/Destreg_Spaceport",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/08/Destreg_Spaceport.jpg/revision/latest?cb=20240124221751",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -103,6 +103,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "N-18"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -136,14 +143,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 59419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destreg_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 362126,
       "PageUrl": "https://starwars.fandom.com/wiki/Destreg_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 59419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destreg_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

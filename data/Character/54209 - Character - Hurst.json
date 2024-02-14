@@ -2,6 +2,7 @@
   "PageId": 54209,
   "PageUrl": "https://starwars.fandom.com/wiki/Hurst",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,37 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Hurst's wife",
+          "Href": "https://starwars.fandom.com/wiki/Hurst%27s_wife"
+        }
+      ],
+      "Values": [
+        "Hurst's wife"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Dessel",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Bane/Legends"
+        }
+      ],
+      "Values": [
+        "Dessel"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +103,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Bane/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

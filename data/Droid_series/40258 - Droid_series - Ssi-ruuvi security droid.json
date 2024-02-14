@@ -2,7 +2,7 @@
   "PageId": 40258,
   "PageUrl": "https://starwars.fandom.com/wiki/Ssi-ruuvi_security_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e6/Ssi-Ruuvi_Security_Droid.jpg/revision/latest?cb=20060301144230",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e7/Ssi-ruuviSecurityDroid-FF50.png/revision/latest?cb=20230927223509",
   "Data": [
     {
       "Label": "Titles",
@@ -60,8 +60,25 @@
       ]
     },
     {
+      "Label": "Plating color",
+      "Links": [
+        {
+          "Content": "Metallic green",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Metallic green"
+      ]
+    },
+    {
       "Label": "Armament",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "stun blaster",
+          "Href": "https://starwars.fandom.com/wiki/Stun_blaster/Legends"
+        }
+      ],
       "Values": [
         "Mounted short-range stun blaster (1)"
       ]
@@ -81,14 +98,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 24404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shree-class_battle_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 1629,
       "PageUrl": "https://starwars.fandom.com/wiki/Sibwarra",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 24404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shree-class_battle_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

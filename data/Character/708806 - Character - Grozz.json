@@ -36,15 +36,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
@@ -65,7 +60,30 @@
       "Values": [
         "Green"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Hunters of the Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
+        }
+      ],
+      "Values": [
+        "Hunters of the Outer Rim"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 781552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huttballer_clubs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 781225,
+      "PageUrl": "https://starwars.fandom.com/wiki/KX_Clubs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

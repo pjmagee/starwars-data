@@ -2,7 +2,6 @@
   "PageId": 20060,
   "PageUrl": "https://starwars.fandom.com/wiki/Galgamok",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media",
-  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -17,23 +16,24 @@
         {
           "Content": "Evar Orbus and His Galactic Jizz-Wailers",
           "Href": "https://starwars.fandom.com/wiki/Evar_Orbus_and_His_Galactic_Jizz-Wailers"
-        },
-        {
-          "Content": "Max Rebo Band",
-          "Href": "https://starwars.fandom.com/wiki/Max_Rebo_Band/Legends"
         }
       ],
       "Values": [
-        "Evar Orbus and His Galactic Jizz-Wailers",
-        "Max Rebo Band"
+        "Evar Orbus and His Galactic Jizz-Wailers"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Song",
+          "Href": "https://starwars.fandom.com/wiki/Music/Legends"
+        }
+      ],
+      "Values": [
+        "Song"
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 1738,
-      "PageUrl": "https://starwars.fandom.com/wiki/Max_Rebo_Band/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
-    }
-  ]
+  "Relationships": []
 }

@@ -86,12 +86,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Girard",
           "Href": "https://starwars.fandom.com/wiki/House_Girard"
-        },
+        }
+      ],
+      "Values": [
+        "House Girard"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Heitor Girard",
+          "Href": "https://starwars.fandom.com/wiki/Heitor_Girard"
+        }
+      ],
+      "Values": [
+        "Heitor Girard"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "House Thul",
           "Href": "https://starwars.fandom.com/wiki/House_of_Thul"
@@ -102,11 +122,16 @@
         }
       ],
       "Values": [
-        "House Girard",
         "House Thul",
         "Sith Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 426268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heitor_Girard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

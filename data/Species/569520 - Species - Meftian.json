@@ -60,19 +60,42 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Blue"
+        "Blue",
+        "Gray"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Mefti",
+          "Href": "https://starwars.fandom.com/wiki/Mefti"
+        }
+      ],
+      "Values": [
+        "Mefti"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 557852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kullbee_Sperado",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 730944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mefti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 621575,
       "PageUrl": "https://starwars.fandom.com/wiki/Flebek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Meftian_merchant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 557852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kullbee_Sperado",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

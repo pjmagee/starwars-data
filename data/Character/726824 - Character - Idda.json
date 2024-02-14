@@ -2,6 +2,7 @@
   "PageId": 726824,
   "PageUrl": "https://starwars.fandom.com/wiki/Idda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,20 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 730844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Namrelllew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

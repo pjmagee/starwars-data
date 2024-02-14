@@ -2,6 +2,7 @@
   "PageId": 420082,
   "PageUrl": "https://starwars.fandom.com/wiki/Attempted_assassination_of_Allana_Solo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
       "Links": [
         {
           "Content": "Allana Solo",
-          "Href": "https://starwars.fandom.com/wiki/Allana_Solo"
+          "Href": "https://starwars.fandom.com/wiki/Allana_Djo_Solo"
         }
       ],
       "Values": [
@@ -70,5 +71,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_Cluster/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 164077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interior_Region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "B'ankora",
@@ -32,7 +32,24 @@
         }
       ],
       "Values": [
-        "B'ankora"
+        "B'ankora (extinct)"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        },
+        {
+          "Content": "0 BBY",
+          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        }
+      ],
+      "Values": [
+        "10,000 (post-19 BBY)",
+        "None (by 0 BBY)"
       ]
     },
     {
@@ -50,14 +67,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 555343,
+      "PageUrl": "https://starwars.fandom.com/wiki/B'ankora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 479522,
       "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
-      "PageId": 555343,
-      "PageUrl": "https://starwars.fandom.com/wiki/B'ankora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 756982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relocation_of_the_B'ankora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

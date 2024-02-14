@@ -29,8 +29,15 @@
     },
     {
       "Label": "Species",
-      "Links": [],
-      "Values": []
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        }
+      ],
+      "Values": [
+        "Human"
+      ]
     },
     {
       "Label": "Gender",
@@ -59,14 +66,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 619500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Marr's_task_force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 515231,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Marr's_flagship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 619500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Marr's_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

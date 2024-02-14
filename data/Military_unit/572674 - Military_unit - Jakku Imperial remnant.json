@@ -13,7 +13,12 @@
     },
     {
       "Label": "Military unit type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
+        }
+      ],
       "Values": [
         "Imperial remnant"
       ]
@@ -84,6 +89,21 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 475427,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/d_\"Defender\"_Multi-Role_Starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 775328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Versio's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 499302,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku",

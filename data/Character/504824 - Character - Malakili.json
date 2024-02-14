@@ -17,10 +17,15 @@
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia"
+        },
+        {
+          "Content": "Tatooine",
+          "Href": "https://starwars.fandom.com/wiki/Tatooine"
         }
       ],
       "Values": [
-        "Corellia"
+        "Corellia",
+        "Tatooine"
       ]
     },
     {
@@ -95,6 +100,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Malakili's mother",
+          "Href": "https://starwars.fandom.com/wiki/Malakili%27s_mother"
+        }
+      ],
+      "Values": [
+        "Malakili's mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -133,9 +150,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 594060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Waterskin",
+      "PageId": 565387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Magna-driver",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 734847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chak-root_sauce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 542388,
@@ -143,8 +165,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 565387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Magna-driver",
+      "PageId": 779526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malakili's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 594060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Waterskin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]

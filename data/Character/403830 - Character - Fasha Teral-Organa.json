@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Teral",
@@ -83,18 +83,60 @@
         {
           "Content": "House Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House Teral",
+        "House Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Teral",
+          "Href": "https://starwars.fandom.com/wiki/Teral_(Lord)"
+        }
+      ],
+      "Values": [
+        "Teral"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Lew Organa",
+          "Href": "https://starwars.fandom.com/wiki/Lew_Organa"
+        }
+      ],
+      "Values": [
+        "Lew Organa"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "House Teral",
-        "House Organa",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 393130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lew_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 426519,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teral_(Lord)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

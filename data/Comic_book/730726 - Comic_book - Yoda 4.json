@@ -2,6 +2,7 @@
   "PageId": 730726,
   "PageUrl": "https://starwars.fandom.com/wiki/Yoda_4",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e5/Yoda-4-Final-Cover.jpg/revision/latest?cb=20230207012914",
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,49 @@
       ]
     },
     {
+      "Label": "Inker",
+      "Links": [],
+      "Values": [
+        "Luke Ross"
+      ]
+    },
+    {
+      "Label": "Letterer",
+      "Links": [
+        {
+          "Content": "Joe Caramagna",
+          "Href": "https://starwars.fandom.com/wiki/Joe_Caramagna"
+        }
+      ],
+      "Values": [
+        "Joe Caramagna"
+      ]
+    },
+    {
+      "Label": "Colorist",
+      "Links": [
+        {
+          "Content": "Nolan Woodard",
+          "Href": "https://starwars.fandom.com/wiki/Nolan_Woodard"
+        }
+      ],
+      "Values": [
+        "Nolan Woodard"
+      ]
+    },
+    {
+      "Label": "Cover artist",
+      "Links": [
+        {
+          "Content": "Phil Noto",
+          "Href": "https://starwars.fandom.com/wiki/Phil_Noto"
+        }
+      ],
+      "Values": [
+        "Phil Noto"
+      ]
+    },
+    {
       "Label": "Editor",
       "Links": [
         {
@@ -59,6 +103,39 @@
       ]
     },
     {
+      "Label": "Publication date",
+      "Links": [
+        {
+          "Content": "February 22",
+          "Href": "https://starwars.fandom.com/wiki/February_22"
+        },
+        {
+          "Content": "2023",
+          "Href": "https://starwars.fandom.com/wiki/2023"
+        }
+      ],
+      "Values": [
+        "February 22, 2023"
+      ]
+    },
+    {
+      "Label": "Timeline",
+      "Links": [
+        {
+          "Content": "42 BBY",
+          "Href": "https://starwars.fandom.com/wiki/42_BBY"
+        },
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        }
+      ],
+      "Values": [
+        "By 42 BBY (Flashbacks)",
+        "3 ABY"
+      ]
+    },
+    {
       "Label": "Series",
       "Links": [
         {
@@ -79,18 +156,39 @@
     },
     {
       "Label": "Preceded by",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Yoda 3",
+          "Href": "https://starwars.fandom.com/wiki/Yoda_3"
+        }
+      ],
       "Values": [
         "Yoda 3"
       ]
     },
     {
       "Label": "Followed by",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Yoda 5",
+          "Href": "https://starwars.fandom.com/wiki/Yoda_5"
+        }
+      ],
       "Values": [
         "Yoda 5"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 732990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 732991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda_5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    }
+  ]
 }

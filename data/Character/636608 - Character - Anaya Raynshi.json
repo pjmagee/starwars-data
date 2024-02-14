@@ -2,6 +2,7 @@
   "PageId": 636608,
   "PageUrl": "https://starwars.fandom.com/wiki/Anaya_Raynshi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,54 @@
       "Values": [
         "Green"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Raynshi family",
+          "Href": "https://starwars.fandom.com/wiki/Raynshi_family"
+        }
+      ],
+      "Values": [
+        "Raynshi family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Vroc Raynshi",
+          "Href": "https://starwars.fandom.com/wiki/Vroc_Raynshi"
+        }
+      ],
+      "Values": [
+        "Vroc Raynshi"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Maize Raynshi",
+          "Href": "https://starwars.fandom.com/wiki/Maize_Raynshi"
+        }
+      ],
+      "Values": [
+        "Maize Raynshi"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 636548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vroc_Raynshi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maize_Raynshi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

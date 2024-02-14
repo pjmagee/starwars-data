@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Sensor color",
       "Links": [
         {
@@ -53,7 +60,35 @@
       "Values": [
         "Silver and gold"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Hunters of the Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
+        },
+        {
+          "Content": "Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        }
+      ],
+      "Values": [
+        "Hunters of the Outer Rim",
+        "Jedi Order (In character)"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothwell_(trainer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 781222,
+      "PageUrl": "https://starwars.fandom.com/wiki/J-3DI's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

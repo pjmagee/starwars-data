@@ -2,6 +2,7 @@
   "PageId": 337828,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_elix_homeworld",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -30,7 +31,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -54,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 24869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 512618,
   "PageUrl": "https://starwars.fandom.com/wiki/Wynnet_Ree",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +44,7 @@
         }
       ],
       "Values": [
-        "19 BBY"
+        "19 BBY, Jelucan"
       ]
     },
     {
@@ -71,22 +72,78 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
-        {
-          "Content": "First Wavers",
-          "Href": "https://starwars.fandom.com/wiki/First_Wavers"
-        },
         {
           "Content": "Ree family",
           "Href": "https://starwars.fandom.com/wiki/Ree_family"
         }
       ],
       "Values": [
-        "First Wavers",
         "Ree family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Paron Ree",
+          "Href": "https://starwars.fandom.com/wiki/Paron_Ree"
+        },
+        {
+          "Content": "Verine Ree",
+          "Href": "https://starwars.fandom.com/wiki/Verine_Ree"
+        }
+      ],
+      "Values": [
+        "Paron Ree",
+        "Verine Ree"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ciena Ree",
+          "Href": "https://starwars.fandom.com/wiki/Ciena_Ree"
+        },
+        {
+          "Content": "twin",
+          "Href": "https://starwars.fandom.com/wiki/Twin"
+        }
+      ],
+      "Values": [
+        "Ciena Ree (twin sister)"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "First Wavers",
+          "Href": "https://starwars.fandom.com/wiki/First_Wavers"
+        }
+      ],
+      "Values": [
+        "First Wavers"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 499507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ciena_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paron_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Verine_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

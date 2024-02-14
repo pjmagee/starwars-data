@@ -2,7 +2,7 @@
   "PageId": 187527,
   "PageUrl": "https://starwars.fandom.com/wiki/Neimoidian_Throne",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/79/Neimoidian_Throne.jpg/revision/latest?cb=20110703155839",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/51/Theed_monument.png/revision/latest?cb=20240113111922",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Monument",
+          "Href": "https://starwars.fandom.com/wiki/Monument"
+        }
+      ],
+      "Values": [
+        "Monument"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -31,27 +43,27 @@
           "Href": "https://starwars.fandom.com/wiki/Naboo/Legends"
         },
         {
+          "Content": "Palace Plaza",
+          "Href": "https://starwars.fandom.com/wiki/Palace_Plaza/Legends"
+        },
+        {
           "Content": "Theed",
           "Href": "https://starwars.fandom.com/wiki/Theed/Legends"
         },
         {
-          "Content": "Harte Secur",
-          "Href": "https://starwars.fandom.com/wiki/Harte_Secur"
+          "Content": "Spinnaker",
+          "Href": "https://starwars.fandom.com/wiki/Spinnaker/Legends"
         }
       ],
       "Values": [
         "Naboo",
-        "Theed",
-        "Harte Secur"
+        "Palace Plaza, Theed",
+        "Spinnaker"
       ]
     },
     {
       "Label": "Builder(s)",
       "Links": [
-        {
-          "Content": "Trade Federation",
-          "Href": "https://starwars.fandom.com/wiki/Trade_Federation_of_Planets"
-        },
         {
           "Content": "OX9",
           "Href": "https://starwars.fandom.com/wiki/OX9"
@@ -62,12 +74,17 @@
         }
       ],
       "Values": [
-        "Trade Federation OX9 labor droids"
+        "OX9 labor droids"
       ]
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Trade Federation",
+          "Href": "https://starwars.fandom.com/wiki/Trade_Federation_of_Planets"
+        }
+      ],
       "Values": [
         "Trade Federation"
       ]

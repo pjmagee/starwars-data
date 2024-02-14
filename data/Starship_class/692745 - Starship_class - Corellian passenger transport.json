@@ -2,6 +2,7 @@
   "PageId": 692745,
   "PageUrl": "https://starwars.fandom.com/wiki/Corellian_passenger_transport",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -35,5 +36,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

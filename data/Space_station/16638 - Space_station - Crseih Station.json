@@ -19,11 +19,39 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Pakuuni sector",
+          "Href": "https://starwars.fandom.com/wiki/Pakuuni_sector"
+        }
+      ],
+      "Values": [
+        "Pakuuni sector"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
           "Content": "Crseih system",
           "Href": "https://starwars.fandom.com/wiki/Crseih_system"
+        },
+        {
+          "Content": "Codru system",
+          "Href": "https://starwars.fandom.com/wiki/Codru_system"
         },
         {
           "Content": "Pakuuni system",
@@ -32,11 +60,12 @@
       ],
       "Values": [
         "Crseih system",
+        "Codru system",
         "Pakuuni system"
       ]
     },
     {
-      "Label": "Orbital distance",
+      "Label": "Planet",
       "Links": [
         {
           "Content": "Pakuuni",
@@ -45,6 +74,13 @@
       ],
       "Values": [
         "Pakuuni"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "T-6"
       ]
     },
     {
@@ -81,6 +117,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 7304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Codru_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 16923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crseih",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
       "PageId": 79634,
       "PageUrl": "https://starwars.fandom.com/wiki/Confrontation_on_Crseih_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -89,11 +135,6 @@
       "PageId": 16637,
       "PageUrl": "https://starwars.fandom.com/wiki/Crseih_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crseih",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 3044,

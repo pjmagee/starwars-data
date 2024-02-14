@@ -2,6 +2,7 @@
   "PageId": 416105,
   "PageUrl": "https://starwars.fandom.com/wiki/Drellik",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,35 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Drellik family",
+          "Href": "https://starwars.fandom.com/wiki/Drellik_family"
+        }
+      ],
+      "Values": [
+        "Drellik family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Talos Drellik",
+          "Href": "https://starwars.fandom.com/wiki/Talos_Drellik"
+        },
+        {
+          "Content": "Talos Drellik's brother",
+          "Href": "https://starwars.fandom.com/wiki/Talos_Drellik%27s_brother"
+        }
+      ],
+      "Values": [
+        "Talos Drellik",
+        "Talos Drellik's brother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -52,5 +82,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 360184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talos_Drellik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 499807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drellik_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 400529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talos_Drellik's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

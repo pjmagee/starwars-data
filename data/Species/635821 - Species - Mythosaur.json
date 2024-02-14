@@ -2,7 +2,7 @@
   "PageId": 635821,
   "PageUrl": "https://starwars.fandom.com/wiki/Mythosaur",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/59/MythosaurCh18.png/revision/latest?cb=20230308110203",
   "Data": [
     {
       "Label": "Titles",
@@ -12,22 +12,102 @@
       ]
     },
     {
+      "Label": "Average length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "More than 15 meters (50 feet)"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Yellow"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Black"
+      ]
+    },
+    {
       "Label": "Distinctions",
       "Links": [],
       "Values": [
         "Gigantic proportions"
       ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
+        }
+      ],
+      "Values": [
+        "Mandalore"
+      ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Mines of Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mines_of_Mandalore"
+        },
+        {
+          "Content": "Living Waters",
+          "Href": "https://starwars.fandom.com/wiki/Living_Waters"
+        }
+      ],
+      "Values": [
+        "Mines of Mandalore",
+        "Underwater inside the Living Waters lake"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 779606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mythosaur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
     {
       "PageId": 452682,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalore",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 720052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Living_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 757791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Living_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 672284,
       "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 673849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_Mandalorian_armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     }
   ]

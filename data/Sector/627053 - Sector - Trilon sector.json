@@ -15,16 +15,22 @@
       "Label": "Region(s)",
       "Links": [
         {
-          "Content": "Western Reaches",
-          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
-        },
-        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Western Reaches, Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier",
+        "Western Reaches"
       ]
     },
     {
@@ -49,6 +55,18 @@
       ],
       "Values": [
         "Gannaria"
+      ]
+    },
+    {
+      "Label": "High Republic Era",
+      "Links": [
+        {
+          "Content": "Batuu Jedi temple incident",
+          "Href": "https://starwars.fandom.com/wiki/Batuu_Jedi_temple_incident"
+        }
+      ],
+      "Values": [
+        "Batuu Jedi temple incident"
       ]
     },
     {
@@ -78,34 +96,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 633768,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 648323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valara",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 269474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gannaria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 625939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Batuu_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 467701,
       "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
-      "PageId": 569013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Batuu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 631401,
@@ -121,6 +119,31 @@
       "PageId": 631403,
       "PageUrl": "https://starwars.fandom.com/wiki/Ubaat_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 633768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 648323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 569013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Batuu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 625939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Batuu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 269474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gannaria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

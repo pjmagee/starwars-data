@@ -2,7 +2,7 @@
   "PageId": 627896,
   "PageUrl": "https://starwars.fandom.com/wiki/DC-17m_Interchangeable_Weapon_System",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/28/Gregor.png/revision/latest?cb=20130104134800",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f0/GregorDC17m-FFp61.png/revision/latest?cb=20220912175619",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,31 @@
       ]
     },
     {
+      "Label": "Model",
+      "Links": [],
+      "Values": [
+        "DC-17m"
+      ]
+    },
+    {
       "Label": "Type",
       "Links": [
         {
-          "Content": "Reconfigurable",
-          "Href": "https://starwars.fandom.com/wiki/Reconfigurable_blaster"
+          "Content": "Repeating blaster",
+          "Href": "https://starwars.fandom.com/wiki/Repeating_blaster"
         },
         {
-          "Content": "blaster rifle",
-          "Href": "https://starwars.fandom.com/wiki/Blaster_rifle"
+          "Content": "rifle",
+          "Href": "https://starwars.fandom.com/wiki/Rifle"
+        },
+        {
+          "Content": "Grenade launcher",
+          "Href": "https://starwars.fandom.com/wiki/Grenade_launcher"
         }
       ],
       "Values": [
-        "Reconfigurable blaster rifle"
+        "Repeating blaster rifle",
+        "Grenade launcher"
       ]
     },
     {
@@ -55,11 +67,5 @@
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 466335,
-      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    }
-  ]
+  "Relationships": []
 }

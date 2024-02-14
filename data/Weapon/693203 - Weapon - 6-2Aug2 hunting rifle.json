@@ -36,23 +36,6 @@
       ]
     },
     {
-      "Label": "Owners",
-      "Links": [
-        {
-          "Content": "Luke Skywalker",
-          "Href": "https://starwars.fandom.com/wiki/Luke_Skywalker"
-        },
-        {
-          "Content": "Suu Lawquane",
-          "Href": "https://starwars.fandom.com/wiki/Suu_Lawquane"
-        }
-      ],
-      "Values": [
-        "Luke Skywalker",
-        "Suu Lawquane"
-      ]
-    },
-    {
       "Label": "Locations",
       "Links": [
         {
@@ -75,7 +58,30 @@
       "Values": [
         "Homestead defense"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Lawquanes",
+          "Href": "https://starwars.fandom.com/wiki/Lawquanes"
+        },
+        {
+          "Content": "Lars family",
+          "Href": "https://starwars.fandom.com/wiki/Lars_family"
+        }
+      ],
+      "Values": [
+        "Lawquanes",
+        "Lars family"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 502677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Czerka_Arms",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

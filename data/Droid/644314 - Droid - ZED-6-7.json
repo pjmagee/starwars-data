@@ -21,10 +21,28 @@
         {
           "Content": "Polis Massa",
           "Href": "https://starwars.fandom.com/wiki/Polis_Massa"
+        },
+        {
+          "Content": "ABY",
+          "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "Executor",
+          "Href": "https://starwars.fandom.com/wiki/Executor"
+        },
+        {
+          "Content": "Mustafar",
+          "Href": "https://starwars.fandom.com/wiki/Mustafar"
         }
       ],
       "Values": [
-        "c. 3 ABY, Polis Massa (later rebuilt)"
+        "3 ABY, Polis Massa (later rebuilt)",
+        "Between 3 ABY and 4 ABY, Executor (rebuilt)",
+        "Between 3 ABY and 4 ABY, Mustafar (rebuilt)"
       ]
     },
     {
@@ -69,15 +87,27 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Sensor color",
       "Links": [
         {
           "Content": "Blue",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Blue"
+        "Blue",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -97,13 +127,34 @@
         {
           "Content": "Crimson Dawn",
           "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
+        },
+        {
+          "Content": "Darth Vader",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        },
+        {
+          "Content": "Droid uprising",
+          "Href": "https://starwars.fandom.com/wiki/Droid_uprising"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Crimson Dawn"
+        "Crimson Dawn",
+        "Darth Vader",
+        "Droid uprising",
+        "Scourge (As a vessel)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

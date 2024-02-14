@@ -2,7 +2,7 @@
   "PageId": 7510,
   "PageUrl": "https://starwars.fandom.com/wiki/Daminia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ee/Daminia-TEA.jpg/revision/latest?cb=20231229184430",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trans-Hydian"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-7"
@@ -62,31 +67,39 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Deserts",
+          "Content": "Desert",
           "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
         }
       ],
       "Values": [
-        "Deserts"
+        "Desert"
       ]
     },
     {
       "Label": "Major exports",
       "Links": [
         {
-          "Content": "Damind",
+          "Content": "Damind crystals",
           "Href": "https://starwars.fandom.com/wiki/Damind"
-        },
-        {
-          "Content": "crystals",
-          "Href": "https://starwars.fandom.com/wiki/Lightsaber_crystal"
         }
       ],
       "Values": [
         "Damind crystals"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Darth Revan's Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Revan%27s_Sith_Empire"
+        }
+      ],
+      "Values": [
+        "Darth Revan's Sith Empire"
       ]
     }
   ],

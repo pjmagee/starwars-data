@@ -2,7 +2,7 @@
   "PageId": 565112,
   "PageUrl": "https://starwars.fandom.com/wiki/Lumpawaroo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2a/Lumpawaroo.jpg/revision/latest?cb=20180913152752",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/Grownlump.jpg/revision/latest?cb=20230724082147",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,19 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Chewbacca's family",
@@ -58,7 +70,35 @@
       "Values": [
         "Chewbacca's family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Chewbacca",
+          "Href": "https://starwars.fandom.com/wiki/Chewbacca"
+        },
+        {
+          "Content": "Mallatobuck",
+          "Href": "https://starwars.fandom.com/wiki/Mallatobuck"
+        }
+      ],
+      "Values": [
+        "Chewbacca",
+        "Mallatobuck"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 51821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mallatobuck",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 666467,
   "PageUrl": "https://starwars.fandom.com/wiki/Primea_fleet",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -46,7 +47,7 @@
           "Href": "https://starwars.fandom.com/wiki/General"
         },
         {
-          "Content": "Yiv the Benevolent",
+          "Content": "Yiv",
           "Href": "https://starwars.fandom.com/wiki/Yiv"
         }
       ],
@@ -91,5 +92,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 681768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yiv's_battle_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 666459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nikardun_destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    }
+  ]
 }

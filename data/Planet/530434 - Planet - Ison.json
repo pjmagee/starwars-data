@@ -2,7 +2,7 @@
   "PageId": 530434,
   "PageUrl": "https://starwars.fandom.com/wiki/Ison",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a8/IsonBTM.png/revision/latest?cb=20210525190043",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ed/Ison-Legends_of_the_Alliance.jpg/revision/latest?cb=20231103185010",
   "Data": [
     {
       "Label": "Titles",
@@ -48,15 +48,15 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
-          "Content": " K-18",
+          "Content": "K-18",
           "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        " K-18"
+        "K-18"
       ]
     },
     {
@@ -70,13 +70,42 @@
       "Values": [
         "Ison Trade Corridor"
       ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Snowcapped mountains"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Haven",
+          "Href": "https://starwars.fandom.com/wiki/Haven_(Ison)"
+        }
+      ],
+      "Values": [
+        "Haven"
+      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 785929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haven_(Ison)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 533305,
       "PageUrl": "https://starwars.fandom.com/wiki/Ison_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 785663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorin_(Imperial)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

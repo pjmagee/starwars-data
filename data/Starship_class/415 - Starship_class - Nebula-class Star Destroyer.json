@@ -2,7 +2,7 @@
   "PageId": 415,
   "PageUrl": "https://starwars.fandom.com/wiki/Nebula-class_Star_Destroyer",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/48/NebulaClassSD-EGTW.jpg/revision/latest?cb=20120425020541",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2b/NebulaClassSD-EGTW.png/revision/latest?cb=20230124052550",
   "Data": [
     {
       "Label": "Titles",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Cruiser",
@@ -331,15 +331,30 @@
         {
           "Content": "Galactic Federation of Free Alliances",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
+        },
+        {
+          "Content": "Wheel Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Wheel_Security_Force"
         }
       ],
       "Values": [
         "New Republic",
-        "Galactic Federation of Free Alliances"
+        "Galactic Federation of Free Alliances",
+        "Wheel Security Force"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 29594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brilliant_(Nebula-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 5988,
+      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
     {
       "PageId": 42658,
       "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_(Nebula-class)",
@@ -353,16 +368,6 @@
     {
       "PageId": 353076,
       "PageUrl": "https://starwars.fandom.com/wiki/Dragonsnake_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 5988,
-      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 29594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brilliant_(Nebula-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

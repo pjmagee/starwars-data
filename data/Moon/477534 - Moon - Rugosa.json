@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-17",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caverns",
@@ -86,12 +86,25 @@
       ]
     },
     {
-      "Label": "Fauna",
+      "Label": "Flora",
       "Links": [
         {
           "Content": "Neebray",
           "Href": "https://starwars.fandom.com/wiki/Neebray"
         },
+        {
+          "Content": "leviathan",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_leviathan"
+        }
+      ],
+      "Values": [
+        "Neebray",
+        "A leviathan"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
         {
           "Content": "Trident cluster coral",
           "Href": "https://starwars.fandom.com/wiki/Trident_cluster_coral"
@@ -102,7 +115,6 @@
         }
       ],
       "Values": [
-        "Neebray",
         "Trident cluster coral",
         "Rugosan King coral"
       ]
@@ -110,19 +122,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 470202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_AAT_driver_battle_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 515675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neebray",
+      "PageId": 223881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neebray/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 568240,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trident_cluster_coral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 629127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ventress's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 499580,
@@ -130,19 +137,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 671831,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugosan_King_coral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 477525,
-      "PageUrl": "https://starwars.fandom.com/wiki/224",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
       "PageId": 655631,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2_super_battle_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 586490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 733803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_squad_(Rugosa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 679250,
@@ -160,14 +167,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 650881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 470202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_AAT_driver_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 721497,
@@ -175,24 +177,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 629127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ventress's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 586490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 670758,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_leviathan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 671831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugosan_King_coral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 568240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trident_cluster_coral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 477525,
+      "PageUrl": "https://starwars.fandom.com/wiki/224",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 515675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neebray",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 575926,
       "PageUrl": "https://starwars.fandom.com/wiki/Jek's_rotary_blaster_cannon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 650881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

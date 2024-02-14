@@ -2,13 +2,25 @@
   "PageId": 634950,
   "PageUrl": "https://starwars.fandom.com/wiki/Fennec_Shand",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9f/TBBF_Fennec_Shand.png/revision/latest?cb=20220511002135",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b4/FennecShandHS-TMCh15.png/revision/latest?cb=20201217015151",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Fennec Shand"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Mid Rim Territories"
       ]
     },
     {
@@ -33,6 +45,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -84,6 +103,10 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Kaminoan government",
+          "Href": "https://starwars.fandom.com/wiki/Ruling_Council_(Kamino)"
+        },
+        {
           "Content": "Hutt Clan",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Clan"
         },
@@ -93,12 +116,18 @@
         }
       ],
       "Values": [
+        "Kaminoan government (as a mercenary)",
         "Hutt Clan",
         "Fett gotra"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 717908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_outside_of_the_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 638461,
       "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Fennec_Shand",
@@ -110,13 +139,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 717908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_outside_of_the_Sanctuary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 719480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Recovery_of_Slave_I",
+      "PageUrl": "https://starwars.fandom.com/wiki/Firespray_heist",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]

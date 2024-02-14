@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -69,7 +76,19 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Grievous's family",
+          "Href": "https://starwars.fandom.com/wiki/Grievous%27s_family/Legends"
+        }
+      ],
+      "Values": [
+        "Grievous's family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
       "Links": [
         {
           "Content": "Qymaen jai Sheelal",
@@ -81,5 +100,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

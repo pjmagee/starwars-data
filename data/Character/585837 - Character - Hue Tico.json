@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tico family",
@@ -65,7 +65,74 @@
       "Values": [
         "Tico family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Storm",
+          "Href": "https://starwars.fandom.com/wiki/Storm"
+        },
+        {
+          "Content": "Etta",
+          "Href": "https://starwars.fandom.com/wiki/Etta"
+        }
+      ],
+      "Values": [
+        "Storm",
+        "Etta"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Thanya Tico",
+          "Href": "https://starwars.fandom.com/wiki/Thanya_Tico"
+        }
+      ],
+      "Values": [
+        "Thanya Tico"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Paige Tico",
+          "Href": "https://starwars.fandom.com/wiki/Paige_Tico"
+        },
+        {
+          "Content": "Rose Tico",
+          "Href": "https://starwars.fandom.com/wiki/Rose_Tico"
+        }
+      ],
+      "Values": [
+        "Paige Tico",
+        "Rose Tico"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 571492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paige_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Etta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 591755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Storm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rose_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

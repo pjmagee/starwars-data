@@ -2,7 +2,7 @@
   "PageId": 22958,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Ruling_Council/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/44/Inner_circle.jpg/revision/latest?cb=20130519182116",
   "Data": [
     {
       "Label": "Titles",
@@ -79,6 +79,10 @@
       "Label": "Date reorganized",
       "Links": [
         {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY/Legends"
+        },
+        {
           "Content": "7 ABY",
           "Href": "https://starwars.fandom.com/wiki/7_ABY/Legends"
         },
@@ -88,8 +92,9 @@
         }
       ],
       "Values": [
+        "4 ABY (as \"Emperor's Ruling Circle\")",
         "7 ABY",
-        "11 ABY"
+        "11 ABY (as \"Imperial Interim Ruling Council\")"
       ]
     },
     {
@@ -110,14 +115,49 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Thrawn's confederation",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_confederation"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
+        },
+        {
+          "Content": "Crimson Empire",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Thrawn's confederation",
+        "Dark Empire",
+        "Crimson Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 379799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 21207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Burr_Nolyds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 28857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nefta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 29049,
       "PageUrl": "https://starwars.fandom.com/wiki/Ch'Unkk",
@@ -126,6 +166,66 @@
     {
       "PageId": 29055,
       "PageUrl": "https://starwars.fandom.com/wiki/Llon_Banjeer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 29064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jeratai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 308905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Feena_D'Asta_(clone)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Coalition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 15015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sim_Aloo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 398855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ch'Unkk's_protocol_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 57208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paltr_Carvin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(purple_robe)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 345360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(tall_hat)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 89609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boss_Banjeer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mas_Amedda/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kadann",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 52711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ganner",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -139,86 +239,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 89609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boss_Banjeer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 1468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sate_Pestage/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 52711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ganner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 398862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Burr_Nolyds's_chambers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 28857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nefta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 15015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sim_Aloo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 431060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(black_robe)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 345360,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(tall_hat)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 103494,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xandel_Carivus's_Private_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 1756,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mas_Amedda/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 334313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_confederation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 510731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Coalition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 10991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Coruscant_(Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 165013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coh_Veshiv",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 21207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Burr_Nolyds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 63874,
       "PageUrl": "https://starwars.fandom.com/wiki/Plumba",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -229,13 +249,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 103494,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xandel_Carivus's_Private_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 2131,
       "PageUrl": "https://starwars.fandom.com/wiki/Sly_Moore/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 57208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paltr_Carvin",
+      "PageId": 26465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ars_Dangor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 398862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Burr_Nolyds's_chambers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 1468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sate_Pestage/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 431060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(black_robe)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -249,19 +289,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 26465,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ars_Dangor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 625163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Advisor_(purple_robe)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 398855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ch'Unkk's_protocol_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 10991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Coruscant_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

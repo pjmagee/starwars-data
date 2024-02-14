@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Star Dreadnought"
@@ -98,8 +98,8 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "superlaser",
-          "Href": "https://starwars.fandom.com/wiki/Superlaser/Legends"
+          "Content": "Axial superlaser",
+          "Href": "https://starwars.fandom.com/wiki/Axial_superlaser/Legends"
         },
         {
           "Content": "laser cannons",
@@ -143,6 +143,10 @@
           "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor/Legends"
         },
         {
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron/Legends"
+        },
+        {
           "Content": "TIE/sa bombers",
           "Href": "https://starwars.fandom.com/wiki/TIE/sa_bomber/Legends"
         },
@@ -160,23 +164,19 @@
         }
       ],
       "Values": [
-        "TIE/IN interceptors (600)",
+        "TIE/IN interceptors (600) (50 squadrons)",
         "TIE/sa bombers (96)",
+        "Various other support craft",
         "All Terrain Armored Transport walkers (100)",
         "Prefabricated garrison bases (5)"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [
-        {
-          "Content": "Gunners",
-          "Href": "https://starwars.fandom.com/wiki/Gunner/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Crew members (708,470)",
-        "Gunners (4,175)"
+        "780,470 (crew)",
+        "4,175 (gunners)"
       ]
     },
     {
@@ -188,9 +188,14 @@
     },
     {
       "Label": "Passengers",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper/Legends"
+        }
+      ],
       "Values": [
-        "150,000 (troops)"
+        "150,000 (Stormtroopers)"
       ]
     },
     {
@@ -215,6 +220,13 @@
       ],
       "Values": [
         "10 years"
+      ]
+    },
+    {
+      "Label": "Availability",
+      "Links": [],
+      "Values": [
+        "Military"
       ]
     },
     {
@@ -270,19 +282,24 @@
         {
           "Content": "Dark Empire",
           "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
+        },
+        {
+          "Content": "Zann Consortium",
+          "Href": "https://starwars.fandom.com/wiki/Zann_Consortium/Legends"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Dark Empire"
+        "Dark Empire",
+        "Zann Consortium (briefly)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 123062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Space_Battle_at_Yavin_4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 63170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Eclipse-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 1381,
@@ -290,9 +307,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 63170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Eclipse-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 123062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Space_Battle_at_Yavin_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

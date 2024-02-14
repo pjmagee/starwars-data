@@ -2,7 +2,7 @@
   "PageId": 707509,
   "PageUrl": "https://starwars.fandom.com/wiki/Boggs_Triff",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e9/BoggsT.png/revision/latest?cb=20210904002840",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/46/BoggsTriff-TftGELC.png/revision/latest?cb=20231130135411",
   "Data": [
     {
       "Label": "Titles",
@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -69,7 +76,35 @@
       "Values": [
         "Brown"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Boggs Triff's mob",
+          "Href": "https://starwars.fandom.com/wiki/Boggs_Triff%27s_mob"
+        }
+      ],
+      "Values": [
+        "Boggs Triff's mob"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 768058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 767897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boggs_Triff's_mob",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 768334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Boggs_Triff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    }
+  ]
 }

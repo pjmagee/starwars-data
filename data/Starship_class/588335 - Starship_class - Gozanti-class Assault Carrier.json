@@ -2,7 +2,7 @@
   "PageId": 588335,
   "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_Assault_Carrier",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5e/Gozanti-Mando.png/revision/latest?cb=20211110192918",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5e/Gozanti-Mando.png/revision/latest?cb=20230729035745",
   "Data": [
     {
       "Label": "Titles",
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -51,6 +51,32 @@
       ],
       "Values": [
         "Transport"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "210 ft"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "114 ft "
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "42 ft "
       ]
     },
     {
@@ -164,26 +190,31 @@
         {
           "Content": "Mandalorian resistance",
           "Href": "https://starwars.fandom.com/wiki/Mandalorian_resistance"
+        },
+        {
+          "Content": "Mandalorian fleet",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_fleet"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy",
         "Gideon's Imperial remnant",
-        "Mandalorian resistance"
+        "Mandalorian resistance",
+        "Mandalorian fleet"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 674278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gozanti-class_Assault_Carrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 460272,
       "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 674278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gozanti-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

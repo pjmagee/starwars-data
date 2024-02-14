@@ -48,7 +48,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Planet",
+      "Links": [],
+      "Values": [
+        "A gas giant"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-20"
@@ -122,7 +129,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -196,14 +203,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 44550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Travnin_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 535435,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Travnin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 44550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Travnin_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

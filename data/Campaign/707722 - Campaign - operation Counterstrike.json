@@ -2,7 +2,7 @@
   "PageId": 707722,
   "PageUrl": "operation:_Counterstrike",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6e/HighRepublic11-fighterbattle.png/revision/latest?cb=20231114100804",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "c. 231 BBY"
+        "231 BBY"
       ]
     },
     {
@@ -49,25 +49,65 @@
         {
           "Content": "Engagement in the Dreighton Nebula",
           "Href": "https://starwars.fandom.com/wiki/Engagement_in_the_Dreighton_Nebula"
+        },
+        {
+          "Content": "Battle on Aris",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Aris"
+        },
+        {
+          "Content": "Battle on Golrath",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Golrath"
+        },
+        {
+          "Content": "Battle on Port Haven",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Port_Haven"
+        },
+        {
+          "Content": "Infiltration of the Nihil Tempest",
+          "Href": "https://starwars.fandom.com/wiki/Infiltration_of_the_Nihil_Tempest"
         }
       ],
       "Values": [
         "Engagement on Carlac",
         "Engagement on Magaveene",
-        "Engagement in the Dreighton Nebula"
+        "Engagement in the Dreighton Nebula",
+        "Battle on Aris",
+        "Battle on Golrath",
+        "Battle on Port Haven",
+        "Infiltration of the Nihil Tempest"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 719344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil_conflict",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 776231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Golrath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 776232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Aris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 776233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Port_Haven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 725390,
       "PageUrl": "https://starwars.fandom.com/wiki/Engagement_on_Carlac",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 719344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nihil_conflict",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 775789,
+      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Nihil_Tempest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

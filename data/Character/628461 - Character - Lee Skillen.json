@@ -2,12 +2,29 @@
   "PageId": 628461,
   "PageUrl": "https://starwars.fandom.com/wiki/Lee_Skillen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Lee Skillen"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "aquatic",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
+        },
+        {
+          "Content": "world",
+          "Href": "https://starwars.fandom.com/wiki/Planet"
+        }
+      ],
+      "Values": [
+        "An aquatic world"
       ]
     },
     {
@@ -32,6 +49,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -66,6 +90,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "mother",
+          "Href": "https://starwars.fandom.com/wiki/Lee_Skillen%27s_mother"
+        }
+      ],
+      "Values": [
+        "A mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -78,5 +114,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 643512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lee_Skillen's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

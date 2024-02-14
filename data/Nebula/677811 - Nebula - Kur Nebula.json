@@ -17,10 +17,27 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-20",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-20"
       ]
     },
     {
@@ -38,28 +55,23 @@
   ],
   "Relationships": [
     {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 721167,
       "PageUrl": "https://starwars.fandom.com/wiki/Teemank",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 682217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gravhan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 679043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 682218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dellex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 671077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kassav_Milliko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 671195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jora_Malli",
+      "PageId": 680169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wet_Bub",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -73,18 +85,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 671077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kassav_Milliko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 679043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 671195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jora_Malli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 680169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wet_Bub",
+      "PageId": 682217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravhan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 682218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dellex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

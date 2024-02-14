@@ -25,9 +25,14 @@
     },
     {
       "Label": "Season",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Volume 1",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Visions_Volume_1"
+        }
+      ],
       "Values": [
-        "1"
+        "Volume 1"
       ]
     },
     {
@@ -85,9 +90,26 @@
       "Values": [
         "Lop & Ochō"
       ]
+    },
+    {
+      "Label": "Next episode",
+      "Links": [
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith_(short_film)"
+        }
+      ],
+      "Values": [
+        "Sith"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 753641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_(short_film)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    },
     {
       "PageId": 700745,
       "PageUrl": "https://starwars.fandom.com/wiki/Lop_&_Ochō",

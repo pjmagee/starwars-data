@@ -1,13 +1,14 @@
 {
   "PageId": 415295,
-  "PageUrl": "https://starwars.fandom.com/wiki/Jedi_enclave_(Ossus)",
+  "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Enclave_(Ossus)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Jedi enclave"
+        "Jedi Enclave"
       ]
     },
     {
@@ -23,6 +24,13 @@
       ]
     },
     {
+      "Label": "Point(s) of interest",
+      "Links": [],
+      "Values": [
+        "Halls"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -35,5 +43,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

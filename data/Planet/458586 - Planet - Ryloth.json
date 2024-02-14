@@ -19,10 +19,6 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
-          "Content": "Cloak of the Sith",
-          "Href": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith"
-        },
-        {
           "Content": "Spice Triangle",
           "Href": "https://starwars.fandom.com/wiki/Spice_Triangle"
         },
@@ -33,7 +29,6 @@
       ],
       "Values": [
         "Outer Rim Territories",
-        "Cloak of the Sith",
         "Spice Triangle",
         "The Slice"
       ]
@@ -110,7 +105,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-17",
@@ -125,6 +120,10 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Cloak of the Sith",
+          "Href": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith"
+        },
+        {
           "Content": "Corellian Run",
           "Href": "https://starwars.fandom.com/wiki/Corellian_Run"
         },
@@ -134,6 +133,7 @@
         }
       ],
       "Values": [
+        "Cloak of the Sith",
         "Corellian Run",
         "Mumble's Turnaround"
       ]
@@ -163,6 +163,18 @@
       ]
     },
     {
+      "Label": "Diameter",
+      "Links": [
+        {
+          "Content": "km",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer"
+        }
+      ],
+      "Values": [
+        "10,600 km (6,587 miles)"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
@@ -182,8 +194,12 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
+        {
+          "Content": "Deserts",
+          "Href": "https://starwars.fandom.com/wiki/Desert"
+        },
         {
           "Content": "jungles",
           "Href": "https://starwars.fandom.com/wiki/Jungle"
@@ -198,6 +214,7 @@
         }
       ],
       "Values": [
+        "Deserts",
         "Dense jungles",
         "Mesas",
         "Valleys",
@@ -210,6 +227,10 @@
         {
           "Content": "Bypass Notch",
           "Href": "https://starwars.fandom.com/wiki/Bypass_Notch"
+        },
+        {
+          "Content": "Imperial fortress",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_fortress_(Ryloth)"
         },
         {
           "Content": "Jixuan desert",
@@ -230,6 +251,7 @@
       ],
       "Values": [
         "Bypass Notch",
+        "Imperial fortress",
         "Jixuan desert",
         "Ryloth's northern continent",
         "Tann Province",
@@ -303,7 +325,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -460,169 +482,54 @@
   ],
   "Relationships": [
     {
-      "PageId": 499702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 531762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth_(Phoenix_Squadron)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 499704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Breehld",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 552678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 499707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 554918,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relief_mission_to_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 500135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drua",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 625020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emir_of_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 532796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Max_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 590860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_hovertrain_attack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 581807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dianthy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 484076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 503008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lylek_tube",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 702011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 702095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Howzer's_squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 702189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_security_forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 576564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 576583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 614597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 552704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalikori",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 512622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yendor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 513377,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bizu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 530331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Goll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531366,
-      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raithe_Kole",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 475168,
-      "PageUrl": "https://starwars.fandom.com/wiki/TX-20",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 639996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yendor's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 546028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_northern_continent",
+      "PageId": 552710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tann_Province",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 505657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_deepdock",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 552711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tulara_Ravine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 712095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Articles_of_membership",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+      "PageId": 540462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_kinetic_glider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 556197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beezer_Fortuna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 555495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhovari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 596224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 714222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_incident",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 701485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gobi_Glie's_starship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 695266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 568805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doonium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 503360,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eshgo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 507906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 553558,
@@ -645,88 +552,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 553948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dashira_Dobeq",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 569359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ophim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555389,
-      "PageUrl": "https://starwars.fandom.com/wiki/RB-551",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 569420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_summer_riots",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 646747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Munch-fungus_loaf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 581564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Level_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 581565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Level_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 581645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Isval's_garret",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 581646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dish_3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 550707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Flight_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 576560,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 540462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_kinetic_glider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 124169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capitol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 600597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 601149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dicsato_Smi's_corner_market",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 712069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assembly_building",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 500627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lessu",
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
@@ -735,14 +562,269 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 612045,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_freedom_fighters_hideout",
+      "PageId": 572198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Octagon_district",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 499181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 505657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_deepdock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 464088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oola",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lyn_Me",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'leki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 452331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 787052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drave's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 530071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jixuan_desert",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 532020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_equatorial_forest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 634988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dross_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 635960,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 635961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 512622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yendor_Brethen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 513377,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bizu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nima_(Twi'lek)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diala_Passil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 536716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 734298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ancient_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 755602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 530331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 630120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 514726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 576564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 576583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 542591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tekku_Aylay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 542883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nilim_Bril",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 543422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chorn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 576561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kallon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 576562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryiin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 484076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 584814,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 592913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dao's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 500139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perilous",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 553888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cazne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 500413,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 498130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gobi_Glie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 532014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nordon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 525554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 581807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dianthy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 613613,
       "PageUrl": "https://starwars.fandom.com/wiki/Level_Two_(Ryloth)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 592919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 541316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tae_Boon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 550530,
+      "PageUrl": "https://starwars.fandom.com/wiki/OM-5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 550531,
+      "PageUrl": "https://starwars.fandom.com/wiki/OM-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 514714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 746715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 701486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_nearest_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 555443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Ark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 442414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hera_Syndulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 532022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_shuttle_(Mission_to_Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 701401,
@@ -775,154 +857,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 504619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 531762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth_(Phoenix_Squadron)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 677264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 452331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 590860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_hovertrain_attack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 630120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 525554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 635112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Longest_Night",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
-    },
-    {
-      "PageId": 562511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_largest_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 575985,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_outermost_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 575986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_third_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 531672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_Scout_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 538688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531362,
-      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_home",
+      "PageId": 552676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_residence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 531687,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kala'uun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 635578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Defense_Authority_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 498130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gobi_Glie",
+      "PageId": 556197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beezer_Fortuna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 532014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nordon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 503008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lylek_tube",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 724514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 475917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 497119,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'leki",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 552710,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tann_Province",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tulara_Ravine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 553888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cazne",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 500698,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gutkurr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 503004,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lylek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 567299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_garrison_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 569132,
-      "PageUrl": "https://starwars.fandom.com/wiki/Equatorial_Communications_Hub",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 472511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ima-Gun_Di",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 473130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orn_Free_Taa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 712095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Articles_of_membership",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
     },
     {
       "PageId": 498411,
@@ -935,34 +887,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 681899,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_bombed_Ryloth_city",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 724514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 693540,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9904's_Elite_Squad",
+      "PageId": 711986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Assembly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 518125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightning_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 701222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Hera_Syndulla_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 701997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Cham_and_Eleni_Syndulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 607709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rutian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 566170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 722467,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_in_Lessu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 500704,
@@ -985,9 +927,154 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 584814,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_blockade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 635006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charth_Brethen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hahnee_Brethen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 475168,
+      "PageUrl": "https://starwars.fandom.com/wiki/TX-20",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 562511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_largest_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 503006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whiptree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 566170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 611906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 491163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Isval",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_bombed_Ryloth_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 581564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Level_Seven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 581565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Level_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 581645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Isval's_garret",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 581646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dish_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 473563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 701222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Hera_Syndulla_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 701997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 458119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cham_Syndulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eshgo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 569359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ophim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 604927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tualon_Yaluna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 714222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fiasco_on_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 550707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Flight_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 529440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blurrg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 782303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glabos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 531362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Numa's_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 531687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kala'uun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 497419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Free_Ryloth_Movement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 639046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xi'an",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Longest_Night",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
     },
     {
       "PageId": 496319,
@@ -1000,74 +1087,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
-      "PageId": 473563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 611906,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 635607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rylothian_jade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 625020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emir_of_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 456823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bib_Fortuna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 517792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eleni_Syndulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 552737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xira",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 568247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ann_Gella",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 550530,
-      "PageUrl": "https://starwars.fandom.com/wiki/OM-5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 550531,
-      "PageUrl": "https://starwars.fandom.com/wiki/OM-7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 518125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightning_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 503006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whiptree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 529440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blurrg",
+      "PageId": 607709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rutian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 542591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tekku_Aylay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 568805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doonium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 695464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 696380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 784142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Imperial_supply_convoys",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 628362,
@@ -1075,189 +1117,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 531361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nabat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 555495,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhovari",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 530071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jixuan_desert",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 532020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_equatorial_forest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 554918,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relief_mission_to_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 701486,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_nearest_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 542657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_archives",
+      "PageId": 567299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_garrison_(Ryloth)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 507906,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 533473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Insurgency",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 476663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charth_Brethen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hahnee_Brethen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 536716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ration_pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 592913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dao's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 572198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Octagon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 663090,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bypass_Notch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 497419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Free_Ryloth_Movement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 453968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pyke_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 514726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 722467,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_in_Lessu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 464088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oola",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 464089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lyn_Me",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 491163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Isval",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 542883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nilim_Bril",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 543422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chorn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 576561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kallon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 576562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryiin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 514714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 557482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortuna_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 634988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dross_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 635960,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 635961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 457105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 552676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_residence",
+      "PageId": 569132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Equatorial_Communications_Hub",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 500413,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 458119,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cham_Syndulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 458235,
@@ -1285,11 +1152,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 554426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Captain_of_the_Royal_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 570675,
       "PageUrl": "https://starwars.fandom.com/wiki/Tann_Gella",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -1310,34 +1172,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xi'an",
+      "PageId": 693540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 702011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 702095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Howzer's_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 702189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_security_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 575985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_outermost_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 575986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_third_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 576560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 600597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 601149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dicsato_Smi's_corner_market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 635607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rylothian_jade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 635088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 456823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bib_Fortuna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qin",
+      "PageId": 568247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ann_Gella",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 664905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Munch-fungus",
+      "PageId": 793307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incident_on_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 646747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Munch-fungus_loaf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 711986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Assembly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 500139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perilous",
+      "PageId": 701485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gobi_Glie's_starship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 499181,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 663090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bypass_Notch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 635010,
@@ -1355,49 +1272,239 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 695464,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 670814,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tolonda_Oversector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 696380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_energy_bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 517792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eleni_Syndulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 555443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Ark",
+      "PageId": 552737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_1_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 504619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 531672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_Scout_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 538688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 695266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 754335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla_Kalikori",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 442414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hera_Syndulla",
+      "PageId": 499702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 541316,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tae_Boon",
+      "PageId": 499704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Breehld",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 635088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ryloth_(First_Order–Resistance_war)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 499707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 532022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_shuttle_(Mission_to_Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 500135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drua",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 592919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 532796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Max_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 569420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_summer_riots",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 612045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_freedom_fighters_hideout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 635578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Defense_Authority_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalikori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 677264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 124169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capitol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 712069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assembly_building",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 598129,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 596224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 557482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortuna_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 664905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Munch-fungus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 457105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 476663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 774408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oola's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 777474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drave's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 542657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_archives",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 746721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_fortress_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 546028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth's_northern_continent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 453968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pyke_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 503004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lylek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 533473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Insurgency",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 553948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dashira_Dobeq",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 554426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Captain_of_the_Royal_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nabat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 596142,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_droid_patrol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 782921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth_(Tualon_Yaluna)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 614597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 472511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ima-Gun_Di",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 473130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orn_Free_Taa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 475917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 555389,
+      "PageUrl": "https://starwars.fandom.com/wiki/RB-551",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 639996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yendor's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 500698,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gutkurr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

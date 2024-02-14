@@ -1,6 +1,6 @@
 {
   "PageId": 374451,
-  "PageUrl": "https://starwars.fandom.com/wiki/Garosian_Civil_War",
+  "PageUrl": "https://starwars.fandom.com/wiki/Garosian_civil_war",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War",
   "ImageUrl": null,
   "Data": [
@@ -8,7 +8,23 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Garosian Civil War"
+        "Garosian civil war"
+      ]
+    },
+    {
+      "Label": "Beginning",
+      "Links": [
+        {
+          "Content": "206 BBY",
+          "Href": "https://starwars.fandom.com/wiki/206_BBY"
+        },
+        {
+          "Content": "107 BBY",
+          "Href": "https://starwars.fandom.com/wiki/107_BBY"
+        }
+      ],
+      "Values": [
+        "Between c. 206 BBY and 107 BBY"
       ]
     },
     {
@@ -46,9 +62,26 @@
       "Values": [
         "Imperial presence on Garos IV"
       ]
+    },
+    {
+      "Label": "Major battles",
+      "Links": [
+        {
+          "Content": "Whahalla Massacre",
+          "Href": "https://starwars.fandom.com/wiki/Whahalla_Massacre"
+        }
+      ],
+      "Values": [
+        "Whahalla Massacre"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 597495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whahalla_Massacre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 342928,
       "PageUrl": "https://starwars.fandom.com/wiki/Msst_sector",

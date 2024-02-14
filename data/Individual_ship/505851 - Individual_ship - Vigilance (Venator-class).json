@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Kuat Drive Yards",
-          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
-        }
-      ],
-      "Values": [
-        "Kuat Drive Yards"
-      ]
-    },
-    {
       "Label": "Product line",
       "Links": [
         {
@@ -36,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -56,14 +44,21 @@
         }
       ],
       "Values": [
-        "1,137 meters (3,730 ft. 4 in.)"
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "268 meters (938ft 4 in.) (in flight)"
+        "268 meters"
       ]
     },
     {
@@ -80,11 +75,26 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "Tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "DBY-827 heavy turbolaser turrets (8)",
-        "Medium dual turbolaser cannons (2)"
+        "8 DBY-827 heavy turbolaser turrets",
+        "2 medium dual turbolaser cannons",
+        "Laser cannons",
+        "Proton torpedo launchers",
+        "Tractor beam projectors"
       ]
     },
     {
@@ -123,19 +133,12 @@
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "Hangar bay",
+          "Content": "Hangar",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
         "Hangar bay"
-      ]
-    },
-    {
-      "Label": "Crew",
-      "Links": [],
-      "Values": [
-        "7,400"
       ]
     },
     {
@@ -163,20 +166,34 @@
       "Label": "Role(s)",
       "Links": [
         {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
           "Content": "Command ship",
           "Href": "https://starwars.fandom.com/wiki/Command_ship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
         }
       ],
       "Values": [
-        "Command ship"
+        "Battleship",
+        "Command ship",
+        "Starfighter carrier"
       ]
     },
     {
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Destruction of the Vanqor listening post",
-          "Href": "https://starwars.fandom.com/wiki/Destruction_of_the_Vanqor_listening_post"
+          "Content": "Destruction of the Vanqor listening station",
+          "Href": "https://starwars.fandom.com/wiki/Destruction_of_the_Vanqor_listening_station"
         },
         {
           "Content": "Second battle of Christophsis",
@@ -188,7 +205,7 @@
         }
       ],
       "Values": [
-        "Destruction of the Vanqor listening post",
+        "Destruction of the Vanqor listening station",
         "Second battle of Christophsis",
         "Battle of Utapau"
       ]
@@ -252,7 +269,7 @@
         },
         {
           "Content": "CC-2224",
-          "Href": "https://starwars.fandom.com/wiki/CC-2224"
+          "Href": "https://starwars.fandom.com/wiki/Cody"
         }
       ],
       "Values": [
@@ -274,14 +291,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 651987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
       "PageId": 505946,
       "PageUrl": "https://starwars.fandom.com/wiki/Kav_Bayons",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 651987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

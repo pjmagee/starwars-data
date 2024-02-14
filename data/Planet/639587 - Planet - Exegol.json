@@ -2,7 +2,7 @@
   "PageId": 639587,
   "PageUrl": "https://starwars.fandom.com/wiki/Exegol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9c/Exegol-TROS-VD.png/revision/latest?cb=20191225065904",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/40/Exegol-TROSTGG.png/revision/latest?cb=20230724014110",
   "Data": [
     {
       "Label": "Titles",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "F-7",
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Rocky",
@@ -165,6 +165,10 @@
           "Href": "https://starwars.fandom.com/wiki/Sadow_escarpment"
         },
         {
+          "Content": "Sanctuary district",
+          "Href": "https://starwars.fandom.com/wiki/Sanctuary_district"
+        },
+        {
           "Content": "Sith Citadel",
           "Href": "https://starwars.fandom.com/wiki/Sith_Citadel"
         }
@@ -174,6 +178,7 @@
         "Hâsk desert",
         "Hon Zduul plateau",
         "Sadow escarpment",
+        "Sanctuary district",
         "Sith Citadel"
       ]
     },
@@ -212,15 +217,20 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Symeong",
+          "Href": "https://starwars.fandom.com/wiki/Symeong"
         }
       ],
       "Values": [
-        "Human"
+        "Human",
+        "Symeong"
       ]
     },
     {
@@ -244,41 +254,31 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Sith Order",
+          "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
+        },
+        {
+          "Content": "Sith Eternal",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Eternal"
         },
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Sith Eternal",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Eternal"
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
       ],
       "Values": [
-        "Sith Order",
+        "Sith",
+        "Sith Eternal",
         "Galactic Empire",
-        "Sith Eternal"
+        "First Order"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 658124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sanguis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 73963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
     {
       "PageId": 640838,
       "PageUrl": "https://starwars.fandom.com/wiki/ST-W48_blaster",
@@ -295,9 +295,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 513517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley",
+      "PageId": 748628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_amulet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 726653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knights_of_Gonk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 623452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enric_Pryde",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 640131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 651221,
@@ -305,29 +325,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 453304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cloning",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 639600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 654868,
-      "PageUrl": "https://starwars.fandom.com/wiki/SP-B50_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 710430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sutta",
+      "PageId": 639742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 724176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forbidden_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 639745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Derriphan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 500483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ur-Kittât",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 639719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_cultist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign_Protector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639625,
+      "PageUrl": "https://starwars.fandom.com/wiki/26th_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 639632,
@@ -390,69 +415,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 639620,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 713858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 502844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snoke",
+      "PageId": 513517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 623452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enric_Pryde",
+      "PageId": 745203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droid_Snoke",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 684139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alpha_Three_(Exegol)",
+      "PageId": 745204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Intellectual_Snoke",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 684140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Leader_(Exegol)",
+      "PageId": 745234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backwards_Snoke",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 724108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_book_(Exegol)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 640486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal_officer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 637161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 654868,
+      "PageUrl": "https://starwars.fandom.com/wiki/SP-B50_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 642926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_officer_(Exegol)",
+      "PageId": 452582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 703329,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Citadel_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 639803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Throne_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 639940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Citadel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 704386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cloning_program",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 647814,
@@ -460,9 +455,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 500483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ur-Kittât",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+      "PageId": 713858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 639806,
+      "PageUrl": "https://starwars.fandom.com/wiki/ST-I4191",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639807,
+      "PageUrl": "https://starwars.fandom.com/wiki/ST-A1215",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Simero_Quonit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Milon_Lenwith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Urcos_Furdam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 640035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seftin_Vanik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 703329,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_science_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 639586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Final_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 639641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citizens'_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 647870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 691699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_Sith_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 639962,
@@ -485,34 +545,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 637278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasaana_(Resistance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 639932,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 639590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
+      "PageId": 711395,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Secrets_of_the_Sith",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 452582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472915,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472920,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 781281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 692115,
@@ -520,109 +560,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 651228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 637161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 475265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nien_Nunb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 679961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 726653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knights_of_Gonk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 640486,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal_officer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 671775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quest_for_Exegol",
+      "PageId": 742011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_Exegol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 626663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 640131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 640134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 711395,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Secrets_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 639586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Final_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 639641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Citizens'_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 647870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 453271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 639719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_cultist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 639805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign_Protector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 724101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sanguis'_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 639625,
-      "PageUrl": "https://starwars.fandom.com/wiki/26th_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 691699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_Sith_guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 452601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 562119,
-      "PageUrl": "https://starwars.fandom.com/wiki/R6-D8",
+      "PageId": 730624,
+      "PageUrl": "https://starwars.fandom.com/wiki/R7-FNG",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 724108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_book_(Exegol)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 639428,
@@ -665,11 +620,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masir_Trach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 639741,
       "PageUrl": "https://starwars.fandom.com/wiki/Frantis_Griss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -680,44 +630,159 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639806,
-      "PageUrl": "https://starwars.fandom.com/wiki/ST-I4191",
+      "PageId": 774693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funky_Snoke",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639807,
-      "PageUrl": "https://starwars.fandom.com/wiki/ST-A1215",
+      "PageId": 704386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cloning_program",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 684139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alpha_Three_(Exegol)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Simero_Quonit",
+      "PageId": 684140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Leader_(Exegol)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639811,
-      "PageUrl": "https://starwars.fandom.com/wiki/Milon_Lenwith",
+      "PageId": 626663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 671775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quest_for_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 502844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snoke",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Urcos_Furdam",
+      "PageId": 642926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_officer_(Exegol)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
+      "PageId": 452601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 679961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 639620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 675359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_cult",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 639803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Throne_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 639940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Citadel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 73963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 453304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloning",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 710430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sutta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 639745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Derriphan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 640134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 640035,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seftin_Vanik",
+      "PageId": 475265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nien_Nunb",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 658124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sanguis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562119,
+      "PageUrl": "https://starwars.fandom.com/wiki/R6-D8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 724176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forbidden_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 651228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 742788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shipyards_of_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 710507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_talisman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 472915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 724101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sanguis'_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

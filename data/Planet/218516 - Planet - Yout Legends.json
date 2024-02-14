@@ -53,15 +53,19 @@
         {
           "Content": "Yout 12",
           "Href": "https://starwars.fandom.com/wiki/Yout_12"
+        },
+        {
+          "Content": "moons",
+          "Href": "https://starwars.fandom.com/wiki/Moon/Legends"
         }
       ],
       "Values": [
-        "At least 12",
-        "Yout 12"
+        "Yout 12",
+        "At least 11 other moons"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-7"
@@ -94,6 +98,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 218512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yout_12",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 272100,
       "PageUrl": "https://starwars.fandom.com/wiki/Yout_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -102,11 +111,6 @@
       "PageId": 332357,
       "PageUrl": "https://starwars.fandom.com/wiki/Entralla_Route/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 218512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yout_12",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

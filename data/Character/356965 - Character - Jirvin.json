@@ -2,6 +2,7 @@
   "PageId": 356965,
   "PageUrl": "https://starwars.fandom.com/wiki/Jirvin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -27,7 +28,7 @@
       "Links": [
         {
           "Content": "Quesoth",
-          "Href": "https://starwars.fandom.com/wiki/Quesoth/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Quesoth"
         }
       ],
       "Values": [
@@ -47,5 +48,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 737750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trevik's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

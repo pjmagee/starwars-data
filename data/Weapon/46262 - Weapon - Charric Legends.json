@@ -2,7 +2,7 @@
   "PageId": 46262,
   "PageUrl": "https://starwars.fandom.com/wiki/Charric/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ab/Charric-FF.png/revision/latest?cb=20060323042539",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/27/Charric2-FF137.png/revision/latest?cb=20231019051903",
   "Data": [
     {
       "Label": "Titles",
@@ -15,50 +15,37 @@
       "Label": "Type",
       "Links": [
         {
-          "Content": "Blaster rifle",
-          "Href": "https://starwars.fandom.com/wiki/Blaster_rifle/Legends"
+          "Content": "maser",
+          "Href": "https://starwars.fandom.com/wiki/Maser"
         }
       ],
       "Values": [
-        "Blaster rifle"
+        "Ranged maser weapon"
       ]
     },
     {
       "Label": "Culture",
       "Links": [
         {
-          "Content": "Chiss Ascendancy",
-          "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy/Legends"
+          "Content": "Chiss",
+          "Href": "https://starwars.fandom.com/wiki/Chiss/Legends"
         }
       ],
       "Values": [
-        "Chiss Ascendancy"
-      ]
-    },
-    {
-      "Label": "Cost",
-      "Links": [
-        {
-          "Content": "credits",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
-        }
-      ],
-      "Values": [
-        "500 credits"
-      ]
-    },
-    {
-      "Label": "Weight",
-      "Links": [
-        {
-          "Content": "kilograms",
-          "Href": "https://starwars.fandom.com/wiki/Kilogram/Legends"
-        }
-      ],
-      "Values": [
-        "4.5 kilograms"
+        "Chiss"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 770261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charric_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 770266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charric_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

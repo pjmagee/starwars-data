@@ -17,14 +17,10 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
-        },
-        {
-          "Content": "Transitory Mists",
-          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
-        "Inner Rim; Transitory Mists"
+        "Inner Rim"
       ]
     },
     {
@@ -33,29 +29,51 @@
         {
           "Content": "Hapes Cluster",
           "Href": "https://starwars.fandom.com/wiki/Hapes_Cluster/Legends"
+        },
+        {
+          "Content": "Hapan Rim Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Hapan_Rim_Worlds"
+        },
+        {
+          "Content": "Transitory Mists",
+          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
-        "Hapes Cluster"
+        "Hapes Cluster",
+        "Hapan Rim Worlds",
+        "Transitory Mists"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-9"
       ]
     },
     {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Maad",
+          "Href": "https://starwars.fandom.com/wiki/Maad"
+        }
+      ],
+      "Values": [
+        "Maad"
+      ]
+    },
+    {
       "Label": "Orbits",
       "Links": [
         {
-          "Content": "Shedu Maad",
-          "Href": "https://starwars.fandom.com/wiki/Shedu_Maad"
-        },
-        {
           "Content": "Qogo",
           "Href": "https://starwars.fandom.com/wiki/Qogo"
+        },
+        {
+          "Content": "Shedu Maad",
+          "Href": "https://starwars.fandom.com/wiki/Shedu_Maad"
         },
         {
           "Content": "Uluq",
@@ -63,9 +81,33 @@
         }
       ],
       "Values": [
-        "Shedu Maad",
         "Qogo",
+        "Shedu Maad",
         "Uluq"
+      ]
+    },
+    {
+      "Label": "Space stations",
+      "Links": [
+        {
+          "Content": "Uroro Station",
+          "Href": "https://starwars.fandom.com/wiki/Uroro_Station"
+        }
+      ],
+      "Values": [
+        "Uroro Station"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "The Throat",
+          "Href": "https://starwars.fandom.com/wiki/The_Throat"
+        }
+      ],
+      "Values": [
+        "The Throat"
       ]
     },
     {
@@ -74,20 +116,10 @@
         {
           "Content": "Jedi Coalition",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Coalition"
-        },
-        {
-          "Content": "New Jedi Order",
-          "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
-        },
-        {
-          "Content": "Galactic Federation of Free Alliances",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
-        "Jedi Coalition",
-        "New Jedi Order",
-        "Galactic Federation of Free Alliances"
+        "Jedi Coalition"
       ]
     }
   ],
@@ -98,9 +130,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 206803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uluq",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 206804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qogo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 206802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uroro_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 761256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
       "PageId": 1078,
       "PageUrl": "https://starwars.fandom.com/wiki/Hapes_Cluster/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 539008,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Throat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 450927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Uroro_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

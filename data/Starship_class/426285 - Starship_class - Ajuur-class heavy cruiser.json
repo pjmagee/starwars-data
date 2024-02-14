@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Cruiser",
@@ -29,14 +29,24 @@
         {
           "Content": "Hutt Cartel",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Cartel"
+        },
+        {
+          "Content": "Mandalorian clans",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian/Legends"
         }
       ],
       "Values": [
-        "Hutt Cartel"
+        "Hutt Cartel",
+        "Mandalorian clans"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 456260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 371855,
       "PageUrl": "https://starwars.fandom.com/wiki/Spirit_of_Vengeance",

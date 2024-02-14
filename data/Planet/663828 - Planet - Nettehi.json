@@ -17,10 +17,15 @@
         {
           "Content": "Unknown Regions",
           "Href": "https://starwars.fandom.com/wiki/Unknown_Regions"
+        },
+        {
+          "Content": "Holy Paataatus space",
+          "Href": "https://starwars.fandom.com/wiki/Holy_Paataatus_space"
         }
       ],
       "Values": [
-        "Unknown Regions"
+        "Unknown Regions",
+        "Holy Paataatus space"
       ]
     },
     {
@@ -70,29 +75,29 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Nikardun",
-          "Href": "https://starwars.fandom.com/wiki/Nikardun"
+          "Content": "Nikardun Destiny",
+          "Href": "https://starwars.fandom.com/wiki/Nikardun_Destiny"
         }
       ],
       "Values": [
-        "Nikardun remnants"
+        "Nikardun Destiny"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 726463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holy_Paataatus_space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 663827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 663834,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Paataatus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 687554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 698483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_above_Nettehi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -111,9 +116,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 663827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 698483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_above_Nettehi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 687554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

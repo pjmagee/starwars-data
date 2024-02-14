@@ -2,6 +2,7 @@
   "PageId": 464563,
   "PageUrl": "https://starwars.fandom.com/wiki/Alli_Krieger",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,35 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Erek Krieger",
+          "Href": "https://starwars.fandom.com/wiki/Erek_Krieger"
+        },
+        {
+          "Content": "Unnamed sister",
+          "Href": "https://starwars.fandom.com/wiki/Alli_Krieger%27s_sister"
+        }
+      ],
+      "Values": [
+        "Erek Krieger",
+        "Unnamed sister"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 464564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erek_Krieger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 541953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alli_Krieger's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

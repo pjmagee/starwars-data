@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "starfighter",
@@ -188,19 +188,19 @@
         {
           "Content": "Invids",
           "Href": "https://starwars.fandom.com/wiki/Invids"
-        },
-        {
-          "Content": "Rebel privateers",
-          "Href": "https://starwars.fandom.com/wiki/Rebel_privateer"
         }
       ],
       "Values": [
-        "Invids",
-        "Rebel privateers"
+        "Invids"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 63157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 38515,
       "PageUrl": "https://starwars.fandom.com/wiki/Booty_Full",
@@ -209,11 +209,6 @@
     {
       "PageId": 12344,
       "PageUrl": "https://starwars.fandom.com/wiki/Free_Lance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

@@ -2,7 +2,7 @@
   "PageId": 391449,
   "PageUrl": "https://starwars.fandom.com/wiki/Hasaq_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3c/Hasaq-TEA.jpg/revision/latest?cb=20230806081508",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -36,40 +41,59 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-12"
       ]
     },
     {
-      "Label": "Orbits",
+      "Label": "Suns",
       "Links": [
         {
-          "Content": "Hasaq",
-          "Href": "https://starwars.fandom.com/wiki/Hasaq"
+          "Content": "Hasaq's sun",
+          "Href": "https://starwars.fandom.com/wiki/Hasaq%27s_sun"
         }
       ],
       "Values": [
-        "Hasaq"
+        "Hasaq's sun"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Nanth'ri Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Route"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Darth Revan's Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Revan%27s_Sith_Empire"
+        }
+      ],
+      "Values": [
+        "Darth Revan's Sith Empire"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 397437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Askarian_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
     {
       "PageId": 343327,
       "PageUrl": "https://starwars.fandom.com/wiki/Hasaq's_sun",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 116636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hasaq",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 397437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Askarian_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

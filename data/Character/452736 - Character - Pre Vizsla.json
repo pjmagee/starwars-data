@@ -60,15 +60,38 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "1.84 meters"
+        "1.84 meters (6 ft)"
+      ]
+    },
+    {
+      "Label": "Mass",
+      "Links": [
+        {
+          "Content": "kilograms",
+          "Href": "https://starwars.fandom.com/wiki/Kilogram"
+        }
+      ],
+      "Values": [
+        "80 kilograms"
       ]
     },
     {
@@ -98,7 +121,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Vizsla",
@@ -122,6 +145,10 @@
           "Href": "https://starwars.fandom.com/wiki/Death_Watch"
         },
         {
+          "Content": "New Mandalorians",
+          "Href": "https://starwars.fandom.com/wiki/New_Mandalorians"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
@@ -132,6 +159,7 @@
       ],
       "Values": [
         "Death Watch",
+        "New Mandalorians (publicly)",
         "Confederacy of Independent Systems (briefly)",
         "Shadow Collective"
       ]
@@ -139,39 +167,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 484089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529702,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 410237,
       "PageUrl": "https://starwars.fandom.com/wiki/Takeover_of_Mandalore",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 488217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 535676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 455718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 625839,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 679156,
@@ -179,19 +177,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 453788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
+      "PageId": 484089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 453790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 689017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_(Pre_Vizsla)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 591084,
@@ -207,6 +195,51 @@
       "PageId": 591086,
       "PageUrl": "https://starwars.fandom.com/wiki/Flame_Thrower_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 504382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 689017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_(Pre_Vizsla)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 488217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 625839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529702,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 535676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 455718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 453788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 453790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

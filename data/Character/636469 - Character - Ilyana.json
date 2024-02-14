@@ -2,6 +2,7 @@
   "PageId": 636469,
   "PageUrl": "https://starwars.fandom.com/wiki/Ilyana",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -28,10 +29,6 @@
         {
           "Content": "20 BBY",
           "Href": "https://starwars.fandom.com/wiki/20_BBY"
-        },
-        {
-          "Content": "Dathomir",
-          "Href": "https://starwars.fandom.com/wiki/Dathomir"
         }
       ],
       "Values": [
@@ -67,7 +64,40 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Silver",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Silver"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Ice-blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Chalky-white"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Mother Talzin's clan",
@@ -91,5 +121,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merrin's_necklace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    }
+  ]
 }

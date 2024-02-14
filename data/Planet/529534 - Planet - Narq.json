@@ -2,7 +2,7 @@
   "PageId": 529534,
   "PageUrl": "https://starwars.fandom.com/wiki/Narq",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f3/LiToran-GEDatapad.png/revision/latest?cb=20231123050718",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,50 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Slice"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-11",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-11"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Quellor Run",
+          "Href": "https://starwars.fandom.com/wiki/Quellor_Run"
+        }
+      ],
+      "Values": [
+        "Quellor Run"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Fungus",
@@ -43,12 +79,12 @@
       "Label": "Flora",
       "Links": [
         {
-          "Content": "Fungi",
-          "Href": "https://starwars.fandom.com/wiki/Fungus"
+          "Content": "Trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
         }
       ],
       "Values": [
-        "Fungi"
+        "Trees"
       ]
     },
     {
@@ -64,6 +100,13 @@
       ]
     },
     {
+      "Label": "Other lifeforms",
+      "Links": [],
+      "Values": [
+        "Fungi"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -76,7 +119,7 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Neimoidians",
@@ -84,15 +127,15 @@
         }
       ],
       "Values": [
-        "Neimoidians (occupied)"
+        "Neimoidians"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 529531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Narquois",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 524192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pru_Sweevant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 498762,
@@ -100,14 +143,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
+      "PageId": 529531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narquois",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 548310,
       "PageUrl": "https://starwars.fandom.com/wiki/Narquois_precursor_species",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 524192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pru_Sweevant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 695251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

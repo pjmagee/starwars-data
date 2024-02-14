@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Tatooine",
-          "Href": "https://starwars.fandom.com/wiki/Tatooine/Legends"
-        }
-      ],
-      "Values": [
-        "Tatooine"
-      ]
-    },
-    {
       "Label": "Species",
       "Links": [
         {
@@ -46,9 +34,35 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [],
+      "Values": [
+        "Gray"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Black"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Fair"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 387179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghastly_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
     {
       "PageId": 387176,
       "PageUrl": "https://starwars.fandom.com/wiki/Chieftain's_skull",
@@ -57,11 +71,6 @@
     {
       "PageId": 387178,
       "PageUrl": "https://starwars.fandom.com/wiki/Krayt_head",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 387179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghastly_baton",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]

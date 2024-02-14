@@ -23,13 +23,17 @@
           "Href": "https://starwars.fandom.com/wiki/Foundry_of_the_Confederacy"
         },
         {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        },
+        {
           "Content": "The Slice",
           "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
         "Outer Rim Territories",
-        "Foundry of the Confederacy",
+        "Foundry of the Confederacy (Clone Wars)",
         "The Slice"
       ]
     },
@@ -84,7 +88,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-6",
@@ -182,26 +186,40 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungles",
           "Href": "https://starwars.fandom.com/wiki/Jungle"
+        },
+        {
+          "Content": "swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp"
         }
       ],
       "Values": [
-        "Jungles"
+        "Jungles swamps"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Nigkoe Detention Facility",
+          "Href": "https://starwars.fandom.com/wiki/Nigkoe_Detention_Facility"
+        },
+        {
+          "Content": "Commerce Guild headquarters",
+          "Href": "https://starwars.fandom.com/wiki/Commerce_Guild_headquarters"
+        },
+        {
           "Content": "Separatist outpost",
           "Href": "https://starwars.fandom.com/wiki/Separatist_outpost_(Felucia)"
         }
       ],
       "Values": [
+        "Nigkoe Detention Facility",
+        "Commerce Guild headquarters",
         "Separatist outpost"
       ]
     },
@@ -292,7 +310,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Gossam",
@@ -407,29 +425,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 504665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 519801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_outpost_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 532957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dilanni",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 509377,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 703230,
-      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33's_droid_battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 530805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Casiss_Midagatis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 627349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akira",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 498790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ohnaka_Gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 536502,
@@ -437,14 +445,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 624005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_bird",
+      "PageId": 660349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 661476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 473301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gelagrub",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 624012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cerulean_droch",
+      "PageId": 284592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 530805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Casiss_Midagatis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 648789,
+      "PageUrl": "https://starwars.fandom.com/wiki/DP-23",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 631628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Ripper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 631629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manta_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 724743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yerdua_Poison_Spitter_Drop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 700427,
+      "PageUrl": "https://starwars.fandom.com/wiki/27,000_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 469219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Outer_Rim_Sieges)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 585612,
@@ -452,19 +505,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 636966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_snail",
+      "PageId": 627349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 646215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sixth_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 700437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gossam_Courivers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 745422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Gardenleaf",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 453174,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarlacc",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 600597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 519801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_outpost_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 686774,
@@ -472,9 +535,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
+      "PageId": 693510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_Felucian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 664636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 664637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nigkoe_Detention_Facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 781337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 499796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 728195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seripas's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 469709,
+      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 504356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 672772,
       "PageUrl": "https://starwars.fandom.com/wiki/Slimesnipe",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 519768,
+      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 589392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pirate_scout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 664632,
@@ -497,24 +610,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 496453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 645279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(pre–Naboo_Crisis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 504327,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504356,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 458235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aayla_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 644528,
@@ -522,54 +620,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 503824,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 499796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 519768,
-      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 469709,
-      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
+      "PageId": 703230,
+      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33's_droid_battalion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 664636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_headquarters",
+      "PageId": 624005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_bird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 600597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 664637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nigkoe_Detention_Facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 530435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_rancor",
+      "PageId": 636966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_snail",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 631628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Ripper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 631629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Manta_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 284592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 509876,
@@ -577,68 +645,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 589392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pirate_scout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 724743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yerdua_Poison_Spitter_Drop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 453174,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarlacc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 693510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_Felucian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 509377,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 561059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrified_net_gun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 646215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sixth_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 660349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fern",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 661476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 469219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Outer_Rim_Sieges)",
+      "PageId": 719637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_near_Felucia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 626359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tank_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 624012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerulean_droch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 700437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gossam_Courivers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 457369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor",
+      "PageId": 627476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_firefly",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -647,24 +665,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 531917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stun_net",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 700427,
-      "PageUrl": "https://starwars.fandom.com/wiki/27,000_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 458235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aayla_Secura",
+      "PageId": 532957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dilanni",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 498790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ohnaka_Gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 645279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(pre–Naboo_Crisis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 504665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 496453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 457369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 530435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_rancor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 561059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrified_net_gun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 503824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 507836,
@@ -672,14 +710,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 719637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_near_Felucia",
+      "PageId": 531917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stun_net",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 504327,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Felucia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 627476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_firefly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 626359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tank_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

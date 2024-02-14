@@ -62,7 +62,61 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Dark"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Vexx",
+          "Href": "https://starwars.fandom.com/wiki/Vexx"
+        },
+        {
+          "Content": "Vye",
+          "Href": "https://starwars.fandom.com/wiki/Vye"
+        }
+      ],
+      "Values": [
+        "Vexx",
+        "Vye"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 415139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vye",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 384628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vexx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,15 +24,15 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
-          "Content": "S-18",
+          "Content": "S-17",
           "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        "S-18"
+        "S-17"
       ]
     },
     {
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -85,6 +85,19 @@
       ]
     },
     {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Grass",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        }
+      ],
+      "Values": [
+        "Grass",
+        "Scrub brush"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -97,7 +110,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -133,9 +146,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 556706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jyn's_kyber_pendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 538504,
       "PageUrl": "https://starwars.fandom.com/wiki/Partisans",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 485674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 562575,
@@ -146,16 +169,6 @@
       "PageId": 565504,
       "PageUrl": "https://starwars.fandom.com/wiki/Saw_Gerrera's_Wrea_outpost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 556706,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jyn's_kyber_pendant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

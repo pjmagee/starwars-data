@@ -2,7 +2,7 @@
   "PageId": 93691,
   "PageUrl": "https://starwars.fandom.com/wiki/GX-8_water_vaporator/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/Vaporator_negwt.jpg/revision/latest?cb=20060808184026",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b5/MoistureVaporator-NEGWT.png/revision/latest?cb=20221022000014",
   "Data": [
     {
       "Label": "Titles",
@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Pretormin Environmental",
-          "Href": "https://starwars.fandom.com/wiki/Pretormin_Environmental/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Pretormin_Environmental"
         }
       ],
       "Values": [
@@ -44,14 +44,24 @@
     },
     {
       "Label": "Cost",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
       "Values": [
-        "2.000 to 10.000 credits"
+        "2,000 to 10,000 credits"
       ]
     },
     {
-      "Label": "Size",
-      "Links": [],
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "3 to 5 meters high"
       ]
@@ -72,7 +82,7 @@
   "Relationships": [
     {
       "PageId": 61987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pretormin_Environmental/Legends",
+      "PageUrl": "https://starwars.fandom.com/wiki/Pretormin_Environmental",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]

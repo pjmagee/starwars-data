@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-16",
@@ -78,12 +78,22 @@
         {
           "Content": "Bahryn",
           "Href": "https://starwars.fandom.com/wiki/Bahryn"
+        },
+        {
+          "Content": "Geonosis' largest moon",
+          "Href": "https://starwars.fandom.com/wiki/Geonosis%27_largest_moon"
+        },
+        {
+          "Content": "Gas giants",
+          "Href": "https://starwars.fandom.com/wiki/Gas_giant"
         }
       ],
       "Values": [
         "Geonosis",
         "15 moons",
-        "Bahryn"
+        "Bahryn",
+        "Geonosis' largest moon",
+        "Gas giants"
       ]
     },
     {
@@ -101,6 +111,23 @@
       "Values": [
         "Imperial construction modules; including",
         "Orbital Foundry 7"
+      ]
+    },
+    {
+      "Label": "Asteroids",
+      "Links": [
+        {
+          "Content": "Asteroid fields",
+          "Href": "https://starwars.fandom.com/wiki/Asteroid_field"
+        },
+        {
+          "Content": "gas",
+          "Href": "https://starwars.fandom.com/wiki/Gas"
+        }
+      ],
+      "Values": [
+        "Asteroid fields of the other gas gaints",
+        "Geonosis's asteroid belt"
       ]
     },
     {
@@ -133,7 +160,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -214,24 +241,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 554689,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Foundry_7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 457990,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 713216,
       "PageUrl": "https://starwars.fandom.com/wiki/Second_occupation_of_Geonosis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 502122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 554689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Foundry_7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 733277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis'_largest_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 532418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bahryn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 505556,
@@ -239,9 +271,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 532418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bahryn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 457990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 502122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

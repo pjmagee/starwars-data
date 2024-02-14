@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -82,6 +82,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-19"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -130,7 +142,7 @@
         }
       ],
       "Values": [
-        "c. 230 BBY, Eiram system"
+        "230 BBY, Eiram system"
       ]
     },
     {
@@ -254,6 +266,10 @@
           "Href": "https://starwars.fandom.com/wiki/Starlight_Beacon_meditation_garden"
         },
         {
+          "Content": "Quartermaster's office",
+          "Href": "https://starwars.fandom.com/wiki/Quartermaster%27s_office"
+        },
+        {
           "Content": "Conduit 398-GX14",
           "Href": "https://starwars.fandom.com/wiki/Conduit_398-GX14"
         },
@@ -266,8 +282,16 @@
           "Href": "https://starwars.fandom.com/wiki/Starlight_Beacon_detention_center"
         },
         {
+          "Content": "Medical and science research tower",
+          "Href": "https://starwars.fandom.com/wiki/Medical_and_science_research_tower"
+        },
+        {
           "Content": "Ops",
           "Href": "https://starwars.fandom.com/wiki/Ops_(Starlight_Beacon)"
+        },
+        {
+          "Content": "Unity",
+          "Href": "https://starwars.fandom.com/wiki/Unity_(cantina)"
         }
       ],
       "Values": [
@@ -286,27 +310,18 @@
         "Security tower",
         "Starlight Beacon detention center",
         "Starlight's medcenter",
-        "medical tower",
+        "Medical and science research tower",
         "Ops",
-        "Cargo bay (Starlight Beacon"
+        "Cargo bay",
+        "Unity"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 677726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Estala_Maru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 677734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orla_Jareni",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koley_Linn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 689767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 691976,
@@ -314,14 +329,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 709472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Firebird_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 766485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogan_Collection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 677752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 649066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 673878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_conclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 680368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dedication_of_the_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 721141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flame-tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 686713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_quarter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 686716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Biosphere_zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 741883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seed_bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 741891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yellow_chime_fruit_preserve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 749661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon's_medcenter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 749669,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_Bay_Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 749671,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corridor_sixteen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 749672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Restorative_springs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 794387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dedication_plaque",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 719346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 679042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starless_Expanse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 721591,
@@ -331,26 +416,6 @@
     {
       "PageId": 721595,
       "PageUrl": "https://starwars.fandom.com/wiki/Leyel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 727979,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_cyclone_disaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 683367,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chancey_Yarrow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 689767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Starlight_Beacon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 649066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -369,43 +434,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 700566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nooranbakarakana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 641911,
-      "PageUrl": "https://starwars.fandom.com/wiki/High_Republic_Era",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
-    },
-    {
-      "PageId": 707714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Regald_Coll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 718338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 679042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starless_Expanse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 671229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nib_Assek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 677752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 719778,
       "PageUrl": "https://starwars.fandom.com/wiki/Unity_(cantina)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 721690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_meditation_garden",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -414,19 +449,119 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 792190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mid-Tower_Exquisite_View_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 792193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeen_Mrala's_quarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 792637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assembly_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 671229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nib_Assek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 641911,
+      "PageUrl": "https://starwars.fandom.com/wiki/High_Republic_Era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 775077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quartermaster's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 683367,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chancey_Yarrow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 727979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_cyclone_disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 786587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Medical_and_science_research_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 718311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ar_Prace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 718338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 768525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rardal_Balnar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 782314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 792191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Party_on_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 709472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firebird_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 719957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Corellian_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 707714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Regald_Coll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 452741,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 719346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Starlight_Beacon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 677726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Estala_Maru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 719957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 677734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orla_Jareni",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 677820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bibs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 726608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koley_Linn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 679197,
@@ -439,29 +574,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 673878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_conclave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 700566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nooranbakarakana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 680368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dedication_of_the_Starlight_Beacon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 686713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_quarter",
+      "PageId": 721690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_meditation_garden",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 686716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Biosphere_zone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 721141,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flame-tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 689622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mei-mei_tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

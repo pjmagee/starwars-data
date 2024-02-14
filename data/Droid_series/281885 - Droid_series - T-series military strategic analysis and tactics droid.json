@@ -2,7 +2,7 @@
   "PageId": 281885,
   "PageUrl": "https://starwars.fandom.com/wiki/T-series_military_strategic_analysis_and_tactics_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7e/Tactical_droid_TCW.jpg/revision/latest?cb=20090310061419",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2e/TacticalDroid-TCW.png/revision/latest?cb=20230709155925",
   "Data": [
     {
       "Label": "Titles",
@@ -79,19 +79,28 @@
       "Label": "Gender",
       "Links": [
         {
-          "Content": "Masculine or feminine programming",
+          "Content": "Masculine programming",
           "Href": "https://starwars.fandom.com/wiki/Gender"
         }
       ],
       "Values": [
-        "Masculine or feminine programming"
+        "Masculine programming",
+        "Feminine programming"
       ]
     },
     {
       "Label": "Sensor color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        }
+      ],
       "Values": [
-        "Red, white, yellow"
+        "Red",
+        "White",
+        "Yellow",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -118,23 +127,103 @@
           "Href": "https://starwars.fandom.com/wiki/Confederacy_military"
         },
         {
+          "Content": "Zygerrian Slave Empire",
+          "Href": "https://starwars.fandom.com/wiki/Zygerrian_Slave_Empire"
+        },
+        {
+          "Content": "Separatist holdouts",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts"
+        },
+        {
+          "Content": "Desix Separatist holdout",
+          "Href": "https://starwars.fandom.com/wiki/Desix_Separatist_holdout"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
           "Content": "Rebel officer corps",
           "Href": "https://starwars.fandom.com/wiki/Rebel_officer_corps"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         }
       ],
       "Values": [
         "Confederacy of Independent Systems",
         "Confederacy military",
+        "Zygerrian Slave Empire",
+        "Separatist holdouts",
+        "Desix Separatist holdout",
         "Alliance to Restore the Republic",
-        "Rebel officer corps"
+        "Rebel officer corps",
+        "Scourge (As a vessel)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 625747,
+      "PageUrl": "https://starwars.fandom.com/wiki/TX-532",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 629438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tactical_droid_(Alamass)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 453665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dual_Hemisphere-Omni_Support_Vessel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 696378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Corellia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 532416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_military_strategic_analysis_and_tactics_droid_(Anaxes)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 536080,
+      "PageUrl": "https://starwars.fandom.com/wiki/K2-B4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 647472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trench's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 634970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Horain)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 613039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tactical_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 545627,
+      "PageUrl": "https://starwars.fandom.com/wiki/TI-99",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 551058,
+      "PageUrl": "https://starwars.fandom.com/wiki/TV-94B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 475168,
+      "PageUrl": "https://starwars.fandom.com/wiki/TX-20",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 507647,
       "PageUrl": "https://starwars.fandom.com/wiki/TJ-55",
@@ -146,18 +235,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 696378,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Corellia)",
+      "PageId": 519768,
+      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 500525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tactical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 531424,
+      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 475168,
-      "PageUrl": "https://starwars.fandom.com/wiki/TX-20",
+      "PageId": 716191,
+      "PageUrl": "https://starwars.fandom.com/wiki/TA1313",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -174,6 +263,26 @@
       "PageId": 475241,
       "PageUrl": "https://starwars.fandom.com/wiki/TX-21",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 572318,
+      "PageUrl": "https://starwars.fandom.com/wiki/TF-1726",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 667588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_officer_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 750914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Desix)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 505882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 589056,
@@ -196,83 +305,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 647472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trench's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 551058,
-      "PageUrl": "https://starwars.fandom.com/wiki/TV-94B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
       "PageId": 600441,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Christophsis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 603471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Florrum)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 634970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_tactical_droid_(Horain)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 667588,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_officer_corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 505882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 519768,
-      "PageUrl": "https://starwars.fandom.com/wiki/TZ-33",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 531424,
-      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 545627,
-      "PageUrl": "https://starwars.fandom.com/wiki/TI-99",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 613039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tactical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 532416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_T-series_military_strategic_analysis_and_tactics_droid_(Anaxes)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 536080,
-      "PageUrl": "https://starwars.fandom.com/wiki/K2-B4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 716191,
-      "PageUrl": "https://starwars.fandom.com/wiki/TA1313",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 625747,
-      "PageUrl": "https://starwars.fandom.com/wiki/TX-532",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 629438,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tactical_droid_(Alamass)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -281,9 +315,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 572318,
-      "PageUrl": "https://starwars.fandom.com/wiki/TF-1726",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 500525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tactical_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     }
   ]
 }

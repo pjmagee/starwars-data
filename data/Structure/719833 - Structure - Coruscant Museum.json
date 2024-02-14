@@ -2,12 +2,25 @@
   "PageId": 719833,
   "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Museum",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Coruscant Museum"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Museum",
+          "Href": "https://starwars.fandom.com/wiki/Museum"
+        }
+      ],
+      "Values": [
+        "Museum"
       ]
     },
     {
@@ -27,5 +40,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 719831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tase_Somer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

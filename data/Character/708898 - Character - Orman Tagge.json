@@ -36,22 +36,106 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Tagge",
           "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
-        },
-        {
-          "Content": "Tagge Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
         }
       ],
       "Values": [
-        "House of Tagge",
-        "Tagge Corporation"
+        "House of Tagge"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Killian Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Killian_Tagge"
+        },
+        {
+          "Content": "Sanya Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Sanya_Tagge"
+        }
+      ],
+      "Values": [
+        "Killian Tagge",
+        "Sanya Tagge"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Domina Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Domina_Tagge"
+        },
+        {
+          "Content": "Silas Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Silas_Tagge"
+        },
+        {
+          "Content": "Ulric Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Ulric_Tagge"
+        }
+      ],
+      "Values": [
+        "Domina Tagge",
+        "Silas Tagge",
+        "Ulric Tagge"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Tagge Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
+        },
+        {
+          "Content": "Executive Board",
+          "Href": "https://starwars.fandom.com/wiki/Executive_Board"
+        }
+      ],
+      "Values": [
+        "Tagge Corporation",
+        "Executive Board"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 708897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silas_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ulric_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 652336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domina_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 778430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Killian_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 778431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanya_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

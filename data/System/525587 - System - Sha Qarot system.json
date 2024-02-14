@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "L-12",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "L-12"
+      ]
+    },
+    {
       "Label": "Suns",
       "Links": [
         {
@@ -41,33 +53,38 @@
         {
           "Content": "Sha Qarot",
           "Href": "https://starwars.fandom.com/wiki/Sha_Qarot"
+        },
+        {
+          "Content": "Fex",
+          "Href": "https://starwars.fandom.com/wiki/Fex"
         }
       ],
       "Values": [
-        "Sha Qarot"
+        "Sha Qarot",
+        "Fex"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 506160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sha_Qarot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
     {
       "PageId": 500078,
       "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
-      "PageId": 658590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sha_Qarot's_star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 506160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sha_Qarot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 497808,
       "PageUrl": "https://starwars.fandom.com/wiki/Fex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 658590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sha_Qarot's_star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

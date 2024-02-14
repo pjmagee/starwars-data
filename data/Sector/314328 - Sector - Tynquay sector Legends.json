@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -156,19 +161,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 103992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gathus/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 92418,
       "PageUrl": "https://starwars.fandom.com/wiki/Tynquay_Skirmishes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 338185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Javarica_system",
+      "PageId": 314335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sikurd_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 15978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Listehol_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 71093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pegg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 43590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trans-Hydian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 362857,
@@ -178,21 +193,6 @@
     {
       "PageId": 42770,
       "PageUrl": "https://starwars.fandom.com/wiki/N'ildwab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 71093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pegg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 103992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gathus/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gigor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -226,14 +226,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 314335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sikurd_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 14631,
       "PageUrl": "https://starwars.fandom.com/wiki/Sikurd",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Listehol_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 14713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gigor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 338185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Javarica_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

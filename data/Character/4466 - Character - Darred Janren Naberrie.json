@@ -2,6 +2,7 @@
   "PageId": 4466,
   "PageUrl": "https://starwars.fandom.com/wiki/Darred_Janren_Naberrie",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,18 +24,6 @@
       ]
     },
     {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Human"
-      ]
-    },
-    {
       "Label": "Gender",
       "Links": [
         {
@@ -47,7 +36,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Naberrie",
@@ -57,7 +46,52 @@
       "Values": [
         "House Naberrie"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Sola Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Sola_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Sola Naberrie"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ryoo Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ryoo_Naberrie/Legends"
+        },
+        {
+          "Content": "Pooja Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Pooja_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Ryoo Naberrie",
+        "Pooja Naberrie"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pooja_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

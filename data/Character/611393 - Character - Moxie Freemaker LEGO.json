@@ -62,22 +62,57 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Freemakers",
           "Href": "https://starwars.fandom.com/wiki/Freemakers/LEGO"
+        }
+      ],
+      "Values": [
+        "Freemakers"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Zander Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Zander_Freemaker"
         },
+        {
+          "Content": "Becky Smoochenbacher",
+          "Href": "https://starwars.fandom.com/wiki/Becky_Smoochenbacher"
+        }
+      ],
+      "Values": [
+        "Zander Freemaker",
+        "Becky Smoochenbacher"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Resistance",
           "Href": "https://starwars.fandom.com/wiki/Resistance"
         }
       ],
       "Values": [
-        "Freemakers",
         "Resistance"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 538028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zander_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Becky_Smoochenbacher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

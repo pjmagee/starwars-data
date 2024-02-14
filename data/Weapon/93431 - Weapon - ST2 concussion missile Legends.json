@@ -2,7 +2,7 @@
   "PageId": 93431,
   "PageUrl": "https://starwars.fandom.com/wiki/ST2_concussion_missile/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/19/Concussionmissile_NEGWT.jpg/revision/latest?cb=20080722201158",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2e/ConcussionMissile-NEGWT.png/revision/latest?cb=20221021151946",
   "Data": [
     {
       "Label": "Titles",
@@ -43,6 +43,18 @@
       ]
     },
     {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
+      "Values": [
+        "750 credits"
+      ]
+    },
+    {
       "Label": "Range",
       "Links": [
         {
@@ -75,14 +87,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 238313,
-      "PageUrl": "https://starwars.fandom.com/wiki/G61_Delta_Wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 360,
       "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 238313,
+      "PageUrl": "https://starwars.fandom.com/wiki/G61_Delta_Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

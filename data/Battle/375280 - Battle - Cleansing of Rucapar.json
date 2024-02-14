@@ -2,13 +2,14 @@
   "PageId": 375280,
   "PageUrl": "https://starwars.fandom.com/wiki/Cleansing_of_Rucapar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/92/Cleansing_of_Rucapar.jpg/revision/latest?cb=20200406221344",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9d/Kes-EGTW.jpg/revision/latest?cb=20210820192104",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Cleansing of Rucapar"
+        "Cleansing of Rucapar",
+        "(Labeled as \"Alsakan\")"
       ]
     },
     {
@@ -39,25 +40,41 @@
       "Label": "Place",
       "Links": [
         {
+          "Content": "Rucapar",
+          "Href": "https://starwars.fandom.com/wiki/Rucapar"
+        },
+        {
           "Content": "Alsakan",
           "Href": "https://starwars.fandom.com/wiki/Alsakan/Legends"
         }
       ],
       "Values": [
-        "Alsakan"
+        "Rucapar, Alsakan"
+      ]
+    },
+    {
+      "Label": "Outcome",
+      "Links": [
+        {
+          "Content": "Alsakan Mosaics",
+          "Href": "https://starwars.fandom.com/wiki/Alsakan_Mosaics"
+        }
+      ],
+      "Values": [
+        "The centerpiece of the Alsakan Mosaics destroyed"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 385079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alsaka_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 296304,
       "PageUrl": "https://starwars.fandom.com/wiki/Third_Alsakan_Conflict",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 385079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alsaka_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

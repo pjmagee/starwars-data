@@ -2,6 +2,7 @@
   "PageId": 317350,
   "PageUrl": "https://starwars.fandom.com/wiki/Dana_Meimonda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -38,19 +39,25 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
-        },
-        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire",
-        "Alliance to Restore the Republic"
+        "Alliance to Restore the Republic",
+        "New Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 766500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dakshee_uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battlecruiser",
@@ -85,7 +85,11 @@
       "Label": "Hyperdrive system",
       "Links": [],
       "Values": [
-        "Equipped"
+        "Equipped",
+        "Hyperdrive generator",
+        "Hyperdrive core",
+        "Main generator (1)",
+        "Backup generators (3)"
       ]
     },
     {
@@ -155,6 +159,14 @@
           "Href": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport"
         },
         {
+          "Content": "All Terrain MegaCaliber Sixes",
+          "Href": "https://starwars.fandom.com/wiki/All_Terrain_MegaCaliber_Six"
+        },
+        {
+          "Content": "First Order All Terrain Scout Transports",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_All_Terrain_Scout_Transport"
+        },
+        {
           "Content": "Prefabricated ground base",
           "Href": "https://starwars.fandom.com/wiki/Prefabricated_ground_base"
         }
@@ -165,6 +177,8 @@
         "TIE/sf space superiority fighters",
         "AAL-1971/9.1 Troop Transports (100)",
         "Ground vehicles",
+        "All Terrain MegaCaliber Sixes",
+        "First Order All Terrain Scout Transports",
         "Prefabricated ground base (1)"
       ]
     },
@@ -172,18 +186,62 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Officers",
+          "Content": "First Order officers",
           "Href": "https://starwars.fandom.com/wiki/First_Order_officer"
+        },
+        {
+          "Content": "First Order TIE Fighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_TIE_Fighter_Pilot"
         },
         {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
+        },
+        {
+          "Content": "Megablaster heavy assault troopers",
+          "Href": "https://starwars.fandom.com/wiki/Megablaster_heavy_assault_trooper"
+        },
+        {
+          "Content": "Riot control stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper"
+        },
+        {
+          "Content": "Flametroopers",
+          "Href": "https://starwars.fandom.com/wiki/Flametrooper"
+        },
+        {
+          "Content": "First Order patrol droids",
+          "Href": "https://starwars.fandom.com/wiki/Patrol_droid"
+        },
+        {
+          "Content": "First Order Sentry Droids",
+          "Href": "https://starwars.fandom.com/wiki/Sentry_droid/Legends"
+        },
+        {
+          "Content": "MSE-6 series repair droids",
+          "Href": "https://starwars.fandom.com/wiki/MSE-6_series_repair_droid"
         }
       ],
       "Values": [
-        "Officers (19,000)",
+        "First Order officers (19,000)",
         "Enlisted (55,000)",
-        "Stormtroopers (Over 8,000)"
+        "First Order TIE Fighter Pilots",
+        "Stormtroopers (Over 8,000)",
+        "Megablaster heavy assault troopers",
+        "Riot control stormtroopers",
+        "Flametroopers",
+        "First Order patrol droids",
+        "First Order Sentry Droids",
+        "MSE-6 series repair droids"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [],
+      "Values": [
+        "At least 1 storage bay",
+        "Weapons bay",
+        "Multiple armories"
       ]
     },
     {
@@ -195,7 +253,25 @@
         }
       ],
       "Values": [
-        "Hyperwave comm scanner"
+        "Hyperwave comm scanner",
+        "Communications center"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Databanks",
+          "Href": "https://starwars.fandom.com/wiki/Databank"
+        },
+        {
+          "Content": "Waste heat sink",
+          "Href": "https://starwars.fandom.com/wiki/Waste_heat_sink"
+        }
+      ],
+      "Values": [
+        "Databanks",
+        "Waste heat sink"
       ]
     },
     {
@@ -293,9 +369,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 279980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
+      "PageId": 510427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper_(First_Order)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 585533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kestro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 568876,
@@ -308,13 +389,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 585533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kestro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 510427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper_(First_Order)",
+      "PageId": 279980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

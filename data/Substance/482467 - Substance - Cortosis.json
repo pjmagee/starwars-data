@@ -29,8 +29,13 @@
       ]
     },
     {
-      "Label": "Material type",
-      "Links": [],
+      "Label": "Substance type",
+      "Links": [
+        {
+          "Content": "Metal",
+          "Href": "https://starwars.fandom.com/wiki/Metal"
+        }
+      ],
       "Values": [
         "Metal"
       ]
@@ -53,33 +58,23 @@
         {
           "Content": "Blaster",
           "Href": "https://starwars.fandom.com/wiki/Blaster"
+        },
+        {
+          "Content": "Lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Lightsaber"
         }
       ],
       "Values": [
-        "Blaster conductive"
+        "Blaster conductive",
+        "Lightsaber resistant"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 603538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mokivj",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 639282,
       "PageUrl": "https://starwars.fandom.com/wiki/Lightwhip",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 603607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mokivj",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 603723,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mokivj_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 712429,
@@ -87,9 +82,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 568610,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dinzo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 749385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Null_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 603607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mokivj",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 715624,
@@ -100,6 +100,21 @@
       "PageId": 715630,
       "PageUrl": "https://starwars.fandom.com/wiki/Cortosis_sword",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 568610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dinzo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 603538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mokivj",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 603723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mokivj_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

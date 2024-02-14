@@ -13,25 +13,30 @@
     },
     {
       "Label": "Average height",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "Over 2.5 meters"
       ]
     },
     {
       "Label": "Distinctions",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "legs",
+          "Href": "https://starwars.fandom.com/wiki/Limb/Legends"
+        }
+      ],
       "Values": [
         "Strong legs with grasping toes"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 393287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imbat_bartender",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
     {
       "PageId": 13254,
       "PageUrl": "https://starwars.fandom.com/wiki/Bandomeer/Legends",
@@ -40,6 +45,11 @@
     {
       "PageId": 88150,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imbat_captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 393287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imbat_bartender",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

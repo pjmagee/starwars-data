@@ -2,7 +2,7 @@
   "PageId": 13994,
   "PageUrl": "https://starwars.fandom.com/wiki/Ashas_Ree/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1b/AshasRee-TEA.png/revision/latest?cb=20211030012800",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b3/Battle_of_Ashas_Ree.jpg/revision/latest?cb=20231216175034",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -53,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-5"
@@ -77,52 +82,61 @@
       ]
     },
     {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith_(species)/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Sith (formally)"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Primary language(s)",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith_(language)"
+          "Content": "Jungles",
+          "Href": "https://starwars.fandom.com/wiki/Jungle/Legends"
         }
       ],
       "Values": [
-        "Sith (formally)"
+        "Jungles",
+        "Rocky"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Doctrinist",
+          "Href": "https://starwars.fandom.com/wiki/Doctrinist"
+        }
+      ],
+      "Values": [
+        "Killing fields",
+        "Doctrinist encampments"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Adas's Sith Empire",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Pre-Republic)"
+          "Content": "Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire/Legends"
         },
         {
-          "Content": "Old Sith Empire",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Empire/Legends"
+          "Content": "Reconstituted Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         }
       ],
       "Values": [
-        "Adas's Sith Empire",
-        "Old Sith Empire"
+        "Sith Empire",
+        "Reconstituted Sith Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 108380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holocron_of_King_Adas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+      "PageId": 35696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 271454,
@@ -130,9 +144,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 35696,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 370967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ashas_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 787385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_garrison_(Ashas_Ree)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 787382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doctrinist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 108380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holocron_of_King_Adas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
       "PageId": 279681,
@@ -143,11 +172,6 @@
       "PageId": 279682,
       "PageUrl": "https://starwars.fandom.com/wiki/Zorfe_Trete",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 370967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ashas_Ree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

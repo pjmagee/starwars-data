@@ -36,6 +36,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-19"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -43,23 +55,55 @@
       ]
     },
     {
-      "Label": "Points of interest",
-      "Links": [],
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
       "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Hon-Tallos groves",
+          "Href": "https://starwars.fandom.com/wiki/Hon-Tallos_groves"
+        },
+        {
+          "Content": "Hon-Tallos temple",
+          "Href": "https://starwars.fandom.com/wiki/Hon-Tallos_temple"
+        }
+      ],
+      "Values": [
+        "Hon-Tallos groves",
         "Hon-Tallos temple"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 757477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hon-Tallos_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 690181,
       "PageUrl": "https://starwars.fandom.com/wiki/Inugg_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 721185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Durga_berry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 741919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alonso_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 791225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vroma's_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 721666,
@@ -67,14 +111,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 763287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Wollina's_Animal_Adventures",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 721266,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Hon-Tallos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 721185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Durga_berry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 756578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_dockside_bar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
       "PageId": 721385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghenil's_groves",
+      "PageUrl": "https://starwars.fandom.com/wiki/Hon-Tallos_groves",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 768718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wollina's_criminal_syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 763291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hon-Tallos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

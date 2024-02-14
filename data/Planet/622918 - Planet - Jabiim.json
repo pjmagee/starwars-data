@@ -2,7 +2,7 @@
   "PageId": 622918,
   "PageUrl": "https://starwars.fandom.com/wiki/Jabiim",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/74/Sy_Myrth.jpg/revision/latest?cb=20190512094217",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Jabiim.png/revision/latest?cb=20220719031700",
   "Data": [
     {
       "Label": "Titles",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "S-7",
@@ -41,6 +41,18 @@
       ]
     },
     {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Triellus Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Triellus_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Triellus Trade Route"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -48,14 +60,98 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Diameter",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
       "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Rocky",
+          "Href": "https://starwars.fandom.com/wiki/Rock"
+        },
+        {
+          "Content": "Caves",
+          "Href": "https://starwars.fandom.com/wiki/Cave"
+        }
+      ],
+      "Values": [
+        "Plains",
+        "Rocky",
+        "Caves"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Jabiim Hidden Path safehouse",
+          "Href": "https://starwars.fandom.com/wiki/Jabiim_Hidden_Path_safehouse"
+        }
+      ],
+      "Values": [
+        "Jabiim Hidden Path safehouse"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Dynym Quid's Species",
+          "Href": "https://starwars.fandom.com/wiki/Dynym_Quid%27s_Species"
+        },
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Mohsenians",
+          "Href": "https://starwars.fandom.com/wiki/Mohsenian"
+        },
+        {
+          "Content": "Nikto",
+          "Href": "https://starwars.fandom.com/wiki/Nikto"
+        },
+        {
+          "Content": "Talpiddians",
+          "Href": "https://starwars.fandom.com/wiki/Talpiddian"
+        },
+        {
+          "Content": "Tarsunt",
+          "Href": "https://starwars.fandom.com/wiki/Tarsunt"
+        },
+        {
+          "Content": "Trandoshans",
+          "Href": "https://starwars.fandom.com/wiki/Trandoshan"
+        },
         {
           "Content": "Wookiees",
           "Href": "https://starwars.fandom.com/wiki/Wookiee"
         }
       ],
       "Values": [
+        "Dynym Quid's Species",
+        "Humans",
+        "Mohsenians",
+        "Nikto",
+        "Talpiddians",
+        "Tarsunt",
+        "Trandoshans",
         "Wookiees (enslaved)"
       ]
     },
@@ -63,11 +159,20 @@
       "Label": "Major imports",
       "Links": [
         {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi"
+        },
+        {
+          "Content": "Force-sensitive",
+          "Href": "https://starwars.fandom.com/wiki/Force-sensitive"
+        },
+        {
           "Content": "Slaves",
           "Href": "https://starwars.fandom.com/wiki/Slavery"
         }
       ],
       "Values": [
+        "Jedi and other Force-sensitive fugitives",
         "Slaves"
       ]
     },
@@ -80,32 +185,83 @@
         }
       ],
       "Values": [
-        "Ore"
+        "Ore",
+        "Jedi and other Force-sensitive fugitives with new identities"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Hidden Path",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Path"
+        },
+        {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
       ],
       "Values": [
+        "Hidden Path",
         "First Order"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 731004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hidden_Path",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 623941,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Slice",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 732790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Eight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 732572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Jabiim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 729015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Obi-Wan_Kenobi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 730987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tala_Durith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 731102,
+      "PageUrl": "https://starwars.fandom.com/wiki/NED-B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 597584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 741616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabiim_Hidden_Path_safehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

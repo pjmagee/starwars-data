@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -124,6 +124,13 @@
       ]
     },
     {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Power plant",
       "Links": [
         {
@@ -149,6 +156,13 @@
       ],
       "Values": [
         "Deflector shield generator domes (2)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -218,6 +232,34 @@
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
         },
         {
+          "Content": "TIE/ln space superiority starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE Advanced x1",
+          "Href": "https://starwars.fandom.com/wiki/TIE_Advanced_x1"
+        },
+        {
+          "Content": "Darth Vader's TIE Advanced",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vader%27s_TIE_Advanced"
+        },
+        {
+          "Content": "TIE Advanced v1",
+          "Href": "https://starwars.fandom.com/wiki/TIE_Advanced_v1"
+        },
+        {
+          "Content": "The Inquisitor's TIE Advanced",
+          "Href": "https://starwars.fandom.com/wiki/The_Inquisitor%27s_TIE_Advanced"
+        },
+        {
+          "Content": "Sentinel-class landing crafts",
+          "Href": "https://starwars.fandom.com/wiki/Sentinel-class_landing_craft"
+        },
+        {
+          "Content": "LAAT/le patrol gunships",
+          "Href": "https://starwars.fandom.com/wiki/LAAT/le_patrol_gunship"
+        },
+        {
           "Content": "Lambda-class T-4a shuttles",
           "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
         },
@@ -236,37 +278,68 @@
         {
           "Content": "K79-S80 Imperial Troop Transports",
           "Href": "https://starwars.fandom.com/wiki/K79-S80_Imperial_Troop_Transport"
-        },
-        {
-          "Content": "LAAT/le patrol gunships",
-          "Href": "https://starwars.fandom.com/wiki/LAAT/le_patrol_gunship"
         }
       ],
       "Values": [
         "TIE line starfighters (72)",
+        "TIE/ln space superiority starfighters",
+        "At least 1 TIE Advanced x1",
+        "Darth Vader's TIE Advanced",
+        "At least 1 TIE Advanced v1",
+        "The Inquisitor's TIE Advanced",
+        "Sentinel-class landing crafts",
+        "LAAT/le patrol gunships",
         "Lambda-class T-4a shuttles (8)",
         "AT-AT walkers (20)",
         "AT-ST or AT-DP walkers (30)",
-        "K79-S80 Imperial Troop Transports (15)",
-        "LAAT/le patrol gunships"
+        "K79-S80 Imperial Troop Transports (15)"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Officers",
-          "Href": "https://starwars.fandom.com/wiki/Officer"
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial Security Bureau",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau"
+        },
+        {
+          "Content": "Agent",
+          "Href": "https://starwars.fandom.com/wiki/Agent"
+        },
+        {
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
         },
         {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "AT-AT pilots",
+          "Href": "https://starwars.fandom.com/wiki/AT-AT_pilot"
+        },
+        {
+          "Content": "R2-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R2-series_astromech_droid"
+        },
+        {
+          "Content": "Dwarf probe droids",
+          "Href": "https://starwars.fandom.com/wiki/Dwarf_probe_droid"
         }
       ],
       "Values": [
-        "Officers (9,235)",
+        "Imperial officers (9,235)",
+        "At least 1 Imperial Security Bureau Agent",
         "Enlisted (27,850)",
-        "Stormtroopers (9,700)"
+        "Imperial Starfighter Pilots",
+        "Stormtroopers (9,700)",
+        "AT-AT pilots",
+        "R2-series astromech droids",
+        "Dwarf probe droids"
       ]
     },
     {
@@ -279,6 +352,30 @@
       ],
       "Values": [
         "2 years"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Holotable",
+          "Href": "https://starwars.fandom.com/wiki/Holotable"
+        }
+      ],
+      "Values": [
+        "Holotable"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Flagship",
+          "Href": "https://starwars.fandom.com/wiki/Flagship"
+        }
+      ],
+      "Values": [
+        "Flagship"
       ]
     },
     {
@@ -295,6 +392,10 @@
         {
           "Content": "Siege of Lothal",
           "Href": "https://starwars.fandom.com/wiki/Siege_of_Lothal"
+        },
+        {
+          "Content": "Mission to Lothal",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Lothal_(4_BBY)"
         },
         {
           "Content": "Attack on Phoenix Squadron",
@@ -317,6 +418,7 @@
         "Rescue of Tseebo",
         "Mission to Lando Calrissian's farm",
         "Siege of Lothal",
+        "Mission to Lothal",
         "Attack on Phoenix Squadron",
         "Assault on Seelos",
         "Battle of Garel"
@@ -374,11 +476,21 @@
       "Label": "Crewmembers",
       "Links": [
         {
+          "Content": "Alexsandr Kallus",
+          "Href": "https://starwars.fandom.com/wiki/Alexsandr_Kallus"
+        },
+        {
+          "Content": "Unidentified Imperial officer",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(Seelos_system)"
+        },
+        {
           "Content": "Unidentified Imperial scanning technician",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_scanning_technician"
         }
       ],
       "Values": [
+        "Alexsandr Kallus",
+        "Unidentified Imperial officer",
         "Unidentified Imperial scanning technician"
       ]
     }

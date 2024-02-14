@@ -48,6 +48,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.68 meters (5 ft, 6 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,18 +97,33 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [],
+      "Values": [
+        "Jahen clan"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Gagic Alliance",
+          "Href": "https://starwars.fandom.com/wiki/Gagic_Alliance"
+        },
+        {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Republic Defense Coalition",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Defense_Coalition"
         }
       ],
       "Values": [
-        "Jahen clan",
         "Gagic Alliance",
         "Galactic Republic",
-        "Republic administration corps"
+        "Republic administration corps",
+        "Republic Defense Coalition"
       ]
     }
   ],
@@ -94,6 +132,11 @@
       "PageId": 643764,
       "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 761615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

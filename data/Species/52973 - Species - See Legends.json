@@ -25,7 +25,12 @@
     },
     {
       "Label": "Classification",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Fish",
+          "Href": "https://starwars.fandom.com/wiki/Fish/Legends"
+        }
+      ],
       "Values": [
         "Fish"
       ]
@@ -65,17 +70,39 @@
     },
     {
       "Label": "Habitat",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
       "Values": [
-        "Naboo oceans"
+        "Oceans"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Laa",
+          "Href": "https://starwars.fandom.com/wiki/Laa/Legends"
+        },
+        {
+          "Content": "Mee",
+          "Href": "https://starwars.fandom.com/wiki/Mee/Legends"
+        }
+      ],
+      "Values": [
+        "Laa",
+        "Mee"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 239916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Abyss/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 35333,
@@ -83,9 +110,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 239916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Abyss/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

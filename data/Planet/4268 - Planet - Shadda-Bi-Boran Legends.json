@@ -17,26 +17,32 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trailing Sectors"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
-          "Content": "Bi-Boran Cluster",
-          "Href": "https://starwars.fandom.com/wiki/Bi-Boran_Cluster"
-        },
-        {
           "Content": "Toblain sector",
           "Href": "https://starwars.fandom.com/wiki/Toblain_sector"
+        },
+        {
+          "Content": "Bi-Boran Cluster",
+          "Href": "https://starwars.fandom.com/wiki/Bi-Boran_Cluster"
         }
       ],
       "Values": [
-        "Bi-Boran Cluster, Toblain sector"
+        "Toblain sector",
+        "Bi-Boran Cluster"
       ]
     },
     {
@@ -60,7 +66,7 @@
         }
       ],
       "Values": [
-        "1: Shadda"
+        "Shadda"
       ]
     },
     {
@@ -78,7 +84,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-18"
@@ -128,7 +134,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamps",
@@ -171,7 +177,12 @@
     },
     {
       "Label": "Government",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Theocracy",
+          "Href": "https://starwars.fandom.com/wiki/Theocracy"
+        }
+      ],
       "Values": [
         "Theocracy"
       ]
@@ -198,26 +209,9 @@
       "Values": [
         "Textiles"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Republic"
-      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 278079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
     {
       "PageId": 112034,
       "PageUrl": "https://starwars.fandom.com/wiki/N'a-kee-tula",
@@ -232,6 +226,26 @@
       "PageId": 112063,
       "PageUrl": "https://starwars.fandom.com/wiki/Shadda-Bi-Boran_(species)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 763131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadda-Bi-Boran_exodus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 278079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 763149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadda_silk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 657996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadda-Bi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

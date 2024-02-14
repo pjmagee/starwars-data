@@ -12,6 +12,22 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Mammal",
+          "Href": "https://starwars.fandom.com/wiki/Mammal/Legends"
+        },
+        {
+          "Content": "Ungulate",
+          "Href": "https://starwars.fandom.com/wiki/Ungulate"
+        }
+      ],
+      "Values": [
+        "Mammal (Ungulate)"
+      ]
+    },
+    {
       "Label": "Average height",
       "Links": [
         {
@@ -21,6 +37,14 @@
       ],
       "Values": [
         "3.5 meters"
+      ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [],
+      "Values": [
+        "Long toungue",
+        "Short neck"
       ]
     },
     {
@@ -34,19 +58,33 @@
       "Values": [
         "Naboo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Swamps"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Herbivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Herbivore"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 257720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lasay_Swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 40076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
     {
       "PageId": 27296,
       "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
@@ -55,6 +93,16 @@
     {
       "PageId": 684321,
       "PageUrl": "https://starwars.fandom.com/wiki/Narmle_Bog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 40076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 257720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lasay_Swamp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

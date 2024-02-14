@@ -2,6 +2,7 @@
   "PageId": 58831,
   "PageUrl": "https://starwars.fandom.com/wiki/Ward_Fizark",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Sharina Fizark",
+          "Href": "https://starwars.fandom.com/wiki/Sharina_Fizark"
+        }
+      ],
+      "Values": [
+        "Sharina Fizark"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +91,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 42197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sharina_Fizark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 636156,
   "PageUrl": "https://starwars.fandom.com/wiki/Mirienna",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/Mirienna_JFO.jpg/revision/latest?cb=20191213160043",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d1/JFO-Mirienna.png/revision/latest?cb=20230407005150",
   "Data": [
     {
       "Label": "Titles",
@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,6 +81,42 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mirienna's father",
+          "Href": "https://starwars.fandom.com/wiki/Mirienna%27s_father"
+        }
+      ],
+      "Values": [
+        "Mirienna's father"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ostar",
+          "Href": "https://starwars.fandom.com/wiki/Ostar"
+        }
+      ],
+      "Values": [
+        "Ostar"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Sienna",
+          "Href": "https://starwars.fandom.com/wiki/Sienna"
+        }
+      ],
+      "Values": [
+        "Sienna"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -86,5 +129,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 638013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mirienna's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ostar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 98398,
   "PageUrl": "https://starwars.fandom.com/wiki/Spindragon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Freighter",
@@ -59,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 98399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_epoxy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    }
+  ]
 }

@@ -41,6 +41,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-19"
+      ]
+    },
+    {
       "Label": "Suns",
       "Links": [
         {
@@ -49,7 +61,9 @@
         }
       ],
       "Values": [
-        "2"
+        "2",
+        "First sun",
+        "Second sun"
       ]
     },
     {
@@ -70,7 +84,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Aqualish",
@@ -124,14 +138,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 671082,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 632358,
       "PageUrl": "https://starwars.fandom.com/wiki/Dalna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 671082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-17"
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caves",
@@ -100,11 +100,11 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Rakata",
-          "Href": "https://starwars.fandom.com/wiki/Rakata/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Rakata"
         },
         {
           "Content": "Toydarians",
@@ -141,64 +141,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 223626,
-      "PageUrl": "https://starwars.fandom.com/wiki/224/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 216476,
-      "PageUrl": "https://starwars.fandom.com/wiki/T81_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 223881,
       "PageUrl": "https://starwars.fandom.com/wiki/Neebray/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 280428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gash_Rugosa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 223591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thief's_Eye/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 692993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_giant_beetle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 692999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rugosa_snake",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 217862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rugosa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 280426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 401379,
       "PageUrl": "https://starwars.fandom.com/wiki/L60_blaster_rifle/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 383933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_3_(Rugosa)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 383943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(Rugosa)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 383944,
@@ -218,6 +168,56 @@
     {
       "PageId": 383975,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2_super_battle_droid/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 223591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thief's_Eye/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 216476,
+      "PageUrl": "https://starwars.fandom.com/wiki/T81_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 223626,
+      "PageUrl": "https://starwars.fandom.com/wiki/224/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 217862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rugosa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 692993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_giant_beetle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 692999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rugosa_snake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 280428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gash_Rugosa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 280426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugosa_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 383933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_3_(Rugosa)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 383943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(Rugosa)/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

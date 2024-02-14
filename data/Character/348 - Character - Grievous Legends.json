@@ -2,7 +2,7 @@
   "PageId": 348,
   "PageUrl": "https://starwars.fandom.com/wiki/Grievous/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/de/Grievoushead.jpg/revision/latest?cb=20100630082056",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/Grievoushead-OP.png/revision/latest?cb=20221116061150",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,18 @@
       ],
       "Values": [
         "Kalee"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "60 BBY",
+          "Href": "https://starwars.fandom.com/wiki/60_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "By 60 BBY (Approximate date)"
       ]
     },
     {
@@ -65,6 +77,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -123,12 +142,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Kaleesh",
-          "Href": "https://starwars.fandom.com/wiki/Kaleesh/Legends"
-        },
+          "Content": "Grievous's family",
+          "Href": "https://starwars.fandom.com/wiki/Grievous%27s_family/Legends"
+        }
+      ],
+      "Values": [
+        "Grievous's family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Grievous's father",
+          "Href": "https://starwars.fandom.com/wiki/Grievous%27s_father/Legends"
+        }
+      ],
+      "Values": [
+        "Grievous's father"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ronderu lij Kummar",
+          "Href": "https://starwars.fandom.com/wiki/Ronderu_lij_Kummar"
+        }
+      ],
+      "Values": [
+        "Ronderu lij Kummar",
+        "Ten other wives"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [],
+      "Values": [
+        "Thirty children"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Kolkpravis",
           "Href": "https://starwars.fandom.com/wiki/Kolkpravis"
@@ -151,7 +210,6 @@
         }
       ],
       "Values": [
-        "Kaleesh",
         "Kolkpravis",
         "Izvoshra",
         "InterGalactic Banking Clan",
@@ -178,19 +236,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 334268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_the_Dead_Moon_of_Antar",
+      "PageId": 268559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(Clone_Wars)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 216128,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 234214,
-      "PageUrl": "https://starwars.fandom.com/wiki/EV-A4-D/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 208331,
@@ -198,8 +246,68 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 388080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Providence-class_carrier/destroyer_(Kamino)",
+      "PageId": 636043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tovarskl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 23469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_First_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 23470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_Third_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 334268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_the_Dead_Moon_of_Antar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 277626,
+      "PageUrl": "https://starwars.fandom.com/wiki/EG-07",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 54327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Martyr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_Navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 316330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deyvus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 28134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Arcus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 287720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 39974,
+      "PageUrl": "https://starwars.fandom.com/wiki/N-K_Necrosis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 297941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Separatist_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -213,24 +321,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 287720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer/Legends",
+      "PageId": 450597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 54359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievance_Striker/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 52731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ronderu_lij_Kummar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 54327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Martyr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 216128,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 228850,
@@ -243,98 +341,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 355279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Dica",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 15681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 651644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Ord_Mantell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 696251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_family/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 215346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 28134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Arcus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 50803,
       "PageUrl": "https://starwars.fandom.com/wiki/Bane's_Heart_(crystal)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 277626,
-      "PageUrl": "https://starwars.fandom.com/wiki/EG-07",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 23469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_First_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 23470,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_Third_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 53161,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-109",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 4451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 268559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(Clone_Wars)",
+      "PageId": 318940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 4539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 234214,
+      "PageUrl": "https://starwars.fandom.com/wiki/EV-A4-D/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 358876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 230437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 363112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neebo's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 279547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dorin",
+      "PageId": 215656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bothawui/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -348,13 +376,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 202262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_military/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 334270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_(II)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 450597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One/Legends",
+      "PageId": 25303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huk_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 334266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_at_Grievous's_castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 355279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Dica",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 4539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 53161,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-109",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 371429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Munificent-class_star_frigate_(suspected_Confederate_space)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -368,6 +421,31 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
+      "PageId": 25698,
+      "PageUrl": "https://starwars.fandom.com/wiki/Group_One_(Separatists)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 52731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronderu_lij_Kummar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 215346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 651644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Ord_Mantell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 15681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 302581,
       "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti's_lightsaber/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
@@ -378,29 +456,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 230437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 358876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 215656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bothawui/Legends",
+      "PageId": 363112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neebo's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 696251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_family/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 279547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dorin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 334266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_at_Grievous's_castle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+      "PageId": 202262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederacy_military/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 371429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Munificent-class_star_frigate_(suspected_Confederate_space)",
+      "PageId": 4451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 25303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Huk_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 287557,
@@ -408,8 +491,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 297941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Separatist_frigate",
+      "PageId": 388080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Providence-class_carrier/destroyer_(Kamino)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -418,39 +501,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 13084,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate_Navy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 316330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deyvus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 318940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 355357,
       "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Adi_Gallia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 636043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tovarskl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 696237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_father/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 39974,
-      "PageUrl": "https://starwars.fandom.com/wiki/N-K_Necrosis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 334270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_(II)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 54359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievance_Striker/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

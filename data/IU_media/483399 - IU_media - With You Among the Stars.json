@@ -2,6 +2,7 @@
   "PageId": 483399,
   "PageUrl": "https://starwars.fandom.com/wiki/With_You_Among_the_Stars",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -26,23 +27,24 @@
       "Label": "Release date",
       "Links": [
         {
-          "Content": "years",
-          "Href": "https://starwars.fandom.com/wiki/Standard_year"
-        },
-        {
-          "Content": "Battle of Yavin",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Yavin"
+          "Content": "5 BBY",
+          "Href": "https://starwars.fandom.com/wiki/5_BBY"
         }
       ],
       "Values": [
-        "Well before five years before the Battle of Yavin"
+        "Long before 5 BBY"
       ]
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ballad",
+          "Href": "https://starwars.fandom.com/wiki/Music"
+        }
+      ],
       "Values": [
-        "Song"
+        "Ballad"
       ]
     },
     {
@@ -53,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 483566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plexo-33",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    }
+  ]
 }

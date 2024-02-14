@@ -17,10 +17,20 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Greater Javin",
+          "Href": "https://starwars.fandom.com/wiki/Greater_Javin"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Greater Javin",
+        "Galactic Frontier"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "K-18",
@@ -71,6 +81,10 @@
           "Href": "https://starwars.fandom.com/wiki/Jhas"
         },
         {
+          "Content": "Jhas Krill",
+          "Href": "https://starwars.fandom.com/wiki/Jhas_Krill"
+        },
+        {
           "Content": "planets",
           "Href": "https://starwars.fandom.com/wiki/Planet"
         }
@@ -78,6 +92,8 @@
       "Values": [
         "Hoth",
         "Jhas",
+        "Jhas Krill",
+        "23 other moons",
         "Four other planets"
       ]
     },
@@ -99,6 +115,10 @@
         {
           "Content": "Airtight Base",
           "Href": "https://starwars.fandom.com/wiki/Airtight_Base"
+        },
+        {
+          "Content": "Big One",
+          "Href": "https://starwars.fandom.com/wiki/Big_One"
         },
         {
           "Content": "Kerane's Folly",
@@ -124,9 +144,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 5642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 115293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_asteroid_belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 451989,
@@ -134,19 +154,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 572665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 503332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anoat_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 527170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jhas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 527173,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jhas_Krill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 606166,
@@ -154,13 +164,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 527173,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jhas_Krill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 527170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jhas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 115293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_asteroid_belt",
+      "PageId": 503332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anoat_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 572665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoth_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 5642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendal_Ozzel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Big_One",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

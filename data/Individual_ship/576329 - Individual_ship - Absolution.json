@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battlecruiser",
@@ -155,6 +155,18 @@
           "Href": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport"
         },
         {
+          "Content": "Walkers",
+          "Href": "https://starwars.fandom.com/wiki/Walker"
+        },
+        {
+          "Content": "Ground assault vehicles",
+          "Href": "https://starwars.fandom.com/wiki/Ground_assault_vehicle"
+        },
+        {
+          "Content": "Speeder bikes",
+          "Href": "https://starwars.fandom.com/wiki/Speeder_bike"
+        },
+        {
           "Content": "Prefabricated ground base",
           "Href": "https://starwars.fandom.com/wiki/Prefabricated_ground_base"
         }
@@ -165,6 +177,9 @@
         "TIE/sf space superiority fighters",
         "AAL-1971/9.1 Troop Transports (100)",
         "Ground vehicles",
+        "Walkers",
+        "Ground assault vehicles",
+        "Speeder bikes",
         "Prefabricated ground base (1)"
       ]
     },
@@ -172,18 +187,44 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Officers",
-          "Href": "https://starwars.fandom.com/wiki/Officer"
+          "Content": "First Order officers",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_officer"
         },
         {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
+        },
+        {
+          "Content": "cadets",
+          "Href": "https://starwars.fandom.com/wiki/Cadet"
+        },
+        {
+          "Content": "Protocol droid",
+          "Href": "https://starwars.fandom.com/wiki/Protocol_droid"
+        },
+        {
+          "Content": "Communications droid",
+          "Href": "https://starwars.fandom.com/wiki/Communications_droid"
+        },
+        {
+          "Content": "Cafeteria droid",
+          "Href": "https://starwars.fandom.com/wiki/Cafeteria_droid"
+        },
+        {
+          "Content": "MSE-6 series repair droids",
+          "Href": "https://starwars.fandom.com/wiki/MSE-6_series_repair_droid"
         }
       ],
       "Values": [
-        "Officers (19,000)",
+        "First Order officers (19,000)",
         "Enlisted (55,000)",
-        "Stormtroopers (Over 8,000)"
+        "Stormtroopers (Over 8,000)",
+        "Stormtrooper cadets",
+        "At least 1 Protocol droid",
+        "At least 1 Communications droid",
+        "Combat holo droids",
+        "At least 1 Cafeteria droid",
+        "MSE-6 series repair droids"
       ]
     },
     {
@@ -196,6 +237,23 @@
       ],
       "Values": [
         "Hyperwave comm scanner"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        },
+        {
+          "Content": "cameras",
+          "Href": "https://starwars.fandom.com/wiki/Camera"
+        }
+      ],
+      "Values": [
+        "Internal sensors",
+        "Video cameras"
       ]
     },
     {
@@ -217,8 +275,21 @@
       "Values": [
         "Carrier",
         "Destroyer",
+        "Mobile academy",
         "Military transport",
         "Command ship"
+      ]
+    },
+    {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Abduction of Vi Moradi",
+          "Href": "https://starwars.fandom.com/wiki/Abduction_of_Vi_Moradi"
+        }
+      ],
+      "Values": [
+        "Abduction of Vi Moradi"
       ]
     },
     {
@@ -227,10 +298,15 @@
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Academy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Academy"
         }
       ],
       "Values": [
-        "First Order"
+        "First Order",
+        "First Order Academy"
       ]
     },
     {
@@ -280,13 +356,23 @@
         {
           "Content": "FM-0676",
           "Href": "https://starwars.fandom.com/wiki/FM-0676"
+        },
+        {
+          "Content": "Iris",
+          "Href": "https://starwars.fandom.com/wiki/Iris_(droid)"
+        },
+        {
+          "Content": "K-4",
+          "Href": "https://starwars.fandom.com/wiki/K-4"
         }
       ],
       "Values": [
         "Bolander",
         "FB-0007",
         "FE-1211",
-        "FM-0676"
+        "FM-0676",
+        "Iris",
+        "K-4"
       ]
     }
   ],
@@ -295,6 +381,11 @@
       "PageId": 534812,
       "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 745841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abduction_of_Vi_Moradi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 578091,

@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Hair color",
       "Links": [
         {
@@ -44,7 +32,7 @@
         }
       ],
       "Values": [
-        "Gray"
+        "Gray, with black beard"
       ]
     },
     {
@@ -60,7 +48,25 @@
       "Values": [
         "Tan"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Stallo's sister",
+          "Href": "https://starwars.fandom.com/wiki/Stallo%27s_sister"
+        }
+      ],
+      "Values": [
+        "Stallo's sister"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 740346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stallo's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

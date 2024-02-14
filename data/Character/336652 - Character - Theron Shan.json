@@ -2,7 +2,7 @@
   "PageId": 336652,
   "PageUrl": "https://starwars.fandom.com/wiki/Theron_Shan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/06/Theron_Shan.png/revision/latest?cb=20220331221821",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Theron_Shan_on_Dromund_Kaas.jpg/revision/latest?cb=20230227085449",
   "Data": [
     {
       "Label": "Titles",
@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -73,9 +80,14 @@
     },
     {
       "Label": "Eye color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Hazel",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
-        "Olive green"
+        "Hazel"
       ]
     },
     {
@@ -90,6 +102,35 @@
       "Links": [],
       "Values": [
         "Cranial implants"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Shan family",
+          "Href": "https://starwars.fandom.com/wiki/Shan_family"
+        }
+      ],
+      "Values": [
+        "Shan family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jace Malcom",
+          "Href": "https://starwars.fandom.com/wiki/Jace_Malcom"
+        },
+        {
+          "Content": "Satele Shan",
+          "Href": "https://starwars.fandom.com/wiki/Satele_Shan"
+        }
+      ],
+      "Values": [
+        "Jace Malcom",
+        "Satele Shan"
       ]
     },
     {
@@ -125,7 +166,7 @@
         },
         {
           "Content": "Alliance Intelligence",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_Intelligence"
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Intelligence_(Eternal_Alliance)"
         },
         {
           "Content": "Order of Zildrog",
@@ -159,48 +200,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 10123,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cross_of_Glory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+      "PageId": 577407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crisis_on_Umbara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 585979,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Copero",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 402781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theron_Shan's_apartment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 643952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Taris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 345572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ngani_Zho",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 410641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prosperity_(shuttle)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 579536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Intelligence_(Eternal_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 547399,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 577407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crisis_on_Umbara",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
@@ -209,9 +215,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
+      "PageId": 10123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cross_of_Glory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+    },
+    {
+      "PageId": 402781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theron_Shan's_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 307839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jace_Malcom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 345572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ngani_Zho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 643952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Taris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 579536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Intelligence_(Eternal_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 244945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satele_Shan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 547399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 568756,
       "PageUrl": "https://starwars.fandom.com/wiki/Eternal_Alliance_Recon_Unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 410641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prosperity_(shuttle)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

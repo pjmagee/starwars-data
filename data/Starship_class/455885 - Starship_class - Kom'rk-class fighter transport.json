@@ -2,7 +2,7 @@
   "PageId": 455885,
   "PageUrl": "https://starwars.fandom.com/wiki/Kom'rk-class_fighter/transport",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/33/Gauntlet-Mando.png/revision/latest?cb=20211110040415",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/33/Gauntlet-Mando.png/revision/latest?cb=20230312033851",
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "transport",
@@ -166,11 +166,16 @@
         {
           "Content": "laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Heat-seeking missile",
+          "Href": "https://starwars.fandom.com/wiki/Heat-seeking_missile"
         }
       ],
       "Values": [
         "2 forward laser cannons",
-        "2 rear laser cannons"
+        "2 rear laser cannons",
+        "Heat-seeking missile"
       ]
     },
     {
@@ -237,12 +242,24 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
           "Content": "Phoenix Cell",
           "Href": "https://starwars.fandom.com/wiki/Phoenix_Cell"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+        },
+        {
+          "Content": "Clan Kryze",
+          "Href": "https://starwars.fandom.com/wiki/Clan_Kryze"
         },
         {
           "Content": "Citizens' Fleet",
@@ -257,8 +274,11 @@
         "Pyke Syndicate",
         "Hutt Clan",
         "Galactic Empire",
+        "Imperial Navy",
         "Alliance to Restore the Republic (appropriated)",
         "Phoenix Cell",
+        "Rebel Alliance Navy",
+        "Clan Kryze",
         "Citizens' Fleet"
       ]
     }

@@ -2,7 +2,7 @@
   "PageId": 555125,
   "PageUrl": "https://starwars.fandom.com/wiki/Kiza",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8c/Kiza.jpg/revision/latest?cb=20220529020414",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8c/Kiza.jpg/revision/latest?cb=20231104181544",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,42 @@
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia"
+        },
+        {
+          "Content": "Pantora",
+          "Href": "https://starwars.fandom.com/wiki/Pantora"
         }
       ],
       "Values": [
+        "Corellia",
+        "Pantora"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [],
+      "Values": [
         "Corellia"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "21 ABY",
+          "Href": "https://starwars.fandom.com/wiki/21_ABY"
+        },
+        {
+          "Content": "core ship",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_core_ship_(Kiza)"
+        },
+        {
+          "Content": "Kiza's world",
+          "Href": "https://starwars.fandom.com/wiki/Kiza%27s_world"
+        }
+      ],
+      "Values": [
+        "21 ABY, a core ship, Kiza's world"
       ]
     },
     {
@@ -48,24 +80,96 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Blue-black",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Blue-black"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Golden"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Kiza's family",
           "Href": "https://starwars.fandom.com/wiki/Kiza%27s_family"
-        },
-        {
-          "Content": "Acolytes of the Beyond",
-          "Href": "https://starwars.fandom.com/wiki/Acolytes_of_the_Beyond"
         }
       ],
       "Values": [
-        "Kiza's family",
-        "Acolytes of the Beyond"
+        "Kiza's family"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Acolytes of the Beyond",
+          "Href": "https://starwars.fandom.com/wiki/Acolytes_of_the_Beyond"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
+        },
+        {
+          "Content": "Sith Eternal",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Eternal"
+        },
+        {
+          "Content": "Kiza's droid army",
+          "Href": "https://starwars.fandom.com/wiki/Kiza%27s_droid_army"
+        }
+      ],
+      "Values": [
+        "Acolytes of the Beyond",
+        "Sith",
+        "Sith Eternal",
+        "Kiza's droid army"
+      ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Exim Panshard",
+          "Href": "https://starwars.fandom.com/wiki/Exim_Panshard"
+        }
+      ],
+      "Values": [
+        "Exim Panshard"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 788941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiza's_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 565115,
       "PageUrl": "https://starwars.fandom.com/wiki/Mask_of_Viceroy_Exim_Panshard",
@@ -75,6 +179,31 @@
       "PageId": 555484,
       "PageUrl": "https://starwars.fandom.com/wiki/Coronet_City_revolution",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 572504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exim_Panshard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quest_for_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 733735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_of_Darth_Noctyss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 734502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiza's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 734317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Kiza's_world",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

@@ -12,6 +12,26 @@
       ]
     },
     {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "34 ABY",
+          "Href": "https://starwars.fandom.com/wiki/34_ABY"
+        },
+        {
+          "Content": "Thunderer",
+          "Href": "https://starwars.fandom.com/wiki/Thunderer"
+        },
+        {
+          "Content": "Barabesh system",
+          "Href": "https://starwars.fandom.com/wiki/Barabesh_system"
+        }
+      ],
+      "Values": [
+        "34 ABY, Thunderer, Barabesh system"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -33,6 +53,18 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.80 meters"
       ]
     },
     {
@@ -65,12 +97,16 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Jace Rucklin's racing team",
-          "Href": "https://starwars.fandom.com/wiki/Jace_Rucklin%27s_racing_team"
+          "Content": "Rucklin's team",
+          "Href": "https://starwars.fandom.com/wiki/Rucklin%27s_team"
         },
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Academy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Academy"
         },
         {
           "Content": "Galek's TIE fighter squadron",
@@ -78,17 +114,18 @@
         }
       ],
       "Values": [
-        "Jace Rucklin's racing team",
+        "Rucklin's team",
         "First Order",
+        "First Order Academy",
         "Galek's TIE fighter squadron"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 609895,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jace_Rucklin's_racing_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 609892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rucklin's_racer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 619483,
@@ -96,9 +133,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 609892,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jace_Rucklin's_racer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 633345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 643886,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tamara_Ryvora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 609895,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rucklin's_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

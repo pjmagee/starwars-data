@@ -60,35 +60,52 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-7"
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Trade routes",
       "Links": [
         {
-          "Content": "Black Sun",
-          "Href": "https://starwars.fandom.com/wiki/Black_Sun"
+          "Content": "Entralla Route",
+          "Href": "https://starwars.fandom.com/wiki/Entralla_Route/Legends"
         }
       ],
       "Values": [
-        "Black Sun"
+        "Entralla Route"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 218516,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yout/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 272100,
       "PageUrl": "https://starwars.fandom.com/wiki/Yout_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 218516,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yout/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 767871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Yout_12",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

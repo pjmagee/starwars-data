@@ -29,14 +29,10 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
-        },
-        {
-          "Content": "Eriaduan",
-          "Href": "https://starwars.fandom.com/wiki/Eriaduan"
         }
       ],
       "Values": [
-        "Human (Eriaduan)"
+        "Human"
       ]
     },
     {
@@ -78,7 +74,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tarkin family",
@@ -88,7 +84,25 @@
       "Values": [
         "Tarkin family"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Wilhuff Tarkin's grandfather",
+          "Href": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin%27s_grandfather"
+        }
+      ],
+      "Values": [
+        "Wilhuff Tarkin's grandfather"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 547241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin's_grandfather",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

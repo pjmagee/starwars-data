@@ -36,23 +36,42 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-7"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Unidentified astronomical object",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_astronomical_object_(Reo_system)"
+        }
+      ],
+      "Values": [
+        "Unidentified astronomical object"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 351455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Celestial_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 351453,
       "PageUrl": "https://starwars.fandom.com/wiki/Maraqoo_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 762552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_astronomical_object_(Reo_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

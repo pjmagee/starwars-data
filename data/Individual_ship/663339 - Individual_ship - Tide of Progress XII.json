@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Hoersch-Kessel Drive Inc",
+          "Href": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc."
+        }
+      ],
+      "Values": [
+        "Hoersch-Kessel Drive Inc"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [
         {
@@ -24,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -41,40 +53,103 @@
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "825 meters"
+        "825 meters (2,706ft, 8in)"
       ]
     },
     {
       "Label": "Width",
       "Links": [],
       "Values": [
-        "426 meters"
+        "426 meters (1,397ft, 8in)"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "243 meters"
+        "243 meters (797ft, 3in)"
       ]
     },
     {
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Ion drive",
+          "Content": "Ion drive thrusters",
           "Href": "https://starwars.fandom.com/wiki/Ion_engine"
-        },
-        {
-          "Content": "thruster",
-          "Href": "https://starwars.fandom.com/wiki/Engine"
         }
       ],
       "Values": [
-        "Ion drive thruster (at least 1)"
+        "Ion drive thrusters (7)"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [
+        {
+          "Content": "hyperdrive",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
+        }
+      ],
+      "Values": [
+        "Several hyperdrive units"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Energy cells",
+          "Href": "https://starwars.fandom.com/wiki/Energy_cell"
+        },
+        {
+          "Content": "reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        },
+        {
+          "Content": "Power cells",
+          "Href": "https://starwars.fandom.com/wiki/Power_cell"
+        }
+      ],
+      "Values": [
+        "Energy cells",
+        "Main reactors (2)",
+        "Power cells"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Ray shield generator",
+          "Href": "https://starwars.fandom.com/wiki/Ray_shield_generator"
+        }
+      ],
+      "Values": [
+        "Ray shield generator"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        },
+        {
+          "Content": "antennas",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "High-performance sensors",
+        "Sensory antennas"
       ]
     },
     {
@@ -87,10 +162,125 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "ion cannons",
+          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
+        },
+        {
+          "Content": "turrets",
+          "Href": "https://starwars.fandom.com/wiki/Turret"
+        },
+        {
+          "Content": "point-defense laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         }
       ],
       "Values": [
-        "Heavy turbolaser cannons (2)"
+        "2 heavy turbolaser cannons",
+        "2 long-range heavy ion cannons",
+        "26 twin turbolaser turrets",
+        "20 light turbolaser turrets",
+        "38 point-defense laser cannons"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "Vulture-class droid starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
+        },
+        {
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron"
+        }
+      ],
+      "Values": [
+        "48 Vulture-class droid starfighters",
+        "(4 squadrons; maximum load)"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        }
+      ],
+      "Values": [
+        "200 (up to 150,000 battle droids)"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "hyperwave transceiver",
+          "Href": "https://starwars.fandom.com/wiki/Hyperwave_transceiver"
+        }
+      ],
+      "Values": [
+        "Long-range hyperwave transceiver masts (2)"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "docking rings",
+          "Href": "https://starwars.fandom.com/wiki/Docking_ring"
+        },
+        {
+          "Content": "Inertial compensators",
+          "Href": "https://starwars.fandom.com/wiki/Acceleration_compensator"
+        },
+        {
+          "Content": "neutrino radiator",
+          "Href": "https://starwars.fandom.com/wiki/Neutrino_radiator"
+        },
+        {
+          "Content": "heat sinks",
+          "Href": "https://starwars.fandom.com/wiki/Waste_heat_sink"
+        },
+        {
+          "Content": "Tensor field generators",
+          "Href": "https://starwars.fandom.com/wiki/Tensor_field_generator"
+        }
+      ],
+      "Values": [
+        "5 starboard-mounted docking rings",
+        "Inertial compensators",
+        "1 neutrino radiator",
+        "Scanner",
+        "Shield heat sinks",
+        "Superdense reactant tanks",
+        "Tensor field generators"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Warship",
+          "Href": "https://starwars.fandom.com/wiki/Warship"
+        }
+      ],
+      "Values": [
+        "Warship"
+      ]
+    },
+    {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Battle of Crombach Nebula",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Crombach_Nebula"
+        }
+      ],
+      "Values": [
+        "Battle of Crombach Nebula"
       ]
     },
     {

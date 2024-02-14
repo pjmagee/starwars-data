@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Empress Acina",
-          "Href": "https://starwars.fandom.com/wiki/Acina"
+          "Href": "https://starwars.fandom.com/wiki/Darth_Acina"
         }
       ],
       "Values": [
@@ -39,12 +39,34 @@
       "Label": "Leader(s)",
       "Links": [
         {
+          "Content": "Dark Councilor",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Council"
+        },
+        {
           "Content": "Darth Xarion",
           "Href": "https://starwars.fandom.com/wiki/Darth_Xarion"
         }
       ],
       "Values": [
+        "Dark Councilor",
         "Darth Xarion"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Sith Intelligence",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Intelligence"
+        },
+        {
+          "Content": "Imperial Outreach Division",
+          "Href": "https://starwars.fandom.com/wiki/Outreach_Bureau"
+        }
+      ],
+      "Values": [
+        "Sith Intelligence",
+        "Imperial Outreach Division"
       ]
     },
     {
@@ -96,14 +118,49 @@
   ],
   "Relationships": [
     {
+      "PageId": 378376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Imperial_Intelligence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 141598,
       "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 644929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Rivix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 631549,
+      "PageUrl": "https://starwars.fandom.com/wiki/Izar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 459840,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Xarion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 366659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outreach_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tronus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 398386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Expansion_and_Diplomacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Infiltration_Specialists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

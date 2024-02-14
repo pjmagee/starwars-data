@@ -2,7 +2,7 @@
   "PageId": 725414,
   "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_the_Spark_Eternal",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/58/Tombspark.jpg/revision/latest?cb=20231122160407",
   "Data": [
     {
       "Label": "Titles",
@@ -39,30 +39,40 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "The Ascendant",
-          "Href": "https://starwars.fandom.com/wiki/The_Ascendant"
+          "Content": "Ascendant",
+          "Href": "https://starwars.fandom.com/wiki/Ascendant"
         }
       ],
       "Values": [
-        "The Ascendant"
+        "Ascendant"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 756064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bar'leth_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 735546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slaughter_of_the_Ascendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 719844,
       "PageUrl": "https://starwars.fandom.com/wiki/Spark_Eternal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
+      "PageId": 711403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ascendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
       "PageId": 725412,
       "PageUrl": "https://starwars.fandom.com/wiki/Unyielding_Heart",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 711403,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Ascendant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

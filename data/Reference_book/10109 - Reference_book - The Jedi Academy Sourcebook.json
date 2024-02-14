@@ -24,23 +24,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Bill Smith",
-          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
-        },
-        {
-          "Content": "Eric S. Trautmann",
-          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
-        }
-      ],
-      "Values": [
-        "Bill Smith",
-        "Eric S. Trautmann"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -60,6 +43,23 @@
         "Storn Cook",
         "John Dollar",
         "Ray Lederer"
+      ]
+    },
+    {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Bill Smith",
+          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
+        },
+        {
+          "Content": "Eric S. Trautmann",
+          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
+        }
+      ],
+      "Values": [
+        "Bill Smith",
+        "Eric S. Trautmann"
       ]
     },
     {
@@ -110,5 +110,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 311028,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Change_of_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 174272,
   "PageUrl": "https://starwars.fandom.com/wiki/Kassar_Forge",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -68,12 +69,45 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
-      "Links": [],
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Myda Forge",
+          "Href": "https://starwars.fandom.com/wiki/Myda_Forge"
+        }
+      ],
       "Values": [
-        "Neutral"
+        "Myda Forge"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Lujayne Forge",
+          "Href": "https://starwars.fandom.com/wiki/Lujayne_Forge"
+        },
+        {
+          "Content": "Inyri Forge",
+          "Href": "https://starwars.fandom.com/wiki/Inyri_Forge"
+        }
+      ],
+      "Values": [
+        "Lujayne Forge",
+        "Inyri Forge"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 26122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inyri_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 23264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lujayne_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

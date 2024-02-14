@@ -19,15 +19,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
+        {
+          "Content": "frigate",
+          "Href": "https://starwars.fandom.com/wiki/Frigate"
+        },
         {
           "Content": "Star Destroyer",
           "Href": "https://starwars.fandom.com/wiki/Star_Destroyer"
         }
       ],
       "Values": [
-        "Star Destroyer"
+        "Escort frigate-class Star Destroyer"
       ]
     },
     {
@@ -77,6 +81,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 628125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harrow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 675534,
       "PageUrl": "https://starwars.fandom.com/wiki/Corrupter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -90,11 +99,6 @@
       "PageId": 712796,
       "PageUrl": "https://starwars.fandom.com/wiki/Victory_I-class_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 628125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harrow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

@@ -25,7 +25,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
       ]
@@ -55,14 +60,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 74996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dodonna_(Galactic-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 44113,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Second_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 74996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dodonna_(Galactic-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

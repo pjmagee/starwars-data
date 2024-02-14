@@ -2,7 +2,7 @@
   "PageId": 469357,
   "PageUrl": "https://starwars.fandom.com/wiki/Onaconda_Farr",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bd/OnacondaFarr-POP.png/revision/latest?cb=20130519183349",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f2/OnacondaFarr-SM.png/revision/latest?cb=20221219145819",
   "Data": [
     {
       "Label": "Titles",
@@ -31,16 +31,12 @@
           "Href": "https://starwars.fandom.com/wiki/21_BBY"
         },
         {
-          "Content": "20 BBY",
-          "Href": "https://starwars.fandom.com/wiki/20_BBY"
-        },
-        {
           "Content": "Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Coruscant"
         }
       ],
       "Values": [
-        "Between 21 BBY and 20 BBY, Coruscant"
+        "21 BBY, Coruscant"
       ]
     },
     {
@@ -65,6 +61,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -117,6 +120,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Committee for transportation of construction materials",
+          "Href": "https://starwars.fandom.com/wiki/Committee_for_transportation_of_construction_materials"
+        },
+        {
           "Content": "Council of Neutral Systems",
           "Href": "https://starwars.fandom.com/wiki/Council_of_Neutral_Systems"
         },
@@ -127,12 +134,35 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Committee for transportation of construction materials",
         "Council of Neutral Systems",
         "Confederacy of Independent Systems (briefly)"
+      ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Padmé Amidala",
+          "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala"
+        },
+        {
+          "Content": "Lolo Purs",
+          "Href": "https://starwars.fandom.com/wiki/Lolo_Purs"
+        }
+      ],
+      "Values": [
+        "Padmé Amidala (Protégé)",
+        "Lolo Purs (Protégé)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 452809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 496306,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill",
@@ -152,6 +182,11 @@
       "PageId": 532103,
       "PageUrl": "https://starwars.fandom.com/wiki/Enhanced_Privacy_Invasion_Bill",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 457129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lolo_Purs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

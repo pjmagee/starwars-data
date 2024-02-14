@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sector 5",
+          "Href": "https://starwars.fandom.com/wiki/Sector_5"
+        }
+      ],
+      "Values": [
+        "Sector 5"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -62,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-10"
@@ -81,7 +93,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -128,7 +140,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Wookiees",
@@ -161,9 +173,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 272975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 435385,
       "PageUrl": "https://starwars.fandom.com/wiki/Ceh'let",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 435517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Ska_Gora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 367177,
@@ -171,29 +193,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 428803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wookiee_land_wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 450198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gharcanna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 272975,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 435937,
       "PageUrl": "https://starwars.fandom.com/wiki/Rakatan_Base_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 417923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vaisamond_red_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 437443,
@@ -201,9 +203,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 435517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Ska_Gora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 450198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gharcanna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 428803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wookiee_land_wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 417923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaisamond_red_wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

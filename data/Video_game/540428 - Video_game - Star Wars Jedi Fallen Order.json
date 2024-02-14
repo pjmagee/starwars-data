@@ -83,7 +83,9 @@
     {
       "Label": "",
       "Links": [],
-      "Values": []
+      "Values": [
+        "Teen (T)"
+      ]
     },
     {
       "Label": "Platform(s)",
@@ -91,6 +93,10 @@
         {
           "Content": "Google Stadia",
           "Href": "https://starwars.fandom.com/wiki/Google_Stadia"
+        },
+        {
+          "Content": "Microsoft Windows",
+          "Href": "https://starwars.fandom.com/wiki/Microsoft_Windows"
         },
         {
           "Content": "PlayStation 4",
@@ -107,15 +113,21 @@
         {
           "Content": "Xbox Series X",
           "Href": "https://starwars.fandom.com/wiki/Xbox_Series_X"
+        },
+        {
+          "Content": "Xbox Cloud Gaming",
+          "Href": "https://starwars.fandom.com/wiki/Xbox_Cloud_Gaming"
         }
       ],
       "Values": [
-        "Google Stadia",
+        "Google Stadia (now discontinued)",
+        "Microsoft Windows",
         "PlayStation 4",
         "PlayStation 5",
         "Xbox One",
         "Xbox Series S",
-        "Xbox Series X"
+        "Xbox Series X",
+        "Xbox Cloud Gaming"
       ]
     },
     {
@@ -128,6 +140,45 @@
       ],
       "Values": [
         "Star Wars Jedi"
+      ]
+    },
+    {
+      "Label": "Director(s)",
+      "Links": [
+        {
+          "Content": "Stig Asmussen",
+          "Href": "https://starwars.fandom.com/wiki/Stig_Asmussen"
+        }
+      ],
+      "Values": [
+        "Stig Asmussen"
+      ]
+    },
+    {
+      "Label": "Writer(s)",
+      "Links": [
+        {
+          "Content": "Aaron Contreras",
+          "Href": "https://starwars.fandom.com/wiki/Aaron_Contreras"
+        },
+        {
+          "Content": "Manny Hagopian",
+          "Href": "https://starwars.fandom.com/wiki/Manny_Hagopian"
+        },
+        {
+          "Content": "Megan Fausti",
+          "Href": "https://starwars.fandom.com/wiki/Megan_Fausti"
+        },
+        {
+          "Content": "Matt Michnovetz",
+          "Href": "https://starwars.fandom.com/wiki/Matt_Michnovetz"
+        }
+      ],
+      "Values": [
+        "Aaron Contreras",
+        "Manny Hagopian",
+        "Megan Fausti",
+        "Matt Michnovetz"
       ]
     },
     {
@@ -157,24 +208,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 230238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Dark_Deeds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
       "PageId": 620737,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Art_of_Star_Wars_Jedi:_Fallen_Order",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book"
     },
     {
-      "PageId": 719857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Jedi:_Survivor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+      "PageId": 9972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Jedi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Multimedia"
+    },
+    {
+      "PageId": 230238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Dark_Deeds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 675664,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Jedi:_Fallen_Order_(Original_Video_Game_Soundtrack)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Soundtrack"
+    },
+    {
+      "PageId": 719857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Jedi:_Survivor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
     }
   ]
 }

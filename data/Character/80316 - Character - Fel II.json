@@ -2,6 +2,7 @@
   "PageId": 80316,
   "PageUrl": "https://starwars.fandom.com/wiki/Fel_II",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,42 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Fel dynasty",
+          "Href": "https://starwars.fandom.com/wiki/Fel_dynasty"
+        }
+      ],
+      "Values": [
+        "Fel dynasty"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jagged Fel",
+          "Href": "https://starwars.fandom.com/wiki/Jagged_Fel"
+        }
+      ],
+      "Values": [
+        "Jagged Fel"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Roan Fel",
+          "Href": "https://starwars.fandom.com/wiki/Roan_Fel"
+        }
+      ],
+      "Values": [
+        "Roan Fel"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +84,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jagged_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

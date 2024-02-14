@@ -2,6 +2,7 @@
   "PageId": 11988,
   "PageUrl": "https://starwars.fandom.com/wiki/Patricia_Katarn",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,54 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Katarn family",
+          "Href": "https://starwars.fandom.com/wiki/Katarn_family"
+        }
+      ],
+      "Values": [
+        "Katarn family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Morgan Katarn",
+          "Href": "https://starwars.fandom.com/wiki/Morgan_Katarn"
+        }
+      ],
+      "Values": [
+        "Morgan Katarn"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Kyle Katarn",
+          "Href": "https://starwars.fandom.com/wiki/Kyle_Katarn"
+        }
+      ],
+      "Values": [
+        "Kyle Katarn"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 7760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Katarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyle_Katarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

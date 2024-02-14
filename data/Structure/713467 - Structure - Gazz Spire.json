@@ -2,6 +2,7 @@
   "PageId": 713467,
   "PageUrl": "https://starwars.fandom.com/wiki/Gazz_Spire",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -19,7 +20,7 @@
         },
         {
           "Content": "Kalimahr",
-          "Href": "https://starwars.fandom.com/wiki/Kalimahr"
+          "Href": "https://starwars.fandom.com/wiki/Kalimahr/Legends"
         }
       ],
       "Values": [
@@ -31,7 +32,7 @@
       "Links": [
         {
           "Content": "Stargazers",
-          "Href": "https://starwars.fandom.com/wiki/Stargazers_(sect)"
+          "Href": "https://starwars.fandom.com/wiki/Stargazers"
         }
       ],
       "Values": [
@@ -39,5 +40,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 367182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalimahr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

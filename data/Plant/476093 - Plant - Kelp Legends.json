@@ -27,11 +27,16 @@
       "Label": "Homeworld",
       "Links": [
         {
+          "Content": "Dac",
+          "Href": "https://starwars.fandom.com/wiki/Dac"
+        },
+        {
           "Content": "Taris",
           "Href": "https://starwars.fandom.com/wiki/Taris/Legends"
         }
       ],
       "Values": [
+        "Dac",
         "Taris"
       ]
     },
@@ -55,10 +60,15 @@
         {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Mon Calamari",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari/Legends"
         }
       ],
       "Values": [
-        "Humans"
+        "Humans",
+        "Mon Calamari"
       ]
     },
     {
@@ -71,14 +81,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 8948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aiwha/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 20728,
       "PageUrl": "https://starwars.fandom.com/wiki/Barison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 8948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aiwha/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

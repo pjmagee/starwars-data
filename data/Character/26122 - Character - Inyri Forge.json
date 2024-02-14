@@ -48,8 +48,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -58,7 +70,36 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Brown"
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kassar Forge",
+          "Href": "https://starwars.fandom.com/wiki/Kassar_Forge"
+        },
+        {
+          "Content": "Myda Forge",
+          "Href": "https://starwars.fandom.com/wiki/Myda_Forge"
+        }
+      ],
+      "Values": [
+        "Kassar Forge",
+        "Myda Forge"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Lujayne Forge",
+          "Href": "https://starwars.fandom.com/wiki/Lujayne_Forge"
+        }
+      ],
+      "Values": [
+        "Lujayne Forge"
       ]
     },
     {
@@ -69,45 +110,31 @@
           "Href": "https://starwars.fandom.com/wiki/Black_Sun/Legends"
         },
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
-        },
-        {
-          "Content": "Alliance of Free Planets",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_of_Free_Planets"
-        },
-        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         },
         {
-          "Content": "New Republic Defense Force",
-          "Href": "https://starwars.fandom.com/wiki/Combined_Defense_Forces_of_the_New_Republic"
-        },
-        {
           "Content": "Rogue Squadron",
           "Href": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends"
-        },
-        {
-          "Content": "Galactic Alliance",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
-        },
-        {
-          "Content": "Galactic Alliance Defense",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Alliance_Defense_Force"
         }
       ],
       "Values": [
         "Black Sun",
-        "Alliance to Restore the Republic",
-        "Alliance of Free Planets",
         "New Republic",
-        "New Republic Defense Force",
-        "Rogue Squadron",
-        "Galactic Alliance",
-        "Galactic Alliance Defense"
+        "Rogue Squadron"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 23264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lujayne_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 174272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kassar_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -28,11 +28,18 @@
       ]
     },
     {
+      "Label": "Official language(s)",
+      "Links": [],
+      "Values": [
+        "Fallanassi script"
+      ]
+    },
+    {
       "Label": "Deities",
       "Links": [
         {
           "Content": "White Current",
-          "Href": "https://starwars.fandom.com/wiki/White_Current"
+          "Href": "https://starwars.fandom.com/wiki/White_Current/Legends"
         }
       ],
       "Values": [
@@ -43,8 +50,16 @@
       "Label": "Locations/temples",
       "Links": [
         {
+          "Content": "Ialtra",
+          "Href": "https://starwars.fandom.com/wiki/Ialtra"
+        },
+        {
           "Content": "Lucazec",
           "Href": "https://starwars.fandom.com/wiki/Lucazec/Legends"
+        },
+        {
+          "Content": "Jisasu",
+          "Href": "https://starwars.fandom.com/wiki/Jisasu"
         },
         {
           "Content": "J't'p'tan",
@@ -56,8 +71,8 @@
         }
       ],
       "Values": [
-        "Ialtra",
-        "Lucazec",
+        "Ialtra, Lucazec",
+        "Jisasu, Lucazec",
         "J't'p'tan",
         "Pydyr"
       ]
@@ -65,24 +80,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 131647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enara",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 56925,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Morning",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 128826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ji",
+      "PageId": 129952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jib_Djalla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 128823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ialtra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 129954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Novus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 670939,
@@ -110,19 +120,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
     },
     {
-      "PageId": 29439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akanah_Norand_Goss_Pell",
+      "PageId": 766030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sense_Current",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 161740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mud_Sloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 128826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ji",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 328327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eliya",
+      "PageId": 33511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wialu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 328443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fallanassi_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 128685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dopplegänger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 131647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 48461,
@@ -135,23 +160,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 33511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wialu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 3999,
       "PageUrl": "https://starwars.fandom.com/wiki/Pydyr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 129952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jib_Djalla",
+      "PageId": 215099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fallanassi_powers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 277061,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mirror_illusion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 328443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fallanassi_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 128823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ialtra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 328327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eliya",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 129954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Novus",
+      "PageId": 794347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koqus_liner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 29439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akanah_Norand_Goss_Pell",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

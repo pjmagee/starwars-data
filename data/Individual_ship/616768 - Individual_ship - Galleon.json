@@ -2,7 +2,7 @@
   "PageId": 616768,
   "PageUrl": "https://starwars.fandom.com/wiki/Galleon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Galleon-USWNE.png/revision/latest?cb=20211114194336",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Galleon-USWNE.png/revision/latest?cb=20231108031658",
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Sail barge",
@@ -43,26 +43,40 @@
           "Href": "https://starwars.fandom.com/wiki/Skiff"
         },
         {
-          "Content": "Starfighters",
+          "Content": "Pirate",
+          "Href": "https://starwars.fandom.com/wiki/Pirate"
+        },
+        {
+          "Content": "starfighters",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
         },
         {
           "Content": "Swoops",
           "Href": "https://starwars.fandom.com/wiki/Swoop"
+        },
+        {
+          "Content": "Kragan Gorr's shuttle",
+          "Href": "https://starwars.fandom.com/wiki/Kragan_Gorr%27s_shuttle"
+        },
+        {
+          "Content": "Sheathipede-class transport shuttle",
+          "Href": "https://starwars.fandom.com/wiki/Sheathipede-class_transport_shuttle"
         }
       ],
       "Values": [
         "Skiffs",
-        "Starfighters",
-        "Swoops"
+        "8 Pirate starfighters",
+        "Swoops",
+        "Kragan Gorr's shuttle",
+        "Sheathipede-class transport shuttle"
       ]
     },
     {
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Kidnapping of Torra Doza",
-          "Href": "https://starwars.fandom.com/wiki/Kidnapping_of_Torra_Doza"
+          "Content": "Torra Doza's abduction",
+          "Href": "https://starwars.fandom.com/wiki/Torra_Doza%27s_abduction"
         },
         {
           "Content": "Battle of Castilon",
@@ -78,7 +92,7 @@
         }
       ],
       "Values": [
-        "Kidnapping of Torra Doza",
+        "Torra Doza's abduction",
         "Battle of Castilon",
         "Skirmish over D'Qar",
         "Mission to Celsor 3"
@@ -126,26 +140,62 @@
         {
           "Content": "Valik",
           "Href": "https://starwars.fandom.com/wiki/Valik"
+        },
+        {
+          "Content": "Snarl",
+          "Href": "https://starwars.fandom.com/wiki/Snarl"
+        },
+        {
+          "Content": "Leoz",
+          "Href": "https://starwars.fandom.com/wiki/Leoz"
+        },
+        {
+          "Content": "Tooms",
+          "Href": "https://starwars.fandom.com/wiki/Tooms"
+        },
+        {
+          "Content": "Unidentified Warbird pirate",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Warbird_pirate"
+        },
+        {
+          "Content": "Gork",
+          "Href": "https://starwars.fandom.com/wiki/Gork"
+        },
+        {
+          "Content": "Vusk",
+          "Href": "https://starwars.fandom.com/wiki/Vusk"
+        },
+        {
+          "Content": "Narvin",
+          "Href": "https://starwars.fandom.com/wiki/Narvin"
         }
       ],
       "Values": [
         "Drell",
         "Synara San",
         "Skreek",
-        "Valik"
+        "Valik",
+        "Snarl",
+        "Leoz",
+        "Tooms",
+        "Unidentified Warbird pirate",
+        "Gork",
+        "Vusk",
+        "Unidentified Warbird Kassk pirate",
+        "Narvin"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 609527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warbird_gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 605518,
       "PageUrl": "https://starwars.fandom.com/wiki/Colossus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 609527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warbird_gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

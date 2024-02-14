@@ -2,6 +2,7 @@
   "PageId": 379255,
   "PageUrl": "https://starwars.fandom.com/wiki/Farbinda_III",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -16,10 +17,15 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -35,12 +41,37 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-14"
       ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "colony",
+          "Href": "https://starwars.fandom.com/wiki/Colonist/Legends"
+        }
+      ],
+      "Values": [
+        "A colony"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 408072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farbinda_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 10440,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperator-class_Star_Destroyer",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,24 @@
       "Label": "Designer",
       "Links": [
         {
+          "Content": "Kuat Drive Yards",
+          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
+        },
+        {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         }
       ],
       "Values": [
+        "Kuat Drive Yards",
         "Galactic Republic"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [],
+      "Values": [
+        "Kuat Drive Yards"
       ]
     },
     {
@@ -30,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -57,12 +70,12 @@
       "Label": "Year introduced",
       "Links": [
         {
-          "Content": "Clone Wars",
-          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
         }
       ],
       "Values": [
-        "Late Clone Wars"
+        "19 BBY"
       ]
     },
     {
@@ -71,13 +84,29 @@
         {
           "Content": "Galactic Republic Navy",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Republic Navy"
+        "Galactic Republic Navy",
+        "Galactic Empire",
+        "Imperial Navy"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

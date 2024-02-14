@@ -13,7 +13,12 @@
     },
     {
       "Label": "Military unit type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
+        }
+      ],
       "Values": [
         "Imperial remnant"
       ]
@@ -52,38 +57,60 @@
         {
           "Content": "Dalven Kyrell",
           "Href": "https://starwars.fandom.com/wiki/Dalven_Kyrell"
+        },
+        {
+          "Content": "Ved Foslo",
+          "Href": "https://starwars.fandom.com/wiki/Ved_Foslo"
         }
       ],
       "Values": [
         "Commander Nash Windrider",
-        "Lieutenant Dalven Kyrell"
+        "Lieutenant Dalven Kyrell",
+        "Ved Foslo"
+      ]
+    },
+    {
+      "Label": "Sub-units",
+      "Links": [
+        {
+          "Content": "Queluhan Nebula Imperial fleet",
+          "Href": "https://starwars.fandom.com/wiki/Queluhan_Nebula_Imperial_fleet"
+        }
+      ],
+      "Values": [
+        "Queluhan Nebula Imperial fleet"
       ]
     },
     {
       "Label": "Vehicles",
       "Links": [
         {
+          "Content": "Star Destroyers",
+          "Href": "https://starwars.fandom.com/wiki/Star_Destroyer"
+        },
+        {
           "Content": "Light cruisers",
           "Href": "https://starwars.fandom.com/wiki/Light_cruiser"
+        },
+        {
+          "Content": "Attack cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Attack_cruiser"
         },
         {
           "Content": "Garrote",
           "Href": "https://starwars.fandom.com/wiki/Garrote_(attack_cruiser)"
         },
         {
-          "Content": "Star Destroyers",
-          "Href": "https://starwars.fandom.com/wiki/Star_Destroyer"
-        },
-        {
-          "Content": "TIE fighters",
+          "Content": "TIE/ln space superiority starfighters",
           "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
         }
       ],
       "Values": [
-        "Light cruisers",
-        "Garrote",
         "At least 10 Star Destroyers",
-        "TIE fighters"
+        "Light cruisers",
+        "At least 1 Attack cruiser",
+        "Garrote",
+        "TIE/ln space superiority starfighters"
       ]
     },
     {
@@ -125,14 +152,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 528253,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queluhan_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 513563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ved_Foslo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 515013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garrote_(attack_cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 451736,
@@ -140,9 +162,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 65415,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 510598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randd",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 512222,
@@ -150,19 +172,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 611678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nash_Windrider's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 515593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalven_Kyrell",
+      "PageId": 513563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ved_Foslo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 515603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Distinguished_Medal_of_Imperial_Honor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
     },
     {
       "PageId": 499888,
@@ -170,14 +182,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 510598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Randd",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 512149,
       "PageUrl": "https://starwars.fandom.com/wiki/Kyrell_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 515603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Distinguished_Medal_of_Imperial_Honor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+    },
+    {
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 458694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flight_Commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 469523,
@@ -190,9 +212,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 515013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garrote_(attack_cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 65415,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 528253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queluhan_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 515593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalven_Kyrell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 611678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nash_Windrider's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

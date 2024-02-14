@@ -20,7 +20,7 @@
         },
         {
           "Content": "Hynestia",
-          "Href": "https://starwars.fandom.com/wiki/Hynestia"
+          "Href": "https://starwars.fandom.com/wiki/Hynestia_Prime"
         }
       ],
       "Values": [
@@ -69,6 +69,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.78 meters (5 ft, 10 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -100,10 +123,20 @@
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Red Group",
+          "Href": "https://starwars.fandom.com/wiki/Red_Group"
         }
       ],
       "Values": [
-        "Jedi Order"
+        "Jedi Order",
+        "Galactic Republic",
+        "Red Group"
       ]
     },
     {
@@ -126,9 +159,34 @@
   ],
   "Relationships": [
     {
-      "PageId": 713760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wishful_Thinking",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 681803,
+      "PageUrl": "https://starwars.fandom.com/wiki/246_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 683060,
+      "PageUrl": "https://starwars.fandom.com/wiki/234_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 728106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_Gravity's_Heart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 717131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imri_Cantaros'_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 717132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imri_Cantaros'_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 792191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Party_on_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 678450,
@@ -141,24 +199,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 728106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Berenge_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 713760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wishful_Thinking",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 646064,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vernestra_Rwoh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 681803,
-      "PageUrl": "https://starwars.fandom.com/wiki/246_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 683060,
-      "PageUrl": "https://starwars.fandom.com/wiki/234_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 682222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 664281,
@@ -166,9 +214,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 682222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 646064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vernestra_Rwoh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 682084,

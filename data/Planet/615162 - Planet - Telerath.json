@@ -67,7 +67,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Islands"
@@ -77,20 +89,30 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "cantina",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Telerath)"
+        },
+        {
           "Content": "Manala",
           "Href": "https://starwars.fandom.com/wiki/Manala"
         }
       ],
       "Values": [
+        "A cantina",
         "Manala"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 624562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Telerath_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 789488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Telerath)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 615381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 548329,
@@ -98,9 +120,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 615381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Manala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 624562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Telerath_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

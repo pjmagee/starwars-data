@@ -27,7 +27,7 @@
       "Label": "End",
       "Links": [],
       "Values": [
-        "c. 35 ABY"
+        "35 ABY"
       ]
     },
     {
@@ -46,17 +46,19 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "galaxy",
-          "Href": "https://starwars.fandom.com/wiki/Galaxy"
-        },
-        {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "galaxy",
+          "Href": "https://starwars.fandom.com/wiki/Galaxy"
         }
       ],
       "Values": [
+        "First Order defeat",
         "The inhabitants of the galaxy rise up against the First Order",
-        "Fall of the First Order"
+        "Fall of the First Order",
+        "A power vacuum is opened in the galaxy"
       ]
     },
     {
@@ -109,19 +111,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 637161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 640807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Cloud_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 640808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Endor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 629551,
+      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 641124,
@@ -154,9 +146,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 629551,
-      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 637161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 640807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Cloud_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 640808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

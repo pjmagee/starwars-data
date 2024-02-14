@@ -2,7 +2,7 @@
   "PageId": 504718,
   "PageUrl": "https://starwars.fandom.com/wiki/Gand_(planet)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/Gand_FFG.png/revision/latest?cb=20160923151546",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b9/Gandplanet.jpg/revision/latest?cb=20230313173633",
   "Data": [
     {
       "Label": "Titles",
@@ -30,13 +30,18 @@
     },
     {
       "Label": "Sector",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Shadola sector",
+          "Href": "https://starwars.fandom.com/wiki/Shadola_sector"
+        }
+      ],
       "Values": [
         "Shadola sector"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "T-8",
@@ -60,7 +65,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -105,8 +110,58 @@
   ],
   "Relationships": [
     {
+      "PageId": 756888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 578601,
       "PageUrl": "https://starwars.fandom.com/wiki/Churkk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadola_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 756989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zuckuss'_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 757680,
+      "PageUrl": "https://starwars.fandom.com/wiki/T'karra_flower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 756992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zuckuss'_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Rite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 757676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Master_Findsman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zimbokk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korgoss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garkung",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -120,11 +175,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 472961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zuckuss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 504805,
       "PageUrl": "https://starwars.fandom.com/wiki/Gand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -135,9 +185,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 472961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zuckuss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

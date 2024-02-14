@@ -2,6 +2,7 @@
   "PageId": 80944,
   "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Command",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,16 @@
       "Label": "Headquarters",
       "Links": [
         {
+          "Content": "Holocomm center of Jedi Command",
+          "Href": "https://starwars.fandom.com/wiki/Holocomm_center_of_Jedi_Command"
+        },
+        {
           "Content": "Jedi Temple",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Temple"
         }
       ],
       "Values": [
-        "Jedi Temple"
+        "Holocomm center of Jedi Command, Jedi Temple"
       ]
     },
     {
@@ -71,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 777709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holocomm_center_of_Jedi_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

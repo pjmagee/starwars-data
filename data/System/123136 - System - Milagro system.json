@@ -2,7 +2,7 @@
   "PageId": 123136,
   "PageUrl": "https://starwars.fandom.com/wiki/Milagro_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7b/Second_Battle_of_Milagro.jpg/revision/latest?cb=20060729044143",
   "Data": [
     {
       "Label": "Titles",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-14"
@@ -75,25 +75,35 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
+        },
+        {
+          "Content": "Yuuzhan Vong empire",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "Galactic Republic",
+        "Confederacy of Independent Systems",
+        "Yuuzhan Vong empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 447642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Milagro_system_(Yuuzhan_Vong_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 14640,
       "PageUrl": "https://starwars.fandom.com/wiki/Milagro/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 447642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Milagro_system_(Yuuzhan_Vong_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 169641,

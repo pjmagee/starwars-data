@@ -2,7 +2,7 @@
   "PageId": 636304,
   "PageUrl": "https://starwars.fandom.com/wiki/Cal_Kestis'_second_lightsaber",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/CalKestis2ndLightsaber-TLC.png/revision/latest?cb=20201211030659",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/CalKestis2ndLightsaber-TLC.png/revision/latest?cb=20220916034112",
   "Data": [
     {
       "Label": "Titles",
@@ -33,12 +33,17 @@
         {
           "Content": "Double-bladed lightsaber",
           "Href": "https://starwars.fandom.com/wiki/Double-bladed_lightsaber"
+        },
+        {
+          "Content": "Crossguard lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Crossguard_lightsaber"
         }
       ],
       "Values": [
         "Split saber",
         "Double-bladed lightsaber",
-        "Single-bladed lightsaber (when separated)"
+        "Single-bladed lightsaber (when separated)",
+        "Crossguard lightsaber"
       ]
     },
     {
@@ -92,7 +97,23 @@
       "Label": "Hilt shape",
       "Links": [],
       "Values": [
-        "Straight"
+        "Cylindrical, straight"
+      ]
+    },
+    {
+      "Label": "Hilt material",
+      "Links": [
+        {
+          "Content": "Cere Junda's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Cere_Junda%27s_lightsaber"
+        },
+        {
+          "Content": "Jaro Tapal's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Jaro_Tapal%27s_lightsaber"
+        }
+      ],
+      "Values": [
+        "Salvaged materials from Cere Junda's lightsaber and Jaro Tapal's lightsaber"
       ]
     },
     {
@@ -109,9 +130,21 @@
     },
     {
       "Label": "Blade color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
         "Blue"
+      ]
+    },
+    {
+      "Label": "Modification(s)",
+      "Links": [],
+      "Values": [
+        "Detachable hilt allows the user to fight with two single sabers"
       ]
     },
     {
@@ -136,11 +169,16 @@
         {
           "Content": "Mantis crew",
           "Href": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew"
+        },
+        {
+          "Content": "Hidden Path",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Path"
         }
       ],
       "Values": [
         "Jedi Order",
-        "Mantis crew"
+        "Mantis crew",
+        "Hidden Path"
       ]
     }
   ],

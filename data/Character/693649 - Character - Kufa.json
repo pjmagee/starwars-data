@@ -2,6 +2,7 @@
   "PageId": 693649,
   "PageUrl": "https://starwars.fandom.com/wiki/Kufa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
         }
       ],
       "Values": [
-        "c. 231 BBY, Rystan"
+        "231 BBY, Rystan"
       ]
     },
     {
@@ -70,11 +71,11 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Ro family",
-          "Href": "https://starwars.fandom.com/wiki/Ros_(family)"
+          "Href": "https://starwars.fandom.com/wiki/Ro_family"
         }
       ],
       "Values": [
@@ -82,5 +83,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 791764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rystan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 725436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Open_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

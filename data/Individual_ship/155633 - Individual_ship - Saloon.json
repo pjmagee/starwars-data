@@ -2,6 +2,7 @@
   "PageId": 155633,
   "PageUrl": "https://starwars.fandom.com/wiki/Saloon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light freighter",
@@ -87,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 748554,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Lucky_Whistle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    }
+  ]
 }

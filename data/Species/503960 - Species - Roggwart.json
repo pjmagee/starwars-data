@@ -2,7 +2,7 @@
   "PageId": 503960,
   "PageUrl": "https://starwars.fandom.com/wiki/Roggwart",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/29/GorRoggwart-SW.png/revision/latest?cb=20140907231100",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/29/GorRoggwart-SW.png/revision/latest?cb=20220914010241",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,8 @@
         }
       ],
       "Values": [
-        "Gray"
+        "Gray",
+        "Brown"
       ]
     },
     {
@@ -48,10 +49,21 @@
         {
           "Content": "Mustafar",
           "Href": "https://starwars.fandom.com/wiki/Mustafar"
+        },
+        {
+          "Content": "Vendaxa",
+          "Href": "https://starwars.fandom.com/wiki/Vendaxa"
+        },
+        {
+          "Content": "Guiteica",
+          "Href": "https://starwars.fandom.com/wiki/Guiteica"
         }
       ],
       "Values": [
-        "Mustafar"
+        "Mustafar",
+        "Also present on",
+        "Vendaxa",
+        "Guiteica"
       ]
     },
     {
@@ -87,9 +99,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 697655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guiteica",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 503961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 453226,
@@ -97,14 +109,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 503961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
       "PageId": 517989,
       "PageUrl": "https://starwars.fandom.com/wiki/Kongo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 697655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guiteica",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

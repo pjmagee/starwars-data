@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Dreadnought",
@@ -115,25 +115,60 @@
       ]
     },
     {
-      "Label": "Armament",
+      "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "Turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
-          "Content": "Ion cannons",
-          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
-        },
-        {
-          "Content": "Concussion missile",
-          "Href": "https://starwars.fandom.com/wiki/Concussion_missile"
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
         }
       ],
       "Values": [
-        "Turbolasers (5,000)",
-        "Ion cannons",
-        "Concussion missile tubes"
+        "Long-ranged sensors"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "ion cannons",
+          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
+        },
+        {
+          "Content": "concussion missile launchers",
+          "Href": "https://starwars.fandom.com/wiki/Concussion_missile_launcher"
+        },
+        {
+          "Content": "laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        }
+      ],
+      "Values": [
+        "Over 5,000 turbolasers",
+        "Twin heavy turbolaser batteries (750)",
+        "Turret-mounted twin light turbolaser batteries (1000)",
+        "Twin battleship ion cannons (100)",
+        "Assault concussion missile launchers (125)",
+        "Turret-mounted quad laser cannons (250)"
       ]
     },
     {
@@ -142,6 +177,14 @@
         {
           "Content": "ships",
           "Href": "https://starwars.fandom.com/wiki/Starship"
+        },
+        {
+          "Content": "TIE Series",
+          "Href": "https://starwars.fandom.com/wiki/TIE_Series"
+        },
+        {
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron"
         },
         {
           "Content": "TIE/ln space superiority starfighters",
@@ -154,13 +197,40 @@
         {
           "Content": "TIE/IN interceptors",
           "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "shuttles",
+          "Href": "https://starwars.fandom.com/wiki/Shuttle"
+        },
+        {
+          "Content": "Y-85 Titan dropships",
+          "Href": "https://starwars.fandom.com/wiki/Y-85_Titan_dropship"
+        },
+        {
+          "Content": "Walkers",
+          "Href": "https://starwars.fandom.com/wiki/Walker"
+        },
+        {
+          "Content": "All Terrain Armored Transports",
+          "Href": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport"
+        },
+        {
+          "Content": "All Terrain Scout Transports",
+          "Href": "https://starwars.fandom.com/wiki/All_Terrain_Scout_Transport"
         }
       ],
       "Values": [
         "Over 1,000 ships",
+        "TIE Series starfighters (144) (12 squadrons)",
         "TIE/ln space superiority starfighters",
         "TIE/sa bombers",
-        "TIE/IN interceptors"
+        "TIE/IN interceptors",
+        "Assault shuttles, transport shuttles, and support craft (200)",
+        "Y-85 Titan dropships",
+        "Walkers",
+        "All Terrain Armored Transports (24)",
+        "All Terrain Scout Transports (50)",
+        "IM-455 modular garrisons (2)"
       ]
     },
     {
@@ -172,7 +242,7 @@
         }
       ],
       "Values": [
-        "At least 1"
+        "At least ventral 1"
       ]
     },
     {
@@ -191,7 +261,38 @@
       "Label": "Crew",
       "Links": [],
       "Values": [
-        "1,000s"
+        "280,784 officers, pilots, and enlisted crew"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "38,000 troops and support staff"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [
+        {
+          "Content": "tons",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        }
+      ],
+      "Values": [
+        "105,000 tons (encumbrance)"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year"
+        }
+      ],
+      "Values": [
+        "6 years"
       ]
     },
     {

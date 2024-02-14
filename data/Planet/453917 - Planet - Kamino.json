@@ -15,12 +15,29 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "Wild Space",
+          "Href": "https://starwars.fandom.com/wiki/Wild_Space"
+        },
+        {
           "Content": "Extragalactic",
           "Href": "https://starwars.fandom.com/wiki/Extragalactic"
         }
       ],
       "Values": [
+        "Wild Space",
         "Extragalactic"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Abrion sector",
+          "Href": "https://starwars.fandom.com/wiki/Abrion_sector"
+        }
+      ],
+      "Values": [
+        "Abrion sector"
       ]
     },
     {
@@ -103,7 +120,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -145,19 +162,19 @@
           "Href": "https://starwars.fandom.com/wiki/Unidentified_fish_(Kamino)"
         },
         {
-          "Content": "Krill",
-          "Href": "https://starwars.fandom.com/wiki/Krill_(creature)"
+          "Content": "Kamoradon Sea Dragon",
+          "Href": "https://starwars.fandom.com/wiki/Kamoradon_Sea_Dragon"
         },
         {
-          "Content": "Saberjowl",
-          "Href": "https://starwars.fandom.com/wiki/Saberjowl"
+          "Content": "Krill",
+          "Href": "https://starwars.fandom.com/wiki/Krill_(creature)"
         }
       ],
       "Values": [
         "Aiwha",
         "A fish",
-        "Krill",
-        "Saberjowl"
+        "Kamoradon Sea Dragon",
+        "Krill"
       ]
     },
     {
@@ -173,15 +190,30 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
+        {
+          "Content": "Arcona",
+          "Href": "https://starwars.fandom.com/wiki/Arcona"
+        },
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Siniteen",
+          "Href": "https://starwars.fandom.com/wiki/Siniteen"
+        },
+        {
+          "Content": "Togruta",
+          "Href": "https://starwars.fandom.com/wiki/Togruta"
         }
       ],
       "Values": [
-        "Human"
+        "Arcona",
+        "Human",
+        "Siniteen",
+        "Togruta"
       ]
     },
     {
@@ -273,7 +305,7 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Sith Order",
+          "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
         },
         {
@@ -295,23 +327,8 @@
   ],
   "Relationships": [
     {
-      "PageId": 474170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lama_Su",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 533499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lock_(Clone_Captain)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 547901,
-      "PageUrl": "https://starwars.fandom.com/wiki/Engle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 547902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Killer",
+      "PageId": 350673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Contrail",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -320,28 +337,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 657859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 702446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone0000004",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 702449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone0000005",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Tranquility)",
+      "PageId": 599782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bellows_(clone_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -350,24 +347,184 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 650836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jango_Fett's_apartment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 728054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Endurance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 653970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Genetic_Records_Hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 728056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Coruscant_Guard_1_(Florrum)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 653972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_embryo_room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 728061,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Video_Call)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 704332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 728067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Geonosis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 728486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Checkbox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 766971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cesar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 461767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fives",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Twilight)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Quell)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Resolute_navigation_officer_(Battle_of_Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 573060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fox_(501st_Legion)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 640384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Captain_(Geonosis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 688819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 777812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hamm_(radio_communications_clone)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stone_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Waxer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dogma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jesse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ringo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 483028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 483037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 483238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 483246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Comet_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 524730,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-66-3232",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twitch_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750896,
+      "PageUrl": "https://starwars.fandom.com/wiki/CC-1226",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wyler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nova_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 512343,
@@ -375,18 +532,98 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 467336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gregor",
+      "PageId": 479385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scorch",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 496847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thorn",
+      "PageId": 480179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cut_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 553565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 662776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stealth_clone_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 662836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Chiata's_unit)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_medical_officer_(Ryndellia_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Resolute_navigational_officer_(Battle_of_Sullust)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749310,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Resolute_navigational_officer_(pre–Battle_of_Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Resolute_navigational_officer_(Battle_of_Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749571,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Devaron)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 792072,
+      "PageUrl": "https://starwars.fandom.com/wiki/CX-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 454385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 783339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Edmon_Rampart's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 505471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_cadet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 581189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Egg_Lab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 519320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 698415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino_(Kit_Fisto)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 510519,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torrent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Leader_(Anaxes)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -395,38 +632,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 546285,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stew_(clone_gunner)",
+      "PageId": 648886,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Corporal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 546342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tucker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546354,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slammer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546356,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kickback",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Axe_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Matchstick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 594498,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_sergeant",
+      "PageId": 649760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heater_(clone_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -450,23 +662,68 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 697930,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-8508",
+      "PageId": 654308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ice_age_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 631827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan_Planetary_Defense_substation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 466176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_saberdart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 586120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Even-class_training_helmet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 465375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_99",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 722517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Ryloth)",
+      "PageId": 465607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bacara",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 453304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cloning",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 465610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 581189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Egg_Lab",
+      "PageId": 550729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 658905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corvis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 638743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_security",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 704655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamoradon_Sea_Dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 704735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fish_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 476083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_Military_Complex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -485,19 +742,264 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 461767,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5555",
+      "PageId": 467336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gregor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 483238,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-4860",
+      "PageId": 617287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 483246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Comet_(clone_trooper)",
+      "PageId": 617294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_pilot_captain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 617301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Sergeant_(Coruscant_Guard)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 654795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bellow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 702446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone0000004",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 702449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone0000005",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thorn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 594498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_sergeant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kamino_(Separatist_Crisis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 472313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Davijaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 27242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deviss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Six_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497670,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grey_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Styles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531964,
+      "PageUrl": "https://starwars.fandom.com/wiki/Draa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goji",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 596244,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Brighthome)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 722517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 361121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_training_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 477171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 477178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warthog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 550992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Six",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 583121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Captain_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 583425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tacks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 659782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(332nd_Company)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 704686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(VZ-114)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 459761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sev",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 506129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 735926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 9772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 692942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_Training_Facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 692950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_cafeteria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 482250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fixer_(clone_commando)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482496,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droidbait",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hevy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 555104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rattle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_tank_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Racetrack_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sync",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charlie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 712514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Faie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 713509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Thrawn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 754547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slip_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 754554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_X",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 704136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Platform_five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 483266,
@@ -551,7 +1053,7 @@
     },
     {
       "PageId": 483501,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-6910",
+      "PageUrl": "https://starwars.fandom.com/wiki/Razor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -586,7 +1088,7 @@
     },
     {
       "PageId": 483668,
-      "PageUrl": "https://starwars.fandom.com/wiki/1174",
+      "PageUrl": "https://starwars.fandom.com/wiki/Whiplash_(Clone_Youth_Brigade)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -602,126 +1104,6 @@
     {
       "PageId": 483709,
       "PageUrl": "https://starwars.fandom.com/wiki/Lucky",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Twilight)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507816,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Quell)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507912,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Resolute_navigation_officer_(Battle_of_Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 640384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Captain_(Geonosis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 93407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muzzle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 454385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 625878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 631827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan_Planetary_Defense_substation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 361121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_training_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 457148,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5385",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 457399,
-      "PageUrl": "https://starwars.fandom.com/wiki/RC-1138",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 479385,
-      "PageUrl": "https://starwars.fandom.com/wiki/RC-1262",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 480179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cut_Lawquane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 503057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Havoc_(ARC_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 5034,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-2224",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 5038,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1119",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 538437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tag_(clone_trooper_pilot)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 553565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 605177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_Scout_Trooper_lieutenant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 718023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_assault_ship_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 583417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruling_Council_(Kamino)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 545225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 319128,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trap",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -743,6 +1125,276 @@
       "PageId": 483749,
       "PageUrl": "https://starwars.fandom.com/wiki/CT-66-3339",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 754569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 676216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_unit_commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 724514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 725868,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(187th_Legion)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 575408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chocolate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 500524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crosshair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wrecker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mixx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 601673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wildfire_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 728776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_pilot_(Brighthome)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 728959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theo_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 728962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sparks_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drift_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stub_(clone_pilot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729188,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729244,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slider_(clone_pilot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 692318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 626240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_flood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 492012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neyo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 670824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klick_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(Geonosis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(First_Battle_of_Geonosis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_Scout_Trooper_officer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_paratrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671875,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander_(Kaliida_Shoals_Medical_Center)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 671879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_medical_officer_clone_(Kaliida_Shoals_Medical_Center)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 759298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireball_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 759306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nemec",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 687848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Base_1468",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 453524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 458564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 464644,
+      "PageUrl": "https://starwars.fandom.com/wiki/501st_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 692385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Kamino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 704002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Hunter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 557927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Project_War-Mantle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 123016,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 457399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boss_(clone_commando)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 503057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Havoc_(ARC_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cody",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Appo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tag_(clone_trooper_pilot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_Scout_Trooper_lieutenant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 731683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doc_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Kamino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 606200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Section_C-6",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 545225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 531403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_DNA_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 483750,
@@ -771,7 +1423,7 @@
     },
     {
       "PageId": 483992,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-1284",
+      "PageUrl": "https://starwars.fandom.com/wiki/Spark",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -825,33 +1477,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 609345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peel",
+      "PageId": 484422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kosmos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 641303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Resolute)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 692392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shock_trooper_quartermaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 692543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_Master_(Kamino)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 693099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(cafeteria)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 693542,
-      "PageUrl": "https://starwars.fandom.com/wiki/ES-04",
+      "PageId": 484432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scythe_(clone_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -860,714 +1492,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 717483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Platform_five",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 505290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Tipoca_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 677264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 503790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 519320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 465375,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_99",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 465607,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1138",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 465610,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1010",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nala_Se",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544313,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-55/11-9009",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 544925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crasher",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broadside",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 629800,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-4547",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 629801,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-2357",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 648886,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Corporal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9772,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-4477",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cloning_program",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 692942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_Training_Facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 692950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_cafeteria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 472622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kamino_(Separatist_Crisis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 531672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_Scout_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_DNA_room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 499933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Six_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497670,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-10/994",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Styles",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531964,
-      "PageUrl": "https://starwars.fandom.com/wiki/Draa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rod",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 531974,
-      "PageUrl": "https://starwars.fandom.com/wiki/Goji",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Ten",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Twelve",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Four",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trauma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 547068,
-      "PageUrl": "https://starwars.fandom.com/wiki/Monnk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 596244,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_(Brighthome)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_captain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander_(Tranquility)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_pilot_captain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 617301,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Sergeant_(Coruscant_Guard)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 652690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_captain_(Teth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 652933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Tribunal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 654795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bellow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 724514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fetts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 575408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chocolate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 586120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Even-class_training_helmet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 452447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472313,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-2237",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 580791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crag",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 657147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Green_Company_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 676216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_unit_commander",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 725868,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(187th_Legion)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726119,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sister",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 687848,
-      "PageUrl": "https://starwars.fandom.com/wiki/Base_1468",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 625288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 636103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fett_Code",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 693540,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9904's_Elite_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 692385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Kamino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 704002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Hunter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 698415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino_(Kit_Fisto)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 455196,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-5052",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 455197,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1004",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 475635,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-411",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500524,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500598,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9904",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500599,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tech",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wrecker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mixx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 550729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 550992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Six",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 583121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Kamino_security)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 583425,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-2801",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 658905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corvis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 704686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Rampart)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728054,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Endurance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Coruscant_Guard_1_(Florrum)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728061,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Video_Call)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728067,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_(Geonosis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728486,
-      "PageUrl": "https://starwars.fandom.com/wiki/Checkbox",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_pilot_(Brighthome)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theo_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 728962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sparks_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 680997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Growth_jar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 485410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 496306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 496319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 499229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_initiative",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 559753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Central_Armory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 453524,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 464644,
-      "PageUrl": "https://starwars.fandom.com/wiki/501st_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 123016,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 27242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deviss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 456625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Denal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 456628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hardcase",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 603493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Endurance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(Zeffo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(13th_Battalion)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 662776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stealth_clone_pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 662836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Chiata's_unit)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 681936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_lieutenant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 730428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_veteran_clone_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 467103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 475365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper_pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 476065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_Space_Control",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 704036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Secret_landing_platform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 704266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nala_Se's_private_lab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 704315,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_tube_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 466176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_saberdart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 484422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kosmos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 484432,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9544",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 509842,
-      "PageUrl": "https://starwars.fandom.com/wiki/Threepwood",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 509845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tracker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 528219,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-1157",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 643148,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-0292",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 670824,
-      "PageUrl": "https://starwars.fandom.com/wiki/GC-1000",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 693912,
-      "PageUrl": "https://starwars.fandom.com/wiki/ES-03",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 350673,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-4981",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 476416,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-4040",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 476566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doom",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 476663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warthog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 601673,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-1701",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 659782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(332nd_Company)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 707255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jumpy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 707461,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729155,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-1020",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729156,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stub_(clone_pilot)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729188,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet_2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_cadet_3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729244,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slider_(clone_pilot)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 730243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 692318,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 583417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruling_Council_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 479521,
@@ -1590,24 +1517,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 453525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 754607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Coruscant_(Clone_Force_99)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 455502,
-      "PageUrl": "https://starwars.fandom.com/wiki/ARC_program",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 506929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chatter_(radio_communications_clone)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 458520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 572731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 461214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_shock_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 572734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kicker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 734710,
+      "PageUrl": "https://starwars.fandom.com/wiki/CloneKL-555",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 485410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 496306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 496319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 499229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_initiative",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 751001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Defense_Recruitment_Bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 650836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jango_Fett's_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 653970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Genetic_Records_Hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 653972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_embryo_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 616498,
@@ -1615,79 +1587,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 492012,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-8826",
+      "PageId": 695464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 696380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 528219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 510519,
-      "PageUrl": "https://starwars.fandom.com/wiki/TX-828",
+      "PageId": 717483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 510720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Leader_(Anaxes)",
+      "PageId": 757720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mayday",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 671650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(Geonosis)",
+      "PageId": 757721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hexx",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 671714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(First_Battle_of_Geonosis)",
+      "PageId": 757722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veetch",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 671715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_Scout_Trooper_officer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 704386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cloning_program",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 671716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_paratrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 671875,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander_(Kaliida_Shoals_Medical_Center)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 671879,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_medical_officer_clone_(Kaliida_Shoals_Medical_Center)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 638743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_security",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 557927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Project_War-Mantle",
+      "PageId": 467103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 457135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 475365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 704655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saberjowl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 704735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fish_(Kamino)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 529064,
-      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-34_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 476065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_Space_Control",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 458163,
@@ -1710,33 +1662,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 519615,
-      "PageUrl": "https://starwars.fandom.com/wiki/Remo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 519616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaylon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 519617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Big-Mouth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 519618,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 540135,
       "PageUrl": "https://starwars.fandom.com/wiki/Lassar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 554426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Captain_of_the_Royal_Guard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -1770,94 +1697,149 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 505471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_cadet",
+      "PageId": 693540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 456625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 456628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hardcase",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 457148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 603493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Endurance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(Zeffo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(13th_Battalion)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_lieutenant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 93407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muzzle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 704332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 509842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Threepwood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 509845,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tracker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 643148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaughn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693542,
+      "PageUrl": "https://starwars.fandom.com/wiki/ES-04",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693912,
+      "PageUrl": "https://starwars.fandom.com/wiki/ES-03",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_commando_(Transport_904)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 704144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fetts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 704036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Secret_landing_platform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 704266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nala_Se's_private_lab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 704315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_tube_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 707255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jumpy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 707461,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 749211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_AQ-series_battle_droid_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 718023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_assault_ship_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 559753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_Armory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 505290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Tipoca_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 531672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_Scout_Trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 695464,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 696380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_energy_bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 482250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 482412,
-      "PageUrl": "https://starwars.fandom.com/wiki/RC-1140",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 482496,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oz",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 482587,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-00-2010",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 506129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rattle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 625039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_tank_pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 665202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twitch_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 665204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 665744,
-      "PageUrl": "https://starwars.fandom.com/wiki/Racetrack_(clone_trooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 665746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sync",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 665747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charlie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 712514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Faie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 626240,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_flood",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 654308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ice_age_(Kamino)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 625976,
@@ -1865,129 +1847,384 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 476083,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tipoca_City_Military_Complex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 459761,
-      "PageUrl": "https://starwars.fandom.com/wiki/RC-1207",
+      "PageId": 455196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bly",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482691,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-782",
+      "PageId": 455197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gree_(clone_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482779,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1993",
+      "PageId": 533499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lock_(Clone_Captain)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482804,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-5869",
+      "PageId": 599672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(ARC_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Waxer",
+      "PageId": 726119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sister",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boil",
+      "PageId": 726196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Tranquility)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482830,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-6922",
+      "PageId": 680997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Growth_jar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 625288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 636103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fett_Code",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 474170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lama_Su",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482841,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5597",
+      "PageId": 546285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stew_(clone_gunner)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ringo",
+      "PageId": 546342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tucker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482904,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ridge",
+      "PageId": 546354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slammer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hound",
+      "PageId": 546356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kickback",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jek",
+      "PageId": 546357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Axe_(clone_trooper)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 483028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charger",
+      "PageId": 546359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Matchstick",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 483037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slick",
+      "PageId": 546405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Ten",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 506929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chatter_(radio_communications_clone)",
+      "PageId": 546406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Seven",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 524730,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-66-3232",
+      "PageId": 546407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Twelve",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 572731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ding",
+      "PageId": 546408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Four",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 572734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kicker",
+      "PageId": 546954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trauma",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 573060,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-0000/1010",
+      "PageId": 547068,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monnk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 625730,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drak",
+      "PageId": 580791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crag",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 688819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega",
+      "PageId": 617001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_captain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 713509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Thrawn)",
+      "PageId": 617005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_commander_(Tranquility)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 703395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_on_Kamino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 652690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_naval_captain_(Teth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 606200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Section_C-6",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 652933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Tribunal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 697930,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-8508",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 743564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rala_De",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 784169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umbra_(clone_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloning",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 774931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shock_trooper_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 677264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 503790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 598129,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 319128,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 641303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Resolute)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 692392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shock_trooper_quartermaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 692543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_Master_(Kamino)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(cafeteria)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703640,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 457135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaminoan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 499933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kamino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 475635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ponds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cutup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 547901,
+      "PageUrl": "https://starwars.fandom.com/wiki/Engle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 547902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Killer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 657147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Green_Company_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 657859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nala_Se",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 629800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hawk_(Advanced_Recon_Commando)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 629801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_(Clone_Commander)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 458520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 461214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_shock_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529064,
+      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-34_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 519615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Remo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaylon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Big-Mouth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 554426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Captain_of_the_Royal_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilco",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750188,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-8801",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750193,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-3278",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Anakin_Skywalker)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 544313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jag",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 544925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crasher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broadside",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 741213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sicko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

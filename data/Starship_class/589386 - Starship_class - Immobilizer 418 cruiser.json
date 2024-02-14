@@ -8,7 +8,25 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Immobilizer 418 cruiser"
+        "Immobilizer 418 cruiser",
+        "(Interior depicted)"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Corellian Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
+        },
+        {
+          "Content": "Sienar Fleet Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
+        }
+      ],
+      "Values": [
+        "Corellian Engineering Corporation",
+        "Sienar Fleet Systems"
       ]
     },
     {
@@ -19,15 +37,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Cruiser",
+          "Content": "Interdictor",
+          "Href": "https://starwars.fandom.com/wiki/Interdictor_vessel"
+        },
+        {
+          "Content": "cruiser",
           "Href": "https://starwars.fandom.com/wiki/Cruiser"
         }
       ],
       "Values": [
-        "Cruiser"
+        "Interdictor cruiser"
       ]
     },
     {
@@ -40,6 +62,30 @@
       ],
       "Values": [
         "600 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Reactor"
       ]
     },
     {
@@ -72,37 +118,47 @@
           "Href": "https://starwars.fandom.com/wiki/Gravity_well_projector"
         },
         {
-          "Content": "turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
           "Content": "Laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Quad laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
         }
       ],
       "Values": [
         "Gravity well projectors (4)",
-        "Multiple turbolasers",
-        "Laser cannons (20)"
+        "Laser cannons (20)",
+        "Quad laser cannons"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron"
+        },
+        {
           "Content": "TIE/ln space superiority starfighters",
           "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
         }
       ],
       "Values": [
+        "2 squadrons",
         "24 TIE/ln space superiority starfighters"
       ]
     },
     {
       "Label": "Docking bays",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "hangar",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
       "Values": [
-        "1"
+        "Ventral hangar"
       ]
     },
     {
@@ -111,22 +167,46 @@
         {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Gunners",
+          "Href": "https://starwars.fandom.com/wiki/Gunner"
         }
       ],
       "Values": [
-        "Stormtroopers"
+        "Stormtroopers",
+        "Gunners"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Overcurrent resistors",
+          "Href": "https://starwars.fandom.com/wiki/Overcurrent_resistor"
+        }
+      ],
+      "Values": [
+        "Overcurrent resistors"
       ]
     },
     {
       "Label": "Role(s)",
+      "Links": [],
+      "Values": [
+        "Interdictor vessel"
+      ]
+    },
+    {
+      "Label": "Retired",
       "Links": [
         {
-          "Content": "Interdictor vessel",
-          "Href": "https://starwars.fandom.com/wiki/Interdictor_vessel"
+          "Content": "0 ABY",
+          "Href": "https://starwars.fandom.com/wiki/0_ABY"
         }
       ],
       "Values": [
-        "Interdictor vessel"
+        "By 0 ABY (Manufacturing only)"
       ]
     },
     {
@@ -143,12 +223,17 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy",
-        "New Republic"
+        "New Republic (Captured)",
+        "New Republic Defense Fleet (Captured)"
       ]
     }
   ],
@@ -157,6 +242,26 @@
       "PageId": 572273,
       "PageUrl": "https://starwars.fandom.com/wiki/Glaciate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 786063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raschuk_Sector_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 764023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Immobilizer_418_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 460134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

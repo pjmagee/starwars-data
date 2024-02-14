@@ -2,6 +2,7 @@
   "PageId": 23911,
   "PageUrl": "https://starwars.fandom.com/wiki/Trax_Bonkik",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Pax Bonkik",
+          "Href": "https://starwars.fandom.com/wiki/Pax_Bonkik"
+        }
+      ],
+      "Values": [
+        "Pax Bonkik"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 23837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pax_Bonkik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

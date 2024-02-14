@@ -2,7 +2,7 @@
   "PageId": 556556,
   "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Vader",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bf/Vaders_Castle_FDKF.png/revision/latest?cb=20181001030325",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bf/Vaders_Castle_FDKF.png/revision/latest?cb=20240118055201",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,18 @@
       ],
       "Values": [
         "12 BBY"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Fortress",
+          "Href": "https://starwars.fandom.com/wiki/Fortress"
+        }
+      ],
+      "Values": [
+        "Fortress"
       ]
     },
     {
@@ -43,17 +55,18 @@
       "Label": "Point(s) of interest",
       "Links": [
         {
-          "Content": "Fortress Vader hangar",
-          "Href": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar"
+          "Content": "Darth Vader's throne room",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vader%27s_throne_room"
         },
         {
-          "Content": "Sith cave",
-          "Href": "https://starwars.fandom.com/wiki/Sith_cave"
+          "Content": "Fortress Vader hangar",
+          "Href": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar"
         }
       ],
       "Values": [
-        "Fortress Vader hangar",
-        "Sith cave"
+        "Darth Vader's throne room",
+        "Fortress Vader bacta tank chamber",
+        "Fortress Vader hangar"
       ]
     },
     {
@@ -98,44 +111,64 @@
   ],
   "Relationships": [
     {
+      "PageId": 777697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Mech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 554188,
+      "PageUrl": "https://starwars.fandom.com/wiki/12_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 639590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 640131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 688071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 777685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett_Mech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 777690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader_Mech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 668463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lanvorak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 586526,
       "PageUrl": "https://starwars.fandom.com/wiki/Snoke's_ring",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
+      "PageId": 612538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Fortress_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 453226,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mustafar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 633966,
       "PageUrl": "https://starwars.fandom.com/wiki/Aeon_Engine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 719152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_Fortress_Vader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 728038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Screaming_Key",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 634552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Fortress_Vader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 609346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lava_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 640012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alazmec_of_Winsit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 611965,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gahenn_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 611969,
@@ -153,24 +186,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 639932,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
+      "PageId": 719152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_Vader's_Castle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 453226,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mustafar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 639590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 709182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Immortal_gods_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
     },
     {
       "PageId": 512043,
@@ -178,18 +196,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 640131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 634552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Fortress_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 452601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 639932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 612538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Fortress_Vader",
+      "PageId": 709182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Immortal_gods_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 784214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_throne_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 783645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scourge_attack_on_Fortress_Vader",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -208,9 +236,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 688071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar",
+      "PageId": 748873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halloween",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 452601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 611965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gahenn_Plains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 640012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alazmec_of_Winsit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 728038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Screaming_Key",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 609346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Volcanic_environment_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

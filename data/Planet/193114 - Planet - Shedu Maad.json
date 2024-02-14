@@ -17,14 +17,10 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
-        },
-        {
-          "Content": "Transitory Mists",
-          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
-        "Inner Rim; Transitory Mists"
+        "Inner Rim"
       ]
     },
     {
@@ -33,10 +29,20 @@
         {
           "Content": "Hapes Cluster",
           "Href": "https://starwars.fandom.com/wiki/Hapes_Cluster/Legends"
+        },
+        {
+          "Content": "Hapan Rim Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Hapan_Rim_Worlds"
+        },
+        {
+          "Content": "Transitory Mists",
+          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
-        "Hapes Cluster"
+        "Hapes Cluster",
+        "Hapan Rim Worlds",
+        "Transitory Mists"
       ]
     },
     {
@@ -52,22 +58,53 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Maad",
+          "Href": "https://starwars.fandom.com/wiki/Maad"
+        }
+      ],
+      "Values": [
+        "Maad"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-9"
       ]
     },
     {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "The Throat",
+          "Href": "https://starwars.fandom.com/wiki/The_Throat"
+        }
+      ],
+      "Values": [
+        "The Throat"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Type 1",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends"
         }
       ],
       "Values": [
-        "Type 1 (Breathable)"
+        "Type I (Breathable)"
       ]
     },
     {
@@ -107,6 +144,18 @@
       ]
     },
     {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Ore",
+          "Href": "https://starwars.fandom.com/wiki/Ore/Legends"
+        }
+      ],
+      "Values": [
+        "Ore (Formerly)"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -116,20 +165,20 @@
         {
           "Content": "New Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
-        },
-        {
-          "Content": "Galactic Federation of Free Alliances",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
         "Jedi Coalition",
-        "New Jedi Order",
-        "Galactic Federation of Free Alliances"
+        "New Jedi Order"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 761256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
     {
       "PageId": 232037,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Academy_(Shedu_Maad)",

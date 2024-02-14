@@ -78,9 +78,14 @@
     },
     {
       "Label": "Publisher",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Bantam Spectra",
+          "Href": "https://starwars.fandom.com/wiki/Bantam_Spectra"
+        }
+      ],
       "Values": [
-        "Lucasfilm, Ltd"
+        "Bantam Spectra"
       ]
     },
     {
@@ -113,9 +118,18 @@
     },
     {
       "Label": "Timeline",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "3",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY/Legends"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY/Legends"
+        }
+      ],
       "Values": [
-        "3.5 ABY"
+        "3-4 ABY"
       ]
     },
     {
@@ -128,14 +142,84 @@
   ],
   "Relationships": [
     {
-      "PageId": 660666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(Talking_Book_Publishers_Inc._audiobook)",
+      "PageId": 54649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(soundtrack)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Soundtrack"
+    },
+    {
+      "PageId": 213647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_(Ertl)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 299501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(audiobook)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Audiobook"
+    },
+    {
+      "PageId": 467303,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Case_of_Mistaken_Identities",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 467476,
+      "PageUrl": "https://starwars.fandom.com/wiki/An_Invitation_to_Defect",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 467699,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Most_Deadly_Hunt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 469157,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Ganjuko_Graveyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 469186,
+      "PageUrl": "operation:_Recovery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 469231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ion_Cannon_Parts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 469242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garbage_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
     },
     {
       "PageId": 19712,
       "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(novel)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 233579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_(toy_line)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Toy_line"
+    },
+    {
+      "PageId": 172986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(junior_novelization)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 411342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Limited_Collector's_Edition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine"
+    },
+    {
+      "PageId": 405538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Embossed_Metal_Collector_Cards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
+    },
+    {
+      "PageId": 405840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Micro_Machines",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
     },
     {
       "PageId": 463575,
@@ -176,86 +260,6 @@
       "PageId": 467002,
       "PageUrl": "https://starwars.fandom.com/wiki/Will_the_Last_Person_Leaving_Vergesso_Turn_Off_the_Lights?",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 467303,
-      "PageUrl": "https://starwars.fandom.com/wiki/A_Case_of_Mistaken_Identities",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 467476,
-      "PageUrl": "https://starwars.fandom.com/wiki/An_Invitation_to_Defect",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 467699,
-      "PageUrl": "https://starwars.fandom.com/wiki/A_Most_Deadly_Hunt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 469157,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Ganjuko_Graveyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 469186,
-      "PageUrl": "operation:_Recovery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 469231,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ion_Cannon_Parts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 469242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garbage_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
-    },
-    {
-      "PageId": 54649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(soundtrack)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
-    },
-    {
-      "PageId": 411342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Limited_Collector's_Edition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine"
-    },
-    {
-      "PageId": 299501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(audiobook)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Audiobook"
-    },
-    {
-      "PageId": 213647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_(Ertl)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
-    },
-    {
-      "PageId": 172986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadows_of_the_Empire_(junior_novelization)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
-    },
-    {
-      "PageId": 233579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_(toy_line)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Toy_line"
-    },
-    {
-      "PageId": 243099,
-      "PageUrl": "https://starwars.fandom.com/wiki/1996_Topps_Star_Wars:_Shadows_of_the_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
-    },
-    {
-      "PageId": 405538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Embossed_Metal_Collector_Cards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
-    },
-    {
-      "PageId": 405840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Shadows_of_the_Empire_Micro_Machines",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
     }
   ]
 }

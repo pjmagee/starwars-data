@@ -2,6 +2,7 @@
   "PageId": 726913,
   "PageUrl": "https://starwars.fandom.com/wiki/Vassal_Four_(Whetstone)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,15 +12,22 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Species",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "Kilji",
+          "Href": "https://starwars.fandom.com/wiki/Kilji"
         }
       ],
       "Values": [
-        "Male"
+        "Kilji"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -35,5 +43,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 712902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakirre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 712955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whetstone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

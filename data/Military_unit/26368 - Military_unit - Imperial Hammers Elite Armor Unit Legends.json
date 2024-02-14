@@ -41,7 +41,7 @@
       "Links": [
         {
           "Content": "High Colonel",
-          "Href": "https://starwars.fandom.com/wiki/High_Colonel"
+          "Href": "https://starwars.fandom.com/wiki/High_Colonel/Legends"
         },
         {
           "Content": "Zel Johans",
@@ -56,7 +56,7 @@
       "Label": "Sub-units",
       "Links": [
         {
-          "Content": "Squad Three",
+          "Content": "Squad three",
           "Href": "https://starwars.fandom.com/wiki/Squad_three"
         },
         {
@@ -69,7 +69,7 @@
         }
       ],
       "Values": [
-        "Squad Three",
+        "Squad three",
         "Armor Troop Zerek",
         "4th Squadron"
       ]
@@ -137,6 +137,10 @@
         {
           "Content": "Thrawn's confederation",
           "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_confederation"
+        },
+        {
+          "Content": "Thrawn's army",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_army"
         }
       ],
       "Values": [
@@ -144,11 +148,17 @@
         "Grand Army of the Republic",
         "Galactic Empire",
         "Imperial Army",
-        "Thrawn's confederation"
+        "Thrawn's confederation",
+        "Thrawn's army"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 10091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 448375,
       "PageUrl": "https://starwars.fandom.com/wiki/Squad_three",
@@ -158,11 +168,6 @@
       "PageId": 448879,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Turak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 10091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 132853,
@@ -175,14 +180,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 50033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zel_Johans",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 678708,
       "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 50033,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zel_Johans",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 10452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Repulsortank_1-H",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     }
   ]
 }

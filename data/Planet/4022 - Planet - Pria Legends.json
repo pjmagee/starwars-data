@@ -2,7 +2,7 @@
   "PageId": 4022,
   "PageUrl": "https://starwars.fandom.com/wiki/Pria/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/60/Pria-TEA.png/revision/latest?cb=20230303153222",
   "Data": [
     {
       "Label": "Titles",
@@ -15,16 +15,22 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Arrowhead",
-          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
-        },
-        {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Arrowhead; Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -41,13 +47,18 @@
     },
     {
       "Label": "Moons",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pria's sole moon",
+          "Href": "https://starwars.fandom.com/wiki/Pria%27s_sole_moon"
+        }
+      ],
       "Values": [
-        "1"
+        "Pria's sole moon"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
@@ -59,34 +70,26 @@
         {
           "Content": "standard hours",
           "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
+        },
+        {
+          "Content": "seconds",
+          "Href": "https://starwars.fandom.com/wiki/Standard_second"
         }
       ],
       "Values": [
-        "20 standard hours"
+        "20 standard hours and 3 seconds"
       ]
     },
     {
       "Label": "Class",
       "Links": [
         {
-          "Content": "ocean",
-          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+          "Content": "waterworld",
+          "Href": "https://starwars.fandom.com/wiki/Waterworld/Legends"
         }
       ],
       "Values": [
-        "Terrestrial ocean"
-      ]
-    },
-    {
-      "Label": "Atmosphere",
-      "Links": [
-        {
-          "Content": "Type I",
-          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends#Type_I_atmospheres"
-        }
-      ],
-      "Values": [
-        "Type I (breathable)"
+        "Terrestrial waterworld"
       ]
     },
     {
@@ -95,30 +98,60 @@
         {
           "Content": "Temperate",
           "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
+        },
+        {
+          "Content": "oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
         }
       ],
       "Values": [
-        "Temperate"
+        "Temperate",
+        "Stormy (over oceans)"
       ]
     },
     {
-      "Label": "Gravity",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Standard",
-          "Href": "https://starwars.fandom.com/wiki/Gravity/Legends"
+          "Content": "ice",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
         }
       ],
       "Values": [
-        "Standard"
+        "Polar ice caps",
+        "Oceans",
+        "Atolls",
+        "Tidal flats"
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "North Flows",
+          "Href": "https://starwars.fandom.com/wiki/North_Flows"
+        }
+      ],
       "Values": [
-        "Oceans",
-        "Dried sea beds"
+        "North Flows",
+        "Seafloor outposts and research facilities"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Crast",
+          "Href": "https://starwars.fandom.com/wiki/Crast"
+        },
+        {
+          "Content": "worm-like creature",
+          "Href": "https://starwars.fandom.com/wiki/Priapulin_precursor_species"
+        }
+      ],
+      "Values": [
+        "Crast",
+        "A worm-like creature"
       ]
     },
     {
@@ -127,15 +160,10 @@
         {
           "Content": "Priapulin",
           "Href": "https://starwars.fandom.com/wiki/Priapulin"
-        },
-        {
-          "Content": "Crast",
-          "Href": "https://starwars.fandom.com/wiki/Crast"
         }
       ],
       "Values": [
-        "Priapulin",
-        "Crast"
+        "Priapulin"
       ]
     },
     {
@@ -149,30 +177,38 @@
       "Values": [
         "Priap"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Republic",
-        "Galactic Empire"
-      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 40132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 21812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charza_Kwinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 380511,
       "PageUrl": "https://starwars.fandom.com/wiki/Pria_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 757058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pria's_sole_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 21811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Priapulin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 67671,
+      "PageUrl": "https://starwars.fandom.com/wiki/Priap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

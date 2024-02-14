@@ -2,7 +2,7 @@
   "PageId": 453271,
   "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/24/TantiveIV-TSWB.png/revision/latest?cb=20201021033048",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/24/TantiveIV-TSWB.png/revision/latest?cb=20221006055135",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -60,15 +60,45 @@
       ]
     },
     {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Credit"
+        }
+      ],
+      "Values": [
+        "1,200,000 credits"
+      ]
+    },
+    {
       "Label": "Length",
       "Links": [
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "126 meters"
+        "126 meters (490 ft)"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "160 ft"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "108 ft"
       ]
     },
     {
@@ -135,12 +165,24 @@
       "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "sensors",
           "Href": "https://starwars.fandom.com/wiki/Sensor"
         }
       ],
       "Values": [
-        "Equipped"
+        "Long range sensors"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Navicomputer",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Navicomputer"
       ]
     },
     {
@@ -186,8 +228,28 @@
         }
       ],
       "Values": [
+        "30 to 165 (depending on configuration)",
         "46 crew",
         "39 diplomats"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "Up to 600 (depending on configuration)"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "year",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year"
+        }
+      ],
+      "Values": [
+        "1 year"
       ]
     },
     {
@@ -200,6 +262,21 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Troop carrier",
+          "Href": "https://starwars.fandom.com/wiki/Troop_carrier"
+        }
+      ],
+      "Values": [
+        "Troop carrier",
+        "Cargo liner",
+        "Consular ship",
+        "Escourt vessel"
       ]
     },
     {
@@ -293,12 +370,34 @@
       "Label": "Navy",
       "Links": [
         {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
           "Content": "Rebel Alliance Navy",
           "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+        },
+        {
+          "Content": "Resistance navy",
+          "Href": "https://starwars.fandom.com/wiki/Resistance_navy"
         }
       ],
       "Values": [
-        "Rebel Alliance Navy"
+        "Galactic Republic Navy",
+        "Rebel Alliance Navy",
+        "Resistance navy"
+      ]
+    },
+    {
+      "Label": "Fleet",
+      "Links": [
+        {
+          "Content": "Royal Alderaan Civil Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Alderaan_Civil_Fleet"
+        }
+      ],
+      "Values": [
+        "Royal Alderaan Civil Fleet"
       ]
     },
     {
@@ -390,14 +489,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 713041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Profundity_task_force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 500392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satine's_Lament",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 471760,
       "PageUrl": "https://starwars.fandom.com/wiki/Raymus_Antilles",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Urcos_Furdam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 660694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Alderaan_Civil_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 580670,
@@ -410,19 +524,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 660694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaanian_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 500392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satine's_Lament",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 639873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Urcos_Furdam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 556607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Profundity",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

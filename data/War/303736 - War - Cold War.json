@@ -17,10 +17,14 @@
         {
           "Content": "29 ABY",
           "Href": "https://starwars.fandom.com/wiki/29_ABY"
+        },
+        {
+          "Content": "First Order secession",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_secession"
         }
       ],
       "Values": [
-        "29 ABY"
+        "29 ABY, First Order secession"
       ]
     },
     {
@@ -40,12 +44,20 @@
       ]
     },
     {
-      "Label": "Outcome",
+      "Label": "Place",
       "Links": [
         {
-          "Content": "Galactic Concordance",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Concordance"
-        },
+          "Content": "galaxy",
+          "Href": "https://starwars.fandom.com/wiki/Galaxy"
+        }
+      ],
+      "Values": [
+        "The galaxy"
+      ]
+    },
+    {
+      "Label": "Outcome",
+      "Links": [
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
@@ -71,13 +83,18 @@
           "Href": "https://starwars.fandom.com/wiki/New_Republic_Senate"
         },
         {
-          "Content": "New Republic home fleet",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic_home_fleet"
+          "Content": "New Republic Home Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Home_Fleet"
+        },
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
       ],
       "Values": [
-        "The Galactic Concordance is broken",
-        "The First Order destroys the Hosnian system, including the New Republic capital Hosnian Prime, where the Galactic Senate and the New Republic home fleet are destroyed",
+        "Decisive First Order victory",
+        "The First Order destroys the Hosnian system, including the New Republic capital Hosnian Prime, where the Galactic Senate and the New Republic Home Fleet are destroyed",
+        "The First Order becomes the dominant galactic power",
         "Open warfare between the First Order and the Resistance begins"
       ]
     },
@@ -123,6 +140,10 @@
         {
           "Content": "Missions against pirates in the Cassander sector",
           "Href": "https://starwars.fandom.com/wiki/Missions_against_pirates_in_the_Cassander_sector"
+        },
+        {
+          "Content": "Starkiller crisis",
+          "Href": "https://starwars.fandom.com/wiki/Starkiller_crisis"
         }
       ],
       "Values": [
@@ -135,14 +156,135 @@
         "Mission on the Colossus platform",
         "Occupation of the Colossus",
         "Mission to Athulla",
-        "Missions against pirates in the Cassander sector"
+        "Missions against pirates in the Cassander sector",
+        "Starkiller crisis"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 553459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Pheryon",
+      "PageId": 424787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 525240,
+      "PageUrl": "operation:_Sabre_Strike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 536487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ovanis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 540331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Taul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 542579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Admiral_Ackbar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 542621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Finalizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 544327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Megalox_Beta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 545978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kerroc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 554397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kaddak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 630180,
+      "PageUrl": "https://starwars.fandom.com/wiki/32_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 589578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mamkoda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 589586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sheh_Soahi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 555066,
+      "PageUrl": "https://starwars.fandom.com/wiki/33_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 545926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_Assault",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 710867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starkiller_crisis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 605264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Missions_against_pirates_in_the_Cassander_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 608643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_the_Colossus_platform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 617110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_the_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 581306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_a_civilian_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 581737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia_(Resistance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 585522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Athulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 585943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atterra_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 589582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Caraxl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 594053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Lor_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 568859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_over_a_desert_planet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -151,13 +293,93 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 577769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supremacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 577855,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Home_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 763787,
+      "PageUrl": "https://starwars.fandom.com/wiki/357_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 526251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_OR-Kappa-2722",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 527802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suraz_engagement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 553459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Pheryon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 523965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Cataclysm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 555890,
+      "PageUrl": "https://starwars.fandom.com/wiki/31_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 598152,
+      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 598172,
+      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 523951,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tuanul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 567866,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 608980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rendezvous_with_the_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 610844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Doza_Tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 611253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Eila_and_Kel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 613299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Doza_Tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 613679,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Station_Theta_Black",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 616741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_Torra_Doza",
+      "PageUrl": "https://starwars.fandom.com/wiki/Torra_Doza's_abduction",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
@@ -186,184 +408,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 523951,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tuanul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 526251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_OR-Kappa-2722",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 585522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Athulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 585943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atterra_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 589582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Caraxl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 594053,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Lor_San_Tekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 608980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rendezvous_with_the_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 610844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Doza_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 611253,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Eila_and_Kel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 613299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Doza_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 545926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_Assault",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 525240,
-      "PageUrl": "operation:_Sabre_Strike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 536487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ovanis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 540331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Taul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 589578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mamkoda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 589586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sheh_Soahi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 598152,
-      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 598172,
-      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 567866,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Era",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
-    },
-    {
-      "PageId": 605264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Missions_against_pirates_in_the_Cassander_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 608643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_the_Colossus_platform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 617110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_the_Colossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 577855,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Home_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 710867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starkiller_crisis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 523965,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Cataclysm",
+      "PageId": 760698,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_secession",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 555066,
-      "PageUrl": "https://starwars.fandom.com/wiki/33_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 555890,
-      "PageUrl": "https://starwars.fandom.com/wiki/31_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 542579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Admiral_Ackbar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 542621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Finalizer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 544327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Megalox_Beta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 545978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kerroc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 554397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kaddak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 565888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vodran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 536509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 424787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 748380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Blackout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 568795,
       "PageUrl": "https://starwars.fandom.com/wiki/Black_Spire_Outpost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 565888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vodran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 575431,
@@ -376,33 +438,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 581306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_a_civilian_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 581737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia_(Resistance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 568859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_over_a_desert_planet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 630180,
-      "PageUrl": "https://starwars.fandom.com/wiki/32_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 527802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suraz_engagement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 609279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Colossus",
+      "PageId": 472926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Jakku",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -411,9 +448,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 472926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Jakku",
+      "PageId": 609279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Colossus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 536509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

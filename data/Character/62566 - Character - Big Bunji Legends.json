@@ -36,24 +36,26 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Slate-colored",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Slate-colored"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 401417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rait",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 401418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wrex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
     {
       "PageId": 199060,
       "PageUrl": "https://starwars.fandom.com/wiki/Voushon",
@@ -62,6 +64,16 @@
     {
       "PageId": 67008,
       "PageUrl": "https://starwars.fandom.com/wiki/Squeak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 401417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rait",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 401418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wrex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

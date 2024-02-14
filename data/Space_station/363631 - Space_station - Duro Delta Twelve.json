@@ -2,6 +2,7 @@
   "PageId": 363631,
   "PageUrl": "https://starwars.fandom.com/wiki/Duro_Delta_Twelve",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shipyard",
@@ -35,6 +36,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "M-11"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [
         {
@@ -47,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 56020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duro_Starshipwright_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

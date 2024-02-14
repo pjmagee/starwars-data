@@ -2,7 +2,6 @@
   "PageId": 698116,
   "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_-_The_Official_Magazine_20",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine",
-  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -13,7 +12,12 @@
     },
     {
       "Label": "Publisher",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "OZ Verlag",
+          "Href": "https://starwars.fandom.com/wiki/OZ_Verlag"
+        }
+      ],
       "Values": [
         "OZ Verlag"
       ]
@@ -61,11 +65,5 @@
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 571560,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Weapon_of_a_Jedi,_Part_2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
-    }
-  ]
+  "Relationships": []
 }

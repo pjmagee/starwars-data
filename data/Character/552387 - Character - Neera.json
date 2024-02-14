@@ -2,6 +2,7 @@
   "PageId": 552387,
   "PageUrl": "https://starwars.fandom.com/wiki/Neera",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -63,6 +64,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Hoban",
+          "Href": "https://starwars.fandom.com/wiki/Hoban"
+        }
+      ],
+      "Values": [
+        "Hoban (twin brother)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -75,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 552376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

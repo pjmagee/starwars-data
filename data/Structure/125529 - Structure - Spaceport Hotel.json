@@ -2,12 +2,25 @@
   "PageId": 125529,
   "PageUrl": "https://starwars.fandom.com/wiki/Spaceport_Hotel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/64/Spaceport_Hotel-Tatooine_Manhunt.jpg/revision/latest?cb=20230530141726",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Spaceport Hotel"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Hotel",
+          "Href": "https://starwars.fandom.com/wiki/Hotel/Legends"
+        }
+      ],
+      "Values": [
+        "Hotel"
       ]
     },
     {
@@ -27,5 +40,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 754923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sullustan_clerk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

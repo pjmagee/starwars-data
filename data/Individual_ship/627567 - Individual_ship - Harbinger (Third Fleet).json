@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -45,6 +45,77 @@
       ],
       "Values": [
         "1,600 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        }
+      ],
+      "Values": [
+        "Imperial officers"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Destroyed",
+      "Links": [
+        {
+          "Content": "1 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1_BBY"
+        },
+        {
+          "Content": "Lothal system",
+          "Href": "https://starwars.fandom.com/wiki/Lothal_system"
+        }
+      ],
+      "Values": [
+        "1 BBY, Lothal system"
+      ]
+    },
+    {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Anti-piracy campaign in the Esaga sector",
+          "Href": "https://starwars.fandom.com/wiki/Anti-piracy_campaign_in_the_Esaga_sector"
+        },
+        {
+          "Content": "Skirmish against the Third Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_against_the_Third_Fleet"
+        },
+        {
+          "Content": "Liberation of Lothal",
+          "Href": "https://starwars.fandom.com/wiki/Liberation_of_Lothal"
+        }
+      ],
+      "Values": [
+        "Anti-piracy campaign in the Esaga sector",
+        "Skirmish against the Third Fleet",
+        "Liberation of Lothal"
       ]
     },
     {
@@ -85,7 +156,7 @@
       ],
       "Values": [
         "Third Fleet",
-        "7th Fleet (tentatively)"
+        "7th Fleet"
       ]
     },
     {
@@ -114,6 +185,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 783344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 427493,
       "PageUrl": "https://starwars.fandom.com/wiki/7th_Fleet",

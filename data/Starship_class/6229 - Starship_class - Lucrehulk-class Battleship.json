@@ -2,7 +2,7 @@
   "PageId": 6229,
   "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/Lucrehulk_battleship_TCW.jpg/revision/latest?cb=20090311015214",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/Lucrehulk-Battlefront-2-Render.png/revision/latest?cb=20221114195931",
   "Data": [
     {
       "Label": "Titles",
@@ -20,7 +20,7 @@
         }
       ],
       "Values": [
-        "Hoersch-Kessel Drive Inc"
+        "Hoersch-Kessel Drive Inc. (primary contractor)"
       ]
     },
     {
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "Label": "Maximum acceleration",
+      "Label": "Maximum atmospheric speed",
       "Links": [
         {
           "Content": "kilometers per hour",
@@ -101,17 +101,21 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Rendili StarDrive",
-          "Href": "https://starwars.fandom.com/wiki/Rendili_StarDrive"
-        },
-        {
           "Content": "Proton 2",
           "Href": "https://starwars.fandom.com/wiki/Proton_2"
+        },
+        {
+          "Content": "sublight engines",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
+        },
+        {
+          "Content": "engines",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
         }
       ],
       "Values": [
-        "Rendili StarDrive Proton 2",
-        "Proton sublight drives (12)"
+        "3 Proton 2 sublight engines",
+        "12 Proton 12 sublight engines"
       ]
     },
     {
@@ -135,39 +139,58 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [],
+      "Values": [
+        "Two main reactors",
+        "Other reactors (in centersphere)"
+      ]
+    },
+    {
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "deflector shield generators",
           "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         }
       ],
       "Values": [
-        "Equipped"
+        "Multiple deflector shield generators"
       ]
     },
     {
       "Label": "Hull",
       "Links": [
         {
-          "Content": "armor",
+          "Content": "Hull",
+          "Href": "https://starwars.fandom.com/wiki/Hull"
+        },
+        {
+          "Content": "Armored",
           "Href": "https://starwars.fandom.com/wiki/Armor"
         }
       ],
       "Values": [
-        "Thick armor"
+        "Hull strengthened",
+        "Armored interior segments"
       ]
     },
     {
       "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "sensors",
+          "Content": "sensor",
           "Href": "https://starwars.fandom.com/wiki/Sensor"
+        },
+        {
+          "Content": "rectenna",
+          "Href": "https://starwars.fandom.com/wiki/Rectenna"
         }
       ],
       "Values": [
-        "Long-range sensors"
+        "Long-range",
+        "1 main sensor rectenna",
+        "4 auxiliary sensor rectennas"
       ]
     },
     {
@@ -183,96 +206,117 @@
       ]
     },
     {
-      "Label": "Armament",
+      "Label": "Main computer",
       "Links": [
         {
-          "Content": "Quad turbolaser",
-          "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
-        },
-        {
-          "Content": "Turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
-          "Content": "laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
-        },
-        {
-          "Content": "Point-defense",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
-        },
-        {
-          "Content": "quad laser",
-          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
-        },
-        {
-          "Content": "cannon",
-          "Href": "https://starwars.fandom.com/wiki/Cannon"
-        },
-        {
-          "Content": "turrets",
-          "Href": "https://starwars.fandom.com/wiki/Turret"
+          "Content": "Central Computer Core",
+          "Href": "https://starwars.fandom.com/wiki/Central_Computer_Core"
         }
       ],
       "Values": [
-        "Quad turbolaser batteries (42)Later",
-        "Turbolasers (51)",
-        "Assault laser cannons (520)",
-        "Point-defense quad laser batteries (185)Alternatively",
-        "Heavy turbolaser quad batteries (24)",
-        "Twin heavy turbolaser batteries (4)",
-        "Twin heavy laser cannon turrets (400)",
-        "Point-defense quad laser cannon turrets (160)",
-        "Quad turbolaser batteries (42)",
-        "Point-defense quad laser batteries (185)"
+        "Central Computer Core"
+      ]
+    },
+    {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Turret droids",
+          "Href": "https://starwars.fandom.com/wiki/Turret_droid"
+        }
+      ],
+      "Values": [
+        "Turret droids"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "quad turbolaser batteries",
+          "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
+        },
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        },
+        {
+          "Content": "turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "point-defense",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+        },
+        {
+          "Content": "quad laser batteries",
+          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
+        },
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "batteries",
+          "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "point-defense",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+        },
+        {
+          "Content": "heavy laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_laser_cannon"
+        }
+      ],
+      "Values": [
+        "42 quad turbolaser batteriesClone Wars refitting",
+        "51 turbolasers",
+        "520 assault laser cannons",
+        "185 point-defense quad laser batteriesAlternative refitting",
+        "24 heavy quad turbolaser batteries",
+        "4 twin heavy turbolaser batteries",
+        "160 point-defense quad laser cannon turrets",
+        "400 twin heavy laser cannons",
+        "42 quad turbolaser batteries",
+        "185 point-defense quad laser batteries"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "C-9979 landing craft",
-          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
-        },
-        {
-          "Content": "Vulture-class starfighters",
+          "Content": "Vulture-class droid starfighters",
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
-        },
-        {
-          "Content": "Shuttles",
-          "Href": "https://starwars.fandom.com/wiki/Shuttle"
-        },
-        {
-          "Content": "Boarding vessels",
-          "Href": "https://starwars.fandom.com/wiki/Boarding_craft"
-        },
-        {
-          "Content": "Landing ships",
-          "Href": "https://starwars.fandom.com/wiki/Landing_craft"
-        },
-        {
-          "Content": "Multi-Troop Transports",
-          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
         },
         {
           "Content": "Armored Assault Tanks",
           "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
         },
         {
-          "Content": "Platoon Attack Craft",
-          "Href": "https://starwars.fandom.com/wiki/Platoon_Attack_Craft"
+          "Content": "Multi-Troop Transports",
+          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
+        },
+        {
+          "Content": "C-9979 landing crafts",
+          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
+        },
+        {
+          "Content": "boarding ships",
+          "Href": "https://starwars.fandom.com/wiki/Boarding_craft"
+        },
+        {
+          "Content": "shuttles",
+          "Href": "https://starwars.fandom.com/wiki/Shuttle"
         }
       ],
       "Values": [
-        "C-9979 landing craft (50)",
-        "Vulture-class starfighters (1,500)",
-        "Shuttles",
-        "Boarding vessels",
-        "Landing ships",
-        "Ship's boats",
-        "Multi-Troop Transports (550)",
-        "Armored Assault Tanks (6,520)",
-        "Platoon Attack Craft (1,500)"
+        "Ammunition",
+        "1,500 Vulture-class droid starfighters",
+        "6,250 Armored Assault Tanks (max load)",
+        "550 Multi-Troop Transports (max load)",
+        "50 C-9979 landing crafts (max load)",
+        "Other boarding ships, shuttles and ship's boats"
       ]
     },
     {
@@ -286,29 +330,78 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "droid",
-          "Href": "https://starwars.fandom.com/wiki/Droid"
+          "Content": "supervisors",
+          "Href": "https://starwars.fandom.com/wiki/Supervisor"
+        },
+        {
+          "Content": "OOM pilot battle droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM_pilot_battle_droid"
+        },
+        {
+          "Content": "maintenance droids",
+          "Href": "https://starwars.fandom.com/wiki/Maintenance_droid"
         }
       ],
       "Values": [
-        "150 droid",
-        "25 command staff"
+        "203,060",
+        "60 supervisors",
+        "3,000 droid crewmembers, including OOM pilot battle droids",
+        "200,000 maintenance droids"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [
         {
+          "Content": "army",
+          "Href": "https://starwars.fandom.com/wiki/Army"
+        },
+        {
           "Content": "battle droids",
           "Href": "https://starwars.fandom.com/wiki/Battle_droid"
         },
         {
+          "Content": "OOM-series battle droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM-series_battle_droid"
+        },
+        {
+          "Content": "command",
+          "Href": "https://starwars.fandom.com/wiki/OOM_command_battle_droid"
+        },
+        {
+          "Content": "security",
+          "Href": "https://starwars.fandom.com/wiki/OOM-series_security_droid"
+        },
+        {
           "Content": "B1-series battle droids",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
+        },
+        {
+          "Content": "Droidekas",
+          "Href": "https://starwars.fandom.com/wiki/Droideka"
+        },
+        {
+          "Content": "P-series",
+          "Href": "https://starwars.fandom.com/wiki/P-series_droideka"
         }
       ],
       "Values": [
-        "139,000 battle droids (typically B1-series battle droids)"
+        "1 army of 139,000 battle droids (329,000 maximum)",
+        "OOM-series battle droids, including command and security models",
+        "B1-series battle droids",
+        "Droidekas, including the P-series"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [
+        {
+          "Content": "tons",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        }
+      ],
+      "Values": [
+        "25,000,000 tons"
       ]
     },
     {
@@ -324,15 +417,24 @@
       ]
     },
     {
-      "Label": "Other systems",
+      "Label": "Life support",
+      "Links": [],
+      "Values": [
+        "Ventilation shafts"
+      ]
+    },
+    {
+      "Label": "Communication systems",
       "Links": [
         {
-          "Content": "Central Control Computers",
-          "Href": "https://starwars.fandom.com/wiki/Central_Control_Computer"
+          "Content": "antennae",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
         }
       ],
       "Values": [
-        "Central Control Computers"
+        "2 main communications antennae",
+        "6 auxiliary antennae",
+        "16 signal receiver stations"
       ]
     },
     {
@@ -341,15 +443,11 @@
         {
           "Content": "transport",
           "Href": "https://starwars.fandom.com/wiki/Transport"
-        },
-        {
-          "Content": "Warship",
-          "Href": "https://starwars.fandom.com/wiki/Warship"
         }
       ],
       "Values": [
-        "Heavy transport",
-        "Warship"
+        "Battleship",
+        "Heavy transport"
       ]
     },
     {
@@ -380,8 +478,16 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
         }
       ],
       "Values": [
@@ -390,27 +496,14 @@
         "Trade Federation Home Defense Legions",
         "Confederacy of Independent Systems",
         "Confederacy of Independent Systems Navy",
-        "Galactic Republic (stolen)",
-        "Alliance to Restore the Republic"
+        "Galactic Republic",
+        "Galactic Republic Navy",
+        "Alliance to Restore the Republic",
+        "Rebel Alliance Navy"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 518899,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 423556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Droid_Control_Ship_(Coruscant)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 592208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 210417,
       "PageUrl": "https://starwars.fandom.com/wiki/Profit_(Lucrehulk-class_battleship)",
@@ -422,13 +515,58 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 14276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Acquisitor_(Lucrehulk-class)",
+      "PageId": 140130,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-1600_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 177758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortressa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 357326,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_battleship",
+      "PageId": 47957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 681889,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 592208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 241085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starworm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 596870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 6863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive,_Inc.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 58557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 518899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive_Inc.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 423556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Droid_Control_Ship_(Coruscant)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -442,44 +580,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 140130,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-1600_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 58557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stockade",
+      "PageId": 14276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Acquisitor_(Lucrehulk-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 47957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Defense_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 241085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starworm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 596870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 177758,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortressa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 681889,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Battleship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 6863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hoersch-Kessel_Drive,_Inc.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 55590,
@@ -489,6 +592,16 @@
     {
       "PageId": 55610,
       "PageUrl": "https://starwars.fandom.com/wiki/Keeper_(Lucrehulk-class_battleship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 357326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 746132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lucrehulk-class_Battleship_(Pantora)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {

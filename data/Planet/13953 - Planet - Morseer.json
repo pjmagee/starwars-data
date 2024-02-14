@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-6"
@@ -83,22 +83,20 @@
       ]
     },
     {
-      "Label": "Native species",
-      "Links": [],
-      "Values": [
-        "None"
-      ]
-    },
-    {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Morseerian",
           "Href": "https://starwars.fandom.com/wiki/Morseerian/Legends"
+        },
+        {
+          "Content": "Drackmarians",
+          "Href": "https://starwars.fandom.com/wiki/Drackmarian"
         }
       ],
       "Values": [
-        "Morseerian"
+        "Morseerian",
+        "Drackmarians"
       ]
     },
     {
@@ -107,10 +105,15 @@
         {
           "Content": "Morseerian",
           "Href": "https://starwars.fandom.com/wiki/Morseerian_(language)"
+        },
+        {
+          "Content": "Galactic Basic Standard",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard/Legends"
         }
       ],
       "Values": [
-        "Morseerian"
+        "Morseerian",
+        "Galactic Basic Standard"
       ]
     },
     {
@@ -121,23 +124,14 @@
           "Href": "https://starwars.fandom.com/wiki/Infinite_Empire"
         },
         {
-          "Content": "Drackmarians",
-          "Href": "https://starwars.fandom.com/wiki/Drackmarian"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
-        },
-        {
-          "Content": "Zsinj's Empire",
-          "Href": "https://starwars.fandom.com/wiki/Zsinj%27s_Empire"
         }
       ],
       "Values": [
         "Infinite Empire",
         "Drackmarians",
-        "Galactic Empire",
-        "Zsinj's Empire"
+        "Galactic Empire"
       ]
     }
   ],

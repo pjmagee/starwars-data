@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Inner Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Inner Rim Territories"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -33,6 +45,18 @@
       ],
       "Values": [
         "Harkrova I"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-9"
       ]
     },
     {
@@ -67,7 +91,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -110,19 +134,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 624597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harkrova_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 624599,
       "PageUrl": "https://starwars.fandom.com/wiki/Harkrova_I",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 624924,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_temple_(Harkrova_system)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 624597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harkrova_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

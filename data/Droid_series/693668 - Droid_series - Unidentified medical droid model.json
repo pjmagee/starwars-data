@@ -66,16 +66,42 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Kaminoan government",
+          "Href": "https://starwars.fandom.com/wiki/Ruling_Council_(Kamino)"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Advanced Science Division",
+          "Href": "https://starwars.fandom.com/wiki/Advanced_Science_Division"
         }
       ],
       "Values": [
         "Death Watch",
         "Galactic Republic",
-        "Galactic Empire"
+        "Kaminoan government",
+        "Galactic Empire",
+        "Advanced Science Division"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 756885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_research_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 757220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_droid_(Transport_904)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 756864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_904",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

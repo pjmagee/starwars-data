@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Pelgrin sector",
-          "Href": "https://starwars.fandom.com/wiki/Pelgrin_sector"
+          "Href": "https://starwars.fandom.com/wiki/Pelgrin_sector/Legends"
         }
       ],
       "Values": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-18"
@@ -83,14 +83,22 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
-        "Mountains",
+        "Canyons",
         "Hills",
-        "Valleys",
+        "Mountains",
         "Plains",
-        "Tall grasses"
+        "Tall grasses",
+        "Valleys"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [],
+      "Values": [
+        "At least one river"
       ]
     },
     {
@@ -106,7 +114,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Sarl",
+          "Href": "https://starwars.fandom.com/wiki/Sarl"
+        }
+      ],
+      "Values": [
+        "Sarl"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -149,6 +169,21 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 223311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Kressh_the_Younger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 231559,
+      "PageUrl": "https://starwars.fandom.com/wiki/True_Covenant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 414902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 410307,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_(Draay_2)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -157,21 +192,6 @@
       "PageId": 659192,
       "PageUrl": "https://starwars.fandom.com/wiki/Draay_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 231559,
-      "PageUrl": "https://starwars.fandom.com/wiki/True_Covenant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 223311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Kressh_the_Younger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 414902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
@@ -58,8 +58,8 @@
       "Label": "Orbits",
       "Links": [
         {
-          "Content": "Atloran",
-          "Href": "https://starwars.fandom.com/wiki/Atloran"
+          "Content": "Altoran",
+          "Href": "https://starwars.fandom.com/wiki/Altoran"
         },
         {
           "Content": "Pantolomin",
@@ -71,7 +71,7 @@
         }
       ],
       "Values": [
-        "Atloran",
+        "Altoran",
         "Pantolomin",
         "Toloran"
       ]
@@ -82,10 +82,15 @@
         {
           "Content": "Jervo's World",
           "Href": "https://starwars.fandom.com/wiki/Jervo%27s_World"
+        },
+        {
+          "Content": "Panto Prime",
+          "Href": "https://starwars.fandom.com/wiki/Panto_Prime"
         }
       ],
       "Values": [
-        "Jervo's World"
+        "Jervo's World",
+        "Panto Prime"
       ]
     },
     {
@@ -106,7 +111,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -132,19 +137,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 248427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jervo's_World",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 12692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dolomar_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 301042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Board_of_Tourism",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 17234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Altoran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 17232,
@@ -162,9 +157,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 17234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Altoran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 12692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dolomar_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 248427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jervo's_World",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 301042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Board_of_Tourism",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

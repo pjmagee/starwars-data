@@ -37,7 +37,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blond",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Blond"
       ]
@@ -83,14 +88,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 55657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khuiumin_Survivors",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 63157,
       "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 55657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khuiumin_Survivors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 356733,
   "PageUrl": "https://starwars.fandom.com/wiki/Nyama",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -36,7 +37,12 @@
     },
     {
       "Label": "Eye color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
       ]
@@ -49,15 +55,31 @@
           "Href": "https://starwars.fandom.com/wiki/Stromma_council"
         },
         {
-          "Content": "Empire of the Hand",
-          "Href": "https://starwars.fandom.com/wiki/Empire_of_the_Hand"
+          "Content": "Nuso Esva's realm",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_realm"
+        },
+        {
+          "Content": "Quesoth",
+          "Href": "https://starwars.fandom.com/wiki/Quesoth"
+        },
+        {
+          "Content": "Queen of the Red",
+          "Href": "https://starwars.fandom.com/wiki/Queen_of_the_Red_(8_ABY)"
         }
       ],
       "Values": [
         "Stromma council",
-        "Empire of the Hand"
+        "Nuso Esva's realm",
+        "Quesoth",
+        "Queen of the Red"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 740900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stromma_contingent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

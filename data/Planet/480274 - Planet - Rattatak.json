@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "H-16",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -65,10 +65,15 @@
         {
           "Content": "Barterus",
           "Href": "https://starwars.fandom.com/wiki/Barterus"
+        },
+        {
+          "Content": "gladiatorial arena",
+          "Href": "https://starwars.fandom.com/wiki/Rattatak_gladiatorial_arena"
         }
       ],
       "Values": [
-        "Barterus"
+        "Barterus",
+        "A gladiatorial arena"
       ]
     },
     {
@@ -89,7 +94,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Dathomirian",
@@ -152,9 +157,14 @@
     },
     {
       "Label": "Major cities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Velenki",
+          "Href": "https://starwars.fandom.com/wiki/Velenki"
+        }
+      ],
       "Values": [
-        "Rattataki Village"
+        "Velenki"
       ]
     },
     {
@@ -172,34 +182,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 515272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rattatakian_redjacket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 632309,
-      "PageUrl": "https://starwars.fandom.com/wiki/Velenki",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
       "PageId": 635111,
       "PageUrl": "https://starwars.fandom.com/wiki/Barterus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 483283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hal'Sted",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 596718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rattataki_Trogodile",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 714874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Ky_Narec",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 284592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 635699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barterus_gladiatorial_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 467701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 679540,
@@ -207,9 +207,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 472883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ky_Narec",
+      "PageId": 589046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shepherd_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 483283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hal'Sted",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632309,
+      "PageUrl": "https://starwars.fandom.com/wiki/Velenki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 632288,
@@ -222,8 +232,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 596718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rattataki_Trogodile",
+      "PageId": 714874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Ky_Narec",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 784834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rattatak_gladiatorial_arena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 633218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strike-vulture",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rattatakian_redjacket",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -232,29 +257,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 633218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Strike-vulture",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 635699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barterus_gladiatorial_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 284592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 467701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 589046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shepherd_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 472883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ky_Narec",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

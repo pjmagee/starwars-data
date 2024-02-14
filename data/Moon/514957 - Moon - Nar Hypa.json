@@ -60,7 +60,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-18",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-18"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Deserts",
@@ -77,14 +89,29 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Ubrik Adelhard's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Ubrik_Adelhard%27s_Imperial_remnant"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Ubrik Adelhard's Imperial remnant"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 566016,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-408",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mataou_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 513426,
       "PageUrl": "https://starwars.fandom.com/wiki/Kaoul",
@@ -98,16 +125,6 @@
     {
       "PageId": 513428,
       "PageUrl": "https://starwars.fandom.com/wiki/TK-412",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mataou_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 566016,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-408",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {

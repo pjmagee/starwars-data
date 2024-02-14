@@ -72,6 +72,35 @@
       ]
     },
     {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Algae",
+          "Href": "https://starwars.fandom.com/wiki/Algae/Legends"
+        }
+      ],
+      "Values": [
+        "Algae"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Arthropods",
+          "Href": "https://starwars.fandom.com/wiki/Arthropod/Legends"
+        },
+        {
+          "Content": "Unidentified aquatic predator",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_aquatic_predator"
+        }
+      ],
+      "Values": [
+        "Arthropods",
+        "Unidentified aquatic predator"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -86,14 +115,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 662648,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Sanctuary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 662646,
       "PageUrl": "https://starwars.fandom.com/wiki/Delriss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 790361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_aquatic_predator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 662648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

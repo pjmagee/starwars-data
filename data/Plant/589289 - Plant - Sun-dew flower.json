@@ -2,6 +2,7 @@
   "PageId": 589289,
   "PageUrl": "https://starwars.fandom.com/wiki/Sun-dew_flower",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,40 @@
       "Values": [
         "Flower"
       ]
+    },
+    {
+      "Label": "Found on",
+      "Links": [
+        {
+          "Content": "Chandrila",
+          "Href": "https://starwars.fandom.com/wiki/Chandrila"
+        }
+      ],
+      "Values": [
+        "Chandrila"
+      ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [],
+      "Values": [
+        "Greenhouses"
+      ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [],
+      "Values": [
+        "Firm stems",
+        "Resilient petals"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_City_greenhouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

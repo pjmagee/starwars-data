@@ -2,24 +2,13 @@
   "PageId": 376342,
   "PageUrl": "https://starwars.fandom.com/wiki/Thull_Yularen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Thull Yularen"
-      ]
-    },
-    {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Human"
       ]
     },
     {
@@ -32,6 +21,18 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Wullf Yularen",
+          "Href": "https://starwars.fandom.com/wiki/Wullf_Yularen/Legends"
+        }
+      ],
+      "Values": [
+        "Wullf Yularen"
       ]
     },
     {
@@ -52,5 +53,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wullf_Yularen/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

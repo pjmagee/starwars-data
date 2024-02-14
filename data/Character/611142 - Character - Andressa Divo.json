@@ -2,7 +2,7 @@
   "PageId": 611142,
   "PageUrl": "https://starwars.fandom.com/wiki/Andressa_Divo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/df/Andressa_Divo.png/revision/latest?cb=20181103125635",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/df/Andressa_Divo.png/revision/latest?cb=20230808225620",
   "Data": [
     {
       "Label": "Titles",
@@ -58,16 +58,48 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Divo family",
+          "Href": "https://starwars.fandom.com/wiki/Divo_family"
+        }
+      ],
+      "Values": [
+        "Divo family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Tanivos Exantor Divo",
+          "Href": "https://starwars.fandom.com/wiki/Tanivos_Exantor_Divo"
+        }
+      ],
+      "Values": [
+        "Tanivos Exantor Divo"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Exantor Divo",
+          "Href": "https://starwars.fandom.com/wiki/Exantor_Divo"
+        }
+      ],
+      "Values": [
+        "Exantor Divo"
       ]
     },
     {
       "Label": "Affiliation(s)",
       "Links": [
-        {
-          "Content": "Divo family",
-          "Href": "https://starwars.fandom.com/wiki/Divo_family"
-        },
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
@@ -78,11 +110,21 @@
         }
       ],
       "Values": [
-        "Divo family",
         "Galactic Empire",
         "Imperial Security Bureau"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 456434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tanivos_Exantor_Divo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 611046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exantor_Divo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

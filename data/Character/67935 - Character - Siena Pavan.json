@@ -2,6 +2,7 @@
   "PageId": 67935,
   "PageUrl": "https://starwars.fandom.com/wiki/Siena_Pavan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -61,7 +62,42 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Lorn Pavan",
+          "Href": "https://starwars.fandom.com/wiki/Lorn_Pavan"
+        }
+      ],
+      "Values": [
+        "Lorn Pavan"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Jax Pavan",
+          "Href": "https://starwars.fandom.com/wiki/Jax_Pavan"
+        }
+      ],
+      "Values": [
+        "Jax Pavan"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 28761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorn_Pavan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jax_Pavan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

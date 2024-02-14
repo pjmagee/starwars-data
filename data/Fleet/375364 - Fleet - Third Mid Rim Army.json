@@ -2,14 +2,26 @@
   "PageId": 375364,
   "PageUrl": "https://starwars.fandom.com/wiki/Third_Mid_Rim_Army",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/CommenceAttack_cw22.jpg/revision/latest?cb=20100325182836",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Third Mid Rim Army",
-        "Steel Blade Command"
+        "(Steel Blade Command)"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Sector Army",
+          "Href": "https://starwars.fandom.com/wiki/Sector_Army/Legends"
+        }
+      ],
+      "Values": [
+        "Sector Army"
       ]
     },
     {
@@ -41,7 +53,7 @@
       "Links": [
         {
           "Content": "Sector 3",
-          "Href": "https://starwars.fandom.com/wiki/Sector_3_(Imperial_Priority_Sector)"
+          "Href": "https://starwars.fandom.com/wiki/Sector_3_(Oversector)"
         }
       ],
       "Values": [
@@ -58,15 +70,53 @@
         {
           "Content": "Kohl Seerdon",
           "Href": "https://starwars.fandom.com/wiki/Kohl_Seerdon"
+        },
+        {
+          "Content": "High Jedi General",
+          "Href": "https://starwars.fandom.com/wiki/High_Jedi_General/Legends"
+        },
+        {
+          "Content": "Obi-Wan Kenobi",
+          "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi/Legends"
+        },
+        {
+          "Content": "Jedi General",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_General/Legends"
+        },
+        {
+          "Content": "Anakin Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
         }
       ],
       "Values": [
-        "Grand Moff Kohl Seerdon"
+        "Grand Moff Kohl Seerdon",
+        "High Jedi General Obi-Wan Kenobi",
+        "Jedi General Anakin Skywalker"
       ]
     },
     {
       "Label": "Notable officer(s)",
       "Links": [
+        {
+          "Content": "Clone Commander",
+          "Href": "https://starwars.fandom.com/wiki/Clone_trooper_commander"
+        },
+        {
+          "Content": "CC-2224",
+          "Href": "https://starwars.fandom.com/wiki/CC-2224/Legends"
+        },
+        {
+          "Content": "Clone",
+          "Href": "https://starwars.fandom.com/wiki/Cloning/Legends"
+        },
+        {
+          "Content": "Commander",
+          "Href": "https://starwars.fandom.com/wiki/Commander/Legends"
+        },
+        {
+          "Content": "CC-1004",
+          "Href": "https://starwars.fandom.com/wiki/CC-1004/Legends"
+        },
         {
           "Content": "Jedi General",
           "Href": "https://starwars.fandom.com/wiki/Jedi_General"
@@ -77,6 +127,8 @@
         }
       ],
       "Values": [
+        "Clone Commander CC-2224 \"Cody",
+        "Clone Commander CC-1004 \"Gree",
         "Jedi General Luminara Unduli"
       ]
     },
@@ -84,11 +136,16 @@
       "Label": "Notable ground units",
       "Links": [
         {
+          "Content": "9th Assault Corps",
+          "Href": "https://starwars.fandom.com/wiki/9th_Assault_Corps/Legends"
+        },
+        {
           "Content": "41st Elite Corps",
           "Href": "https://starwars.fandom.com/wiki/41st_Stormtrooper_Legion"
         }
       ],
       "Values": [
+        "9th Assault Corps",
         "41st Elite Corps"
       ]
     },
@@ -110,10 +167,15 @@
         {
           "Content": "Battle of Kashyyyk",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Kashyyyk/Legends"
+        },
+        {
+          "Content": "Battle of unidentified planet (shielded city)",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_unidentified_planet_(shielded_city)"
         }
       ],
       "Values": [
-        "Battle of Kashyyyk"
+        "Battle of Kashyyyk",
+        "Battle of unidentified planet (shielded city)"
       ]
     },
     {
@@ -140,6 +202,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 4343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cody/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 27809,
       "PageUrl": "https://starwars.fandom.com/wiki/9th_Assault_Corps/Legends",

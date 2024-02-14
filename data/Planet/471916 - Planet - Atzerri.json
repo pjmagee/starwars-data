@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-13",
@@ -36,7 +36,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Shipwrights' Trace",
+          "Href": "https://starwars.fandom.com/wiki/Shipwrights%27_Trace"
+        }
+      ],
+      "Values": [
+        "Shipwrights' Trace"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Gotal",
@@ -50,9 +62,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 723578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raithe_Kole",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 477940,
       "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 596874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shipwrights'_Trace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

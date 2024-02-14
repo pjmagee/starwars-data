@@ -27,11 +27,11 @@
       "Label": "Model",
       "Links": [],
       "Values": [
-        "Hyena-class bomber"
+        "Hyena-class Droid Fighter/Bomber"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -91,6 +91,30 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "hull",
+          "Href": "https://starwars.fandom.com/wiki/Hull"
+        }
+      ],
+      "Values": [
+        "Sturdy hull"
+      ]
+    },
+    {
       "Label": "Sensor systems",
       "Links": [
         {
@@ -99,44 +123,62 @@
         }
       ],
       "Values": [
-        "3 photoreceptors"
+        "2 photoreceptors"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Quad laser cannon",
+          "Content": "Quad",
           "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
         },
         {
-          "Content": "Missile",
-          "Href": "https://starwars.fandom.com/wiki/Missile"
+          "Content": "laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
-          "Content": "Proton torpedoes",
-          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo"
+          "Content": "Concussion missile launchers",
+          "Href": "https://starwars.fandom.com/wiki/Concussion_missile_launcher"
         },
         {
-          "Content": "Concussion missiles",
+          "Content": "concussion missiles",
           "Href": "https://starwars.fandom.com/wiki/Concussion_missile"
         },
         {
-          "Content": "Bomb",
-          "Href": "https://starwars.fandom.com/wiki/Bomb"
+          "Content": "Proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
         },
         {
-          "Content": "Proton bombs",
+          "Content": "proton torpedoes",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo"
+        },
+        {
+          "Content": "Proton bomb",
           "Href": "https://starwars.fandom.com/wiki/Proton_bomb"
+        },
+        {
+          "Content": "bombs",
+          "Href": "https://starwars.fandom.com/wiki/Bomb"
         }
       ],
       "Values": [
-        "Quad laser cannon",
-        "Missile pods (2)",
-        "Proton torpedoes (6)",
-        "Concussion missiles (6)",
-        "Bomb chute",
-        "Proton bombs (4)"
+        "4 Quad light laser cannons",
+        "Concussion missile launchers (6 concussion missiles)",
+        "Proton torpedo launchers (6 proton torpedoes)",
+        "Proton bomb chute (4 proton bombs)"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "droid brain",
+          "Href": "https://starwars.fandom.com/wiki/Droid_brain"
+        }
+      ],
+      "Values": [
+        "Integrated droid brain"
       ]
     },
     {
@@ -153,9 +195,15 @@
     },
     {
       "Label": "Role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "capital ship",
+          "Href": "https://starwars.fandom.com/wiki/Capital_ship"
+        }
+      ],
       "Values": [
-        "Bomber"
+        "Bombing raids",
+        "Fortification/capital ship bombardment"
       ]
     },
     {
@@ -178,31 +226,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 516859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 591831,
-      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912's_Recusant-class_light_destroyer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 663609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 483812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invincible",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 452845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Dreadnought",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 666669,
       "PageUrl": "https://starwars.fandom.com/wiki/DBS-404",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
@@ -213,6 +236,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
+      "PageId": 591831,
+      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912's_Recusant-class_light_destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 584369,
       "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -221,6 +249,21 @@
       "PageId": 472794,
       "PageUrl": "https://starwars.fandom.com/wiki/Subjugator-class_heavy_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 516859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 663609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 483812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invincible",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

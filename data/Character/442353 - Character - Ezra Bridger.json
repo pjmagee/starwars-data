@@ -2,7 +2,7 @@
   "PageId": 442353,
   "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/30/Ezra_HS.png/revision/latest?cb=20180829054733",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ad/Ezra_Bridger_character_poster.png/revision/latest?cb=20231004192907",
   "Data": [
     {
       "Label": "Titles",
@@ -68,15 +68,26 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "feet",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "Taller than 1.65 meters"
+        "1.82 meters (5 feet, 11 inches)"
       ]
     },
     {
@@ -118,6 +129,40 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Bridger family",
+          "Href": "https://starwars.fandom.com/wiki/Bridger_family"
+        }
+      ],
+      "Values": [
+        "Bridger family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Ephraim Bridger",
+          "Href": "https://starwars.fandom.com/wiki/Ephraim_Bridger"
+        },
+        {
+          "Content": "Mira Bridger",
+          "Href": "https://starwars.fandom.com/wiki/Mira_Bridger"
+        },
+        {
+          "Content": "Hera Syndulla",
+          "Href": "https://starwars.fandom.com/wiki/Hera_Syndulla"
+        }
+      ],
+      "Values": [
+        "Ephraim Bridger",
+        "Mira Bridger",
+        "Hera Syndulla (Maternal figure)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -127,6 +172,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "LRC077",
+          "Href": "https://starwars.fandom.com/wiki/LRC077"
         },
         {
           "Content": "Alliance to Restore the Republic",
@@ -144,6 +193,7 @@
       "Values": [
         "Jedi Order",
         "Galactic Empire (as a spy)",
+        "LRC077",
         "Alliance to Restore the Republic",
         "Spectres",
         "Gold Squadron (briefly)"
@@ -165,6 +215,10 @@
           "Href": "https://starwars.fandom.com/wiki/Pilot"
         },
         {
+          "Content": "Rex",
+          "Href": "https://starwars.fandom.com/wiki/Rex"
+        },
+        {
           "Content": "White Loth-wolf",
           "Href": "https://starwars.fandom.com/wiki/White_Loth-wolf"
         }
@@ -172,20 +226,211 @@
       "Values": [
         "Kanan Jarrus (Jedi Master)",
         "Hera Syndulla (piloting)",
+        "Rex (Combat training)",
         "White Loth-wolf (as a guide)"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 504795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Empire_Day_parade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 784627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Journal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 518935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_the_Imperial_Interdictor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 554154,
+      "PageUrl": "https://starwars.fandom.com/wiki/5_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 545732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Ezra_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 592514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Lothal_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 592992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 460138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Energy_slingshot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 461055,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Inquisitor's_TIE_Advanced",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 461058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broken_Horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 466192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_in_Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 466301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Stygeon_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 475259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 452307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 691446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merging_potion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 593268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 779122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baylan_Skoll_and_Shin_Hati's_Eta-class_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 442414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hera_Syndulla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 442415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 781456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noti_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 461647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 593066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple_key_stone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 593004,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-6_One-Nine-Seven-Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 483311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 781795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Peridea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 782891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Peridea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 556193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 458124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ephraim_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 458125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mira_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 542630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 563075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber-blaster_hybrid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 660207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quest_to_find_Ezra_Bridger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
       "PageId": 424062,
       "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 458938,
-      "PageUrl": "https://starwars.fandom.com/wiki/LothalNet_comm_tower_E-272",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 551801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_(Gauntlet_fighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 553113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phantom_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 569597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_broadcast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 782858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger's_third_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 782387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pod-shaped_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
       "PageId": 465760,
@@ -203,24 +448,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
+      "PageId": 465860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
       "PageId": 565275,
       "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_Theme",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 691446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merging_potion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 545732,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Ezra_Bridger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 569597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_broadcast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 483444,
@@ -228,144 +463,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 465860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 542630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_second_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 563075,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber-blaster_hybrid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 556193,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 518935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_the_Imperial_Interdictor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 535596,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Malachor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 592514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Lothal_Jedi_Temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 592992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 593268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 461647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 504795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_at_the_Empire_Day_parade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 461055,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Inquisitor's_TIE_Advanced",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 461058,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broken_Horn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 460138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Energy_slingshot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 554154,
-      "PageUrl": "https://starwars.fandom.com/wiki/5_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
       "PageId": 566471,
       "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_heavy_blaster_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 483311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 592575,
       "PageUrl": "https://starwars.fandom.com/wiki/White_Loth-wolf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_(Gauntlet_fighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 553113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phantom_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 442414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hera_Syndulla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 442415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 554026,
-      "PageUrl": "https://starwars.fandom.com/wiki/5_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 593066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_Jedi_Temple_key_stone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 475259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 466192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_in_Capital_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 466301,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Stygeon_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

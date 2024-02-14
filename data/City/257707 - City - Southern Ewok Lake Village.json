@@ -2,7 +2,7 @@
   "PageId": 257707,
   "PageUrl": "https://starwars.fandom.com/wiki/Southern_Ewok_Lake_Village",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1a/SouthernEwokLakeVillage-SWG.jpg/revision/latest?cb=20090529150806",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/71/Southern_Ewok_Lake_Village.jpg/revision/latest?cb=20230114143711",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,27 @@
       ]
     },
     {
-      "Label": "Planet",
+      "Label": "Moon",
       "Links": [
         {
           "Content": "Endor",
           "Href": "https://starwars.fandom.com/wiki/Endor/Legends"
-        },
-        {
-          "Content": "Nub Shanda",
-          "Href": "https://starwars.fandom.com/wiki/Nub_Shanda"
         }
       ],
       "Values": [
-        "Endor, Nub Shanda"
+        "Endor"
+      ]
+    },
+    {
+      "Label": "Location",
+      "Links": [
+        {
+          "Content": "Mertuen Forest",
+          "Href": "https://starwars.fandom.com/wiki/Mertuen_Forest"
+        }
+      ],
+      "Values": [
+        "Mertuen Forest"
       ]
     },
     {
@@ -33,16 +41,18 @@
         {
           "Content": "Gondula",
           "Href": "https://starwars.fandom.com/wiki/Gondula"
-        },
-        {
-          "Content": "Ewoks",
-          "Href": "https://starwars.fandom.com/wiki/Ewok/Legends"
         }
       ],
       "Values": [
-        "Gondula Ewoks"
+        "Gondula"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 285709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mertuen_Forest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

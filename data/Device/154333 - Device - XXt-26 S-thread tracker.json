@@ -44,7 +44,12 @@
     },
     {
       "Label": "Owners",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "spies",
+          "Href": "https://starwars.fandom.com/wiki/Spy/Legends"
+        }
+      ],
       "Values": [
         "Military spies"
       ]
@@ -65,11 +70,22 @@
     },
     {
       "Label": "Purpose",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ship",
+          "Href": "https://starwars.fandom.com/wiki/Starship/Legends"
+        }
+      ],
       "Values": [
         "Ship-tracking"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 99358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neuro-Saav_Technologies/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

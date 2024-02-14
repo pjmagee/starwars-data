@@ -2,7 +2,7 @@
   "PageId": 14943,
   "PageUrl": "https://starwars.fandom.com/wiki/Donovia/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/de/Donovia-TEA.jpg/revision/latest?cb=20220920192615",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-9"
@@ -63,13 +68,32 @@
     },
     {
       "Label": "Climate",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "rainy",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        }
+      ],
       "Values": [
-        "Rainy"
+        "Seasonally rainy"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Rugged"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [],
+      "Values": [
+        "Service towers"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -81,39 +105,10 @@
       ]
     },
     {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Galactic Basic Standard",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Basic Standard"
-      ]
-    },
-    {
       "Label": "Demonym",
       "Links": [],
       "Values": [
         "Donovian"
-      ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "Confederacy of Independent Systems",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Republic",
-        "Confederacy of Independent Systems"
       ]
     }
   ],

@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "251 BBY",
+          "Href": "https://starwars.fandom.com/wiki/251_BBY"
+        }
+      ],
+      "Values": [
+        "c. 251 BBY"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -34,18 +46,58 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.65 meters (5 ft, 5 in)"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mantessa Chekkat",
+          "Href": "https://starwars.fandom.com/wiki/Mantessa_Chekkat"
+        }
+      ],
+      "Values": [
+        "Mantessa Chekkat"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 700633,
+      "PageUrl": "https://starwars.fandom.com/wiki/47_lightsaber_nullifier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
     {
       "PageId": 700628,
       "PageUrl": "https://starwars.fandom.com/wiki/Dynamo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 700633,
-      "PageUrl": "https://starwars.fandom.com/wiki/Four-seven_nullifier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 700141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantessa_Chekkat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

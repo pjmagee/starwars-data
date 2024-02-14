@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "The Slice"
       ]
     },
     {
@@ -79,7 +84,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-12"
@@ -89,11 +94,26 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
+        },
+        {
+          "Content": "Ootmian Pabol",
+          "Href": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends"
+        },
+        {
+          "Content": "Pabol Hutta",
+          "Href": "https://starwars.fandom.com/wiki/Pabol_Hutta/Legends"
+        },
+        {
           "Content": "Shag Pabol",
           "Href": "https://starwars.fandom.com/wiki/Shag_Pabol/Legends"
         }
       ],
       "Values": [
+        "Oktos Route",
+        "Ootmian Pabol",
+        "Pabol Hutta",
         "Shag Pabol"
       ]
     },
@@ -181,7 +201,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Vongformed",
@@ -290,6 +310,10 @@
         {
           "Content": "Xuvva",
           "Href": "https://starwars.fandom.com/wiki/Xuvva"
+        },
+        {
+          "Content": "Akk dog",
+          "Href": "https://starwars.fandom.com/wiki/Akk_dog"
         }
       ],
       "Values": [
@@ -297,7 +321,8 @@
         "Dragonsnake",
         "Fire-kraken",
         "Sha'rellian toop",
-        "Xuvva"
+        "Xuvva",
+        "Akk dog"
       ]
     },
     {
@@ -313,7 +338,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Hutts",
@@ -426,6 +451,10 @@
           "Href": "https://starwars.fandom.com/wiki/Hutt_Empire"
         },
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
           "Content": "Hutt Cartel",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Cartel"
         },
@@ -440,6 +469,7 @@
       ],
       "Values": [
         "Hutt Empire",
+        "Galactic Republic",
         "Hutt Cartel",
         "Yuuzhan Vong empire",
         "Confederation"
@@ -448,49 +478,84 @@
   ],
   "Relationships": [
     {
-      "PageId": 408608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paradise_Planet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
-    },
-    {
-      "PageId": 335701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_Tassaa_Bareesh's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 110279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shalera",
+      "PageId": 402852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karrels_Javis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 15699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veratil",
+      "PageId": 402871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Albea",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 15708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kibbick",
+      "PageId": 456122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vakir'sa'jaina",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 15710,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zavval",
+      "PageId": 456123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oro_Memis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 373672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Blade",
+      "PageId": 53578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 53402,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pohtarza",
+      "PageId": 425064,
+      "PageUrl": "https://starwars.fandom.com/wiki/G4-B3_Heavy_Fabricator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 76468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trinivii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 306129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nem'ro's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 307823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba's_Nal_Hutta_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 313681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poison_Pit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 28241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grejic",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 58196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pazda_Desilijic_Tiure",
+      "PageId": 28243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mardoc",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 99741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narbuj_Desilijic_Preor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 99746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Herogga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 99776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jelasi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nal_Hutta/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 431802,
@@ -518,68 +583,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 465256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutta_Orbital_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 2462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evocii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 366430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pablo's_Pawnshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 459422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jiguuna_Spaceport",
+      "PageId": 285318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Set_Harth's_mansion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 421265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Targen",
+      "PageId": 305806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kossak_the_Younger",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 421355,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yalt",
+      "PageId": 417348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nails",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 435262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suudaa_Nem'ro's_beast_master",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beldorion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 99741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Narbuj_Desilijic_Preor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 99746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Herogga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 99776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jelasi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 399972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Karagga's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 368736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pablo's_Twi'lek_partner/Legends",
+      "PageId": 417350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rarsk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -603,69 +628,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 62748,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grubba_Desilijic_Aarrpo",
+      "PageId": 7974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vago_Gejalli_Thokka",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 76480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_Besadii_the_Younger",
+      "PageId": 8043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Durga_Besadii_Tai",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 76765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Golga_Besadii_Fir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 93835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 435781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baratatta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 155060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Huttese_(writing_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 22194,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Ruling_Council",
+      "PageId": 42258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Cartel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 400372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanderijar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 663729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Council_Hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 327470,
-      "PageUrl": "https://starwars.fandom.com/wiki/3645_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 28241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grejic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 28243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mardoc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 365487,
@@ -673,133 +648,63 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 376882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mennac_Vanderijar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 5052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desilijic/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 376884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jobwah",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 5055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Besadii/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 403059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rex_Geer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 506878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qunaalac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 403110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carnus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 506879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorensla/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 637697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Empire_(Post-Imperial_era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 2528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 366720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_Bazaar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 17276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 366893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rust_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 286386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Doan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 131079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Winter_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 378278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karagga's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 436614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xuvva_Hunter's_Sport_Rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 49937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Nal_Hutta",
+      "PageId": 399972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Karagga's_Palace",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 220812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorgo",
+      "PageId": 546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 369217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karagga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 325832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ran-D_housekeeper_droid/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 418328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grahuur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 418503,
-      "PageUrl": "https://starwars.fandom.com/wiki/D'nar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 357303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bareesh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 419002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Juda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 444521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jorsooda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 463167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luunti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 95114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Decca_Besadii_Diori",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 424377,
-      "PageUrl": "https://starwars.fandom.com/wiki/B3-4T_Disposal_Droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 424378,
-      "PageUrl": "https://starwars.fandom.com/wiki/M-78",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 425064,
-      "PageUrl": "https://starwars.fandom.com/wiki/G4-B3_Heavy_Fabricator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 1292,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 407873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spaceport_27",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 1307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zorba_Desilijic_Tiure",
+      "PageId": 110279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shalera",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -813,18 +718,233 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 8115,
-      "PageUrl": "https://starwars.fandom.com/wiki/Randa_Besadii_Diori",
+      "PageId": 384628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vexx",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 8154,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aruk_Besadii_Aora",
+      "PageId": 385052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morsel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 8157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Borga_Besadii_Diori",
+      "PageId": 385053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odeph",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 435262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suudaa_Nem'ro's_beast_master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonethrasher's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 459822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clawbane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 459826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boneshatter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 459827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fleshripper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 378278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karagga's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 271334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zietta_Anjiliac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 421355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yalt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 637697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Hutt_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 155060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huttese_(writing_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 98222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fire-kraken",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 793337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ooze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 324331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nohn_Veyaiko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 324332,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Wheezer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 325079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oruba/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 386208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eagle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 408095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tayari_Rook",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 408174,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qiltakka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 119829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Raka_Criminal_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 366614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nomen_Karr's_safe_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 154708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nal_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 424377,
+      "PageUrl": "https://starwars.fandom.com/wiki/B3-4T_Disposal_Droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 424378,
+      "PageUrl": "https://starwars.fandom.com/wiki/M-78",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 424962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush's_centennial_feast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 430969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_annual_gladiatorial_tournament",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 417665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_Grime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 456252,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Muckworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 459422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiguuna_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 298504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tassaa_Bareesh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 298696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Huttsbane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 388917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dheno_Rey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 413638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendrel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 58196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pazda_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 22194,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Ruling_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 436614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xuvva_Hunter's_Sport_Rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 313390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ia_Nirvin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Robann_Potannin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yeama",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Encaasa_Bareesh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 459664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bashrar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 459666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ortoggan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 459667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korkresh",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -843,9 +963,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 378916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Hutta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+      "PageId": 496030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiguuna_Market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 496031,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rust_Yards_worker_settlement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 496032,
+      "PageUrl": "https://starwars.fandom.com/wiki/Donal's_brother's_farm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 367494,
@@ -853,14 +983,364 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 206105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Council_Chamber/Legends",
+      "PageId": 366471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ithorian_bartender_(Nal_Hutta)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 366536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nikto_guard_(Nal_Hutta)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randa_Besadii_Diori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aruk_Besadii_Aora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borga_Besadii_Diori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 368736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pablo's_Twi'lek_partner/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 418328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grahuur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 418503,
+      "PageUrl": "https://starwars.fandom.com/wiki/D'nar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beldorion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 392130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Lone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 392131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Rook/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 698347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vexx's_Crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 663729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Council_Hall",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 1148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_Besadii_the_Elder/Legends",
+      "PageId": 664545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wheeta_Palace/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 408608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paradise_Planet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 310215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vedo_Anjiliac_Atirue",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 373621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glorzo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 373672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 76480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_Besadii_the_Younger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 402289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilikin_Drell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 424379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gajoru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 53434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarrz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 53441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tilenna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 76765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Golga_Besadii_Fir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 424961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 49144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tagta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 52915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grodo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 376882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mennac_Vanderijar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 376884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobwah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 426753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teemo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 426938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bargos_(Hutt)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 42707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borvo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 95114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Decca_Besadii_Diori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 335701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_Tassaa_Bareesh's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 369217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karagga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 419002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Juda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 444521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jorsooda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 62748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grubba_Desilijic_Aarrpo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 285469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_Set_Harth's_mansion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 366720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_Bazaar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 366893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rust_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 1292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 366430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pablo's_Pawnshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 3131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 97336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zonnos_Anjiliac_Priare",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 325950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sha'rellian_toop/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 371386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grappling_boa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 42009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorga_Desilijic_Aarrpo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 670302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duuba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 663728,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oedriga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 66773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 8171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gejalli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 252995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chemilizard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 325809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_the_Hutt's_Palace/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 325830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mama_the_Hutt's_house/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 327470,
+      "PageUrl": "https://starwars.fandom.com/wiki/3645_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 5051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiliac_Desilijic_Tiron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 641416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta_droid_factory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 320400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kajidier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 383051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_saloon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 15699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veratil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kibbick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zavval",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 270512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 270515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suudaa_Nem'ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rex_Geer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carnus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 9336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 93835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 338713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Longo_Two-Guns_Gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 417666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fa'athra's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 147629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Nal_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 381496,
@@ -893,176 +1373,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 405127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rholl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 430890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Hutt_(Riegenn_Hetuu)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 663728,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oedriga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 66773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 641416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta_droid_factory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 42258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Cartel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 76468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trinivii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 306129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nem'ro's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 307823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jabba's_Nal_Hutta_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 313681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poison_Pit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 310215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vedo_Anjiliac_Atirue",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 325715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mama/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 325774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marlo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 3259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jodo_Kast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 361470,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nomen_Karr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 373621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Glorzo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 386208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eagle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 38674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mika_Anjiliac_Chiera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 408095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tayari_Rook",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 408174,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qiltakka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gejalli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 325950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sha'rellian_toop/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 325809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_the_Hutt's_Palace/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 325830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mama_the_Hutt's_house/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 456252,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Muckworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 147629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Nal_Hutta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 270512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 270515,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suudaa_Nem'ro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 410947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_bounty_hunter_(Nal_Hutta)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 45531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bana_Besadii_Diori",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 474816,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 53434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarrz",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 53441,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tilenna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 313518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 456285,
       "PageUrl": "https://starwars.fandom.com/wiki/Drainage_Isle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -1073,8 +1383,73 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 285318,
-      "PageUrl": "https://starwars.fandom.com/wiki/Set_Harth's_mansion",
+      "PageId": 459140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evocii_swamp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 459425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Muckworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 459434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 648157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Targen's_gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 649935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nem'ro's_engineering_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 206105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Council_Chamber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 435623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 435781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baratatta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 313518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_Spaceport/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 465256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutta_Orbital_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 253289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Braden",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 45531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bana_Besadii_Diori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 53402,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pohtarza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 407873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spaceport_27",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -1098,18 +1473,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 298696,
-      "PageUrl": "https://starwars.fandom.com/wiki/Huttsbane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 402871,
-      "PageUrl": "https://starwars.fandom.com/wiki/Albea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 413638,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendrel",
+      "PageId": 474816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -1118,283 +1483,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 313672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gebroila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 663959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yev'anaha_Belt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 320400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kajidier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 98222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fire-kraken",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 366614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nomen_Karr's_safe_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 154708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nal_Hutta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 324331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nohn_Veyaiko",
+      "PageId": 405127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rholl",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 324332,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Wheezer",
+      "PageId": 430890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Hutt_(Riegenn_Hetuu)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 325079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oruba/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 384628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vexx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 385052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morsel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 385053,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odeph",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 670302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duuba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 417666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fa'athra's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 253289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Braden",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 271334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zietta_Anjiliac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 298504,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tassaa_Bareesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 388917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dheno_Rey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 402289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bilikin_Drell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 402852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karrels_Javis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 424379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gajoru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 456122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vakir'sa'jaina",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 456123,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oro_Memis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 53578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 325832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ran-D_housekeeper_droid/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 424962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush's_centennial_feast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 430969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_annual_gladiatorial_tournament",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 459140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evocii_swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 459425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Muckworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 459434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 252995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chemilizard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 17276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 158536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Command_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 3131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 371386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grappling_boa/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 305806,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kossak_the_Younger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 313676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yeama",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 313688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Encaasa_Bareesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 42009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorga_Desilijic_Aarrpo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 49144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tagta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 52915,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grodo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 7974,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vago_Gejalli_Thokka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Durga_Besadii_Tai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 97336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zonnos_Anjiliac_Priare",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 285469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_Set_Harth's_mansion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 417665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_Grime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 392130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Lone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 392131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Rook/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 698347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vexx's_Crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 424961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bakuush's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 425919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jolla's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 426753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teemo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 426938,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bargos_(Hutt)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 42707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Borvo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 5051,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jiliac_Desilijic_Tiron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 52034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jiliac_Desilijic_Tiron's_child",
+      "PageId": 463167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luunti",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -1408,174 +1508,114 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
+      "PageId": 400372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanderijar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 1148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gardulla_Besadii_the_Elder/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 743774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Donal's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gebroila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 751508,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_beverage/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 286386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Doan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 49937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Nal_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 1307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zorba_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 421265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Targen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 354932,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hutta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 119829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Raka_Criminal_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 338713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Longo_Two-Guns_Gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 5052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Desilijic/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 5055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Besadii/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qunaalac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506879,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorensla/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 2528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 2462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evocii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 383051,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bilbousa_saloon/Legends",
+      "PageId": 158536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Command_Center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 113289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tanda_(Hutt)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Tanda",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 313390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ia_Nirvin",
+      "PageId": 220812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorgo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 313513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Robann_Potannin",
+      "PageId": 52034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiliac_Desilijic_Tiron's_child",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 313674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Droog",
+      "PageId": 378916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 425919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jolla's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 325715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mama/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 366471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ithorian_bartender_(Nal_Hutta)/Legends",
+      "PageId": 325774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marlo/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 366536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nikto_guard_(Nal_Hutta)/Legends",
+      "PageId": 3259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jodo_Kast",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 459664,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bashrar",
+      "PageId": 361470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nomen_Karr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 459666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ortoggan",
+      "PageId": 38674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mika_Anjiliac_Chiera",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 459667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korkresh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jiguuna_Market",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 496031,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rust_Yards_worker_settlement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 496032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Donal's_brother's_farm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 403916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nal_Hutta/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 357303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bareesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 455983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonethrasher's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 459822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clawbane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 459826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boneshatter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 459827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fleshripper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 417348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nails",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 417350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rarsk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 435623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 648157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Targen's_gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 649935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nem'ro's_engineering_corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 131079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Winter_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

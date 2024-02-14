@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-7"
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -227,7 +227,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chazrach",
@@ -276,10 +276,33 @@
       ]
     },
     {
+      "Label": "Government",
+      "Links": [
+        {
+          "Content": "Dictatorship",
+          "Href": "https://starwars.fandom.com/wiki/Dictatorship/Legends"
+        },
+        {
+          "Content": "Joruus C'baoth's kingdom",
+          "Href": "https://starwars.fandom.com/wiki/Joruus_C%27baoth%27s_kingdom"
+        }
+      ],
+      "Values": [
+        "Dictatorship (Joruus C'baoth's kingdom)"
+      ]
+    },
+    {
       "Label": "Population",
       "Links": [],
       "Values": [
         "28 million"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Waylander"
       ]
     },
     {
@@ -353,24 +376,54 @@
   ],
   "Relationships": [
     {
-      "PageId": 11007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freja_Covell",
+      "PageId": 181242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garrbo_V'Droz",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 931,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps/Legends",
+      "PageId": 154704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Wayland_(28_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 386218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Imperial_Research_Station_61",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 2480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Psadan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 760766,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Labyrinth_(Mount_Tantiss)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 569151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 497390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_project",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 290874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heartstriker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 48709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Psadan_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
-      "PageId": 8939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Myneyrsh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 49053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myneyrsh_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 4656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joruus_C'baoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 290877,
@@ -378,9 +431,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 299916,
-      "PageUrl": "https://starwars.fandom.com/wiki/126_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 75653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Hakh'khar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 781396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 782052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_insertion_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 286714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Wayland",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 334313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_confederation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 347165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arthen_Brutt's_warehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 321788,
@@ -388,14 +466,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 385739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Wayland_(Mandalorian_Wars)",
+      "PageId": 114964,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 370751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Research_Station_61",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 290874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heartstriker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 296732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Mount_Tantiss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 73753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Txer",
+      "PageId": 21447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 368801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Milosh_Muhrlein",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 190180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Wayland",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 75656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Debble_Agreement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 9234,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Nystao",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 782559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joruus_C'baoth's_kingdom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 294648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_Yuuzhan_Vong_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 678708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 368891,
@@ -408,44 +536,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 294393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_trap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 760449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Wayland",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 114964,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 368801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Milosh_Muhrlein",
+      "PageId": 75651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yintal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 296732,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Mount_Tantiss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 4656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Joruus_C'baoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 1276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luuke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 75653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Hakh'khar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 678708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 17647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 455465,
@@ -453,28 +556,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 294648,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_Yuuzhan_Vong_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 18993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spaarti_cloning_cylinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 370751,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Research_Station_61",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 710161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cloning_Chamber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 154704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Wayland_(28_ABY)",
+      "PageId": 782991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Subjugation_of_Wayland",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -483,19 +566,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 181242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garrbo_V'Droz",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 760554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland's_main_continent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 334313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_confederation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 80612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Project",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 190180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Wayland",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 8939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myneyrsh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 781678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_Bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 781871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emergency_Shuttle_Hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 782672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_palace_(Wayland)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 299916,
+      "PageUrl": "https://starwars.fandom.com/wiki/126_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 385739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Wayland_(Mandalorian_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 11557,
@@ -513,34 +621,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 17647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 21447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 286714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Wayland",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 12401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yabeley",
+      "PageId": 11007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freja_Covell",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 2480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Psadan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 386218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Imperial_Research_Station_61",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 286706,
@@ -548,14 +631,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 75651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yintal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 653,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 755342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Throne_Room_Complex_(Wayland)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 756170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Chambers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 18993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spaarti_cloning_cylinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 710161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloning_Chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 12401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yabeley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 73753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Txer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 294393,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wayland_trap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 1276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luuke_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_dig",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

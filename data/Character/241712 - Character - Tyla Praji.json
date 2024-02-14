@@ -2,6 +2,7 @@
   "PageId": 241712,
   "PageUrl": "https://starwars.fandom.com/wiki/Tyla_Praji",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Praji",
@@ -45,7 +46,25 @@
       "Values": [
         "House Praji"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Nahdonnis Praji",
+          "Href": "https://starwars.fandom.com/wiki/Nahdonnis_Praji"
+        }
+      ],
+      "Values": [
+        "Nahdonnis Praji"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nahdonnis_Praji",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 582923,
   "PageUrl": "https://starwars.fandom.com/wiki/Jaren_Beniko",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,49 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Beniko family",
+          "Href": "https://starwars.fandom.com/wiki/Beniko_family"
+        }
+      ],
+      "Values": [
+        "Beniko family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Kelsa Beniko",
+          "Href": "https://starwars.fandom.com/wiki/Kelsa_Beniko"
+        }
+      ],
+      "Values": [
+        "Kelsa Beniko"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Lana Beniko",
+          "Href": "https://starwars.fandom.com/wiki/Lana_Beniko"
+        }
+      ],
+      "Values": [
+        "Lana Beniko"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -59,5 +103,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 445149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lana_Beniko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 686862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelsa_Beniko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 791825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beniko_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

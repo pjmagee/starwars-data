@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -431,17 +431,77 @@
         {
           "Content": "Resistance navy",
           "Href": "https://starwars.fandom.com/wiki/Resistance_navy"
+        },
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Navy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
         }
       ],
       "Values": [
         "New Republic",
         "New Republic Defense Fleet",
         "Resistance",
-        "Resistance navy"
+        "Resistance navy",
+        "First Order (stolen)",
+        "First Order Navy (stolen)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 527644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cobalt_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 528397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coalstreak_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 536289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Squadron_(Resistance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 524089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 525787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_of_Hope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 585834,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC85_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 632752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 637211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Venisa_Doza's_X-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 510825,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Force_Awakens_Core_Set",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
+    {
+      "PageId": 634988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dross_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 640229,
       "PageUrl": "https://starwars.fandom.com/wiki/Xantho_Squadron",
@@ -458,44 +518,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 536289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Squadron_(Resistance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 553487,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 602296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Complete_Vehicles_(2016)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book"
-    },
-    {
-      "PageId": 585834,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC85_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 510825,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Force_Awakens_Core_Set",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
       "PageId": 618741,
       "PageUrl": "https://starwars.fandom.com/wiki/Team_Colossus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 577775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raddus_(MC85_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 620325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_fighter_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 472997,
       "PageUrl": "https://starwars.fandom.com/wiki/X-wing_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 518984,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-70_X-wing_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
+    {
+      "PageId": 538525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_the_Resistance_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
       "PageId": 512889,
@@ -513,33 +558,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 527644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cobalt_Squadron_(Resistance)",
+      "PageId": 605518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 553487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 528397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coalstreak_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 602296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Complete_Vehicles_(2016)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book"
     },
     {
-      "PageId": 620325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_fighter_wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 537069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incom-FreiTek_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 634988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dross_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 632752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
+      "PageId": 577775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raddus_(MC85_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -548,29 +583,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 605518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 518984,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-70_X-wing_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 538525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_the_Resistance_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 524089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 525787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_of_Hope",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 537069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom-FreiTek_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

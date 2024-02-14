@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "54 BBY",
+          "Href": "https://starwars.fandom.com/wiki/54_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "After 54 BBY"
+      ]
+    },
+    {
       "Label": "Died",
       "Links": [
         {
@@ -95,7 +107,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Nightbrothers",
@@ -104,6 +116,35 @@
       ],
       "Values": [
         "Nightbrothers"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kycina",
+          "Href": "https://starwars.fandom.com/wiki/Kycina"
+        }
+      ],
+      "Values": [
+        "Kycina"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Maul",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Maul/Legends"
+        },
+        {
+          "Content": "Savage Opress",
+          "Href": "https://starwars.fandom.com/wiki/Savage_Opress/Legends"
+        }
+      ],
+      "Values": [
+        "Maul",
+        "Savage Opress"
       ]
     },
     {
@@ -126,5 +167,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Maul/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 366078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kycina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 387524,
   "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Fanha/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/fb/Fanhabattle.jpg/revision/latest?cb=20230606140619",
   "Data": [
     {
       "Label": "Titles",
@@ -24,7 +24,8 @@
         }
       ],
       "Values": [
-        "Reconquest of the Rim (Western Reaches Operation)"
+        "Reconquest of the Rim",
+        "Western Reaches Operation"
       ]
     },
     {
@@ -50,9 +51,43 @@
       "Values": [
         "Fanha"
       ]
+    },
+    {
+      "Label": "Outcome",
+      "Links": [
+        {
+          "Content": "Imperial",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Pirate",
+          "Href": "https://starwars.fandom.com/wiki/Pirate/Legends"
+        },
+        {
+          "Content": "Lord",
+          "Href": "https://starwars.fandom.com/wiki/Lord/Legends"
+        },
+        {
+          "Content": "Guun Cutlax",
+          "Href": "https://starwars.fandom.com/wiki/Guun_Cutlax"
+        },
+        {
+          "Content": "Atravis sector",
+          "Href": "https://starwars.fandom.com/wiki/Atravis_sector/Legends"
+        }
+      ],
+      "Values": [
+        "Imperial victory",
+        "Pirate Lord Guun Cutlax escapes into the Atravis sector"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 272237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seitia_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 375841,
       "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches_Superiority_Force",
@@ -62,11 +97,6 @@
       "PageId": 377683,
       "PageUrl": "https://starwars.fandom.com/wiki/Reconquest_of_the_Rim",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 272237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seitia_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

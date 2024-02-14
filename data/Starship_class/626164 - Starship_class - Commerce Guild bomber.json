@@ -2,6 +2,7 @@
   "PageId": 626164,
   "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_bomber",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Bomber",
@@ -45,5 +46,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 624940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_Punitive_Security_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

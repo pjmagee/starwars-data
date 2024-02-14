@@ -67,7 +67,12 @@
     },
     {
       "Label": "Habitat",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Sand dunes",
+          "Href": "https://starwars.fandom.com/wiki/Dune_Sea"
+        }
+      ],
       "Values": [
         "Sand dunes"
       ]
@@ -76,26 +81,16 @@
       "Label": "Diet",
       "Links": [
         {
-          "Content": "Carnivore",
+          "Content": "Carnivorous",
           "Href": "https://starwars.fandom.com/wiki/Diet"
         }
       ],
       "Values": [
-        "Carnivore"
+        "Carnivorous"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 452688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 464516,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krayt_dragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
     {
       "PageId": 672374,
       "PageUrl": "https://starwars.fandom.com/wiki/Abandoned_sarlacc_pit",
@@ -105,6 +100,21 @@
       "PageId": 672301,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Tatooine_(Din_Djarin)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 452688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 478176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dune_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 464516,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krayt_dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

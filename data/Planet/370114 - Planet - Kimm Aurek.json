@@ -2,13 +2,13 @@
   "PageId": 370114,
   "PageUrl": "https://starwars.fandom.com/wiki/Kimm_Aurek",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/05/KimmAurek-TEA.jpg/revision/latest?cb=20220918195059",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Kimm Aurek"
+        "Pieldi"
       ]
     },
     {
@@ -17,21 +17,31 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Senex-Juvex",
+          "Href": "https://starwars.fandom.com/wiki/Senex-Juvex/Legends"
+        },
+        {
           "Content": "Juvex sector",
           "Href": "https://starwars.fandom.com/wiki/Juvex_sector/Legends"
         }
       ],
       "Values": [
+        "Senex-Juvex",
         "Juvex sector"
       ]
     },
@@ -39,16 +49,21 @@
       "Label": "System",
       "Links": [
         {
+          "Content": "Kimm systems",
+          "Href": "https://starwars.fandom.com/wiki/Kimm_systems"
+        },
+        {
           "Content": "Kimm Aurek system",
           "Href": "https://starwars.fandom.com/wiki/Kimm_Aurek_system"
         }
       ],
       "Values": [
+        "Kimm systems",
         "Kimm Aurek system"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-18"
@@ -67,6 +82,13 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -81,14 +103,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 370102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kimm_Aurek_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 91255,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Sreethyn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 370102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kimm_Aurek_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 277455,

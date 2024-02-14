@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
@@ -62,15 +62,95 @@
       ]
     },
     {
-      "Label": "Other systems",
+      "Label": "Hull",
       "Links": [
         {
-          "Content": "Droid",
+          "Content": "antenna",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Exotic alloy (antenna array)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "main sensor rectenna",
+          "Href": "https://starwars.fandom.com/wiki/Rectenna"
+        },
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "1 main sensor rectenna",
+        "4 auxiliary sensors"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "Vulture-class droid starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
+        },
+        {
+          "Content": "Multi-Troop Transports",
+          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
+        },
+        {
+          "Content": "Armored Assault Tanks",
+          "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
+        },
+        {
+          "Content": "Platoon Attack Craft",
+          "Href": "https://starwars.fandom.com/wiki/Platoon_Attack_Craft"
+        },
+        {
+          "Content": "C-9979 landing craft",
+          "Href": "https://starwars.fandom.com/wiki/C-9979_landing_craft"
+        }
+      ],
+      "Values": [
+        "1,500 Vulture-class droid starfighters",
+        "550 Multi-Troop Transports",
+        "6,250 Armored Assault Tanks",
+        "1,500 Platoon Attack Craft",
+        "50 C-9979 landing craft"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [
+        {
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        },
+        {
+          "Content": "droid",
           "Href": "https://starwars.fandom.com/wiki/Droid"
         }
       ],
       "Values": [
-        "Droid signal receiver stations"
+        "10,000+ battle droids",
+        "Other droid models"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "signal receiver",
+          "Href": "https://starwars.fandom.com/wiki/Signal_receiver"
+        }
+      ],
+      "Values": [
+        "2 main communications antennae (16,500 kilometer broadcast range)",
+        "6 auxiliary antennae",
+        "16 signal receiver dishes"
       ]
     },
     {
@@ -110,5 +190,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

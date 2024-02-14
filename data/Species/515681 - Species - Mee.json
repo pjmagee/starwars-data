@@ -2,7 +2,7 @@
   "PageId": 515681,
   "PageUrl": "https://starwars.fandom.com/wiki/Mee",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Mee.png/revision/latest?cb=20160912235134",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Mee.png/revision/latest?cb=20220930160146",
   "Data": [
     {
       "Label": "Titles",
@@ -72,10 +72,20 @@
         {
           "Content": "Naboo",
           "Href": "https://starwars.fandom.com/wiki/Naboo"
+        },
+        {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
+        },
+        {
+          "Content": "Sakavi Tar",
+          "Href": "https://starwars.fandom.com/wiki/Sakavi_Tar"
         }
       ],
       "Values": [
-        "Naboo"
+        "Naboo",
+        "Koboh",
+        "Sakavi Tar"
       ]
     },
     {
@@ -100,10 +110,15 @@
         {
           "Content": "Herbivorous",
           "Href": "https://starwars.fandom.com/wiki/Diet"
+        },
+        {
+          "Content": "fish",
+          "Href": "https://starwars.fandom.com/wiki/Fish"
         }
       ],
       "Values": [
-        "Herbivorous"
+        "Herbivorous",
+        "Small fish (Koboh variety)"
       ]
     }
   ],
@@ -111,6 +126,16 @@
     {
       "PageId": 451978,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 780643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prospector's_Folly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 754459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koboh",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

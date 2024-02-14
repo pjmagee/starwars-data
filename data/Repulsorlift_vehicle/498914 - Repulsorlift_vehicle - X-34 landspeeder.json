@@ -2,13 +2,20 @@
   "PageId": 498914,
   "PageUrl": "https://starwars.fandom.com/wiki/X-34_landspeeder",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/54/X34-landspeeder.jpg/revision/latest?cb=20080316031428",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/be/X-34-TGTB.png/revision/latest?cb=20211204185714",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "X-34 landspeeder"
+      ]
+    },
+    {
+      "Label": "Designer",
+      "Links": [],
+      "Values": [
+        "SoroSuub Corporation"
       ]
     },
     {
@@ -24,13 +31,6 @@
       ]
     },
     {
-      "Label": "Designer",
-      "Links": [],
-      "Values": [
-        "SoroSuub Corporation"
-      ]
-    },
-    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Landspeeder",
@@ -54,7 +54,7 @@
       "Links": [
         {
           "Content": "credits",
-          "Href": "https://starwars.fandom.com/wiki/Credits"
+          "Href": "https://starwars.fandom.com/wiki/Credit"
         },
         {
           "Content": "credits",
@@ -146,14 +146,30 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Lars family",
+          "Href": "https://starwars.fandom.com/wiki/Lars_family"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
+        "Lars family",
         "Alliance to Restore the Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 764573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flynn-Fletcher's_landspeeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 514319,
+      "PageUrl": "https://starwars.fandom.com/wiki/SoroSuub_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

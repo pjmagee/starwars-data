@@ -2,7 +2,7 @@
   "PageId": 458509,
   "PageUrl": "https://starwars.fandom.com/wiki/DL-18_blaster_pistol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/27/WeaponDL-18_big-65b6ebf6.png/revision/latest?cb=20160518002943",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/85/DL18BlasterPistol-SWBF.png/revision/latest?cb=20160518002943",
   "Data": [
     {
       "Label": "Titles",
@@ -43,6 +43,23 @@
       ]
     },
     {
+      "Label": "Culture",
+      "Links": [
+        {
+          "Content": "Bounty hunters",
+          "Href": "https://starwars.fandom.com/wiki/Bounty_hunter"
+        },
+        {
+          "Content": "Smugglers",
+          "Href": "https://starwars.fandom.com/wiki/Smuggler"
+        }
+      ],
+      "Values": [
+        "Bounty hunters",
+        "Smugglers"
+      ]
+    },
+    {
       "Label": "Weight",
       "Links": [
         {
@@ -77,6 +94,14 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Stinger Mantis crew",
+          "Href": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew"
+        },
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
           "Content": "Spectres",
           "Href": "https://starwars.fandom.com/wiki/Spectres"
         },
@@ -85,27 +110,29 @@
           "Href": "https://starwars.fandom.com/wiki/Phoenix_Cell"
         },
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+          "Content": "Jabba's criminal empire",
+          "Href": "https://starwars.fandom.com/wiki/Jabba%27s_criminal_empire"
         }
       ],
       "Values": [
+        "Stinger Mantis crew",
+        "Alliance to Restore the Republic",
         "Spectres",
         "Phoenix Cell",
-        "Alliance to Restore the Republic"
+        "Jabba's criminal empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 466335,
-      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 581593,
       "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus's_DL-18_blaster_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 466335,
+      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

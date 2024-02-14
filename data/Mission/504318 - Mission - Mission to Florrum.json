@@ -75,44 +75,48 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
-        },
-        {
-          "Content": "Separatist",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
-        },
-        {
           "Content": "Anakin Skywalker",
           "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
         },
         {
           "Content": "Obi-Wan Kenobi",
           "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi"
+        },
+        {
+          "Content": "Death",
+          "Href": "https://starwars.fandom.com/wiki/Death"
+        },
+        {
+          "Content": "Senator",
+          "Href": "https://starwars.fandom.com/wiki/Senator"
+        },
+        {
+          "Content": "Kharrus",
+          "Href": "https://starwars.fandom.com/wiki/Kharrus"
         }
       ],
       "Values": [
-        "Republic/Separatist victory",
         "Anakin Skywalker and Obi-Wan Kenobi rescued",
-        "Count Dooku escapes"
+        "Failure to retrieve Count Dooku",
+        "Death of Senator Kharrus"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 689011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nu-class_attack/transport_shuttle_(Florrum)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 458176,
       "PageUrl": "https://starwars.fandom.com/wiki/Twilight",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 586490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 458564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 506632,
@@ -120,9 +124,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 586490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 689011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nu-class_attack/transport_shuttle_(Florrum)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

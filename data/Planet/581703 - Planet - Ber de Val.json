@@ -2,6 +2,7 @@
   "PageId": 581703,
   "PageUrl": "https://starwars.fandom.com/wiki/Ber_de_Val",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,12 +36,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-9"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 317618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ber_de_Val_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

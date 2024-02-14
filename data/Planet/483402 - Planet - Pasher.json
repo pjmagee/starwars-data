@@ -2,7 +2,7 @@
   "PageId": 483402,
   "PageUrl": "https://starwars.fandom.com/wiki/Pasher",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1a/Kuliquo-SWT.png/revision/latest?cb=20220601190719",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-14",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-14"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -72,7 +84,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -86,19 +98,34 @@
   ],
   "Relationships": [
     {
+      "PageId": 554313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasher",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 477940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 483677,
       "PageUrl": "https://starwars.fandom.com/wiki/Nakari_Kelen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 591440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dune_Sea_(Pasher)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 591443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Pasher_hotel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 483910,
       "PageUrl": "https://starwars.fandom.com/wiki/Fayet_Kelen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 525584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kelen_Biolabs",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 483403,
@@ -111,24 +138,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 554313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasher",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 477940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 591440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dune_Sea_(Pasher)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 591443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Pasher_hotel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 525584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelen_Biolabs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

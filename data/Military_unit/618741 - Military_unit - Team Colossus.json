@@ -2,7 +2,7 @@
   "PageId": 618741,
   "PageUrl": "https://starwars.fandom.com/wiki/Team_Colossus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8e/Colossus_resistance.png/revision/latest?cb=20190318022956",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/TeamColossus-NoEscapeP2.jpg/revision/latest?cb=20200228200529",
   "Data": [
     {
       "Label": "Titles",
@@ -29,21 +29,26 @@
       "Label": "Commanding officer(s)",
       "Links": [
         {
-          "Content": "Kazuda Xiono",
-          "Href": "https://starwars.fandom.com/wiki/Kazuda_Xiono"
-        },
-        {
           "Content": "Captain",
           "Href": "https://starwars.fandom.com/wiki/Captain"
         },
         {
           "Content": "Imanuel Doza",
           "Href": "https://starwars.fandom.com/wiki/Imanuel_Doza"
+        },
+        {
+          "Content": "Jarek Yeager",
+          "Href": "https://starwars.fandom.com/wiki/Jarek_Yeager"
+        },
+        {
+          "Content": "Kazuda Xiono",
+          "Href": "https://starwars.fandom.com/wiki/Kazuda_Xiono"
         }
       ],
       "Values": [
-        "Kazuda Xiono",
-        "Captain Imanuel Doza"
+        "Captain Imanuel Doza",
+        "Jarek Yeager",
+        "Kazuda Xiono"
       ]
     },
     {
@@ -125,10 +130,20 @@
         {
           "Content": "Castilon",
           "Href": "https://starwars.fandom.com/wiki/Castilon"
+        },
+        {
+          "Content": "Aeos Prime",
+          "Href": "https://starwars.fandom.com/wiki/Aeos_Prime"
+        },
+        {
+          "Content": "Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         }
       ],
       "Values": [
-        "Castilon"
+        "Castilon",
+        "Aeos Prime",
+        "Various Outer Rim Locations"
       ]
     },
     {
@@ -159,8 +174,8 @@
           "Href": "https://starwars.fandom.com/wiki/Skirmish_by_a_signal_beacon"
         },
         {
-          "Content": "Escape from Aeos Prime",
-          "Href": "https://starwars.fandom.com/wiki/Escape_from_Aeos_Prime"
+          "Content": "Attack on Aeos Prime",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_Aeos_Prime"
         },
         {
           "Content": "Rescue of Tamara Ryvora",
@@ -210,7 +225,7 @@
         "Skirmish over D'Qar",
         "Sabotage of the Colossus",
         "Skirmish by a signal beacon",
-        "Escape from Aeos Prime",
+        "Attack on Aeos Prime",
         "Rescue of Tamara Ryvora",
         "Mission to Celsor 3",
         "Mission to Drahgor III",
@@ -227,12 +242,32 @@
       "Label": "Formed from",
       "Links": [
         {
+          "Content": "Resistance",
+          "Href": "https://starwars.fandom.com/wiki/Resistance"
+        },
+        {
           "Content": "Team Fireball",
           "Href": "https://starwars.fandom.com/wiki/Team_Fireball"
+        },
+        {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
+        },
+        {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
+        },
+        {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
         }
       ],
       "Values": [
-        "Team Fireball"
+        "Resistance",
+        "Team Fireball",
+        "The Colossus",
+        "Colossus Command",
+        "Colossus Civilians"
       ]
     },
     {
@@ -253,43 +288,33 @@
         {
           "Content": "Resistance",
           "Href": "https://starwars.fandom.com/wiki/Resistance"
+        },
+        {
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
         }
       ],
       "Values": [
-        "Resistance"
+        "Resistance",
+        "The Colossus"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 605581,
-      "PageUrl": "https://starwars.fandom.com/wiki/Team_Fireball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 607368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Ace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 609947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yeager's_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 510428,
       "PageUrl": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 641669,
-      "PageUrl": "https://starwars.fandom.com/wiki/B1_(Colossus)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 455609,
-      "PageUrl": "https://starwars.fandom.com/wiki/B1-series_battle_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 618749,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_contact_the_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 635694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Drahgor_III",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 608808,
@@ -305,161 +330,6 @@
       "PageId": 609033,
       "PageUrl": "https://starwars.fandom.com/wiki/Grevel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jooks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 708643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kragan_Gorr's_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 642900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 605514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jarek_Yeager",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Narb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Egdir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yani",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609955,
-      "PageUrl": "https://starwars.fandom.com/wiki/Opeepit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 605640,
-      "PageUrl": "https://starwars.fandom.com/wiki/R1-J5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 609035,
-      "PageUrl": "https://starwars.fandom.com/wiki/G1-7CH",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 609562,
-      "PageUrl": "https://starwars.fandom.com/wiki/G-LN",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 610858,
-      "PageUrl": "https://starwars.fandom.com/wiki/4D-M1N",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 611040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yeager_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 611098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doza_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 611111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xiono_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 607334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ace_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 635066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Service_tunnel_A2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 39436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Al",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 596667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kazuda_Xiono",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 640350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Norath_Kev",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 618012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_mouthless_alien",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chl'parr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vil'pak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 686684,
-      "PageUrl": "https://starwars.fandom.com/wiki/B1's_B2-series_super_battle_droid_battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 643564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barabesh_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 636379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mika_Grey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yeager's_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 611247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eila",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611248,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611702,
-      "PageUrl": "https://starwars.fandom.com/wiki/CB-23",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 614649,
@@ -492,19 +362,149 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
+      "PageId": 499181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639029,
+      "PageUrl": "https://starwars.fandom.com/wiki/B-series_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 642900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 618012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_mouthless_alien",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chl'parr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vil'pak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605640,
+      "PageUrl": "https://starwars.fandom.com/wiki/R1-J5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 609035,
+      "PageUrl": "https://starwars.fandom.com/wiki/G1-7CH",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 609562,
+      "PageUrl": "https://starwars.fandom.com/wiki/G-LN",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 610858,
+      "PageUrl": "https://starwars.fandom.com/wiki/4D-M1N",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 611702,
+      "PageUrl": "https://starwars.fandom.com/wiki/CB-23",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 764881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tamara_Ryvora's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 633346,
+      "PageUrl": "https://starwars.fandom.com/wiki/\"Changeling\"_Mark_71NB",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 641669,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1_(Colossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 596667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kazuda_Xiono",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Team_Fireball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 641651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mutiny_on_the_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 607819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 633345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 749187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neimoidian_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
       "PageId": 606372,
       "PageUrl": "https://starwars.fandom.com/wiki/Fireball",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 607368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Ace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 635694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Drahgor_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 619488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_B2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 640350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Norath_Kev",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 638091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voxx_Vortex_5000",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 628919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norath_Kev",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 609810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supertanker_fuel_depot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 636379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mika_Grey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 3717,
@@ -512,34 +512,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 605705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neeku_Vozo",
+      "PageId": 618749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_contact_the_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 39436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Al",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 605775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Z'Vk'Thkrkza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 605777,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tamara_Ryvora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 606448,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torra_Doza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 499181,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 609810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supertanker_fuel_depot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 607336,
@@ -567,34 +547,144 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639029,
-      "PageUrl": "https://starwars.fandom.com/wiki/B-series_battle_droid",
+      "PageId": 607334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ace_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 466846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Commuter_2000",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 605514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jarek_Yeager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neeku_Vozo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z'Vk'Thkrkza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 605777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tamara_Ryvora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 606448,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torra_Doza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455609,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1-series_battle_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 638091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voxx_Vortex_5000",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 686684,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1's_B2-series_super_battle_droid_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 605518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 607819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flix",
+      "PageId": 611247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eila",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 607820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orka",
+      "PageId": 611248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 633346,
-      "PageUrl": "https://starwars.fandom.com/wiki/\"Changeling\"_Mark_71NB",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 457274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 619488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_B2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 635066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Service_tunnel_A2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 767785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_AAL-1971/9.1_Troop_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 768298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Star_Commuter_2000",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 609192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jooks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Egdir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Opeepit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kragan_Gorr's_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 775545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neeku_Vozo's_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 643564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barabesh_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 611040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yeager_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 611098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doza_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 611111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xiono_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

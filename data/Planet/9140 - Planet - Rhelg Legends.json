@@ -58,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-5"
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Arable land"
@@ -92,13 +92,18 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ludo Kressh's palace",
+          "Href": "https://starwars.fandom.com/wiki/Ludo_Kressh%27s_palace"
+        }
+      ],
       "Values": [
         "Ludo Kressh's palace"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Sith",
@@ -141,6 +146,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 1066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ludo_Kressh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 257808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seelah_Korsin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 361509,
       "PageUrl": "https://starwars.fandom.com/wiki/Rhelg_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -151,9 +166,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 279679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nache_Bhelfia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 223311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Kressh_the_Younger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 292930,
@@ -161,9 +176,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 296660,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seelah_Korsin's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 786683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ludo_Kressh's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 293255,
@@ -171,23 +186,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
+      "PageId": 279679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nache_Bhelfia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 398454,
       "PageUrl": "https://starwars.fandom.com/wiki/Kressh_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 223311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gauntlet_of_Kressh_the_Younger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 257808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seelah_Korsin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 1066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ludo_Kressh",
+      "PageId": 296660,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seelah_Korsin's_father",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

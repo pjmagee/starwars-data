@@ -2,7 +2,7 @@
   "PageId": 579521,
   "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps_(First_Order)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4a/First_Order_Stormtrooper_Corps.jpg/revision/latest?cb=20180202035410",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4a/First_Order_Stormtrooper_Corps.jpg/revision/latest?cb=20230726034603",
   "Data": [
     {
       "Label": "Titles",
@@ -47,12 +47,16 @@
           "Href": "https://starwars.fandom.com/wiki/Supreme_Leader"
         },
         {
+          "Content": "Snoke",
+          "Href": "https://starwars.fandom.com/wiki/Snoke"
+        },
+        {
           "Content": "Kylo Ren",
           "Href": "https://starwars.fandom.com/wiki/Ben_Solo"
         },
         {
-          "Content": "Snoke",
-          "Href": "https://starwars.fandom.com/wiki/Snoke"
+          "Content": "Armitage Hux",
+          "Href": "https://starwars.fandom.com/wiki/Armitage_Hux"
         },
         {
           "Content": "Captain",
@@ -64,8 +68,9 @@
         }
       ],
       "Values": [
-        "Supreme Leader Kylo Ren",
         "Supreme Leader Snoke",
+        "Supreme Leader Kylo Ren",
+        "General Armitage Hux",
         "Captain Phasma"
       ]
     },
@@ -111,6 +116,14 @@
         {
           "Content": "Phasma's division",
           "Href": "https://starwars.fandom.com/wiki/Phasma%27s_division"
+        },
+        {
+          "Content": "Unidentified First Order Raider squad",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_First_Order_Raider_squad"
+        },
+        {
+          "Content": "First Order Raider",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Raider"
         }
       ],
       "Values": [
@@ -123,7 +136,9 @@
         "FL group",
         "FN Corps",
         "FO group",
-        "Phasma's division"
+        "Phasma's division",
+        "Unidentified First Order Raider squad",
+        "First Order Raider"
       ]
     },
     {
@@ -179,6 +194,18 @@
       ]
     },
     {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "35 ABY",
+          "Href": "https://starwars.fandom.com/wiki/35_ABY"
+        }
+      ],
+      "Values": [
+        "35 ABY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -198,9 +225,59 @@
   ],
   "Relationships": [
     {
+      "PageId": 526863,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 533988,
+      "PageUrl": "https://starwars.fandom.com/wiki/FL_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 533989,
+      "PageUrl": "https://starwars.fandom.com/wiki/FO_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 639299,
       "PageUrl": "https://starwars.fandom.com/wiki/Electroprod",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 608372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pyre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 640147,
+      "PageUrl": "https://starwars.fandom.com/wiki/CS-9147",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 736347,
+      "PageUrl": "https://starwars.fandom.com/wiki/James_(stormtrooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Colossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 587255,
+      "PageUrl": "https://starwars.fandom.com/wiki/CZ-1076",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 709303,
+      "PageUrl": "https://starwars.fandom.com/wiki/LB-1033",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 709784,
+      "PageUrl": "https://starwars.fandom.com/wiki/AM-501",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 578196,
@@ -223,19 +300,144 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 783158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_1_(Thunderer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tech_stormtrooper_(Varkana)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prisoner_control_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 640972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tech_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 788213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_2_(Hoth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_1_(Hoth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 629999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wulfgar_Kath's_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 630474,
+      "PageUrl": "https://starwars.fandom.com/wiki/105th_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 639647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Company_77",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 628909,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Raider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 595138,
       "PageUrl": "https://starwars.fandom.com/wiki/SB-3709",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 279980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
+      "PageId": 510427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper_(First_Order)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 615496,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_SCUBA_trooper",
+      "PageId": 510463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Megablaster_heavy_assault_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 510465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snowtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 512037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 527440,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 631621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruthford",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 617498,
+      "PageUrl": "https://starwars.fandom.com/wiki/CS-Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 618451,
+      "PageUrl": "https://starwars.fandom.com/wiki/709th_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 620844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phasma's_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 581855,
+      "PageUrl": "https://starwars.fandom.com/wiki/UV-8855",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 747618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Station_Theta_Black)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 573374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallius_Rax's_child_soldiers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639973,
+      "PageUrl": "https://starwars.fandom.com/wiki/HF-3311",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_SCUBA_trooper_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_SCUBA_trooper_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 725721,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_sniper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 587892,
+      "PageUrl": "https://starwars.fandom.com/wiki/VC-2123",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 626315,
@@ -253,18 +455,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 641014,
-      "PageUrl": "https://starwars.fandom.com/wiki/BT-9093",
+      "PageId": 767430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(supply_depot)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Company_77",
+      "PageId": 767467,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_3_(Titan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 767468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_4_(Titan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 767766,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Thunderer's_hangar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 481969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 573374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallius_Rax's_child_soldiers",
+      "PageId": 577731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executioner_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 604822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 593788,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_gunner",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -273,13 +500,98 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 709303,
-      "PageUrl": "https://starwars.fandom.com/wiki/LB-1033",
+      "PageId": 624512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mountain_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 537530,
+      "PageUrl": "https://starwars.fandom.com/wiki/1138_(First_Order)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 709784,
-      "PageUrl": "https://starwars.fandom.com/wiki/AM-501",
+      "PageId": 578675,
+      "PageUrl": "https://starwars.fandom.com/wiki/BL-155_Laser_ax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 707515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gauge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_1_(Varkana)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 789930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_2_(Varkana)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632637,
+      "PageUrl": "https://starwars.fandom.com/wiki/TR-4018",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632638,
+      "PageUrl": "https://starwars.fandom.com/wiki/TR-1004",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tech_stormtrooper_(Colossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_2_(Titan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_1_(Titan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 617130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 772902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_Raider_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 641014,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT-9093",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 529412,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-338",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 529905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Starkiller_Base)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 593133,
+      "PageUrl": "https://starwars.fandom.com/wiki/926",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 585941,
+      "PageUrl": "https://starwars.fandom.com/wiki/SC-4044",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 664030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Steadfast)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -328,209 +640,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 533988,
-      "PageUrl": "https://starwars.fandom.com/wiki/FL_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 533989,
-      "PageUrl": "https://starwars.fandom.com/wiki/FO_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 628909,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Raider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 617498,
-      "PageUrl": "https://starwars.fandom.com/wiki/CS-Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 618451,
-      "PageUrl": "https://starwars.fandom.com/wiki/709th_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 529905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_female_First_Order_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 593133,
-      "PageUrl": "https://starwars.fandom.com/wiki/926",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 604822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 617130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_commander",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 631621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruthford",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 586991,
       "PageUrl": "https://starwars.fandom.com/wiki/First_Order_jet_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 632637,
-      "PageUrl": "https://starwars.fandom.com/wiki/TR-4018",
+      "PageId": 782933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Thunderer's_bridge)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 632638,
-      "PageUrl": "https://starwars.fandom.com/wiki/TR-1004",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 593788,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_gunner",
+      "PageId": 279980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flametrooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 577731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executioner_trooper",
+      "PageId": 615496,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_SCUBA_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 725721,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_sniper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 527440,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_stormtrooper_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 537530,
-      "PageUrl": "https://starwars.fandom.com/wiki/1138_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raith_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 526863,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 620844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phasma's_division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 707515,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gauge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 481969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 510427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 510463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Megablaster_heavy_assault_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 510465,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snowtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 512037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 639292,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electroprod_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 640972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tech_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529412,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-338",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 629999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wulfgar_Kath's_squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 630474,
-      "PageUrl": "https://starwars.fandom.com/wiki/105th_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 585941,
-      "PageUrl": "https://starwars.fandom.com/wiki/SC-4044",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 664030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_(Steadfast)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 587255,
-      "PageUrl": "https://starwars.fandom.com/wiki/CZ-1076",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 624512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mountain_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 587892,
-      "PageUrl": "https://starwars.fandom.com/wiki/VC-2123",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 608372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pyre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 639973,
-      "PageUrl": "https://starwars.fandom.com/wiki/HF-3311",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 640147,
-      "PageUrl": "https://starwars.fandom.com/wiki/CS-9147",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 578675,
-      "PageUrl": "https://starwars.fandom.com/wiki/BL-155_Laser_ax",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

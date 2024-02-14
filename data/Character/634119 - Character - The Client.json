@@ -2,13 +2,29 @@
   "PageId": 634119,
   "PageUrl": "https://starwars.fandom.com/wiki/The_Client",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c7/TheClient-SWCT.png/revision/latest?cb=20211219000718",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c7/TheClient-SWCT.png/revision/latest?cb=20231022173409",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "The Client"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "70 BBY",
+          "Href": "https://starwars.fandom.com/wiki/70_BBY"
+        },
+        {
+          "Content": "61 BBY",
+          "Href": "https://starwars.fandom.com/wiki/61_BBY"
+        }
+      ],
+      "Values": [
+        "Between 70 BBY and 61 BBY"
       ]
     },
     {
@@ -24,7 +40,7 @@
         }
       ],
       "Values": [
-        "c. 9 ABY, Nevarro"
+        "9 ABY, Nevarro"
       ]
     },
     {
@@ -52,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -71,12 +94,19 @@
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Grey",
+          "Content": "Gray",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Grey"
+        "Gray"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Light blue"
       ]
     },
     {
@@ -94,13 +124,23 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Imperial Officer Corps",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
+        },
+        {
           "Content": "Gideon's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
+        },
+        {
+          "Content": "The Client's squad",
+          "Href": "https://starwars.fandom.com/wiki/The_Client%27s_squad"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Gideon's Imperial remnant"
+        "Imperial Officer Corps",
+        "Gideon's Imperial remnant",
+        "The Client's squad"
       ]
     }
   ],
@@ -112,8 +152,13 @@
     },
     {
       "PageId": 639562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Nevarro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageUrl": "https://starwars.fandom.com/wiki/Clash_on_Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 730879,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Client's_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

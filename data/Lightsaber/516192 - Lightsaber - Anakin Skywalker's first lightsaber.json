@@ -15,16 +15,12 @@
       "Label": "Model",
       "Links": [
         {
-          "Content": "Jedi",
-          "Href": "https://starwars.fandom.com/wiki/Jedi"
-        },
-        {
           "Content": "Lightsaber",
           "Href": "https://starwars.fandom.com/wiki/Lightsaber"
         }
       ],
       "Values": [
-        "Jedi Lightsaber"
+        "Lightsaber"
       ]
     },
     {
@@ -36,7 +32,12 @@
     },
     {
       "Label": "Culture",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi"
+        }
+      ],
       "Values": [
         "Jedi"
       ]
@@ -59,14 +60,10 @@
         {
           "Content": "29 BBY",
           "Href": "https://starwars.fandom.com/wiki/29_BBY"
-        },
-        {
-          "Content": "Ilum",
-          "Href": "https://starwars.fandom.com/wiki/Ilum"
         }
       ],
       "Values": [
-        "By 29 BBY, Ilum"
+        "c. 29 BBY"
       ]
     },
     {
@@ -90,6 +87,13 @@
       "Links": [],
       "Values": [
         "Anakin Skywalker"
+      ]
+    },
+    {
+      "Label": "Hilt shape",
+      "Links": [],
+      "Values": [
+        "Cylindrical, straight"
       ]
     },
     {
@@ -141,6 +145,13 @@
       ]
     },
     {
+      "Label": "Range",
+      "Links": [],
+      "Values": [
+        "Close-range"
+      ]
+    },
+    {
       "Label": "Purpose",
       "Links": [
         {
@@ -156,6 +167,10 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Skywalker family",
+          "Href": "https://starwars.fandom.com/wiki/Skywalker_family"
+        },
+        {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
@@ -165,6 +180,7 @@
         }
       ],
       "Values": [
+        "Skywalker family",
         "Jedi Order",
         "Galactic Republic"
       ]

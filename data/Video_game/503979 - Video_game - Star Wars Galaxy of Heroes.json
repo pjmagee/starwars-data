@@ -2,7 +2,7 @@
   "PageId": 503979,
   "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Galaxy_of_Heroes",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5f/Galaxy_of_Heroes_banner.jpg/revision/latest?cb=20151126010248",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3d/GalaxyofHeroes-Banner.jpg/revision/latest?cb=20151126010248",
   "Data": [
     {
       "Label": "Titles",
@@ -13,7 +13,12 @@
     },
     {
       "Label": "Developer(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "EA Capital Games",
+          "Href": "https://starwars.fandom.com/wiki/EA_Capital_Games"
+        }
+      ],
       "Values": [
         "EA Capital Games"
       ]
@@ -50,14 +55,25 @@
       "Label": "",
       "Links": [],
       "Values": [
-        "ESRB: Everyone 10+ (Android)",
-        "Apple App Store: 9+"
+        "Everyone 10+ (E10+)"
       ]
     },
     {
       "Label": "Platform(s)",
-      "Links": [],
-      "Values": []
+      "Links": [
+        {
+          "Content": "Android",
+          "Href": "https://starwars.fandom.com/wiki/Android_(operating_system)"
+        },
+        {
+          "Content": "iOS",
+          "Href": "https://starwars.fandom.com/wiki/IOS"
+        }
+      ],
+      "Values": [
+        "Android",
+        "iOS"
+      ]
     },
     {
       "Label": "Composer(s)",

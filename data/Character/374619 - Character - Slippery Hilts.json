@@ -2,6 +2,7 @@
   "PageId": 374619,
   "PageUrl": "https://starwars.fandom.com/wiki/Slippery_Hilts",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Kesh",
-          "Href": "https://starwars.fandom.com/wiki/Kesh"
+          "Href": "https://starwars.fandom.com/wiki/Kesh/Legends"
         }
       ],
       "Values": [
@@ -71,6 +72,30 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Hilts family",
+          "Href": "https://starwars.fandom.com/wiki/Hilts_family"
+        }
+      ],
+      "Values": [
+        "Hilts family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Varner Hilts",
+          "Href": "https://starwars.fandom.com/wiki/Varner_Hilts"
+        }
+      ],
+      "Values": [
+        "Varner Hilts"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -83,5 +108,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 338339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varner_Hilts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

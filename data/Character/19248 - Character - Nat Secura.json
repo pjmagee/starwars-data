@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Secura",
@@ -72,9 +72,43 @@
       "Values": [
         "Clan Secura"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Lon Secura",
+          "Href": "https://starwars.fandom.com/wiki/Lon_Secura"
+        }
+      ],
+      "Values": [
+        "Lon Secura"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Van Secura",
+          "Href": "https://starwars.fandom.com/wiki/Van_Secura"
+        }
+      ],
+      "Values": [
+        "Van Secura"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 102179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Van_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 27605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lon_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 347402,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ryloth_(Jedi_Order)",

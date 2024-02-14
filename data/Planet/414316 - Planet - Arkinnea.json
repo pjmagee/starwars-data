@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-10"
@@ -77,11 +77,16 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Arkinnea refugee camp",
+          "Href": "https://starwars.fandom.com/wiki/Arkinnea_refugee_camp"
+        },
+        {
           "Content": "Hidden Temple",
           "Href": "https://starwars.fandom.com/wiki/Hidden_Temple_(Arkinnea)"
         }
       ],
       "Values": [
+        "Arkinnea refugee camp",
         "Hidden Temple"
       ]
     },
@@ -122,7 +127,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -137,35 +142,35 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Arkinnea Militia",
+          "Href": "https://starwars.fandom.com/wiki/Arkinnea_Militia"
         }
       ],
       "Values": [
-        "Galactic Republic",
-        "Galactic Empire"
+        "Galactic Empire",
+        "Arkinnea Militia"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 433631,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_Arkinnea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 617138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wooly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 175904,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Hawkbat_Clan",
+      "PageId": 420075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkinnea_Militia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 750319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkinnea_refugee_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 750325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Section_two-four-one",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 423772,
@@ -173,24 +178,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 617037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_female_refugee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 267202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hidden_Temple_(Arkinnea)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 420075,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arkinnea_Militia",
+      "PageId": 433631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_Arkinnea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 175904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Hawkbat_Clan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 643530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freelands",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 654126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arkinnea_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 420104,
@@ -203,9 +203,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 267202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hidden_Temple_(Arkinnea)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 643530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freelands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 617037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_female_refugee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 617138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wooly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 654126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkinnea_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

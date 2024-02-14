@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -71,12 +78,12 @@
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Black",
+          "Content": "Reddish-brown",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Black; (dyed red)"
+        "Reddish-brown"
       ]
     },
     {
@@ -94,6 +101,47 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Lawquanes",
+          "Href": "https://starwars.fandom.com/wiki/Lawquanes"
+        }
+      ],
+      "Values": [
+        "Lawquanes"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Suu Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Suu_Lawquane"
+        }
+      ],
+      "Values": [
+        "Suu Lawquane"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Jek Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Jek_Lawquane"
+        },
+        {
+          "Content": "Shaeeah Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Shaeeah_Lawquane"
+        }
+      ],
+      "Values": [
+        "Jek Lawquane (stepson)",
+        "Shaeeah Lawquane (stepdaughter)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -103,29 +151,39 @@
         {
           "Content": "Grand Army of the Republic",
           "Href": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic"
-        },
-        {
-          "Content": "Lawquanes",
-          "Href": "https://starwars.fandom.com/wiki/Lawquanes"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Grand Army of the Republic",
-        "Lawquanes"
+        "Grand Army of the Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 636243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lawquanes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 510339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suu_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jek_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaeeah_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 505579,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Republic_troop_transport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 636243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lawquanes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

@@ -24,15 +24,26 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "Male"
+        "1.35 meters (4 ft, 5 in)"
       ]
     },
     {
@@ -72,5 +83,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 759234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_mining_disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 770082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keaton_Murag's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

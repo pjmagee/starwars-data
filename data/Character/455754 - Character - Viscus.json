@@ -2,7 +2,7 @@
   "PageId": 455754,
   "PageUrl": "https://starwars.fandom.com/wiki/Viscus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4d/ViscusHS-Monster.png/revision/latest?cb=20130522023056",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7c/Viscus-TCWCEJtB.png/revision/latest?cb=20230704233727",
   "Data": [
     {
       "Label": "Titles",
@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -93,13 +100,18 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "tattoos",
+          "Href": "https://starwars.fandom.com/wiki/Tattoo"
+        }
+      ],
       "Values": [
-        "Orange"
+        "Orange (with black tattoos)"
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Viscus' clan",
@@ -126,14 +138,21 @@
         "Nightbrothers",
         "Shadow Collective"
       ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Savage Opress",
+          "Href": "https://starwars.fandom.com/wiki/Savage_Opress"
+        }
+      ],
+      "Values": [
+        "Savage Opress"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 714701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viscus'_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
     {
       "PageId": 452678,
       "PageUrl": "https://starwars.fandom.com/wiki/Feral",
@@ -143,6 +162,11 @@
       "PageId": 452735,
       "PageUrl": "https://starwars.fandom.com/wiki/Savage_Opress",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 714701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viscus'_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 452685,

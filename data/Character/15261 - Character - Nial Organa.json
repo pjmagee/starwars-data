@@ -2,6 +2,7 @@
   "PageId": 15261,
   "PageUrl": "https://starwars.fandom.com/wiki/Nial_Organa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,17 +60,45 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Alderaan",
-          "Href": "https://starwars.fandom.com/wiki/Alderaan/Legends"
+          "Content": "House of Organa",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
         }
       ],
       "Values": [
-        "Alderaan"
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Tia Organa",
+          "Href": "https://starwars.fandom.com/wiki/Tia_Organa"
+        },
+        {
+          "Content": "Halagad Ventor",
+          "Href": "https://starwars.fandom.com/wiki/Halagad_Ventor"
+        }
+      ],
+      "Values": [
+        "Tia Organa",
+        "Halagad Ventor"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halagad_Ventor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15257,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

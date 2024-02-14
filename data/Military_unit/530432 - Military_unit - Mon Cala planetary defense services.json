@@ -69,8 +69,8 @@
       "Label": "Staff officer(s)",
       "Links": [
         {
-          "Content": "Admiral",
-          "Href": "https://starwars.fandom.com/wiki/Admiral"
+          "Content": "Fleet Admiral",
+          "Href": "https://starwars.fandom.com/wiki/Fleet_Admiral"
         },
         {
           "Content": "Raddus",
@@ -110,7 +110,7 @@
         }
       ],
       "Values": [
-        "Admiral Raddus",
+        "Fleet Admiral Raddus",
         "General Nossor Ri",
         "Commander Gial Ackbar",
         "Captain Pysk Lila",
@@ -261,16 +261,24 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         },
         {
           "Content": "Resistance",
@@ -278,47 +286,19 @@
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic",
+        "Mon Calamari monarchy",
+        "Galactic Republic",
         "Galactic Empire",
-        "Mon Cala monarchy",
+        "Alliance to Restore the Republic",
+        "New Republic",
         "Resistance"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 601660,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Commander_(Mon_Cala)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 593218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
       "PageId": 530415,
       "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 559606,
-      "PageUrl": "https://starwars.fandom.com/wiki/King_of_Mon_Cala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 601251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Urtya's_guards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 601591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quarren_warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 476565,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Knights",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -330,6 +310,11 @@
       "PageId": 597565,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mon_Calamari_aquatic_vehicle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Aquatic_vehicle"
+    },
+    {
+      "PageId": 633762,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_Type_Heavy_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 587939,
@@ -347,9 +332,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 633762,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_Type_Heavy_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 601660,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Commander_(Mon_Cala)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 593218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 476565,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Knights",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 559606,
+      "PageUrl": "https://starwars.fandom.com/wiki/King_of_Mon_Cala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 601251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Urtya's_guards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 601591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quarren_warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

@@ -83,7 +83,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Cortess",
@@ -93,7 +93,42 @@
       "Values": [
         "House Cortess"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Chay Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Chay_Cortess"
+        }
+      ],
+      "Values": [
+        "Chay Cortess"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Pashon Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Pashon_Cortess"
+        }
+      ],
+      "Values": [
+        "Pashon Cortess"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 403136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chay_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pashon_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

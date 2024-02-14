@@ -2,7 +2,7 @@
   "PageId": 611046,
   "PageUrl": "https://starwars.fandom.com/wiki/Exantor_Divo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Extantor_Divo.png/revision/latest?cb=20181103124710",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Extantor_Divo.png/revision/latest?cb=20230808230257",
   "Data": [
     {
       "Label": "Titles",
@@ -74,12 +74,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Divo family",
           "Href": "https://starwars.fandom.com/wiki/Divo_family"
-        },
+        }
+      ],
+      "Values": [
+        "Divo family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Andressa Divo",
+          "Href": "https://starwars.fandom.com/wiki/Andressa_Divo"
+        }
+      ],
+      "Values": [
+        "Andressa Divo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
@@ -90,7 +110,6 @@
         }
       ],
       "Values": [
-        "Divo family",
         "New Republic",
         "Hosnian Prime Academy of Law Enforcement"
       ]
@@ -98,14 +117,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 626380,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Medal_of_Distinguished_Public_Service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+    },
+    {
       "PageId": 612185,
       "PageUrl": "https://starwars.fandom.com/wiki/Scum_and_Villainy:_Case_Files_on_the_Galaxy's_Most_Notorious",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 626380,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Medal_of_Distinguished_Public_Service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+      "PageId": 611142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andressa_Divo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

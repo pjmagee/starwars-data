@@ -36,10 +36,29 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
         "Brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Fair"
       ]
     },
     {
@@ -54,14 +73,24 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
         },
         {
+          "Content": "Death Squadron",
+          "Href": "https://starwars.fandom.com/wiki/Death_Squadron/Legends"
+        },
+        {
           "Content": "Imperial Intelligence",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Intelligence/Legends"
+        },
+        {
+          "Content": "Internal Security Branch",
+          "Href": "https://starwars.fandom.com/wiki/Internal_Security_Branch"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy",
-        "Imperial Intelligence"
+        "Death Squadron",
+        "Imperial Intelligence",
+        "Internal Security Branch"
       ]
     }
   ],

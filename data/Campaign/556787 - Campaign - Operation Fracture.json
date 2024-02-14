@@ -27,16 +27,12 @@
       "Label": "Begin",
       "Links": [
         {
-          "Content": "0 BBY",
-          "Href": "https://starwars.fandom.com/wiki/0_BBY"
-        },
-        {
-          "Content": "Battle on Jedha",
-          "Href": "https://starwars.fandom.com/wiki/Battle_on_Jedha"
+          "Content": "1 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1_BBY"
         }
       ],
       "Values": [
-        "0 BBY, Battle on Jedha"
+        "1 BBY"
       ]
     },
     {
@@ -48,7 +44,7 @@
         }
       ],
       "Values": [
-        "0 BBY, Mission to Eadu"
+        "1 BBY, Mission to Eadu"
       ]
     },
     {
@@ -115,7 +111,12 @@
     },
     {
       "Label": "Battles",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Battle on Jedha",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Jedha"
+        }
+      ],
       "Values": [
         "Battle on Jedha",
         "Mission to Eadu"
@@ -124,14 +125,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 703825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taidu_Sefla's_SpecForces_platoon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 703841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andor_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 554975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eadu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 566487,
@@ -139,9 +135,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 556641,
-      "PageUrl": "https://starwars.fandom.com/wiki/SW-0608",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 555489,
+      "PageUrl": "https://starwars.fandom.com/wiki/1_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 545449,
@@ -159,19 +155,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 703825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taidu_Sefla's_SpecForces_platoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 703841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andor_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 556641,
+      "PageUrl": "https://starwars.fandom.com/wiki/SW-0608",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 452818,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 554975,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eadu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 554061,
-      "PageUrl": "https://starwars.fandom.com/wiki/0_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     }
   ]
 }

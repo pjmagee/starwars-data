@@ -27,22 +27,21 @@
       "Label": "Classification",
       "Links": [
         {
-          "Content": "Reptile",
-          "Href": "https://starwars.fandom.com/wiki/Reptile/Legends"
+          "Content": "Snake",
+          "Href": "https://starwars.fandom.com/wiki/Snake/Legends"
         }
       ],
       "Values": [
-        "Reptile"
+        "Snake"
       ]
     },
     {
-      "Label": "Subspecies",
+      "Label": "Races",
       "Links": [],
       "Values": [
         "Giant fanned rawl",
         "Spitting rawl",
-        "Vine rawl",
-        "Shadevale venomsting"
+        "Vine rawl"
       ]
     },
     {
@@ -68,21 +67,21 @@
       "Label": "Homeworld",
       "Links": [
         {
-          "Content": "Mandalore",
-          "Href": "https://starwars.fandom.com/wiki/Mandalore/Legends"
-        },
-        {
           "Content": "Naboo",
           "Href": "https://starwars.fandom.com/wiki/Naboo/Legends"
         }
       ],
       "Values": [
-        "Mandalore",
         "Naboo"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 4163,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalore/Legends",
@@ -97,11 +96,6 @@
       "PageId": 257724,
       "PageUrl": "https://starwars.fandom.com/wiki/Western_Great_Grass_Plains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

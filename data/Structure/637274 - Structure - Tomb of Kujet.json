@@ -12,15 +12,27 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Palace",
+        "Tomb"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
+        {
+          "Content": "Strangled Cliffs",
+          "Href": "https://starwars.fandom.com/wiki/Strangled_Cliffs"
+        },
         {
           "Content": "Dathomir",
           "Href": "https://starwars.fandom.com/wiki/Dathomir"
         }
       ],
       "Values": [
-        "Dathomir"
+        "Strangled Cliffs, Dathomir"
       ]
     },
     {
@@ -39,25 +51,30 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Zeffo",
-          "Href": "https://starwars.fandom.com/wiki/Zeffo_(species)"
+          "Content": "Zeffonian",
+          "Href": "https://starwars.fandom.com/wiki/Zeffonian"
         }
       ],
       "Values": [
-        "Zeffo"
+        "Zeffonian"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 637267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dathomir_(Cal_Kestis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 675567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strangled_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 452591,
       "PageUrl": "https://starwars.fandom.com/wiki/Dathomir",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 637267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dathomir_(Cal_Kestis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

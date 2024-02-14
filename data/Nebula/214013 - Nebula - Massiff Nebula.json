@@ -2,6 +2,7 @@
   "PageId": 214013,
   "PageUrl": "https://starwars.fandom.com/wiki/Massiff_Nebula",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
@@ -61,5 +62,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

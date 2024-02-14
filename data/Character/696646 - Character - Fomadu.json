@@ -2,6 +2,7 @@
   "PageId": 696646,
   "PageUrl": "https://starwars.fandom.com/wiki/Fomadu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
       "Links": [
         {
           "Content": "Bpfasshi",
-          "Href": "https://starwars.fandom.com/wiki/Bpfasshi"
+          "Href": "https://starwars.fandom.com/wiki/Bpfasshi/Legends"
         }
       ],
       "Values": [
@@ -71,11 +72,22 @@
     },
     {
       "Label": "Masters",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Unidentified cyborg master",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_cyborg_master"
+        }
+      ],
       "Values": [
         "Unidentified cyborg master"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 736192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cyborg_master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

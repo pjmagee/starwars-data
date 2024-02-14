@@ -2,6 +2,7 @@
   "PageId": 482941,
   "PageUrl": "https://starwars.fandom.com/wiki/Ames_Bunkle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Pari Bunkle",
+          "Href": "https://starwars.fandom.com/wiki/Pari_Bunkle"
+        }
+      ],
+      "Values": [
+        "Pari Bunkle"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -81,5 +94,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

@@ -61,7 +61,12 @@
     },
     {
       "Label": "Other locations",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Quilken",
+          "Href": "https://starwars.fandom.com/wiki/Quilken/Legends"
+        }
+      ],
       "Values": [
         "Quilken"
       ]
@@ -69,14 +74,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 50528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Umboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
       "PageId": 50453,
       "PageUrl": "https://starwars.fandom.com/wiki/Auren_Yomm_Baobab",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 50528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

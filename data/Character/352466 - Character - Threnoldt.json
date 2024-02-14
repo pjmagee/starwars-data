@@ -36,8 +36,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
       ]
@@ -64,17 +76,12 @@
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         },
         {
-          "Content": "Imperial Military",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Military_(Sith_Empire)"
-        },
-        {
           "Content": "Imperial Reclamation Service",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Reclamation_Service"
         }
       ],
       "Values": [
         "Sith Empire",
-        "Imperial Military",
         "Imperial Reclamation Service"
       ]
     }
@@ -83,7 +90,7 @@
     {
       "PageId": 351596,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Reclamation_Service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

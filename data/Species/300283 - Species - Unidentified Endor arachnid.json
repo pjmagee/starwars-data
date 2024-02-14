@@ -2,7 +2,7 @@
   "PageId": 300283,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Endor_arachnid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/Endor_arachnid.png/revision/latest?cb=20100421060332",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/Endor_arachnid.png/revision/latest?cb=20230922013243",
   "Data": [
     {
       "Label": "Titles",
@@ -12,29 +12,34 @@
       ]
     },
     {
-      "Label": "Designation",
+      "Label": "Classification",
       "Links": [
         {
-          "Content": "Non-sentient",
-          "Href": "https://starwars.fandom.com/wiki/Sentience/Legends"
+          "Content": "Arachnid",
+          "Href": "https://starwars.fandom.com/wiki/Spider/Legends"
         }
       ],
       "Values": [
-        "Non-sentient"
+        "Arachnid"
       ]
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
-        "Purple"
+        "Blue"
       ]
     },
     {
       "Label": "Hair color",
       "Links": [],
       "Values": [
-        "Blue, purple, yellow"
+        "Blue and yellow"
       ]
     },
     {
@@ -48,12 +53,16 @@
       "Label": "Distinctions",
       "Links": [
         {
-          "Content": "Fangs",
+          "Content": "legs",
+          "Href": "https://starwars.fandom.com/wiki/Limb/Legends"
+        },
+        {
+          "Content": "teeth",
           "Href": "https://starwars.fandom.com/wiki/Tooth/Legends"
         }
       ],
       "Values": [
-        "Fangs, webbing"
+        "Four legs, teeth, webbing ability"
       ]
     },
     {
@@ -67,7 +76,29 @@
       "Values": [
         "Endor"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Deserts",
+          "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
+        },
+        {
+          "Content": "caves",
+          "Href": "https://starwars.fandom.com/wiki/Cave/Legends"
+        }
+      ],
+      "Values": [
+        "Deserts and caves"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 175985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cavern_of_Broken_Dreams",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

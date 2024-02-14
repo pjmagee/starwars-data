@@ -2,7 +2,7 @@
   "PageId": 661609,
   "PageUrl": "https://starwars.fandom.com/wiki/M3_Bulwark_Blast_Shield",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/13/Clone_Shield_Wall.png/revision/latest?cb=20200226150041",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bf/CloneTrooperShield.png/revision/latest?cb=20240205145141",
   "Data": [
     {
       "Label": "Titles",
@@ -20,7 +20,12 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blast shield",
+          "Href": "https://starwars.fandom.com/wiki/Blast_shield"
+        }
+      ],
       "Values": [
         "Blast shield"
       ]
@@ -47,11 +52,21 @@
         {
           "Content": "Grand Army of the Republic",
           "Href": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Army",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Army"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Grand Army of the Republic"
+        "Grand Army of the Republic",
+        "Galactic Empire",
+        "Imperial Army"
       ]
     }
   ],

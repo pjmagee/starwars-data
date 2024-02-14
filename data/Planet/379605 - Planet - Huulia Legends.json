@@ -36,35 +36,61 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-12"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Human",
+          "Content": "spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Spaceport/Legends"
+        }
+      ],
+      "Values": [
+        "At least 1 spaceport"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Human"
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Huulian"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 36308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Valent/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 379016,
       "PageUrl": "https://starwars.fandom.com/wiki/Huulia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 36308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Valent/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

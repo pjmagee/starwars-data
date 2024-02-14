@@ -2,6 +2,7 @@
   "PageId": 565194,
   "PageUrl": "https://starwars.fandom.com/wiki/Danassic",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,32 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Randd",
+          "Href": "https://starwars.fandom.com/wiki/Randd"
+        }
+      ],
+      "Values": [
+        "Randd"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 510598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randd",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

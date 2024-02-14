@@ -13,7 +13,12 @@
     },
     {
       "Label": "Homeworld",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Baroli",
+          "Href": "https://starwars.fandom.com/wiki/Baroli/Legends"
+        }
+      ],
       "Values": [
         "Baroli"
       ]
@@ -36,6 +41,10 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Barolian",
+          "Href": "https://starwars.fandom.com/wiki/Barolian/Legends"
         }
       ],
       "Values": [
@@ -96,6 +105,14 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Car'das smugglers",
+          "Href": "https://starwars.fandom.com/wiki/Car%27das_smugglers"
+        },
+        {
+          "Content": "Smugglers' Alliance",
+          "Href": "https://starwars.fandom.com/wiki/Smugglers%27_Alliance"
+        },
+        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         },
@@ -105,6 +122,8 @@
         }
       ],
       "Values": [
+        "Car'das smugglers",
+        "Smugglers' Alliance",
         "New Republic",
         "Galactic Federation of Free Alliances"
       ]

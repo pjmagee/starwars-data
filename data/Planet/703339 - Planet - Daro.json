@@ -2,7 +2,7 @@
   "PageId": 703339,
   "PageUrl": "https://starwars.fandom.com/wiki/Daro",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e6/ApproachingDaro.png/revision/latest?cb=20220116010430",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a8/DaroConceptArt.jpg/revision/latest?cb=20230822043928",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,34 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-6"
       ]
     },
     {
@@ -34,20 +58,24 @@
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Forest",
+          "Content": "Forests",
           "Href": "https://starwars.fandom.com/wiki/Forest"
+        },
+        {
+          "Content": "Jungles",
+          "Href": "https://starwars.fandom.com/wiki/Jungle"
         },
         {
           "Content": "Mountains",
@@ -55,7 +83,9 @@
         }
       ],
       "Values": [
-        "Forest",
+        "Buttes",
+        "Forests",
+        "Jungles",
         "Mountains"
       ]
     },
@@ -63,12 +93,33 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Imperial Base on Daro",
+          "Content": "Imperial Base",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Base_on_Daro"
         }
       ],
       "Values": [
-        "Imperial Base on Daro"
+        "Imperial Base"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Ferns",
+          "Href": "https://starwars.fandom.com/wiki/Fern"
+        },
+        {
+          "Content": "Pine",
+          "Href": "https://starwars.fandom.com/wiki/Pine"
+        },
+        {
+          "Content": "trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
+        }
+      ],
+      "Values": [
+        "Ferns",
+        "Pine trees"
       ]
     },
     {
@@ -77,10 +128,35 @@
         {
           "Content": "Carrier butterfly",
           "Href": "https://starwars.fandom.com/wiki/Carrier_butterfly"
+        },
+        {
+          "Content": "Massiff",
+          "Href": "https://starwars.fandom.com/wiki/Massiff"
         }
       ],
       "Values": [
-        "Carrier butterfly"
+        "Carrier butterfly",
+        "Massiff"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "Uninhabited (officially)",
+        "At least 1,050 (military)"
       ]
     },
     {
@@ -98,6 +174,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 513176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrier_butterfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 703376,
       "PageUrl": "https://starwars.fandom.com/wiki/Level_six",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -106,11 +187,6 @@
       "PageId": 703357,
       "PageUrl": "https://starwars.fandom.com/wiki/Extraction_on_Daro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 703364,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Base_on_Daro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 557927,
@@ -124,8 +200,23 @@
     },
     {
       "PageId": 696380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_energy_bow",
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 703364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Base_on_Daro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 703640,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 458520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

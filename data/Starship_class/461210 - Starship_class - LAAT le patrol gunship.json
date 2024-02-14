@@ -47,7 +47,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Gunship",
@@ -94,18 +94,6 @@
       "Links": [],
       "Values": [
         "5.43 meters"
-      ]
-    },
-    {
-      "Label": "Hyperdrive system",
-      "Links": [
-        {
-          "Content": "Equipped",
-          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
-        }
-      ],
-      "Values": [
-        "Equipped"
       ]
     },
     {
@@ -198,6 +186,10 @@
           "Href": "https://starwars.fandom.com/wiki/Coruscant_Guard"
         },
         {
+          "Content": "Partisans",
+          "Href": "https://starwars.fandom.com/wiki/Partisans"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
@@ -216,30 +208,61 @@
         {
           "Content": "Lothal resistance group",
           "Href": "https://starwars.fandom.com/wiki/Lothal_resistance_group"
+        },
+        {
+          "Content": "Son-tuul Pride",
+          "Href": "https://starwars.fandom.com/wiki/Son-tuul_Pride"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Defense Force",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Force"
+        },
+        {
+          "Content": "Thrawn's forces",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_forces"
         }
       ],
       "Values": [
         "Galactic Republic",
         "Coruscant Security Force",
         "Coruscant Guard",
+        "Partisans",
         "Galactic Empire",
         "Imperial Navy",
         "Inquisitorius",
         "Alliance to Restore the Republic",
-        "Lothal resistance group"
+        "Lothal resistance group",
+        "Son-tuul Pride",
+        "New Republic",
+        "New Republic Defense Force",
+        "Thrawn's forces"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 458392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
     {
       "PageId": 532429,
       "PageUrl": "https://starwars.fandom.com/wiki/ICM-092792",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 510809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 472514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relentless",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 497319,
@@ -247,9 +270,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 472514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relentless",
+      "PageId": 582197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slavin's_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 510809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Santhe_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 564593,
@@ -260,6 +288,11 @@
       "PageId": 583251,
       "PageUrl": "https://starwars.fandom.com/wiki/Squad_two_(Crawler_413-24)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 554936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

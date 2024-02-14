@@ -19,7 +19,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountainous",
@@ -32,18 +32,31 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Langston's largest continent",
+          "Href": "https://starwars.fandom.com/wiki/Langston%27s_largest_continent"
+        },
+        {
+          "Content": "Langston's mining district",
+          "Href": "https://starwars.fandom.com/wiki/Langston%27s_mining_district"
+        }
+      ],
       "Values": [
         "Langston's largest continent",
         "Langston's mining district"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Aqualish",
           "Href": "https://starwars.fandom.com/wiki/Aqualish"
+        },
+        {
+          "Content": "Gharal",
+          "Href": "https://starwars.fandom.com/wiki/Gharal"
         }
       ],
       "Values": [
@@ -66,9 +79,34 @@
   ],
   "Relationships": [
     {
+      "PageId": 732145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_lake_(Langston)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 729037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Langston",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 729009,
       "PageUrl": "https://starwars.fandom.com/wiki/Langston's_mining_district",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 691675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nyix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 729035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rokura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 729039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aid_mission_to_Langston",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 729442,
@@ -84,26 +122,6 @@
       "PageId": 729013,
       "PageUrl": "https://starwars.fandom.com/wiki/Sector_N-seven-A-I",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 729039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aid_mission_to_Langston",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 691675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nyix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 729037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Langston",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 729035,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rokura",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 476454,
   "PageUrl": "https://starwars.fandom.com/wiki/Ketticus_Brayl",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,17 +12,30 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "Ketticus Brayl's wife",
+          "Href": "https://starwars.fandom.com/wiki/Ketticus_Brayl%27s_wife"
         }
       ],
       "Values": [
-        "Male"
+        "Ketticus Brayl's wife"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 564506,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ketticus_Brayl's_wife",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

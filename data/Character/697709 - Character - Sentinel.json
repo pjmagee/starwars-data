@@ -36,15 +36,22 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [
         {
-          "Content": "Light or tan",
+          "Content": "Tan",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Light or tan"
+        "Tan"
       ]
     },
     {
@@ -57,13 +64,24 @@
         {
           "Content": "Stormtrooper Corps",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps"
+        },
+        {
+          "Content": "Hunters of the Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Stormtrooper Corps"
+        "Stormtrooper Corps",
+        "Hunters of the Outer Rim"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 781307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prototype_E-Web",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

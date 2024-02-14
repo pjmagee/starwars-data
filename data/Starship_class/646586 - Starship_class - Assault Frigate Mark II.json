@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Frigate",
@@ -55,11 +55,23 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Multiple",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Multiple"
+      ]
+    },
+    {
       "Label": "Hyperdrive rating",
       "Links": [],
       "Values": [
         "Class 1 (primary)",
-        "Class 12 (secondary)"
+        "Class 12 (backup)"
       ]
     },
     {
@@ -75,18 +87,6 @@
       ]
     },
     {
-      "Label": "Shielding",
-      "Links": [
-        {
-          "Content": "Deflector shield generator",
-          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
-        }
-      ],
-      "Values": [
-        "Deflector shield generator"
-      ]
-    },
-    {
       "Label": "Sensor systems",
       "Links": [
         {
@@ -95,7 +95,7 @@
         }
       ],
       "Values": [
-        "Medium-range sensor"
+        "Medium-range sensor suite"
       ]
     },
     {
@@ -118,18 +118,14 @@
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
-          "Content": "quad turbolaser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
-        },
-        {
           "Content": "laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         }
       ],
       "Values": [
-        "Medium turbolaser batteries (15)",
-        "Heavy quad turbolaser cannons (10)",
-        "Heavy laser cannons (15)"
+        "15 medium turbolaser batteries",
+        "10 light quad turbolasers ",
+        "15 heavy laser cannons"
       ]
     },
     {
@@ -153,7 +149,7 @@
         }
       ],
       "Values": [
-        "6 starfighters or 1 shuttle/landing craft",
+        "3 starfighters, or 1 shuttle or landing craft",
         "Landspeeders",
         "Small shuttles",
         "Ship's boats"
@@ -163,13 +159,13 @@
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "hangars",
+          "Content": "Hangars",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
-        "Dorsal-hull docking mount",
-        "Internal hangars"
+        "Hangars",
+        "1 dorsal docking mount"
       ]
     },
     {
@@ -188,12 +184,12 @@
       "Label": "Passengers",
       "Links": [
         {
-          "Content": "soldiers",
+          "Content": "troops",
           "Href": "https://starwars.fandom.com/wiki/Soldier"
         }
       ],
       "Values": [
-        "100 soldiers"
+        "100 troops"
       ]
     },
     {
@@ -212,8 +208,12 @@
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "space station",
-          "Href": "https://starwars.fandom.com/wiki/Space_station"
+          "Content": "Ship-to-ship",
+          "Href": "https://starwars.fandom.com/wiki/Starship"
+        },
+        {
+          "Content": "combatant",
+          "Href": "https://starwars.fandom.com/wiki/Warship"
         },
         {
           "Content": "Command ship",
@@ -221,8 +221,7 @@
         }
       ],
       "Values": [
-        "Base/space station defense",
-        "Central command post",
+        "Ship-to-ship combatant",
         "Command ship",
         "Escort"
       ]
@@ -245,5 +244,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 555063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rendili_StarDrive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

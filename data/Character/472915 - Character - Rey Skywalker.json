@@ -2,7 +2,7 @@
   "PageId": 472915,
   "PageUrl": "https://starwars.fandom.com/wiki/Rey_Skywalker",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2b/Rey_TROS_Fathead.png/revision/latest?cb=20191007072042",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2b/Rey_TROS_Fathead.png/revision/latest?cb=20231113074423",
   "Data": [
     {
       "Label": "Titles",
@@ -29,10 +29,14 @@
         {
           "Content": "15 ABY",
           "Href": "https://starwars.fandom.com/wiki/15_ABY"
+        },
+        {
+          "Content": "Hyperkarn",
+          "Href": "https://starwars.fandom.com/wiki/Hyperkarn"
         }
       ],
       "Values": [
-        "15 ABY"
+        "15 ABY, Hyperkarn"
       ]
     },
     {
@@ -45,6 +49,10 @@
         {
           "Content": "Exegol",
           "Href": "https://starwars.fandom.com/wiki/Exegol"
+        },
+        {
+          "Content": "resurrected",
+          "Href": "https://starwars.fandom.com/wiki/Resurrection"
         }
       ],
       "Values": [
@@ -76,6 +84,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -88,7 +103,7 @@
         }
       ],
       "Values": [
-        "1.7 meters (5ft 7 in)"
+        "1.7 meters (5ft, 7 in)"
       ]
     },
     {
@@ -130,19 +145,15 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Palpatine family",
           "Href": "https://starwars.fandom.com/wiki/Palpatine_family"
         },
         {
-          "Content": "Resistance",
-          "Href": "https://starwars.fandom.com/wiki/Resistance"
-        },
-        {
-          "Content": "Jedi Order",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+          "Content": "Miramir's family",
+          "Href": "https://starwars.fandom.com/wiki/Miramir%27s_family"
         },
         {
           "Content": "Skywalker family",
@@ -151,14 +162,51 @@
       ],
       "Values": [
         "Palpatine family (renounced)",
-        "Resistance",
-        "Jedi Order",
+        "Miramir's family",
         "Skywalker family (honorary)"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Dathan",
+          "Href": "https://starwars.fandom.com/wiki/Dathan"
+        },
+        {
+          "Content": "Miramir",
+          "Href": "https://starwars.fandom.com/wiki/Miramir"
+        }
+      ],
+      "Values": [
+        "Dathan",
+        "Miramir"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Resistance",
+          "Href": "https://starwars.fandom.com/wiki/Resistance"
+        },
+        {
+          "Content": "Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        }
+      ],
+      "Values": [
+        "Resistance",
+        "Jedi Order"
       ]
     },
     {
       "Label": "Masters",
       "Links": [
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo"
+        },
         {
           "Content": "Luke Skywalker",
           "Href": "https://starwars.fandom.com/wiki/Luke_Skywalker"
@@ -169,12 +217,108 @@
         }
       ],
       "Values": [
-        "Luke Skywalker",
-        "Leia Skywalker Organa Solo"
+        "Han Solo (mentor)",
+        "Luke Skywalker (Jedi Master)",
+        "Leia Skywalker Organa Solo (Jedi Master)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 640121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Husk_necklace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 785086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Force_training_manual",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 629551,
+      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 566673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(T-65B_X-wing_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 536083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_survival_guide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 554046,
+      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 554113,
+      "PageUrl": "https://starwars.fandom.com/wiki/21_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 585847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Jedi_texts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 640131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 719090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sacred_Jedi_text",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 787172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Life_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 529099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbon_chisel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 536067,
+      "PageUrl": "https://starwars.fandom.com/wiki/\"Blissex-head\"_bit-driver",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 761507,
+      "PageUrl": "https://starwars.fandom.com/wiki/50_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 452217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewokese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 473093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_speeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
     {
       "PageId": 642456,
       "PageUrl": "https://starwars.fandom.com/wiki/Quarantine_suspensor",
@@ -206,19 +350,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 566673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(X-wing_starfighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 453404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ewokese",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 532756,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 562359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sandboard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
       "PageId": 546201,
@@ -226,33 +360,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 719090,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sacred_Jedi_text",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 595062,
-      "PageUrl": "https://starwars.fandom.com/wiki/S-thread_transmitter_bracelet",
+      "PageId": 746798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viiveenn's_doll",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 479480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 524426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 539891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 535860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_quarterstaff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 639686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 637161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
+      "PageId": 519066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Takodana",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -261,14 +390,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 562359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sandboard",
+      "PageId": 54152,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Jedi_Order_Era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 687409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sled",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 578723,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order-Resistance_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 529472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teedospeak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 593206,
@@ -281,129 +415,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 651203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poetics_of_a_Jedi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 536083,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_survival_guide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 452217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 529472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teedospeak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 639686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 673234,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Rise_of_Skywalker_(music)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 674512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Friendship_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 519066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Takodana",
+      "PageId": 637161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 529099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carbon_chisel",
+      "PageId": 590337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_pilot_doll",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 515102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 671775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quest_for_Exegol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 523887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_fighter_jacket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 640121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Husk_necklace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 554113,
-      "PageUrl": "https://starwars.fandom.com/wiki/21_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 640302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Brus-bu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 536067,
-      "PageUrl": "https://starwars.fandom.com/wiki/\"Blissex-head\"_bit-driver",
+      "PageId": 590862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonding_tape",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 639597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 621155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chisel_head_hammer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 687409,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sled",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
-    },
-    {
-      "PageId": 525693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_NN-14_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 585847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Jedi_texts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 639603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 473093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_speeder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 629551,
-      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 639613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miramir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 717420,
@@ -416,9 +450,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 554046,
-      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 539891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 750748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Key",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 671775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quest_for_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 472926,
@@ -426,14 +470,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 590337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_pilot_doll",
+      "PageId": 515102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 651203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poetics_of_a_Jedi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 523887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_fighter_jacket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 479480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 532756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 673234,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Rise_of_Skywalker_(music)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 674512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Friendship_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 640302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Brus-bu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 621155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chisel_head_hammer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 590862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonding_tape",
+      "PageId": 578723,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order-Resistance_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 525693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 595062,
+      "PageUrl": "https://starwars.fandom.com/wiki/S-thread_transmitter_beacon_bracelet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 639603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 535860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rey's_quarterstaff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

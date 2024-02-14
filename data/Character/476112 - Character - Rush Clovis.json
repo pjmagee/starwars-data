@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -96,9 +103,31 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "tattoos",
+          "Href": "https://starwars.fandom.com/wiki/Tattoo"
+        }
+      ],
       "Values": [
-        "Light"
+        "Light (with yellow tattoos)"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Rush Clovis's father",
+          "Href": "https://starwars.fandom.com/wiki/Rush_Clovis%27s_father"
+        },
+        {
+          "Content": "Unidentified Muun banker",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Muun_banker"
+        }
+      ],
+      "Values": [
+        "Rush Clovis's father",
+        "Unidentified Muun banker (adoptive father)"
       ]
     },
     {
@@ -123,6 +152,10 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Neimoidian faction",
+          "Href": "https://starwars.fandom.com/wiki/Neimoidian_faction"
         }
       ],
       "Values": [
@@ -131,15 +164,26 @@
         "Traxus Division",
         "Galactic Republic",
         "Galactic Senate",
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems",
+        "Neimoidian faction"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 505200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 656055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Muun_banker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 466309,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scipio_(executive_shuttle)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 505203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Scipio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 532789,
@@ -147,19 +191,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 552699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rush_Clovis's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 504361,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 505200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 473911,
       "PageUrl": "https://starwars.fandom.com/wiki/InterGalactic_Banking_Clan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 466309,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scipio_(executive_shuttle)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

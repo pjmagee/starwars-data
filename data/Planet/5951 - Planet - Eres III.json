@@ -2,7 +2,7 @@
   "PageId": 5951,
   "PageUrl": "https://starwars.fandom.com/wiki/Eres_III",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3c/EresJediCivilWar-TEA.jpg/revision/latest?cb=20240116152031",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trans-Hydian"
       ]
     },
     {
@@ -48,31 +53,45 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-7"
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Xoxin Plains",
-          "Href": "https://starwars.fandom.com/wiki/Xoxin_Plains"
+          "Content": "Xoxin plains",
+          "Href": "https://starwars.fandom.com/wiki/Xoxin_plains"
         }
       ],
       "Values": [
-        "Xoxin Plains"
+        "Xoxin plains"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Darth Revan's Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Revan%27s_Sith_Empire"
+        }
+      ],
+      "Values": [
+        "Darth Revan's Sith Empire"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 399850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xoxin_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
     {
       "PageId": 339003,
       "PageUrl": "https://starwars.fandom.com/wiki/Eres_system",
@@ -82,6 +101,11 @@
       "PageId": 23545,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Eres_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 399850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xoxin_plains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

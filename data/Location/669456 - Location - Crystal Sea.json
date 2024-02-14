@@ -20,32 +20,44 @@
         }
       ],
       "Values": [
-        "Auratera"
+        "Auratera's southern hemisphere"
       ]
     },
     {
       "Label": "Terrain",
       "Links": [
         {
-          "Content": "Water",
-          "Href": "https://starwars.fandom.com/wiki/Water"
+          "Content": "Sea",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
         }
       ],
       "Values": [
-        "Water"
+        "Sea"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Dewbright",
+          "Href": "https://starwars.fandom.com/wiki/Dewbright"
+        }
+      ],
+      "Values": [
+        "Dewbright"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 669454,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dewbright",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
       "PageId": 668990,
       "PageUrl": "https://starwars.fandom.com/wiki/Auratera",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 669454,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dewbright",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

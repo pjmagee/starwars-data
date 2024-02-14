@@ -12,13 +12,20 @@
       ]
     },
     {
-      "Label": "Born",
+      "Label": "Homeworld",
       "Links": [
         {
           "Content": "Vardos",
           "Href": "https://starwars.fandom.com/wiki/Vardos"
         }
       ],
+      "Values": [
+        "Vardos"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [],
       "Values": [
         "Vardos"
       ]
@@ -82,22 +89,22 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Jinata Security",
+          "Href": "https://starwars.fandom.com/wiki/Jinata_Security"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
-        },
-        {
-          "Content": "Jinata Security",
-          "Href": "https://starwars.fandom.com/wiki/Jinata_Security"
         }
       ],
       "Values": [
+        "Jinata Security",
         "Galactic Empire",
-        "First Order",
-        "Jinata Security"
+        "First Order"
       ]
     }
   ],

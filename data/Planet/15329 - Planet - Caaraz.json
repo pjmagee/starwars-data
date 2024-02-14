@@ -48,15 +48,20 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-17"
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Deserts",
+          "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
+        }
+      ],
       "Values": [
         "Deserts",
         "Glaciers"
@@ -101,14 +106,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 320191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caaraz_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 49617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranth_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 742809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranth_alphabet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
     },
     {
       "PageId": 29247,
       "PageUrl": "https://starwars.fandom.com/wiki/Ranth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 320191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caaraz_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

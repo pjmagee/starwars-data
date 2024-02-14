@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Kathol sector",
-          "Href": "https://starwars.fandom.com/wiki/Kathol_sector"
+          "Href": "https://starwars.fandom.com/wiki/Kathol_sector/Legends"
         }
       ],
       "Values": [
@@ -48,10 +48,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-21"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Trition Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Trition_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Trition Trade Route"
       ]
     },
     {
@@ -122,7 +134,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -165,7 +177,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -295,14 +307,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 158570,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kolatill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 157113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Noell_Ciro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 100407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kal'Shebbol_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 208930,
@@ -310,44 +317,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 100407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kal'Shebbol_Transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 296583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Domaz",
+      "PageId": 158570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kolatill",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 42726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 158566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Domaz",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 50108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trition_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 158576,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lon_Bennor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 158567,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 208929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_Defense_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 57785,
+      "PageUrl": "https://starwars.fandom.com/wiki/GandleMotors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 158418,
@@ -355,9 +332,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 57785,
-      "PageUrl": "https://starwars.fandom.com/wiki/GandleMotors",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 50108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trition_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 208929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_Defense_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 158567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 157113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noell_Ciro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 296583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Domaz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 158566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domaz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 42726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kolatill_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 158576,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lon_Bennor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

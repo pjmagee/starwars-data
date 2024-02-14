@@ -2,7 +2,7 @@
   "PageId": 552168,
   "PageUrl": "https://starwars.fandom.com/wiki/Roon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c2/Roon_FFG.png/revision/latest?cb=20161009133121",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1e/Roon-SG.jpg/revision/latest?cb=20220724072310",
   "Data": [
     {
       "Label": "Titles",
@@ -19,10 +19,6 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
-          "Content": "Cloak of the Sith",
-          "Href": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith"
-        },
-        {
           "Content": "Spice Triangle",
           "Href": "https://starwars.fandom.com/wiki/Spice_Triangle"
         },
@@ -33,13 +29,31 @@
       ],
       "Values": [
         "Outer Rim Territories",
-        "Cloak of the Sith",
         "Spice Triangle",
         "The Slice"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Roon system",
+          "Href": "https://starwars.fandom.com/wiki/Roon_system"
+        }
+      ],
+      "Values": [
+        "Roon system"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "S-15",
@@ -54,6 +68,14 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Cloak of the Sith",
+          "Href": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith"
+        },
+        {
+          "Content": "Death Wind Corridor",
+          "Href": "https://starwars.fandom.com/wiki/Death_Wind_Corridor"
+        },
+        {
           "Content": "Mumble's Turnaround",
           "Href": "https://starwars.fandom.com/wiki/Mumble%27s_Turnaround"
         },
@@ -63,33 +85,81 @@
         }
       ],
       "Values": [
+        "Cloak of the Sith",
+        "Death Wind Corridor",
         "Mumble's Turnaround",
         "Triellus Trade Route"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Iquoonian Peaks",
+          "Href": "https://starwars.fandom.com/wiki/Iquoonian_Peaks"
+        }
+      ],
+      "Values": [
+        "Iquoonian Peaks"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Human"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [
+        {
+          "Content": "Roonian",
+          "Href": "https://starwars.fandom.com/wiki/Roonian"
+        }
+      ],
+      "Values": [
+        "Roonian"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
-          "Content": "Pyke Syndicate",
-          "Href": "https://starwars.fandom.com/wiki/Pyke_Syndicate"
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire",
-        "Pyke Syndicate"
+        "Galactic Republic",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 614597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 742826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 742833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iquoonian_Peaks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 735553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mekedrix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 486070,
@@ -99,17 +169,22 @@
     {
       "PageId": 611906,
       "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 453968,
       "PageUrl": "https://starwars.fandom.com/wiki/Pyke_Syndicate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 614597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 742829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Wind_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

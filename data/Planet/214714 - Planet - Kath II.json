@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-17"
@@ -67,28 +72,108 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Humans",
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
+      "Values": [
+        "Oceans",
+        "Oceanic trenches"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Karm Trenches",
+          "Href": "https://starwars.fandom.com/wiki/Karm_Trenches"
+        }
+      ],
+      "Values": [
+        "Karm Trenches"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Kath",
+          "Href": "https://starwars.fandom.com/wiki/Kath_(species)/Legends"
+        }
+      ],
+      "Values": [
+        "Kath"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Humans"
+        "Human"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [
+        {
+          "Content": "Democracy",
+          "Href": "https://starwars.fandom.com/wiki/Democracy/Legends"
+        }
+      ],
+      "Values": [
+        "Democracy"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "33% Human"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 306533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dustig_Trace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 362100,
       "PageUrl": "https://starwars.fandom.com/wiki/Kath_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 150579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kath_subjugation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

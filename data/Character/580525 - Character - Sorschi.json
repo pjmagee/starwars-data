@@ -2,6 +2,7 @@
   "PageId": 580525,
   "PageUrl": "https://starwars.fandom.com/wiki/Sorschi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,25 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ackmena",
+          "Href": "https://starwars.fandom.com/wiki/Ackmena"
+        }
+      ],
+      "Values": [
+        "Ackmena"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 551635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ackmena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

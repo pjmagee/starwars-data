@@ -24,15 +24,26 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "Male"
+        "1.60 meters (5 ft, 3 in)"
       ]
     },
     {
@@ -51,6 +62,10 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "Path of the Open Hand",
+          "Href": "https://starwars.fandom.com/wiki/Path_of_the_Open_Hand"
+        },
+        {
           "Content": "Elders of the Path",
           "Href": "https://starwars.fandom.com/wiki/Elders_of_the_Path"
         },
@@ -60,6 +75,7 @@
         }
       ],
       "Values": [
+        "Path of the Open Hand",
         "Elders of the Path",
         "Council of Elders"
       ]

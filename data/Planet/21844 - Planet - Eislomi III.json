@@ -2,6 +2,7 @@
   "PageId": 21844,
   "PageUrl": "https://starwars.fandom.com/wiki/Eislomi_III",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-8"
@@ -55,14 +56,21 @@
     },
     {
       "Label": "Points of interest",
+      "Links": [],
+      "Values": [
+        "HoloNet relay station"
+      ]
+    },
+    {
+      "Label": "Fauna",
       "Links": [
         {
-          "Content": "HoloNet relay station",
-          "Href": "https://starwars.fandom.com/wiki/HoloNet_relay/Legends"
+          "Content": "Ratter thist",
+          "Href": "https://starwars.fandom.com/wiki/Ratter_thist"
         }
       ],
       "Values": [
-        "A HoloNet relay station"
+        "Ratter thist"
       ]
     },
     {
@@ -90,5 +98,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 104681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ratter_thist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 390930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eislo_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

@@ -39,12 +39,28 @@
       "Label": "End",
       "Links": [
         {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
+        },
+        {
           "Content": "Battle of the Kaliida Nebula",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula"
         }
       ],
       "Values": [
         "22 BBY, Battle of the Kaliida Nebula"
+      ]
+    },
+    {
+      "Label": "Place",
+      "Links": [
+        {
+          "Content": "Core Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Core_Worlds"
+        }
+      ],
+      "Values": [
+        "Core Worlds (primarily)"
       ]
     },
     {
@@ -69,8 +85,9 @@
       ],
       "Values": [
         "Galactic Republic victory",
-        "Malevolence destroyed",
-        "General Grievous escapes"
+        "Destruction of the Malevolence",
+        "Heavy Republic casualties",
+        "Escape of General Grievous"
       ]
     },
     {
@@ -108,34 +125,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 712863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Fourth_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 452388,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 500563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Abregado",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504236,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_near_the_Kaliida_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 694881,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Phu_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 787224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ares_Nune's_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 545786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pod_1977",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 474180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 780462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_attack_pattern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     },
     {
       "PageId": 553270,
@@ -158,14 +170,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 474180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "PageId": 503876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triumphant",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 545786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pod_1977",
+      "PageId": 503890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 712863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 627072,
@@ -173,19 +190,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
+      "PageId": 509996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_Lekku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 500563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Abregado",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 500678,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Ryndellia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 503876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triumphant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 452388,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 509996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_Lekku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 504233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 504236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_near_the_Kaliida_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

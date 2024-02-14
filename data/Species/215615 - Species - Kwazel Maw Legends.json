@@ -2,7 +2,7 @@
   "PageId": 215615,
   "PageUrl": "https://starwars.fandom.com/wiki/Kwazel_Maw/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a3/Kwazel_Maw_TCWVG.jpg/revision/latest?cb=20090310043636",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/KwazelMaw-TCWVG.png/revision/latest?cb=20221106165758",
   "Data": [
     {
       "Label": "Titles",
@@ -53,18 +53,42 @@
       "Values": [
         "Rodia"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Sea",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
+      "Values": [
+        "Sea"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Carnivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Carnivore"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 231896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogey_(Kwazel_Maw)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
       "PageId": 2075,
       "PageUrl": "https://starwars.fandom.com/wiki/Rodia/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 231896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogey_(Kwazel_Maw)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]
 }

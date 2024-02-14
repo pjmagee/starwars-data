@@ -48,6 +48,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.7 meters"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [
         {
@@ -60,11 +79,51 @@
       ]
     },
     {
+      "Label": "Cybernetics",
+      "Links": [
+        {
+          "Content": "Prosthetic leg",
+          "Href": "https://starwars.fandom.com/wiki/Cybernetics"
+        }
+      ],
+      "Values": [
+        "Prosthetic leg"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Soh family",
+          "Href": "https://starwars.fandom.com/wiki/Soh_family"
+        }
+      ],
+      "Values": [
+        "Soh family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Kitrep Soh",
+          "Href": "https://starwars.fandom.com/wiki/Kitrep_Soh"
+        }
+      ],
+      "Values": [
+        "Kitrep Soh"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Galactic Senate",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Senate"
         },
         {
           "Content": "Office of the Chancellor",
@@ -73,19 +132,35 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Galactic Senate",
         "Office of the Chancellor"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 700142,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Dawn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 680368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dedication_of_the_Starlight_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 713865,
+      "PageUrl": "https://starwars.fandom.com/wiki/230_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 646066,
       "PageUrl": "https://starwars.fandom.com/wiki/232_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 762348,
+      "PageUrl": "https://starwars.fandom.com/wiki/229_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 683060,
+      "PageUrl": "https://starwars.fandom.com/wiki/234_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
@@ -94,9 +169,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 713865,
-      "PageUrl": "https://starwars.fandom.com/wiki/230_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 700554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valo_Republic_Fair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 700142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Dawn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 763709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Chancellor_election,_234_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Election"
+    },
+    {
+      "PageId": 700617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kitrep_Soh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 680023,
@@ -107,16 +197,6 @@
       "PageId": 680025,
       "PageUrl": "https://starwars.fandom.com/wiki/Voru_(targon)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 680368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dedication_of_the_Starlight_Beacon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 700554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valo_Republic_Fair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

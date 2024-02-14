@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Destroyed",
+      "Links": [
+        {
+          "Content": "3956 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3956_BBY"
+        }
+      ],
+      "Values": [
+        "3956 BBY"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -31,14 +43,37 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Larrim",
-          "Href": "https://starwars.fandom.com/wiki/Larrim"
+          "Content": "Larrim's kiosk",
+          "Href": "https://starwars.fandom.com/wiki/Larrim%27s_kiosk"
+        },
+        {
+          "Content": "Dia",
+          "Href": "https://starwars.fandom.com/wiki/Dia"
         }
       ],
       "Values": [
-        "Larrim's Kiosk"
+        "Larrim's kiosk",
+        "Dia's room"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Darth Revan's Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Revan%27s_Sith_Empire"
+        }
+      ],
+      "Values": [
+        "Darth Revan's Sith Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Larrim's_kiosk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

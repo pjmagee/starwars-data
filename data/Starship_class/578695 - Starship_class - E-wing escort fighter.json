@@ -2,7 +2,7 @@
   "PageId": 578695,
   "PageUrl": "https://starwars.fandom.com/wiki/E-wing_escort_fighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f2/E-wing-TheEmbersteelHeist.png/revision/latest?cb=20201014020513",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ea/Ewing-MaA.png/revision/latest?cb=20230824013450",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,7 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "FreiTek Incorporated",
-          "Href": "https://starwars.fandom.com/wiki/FreiTek_Incorporated"
-        }
-      ],
-      "Values": [
-        "FreiTek Incorporated"
-      ]
-    },
-    {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -34,7 +22,47 @@
       "Values": [
         "Starfighter"
       ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        },
+        {
+          "Content": "Astromech droid",
+          "Href": "https://starwars.fandom.com/wiki/Astromech_droid"
+        }
+      ],
+      "Values": [
+        "Pilot (1)",
+        "Astromech droid (1)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Starfighter Corps",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps"
+        }
+      ],
+      "Values": [
+        "New Republic",
+        "New Republic Starfighter Corps"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 553487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

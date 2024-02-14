@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "13 BBY"
+        "c. 13 BBY"
       ]
     },
     {
@@ -79,7 +79,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Dooku",
@@ -89,6 +96,23 @@
       "Values": [
         "House Dooku"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Adan Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Adan_Dooku"
+        },
+        {
+          "Content": "Maite Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Maite_Dooku"
+        }
+      ],
+      "Values": [
+        "Adan Dooku",
+        "Maite Dooku"
+      ]
     }
   ],
   "Relationships": [
@@ -96,6 +120,26 @@
       "PageId": 426817,
       "PageUrl": "https://starwars.fandom.com/wiki/25th_anniversary_of_the_settling_of_the_Alderaan_Ascendancy_Contention",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 397044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adan_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 397141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maite_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Windrunner/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 396739,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

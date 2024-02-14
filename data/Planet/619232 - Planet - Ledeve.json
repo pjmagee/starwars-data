@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Interior"
       ]
     },
     {
@@ -31,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "I-7",
@@ -62,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungles",
@@ -100,14 +105,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 619265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mikkian_Jedi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 623371,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_Padawan_(Grievous)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
       "PageId": 619201,
@@ -120,9 +130,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 452741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 619265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mikkian_Jedi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

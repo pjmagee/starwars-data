@@ -2,6 +2,7 @@
   "PageId": 338181,
   "PageUrl": "https://starwars.fandom.com/wiki/Iphar_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-14"
@@ -42,5 +43,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 50379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ipharian-Da'Lor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    }
+  ]
 }

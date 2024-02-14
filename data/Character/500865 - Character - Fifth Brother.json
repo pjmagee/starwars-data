@@ -2,13 +2,25 @@
   "PageId": 500865,
   "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Brother",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Fifth_Brother_-_profile.png/revision/latest?cb=20160807082531",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Fifth_Brother_-_profile.png/revision/latest?cb=20230731161206",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Fifth Brother"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Artemesium",
+          "Href": "https://starwars.fandom.com/wiki/Artemesium"
+        }
+      ],
+      "Values": [
+        "Artemesium"
       ]
     },
     {
@@ -40,22 +52,41 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
-          "Content": "Mint",
+          "Content": "Light mint",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Mint"
+        "Light mint"
       ]
     },
     {
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Gray"
+        "Gray-green"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Fifth Brother's family",
+          "Href": "https://starwars.fandom.com/wiki/Fifth_Brother%27s_family"
+        }
+      ],
+      "Values": [
+        "Fifth Brother's family"
       ]
     },
     {
@@ -100,9 +131,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 452390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Brother's_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 516006,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_a_Republic_medical_station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 535861,

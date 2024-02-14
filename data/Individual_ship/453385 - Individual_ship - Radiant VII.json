@@ -2,13 +2,25 @@
   "PageId": 453385,
   "PageUrl": "https://starwars.fandom.com/wiki/Radiant_VII",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d1/Republic_Cruiser_SWE.png/revision/latest?cb=20161018222318",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/45/RadiantVII-SWTCSfeaturews.png/revision/latest?cb=20230711003633",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Radiant VII"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Corellian Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
+        }
+      ],
+      "Values": [
+        "Corellian Engineering Corporation"
       ]
     },
     {
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Consular-class space cruiser",
@@ -58,12 +70,12 @@
       "Label": "Maximum speed (atmosphere)",
       "Links": [
         {
-          "Content": "KPH",
+          "Content": "kph",
           "Href": "https://starwars.fandom.com/wiki/Kilometer"
         }
       ],
       "Values": [
-        "900 KPH"
+        "900 kph"
       ]
     },
     {
@@ -115,6 +127,13 @@
       ]
     },
     {
+      "Label": "Armament",
+      "Links": [],
+      "Values": [
+        "none"
+      ]
+    },
+    {
       "Label": "Escape craft",
       "Links": [
         {
@@ -127,8 +146,29 @@
       ]
     },
     {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "captain",
+          "Href": "https://starwars.fandom.com/wiki/Captain"
+        }
+      ],
+      "Values": [
+        "1 captain",
+        "2 co-pilots",
+        "2 com-officers",
+        "3 engineers",
+        "16 passengers"
+      ]
+    },
+    {
       "Label": "Other systems",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Radiation dampers",
+          "Href": "https://starwars.fandom.com/wiki/Radiation_damper"
+        }
+      ],
       "Values": [
         "Radiation dampers"
       ]
@@ -199,7 +239,7 @@
       ]
     },
     {
-      "Label": "Crewmembers",
+      "Label": "Commander(s)",
       "Links": [
         {
           "Content": "Maoi Madakor",
@@ -223,13 +263,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 567821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antidar_Williams",
+      "PageId": 570680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maoi_Madakor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 570680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maoi_Madakor",
+      "PageId": 567821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antidar_Williams",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

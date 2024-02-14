@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -124,6 +124,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "P-13"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -134,8 +141,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Dimoks",
-          "Href": "https://starwars.fandom.com/wiki/Dimok_(species)"
+          "Content": "Dimok government",
+          "Href": "https://starwars.fandom.com/wiki/Dimok_government"
         },
         {
           "Content": "Galactic Empire",
@@ -143,7 +150,7 @@
         }
       ],
       "Values": [
-        "Dimoks",
+        "Dimok government",
         "Galactic Empire"
       ]
     },
@@ -167,14 +174,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 109147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 18483,
       "PageUrl": "https://starwars.fandom.com/wiki/Sepan_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 109147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 27969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

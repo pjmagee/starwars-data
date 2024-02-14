@@ -2,6 +2,7 @@
   "PageId": 396674,
   "PageUrl": "https://starwars.fandom.com/wiki/Balam",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,24 @@
       "Label": "Associated religion",
       "Links": [
         {
-          "Content": "Gungan",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
+          "Content": "Gungan religion",
+          "Href": "https://starwars.fandom.com/wiki/Gungan_religion"
         }
       ],
       "Values": [
-        "Gungan beliefs"
+        "Gungan religion"
+      ]
+    },
+    {
+      "Label": "Pantheon",
+      "Links": [
+        {
+          "Content": "Guds",
+          "Href": "https://starwars.fandom.com/wiki/Gud/Legends"
+        }
+      ],
+      "Values": [
+        "Guds"
       ]
     },
     {
@@ -27,6 +40,18 @@
       "Links": [],
       "Values": [
         "God of war"
+      ]
+    },
+    {
+      "Label": "Powers",
+      "Links": [
+        {
+          "Content": "Immortality",
+          "Href": "https://starwars.fandom.com/wiki/Immortality/Legends"
+        }
+      ],
+      "Values": [
+        "Immortality"
       ]
     },
     {
@@ -52,19 +77,13 @@
       "Values": [
         "Naboo"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Gungans",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
-        }
-      ],
-      "Values": [
-        "Gungans"
-      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

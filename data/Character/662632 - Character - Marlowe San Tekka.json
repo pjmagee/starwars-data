@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.70 meters (5 ft, 7 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -62,22 +85,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "San Tekka clan",
           "Href": "https://starwars.fandom.com/wiki/San_Tekka_clan"
-        },
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         }
       ],
       "Values": [
-        "San Tekka clan",
-        "Galactic Republic"
+        "San Tekka clan"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Vellis San Tekka",
+          "Href": "https://starwars.fandom.com/wiki/Vellis_San_Tekka"
+        }
+      ],
+      "Values": [
+        "Vellis San Tekka"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Church of the Force",
+          "Href": "https://starwars.fandom.com/wiki/Church_of_the_Force"
+        }
+      ],
+      "Values": [
+        "Galactic Republic",
+        "Church of the Force"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 662633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vellis_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

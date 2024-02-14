@@ -2,6 +2,7 @@
   "PageId": 65898,
   "PageUrl": "https://starwars.fandom.com/wiki/Expeditious",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Light cruiser"
@@ -78,5 +79,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raschuk_Sector_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

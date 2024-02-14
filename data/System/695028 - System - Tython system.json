@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-10",
@@ -33,6 +33,18 @@
       ],
       "Values": [
         "L-10"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "1",
+          "Href": "https://starwars.fandom.com/wiki/Tython_sun"
+        }
+      ],
+      "Values": [
+        "1"
       ]
     },
     {
@@ -45,19 +57,29 @@
         {
           "Content": "Ashla",
           "Href": "https://starwars.fandom.com/wiki/Ashla_(moon)"
+        },
+        {
+          "Content": "gas giant",
+          "Href": "https://starwars.fandom.com/wiki/Gas_giant"
         }
       ],
       "Values": [
         "Tython",
-        "Ashla"
+        "Ashla",
+        "A gas giant"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 550971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 500078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 735086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 692907,
@@ -65,9 +87,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 500078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 674651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 550971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

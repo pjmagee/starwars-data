@@ -65,15 +65,10 @@
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia"
-        },
-        {
-          "Content": "Nur",
-          "Href": "https://starwars.fandom.com/wiki/Nur"
         }
       ],
       "Values": [
-        "Corellia",
-        "Nur"
+        "Corellia"
       ]
     },
     {
@@ -91,14 +86,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 636118,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
       "PageId": 453102,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 636118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

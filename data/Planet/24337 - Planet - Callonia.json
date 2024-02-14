@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
@@ -56,7 +56,12 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Callonia spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Callonia_spaceport"
+        }
+      ],
       "Values": [
         "Callonia spaceport"
       ]
@@ -67,6 +72,11 @@
       "PageId": 271975,
       "PageUrl": "https://starwars.fandom.com/wiki/Callonia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 741753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Callonia_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

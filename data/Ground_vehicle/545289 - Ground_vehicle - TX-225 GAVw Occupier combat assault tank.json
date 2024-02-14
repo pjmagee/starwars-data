@@ -2,7 +2,7 @@
   "PageId": 545289,
   "PageUrl": "https://starwars.fandom.com/wiki/TX-225_GAVw_\"Occupier\"_combat_assault_tank",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/TX-225_Occupier.png/revision/latest?cb=20171214043301",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/TX-225_Occupier.png/revision/latest?cb=20230803035642",
   "Data": [
     {
       "Label": "Titles",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Ground assault vehicle",
@@ -105,7 +105,12 @@
     },
     {
       "Label": "Engine unit(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "ADGT-1500 engine",
+          "Href": "https://starwars.fandom.com/wiki/ADGT-1500_engine"
+        }
+      ],
       "Values": [
         "Rothana Heavy Engineering ADGT-1500 engine"
       ]
@@ -235,20 +240,25 @@
         {
           "Content": "Imperial Army",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Army"
+        },
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Tatooine rebel cell",
+          "Href": "https://starwars.fandom.com/wiki/Tatooine_rebel_cell"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Army"
+        "Imperial Army",
+        "Alliance to Restore the Republic",
+        "Tatooine rebel cell"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 514429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
     {
       "PageId": 578929,
       "PageUrl": "https://starwars.fandom.com/wiki/TX-225_Occupier",
@@ -258,6 +268,11 @@
       "PageId": 556959,
       "PageUrl": "https://starwars.fandom.com/wiki/71st_GAV_Battalion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 514429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

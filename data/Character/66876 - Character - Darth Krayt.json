@@ -90,6 +90,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -144,6 +151,35 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Hett family",
+          "Href": "https://starwars.fandom.com/wiki/Hett_family"
+        }
+      ],
+      "Values": [
+        "Hett family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sharad Hett",
+          "Href": "https://starwars.fandom.com/wiki/Sharad_Hett"
+        },
+        {
+          "Content": "K'Sheek",
+          "Href": "https://starwars.fandom.com/wiki/K%27Sheek"
+        }
+      ],
+      "Values": [
+        "Sharad Hett",
+        "K'Sheek"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -178,10 +214,6 @@
     {
       "Label": "Masters",
       "Links": [
-        {
-          "Content": "Sharad Hett",
-          "Href": "https://starwars.fandom.com/wiki/Sharad_Hett"
-        },
         {
           "Content": "Jedi Master",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Master/Legends"
@@ -248,14 +280,179 @@
   ],
   "Relationships": [
     {
-      "PageId": 333397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Vinsoth",
+      "PageId": 316759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_trooper_(catacombs)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 264412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 3645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkania/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 21592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vonduun_Skerr_Kyrric",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 80192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Maladi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 65001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith–Imperial_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 329036,
+      "PageUrl": "https://starwars.fandom.com/wiki/138_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 629843,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_of_A'Sharad_Hett",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 172804,
+      "PageUrl": "https://starwars.fandom.com/wiki/One_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 164646,
+      "PageUrl": "https://starwars.fandom.com/wiki/XoXaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 109379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Imperial_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 210634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_Jedi_Purge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 3992,
+      "PageUrl": "https://starwars.fandom.com/wiki/An'ya_Kuro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 64410,
+      "PageUrl": "https://starwars.fandom.com/wiki/130_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 64420,
+      "PageUrl": "https://starwars.fandom.com/wiki/137_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 341948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Second_Imperial_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 329094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_the_Temple_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 66003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Talon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 80272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hand_(One_Sith)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 232644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Had_Abbadon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 26880,
       "PageUrl": "https://starwars.fandom.com/wiki/KkH'Oar'Rrhr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 220327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Prakith_(Darth_Wyyrlok)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 2741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sharad_Hett",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 402739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Skirmish_on_The_Wheel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 620496,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 6683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bhat_Jul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valley_of_the_Dark_Lords/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 753381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lannik–Red_Iaro_peace_negotiations",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 169902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Temple_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 177415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Tatooine_(Imperial_Period)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 80267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence_and_Assassination",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 291723,
+      "PageUrl": "https://starwars.fandom.com/wiki/132_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 192981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_the_Temple_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 333397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Vinsoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 315686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt's_Sith_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 108264,
@@ -278,34 +475,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
-      "PageId": 2741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sharad_Hett",
+      "PageId": 1246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ki-Adi-Mundi/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 291723,
-      "PageUrl": "https://starwars.fandom.com/wiki/132_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 329036,
-      "PageUrl": "https://starwars.fandom.com/wiki/138_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 316759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_trooper_(catacombs)",
+      "PageId": 2339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vergere",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 21592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vonduun_Skerr_Kyrric",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 29634,
+      "PageUrl": "https://starwars.fandom.com/wiki/K'Sheek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 6683,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bhat_Jul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 410243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sharad_Hett's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 341937,
@@ -316,151 +503,6 @@
       "PageId": 187289,
       "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Oppo_Rancisis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 7873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valley_of_the_Dark_Lords/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 264412,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Defense_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 80267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence_and_Assassination",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 410243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sharad_Hett's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 315686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt's_Sith_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 329094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_the_Temple_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 629843,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_of_A'Sharad_Hett",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 3992,
-      "PageUrl": "https://starwars.fandom.com/wiki/An'ya_Kuro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 169902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Temple_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 177415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Tatooine_(Imperial_Period)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 172804,
-      "PageUrl": "https://starwars.fandom.com/wiki/One_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 65001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith–Imperial_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 341948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Second_Imperial_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 2339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vergere",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 66003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Talon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 220327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Prakith_(Darth_Wyyrlok)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 3645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arkania/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 109379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Imperial_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 64410,
-      "PageUrl": "https://starwars.fandom.com/wiki/130_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 64420,
-      "PageUrl": "https://starwars.fandom.com/wiki/137_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 402739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Skirmish_on_The_Wheel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 164646,
-      "PageUrl": "https://starwars.fandom.com/wiki/XoXaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 80192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Maladi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 210634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_Jedi_Purge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 1246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ki-Adi-Mundi/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 74948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Krayt's_Galactic_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 620496,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 80272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hand_(One_Sith)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 232644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Had_Abbadon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

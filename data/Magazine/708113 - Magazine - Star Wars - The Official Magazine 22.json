@@ -2,7 +2,6 @@
   "PageId": 708113,
   "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_-_The_Official_Magazine_22",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine",
-  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -13,7 +12,12 @@
     },
     {
       "Label": "Publisher",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "OZ Verlag",
+          "Href": "https://starwars.fandom.com/wiki/OZ_Verlag"
+        }
+      ],
       "Values": [
         "OZ Verlag"
       ]
@@ -22,12 +26,16 @@
       "Label": "Release date",
       "Links": [
         {
+          "Content": "July 11",
+          "Href": "https://starwars.fandom.com/wiki/July_11"
+        },
+        {
           "Content": "2001",
           "Href": "https://starwars.fandom.com/wiki/2001"
         }
       ],
       "Values": [
-        "Second quarter 2001"
+        "July 11, 2001"
       ]
     },
     {
@@ -50,11 +58,5 @@
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 579658,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Weapon_of_a_Jedi,_Part_4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story"
-    }
-  ]
+  "Relationships": []
 }

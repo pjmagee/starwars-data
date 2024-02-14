@@ -17,10 +17,15 @@
         {
           "Content": "Clone Wars",
           "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        },
+        {
+          "Content": "Great Jedi Purge",
+          "Href": "https://starwars.fandom.com/wiki/Great_Jedi_Purge"
         }
       ],
       "Values": [
-        "Clone Wars"
+        "Clone Wars",
+        "Great Jedi Purge (late battle)"
       ]
     },
     {
@@ -67,7 +72,7 @@
           "Href": "https://starwars.fandom.com/wiki/Head_of_State"
         },
         {
-          "Content": "Supreme Commander",
+          "Content": "Supreme Martial Commander of the Separatist Droid Armies",
           "Href": "https://starwars.fandom.com/wiki/Supreme_Martial_Commander_of_the_Separatist_Droid_Armies"
         },
         {
@@ -87,34 +92,73 @@
           "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi"
         },
         {
-          "Content": "Separatist control structure",
+          "Content": "Separatist leadership",
           "Href": "https://starwars.fandom.com/wiki/Executive_Separatist_Council"
         },
         {
           "Content": "Pau'ans",
           "Href": "https://starwars.fandom.com/wiki/Pau%27an"
+        },
+        {
+          "Content": "military control structure",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_officer"
         }
       ],
       "Values": [
-        "Galactic Republic victory",
-        "Death of the Confederate Head of State and Supreme Commander, General Grievous",
+        "Decisive Galactic Republic victory",
+        "Death of the Confederate Head of State and Supreme Martial Commander of the Separatist Droid Armies, General Grievous",
         "Presumed death of Jedi Master Obi-Wan Kenobi",
-        "Further destabilizion of the Separatist control structure",
+        "Destabilizion of the Separatist leadership",
         "Beginning of the occupation of Utapau and many Pau'ans arrested",
-        "End of the Clone Wars"
+        "Collapse of the Confederacy's military control structure, marking the technical end of the Clone Wars"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 533327,
+      "PageUrl": "https://starwars.fandom.com/wiki/7th_Sky_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 652045,
       "PageUrl": "https://starwars.fandom.com/wiki/Red_unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 533327,
-      "PageUrl": "https://starwars.fandom.com/wiki/7th_Sky_Corps",
+      "PageId": 725332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Order_67",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 553270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Open_Circle_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 505851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Venator-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 631924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jmmaar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 742228,
+      "PageUrl": "https://starwars.fandom.com/wiki/2nd_Airborne_Company",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 644352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 651987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 547745,
@@ -122,9 +166,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 479521,
+      "PageUrl": "https://starwars.fandom.com/wiki/212th_Attack_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Security_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 519543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarabba_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 671352,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 477162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 452388,
@@ -135,56 +199,6 @@
       "PageId": 602733,
       "PageUrl": "https://starwars.fandom.com/wiki/Pau'an_Warrior",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 603514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Security_Forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 631924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jmmaar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 553270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Open_Circle_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 651987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 477162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soulless_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 644352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet_(Galactic_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 479521,
-      "PageUrl": "https://starwars.fandom.com/wiki/212th_Attack_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 519543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarabba_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 505851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Venator-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 725332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Order_67",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     }
   ]
 }

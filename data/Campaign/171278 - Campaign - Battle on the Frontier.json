@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Begin",
+      "Label": "Conflict",
+      "Links": [
+        {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Civil War"
+      ]
+    },
+    {
+      "Label": "Date",
       "Links": [
         {
           "Content": "3 ABY",
@@ -24,22 +36,11 @@
       ]
     },
     {
-      "Label": "End",
-      "Links": [],
-      "Values": [
-        "3 ABY"
-      ]
-    },
-    {
       "Label": "Place",
       "Links": [
         {
-          "Content": "Pakuuni sector",
-          "Href": "https://starwars.fandom.com/wiki/Pakuuni_sector"
-        },
-        {
-          "Content": "Newland system",
-          "Href": "https://starwars.fandom.com/wiki/Newland_system"
+          "Content": "Argoon",
+          "Href": "https://starwars.fandom.com/wiki/Argoon"
         },
         {
           "Content": "Pakuuni system",
@@ -47,8 +48,7 @@
         }
       ],
       "Values": [
-        "Pakuuni sector",
-        "Newland system",
+        "Argoon",
         "Pakuuni system"
       ]
     },
@@ -68,8 +68,8 @@
       "Label": "Battles",
       "Links": [
         {
-          "Content": "First Battle of the Pakuuni system",
-          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_the_Pakuuni_system"
+          "Content": "Mission at Argoon",
+          "Href": "https://starwars.fandom.com/wiki/Mission_at_Argoon"
         },
         {
           "Content": "Destruction of the Pakuuni Pirates",
@@ -93,7 +93,7 @@
         }
       ],
       "Values": [
-        "First Battle of the Pakuuni system",
+        "Mission at Argoon",
         "Destruction of the Pakuuni Pirates",
         "Second Battle of the Pakuuni system",
         "First Battle of Platform NL-1",
@@ -103,6 +103,26 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 56423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stalwart_(Victory-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 424729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_at_Argoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 424731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Pakuuni_Pirates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 424733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_the_Pakuuni_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 171274,
       "PageUrl": "https://starwars.fandom.com/wiki/Soryi",
@@ -159,51 +179,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 56423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stalwart_(Victory-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 78174,
-      "PageUrl": "https://starwars.fandom.com/wiki/NL-1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 424729,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_the_Pakuuni_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 424731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Pakuuni_Pirates",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 424733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_the_Pakuuni_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 424734,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Platform_NL-1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 424735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Platform_NL-1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 424736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_Battle_of_the_Pakuuni_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 536677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Splinter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 537924,
       "PageUrl": "https://starwars.fandom.com/wiki/Runeer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -222,6 +197,26 @@
       "PageId": 538006,
       "PageUrl": "https://starwars.fandom.com/wiki/Clipper_(Lambda-class_T-4a_shuttle)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 78174,
+      "PageUrl": "https://starwars.fandom.com/wiki/NL-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 424734,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Platform_NL-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 424735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Platform_NL-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 424736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_Battle_of_the_Pakuuni_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 121784,
@@ -262,11 +257,6 @@
       "PageId": 122847,
       "PageUrl": "https://starwars.fandom.com/wiki/Ranger_(IPV-1_Patrol_Craft)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 272794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pakuuni_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

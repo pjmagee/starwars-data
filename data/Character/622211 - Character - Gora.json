@@ -27,12 +27,16 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "40 BBY",
-          "Href": "https://starwars.fandom.com/wiki/40_BBY"
+          "Content": "82 BBY",
+          "Href": "https://starwars.fandom.com/wiki/82_BBY"
+        },
+        {
+          "Content": "42 BBY",
+          "Href": "https://starwars.fandom.com/wiki/42_BBY"
         }
       ],
       "Values": [
-        "Before 40 BBY, Serenno"
+        "Between 82 BBY and 42 BBY, Serenno"
       ]
     },
     {
@@ -64,7 +68,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Serenno",
@@ -74,9 +78,53 @@
       "Values": [
         "House Serenno"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Anya",
+          "Href": "https://starwars.fandom.com/wiki/Anya_(Serenno)"
+        }
+      ],
+      "Values": [
+        "Anya"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Dooku"
+        },
+        {
+          "Content": "Jenza",
+          "Href": "https://starwars.fandom.com/wiki/Jenza"
+        },
+        {
+          "Content": "Ramil",
+          "Href": "https://starwars.fandom.com/wiki/Ramil"
+        }
+      ],
+      "Values": [
+        "Dooku",
+        "Jenza",
+        "Ramil"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 754910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 452893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 512882,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Serenno",
@@ -91,6 +139,21 @@
       "PageId": 707650,
       "PageUrl": "https://starwars.fandom.com/wiki/Celebration_on_Serenno",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 622184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jenza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anya_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ramil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

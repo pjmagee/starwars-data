@@ -2,6 +2,7 @@
   "PageId": 729067,
   "PageUrl": "https://starwars.fandom.com/wiki/Kilji_data_rectangle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -27,7 +28,7 @@
       "Links": [
         {
           "Content": "Hammer",
-          "Href": "https://starwars.fandom.com/wiki/Hammer_(cruiser)"
+          "Href": "https://starwars.fandom.com/wiki/Hammer_(Kilji_picket_cruiser)"
         }
       ],
       "Values": [
@@ -38,7 +39,7 @@
       "Label": "Purpose",
       "Links": [],
       "Values": [
-        "Storage data"
+        "Store data"
       ]
     },
     {
@@ -54,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 714717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

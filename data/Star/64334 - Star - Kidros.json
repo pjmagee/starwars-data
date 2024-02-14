@@ -56,7 +56,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-20"
@@ -109,7 +109,12 @@
     },
     {
       "Label": "Class",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Orange giant",
+          "Href": "https://starwars.fandom.com/wiki/Orange_giant"
+        }
+      ],
       "Values": [
         "Orange giant"
       ]
@@ -127,6 +132,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 791489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orange_giant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star_type"
+    },
+    {
+      "PageId": 16380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kidron_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 129229,
       "PageUrl": "https://starwars.fandom.com/wiki/Tue",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -140,11 +155,6 @@
       "PageId": 129231,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuantar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidron_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -15,19 +15,60 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Missiles",
+          "Content": "Missile",
           "Href": "https://starwars.fandom.com/wiki/Missile"
         }
       ],
       "Values": [
-        "Missiles"
+        "Missile launchers"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "TIE/rp Reaper attack lander",
+          "Href": "https://starwars.fandom.com/wiki/TIE/rp_Reaper_attack_lander"
+        }
+      ],
+      "Values": [
+        "At least 1 TIE/rp Reaper attack lander"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "Hangar",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
+      "Values": [
+        "Hangar (1)"
       ]
     },
     {
       "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Imperial officer",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial cadets",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_cadet"
+        }
+      ],
+      "Values": [
+        "1 Imperial officer",
+        "5 Imperial cadets"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
       "Links": [],
       "Values": [
-        "At least 6"
+        "Several cargo crates"
       ]
     },
     {
@@ -35,7 +76,7 @@
       "Links": [
         {
           "Content": "Nuvar system",
-          "Href": "https://starwars.fandom.com/wiki/Nuvar_system/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Nuvar_system"
         }
       ],
       "Values": [
@@ -48,10 +89,15 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic (briefly)"
       ]
     },
     {
@@ -82,14 +128,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 670463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuvar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 670471,
       "PageUrl": "https://starwars.fandom.com/wiki/Incident_in_the_Nuvar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 670463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuvar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

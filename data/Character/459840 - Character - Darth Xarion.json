@@ -2,7 +2,7 @@
   "PageId": 459840,
   "PageUrl": "https://starwars.fandom.com/wiki/Darth_Xarion",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/de/Xarion.png/revision/latest?cb=20191105001806",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d5/Darth_Xarion.jpg/revision/latest?cb=20220902092008",
   "Data": [
     {
       "Label": "Titles",
@@ -49,17 +49,43 @@
         "Sith Intelligence",
         "Sphere of Galactic Influence"
       ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Lord",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Lord/Legends"
+        },
+        {
+          "Content": "Tronus",
+          "Href": "https://starwars.fandom.com/wiki/Tronus"
+        }
+      ],
+      "Values": [
+        "Lord Tronus"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 141598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tronus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 633727,
       "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Galactic_Influence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 141598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence",
+      "PageId": 775228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Infiltration_Specialists",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

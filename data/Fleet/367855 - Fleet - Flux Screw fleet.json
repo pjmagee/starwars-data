@@ -2,6 +2,7 @@
   "PageId": 367855,
   "PageUrl": "https://starwars.fandom.com/wiki/Flux_Screw_fleet",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,23 +13,46 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Fleet/Legends"
+        }
+      ],
       "Values": [
-        "Pirate fleet"
+        "Fleet"
+      ]
+    },
+    {
+      "Label": "Commanding officer(s)",
+      "Links": [
+        {
+          "Content": "chieftain",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Ebruchi_chieftain"
+        }
+      ],
+      "Values": [
+        "A chieftain"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Ebruchi Pirates",
-          "Href": "https://starwars.fandom.com/wiki/Ebruchi_Pirates"
+          "Content": "Ebruchi",
+          "Href": "https://starwars.fandom.com/wiki/Ebruchi_(fleet)"
         }
       ],
       "Values": [
-        "Ebruchi Pirates"
+        "Ebruchi"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 747014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ebruchi_chieftain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

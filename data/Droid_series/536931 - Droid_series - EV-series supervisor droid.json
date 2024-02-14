@@ -2,7 +2,7 @@
   "PageId": 536931,
   "PageUrl": "https://starwars.fandom.com/wiki/EV-series_supervisor_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/ff/EV-9D9_negtd.jpg/revision/latest?cb=20071012121203",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f5/EVseriesSupervisorDroid-NEGTD.png/revision/latest?cb=20221025040127",
   "Data": [
     {
       "Label": "Titles",
@@ -65,10 +65,16 @@
         {
           "Content": "Red",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Red, yellow"
+        "Red",
+        "Yellow",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -113,27 +119,42 @@
           "Href": "https://starwars.fandom.com/wiki/Jabba%27s_criminal_empire"
         },
         {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
           "Content": "Pyke Syndicate",
           "Href": "https://starwars.fandom.com/wiki/Pyke_Syndicate"
         },
         {
           "Content": "Chalmun's Spaceport Cantina",
           "Href": "https://starwars.fandom.com/wiki/Chalmun%27s_Spaceport_Cantina"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Jabba's criminal empire",
+        "Alliance to Restore the Republic",
+        "Scourge (As a vessel)",
         "Pyke Syndicate",
-        "Chalmun's Spaceport Cantina"
+        "Chalmun's Spaceport Cantina",
+        "Plazir-15 government"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 470369,
-      "PageUrl": "https://starwars.fandom.com/wiki/EV-9D9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 611347,
+      "PageUrl": "https://starwars.fandom.com/wiki/EV-series",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 590658,
@@ -146,18 +167,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 506854,
-      "PageUrl": "https://starwars.fandom.com/wiki/MerenData",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 544566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_supervisor_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 470369,
+      "PageUrl": "https://starwars.fandom.com/wiki/EV-9D9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 715107,
       "PageUrl": "https://starwars.fandom.com/wiki/N-3RO",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 544566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_supervisor_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -166,9 +187,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 611347,
-      "PageUrl": "https://starwars.fandom.com/wiki/EV-series",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 506854,
+      "PageUrl": "https://starwars.fandom.com/wiki/MerenData",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 745091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_supervisor_droid_(Accretion_Disco)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

@@ -17,10 +17,27 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Trailing Sectors"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Kira sector",
+          "Href": "https://starwars.fandom.com/wiki/Kira_sector"
+        }
+      ],
+      "Values": [
+        "Kira sector"
       ]
     },
     {
@@ -36,10 +53,27 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-15"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Harrin Trade Corridor",
+          "Href": "https://starwars.fandom.com/wiki/Harrin_Trade_Corridor"
+        },
+        {
+          "Content": "Kira Run",
+          "Href": "https://starwars.fandom.com/wiki/Kira_Run"
+        }
+      ],
+      "Values": [
+        "Harrin Trade Corridor",
+        "Kira Run"
       ]
     },
     {
@@ -109,6 +143,18 @@
       ]
     },
     {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Transponder buoys",
+          "Href": "https://starwars.fandom.com/wiki/Transponder_buoy"
+        }
+      ],
+      "Values": [
+        "Transponder buoys"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [
         {
@@ -126,6 +172,11 @@
       "PageId": 14321,
       "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_IV",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 16766,
@@ -166,11 +217,6 @@
       "PageId": 16775,
       "PageUrl": "https://starwars.fandom.com/wiki/Rokwahl_Asteroid_Belt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

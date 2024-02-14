@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
+      "Links": [
+        {
+          "Content": "Imperial-class Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Imperial-class_Star_Destroyer"
+        }
+      ],
+      "Values": [
+        "Imperial-class Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -51,17 +63,44 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "lasers",
-          "Href": "https://starwars.fandom.com/wiki/Laser"
-        },
-        {
           "Content": "Turbolasers",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "lasers",
+          "Href": "https://starwars.fandom.com/wiki/Laser"
         }
       ],
       "Values": [
-        "Point-defense lasers",
-        "Turbolasers"
+        "Turbolasers",
+        "Point-defense lasers"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "TIE/ln space superiority starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "Squadron One",
+          "Href": "https://starwars.fandom.com/wiki/Squadron_One"
+        },
+        {
+          "Content": "Squadron Two",
+          "Href": "https://starwars.fandom.com/wiki/Squadron_Two"
+        },
+        {
+          "Content": "Lambda-class T-4a shuttles",
+          "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
+        }
+      ],
+      "Values": [
+        "TIE/ln space superiority starfighters",
+        "Squadron One",
+        "Squadron Two",
+        "Lambda-class T-4a shuttles"
       ]
     },
     {
@@ -77,6 +116,39 @@
       ]
     },
     {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial Navy Troopers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy_Trooper"
+        },
+        {
+          "Content": "Gunners",
+          "Href": "https://starwars.fandom.com/wiki/Gunner"
+        },
+        {
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        }
+      ],
+      "Values": [
+        "Imperial officers",
+        "Imperial Navy Troopers",
+        "Gunners",
+        "Imperial Starfighter Pilots",
+        "At least 1 TIE Commander",
+        "Stormtroopers"
+      ]
+    },
+    {
       "Label": "Communication systems",
       "Links": [
         {
@@ -85,7 +157,8 @@
         }
       ],
       "Values": [
-        "Equipped"
+        "Equipped",
+        "Short-Range transmitter"
       ]
     },
     {
@@ -186,7 +259,10 @@
         }
       ],
       "Values": [
-        "Llano"
+        "Balanhai Savit's TIE Commander",
+        "Llano",
+        "Unidentified chief warder",
+        "Unidentified comm officer"
       ]
     }
   ],

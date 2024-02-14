@@ -15,12 +15,17 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Mid Rim",
-          "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -53,10 +58,16 @@
         {
           "Content": "Y'Toub",
           "Href": "https://starwars.fandom.com/wiki/Y%27Toub"
+        },
+        {
+          "Content": "Unidentified star",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_star_(Nar_Hekka)"
         }
       ],
       "Values": [
-        "1: Y'Toub"
+        "2",
+        "Y'Toub",
+        "Unidentified star"
       ]
     },
     {
@@ -74,34 +85,75 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
-        "S-12"
+        "S-11"
       ]
     },
     {
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Ootmian Pabol",
+          "Href": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends"
+        },
+        {
           "Content": "Sheela Run",
           "Href": "https://starwars.fandom.com/wiki/Sheela_Run"
         }
       ],
       "Values": [
+        "Ootmian Pabol",
         "Sheela Run"
       ]
     },
     {
       "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Frozen",
-          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends#Type_I_atmospheres"
         }
       ],
       "Values": [
-        "Frozen rock"
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [
+        {
+          "Content": "Cold",
+          "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
+        }
+      ],
+      "Values": [
+        "Cold"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "ice",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        },
+        {
+          "Content": "domes",
+          "Href": "https://starwars.fandom.com/wiki/Domed_city/Legends"
+        }
+      ],
+      "Values": [
+        "Frozen ice",
+        "Enormous hothouse domes"
       ]
     },
     {
@@ -117,19 +169,27 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Hutts",
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Hutt",
           "Href": "https://starwars.fandom.com/wiki/Hutt/Legends"
         },
         {
-          "Content": "Vippits",
-          "Href": "https://starwars.fandom.com/wiki/Vippit"
+          "Content": "Nikto",
+          "Href": "https://starwars.fandom.com/wiki/Nikto/Legends"
         },
         {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+          "Content": "Tradoshan",
+          "Href": "https://starwars.fandom.com/wiki/Trandoshan/Legends"
+        },
+        {
+          "Content": "species",
+          "Href": "https://starwars.fandom.com/wiki/Species/Legends"
         },
         {
           "Content": "Yuuzhan Vong",
@@ -137,10 +197,11 @@
         }
       ],
       "Values": [
-        "Hutts",
-        "Vippits",
-        "Humans",
-        "Many others",
+        "Human",
+        "Hutt",
+        "Nikto",
+        "Tradoshan",
+        "Many other species",
         "Yuuzhan Vong"
       ]
     },
@@ -150,18 +211,35 @@
         {
           "Content": "Huttese",
           "Href": "https://starwars.fandom.com/wiki/Huttese/Legends"
+        },
+        {
+          "Content": "Galactic Basic Standard",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard/Legends"
         }
       ],
       "Values": [
-        "Huttese"
+        "Huttese",
+        "Galactic Basic Standard"
+      ]
+    },
+    {
+      "Label": "Major imports",
+      "Links": [
+        {
+          "Content": "Plants",
+          "Href": "https://starwars.fandom.com/wiki/Plant/Legends"
+        }
+      ],
+      "Values": [
+        "Plants"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Hutt Empire",
-          "Href": "https://starwars.fandom.com/wiki/Hutt_Empire"
+          "Content": "Hutt Cartel",
+          "Href": "https://starwars.fandom.com/wiki/Hutt_Cartel"
         },
         {
           "Content": "Yuuzhan Vong empire",
@@ -169,16 +247,26 @@
         }
       ],
       "Values": [
-        "Hutt Empire",
+        "Hutt Cartel",
         "Yuuzhan Vong empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 430039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sheela_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 17276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 430040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Hekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 772255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_(Nar_Hekka)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 430038,
@@ -186,9 +274,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 17276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 430039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sheela_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 3131,
@@ -196,9 +284,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 430040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Hekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 270237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

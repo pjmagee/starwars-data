@@ -2,6 +2,7 @@
   "PageId": 397141,
   "PageUrl": "https://starwars.fandom.com/wiki/Maite_Dooku",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
         }
       ],
       "Values": [
-        "3 BBY"
+        "By 3 BBY"
       ]
     },
     {
@@ -59,6 +60,30 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Adan Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Adan_Dooku"
+        }
+      ],
+      "Values": [
+        "Adan Dooku"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Bron Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Bron_Dooku"
+        }
+      ],
+      "Values": [
+        "Bron Dooku"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +96,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 396979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bron_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 397044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adan_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 396739,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

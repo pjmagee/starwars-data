@@ -2,7 +2,7 @@
   "PageId": 271164,
   "PageUrl": "https://starwars.fandom.com/wiki/Presbalin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/Presbalin-TEA.jpg/revision/latest?cb=20221001150921",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -29,10 +34,15 @@
         {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
+        },
+        {
+          "Content": "Loop Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Loop_Worlds"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Gordian Reach",
+        "Loop Worlds"
       ]
     },
     {
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-6"
@@ -67,7 +77,23 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Alien",
+          "Href": "https://starwars.fandom.com/wiki/Alien/Legends"
+        },
+        {
+          "Content": "cities",
+          "Href": "https://starwars.fandom.com/wiki/City/Legends"
+        }
+      ],
+      "Values": [
+        "Alien cities"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -81,6 +107,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 362335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Presbalin_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 271163,
       "PageUrl": "https://starwars.fandom.com/wiki/Denarii_Nebula",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
@@ -89,11 +120,6 @@
       "PageId": 271155,
       "PageUrl": "https://starwars.fandom.com/wiki/Junction-Tierell_Loop/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 362335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Presbalin_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

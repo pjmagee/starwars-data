@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forest",
@@ -50,6 +50,14 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Birds",
+          "Href": "https://starwars.fandom.com/wiki/Bird/Legends"
+        },
+        {
+          "Content": "Insects",
+          "Href": "https://starwars.fandom.com/wiki/Insect/Legends"
+        },
+        {
           "Content": "Lizards",
           "Href": "https://starwars.fandom.com/wiki/Lizard/Legends"
         },
@@ -59,6 +67,8 @@
         }
       ],
       "Values": [
+        "Birds",
+        "Insects",
         "Lizards",
         "Unidentified pig"
       ]
@@ -78,6 +88,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 592753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pig_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 91482,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Omphalos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -86,11 +101,6 @@
       "PageId": 68121,
       "PageUrl": "https://starwars.fandom.com/wiki/Planet_Killer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 592753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pig_species",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

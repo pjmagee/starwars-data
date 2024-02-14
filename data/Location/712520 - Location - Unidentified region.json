@@ -45,18 +45,19 @@
         {
           "Content": "Appenza Peak",
           "Href": "https://starwars.fandom.com/wiki/Appenza_Peak"
-        },
-        {
-          "Content": "Royal Palace of Alderaan",
-          "Href": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan"
         }
       ],
       "Values": [
         "Aldera",
-        "Appenza Peak",
-        "Royal Palace of Alderaan"
+        "Appenza Peak"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 451697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

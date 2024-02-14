@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -82,15 +89,25 @@
         {
           "Content": "Imperial Army",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Army/Legends"
+        },
+        {
+          "Content": "Imperial Department of Resources",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Department_of_Resources"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Army"
+        "Imperial Army",
+        "Imperial Department of Resources"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 545322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mine_towns",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
     {
       "PageId": 5441,
       "PageUrl": "https://starwars.fandom.com/wiki/Kaiburr_crystal",
@@ -100,11 +117,6 @@
       "PageId": 545371,
       "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_office",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 545322,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mine_towns",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

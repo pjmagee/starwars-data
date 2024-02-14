@@ -13,7 +13,12 @@
     },
     {
       "Label": "Formation type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Operations Group",
+          "Href": "https://starwars.fandom.com/wiki/Operations_Group"
+        }
+      ],
       "Values": [
         "Operations Group"
       ]
@@ -23,7 +28,7 @@
       "Links": [
         {
           "Content": "Lord",
-          "Href": "https://starwars.fandom.com/wiki/Lord/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Sith_Lord/Legends"
         },
         {
           "Content": "Medechas",
@@ -35,15 +40,31 @@
       ]
     },
     {
-      "Label": "Location(s)",
+      "Label": "Headquarters",
       "Links": [
+        {
+          "Content": "Imperial Lodgement",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Lodgement"
+        },
         {
           "Content": "Belsavis",
           "Href": "https://starwars.fandom.com/wiki/Belsavis/Legends"
         }
       ],
       "Values": [
-        "Belsavis"
+        "Imperial Lodgement, Belsavis"
+      ]
+    },
+    {
+      "Label": "Notable battles",
+      "Links": [
+        {
+          "Content": "Invasion of Belsavis",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Belsavis"
+        }
+      ],
+      "Values": [
+        "Invasion of Belsavis"
       ]
     },
     {
@@ -60,6 +81,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 790614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operations_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 506278,
       "PageUrl": "https://starwars.fandom.com/wiki/Medechas",

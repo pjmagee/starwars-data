@@ -27,11 +27,11 @@
       "Label": "Model",
       "Links": [],
       "Values": [
-        "Haven-class medical station"
+        "Modified Haven-class space station"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -55,26 +55,120 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Main reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Main reactor"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "deflector shielding",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield"
+        }
+      ],
+      "Values": [
+        "Heavy deflector shielding"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "armor",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        }
+      ],
+      "Values": [
+        "Powerful armor"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [],
+      "Values": [
+        "Unarmed"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "Pelta-class frigates",
+          "Href": "https://starwars.fandom.com/wiki/Pelta-class_frigate"
+        },
+        {
+          "Content": "Venator-class Star Destroyers",
+          "Href": "https://starwars.fandom.com/wiki/Venator-class_Star_Destroyer"
+        }
+      ],
+      "Values": [
+        "Medical supplies",
+        "Pelta-class frigates",
+        "Venator-class Star Destroyers"
+      ]
+    },
+    {
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "Docking bays",
+          "Content": "docking ports",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
-        "Docking bays (8)"
+        "8 docking ports"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Kaminoan",
+          "Href": "https://starwars.fandom.com/wiki/Kaminoan"
+        },
+        {
+          "Content": "technician",
+          "Href": "https://starwars.fandom.com/wiki/Technician"
+        },
+        {
+          "Content": "clone medical officers",
+          "Href": "https://starwars.fandom.com/wiki/Clone_medical_officer"
+        },
+        {
+          "Content": "medical droids",
+          "Href": "https://starwars.fandom.com/wiki/Medical_droid"
+        }
+      ],
       "Values": [
-        "150, including medical droids"
+        "1 Kaminoan technician",
+        "150 clone medical officers",
+        "1,000+ medical droids"
       ]
     },
     {
       "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "80,000 (maximum)"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Other systems",
       "Links": [
         {
           "Content": "bacta tanks",
@@ -82,7 +176,7 @@
         }
       ],
       "Values": [
-        "80,000 (maximum; 60,000 bacta tanks)"
+        "60,000 bacta tanks"
       ]
     },
     {
@@ -113,11 +207,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 516006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_a_Republic_medical_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
       "PageId": 503936,
       "PageUrl": "https://starwars.fandom.com/wiki/Kaliida_Shoals_Medical_Center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
@@ -130,6 +219,16 @@
     {
       "PageId": 536506,
       "PageUrl": "https://starwars.fandom.com/wiki/Ord_Cestus_medical_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 469709,
+      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 656788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Haven-class_medical_station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
@@ -158,14 +257,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 469709,
-      "PageUrl": "https://starwars.fandom.com/wiki/12th_Sector_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 656788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Haven-class_medical_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 516006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_a_Republic_medical_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

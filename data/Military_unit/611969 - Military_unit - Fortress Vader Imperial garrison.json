@@ -89,8 +89,8 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
         },
         {
-          "Content": "Lava Troopers",
-          "Href": "https://starwars.fandom.com/wiki/Lava_Trooper"
+          "Content": "Lava troopers",
+          "Href": "https://starwars.fandom.com/wiki/Volcanic_environment_stormtrooper"
         },
         {
           "Content": "Magma troopers",
@@ -104,7 +104,7 @@
       "Values": [
         "Fortress security droids",
         "Imperial officers",
-        "Lava Troopers",
+        "Lava troopers",
         "Magma troopers",
         "Stormtroopers"
       ]
@@ -159,7 +159,7 @@
         }
       ],
       "Values": [
-        "Gahenn Plains, Mustafar"
+        "Far side of the Gahenn Plains, Mustafar"
       ]
     },
     {
@@ -206,6 +206,10 @@
         {
           "Content": "Battle on Mustafar",
           "Href": "https://starwars.fandom.com/wiki/Battle_on_Mustafar"
+        },
+        {
+          "Content": "Heist on Vader's Castle",
+          "Href": "https://starwars.fandom.com/wiki/Heist_on_Vader%27s_Castle"
         }
       ],
       "Values": [
@@ -214,7 +218,8 @@
         "Attack on Fortress Vader",
         "Mission to Mustafar",
         "Skirmish in Fortress Vader",
-        "Battle on Mustafar"
+        "Battle on Mustafar",
+        "Heist on Vader's Castle"
       ]
     },
     {
@@ -251,6 +256,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 688071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 612538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Fortress_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 611971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 612944,
       "PageUrl": "https://starwars.fandom.com/wiki/Squad_four",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -264,21 +284,6 @@
       "PageId": 621166,
       "PageUrl": "https://starwars.fandom.com/wiki/Gable_Karius",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 612538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Fortress_Vader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 688071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortress_Vader_hangar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

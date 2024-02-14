@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-7"
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -207,6 +207,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 291642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 290883,
       "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_bomber/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -222,34 +227,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 289220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concordian/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+      "PageId": 309788,
+      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 145802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 4163,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalore/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 333458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Concordia_city/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 114933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_(star)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 291642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 20488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_iron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
       "PageId": 292754,
@@ -262,34 +252,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 8502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 290893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_hideout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 309922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 309788,
-      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 291423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Death_Watch_Mandalorian_3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 293196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Guard/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 114933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_(star)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 17538,
@@ -297,14 +262,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 289220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concordian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 290893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_hideout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 293196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Guard/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 20488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_iron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 8502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 309922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 359289,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_blaster_carbine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 145802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 333458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Concordia_city/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

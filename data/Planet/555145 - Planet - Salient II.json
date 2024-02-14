@@ -67,7 +67,31 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-3",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-3"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Hydian Way",
+          "Href": "https://starwars.fandom.com/wiki/Hydian_Way"
+        }
+      ],
+      "Values": [
+        "Hydian Way"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Hiitian",
@@ -82,8 +106,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Salient's battle group",
-          "Href": "https://starwars.fandom.com/wiki/Salient%27s_battle_group"
+          "Content": "Salient Battle Group",
+          "Href": "https://starwars.fandom.com/wiki/Salient_Battle_Group"
         },
         {
           "Content": "Salient II's militias",
@@ -103,7 +127,7 @@
         }
       ],
       "Values": [
-        "Salient's battle group",
+        "Salient Battle Group",
         "Salient II's militias",
         "Confederacy of Independent Systems",
         "Zerpen Industries",
@@ -113,16 +137,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 555072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 560645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_Strategic_Command",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
       "PageId": 559832,
       "PageUrl": "https://starwars.fandom.com/wiki/Salient_Battle_Group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
@@ -131,6 +145,16 @@
       "PageId": 561069,
       "PageUrl": "https://starwars.fandom.com/wiki/Salient_II's_militias",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 560645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_Strategic_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 555072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

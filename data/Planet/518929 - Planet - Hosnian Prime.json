@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-12",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -143,6 +143,10 @@
           "Href": "https://starwars.fandom.com/wiki/Senate_hangar"
         },
         {
+          "Content": "Starros family homestead",
+          "Href": "https://starwars.fandom.com/wiki/Starros_family_homestead"
+        },
+        {
           "Content": "Unidentified New Republic veteran hospital",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_New_Republic_veteran_hospital"
         }
@@ -156,6 +160,7 @@
         "New Republic senatorial complex",
         "Offices of the Galaxy Beacon",
         "Senate hangar",
+        "Starros family homestead",
         "Unidentified New Republic veteran hospital"
       ]
     },
@@ -172,32 +177,29 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
-        }
-      ],
-      "Values": [
-        "Human"
-      ]
-    },
-    {
-      "Label": "Government",
-      "Links": [
+        },
         {
-          "Content": "New Republic",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+          "Content": "Pantoran",
+          "Href": "https://starwars.fandom.com/wiki/Pantoran"
         }
       ],
       "Values": [
-        "New Republic"
+        "Human",
+        "Pantoran"
       ]
     },
     {
       "Label": "Major cities",
       "Links": [
+        {
+          "Content": "Chikua City",
+          "Href": "https://starwars.fandom.com/wiki/Chikua_City"
+        },
         {
           "Content": "Darropolis",
           "Href": "https://starwars.fandom.com/wiki/Darropolis"
@@ -212,6 +214,7 @@
         }
       ],
       "Values": [
+        "Chikua City",
         "Darropolis",
         "Republic City (capital)"
       ]
@@ -226,6 +229,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
@@ -237,36 +244,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 565172,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yuprin_Arlo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 680332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starros_Clan_private_compound",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 513374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sondiv_Sella",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472922,
-      "PageUrl": "https://starwars.fandom.com/wiki/BB-8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 634049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antilles_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 658472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starros_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
       "PageId": 538471,
       "PageUrl": "https://starwars.fandom.com/wiki/Riosan_liqueur",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
@@ -275,206 +252,6 @@
       "PageId": 538541,
       "PageUrl": "https://starwars.fandom.com/wiki/Buttersweet_puff",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 546368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Senate_hangar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 608611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hamato_Xiono",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 424437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Senate_chamber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 541131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hanging_gardens",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 712759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whisper_Network",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 538450,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tai-Lin_Garr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 538523,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arliz_Hadrassian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 538491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Napkin_Bombing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 538919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Organa_statue-dedication_ceremony",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 546936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tai-Lin_Garr's_memorial_service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 539293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Precision_air_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 539571,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 553487,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 589552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaduki_plant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 665840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_orbital_outpost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 682225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 538536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snowbird",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 690604,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flutterbug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 538622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Senatorial_conference_building",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 645835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_Academy_of_Law_Enforcement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 629762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reelka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xiono_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 538192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Equinox_Day",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
-    },
-    {
-      "PageId": 534332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Centrists",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 534333,
-      "PageUrl": "https://starwars.fandom.com/wiki/Populists",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 538530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Association_of_Small_Craft_Manufacturers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 539148,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_soldier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 530626,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_senatorial_complex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 598152,
-      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 612001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Smuggler's_Guide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 596667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kazuda_Xiono",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 555084,
-      "PageUrl": "https://starwars.fandom.com/wiki/Senate_Square",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 665890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hosnian_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 571359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_flight_academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 575449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_New_Republic_veteran_hospital",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 531745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 7994,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 662706,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghirra_Starros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 499345,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 512339,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 529110,
@@ -487,19 +264,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 538597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blueblossom_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 539293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Precision_air_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 611046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exantor_Divo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 552390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darropolis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 539571,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 546934,
@@ -507,19 +279,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 548204,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_pilot",
+      "PageId": 764070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad_(Starros_family_homestead)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 553457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galaxy_Beacon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 774359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hyko_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 546636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 608611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hamato_Xiono",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rilo_Grenth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snowbird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supra-atmo_skytower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 524156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gadde_Neshurrion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 524185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andrithal_Robb-Voti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 552390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darropolis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 523904,
@@ -532,9 +334,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 513374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sondiv_Sella",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 753558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Starros_family_homestead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 7994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 510551,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Senate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 575449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_New_Republic_veteran_hospital",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 555084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senate_Square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 596667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kazuda_Xiono",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 424437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senate_chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 680332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starros_family_homestead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 540332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_male_Hosnian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 451731,
@@ -542,19 +389,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 553456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Offices_of_the_Galaxy_Beacon",
+      "PageId": 530626,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_senatorial_complex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 303736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cold_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 540332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_male_Hosnian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 523734,
@@ -592,24 +429,264 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 723939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Club_Silhouette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+      "PageId": 553456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Offices_of_the_Galaxy_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 524156,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gadde_Neshurrion",
+      "PageId": 755073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pilot_(Hosnian_Prime)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 524185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andrithal_Robb-Voti",
+      "PageId": 784058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Herbage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 538491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Napkin_Bombing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 538919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Organa_statue-dedication_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 546936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tai-Lin_Garr's_memorial_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 512339,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 539148,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_soldier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 598152,
+      "PageUrl": "https://starwars.fandom.com/wiki/29_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 728927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_youngling_(Hosnian_Prime)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472922,
+      "PageUrl": "https://starwars.fandom.com/wiki/BB-8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 614078,
+      "PageUrl": "https://starwars.fandom.com/wiki/All_Aces_Battle_Royale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 538597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blueblossom_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 538450,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tai-Lin_Garr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538523,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arliz_Hadrassian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 553487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 303736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cold_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 499345,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 787759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 682225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 538192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Equinox_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 665840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_orbital_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 612001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Smuggler's_Guide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 757623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qeris_Lar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 571359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_flight_academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 589552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaduki_plant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 546636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 780504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_Avon_Starros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 636387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 645835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_Academy_of_Law_Enforcement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 611046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exantor_Divo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kevmo_Zink",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 662706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghirra_Starros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 534332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Centrists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 534333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Populists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 538530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Association_of_Small_Craft_Manufacturers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 621520,
       "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_factory_complex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 565172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuprin_Arlo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 665890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hosnian_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 548204,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_pilot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 553457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galaxy_Beacon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 712759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whisper_Network",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 723939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Club_Silhouette",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 538622,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Senate_conference_building",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 629762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reelka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chikua_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 541131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanging_gardens",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 546368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senate_hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 611111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xiono_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 634049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antilles_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 658472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starros_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

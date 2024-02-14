@@ -2,6 +2,7 @@
   "PageId": 636158,
   "PageUrl": "https://starwars.fandom.com/wiki/Sienna",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,42 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mirienna",
+          "Href": "https://starwars.fandom.com/wiki/Mirienna"
+        },
+        {
+          "Content": "Ostar",
+          "Href": "https://starwars.fandom.com/wiki/Ostar"
+        }
+      ],
+      "Values": [
+        "Mirienna",
+        "Ostar"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 636156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mirienna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ostar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

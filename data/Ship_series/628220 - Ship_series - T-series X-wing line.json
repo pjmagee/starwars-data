@@ -2,6 +2,7 @@
   "PageId": 628220,
   "PageUrl": "https://starwars.fandom.com/wiki/T-series_X-wing_line",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -84,5 +85,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 788806,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    }
+  ]
 }

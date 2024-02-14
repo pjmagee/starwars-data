@@ -15,24 +15,17 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "Hutt Space",
+          "Href": "https://starwars.fandom.com/wiki/Hutt_Space"
+        },
+        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         }
       ],
       "Values": [
+        "Hutt Space",
         "Outer Rim Territories"
-      ]
-    },
-    {
-      "Label": "Sector",
-      "Links": [
-        {
-          "Content": "Hutt Space",
-          "Href": "https://starwars.fandom.com/wiki/Hutt_Space"
-        }
-      ],
-      "Values": [
-        "Hutt Space"
       ]
     },
     {
@@ -47,6 +40,18 @@
       "Links": [],
       "Values": [
         "2"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "T-13",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "T-13"
       ]
     },
     {
@@ -80,14 +85,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 513169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Motok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 514131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_male_(Cyrkon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 580835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cyrkon_Extraction",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 593966,
@@ -95,19 +95,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 483302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 580835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cyrkon_Extraction",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 514131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_male_(Cyrkon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 560917,
@@ -115,13 +105,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 483302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 609807,
       "PageUrl": "https://starwars.fandom.com/wiki/Bay_seven_thirty-two",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 513169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Motok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 727032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hotel",
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_hotel_(Cyrkon)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

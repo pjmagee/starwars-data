@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Malvern",
@@ -83,18 +83,87 @@
         {
           "Content": "House Borgin",
           "Href": "https://starwars.fandom.com/wiki/House_Borgin/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House Malvern",
+        "House Borgin"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Rodas Borgin",
+          "Href": "https://starwars.fandom.com/wiki/Rodas_Borgin"
+        }
+      ],
+      "Values": [
+        "Rodas Borgin"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Orom Malvern",
+          "Href": "https://starwars.fandom.com/wiki/Orom_Malvern"
+        }
+      ],
+      "Values": [
+        "Orom Malvern"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Pero Borgin",
+          "Href": "https://starwars.fandom.com/wiki/Pero_Borgin"
+        }
+      ],
+      "Values": [
+        "Pero Borgin"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "House Malvern",
-        "House Borgin",
         "Galactic Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 408242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orom_Malvern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 402609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rodas_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403638,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Borgin/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 408249,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Malvern/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 408958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pero_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

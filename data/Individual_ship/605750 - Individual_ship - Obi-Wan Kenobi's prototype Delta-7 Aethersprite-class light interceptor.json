@@ -39,11 +39,11 @@
         }
       ],
       "Values": [
-        "prototype Delta-7 Aethersprite-class light interceptor"
+        "Prototype Delta-7 Aethersprite-class light interceptor"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -68,16 +68,15 @@
     },
     {
       "Label": "Modified systems",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "S-foils",
+          "Href": "https://starwars.fandom.com/wiki/S-foils/Legends"
+        }
+      ],
       "Values": [
-        "armament"
-      ]
-    },
-    {
-      "Label": "Hyperdrive rating",
-      "Links": [],
-      "Values": [
-        "Class 1"
+        "Additional armament",
+        "S-foils"
       ]
     },
     {
@@ -102,6 +101,13 @@
       ]
     },
     {
+      "Label": "Navigation system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -109,46 +115,44 @@
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon/Legends"
         },
         {
-          "Content": "Proton torpedo launchers",
-          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher/Legends"
+          "Content": "Missile launchers",
+          "Href": "https://starwars.fandom.com/wiki/Missile_launcher/Legends"
         }
       ],
       "Values": [
-        "twin dual-laser cannons",
-        "10 symmetrical Laser cannons (while in fight mode)",
-        "2 Proton torpedo launchers"
+        "Dual laser cannons (2)While in fight mode",
+        "Laser cannons (10)",
+        "Missile launchers (2)",
+        "Dual laser cannons (2)"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
-          "Content": "R4-series agromech droid",
-          "Href": "https://starwars.fandom.com/wiki/R4-series_agromech_droid"
+          "Content": "Pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot/Legends"
+        },
+        {
+          "Content": "Astromech droid",
+          "Href": "https://starwars.fandom.com/wiki/Astromech_droid/Legends"
         }
       ],
       "Values": [
         "Pilot (1)",
-        "R4-series agromech droid"
-      ]
-    },
-    {
-      "Label": "Minimum crew",
-      "Links": [],
-      "Values": [
-        "1"
+        "Astromech droid (1)"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "interceptor",
+          "Content": "Interceptor",
           "Href": "https://starwars.fandom.com/wiki/Interceptor/Legends"
         }
       ],
       "Values": [
-        "Prototype interceptor starfighter"
+        "Interceptor"
       ]
     },
     {
@@ -169,26 +173,14 @@
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
-        },
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "Jedi Order",
-        "Galactic Republic"
+        "Jedi Order"
       ]
     },
     {
       "Label": "Owner(s)",
-      "Links": [],
-      "Values": [
-        "Obi-Wan Kenobi"
-      ]
-    },
-    {
-      "Label": "Commander(s)",
       "Links": [
         {
           "Content": "Obi-Wan Kenobi",
@@ -197,18 +189,6 @@
       ],
       "Values": [
         "Obi-Wan Kenobi"
-      ]
-    },
-    {
-      "Label": "Crewmembers",
-      "Links": [
-        {
-          "Content": "R4-P17",
-          "Href": "https://starwars.fandom.com/wiki/R4-P17"
-        }
-      ],
-      "Values": [
-        "R4-P17"
       ]
     }
   ],

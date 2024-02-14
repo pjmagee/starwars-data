@@ -2,7 +2,7 @@
   "PageId": 3044,
   "PageUrl": "https://starwars.fandom.com/wiki/Hethrir",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2a/Hethrir-DSSB.jpg/revision/latest?cb=20070605173124",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b2/Hethrir-TDSS.png/revision/latest?cb=20230119015550",
   "Data": [
     {
       "Label": "Titles",
@@ -41,7 +41,12 @@
     },
     {
       "Label": "Species",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Firrerreo",
+          "Href": "https://starwars.fandom.com/wiki/Firrerreo/Legends"
+        }
+      ],
       "Values": [
         "Firrerreo"
       ]
@@ -56,6 +61,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -89,6 +101,30 @@
       "Links": [],
       "Values": [
         "Pale"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Rillao",
+          "Href": "https://starwars.fandom.com/wiki/Rillao"
+        }
+      ],
+      "Values": [
+        "Rillao"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Tigris",
+          "Href": "https://starwars.fandom.com/wiki/Tigris"
+        }
+      ],
+      "Values": [
+        "Tigris"
       ]
     },
     {
@@ -132,14 +168,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 266515,
-      "PageUrl": "https://starwars.fandom.com/wiki/Helpers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 79666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Head_Proctor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 61492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Proctor_(Empire_Reborn)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 5229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doomgiver",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 144705,
@@ -147,13 +183,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 62104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mistress_Dragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 23992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empire_Youth",
+      "PageId": 266515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helpers",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -167,18 +198,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 79666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Head_Proctor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 5229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doomgiver",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 15914,
       "PageUrl": "https://starwars.fandom.com/wiki/Empire_Reborn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 62104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mistress_Dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 23992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire_Youth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 61492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Proctor_(Empire_Reborn)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

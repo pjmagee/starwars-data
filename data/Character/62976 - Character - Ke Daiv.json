@@ -64,10 +64,15 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
+      "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "White",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
-        "None"
+        "White"
       ]
     },
     {
@@ -76,10 +81,20 @@
         {
           "Content": "Trade Federation",
           "Href": "https://starwars.fandom.com/wiki/Trade_Federation_of_Planets"
+        },
+        {
+          "Content": "Wilhuff Tarkin",
+          "Href": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin/Legends"
+        },
+        {
+          "Content": "Republic Outland Regions Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force"
         }
       ],
       "Values": [
-        "Trade Federation"
+        "Trade Federation",
+        "Wilhuff Tarkin",
+        "Republic Outland Regions Security Force"
       ]
     }
   ],

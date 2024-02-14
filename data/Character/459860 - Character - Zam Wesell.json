@@ -64,8 +64,20 @@
       ]
     },
     {
-      "Label": "Height",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
       "Values": [
         "1.68 meters"
       ]
@@ -111,19 +123,23 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "mercenary",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary"
         }
       ],
       "Values": [
         "Mabari",
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems (as a mercenary)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 598091,
-      "PageUrl": "https://starwars.fandom.com/wiki/ASN-121",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 613360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Messenger_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 476332,
@@ -136,9 +152,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 613360,
-      "PageUrl": "https://starwars.fandom.com/wiki/Messenger_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 598091,
+      "PageUrl": "https://starwars.fandom.com/wiki/ASN-121",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Haor Chall Engineering",
-          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering"
         }
       ],
       "Values": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -175,5 +175,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1971,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-9979_landing_craft/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 383970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Trade_Federation_Superfreighter_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

@@ -19,12 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/1_ABY/Legends"
         },
         {
-          "Content": "Blackguard",
-          "Href": "https://starwars.fandom.com/wiki/Blackguard_(Star_Destroyer)"
+          "Content": "Bright Jewel system",
+          "Href": "https://starwars.fandom.com/wiki/Bright_Jewel_system/Legends"
         }
       ],
       "Values": [
-        "1 ABY, Blackguard"
+        "1 ABY, Bright Jewel system"
       ]
     },
     {
@@ -53,9 +53,28 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Greeen"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Tan"
       ]
     },
     {
@@ -66,26 +85,26 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Andal Sait",
-          "Href": "https://starwars.fandom.com/wiki/Andal_Sait"
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Andal Sait"
+        "Imperial Navy"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 456266,
-      "PageUrl": "https://starwars.fandom.com/wiki/VT-49_Decimator_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
       "PageId": 184304,
       "PageUrl": "https://starwars.fandom.com/wiki/Blackguard_(Star_Destroyer)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 456266,
+      "PageUrl": "https://starwars.fandom.com/wiki/VT-49_Decimator_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     }
   ]
 }

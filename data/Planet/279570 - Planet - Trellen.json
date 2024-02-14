@@ -2,7 +2,7 @@
   "PageId": 279570,
   "PageUrl": "https://starwars.fandom.com/wiki/Trellen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3f/Trellen-TEA.png/revision/latest?cb=20230302133422",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
@@ -57,18 +67,6 @@
       "Values": [
         "Hydian Way",
         "Trellen Trade Route"
-      ]
-    },
-    {
-      "Label": "Population",
-      "Links": [
-        {
-          "Content": "25 ABY",
-          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
-        }
-      ],
-      "Values": [
-        "100–500 billion (25 ABY)"
       ]
     },
     {
@@ -96,9 +94,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 273303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trellen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 14937,
@@ -106,14 +104,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 273303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trellen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 348872,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Trellen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

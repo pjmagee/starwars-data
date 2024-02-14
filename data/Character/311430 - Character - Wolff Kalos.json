@@ -2,6 +2,7 @@
   "PageId": 311430,
   "PageUrl": "https://starwars.fandom.com/wiki/Wolff_Kalos",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,30 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Wolff Kalos's family",
+          "Href": "https://starwars.fandom.com/wiki/Wolff_Kalos%27s_family"
+        }
+      ],
+      "Values": [
+        "Wolff Kalos's family"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Mirrian",
+          "Href": "https://starwars.fandom.com/wiki/Mirrian"
+        }
+      ],
+      "Values": [
+        "Mirrian"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -35,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 754783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mirrian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "sector",
+          "Href": "https://starwars.fandom.com/wiki/Castell%27s_sector"
+        }
+      ],
+      "Values": [
+        "A sector"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -36,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-9",
@@ -65,10 +77,15 @@
         {
           "Content": "Lair of Papa Toren",
           "Href": "https://starwars.fandom.com/wiki/Lair_of_Papa_Toren"
+        },
+        {
+          "Content": "Orbital Shipyard CC-24",
+          "Href": "https://starwars.fandom.com/wiki/Orbital_Shipyard_CC-24"
         }
       ],
       "Values": [
-        "Lair of Papa Toren"
+        "Lair of Papa Toren",
+        "Orbital Shipyard CC-24"
       ]
     },
     {
@@ -84,7 +101,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -109,6 +126,18 @@
       ],
       "Values": [
         "Imperial Governor"
+      ]
+    },
+    {
+      "Label": "Major cities",
+      "Links": [
+        {
+          "Content": "city",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_city_(Castell)"
+        }
+      ],
+      "Values": [
+        "A city"
       ]
     },
     {
@@ -137,39 +166,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 506078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Shipyard_CC-24",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 714689,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Castell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 712759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whisper_Network",
+      "PageId": 732868,
+      "PageUrl": "https://starwars.fandom.com/wiki/Papa_Toren's_group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 465425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shu_Mai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 499796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 482423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gossam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 716644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lair_of_Papa_Toren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 517860,
@@ -177,9 +181,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 716644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lair_of_Papa_Toren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 506078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Shipyard_CC-24",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 752362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toren's_object",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 465425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shu_Mai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 499796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 777831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ssaria's_quarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 752360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Castell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 496453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 482423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gossam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 712759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whisper_Network",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 714689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Castell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 777830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_city_(Castell)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

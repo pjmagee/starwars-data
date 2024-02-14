@@ -2,7 +2,7 @@
   "PageId": 357578,
   "PageUrl": "https://starwars.fandom.com/wiki/Denebia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/14/Denebia-TEA.jpg/revision/latest?cb=20220919191304",
   "Data": [
     {
       "Label": "Titles",
@@ -17,21 +17,31 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Senex-Juvex",
+          "Href": "https://starwars.fandom.com/wiki/Senex-Juvex/Legends"
+        },
+        {
           "Content": "Senex sector",
           "Href": "https://starwars.fandom.com/wiki/Senex_sector/Legends"
         }
       ],
       "Values": [
+        "Senex-Juvex",
         "Senex sector"
       ]
     },
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-18"
@@ -67,10 +77,46 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Climate",
+      "Links": [
+        {
+          "Content": "Cool",
+          "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
+        },
+        {
+          "Content": "Dry",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        }
+      ],
+      "Values": [
+        "Cool",
+        "Dry"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Plains"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Plantations",
+          "Href": "https://starwars.fandom.com/wiki/Farm/Legends"
+        }
+      ],
+      "Values": [
+        "Plantations"
       ]
     },
     {
@@ -95,6 +141,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 366125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denebia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 344830,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Hax",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
@@ -103,11 +154,6 @@
       "PageId": 277455,
       "PageUrl": "https://starwars.fandom.com/wiki/Senex-Juvex_Loop",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 366125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Denebia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

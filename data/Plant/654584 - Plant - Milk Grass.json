@@ -2,13 +2,25 @@
   "PageId": 654584,
   "PageUrl": "https://starwars.fandom.com/wiki/Milk_Grass",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/db/Milkgrass.png/revision/latest?cb=20200912224902",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/db/Milkgrass.png/revision/latest?cb=20220810003519",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Milk Grass"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Grass",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        }
+      ],
+      "Values": [
+        "Grass"
       ]
     },
     {
@@ -22,18 +34,30 @@
       "Values": [
         "Kashyyyk"
       ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [
+        {
+          "Content": "Green",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Green leaves"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 655205,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gloomroot_Hollow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 455688,
       "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 655205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gloomroot_Hollow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

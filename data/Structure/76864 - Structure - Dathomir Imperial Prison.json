@@ -36,7 +36,19 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "X1's Dathomir base",
+          "Href": "https://starwars.fandom.com/wiki/X1%27s_Dathomir_base"
+        }
+      ],
+      "Values": [
+        "X1's Dathomir base"
+      ]
+    },
+    {
+      "Label": "Builder(s)",
       "Links": [
         {
           "Content": "Galactic Empire",
@@ -46,9 +58,37 @@
       "Values": [
         "Galactic Empire"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Nightsisters",
+          "Href": "https://starwars.fandom.com/wiki/Nightsisters/Legends"
+        },
+        {
+          "Content": "X1's faction",
+          "Href": "https://starwars.fandom.com/wiki/X1%27s_faction"
+        },
+        {
+          "Content": "Imperial Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
+        }
+      ],
+      "Values": [
+        "Galactic Empire",
+        "Nightsisters",
+        "X1's faction",
+        "Imperial Remnant"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 302349,
+      "PageUrl": "https://starwars.fandom.com/wiki/X1's_Dathomir_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
     {
       "PageId": 729968,
       "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Dathomir",
@@ -58,11 +98,6 @@
       "PageId": 2018,
       "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 308393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mozo_Bondog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

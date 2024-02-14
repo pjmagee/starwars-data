@@ -2,6 +2,7 @@
   "PageId": 708980,
   "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Acquisitor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7a/Lightsaber_corndog.jpg/revision/latest?cb=20220805172433",
   "Data": [
     {
       "Label": "Titles",
@@ -36,14 +37,10 @@
         {
           "Content": "3 ABY",
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
-        },
-        {
-          "Content": "4 ABY",
-          "Href": "https://starwars.fandom.com/wiki/4_ABY"
         }
       ],
       "Values": [
-        "Between 3 ABY and 4 ABY"
+        "3 ABY"
       ]
     },
     {
@@ -72,12 +69,27 @@
         {
           "Content": "Boushh",
           "Href": "https://starwars.fandom.com/wiki/Boushh"
+        },
+        {
+          "Content": "Death",
+          "Href": "https://starwars.fandom.com/wiki/Death"
+        },
+        {
+          "Content": "Silas Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Silas_Tagge"
         }
       ],
       "Values": [
-        "Domina Tagge allies with Boushh's crew"
+        "Domina Tagge allies with Boushh's crew",
+        "Death of Silas Tagge"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 675297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Acquisitor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

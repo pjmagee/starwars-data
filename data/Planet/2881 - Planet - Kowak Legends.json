@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-16"
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Rainforests",
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Fauna",
       "Links": [
         {
           "Content": "Kowakian monkey-lizard",
@@ -152,7 +152,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Zygerrians",
@@ -262,7 +262,15 @@
       "Links": [
         {
           "Content": "Sclavos",
-          "Href": "https://starwars.fandom.com/wiki/Sclavos"
+          "Href": "https://starwars.fandom.com/wiki/Sclavos/Legends"
+        },
+        {
+          "Content": "Lanturi",
+          "Href": "https://starwars.fandom.com/wiki/Lanturi/Legends"
+        },
+        {
+          "Content": "Caden",
+          "Href": "https://starwars.fandom.com/wiki/Caden/Legends"
         }
       ],
       "Values": [
@@ -307,14 +315,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 350699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eeetch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 563810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sclavos/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 306454,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kowakian_crumb_cake/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 127272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karazak_Slavers_Cooperative",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 391674,
@@ -327,24 +335,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 734350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lanturi/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 734351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caden/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 2872,
       "PageUrl": "https://starwars.fandom.com/wiki/Kowakian_monkey-lizard/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 563810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sclavos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 127272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karazak_Slavers_Cooperative",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 306454,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kowakian_crumb_cake/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 584996,
       "PageUrl": "https://starwars.fandom.com/wiki/Molec_Royal_Palace",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 350699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeetch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 608740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_between_the_Zygerrians_and_Galactic_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

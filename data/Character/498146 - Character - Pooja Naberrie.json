@@ -12,15 +12,31 @@
       ]
     },
     {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo"
+        }
+      ],
+      "Values": [
+        "Naboo"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo_(people)"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Naboo)"
       ]
     },
     {
@@ -62,7 +78,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Naberrie family",
@@ -72,6 +88,30 @@
       "Values": [
         "Naberrie family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sola Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Sola_Naberrie"
+        }
+      ],
+      "Values": [
+        "Sola Naberrie"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ryoo Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ryoo_Naberrie"
+        }
+      ],
+      "Values": [
+        "Ryoo Naberrie"
+      ]
     }
   ],
   "Relationships": [
@@ -79,6 +119,16 @@
       "PageId": 477147,
       "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_funeral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 498131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 525585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

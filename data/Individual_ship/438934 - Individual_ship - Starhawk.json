@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
@@ -39,12 +39,12 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Sublight engines",
           "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
         }
       ],
       "Values": [
-        "Equipped"
+        "Sublight engines"
       ]
     },
     {
@@ -60,9 +60,48 @@
       ]
     },
     {
-      "Label": "Armament",
-      "Links": [],
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "Durasteel",
+          "Href": "https://starwars.fandom.com/wiki/Durasteel"
+        }
+      ],
       "Values": [
+        "Imperial Durasteel"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Radar",
+          "Href": "https://starwars.fandom.com/wiki/Radar"
+        }
+      ],
+      "Values": [
+        "Equipped",
+        "Radar"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "turrets",
+          "Href": "https://starwars.fandom.com/wiki/Turret"
+        },
+        {
+          "Content": "Magnite Crystal Tractor Beam Arrays",
+          "Href": "https://starwars.fandom.com/wiki/Magnite_Crystal_Tractor_Beam_Array"
+        }
+      ],
+      "Values": [
+        "Turbolaser turrets",
         "Magnite Crystal Tractor Beam Arrays (6)"
       ]
     },
@@ -84,6 +123,57 @@
       ]
     },
     {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "New Republic officers",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_officer"
+        },
+        {
+          "Content": "Fleet Intelligence",
+          "Href": "https://starwars.fandom.com/wiki/Fleet_Intelligence"
+        },
+        {
+          "Content": "Technicians",
+          "Href": "https://starwars.fandom.com/wiki/Technician"
+        },
+        {
+          "Content": "Engineers",
+          "Href": "https://starwars.fandom.com/wiki/Engineer"
+        },
+        {
+          "Content": "Mechanics",
+          "Href": "https://starwars.fandom.com/wiki/Technician"
+        }
+      ],
+      "Values": [
+        "New Republic officers",
+        "At least 1 Fleet Intelligence officer",
+        "Technicians",
+        "Engineers",
+        "Mechanics"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        }
+      ],
+      "Values": [
+        "Battleship"
+      ]
+    },
+    {
       "Label": "Destroyed",
       "Links": [
         {
@@ -96,19 +186,19 @@
         }
       ],
       "Values": [
-        "c. 4 ABY, Galitan"
+        "4 ABY, Galitan"
       ]
     },
     {
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Battle in the Zavian Abyss",
-          "Href": "https://starwars.fandom.com/wiki/Battle_in_the_Zavian_Abyss"
+          "Content": "Ambush at the Zavian Abyss",
+          "Href": "https://starwars.fandom.com/wiki/Ambush_at_the_Zavian_Abyss"
         },
         {
           "Content": "Battle at the Nadiri Dockyards",
-          "Href": "https://starwars.fandom.com/wiki/Battle_at_the_Nadiri_Dockyards"
+          "Href": "https://starwars.fandom.com/wiki/Attack_at_Nadiri_Dockyards"
         },
         {
           "Content": "Battle in the Ringali Nebula junkyard",
@@ -120,7 +210,7 @@
         }
       ],
       "Values": [
-        "Battle in the Zavian Abyss",
+        "Ambush at the Zavian Abyss",
         "Battle at the Nadiri Dockyards",
         "Battle in the Ringali Nebula junkyard",
         "Battle of Galitan"
@@ -161,12 +251,41 @@
       "Values": [
         "Nadiri fleet"
       ]
+    },
+    {
+      "Label": "Commander(s)",
+      "Links": [
+        {
+          "Content": "Hera Syndulla",
+          "Href": "https://starwars.fandom.com/wiki/Hera_Syndulla"
+        },
+        {
+          "Content": "Lindon Javes",
+          "Href": "https://starwars.fandom.com/wiki/Lindon_Javes"
+        }
+      ],
+      "Values": [
+        "Hera Syndulla",
+        "Lindon Javes (briefly)"
+      ]
+    },
+    {
+      "Label": "Crewmembers",
+      "Links": [
+        {
+          "Content": "Ardo Barodai",
+          "Href": "https://starwars.fandom.com/wiki/Ardo_Barodai"
+        }
+      ],
+      "Values": [
+        "Ardo Barodai (briefly)"
+      ]
     }
   ],
   "Relationships": [
     {
       "PageId": 669573,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_the_Nadiri_Dockyards",
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_at_Nadiri_Dockyards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {

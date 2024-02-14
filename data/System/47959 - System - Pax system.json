@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-16"
@@ -46,7 +46,7 @@
       "Label": "Suns",
       "Links": [],
       "Values": [
-        "1"
+        "1 Blue Star"
       ]
     },
     {
@@ -59,6 +59,18 @@
       ],
       "Values": [
         "Plagen"
+      ]
+    },
+    {
+      "Label": "Asteroids",
+      "Links": [
+        {
+          "Content": "Karbonni asteroid belt",
+          "Href": "https://starwars.fandom.com/wiki/Karbonni_asteroid_belt"
+        }
+      ],
+      "Values": [
+        "Karbonni asteroid belt"
       ]
     },
     {
@@ -93,24 +105,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 335768,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Pax",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 12722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kira_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 14326,
       "PageUrl": "https://starwars.fandom.com/wiki/Plagen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kira_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

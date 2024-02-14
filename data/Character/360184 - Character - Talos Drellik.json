@@ -2,7 +2,7 @@
   "PageId": 360184,
   "PageUrl": "https://starwars.fandom.com/wiki/Talos_Drellik",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/58/Talos_Drellik.png/revision/latest?cb=20130206045612",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b7/Talos_Drellik_on_Elom.jpg/revision/latest?cb=20230206001953",
   "Data": [
     {
       "Label": "Titles",
@@ -60,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -86,6 +93,42 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Drellik family",
+          "Href": "https://starwars.fandom.com/wiki/Drellik_family"
+        }
+      ],
+      "Values": [
+        "Drellik family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Drellik",
+          "Href": "https://starwars.fandom.com/wiki/Drellik"
+        }
+      ],
+      "Values": [
+        "Drellik"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Talos Drellik's brother",
+          "Href": "https://starwars.fandom.com/wiki/Talos_Drellik%27s_brother"
+        }
+      ],
+      "Values": [
+        "Talos Drellik's brother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -99,25 +142,35 @@
         {
           "Content": "Eternal Alliance",
           "Href": "https://starwars.fandom.com/wiki/Eternal_Alliance"
-        },
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
         "Sith Empire",
         "Imperial Reclamation Service",
-        "Eternal Alliance",
-        "Galactic Republic"
+        "Eternal Alliance"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 499807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drellik_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 400529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talos_Drellik's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 481151,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Nox's_Fury-class_Imperial_interceptor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 416105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drellik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

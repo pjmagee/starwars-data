@@ -27,19 +27,19 @@
       "Label": "Type",
       "Links": [],
       "Values": [
-        "Single-bladed lightsaber"
+        "Single-blade"
       ]
     },
     {
-      "Label": "Owners",
+      "Label": "Culture",
       "Links": [
         {
-          "Content": "Darth Noctyss",
-          "Href": "https://starwars.fandom.com/wiki/Darth_Noctyss"
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
-        "Darth Noctyss"
+        "Sith"
       ]
     },
     {
@@ -56,16 +56,17 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Sith"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 733735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_of_Darth_Noctyss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 575950,
   "PageUrl": "https://starwars.fandom.com/wiki/Aldera",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/22/Aldera_by_day.png/revision/latest?cb=20220527130535",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/22/Aldera_by_day.png/revision/latest?cb=20220703213928",
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +59,10 @@
           "Href": "https://starwars.fandom.com/wiki/Aldera_spaceport"
         },
         {
+          "Content": "Royal Museum of Aldera",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Museum_of_Aldera"
+        },
+        {
           "Content": "Royal Palace of Alderaan",
           "Href": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan"
         },
@@ -69,6 +73,7 @@
       ],
       "Values": [
         "Aldera spaceport",
+        "Royal Museum of Aldera",
         "Royal Palace of Alderaan",
         "University of Alderaan"
       ]
@@ -88,6 +93,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 740854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan_throne_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 577828,
       "PageUrl": "https://starwars.fandom.com/wiki/Aldera_spaceport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -98,23 +108,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 712520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 597468,
       "PageUrl": "https://starwars.fandom.com/wiki/University_of_Alderaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 640444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Museum_of_Aldera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 647006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaanian_crown_jewels",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 531475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -123,9 +123,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 593432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aldera_security_forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 531475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 737368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldera_cathedral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 464382,
@@ -133,9 +138,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 712520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_region",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 593432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldera_security_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 786097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vence_spire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 647006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaanian_crown_jewels",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 640444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Museum_of_Aldera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

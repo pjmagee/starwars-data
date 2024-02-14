@@ -17,10 +17,15 @@
         {
           "Content": "Sniper rifle",
           "Href": "https://starwars.fandom.com/wiki/Sniper_rifle"
+        },
+        {
+          "Content": "Longblaster",
+          "Href": "https://starwars.fandom.com/wiki/Longblaster"
         }
       ],
       "Values": [
-        "Sniper rifle"
+        "Sniper rifle",
+        "Longblaster"
       ]
     },
     {
@@ -41,5 +46,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 584068,
+      "PageUrl": "https://starwars.fandom.com/wiki/OOM-series_security_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 682963,
   "PageUrl": "https://starwars.fandom.com/wiki/Rushlight_Equinox",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,24 @@
       ]
     },
     {
-      "Label": "Owner(s)",
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Byne Guild",
+          "Href": "https://starwars.fandom.com/wiki/Byne_Guild"
+        },
+        {
+          "Content": "Vishla's crew",
+          "Href": "https://starwars.fandom.com/wiki/Vishla%27s_crew"
+        }
+      ],
+      "Values": [
+        "Byne Guild",
+        "Vishla's crew"
+      ]
+    },
+    {
+      "Label": "Crewmembers",
       "Links": [
         {
           "Content": "Vishla",
@@ -23,5 +41,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 787452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vishla's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

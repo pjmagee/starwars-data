@@ -2,7 +2,7 @@
   "PageId": 359708,
   "PageUrl": "https://starwars.fandom.com/wiki/Third_moon_of_Naboo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/Naboo%27sMoons.jpg/revision/latest?cb=20120615220847",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c4/MoonofNaboo-SWCTP.png/revision/latest?cb=20230903042658",
   "Data": [
     {
       "Label": "Titles",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-17"
@@ -68,6 +68,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 17285,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo_(star)/Legends",
@@ -77,11 +82,6 @@
       "PageId": 3125,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

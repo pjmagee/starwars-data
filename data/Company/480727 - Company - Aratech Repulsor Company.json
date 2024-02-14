@@ -34,6 +34,14 @@
       "Label": "Major product(s)",
       "Links": [
         {
+          "Content": "11-3K viper probe droid",
+          "Href": "https://starwars.fandom.com/wiki/11-3K_viper_probe_droid"
+        },
+        {
+          "Content": "57-D delivery speeder",
+          "Href": "https://starwars.fandom.com/wiki/57-D_delivery_speeder"
+        },
+        {
           "Content": "74-Z speeder bike",
           "Href": "https://starwars.fandom.com/wiki/74-Z_speeder_bike"
         },
@@ -59,6 +67,8 @@
         }
       ],
       "Values": [
+        "11-3K viper probe droid",
+        "57-D delivery speeder",
         "74-Z speeder bike",
         "614-AvA speeder bike",
         "712-AvA speeder bike",
@@ -77,49 +87,49 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 601070,
+      "PageUrl": "https://starwars.fandom.com/wiki/11-3K_viper_probe_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 538103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 469539,
+      "PageUrl": "https://starwars.fandom.com/wiki/BARC_speeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
     {
       "PageId": 642631,
       "PageUrl": "https://starwars.fandom.com/wiki/125-Zr_repulsor_unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 36066,
-      "PageUrl": "https://starwars.fandom.com/wiki/74-Y",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 438033,
-      "PageUrl": "https://starwars.fandom.com/wiki/614-AvA_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
-    },
-    {
-      "PageId": 665683,
-      "PageUrl": "https://starwars.fandom.com/wiki/580-AvA_\"Dash\"_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 674191,
-      "PageUrl": "https://starwars.fandom.com/wiki/610-AvA_\"Dart\"_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 701064,
-      "PageUrl": "https://starwars.fandom.com/wiki/R82_Jump_Boots",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 601070,
-      "PageUrl": "https://starwars.fandom.com/wiki/11-3K_viper_probe_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 647017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Law_Enforcement_Technology_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 570718,
@@ -132,24 +142,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
-      "PageId": 538103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+      "PageId": 701064,
+      "PageUrl": "https://starwars.fandom.com/wiki/R82_Jump_Boots",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 647017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Law_Enforcement_Technology_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 594858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arrow-23",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 483051,
-      "PageUrl": "https://starwars.fandom.com/wiki/74-Z_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+      "PageId": 438033,
+      "PageUrl": "https://starwars.fandom.com/wiki/614-AvA_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
       "PageId": 713490,
@@ -157,19 +157,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
+      "PageId": 36066,
+      "PageUrl": "https://starwars.fandom.com/wiki/74-Y",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
       "PageId": 647172,
       "PageUrl": "https://starwars.fandom.com/wiki/RapidResponse_police_speeder",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
-      "PageId": 469539,
-      "PageUrl": "https://starwars.fandom.com/wiki/BARC_speeder",
+      "PageId": 594858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arrow-23",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 665683,
+      "PageUrl": "https://starwars.fandom.com/wiki/580-AvA_\"Dash\"_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 674191,
+      "PageUrl": "https://starwars.fandom.com/wiki/610-AvA_\"Dart\"_speeder_bike",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
       "PageId": 507854,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Armory_Complex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 483051,
+      "PageUrl": "https://starwars.fandom.com/wiki/74-Z_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     }
   ]
 }

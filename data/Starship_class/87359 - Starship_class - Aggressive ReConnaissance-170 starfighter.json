@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Republic High Command",
+          "Href": "https://starwars.fandom.com/wiki/Republic_High_Command"
+        }
+      ],
+      "Values": [
+        "Republic High Command"
+      ]
+    },
+    {
       "Label": "Manufacturer",
       "Links": [
         {
@@ -36,15 +48,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Starfighter",
+          "Content": "starfighter",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "bombers",
+          "Href": "https://starwars.fandom.com/wiki/Bomber"
         }
       ],
       "Values": [
-        "Starfighter"
+        "Heavy assault starfighter/bombers"
       ]
     },
     {
@@ -56,7 +72,7 @@
         }
       ],
       "Values": [
-        "155,000 credits"
+        "180,000 credits"
       ]
     },
     {
@@ -82,7 +98,7 @@
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "3.81 meters (flight configuration)"
+        "3.81 meters"
       ]
     },
     {
@@ -121,7 +137,7 @@
       "Label": "Engine unit(s)",
       "Links": [],
       "Values": [
-        "2"
+        "2 IGP-440a ion turbine engines"
       ]
     },
     {
@@ -141,6 +157,18 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "armor",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        }
+      ],
+      "Values": [
+        "Tough armor"
       ]
     },
     {
@@ -165,6 +193,13 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Countermeasures",
+      "Links": [],
+      "Values": [
+        "Jamming device"
       ]
     },
     {
@@ -222,6 +257,13 @@
       ]
     },
     {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
       "Label": "Consumables",
       "Links": [
         {
@@ -234,22 +276,80 @@
       ]
     },
     {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "processors",
+          "Href": "https://starwars.fandom.com/wiki/Processor"
+        }
+      ],
+      "Values": [
+        "Communications processors"
+      ]
+    },
+    {
       "Label": "Other systems",
       "Links": [
         {
           "Content": "S-foils",
           "Href": "https://starwars.fandom.com/wiki/S-foils"
+        },
+        {
+          "Content": "Scanners",
+          "Href": "https://starwars.fandom.com/wiki/Scanner"
+        },
+        {
+          "Content": "Waste heat sinks",
+          "Href": "https://starwars.fandom.com/wiki/Waste_heat_sink"
         }
       ],
       "Values": [
-        "S-foils"
+        "S-foils",
+        "Scanners",
+        "Waste heat sinks"
       ]
     },
     {
       "Label": "Role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Dogfighting",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter_combat"
+        }
+      ],
       "Values": [
-        "Starfighter"
+        "Attack/anti-ship missions",
+        "Dogfighting",
+        "Large-scale combatant",
+        "Long-range armed reconnaissance/standoff combat (original purpose)"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY"
+        },
+        {
+          "Content": "Battle of Geonosis",
+          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis"
+        }
+      ],
+      "Values": [
+        "By 22 BBY (developed before Battle of Geonosis)"
+      ]
+    },
+    {
+      "Label": "Retired",
+      "Links": [
+        {
+          "Content": "Imperial Era",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
+        }
+      ],
+      "Values": [
+        "Imperial Era"
       ]
     },
     {
@@ -276,6 +376,10 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
+          "Content": "Amidalans",
+          "Href": "https://starwars.fandom.com/wiki/Amidalans"
+        },
+        {
           "Content": "Jinata Security",
           "Href": "https://starwars.fandom.com/wiki/Jinata_Security"
         },
@@ -290,6 +394,7 @@
         "Galactic Empire",
         "Imperial Starfighter Corps",
         "Alliance to Restore the Republic",
+        "Amidalans",
         "Jinata Security",
         "Resistance"
       ]
@@ -297,13 +402,38 @@
   ],
   "Relationships": [
     {
-      "PageId": 472569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galidraan_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 170598,
       "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 503890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 505851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Venator-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 601350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adi_Gallia's_flagship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 518950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 1929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 473587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Rebel_Alliance)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -317,28 +447,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 533122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sublights_Products_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 472569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galidraan_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 473587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 518950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 601350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adi_Gallia's_flagship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 505851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Venator-class)",
+      "PageId": 650302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Venator-class_Star_Destroyer_(Zeffo)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -347,8 +462,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 1929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incom_Corporation",
+      "PageId": 758890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brighthome_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 533122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sublights_Products_Corporation",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]

@@ -38,7 +38,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamp",
@@ -50,15 +50,28 @@
       ]
     },
     {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "swamp creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_swamp_creature"
+        }
+      ],
+      "Values": [
+        "A red maggot",
+        "A swamp creature"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Unidentified species",
+          "Content": "species",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_species_(Neijaian)"
         }
       ],
       "Values": [
-        "Unidentified species"
+        "A species"
       ]
     },
     {
@@ -76,9 +89,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 713915,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tribe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 714935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_swamp_creature",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 611070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kori_Ong",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 611067,
@@ -91,9 +109,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 611070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kori_Ong",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 713915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

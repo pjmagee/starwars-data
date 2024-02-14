@@ -66,11 +66,27 @@
       ]
     },
     {
+      "Label": "Stations",
+      "Links": [
+        {
+          "Content": "The Foundry",
+          "Href": "https://starwars.fandom.com/wiki/Foundry_(space_station)"
+        }
+      ],
+      "Values": [
+        "The Foundry"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
           "Content": "Nanth'ri Route",
           "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Route"
+        },
+        {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
         },
         {
           "Content": "Trax Tube",
@@ -79,6 +95,7 @@
       ],
       "Values": [
         "Nanth'ri Route",
+        "Oktos Route",
         "Trax Tube"
       ]
     },
@@ -118,87 +135,52 @@
       "Label": "Galactic War",
       "Links": [
         {
-          "Content": "Battle of the Foundry",
+          "Content": "Nanth'ri system",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Foundry"
         }
       ],
       "Values": [
-        "Battle of the Foundry"
+        "Nanth'ri system"
       ]
     },
     {
       "Label": "Local conflict",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Prospera Jang",
+          "Href": "https://starwars.fandom.com/wiki/Raid_at_Prospera_Jang"
+        }
+      ],
       "Values": [
-        "Raid on Prospera Jang"
+        "Prospera Jang"
       ]
     },
     {
       "Label": "Clone Wars",
       "Links": [
         {
-          "Content": "Battle of Farquar III",
+          "Content": "Farquar III",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Farquar_III"
         }
       ],
       "Values": [
-        "Battle of Farquar III"
+        "Farquar III"
       ]
     },
     {
       "Label": "Yuuzhan Vong War",
       "Links": [
         {
-          "Content": "Battle of the Nanth'ri system",
+          "Content": "Nanth'ri system",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Nanth%27ri_system"
         }
       ],
       "Values": [
-        "Battle of the Nanth'ri system"
+        "Nanth'ri system"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 338453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thulia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 380190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 15715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trax_Tube/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 15719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 241962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Farquar_III",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 372539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sev_Tok_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sev_Tok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 364589,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_(space_station)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
     {
       "PageId": 398756,
       "PageUrl": "https://starwars.fandom.com/wiki/Prospera_Jang",
@@ -220,8 +202,58 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 372539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sev_Tok_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 241962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farquar_III",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 380095,
       "PageUrl": "https://starwars.fandom.com/wiki/Farquar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 16295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sev_Tok/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 380190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 15715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trax_Tube/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 15719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 364589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foundry_(space_station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 385316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peluchia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 270431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oktos_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 338453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thulia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]

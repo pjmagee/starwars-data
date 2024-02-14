@@ -51,21 +51,40 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "Separatist",
+          "Content": "Separatist Alliance",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
         {
           "Content": "Eeth Koth",
           "Href": "https://starwars.fandom.com/wiki/Eeth_Koth"
+        },
+        {
+          "Content": "Saleucami",
+          "Href": "https://starwars.fandom.com/wiki/Saleucami"
         }
       ],
       "Values": [
-        "Separatist victory",
-        "Eeth Koth captured"
+        "Separatist Alliance victory",
+        "Eeth Koth taken captive to Saleucami"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 546247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Venator-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 711820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 477020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suolriep_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 703079,
       "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_unit",
@@ -75,21 +94,6 @@
       "PageId": 563273,
       "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 711820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eeth_Koth's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 546247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Venator-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 477020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suolriep_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

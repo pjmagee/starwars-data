@@ -74,10 +74,32 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "F-8"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Cressus Route",
+          "Href": "https://starwars.fandom.com/wiki/Cressus_Route"
+        },
+        {
+          "Content": "Path of the Houses",
+          "Href": "https://starwars.fandom.com/wiki/Path_of_the_Houses"
+        },
+        {
+          "Content": "Vagaari Corridor",
+          "Href": "https://starwars.fandom.com/wiki/Vagaari_Corridor"
+        }
+      ],
+      "Values": [
+        "Cressus Route",
+        "Path of the Houses",
+        "Vagaari Corridor"
       ]
     },
     {
@@ -102,14 +124,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 54636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csilla_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 274306,
       "PageUrl": "https://starwars.fandom.com/wiki/Csilla_(star)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 54636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csilla_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

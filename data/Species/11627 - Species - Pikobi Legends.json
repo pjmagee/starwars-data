@@ -2,13 +2,37 @@
   "PageId": 11627,
   "PageUrl": "https://starwars.fandom.com/wiki/Pikobi/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f5/Pikobis.png/revision/latest?cb=20130607201849",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f5/Pikobis.png/revision/latest?cb=20220914024230",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Pikobi"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Reptavian",
+          "Href": "https://starwars.fandom.com/wiki/Reptavian/Legends"
+        }
+      ],
+      "Values": [
+        "Reptavian"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Grey",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Grey"
       ]
     },
     {
@@ -27,24 +51,28 @@
         "Naboo",
         "Onderon"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Swamps"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [],
+      "Values": [
+        "Small preys"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 40076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 596171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
     {
       "PageId": 27296,
       "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
@@ -54,6 +82,21 @@
       "PageId": 17274,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 596171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 40076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

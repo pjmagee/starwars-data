@@ -17,10 +17,15 @@
         {
           "Content": "Inner Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Inner Rim Territories"
+        "Inner Rim Territories",
+        "The Interior"
       ]
     },
     {
@@ -37,9 +42,14 @@
     },
     {
       "Label": "Suns",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Pijal's sun",
+          "Href": "https://starwars.fandom.com/wiki/Pijal%27s_sun"
+        }
+      ],
       "Values": [
-        "1"
+        "1: Pijal's sun"
       ]
     },
     {
@@ -51,7 +61,19 @@
         }
       ],
       "Values": [
-        "Pijal's moon"
+        "1: Pijal's moon"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "L-8",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "L-8"
       ]
     },
     {
@@ -77,12 +99,12 @@
       "Label": "Atmosphere",
       "Links": [
         {
-          "Content": "Breathable",
+          "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
         }
       ],
       "Values": [
-        "Breathable"
+        "Type I (breathable)"
       ]
     },
     {
@@ -98,10 +120,26 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Caves",
+          "Href": "https://starwars.fandom.com/wiki/Cave"
+        },
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        },
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
       "Values": [
-        "Islands"
+        "Caves",
+        "Forests",
+        "Meadows",
+        "Mountains"
       ]
     },
     {
@@ -110,18 +148,31 @@
         {
           "Content": "Oceans",
           "Href": "https://starwars.fandom.com/wiki/Ocean"
+        },
+        {
+          "Content": "ocean",
+          "Href": "https://starwars.fandom.com/wiki/Pijal%27s_ocean"
         }
       ],
       "Values": [
-        "Oceans"
+        "Oceans",
+        "An ocean"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Blackguard base",
+          "Href": "https://starwars.fandom.com/wiki/Blackguard_base"
+        },
+        {
           "Content": "Czerka headquarters",
           "Href": "https://starwars.fandom.com/wiki/Czerka_headquarters"
+        },
+        {
+          "Content": "Czerka warehouse",
+          "Href": "https://starwars.fandom.com/wiki/Czerka_warehouse"
         },
         {
           "Content": "Hall of Assembly",
@@ -130,12 +181,19 @@
         {
           "Content": "Pijali palace",
           "Href": "https://starwars.fandom.com/wiki/Pijali_palace"
+        },
+        {
+          "Content": "Soulcraft docks",
+          "Href": "https://starwars.fandom.com/wiki/Soulcraft_docks"
         }
       ],
       "Values": [
+        "Blackguard base",
         "Czerka headquarters",
+        "Czerka warehouse",
         "Hall of Assembly",
-        "Pijali palace"
+        "Pijali palace",
+        "Soulcraft docks"
       ]
     },
     {
@@ -144,10 +202,15 @@
         {
           "Content": "Conifer",
           "Href": "https://starwars.fandom.com/wiki/Conifer"
+        },
+        {
+          "Content": "trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
         }
       ],
       "Values": [
-        "Conifer"
+        "Conifer trees",
+        "Vineyards"
       ]
     },
     {
@@ -156,53 +219,117 @@
         {
           "Content": "Pijal varactyl",
           "Href": "https://starwars.fandom.com/wiki/Pijal_varactyl"
+        },
+        {
+          "Content": "Seabirds",
+          "Href": "https://starwars.fandom.com/wiki/Seabird"
         }
       ],
       "Values": [
-        "Pijal varactyl"
+        "Pijal varactyl",
+        "Seabirds"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Human",
+          "Content": "Abednedos",
+          "Href": "https://starwars.fandom.com/wiki/Abednedo"
+        },
+        {
+          "Content": "Duros",
+          "Href": "https://starwars.fandom.com/wiki/Duros"
+        },
+        {
+          "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
         },
         {
-          "Content": "Pantoran",
+          "Content": "Ithorians",
+          "Href": "https://starwars.fandom.com/wiki/Ithorian"
+        },
+        {
+          "Content": "Nautolans",
+          "Href": "https://starwars.fandom.com/wiki/Nautolan"
+        },
+        {
+          "Content": "Pantorans",
           "Href": "https://starwars.fandom.com/wiki/Pantoran"
         },
         {
-          "Content": "Twi'lek",
+          "Content": "Sullustans",
+          "Href": "https://starwars.fandom.com/wiki/Sullustan"
+        },
+        {
+          "Content": "Twi'leks",
           "Href": "https://starwars.fandom.com/wiki/Twi%27lek"
+        },
+        {
+          "Content": "Ugnaughts",
+          "Href": "https://starwars.fandom.com/wiki/Ugnaught"
+        },
+        {
+          "Content": "Wookiees",
+          "Href": "https://starwars.fandom.com/wiki/Wookiee"
         }
       ],
       "Values": [
-        "Human",
-        "Pantoran",
-        "Twi'lek"
+        "Abednedos",
+        "Duros",
+        "Humans",
+        "Ithorians",
+        "Nautolans",
+        "Pantorans",
+        "Sullustans",
+        "Twi'leks",
+        "Ugnaughts",
+        "Wookiees"
+      ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Galactic Basic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard"
+        }
+      ],
+      "Values": [
+        "Galactic Basic"
       ]
     },
     {
       "Label": "Government",
       "Links": [
         {
-          "Content": "Monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Pijali_monarchy"
+          "Content": "Absolutist",
+          "Href": "https://starwars.fandom.com/wiki/Dictatorship"
+        },
+        {
+          "Content": "monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Monarchy"
         },
         {
           "Content": "40 BBY",
           "Href": "https://starwars.fandom.com/wiki/40_BBY"
         },
         {
+          "Content": "Democratic",
+          "Href": "https://starwars.fandom.com/wiki/Democracy"
+        },
+        {
           "Content": "Assembly",
           "Href": "https://starwars.fandom.com/wiki/Assembly_(Pijal)"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/%27ABY-BBY%27_dating_system"
         }
       ],
       "Values": [
-        "Monarchy (till 40 BBY)",
-        "Assembly (from 40 BBY)"
+        "Absolutist monarchy (—40 BBY)",
+        "Democratic Assembly (40 BBY—)"
       ]
     },
     {
@@ -221,12 +348,46 @@
       "Label": "Major cities",
       "Links": [
         {
-          "Content": "Pijal capital city",
-          "Href": "https://starwars.fandom.com/wiki/Pijal_capital_city"
+          "Content": "capital city",
+          "Href": "https://starwars.fandom.com/wiki/Pijal%27s_capital_city"
         }
       ],
       "Values": [
-        "Pijal capital city"
+        "A capital city"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Minerals",
+          "Href": "https://starwars.fandom.com/wiki/Mineral"
+        }
+      ],
+      "Values": [
+        "Minerals"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Pijali monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Pijali_monarchy"
+        },
+        {
+          "Content": "Czerka Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Czerka_Arms"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        }
+      ],
+      "Values": [
+        "Pijali monarchy",
+        "Czerka Corporation",
+        "Galactic Republic"
       ]
     }
   ],
@@ -237,114 +398,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 621457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_varactyl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 621529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijali",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 621486,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_Hyperspace_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 623525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_capital_city",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
       "PageId": 538193,
       "PageUrl": "https://starwars.fandom.com/wiki/Port_in_a_Storm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 726646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_ocean",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 644124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerky",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 621546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assembly_(Pijal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 576560,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 621479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 643935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_palace_treasury",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 644041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palace_stables",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 724765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Pijal_monarch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 621481,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 651831,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 626289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fruit_punch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 625402,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_honor_guard",
+      "PageId": 756352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_security_forces",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 625407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackguard",
+      "PageId": 769365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_reception_hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 623158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_ceremonial_sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 643989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_guard_(Pijal)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 705485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_chamber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 726035,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lunar_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 650407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Pijal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 651227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Regent's_quarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 621510,
@@ -362,33 +438,63 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 621655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mollusk_jerky",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 621546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assembly_(Pijal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 643989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_guard_(Pijal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 746155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 724710,
-      "PageUrl": "https://starwars.fandom.com/wiki/Czerka_warehouse",
+      "PageId": 626485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Czerka_headquarters",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 621580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_cigarra",
+      "PageId": 626488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackguard_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 747484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Data_solid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 624071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Selbie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 726035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lunar_wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 639502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Skykeeper",
+      "PageId": 756454,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soulcraft_docks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 756466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_dock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 756560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_dome",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 623525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_capital_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 651831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 724765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Pijal_monarch",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -402,9 +508,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 621655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mollusk_jerky",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 747984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackguard_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 639502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Skykeeper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 755998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Grand_Hunt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 626289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fruit_punch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 756559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_orchestras",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 621479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 624099,
       "PageUrl": "https://starwars.fandom.com/wiki/Opposition",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 625402,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_honor_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 625407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackguard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 576560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 621457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_varactyl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 621529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijali",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 644124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerky",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 755997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronation_Eve",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 643935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijali_palace_treasury",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 644041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_stables",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 650407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cantina_(Pijal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 651227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Regent's_quarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 623526,
@@ -422,13 +618,63 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 626485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Czerka_headquarters",
+      "PageId": 744107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_white_stone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 705485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_chamber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 626488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackguard_base",
+      "PageId": 751498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Regent's_private_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 621580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chandrilan_cigarra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 726646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal's_ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 745707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_library",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 621481,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 624071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selbie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 621486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal_Hyperspace_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 756468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stealth_shield_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 756481,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kohlen_crystal_shield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 724710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Czerka_warehouse",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {

@@ -88,7 +88,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-9"
@@ -156,12 +156,12 @@
       "Label": "Climate",
       "Links": [
         {
-          "Content": "Arid",
+          "Content": "Humid (in some parts) Arid (in some parts)",
           "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
         }
       ],
       "Values": [
-        "Arid"
+        "Humid (in some parts) Arid (in some parts)"
       ]
     },
     {
@@ -177,8 +177,16 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
+        {
+          "Content": "Jungles",
+          "Href": "https://starwars.fandom.com/wiki/Jungle/Legends"
+        },
+        {
+          "Content": "Woodlands",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        },
         {
           "Content": "Deserts",
           "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
@@ -193,6 +201,10 @@
         }
       ],
       "Values": [
+        "Jungles",
+        "Rainforests",
+        "Woodlands",
+        "Savannahs",
         "Deserts",
         "Grasslands",
         "High mountains",
@@ -369,19 +381,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 40108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cahhmakt",
+      "PageId": 180428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trossilik",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 45510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corrsk_(Diversity_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 690739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pekt's_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 102028,
@@ -389,33 +391,73 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 162177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsserk",
+      "PageId": 224846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Traggissk_Reosss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 426424,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tally-house_Meeting_Halls",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 126583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frossk",
+      "PageId": 38259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Portha",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 126616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oosk_Kassa",
+      "PageId": 237539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akoshissss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 336619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wasskah/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 143532,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crovessk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 126774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drossk",
+      "PageId": 433774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrassk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 126810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gahseelik",
+      "PageId": 216398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gha_Nachkt/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 32493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pekt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frissk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 40032,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vossk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 113088,
+      "PageUrl": "https://starwars.fandom.com/wiki/X10-D_draft_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 426404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk–Trandosha_peace_negotiations",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 363620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skarsk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 363623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skeesk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -424,18 +466,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 113088,
-      "PageUrl": "https://starwars.fandom.com/wiki/X10-D_draft_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 11595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sish_Sadeet",
+      "PageId": 182383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marite",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 1160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bossk/Legends",
+      "PageId": 3362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 412991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garnac's_hunting_guild/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 37312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tossk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 40108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cahhmakt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 12299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kras'dohk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -459,23 +521,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 38259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Portha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 433774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrassk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 449945,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tregg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 244102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raikhssa",
+      "PageId": 162177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsserk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -499,6 +546,56 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 104888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ssoh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 569762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vrrisk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 119876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakaron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 690739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pekt's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 456053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trandoshan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 45510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corrsk_(Diversity_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 126583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frossk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 126616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oosk_Kassa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 126774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drossk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 126810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gahseelik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 405132,
       "PageUrl": "https://starwars.fandom.com/wiki/Harman_Rike",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -509,113 +606,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 24340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scorekeeper/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
-    },
-    {
-      "PageId": 119876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nakaron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 37312,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tossk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 40032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vossk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 412991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garnac's_hunting_guild/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 12299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kras'dohk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 182383,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marite",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 104888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ssoh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 32493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pekt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 37290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frissk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 79439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karniss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 244095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warlord's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 180428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trossilik",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 363620,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skarsk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 363623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skeesk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cradossk/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 426404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk–Trandosha_peace_negotiations",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 216398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gha_Nachkt/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 456053,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trandoshan_religion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 3362,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 97622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hsskhor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 569762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vrrisk",
+      "PageId": 244102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raikhssa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -624,34 +616,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 237539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akoshissss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
       "PageId": 2438,
       "PageUrl": "https://starwars.fandom.com/wiki/Trandoshan/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 15559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 244095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warlord's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 143532,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crovessk",
+      "PageId": 97622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hsskhor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 11595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sish_Sadeet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 336619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wasskah/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 1160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bossk/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 224846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Traggissk_Reosss",
+      "PageId": 449945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tregg",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cradossk/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 24340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scorekeeper/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 79439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karniss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 426424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tally-house_Meeting_Halls",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

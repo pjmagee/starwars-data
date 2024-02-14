@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-6"
@@ -180,7 +180,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Fungus",
@@ -215,8 +215,8 @@
           "Href": "https://starwars.fandom.com/wiki/Ancient_Abyss"
         },
         {
-          "Content": "Rancor Graveyard",
-          "Href": "https://starwars.fandom.com/wiki/Rancor_Graveyard"
+          "Content": "Rancor graveyard",
+          "Href": "https://starwars.fandom.com/wiki/Rancor_graveyard"
         }
       ],
       "Values": [
@@ -224,7 +224,7 @@
         "Shu Mai's compound",
         "Vanishing Place",
         "Ancient Abyss",
-        "Rancor Graveyard"
+        "Rancor graveyard"
       ]
     },
     {
@@ -244,7 +244,7 @@
       "Links": [
         {
           "Content": "Felucian Flying Manta",
-          "Href": "https://starwars.fandom.com/wiki/Felucian_Flying_Manta"
+          "Href": "https://starwars.fandom.com/wiki/Felucian_flying_manta"
         },
         {
           "Content": "Felucian ripper",
@@ -270,10 +270,6 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Felucian",
-          "Href": "https://starwars.fandom.com/wiki/Felucian/Legends"
-        },
-        {
           "Content": "Jungle Felucians",
           "Href": "https://starwars.fandom.com/wiki/Jungle_Felucian/Legends"
         },
@@ -287,15 +283,18 @@
         }
       ],
       "Values": [
-        "Felucian",
         "Jungle Felucians",
         "Yerdua Poison-Spitter",
         "T'da's species"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
+        {
+          "Content": "Felucian",
+          "Href": "https://starwars.fandom.com/wiki/Felucian/Legends"
+        },
         {
           "Content": "Acklay",
           "Href": "https://starwars.fandom.com/wiki/Acklay/Legends"
@@ -334,6 +333,7 @@
         }
       ],
       "Values": [
+        "Felucian",
         "Acklay",
         "Gossam",
         "Human",
@@ -525,6 +525,156 @@
   ],
   "Relationships": [
     {
+      "PageId": 273100,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Felucia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 375432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ror",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 217591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Imperial_Period)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 89131,
+      "PageUrl": "https://starwars.fandom.com/wiki/T'da",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 221821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yerdua_Poison-Spitter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 221823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Giant_purple_mushroom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 265329,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kargrek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 414987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kralla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 505306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 1651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barriss_Offee/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 20918,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Offee_and_Zonder)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 338542,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Felucia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 326244,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gossam_Courivers/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 785038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 1257,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 290647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rumi_Paramita/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 434803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scratch_(rancor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 297331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_medical_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 37893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nigkoe_Detention_Facility/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 285421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Weequay_blaster_lance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 421847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 28878,
+      "PageUrl": "https://starwars.fandom.com/wiki/182nd_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 135279,
+      "PageUrl": "https://starwars.fandom.com/wiki/EVO_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 338819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_outpost_(Felucia)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 218235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aden",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 441652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Skywalker_and_Kenobi)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 97913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zann_Consortium/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 298644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 114913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felix/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
       "PageId": 26434,
       "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
@@ -535,9 +685,234 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 131175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Puffball/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 135862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_Felucian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 19256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 659866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kern_(Dark_Acolyte)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 221905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 56739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 1047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarlacc/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 354862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Felucian_chief",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 354863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Felucian_guide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 221869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_Abyss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 94850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_bird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 257997,
+      "PageUrl": "https://starwars.fandom.com/wiki/CIS_mobile_command_center/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 505308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_battle_of_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 236208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_graveyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 219979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Great_Jedi_Purge)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 183810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incinerator_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 297639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akira/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 297504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Felucia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 440471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebellion_on_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 114912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 505304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wesk_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 237386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ohnaka_Gang/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 463206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_outpost_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 463458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Separatist_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 419447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yorn_Nuro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 219398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Great_Jedi_Purge)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 326401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_Imperial_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 600598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 11567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gelagrub/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 626513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaaten",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 328593,
       "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti's_rancor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 50243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triad_of_Evil/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 127324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Zann_Consortium)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 463459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_colony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 463460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scratch's_Cave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 463462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sarlacc_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 1600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 441653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_Separatist_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 297085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Casiss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 297087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dilanni/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 297885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pirate_scout/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 298514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Felucia_medical_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 236992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_ripper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 8034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Crisis/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 4611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Outer_Rim_Sieges)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 381114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_(Felucia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 215620,
@@ -560,288 +935,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 221821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yerdua_Poison-Spitter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 221823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Giant_purple_mushroom",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 338819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_outpost_(Felucia)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 114912,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 290647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rumi_Paramita/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 434803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scratch_(rancor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 97913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zann_Consortium/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 131175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Puffball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 463206,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_outpost_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 463458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Separatist_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 4611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Outer_Rim_Sieges)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 221869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_Abyss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 236208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Graveyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 221905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 56739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Recon_Force_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 1600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 217591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Imperial_Period)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 218235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aden",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 463459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_colony",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 463460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scratch's_Cave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 463462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sarlacc_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 298514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Felucia_medical_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 326244,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gossam_Courivers/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 236992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_ripper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 114913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felix/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 37893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nigkoe_Detention_Facility/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 600598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 148,
       "PageUrl": "https://starwars.fandom.com/wiki/Aayla_Secura/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 183810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incinerator_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 50243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triad_of_Evil/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 20918,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Offee_and_Zonder)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 297504,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Felucia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 265329,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kargrek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 361580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 19256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 419447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yorn_Nuro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 28878,
-      "PageUrl": "https://starwars.fandom.com/wiki/182nd_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 297331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_medical_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 441653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_Separatist_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 338542,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Felucia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 326401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucia_Imperial_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 297085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Casiss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 297087,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dilanni/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 237386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ohnaka_Gang/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 297639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akira/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 285421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Weequay_blaster_lance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 219979,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Great_Jedi_Purge)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 421847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 219398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Great_Jedi_Purge)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 135862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jungle_Felucian/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 127324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Felucia_(Zann_Consortium)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 505308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_battle_of_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 297885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_pirate_scout/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 297963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_village_child_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 375432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ror",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 659866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kern_(Dark_Acolyte)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -850,104 +945,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 505304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wesk_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 89131,
-      "PageUrl": "https://starwars.fandom.com/wiki/T'da",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 11567,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gelagrub/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 273100,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Felucia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 1257,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 1651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barriss_Offee/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 298644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 257997,
-      "PageUrl": "https://starwars.fandom.com/wiki/CIS_mobile_command_center/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 414987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kralla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 505306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 1047,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarlacc/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 354862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Felucian_chief",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 354863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Felucian_guide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 381114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 381117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(Felucia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 135279,
-      "PageUrl": "https://starwars.fandom.com/wiki/EVO_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 626513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaaten",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 440471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebellion_on_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 441652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Felucia_(Skywalker_and_Kenobi)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 8034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Crisis/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 361580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Felucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

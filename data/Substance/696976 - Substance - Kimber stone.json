@@ -2,6 +2,7 @@
   "PageId": 696976,
   "PageUrl": "https://starwars.fandom.com/wiki/Kimber_stone",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Material type",
+      "Label": "Substance type",
       "Links": [
         {
           "Content": "Kyber crystal",
@@ -59,5 +60,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 664151,
+      "PageUrl": "https://starwars.fandom.com/wiki/N'zoth_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 664150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'ness",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    }
+  ]
 }

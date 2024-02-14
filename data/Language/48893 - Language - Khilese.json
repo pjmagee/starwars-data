@@ -37,7 +37,12 @@
     },
     {
       "Label": "Script",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Written Khilese",
+          "Href": "https://starwars.fandom.com/wiki/Written_Khilese"
+        }
+      ],
       "Values": [
         "Written Khilese"
       ]
@@ -57,6 +62,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 13762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 289440,
       "PageUrl": "https://starwars.fandom.com/wiki/Belnar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -65,11 +75,6 @@
       "PageId": 13392,
       "PageUrl": "https://starwars.fandom.com/wiki/Belnar/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

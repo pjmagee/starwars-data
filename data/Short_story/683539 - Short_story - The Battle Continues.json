@@ -2,6 +2,7 @@
   "PageId": 683539,
   "PageUrl": "https://starwars.fandom.com/wiki/The_Battle_Continues",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/42/TheBattleContinues.png/revision/latest?cb=20221207215850",
   "Data": [
     {
       "Label": "Titles",
@@ -92,7 +93,42 @@
       "Values": [
         "3 ABY"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "A New Adventure",
+          "Href": "https://starwars.fandom.com/wiki/A_New_Adventure"
+        }
+      ],
+      "Values": [
+        "A New Adventure"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "Against All Odds",
+          "Href": "https://starwars.fandom.com/wiki/Against_All_Odds_(Star_Wars_Galactic_Storybook)"
+        }
+      ],
+      "Values": [
+        "Against All Odds"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683538,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_New_Adventure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 683544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Against_All_Odds_(Star_Wars_Galactic_Storybook)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

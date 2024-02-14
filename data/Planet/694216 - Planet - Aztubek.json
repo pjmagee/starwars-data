@@ -2,7 +2,7 @@
   "PageId": 694216,
   "PageUrl": "https://starwars.fandom.com/wiki/Aztubek",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/66/AztubekKumru.png/revision/latest?cb=20210525182026",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Aztubek-BMF18.jpg/revision/latest?cb=20230719172519",
   "Data": [
     {
       "Label": "Titles",
@@ -15,24 +15,46 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Mugaari Space",
-          "Href": "https://starwars.fandom.com/wiki/Mugaari_Space"
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Mugaari Space"
+        "Outer Rim Territories",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Greater Javin",
+          "Href": "https://starwars.fandom.com/wiki/Greater_Javin"
+        },
+        {
           "Content": "Javin Sector",
           "Href": "https://starwars.fandom.com/wiki/Javin_Sector"
         }
       ],
       "Values": [
+        "Greater Javin",
         "Javin Sector"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-18",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-18"
       ]
     },
     {
@@ -50,6 +72,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 694221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mugaari_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 694214,
       "PageUrl": "https://starwars.fandom.com/wiki/Javin_Sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
@@ -58,11 +85,6 @@
       "PageId": 531745,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 694221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mugaari_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

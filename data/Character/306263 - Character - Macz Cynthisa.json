@@ -12,27 +12,19 @@
       ]
     },
     {
-      "Label": "Homeworld",
+      "Label": "Died",
       "Links": [
+        {
+          "Content": "1 ABY",
+          "Href": "https://starwars.fandom.com/wiki/1_ABY/Legends"
+        },
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia/Legends"
         }
       ],
       "Values": [
-        "Corellia"
-      ]
-    },
-    {
-      "Label": "Died",
-      "Links": [
-        {
-          "Content": "0 BBY",
-          "Href": "https://starwars.fandom.com/wiki/0_BBY/Legends"
-        }
-      ],
-      "Values": [
-        "Post-0 BBY, Corellia"
+        "1 ABY, Corellia"
       ]
     },
     {
@@ -64,7 +56,7 @@
       "Links": [
         {
           "Content": "Brown",
-          "Href": "https://starwars.fandom.com/wiki/Brown"
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
@@ -84,7 +76,25 @@
       "Values": [
         "Fair"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Gravestone bandits",
+          "Href": "https://starwars.fandom.com/wiki/Gravestone_bandits"
+        }
+      ],
+      "Values": [
+        "Gravestone bandits"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 752788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravestone_bandits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

@@ -2,12 +2,25 @@
   "PageId": 605328,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_subtropical_moon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Unidentified subtropical moon"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Oseon system",
+          "Href": "https://starwars.fandom.com/wiki/Oseon_system"
+        }
+      ],
+      "Values": [
+        "Oseon system"
       ]
     },
     {
@@ -23,5 +36,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 776956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oseon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

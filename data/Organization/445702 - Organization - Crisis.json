@@ -2,12 +2,25 @@
   "PageId": 445702,
   "PageUrl": "https://starwars.fandom.com/wiki/Crisis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Crisis"
+      ]
+    },
+    {
+      "Label": "Formed from",
+      "Links": [
+        {
+          "Content": "Crisis Branch",
+          "Href": "https://starwars.fandom.com/wiki/Crisis_Branch"
+        }
+      ],
+      "Values": [
+        "Crisis Branch"
       ]
     },
     {
@@ -33,5 +46,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 129592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crisis_Branch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

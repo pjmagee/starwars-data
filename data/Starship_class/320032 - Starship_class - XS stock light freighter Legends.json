@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Corellian Engineering Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends"
-        }
-      ],
-      "Values": [
-        "Corellian Engineering Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,7 +24,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Corellian Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends"
+        }
+      ],
+      "Values": [
+        "Corellian Engineering Corporation"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light freighter",
@@ -145,8 +145,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 396363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redshifter",
+      "PageId": 547399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 330669,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fatman",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -155,13 +160,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 547399,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 330669,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fatman",
+      "PageId": 396363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redshifter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

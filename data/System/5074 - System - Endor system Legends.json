@@ -17,14 +17,10 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
-        },
-        {
-          "Content": "Inner Zuma",
-          "Href": "https://starwars.fandom.com/wiki/Inner_Zuma_Region"
         }
       ],
       "Values": [
-        "Outer Rim Territories; Inner Zuma"
+        "Outer Rim Territories"
       ]
     },
     {
@@ -33,6 +29,10 @@
         {
           "Content": "Zuma sector",
           "Href": "https://starwars.fandom.com/wiki/Zuma_sector"
+        },
+        {
+          "Content": "Inner Zuma",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Zuma_Region"
         },
         {
           "Content": "Moddell sector",
@@ -44,11 +44,14 @@
         }
       ],
       "Values": [
-        "Zuma sector; Moddell sector; Outer Moddell systems"
+        "Zuma sector",
+        "Inner Zuma",
+        "Moddell sector",
+        "Outer Moddell systems"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-16"
@@ -109,7 +112,15 @@
       "Links": [
         {
           "Content": "Death Star II",
-          "Href": "https://starwars.fandom.com/wiki/Death_Star_II/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Death_Star_II"
+        },
+        {
+          "Content": "Empire's Station I",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_I_(Endor_system)"
+        },
+        {
+          "Content": "Empire's Station II",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_II_(Endor_system)"
         },
         {
           "Content": "Endor Space Station",
@@ -128,20 +139,18 @@
           "Href": "https://starwars.fandom.com/wiki/Rokna_Station"
         },
         {
-          "Content": "orbits",
-          "Href": "https://starwars.fandom.com/wiki/Orbit/Legends"
-        },
-        {
           "Content": "RSF Outpost",
           "Href": "https://starwars.fandom.com/wiki/RSF_Outpost_(Endor_system)"
         }
       ],
       "Values": [
         "Death Star II",
+        "Empire's Station I",
+        "Empire's Station II",
         "Endor Space Station",
         "Imperial Claw Station",
         "Onyx Beacon",
-        "Rokna Station (between orbits 3 and 4)",
+        "Rokna Station",
         "RSF Outpost"
       ]
     },
@@ -170,15 +179,18 @@
       ]
     },
     {
-      "Label": "Other objects",
+      "Label": "Subsectors",
       "Links": [
         {
-          "Content": "Declorian Territory",
-          "Href": "https://starwars.fandom.com/wiki/Declorian_Territory"
+          "Content": "Sector 47",
+          "Href": "https://starwars.fandom.com/wiki/Sector_47/Legends"
         }
       ],
       "Values": [
-        "Declorian Territory"
+        "Sector 47",
+        "Sector MV-7",
+        "Sector PB-4",
+        "Sector RT-23"
       ]
     },
     {
@@ -187,6 +199,10 @@
         {
           "Content": "Area D-435",
           "Href": "https://starwars.fandom.com/wiki/Area_D-435"
+        },
+        {
+          "Content": "Declorian Territory",
+          "Href": "https://starwars.fandom.com/wiki/Declorian_Territory"
         },
         {
           "Content": "Durillium Sea",
@@ -203,6 +219,7 @@
       ],
       "Values": [
         "Area D-435",
+        "Declorian Territory",
         "Durillium Sea",
         "Empire's Justice",
         "Red Sin Chimaera"
@@ -247,6 +264,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 26373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redemption/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 321950,
       "PageUrl": "https://starwars.fandom.com/wiki/Linear_Miasma",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
@@ -257,39 +279,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
-      "PageId": 94913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Squadron_(Rebel_Alliance)/Legends",
+      "PageId": 321949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endorian_Researchers_Guild",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 4946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eloggi",
+      "PageId": 329459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Linear_Miasma_Scientists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 787996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grey_Squadron_(Imperial)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 17014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 4947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Megiddo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 137860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rokna_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 1005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ibleam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 613,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 381609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Horst_Strage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 329411,
@@ -307,29 +314,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 5633,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merrick_Simms",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 94913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 113378,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced_x1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 137860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rokna_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 872,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moddell_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 52613,
-      "PageUrl": "https://starwars.fandom.com/wiki/R5-J2/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 26373,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redemption/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 1005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ibleam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 6133,
@@ -337,9 +334,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 34137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_(planet)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 114135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 70378,
@@ -347,24 +344,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 114135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wister",
+      "PageId": 872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moddell_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 95234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Zuma_Region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 5633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merrick_Simms",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 2806,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiaan_Jerjerrod/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 10883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keir_Santage/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 17014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 754968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire's_Station_II_(Endor_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 95876,
@@ -372,9 +369,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
+      "PageId": 320580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zuma_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 2806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiaan_Jerjerrod/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 52613,
+      "PageUrl": "https://starwars.fandom.com/wiki/R5-J2/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 754938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire's_Station_I_(Endor_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 381609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Horst_Strage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 171323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blacklight_Pirates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 329537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Folding_Dancer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 4946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eloggi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 4947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Megiddo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 34137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_(planet)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 10883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keir_Santage/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 715204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asteroid_Bandits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 15016,
       "PageUrl": "https://starwars.fandom.com/wiki/Kren_Blista-Vanee/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 113378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced_x1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

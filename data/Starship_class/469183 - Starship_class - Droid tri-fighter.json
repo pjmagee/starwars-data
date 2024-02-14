@@ -2,25 +2,13 @@
   "PageId": 469183,
   "PageUrl": "https://starwars.fandom.com/wiki/Droid_tri-fighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a0/DroidTrifighter-TCWs3BR2.png/revision/latest?cb=20200314034553",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a0/DroidTrifighter-TCWs3BR2.png/revision/latest?cb=20230919010425",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Droid tri-fighter"
-      ]
-    },
-    {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Phlac-Arphocc Automata Industries",
-          "Href": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Automata_Industries"
-        }
-      ],
-      "Values": [
-        "Phlac-Arphocc Automata Industries"
       ]
     },
     {
@@ -36,6 +24,23 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Phlac-Arphocc Automata Industries",
+          "Href": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Automata_Industries"
+        },
+        {
+          "Content": "Colla Designs",
+          "Href": "https://starwars.fandom.com/wiki/Colla_Designs"
+        }
+      ],
+      "Values": [
+        "Phlac-Arphocc Automata Industries",
+        "Colla Designs"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [
         {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Droid starfighter",
@@ -56,6 +61,7 @@
         }
       ],
       "Values": [
+        "Aerospace superiority starfighter",
         "Droid starfighter"
       ]
     },
@@ -102,27 +108,52 @@
       ]
     },
     {
+      "Label": "MGLT",
+      "Links": [
+        {
+          "Content": "MGLT",
+          "Href": "https://starwars.fandom.com/wiki/Megalight_per_hour"
+        }
+      ],
+      "Values": [
+        "125 MGLT"
+      ]
+    },
+    {
       "Label": "Maximum atmospheric speed",
       "Links": [
         {
-          "Content": "kph",
+          "Content": "km/h",
           "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
         }
       ],
       "Values": [
-        "1,050 kph"
+        "1,180–37,000 km/h"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "engines",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "3 vectoring engines"
       ]
     },
     {
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "reactor",
+          "Content": "main reactor",
           "Href": "https://starwars.fandom.com/wiki/Reactor"
         }
       ],
       "Values": [
-        "Main reactor"
+        "1 main reactor",
+        "ionization reactor"
       ]
     },
     {
@@ -138,30 +169,76 @@
       ]
     },
     {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "scanners",
+          "Href": "https://starwars.fandom.com/wiki/Scanner"
+        }
+      ],
+      "Values": [
+        "Target scanners"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
+        {
+          "Content": "heavy laser cannon",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_laser_cannon"
+        },
+        {
+          "Content": "laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "missiles",
+          "Href": "https://starwars.fandom.com/wiki/Missile"
+        },
         {
           "Content": "Concussion missiles",
           "Href": "https://starwars.fandom.com/wiki/Concussion_missile"
         },
         {
-          "Content": "Laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+          "Content": "Discord missiles",
+          "Href": "https://starwars.fandom.com/wiki/Discord_missile"
         },
         {
           "Content": "Proton torpedoes",
           "Href": "https://starwars.fandom.com/wiki/Proton_torpedo"
-        },
+        }
+      ],
+      "Values": [
+        "1 heavy laser cannon",
+        "3 light laser cannons",
+        "2 flex ordnance launchers (6 missiles)",
+        "Concussion missiles",
+        "Discord missiles",
+        "Proton torpedoes"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
         {
-          "Content": "Buzz droid",
+          "Content": "Pistoeka sabotage droids",
           "Href": "https://starwars.fandom.com/wiki/Pistoeka_sabotage_droid"
         }
       ],
       "Values": [
-        "Concussion missiles",
-        "Laser cannons (4)",
-        "Proton torpedoes",
-        "Buzz droid missiles"
+        "Pistoeka sabotage droids (in discord missiles)"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "droid brain",
+          "Href": "https://starwars.fandom.com/wiki/Droid_brain"
+        }
+      ],
+      "Values": [
+        "Integrated droid brain"
       ]
     },
     {
@@ -180,19 +257,25 @@
       "Label": "Communication systems",
       "Links": [],
       "Values": [
-        "Communications dish"
+        "Communications dish",
+        "Control/comms receiver"
       ]
     },
     {
       "Label": "Other systems",
       "Links": [
         {
-          "Content": "droid brain",
-          "Href": "https://starwars.fandom.com/wiki/Droid_brain"
+          "Content": "Cooling radiators",
+          "Href": "https://starwars.fandom.com/wiki/Cooling_unit"
+        },
+        {
+          "Content": "Ion acceleration chamber",
+          "Href": "https://starwars.fandom.com/wiki/Ion_accelerator"
         }
       ],
       "Values": [
-        "Integrated droid brain"
+        "Cooling radiators",
+        "Ion acceleration chamber"
       ]
     },
     {
@@ -237,16 +320,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 591831,
-      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912's_Recusant-class_light_destroyer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 621637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Automata_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 531449,
       "PageUrl": "https://starwars.fandom.com/wiki/Trident_group_one",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -257,14 +330,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 552224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colicoid_Creation_Nest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 452845,
       "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Dreadnought",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 666675,
-      "PageUrl": "https://starwars.fandom.com/wiki/DIS-T81",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 621637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Automata_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 466804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 782543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phlac-Arphocc_Prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 671287,
@@ -272,14 +360,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 552224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colicoid_Creation_Nest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 666675,
+      "PageUrl": "https://starwars.fandom.com/wiki/DIS-T81",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 466804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
+      "PageId": 591831,
+      "PageUrl": "https://starwars.fandom.com/wiki/TJ-912's_Recusant-class_light_destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 775723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colla_Designs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

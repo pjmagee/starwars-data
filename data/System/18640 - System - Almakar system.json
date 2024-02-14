@@ -2,6 +2,7 @@
   "PageId": 18640,
   "PageUrl": "https://starwars.fandom.com/wiki/Almakar_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/81/Almakar-Voyages13.png/revision/latest?cb=20221009184541",
   "Data": [
     {
       "Label": "Titles",
@@ -16,19 +17,42 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "The Slice"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Almakar sector",
+          "Href": "https://starwars.fandom.com/wiki/Almakar_sector"
+        }
+      ],
+      "Values": [
+        "Almakar sector"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-9"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 742311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almakar_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

@@ -15,12 +15,38 @@
       "Label": "Date destroyed",
       "Links": [
         {
+          "Content": "1 ABY",
+          "Href": "https://starwars.fandom.com/wiki/1_ABY"
+        },
+        {
           "Content": "skirmish aboard Accresker Jail",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_aboard_Accresker_Jail"
+        },
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "Tython",
+          "Href": "https://starwars.fandom.com/wiki/Tython"
+        },
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "Amaxine Space Station",
+          "Href": "https://starwars.fandom.com/wiki/Amaxine_Space_Station"
         }
       ],
       "Values": [
-        "During the skirmish aboard Accresker Jail (rebuilt)"
+        "c. 1 ABY, during the skirmish aboard Accresker Jail (rebuilt)",
+        "3 ABY on Tython (processor recovered)",
+        "Between 3 ABY and 4 ABY, Amaxine Space Station (rebuilt)"
       ]
     },
     {
@@ -96,15 +122,28 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him",
+        "It/its"
+      ]
+    },
+    {
       "Label": "Sensor color",
       "Links": [
         {
           "Content": "Orange",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Orange"
+        "Orange",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -115,36 +154,101 @@
       ]
     },
     {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Blaster rifles",
+          "Href": "https://starwars.fandom.com/wiki/Blaster_rifle"
+        },
+        {
+          "Content": "Flamethrower",
+          "Href": "https://starwars.fandom.com/wiki/Flamethrower"
+        },
+        {
+          "Content": "Missile launcher",
+          "Href": "https://starwars.fandom.com/wiki/Missile_launcher"
+        },
+        {
+          "Content": "Buzz saw",
+          "Href": "https://starwars.fandom.com/wiki/Buzz_saw"
+        }
+      ],
+      "Values": [
+        "Blaster rifles",
+        "Flamethrower",
+        "Missile launcher",
+        "Buzz saw"
+      ]
+    },
+    {
+      "Label": "Equipment",
+      "Links": [
+        {
+          "Content": "Rocket booster",
+          "Href": "https://starwars.fandom.com/wiki/Rocket_booster"
+        },
+        {
+          "Content": "drone",
+          "Href": "https://starwars.fandom.com/wiki/Drone"
+        }
+      ],
+      "Values": [
+        "Rocket booster",
+        "Ammunition production plant",
+        "Probe drone"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Droid Gotra",
-          "Href": "https://starwars.fandom.com/wiki/Droid_Gotra"
+          "Content": "Aphra's crew",
+          "Href": "https://starwars.fandom.com/wiki/Aphra%27s_crew"
         },
         {
           "Content": "Sith Order",
           "Href": "https://starwars.fandom.com/wiki/Sith"
         },
         {
+          "Content": "Darth Vader's secret forces",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vader%27s_secret_forces"
+        },
+        {
           "Content": "Son-tuul Pride",
           "Href": "https://starwars.fandom.com/wiki/Son-tuul_Pride"
+        },
+        {
+          "Content": "Sana Starros' crew",
+          "Href": "https://starwars.fandom.com/wiki/Sana_Starros%27_crew"
+        },
+        {
+          "Content": "Spark Eternal",
+          "Href": "https://starwars.fandom.com/wiki/Spark_Eternal"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
+          "Content": "D-Squad",
+          "Href": "https://starwars.fandom.com/wiki/D-Squad"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Tarkin Initiative",
-        "Droid Gotra",
+        "Aphra's crew",
         "Sith Order",
-        "Son-tuul Pride"
+        "Darth Vader's secret forces",
+        "Son-tuul Pride",
+        "Sana Starros' crew",
+        "Spark Eternal",
+        "Scourge (As a vessel)",
+        "D-Squad"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 556611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ark_Angel_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 501333,
       "PageUrl": "https://starwars.fandom.com/wiki/R&D_language",
@@ -156,8 +260,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 787346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massacre_on_Gallios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 552365,
       "PageUrl": "https://starwars.fandom.com/wiki/Black_Krrsantan's_Auzituck_anti-slaver_gunship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 556611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ark_Angel_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

@@ -74,6 +74,35 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Chagras",
+          "Href": "https://starwars.fandom.com/wiki/Chagras"
+        }
+      ],
+      "Values": [
+        "Chagras"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Arkadia Calimondra",
+          "Href": "https://starwars.fandom.com/wiki/Arkadia_Calimondra"
+        },
+        {
+          "Content": "Dromika",
+          "Href": "https://starwars.fandom.com/wiki/Dromika"
+        }
+      ],
+      "Values": [
+        "Arkadia Calimondra",
+        "Dromika"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -93,14 +122,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 333673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dyarchy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
       "PageId": 337555,
       "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Calimondretta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 333673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dyarchy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 313078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dromika",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 313079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkadia_Calimondra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 325786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chagras",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

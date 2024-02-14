@@ -13,7 +13,12 @@
     },
     {
       "Label": "Gender",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Masculine programming",
+          "Href": "https://starwars.fandom.com/wiki/Gender"
+        }
+      ],
       "Values": [
         "Masculine programming"
       ]
@@ -38,5 +43,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 749520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tobi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

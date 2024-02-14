@@ -90,7 +90,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Cortess",
@@ -100,7 +100,35 @@
       "Values": [
         "House Cortess"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Chay Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Chay_Cortess"
+        },
+        {
+          "Content": "Peyar Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Peyar_Cortess"
+        }
+      ],
+      "Values": [
+        "Chay Cortess",
+        "Peyar Cortess"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 402909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peyar_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chay_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

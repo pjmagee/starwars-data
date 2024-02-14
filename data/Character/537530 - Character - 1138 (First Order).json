@@ -2,6 +2,7 @@
   "PageId": 537530,
   "PageUrl": "https://starwars.fandom.com/wiki/1138_(First_Order)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,18 +24,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -52,5 +41,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 510429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

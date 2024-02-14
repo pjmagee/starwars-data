@@ -2,7 +2,7 @@
   "PageId": 65915,
   "PageUrl": "https://starwars.fandom.com/wiki/Blair_Cluster",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/08/Blair_Cluster.png/revision/latest?cb=20240131090206",
   "Data": [
     {
       "Label": "Titles",
@@ -36,23 +36,35 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-20"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [
+        {
+          "Content": "Asteroid belt",
+          "Href": "https://starwars.fandom.com/wiki/Asteroid_belt"
+        }
+      ],
+      "Values": [
+        "Asteroid belt"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 12782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Airam_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 172367,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_near_the_Blair_Cluster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 12782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airam_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

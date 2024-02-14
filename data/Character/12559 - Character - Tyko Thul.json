@@ -2,6 +2,7 @@
   "PageId": 12559,
   "PageUrl": "https://starwars.fandom.com/wiki/Tyko_Thul",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -66,6 +67,30 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Thul",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Thul"
+        }
+      ],
+      "Values": [
+        "House of Thul"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Bornan Thul",
+          "Href": "https://starwars.fandom.com/wiki/Bornan_Thul"
+        }
+      ],
+      "Values": [
+        "Bornan Thul"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -83,5 +108,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 7081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bornan_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

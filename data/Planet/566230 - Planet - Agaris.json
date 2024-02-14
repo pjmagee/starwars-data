@@ -48,6 +48,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "G-14",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "G-14"
+      ]
+    },
+    {
       "Label": "Climate",
       "Links": [],
       "Values": [
@@ -64,6 +76,18 @@
       ],
       "Values": [
         "Imperial compound"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Mushroom",
+          "Href": "https://starwars.fandom.com/wiki/Mushroom"
+        }
+      ],
+      "Values": [
+        "Mushroom"
       ]
     },
     {
@@ -117,44 +141,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 651600,
-      "PageUrl": "https://starwars.fandom.com/wiki/C-patrol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 569851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agarian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 573918,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agaris'_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 651601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Imperial_compound",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 573548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agarian_language",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 496324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 575971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agaris'_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 573541,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_compound_(Agaris)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 651600,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 512133,
@@ -162,9 +156,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 496324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 608173,
       "PageUrl": "https://starwars.fandom.com/wiki/Hffrr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 569851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agarian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 573548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agarian_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 651601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Imperial_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 573918,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agaris'_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 575971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agaris'_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

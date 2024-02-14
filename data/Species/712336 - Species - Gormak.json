@@ -2,6 +2,7 @@
   "PageId": 712336,
   "PageUrl": "https://starwars.fandom.com/wiki/Gormak",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,37 @@
       "Values": [
         "Reptilian"
       ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "Orange",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Orange"
+      ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [],
+      "Values": [
+        "Frills and mandibles"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 742119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trilok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 782111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Athul_Taran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

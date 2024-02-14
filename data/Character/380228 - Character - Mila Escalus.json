@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,7 +81,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Escalus line",
@@ -84,7 +91,30 @@
       "Values": [
         "Escalus line"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "A father",
+          "Href": "https://starwars.fandom.com/wiki/Mila_Escalus%27s_father"
+        }
+      ],
+      "Values": [
+        "A father"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 547377,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mila_Escalus's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 478517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escalus_line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

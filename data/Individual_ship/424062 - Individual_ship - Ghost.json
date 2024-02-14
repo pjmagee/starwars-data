@@ -2,7 +2,7 @@
   "PageId": 424062,
   "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f7/Ghost-RO.png/revision/latest?cb=20220430183550",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4c/The_Ghost_USW_NE.png/revision/latest?cb=20230522003038",
   "Data": [
     {
       "Label": "Titles",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light freighter",
@@ -378,6 +378,10 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Jakku"
         },
         {
+          "Content": "Skirmish on Seatos",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Seatos"
+        },
+        {
           "Content": "Battle of Exegol",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Exegol"
         }
@@ -418,6 +422,7 @@
         "Battle of Scarif",
         "Battle of Endor",
         "Battle of Jakku",
+        "Skirmish on Seatos",
         "Battle of Exegol"
       ]
     },
@@ -505,6 +510,13 @@
       ]
     },
     {
+      "Label": "Commander(s)",
+      "Links": [],
+      "Values": [
+        "Hera Syndulla"
+      ]
+    },
+    {
       "Label": "Crewmembers",
       "Links": [
         {
@@ -572,10 +584,6 @@
         {
           "Content": "Starbird",
           "Href": "https://starwars.fandom.com/wiki/Starbird_(symbol)"
-        },
-        {
-          "Content": "Tontine",
-          "Href": "https://starwars.fandom.com/wiki/Tontine"
         }
       ],
       "Values": [
@@ -591,16 +599,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 551719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_capture_of_the_Ghost_crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 465860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
       "PageId": 530562,
       "PageUrl": "https://starwars.fandom.com/wiki/Rediscovery_of_Lira_San",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -611,34 +609,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 534788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Nest",
+      "PageId": 476422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 477427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 461647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 566446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Atollon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 465825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorse_Conflict",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 696829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Altyr_5_Light_Freighter_Race",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 465725,
@@ -647,8 +620,48 @@
     },
     {
       "PageId": 466192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_in_Capital_City",
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_in_Capital_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 477427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_Lothal_airfield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 465825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorse_Conflict",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 566446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Atollon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 534788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Nest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 551719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_capture_of_the_Ghost_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 461647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 696829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Altyr_5_Light_Freighter_Race",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 465860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra_Bridger's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     }
   ]
 }

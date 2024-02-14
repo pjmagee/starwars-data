@@ -69,8 +69,41 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Dorne family",
+          "Href": "https://starwars.fandom.com/wiki/Dorne_family"
+        }
+      ],
+      "Values": [
+        "Dorne family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Elara Dorne",
+          "Href": "https://starwars.fandom.com/wiki/Elara_Dorne"
+        },
+        {
+          "Content": "Aleksei Dorne",
+          "Href": "https://starwars.fandom.com/wiki/Aleksei_Dorne"
+        }
+      ],
+      "Values": [
+        "Elara Dorne",
+        "Aleksei Dorne"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
+        {
+          "Content": "Dorne family",
+          "Href": "https://starwars.fandom.com/wiki/Dorne_family"
+        },
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
@@ -85,11 +118,28 @@
         }
       ],
       "Values": [
+        "Dorne family",
         "Sith Empire",
         "Imperial Military",
         "Ministry of Intelligence"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 359408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elara_Dorne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 389741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aleksei_Dorne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 407335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorne_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 700619,
   "PageUrl": "https://starwars.fandom.com/wiki/Jom_Lariin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,25 @@
       "Values": [
         "Ginger"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Nas Lariin",
+          "Href": "https://starwars.fandom.com/wiki/Nas_Lariin"
+        }
+      ],
+      "Values": [
+        "Nas Lariin"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 715424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nas_Lariin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 502737,
   "PageUrl": "https://starwars.fandom.com/wiki/Belderone",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/47/Belderone_TFA_BG.jpg/revision/latest?cb=20180510173523",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/47/Belderone_TFA_BG.jpg/revision/latest?cb=20230720133024",
   "Data": [
     {
       "Label": "Titles",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-6",
@@ -65,10 +65,17 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Belderone Imperial naval base",
+          "Content": "Imperial naval base",
           "Href": "https://starwars.fandom.com/wiki/Belderone_Imperial_naval_base"
         },
         {
@@ -77,7 +84,7 @@
         }
       ],
       "Values": [
-        "Belderone Imperial naval base",
+        "Imperial naval base",
         "R/M Facility Four deepdock"
       ]
     },
@@ -96,14 +103,14 @@
   ],
   "Relationships": [
     {
+      "PageId": 512440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Belderone_Imperial_naval_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 512441,
       "PageUrl": "https://starwars.fandom.com/wiki/R/M_Facility_Four_deepdock",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 554255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Belderone_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 566171,
@@ -111,9 +118,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 512440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Belderone_Imperial_naval_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 554255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Belderone_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

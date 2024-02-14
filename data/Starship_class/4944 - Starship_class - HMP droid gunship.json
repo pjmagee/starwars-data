@@ -12,32 +12,33 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Baktoid Fleet Ordnance",
-          "Href": "https://starwars.fandom.com/wiki/Baktoid_Fleet_Ordnance"
-        },
-        {
-          "Content": "Haor Chall Engineering Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering_Corporation"
-        }
-      ],
-      "Values": [
-        "Baktoid Fleet Ordnance",
-        "Haor Chall Engineering Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
           "Content": "Geonosians",
           "Href": "https://starwars.fandom.com/wiki/Geonosian"
+        },
+        {
+          "Content": "Haor Chall Engineering",
+          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering_Corporation"
         }
       ],
       "Values": [
-        "Geonosians"
+        "Geonosians",
+        "Haor Chall Engineering"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Baktoid Fleet Ordnance",
+          "Href": "https://starwars.fandom.com/wiki/Baktoid_Fleet_Ordnance"
+        }
+      ],
+      "Values": [
+        "Baktoid Fleet Ordnance",
+        "Haor Chall Engineering"
       ]
     },
     {
@@ -48,10 +49,24 @@
       ]
     },
     {
-      "Label": "Class",
-      "Links": [],
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Droid",
+          "Href": "https://starwars.fandom.com/wiki/Droid"
+        },
+        {
+          "Content": "repulsorlift",
+          "Href": "https://starwars.fandom.com/wiki/Repulsorlift"
+        },
+        {
+          "Content": "airspeeder",
+          "Href": "https://starwars.fandom.com/wiki/Airspeeder"
+        }
+      ],
       "Values": [
-        "Missile platform droid combat fighter"
+        "Droid lander",
+        "Heavy repulsorlift airspeeder"
       ]
     },
     {
@@ -75,21 +90,21 @@
         }
       ],
       "Values": [
-        "12.46 meters"
+        "12.3 meters"
       ]
     },
     {
       "Label": "Width",
       "Links": [],
       "Values": [
-        "9.75 meters"
+        "11 meters"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "2.78 meters"
+        "3.1 meters"
       ]
     },
     {
@@ -108,46 +123,40 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Ion drive",
+          "Content": "Ion-drive engines",
           "Href": "https://starwars.fandom.com/wiki/Ion_engine"
         }
       ],
       "Values": [
-        "Ion drive thrusters"
+        "Ion-drive engines"
       ]
     },
     {
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "Power cell",
-          "Href": "https://starwars.fandom.com/wiki/Power_cell"
-        },
-        {
           "Content": "Reactor",
           "Href": "https://starwars.fandom.com/wiki/Reactor"
         }
       ],
       "Values": [
-        "Power cell",
-        "Reactor"
+        "Reactor core"
       ]
     },
     {
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Deflector shield generator",
+          "Content": "deflector shield generators",
           "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         },
         {
-          "Content": "Ray shield generator",
-          "Href": "https://starwars.fandom.com/wiki/Ray_shield_generator"
+          "Content": "ray shielding",
+          "Href": "https://starwars.fandom.com/wiki/Ray_shield"
         }
       ],
       "Values": [
-        "Deflector shield generator",
-        "Ray shield generator"
+        "High-powered deflector shield generators (ray shielding)"
       ]
     },
     {
@@ -166,17 +175,17 @@
       "Label": "Targeting systems",
       "Links": [
         {
-          "Content": "Targeting scanners",
-          "Href": "https://starwars.fandom.com/wiki/Targeting_scanner"
+          "Content": "Binocular rangefinders",
+          "Href": "https://starwars.fandom.com/wiki/Rangefinder"
         },
         {
-          "Content": "Targeting sensors",
+          "Content": "targeting sensors",
           "Href": "https://starwars.fandom.com/wiki/Targeting_sensor"
         }
       ],
       "Values": [
-        "Targeting scanners",
-        "Targeting sensors"
+        "2 Binocular rangefinders",
+        "Upgraded targeting sensors/scanners"
       ]
     },
     {
@@ -191,20 +200,12 @@
           "Href": "https://starwars.fandom.com/wiki/Laser"
         },
         {
-          "Content": "cannon",
+          "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
         },
         {
           "Content": "turrets",
           "Href": "https://starwars.fandom.com/wiki/Turret"
-        },
-        {
-          "Content": "laser",
-          "Href": "https://starwars.fandom.com/wiki/Laser"
-        },
-        {
-          "Content": "cannons",
-          "Href": "https://starwars.fandom.com/wiki/Cannon"
         },
         {
           "Content": "missile",
@@ -216,45 +217,52 @@
         }
       ],
       "Values": [
-        "Medium laser cannon (1)",
-        "Double laser cannon turrets (2)",
-        "Wingtip light laser cannons (2)",
-        "Pod multi-missile racks (2)",
-        "14 missiles each",
+        "1 heavy/medium laser cannon",
+        "2 dual medium laser cannons",
+        "2 twin light laser cannon turrets",
+        "2 flex ordnance launchers (14 missile racks)",
+        "Concussion bombs",
         "Torpedoes",
-        "Concussion bombs"
+        "Interchangeable to other munitions types"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Droid brain",
+          "Content": "droid brain",
           "Href": "https://starwars.fandom.com/wiki/Droid_brain"
         }
       ],
       "Values": [
-        "Droid brain (1)"
+        "Predatory droid brain"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [
         {
-          "Content": "B1-series battle droids",
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        },
+        {
+          "Content": "B1-series model",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
         },
         {
-          "Content": "B2-series super battle droids",
+          "Content": "B2-series model",
           "Href": "https://starwars.fandom.com/wiki/B2-series_super_battle_droid"
         },
         {
-          "Content": "BX-series droid commandos",
+          "Content": "BX-series model",
           "Href": "https://starwars.fandom.com/wiki/BX-series_droid_commando"
         }
       ],
       "Values": [
-        "B1-series battle droids, B2-series super battle droids or BX-series droid commandos (12)"
+        "12 battle droids of either",
+        "B1-series model",
+        "B2-series model",
+        "BX-series model"
       ]
     },
     {
@@ -270,42 +278,59 @@
       ]
     },
     {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "Radioactive",
+          "Href": "https://starwars.fandom.com/wiki/Radiation"
+        },
+        {
+          "Content": "fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel"
+        }
+      ],
+      "Values": [
+        "Radioactive fuel"
+      ]
+    },
+    {
       "Label": "Other systems",
       "Links": [
         {
-          "Content": "Power converters",
-          "Href": "https://starwars.fandom.com/wiki/Power_converter"
-        },
-        {
-          "Content": "Rangefinder",
-          "Href": "https://starwars.fandom.com/wiki/Rangefinder"
-        },
-        {
-          "Content": "Repulsorlift generator",
+          "Content": "Repulsorlift generators",
           "Href": "https://starwars.fandom.com/wiki/Repulsorlift_generator"
         }
       ],
       "Values": [
-        "Power converters",
-        "Rangefinder processor",
-        "Repulsorlift generator"
+        "Repulsorlift generators"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Transport",
-          "Href": "https://starwars.fandom.com/wiki/Transport"
+          "Content": "infantry",
+          "Href": "https://starwars.fandom.com/wiki/Infantry"
         },
         {
-          "Content": "Gunship",
-          "Href": "https://starwars.fandom.com/wiki/Gunship"
+          "Content": "armor",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        },
+        {
+          "Content": "Atmospheric",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        },
+        {
+          "Content": "Troop carrier",
+          "Href": "https://starwars.fandom.com/wiki/Troop_carrier"
         }
       ],
       "Values": [
-        "Transport",
-        "Gunship"
+        "Anti-infantry and armor",
+        "Atmospheric aerial strike vessel",
+        "Close air-support",
+        "Missile platform",
+        "Troop carrier"
       ]
     },
     {
@@ -316,41 +341,46 @@
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
         {
+          "Content": "Confederacy of Independent Systems Navy",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
+        },
+        {
           "Content": "Separatist Droid Army",
           "Href": "https://starwars.fandom.com/wiki/Separatist_Droid_Army"
+        },
+        {
+          "Content": "Bedlam Raiders",
+          "Href": "https://starwars.fandom.com/wiki/Bedlam_Raiders"
         }
       ],
       "Values": [
         "Confederacy of Independent Systems",
-        "Separatist Droid Army"
+        "Confederacy of Independent Systems Navy",
+        "Separatist Droid Army",
+        "Bedlam Raiders"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 518897,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Fleet_Ordnance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
     {
       "PageId": 647472,
       "PageUrl": "https://starwars.fandom.com/wiki/Trench's_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 452845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Dreadnought",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 518897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Fleet_Ordnance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 670270,
       "PageUrl": "https://starwars.fandom.com/wiki/DGS-286",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 670273,
       "PageUrl": "https://starwars.fandom.com/wiki/DGS-047",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

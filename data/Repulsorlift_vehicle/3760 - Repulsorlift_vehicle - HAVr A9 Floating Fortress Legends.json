@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Floating fortress"
@@ -62,7 +62,7 @@
       "Label": "Maximum altitude",
       "Links": [],
       "Values": [
-        "2 meters"
+        "20 meters"
       ]
     },
     {
@@ -121,36 +121,41 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
+          "Content": "Thrawn's confederation",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_confederation"
+        },
+        {
           "Content": "United Warlord Fleets",
           "Href": "https://starwars.fandom.com/wiki/United_Warlord_Fleets"
         }
       ],
       "Values": [
         "Galactic Empire",
+        "Thrawn's confederation",
         "United Warlord Fleets"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 1480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 99263,
       "PageUrl": "https://starwars.fandom.com/wiki/Ubrikkian_Transports/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 1480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star_II/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 678708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 407,
       "PageUrl": "https://starwars.fandom.com/wiki/Victory_I-class_Star_Destroyer/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 678708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

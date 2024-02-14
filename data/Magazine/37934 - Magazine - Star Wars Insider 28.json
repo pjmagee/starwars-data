@@ -2,7 +2,7 @@
   "PageId": 37934,
   "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Insider_28",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/55/Insider28.jpg/revision/latest?cb=20110411035406",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/55/Insider28.jpg/revision/latest?cb=20220818015419",
   "Data": [
     {
       "Label": "Titles",
@@ -14,6 +14,10 @@
     {
       "Label": "Contributor(s)",
       "Links": [
+        {
+          "Content": "Kevin Stevens",
+          "Href": "https://starwars.fandom.com/wiki/Kevin_Stevens"
+        },
         {
           "Content": "Kevin Fitzpatrick",
           "Href": "https://starwars.fandom.com/wiki/Kevin_Fitzpatrick"
@@ -59,12 +63,16 @@
       "Label": "Release date",
       "Links": [
         {
+          "Content": "February",
+          "Href": "https://starwars.fandom.com/wiki/February"
+        },
+        {
           "Content": "1996",
           "Href": "https://starwars.fandom.com/wiki/1996"
         }
       ],
       "Values": [
-        "Winter 1996"
+        "February 1996"
       ]
     },
     {
@@ -101,5 +109,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 476459,
+      "PageUrl": "chewie:_An_Exclusive_Interview_with_Peter_Mayhew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    },
+    {
+      "PageId": 499926,
+      "PageUrl": "https://starwars.fandom.com/wiki/From_Jedi_to_Jumanji:_Joe_Johnston_Profile",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    }
+  ]
 }

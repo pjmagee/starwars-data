@@ -2,6 +2,7 @@
   "PageId": 122612,
   "PageUrl": "https://starwars.fandom.com/wiki/Tanlassa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -28,12 +29,43 @@
         {
           "Content": "Jasserak Highlands",
           "Href": "https://starwars.fandom.com/wiki/Jasserak_Highlands"
+        },
+        {
+          "Content": "Jasserak Lowlands",
+          "Href": "https://starwars.fandom.com/wiki/Jasserak_Lowlands"
         }
       ],
       "Values": [
-        "Jasserak Highlands"
+        "Jasserak Highlands",
+        "Jasserak Lowlands"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 732157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jasserak_Lowlands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 242433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qarohan_Steppes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 320504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jackhack_Slough",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 320760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jasserak_Highlands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 152281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kondrus_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

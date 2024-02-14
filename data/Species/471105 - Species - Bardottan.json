@@ -51,16 +51,17 @@
       "Label": "Skin color",
       "Links": [
         {
-          "Content": "Green",
+          "Content": "Blue",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Green",
-        "Yellow",
+        "Blue",
         "Gray",
+        "Green",
+        "Purple",
         "Red",
-        "Purple"
+        "Yellow"
       ]
     },
     {
@@ -119,19 +120,23 @@
     },
     {
       "Label": "Language",
-      "Links": [
-        {
-          "Content": "Galactic Basic Standard",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Bardottan",
-        "Galactic Basic Standard"
+        "Bardottan"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 695118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 465693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mars_Guo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 467061,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Bardottan_taxi_driver",
@@ -143,39 +148,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 695118,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phu_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 461181,
-      "PageUrl": "https://starwars.fandom.com/wiki/Joseph",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 559625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shasos_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 559621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bardotta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 465693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mars_Guo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 466349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bardotta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 451666,
       "PageUrl": "https://starwars.fandom.com/wiki/Bardotta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 476887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savatte",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 498366,
@@ -188,24 +173,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 498161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zardossa_Stix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 559625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shasos_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 461181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joseph",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 559730,
       "PageUrl": "https://starwars.fandom.com/wiki/Electrolance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 476887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Savatte",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 551390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 466349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bardotta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 498161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zardossa_Stix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 559621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bardotta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

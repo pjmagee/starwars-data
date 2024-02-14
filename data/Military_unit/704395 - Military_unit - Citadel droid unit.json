@@ -2,6 +2,7 @@
   "PageId": 704395,
   "PageUrl": "https://starwars.fandom.com/wiki/Citadel_droid_unit",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -87,8 +88,8 @@
           "Href": "https://starwars.fandom.com/wiki/OOM-series_security_droid"
         },
         {
-          "Content": "Separatist probe droids",
-          "Href": "https://starwars.fandom.com/wiki/Separatist_probe_droid"
+          "Content": "Ringneck recon droids",
+          "Href": "https://starwars.fandom.com/wiki/Ringneck_recon_droid"
         }
       ],
       "Values": [
@@ -99,7 +100,7 @@
         "Droidekas",
         "LM-432 crab droids",
         "OOM-series security droids",
-        "Separatist probe droids"
+        "Ringneck recon droids"
       ]
     },
     {
@@ -151,6 +152,22 @@
       ]
     },
     {
+      "Label": "Date reorganized",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        },
+        {
+          "Content": "Citadel Separatist holdout",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdout_(Citadel)"
+        }
+      ],
+      "Values": [
+        "During or after 19 BBY, as the Citadel Separatist holdout"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -168,5 +185,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 612697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdout_(Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

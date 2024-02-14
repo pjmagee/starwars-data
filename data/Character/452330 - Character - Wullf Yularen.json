@@ -2,7 +2,7 @@
   "PageId": 452330,
   "PageUrl": "https://starwars.fandom.com/wiki/Wullf_Yularen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f4/WullfYularen.jpg/revision/latest?cb=20111029215424",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/35/WullfYularen-ANH.png/revision/latest?cb=20221022144732",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,14 @@
         {
           "Content": "Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Coruscant"
+        },
+        {
+          "Content": "Anaxes",
+          "Href": "https://starwars.fandom.com/wiki/Anaxes"
         }
       ],
       "Values": [
-        "Coruscant"
+        "Coruscant, raised on Anaxes"
       ]
     },
     {
@@ -31,7 +35,7 @@
           "Href": "https://starwars.fandom.com/wiki/0_BBY"
         },
         {
-          "Content": "Death Star",
+          "Content": "DS-1 Death Star Mobile Battle Station",
           "Href": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station"
         },
         {
@@ -40,7 +44,7 @@
         }
       ],
       "Values": [
-        "0 BBY, Death Star, Yavin system"
+        "0 BBY, DS-1 Death Star Mobile Battle Station, Yavin system"
       ]
     },
     {
@@ -49,14 +53,10 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
-        },
-        {
-          "Content": "Coruscanti",
-          "Href": "https://starwars.fandom.com/wiki/Coruscanti"
         }
       ],
       "Values": [
-        "Human (Coruscanti)"
+        "Human"
       ]
     },
     {
@@ -91,12 +91,12 @@
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Brown",
+          "Content": "Dark brown",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Brown, later white"
+        "Dark brown, later white"
       ]
     },
     {
@@ -125,8 +125,8 @@
           "Href": "https://starwars.fandom.com/wiki/Senate_Bureau_of_Intelligence"
         },
         {
-          "Content": "Galactic Republic Navy",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+          "Content": "Naval corps",
+          "Href": "https://starwars.fandom.com/wiki/Naval_corps"
         },
         {
           "Content": "Galactic Empire",
@@ -152,31 +152,40 @@
       "Values": [
         "Galactic Republic",
         "Senate Bureau of Intelligence",
-        "Galactic Republic Navy",
+        "Naval corps",
         "Galactic Empire",
         "Imperial Security Bureau",
         "Imperial Academy",
         "Naval Intelligence Agency",
         "Imperial Officer Corps"
       ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Sheev Palpatine",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
+        }
+      ],
+      "Values": [
+        "Sheev Palpatine (Mentor)"
+      ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Alexsandr Kallus",
+          "Href": "https://starwars.fandom.com/wiki/Alexsandr_Kallus"
+        }
+      ],
+      "Values": [
+        "Alexsandr Kallus (Protégé)"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 453101,
-      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 679282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Yularen_(theme)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 586477,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
     {
       "PageId": 505152,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_strategy_conference",
@@ -188,24 +197,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 677147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fleet_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 471488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naval_Intelligence_Agency",
+      "PageId": 745461,
+      "PageUrl": "https://starwars.fandom.com/wiki/ISB_board",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 678841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Venator-class_Star_Destroyer_(Teth)",
+      "PageId": 586477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 499513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 565313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Alexsandr_Kallus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 452582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 677147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_of_the_Fifth_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 627024,
@@ -218,14 +232,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
+      "PageId": 679282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Yularen_(theme)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
       "PageId": 603143,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_flagship",
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_flagship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 457328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "PageId": 678841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Venator-class_Star_Destroyer_(Teth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 565313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Alexsandr_Kallus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 471488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naval_Intelligence_Agency",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 453101,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 585111,
@@ -233,9 +267,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 499513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 744075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Senate_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 457328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

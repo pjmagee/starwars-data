@@ -2,13 +2,20 @@
   "PageId": 514311,
   "PageUrl": "https://starwars.fandom.com/wiki/ISB_Central_Office",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/Dark_Lord_8_ISB_HQ.jpg/revision/latest?cb=20180622234846",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/96/Isb-hq.png/revision/latest?cb=20221020020739",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "ISB Central Office"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Office complex"
       ]
     },
     {
@@ -33,9 +40,35 @@
     },
     {
       "Label": "Point(s) of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blevin's office",
+          "Href": "https://starwars.fandom.com/wiki/Blevin%27s_office"
+        },
+        {
+          "Content": "Dedra Meero's office",
+          "Href": "https://starwars.fandom.com/wiki/Dedra_Meero%27s_office"
+        },
+        {
+          "Content": "ISB conference chamber",
+          "Href": "https://starwars.fandom.com/wiki/ISB_conference_chamber"
+        },
+        {
+          "Content": "ISB datavault",
+          "Href": "https://starwars.fandom.com/wiki/ISB_datavault"
+        },
+        {
+          "Content": "ISB interrogation room",
+          "Href": "https://starwars.fandom.com/wiki/ISB_interrogation_room"
+        }
+      ],
       "Values": [
-        "Admiral Versio's office"
+        "Admiral Versio's office",
+        "Blevin's office",
+        "Dedra Meero's office",
+        "ISB conference chamber",
+        "ISB datavault",
+        "ISB interrogation room"
       ]
     },
     {
@@ -58,19 +91,54 @@
   ],
   "Relationships": [
     {
+      "PageId": 745461,
+      "PageUrl": "https://starwars.fandom.com/wiki/ISB_board",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 466892,
       "PageUrl": "https://starwars.fandom.com/wiki/COMPNOR_arcology",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 457328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 742873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blevin's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 743000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dedra_Meero's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 743628,
+      "PageUrl": "https://starwars.fandom.com/wiki/ISB_conference_chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 743659,
+      "PageUrl": "https://starwars.fandom.com/wiki/ISB_datavault",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 744314,
+      "PageUrl": "https://starwars.fandom.com/wiki/ISB_interrogation_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 452675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 471255,
       "PageUrl": "https://starwars.fandom.com/wiki/Federal_District",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 457328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

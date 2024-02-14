@@ -36,15 +36,27 @@
       ]
     },
     {
-      "Label": "Location(s)",
+      "Label": "Strength",
       "Links": [
         {
-          "Content": "Separatist stronghold",
-          "Href": "https://starwars.fandom.com/wiki/Separatist_stronghold_(PM-6986)"
-        },
+          "Content": "Droids",
+          "Href": "https://starwars.fandom.com/wiki/Droid"
+        }
+      ],
+      "Values": [
+        "Droids"
+      ]
+    },
+    {
+      "Label": "Headquarters",
+      "Links": [
         {
           "Content": "PM-6986",
           "Href": "https://starwars.fandom.com/wiki/PM-6986"
+        },
+        {
+          "Content": "Separatist stronghold",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_stronghold_(PM-6986)"
         },
         {
           "Content": "Anaxes asteroid belt",
@@ -52,7 +64,7 @@
         }
       ],
       "Values": [
-        "Separatist stronghold, PM-6986, Anaxes asteroid belt"
+        "PM-6986 Separatist stronghold, Anaxes asteroid belt"
       ]
     },
     {
@@ -82,6 +94,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 507199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdouts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639029,
+      "PageUrl": "https://starwars.fandom.com/wiki/B-series_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 594098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_stronghold_(PM-6986)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 593272,
       "PageUrl": "https://starwars.fandom.com/wiki/JF-86",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
@@ -90,16 +117,6 @@
       "PageId": 594086,
       "PageUrl": "https://starwars.fandom.com/wiki/PM-6986",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 594098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_stronghold_(PM-6986)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 507199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdouts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

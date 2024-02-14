@@ -71,7 +71,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-11"
@@ -90,7 +90,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Mon Calamari",
@@ -131,14 +131,29 @@
         {
           "Content": "Hutt Empire",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Anjiliac",
+          "Href": "https://starwars.fandom.com/wiki/Anjiliac"
         }
       ],
       "Values": [
-        "Hutt Empire"
+        "Hutt Empire",
+        "New Republic",
+        "Anjiliac Clan"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 17774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cyax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
     {
       "PageId": 179594,
       "PageUrl": "https://starwars.fandom.com/wiki/Napdu",
@@ -150,19 +165,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 8173,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anjiliac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 306165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Devastation_of_Da_Soocha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 306986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quad_Victor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 17711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cyax_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 306988,
@@ -175,14 +180,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 17774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cyax",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 306165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastation_of_Da_Soocha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 17711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cyax_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 8173,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anjiliac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 306986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quad_Victor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

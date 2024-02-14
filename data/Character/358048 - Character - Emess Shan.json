@@ -2,6 +2,7 @@
   "PageId": 358048,
   "PageUrl": "https://starwars.fandom.com/wiki/Emess_Shan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Shan family",
@@ -57,7 +58,52 @@
       "Values": [
         "Shan family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Vaner Shan",
+          "Href": "https://starwars.fandom.com/wiki/Vaner_Shan"
+        }
+      ],
+      "Values": [
+        "Vaner Shan"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Bress Shan",
+          "Href": "https://starwars.fandom.com/wiki/Bress_Shan"
+        },
+        {
+          "Content": "Reesa Shan",
+          "Href": "https://starwars.fandom.com/wiki/Reesa_Shan"
+        }
+      ],
+      "Values": [
+        "Bress Shan",
+        "Reesa Shan"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 358043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaner_Shan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 358045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reesa_Shan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 358047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bress_Shan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

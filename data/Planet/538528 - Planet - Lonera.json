@@ -24,15 +24,27 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
-          "Content": "N-12",
+          "Content": "O-12",
           "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        "N-12"
+        "O-12"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Trade Route"
       ]
     },
     {
@@ -67,14 +79,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 537547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loneran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 537781,
       "PageUrl": "https://starwars.fandom.com/wiki/Varish_Vicly",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 537547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loneran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

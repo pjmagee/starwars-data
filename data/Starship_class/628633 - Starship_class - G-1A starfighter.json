@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -45,6 +45,18 @@
       ],
       "Values": [
         "130,000 credits"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "BPS-980 ion drives",
+          "Href": "https://starwars.fandom.com/wiki/BPS-980_ion_drive"
+        }
+      ],
+      "Values": [
+        "Byblos BPS-980 ion drives (2)"
       ]
     },
     {
@@ -72,7 +84,7 @@
       "Links": [
         {
           "Content": "laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannons"
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
           "Content": "Concussion missile launchers",
@@ -109,14 +121,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 597644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mist_Hunter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 647018,
       "PageUrl": "https://starwars.fandom.com/wiki/Byblos_Drive_Yards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 597644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mist_Hunter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

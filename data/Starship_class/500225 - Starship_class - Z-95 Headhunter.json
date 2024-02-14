@@ -2,7 +2,7 @@
   "PageId": 500225,
   "PageUrl": "https://starwars.fandom.com/wiki/Z-95_Headhunter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f7/BanditSquadronPilot-XWM.png/revision/latest?cb=20190418031535",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/33/SWC_Z95.png/revision/latest?cb=20161023190944",
   "Data": [
     {
       "Label": "Titles",
@@ -15,16 +15,17 @@
       "Label": "Manufacturer",
       "Links": [
         {
-          "Content": "Incom",
+          "Content": "Incom Corporation",
           "Href": "https://starwars.fandom.com/wiki/Incom_Corporation"
         },
         {
-          "Content": "SubPro",
+          "Content": "Sublights Products Corporation",
           "Href": "https://starwars.fandom.com/wiki/Sublights_Products_Corporation"
         }
       ],
       "Values": [
-        "Incom/SubPro"
+        "Incom Corporation",
+        "Sublights Products Corporation"
       ]
     },
     {
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -112,12 +113,12 @@
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "9771 deflector shield generator",
-          "Href": "https://starwars.fandom.com/wiki/9771_deflector_shield_generator"
+          "Content": "XoLynn 9771 deflector shield generator",
+          "Href": "https://starwars.fandom.com/wiki/XoLynn_9771_deflector_shield_generator"
         }
       ],
       "Values": [
-        "9771 deflector shield generator"
+        "XoLynn 9771 deflector shield generator"
       ]
     },
     {
@@ -206,6 +207,10 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
           "Content": "Berch Teller's rebel cell",
           "Href": "https://starwars.fandom.com/wiki/Berch_Teller%27s_rebel_cell"
         },
@@ -228,6 +233,7 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Galactic Empire",
         "Berch Teller's rebel cell",
         "Partisans",
         "Alliance to Restore the Republic",
@@ -238,13 +244,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 710459,
-      "PageUrl": "https://starwars.fandom.com/wiki/F's_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 170598,
       "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 523866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -253,13 +259,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
+      "PageId": 710459,
+      "PageUrl": "https://starwars.fandom.com/wiki/F's_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 533122,
       "PageUrl": "https://starwars.fandom.com/wiki/Sublights_Products_Corporation",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 523866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_Starfighter_Corps",
+      "PageId": 625358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nebula_Raiders",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]

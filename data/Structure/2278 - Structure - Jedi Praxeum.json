@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "26 ABY",
-          "Href": "https://starwars.fandom.com/wiki/26_ABY"
+          "Href": "https://starwars.fandom.com/wiki/26_ABY/Legends"
         },
         {
           "Content": "Invasion of Yavin 4",
@@ -87,13 +87,29 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        }
+      ],
       "Values": [
-        "New Jedi Order"
+        "New Jedi Order",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 31281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Jedi_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 328422,
+      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
     {
       "PageId": 23958,
       "PageUrl": "https://starwars.fandom.com/wiki/Third_Battle_of_Yavin",
@@ -105,41 +121,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 108500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asli_Krimsan's_holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 5441,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaiburr_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 13665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reboam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 328422,
-      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 5732,
-      "PageUrl": "https://starwars.fandom.com/wiki/11_ABY/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 6012,
-      "PageUrl": "https://starwars.fandom.com/wiki/26_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 31281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Jedi_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 70267,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Praxeum_protocol_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
@@ -148,6 +129,46 @@
       "PageId": 29383,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Jedi_Order",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 136423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chu'unthor_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reboam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 52643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Artus_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 5441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaiburr_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 761957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ithorian_wind_chime/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 5732,
+      "PageUrl": "https://starwars.fandom.com/wiki/11_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 6012,
+      "PageUrl": "https://starwars.fandom.com/wiki/26_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 108500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asli_Krimsan's_holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     }
   ]
 }

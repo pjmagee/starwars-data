@@ -67,12 +67,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Teraan",
           "Href": "https://starwars.fandom.com/wiki/House_Teraan"
-        },
+        }
+      ],
+      "Values": [
+        "House Teraan"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Cedonia Teraan",
+          "Href": "https://starwars.fandom.com/wiki/Cedonia_Teraan"
+        }
+      ],
+      "Values": [
+        "Cedonia Teraan"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
@@ -83,11 +103,16 @@
         }
       ],
       "Values": [
-        "House Teraan",
         "House of Organa",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 401966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cedonia_Teraan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

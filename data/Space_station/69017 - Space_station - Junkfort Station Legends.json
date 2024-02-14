@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -43,6 +43,14 @@
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
         },
         {
+          "Content": "1004 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1004_BBY"
+        },
+        {
+          "Content": "1000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1000_BBY/Legends"
+        },
+        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         },
@@ -52,7 +60,7 @@
         }
       ],
       "Values": [
-        "Hutt Space (historically)",
+        "Hutt Space (between 1004 BBY and 1000 BBY)",
         "Outer Rim Territories",
         "The Slice"
       ]
@@ -79,6 +87,13 @@
       ],
       "Values": [
         "Junkfort system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "T-8"
       ]
     },
     {
@@ -178,6 +193,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 408001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junkfort_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 12624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tharin_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 447655,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Junkfort_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -191,16 +216,6 @@
       "PageId": 271353,
       "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 408001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junkfort_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 12624,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tharin_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

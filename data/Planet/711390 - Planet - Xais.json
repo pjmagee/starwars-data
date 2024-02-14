@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Urban"
@@ -70,7 +70,12 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Nihil gas foundry",
+          "Href": "https://starwars.fandom.com/wiki/Nihil_gas_foundry"
+        }
+      ],
       "Values": [
         "Nihil gas foundry"
       ]
@@ -90,19 +95,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 724518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Xais",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 775791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil_gas_foundry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 689682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Myarga",
+      "PageUrl": "https://starwars.fandom.com/wiki/Myarga_Anjiliac_Atirue",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 717358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lepi_Nihil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 643796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 717341,
@@ -110,9 +115,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 643796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 724518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Xais",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 717358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lepi_Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

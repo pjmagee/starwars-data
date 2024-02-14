@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Sector",
+      "Label": "Region",
       "Links": [
         {
           "Content": "Hutt Space",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "S-12",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "S-12"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -50,7 +62,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -64,6 +76,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 644884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mourner's_Wail_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 764293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 483302,
       "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
@@ -72,11 +94,6 @@
       "PageId": 648387,
       "PageUrl": "https://starwars.fandom.com/wiki/Fortress_of_the_Mourner's_Wail",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 644884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mourner's_Wail_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 719697,

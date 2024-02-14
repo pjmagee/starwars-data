@@ -2,6 +2,7 @@
   "PageId": 102179,
   "PageUrl": "https://starwars.fandom.com/wiki/Van_Secura",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Secura",
@@ -57,7 +65,42 @@
       "Values": [
         "Clan Secura"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Lon Secura",
+          "Href": "https://starwars.fandom.com/wiki/Lon_Secura"
+        }
+      ],
+      "Values": [
+        "Lon Secura"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Nat Secura",
+          "Href": "https://starwars.fandom.com/wiki/Nat_Secura"
+        }
+      ],
+      "Values": [
+        "Nat Secura"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 19248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nat_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 27605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lon_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

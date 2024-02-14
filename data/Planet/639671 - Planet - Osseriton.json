@@ -2,7 +2,7 @@
   "PageId": 639671,
   "PageUrl": "https://starwars.fandom.com/wiki/Osseriton",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5f/Osseriton-TimelinesMap.png/revision/latest?cb=20220531072034",
   "Data": [
     {
       "Label": "Titles",
@@ -22,9 +22,33 @@
       "Values": [
         "Unknown Regions"
       ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "G-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "G-9"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Harsh"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 471997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unknown_Regions",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
     {
       "PageId": 639967,
       "PageUrl": "https://starwars.fandom.com/wiki/Osseriton_Assemblages",
@@ -34,11 +58,6 @@
       "PageId": 659898,
       "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Osseriton",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 471997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unknown_Regions",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

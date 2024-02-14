@@ -2,7 +2,7 @@
   "PageId": 720050,
   "PageUrl": "https://starwars.fandom.com/wiki/Mines_of_Mandalore",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/63/MinesOfMandalore.png/revision/latest?cb=20230308182955",
   "Data": [
     {
       "Label": "Titles",
@@ -12,39 +12,35 @@
       ]
     },
     {
-      "Label": "Destroyed",
-      "Links": [
-        {
-          "Content": "New Republic Era",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic_Era"
-        }
-      ],
-      "Values": [
-        "By the New Republic Era"
-      ]
-    },
-    {
       "Label": "Location",
       "Links": [
+        {
+          "Content": "Civic Center",
+          "Href": "https://starwars.fandom.com/wiki/Civic_Center"
+        },
+        {
+          "Content": "Sundari",
+          "Href": "https://starwars.fandom.com/wiki/Sundari"
+        },
         {
           "Content": "Mandalore",
           "Href": "https://starwars.fandom.com/wiki/Mandalore"
         }
       ],
       "Values": [
-        "Mandalore"
+        "Civic Center, Sundari, Mandalore"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Living waters",
-          "Href": "https://starwars.fandom.com/wiki/Living_waters"
+          "Content": "Living Waters",
+          "Href": "https://starwars.fandom.com/wiki/Living_Waters"
         }
       ],
       "Values": [
-        "Living waters"
+        "Living Waters"
       ]
     },
     {
@@ -62,9 +58,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 452682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 456984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 720052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Living_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 635821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mythosaur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757031,
+      "PageUrl": "https://starwars.fandom.com/wiki/Civic_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

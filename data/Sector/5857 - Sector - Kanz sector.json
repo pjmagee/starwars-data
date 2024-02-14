@@ -117,7 +117,7 @@
       "Links": [
         {
           "Content": "Argazdan",
-          "Href": "https://starwars.fandom.com/wiki/Argazdan"
+          "Href": "https://starwars.fandom.com/wiki/Argazdan/Legends"
         },
         {
           "Content": "Ereesi",
@@ -192,16 +192,20 @@
       ]
     },
     {
-      "Label": "Old Republic era",
+      "Label": "Local conflict",
       "Links": [
         {
           "Content": "Kanz sector",
           "Href": "https://starwars.fandom.com/wiki/Republic–Ereesi_war"
-        },
-        {
-          "Content": "Kanz Disorders",
-          "Href": "https://starwars.fandom.com/wiki/Kanz_Disorders/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "Kanz sector"
+      ]
+    },
+    {
+      "Label": "Kanz Disorders",
+      "Links": [
         {
           "Content": "Lorrd (I)",
           "Href": "https://starwars.fandom.com/wiki/Invasion_of_Lorrd"
@@ -209,36 +213,39 @@
         {
           "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Liberation_of_Lorrd"
-        },
-        {
-          "Content": "Galactic War",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_War"
-        },
+        }
+      ],
+      "Values": [
+        "Lorrd (I) (II)"
+      ]
+    },
+    {
+      "Label": "Galactic War",
+      "Links": [
         {
           "Content": "Bimmiel asteroid field",
           "Href": "https://starwars.fandom.com/wiki/Battle_in_the_Bimmiel_asteroid_field"
         }
       ],
       "Values": [
-        "Local conflictKanz sector",
-        "Kanz DisordersLorrd (I) (II)",
-        "Galactic WarBimmiel asteroid field",
-        "Local conflict",
-        "Kanz Disorders",
-        "Galactic War"
+        "Bimmiel asteroid field"
       ]
     },
     {
-      "Label": "Rise of the Empire era",
+      "Label": "Local conflict",
       "Links": [
         {
           "Content": "Kol Huro system",
           "Href": "https://starwars.fandom.com/wiki/Kol_Huro_Unrest"
-        },
-        {
-          "Content": "Clone Wars",
-          "Href": "https://starwars.fandom.com/wiki/Clone_Wars/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "Kol Huro system"
+      ]
+    },
+    {
+      "Label": "Clone Wars",
+      "Links": [
         {
           "Content": "Amaltanna",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Amaltanna"
@@ -246,32 +253,27 @@
         {
           "Content": "Ereesus",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Ereesus"
-        },
-        {
-          "Content": "Imperial Period conflicts",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Period"
-        },
+        }
+      ],
+      "Values": [
+        "Amaltanna - Ereesus"
+      ]
+    },
+    {
+      "Label": "Reconquest of the Rim",
+      "Links": [
         {
           "Content": "Bimmiel",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Bimmiel"
         }
       ],
       "Values": [
-        "Local conflictKol Huro system",
-        "Clone WarsAmaltanna - Ereesus",
-        "Imperial Period conflictsBimmiel",
-        "Local conflict",
-        "Clone Wars",
-        "Imperial Period conflicts"
+        "Bimmiel"
       ]
     },
     {
-      "Label": "Rebellion era",
+      "Label": "Galactic Civil War",
       "Links": [
-        {
-          "Content": "Galactic Civil War",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
-        },
         {
           "Content": "Thovinack",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Thovinack"
@@ -282,34 +284,24 @@
         }
       ],
       "Values": [
-        "Galactic Civil WarThovinack - Jerne",
-        "Galactic Civil War"
+        "Thovinack - Jerne"
       ]
     },
     {
-      "Label": "New Jedi Order era",
+      "Label": "Yuuzhan Vong War",
       "Links": [
-        {
-          "Content": "Yuuzhan Vong War",
-          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_War"
-        },
         {
           "Content": "Bimmiel",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Bimmiel"
         }
       ],
       "Values": [
-        "Yuuzhan Vong WarBimmiel",
-        "Yuuzhan Vong War"
+        "Bimmiel"
       ]
     },
     {
-      "Label": "Legacy era",
+      "Label": "Second Galactic Civil War",
       "Links": [
-        {
-          "Content": "Second Galactic Civil War",
-          "Href": "https://starwars.fandom.com/wiki/Second_Galactic_Civil_War"
-        },
         {
           "Content": "The Home (I)",
           "Href": "https://starwars.fandom.com/wiki/Duel_at_The_Home"
@@ -320,100 +312,14 @@
         }
       ],
       "Values": [
-        "Second Galactic Civil WarThe Home (I) - (II)",
-        "Second Galactic Civil War"
+        "The Home (I) (II)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 271393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Argazziis_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 289386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thovinack_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 396612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ayceezee_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 34431,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanz_Disorders/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 270841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Noremac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 392060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ayceezee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 130465,
       "PageUrl": "https://starwars.fandom.com/wiki/Amaltanna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 18122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Huro_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 279834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ereesus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 442223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Atorn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 334048,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veragi_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 82020,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Home",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 271013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amaltanna_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 304316,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorrd_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 651760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Atorn_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13723,
-      "PageUrl": "https://starwars.fandom.com/wiki/Argazda/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 58065,
-      "PageUrl": "https://starwars.fandom.com/wiki/MZX33291_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 348111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega_379",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -422,9 +328,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 434241,
-      "PageUrl": "https://starwars.fandom.com/wiki/MZX32905_system's_star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 3701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorrd/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 189355,
@@ -432,19 +338,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 14718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerne",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 4038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bimmiel/Legends",
+      "PageId": 21914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Huro_VII",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 260747,
       "PageUrl": "https://starwars.fandom.com/wiki/Lorrd_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 396612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ayceezee_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 13723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Argazda/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 442223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Atorn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 269531,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Territories/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 310710,
@@ -467,14 +388,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 271393,
+      "PageUrl": "https://starwars.fandom.com/wiki/Argazziis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 279834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ereesus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 270841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noremac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 392060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ayceezee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 58065,
+      "PageUrl": "https://starwars.fandom.com/wiki/MZX33291_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 34431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanz_Disorders/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 82020,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 4038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bimmiel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 304316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorrd_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 334048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veragi_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 420720,
       "PageUrl": "https://starwars.fandom.com/wiki/Ereesus_moon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 3701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorrd/Legends",
+      "PageId": 18122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Huro_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 289386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thovinack_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 434241,
+      "PageUrl": "https://starwars.fandom.com/wiki/MZX32905_system's_star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 348111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega_379",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 271013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaltanna_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 651760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Atorn_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 371445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic–Ereesi_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

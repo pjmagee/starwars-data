@@ -40,15 +40,25 @@
         {
           "Content": "AA-9 Freighter-Liner",
           "Href": "https://starwars.fandom.com/wiki/AA-9_Freighter-Liner"
+        },
+        {
+          "Content": "Mako-Ta Space Docks",
+          "Href": "https://starwars.fandom.com/wiki/Mako-Ta_Space_Docks"
         }
       ],
       "Values": [
         "SS-54 assault ship",
-        "AA-9 Freighter-Liner"
+        "AA-9 Freighter-Liner",
+        "Mako-Ta Space Docks"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 530811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 524289,
       "PageUrl": "https://starwars.fandom.com/wiki/AA-9_Freighter-Liner",
@@ -68,11 +78,6 @@
       "PageId": 600461,
       "PageUrl": "https://starwars.fandom.com/wiki/Mako-Ta_Space_Docks",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 530811,
-      "PageUrl": "https://starwars.fandom.com/wiki/Halo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

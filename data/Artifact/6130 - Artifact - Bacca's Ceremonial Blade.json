@@ -2,7 +2,7 @@
   "PageId": 6130,
   "PageUrl": "https://starwars.fandom.com/wiki/Bacca's_Ceremonial_Blade",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/BaccasBlade.jpg/revision/latest?cb=20051118231035",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d4/CeremonialBlade-SWGoH.png/revision/latest?cb=20240205080342",
   "Data": [
     {
       "Label": "Titles",
@@ -13,14 +13,24 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Vibrosword",
+          "Href": "https://starwars.fandom.com/wiki/Vibrosword/Legends"
+        }
+      ],
       "Values": [
-        "Sword"
+        "Vibrosword"
       ]
     },
     {
       "Label": "Culture",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Wookiee",
+          "Href": "https://starwars.fandom.com/wiki/Wookiee/Legends"
+        }
+      ],
       "Values": [
         "Wookiee"
       ]
@@ -64,10 +74,6 @@
     {
       "Label": "Owners",
       "Links": [
-        {
-          "Content": "Bacca",
-          "Href": "https://starwars.fandom.com/wiki/Bacca"
-        },
         {
           "Content": "Rothrrrawr",
           "Href": "https://starwars.fandom.com/wiki/Rothrrrawr"
@@ -122,13 +128,6 @@
       ],
       "Values": [
         "Wookiee Chieftains"
-      ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [],
-      "Values": [
-        "Wookiees"
       ]
     }
   ],

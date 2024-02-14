@@ -12,6 +12,26 @@
       ]
     },
     {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "planet",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_planet_(Fermata_Cage)"
+        }
+      ],
+      "Values": [
+        "Between 3 ABY and 4 ABY, a planet"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -62,23 +82,50 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sear's parents",
+          "Href": "https://starwars.fandom.com/wiki/Sear%27s_parents"
+        }
+      ],
+      "Values": [
+        "Sear's parents"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Orphans",
           "Href": "https://starwars.fandom.com/wiki/Orphans"
+        },
+        {
+          "Content": "Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
         }
       ],
       "Values": [
-        "Orphans"
+        "Orphans",
+        "Crimson Dawn"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 754518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_an_unidentified_planet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 715890,
       "PageUrl": "https://starwars.fandom.com/wiki/Siroto",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 784471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sear's_parents",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

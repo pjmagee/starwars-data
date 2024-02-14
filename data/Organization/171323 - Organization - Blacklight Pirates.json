@@ -12,28 +12,62 @@
       ]
     },
     {
-      "Label": "Location(s)",
+      "Label": "Organization type",
       "Links": [
         {
-          "Content": "Blacklight Territory",
-          "Href": "https://starwars.fandom.com/wiki/Blacklight_Territory"
-        },
+          "Content": "Pirate",
+          "Href": "https://starwars.fandom.com/wiki/Pirate/Legends"
+        }
+      ],
+      "Values": [
+        "Pirate organization"
+      ]
+    },
+    {
+      "Label": "Headquarters",
+      "Links": [
         {
           "Content": "Onyx Beacon",
           "Href": "https://starwars.fandom.com/wiki/Onyx_Beacon"
         }
       ],
       "Values": [
-        "Blacklight Territory",
         "Onyx Beacon"
+      ]
+    },
+    {
+      "Label": "Location(s)",
+      "Links": [
+        {
+          "Content": "Dantooine system",
+          "Href": "https://starwars.fandom.com/wiki/Dantooine_system/Legends"
+        },
+        {
+          "Content": "Endor system",
+          "Href": "https://starwars.fandom.com/wiki/Endor_system/Legends"
+        }
+      ],
+      "Values": [
+        "Dantooine system",
+        "Endor system"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 49721,
+      "PageUrl": "https://starwars.fandom.com/wiki/M3-A_Scyk_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 329454,
       "PageUrl": "https://starwars.fandom.com/wiki/Onyx_Beacon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 49719,
+      "PageUrl": "https://starwars.fandom.com/wiki/M12-L_Kimogila_heavy_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

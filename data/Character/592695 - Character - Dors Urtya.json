@@ -27,10 +27,6 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "0 ABY",
-          "Href": "https://starwars.fandom.com/wiki/0_ABY"
-        },
-        {
           "Content": "1 ABY",
           "Href": "https://starwars.fandom.com/wiki/1_ABY"
         },
@@ -40,7 +36,7 @@
         }
       ],
       "Values": [
-        "Between 0 ABY and 1 ABY, during the mutiny on Mon Cala"
+        "1 ABY, during the mutiny on Mon Cala"
       ]
     },
     {
@@ -90,8 +86,8 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Mon Cala Mercantile Fleet",
@@ -107,7 +103,7 @@
         }
       ],
       "Values": [
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Mon Cala Mercantile Fleet",
         "Galactic Empire",
         "Alliance to Restore the Republic"
@@ -116,14 +112,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 593218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
       "PageId": 530432,
       "PageUrl": "https://starwars.fandom.com/wiki/Mon_Cala_planetary_defense_services",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 592692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Cala_Mercantile_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 601251,
@@ -134,11 +130,6 @@
       "PageId": 599862,
       "PageUrl": "https://starwars.fandom.com/wiki/Mutiny_on_Mon_Cala",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 592692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Cala_Mercantile_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

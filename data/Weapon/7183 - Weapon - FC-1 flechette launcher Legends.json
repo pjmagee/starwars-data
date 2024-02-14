@@ -55,13 +55,6 @@
       ]
     },
     {
-      "Label": "Size",
-      "Links": [],
-      "Values": [
-        "Large"
-      ]
-    },
-    {
       "Label": "Weight",
       "Links": [],
       "Values": [
@@ -77,10 +70,15 @@
     },
     {
       "Label": "Range",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "100 meters (optimum)",
-        "250 meters (effective)"
+        "250 meters(maximum)"
       ]
     },
     {

@@ -24,15 +24,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
@@ -55,15 +50,27 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Tagge",
           "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
-        },
+        }
+      ],
+      "Values": [
+        "House of Tagge"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Tagge Corporation",
           "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
+        },
+        {
+          "Content": "Executive Board",
+          "Href": "https://starwars.fandom.com/wiki/Executive_Board"
         },
         {
           "Content": "Galactic Empire",
@@ -75,8 +82,8 @@
         }
       ],
       "Values": [
-        "House of Tagge",
         "Tagge Corporation",
+        "Executive Board",
         "Galactic Empire",
         "Imperial Officer Corps"
       ]

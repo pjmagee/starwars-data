@@ -15,20 +15,24 @@
       "Label": "Location",
       "Links": [
         {
+          "Content": "Strangled Cliffs",
+          "Href": "https://starwars.fandom.com/wiki/Strangled_Cliffs"
+        },
+        {
           "Content": "Dathomir",
           "Href": "https://starwars.fandom.com/wiki/Dathomir"
         }
       ],
       "Values": [
-        "Dathomir"
+        "Strangled Cliffs, Dathomir"
       ]
     },
     {
       "Label": "Fauna",
       "Links": [
         {
-          "Content": "Nydak",
-          "Href": "https://starwars.fandom.com/wiki/Nydak"
+          "Content": "Lesser Nydak",
+          "Href": "https://starwars.fandom.com/wiki/Lesser_Nydak"
         },
         {
           "Content": "Bane back spiders",
@@ -36,7 +40,7 @@
         }
       ],
       "Values": [
-        "Nydak",
+        "Lesser Nydak",
         "Bane back spiders"
       ]
     },
@@ -54,6 +58,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 675567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strangled_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 452591,
       "PageUrl": "https://starwars.fandom.com/wiki/Dathomir",

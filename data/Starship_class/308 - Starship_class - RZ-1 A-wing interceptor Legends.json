@@ -12,23 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Alliance Underground Engineering",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_Underground_Engineering"
-        },
-        {
-          "Content": "Incom Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
-        }
-      ],
-      "Values": [
-        "Alliance Underground Engineering",
-        "Incom Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -49,6 +32,23 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Alliance Underground Engineering",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Underground_Engineering"
+        },
+        {
+          "Content": "Incom Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
+        }
+      ],
+      "Values": [
+        "Alliance Underground Engineering",
+        "Incom Corporation"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [
         {
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -448,80 +448,120 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
         },
         {
-          "Content": "Zann Consortium",
-          "Href": "https://starwars.fandom.com/wiki/Zann_Consortium/Legends"
-        },
-        {
           "Content": "Alliance of Free Planets",
           "Href": "https://starwars.fandom.com/wiki/Alliance_of_Free_Planets"
         },
         {
-          "Content": "New Republic",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
-        },
-        {
-          "Content": "Galactic Federation of Free Alliances",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
-        },
-        {
-          "Content": "Pirates",
-          "Href": "https://starwars.fandom.com/wiki/Pirate/Legends"
+          "Content": "Confederation",
+          "Href": "https://starwars.fandom.com/wiki/Confederation"
         },
         {
           "Content": "Corellian Security Force",
           "Href": "https://starwars.fandom.com/wiki/Corellian_Security_Force"
         },
         {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
+        },
+        {
+          "Content": "Hidden Daggers",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
+        },
+        {
           "Content": "Mercenaries",
           "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Pirates",
+          "Href": "https://starwars.fandom.com/wiki/Pirate/Legends"
         },
         {
           "Content": "Vylukh Clan",
           "Href": "https://starwars.fandom.com/wiki/Vylukh_Clan"
         },
         {
-          "Content": "Confederation",
-          "Href": "https://starwars.fandom.com/wiki/Confederation"
+          "Content": "Zann Consortium",
+          "Href": "https://starwars.fandom.com/wiki/Zann_Consortium/Legends"
         }
       ],
       "Values": [
         "Alliance to Restore the Republic",
-        "Zann Consortium",
         "Alliance of Free Planets",
-        "New Republic",
-        "Galactic Federation of Free Alliances",
-        "Pirates",
+        "Confederation",
         "Corellian Security Force",
+        "Galactic Federation of Free Alliances",
+        "Hidden Daggers",
         "Mercenaries",
+        "New Republic",
+        "Pirates",
         "Vylukh Clan",
-        "Confederation"
+        "Zann Consortium"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 452157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Dactillions",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
     {
       "PageId": 183787,
       "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(New_Republic)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 141984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chie_(MC40a_light_cruiser)",
+      "PageId": 540612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydro-servo_bearing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 452157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Dactillions",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 31180,
+      "PageUrl": "https://starwars.fandom.com/wiki/No_Luck_Required",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 9509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viscount-class_Star_Defender",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 539900,
       "PageUrl": "https://starwars.fandom.com/wiki/Dodger_(EF76_Nebulon-B_escort_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 25909,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80a_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 4526,
+      "PageUrl": "https://starwars.fandom.com/wiki/A-wing_Slash/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 736830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 509291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dust_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 129813,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_type_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 5813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -530,24 +570,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 129813,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_type_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 50492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Underground_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 7165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 5813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Home_One/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 9509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viscount-class_Star_Defender",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 7167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 72818,
@@ -560,23 +595,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 540612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydro-servo_bearing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 509291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dust_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 397985,
       "PageUrl": "https://starwars.fandom.com/wiki/A-Wing_Expansion_Pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 31180,
-      "PageUrl": "https://starwars.fandom.com/wiki/No_Luck_Required",
+      "PageId": 5631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 50492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Underground_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 141984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chie_(MC80_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

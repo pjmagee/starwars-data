@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "~2 meters"
+        "Around 2 meters"
       ]
     },
     {
@@ -56,13 +56,23 @@
     },
     {
       "Label": "Distinctions",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Ice",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        }
+      ],
       "Values": [
         "Ice-like appearance, horns"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
     {
       "PageId": 146673,
       "PageUrl": "https://starwars.fandom.com/wiki/Stagorr",
@@ -72,11 +82,6 @@
       "PageId": 146681,
       "PageUrl": "https://starwars.fandom.com/wiki/Ice_Mountain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 613,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

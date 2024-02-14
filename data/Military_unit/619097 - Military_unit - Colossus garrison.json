@@ -27,32 +27,32 @@
       "Label": "Commanding officer(s)",
       "Links": [
         {
-          "Content": "Major",
-          "Href": "https://starwars.fandom.com/wiki/Major"
-        },
-        {
-          "Content": "Elrik Vonreg",
-          "Href": "https://starwars.fandom.com/wiki/Elrik_Vonreg"
-        },
-        {
           "Content": "Commander",
           "Href": "https://starwars.fandom.com/wiki/Commander"
         },
         {
           "Content": "Pyre",
           "Href": "https://starwars.fandom.com/wiki/Pyre"
+        },
+        {
+          "Content": "Major",
+          "Href": "https://starwars.fandom.com/wiki/Major"
+        },
+        {
+          "Content": "Elrik Vonreg",
+          "Href": "https://starwars.fandom.com/wiki/Elrik_Vonreg"
         }
       ],
       "Values": [
-        "Major Elrik Vonreg",
-        "Commander Pyre"
+        "Commander Pyre",
+        "Major Elrik Vonreg"
       ]
     },
     {
       "Label": "Staff officer(s)",
       "Links": [
         {
-          "Content": "Unidentified First Order stormtrooper commander",
+          "Content": "A First Order stormtrooper commander",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_commander"
         },
         {
@@ -65,7 +65,7 @@
         }
       ],
       "Values": [
-        "Unidentified First Order stormtrooper commander",
+        "A First Order stormtrooper commander",
         "Sergeant CS-812"
       ]
     },
@@ -90,49 +90,76 @@
       "Label": "Strength",
       "Links": [
         {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
+        },
+        {
           "Content": "First Order SCUBA troopers",
           "Href": "https://starwars.fandom.com/wiki/First_Order_SCUBA_trooper"
         },
         {
-          "Content": "First Order TIE Fighter Pilots",
-          "Href": "https://starwars.fandom.com/wiki/First_Order_TIE_Fighter_Pilot"
+          "Content": "First Order Special Forces",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Special_Forces"
         },
         {
-          "Content": "Stormtroopers",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
+          "Content": "First Order TIE Fighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_TIE_Fighter_Pilot"
         }
       ],
       "Values": [
+        "Stormtroopers",
         "First Order SCUBA troopers",
-        "First Order TIE Fighter Pilots",
-        "Stormtroopers"
+        "1 First Order Special Forces member",
+        "First Order TIE Fighter Pilots"
       ]
     },
     {
       "Label": "Vehicles",
       "Links": [
         {
-          "Content": "AAL-1971/9.1 Troop Transports",
-          "Href": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport"
-        },
-        {
           "Content": "TIE/ba Baron Space Superiority Interceptor",
           "Href": "https://starwars.fandom.com/wiki/TIE/ba_Baron_Space_Superiority_Interceptor"
+        },
+        {
+          "Content": "Vonreg's TIE",
+          "Href": "https://starwars.fandom.com/wiki/Vonreg%27s_TIE"
         },
         {
           "Content": "TIE/fo space superiority fighters",
           "Href": "https://starwars.fandom.com/wiki/TIE/fo_space_superiority_fighter"
         },
         {
-          "Content": "Upsilon-class command shuttless",
+          "Content": "Upsilon-class command shuttles",
           "Href": "https://starwars.fandom.com/wiki/Upsilon-class_command_shuttle"
+        },
+        {
+          "Content": "Pyre's shuttle",
+          "Href": "https://starwars.fandom.com/wiki/Pyre%27s_ship"
+        },
+        {
+          "Content": "AAL-1971/9.1 Troop Transports",
+          "Href": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport"
         }
       ],
       "Values": [
-        "AAL-1971/9.1 Troop Transports",
         "1 TIE/ba Baron Space Superiority Interceptor",
+        "Vonreg's TIE",
         "TIE/fo space superiority fighters",
-        "Upsilon-class command shuttless"
+        "Upsilon-class command shuttles",
+        "Pyre's shuttle",
+        "AAL-1971/9.1 Troop Transports"
+      ]
+    },
+    {
+      "Label": "Headquarters",
+      "Links": [
+        {
+          "Content": "Doza Tower",
+          "Href": "https://starwars.fandom.com/wiki/Doza_Tower"
+        }
+      ],
+      "Values": [
+        "Doza Tower"
       ]
     },
     {
@@ -141,10 +168,14 @@
         {
           "Content": "Colossus",
           "Href": "https://starwars.fandom.com/wiki/Colossus"
+        },
+        {
+          "Content": "Castilon",
+          "Href": "https://starwars.fandom.com/wiki/Castilon"
         }
       ],
       "Values": [
-        "Colossus"
+        "Colossus, Castilon"
       ]
     },
     {
@@ -153,6 +184,10 @@
         {
           "Content": "Occupation of the Colossus",
           "Href": "https://starwars.fandom.com/wiki/Occupation_of_the_Colossus"
+        },
+        {
+          "Content": "Escape from the Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Escape_from_the_Colossus"
         },
         {
           "Content": "Rescue on the Colossus",
@@ -169,6 +204,7 @@
       ],
       "Values": [
         "Occupation of the Colossus",
+        "Escape from the Colossus",
         "Rescue on the Colossus",
         "Mission to contact the Resistance",
         "Battle of Castilon"
@@ -213,18 +249,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 611254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elrik_Vonreg's_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 608988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vonreg's_TIE",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 617498,
-      "PageUrl": "https://starwars.fandom.com/wiki/CS-Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 617130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_commander",
+      "PageId": 608372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pyre",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -233,18 +264,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 617498,
+      "PageUrl": "https://starwars.fandom.com/wiki/CS-Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 776106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_SCUBA_trooper_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_SCUBA_trooper_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 579521,
       "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps_(First_Order)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 608988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vonreg's_TIE",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 607351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elrik_Vonreg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 608372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pyre",
+      "PageId": 611254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elrik_Vonreg's_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 617130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_First_Order_stormtrooper_commander",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

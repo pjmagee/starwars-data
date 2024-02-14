@@ -13,7 +13,12 @@
     },
     {
       "Label": "Founded",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "1996",
+          "Href": "https://starwars.fandom.com/wiki/1996"
+        }
+      ],
       "Values": [
         "1996"
       ]
@@ -32,7 +37,12 @@
     },
     {
       "Label": "Dissolved",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "2001",
+          "Href": "https://starwars.fandom.com/wiki/2001"
+        }
+      ],
       "Values": [
         "2001"
       ]
@@ -40,39 +50,22 @@
     {
       "Label": "Headquarters",
       "Links": [],
-      "Values": [
-        "San Rafael, California, United States"
-      ]
+      "Values": []
     },
     {
       "Label": "Official website",
       "Links": [
         {
-          "Content": "http://www.lucaslearning.com",
+          "Content": "lucaslearning.com",
           "Href": "http://www.lucaslearning.com"
         }
       ],
       "Values": [
-        "http://www.lucaslearning.com"
+        "lucaslearning.com"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 1093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucasfilm_Ltd.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:OOU_company"
-    },
-    {
-      "PageId": 116929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Pit_Droids",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
-    },
-    {
-      "PageId": 125700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Yoda's_Challenge_Activity_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
-    },
     {
       "PageId": 33533,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Episode_I:_The_Gungan_Frontier",
@@ -99,6 +92,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person"
     },
     {
+      "PageId": 116929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Pit_Droids",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 125700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Yoda's_Challenge_Activity_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
       "PageId": 156924,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Math:_Jabba's_Game_Galaxy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
@@ -117,6 +120,11 @@
       "PageId": 156933,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Jar_Jar's_Journey_Adventure_Book",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 1093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucasfilm_Ltd.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:OOU_company"
     }
   ]
 }

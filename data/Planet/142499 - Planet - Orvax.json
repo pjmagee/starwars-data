@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-17",
@@ -34,13 +34,47 @@
       "Values": [
         "R-17"
       ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        }
+      ],
+      "Values": [
+        "Forests"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "sentient species",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_sentient_species"
+        }
+      ],
+      "Values": [
+        "A sentient species"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 777465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sentient_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 777463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gella_Nattai's_Pathfinder_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 777464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expedition_to_Orvax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

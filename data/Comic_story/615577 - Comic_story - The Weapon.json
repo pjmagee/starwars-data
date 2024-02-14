@@ -36,6 +36,18 @@
       ]
     },
     {
+      "Label": "Letterer",
+      "Links": [
+        {
+          "Content": "Travis Lanham",
+          "Href": "https://starwars.fandom.com/wiki/Travis_Lanham"
+        }
+      ],
+      "Values": [
+        "Travis Lanham"
+      ]
+    },
+    {
       "Label": "Colorist",
       "Links": [
         {
@@ -45,6 +57,23 @@
       ],
       "Values": [
         "Erick Arciniega"
+      ]
+    },
+    {
+      "Label": "Editor",
+      "Links": [
+        {
+          "Content": "Mark Paniccia",
+          "Href": "https://starwars.fandom.com/wiki/Mark_Paniccia"
+        },
+        {
+          "Content": "Tom Groneman",
+          "Href": "https://starwars.fandom.com/wiki/Tom_Groneman"
+        }
+      ],
+      "Values": [
+        "Mark Paniccia (editor)",
+        "Tom Groneman (assistant editor)"
       ]
     },
     {
@@ -88,15 +117,32 @@
       ]
     },
     {
-      "Label": "Timeline",
+      "Label": "Reprinted in",
       "Links": [
         {
-          "Content": "32 BBY",
-          "Href": "https://starwars.fandom.com/wiki/32_BBY"
+          "Content": "Star Wars: Age of Republic — Heroes",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Republic_—_Heroes"
+        },
+        {
+          "Content": "Star Wars: Age of Republic HC",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Republic_(HC)"
         }
       ],
       "Values": [
-        "During or before 32 BBY"
+        "Star Wars: Age of Republic — Heroes",
+        "Star Wars: Age of Republic HC"
+      ]
+    },
+    {
+      "Label": "Timeline",
+      "Links": [
+        {
+          "Content": "34 BBY",
+          "Href": "https://starwars.fandom.com/wiki/34_BBY"
+        }
+      ],
+      "Values": [
+        "34 BBY"
       ]
     },
     {
@@ -114,14 +160,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 612122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Republic_—_Heroes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
       "PageId": 609669,
       "PageUrl": "https://starwars.fandom.com/wiki/Age_of_Republic_Special_1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 612122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Republic_—_Heroes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
     }
   ]
 }

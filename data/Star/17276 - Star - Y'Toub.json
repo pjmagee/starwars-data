@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "The Slice"
       ]
     },
     {
@@ -48,10 +53,42 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-12"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
+        },
+        {
+          "Content": "Ootmian Pabol",
+          "Href": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends"
+        },
+        {
+          "Content": "Pabol Hutta",
+          "Href": "https://starwars.fandom.com/wiki/Pabol_Hutta/Legends"
+        },
+        {
+          "Content": "Shag Pabol",
+          "Href": "https://starwars.fandom.com/wiki/Shag_Pabol/Legends"
+        },
+        {
+          "Content": "Sheela Run",
+          "Href": "https://starwars.fandom.com/wiki/Sheela_Run"
+        }
+      ],
+      "Values": [
+        "Oktos Route",
+        "Ootmian Pabol",
+        "Pabol Hutta",
+        "Shag Pabol",
+        "Sheela Run"
       ]
     },
     {
@@ -64,6 +101,10 @@
         {
           "Content": "Nal Koska",
           "Href": "https://starwars.fandom.com/wiki/Nal_Koska"
+        },
+        {
+          "Content": "moons",
+          "Href": "https://starwars.fandom.com/wiki/Moon/Legends"
         },
         {
           "Content": "Nal Hutta",
@@ -82,7 +123,7 @@
           "Href": "https://starwars.fandom.com/wiki/Kiskua"
         },
         {
-          "Content": "Unidentified moon",
+          "Content": "unidentified moon",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_moon_of_Kiskua"
         },
         {
@@ -94,14 +135,24 @@
         "Esyam",
         "Nal Koska",
         "2 moons",
-        "Nal Hutta (Originally Evocar)",
-        "5 moons",
-        "Nar Shaddaa",
+        "Nal Hutta (originally Evocar)",
+        "5 moons, including Nar Shaddaa",
         "Nal Yeshu",
         "Kiskua",
-        "18 moons",
-        "Unidentified moon",
+        "18 moons, including an unidentified moon",
         "Nar Hekka"
+      ]
+    },
+    {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Unidentified star",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_star_(Nar_Hekka)"
+        }
+      ],
+      "Values": [
+        "Unidentified star"
       ]
     }
   ],

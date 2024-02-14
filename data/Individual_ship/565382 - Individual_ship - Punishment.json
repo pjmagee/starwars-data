@@ -2,6 +2,7 @@
   "PageId": 565382,
   "PageUrl": "https://starwars.fandom.com/wiki/Punishment",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -30,12 +31,12 @@
           "Href": "https://starwars.fandom.com/wiki/5_ABY"
         },
         {
-          "Content": "Jakku",
-          "Href": "https://starwars.fandom.com/wiki/Jakku"
+          "Content": "Jakku system",
+          "Href": "https://starwars.fandom.com/wiki/Jakku_system"
         }
       ],
       "Values": [
-        "5 ABY, Jakku"
+        "5 ABY, Jakku system"
       ]
     },
     {
@@ -87,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 565381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Groff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

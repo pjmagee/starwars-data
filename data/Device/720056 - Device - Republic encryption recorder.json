@@ -2,7 +2,7 @@
   "PageId": 720056,
   "PageUrl": "https://starwars.fandom.com/wiki/Republic_encryption_recorder",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/85/RepublicEncryptionRecorder.png/revision/latest?cb=20220127215329",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/55/RepublicEncryptionRecorder-AABR.png/revision/latest?cb=20220127215329",
   "Data": [
     {
       "Label": "Titles",
@@ -12,39 +12,34 @@
       ]
     },
     {
-      "Label": "Date created",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "34 ABY",
-          "Href": "https://starwars.fandom.com/wiki/34_ABY"
+          "Content": "Espionage",
+          "Href": "https://starwars.fandom.com/wiki/Spy"
         }
       ],
       "Values": [
-        "By 34 ABY"
+        "Espionage equipment"
       ]
     },
     {
-      "Label": "Date destroyed",
+      "Label": "Locations",
       "Links": [
         {
-          "Content": "34 ABY",
-          "Href": "https://starwars.fandom.com/wiki/34_ABY"
+          "Content": "Colossus",
+          "Href": "https://starwars.fandom.com/wiki/Colossus"
         }
       ],
       "Values": [
-        "34 ABY"
+        "Colossus"
       ]
     },
     {
-      "Label": "Owners",
-      "Links": [
-        {
-          "Content": "Kazuda Xiono",
-          "Href": "https://starwars.fandom.com/wiki/Kazuda_Xiono"
-        }
-      ],
+      "Label": "Structure",
+      "Links": [],
       "Values": [
-        "Kazuda Xiono"
+        "Roughly square-shaped"
       ]
     },
     {
@@ -58,9 +53,20 @@
       "Label": "Purpose",
       "Links": [],
       "Values": [
-        "Data interception and replication"
+        "Data interception and recording"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 614078,
+      "PageUrl": "https://starwars.fandom.com/wiki/All_Aces_Battle_Royale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 649270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_backup_racer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

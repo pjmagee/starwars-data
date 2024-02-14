@@ -49,7 +49,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blond",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Blond"
       ]
@@ -86,14 +91,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 174946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thyferran_Aerospace_Defense_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 10523,
       "PageUrl": "https://starwars.fandom.com/wiki/Zaltin_Corporation",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 174946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thyferran_Aerospace_Defense_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

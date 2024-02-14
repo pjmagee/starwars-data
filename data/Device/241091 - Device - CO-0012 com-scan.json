@@ -2,6 +2,7 @@
   "PageId": 241091,
   "PageUrl": "https://starwars.fandom.com/wiki/CO-0012_com-scan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,12 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "MicroThrust Processors",
+          "Href": "https://starwars.fandom.com/wiki/MicroThrust_Processors"
+        }
+      ],
       "Values": [
         "MicroThrust Processors"
       ]
@@ -40,11 +46,22 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military/Legends"
+        }
+      ],
       "Values": [
-        "Security and War"
+        "Imperial military"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 3798,
+      "PageUrl": "https://starwars.fandom.com/wiki/LAVr_QH-7_Chariot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    }
+  ]
 }

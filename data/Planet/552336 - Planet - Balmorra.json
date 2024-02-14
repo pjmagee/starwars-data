@@ -2,7 +2,7 @@
   "PageId": 552336,
   "PageUrl": "https://starwars.fandom.com/wiki/Balmorra",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/TeltiTFA.png/revision/latest?cb=20210512161412",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bb/BalmorraTBB.png/revision/latest?cb=20230322145950",
   "Data": [
     {
       "Label": "Titles",
@@ -41,26 +41,88 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Moons",
       "Links": [
         {
-          "Content": "N-10",
+          "Content": "1",
+          "Href": "https://starwars.fandom.com/wiki/Balmorra%27s_moon"
+        }
+      ],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-10",
           "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        "N-10"
+        "M-10"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
+      "Values": [
+        "Mountains"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Balmorra relay",
+          "Href": "https://starwars.fandom.com/wiki/Balmorra_relay"
+        },
+        {
+          "Content": "Droid",
+          "Href": "https://starwars.fandom.com/wiki/Droid"
+        },
+        {
+          "Content": "factories",
+          "Href": "https://starwars.fandom.com/wiki/Factory"
+        },
+        {
+          "Content": "Imperial outpost",
+          "Href": "https://starwars.fandom.com/wiki/Balmorra_Imperial_outpost"
+        },
+        {
           "Content": "Swellbottom market",
           "Href": "https://starwars.fandom.com/wiki/Swellbottom_market"
         }
       ],
       "Values": [
+        "Balmorra relay",
+        "Droid factories",
+        "Imperial outpost",
         "Swellbottom market"
       ]
     },
@@ -89,6 +151,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 773866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Balmorra_Imperial_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 789100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Balmorra_relay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 638753,
       "PageUrl": "https://starwars.fandom.com/wiki/Swellbottom_market",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -102,6 +174,16 @@
       "PageId": 635482,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Baras'_spy_network",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 789911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_Sobrik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 759341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Balmorra's_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

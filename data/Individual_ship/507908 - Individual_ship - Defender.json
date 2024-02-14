@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -33,6 +33,32 @@
       ],
       "Values": [
         "Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
       ]
     },
     {
@@ -89,47 +115,95 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "point-defense laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+        },
+        {
+          "Content": "proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "DBY-827 heavy turbolaser turrets (8)",
-        "Medium dual turbolaser cannons (2)"
+        "8 DBY-827 heavy turbolaser turrets",
+        "2 medium dual turbolaser cannons",
+        "52 point-defense laser cannons",
+        "4 proton torpedo launchers",
+        "6 tractor beam projectors"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "V-19 Torrent starfighters",
+          "Href": "https://starwars.fandom.com/wiki/V-19_Torrent_starfighter"
+        }
+      ],
+      "Values": [
+        "V-19 Torrent starfighters"
       ]
     },
     {
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "hangar",
+          "Content": "Dorsal hangar",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
-        "Dorsal hangar bay"
+        "Dorsal hangar"
       ]
     },
     {
       "Label": "Escape craft",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Escape pods",
           "Href": "https://starwars.fandom.com/wiki/Escape_pod"
         }
       ],
       "Values": [
-        "Equipped"
+        "Escape pods"
       ]
     },
     {
       "Label": "Communication systems",
       "Links": [
         {
-          "Content": "Hyperwave comm scanners",
+          "Content": "hyperwave comm scanners",
           "Href": "https://starwars.fandom.com/wiki/Hyperwave_comm_scanner"
         }
       ],
       "Values": [
-        "Hyperwave comm scanners (2)"
+        "2 hyperwave comm scanners"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        }
+      ],
+      "Values": [
+        "Battleship",
+        "Starfighter carrier"
       ]
     },
     {
@@ -199,6 +273,18 @@
       "Values": [
         "Open Circle Fleet",
         "Skywalker's fleet"
+      ]
+    },
+    {
+      "Label": "Commander(s)",
+      "Links": [
+        {
+          "Content": "Anakin Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        }
+      ],
+      "Values": [
+        "Anakin Skywalker"
       ]
     }
   ],

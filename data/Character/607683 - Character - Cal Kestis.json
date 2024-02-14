@@ -2,13 +2,25 @@
   "PageId": 607683,
   "PageUrl": "https://starwars.fandom.com/wiki/Cal_Kestis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1f/Cal-Kestis.png/revision/latest?cb=20201205032359",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/CalKestisBD1-Survivor.png/revision/latest?cb=20230501160141",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Cal Kestis"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Bracca",
+          "Href": "https://starwars.fandom.com/wiki/Bracca"
+        }
+      ],
+      "Values": [
+        "Bracca (adoptive)"
       ]
     },
     {
@@ -36,19 +48,22 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
-        },
-        {
-          "Content": "foot",
-          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "1.82 meters (5 foot, 9 inches)"
+        "1.8 meters"
       ]
     },
     {
@@ -97,8 +112,12 @@
           "Href": "https://starwars.fandom.com/wiki/Scrapper_Guild"
         },
         {
-          "Content": "Mantis crew",
+          "Content": "Stinger Mantis crew",
           "Href": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew"
+        },
+        {
+          "Content": "Hidden Path",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Path"
         }
       ],
       "Values": [
@@ -106,7 +125,8 @@
         "Galactic Republic",
         "13th Battalion",
         "Scrapper Guild",
-        "Mantis crew"
+        "Stinger Mantis crew",
+        "Hidden Path"
       ]
     },
     {
@@ -137,9 +157,54 @@
   ],
   "Relationships": [
     {
+      "PageId": 636372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Albedo_Brave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 636405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 637983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Albedo_Brave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 621214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cere_Junda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636274,
+      "PageUrl": "https://starwars.fandom.com/wiki/13th_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 641620,
       "PageUrl": "https://starwars.fandom.com/wiki/Climbing_claw",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 624378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 766926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_tuner_device",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 219991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_on_Kashyyyk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 742288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cal_Kestis's_theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 637267,
@@ -157,6 +222,96 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
+      "PageId": 756617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guardian_(outfit)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 756622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sumi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 757817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pathfinder_(outfit)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 757850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_(poncho)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 758104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rainforest_(poncho)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 756098,
+      "PageUrl": "https://starwars.fandom.com/wiki/BD-1's_tapping_code",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 759101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Coruscant_(Cal_Kestis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 765048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_on_Tanalorr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 792457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Shattered_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 792912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Central_Manse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 793085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rescue_ZN-A4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 793733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_the_Shattered_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 621212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 636045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 761274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commando_(poncho)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 777550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outlander_(poncho)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 636387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 765781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abyss_compass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
       "PageId": 651145,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Zeffo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -167,29 +322,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 621214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cere_Junda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636045,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 219991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_on_Kashyyyk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 636274,
-      "PageUrl": "https://starwars.fandom.com/wiki/13th_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 621212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal's_lightsaber",
+      "PageId": 765427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drya_Thornne's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 768533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Santari_Khri's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 766719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pilgrim's_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 636179,
@@ -200,21 +345,6 @@
       "PageId": 636304,
       "PageUrl": "https://starwars.fandom.com/wiki/Cal_Kestis'_second_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 637983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Albedo_Brave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 636372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Albedo_Brave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 636405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Bracca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

@@ -29,10 +29,14 @@
         {
           "Content": "1 BBY",
           "Href": "https://starwars.fandom.com/wiki/1_BBY"
+        },
+        {
+          "Content": "Tiber Saxon's Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Tiber_Saxon%27s_Star_Destroyer"
         }
       ],
       "Values": [
-        "c. 1 BBY, Mandalore"
+        "1 BBY, Tiber Saxon's Star Destroyer, Mandalore"
       ]
     },
     {
@@ -86,7 +90,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Vizsla",
@@ -103,6 +107,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Gar Saxon",
+          "Href": "https://starwars.fandom.com/wiki/Gar_Saxon"
+        }
+      ],
+      "Values": [
+        "Gar Saxon"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -110,17 +126,22 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Super Commando",
+          "Content": "Imperial Super Commandos",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Super_Commando"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Super Commando"
+        "Imperial Super Commandos"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 580165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 567163,
       "PageUrl": "https://starwars.fandom.com/wiki/Clan_Saxon",
@@ -132,19 +153,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 567160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
       "PageId": 581695,
       "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon's_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 580165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 450970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gar_Saxon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 567160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

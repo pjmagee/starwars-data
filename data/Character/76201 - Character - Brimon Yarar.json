@@ -2,6 +2,7 @@
   "PageId": 76201,
   "PageUrl": "https://starwars.fandom.com/wiki/Brimon_Yarar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -66,12 +67,23 @@
         {
           "Content": "Human League",
           "Href": "https://starwars.fandom.com/wiki/Human_League"
+        },
+        {
+          "Content": "Human League Heritage Squad",
+          "Href": "https://starwars.fandom.com/wiki/Human_League_Heritage_Squad"
         }
       ],
       "Values": [
-        "Human League"
+        "Human League",
+        "Human League Heritage Squad"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 102998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Human_League_Heritage_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

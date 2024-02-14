@@ -2,13 +2,39 @@
   "PageId": 474180,
   "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/Malevolence2.jpg/revision/latest?cb=20090311015832",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/be/Malevolence-TCWIV.png/revision/latest?cb=20221119221606",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Malevolence"
+      ]
+    },
+    {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Ruggle Schmong",
+          "Href": "https://starwars.fandom.com/wiki/Ruggle_Schmong"
+        },
+        {
+          "Content": "Quarren",
+          "Href": "https://starwars.fandom.com/wiki/Quarren"
+        },
+        {
+          "Content": "engineers",
+          "Href": "https://starwars.fandom.com/wiki/Engineer"
+        },
+        {
+          "Content": "SoroSuub Corporation",
+          "Href": "https://starwars.fandom.com/wiki/SoroSuub_Corporation"
+        }
+      ],
+      "Values": [
+        "Ruggle Schmong (blueprinted)",
+        "Quarren engineers (builders)",
+        "SoroSuub Corporation (design basis)"
       ]
     },
     {
@@ -41,16 +67,8 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
-        {
-          "Content": "Battleship",
-          "Href": "https://starwars.fandom.com/wiki/Battleship"
-        },
-        {
-          "Content": "Dreadnought",
-          "Href": "https://starwars.fandom.com/wiki/Dreadnought"
-        },
         {
           "Content": "Heavy cruiser",
           "Href": "https://starwars.fandom.com/wiki/Heavy_cruiser"
@@ -61,9 +79,8 @@
         }
       ],
       "Values": [
-        "Battleship",
-        "Dreadnought",
         "Heavy cruiser",
+        "Star battleship",
         "Star Dreadnought"
       ]
     },
@@ -95,12 +112,12 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Sublight engines",
+          "Content": "sublight engines",
           "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
         }
       ],
       "Values": [
-        "Sublight engines (16)"
+        "16 sublight engines"
       ]
     },
     {
@@ -126,12 +143,13 @@
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "Reactor",
-          "Href": "https://starwars.fandom.com/wiki/Reactor"
+          "Content": "power generator",
+          "Href": "https://starwars.fandom.com/wiki/Power_generator"
         }
       ],
       "Values": [
-        "Reactor"
+        "Primary power generator",
+        "Secondary power plant"
       ]
     },
     {
@@ -171,6 +189,18 @@
       ]
     },
     {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Sensor jammers",
+          "Href": "https://starwars.fandom.com/wiki/Sensor_jammer"
+        }
+      ],
+      "Values": [
+        "Sensor jammers"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -178,12 +208,8 @@
           "Href": "https://starwars.fandom.com/wiki/Mega-ion_cannon"
         },
         {
-          "Content": "Point-defense laser cannons",
+          "Content": "point-defense",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
-        },
-        {
-          "Content": "Turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
           "Content": "Tractor beam",
@@ -192,8 +218,8 @@
       ],
       "Values": [
         "Mega-ion cannons (2)",
-        "Point-defense laser cannons (5)",
-        "Turbolasers (500)",
+        "500 twin turbolaser batteries",
+        "5 point-defense light laser cannon batteries",
         "Tractor beam"
       ]
     },
@@ -201,12 +227,16 @@
       "Label": "Complement",
       "Links": [
         {
-          "Content": "Droch-class boarding ship",
-          "Href": "https://starwars.fandom.com/wiki/Droch-class_boarding_ship"
+          "Content": "droid starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Droid_starfighter"
         },
         {
-          "Content": "Variable Geometry Self-Propelled Battle Droid, Mark Is",
+          "Content": "vulture droids",
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
+        },
+        {
+          "Content": "Droch-class boarding ships",
+          "Href": "https://starwars.fandom.com/wiki/Droch-class_boarding_ship"
         },
         {
           "Content": "Soulless One",
@@ -214,8 +244,8 @@
         }
       ],
       "Values": [
-        "At least one Droch-class boarding ship",
-        "Variable Geometry Self-Propelled Battle Droid, Mark Is",
+        "200+ droid starfighters, including vulture droids",
+        "Droch-class boarding ships",
         "Soulless One"
       ]
     },
@@ -235,12 +265,16 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "battle droids",
-          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+          "Content": "droids",
+          "Href": "https://starwars.fandom.com/wiki/Droid"
         },
         {
           "Content": "B1-series battle droids",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
+        },
+        {
+          "Content": "B2-series super battle droids",
+          "Href": "https://starwars.fandom.com/wiki/B2-series_super_battle_droid"
         },
         {
           "Content": "Firefighter battle droids",
@@ -252,25 +286,34 @@
         }
       ],
       "Values": [
-        "900 battle droids",
+        "23,530 droids, with support and tactical crew",
         "B1-series battle droids",
+        "B2-series super battle droids",
         "Firefighter battle droids",
         "OOM command battle droids"
+      ]
+    },
+    {
+      "Label": "Minimum crew",
+      "Links": [
+        {
+          "Content": "battle droids",
+          "Href": "https://starwars.fandom.com/wiki/Battle_droid"
+        }
+      ],
+      "Values": [
+        "900 battle droids"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [
         {
-          "Content": "B1-series rocket battle droids",
+          "Content": "rocket battle droids",
           "Href": "https://starwars.fandom.com/wiki/B1-series_rocket_battle_droid"
         },
         {
-          "Content": "B2-series super battle droids",
-          "Href": "https://starwars.fandom.com/wiki/B2-series_super_battle_droid"
-        },
-        {
-          "Content": "B2-HA super battle droid",
+          "Content": "B2-HA super battle droids",
           "Href": "https://starwars.fandom.com/wiki/B2-HA_super_battle_droid"
         },
         {
@@ -279,10 +322,9 @@
         }
       ],
       "Values": [
-        "B1-series battle droids",
-        "B1-series rocket battle droids",
-        "B2-series super battle droids",
-        "At least 1 B2-HA super battle droid",
+        "10,000+ battle droids",
+        "B1-series droids, including rocket battle droids",
+        "B2-series droids, including B2-HA super battle droids",
         "Droidekas"
       ]
     },
@@ -290,12 +332,32 @@
       "Label": "Cargo handling systems",
       "Links": [
         {
-          "Content": "Internal shuttle train system",
+          "Content": "Rail jet",
           "Href": "https://starwars.fandom.com/wiki/Rail_jet"
         }
       ],
       "Values": [
-        "Internal shuttle train system"
+        "Rail jet train system"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "Hyperwave",
+          "Href": "https://starwars.fandom.com/wiki/Hyperwave"
+        },
+        {
+          "Content": "transmission",
+          "Href": "https://starwars.fandom.com/wiki/Transmitter"
+        },
+        {
+          "Content": "antennas",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Hyperwave emission and transmission antennas"
       ]
     },
     {
@@ -314,17 +376,22 @@
       "Label": "Other systems",
       "Links": [
         {
+          "Content": "reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        },
+        {
           "Content": "Plasma rotors",
           "Href": "https://starwars.fandom.com/wiki/Plasma_rotor"
         },
         {
-          "Content": "Sensor jammers",
-          "Href": "https://starwars.fandom.com/wiki/Sensor_jammer"
+          "Content": "Tachyonic",
+          "Href": "https://starwars.fandom.com/wiki/Tachyon"
         }
       ],
       "Values": [
+        "Cannon reactor valves",
         "Plasma rotors",
-        "Sensor jammers"
+        "Tachyonic discharge systems"
       ]
     },
     {
@@ -336,7 +403,9 @@
         }
       ],
       "Values": [
-        "Flagship"
+        "Experimental testbed",
+        "Flagship",
+        "Terror weapon"
       ]
     },
     {
@@ -393,10 +462,15 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems",
+        "Sith Order"
       ]
     },
     {
@@ -430,7 +504,12 @@
     },
     {
       "Label": "Commander(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Malevolence OOM command battle droid",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Malevolence)"
+        }
+      ],
       "Values": [
         "Malevolence OOM command battle droid"
       ]
@@ -438,9 +517,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 600484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_Campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
       "PageId": 603475,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Malevolence)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 684182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Malevolence)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 500563,
@@ -453,14 +542,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 600484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence_Campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 684182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Malevolence)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 748369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Malevolence)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

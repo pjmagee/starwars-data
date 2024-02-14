@@ -56,6 +56,10 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Imperial outpost",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_outpost_(Lok)"
+        },
+        {
           "Content": "Sulfur Lake",
           "Href": "https://starwars.fandom.com/wiki/Sulfur_Lake"
         },
@@ -65,6 +69,7 @@
         }
       ],
       "Values": [
+        "Imperial outpost",
         "Sulfur Lake",
         "Sulfur Lake Pirate Hideout"
       ]
@@ -72,14 +77,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 6838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lok/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 430514,
       "PageUrl": "https://starwars.fandom.com/wiki/Sulfur_Lake_Pirate_Hideout",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 6838,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lok/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 751952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_outpost_(Lok)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

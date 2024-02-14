@@ -2,6 +2,7 @@
   "PageId": 712567,
   "PageUrl": "https://starwars.fandom.com/wiki/Falk",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -18,15 +19,21 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Military",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Military"
+          "Content": "224th Imperial Armored Division",
+          "Href": "https://starwars.fandom.com/wiki/224th_Imperial_Armored_Division"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Military"
+        "224th Imperial Armored Division"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 519817,
+      "PageUrl": "https://starwars.fandom.com/wiki/224th_Imperial_Armored_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

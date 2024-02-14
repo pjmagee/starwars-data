@@ -89,9 +89,14 @@
     },
     {
       "Label": "Movies",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Solo",
+          "Href": "https://starwars.fandom.com/wiki/Solo:_A_Star_Wars_Story"
+        }
+      ],
       "Values": [
-        "All"
+        "All except Solo"
       ]
     },
     {
@@ -112,10 +117,20 @@
         {
           "Content": "Holiday Special",
           "Href": "https://starwars.fandom.com/wiki/The_LEGO_Star_Wars_Holiday_Special"
+        },
+        {
+          "Content": "Terrifying Tales",
+          "Href": "https://starwars.fandom.com/wiki/LEGO_Star_Wars_Terrifying_Tales"
+        },
+        {
+          "Content": "Summer Vacation",
+          "Href": "https://starwars.fandom.com/wiki/LEGO_Star_Wars_Summer_Vacation"
         }
       ],
       "Values": [
-        "Holiday Special"
+        "Holiday Special",
+        "Terrifying Tales",
+        "Summer Vacation"
       ]
     },
     {

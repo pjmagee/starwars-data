@@ -103,12 +103,19 @@
       "Label": "Sensor color",
       "Links": [
         {
-          "Content": "Red",
+          "Content": "Black",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Red"
+        "Black",
+        "White",
+        "Red (Chest light)",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -150,8 +157,40 @@
           "Href": "https://starwars.fandom.com/wiki/Separatist_Droid_Army"
         },
         {
+          "Content": "Cato Neimoidian government",
+          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidian_government"
+        },
+        {
+          "Content": "Bedlam Raiders",
+          "Href": "https://starwars.fandom.com/wiki/Bedlam_Raiders"
+        },
+        {
           "Content": "Quarantine World III",
           "Href": "https://starwars.fandom.com/wiki/Quarantine_World_III"
+        },
+        {
+          "Content": "Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
+        },
+        {
+          "Content": "Second Revelation",
+          "Href": "https://starwars.fandom.com/wiki/Second_Revelation"
+        },
+        {
+          "Content": "Jul's droid army",
+          "Href": "https://starwars.fandom.com/wiki/Jul%27s_droid_army"
+        },
+        {
+          "Content": "Droid uprising",
+          "Href": "https://starwars.fandom.com/wiki/Droid_uprising"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
+          "Content": "Plazir-15's government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
         },
         {
           "Content": "House Maccon",
@@ -160,6 +199,10 @@
         {
           "Content": "House Reya",
           "Href": "https://starwars.fandom.com/wiki/House_Reya"
+        },
+        {
+          "Content": "Sidon Ithano's crew",
+          "Href": "https://starwars.fandom.com/wiki/Sidon_Ithano%27s_crew"
         },
         {
           "Content": "Warbird gang",
@@ -179,9 +222,18 @@
         "Trade Federation",
         "Confederacy of Independent Systems",
         "Separatist Droid Army",
+        "Cato Neimoidian government",
+        "Bedlam Raiders",
         "Quarantine World III",
+        "Crimson Dawn",
+        "Second Revelation",
+        "Jul's droid army",
+        "Droid uprising",
+        "Scourge (As a vessel)",
+        "Plazir-15's government",
         "House Maccon",
         "House Reya",
+        "Sidon Ithano's crew",
         "Warbird gang",
         "B1's B2-series super battle droid battalion",
         "Team Colossus"
@@ -190,13 +242,58 @@
   ],
   "Relationships": [
     {
-      "PageId": 591057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cad_Bane's_Munificent-class_star_frigate",
+      "PageId": 628152,
+      "PageUrl": "https://starwars.fandom.com/wiki/B2-ACM_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 507793,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skytop_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 647472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trench's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 639029,
+      "PageUrl": "https://starwars.fandom.com/wiki/B-series_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 629986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 634871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_battle_droid_legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 466804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 704395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_droid_unit",
+      "PageId": 474180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 788771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2-series_super_battle_droid_(Gabredor_III)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 575849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 28134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Arcus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -205,19 +302,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 456571,
-      "PageUrl": "https://starwars.fandom.com/wiki/B2_grapple_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 663609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 507793,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skytop_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 655631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2_super_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 705832,
@@ -225,44 +312,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 647472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trench's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 671352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 618741,
       "PageUrl": "https://starwars.fandom.com/wiki/Team_Colossus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 413153,
-      "PageUrl": "https://starwars.fandom.com/wiki/B2-RP_super_battle_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 532840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invulnerable",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 600591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Separatist_platoon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 605764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hissrich_droid_unit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 655631,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2_super_battle_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 475453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Multi-Troop_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
       "PageId": 475358,
@@ -275,38 +332,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 575849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 505882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 584369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 4944,
-      "PageUrl": "https://starwars.fandom.com/wiki/HMP_droid_gunship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 519702,
-      "PageUrl": "https://starwars.fandom.com/wiki/G21",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 466804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 474180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "PageId": 532840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invulnerable",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -325,24 +352,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 626652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geonosian_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 761190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_rogue_B2-series_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 629986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 634871,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_battle_droid_legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 628152,
-      "PageUrl": "https://starwars.fandom.com/wiki/B2-ACM_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 591057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cad_Bane's_Munificent-class_star_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 557980,
@@ -350,14 +367,94 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 475453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Multi-Troop_Transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+      "PageId": 519702,
+      "PageUrl": "https://starwars.fandom.com/wiki/G21",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 639029,
-      "PageUrl": "https://starwars.fandom.com/wiki/B-series_battle_droid",
+      "PageId": 748963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attempted_execution_of_Ramsis_Dendup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 605764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hissrich_droid_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 584369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 4944,
+      "PageUrl": "https://starwars.fandom.com/wiki/HMP_droid_gunship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 456571,
+      "PageUrl": "https://starwars.fandom.com/wiki/B2_grapple_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 671352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 413153,
+      "PageUrl": "https://starwars.fandom.com/wiki/B2-RP_super_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 704395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_droid_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 749189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_C-9979_landing_craft_(Rugosa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 505882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Combat_Automata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 765574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beetu_Deetu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 771101,
+      "PageUrl": "https://starwars.fandom.com/wiki/388",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 771102,
+      "PageUrl": "https://starwars.fandom.com/wiki/459",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 739296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2-series_super_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 600591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Separatist_platoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 626652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosian_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

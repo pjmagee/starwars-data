@@ -31,6 +31,10 @@
           "Href": "https://starwars.fandom.com/wiki/Supreme_Chancellor/Legends"
         },
         {
+          "Content": "Galactic Emperor",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Emperor/Legends"
+        },
+        {
           "Content": "Palpatine",
           "Href": "https://starwars.fandom.com/wiki/Palpatine/Legends"
         },
@@ -68,7 +72,7 @@
         }
       ],
       "Values": [
-        "Supreme Chancellor Palpatine",
+        "Supreme Chancellor/Galactic Emperor Palpatine",
         "Jedi General Anakin Skywalker/Supreme Commander Darth Vader",
         "Jedi General Pong Krell (briefly)",
         "General Oron Jaeger"
@@ -82,8 +86,8 @@
           "Href": "https://starwars.fandom.com/wiki/Senior_clone_commander"
         },
         {
-          "Content": "CC-1119",
-          "Href": "https://starwars.fandom.com/wiki/CC-1119/Legends"
+          "Content": "Appo",
+          "Href": "https://starwars.fandom.com/wiki/Appo/Legends"
         },
         {
           "Content": "Jedi Commander",
@@ -98,14 +102,14 @@
           "Href": "https://starwars.fandom.com/wiki/Clone_trooper_captain"
         },
         {
-          "Content": "CT-7567",
-          "Href": "https://starwars.fandom.com/wiki/CT-7567/Legends"
+          "Content": "Rex",
+          "Href": "https://starwars.fandom.com/wiki/Rex/Legends"
         }
       ],
       "Values": [
-        "Commander CC-1119 \"Appo",
+        "Commander Appo",
         "Jedi Commander Ahsoka Tano",
-        "Captain CT-7567 \"Rex"
+        "Captain Rex"
       ]
     },
     {
@@ -136,8 +140,8 @@
           "Href": "https://starwars.fandom.com/wiki/Clone_trooper_sergeant"
         },
         {
-          "Content": "CS-2207",
-          "Href": "https://starwars.fandom.com/wiki/CS-2207"
+          "Content": "Boomer",
+          "Href": "https://starwars.fandom.com/wiki/Boomer_(Advanced_Recon_Force_trooper)"
         },
         {
           "Content": "Sergeant",
@@ -148,16 +152,16 @@
           "Href": "https://starwars.fandom.com/wiki/Coric"
         },
         {
-          "Content": "CT-0000/1010",
-          "Href": "https://starwars.fandom.com/wiki/CT-0000/1010/Legends"
+          "Content": "Fox",
+          "Href": "https://starwars.fandom.com/wiki/Fox_(501st_Legion)/Legends"
         },
         {
           "Content": "Hez",
           "Href": "https://starwars.fandom.com/wiki/Hez"
         },
         {
-          "Content": "CS-1004",
-          "Href": "https://starwars.fandom.com/wiki/CS-1004"
+          "Content": "Kano",
+          "Href": "https://starwars.fandom.com/wiki/Kano"
         },
         {
           "Content": "Unidentified clone trooper sergeant (Decoy Squad Five)",
@@ -169,15 +173,15 @@
         }
       ],
       "Values": [
-        "Commander \"Bow",
-        "Commander \"Vill",
-        "Commander \"Voca",
+        "Commander Bow",
+        "Commander Vill",
+        "Commander Voca",
         "Commander Roly Melusar",
-        "Sergeant CS-2207 \"Boomer",
-        "Sergeant \"Coric",
-        "Sergeant CT-0000/1010 \"Fox",
-        "Sergeant \"Hez",
-        "Sergeant CS-1004 \"Kano",
+        "Sergeant Boomer",
+        "Sergeant Coric",
+        "Sergeant Fox",
+        "Sergeant Hez",
+        "Sergeant Kano",
         "Unidentified clone trooper sergeant (Decoy Squad Five)",
         "Unidentified clone trooper sergeant (Teth)"
       ]
@@ -238,7 +242,7 @@
         },
         {
           "Content": "Death Star I",
-          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station/Legends"
+          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station"
         },
         {
           "Content": "Nirauan",
@@ -356,28 +360,203 @@
   ],
   "Relationships": [
     {
+      "PageId": 7369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fox_(501st_Legion)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 207533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resolute/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 356490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umbaran_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 365275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_trooper/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 110637,
+      "PageUrl": "https://starwars.fandom.com/wiki/NT-311",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 187253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rex/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 287505,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kix/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 287506,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hardcase/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 287509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jesse/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 382261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Umbara)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 289828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_501st_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 327156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 187871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 216434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retired_clone_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 291640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redeye/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 178180,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_commander_(Tantive_IV)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 348216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_501st_stormtrooper_(first_casualty)",
+      "PageId": 144705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 409680,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-3636",
+      "PageId": 436581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hock_Malsuum",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 473995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silam_Dunerz",
+      "PageId": 232101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torrent_Company/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 6133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 264205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_commander_(Jedi_Temple)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 65759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bow_(clone_stormtrooper)",
+      "PageId": 5822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daine_Jir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 279748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roly_Melusar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 279749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ennen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 355232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dogma/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 355233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tup/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 230630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denal/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 335442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charger/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 71722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Decoy_Squad_Five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 29753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star_Uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 678708,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 61962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triton_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 102325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oron_Jaeger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 539000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_3_(Umbara)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 356372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oz/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 356373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ringo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 154357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_second_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 606501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker's_team/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 5026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Appo/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -396,19 +575,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 289828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_501st_stormtrooper",
+      "PageId": 113937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vill",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 207533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resolute/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 245021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slammer/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 232101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torrent_Company/Legends",
+      "PageId": 725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 348216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_501st_stormtrooper_(first_casualty)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 473995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silam_Dunerz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 65759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bow_(clone_stormtrooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 226779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fives/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 87505,
+      "PageUrl": "https://starwars.fandom.com/wiki/DV-692",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 87506,
+      "PageUrl": "https://starwars.fandom.com/wiki/DV-523",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 261749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boomer_(Advanced_Recon_Force_trooper)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 334394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 481205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mak_Tennar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 594848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Negastrike_platoon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 58579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cuis_clone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 219596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 409680,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-3636",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 577881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_sergeant_(Teth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 276192,
@@ -429,256 +678,6 @@
       "PageId": 280701,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Commando_Special_Unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 102325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oron_Jaeger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 144705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 219596,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 261749,
-      "PageUrl": "https://starwars.fandom.com/wiki/CS-2207",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 365275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Advanced_Recon_Force_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 539000,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_3_(Umbara)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 7369,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-0000/1010/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 327156,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 356490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Umbaran_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 29753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star_Uprising",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 226779,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5555/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 577881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_sergeant_(Teth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 606501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker's_team/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 436581,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5539",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 10091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 29780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_Systems_Army/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 58579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cuis_clone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 230630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Denal/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 678708,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 5822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daine_Jir/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 71722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Decoy_Squad_Five",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 5026,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-1119/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 6133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 291640,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redeye/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 110637,
-      "PageUrl": "https://starwars.fandom.com/wiki/NT-311",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 87505,
-      "PageUrl": "https://starwars.fandom.com/wiki/DV-692",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 87506,
-      "PageUrl": "https://starwars.fandom.com/wiki/DV-523",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 154357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_second_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 113937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 187253,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-7567/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 187871,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-21-0408",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 216434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retired_clone_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 279835,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-70558",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 356372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oz/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 356373,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ringo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 334394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 481205,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mak_Tennar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 279748,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roly_Melusar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 279749,
-      "PageUrl": "https://starwars.fandom.com/wiki/IC-4447",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 335442,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charger/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 355232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dogma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 355233,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5385/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 61962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triton_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 245021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slammer/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 264205,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_commander_(Jedi_Temple)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 287505,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kix/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 287506,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hardcase/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 287509,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5597/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 382261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Umbara)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

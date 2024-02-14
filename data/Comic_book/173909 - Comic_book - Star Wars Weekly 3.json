@@ -130,7 +130,42 @@
       "Values": [
         "3"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "Star Wars Weekly 2",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars_Weekly_2"
+        }
+      ],
+      "Values": [
+        "Star Wars Weekly 2"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "Star Wars Weekly 4",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars_Weekly_4"
+        }
+      ],
+      "Values": [
+        "Star Wars Weekly 4"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 173908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Weekly_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 173912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Weekly_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    }
+  ]
 }

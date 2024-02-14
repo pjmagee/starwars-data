@@ -31,11 +31,40 @@
       ]
     },
     {
+      "Label": "Culture",
+      "Links": [
+        {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi/Legends"
+        },
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith/Legends"
+        }
+      ],
+      "Values": [
+        "Jedi",
+        "Sith"
+      ]
+    },
+    {
       "Label": "Owners",
       "Links": [
         {
           "Content": "Dooku",
           "Href": "https://starwars.fandom.com/wiki/Dooku/Legends"
+        },
+        {
+          "Content": "Dooku's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Dooku%27s_lightsaber/Legends"
+        },
+        {
+          "Content": "Exar Kun",
+          "Href": "https://starwars.fandom.com/wiki/Exar_Kun/Legends"
+        },
+        {
+          "Content": "Exar Kun's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Exar_Kun%27s_lightsaber/Legends"
         },
         {
           "Content": "Gantoris",
@@ -47,19 +76,28 @@
         },
         {
           "Content": "Corran Horn",
-          "Href": "https://starwars.fandom.com/wiki/Corran_Horn"
+          "Href": "https://starwars.fandom.com/wiki/Corran_Horn/Legends"
+        },
+        {
+          "Content": "Corran Horn's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Corran_Horn%27s_lightsaber"
         },
         {
           "Content": "Darth Vader",
           "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
+        },
+        {
+          "Content": "Darth Vader's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vader%27s_lightsaber/Legends"
         }
       ],
       "Values": [
-        "Dooku",
-        "Gantoris",
-        "Keiran Halcyon",
-        "Corran Horn",
-        "Darth Vader"
+        "Dooku (Dooku's lightsaber)",
+        "Exar Kun (Exar Kun's lightsaber)",
+        "Gantoris (Gantoris's lightsaber)",
+        "Keiran Halcyon (Keiran Halcyon's lightsaber)",
+        "Corran Horn (Corran Horn's lightsaber)",
+        "Darth Vader (Darth Vader's lightsaber)"
       ]
     },
     {
@@ -118,11 +156,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 386252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corran_Horn's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
       "PageId": 169171,
       "PageUrl": "https://starwars.fandom.com/wiki/Exar_Kun's_lightsaber/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
@@ -135,6 +168,11 @@
     {
       "PageId": 294987,
       "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 386252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corran_Horn's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     }
   ]

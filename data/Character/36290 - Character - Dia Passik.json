@@ -48,8 +48,20 @@
       ]
     },
     {
-      "Label": "Eye color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -59,6 +71,30 @@
       "Links": [],
       "Values": [
         "Green"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Garik Loran",
+          "Href": "https://starwars.fandom.com/wiki/Garik_Loran"
+        }
+      ],
+      "Values": [
+        "Garik Loran"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Adra Passik",
+          "Href": "https://starwars.fandom.com/wiki/Adra_Passik"
+        }
+      ],
+      "Values": [
+        "Adra Passik"
       ]
     },
     {
@@ -81,9 +117,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 389927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adra_Passik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 394801,
       "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Garik_Loran_and_Dia_Passik",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 12408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garik_Loran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

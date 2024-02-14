@@ -2,12 +2,29 @@
   "PageId": 729599,
   "PageUrl": "https://starwars.fandom.com/wiki/Lythian_pirate_raids",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Lythian pirate raids"
+      ]
+    },
+    {
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year/Legends"
+        },
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "Several years before 22 BBY"
       ]
     },
     {
@@ -44,5 +61,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelleem_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

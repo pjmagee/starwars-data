@@ -2,6 +2,7 @@
   "PageId": 619087,
   "PageUrl": "https://starwars.fandom.com/wiki/Talivar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -16,7 +17,25 @@
       "Values": [
         "Terrestrial"
       ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Flix's mother's home",
+          "Href": "https://starwars.fandom.com/wiki/Flix%27s_mother%27s_home"
+        }
+      ],
+      "Values": [
+        "Flix's mother's home"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 764877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flix's_mother's_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

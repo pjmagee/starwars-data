@@ -2,7 +2,7 @@
   "PageId": 237352,
   "PageUrl": "https://starwars.fandom.com/wiki/COO-series_cook_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/53/Unidentified_COO-series_cook_droid.png/revision/latest?cb=20220130010455",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c2/ChefDroid-BoBFBox.png/revision/latest?cb=20231201044408",
   "Data": [
     {
       "Label": "Titles",
@@ -22,23 +22,78 @@
       "Values": [
         "Class 3"
       ]
+    },
+    {
+      "Label": "Sensor color",
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        }
+      ],
+      "Values": [
+        "Yellow",
+        "Green",
+        "Purple (Under Scourge infection)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
+          "Content": "Jabba's criminal empire",
+          "Href": "https://starwars.fandom.com/wiki/Jabba%27s_criminal_empire"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic",
+        "Scourge (As a vessel)",
+        "Jabba's criminal empire",
+        "Plazir-15 government"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 664830,
-      "PageUrl": "https://starwars.fandom.com/wiki/COO-2180",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
     {
       "PageId": 674215,
       "PageUrl": "https://starwars.fandom.com/wiki/COO-2310",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
+      "PageId": 664830,
+      "PageUrl": "https://starwars.fandom.com/wiki/COO-2180",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
       "PageId": 719388,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_COO-series_cook_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 767954,
+      "PageUrl": "https://starwars.fandom.com/wiki/COO-4MRE",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 483041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

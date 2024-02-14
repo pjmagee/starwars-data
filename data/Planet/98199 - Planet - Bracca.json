@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-9",
@@ -52,6 +52,18 @@
       ],
       "Values": [
         "P-9"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Randon Run",
+          "Href": "https://starwars.fandom.com/wiki/Randon_Run"
+        }
+      ],
+      "Values": [
+        "Randon Run"
       ]
     },
     {
@@ -86,7 +98,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Junkyards",
@@ -96,6 +108,18 @@
     {
       "Label": "Points of interest",
       "Links": [
+        {
+          "Content": "Shipbreaking Yard",
+          "Href": "https://starwars.fandom.com/wiki/Shipbreaking_Yard"
+        },
+        {
+          "Content": "Guild store",
+          "Href": "https://starwars.fandom.com/wiki/Guild_store"
+        },
+        {
+          "Content": "Worker Rail Route 213",
+          "Href": "https://starwars.fandom.com/wiki/Worker_Rail_Route_213"
+        },
         {
           "Content": "Platform thirty-three",
           "Href": "https://starwars.fandom.com/wiki/Platform_thirty-three"
@@ -111,23 +135,17 @@
         {
           "Content": "Retired Control Tower",
           "Href": "https://starwars.fandom.com/wiki/Retired_Control_Tower"
-        },
-        {
-          "Content": "Shipbreaking Yard",
-          "Href": "https://starwars.fandom.com/wiki/Shipbreaking_Yard"
-        },
-        {
-          "Content": "Worker Rail Route 213",
-          "Href": "https://starwars.fandom.com/wiki/Worker_Rail_Route_213"
         }
       ],
       "Values": [
+        "Shipbreaking Yard",
+        "Bracca spaceports",
+        "Guild store",
+        "Worker Rail Route 213",
         "Platform thirty-three",
         "Platform thirty-two",
         "Platform twenty",
-        "Retired Control Tower",
-        "Shipbreaking Yard",
-        "Worker Rail Route 213"
+        "Retired Control Tower"
       ]
     },
     {
@@ -153,7 +171,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Abednedo",
@@ -166,12 +184,27 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Mirialan",
+          "Href": "https://starwars.fandom.com/wiki/Mirialan"
+        },
+        {
+          "Content": "Pantoran",
+          "Href": "https://starwars.fandom.com/wiki/Pantoran"
+        },
+        {
+          "Content": "Rodian",
+          "Href": "https://starwars.fandom.com/wiki/Rodian"
         }
       ],
       "Values": [
         "Abednedo",
         "Dianoga",
-        "Human"
+        "Human",
+        "Mirialan",
+        "Pantoran",
+        "Rodian"
       ]
     },
     {
@@ -224,19 +257,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 650162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Worker_Rail_Route_213",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 636405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 637639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrobaton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 697930,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-8508",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 729408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strike_on_Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 635132,
@@ -259,84 +287,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 637656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shipbreaking_Yard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 635473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bracca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 637242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scrap_rat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 677264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 693540,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9904's_Elite_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 697367,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Bracca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 597584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 636140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bracca_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 637287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bracca_Invasion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
       "PageId": 621221,
       "PageUrl": "https://starwars.fandom.com/wiki/Prauf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sanrec_Stronghammer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 658406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Line_Ten-A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 636342,
-      "PageUrl": "https://starwars.fandom.com/wiki/TK-8190",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 635036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ibdis_Maw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 729408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Strike_on_Bracca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 650164,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retired_Control_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 634988,
@@ -349,8 +302,58 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 636387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
+      "PageId": 607683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cal_Kestis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Secret_mission_to_rebuild_the_Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 637287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bracca_Invasion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 635473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 635001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanrec_Stronghammer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 637656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shipbreaking_Yard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 621211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scrapper_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 566200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randon_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 697367,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 650162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Worker_Rail_Route_213",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 597584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_Trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -360,18 +363,73 @@
     },
     {
       "PageId": 696380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_energy_bow",
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 621211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scrapper_Guild",
+      "PageId": 693540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 687124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 636342,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-8190",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 636405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Bracca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 635036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ibdis_Maw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 637242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scrap_rat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 650164,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retired_Control_Tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 697930,
+      "PageUrl": "https://starwars.fandom.com/wiki/CT-8508",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 677264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 598129,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 636140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bracca_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 658406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Line_Ten-A",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

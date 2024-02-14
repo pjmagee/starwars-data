@@ -2,7 +2,7 @@
   "PageId": 723735,
   "PageUrl": "https://starwars.fandom.com/wiki/Daiyu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0f/Daiyu.png/revision/latest?cb=20220529163021",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0f/Daiyu.png/revision/latest?cb=20220704235337",
   "Data": [
     {
       "Label": "Titles",
@@ -31,15 +31,131 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "City-scape"
       ]
     },
     {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Rock wart",
+          "Href": "https://starwars.fandom.com/wiki/Rock_wart"
+        },
+        {
+          "Content": "Rat",
+          "Href": "https://starwars.fandom.com/wiki/Rat"
+        },
+        {
+          "Content": "Worrt",
+          "Href": "https://starwars.fandom.com/wiki/Worrt"
+        }
+      ],
+      "Values": [
+        "Rock wart",
+        "Rat",
+        "Worrt"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Anomid",
+          "Href": "https://starwars.fandom.com/wiki/Anomid"
+        },
+        {
+          "Content": "Boosodian",
+          "Href": "https://starwars.fandom.com/wiki/Boosodian"
+        },
+        {
+          "Content": "Cyclorrian",
+          "Href": "https://starwars.fandom.com/wiki/Cyclorrian"
+        },
+        {
+          "Content": "Dybrinthe",
+          "Href": "https://starwars.fandom.com/wiki/Dybrinthe"
+        },
+        {
+          "Content": "Frigosian",
+          "Href": "https://starwars.fandom.com/wiki/Frigosian"
+        },
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Jaluku",
+          "Href": "https://starwars.fandom.com/wiki/Jaluku"
+        },
+        {
+          "Content": "Pantoran",
+          "Href": "https://starwars.fandom.com/wiki/Pantoran"
+        },
+        {
+          "Content": "Shungbeek",
+          "Href": "https://starwars.fandom.com/wiki/Shungbeek"
+        },
+        {
+          "Content": "Tostonian",
+          "Href": "https://starwars.fandom.com/wiki/Tostonian"
+        },
+        {
+          "Content": "Trandoshan",
+          "Href": "https://starwars.fandom.com/wiki/Trandoshan"
+        },
+        {
+          "Content": "Twi'lek",
+          "Href": "https://starwars.fandom.com/wiki/Twi%27lek"
+        },
+        {
+          "Content": "Unidentified species",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_species_(Snook_Uccorfay)"
+        },
+        {
+          "Content": "Zabrak",
+          "Href": "https://starwars.fandom.com/wiki/Zabrak"
+        }
+      ],
+      "Values": [
+        "Anomid",
+        "Boosodian",
+        "Cyclorrian",
+        "Dybrinthe",
+        "Frigosian",
+        "Human",
+        "Jaluku",
+        "Pantoran",
+        "Shungbeek",
+        "Tostonian",
+        "Trandoshan",
+        "Twi'lek",
+        "Unidentified species",
+        "Zabrak"
+      ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Galactic Basic Standard",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard"
+        }
+      ],
+      "Values": [
+        "Galactic Basic Standard"
+      ]
+    },
+    {
       "Label": "Major cities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Daiyu city",
+          "Href": "https://starwars.fandom.com/wiki/Daiyu_city"
+        }
+      ],
       "Values": [
         "Daiyu city"
       ]
@@ -59,14 +175,169 @@
   ],
   "Relationships": [
     {
+      "PageId": 731900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gate_3-C",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 731004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hidden_Path",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 730836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daiyu_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 730514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_Princess_Leia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 750144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Brother's_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 756445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_building_(Haja_Estree)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 729015,
       "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Obi-Wan_Kenobi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 730514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Daiyu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 731143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Snacks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swartz_BBQ",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swmilk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jawa's_Market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731308,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Den",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daiyu_marketplace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cooper_(Daiyu)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_arcade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiu_Mo_Threads",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoss_Market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731389,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jawa_Jawa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Textrcryonoodle_Sa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bapmaw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Er",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mach_Inc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_bank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731424,
+      "PageUrl": "https://starwars.fandom.com/wiki/LVL6",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_parts_store",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fresh_Brew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daiyu_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 731458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daiyu_cargo_port",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 733011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_disco",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 729794,
+      "PageUrl": "https://starwars.fandom.com/wiki/1-JAC",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 730405,
+      "PageUrl": "https://starwars.fandom.com/wiki/L0-LA59",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 733320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_spicerunner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 730435,
@@ -74,14 +345,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 730508,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_reptilian_bounty_hunter",
+      "PageId": 730501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetha_Grig",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 729794,
-      "PageUrl": "https://starwars.fandom.com/wiki/1-JAC",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 730508,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tredgar_Volk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 731899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Team_five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 779579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lignu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 710550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aurebesh_script_(Jedha)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 733510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alternative_Aurebesh_numerals",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

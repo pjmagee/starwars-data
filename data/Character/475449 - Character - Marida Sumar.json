@@ -29,10 +29,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Lothalite",
+          "Href": "https://starwars.fandom.com/wiki/Lothalite"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Lothalite)"
       ]
     },
     {
@@ -45,6 +49,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -74,6 +85,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Morad Sumar",
+          "Href": "https://starwars.fandom.com/wiki/Morad_Sumar"
+        }
+      ],
+      "Values": [
+        "Morad Sumar"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -92,6 +115,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 466157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morad_Sumar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 470535,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Imperial_Troop_Transports",

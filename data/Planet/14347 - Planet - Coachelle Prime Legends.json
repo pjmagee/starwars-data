@@ -2,7 +2,7 @@
   "PageId": 14347,
   "PageUrl": "https://starwars.fandom.com/wiki/Coachelle_Prime/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/Coachelle-TEA.jpg/revision/latest?cb=20231224140621",
   "Data": [
     {
       "Label": "Titles",
@@ -19,24 +19,29 @@
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
         },
         {
-          "Content": "Kashyyyk Region",
-          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_Region"
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
         "Mid Rim",
-        "Kashyyyk Region"
+        "The Slice"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Kashyyyk Region",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_Region"
+        },
+        {
           "Content": "Terr'skiar sector",
           "Href": "https://starwars.fandom.com/wiki/Terr%27skiar_sector"
         }
       ],
       "Values": [
+        "Kashyyyk Region",
         "Terr'skiar sector"
       ]
     },
@@ -53,14 +58,7 @@
       ]
     },
     {
-      "Label": "Orbital position",
-      "Links": [],
-      "Values": [
-        "1"
-      ]
-    },
-    {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-10"
@@ -79,29 +77,28 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [
-        {
-          "Content": "Hot",
-          "Href": "https://starwars.fandom.com/wiki/Temperature/Legends"
-        },
-        {
-          "Content": "swamps",
-          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Hot swamps"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Points of interest",
       "Links": [
         {
           "Content": "Lepi",
           "Href": "https://starwars.fandom.com/wiki/Lepi/Legends"
         }
       ],
+      "Values": [
+        "Juvenile remand centers",
+        "Lepi warrens"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [],
       "Values": [
         "Lepi"
       ]
@@ -121,9 +118,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 202112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaxxon's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 17778,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coachelle_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 23074,
@@ -131,14 +128,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Constellation"
     },
     {
-      "PageId": 270237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 198734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaxxon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 22040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lepese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 11036,
@@ -146,9 +138,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 17778,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coachelle_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 198734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaxxon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 202112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaxxon's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 270237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

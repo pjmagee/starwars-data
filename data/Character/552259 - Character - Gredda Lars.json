@@ -2,6 +2,7 @@
   "PageId": 552259,
   "PageUrl": "https://starwars.fandom.com/wiki/Gredda_Lars",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Lars family",
@@ -57,7 +58,56 @@
       "Values": [
         "Lars family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Lef Lars",
+          "Href": "https://starwars.fandom.com/wiki/Lef_Lars"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Lef Lars (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Cliegg Lars",
+          "Href": "https://starwars.fandom.com/wiki/Cliegg_Lars"
+        },
+        {
+          "Content": "Edern Lars",
+          "Href": "https://starwars.fandom.com/wiki/Edern_Lars"
+        }
+      ],
+      "Values": [
+        "Cliegg Lars",
+        "Edern Lars"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 471279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliegg_Lars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Edern_Lars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 552258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lef_Lars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

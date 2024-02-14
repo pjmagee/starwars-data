@@ -2,7 +2,7 @@
   "PageId": 539525,
   "PageUrl": "https://starwars.fandom.com/wiki/Manpha",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ad/Saijo.jpg/revision/latest?cb=20190514083344",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6b/Manpha-TFABG.jpg/revision/latest?cb=20221024163438",
   "Data": [
     {
       "Label": "Titles",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "K-20",
@@ -53,33 +53,59 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Climate",
       "Links": [
         {
-          "Content": "Swamp",
+          "Content": "Humid",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "Humid"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Swamps",
           "Href": "https://starwars.fandom.com/wiki/Swamp"
         }
       ],
       "Values": [
-        "Swamp"
+        "Swamps"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Shawda Ubb",
+          "Href": "https://starwars.fandom.com/wiki/Shawda_Ubb"
+        }
+      ],
+      "Values": [
+        "Shawda Ubb"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 531745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
       "PageId": 505626,
       "PageUrl": "https://starwars.fandom.com/wiki/Rappertunie",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

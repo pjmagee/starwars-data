@@ -54,10 +54,15 @@
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia"
+        },
+        {
+          "Content": "Falleen",
+          "Href": "https://starwars.fandom.com/wiki/Falleen"
         }
       ],
       "Values": [
-        "Corellia"
+        "Corellia",
+        "Falleen"
       ]
     },
     {
@@ -75,9 +80,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 472026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Falleen_(planet)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 453102,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 788432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hocekureem_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 338207,
   "PageUrl": "https://starwars.fandom.com/wiki/Murakam_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -42,5 +43,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    }
+  ]
 }

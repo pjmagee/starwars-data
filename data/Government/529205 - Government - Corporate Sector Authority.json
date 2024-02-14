@@ -13,14 +13,9 @@
     },
     {
       "Label": "Organization type",
-      "Links": [
-        {
-          "Content": "Sector",
-          "Href": "https://starwars.fandom.com/wiki/Sector"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Corporate Sector government"
+        "Corporate authority"
       ]
     },
     {
@@ -51,20 +46,41 @@
       "Label": "Date established",
       "Links": [
         {
-          "Content": "18 BBY",
-          "Href": "https://starwars.fandom.com/wiki/18_BBY"
-        },
-        {
-          "Content": "34 ABY",
-          "Href": "https://starwars.fandom.com/wiki/34_ABY"
+          "Content": "Imperial Era",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
         }
       ],
       "Values": [
-        "Between 18 BBY and 34 ABY"
+        "By the Imperial Era"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 525240,
+      "PageUrl": "operation:_Sabre_Strike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 734145,
+      "PageUrl": "https://starwars.fandom.com/wiki/CSA_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 734148,
+      "PageUrl": "https://starwars.fandom.com/wiki/CSA_officer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 623452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enric_Pryde",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 507479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority_Security_Police",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 628403,
       "PageUrl": "https://starwars.fandom.com/wiki/Ground_Forces",
@@ -81,26 +97,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 525240,
-      "PageUrl": "operation:_Sabre_Strike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 554776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 646589,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marauder-class_Assault_Corvette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 109418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tel_Bollin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
       "PageId": 638486,
       "PageUrl": "https://starwars.fandom.com/wiki/Viceprex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
@@ -111,9 +107,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 486840,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 739458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coromun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 628406,
@@ -121,14 +117,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 507479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority_Security_Police",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 486840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 646589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marauder-class_Assault_Corvette",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 607422,
       "PageUrl": "https://starwars.fandom.com/wiki/Stars'_End",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 109418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tel_Bollin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 734623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaywhite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

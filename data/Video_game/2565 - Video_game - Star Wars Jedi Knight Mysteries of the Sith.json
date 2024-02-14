@@ -34,8 +34,8 @@
       "Label": "Release date",
       "Links": [
         {
-          "Content": "February 17",
-          "Href": "https://starwars.fandom.com/wiki/February_17"
+          "Content": "February 16",
+          "Href": "https://starwars.fandom.com/wiki/February_16"
         },
         {
           "Content": "1998",
@@ -43,7 +43,7 @@
         }
       ],
       "Values": [
-        "February 17, 1998"
+        "February 16, 1998"
       ]
     },
     {
@@ -93,6 +93,18 @@
       ]
     },
     {
+      "Label": "Series",
+      "Links": [
+        {
+          "Content": "Dark Forces/Jedi Knight",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Forces/Jedi_Knight"
+        }
+      ],
+      "Values": [
+        "Dark Forces/Jedi Knight"
+      ]
+    },
+    {
       "Label": "Timeline",
       "Links": [
         {
@@ -103,7 +115,47 @@
       "Values": [
         "10 ABY"
       ]
+    },
+    {
+      "Label": "Previous",
+      "Links": [
+        {
+          "Content": "Star Wars: Jedi Knight: Dark Forces II",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Jedi_Knight:_Dark_Forces_II"
+        }
+      ],
+      "Values": [
+        "Star Wars: Jedi Knight: Dark Forces II"
+      ]
+    },
+    {
+      "Label": "Next",
+      "Links": [
+        {
+          "Content": "Star Wars: Jedi Knight II: Jedi Outcast",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Jedi_Knight_II:_Jedi_Outcast"
+        }
+      ],
+      "Values": [
+        "Star Wars: Jedi Knight II: Jedi Outcast"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Jedi_Knight:_Dark_Forces_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 1908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Jedi_Knight_II:_Jedi_Outcast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 62898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Forces/Jedi_Knight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Media"
+    }
+  ]
 }

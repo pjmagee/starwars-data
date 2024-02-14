@@ -2,6 +2,7 @@
   "PageId": 700667,
   "PageUrl": "https://starwars.fandom.com/wiki/Rothana_experimental_walker",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Walker",
@@ -43,9 +44,15 @@
         }
       ],
       "Values": [
-        "c. 231 BBY"
+        "231 BBY"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 514429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

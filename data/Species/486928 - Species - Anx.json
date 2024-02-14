@@ -2,7 +2,7 @@
   "PageId": 486928,
   "PageUrl": "https://starwars.fandom.com/wiki/Anx",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/55/Anx_FDSS_Arden_Beckwith.png/revision/latest?cb=20180316064717",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/55/Anx_FDSS_Arden_Beckwith.png/revision/latest?cb=20230113012316",
   "Data": [
     {
       "Label": "Titles",
@@ -43,6 +43,33 @@
       ]
     },
     {
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Blue",
+        "Gray",
+        "Green",
+        "Orange",
+        "Tan",
+        "Yellow"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Black",
+        "Blue",
+        "Gray",
+        "Orange"
+      ]
+    },
+    {
       "Label": "Distinctions",
       "Links": [
         {
@@ -52,7 +79,8 @@
       ],
       "Values": [
         "Crested head that changes color according to mood",
-        "Large tails"
+        "Large tails",
+        "Long lifespan"
       ]
     },
     {
@@ -70,8 +98,23 @@
   ],
   "Relationships": [
     {
+      "PageId": 362415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravlex_Med_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 631051,
       "PageUrl": "https://starwars.fandom.com/wiki/Graxol_Kelvyyn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 431846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 679911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xo_Lahru",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -85,21 +128,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 552545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gravlex_Med",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 679911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lahru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 431846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 568088,
       "PageUrl": "https://starwars.fandom.com/wiki/Horox_Ryyder",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -110,9 +138,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 362415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gravlex_Med_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 785873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quilo_Zanx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 552545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravlex_Med",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

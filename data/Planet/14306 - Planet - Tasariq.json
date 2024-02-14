@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-14"
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -178,6 +178,10 @@
           "Href": "https://starwars.fandom.com/wiki/Lakefresh_Restaurant"
         },
         {
+          "Content": "Imperial Navy Yard",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy_Yard"
+        },
+        {
           "Content": "Tasariq University",
           "Href": "https://starwars.fandom.com/wiki/Tasariq_University"
         }
@@ -185,6 +189,7 @@
       "Values": [
         "Elikann Crater",
         "Lakefresh Restaurant",
+        "Imperial Navy Yard",
         "Tasariq University"
       ]
     },
@@ -223,7 +228,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -321,64 +326,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 51497,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barimoq_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 51501,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bavar_Breathing_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 73312,
       "PageUrl": "https://starwars.fandom.com/wiki/Echo_Lake",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 704345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kiana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 17125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gyrlat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 704364,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tasariq_Rangers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 703659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garuk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 703769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Circle_Park",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 703671,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valjak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 703786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lakeview",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 703857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shopper's_Round",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 703860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paradise_Square",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 29234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tasari",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 22637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lakefresh_Restaurant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 20892,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tasariq_University",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 155894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tasar_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 704180,
@@ -476,16 +446,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 703659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garuk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 703671,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valjak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 228201,
       "PageUrl": "https://starwars.fandom.com/wiki/Spidercat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -494,6 +454,66 @@
       "PageId": 228202,
       "PageUrl": "https://starwars.fandom.com/wiki/Sting-snake",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 22637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lakefresh_Restaurant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 703769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circle_Park",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 703786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lakeview",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 703857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shopper's_Round",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 703860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paradise_Square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 16199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tasar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 29234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tasari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 155751,
+      "PageUrl": "https://starwars.fandom.com/wiki/TasCorp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 155893,
+      "PageUrl": "https://starwars.fandom.com/wiki/TranStar_Construction",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 51497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barimoq_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 51501,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bavar_Breathing_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 20892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tasariq_University",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 703700,
@@ -591,29 +611,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 17125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gyrlat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 704345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 155894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tasar_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 16199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tasar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 155751,
-      "PageUrl": "https://starwars.fandom.com/wiki/TasCorp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 155893,
-      "PageUrl": "https://starwars.fandom.com/wiki/TranStar_Construction",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 704364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tasariq_Rangers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

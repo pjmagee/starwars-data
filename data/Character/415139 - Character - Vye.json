@@ -62,7 +62,61 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Dark"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Vexx",
+          "Href": "https://starwars.fandom.com/wiki/Vexx"
+        },
+        {
+          "Content": "Vorr",
+          "Href": "https://starwars.fandom.com/wiki/Vorr_(Corellian)"
+        }
+      ],
+      "Values": [
+        "Vexx",
+        "Vorr"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 415138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vorr_(Corellian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 384628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vexx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -12,8 +12,27 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Average height",
       "Links": [],
+      "Values": [
+        "1 meter (rest form)3.5 meters (rage form)"
+      ]
+    },
+    {
+      "Label": "Average mass",
+      "Links": [],
+      "Values": [
+        "30 kg (rest form)540 kg (rage form)"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Black (in \"rage form\"), None (in \"rest form\")"
       ]
@@ -40,19 +59,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 266675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Dazouri_farmer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 56169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gibbela",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 354070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hoe/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 273665,
@@ -60,8 +69,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
       "PageId": 137666,
       "PageUrl": "https://starwars.fandom.com/wiki/Kaggle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 56169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gibbela",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 266675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Dazouri_farmer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

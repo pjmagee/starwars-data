@@ -2,6 +2,7 @@
   "PageId": 370988,
   "PageUrl": "https://starwars.fandom.com/wiki/Assault_Team_One",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -26,8 +27,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Chiss Expansionary Defense Force",
-          "Href": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Force"
+          "Content": "Chiss Expansionary Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Fleet"
         },
         {
           "Content": "Picket Force Two",
@@ -35,10 +36,16 @@
         }
       ],
       "Values": [
-        "Chiss Expansionary Defense Force",
+        "Chiss Expansionary Fleet",
         "Picket Force Two"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 50444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Picket_Force_Two/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

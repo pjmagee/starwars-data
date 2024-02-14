@@ -2,7 +2,7 @@
   "PageId": 702038,
   "PageUrl": "https://starwars.fandom.com/wiki/Bonnard",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/80/Bonnard.png/revision/latest?cb=20230610125923",
   "Data": [
     {
       "Label": "Titles",
@@ -19,16 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
         },
         {
-          "Content": "4 ABY",
-          "Href": "https://starwars.fandom.com/wiki/4_ABY"
-        },
-        {
           "Content": "Ab Dalis",
           "Href": "https://starwars.fandom.com/wiki/Ab_Dalis"
         }
       ],
       "Values": [
-        "Between 3 ABY and 4 ABY, Ab Dalis"
+        "3 ABY, Ab Dalis"
       ]
     },
     {
@@ -56,6 +52,32 @@
       ]
     },
     {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Tan"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -67,27 +89,27 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy%27s_officer_corps"
         },
         {
-          "Content": "Ellian Zahra's assault group",
-          "Href": "https://starwars.fandom.com/wiki/Ellian_Zahra%27s_assault_group"
+          "Content": "Hunter Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Hunter_Fleet"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy's officer corps",
-        "Ellian Zahra's assault group"
+        "Hunter Fleet"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 646355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
       "PageId": 702035,
       "PageUrl": "https://starwars.fandom.com/wiki/Ultima_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 646355,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ellian_Zahra's_assault_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

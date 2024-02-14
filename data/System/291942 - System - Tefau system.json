@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -36,23 +41,35 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-9"
+      ]
+    },
+    {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Tefau",
+          "Href": "https://starwars.fandom.com/wiki/Tefau"
+        }
+      ],
+      "Values": [
+        "Tefau"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 14617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tefau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 12622,
       "PageUrl": "https://starwars.fandom.com/wiki/Suolriep_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 14617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tefau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

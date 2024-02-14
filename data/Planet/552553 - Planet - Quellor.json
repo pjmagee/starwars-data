@@ -2,7 +2,7 @@
   "PageId": 552553,
   "PageUrl": "https://starwars.fandom.com/wiki/Quellor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/4d/Quellor.png/revision/latest?cb=20210318115737",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/23/Quellor-SWT.jpg/revision/latest?cb=20220818110950",
   "Data": [
     {
       "Label": "Titles",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-12",
@@ -56,11 +56,16 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        },
+        {
           "Content": "Quellor Run",
           "Href": "https://starwars.fandom.com/wiki/Quellor_Run"
         }
       ],
       "Values": [
+        "Nanth'ri Trade Route",
         "Quellor Run"
       ]
     },
@@ -86,14 +91,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 695251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 498762,
       "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 505099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 695251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

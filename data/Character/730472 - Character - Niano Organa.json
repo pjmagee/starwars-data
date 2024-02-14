@@ -2,7 +2,7 @@
   "PageId": 730472,
   "PageUrl": "https://starwars.fandom.com/wiki/Niano_Organa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e6/NianoOrgana-KenobiPartI.jpg/revision/latest?cb=20220527165934",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/NianoOrgana-DoRTVG.png/revision/latest?cb=20230921013121",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Alderaanian",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Alderaanian)"
       ]
     },
     {
@@ -33,6 +37,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -62,17 +73,50 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
+        {
+          "Content": "Elder Houses",
+          "Href": "https://starwars.fandom.com/wiki/Elder_Houses"
+        },
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
         }
       ],
       "Values": [
+        "Elder Houses",
         "House of Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kayo Organa",
+          "Href": "https://starwars.fandom.com/wiki/Kayo_Organa"
+        },
+        {
+          "Content": "Celly Organa",
+          "Href": "https://starwars.fandom.com/wiki/Celly_Organa"
+        }
+      ],
+      "Values": [
+        "Kayo Organa",
+        "Celly Organa"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 730410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kayo_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celly_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

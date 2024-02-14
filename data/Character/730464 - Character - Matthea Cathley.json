@@ -2,6 +2,7 @@
   "PageId": 730464,
   "PageUrl": "https://starwars.fandom.com/wiki/Matthea_Cathley",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2e/MattheaCathley-THRA2022-7.png/revision/latest?cb=20240111121943",
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,30 @@
       ]
     },
     {
-      "Label": "Skin color",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.68 meters (5 ft, 6 in)"
+      ]
+    },
+    {
+      "Label": "Eye color",
       "Links": [
         {
           "Content": "Red",
@@ -47,17 +71,67 @@
       ]
     },
     {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Pink"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        },
+        {
+          "Content": "Convocation of the Force",
+          "Href": "https://starwars.fandom.com/wiki/Convocation_of_the_Force"
         }
       ],
       "Values": [
-        "Jedi Order"
+        "Jedi Order",
+        "Convocation of the Force"
+      ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Leebon",
+          "Href": "https://starwars.fandom.com/wiki/Leebon"
+        },
+        {
+          "Content": "Vildar Mac",
+          "Href": "https://starwars.fandom.com/wiki/Vildar_Mac"
+        }
+      ],
+      "Values": [
+        "Leebon",
+        "Vildar Mac"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 740094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leebon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 734780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vildar_Mac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Curved-hilt_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 754885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Matty's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

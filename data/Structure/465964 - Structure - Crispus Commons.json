@@ -2,6 +2,7 @@
   "PageId": 465964,
   "PageUrl": "https://starwars.fandom.com/wiki/Crispus_Commons",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,24 +15,53 @@
       "Label": "Constructed",
       "Links": [
         {
-          "Content": "Clone Wars",
-          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
         }
       ],
       "Values": [
-        "Shortly before the end of the Clone Wars"
+        "c. 19 BBY"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Housing project"
       ]
     },
     {
       "Label": "Location",
       "Links": [
         {
+          "Content": "Gorse City",
+          "Href": "https://starwars.fandom.com/wiki/Gorse_City"
+        },
+        {
           "Content": "Gorse",
           "Href": "https://starwars.fandom.com/wiki/Gorse"
         }
       ],
       "Values": [
-        "Gorse"
+        "Gorse City, Gorse"
+      ]
+    },
+    {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Bomb shelter",
+          "Href": "https://starwars.fandom.com/wiki/Crispus_Commons_bomb_shelter"
+        },
+        {
+          "Content": "Skelly's apartment",
+          "Href": "https://starwars.fandom.com/wiki/Skelly%27s_apartment"
+        }
+      ],
+      "Values": [
+        "Bomb shelter",
+        "Exercise yard",
+        "Skelly's apartment"
       ]
     },
     {
@@ -52,5 +82,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 778228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crispus_Commons_bomb_shelter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 778229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skelly's_apartment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

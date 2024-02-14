@@ -2,7 +2,7 @@
   "PageId": 624557,
   "PageUrl": "https://starwars.fandom.com/wiki/Trenchenovu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a5/Trenchenovu-SWT.jpg/revision/latest?cb=20220603132702",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,27 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Western Reaches"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-19"
       ]
     },
     {
@@ -49,6 +66,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
     {
       "PageId": 624558,
       "PageUrl": "https://starwars.fandom.com/wiki/Trenchenovu_shipyards",

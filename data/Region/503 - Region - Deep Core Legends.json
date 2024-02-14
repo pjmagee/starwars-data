@@ -84,6 +84,10 @@
           "Href": "https://starwars.fandom.com/wiki/Iope_system"
         },
         {
+          "Content": "Jerrilek system",
+          "Href": "https://starwars.fandom.com/wiki/Jerrilek_system"
+        },
+        {
           "Content": "Kampe system",
           "Href": "https://starwars.fandom.com/wiki/Kampe_system"
         },
@@ -108,8 +112,12 @@
           "Href": "https://starwars.fandom.com/wiki/Lialic_system"
         },
         {
-          "Content": "Ojom system",
-          "Href": "https://starwars.fandom.com/wiki/Ojom_system"
+          "Content": "Murakam system",
+          "Href": "https://starwars.fandom.com/wiki/Murakam_system"
+        },
+        {
+          "Content": "Ottabesk system",
+          "Href": "https://starwars.fandom.com/wiki/Ottabesk_system"
         },
         {
           "Content": "Primus Goluud system",
@@ -136,16 +144,8 @@
           "Href": "https://starwars.fandom.com/wiki/Tsoss_Beacon_system"
         },
         {
-          "Content": "Tython system",
-          "Href": "https://starwars.fandom.com/wiki/Tython_system/Legends"
-        },
-        {
           "Content": "Vulpter system",
           "Href": "https://starwars.fandom.com/wiki/Vulpter_system"
-        },
-        {
-          "Content": "Zamael system",
-          "Href": "https://starwars.fandom.com/wiki/Zamael_system"
         }
       ],
       "Values": [
@@ -162,22 +162,22 @@
         "Had Abbadon system",
         "Hakassi system",
         "Iope system",
+        "Jerrilek system",
         "Kampe system",
         "Keeara Major system",
         "Khomm system",
         "Koler system",
         "Kuar system",
         "Lialic system",
-        "Ojom system",
+        "Murakam system",
+        "Ottabesk system",
         "Primus Goluud system",
         "Symbia system",
         "Tarkin's Fang system",
         "Thoadeye system",
         "Treskov system",
         "Tsoss Beacon system",
-        "Tython system",
-        "Vulpter system",
-        "Zamael system"
+        "Vulpter system"
       ]
     },
     {
@@ -185,7 +185,7 @@
       "Links": [
         {
           "Content": "Aloxl",
-          "Href": "https://starwars.fandom.com/wiki/Aloxl"
+          "Href": "https://starwars.fandom.com/wiki/Aloxl/Legends"
         }
       ],
       "Values": [
@@ -196,17 +196,27 @@
       "Label": "Other objects",
       "Links": [
         {
+          "Content": "Galactic Center",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Center"
+        },
+        {
           "Content": "Starswarm Cluster",
           "Href": "https://starwars.fandom.com/wiki/Starswarm_Cluster/Legends"
         },
         {
           "Content": "Deep 3",
           "Href": "https://starwars.fandom.com/wiki/Deep_3"
+        },
+        {
+          "Content": "Zamael Archipelago",
+          "Href": "https://starwars.fandom.com/wiki/Zamael_Archipelago"
         }
       ],
       "Values": [
+        "Galactic Center",
         "Starswarm Cluster",
-        "Deep 3"
+        "Deep 3",
+        "Zamael Archipelago"
       ]
     },
     {
@@ -239,14 +249,184 @@
   ],
   "Relationships": [
     {
-      "PageId": 400352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daala_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 180867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystan_V",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 385421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Undercover_attack_on_Kuat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 188492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Besero/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 54563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core_Mining_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 1046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byss/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mekith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delanoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prakess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulpus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulp_Major",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulp_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nur_(planet)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kins",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunspot/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malterra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nox",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krev_Coeur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalimahr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ska_Gora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Furies_Gate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mawr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 3686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khomm/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 211501,
+      "PageUrl": "https://starwars.fandom.com/wiki/15th_Deep_Core_Reserve_Fleet/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 11144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ojom/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 11451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulpter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 321238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cambria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 333463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottabesk_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 269503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Southern_Core",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 17221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 17280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vulpter_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 272975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 255389,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 255395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 15416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsoss_Beacon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 380537,
@@ -254,9 +434,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 301074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kampe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 17694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Primus_Goluud_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 408160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kampe_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 32190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_orbital_security_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 33849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_carbonite_smelter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 33850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krath_command_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 375548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 19390,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 116876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 17539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 397025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barbeen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 385421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Undercover_attack_on_Kuat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 7680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 289429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thoadeye_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 289525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerrilek_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 308225,
@@ -267,6 +512,106 @@
       "PageId": 308226,
       "PageUrl": "https://starwars.fandom.com/wiki/Cosia/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 338136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adana_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 364603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeara_Major_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 355290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shikaakwa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebaq/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-207",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 90802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 7295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khomm_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 433969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_hyperspace_route_(Satele_Shan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 2260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prakith/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 231699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeara_Major",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 23245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Had_Abbadon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keres_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gillad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mozos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tryast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 58967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_plague_storehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 16826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beshqek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 273021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsoss_Beacon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 215059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalist_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 26707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Shadow_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 8743,
@@ -284,24 +629,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 90802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 313569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dulvoyinn_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 14196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerrilek/Legends",
+      "PageId": 14621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Constancia/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 12771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starswarm_Cluster/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 7677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phiris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 1325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-628_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 7678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keres_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 102201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Core",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 2039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalist_VI/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 535712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 744359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byss_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 618800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 23767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Hyperspace_Security_Net",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 15358,
@@ -309,54 +689,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 15416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsoss_Beacon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-628",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 338207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Murakam_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 338216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cosia_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 56411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Treskov_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 11772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends",
+      "PageId": 335482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nexus_Route/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 13076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_Trail",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 367640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ashla_(moon)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 14474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 367641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 355290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shikaakwa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 417374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zerist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 46129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atale/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 18273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odik_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 318705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Besero_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 12827,
@@ -374,34 +739,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 116876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 11772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 272017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zamael_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 13076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_Trail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 364603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeara_Major_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 14474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 188492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Besero/Legends",
+      "PageId": 14196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerrilek/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 396240,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barbeen",
+      "PageId": 7416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 3211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-881",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 7428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kirrek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronika/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 367762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fury_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 379276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_Orbital_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 367177,
@@ -414,9 +794,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 273021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tsoss_Beacon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 44010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treskov_115-W",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 7647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebaq_9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 16827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Polos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kissarm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16831,
+      "PageUrl": "https://starwars.fandom.com/wiki/Houll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 16832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pelutt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 4923,
@@ -439,9 +854,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 19390,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 301074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kampe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 590105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aloxl/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 400352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daala_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 46,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_galaxy/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Galaxy"
     },
     {
       "PageId": 12749,
@@ -449,74 +879,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 14911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dremulae/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 180867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystan_V",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 269543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottabesk/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 3835,
       "PageUrl": "https://starwars.fandom.com/wiki/Hakassi/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 18273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odik_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 272975,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 318705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Besero_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-207",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kirrek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ronika/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 32190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_orbital_security_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 33849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_carbonite_smelter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 33850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krath_command_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 342354,
@@ -579,398 +944,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 335482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nexus_Route/Legends",
+      "PageId": 12771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starswarm_Cluster/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 784265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros-Tython_hyperlane",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 46,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_galaxy/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Galaxy"
+      "PageId": 785739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_hyperspace_route_(Hetton)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 590105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aloxl",
+      "PageId": 14911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dremulae/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 7673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keres_I",
+      "PageId": 269543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottabesk/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 7674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gillad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mozos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tryast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phiris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keres_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fury_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 379276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython_Orbital_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 15987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ebaq/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 215059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalist_system",
+      "PageId": 338207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murakam_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 289429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thoadeye_system",
+      "PageId": 338216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cosia_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 289525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerrilek_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kissarm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16831,
-      "PageUrl": "https://starwars.fandom.com/wiki/Houll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pelutt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 58967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_plague_storehouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 44010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Treskov_115-W",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 321238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cambria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 333463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottabesk_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 52928,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doornik-881_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 54563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core_Mining_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 377,
-      "PageUrl": "https://starwars.fandom.com/wiki/Infinite_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 1046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Byss/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sunspot/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malterra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nox",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367181,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krev_Coeur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalimahr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ska_Gora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Furies_Gate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mawr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 3686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khomm/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 17280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulpter_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 313569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dulvoyinn_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 7647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ebaq_9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 2039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalist_VI/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 535712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 618800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 338136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adana_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 408160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kampe_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 26707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Shadow_Hand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 23767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Hyperspace_Security_Net",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 255389,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 255395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 14621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Constancia/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 269503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Southern_Core",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 16826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beshqek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 17539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 397025,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barbeen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 367640,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ashla_(moon)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 367641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 417374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zerist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 16827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 16828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Polos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 2260,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prakith/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 231699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeara_Major",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 23245,
-      "PageUrl": "https://starwars.fandom.com/wiki/Had_Abbadon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khomm_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 46129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atale/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 11144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ojom/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 11451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulpter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rake",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mekith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delanoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prakess",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulpus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17286,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulp_Major",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vulp_Minor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nur_(planet)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kins",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Primus_Goluud_system",
+      "PageId": 56411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treskov_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]

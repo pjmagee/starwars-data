@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Samix sector",
-          "Href": "https://starwars.fandom.com/wiki/Samix_sector"
+          "Href": "https://starwars.fandom.com/wiki/Samix_sector/Legends"
         }
       ],
       "Values": [
@@ -48,14 +48,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-19"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "mountains",
@@ -97,9 +97,14 @@
     },
     {
       "Label": "Primary language(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Language of the Flock",
+          "Href": "https://starwars.fandom.com/wiki/Language_of_the_Flock"
+        }
+      ],
       "Values": [
-        "Nediji"
+        "Language of the Flock"
       ]
     },
     {
@@ -112,19 +117,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 352339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nedij_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 768046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Language_of_the_Flock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
       "PageId": 24260,
       "PageUrl": "https://starwars.fandom.com/wiki/Nediji",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 220409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jellybee",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 24291,
       "PageUrl": "https://starwars.fandom.com/wiki/Kaird",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 352339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nedij_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

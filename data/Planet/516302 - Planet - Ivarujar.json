@@ -2,13 +2,37 @@
   "PageId": 516302,
   "PageUrl": "https://starwars.fandom.com/wiki/Ivarujar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f4/Stennaros-SWT.jpg/revision/latest?cb=20220611211233",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ivarujar"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        }
+      ],
+      "Values": [
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-16",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-16"
       ]
     },
     {
@@ -28,7 +52,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Volcanoes",
@@ -61,14 +85,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 487462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noodle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 544365,
       "PageUrl": "https://starwars.fandom.com/wiki/Evacuation_of_Ivarujar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 487462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Noodle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -58,7 +58,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Super Star Destroyer",
@@ -410,28 +410,23 @@
     },
     {
       "Label": "Commander(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Palpatine/Darth Sidious",
+          "Href": "https://starwars.fandom.com/wiki/Palpatine/Legends"
+        },
+        {
+          "Content": "Tyber Zann",
+          "Href": "https://starwars.fandom.com/wiki/Tyber_Zann"
+        }
+      ],
       "Values": [
+        "Palpatine/Darth Sidious",
         "Tyber Zann"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 385421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Undercover_attack_on_Kuat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 134841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Imperial_Archive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 7387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Sovereign_Protector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
     {
       "PageId": 267938,
       "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Hand_Fleet",
@@ -443,9 +438,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 134841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Imperial_Archive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 126,
       "PageUrl": "https://starwars.fandom.com/wiki/Palpatine/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 385421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Undercover_attack_on_Kuat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 7387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Sovereign_Protector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

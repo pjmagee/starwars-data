@@ -48,13 +48,6 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
-      "Values": [
-        "None"
-      ]
-    },
-    {
       "Label": "Skin color",
       "Links": [
         {
@@ -64,6 +57,30 @@
       ],
       "Values": [
         "Green"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sise Fromm",
+          "Href": "https://starwars.fandom.com/wiki/Sise_Fromm"
+        }
+      ],
+      "Values": [
+        "Sise Fromm"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Sonko Fromm",
+          "Href": "https://starwars.fandom.com/wiki/Sonko_Fromm"
+        }
+      ],
+      "Values": [
+        "Sonko Fromm"
       ]
     },
     {
@@ -81,14 +98,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 98719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voor_Viper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 34586,
       "PageUrl": "https://starwars.fandom.com/wiki/Tig_Fromm's_starship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 98719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voor_Viper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 18994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sise_Fromm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

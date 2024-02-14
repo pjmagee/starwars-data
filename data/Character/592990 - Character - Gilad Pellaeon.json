@@ -2,13 +2,25 @@
   "PageId": 592990,
   "PageUrl": "https://starwars.fandom.com/wiki/Gilad_Pellaeon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/32/MandoPellaeon.png/revision/latest?cb=20230417014208",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Gilad Pellaeon"
+      ]
+    },
+    {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Human"
       ]
     },
     {
@@ -21,6 +33,39 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Gray",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Gray"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
       ]
     },
     {
@@ -41,17 +86,37 @@
         {
           "Content": "Seventh Fleet",
           "Href": "https://starwars.fandom.com/wiki/7th_Fleet"
+        },
+        {
+          "Content": "Imperial Remnants",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
+        },
+        {
+          "Content": "Shadow Council",
+          "Href": "https://starwars.fandom.com/wiki/Shadow_Council_(Imperial_Remnants)"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy's officer corps",
         "Third Fleet",
-        "Seventh Fleet"
+        "Seventh Fleet",
+        "Imperial Remnants",
+        "Shadow Council"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 764410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gilad_Pellaeon's_delegation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 783344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 427493,
       "PageUrl": "https://starwars.fandom.com/wiki/7th_Fleet",
@@ -66,6 +131,11 @@
       "PageId": 627567,
       "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Third_Fleet)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

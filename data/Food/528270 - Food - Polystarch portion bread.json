@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Found on",
+      "Label": "Found",
       "Links": [
         {
           "Content": "Jakku",
@@ -21,11 +21,16 @@
         {
           "Content": "Lafete",
           "Href": "https://starwars.fandom.com/wiki/Lafete"
+        },
+        {
+          "Content": "Nevarro",
+          "Href": "https://starwars.fandom.com/wiki/Nevarro"
         }
       ],
       "Values": [
         "Jakku",
-        "Lafete"
+        "Lafete",
+        "Nevarro"
       ]
     },
     {
@@ -44,12 +49,12 @@
       "Label": "Physical description",
       "Links": [
         {
-          "Content": "Beige",
+          "Content": "beige",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Beige and green bread-like loaf"
+        "Lumpy, beige-and-green–colored loaf"
       ]
     },
     {
@@ -119,5 +124,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chocolate_Portion_Bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

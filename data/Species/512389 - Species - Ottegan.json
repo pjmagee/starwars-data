@@ -2,7 +2,7 @@
   "PageId": 512389,
   "PageUrl": "https://starwars.fandom.com/wiki/Ottegan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/PrasterOmmlen-TFAVD.png/revision/latest?cb=20211214050440",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/PrasterOmmlen-SWCT.png/revision/latest?cb=20220930145610",
   "Data": [
     {
       "Label": "Titles",
@@ -25,7 +25,12 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
         "Brown"
       ]
@@ -46,7 +51,8 @@
         }
       ],
       "Values": [
-        "Hammer-shaped head, wide-set eyes"
+        "Hammer-shaped head",
+        "Wide-set eyes"
       ]
     },
     {
@@ -64,14 +70,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 524161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praster_Ommlen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 637741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottega",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 594480,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ottegan_senator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 547065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 763008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ottegan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 553564,
@@ -79,13 +95,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 682023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_First",
+      "PageId": 589195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praster_Barrun",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 589195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praster_Barrun",
+      "PageId": 682023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_First",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -99,24 +115,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 536684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovanis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 519578,
       "PageUrl": "https://starwars.fandom.com/wiki/Adlee",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 524161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praster_Ommlen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 536684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovanis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 637741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottega",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 547065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

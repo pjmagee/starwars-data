@@ -2,6 +2,7 @@
   "PageId": 682818,
   "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Exploration_Transport",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -42,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Walker",
@@ -54,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 514429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

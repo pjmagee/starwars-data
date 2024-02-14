@@ -2,6 +2,7 @@
   "PageId": 656055,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Muun_banker",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,26 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [],
+      "Values": [
+        "A wife"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Rush Clovis",
+          "Href": "https://starwars.fandom.com/wiki/Rush_Clovis"
+        }
+      ],
+      "Values": [
+        "Unidentified children",
+        "Rush Clovis (adoptive son)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +68,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 476112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rush_Clovis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

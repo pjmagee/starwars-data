@@ -17,10 +17,27 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-17",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-17"
       ]
     },
     {
@@ -38,14 +55,34 @@
   ],
   "Relationships": [
     {
+      "PageId": 636900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elphrona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 679994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ultident_Margrona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 673949,
       "PageUrl": "https://starwars.fandom.com/wiki/Nova_(Vector)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 636900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elphrona",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 683079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mack_(Nihil)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 683080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buggo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

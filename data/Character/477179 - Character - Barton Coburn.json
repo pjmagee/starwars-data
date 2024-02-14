@@ -2,7 +2,7 @@
   "PageId": 477179,
   "PageUrl": "https://starwars.fandom.com/wiki/Barton_Coburn",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/CoburnHS-SWE.png/revision/latest?cb=20211211223227",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/CoburnHS-SWE.png/revision/latest?cb=20220908003325",
   "Data": [
     {
       "Label": "Titles",
@@ -33,6 +33,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -70,7 +77,7 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
       ]
     },
     {
@@ -83,20 +90,30 @@
         {
           "Content": "Galactic Republic Navy",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military"
+        },
+        {
+          "Content": "Imperial Officer Corps",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Republic Navy"
+        "Galactic Republic Navy",
+        "Galactic Empire",
+        "Imperial Military",
+        "Imperial Officer Corps"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 585184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hand_of_Justice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 505152,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_strategy_conference",
@@ -114,8 +131,18 @@
     },
     {
       "PageId": 643946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Galactic_Republic_task_force",
+      "PageUrl": "https://starwars.fandom.com/wiki/Lola_Sayu_task_force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 760272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_summit_on_Eriadu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 585184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hand_of_Justice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 11957,
   "PageUrl": "https://starwars.fandom.com/wiki/Hanna_Ding",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,12 @@
       "Label": "Born",
       "Links": [
         {
-          "Content": "34 BBY",
-          "Href": "https://starwars.fandom.com/wiki/34_BBY/Legends"
+          "Content": "33 BBY",
+          "Href": "https://starwars.fandom.com/wiki/33_BBY/Legends"
         }
       ],
       "Values": [
-        "34 BBY"
+        "c. 33 BBY"
       ]
     },
     {
@@ -44,6 +45,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -88,7 +96,25 @@
         "Jedi Order",
         "Galactic Republic"
       ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Hanna Ding's Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Hanna_Ding%27s_Jedi_Master"
+        }
+      ],
+      "Values": [
+        "Hanna Ding's Jedi Master"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 764392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hanna_Ding's_Jedi_Master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

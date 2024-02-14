@@ -60,7 +60,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "K-18",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "K-18"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -84,18 +96,33 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Ubrik Adelhard's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Ubrik_Adelhard%27s_Imperial_remnant"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Ubrik Adelhard's Imperial remnant"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 518904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loathe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 535021,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Crypt_(prison)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 503327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bragh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

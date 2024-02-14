@@ -2,7 +2,7 @@
   "PageId": 19740,
   "PageUrl": "https://starwars.fandom.com/wiki/Geonosian_sonic_blaster/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/58/Sonicblaster_negwt.jpg/revision/latest?cb=20080722200739",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/23/SonicBlaster-NEGWT.png/revision/latest?cb=20221022054154",
   "Data": [
     {
       "Label": "Titles",
@@ -25,12 +25,7 @@
     },
     {
       "Label": "Model",
-      "Links": [
-        {
-          "Content": "Geonosian",
-          "Href": "https://starwars.fandom.com/wiki/Geonosian/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Geonosian sonic blaster"
       ]
@@ -41,10 +36,26 @@
         {
           "Content": "Sonic blaster",
           "Href": "https://starwars.fandom.com/wiki/Sonic_blaster/Legends"
+        },
+        {
+          "Content": "carbine",
+          "Href": "https://starwars.fandom.com/wiki/Blaster_carbine/Legends"
         }
       ],
       "Values": [
-        "Sonic blaster"
+        "Sonic blaster carbine"
+      ]
+    },
+    {
+      "Label": "Culture",
+      "Links": [
+        {
+          "Content": "Geonosian",
+          "Href": "https://starwars.fandom.com/wiki/Geonosian/Legends"
+        }
+      ],
+      "Values": [
+        "Geonosian"
       ]
     },
     {
@@ -71,21 +82,31 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Geonosians",
-          "Href": "https://starwars.fandom.com/wiki/Geonosian/Legends"
+          "Content": "Geonosians warriors",
+          "Href": "https://starwars.fandom.com/wiki/Warrior_caste_(Geonosian)/Legends"
         },
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
+        },
+        {
+          "Content": "Separatist holdouts",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts/Legends"
         }
       ],
       "Values": [
-        "Geonosians",
-        "Confederacy of Independent Systems"
+        "Geonosians warriors",
+        "Confederacy of Independent Systems",
+        "Separatist holdouts"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 113229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalranoos_carbine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
     {
       "PageId": 48387,
       "PageUrl": "https://starwars.fandom.com/wiki/Gordarl_Weaponsmiths/Legends",

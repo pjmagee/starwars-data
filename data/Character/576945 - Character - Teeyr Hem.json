@@ -2,6 +2,7 @@
   "PageId": 576945,
   "PageUrl": "https://starwars.fandom.com/wiki/Teeyr_Hem",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,25 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Hem",
+          "Href": "https://starwars.fandom.com/wiki/Hem"
+        }
+      ],
+      "Values": [
+        "Hem"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 576944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -67,12 +74,28 @@
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Imperial Army",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Army_(Sith_Empire)"
+        },
+        {
+          "Content": "Bravo Team",
+          "Href": "https://starwars.fandom.com/wiki/Bravo_Team_(Voss)"
         }
       ],
       "Values": [
-        "Sith Empire"
+        "Sith Empire",
+        "Imperial Army",
+        "Bravo Team"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 527143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Team_(Voss)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

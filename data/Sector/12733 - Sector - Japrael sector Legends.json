@@ -79,7 +79,7 @@
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         },
         {
-          "Content": "Galactic  Federation of Free Alliances",
+          "Content": "Galactic Federation of Free Alliances",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
@@ -91,12 +91,16 @@
         "Mandalorians",
         "Galactic Empire",
         "New Republic",
-        "Galactic  Federation of Free Alliances"
+        "Galactic Federation of Free Alliances"
       ]
     },
     {
       "Label": "Old Republic era",
       "Links": [
+        {
+          "Content": "Onderon",
+          "Href": "https://starwars.fandom.com/wiki/Coup_on_Onderon"
+        },
         {
           "Content": "Beast Wars",
           "Href": "https://starwars.fandom.com/wiki/Beast_Wars"
@@ -191,6 +195,7 @@
         }
       ],
       "Values": [
+        "Local conflictOnderon",
         "Beast WarsOnderon (I) (II)",
         "Freedon Nadd UprisingOnderon (I) (II)",
         "Great Sith WarOnderon",
@@ -199,6 +204,7 @@
         "First Jedi PurgeDxun",
         "Onderon Civil WarOnderon (I) (II) (III)",
         "Third Galactic WarOnderon - Dxun",
+        "Local conflict",
         "Beast Wars",
         "Freedon Nadd Uprising",
         "Great Sith War",
@@ -285,11 +291,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 417,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 277858,
       "PageUrl": "https://starwars.fandom.com/wiki/Bara",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -325,6 +326,26 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prael/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 3122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Japrael_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dxun/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 271353,
       "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
@@ -342,21 +363,6 @@
     {
       "PageId": 15442,
       "PageUrl": "https://starwars.fandom.com/wiki/Suthre/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 3122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Japrael_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 15445,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prael/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dxun/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]

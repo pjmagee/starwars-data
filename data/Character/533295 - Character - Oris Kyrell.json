@@ -48,22 +48,74 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
-        {
-          "Content": "Second-wave",
-          "Href": "https://starwars.fandom.com/wiki/Second-wave"
-        },
         {
           "Content": "Kyrell family",
           "Href": "https://starwars.fandom.com/wiki/Kyrell_family"
         }
       ],
       "Values": [
-        "Second-wave",
         "Kyrell family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ganaire Kyrell",
+          "Href": "https://starwars.fandom.com/wiki/Ganaire_Kyrell"
+        }
+      ],
+      "Values": [
+        "Ganaire Kyrell"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Dalven Kyrell",
+          "Href": "https://starwars.fandom.com/wiki/Dalven_Kyrell"
+        },
+        {
+          "Content": "Thane Kyrell",
+          "Href": "https://starwars.fandom.com/wiki/Thane_Kyrell"
+        }
+      ],
+      "Values": [
+        "Dalven Kyrell",
+        "Thane Kyrell"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Second-wave",
+          "Href": "https://starwars.fandom.com/wiki/Second-wave"
+        }
+      ],
+      "Values": [
+        "Second-wave"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 499509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thane_Kyrell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 533326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ganaire_Kyrell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 515593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalven_Kyrell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

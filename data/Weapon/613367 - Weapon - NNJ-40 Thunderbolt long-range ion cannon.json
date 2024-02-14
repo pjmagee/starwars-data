@@ -2,7 +2,7 @@
   "PageId": 613367,
   "PageUrl": "https://starwars.fandom.com/wiki/NNJ-40_\"Thunderbolt\"_long-range_ion_cannon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/NNJ-40.png/revision/latest?cb=20210627185640",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/NNJ-40.png/revision/latest?cb=20220908164557",
   "Data": [
     {
       "Label": "Titles",
@@ -34,18 +34,45 @@
       "Values": [
         "Ion cannon"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
+      "Values": [
+        "Galactic Republic",
+        "Galactic Empire"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 58259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borstel_Galactic_Defense",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
     {
       "PageId": 479439,
       "PageUrl": "https://starwars.fandom.com/wiki/RX-200_Falchion-class_assault_tank",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 58259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Borstel_Galactic_Defense",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 756885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_research_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 756864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_904",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

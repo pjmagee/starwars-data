@@ -40,6 +40,18 @@
       ]
     },
     {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Human"
+      ]
+    },
+    {
       "Label": "Gender",
       "Links": [
         {
@@ -49,6 +61,13 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -126,6 +145,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 510487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanjiklub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 762076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_at_Depatar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 518328,
+      "PageUrl": "https://starwars.fandom.com/wiki/\"Huttsplitter\"_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 637106,
       "PageUrl": "https://starwars.fandom.com/wiki/Jablogian_(language)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
@@ -134,16 +168,6 @@
       "PageId": 709580,
       "PageUrl": "https://starwars.fandom.com/wiki/Edgehawk_(starship)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 510487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanjiklub",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 518328,
-      "PageUrl": "https://starwars.fandom.com/wiki/\"Huttsplitter\"_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

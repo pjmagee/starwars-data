@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -36,10 +36,15 @@
         {
           "Content": "Bellassa",
           "Href": "https://starwars.fandom.com/wiki/Bellassa/Legends"
+        },
+        {
+          "Content": "Tati",
+          "Href": "https://starwars.fandom.com/wiki/Tati"
         }
       ],
       "Values": [
-        "Bellassa"
+        "Bellassa",
+        "Tati"
       ]
     },
     {
@@ -48,23 +53,33 @@
         {
           "Content": "Hydian Way",
           "Href": "https://starwars.fandom.com/wiki/Hydian_Way/Legends"
+        },
+        {
+          "Content": "Brentaal-Denon Route",
+          "Href": "https://starwars.fandom.com/wiki/Brentaal–Denon_Route"
         }
       ],
       "Values": [
-        "Hydian Way"
+        "Hydian Way",
+        "Brentaal-Denon Route"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 505,
+      "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
     {
       "PageId": 13004,
       "PageUrl": "https://starwars.fandom.com/wiki/Bellassa/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 505,
-      "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 65052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tati",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

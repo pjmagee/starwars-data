@@ -31,7 +31,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "O-20",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "O-20"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungle",
@@ -90,7 +102,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -104,9 +116,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 541040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xirl_hunting_lodge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 496324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 573568,
@@ -114,9 +126,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 496324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 541040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xirl_hunting_lodge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 755687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sensor_mask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

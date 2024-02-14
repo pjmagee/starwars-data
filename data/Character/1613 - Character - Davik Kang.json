@@ -60,8 +60,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Gray",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Gray"
       ]
@@ -71,6 +83,13 @@
       "Links": [],
       "Values": [
         "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
       ]
     },
     {
@@ -98,19 +117,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 1305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 6785,
       "PageUrl": "https://starwars.fandom.com/wiki/Exchange",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 162557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Force_cage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 1305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 215213,
@@ -118,14 +132,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 37769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Selven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 162557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Force_cage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 15743,
       "PageUrl": "https://starwars.fandom.com/wiki/Black_Vulkars/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 37769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

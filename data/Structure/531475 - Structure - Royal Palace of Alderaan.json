@@ -2,7 +2,7 @@
   "PageId": 531475,
   "PageUrl": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d3/Aldera_Palace_balcony.png/revision/latest?cb=20130202021939",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/AlderaanRoyalPalace-OWKpI.png/revision/latest?cb=20220806052426",
   "Data": [
     {
       "Label": "Titles",
@@ -51,22 +51,94 @@
       ]
     },
     {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Bail Organa's office",
+          "Href": "https://starwars.fandom.com/wiki/Bail_Organa%27s_office_(Alderaan)"
+        },
+        {
+          "Content": "Leia Organa's bedroom",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Organa%27s_bedroom"
+        },
+        {
+          "Content": "Royal Palace of Alderaan throne room",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan_throne_room"
+        }
+      ],
+      "Values": [
+        "Bail Organa's office",
+        "Leia Organa's bedroom",
+        "Royal Palace of Alderaan throne room"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Alderaanian monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian_monarchy"
+        },
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
         }
       ],
       "Values": [
+        "Alliance to Restore the Republic",
+        "Alderaanian monarchy",
         "House of Organa"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 576528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_Day_of_Demand",
+      "PageId": 735358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_bedroom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 737103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Organa's_office_(Alderaan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 740854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Palace_of_Alderaan_throne_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 451697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 575952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhindon_Sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 541105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_keepsake_chest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 575950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 743077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_silver_headband",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 742325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_diplomatic_dinner",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
@@ -75,29 +147,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 451697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 541105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_keepsake_chest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 575952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhindon_Sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 712520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_region",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 575950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aldera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 576528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_Day_of_Demand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

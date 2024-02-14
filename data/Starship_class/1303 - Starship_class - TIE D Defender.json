@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -404,8 +404,8 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Zaarin splinter government",
-          "Href": "https://starwars.fandom.com/wiki/Zaarin_splinter_government"
+          "Content": "Zaarin coup forces",
+          "Href": "https://starwars.fandom.com/wiki/Zaarin_coup_forces"
         },
         {
           "Content": "Nami",
@@ -422,7 +422,7 @@
       ],
       "Values": [
         "Galactic Empire",
-        "Zaarin splinter government",
+        "Zaarin coup forces",
         "Nami",
         "X1's faction",
         "Imperial Remnant"
@@ -430,6 +430,21 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 527863,
+      "PageUrl": "https://starwars.fandom.com/wiki/29th_Fast_Attack_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 169906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garrett_(Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 527867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mephitis_(EF76_Nebulon-B_escort_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 87573,
       "PageUrl": "https://starwars.fandom.com/wiki/Onyx_2",
@@ -441,14 +456,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 169906,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garrett_(Star_Destroyer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 443404,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Defender_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+      "PageId": 538634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Hashim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 173221,
@@ -466,44 +476,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 111406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Annihilator_(Executor-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 24086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wrack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 43033,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/Ad_x7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 6133,
       "PageUrl": "https://starwars.fandom.com/wiki/Executor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 527863,
-      "PageUrl": "https://starwars.fandom.com/wiki/29th_Fast_Attack_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 424545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_Defender_chief_scientist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 10830,
-      "PageUrl": "https://starwars.fandom.com/wiki/181st_Imperial_Fighter_Wing/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 538634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Hashim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 527529,
@@ -511,8 +486,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 527867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mephitis_(EF76_Nebulon-B_escort_frigate)",
+      "PageId": 424545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_Defender_chief_scientist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 24086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wrack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 443404,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Defender_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+    },
+    {
+      "PageId": 43033,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/Ad_x7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 10830,
+      "PageUrl": "https://starwars.fandom.com/wiki/181st_Imperial_Fighter_Wing/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 111406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Annihilator_(Executor-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

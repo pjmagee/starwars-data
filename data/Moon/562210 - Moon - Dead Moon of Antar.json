@@ -53,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-12",
@@ -63,18 +63,30 @@
       "Values": [
         "N-12"
       ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Trade Route"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 551949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 587485,
       "PageUrl": "https://starwars.fandom.com/wiki/Prindaar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 551949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Outer Expansion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Outer Expansion Zone"
       ]
     },
     {
@@ -59,6 +64,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 269471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 96671,
       "PageUrl": "https://starwars.fandom.com/wiki/House_Renliss",

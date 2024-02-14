@@ -2,6 +2,7 @@
   "PageId": 507261,
   "PageUrl": "https://starwars.fandom.com/wiki/Transponder_buoy",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,9 +32,15 @@
         }
       ],
       "Values": [
-        "Safely traveling through asteroid belts"
+        "Allow safe travel through asteroid belts"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 16770,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    }
+  ]
 }

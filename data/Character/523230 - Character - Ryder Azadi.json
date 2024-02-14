@@ -2,7 +2,7 @@
   "PageId": 523230,
   "PageUrl": "https://starwars.fandom.com/wiki/Ryder_Azadi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/65/Ryder_Azadi_CT.png/revision/latest?cb=20161112212720",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/34/LiveActionAzadi.png/revision/latest?cb=20230824015249",
   "Data": [
     {
       "Label": "Titles",
@@ -52,6 +52,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.91 meters"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -91,20 +110,25 @@
         {
           "Content": "Lothal resistance group",
           "Href": "https://starwars.fandom.com/wiki/Lothal_resistance_group"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Alliance to Restore the Republic",
-        "Lothal resistance group"
+        "Lothal resistance group",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 583396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_hideout",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 583252,
@@ -112,8 +136,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     },
     {
+      "PageId": 161255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 583396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryder's_hideout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 555755,
       "PageUrl": "https://starwars.fandom.com/wiki/Lothal_resistance_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 779214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres_mural_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 564593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_garrison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]

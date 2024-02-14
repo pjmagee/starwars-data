@@ -2,7 +2,7 @@
   "PageId": 730411,
   "PageUrl": "https://starwars.fandom.com/wiki/Celly_Organa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/99/CellyOrgana-KenobiPartI.jpg/revision/latest?cb=20220527165518",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/39/DuchessCellyOrgana-ChromeBlack2023sig.png/revision/latest?cb=20240124035838",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Alderaanian",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Alderaanian)"
       ]
     },
     {
@@ -33,6 +37,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -62,17 +73,91 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
+        {
+          "Content": "Elder Houses",
+          "Href": "https://starwars.fandom.com/wiki/Elder_Houses"
+        },
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
         }
       ],
       "Values": [
+        "Elder Houses",
         "House of Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Breha Organa's father",
+          "Href": "https://starwars.fandom.com/wiki/Breha_Organa%27s_father"
+        },
+        {
+          "Content": "Breha Organa's mother",
+          "Href": "https://starwars.fandom.com/wiki/Breha_Organa%27s_mother"
+        }
+      ],
+      "Values": [
+        "Breha Organa's father",
+        "Breha Organa's mother"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Kayo Organa",
+          "Href": "https://starwars.fandom.com/wiki/Kayo_Organa"
+        }
+      ],
+      "Values": [
+        "Kayo Organa"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Breha Organa",
+          "Href": "https://starwars.fandom.com/wiki/Breha_Organa"
+        }
+      ],
+      "Values": [
+        "Breha Organa"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Niano Organa",
+          "Href": "https://starwars.fandom.com/wiki/Niano_Organa"
+        }
+      ],
+      "Values": [
+        "Niano Organa"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 451699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Breha_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kayo_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 730472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Niano_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

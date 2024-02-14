@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-21"
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "mountains",
@@ -64,33 +64,20 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Nagai",
           "Href": "https://starwars.fandom.com/wiki/Nagai"
-        }
-      ],
-      "Values": [
-        "Firrerreo",
-        "Formerly: Nagai"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Firrerrese",
-          "Href": "https://starwars.fandom.com/wiki/Firrerrese"
         },
         {
-          "Content": "Nagaian",
-          "Href": "https://starwars.fandom.com/wiki/Nagaian"
+          "Content": "Firrerreo",
+          "Href": "https://starwars.fandom.com/wiki/Firrerreo/Legends"
         }
       ],
       "Values": [
-        "Firrerrese",
-        "Formerly: Nagaian"
+        "Nagai",
+        "Firrerreo"
       ]
     },
     {
@@ -118,6 +105,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 82925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Kinooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 342268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kinooine_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 33919,
       "PageUrl": "https://starwars.fandom.com/wiki/Rei",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -133,19 +130,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 342268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kinooine_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 114003,
       "PageUrl": "https://starwars.fandom.com/wiki/Faron_Tolis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 82925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Kinooine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

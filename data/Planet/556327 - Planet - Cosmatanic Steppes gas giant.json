@@ -2,7 +2,7 @@
   "PageId": 556327,
   "PageUrl": "https://starwars.fandom.com/wiki/Cosmatanic_Steppes_gas_giant",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/83/CosmatanicSteppes-SWT.jpg/revision/latest?cb=20220608142028",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -28,6 +33,30 @@
       "Links": [],
       "Values": [
         "At least 3"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-16",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-16"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Triellus Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Triellus_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Triellus Trade Route"
       ]
     },
     {
@@ -57,13 +86,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 559152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Archaeo-Prime",
+      "PageId": 540271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cosmatanic_Steppes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 540271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cosmatanic_Steppes",
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 559152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Archaeo-Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {

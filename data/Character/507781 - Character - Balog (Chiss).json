@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/Him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -67,12 +74,23 @@
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Balog's strike team",
+          "Href": "https://starwars.fandom.com/wiki/Balog%27s_strike_team"
         }
       ],
       "Values": [
-        "Sith Empire"
+        "Sith Empire",
+        "Balog's strike team"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Balog's_strike_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

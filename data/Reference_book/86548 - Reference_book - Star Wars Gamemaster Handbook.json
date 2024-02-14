@@ -40,18 +40,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Bill Smith",
-          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
-        }
-      ],
-      "Values": [
-        "Bill Smith"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -72,6 +60,18 @@
       ]
     },
     {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Bill Smith",
+          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
+        }
+      ],
+      "Values": [
+        "Bill Smith"
+      ]
+    },
+    {
       "Label": "Publisher",
       "Links": [
         {
@@ -87,16 +87,12 @@
       "Label": "Publication date",
       "Links": [
         {
-          "Content": "April",
-          "Href": "https://starwars.fandom.com/wiki/April"
-        },
-        {
           "Content": "1993",
           "Href": "https://starwars.fandom.com/wiki/1993"
         }
       ],
       "Values": [
-        "April 1993"
+        "Summer 1993"
       ]
     },
     {
@@ -112,5 +108,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 370650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tales_of_the_Smoking_Blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    }
+  ]
 }

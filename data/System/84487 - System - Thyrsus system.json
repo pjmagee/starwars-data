@@ -24,7 +24,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Six Sisters",
+          "Href": "https://starwars.fandom.com/wiki/Six_Sisters"
+        }
+      ],
+      "Values": [
+        "Six Sisters"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-8"
@@ -41,30 +53,18 @@
       "Values": [
         "Thyrsus"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Six Sisters",
-          "Href": "https://starwars.fandom.com/wiki/Six_Sisters"
-        }
-      ],
-      "Values": [
-        "Six Sisters"
-      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 278513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Six_Sisters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 14805,
       "PageUrl": "https://starwars.fandom.com/wiki/Thyrsus/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 278513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Six_Sisters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

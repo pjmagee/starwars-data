@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Hyperdrive system",
       "Links": [
         {
@@ -55,6 +67,23 @@
       ]
     },
     {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Counselors",
+          "Href": "https://starwars.fandom.com/wiki/Counselor"
+        },
+        {
+          "Content": "Security droids",
+          "Href": "https://starwars.fandom.com/wiki/Security_droid"
+        }
+      ],
+      "Values": [
+        "Counselors",
+        "Security droids"
+      ]
+    },
+    {
       "Label": "Communication systems",
       "Links": [],
       "Values": [
@@ -86,12 +115,12 @@
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Attack on the Restitution",
-          "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Restitution"
+          "Content": "Defense of the Restitution",
+          "Href": "https://starwars.fandom.com/wiki/Defense_of_the_Restitution"
         }
       ],
       "Values": [
-        "Attack on the Restitution"
+        "Defense of the Restitution"
       ]
     },
     {
@@ -106,19 +135,19 @@
           "Href": "https://starwars.fandom.com/wiki/Republic_Correctional_Alliance"
         },
         {
-          "Content": "Prisoner Rehabilitation Program",
-          "Href": "https://starwars.fandom.com/wiki/Prisoner_Rehabilitation_Program"
-        },
-        {
           "Content": "Nihil",
           "Href": "https://starwars.fandom.com/wiki/Nihil"
+        },
+        {
+          "Content": "Lourna Dee's Tempest",
+          "Href": "https://starwars.fandom.com/wiki/Lourna_Dee%27s_Tempest"
         }
       ],
       "Values": [
         "Galactic Republic",
         "Republic Correctional Alliance",
-        "Prisoner Rehabilitation Program",
-        "Nihil"
+        "Nihil",
+        "Lourna Dee's Tempest"
       ]
     },
     {
@@ -135,8 +164,14 @@
     },
     {
       "Label": "Commander(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Arman",
+          "Href": "https://starwars.fandom.com/wiki/Arman"
+        }
+      ],
       "Values": [
+        "Arman",
         "Lourna Dee"
       ]
     },
@@ -148,8 +183,12 @@
           "Href": "https://starwars.fandom.com/wiki/Fry"
         },
         {
-          "Content": "Wittick",
-          "Href": "https://starwars.fandom.com/wiki/Wittick"
+          "Content": "Hazeltow",
+          "Href": "https://starwars.fandom.com/wiki/Hazeltow"
+        },
+        {
+          "Content": "Jon Wittick",
+          "Href": "https://starwars.fandom.com/wiki/Jon_Wittick"
         },
         {
           "Content": "Muglan",
@@ -163,7 +202,8 @@
       "Values": [
         "As Restitution",
         "Fry",
-        "Wittick",
+        "Hazeltow",
+        "Jon Wittick",
         "As Lourna Dee",
         "Muglan",
         "Quin"
@@ -179,28 +219,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 712060,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Correctional_Alliance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 712322,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prisoner_rehabilitation_program",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 679929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pan_Eyta",
+      "PageId": 741811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arman",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 707564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jon_Wittick",
+      "PageId": 742115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hazeltow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 707629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fry",
+      "PageId": 742119,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trilok",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -214,6 +244,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 722538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defense_of_the_Restitution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 679929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pan_Eyta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 707228,
       "PageUrl": "https://starwars.fandom.com/wiki/Tasia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -224,9 +264,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 722538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Restitution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 707564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jon_Wittick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 707629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 712060,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Correctional_Alliance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 712322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prisoner_rehabilitation_program",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

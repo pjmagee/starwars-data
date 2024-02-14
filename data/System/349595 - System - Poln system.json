@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-5"
@@ -58,14 +58,26 @@
         "Poln Major",
         "Poln Minor"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Nuso Esva's realm",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_realm"
+        }
+      ],
+      "Values": [
+        "Galactic Empire",
+        "Nuso Esva's realm"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 355783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Poln_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
     {
       "PageId": 348703,
       "PageUrl": "https://starwars.fandom.com/wiki/Candoras_sector",
@@ -82,9 +94,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 349574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calo_Drusan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 349666,
       "PageUrl": "https://starwars.fandom.com/wiki/Sorro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 355783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Poln_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

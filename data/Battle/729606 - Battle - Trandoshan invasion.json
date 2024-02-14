@@ -2,6 +2,7 @@
   "PageId": 729606,
   "PageUrl": "https://starwars.fandom.com/wiki/Trandoshan_invasion",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -16,10 +17,14 @@
         {
           "Content": "3000 BBY",
           "Href": "https://starwars.fandom.com/wiki/3000_BBY"
+        },
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
         }
       ],
       "Values": [
-        "c. 3000 BBY"
+        "Between 3000 BBY and 22 BBY"
       ]
     },
     {
@@ -55,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelleem_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

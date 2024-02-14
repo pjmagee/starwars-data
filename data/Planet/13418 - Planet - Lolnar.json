@@ -2,7 +2,7 @@
   "PageId": 13418,
   "PageUrl": "https://starwars.fandom.com/wiki/Lolnar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/82/Columus.png/revision/latest?cb=20130508034207",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a2/Lolnar-TEA.jpg/revision/latest?cb=20220830163909",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -53,13 +63,25 @@
       "Values": [
         "Corellian Run"
       ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        }
+      ],
+      "Values": [
+        "Human"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 140083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lesan_Ramier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 409300,
@@ -67,14 +89,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 140083,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lesan_Ramier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 391425,
       "PageUrl": "https://starwars.fandom.com/wiki/Lolnar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -12,6 +12,30 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories",
+        "Galactic Frontier"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "J-19"
+      ]
+    },
+    {
       "Label": "Suns",
       "Links": [
         {
@@ -28,7 +52,7 @@
       "Links": [
         {
           "Content": "Amaxine space station",
-          "Href": "https://starwars.fandom.com/wiki/Amaxine_space_station"
+          "Href": "https://starwars.fandom.com/wiki/Amaxine_Space_Station"
         }
       ],
       "Values": [
@@ -38,8 +62,13 @@
   ],
   "Relationships": [
     {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 639438,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_space_station",
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_Space_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {

@@ -2,6 +2,7 @@
   "PageId": 687293,
   "PageUrl": "https://starwars.fandom.com/wiki/Nihil_fleet",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,30 @@
       ]
     },
     {
+      "Label": "Flagship",
+      "Links": [
+        {
+          "Content": "Gaze Electric",
+          "Href": "https://starwars.fandom.com/wiki/Gaze_Electric"
+        }
+      ],
+      "Values": [
+        "Gaze Electric"
+      ]
+    },
+    {
+      "Label": "Notable campaigns",
+      "Links": [
+        {
+          "Content": "Nihil conflict",
+          "Href": "https://starwars.fandom.com/wiki/Nihil_conflict"
+        }
+      ],
+      "Values": [
+        "Nihil conflict"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -31,9 +56,31 @@
         }
       ],
       "Values": [
-        "Nihil"
+        "Nihil",
+        "Nihil military"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 643796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 679941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaze_Electric",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 679943,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Elite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 679957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lourna_Dee_(cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

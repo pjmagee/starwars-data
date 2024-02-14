@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Koradin sector",
-          "Href": "https://starwars.fandom.com/wiki/Koradin_sector"
+          "Href": "https://starwars.fandom.com/wiki/Koradin_sector/Legends"
         }
       ],
       "Values": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-18"
@@ -67,22 +67,56 @@
       ]
     },
     {
-      "Label": "Climate",
-      "Links": [
-        {
-          "Content": "Humid",
-          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Humid"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Toxic",
+          "Href": "https://starwars.fandom.com/wiki/Poison/Legends"
+        },
+        {
+          "Content": "marshes",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
       "Values": [
         "Toxic marshes"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
+      "Values": [
+        "Oceans"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Mines",
+          "Href": "https://starwars.fandom.com/wiki/Mining/Legends"
+        },
+        {
+          "Content": "factories",
+          "Href": "https://starwars.fandom.com/wiki/Factory/Legends"
+        }
+      ],
+      "Values": [
+        "Mines",
+        "Processing factories",
+        "A port"
       ]
     },
     {
@@ -110,35 +144,32 @@
       ]
     },
     {
-      "Label": "Major exports",
+      "Label": "Population",
       "Links": [
         {
-          "Content": "Slaves",
-          "Href": "https://starwars.fandom.com/wiki/Slavery/Legends"
+          "Content": "system",
+          "Href": "https://starwars.fandom.com/wiki/Star_system/Legends"
+        },
+        {
+          "Content": "25 ABY",
+          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
         }
       ],
       "Values": [
-        "Slaves"
-      ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Republic"
+        "500 million–1 billion (Sump system) (c. 25 ABY)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 14148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lipsec_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 42663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuknog_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 42662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slyther_Bushforb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 272114,
@@ -146,19 +177,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 4849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuknog/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 1391,
       "PageUrl": "https://starwars.fandom.com/wiki/Ark_Roose/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 42662,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slyther_Bushforb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 14148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lipsec_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 4849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuknog/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

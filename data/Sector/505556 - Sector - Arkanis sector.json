@@ -19,12 +19,17 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
         {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
           "Content": "The Slice",
           "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
         "Outer Rim Territories",
+        "Galactic Frontier",
         "The Slice"
       ]
     },
@@ -117,20 +122,20 @@
       ]
     },
     {
-      "Label": "Republic Era",
+      "Label": "Invasion of Naboo",
       "Links": [
         {
-          "Content": "Invasion of Naboo",
-          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Naboo"
-        },
-        {
-          "Content": "Duel on Tatooine",
+          "Content": "Tatooine",
           "Href": "https://starwars.fandom.com/wiki/Duel_on_Tatooine"
-        },
-        {
-          "Content": "Separatist Crisis",
-          "Href": "https://starwars.fandom.com/wiki/Separatist_Crisis"
-        },
+        }
+      ],
+      "Values": [
+        "Tatooine"
+      ]
+    },
+    {
+      "Label": "Separatist Crisis",
+      "Links": [
         {
           "Content": "Geonosis",
           "Href": "https://starwars.fandom.com/wiki/Dogfight_over_Geonosis"
@@ -138,11 +143,15 @@
         {
           "Content": "Tatooine",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_rescue_Shmi_Skywalker_Lars"
-        },
-        {
-          "Content": "Clone Wars",
-          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
-        },
+        }
+      ],
+      "Values": [
+        "Geonosis - Tatooine"
+      ]
+    },
+    {
+      "Label": "Clone Wars",
+      "Links": [
         {
           "Content": "Geonosis (I)",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis"
@@ -165,16 +174,27 @@
         }
       ],
       "Values": [
-        "Invasion of NabooDuel on Tatooine",
-        "Separatist CrisisGeonosis - Tatooine",
-        "Clone WarsGeonosis (I) - Tatooine (I) - Geonosis (II) - Tatooine (II) - Tatooine (III)",
-        "Invasion of Naboo",
-        "Separatist Crisis",
-        "Clone Wars"
+        "Geonosis (I) - Tatooine (I) - Geonosis (II) - Tatooine (II) - Tatooine (III)"
       ]
     },
     {
-      "Label": "Imperial Era",
+      "Label": "Great Jedi Purge",
+      "Links": [
+        {
+          "Content": "Tatooine",
+          "Href": "https://starwars.fandom.com/wiki/Search_for_Nari"
+        },
+        {
+          "Content": "Lars Homestead",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Lars_Homestead"
+        }
+      ],
+      "Values": [
+        "Tatooine - Lars Homestead"
+      ]
+    },
+    {
+      "Label": "Galactic Civil War",
       "Links": [
         {
           "Content": "Berch Teller campaign",
@@ -183,10 +203,6 @@
         {
           "Content": "Attack on Sentinel Base",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_Sentinel_Base"
-        },
-        {
-          "Content": "Galactic Civil War",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
         },
         {
           "Content": "Arkanis",
@@ -251,13 +267,21 @@
         {
           "Content": "Arkanis (II)",
           "Href": "https://starwars.fandom.com/wiki/Siege_of_Arkanis"
+        }
+      ],
+      "Values": [
+        "Berch Teller campaign (Attack on Sentinel Base) - Arkanis - Geonosis (I) - Geonosis (II) - Tatooine (I) - Tatooine II (Tattooine I - Imperial Listening Station - Tatooine (II) (Empire Shuttle Yard - Secret base - Reingorcement Facility - Imerial Garrison - For Ironhard)) - Tatooine (III) - Ben Kenobi's home - Tatooine (IV) - Geonosis (III) - Arkanis (II)"
+      ]
+    },
+    {
+      "Label": "Imperial Era",
+      "Links": [
+        {
+          "Content": "Geonosis",
+          "Href": "https://starwars.fandom.com/wiki/Secret_mission_to_Geonosis"
         },
         {
           "Content": "Tatooine (I)",
-          "Href": "https://starwars.fandom.com/wiki/Mission_to_Tatooine_(Galactic_Empire)"
-        },
-        {
-          "Content": "Tatooine (II)",
           "Href": "https://starwars.fandom.com/wiki/Search_for_the_Tusken_totem"
         },
         {
@@ -269,7 +293,7 @@
           "Href": "https://starwars.fandom.com/wiki/Attack_on_a_Tusken_Raider_camp"
         },
         {
-          "Content": "Tatooine (III)",
+          "Content": "Tatooine (II)",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_cull_womp_rats"
         },
         {
@@ -277,19 +301,19 @@
           "Href": "https://starwars.fandom.com/wiki/Sneak_attack_on_Saponza%27s_homestead"
         },
         {
-          "Content": "Tatooine (IV)",
+          "Content": "Tatooine (III)",
           "Href": "https://starwars.fandom.com/wiki/Campaign_against_the_Tusken_Raiders"
         },
         {
-          "Content": "Tatooine (V)",
+          "Content": "Tatooine (IV)",
           "Href": "https://starwars.fandom.com/wiki/The_Jundland_General%27s_campaign"
         },
         {
-          "Content": "Tatooine (VI)",
+          "Content": "Tatooine (V)",
           "Href": "https://starwars.fandom.com/wiki/Massacre_of_a_Tusken_Raider_tribe"
         },
         {
-          "Content": "Tatooine (VII)",
+          "Content": "Tatooine (VI)",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_aid_Kekit%27s_clan"
         },
         {
@@ -298,12 +322,7 @@
         }
       ],
       "Values": [
-        "Berch Teller campaignAttack on Sentinel Base",
-        "Galactic Civil WarArkanis - Geonosis (I) - Geonosis (II) - Tatooine (I)  - Tatooine II (Tattooine I - Imperial Listening Station - Tatooine (II) (Empire Shuttle Yard - Secret base - Reingorcement Facility - Imerial Garrison - For Ironhard)) - Tatooine (III) - Ben Kenobi's home - Tatooine (IV) - Geonosis (III) - Arkanis (II)",
-        "Local conflictTatooine (I) - Tatooine (II) - Sponza's homestead (I) - Tuskan Raider camp - Tatooine (III) - Spanoza's homestead (II) - Tatooine (IV) - Tatooine (V) - Tatooine (VI) - Tatooine (VII) - Mos Pelgo",
-        "Berch Teller campaign",
-        "Galactic Civil War",
-        "Local conflict"
+        "Geonosis - Tatooine (I) - Sponza's homestead (I) - Tuskan Raider camp - Tatooine (II) - Spanoza's homestead (II) - Tatooine (III) - Tatooine (IV) - Tatooine (V) - Tatooine (VI) - Mos Pelgo"
       ]
     },
     {
@@ -327,14 +346,14 @@
         },
         {
           "Content": "Jabba's Palace (I)",
-          "Href": "https://starwars.fandom.com/wiki/Recovery_of_Slave_I"
+          "Href": "https://starwars.fandom.com/wiki/Firespray_heist"
         },
         {
           "Content": "Tatooine (II)",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Kintan_Striders"
         },
         {
-          "Content": " Tatooine (III)",
+          "Content": "Tatooine (III)",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Tatooine_(Din_Djarin)"
         },
         {
@@ -348,11 +367,15 @@
         {
           "Content": "Boba Fett's palace",
           "Href": "https://starwars.fandom.com/wiki/Assassination_attempt_on_Boba_Fett"
-        },
-        {
-          "Content": "War for Tatooine",
-          "Href": "https://starwars.fandom.com/wiki/War_for_Tatooine"
-        },
+        }
+      ],
+      "Values": [
+        "Freetown - Tatooine (I) - Dune Sea - Pyke repulsortrain - Jabba's Palace (I) - Tatooine (II) - Tatooine (III) - Jabba's Palace (II) - The Sanctuary - Boba Fett's palace"
+      ]
+    },
+    {
+      "Label": "War against the Pykes",
+      "Links": [
         {
           "Content": "Mos Espa (I)",
           "Href": "https://starwars.fandom.com/wiki/Chase_through_Mos_Espa"
@@ -363,7 +386,7 @@
         },
         {
           "Content": "The Sanctuary",
-          "Href": "https://starwars.fandom.com/wiki/Bombing_of_the_Sanctuary"
+          "Href": "https://starwars.fandom.com/wiki/Bombing_of_Garsa%27s_Sanctuary"
         },
         {
           "Content": "Mos Espa (II)",
@@ -371,98 +394,20 @@
         }
       ],
       "Values": [
-        "Local conflictFreetown - Tatooine (I) - Dune Sea - Pyke repulsortrain - Jabba's Palace (I) - Tatooine (II) -  Tatooine (III) - Jabba's Palace (II) - The Sanctuary - Boba Fett's palace",
-        "War for TatooineMos Espa (I) - Freetown - The Sanctuary - Mos Espa (II)",
-        "Local conflict",
-        "War for Tatooine"
+        "Mos Espa (I) - Freetown - The Sanctuary - Mos Espa (II)"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 481385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arkanis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 673080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Iben_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 614597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 695169,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Crystal_Passage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 554689,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Foundry_7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 661573,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lok_Revenants",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 477235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_Base_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 452688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 457990,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 486070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 579358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_gas_giant_(Sentinel_Base)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 600596,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attacks_in_the_Arkanis_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 672957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trask",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
     {
       "PageId": 672958,
       "PageUrl": "https://starwars.fandom.com/wiki/Kol_Iben",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 502122,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 513197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tatoo_I",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 513198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tatoo_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 635899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maldo_Kreis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 507431,
@@ -475,9 +420,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 477231,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_moon",
+      "PageId": 481385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkanis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 554689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbital_Foundry_7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 579358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_gas_giant_(Sentinel_Base)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 452688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 733277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis'_largest_moon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 661573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lok_Revenants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 674651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 673080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Iben_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 513192,
@@ -500,9 +485,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 543416,
       "PageUrl": "https://starwars.fandom.com/wiki/Arkanis_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 672957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 477231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 477235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_Base_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 457990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 502122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 513197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tatoo_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 513198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tatoo_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 614597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mumble's_Turnaround",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 695169,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Crystal_Passage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 600596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attacks_in_the_Arkanis_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

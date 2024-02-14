@@ -2,6 +2,7 @@
   "PageId": 683548,
   "PageUrl": "https://starwars.fandom.com/wiki/New_Heroes_for_the_Galaxy",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/NewHeroesForTheGalaxy.png/revision/latest?cb=20221207220419",
   "Data": [
     {
       "Label": "Titles",
@@ -92,7 +93,42 @@
       "Values": [
         "34 ABY"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "Against All Odds",
+          "Href": "https://starwars.fandom.com/wiki/Against_All_Odds_(Star_Wars_Galactic_Storybook)"
+        }
+      ],
+      "Values": [
+        "Against All Odds"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "The Final Fight",
+          "Href": "https://starwars.fandom.com/wiki/The_Final_Fight_(Star_Wars_Galactic_Storybook)"
+        }
+      ],
+      "Values": [
+        "The Final Fight"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Against_All_Odds_(Star_Wars_Galactic_Storybook)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 683557,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Final_Fight_(Star_Wars_Galactic_Storybook)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

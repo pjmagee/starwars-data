@@ -15,6 +15,7 @@
       "Label": "Organization type",
       "Links": [],
       "Values": [
+        "Mercenaries",
         "Crime syndicate"
       ]
     },
@@ -79,18 +80,33 @@
           "Href": "https://starwars.fandom.com/wiki/First_Light"
         },
         {
-          "Content": "Dathomir",
-          "Href": "https://starwars.fandom.com/wiki/Dathomir"
+          "Content": "Dathomir Fortress",
+          "Href": "https://starwars.fandom.com/wiki/Nightsister_lair"
         },
         {
           "Content": "Vermillion",
           "Href": "https://starwars.fandom.com/wiki/Vermillion_(Crimson_Dawn)"
+        },
+        {
+          "Content": "Dawnfall Base",
+          "Href": "https://starwars.fandom.com/wiki/Cataract_Base"
+        },
+        {
+          "Content": "Crimson Dawn Sub-Headquarters",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn_Sub-Headquarters"
+        },
+        {
+          "Content": "Crimson Dawn Regional Outpost",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn_Regional_Outpost"
         }
       ],
       "Values": [
         "First Light",
-        "Dathomir",
-        "Vermillion"
+        "Dathomir Fortress",
+        "Vermillion",
+        "Dawnfall Base",
+        "Crimson Dawn Sub-Headquarters",
+        "Crimson Dawn Regional Outpost"
       ]
     },
     {
@@ -129,10 +145,6 @@
           "Href": "https://starwars.fandom.com/wiki/Savareen"
         },
         {
-          "Content": "Secret Crimson Dawn Base",
-          "Href": "https://starwars.fandom.com/wiki/Secret_Crimson_Dawn_Base"
-        },
-        {
           "Content": "Vandor",
           "Href": "https://starwars.fandom.com/wiki/Vandor"
         }
@@ -144,8 +156,35 @@
         "Outer Rim Regional Outpost",
         "Sub-Headquarters, Laecor",
         "Savareen",
-        "Secret Crimson Dawn Base",
         "Vandor"
+      ]
+    },
+    {
+      "Label": "Date founded",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        }
+      ],
+      "Values": [
+        "By 19 BBY"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        }
+      ],
+      "Values": [
+        "3 ABY or 4 ABY"
       ]
     },
     {
@@ -178,23 +217,98 @@
   ],
   "Relationships": [
     {
-      "PageId": 454264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabé",
+      "PageId": 727516,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bazzra",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aemon_Gremm",
+      "PageId": 672590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Signet_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 639627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_of_Ochi_of_Bestoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 737403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bevelyn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toht_Ra",
+      "PageId": 737404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jon_Melton",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 702551,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jarm_Brock",
+      "PageId": 629779,
+      "PageUrl": "https://starwars.fandom.com/wiki/GL_vendor_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 747928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bestine_IV_insurgents",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 749825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sana_Starros'_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 465577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 596149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dryden_Vos'_signet_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 599436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masthead_of_Xim_the_Despot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 715538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dryden's_desk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 715632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rafa_life_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 664917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cadeliah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 752597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_(Cygnus_Anton)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 726822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 717660,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Dawn_Sub-Headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 708813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imara_Vex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 709400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trinia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -203,24 +317,119 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 717671,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Vincorba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 706343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xet's_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 719152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_Fortress_Vader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 783972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thallia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 721186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Purge_of_suspected_Crimson_Dawn_collaborators",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 783973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Olio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_of_Ochi_of_Bestoon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 783974,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noyio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783977,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hilst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qorsha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lopie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drex_(Rodian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eleera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corynna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerveteri_Slane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 727891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neural_harness",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 644883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 785260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karthakk_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 599466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rakatan_wraith_box",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 599755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_navi-computer_dataplaque",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 658856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vukorah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 701602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 702551,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jarm_Brock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 786496,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_cell_leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 587558,
+      "PageUrl": "https://starwars.fandom.com/wiki/SE8_waiter_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 595217,
@@ -228,19 +437,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 644314,
-      "PageUrl": "https://starwars.fandom.com/wiki/ZED-6-7",
+      "PageId": 723805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(Accresker_Jail)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B2-series_super_battle_droid_(Gabredor_III)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 642784,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calrissian_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 659827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 788776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1-series_battle_droid_(Gabredor_III)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 643573,
@@ -258,14 +467,159 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 599436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masthead_of_Xim_the_Despot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 717668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Crimson_Dawn_Sub-Headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 599466,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rakatan_wraith_box",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 165780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cornelius_Evazan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 515121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 695154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bokku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 695685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallin_Crae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 644314,
+      "PageUrl": "https://starwars.fandom.com/wiki/ZED-6-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 706345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_droid_model",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 746001,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Archivist's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 452307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dengar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 596062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_agent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 559080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abecederian_line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 788766,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_lieutenant_(Gabredor_III)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 788777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_member_(Gabredor_III)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 615656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dryden's_study",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 616874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Dawn_ore_hub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 717671,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Vincorba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 719152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_on_Vader's_Castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 721186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_of_suspected_Crimson_Dawn_collaborators",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 733072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_of_Skarhorn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 733075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Vermillion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 734036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_a_dark_side_hellscape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 732392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra's_electro_swords",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 740092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fermata_Cage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 747914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus'_machine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 472466,
+      "PageUrl": "https://starwars.fandom.com/wiki/SP-4_ISC",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 712559,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Archivist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 726800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Oro_Sankeria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 715299,
@@ -283,9 +637,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 706345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_droid_model",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 715360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 708398,
@@ -293,153 +647,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 715161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orphans",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 619185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lieutenant_(criminal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 726800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Oro_Sankeria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 165780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cornelius_Evazan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 605295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hado_Gwin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 709400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trinia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 672590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Signet_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 535725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 535055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Percussive_cannon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 599755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_navi-computer_dataplaque",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 508972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chanath_Cha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 601644,
-      "PageUrl": "https://starwars.fandom.com/wiki/GL-0T15",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 601647,
-      "PageUrl": "https://starwars.fandom.com/wiki/PA-LT4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 715538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dryden's_desk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 496435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sly_Moore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 577350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 599199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solo_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 601426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 598958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hylobon_Enforcers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 452307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 596062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_agent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 616875,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_cyborg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 699472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deva_Lompop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 723805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(Accresker_Jail)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 81401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 452714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dengar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452815,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 739087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nav_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 452964,
       "PageUrl": "https://starwars.fandom.com/wiki/Landonis_Balthazar_Calrissian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 701602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -448,74 +662,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 596235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beckett's_gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 658856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vukorah",
+      "PageId": 764293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_warrior",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 706343,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xet's_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 676634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chain_code",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 596116,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Light",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 596477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 726822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_cell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 600889,
-      "PageUrl": "https://starwars.fandom.com/wiki/S-195_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 601783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vibrocutlass",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 596149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dryden_Vos'_signet_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 715632,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rafa_life_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 708813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imara_Vex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 695154,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bokku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 615656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dryden's_study",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 616874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Dawn_ore_hub",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 711409,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thought_dowser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 619185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lieutenant_(criminal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 566873,
@@ -538,29 +702,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 747910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus'_cape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 453788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 615339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_for_the_Phylanx_Redux_Transmitter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 644883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unbroken_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 756808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 725703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Secret_Crimson_Dawn_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 756809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class_Three",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 518377,
-      "PageUrl": "https://starwars.fandom.com/wiki/Han's_heavy_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 756810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class-Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 756817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 711409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thought_Dowser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 590892,
@@ -573,29 +747,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 695685,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallin_Crae",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 719836,
       "PageUrl": "https://starwars.fandom.com/wiki/Sira_Folsomn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_assassin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 720443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(hangar_Fifteen-D)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 696570,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vermillion_(Crimson_Dawn)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 556804,
@@ -603,64 +757,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 508592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knights_of_Ren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 605295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hado_Gwin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 709298,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pulse_bomb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 731074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 380455,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 731079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_waiter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 629779,
-      "PageUrl": "https://starwars.fandom.com/wiki/GL_vendor_droid",
+      "PageId": 3717,
+      "PageUrl": "https://starwars.fandom.com/wiki/B2-series_super_battle_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 615339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Cantonica",
+      "PageId": 701558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_for_Han_Solo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 717660,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Dawn_Sub-Headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 469902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crime_lord",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 688630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bundki_vibrocutlass",
+      "PageId": 510065,
+      "PageUrl": "https://starwars.fandom.com/wiki/DL-44_heavy_blaster_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 696830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra's_S-195_blaster_pistol",
+      "PageId": 518377,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han's_heavy_blaster_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 717668,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Crimson_Dawn_Sub-Headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 719697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Mourner's_Wail_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 30463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deathstick",
+      "PageId": 715820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marinda",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 716846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 596116,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Light",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 745043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 748419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Son-tuul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 639427,
@@ -683,19 +842,314 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 712559,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Archivist",
+      "PageId": 734726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_mole",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 727891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neural_harness",
+      "PageId": 709298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pulse_bomb",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 701558,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auction_for_Han_Solo",
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 596235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beckett's_gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 696830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra's_S-195_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 715822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ladybright",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 756712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_the_Amaxine_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 455609,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1-series_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 715890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siroto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 688630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bundki_vibrocutlass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 696570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vermillion_(Crimson_Dawn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 643169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronen_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 738566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_human_assassin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 469902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crime_lord",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 568287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cane_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 719697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Mourner's_Wail_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 720564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Panisia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 747863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dawn_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 508592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knights_of_Ren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 781314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firestorm_Rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 454264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 599219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aemon_Gremm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 599220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toht_Ra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_religious_cult",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 616875,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Rodian_cyborg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 699472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deva_Lompop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 760411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_One_(Crimson_Dawn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 760412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Three_(Crimson_Dawn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 760413,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Two_(Crimson_Dawn)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 600339,
+      "PageUrl": "https://starwars.fandom.com/wiki/RSKF-44_heavy_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 600889,
+      "PageUrl": "https://starwars.fandom.com/wiki/S-195_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 601783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vibrocutlass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 601975,
+      "PageUrl": "https://starwars.fandom.com/wiki/DG-29_heavy_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 508972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chanath_Cha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 601644,
+      "PageUrl": "https://starwars.fandom.com/wiki/GL-0T15",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 601647,
+      "PageUrl": "https://starwars.fandom.com/wiki/PA-LT4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 599199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solo_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 601426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 535725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 715161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orphans",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 785679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 81401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 747864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cataract_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 747640,
+      "PageUrl": "https://starwars.fandom.com/wiki/War_against_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 747664,
+      "PageUrl": "https://starwars.fandom.com/wiki/War_of_the_Bounty_Hunters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 496435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sly_Moore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_assassin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(hangar_Fifteen-D)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 380455,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 453788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 30463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deathstick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 598958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hylobon_Enforcers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 762075,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Corellia_(IG-88)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 577350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qi'ra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 740674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_human_bartender",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 740676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Crimson_Dawn_member",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496690,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-series",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 642784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calrissian_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 659827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 738669,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scopium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ren_(lightsaber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 726811,
@@ -703,9 +1157,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 596477,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 535055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Percussive_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

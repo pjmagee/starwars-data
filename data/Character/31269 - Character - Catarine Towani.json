@@ -2,7 +2,7 @@
   "PageId": 31269,
   "PageUrl": "https://starwars.fandom.com/wiki/Catarine_Towani",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f5/Catarine.jpg/revision/latest?cb=20070413160238",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c9/CatarineTowani.png/revision/latest?cb=20221003042333",
   "Data": [
     {
       "Label": "Titles",
@@ -52,24 +52,88 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Black",
+          "Content": "Brown",
           "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
-        "Black"
+        "Brown"
       ]
     },
     {
-      "Label": "Eye color",
+      "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Brown"
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Towani family",
+          "Href": "https://starwars.fandom.com/wiki/Towani_family"
+        }
+      ],
+      "Values": [
+        "Towani family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Jeremitt Towani",
+          "Href": "https://starwars.fandom.com/wiki/Jeremitt_Towani"
+        }
+      ],
+      "Values": [
+        "Jeremitt Towani"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Cindel Towani",
+          "Href": "https://starwars.fandom.com/wiki/Cindel_Towani"
+        },
+        {
+          "Content": "Mace Towani",
+          "Href": "https://starwars.fandom.com/wiki/Mace_Towani"
+        }
+      ],
+      "Values": [
+        "Cindel Towani",
+        "Mace Towani"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 31184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mace_Towani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 31263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jeremitt_Towani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cindel_Towani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

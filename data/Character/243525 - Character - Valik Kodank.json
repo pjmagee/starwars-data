@@ -12,15 +12,44 @@
       ]
     },
     {
-      "Label": "Species",
+      "Label": "Died",
       "Links": [
         {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith_(species)/Legends"
+          "Content": "5000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/5000_BBY/Legends"
+        },
+        {
+          "Content": "Tascollan Nebula",
+          "Href": "https://starwars.fandom.com/wiki/Tascollan_Nebula"
+        },
+        {
+          "Content": "death",
+          "Href": "https://starwars.fandom.com/wiki/Death/Legends"
+        },
+        {
+          "Content": "7 ABY",
+          "Href": "https://starwars.fandom.com/wiki/7_ABY/Legends"
+        },
+        {
+          "Content": "spirit",
+          "Href": "https://starwars.fandom.com/wiki/Force_ghost"
         }
       ],
       "Values": [
-        "Sith"
+        "c. 5000 BBY, Tascollan Nebula (physical death)",
+        "c. 7 ABY, Tascollan Nebula (spirit)"
+      ]
+    },
+    {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Near-Human",
+          "Href": "https://starwars.fandom.com/wiki/Near-Human"
+        }
+      ],
+      "Values": [
+        "Near-Human"
       ]
     },
     {
@@ -48,32 +77,54 @@
       ]
     },
     {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Janton Belos",
+          "Href": "https://starwars.fandom.com/wiki/Janton_Belos"
+        }
+      ],
+      "Values": [
+        "Janton Belos"
+      ]
+    },
+    {
       "Label": "Apprentices",
       "Links": [
         {
           "Content": "Thaum Rystra",
           "Href": "https://starwars.fandom.com/wiki/Thaum_Rystra"
+        },
+        {
+          "Content": "Maric Tovar",
+          "Href": "https://starwars.fandom.com/wiki/Maric_Tovar"
         }
       ],
       "Values": [
-        "Thaum Rystra"
+        "Thaum Rystra",
+        "Maric Tovar"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 369496,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maric_Tovar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 243517,
       "PageUrl": "https://starwars.fandom.com/wiki/Sith_holocron_(Tascollan_Nebula)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
-      "PageId": 243528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thaum_Rystra",
+      "PageId": 243526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Janton_Belos",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 369496,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maric_Tovar",
+      "PageId": 243528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thaum_Rystra",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

@@ -12,19 +12,36 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Human",
+          "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
         }
       ],
       "Values": [
-        "Human"
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 763709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Chancellor_election,_234_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Election"
+    },
     {
       "PageId": 658577,
       "PageUrl": "https://starwars.fandom.com/wiki/Lina_Soh",
@@ -34,6 +51,11 @@
       "PageId": 700617,
       "PageUrl": "https://starwars.fandom.com/wiki/Kitrep_Soh",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 766615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soh_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

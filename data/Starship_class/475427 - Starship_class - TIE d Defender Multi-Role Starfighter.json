@@ -2,7 +2,7 @@
   "PageId": 475427,
   "PageUrl": "https://starwars.fandom.com/wiki/TIE/d_\"Defender\"_Multi-Role_Starfighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/44/SWB_TIE_Defender.png/revision/latest?cb=20171030173108",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/44/SWB_TIE_Defender.png/revision/latest?cb=20230723015418",
   "Data": [
     {
       "Label": "Titles",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -243,6 +243,10 @@
           "Href": "https://starwars.fandom.com/wiki/Concussion_missile"
         },
         {
+          "Content": "CLL-3 Ion Torpedoes",
+          "Href": "https://starwars.fandom.com/wiki/CLL-3_Ion_Torpedo"
+        },
+        {
           "Content": "Proton torpedoes",
           "Href": "https://starwars.fandom.com/wiki/Proton_torpedo"
         },
@@ -256,6 +260,7 @@
         "Chin-mounted L-s9.3 laser cannons (2)",
         "Warhead launchers (2)",
         "Concussion missiles",
+        "CLL-3 Ion Torpedoes",
         "Proton torpedoes",
         "Tractor beam projector (1)"
       ]
@@ -341,6 +346,26 @@
       ]
     },
     {
+      "Label": "Retired",
+      "Links": [
+        {
+          "Content": "Years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year"
+        },
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        }
+      ],
+      "Values": [
+        "Years before between 3 ABY and 4 ABY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -352,6 +377,18 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Corps"
         },
         {
+          "Content": "Lothal resistance group",
+          "Href": "https://starwars.fandom.com/wiki/Lothal_resistance_group"
+        },
+        {
+          "Content": "Spectres",
+          "Href": "https://starwars.fandom.com/wiki/Spectres"
+        },
+        {
+          "Content": "Jakku Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Jakku_Imperial_remnant"
+        },
+        {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
@@ -359,25 +396,33 @@
       "Values": [
         "Galactic Empire",
         "Imperial Starfighter Corps",
+        "Lothal resistance group (stolen)",
+        "Spectres (stolen)",
+        "Jakku Imperial remnant",
         "First Order"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 715235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 592032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Hera_Syndulla_(Lothal)",
+      "PageId": 555731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Imperial_Armory_Complex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 582737,
       "PageUrl": "https://starwars.fandom.com/wiki/TIE/D_Defender_Elite",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 657619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 593268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lothal_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 603540,
@@ -390,19 +435,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 685817,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squadron_(TIE/D)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 482545,
       "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 555731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Imperial_Armory_Complex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 685817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squadron_(TIE/D)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 715235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 554936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

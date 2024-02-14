@@ -2,6 +2,7 @@
   "PageId": 68095,
   "PageUrl": "https://starwars.fandom.com/wiki/Calamari_Council",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,14 +22,20 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         }
       ],
       "Values": [
-        "Mon Cala monarchy"
+        "Mon Calamari monarchy"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 593218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    }
+  ]
 }

@@ -2,13 +2,25 @@
   "PageId": 558730,
   "PageUrl": "https://starwars.fandom.com/wiki/Concert_Hall",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c5/Concert_Hall.jpg/revision/latest?cb=20120706140704",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ec/ConcertHall-CL.png/revision/latest?cb=20230228161323",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Concert Hall"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Music",
+          "Href": "https://starwars.fandom.com/wiki/Music"
+        }
+      ],
+      "Values": [
+        "Music venue"
       ]
     },
     {
@@ -28,5 +40,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 95736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purghom_Musical_Performance_Hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

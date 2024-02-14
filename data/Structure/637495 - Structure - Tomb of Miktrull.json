@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Tomb"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -27,25 +34,38 @@
       "Label": "Builder(s)",
       "Links": [
         {
-          "Content": "Zeffo",
-          "Href": "https://starwars.fandom.com/wiki/Zeffo_(species)"
+          "Content": "Zeffonians",
+          "Href": "https://starwars.fandom.com/wiki/Zeffonian"
         }
       ],
       "Values": [
-        "Zeffo"
+        "Zeffonians"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
+      "Values": [
+        "Zeffonians",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 654888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Zeffo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 633447,
       "PageUrl": "https://starwars.fandom.com/wiki/Zeffo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 654888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_mission_to_Zeffo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

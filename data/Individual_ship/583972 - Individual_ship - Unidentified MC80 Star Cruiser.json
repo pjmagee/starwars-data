@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -84,41 +84,27 @@
       ]
     },
     {
-      "Label": "Shielding",
-      "Links": [
-        {
-          "Content": "Deflector shield generators",
-          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
-        }
-      ],
+      "Label": "Hyperdrive system",
+      "Links": [],
       "Values": [
-        "Deflector shield generators"
+        "Equipped"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Turbolaser",
+          "Content": "Turbolasers",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
-          "Content": "Ion cannons",
+          "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
-        },
-        {
-          "Content": "Tractor beam",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam"
-        },
-        {
-          "Content": "projectors",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "Turbolaser cannons",
-        "Ion cannons",
-        "Tractor beam projectors"
+        "Turbolasers",
+        "Port-side ion cannons (3)"
       ]
     },
     {
@@ -131,31 +117,70 @@
         {
           "Content": "starfighters",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "T-65B X-wing starfighters",
+          "Href": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter"
+        },
+        {
+          "Content": "RZ-1 A-wing interceptors",
+          "Href": "https://starwars.fandom.com/wiki/RZ-1_A-wing_interceptor"
         }
       ],
       "Values": [
-        "10 squadrons of starfighters"
+        "10 squadrons of starfighters",
+        "T-65B X-wing starfighters",
+        "RZ-1 A-wing interceptors"
       ]
     },
     {
-      "Label": "Escape craft",
+      "Label": "Docking bays",
       "Links": [],
       "Values": [
-        "Equipped"
+        "Hanger (1)"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "New Republic officers",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_officer"
+        },
+        {
+          "Content": "New Republic pilots",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_pilot"
+        },
+        {
+          "Content": "New Republic soldiers",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_soldier"
+        },
+        {
+          "Content": "3PO-series protocol droids",
+          "Href": "https://starwars.fandom.com/wiki/3PO-series_protocol_droid"
+        },
+        {
+          "Content": "R-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R-series_astromech_droid"
+        },
+        {
+          "Content": "GNK-series power droids",
+          "Href": "https://starwars.fandom.com/wiki/GNK-series_power_droid"
+        },
+        {
+          "Content": "Hangar deck scrubber droids",
+          "Href": "https://starwars.fandom.com/wiki/Hangar_deck_scrubber_droid"
+        }
+      ],
       "Values": [
-        "Over 5,000"
-      ]
-    },
-    {
-      "Label": "Passengers",
-      "Links": [],
-      "Values": [
-        "At least 10,000"
+        "Over 5,000",
+        "New Republic officers",
+        "New Republic pilots",
+        "New Republic soldiers",
+        "3PO-series protocol droids",
+        "R-series astromech droids",
+        "GNK-series power droids",
+        "Hangar deck scrubber droids"
       ]
     },
     {
@@ -174,29 +199,24 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
-        },
-        {
-          "Content": "Alliance Military",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_Military"
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic",
-        "Alliance Military"
+        "New Republic"
       ]
     },
     {
       "Label": "Navy",
       "Links": [
         {
-          "Content": "Rebel Alliance Navy",
-          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
         }
       ],
       "Values": [
-        "Rebel Alliance Navy"
+        "New Republic Defense Fleet"
       ]
     }
   ],

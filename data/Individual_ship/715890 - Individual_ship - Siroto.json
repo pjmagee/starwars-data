@@ -2,7 +2,7 @@
   "PageId": 715890,
   "PageUrl": "https://starwars.fandom.com/wiki/Siroto",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/49/Siroto-CR1.jpg/revision/latest?cb=20211209022021",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f1/Siroto-HiddenEmpire3.png/revision/latest?cb=20230925200701",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Cloaking device",
+          "Href": "https://starwars.fandom.com/wiki/Cloaking_device"
+        }
+      ],
+      "Values": [
+        "Cloaking device"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [],
       "Values": [
@@ -36,10 +48,20 @@
         {
           "Content": "Attack on the Black Sun smash-processing lab",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Black_Sun_smash-processing_lab"
+        },
+        {
+          "Content": "Battle against Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Battle_against_Crimson_Dawn"
+        },
+        {
+          "Content": "Battle on an unidentified planet",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_an_unidentified_planet"
         }
       ],
       "Values": [
-        "Attack on the Black Sun smash-processing lab"
+        "Attack on the Black Sun smash-processing lab",
+        "Battle against Crimson Dawn",
+        "Battle on an unidentified planet"
       ]
     },
     {
@@ -48,10 +70,15 @@
         {
           "Content": "Orphans",
           "Href": "https://starwars.fandom.com/wiki/Orphans"
+        },
+        {
+          "Content": "Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
         }
       ],
       "Values": [
-        "Orphans"
+        "Orphans",
+        "Crimson Dawn"
       ]
     },
     {
@@ -70,6 +97,10 @@
       "Label": "Crewmembers",
       "Links": [
         {
+          "Content": "The Archivist",
+          "Href": "https://starwars.fandom.com/wiki/The_Archivist"
+        },
+        {
           "Content": "Ladybright",
           "Href": "https://starwars.fandom.com/wiki/Ladybright"
         },
@@ -83,11 +114,18 @@
         }
       ],
       "Values": [
+        "The Archivist",
         "Ladybright",
         "Sear",
         "Imara Vex"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 715822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ladybright",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    }
+  ]
 }

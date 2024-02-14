@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -27,12 +39,24 @@
       "Label": "Planet",
       "Links": [
         {
-          "Content": "Unidentified planet",
+          "Content": "planet",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_planet_(Dene_Gois_Cluster)"
         }
       ],
       "Values": [
-        "Unidentified planet"
+        "A planet"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "S-14",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "S-14"
       ]
     },
     {
@@ -55,7 +79,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -101,7 +125,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Duros",
@@ -152,9 +176,39 @@
   ],
   "Relationships": [
     {
-      "PageId": 612467,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Markona",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 612052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rodian_Splice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 615528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Hubin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 612456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tula_Markona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 612607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Markona_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 611449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thane_Markona's_Estate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 611422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Markona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 611451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thanrax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 611874,
@@ -164,42 +218,12 @@
     {
       "PageId": 611413,
       "PageUrl": "https://starwars.fandom.com/wiki/Dene_Gois_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 612607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Markona_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 611451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thanrax",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 612052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rodian_Splice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 611422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Markona",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 612456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tula_Markona",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thane_Markona's_Estate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 615528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Hubin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 612467,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Markona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

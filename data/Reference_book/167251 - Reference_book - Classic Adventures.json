@@ -29,18 +29,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Bill Smith",
-          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
-        }
-      ],
-      "Values": [
-        "Bill Smith"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -50,6 +38,18 @@
       ],
       "Values": [
         "Allen Nunis"
+      ]
+    },
+    {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Bill Smith",
+          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
+        }
+      ],
+      "Values": [
+        "Bill Smith"
       ]
     },
     {
@@ -68,12 +68,16 @@
       "Label": "Publication date",
       "Links": [
         {
+          "Content": "July",
+          "Href": "https://starwars.fandom.com/wiki/July"
+        },
+        {
           "Content": "1995",
           "Href": "https://starwars.fandom.com/wiki/1995"
         }
       ],
       "Values": [
-        "1995"
+        "July 1995"
       ]
     },
     {
@@ -103,5 +107,31 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 385573,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Art_of_Betrayal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 387641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Free_Time",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 483530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Easy_Money",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 322386,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Right_Place_...",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 347132,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Politics_of_Contraband_(adventure)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
         }
       ],
       "Values": [
-        "4 ABY aboard Flurry"
+        "4 ABY, Flurry"
       ]
     },
     {
@@ -56,8 +56,35 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Blond",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Blond"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
+        },
         {
           "Content": "Virgillian Free Alignment",
           "Href": "https://starwars.fandom.com/wiki/Virgillian_Free_Alignment/Legends"
@@ -69,12 +96,19 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "Alliance Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Fleet"
         }
       ],
       "Values": [
+        "Galactic Empire",
+        "Imperial Navy",
         "Virgillian Free Alignment",
         "Virgillian Free Alignment Starfleet",
-        "Alliance to Restore the Republic (supporting role only)"
+        "Alliance to Restore the Republic",
+        "Alliance Fleet"
       ]
     }
   ],

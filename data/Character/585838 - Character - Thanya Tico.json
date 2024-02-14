@@ -62,22 +62,62 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tico family",
           "Href": "https://starwars.fandom.com/wiki/Tico_family"
-        },
-        {
-          "Content": "Central Ridge Mining",
-          "Href": "https://starwars.fandom.com/wiki/Central_Ridge_Mining"
         }
       ],
       "Values": [
-        "Tico family",
-        "Central Ridge Mining"
+        "Tico family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Paige Tico",
+          "Href": "https://starwars.fandom.com/wiki/Paige_Tico"
+        },
+        {
+          "Content": "Rose Tico",
+          "Href": "https://starwars.fandom.com/wiki/Rose_Tico"
+        }
+      ],
+      "Values": [
+        "Paige Tico",
+        "Rose Tico"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Central Ridge Mining Company",
+          "Href": "https://starwars.fandom.com/wiki/Central_Ridge_Mining_Company"
+        }
+      ],
+      "Values": [
+        "Central Ridge Mining Company"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 585837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hue_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 571492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paige_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rose_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

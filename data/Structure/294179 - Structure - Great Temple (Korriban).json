@@ -15,16 +15,28 @@
       "Label": "Location",
       "Links": [
         {
-          "Content": "Korriban",
-          "Href": "https://starwars.fandom.com/wiki/Korriban"
-        },
-        {
           "Content": "Valley of the Dark Lords",
           "Href": "https://starwars.fandom.com/wiki/Valley_of_the_Dark_Lords/Legends"
+        },
+        {
+          "Content": "Korriban",
+          "Href": "https://starwars.fandom.com/wiki/Korriban"
         }
       ],
       "Values": [
-        "Korriban, Valley of the Dark Lords"
+        "Valley of the Dark Lords, Korriban"
+      ]
+    },
+    {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Hall of Judgment",
+          "Href": "https://starwars.fandom.com/wiki/Hall_of_Judgment_(Korriban)"
+        }
+      ],
+      "Values": [
+        "Hall of Judgment"
       ]
     },
     {
@@ -54,6 +66,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 187994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_Darth_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 294470,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_crystal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
@@ -61,6 +78,11 @@
     {
       "PageId": 7873,
       "PageUrl": "https://starwars.fandom.com/wiki/Valley_of_the_Dark_Lords/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 787737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Judgment_(Korriban)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

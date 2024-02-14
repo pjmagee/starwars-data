@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Speeder bike",
@@ -133,14 +133,44 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Lothal resistance group",
+          "Href": "https://starwars.fandom.com/wiki/Lothal_resistance_group"
+        },
+        {
+          "Content": "Spectres",
+          "Href": "https://starwars.fandom.com/wiki/Spectres"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Lothal resistance group (stolen)",
+        "Spectres (stolen)",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 593085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joopa_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
+    },
+    {
+      "PageId": 538103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ezra's_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
     {
       "PageId": 555783,
       "PageUrl": "https://starwars.fandom.com/wiki/Walker_271",
@@ -153,23 +183,23 @@
     },
     {
       "PageId": 562776,
-      "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport_(original)",
+      "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport_(Prototype)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 480727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 593085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Joopa_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
+      "PageId": 779004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine's_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
       "PageId": 564593,
       "PageUrl": "https://starwars.fandom.com/wiki/Lothal_garrison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 480727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

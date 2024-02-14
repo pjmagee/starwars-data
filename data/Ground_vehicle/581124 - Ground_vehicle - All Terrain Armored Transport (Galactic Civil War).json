@@ -8,7 +8,7 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "All Terrain Armored Transport (Galactic Civil War)"
+        "All Terrain Armored Transport"
       ]
     },
     {
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "walker",
@@ -80,14 +80,16 @@
         }
       ],
       "Values": [
-        "20 meters"
+        "20 meters",
+        "25.9 meters"
       ]
     },
     {
       "Label": "Height/depth",
       "Links": [],
       "Values": [
-        "22.5 meters"
+        "22.5 meters",
+        "22.2 meters"
       ]
     },
     {
@@ -96,10 +98,14 @@
         {
           "Content": "kph",
           "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
+        },
+        {
+          "Content": "mph",
+          "Href": "https://starwars.fandom.com/wiki/Mile_per_hour"
         }
       ],
       "Values": [
-        "60 kph"
+        "60 kph (37 mph)"
       ]
     },
     {
@@ -115,6 +121,13 @@
       "Values": [
         "Sensor array",
         "At least 3 terrain scanners"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -135,11 +148,17 @@
         {
           "Content": "R-90C medium blasters",
           "Href": "https://starwars.fandom.com/wiki/R-90C_medium_blaster"
+        },
+        {
+          "Content": "Taim & Bak",
+          "Href": "https://starwars.fandom.com/wiki/Taim_%26_Bak"
         }
       ],
       "Values": [
         "Chin-mounted Taim & Bak MS-1 heavy laser cannons (2)",
-        "Temple-mounted Piperii-Cerlurn R-90C medium blasters (2)"
+        "Temple-mounted medium blasters (2)",
+        "Piperii-Cerlurn R-90C medium blasters",
+        "Taim & Bak FF-4 medium repeating blasters"
       ]
     },
     {
@@ -154,8 +173,8 @@
           "Href": "https://starwars.fandom.com/wiki/LX-4_proton_mine"
         },
         {
-          "Content": "E-11 blaster rifles",
-          "Href": "https://starwars.fandom.com/wiki/E-11_blaster_rifle"
+          "Content": "E-11 medium blaster rifles",
+          "Href": "https://starwars.fandom.com/wiki/E-11_medium_blaster_rifle"
         },
         {
           "Content": "DLT-20A blaster rifles",
@@ -165,7 +184,7 @@
       "Values": [
         "74-Z speeder bikes (5)",
         "LX-4 proton mines (25)",
-        "At least 20 E-11 blaster rifles",
+        "At least 20 E-11 medium blaster rifles",
         "At least 5 DLT-20A blaster rifles"
       ]
     },
@@ -257,19 +276,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 620228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bellicose_(Imperial_II-class_Star_Destroyer)",
+      "PageId": 516102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 543464,
-      "PageUrl": "https://starwars.fandom.com/wiki/68th_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 527453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hellhound_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
       "PageId": 552703,
@@ -292,9 +301,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
+      "PageId": 585080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 748487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tempest_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 454368,
       "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 527453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hellhound_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
+    },
+    {
+      "PageId": 750052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_All_Terrain_Armored_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
+    },
+    {
+      "PageId": 543464,
+      "PageUrl": "https://starwars.fandom.com/wiki/68th_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 110013,
@@ -305,16 +339,6 @@
       "PageId": 122367,
       "PageUrl": "https://starwars.fandom.com/wiki/Blizzard_4",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
-    },
-    {
-      "PageId": 585080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 516102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

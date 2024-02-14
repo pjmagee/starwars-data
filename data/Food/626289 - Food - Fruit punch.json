@@ -2,6 +2,7 @@
   "PageId": 626289,
   "PageUrl": "https://starwars.fandom.com/wiki/Fruit_punch",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/49/Fruitpunch-Activity.png/revision/latest?cb=20231127025922",
   "Data": [
     {
       "Label": "Titles",
@@ -11,26 +12,24 @@
       ]
     },
     {
-      "Label": "Found on",
+      "Label": "Found",
       "Links": [
         {
           "Content": "Pijal",
           "Href": "https://starwars.fandom.com/wiki/Pijal"
+        },
+        {
+          "Content": "Tatooine",
+          "Href": "https://starwars.fandom.com/wiki/Tatooine"
         }
       ],
       "Values": [
-        "Pijal"
+        "Pijal",
+        "Tatooine"
       ]
     },
     {
       "Label": "Type",
-      "Links": [],
-      "Values": [
-        "Beverage"
-      ]
-    },
-    {
-      "Label": "Plant-based ingredients",
       "Links": [
         {
           "Content": "Fruit",
@@ -38,7 +37,26 @@
         }
       ],
       "Values": [
-        "Fruit"
+        "Fruit beverage"
+      ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [
+        {
+          "Content": "Orange",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Orange-colored"
+      ]
+    },
+    {
+      "Label": "Plant-based ingredients",
+      "Links": [],
+      "Values": [
+        "Fruit garnish"
       ]
     },
     {
@@ -47,10 +65,15 @@
         {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Ithorians",
+          "Href": "https://starwars.fandom.com/wiki/Ithorian"
         }
       ],
       "Values": [
-        "Humans"
+        "Humans",
+        "Ithorians"
       ]
     }
   ],

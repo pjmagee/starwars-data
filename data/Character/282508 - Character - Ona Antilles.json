@@ -37,7 +37,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blonde",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Blonde"
       ]
@@ -54,6 +59,18 @@
       "Links": [],
       "Values": [
         "Light"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Bail Antilles",
+          "Href": "https://starwars.fandom.com/wiki/Bail_Antilles_(Galactic_Alliance)"
+        }
+      ],
+      "Values": [
+        "Bail Antilles"
       ]
     },
     {
@@ -79,6 +96,16 @@
       "PageId": 192314,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Core_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 81234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 193271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Antilles_(Galactic_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 193012,

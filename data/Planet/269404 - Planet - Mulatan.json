@@ -2,7 +2,7 @@
   "PageId": 269404,
   "PageUrl": "https://starwars.fandom.com/wiki/Mulatan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/51/Mulatan-TEA.jpg/revision/latest?cb=20230625143657",
   "Data": [
     {
       "Label": "Titles",
@@ -15,16 +15,28 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
           "Content": "Hutt Space",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "The Slice",
+        "Hutt Space"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Bootana Hutta",
           "Href": "https://starwars.fandom.com/wiki/Bootana_Hutta"
         }
       ],
       "Values": [
-        "Hutt Space",
         "Bootana Hutta"
       ]
     },
@@ -41,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-10"
@@ -53,55 +65,30 @@
         {
           "Content": "Pabol Hutta",
           "Href": "https://starwars.fandom.com/wiki/Pabol_Hutta/Legends"
-        },
-        {
-          "Content": "Mulatan–Kor Hestilic hyperlane",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Mulatan–Kor_Hestilic_hyperlane"
         }
       ],
       "Values": [
-        "Pabol Hutta",
-        "Mulatan–Kor Hestilic hyperlane"
+        "Pabol Hutta"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Hutt Cartel",
-          "Href": "https://starwars.fandom.com/wiki/Hutt_Cartel"
+          "Content": "Hutt",
+          "Href": "https://starwars.fandom.com/wiki/Hutt/Legends"
         },
         {
-          "Content": "Qunaalac",
-          "Href": "https://starwars.fandom.com/wiki/Qunaalac"
-        },
-        {
-          "Content": "kajidic",
+          "Content": "clans",
           "Href": "https://starwars.fandom.com/wiki/Kajidic/Legends"
         }
       ],
       "Values": [
-        "Hutt Cartel",
-        "Qunaalac kajidic"
+        "Hutt clans"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 646430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mulatan–Kor_Hestilic_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 391079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mulatan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 270425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Hutta/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
     {
       "PageId": 506878,
       "PageUrl": "https://starwars.fandom.com/wiki/Qunaalac",
@@ -111,6 +98,16 @@
       "PageId": 2528,
       "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 270425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Hutta/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 391079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mulatan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

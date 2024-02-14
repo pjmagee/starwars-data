@@ -27,19 +27,24 @@
       "Label": "Model",
       "Links": [],
       "Values": [
-        "Assertor-class Star Dreadnought"
+        "Assertor-class"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Dreadnought",
           "Href": "https://starwars.fandom.com/wiki/Star_Dreadnought"
+        },
+        {
+          "Content": "Battlecruiser",
+          "Href": "https://starwars.fandom.com/wiki/Battlecruiser"
         }
       ],
       "Values": [
-        "Star Dreadnought"
+        "Star Dreadnought",
+        "Battlecruiser"
       ]
     },
     {
@@ -115,23 +120,15 @@
       "Links": [
         {
           "Content": "Quad heavy turbolaser batteries",
-          "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
           "Content": "Quad battleship ion cannon batteries",
-          "Href": "https://starwars.fandom.com/wiki/Quad_battleship_ion_cannon"
-        },
-        {
-          "Content": "turbolaser",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
           "Content": "battleship",
           "Href": "https://starwars.fandom.com/wiki/Battleship"
-        },
-        {
-          "Content": "ion cannons",
-          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
           "Content": "cannons",
@@ -143,7 +140,7 @@
         },
         {
           "Content": "quad laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
           "Content": "Concussion missile launchers",
@@ -292,6 +289,22 @@
       ]
     },
     {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        },
+        {
+          "Content": "3 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3_BBY"
+        }
+      ],
+      "Values": [
+        "Between 19 BBY–3 BBY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -311,11 +324,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 460133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 665289,
       "PageUrl": "https://starwars.fandom.com/wiki/Assertor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -324,6 +332,11 @@
       "PageId": 665291,
       "PageUrl": "https://starwars.fandom.com/wiki/Wrath_(Assertor-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

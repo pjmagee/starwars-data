@@ -48,14 +48,19 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
-        "None"
+        "Blue"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Clan Secura",
@@ -65,13 +70,57 @@
       "Values": [
         "Clan Secura"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Pol Secura",
+          "Href": "https://starwars.fandom.com/wiki/Pol_Secura"
+        }
+      ],
+      "Values": [
+        "Pol Secura"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Van Secura",
+          "Href": "https://starwars.fandom.com/wiki/Van_Secura"
+        },
+        {
+          "Content": "Nat Secura",
+          "Href": "https://starwars.fandom.com/wiki/Nat_Secura"
+        }
+      ],
+      "Values": [
+        "Van Secura",
+        "Nat Secura"
+      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 102179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Van_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 9999,
       "PageUrl": "https://starwars.fandom.com/wiki/Clan_Secura",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 19246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pol_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 19248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nat_Secura",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

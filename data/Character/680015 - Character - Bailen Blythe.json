@@ -2,6 +2,7 @@
   "PageId": 680015,
   "PageUrl": "https://starwars.fandom.com/wiki/Bailen_Blythe",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Blythe family",
@@ -57,7 +65,52 @@
       "Values": [
         "Blythe family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Erika Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Erika_Blythe"
+        },
+        {
+          "Content": "Ottoh Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Ottoh_Blythe"
+        }
+      ],
+      "Values": [
+        "Erika Blythe",
+        "Ottoh Blythe"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ronn Blythe",
+          "Href": "https://starwars.fandom.com/wiki/Ronn_Blythe"
+        }
+      ],
+      "Values": [
+        "Ronn Blythe"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 680007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottoh_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronn_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 681619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erika_Blythe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

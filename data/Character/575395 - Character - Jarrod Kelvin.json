@@ -36,17 +36,40 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Coruscant rebel cell",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant_rebel_cell"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic"
+        "Alliance to Restore the Republic",
+        "Coruscant rebel cell"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 761808,
+      "PageUrl": "https://starwars.fandom.com/wiki/J4X-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 785379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Efrain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

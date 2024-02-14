@@ -56,10 +56,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-19"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Elrood-Derilyn Run",
+          "Href": "https://starwars.fandom.com/wiki/Elrood-Derilyn_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Elrood-Derilyn Run"
       ]
     },
     {
@@ -134,7 +146,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Plains",
@@ -149,7 +161,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Squib",
@@ -194,16 +206,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 137452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korad_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 16567,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elrood-Derilyn_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 122162,
       "PageUrl": "https://starwars.fandom.com/wiki/Slythor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -212,6 +214,16 @@
       "PageId": 318057,
       "PageUrl": "https://starwars.fandom.com/wiki/Renew",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 16567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elrood-Derilyn_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 137452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korad_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

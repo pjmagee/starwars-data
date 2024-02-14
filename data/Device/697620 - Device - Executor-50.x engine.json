@@ -2,6 +2,7 @@
   "PageId": 697620,
   "PageUrl": "https://starwars.fandom.com/wiki/Executor-50.x_engine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -52,5 +53,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 613385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor_I-class_Star_Dreadnought",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

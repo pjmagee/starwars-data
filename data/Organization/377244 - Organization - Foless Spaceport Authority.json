@@ -2,6 +2,7 @@
   "PageId": 377244,
   "PageUrl": "https://starwars.fandom.com/wiki/Foless_Spaceport_Authority",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f6/Foless_Spaceport_Authority.jpg/revision/latest?cb=20231203130749",
   "Data": [
     {
       "Label": "Titles",
@@ -11,17 +12,27 @@
       ]
     },
     {
-      "Label": "Headquarters",
+      "Label": "Location(s)",
       "Links": [
+        {
+          "Content": "Foless Spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Foless_Spaceport"
+        },
         {
           "Content": "Foless",
           "Href": "https://starwars.fandom.com/wiki/Foless/Legends"
         }
       ],
       "Values": [
-        "Foless"
+        "Foless Spaceport, Foless"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 787743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foless_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

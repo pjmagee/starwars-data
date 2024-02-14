@@ -2,12 +2,25 @@
   "PageId": 710719,
   "PageUrl": "https://starwars.fandom.com/wiki/Second_Spire",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Second Spire"
+      ]
+    },
+    {
+      "Label": "Destroyed",
+      "Links": [
+        {
+          "Content": "0 BBY",
+          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        }
+      ],
+      "Values": [
+        "0 BBY"
       ]
     },
     {
@@ -27,6 +40,18 @@
       ]
     },
     {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Grand Chamber",
+          "Href": "https://starwars.fandom.com/wiki/Grand_Convocation_Chamber"
+        }
+      ],
+      "Values": [
+        "Grand Chamber"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -35,9 +60,30 @@
         }
       ],
       "Values": [
-        "Third of the height of Temple of the Kyber"
+        "A third of the height of Temple of the Kyber"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 555022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedha_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 791273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Spire_medical_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 542783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 750153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_peace_summit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

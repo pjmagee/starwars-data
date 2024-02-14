@@ -12,29 +12,69 @@
       ]
     },
     {
-      "Label": "Found on",
+      "Label": "Found",
       "Links": [
         {
           "Content": "Ord Mantell",
           "Href": "https://starwars.fandom.com/wiki/Ord_Mantell"
+        },
+        {
+          "Content": "Serolonis",
+          "Href": "https://starwars.fandom.com/wiki/Serolonis"
+        },
+        {
+          "Content": "Varkana",
+          "Href": "https://starwars.fandom.com/wiki/Varkana"
         }
       ],
       "Values": [
-        "Ord Mantell"
+        "Ord Mantell",
+        "Serolonis",
+        "Varkana"
       ]
     },
     {
       "Label": "Type",
       "Links": [
         {
-          "Content": "Alcohol",
+          "Content": "Alcoholic",
           "Href": "https://starwars.fandom.com/wiki/Alcohol"
         }
       ],
       "Values": [
-        "Alcohol"
+        "Alcoholic beverage"
+      ]
+    },
+    {
+      "Label": "Potable by",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Cid's Parlor",
+          "Href": "https://starwars.fandom.com/wiki/Cid%27s_Parlor"
+        }
+      ],
+      "Values": [
+        "Cid's Parlor"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 752022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Losha_Tarkon's_cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    }
+  ]
 }

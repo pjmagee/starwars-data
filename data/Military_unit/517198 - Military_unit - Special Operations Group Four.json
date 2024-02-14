@@ -2,6 +2,7 @@
   "PageId": 517198,
   "PageUrl": "https://starwars.fandom.com/wiki/Special_Operations_Group_Four",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,8 +12,13 @@
       ]
     },
     {
-      "Label": "Military unit type",
-      "Links": [],
+      "Label": "Formation type",
+      "Links": [
+        {
+          "Content": "Operations Group",
+          "Href": "https://starwars.fandom.com/wiki/Operations_Group"
+        }
+      ],
       "Values": [
         "Operations Group"
       ]
@@ -46,6 +52,18 @@
       ]
     },
     {
+      "Label": "Notable battles",
+      "Links": [
+        {
+          "Content": "Invasion of Belsavis",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Belsavis"
+        }
+      ],
+      "Values": [
+        "Invasion of Belsavis"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -58,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operations_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

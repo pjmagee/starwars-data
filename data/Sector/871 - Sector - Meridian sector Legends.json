@@ -51,6 +51,10 @@
           "Href": "https://starwars.fandom.com/wiki/Calgon_system"
         },
         {
+          "Content": "Chorios system",
+          "Href": "https://starwars.fandom.com/wiki/Chorios_system"
+        },
+        {
           "Content": "Cybloc system",
           "Href": "https://starwars.fandom.com/wiki/Cybloc_system/Legends"
         },
@@ -81,10 +85,6 @@
         {
           "Content": "Meridian system",
           "Href": "https://starwars.fandom.com/wiki/Meridian_system"
-        },
-        {
-          "Content": "Chorios system",
-          "Href": "https://starwars.fandom.com/wiki/Chorios_system"
         },
         {
           "Content": "Nyemari system",
@@ -118,6 +118,7 @@
         "Budpock system",
         "Caarimon system",
         "Calgon system",
+        "Chorios system",
         "Cybloc system",
         "Damonite Yors-B system",
         "Drovian system",
@@ -126,7 +127,6 @@
         "Helix system",
         "King's Galquek system",
         "Meridian system",
-        "Chorios system",
         "Nyemari system",
         "Ord Adinorr system",
         "Pedducis Chorios system",
@@ -336,18 +336,34 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
         },
         {
-          "Content": "Nyemaris",
+          "Content": "Nyemari",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Nyemari"
         }
       ],
       "Values": [
-        "Galactic Civil WarNyemaris",
+        "Galactic Civil WarNyemari",
         "Galactic Civil War"
       ]
     },
     {
       "Label": "New Republic era",
       "Links": [
+        {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
+        },
+        {
+          "Content": "Ryvester",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Ryvester"
+        },
+        {
+          "Content": "Durren",
+          "Href": "https://starwars.fandom.com/wiki/Durren_rebellion"
+        },
+        {
+          "Content": "Nim Drovis",
+          "Href": "https://starwars.fandom.com/wiki/Nim_Drovis_Civil_War"
+        },
         {
           "Content": "Nam Chorios",
           "Href": "https://starwars.fandom.com/wiki/Bleak_Point_Invasion"
@@ -359,22 +375,16 @@
         {
           "Content": "Nam Chorios",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Nam_Chorios"
-        },
-        {
-          "Content": "Ryvester",
-          "Href": "https://starwars.fandom.com/wiki/Mission_to_Ryvester"
-        },
-        {
-          "Content": "Nim Drovis",
-          "Href": "https://starwars.fandom.com/wiki/Nim_Drovis_Civil_War"
         }
       ],
       "Values": [
-        "Local conflictNam Chorios",
-        "Galactic Civil WarNam Chorios - Ryvester",
+        "Galactic Civil WarRyvester",
+        "Local conflictDurren",
         "Local conflictNim Drovis",
-        "Local conflict",
-        "Galactic Civil War"
+        "Local conflictNam Chorios",
+        "Galactic Civil WarNam Chorios",
+        "Galactic Civil War",
+        "Local conflict"
       ]
     },
     {
@@ -432,33 +442,93 @@
   ],
   "Relationships": [
     {
-      "PageId": 401280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Herkan_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 271106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antamont_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 9161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 311569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nyemari",
+      "PageId": 13010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ampliquen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 9583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nam_Chorios/Legends",
+      "PageId": 13017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brachnis_Chorios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Budpock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cybloc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Damonite_Yors-B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Durren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exodo_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spangled_Veil_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 17785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exodo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 352419,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boreleo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 57994,
+      "PageUrl": "https://starwars.fandom.com/wiki/King's_Galquek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 345064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koval_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 186383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 242234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pedducis_Chorii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 43590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trans-Hydian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 26530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pedducis_Chorios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 397369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryvester_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 235832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calgon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -467,19 +537,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 287356,
-      "PageUrl": "https://starwars.fandom.com/wiki/Till_Chorios_system",
+      "PageId": 311569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nyemari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 271106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antamont_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 338212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nyemari_system",
+      "PageId": 158186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exodo_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 10485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loronar_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 26042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allegiant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meridian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Till_Chorios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorjus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 2312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nim_Drovis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 231620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Adinorr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 5859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drovian_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 243079,
       "PageUrl": "https://starwars.fandom.com/wiki/Antamont",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caarimon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 217683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helix_IX",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 401280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Herkan_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 68476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brachnis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 287356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Till_Chorios_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 294440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chorios_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 88737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cybloc_XII/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 320140,
@@ -542,58 +692,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 13010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ampliquen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 271027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ampliquen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 13017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brachnis_Chorios",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Budpock",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13025,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cybloc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Damonite_Yors-B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Durren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exodo_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 9161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
       "PageId": 383758,
       "PageUrl": "https://starwars.fandom.com/wiki/Ryvester",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 242234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pedducis_Chorii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 13852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meridian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Till_Chorios",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -602,114 +712,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 294440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chorios_system",
+      "PageId": 9583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nam_Chorios/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 338212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nyemari_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 12871,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spangled_Veil_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 217683,
-      "PageUrl": "https://starwars.fandom.com/wiki/Helix_IX",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 345064,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koval_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 271027,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ampliquen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 57994,
-      "PageUrl": "https://starwars.fandom.com/wiki/King's_Galquek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 7092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sorjus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 5859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drovian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 26042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Allegiant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 88737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cybloc_XII/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 15294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caarimon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 68476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brachnis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 10485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loronar_Corporation/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 397369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryvester_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 352419,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boreleo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 2312,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nim_Drovis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 231620,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Adinorr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 235832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calgon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 158186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exodo_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 26530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pedducis_Chorios",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 17785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exodo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 186383,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Cruiser",
@@ -37,6 +37,44 @@
       ],
       "Values": [
         "Cruiser-classed Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Ion engines",
+          "Href": "https://starwars.fandom.com/wiki/Ion_engine"
+        }
+      ],
+      "Values": [
+        "Ion engines (8)"
       ]
     },
     {
@@ -88,6 +126,22 @@
       "Label": "Complement",
       "Links": [
         {
+          "Content": "All Terrain Tactical Enforcers",
+          "Href": "https://starwars.fandom.com/wiki/All_Terrain_Tactical_Enforcer"
+        },
+        {
+          "Content": "IPV-2C Stealth Corvette",
+          "Href": "https://starwars.fandom.com/wiki/IPV-2C_Stealth_Corvette"
+        },
+        {
+          "Content": "Syliure-31 hyperspace docking rings",
+          "Href": "https://starwars.fandom.com/wiki/Syliure-31_hyperspace_docking_ring_(V-19_Torrent_model)"
+        },
+        {
+          "Content": "Aggressive ReConnaissance-170 starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Aggressive_ReConnaissance-170_starfighter"
+        },
+        {
           "Content": "BTL-B Y-wing starfighter/bombers",
           "Href": "https://starwars.fandom.com/wiki/BTL-B_Y-wing_starfighter/bomber"
         },
@@ -100,15 +154,20 @@
           "Href": "https://starwars.fandom.com/wiki/Low_Altitude_Assault_Transport/infantry"
         },
         {
-          "Content": "IPV-2C Stealth Corvette",
-          "Href": "https://starwars.fandom.com/wiki/IPV-2C_Stealth_Corvette"
+          "Content": "hyperspace docking rings",
+          "Href": "https://starwars.fandom.com/wiki/Hyperspace_transport_ring"
         }
       ],
       "Values": [
+        "Battle of Christophsis",
+        "All Terrain Tactical Enforcers",
+        "Prototype IPV-2C Stealth Corvette (1)",
+        "Syliure-31 hyperspace docking ringsTime of destruction",
+        "Aggressive ReConnaissance-170 starfighters",
         "BTL-B Y-wing starfighter/bombers",
         "Clone Z-95 Headhunters",
         "Low Altitude Assault Transport/infantrys",
-        "1 IPV-2C Stealth Corvette"
+        "Syliure-31 hyperspace docking rings"
       ]
     },
     {
@@ -120,8 +179,7 @@
         }
       ],
       "Values": [
-        "At least 2",
-        "Dorsal hangar",
+        "Main dorsal hangar",
         "Ventral docking bay"
       ]
     },
@@ -204,34 +262,57 @@
       "Label": "Communication systems",
       "Links": [
         {
+          "Content": "Holotable",
+          "Href": "https://starwars.fandom.com/wiki/Holotable"
+        },
+        {
           "Content": "Hyperwave comm scanners",
           "Href": "https://starwars.fandom.com/wiki/Hyperwave_comm_scanner"
         }
       ],
       "Values": [
-        "Hyperwave comm scanners (2)"
+        "Holotable",
+        "Hyperwave comm scanners (2)",
+        "Radio"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Databanks",
+          "Href": "https://starwars.fandom.com/wiki/Databank"
+        }
+      ],
+      "Values": [
+        "Databanks"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Flagship",
-          "Href": "https://starwars.fandom.com/wiki/Flagship"
-        },
-        {
           "Content": "Carrier",
           "Href": "https://starwars.fandom.com/wiki/Carrier"
         },
         {
-          "Content": "Warship",
+          "Content": "Flagship",
+          "Href": "https://starwars.fandom.com/wiki/Flagship"
+        },
+        {
+          "Content": "Ship-to-ship",
+          "Href": "https://starwars.fandom.com/wiki/Starship"
+        },
+        {
+          "Content": "combatant",
           "Href": "https://starwars.fandom.com/wiki/Warship"
         }
       ],
       "Values": [
-        "Flagship",
         "Carrier",
-        "Warship"
+        "Convoy protection",
+        "Flagship",
+        "Ship-to-ship combatant"
       ]
     },
     {
@@ -254,6 +335,10 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Christophsis"
         },
         {
+          "Content": "Malevolence Campaign",
+          "Href": "https://starwars.fandom.com/wiki/Malevolence_Campaign"
+        },
+        {
           "Content": "Battle of the Kaliida Nebula",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula"
         },
@@ -264,6 +349,7 @@
       ],
       "Values": [
         "Battle of Christophsis",
+        "Malevolence Campaign",
         "Battle of the Kaliida Nebula",
         "Attack on Obi-Wan Kenobi's fleet"
       ]
@@ -300,12 +386,17 @@
           "Href": "https://starwars.fandom.com/wiki/Open_Circle_Fleet"
         },
         {
+          "Content": "Fifth Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Fifth_Fleet"
+        },
+        {
           "Content": "Obi-Wan Kenobi's taskforce",
           "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi%27s_taskforce"
         }
       ],
       "Values": [
         "Open Circle Fleet",
+        "Fifth Fleet",
         "Obi-Wan Kenobi's taskforce"
       ]
     },
@@ -325,21 +416,16 @@
       "Label": "Crewmembers",
       "Links": [
         {
-          "Content": "CC-2224",
-          "Href": "https://starwars.fandom.com/wiki/CC-2224"
+          "Content": "Cody",
+          "Href": "https://starwars.fandom.com/wiki/Cody"
         }
       ],
       "Values": [
-        "CC-2224 \"Cody"
+        "Cody"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 691112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Arbiter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
     {
       "PageId": 553270,
       "PageUrl": "https://starwars.fandom.com/wiki/Open_Circle_Fleet",
@@ -351,8 +437,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
+      "PageId": 691112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Arbiter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 505127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Obi-Wan_Kenobi's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 644352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet_(Galactic_Republic)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]

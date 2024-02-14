@@ -2,7 +2,7 @@
   "PageId": 453400,
   "PageUrl": "https://starwars.fandom.com/wiki/Yaddle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/Yaddle-SWCT.png/revision/latest?cb=20200807023512",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/Yaddle-SWCT.png/revision/latest?cb=20230726234836",
   "Data": [
     {
       "Label": "Titles",
@@ -20,7 +20,23 @@
         }
       ],
       "Values": [
-        "509 BBY"
+        "c. 509 BBY"
+      ]
+    },
+    {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "32 BBY",
+          "Href": "https://starwars.fandom.com/wiki/32_BBY"
+        },
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant"
+        }
+      ],
+      "Values": [
+        "32 BBY, Coruscant"
       ]
     },
     {
@@ -48,15 +64,26 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "0.61 meters"
+        "0.61 meters (2 ft)"
       ]
     },
     {
@@ -111,21 +138,51 @@
       "Label": "Apprentices",
       "Links": [
         {
+          "Content": "Cippa Tarko",
+          "Href": "https://starwars.fandom.com/wiki/Cippa_Tarko"
+        },
+        {
           "Content": "Oppo Rancisis",
           "Href": "https://starwars.fandom.com/wiki/Oppo_Rancisis"
+        },
+        {
+          "Content": "Jaro Tapal",
+          "Href": "https://starwars.fandom.com/wiki/Jaro_Tapal"
         }
       ],
       "Values": [
         "Many",
-        "Oppo Rancisis"
+        "Cippa Tarko",
+        "Oppo Rancisis",
+        "Jaro Tapal"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 760982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cippa_Tarko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 590366,
       "PageUrl": "https://starwars.fandom.com/wiki/509_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 636045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 791575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_at_the_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 744230,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yaddle's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 474965,

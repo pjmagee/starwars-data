@@ -25,10 +25,32 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "3966 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3966_BBY"
         }
       ],
       "Values": [
-        "Thousands of years before the rise of the Galactic Empire"
+        "Thousands of years before the rise of the Galactic Empire",
+        "By 3966 BBY (superweapon)"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Temple",
+          "Href": "https://starwars.fandom.com/wiki/Temple"
+        },
+        {
+          "Content": "Superweapon",
+          "Href": "https://starwars.fandom.com/wiki/Superweapon"
+        }
+      ],
+      "Values": [
+        "Temple",
+        "Superweapon"
       ]
     },
     {
@@ -56,34 +78,31 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Builder(s)",
       "Links": [
         {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith"
+          "Content": "Darth Tanis",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Tanis"
         }
       ],
       "Values": [
-        "Sith"
+        "Darth Tanis (superweapon)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Sith Order",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Order"
+        }
+      ],
+      "Values": [
+        "Sith Order"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 502595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 551784,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_holocron_(Malachor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 524601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Scourge_of_Malachor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
     {
       "PageId": 535596,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Malachor",
@@ -100,6 +119,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 524601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Scourge_of_Malachor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 568282,
       "PageUrl": "https://starwars.fandom.com/wiki/Malachor_superweapon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -108,6 +132,16 @@
       "PageId": 452601,
       "PageUrl": "https://starwars.fandom.com/wiki/Sith",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 502595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 551784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_holocron_(Malachor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     }
   ]
 }

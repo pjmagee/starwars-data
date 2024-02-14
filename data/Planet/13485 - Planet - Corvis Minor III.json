@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-5"
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -134,14 +134,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 1919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corvis_Minor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 17872,
       "PageUrl": "https://starwars.fandom.com/wiki/Corvis_Minor_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 1919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corvis_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

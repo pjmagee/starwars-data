@@ -59,17 +59,27 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Death trooper division",
+          "Href": "https://starwars.fandom.com/wiki/Death_trooper_division"
+        },
+        {
           "Content": "Imperial Intelligence",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Intelligence"
         }
       ],
       "Values": [
         "Galactic Empire",
+        "Death trooper division",
         "Imperial Intelligence"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 561470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squad_Leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 702166,
       "PageUrl": "https://starwars.fandom.com/wiki/Death_trooper_division",
@@ -79,11 +89,6 @@
       "PageId": 539133,
       "PageUrl": "https://starwars.fandom.com/wiki/Death_trooper",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 561470,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squad_Leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

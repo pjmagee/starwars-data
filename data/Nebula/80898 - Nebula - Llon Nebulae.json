@@ -36,10 +36,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-15"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Kronex spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Kronex_spaceport"
+        }
+      ],
+      "Values": [
+        "Kronex spaceport"
       ]
     },
     {
@@ -57,14 +69,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 400493,
-      "PageUrl": "https://starwars.fandom.com/wiki/Itopol_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 58664,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Llon_Nebulae",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 400493,
+      "PageUrl": "https://starwars.fandom.com/wiki/Itopol_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

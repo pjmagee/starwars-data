@@ -2,6 +2,7 @@
   "PageId": 108888,
   "PageUrl": "https://starwars.fandom.com/wiki/Medrit_Vasur",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,14 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Beviin",
@@ -71,5 +79,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 86433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goran_Beviin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

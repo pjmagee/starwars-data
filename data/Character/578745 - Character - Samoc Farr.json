@@ -2,6 +2,7 @@
   "PageId": 578745,
   "PageUrl": "https://starwars.fandom.com/wiki/Samoc_Farr",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Toryn Farr",
+          "Href": "https://starwars.fandom.com/wiki/Toryn_Farr"
+        }
+      ],
+      "Values": [
+        "Toryn Farr"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -40,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 503695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toryn_Farr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

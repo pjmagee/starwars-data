@@ -12,15 +12,10 @@
       ]
     },
     {
-      "Label": "Location(s)",
-      "Links": [
-        {
-          "Content": "Csilla",
-          "Href": "https://starwars.fandom.com/wiki/Csilla/Legends"
-        }
-      ],
+      "Label": "Organization type",
+      "Links": [],
       "Values": [
-        "Csilla"
+        "Military command"
       ]
     },
     {
@@ -31,26 +26,41 @@
           "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy/Legends"
         },
         {
-          "Content": "Expansionary Defense Force",
+          "Content": "Chiss Expansionary Defense Force",
           "Href": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Force"
         }
       ],
       "Values": [
         "Chiss Ascendancy",
-        "Expansionary Defense Force"
+        "Chiss Expansionary Defense Force"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 777047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 20865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 49095,
       "PageUrl": "https://starwars.fandom.com/wiki/Ar'alani/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 20865,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 765513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defense_Fleet_uniform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 666547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

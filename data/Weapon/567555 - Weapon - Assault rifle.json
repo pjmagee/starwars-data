@@ -2,6 +2,7 @@
   "PageId": 567555,
   "PageUrl": "https://starwars.fandom.com/wiki/Assault_rifle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,12 @@
       "Label": "Type",
       "Links": [
         {
-          "Content": "Blaster",
-          "Href": "https://starwars.fandom.com/wiki/Blaster"
+          "Content": "Blaster rifle",
+          "Href": "https://starwars.fandom.com/wiki/Blaster_rifle"
         }
       ],
       "Values": [
-        "Blaster"
+        "Blaster rifle"
       ]
     },
     {
@@ -45,5 +46,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 555615,
+      "PageUrl": "https://starwars.fandom.com/wiki/A280-CFE_convertible_heavy_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

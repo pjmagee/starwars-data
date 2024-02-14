@@ -52,10 +52,41 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
         "Black"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Dark brown"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Jariah Syn",
+          "Href": "https://starwars.fandom.com/wiki/Jariah_Syn"
+        }
+      ],
+      "Values": [
+        "Jariah Syn"
       ]
     },
     {
@@ -72,6 +103,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 65554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jariah_Syn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 237101,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Roon",

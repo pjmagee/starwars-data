@@ -2,7 +2,7 @@
   "PageId": 523798,
   "PageUrl": "https://starwars.fandom.com/wiki/Resurgent-class_Star_Destroyer",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/93/FinalizerSD-Fathead.png/revision/latest?cb=20161108070629",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/76/TheFinalizer-TLJVehiclesShips.png/revision/latest?cb=20231127194126",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battlecruiser",
@@ -70,6 +70,18 @@
       "Links": [],
       "Values": [
         "496.89 meters"
+      ]
+    },
+    {
+      "Label": "MGLT",
+      "Links": [
+        {
+          "Content": "MGLT",
+          "Href": "https://starwars.fandom.com/wiki/Megalight_per_hour"
+        }
+      ],
+      "Values": [
+        ">130 MGLT"
       ]
     },
     {
@@ -141,16 +153,24 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "turbolasers",
+          "Content": "Turbolasers",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
-          "Content": "point-defense laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         },
         {
           "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
+        },
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
           "Content": "concussion missile",
@@ -166,7 +186,18 @@
         }
       ],
       "Values": [
-        "1,500+ turbolasers, point-defense laser cannons and ion cannons",
+        "Turbolasers, and ion cannons (1,500+)",
+        "Port and starboard primary dual turbolaser batteries (16)",
+        "Twin dual and single heavy turbolaser batteries (8)",
+        "Forward-mounted (6)",
+        "Broadside mounted (2)",
+        "Lower-mounted heavy triple turbolaser turrets (2)",
+        "Hundreds of turbolaser cannons",
+        "Twin triple light turbolaser turrets (~72)",
+        "Upper-mounted (8 middle; 8 port; 8 starboard)",
+        "Lower-mounted (12 port; 12 starboard)",
+        "Bridge-mounted (4)",
+        "Twin triple point-defense laser cannon batteries (10 aft)",
         "Point-defense quad concussion missile emplacements",
         "Tractor beam projectors"
       ]
@@ -191,8 +222,8 @@
           "Href": "https://starwars.fandom.com/wiki/TIE/sf_space_superiority_fighter"
         },
         {
-          "Content": "First Order TIE bombers",
-          "Href": "https://starwars.fandom.com/wiki/First_Order_TIE_bomber"
+          "Content": "TIE/se Bombers",
+          "Href": "https://starwars.fandom.com/wiki/TIE/se_Bomber"
         },
         {
           "Content": "AAL-1971/9.1 Troop Transports",
@@ -211,11 +242,23 @@
         "2 starfighter wings",
         "TIE/fo space superiority fighters",
         "TIE/sf space superiority fighters",
-        "First Order TIE bombers",
+        "TIE/se Bombers",
         "AAL-1971/9.1 Troop Transports (100)",
         "Numerous ground vehicles",
         "Prefabricated ground base (1)",
         "First Order Light Cruiser (1)"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "3",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
+      "Values": [
+        "3"
       ]
     },
     {
@@ -317,24 +360,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 593269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fellfire",
+      "PageId": 735648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forward_Work_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 735650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rear_Work_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 639742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 560009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Subjugator_(Resurgent-class)",
+      "PageId": 639759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incinerator_(Star_Destroyer)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 642575,
       "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal_military",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 619483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thunderer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 576329,
@@ -352,13 +400,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 637204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_of_Venisa_Doza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 619483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thunderer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 585489,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retribution",
+      "PageId": 510429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -372,23 +420,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 593269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fellfire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 585489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retribution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663279,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC95_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 529421,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuat-Entralla_Engineering",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 510429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 639742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 639759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incinerator_(Star_Destroyer)",
+      "PageId": 560009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Subjugator_(Resurgent-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

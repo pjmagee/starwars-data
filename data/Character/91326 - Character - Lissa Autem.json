@@ -65,7 +65,64 @@
       "Values": [
         "Blue"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Autem family",
+          "Href": "https://starwars.fandom.com/wiki/Autem_family"
+        }
+      ],
+      "Values": [
+        "Autem family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sagoro Autem",
+          "Href": "https://starwars.fandom.com/wiki/Sagoro_Autem"
+        },
+        {
+          "Content": "Sula Autem",
+          "Href": "https://starwars.fandom.com/wiki/Sula_Autem"
+        }
+      ],
+      "Values": [
+        "Sagoro Autem",
+        "Sula Autem"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Reymet Autem",
+          "Href": "https://starwars.fandom.com/wiki/Reymet_Autem"
+        }
+      ],
+      "Values": [
+        "Reymet Autem"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 91324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sula_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sagoro_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 32588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reymet_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

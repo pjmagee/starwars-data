@@ -20,14 +20,33 @@
         }
       ],
       "Values": [
-        "Inner Rim;"
+        "Inner Rim"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Mindabaal system",
+          "Href": "https://starwars.fandom.com/wiki/Mindabaal_system"
+        }
+      ],
+      "Values": [
+        "Mindabaal system"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-13"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -48,15 +67,10 @@
         {
           "Content": "Mindabaal Royal Academy",
           "Href": "https://starwars.fandom.com/wiki/Mindabaal_Royal_Academy"
-        },
-        {
-          "Content": "Mindabaal Custom",
-          "Href": "https://starwars.fandom.com/wiki/Mindabaal_Custom"
         }
       ],
       "Values": [
-        "Mindabaal Royal Academy",
-        "Mindabaal Custom"
+        "Mindabaal Royal Academy"
       ]
     },
     {
@@ -98,9 +112,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 76150,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jericho's_Pride",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 76118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jericho_Donovan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 76139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Josephine_Donovan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 133224,
@@ -113,19 +132,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 76118,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jericho_Donovan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 76139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Josephine_Donovan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 380150,
       "PageUrl": "https://starwars.fandom.com/wiki/Mindabaal_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 76150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jericho's_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

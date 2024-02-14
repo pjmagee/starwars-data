@@ -24,15 +24,27 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him",
+        "They/them"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "Male"
+        "1.75 meters (5 ft, 9 in)"
       ]
     },
     {
@@ -67,19 +79,36 @@
       ]
     },
     {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Coron Solstus",
+          "Href": "https://starwars.fandom.com/wiki/Coron_Solstus"
+        }
+      ],
+      "Values": [
+        "Coron Solstus"
+      ]
+    },
+    {
       "Label": "Apprentices",
       "Links": [
         {
-          "Content": "Tylera",
+          "Content": "Tylera Yorrick",
           "Href": "https://starwars.fandom.com/wiki/Ty_Yorrick"
         }
       ],
       "Values": [
-        "Tylera"
+        "Tylera Yorrick"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 753761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coron_Solstus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 676295,
       "PageUrl": "https://starwars.fandom.com/wiki/Ty_Yorrick",

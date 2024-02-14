@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Type",
+      "Label": "Model",
       "Links": [
         {
           "Content": "Lightsaber",
@@ -24,10 +24,92 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Single-bladed",
+        "Double-bladed"
+      ]
+    },
+    {
+      "Label": "Culture",
+      "Links": [
+        {
+          "Content": "Knights of Zakuul",
+          "Href": "https://starwars.fandom.com/wiki/Knights_of_Zakuul"
+        },
+        {
+          "Content": "Jedi Temple Guard",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Temple_Guard/Legends"
+        },
+        {
+          "Content": "Emperor's Shadow Guard",
+          "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Shadow_Guard"
+        },
+        {
+          "Content": "Emperor's Royal Guard",
+          "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Royal_Guard"
+        },
+        {
+          "Content": "Imperial Senate Guard",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Senate_Guard"
+        }
+      ],
+      "Values": [
+        "Knights of Zakuul",
+        "Jedi Temple Guard",
+        "Emperor's Shadow Guard",
+        "Emperor's Royal Guard",
+        "Imperial Senate Guard"
+      ]
+    },
+    {
+      "Label": "Owners",
+      "Links": [
+        {
+          "Content": "Senya Tirall",
+          "Href": "https://starwars.fandom.com/wiki/Senya_Tirall"
+        },
+        {
+          "Content": "Senya Tirall's lightsaber pike",
+          "Href": "https://starwars.fandom.com/wiki/Senya_Tirall%27s_lightsaber_pike"
+        },
+        {
+          "Content": "Kazdan Paratus",
+          "Href": "https://starwars.fandom.com/wiki/Kazdan_Paratus"
+        },
+        {
+          "Content": "Kazdan Paratus's lightsaber pike",
+          "Href": "https://starwars.fandom.com/wiki/Kazdan_Paratus%27s_lightsaber_pike"
+        },
+        {
+          "Content": "Judd",
+          "Href": "https://starwars.fandom.com/wiki/Judd"
+        },
+        {
+          "Content": "Darth Nihl",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Nihl"
+        }
+      ],
+      "Values": [
+        "Senya Tirall (Senya Tirall's lightsaber pike)",
+        "Kazdan Paratus (Kazdan Paratus's lightsaber pike)",
+        "Judd (Judd's lightsaber pike)",
+        "Darth Nihl (Darth Nihl's lightsaber)"
+      ]
+    },
+    {
       "Label": "Cost",
       "Links": [],
       "Values": [
         "4,000 credits"
+      ]
+    },
+    {
+      "Label": "Shape",
+      "Links": [],
+      "Values": [
+        "Cylindrical, straight"
       ]
     },
     {
@@ -39,96 +121,43 @@
     },
     {
       "Label": "Purpose",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Lightsaber combat",
+          "Href": "https://starwars.fandom.com/wiki/Lightsaber_combat/Legends"
+        }
+      ],
       "Values": [
-        "Combat"
+        "Lightsaber combat"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Jedi Order",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
-        },
-        {
-          "Content": "Jedi Temple Guard",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_Temple_Guard/Legends"
-        },
-        {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith/Legends"
-        },
-        {
-          "Content": "Eternal Empire",
-          "Href": "https://starwars.fandom.com/wiki/Eternal_Empire"
-        },
-        {
-          "Content": "Knights of Zakuul",
-          "Href": "https://starwars.fandom.com/wiki/Knights_of_Zakuul"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
-        },
-        {
-          "Content": "Emperor's Royal Guard",
-          "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Royal_Guard"
-        },
-        {
-          "Content": "Emperor's Shadow Guard",
-          "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Shadow_Guard"
-        },
-        {
-          "Content": "Imperial Senate Guard",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Senate_Guard"
-        },
-        {
-          "Content": "Imperial Senate Sentinel",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Senate_Sentinel"
-        },
-        {
-          "Content": "Imperial Sovereign Protector",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Sovereign_Protector"
-        },
-        {
-          "Content": "The Sith Empire",
-          "Href": "https://starwars.fandom.com/wiki/The_Sith_Empire"
-        },
-        {
-          "Content": "Dark Honor Guard",
-          "Href": "https://starwars.fandom.com/wiki/Dark_Honor_Guard"
+          "Content": "Force-sensitive",
+          "Href": "https://starwars.fandom.com/wiki/Force-sensitive/Legends"
         }
       ],
       "Values": [
-        "Jedi Order",
-        "Jedi Temple Guard",
-        "Sith",
-        "Eternal Empire",
-        "Knights of Zakuul",
-        "Galactic Empire",
-        "Emperor's Royal Guard",
-        "Emperor's Shadow Guard",
-        "Imperial Senate Guard",
-        "Imperial Senate Sentinel",
-        "Emperor's Saber Guard",
-        "Imperial Sovereign Protector",
-        "The Sith Empire",
-        "The Sith Order",
-        "Dark Honor Guard",
-        "Sith Shadow Guard"
+        "Force-sensitive organizations"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 127853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Knight_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
     {
       "PageId": 360453,
       "PageUrl": "https://starwars.fandom.com/wiki/Kazdan_Paratus's_lightsaber_pike",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 127853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Knight_lightsaber",
+      "PageId": 761370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senya_Tirall's_lightsaber_pike",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     }
   ]

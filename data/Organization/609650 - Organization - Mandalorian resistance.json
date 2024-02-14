@@ -13,21 +13,40 @@
     },
     {
       "Label": "Organization type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Mercenary",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary"
+        },
+        {
+          "Content": "Garrison",
+          "Href": "https://starwars.fandom.com/wiki/Garrison"
+        },
+        {
+          "Content": "Plazir-15",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15"
+        }
+      ],
       "Values": [
-        "Resistance group"
+        "Resistance group",
+        "Mercenary group",
+        "Garrison (On Plazir-15)"
       ]
     },
     {
       "Label": "Leader(s)",
       "Links": [
         {
+          "Content": "Mand'alor",
+          "Href": "https://starwars.fandom.com/wiki/Mand%27alor"
+        },
+        {
           "Content": "Bo-Katan Kryze",
           "Href": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze"
         }
       ],
       "Values": [
-        "Bo-Katan Kryze"
+        "Mand'alor Bo-Katan Kryze"
       ]
     },
     {
@@ -72,6 +91,14 @@
         {
           "Content": "Nite Owls",
           "Href": "https://starwars.fandom.com/wiki/Nite_Owls"
+        },
+        {
+          "Content": "Bo-Katan Kryze's unit",
+          "Href": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze%27s_unit"
+        },
+        {
+          "Content": "Mandalorian fleet",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_fleet"
         }
       ],
       "Values": [
@@ -84,7 +111,21 @@
         "Clan Vizsla",
         "Clan Wren",
         "Mandalorian Protectors",
-        "Nite Owls"
+        "Nite Owls",
+        "Bo-Katan Kryze's unit",
+        "Mandalorian fleet"
+      ]
+    },
+    {
+      "Label": "Headquarters",
+      "Links": [
+        {
+          "Content": "Plazir-15",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15"
+        }
+      ],
+      "Values": [
+        "Plazir-15 (as mercenaries)"
       ]
     },
     {
@@ -112,25 +153,64 @@
         }
       ],
       "Values": [
-        "c. 1 BBY"
+        "1 BBY"
+      ]
+    },
+    {
+      "Label": "Date fragmented",
+      "Links": [
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+        }
+      ],
+      "Values": [
+        "9 ABY"
+      ]
+    },
+    {
+      "Label": "Date reorganized",
+      "Links": [],
+      "Values": [
+        "9 ABY"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 500821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Z-6_jetpack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
     {
       "PageId": 533157,
       "PageUrl": "https://starwars.fandom.com/wiki/Personal_Combat_Shield",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 673747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Axe_Woves",
+      "PageId": 456390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 529687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Protectors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 746748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 460272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 580165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 588335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 581747,
@@ -138,9 +218,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 529687,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Protectors",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 640655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 461061,
+      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 673744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koska_Reeves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 673747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Axe_Woves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 514213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 566266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren's_modified_Nite_Owl_helmet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 566267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nite_Owl_helmet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
       "PageId": 483956,
@@ -153,8 +263,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 588335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_Assault_Carrier",
+      "PageId": 686483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fleet_Commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 678411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class_546_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 531370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fang-class",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
@@ -163,34 +283,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 641337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clan_Rook_warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 674278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gozanti-class_Assault_Carrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 567160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 529702,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529704,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Kryze",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 500821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-6_jetpack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 562220,
@@ -203,8 +298,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 566267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nite_Owl_helmet",
+      "PageId": 764083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_watchman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 674278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gozanti-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 674860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_light_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 528845,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fenn_Rau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 528920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ursa_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren's_armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
@@ -223,24 +343,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 456390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 575186,
+      "PageUrl": "https://starwars.fandom.com/wiki/JT-12_jetpack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 455718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 762247,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Tribe's_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 461061,
-      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 482545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 673849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 757735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_Gauntlet_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 457274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 660783,
@@ -258,34 +383,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 514213,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Wren",
+      "PageId": 761180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 529702,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 640655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
+      "PageId": 529704,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Kryze",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 528845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fenn_Rau",
+      "PageId": 529742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 762923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fleet_Command_(Mandalorian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 641337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clan_Rook_warrior",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 528920,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ursa_Wren",
+      "PageId": 455718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 673849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_Mandalorian_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 762097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_scout",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 580165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
+      "PageId": 762136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_fleet_commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 762277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 567160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 762167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_a_Mon_Calamari_viceroy's_son",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 575186,
-      "PageUrl": "https://starwars.fandom.com/wiki/JT-12_jetpack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 762181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Plazir-15",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

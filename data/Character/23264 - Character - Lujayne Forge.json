@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -80,6 +87,35 @@
       "Links": [],
       "Values": [
         "Brown"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kassar Forge",
+          "Href": "https://starwars.fandom.com/wiki/Kassar_Forge"
+        },
+        {
+          "Content": "Myda Forge",
+          "Href": "https://starwars.fandom.com/wiki/Myda_Forge"
+        }
+      ],
+      "Values": [
+        "Kassar Forge",
+        "Myda Forge"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Inyri Forge",
+          "Href": "https://starwars.fandom.com/wiki/Inyri_Forge"
+        }
+      ],
+      "Values": [
+        "Inyri Forge"
       ]
     },
     {
@@ -105,5 +141,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 26122,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inyri_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 174272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kassar_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

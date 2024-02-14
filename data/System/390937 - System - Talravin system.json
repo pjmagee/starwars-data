@@ -2,7 +2,7 @@
   "PageId": 390937,
   "PageUrl": "https://starwars.fandom.com/wiki/Talravin_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/30/Talravin_system.jpg/revision/latest?cb=20240202173928",
   "Data": [
     {
       "Label": "Titles",
@@ -24,23 +24,35 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Talravin",
+          "Href": "https://starwars.fandom.com/wiki/Talravin"
+        }
+      ],
+      "Values": [
+        "Talravin"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 2094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talravin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 505,
       "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 2094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talravin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

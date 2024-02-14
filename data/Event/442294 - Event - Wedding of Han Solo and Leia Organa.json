@@ -2,6 +2,7 @@
   "PageId": 442294,
   "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Han_Solo_and_Leia_Organa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7a/Wedding_of_Leia_Organa_and_Han_Solo.jpg/revision/latest?cb=20220817184244",
   "Data": [
     {
       "Label": "Titles",
@@ -26,6 +27,10 @@
       "Label": "Place",
       "Links": [
         {
+          "Content": "Bright Tree temple",
+          "Href": "https://starwars.fandom.com/wiki/Bright_Tree_temple"
+        },
+        {
           "Content": "Bright Tree Village",
           "Href": "https://starwars.fandom.com/wiki/Bright_Tree_Village"
         },
@@ -35,11 +40,11 @@
         }
       ],
       "Values": [
-        "Bright Tree Village, Endor"
+        "Bright Tree temple, Bright Tree Village, Endor"
       ]
     },
     {
-      "Label": "Participants",
+      "Label": "Outcome",
       "Links": [
         {
           "Content": "Leia Organa",
@@ -51,10 +56,74 @@
         }
       ],
       "Values": [
-        "Leia Organa",
-        "Han Solo"
+        "Leia Organa and Han Solo are married"
+      ]
+    },
+    {
+      "Label": "Participants",
+      "Links": [
+        {
+          "Content": "Luke Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Luke_Skywalker"
+        },
+        {
+          "Content": "C-3PO",
+          "Href": "https://starwars.fandom.com/wiki/C-3PO"
+        },
+        {
+          "Content": "R2-D2",
+          "Href": "https://starwars.fandom.com/wiki/R2-D2"
+        },
+        {
+          "Content": "Chirpa",
+          "Href": "https://starwars.fandom.com/wiki/Chirpa"
+        },
+        {
+          "Content": "Chewbacca",
+          "Href": "https://starwars.fandom.com/wiki/Chewbacca"
+        },
+        {
+          "Content": "Landonis Balthazar Calrissian",
+          "Href": "https://starwars.fandom.com/wiki/Landonis_Balthazar_Calrissian"
+        },
+        {
+          "Content": "Logray",
+          "Href": "https://starwars.fandom.com/wiki/Logray"
+        },
+        {
+          "Content": "Mon Mothma",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Mothma"
+        }
+      ],
+      "Values": [
+        "Leia Organa (bride)",
+        "Han Solo (groom)",
+        "Luke Skywalker (officiant)",
+        "C-3PO (guest and translator)",
+        "R2-D2 (guest)",
+        "Chirpa (guest)",
+        "Chewbacca (guest)",
+        "Landonis Balthazar Calrissian (guest)",
+        "Logray (guest)",
+        "Mon Mothma (guest)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_wedding_dress",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    }
+  ]
 }

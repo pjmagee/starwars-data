@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -77,6 +84,18 @@
       ],
       "Values": [
         "2.23 meters (7 ft, 4 in)"
+      ]
+    },
+    {
+      "Label": "Mass",
+      "Links": [
+        {
+          "Content": "kilograms",
+          "Href": "https://starwars.fandom.com/wiki/Kilogram"
+        }
+      ],
+      "Values": [
+        "70 kilograms"
       ]
     },
     {
@@ -99,15 +118,37 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Mother Talzin's clan",
-          "Href": "https://starwars.fandom.com/wiki/Mother_Talzin%27s_clan"
+          "Content": "Maul's family",
+          "Href": "https://starwars.fandom.com/wiki/Maul%27s_family"
         }
       ],
       "Values": [
-        "Mother Talzin's clan"
+        "Maul's family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Maul",
+          "Href": "https://starwars.fandom.com/wiki/Maul"
+        },
+        {
+          "Content": "Savage Opress",
+          "Href": "https://starwars.fandom.com/wiki/Savage_Opress"
+        },
+        {
+          "Content": "Feral",
+          "Href": "https://starwars.fandom.com/wiki/Feral"
+        }
+      ],
+      "Values": [
+        "Maul",
+        "Savage Opress",
+        "Feral"
       ]
     },
     {
@@ -116,6 +157,10 @@
         {
           "Content": "Nightsisters",
           "Href": "https://starwars.fandom.com/wiki/Nightsisters"
+        },
+        {
+          "Content": "Mother Talzin's clan",
+          "Href": "https://starwars.fandom.com/wiki/Mother_Talzin%27s_clan"
         },
         {
           "Content": "Sith",
@@ -132,6 +177,7 @@
       ],
       "Values": [
         "Nightsisters",
+        "Mother Talzin's clan",
         "Sith",
         "Frangawl Cult",
         "Shadow Collective"
@@ -140,49 +186,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 632492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Gethzerion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 572299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 685179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Orb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 631842,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Talzin's_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 505297,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Zardossa_Stix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 551340,
       "PageUrl": "https://starwars.fandom.com/wiki/Savage's_spear",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 530036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_crystal_ball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 534541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_(Nightsister)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 455947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 599994,
@@ -190,13 +196,58 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
+      "PageId": 530036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_crystal_ball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 632492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Gethzerion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 631842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Talzin's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 452307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Feral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savage_Opress",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 600013,
       "PageUrl": "https://starwars.fandom.com/wiki/Talzin's_shuttle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 453788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
+      "PageId": 693379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 505297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Zardossa_Stix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 534541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_(Nightsister)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -205,19 +256,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 534013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talzin's_sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 693379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 685179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Orb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 462428,
       "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Dathomir",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 453788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 659827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 534013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_of_Talzin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

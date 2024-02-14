@@ -2,6 +2,7 @@
   "PageId": 686834,
   "PageUrl": "https://starwars.fandom.com/wiki/Jesha_Narlock",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Dol Narlock",
+          "Href": "https://starwars.fandom.com/wiki/Dol_Narlock"
+        }
+      ],
+      "Values": [
+        "Dol Narlock"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -35,5 +48,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 310269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dol_Narlock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

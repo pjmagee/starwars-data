@@ -2,7 +2,7 @@
   "PageId": 471920,
   "PageUrl": "https://starwars.fandom.com/wiki/Bestine_IV",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8c/Bestine-TFABG.png/revision/latest?cb=20200510070149",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f8/Bestine-BH28.jpg/revision/latest?cb=20221221163346",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-14",
@@ -67,35 +67,86 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
       "Links": [],
       "Values": [
-        "Cliffs"
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Type I",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Type I (breathable)"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Caves",
+          "Href": "https://starwars.fandom.com/wiki/Cave"
+        },
+        {
+          "Content": "Island spires",
+          "Href": "https://starwars.fandom.com/wiki/Island_spires"
+        },
+        {
+          "Content": "Hills",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
+      "Values": [
+        "Caves",
+        "Cliffs",
+        "Island spires",
+        "Hills",
+        "Plains"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
+        }
+      ],
+      "Values": [
+        "Oceans"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Imperial military base",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_military_base_(Bestine_IV)"
+          "Content": "Imperial naval base",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_naval_base"
         }
       ],
       "Values": [
-        "Bestine naval shipyard",
-        "Imperial military base"
+        "Imperial naval base"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Shahkirin",
-          "Href": "https://starwars.fandom.com/wiki/Shahkirin"
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "species",
+          "Href": "https://starwars.fandom.com/wiki/Species"
         }
       ],
       "Values": [
-        "Shahkirin"
+        "Humans and other species"
       ]
     },
     {
@@ -130,9 +181,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 629256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bsellis_City_market_district",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 747928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bestine_IV_insurgents",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 752028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_coastal_defender_stormtrooper_(Bestine_IV)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 628517,
@@ -145,14 +201,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 610140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bsellis_City",
+      "PageId": 606283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bestine_IV_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 747926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jahnae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 748720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_village_(Bestine_IV)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 629255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Garden_Homes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 629256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bsellis_City_market_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 169296,
@@ -160,24 +226,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 650229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 573670,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_military_base_(Bestine_IV)",
+      "PageId": 629255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Garden_Homes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 646952,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bestine_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 640083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yipsit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 531745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 610140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bsellis_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 525702,
@@ -185,14 +246,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 606283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Galactic_Republic_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 531745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 640083,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yipsit",
+      "PageId": 747927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Insurrection_on_Bestine_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 745043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 573670,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_naval_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 748721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Bestine_IV_insurgent",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 650229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV_(Twenty-First)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 770121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Nova_Razors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 646952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bestine_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 725249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Island_spires",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Speeder bike",
@@ -108,6 +108,23 @@
       "Values": [
         "1"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Spectres",
+          "Href": "https://starwars.fandom.com/wiki/Spectres"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic",
+        "Spectres"
+      ]
     }
   ],
   "Relationships": [
@@ -117,14 +134,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
-      "PageId": 461069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zebulon_Dak_Speeder_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 650730,
       "PageUrl": "https://starwars.fandom.com/wiki/Trash",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 461069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zebulon_Dak_Speeder_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

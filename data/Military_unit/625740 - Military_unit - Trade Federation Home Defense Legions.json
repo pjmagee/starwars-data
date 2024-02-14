@@ -28,21 +28,43 @@
         {
           "Content": "Nute Gunray",
           "Href": "https://starwars.fandom.com/wiki/Nute_Gunray"
+        },
+        {
+          "Content": "Supreme Martial Commander",
+          "Href": "https://starwars.fandom.com/wiki/Supreme_Martial_Commander_of_the_Separatist_Droid_Armies"
+        },
+        {
+          "Content": "General",
+          "Href": "https://starwars.fandom.com/wiki/General"
+        },
+        {
+          "Content": "Grievous",
+          "Href": "https://starwars.fandom.com/wiki/Grievous"
+        },
+        {
+          "Content": "Separatist",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         }
       ],
       "Values": [
-        "Viceroy of the Trade Federation Nute Gunray"
+        "Viceroy of the Trade Federation Nute Gunray",
+        "Supreme Martial Commander General Grievous (under Separatist affiliation)"
       ]
     },
     {
       "Label": "Sub-units",
       "Links": [
         {
+          "Content": "Neimoidian special forces",
+          "Href": "https://starwars.fandom.com/wiki/Neimoidian_special_forces"
+        },
+        {
           "Content": "Quellor sector fleet",
           "Href": "https://starwars.fandom.com/wiki/Quellor_sector_fleet"
         }
       ],
       "Values": [
+        "Neimoidian special forces",
         "Quellor sector fleet"
       ]
     },
@@ -50,12 +72,20 @@
       "Label": "Strength",
       "Links": [
         {
-          "Content": "Battle droids",
+          "Content": "Companies",
+          "Href": "https://starwars.fandom.com/wiki/Company"
+        },
+        {
+          "Content": "legions",
+          "Href": "https://starwars.fandom.com/wiki/Legion"
+        },
+        {
+          "Content": "battle droids",
           "Href": "https://starwars.fandom.com/wiki/Battle_droid"
         },
         {
-          "Content": "Neimoidian guards",
-          "Href": "https://starwars.fandom.com/wiki/Neimoidian_guard"
+          "Content": "Neimoidian Royal Guards",
+          "Href": "https://starwars.fandom.com/wiki/Neimoidian_Royal_Guard"
         },
         {
           "Content": "Vulture droid starfighters",
@@ -63,8 +93,8 @@
         }
       ],
       "Values": [
-        "Battle droids",
-        "Neimoidian guards",
+        "Companies to legions of battle droids",
+        "Neimoidian Royal Guards",
         "Vulture droid starfighters"
       ]
     },
@@ -72,7 +102,7 @@
       "Label": "Vehicles",
       "Links": [
         {
-          "Content": "Armored Assault Tanks",
+          "Content": "Armored Assault Tank Mk Is",
           "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
         },
         {
@@ -89,7 +119,7 @@
         }
       ],
       "Values": [
-        "Armored Assault Tanks",
+        "Armored Assault Tank Mk Is",
         "C-9979 landing craft",
         "Lucrehulk-class Battleships",
         "Multi-Troop Transports"
@@ -101,10 +131,20 @@
         {
           "Content": "Quellor sector",
           "Href": "https://starwars.fandom.com/wiki/Quellor_sector"
+        },
+        {
+          "Content": "Cato Neimoidia",
+          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidia"
+        },
+        {
+          "Content": "Purse Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Purse_World"
         }
       ],
       "Values": [
-        "Quellor sector"
+        "Quellor sector",
+        "Cato Neimoidia",
+        "Other Purse Worlds"
       ]
     },
     {
@@ -131,8 +171,8 @@
           "Href": "https://starwars.fandom.com/wiki/Trade_Federation_military"
         },
         {
-          "Content": "Confederacy of Independent Systems",
-          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+          "Content": "Cato Neimoidian government",
+          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidian_government"
         },
         {
           "Content": "Separatist Droid Army",
@@ -142,6 +182,7 @@
       "Values": [
         "Trade Federation",
         "Trade Federation military",
+        "Cato Neimoidian government (associated with)",
         "Confederacy of Independent Systems",
         "Separatist Droid Army"
       ]
@@ -149,13 +190,8 @@
   ],
   "Relationships": [
     {
-      "PageId": 163590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neimoidian_Royal_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 455962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Droid_Army",
+      "PageId": 639191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_military",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -169,9 +205,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 639191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_military",
+      "PageId": 455962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Droid_Army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 163590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neimoidian_Royal_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

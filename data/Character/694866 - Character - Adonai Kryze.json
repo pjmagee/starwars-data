@@ -2,6 +2,7 @@
   "PageId": 694866,
   "PageUrl": "https://starwars.fandom.com/wiki/Adonai_Kryze",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,17 +40,62 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
+        {
+          "Content": "House Kryze",
+          "Href": "https://starwars.fandom.com/wiki/House_Kryze"
+        },
         {
           "Content": "Clan Kryze",
           "Href": "https://starwars.fandom.com/wiki/Clan_Kryze"
         }
       ],
       "Values": [
+        "House Kryze",
         "Clan Kryze"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Satine Kryze",
+          "Href": "https://starwars.fandom.com/wiki/Satine_Kryze"
+        },
+        {
+          "Content": "Bo-Katan Kryze",
+          "Href": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze"
+        }
+      ],
+      "Values": [
+        "Satine Kryze",
+        "Bo-Katan Kryze"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 456390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 455187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satine_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

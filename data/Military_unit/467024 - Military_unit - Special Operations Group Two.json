@@ -13,21 +13,54 @@
     },
     {
       "Label": "Formation type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Operations Group",
+          "Href": "https://starwars.fandom.com/wiki/Operations_Group"
+        }
+      ],
       "Values": [
         "Operations Group"
       ]
     },
     {
-      "Label": "Location(s)",
+      "Label": "Headquarters",
       "Links": [
+        {
+          "Content": "Imperial remote post",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_remote_post"
+        },
         {
           "Content": "Belsavis",
           "Href": "https://starwars.fandom.com/wiki/Belsavis/Legends"
         }
       ],
       "Values": [
-        "Belsavis"
+        "Imperial remote post, Belsavis"
+      ]
+    },
+    {
+      "Label": "Notable battles",
+      "Links": [
+        {
+          "Content": "Invasion of Belsavis",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Belsavis"
+        }
+      ],
+      "Values": [
+        "Invasion of Belsavis"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "3640 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3640_BBY"
+        }
+      ],
+      "Values": [
+        "3640 BBY"
       ]
     },
     {
@@ -43,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operations_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

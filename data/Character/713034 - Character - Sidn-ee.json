@@ -2,6 +2,7 @@
   "PageId": 713034,
   "PageUrl": "https://starwars.fandom.com/wiki/Sidn-ee",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Till-ee",
+          "Href": "https://starwars.fandom.com/wiki/Till-ee"
+        }
+      ],
+      "Values": [
+        "Till-ee"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -40,5 +53,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 713033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Till-ee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

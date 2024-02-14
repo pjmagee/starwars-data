@@ -2,7 +2,7 @@
   "PageId": 8297,
   "PageUrl": "https://starwars.fandom.com/wiki/Electric_Judgment",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3c/ElectricJudgement.jpg/revision/latest?cb=20051119151940",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/50/Luke_Swarm_War.jpg/revision/latest?cb=20070825064509",
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +15,8 @@
       "Label": "Alternate name(s)",
       "Links": [],
       "Values": [
-        "Emerald Lightning"
+        "Emerald Lightning",
+        "Fingertip Lightning"
       ]
     },
     {
@@ -28,6 +29,18 @@
       ],
       "Values": [
         "Light side of the Force"
+      ]
+    },
+    {
+      "Label": "Area",
+      "Links": [
+        {
+          "Content": "Alter",
+          "Href": "https://starwars.fandom.com/wiki/Alter"
+        }
+      ],
+      "Values": [
+        "Alter"
       ]
     },
     {
@@ -55,5 +68,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Force_lightning/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    }
+  ]
 }

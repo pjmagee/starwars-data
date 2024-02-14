@@ -13,14 +13,24 @@
     },
     {
       "Label": "Average height",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meter",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
-        "1.9 – 2.3 meters"
+        "1.9 – 2.3 meter"
       ]
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Grayish",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Grayish"
       ]
@@ -47,9 +57,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 259284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yucrales_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 705855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gronk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 268966,
       "PageUrl": "https://starwars.fandom.com/wiki/Bakku",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 14807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malthor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reigalius",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 13362,
@@ -62,34 +92,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 14847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reigalius",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 343091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reigalius_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 705855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gronk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 185232,
       "PageUrl": "https://starwars.fandom.com/wiki/Chugg",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 441982,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 259284,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yucrales_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 170176,
@@ -97,9 +102,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 14807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malthor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 343091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reigalius_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 441982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

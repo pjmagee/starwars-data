@@ -52,15 +52,27 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
           "Content": "White",
           "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        },
+        {
+          "Content": "eye",
+          "Href": "https://starwars.fandom.com/wiki/Eye/Legends"
         }
       ],
       "Values": [
-        "White right eye, brown left eye"
+        "White (right eye)",
+        "Brown (left eye)"
       ]
     },
     {
@@ -107,24 +119,14 @@
   ],
   "Relationships": [
     {
+      "PageId": 12980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Hammerhead-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 1073,
       "PageUrl": "https://starwars.fandom.com/wiki/Kreia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 387695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Korriban_Academy_(First_Jedi_Purge)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 81423,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Triumvirate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 384305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sion's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 4758,
@@ -132,9 +134,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 12980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Hammerhead-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 81423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Triumvirate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 426271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sion_cult",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 384305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sion's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 387695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Korriban_Academy_(First_Jedi_Purge)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

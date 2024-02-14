@@ -2,7 +2,7 @@
   "PageId": 594241,
   "PageUrl": "https://starwars.fandom.com/wiki/Toprawa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/Toprawa-BMF23.jpg/revision/latest?cb=20210905125138",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/Toprawa-BMF23.jpg/revision/latest?cb=20240214064211",
   "Data": [
     {
       "Label": "Titles",
@@ -29,7 +29,21 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Moons",
+      "Links": [],
+      "Values": [
+        "At least 2"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-5",
@@ -60,6 +74,18 @@
       ]
     },
     {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        }
+      ],
+      "Values": [
+        "Lush forests"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -68,37 +94,57 @@
         }
       ],
       "Values": [
-        "Sila Kott flight school"
+        "Ansharii Caverns",
+        "Big Woolly",
+        "Imperial Research Station",
+        "Sila Kott flight school",
+        "Sila Kott's house",
+        "A spaceport",
+        "A tavern"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Humans",
+          "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
         }
       ],
       "Values": [
-        "Humans"
+        "Human"
+      ]
+    },
+    {
+      "Label": "Major cities",
+      "Links": [],
+      "Values": [
+        "Toprawa City"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
+      "Values": [
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 518433,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 476135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sila_Kott",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 628853,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 518433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 616607,
@@ -109,6 +155,31 @@
       "PageId": 704818,
       "PageUrl": "https://starwars.fandom.com/wiki/'aKraB_clip-point_vibrodagger",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 779556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Set_(Sila_Kott)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lante",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sila_Kott",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

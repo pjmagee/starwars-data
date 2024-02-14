@@ -24,10 +24,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-5"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "stars",
+          "Href": "https://starwars.fandom.com/wiki/Star/Legends"
+        }
+      ],
+      "Values": [
+        "Several stars"
       ]
     },
     {
@@ -43,33 +55,45 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Native species",
       "Links": [
         {
-          "Content": "Nuso Esva's Empire",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_Empire"
-        },
-        {
-          "Content": "Empire of the Hand",
-          "Href": "https://starwars.fandom.com/wiki/Empire_of_the_Hand"
+          "Content": "Quesoth",
+          "Href": "https://starwars.fandom.com/wiki/Quesoth"
         }
       ],
       "Values": [
-        "Nuso Esva's Empire",
-        "Empire of the Hand"
+        "Quesoth"
+      ]
+    },
+    {
+      "Label": "Language",
+      "Links": [
+        {
+          "Content": "Quesoth Common Speak",
+          "Href": "https://starwars.fandom.com/wiki/Quesoth_Common_Speak"
+        },
+        {
+          "Content": "Quesoth Soldier Speak",
+          "Href": "https://starwars.fandom.com/wiki/Quesoth_Soldier_Speak"
+        }
+      ],
+      "Values": [
+        "Quesoth Common Speak",
+        "Quesoth Soldier Speak"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 356940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quethold",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 529501,
       "PageUrl": "https://starwars.fandom.com/wiki/Unknown_Regions/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 356940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quethold",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

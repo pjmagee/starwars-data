@@ -2,6 +2,7 @@
   "PageId": 35794,
   "PageUrl": "https://starwars.fandom.com/wiki/Rim_Faction/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,18 @@
       ]
     },
     {
+      "Label": "Location(s)",
+      "Links": [
+        {
+          "Content": "Rim",
+          "Href": "https://starwars.fandom.com/wiki/Rim"
+        }
+      ],
+      "Values": [
+        "Rim"
+      ]
+    },
+    {
       "Label": "Date dissolved",
       "Links": [
         {
@@ -59,5 +72,26 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 424408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_Senatorial_Delegation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 1035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orn_Free_Taa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mas_Amedda/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 34,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ainlee_Teem/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

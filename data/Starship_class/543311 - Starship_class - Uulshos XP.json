@@ -2,6 +2,7 @@
   "PageId": 543311,
   "PageUrl": "https://starwars.fandom.com/wiki/Uulshos_XP",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Uulshos Manufacturing",
+          "Href": "https://starwars.fandom.com/wiki/Uulshos_Manufacturing"
+        }
+      ],
+      "Values": [
+        "Uulshos Manufacturing"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Yacht",
@@ -23,5 +36,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 595052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uulshos_Manufacturing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

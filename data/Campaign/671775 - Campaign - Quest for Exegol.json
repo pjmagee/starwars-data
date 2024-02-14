@@ -27,17 +27,43 @@
       "Label": "Place",
       "Links": [
         {
-          "Content": "Pasaana",
-          "Href": "https://starwars.fandom.com/wiki/Pasaana"
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        },
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Unknown Regions",
+          "Href": "https://starwars.fandom.com/wiki/Unknown_Regions"
         }
       ],
       "Values": [
-        "Pasaana"
+        "Expansion Region",
+        "Outer Rim Territories",
+        "Unknown Regions"
       ]
     },
     {
       "Label": "Outcome",
       "Links": [
+        {
+          "Content": "Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        },
+        {
+          "Content": "Kiza",
+          "Href": "https://starwars.fandom.com/wiki/Kiza"
+        },
+        {
+          "Content": "Viceroy",
+          "Href": "https://starwars.fandom.com/wiki/Viceroy"
+        },
+        {
+          "Content": "Exim Panshard",
+          "Href": "https://starwars.fandom.com/wiki/Exim_Panshard"
+        },
         {
           "Content": "Exegol",
           "Href": "https://starwars.fandom.com/wiki/Exegol"
@@ -52,6 +78,8 @@
         }
       ],
       "Values": [
+        "Jedi Order victory",
+        "Death of Kiza and Viceroy Exim Panshard",
         "Failure to find Exegol and quest abandoned",
         "Quest later picked up again by Rey and the Resistance"
       ]
@@ -60,20 +88,70 @@
       "Label": "Battles",
       "Links": [
         {
+          "Content": "Raid on Nightside",
+          "Href": "https://starwars.fandom.com/wiki/Raid_on_Nightside"
+        },
+        {
+          "Content": "Skirmish on Torrenoteer Minor",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Torrenoteer_Minor"
+        },
+        {
+          "Content": "Skirmish on Polaar",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Polaar"
+        },
+        {
+          "Content": "Skirmish on Taw Provode",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Taw_Provode"
+        },
+        {
+          "Content": "Duel on Kiza's world",
+          "Href": "https://starwars.fandom.com/wiki/Duel_on_Kiza%27s_world"
+        },
+        {
           "Content": "Mission to Pasaana",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Pasaana"
         }
       ],
       "Values": [
+        "Raid on Nightside",
+        "Skirmish on Torrenoteer Minor",
+        "Skirmish on Polaar",
+        "Skirmish on Taw Provode",
+        "Duel on Kiza's world",
         "Mission to Pasaana"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 734320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nightside",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 640149,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pasaana",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 734319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Taw_Provode",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 734321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Polaar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 734322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Torrenoteer_Minor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 734317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Kiza's_world",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

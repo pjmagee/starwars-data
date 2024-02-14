@@ -17,14 +17,19 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "J-9",
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Biological sea"
@@ -81,19 +86,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 619010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evil_Mahjo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 619792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jogan_fruit_tart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 619050,
       "PageUrl": "https://starwars.fandom.com/wiki/Gwongdeenian_sub-subterranean_gastropod",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 619792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jogan_fruit_tart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 619037,
@@ -104,6 +104,11 @@
       "PageId": 619039,
       "PageUrl": "https://starwars.fandom.com/wiki/Gwongdeen_spaceport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 619010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evil_Mahjo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

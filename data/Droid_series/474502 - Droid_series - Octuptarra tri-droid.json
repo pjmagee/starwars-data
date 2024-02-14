@@ -24,6 +24,22 @@
       ]
     },
     {
+      "Label": "Place of manufacture",
+      "Links": [
+        {
+          "Content": "Techno Union Droid Army",
+          "Href": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army"
+        },
+        {
+          "Content": "Mustafar",
+          "Href": "https://starwars.fandom.com/wiki/Mustafar"
+        }
+      ],
+      "Values": [
+        "Techno Union Droid Army, Mustafar"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [
         {
@@ -86,10 +102,15 @@
         {
           "Content": "Red",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Red"
+        "Red",
+        "Purple (Under Scourge infection)"
       ]
     },
     {
@@ -123,20 +144,30 @@
         {
           "Content": "Separatist Droid Army",
           "Href": "https://starwars.fandom.com/wiki/Separatist_Droid_Army"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         }
       ],
       "Values": [
         "Techno Union",
         "Confederacy of Independent Systems",
-        "Separatist Droid Army"
+        "Separatist Droid Army",
+        "Scourge (As a vessel)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 671352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 629986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 785649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Vader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 605764,
@@ -144,14 +175,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 671352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 475917,
       "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 629986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 537550,
   "PageUrl": "https://starwars.fandom.com/wiki/Birren",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/Birren.png/revision/latest?cb=20231206154024",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "O-10",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "O-10"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -33,6 +45,18 @@
       ],
       "Values": [
         "Great Hall of Birren"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Candlewick flower",
+          "Href": "https://starwars.fandom.com/wiki/Candlewick_flower"
+        }
+      ],
+      "Values": [
+        "Candlewick flower (introduced)"
       ]
     },
     {
@@ -57,39 +81,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 541123,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warden_of_the_sanctum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 785120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stuffed_Candlewick_Flower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 538592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_of_Birren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 537506,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elder_Houses",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 538638,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keepsake_chest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 541105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_keepsake_chest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 537505,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mellowyn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 764935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akuna_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 541124,
@@ -97,9 +96,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 540126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_governor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 477940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 541105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_keepsake_chest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 541107,
@@ -110,6 +114,51 @@
       "PageId": 541109,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Warden_of_the_Treasures",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kata_Akuna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 578219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Candlewick_flower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 538638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keepsake_chest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 537505,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mellowyn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 537506,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elder_Houses",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 764930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tayala_Akuna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_of_Birren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 540126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_governor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 541123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warden_of_the_sanctum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     }
   ]
 }

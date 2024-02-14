@@ -2,7 +2,7 @@
   "PageId": 1928,
   "PageUrl": "https://starwars.fandom.com/wiki/T-47_airspeeder/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0d/Snowspeeder.png/revision/latest?cb=20161110010008",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/52/T47airspeeder-TSS.jpg/revision/latest?cb=20090910013908",
   "Data": [
     {
       "Label": "Titles",
@@ -24,20 +24,13 @@
       ]
     },
     {
-      "Label": "Model",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "airspeeder",
+          "Content": "Airspeeder",
           "Href": "https://starwars.fandom.com/wiki/Airspeeder/Legends"
         }
       ],
-      "Values": [
-        "T-47 airspeeder"
-      ]
-    },
-    {
-      "Label": "Class",
-      "Links": [],
       "Values": [
         "Airspeeder"
       ]
@@ -55,31 +48,58 @@
       ]
     },
     {
+      "Label": "Modifier",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic"
+      ]
+    },
+    {
       "Label": "Length",
       "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        },
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
         }
       ],
       "Values": [
-        "5.3 meters"
+        "4.5 meters (unmodified)",
+        "5.3 meters (modified)"
       ]
     },
     {
       "Label": "Maximum speed",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "kilometers",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
+        },
+        {
+          "Content": "hour",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
+        },
+        {
+          "Content": "kilometers",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
+        },
+        {
+          "Content": "hour",
+          "Href": "https://starwars.fandom.com/wiki/Standard_hour/Legends"
+        }
+      ],
       "Values": [
-        "650 km/h",
-        "Modified version: 1,100 km/h",
-        "Attack speed: 570 km/h"
-      ]
-    },
-    {
-      "Label": "Maximum altitude",
-      "Links": [],
-      "Values": [
-        "175 meters"
+        "650 kilometers an hour (unmodified)",
+        "1,100 kilometers an hour (modified)",
+        "Five hundred and seventy—six hundred kilometers an hour (modified effective combat speed)"
       ]
     },
     {
@@ -90,136 +110,53 @@
           "Href": "https://starwars.fandom.com/wiki/Karydee"
         },
         {
-          "Content": "KD49 repulsorlift engines",
-          "Href": "https://starwars.fandom.com/wiki/KD49_repulsorlift_engine"
+          "Content": "KD49 repulsorlift drive unit",
+          "Href": "https://starwars.fandom.com/wiki/KD49_repulsorlift_drive_unit"
         },
         {
-          "Content": "5i.2 ion afterburner",
-          "Href": "https://starwars.fandom.com/wiki/5i.2_ion_afterburner"
+          "Content": "Incom Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
+        },
+        {
+          "Content": "5i.2 high-powered ion drive afterburner",
+          "Href": "https://starwars.fandom.com/wiki/5i.2_high-powered_ion_drive_afterburner"
         }
       ],
       "Values": [
-        "Karydee KD49 repulsorlift engines (2)",
-        "Incom 5i.2 ion afterburner (2)"
-      ]
-    },
-    {
-      "Label": "Armament",
-      "Links": [
-        {
-          "Content": "Harpoon and tow cable",
-          "Href": "https://starwars.fandom.com/wiki/Power_harpoon"
-        },
-        {
-          "Content": "CEC",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends"
-        },
-        {
-          "Content": "AP/11 double laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/AP/11_double_laser_cannon"
-        },
-        {
-          "Content": "Ubrikkian",
-          "Href": "https://starwars.fandom.com/wiki/Ubrikkian_Industries/Legends"
-        },
-        {
-          "Content": "Mo/Dk energy harpoon",
-          "Href": "https://starwars.fandom.com/wiki/Mo/Dk_energy_harpoon"
-        },
-        {
-          "Content": "blaster",
-          "Href": "https://starwars.fandom.com/wiki/Blaster/Legends"
-        }
-      ],
-      "Values": [
-        "Standard version",
-        "Harpoon and tow cableModified version",
-        "2 CEC AP/11 double laser cannons",
-        "Rear facing weapon",
-        "Ubrikkian Mo/Dk energy harpoon and tow cable",
-        "Light repeating blaster cannon",
-        "Harpoon and tow cable"
+        "Karydee KD49 repulsorlift drive unit",
+        "Incom Corporation 5i.2 high-powered ion drive afterburner"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [
-        {
-          "Content": "Pilot",
-          "Href": "https://starwars.fandom.com/wiki/Pilot/Legends"
-        },
-        {
-          "Content": "Gunner",
-          "Href": "https://starwars.fandom.com/wiki/Gunner/Legends"
-        }
-      ],
-      "Values": [
-        "Standard version",
-        "Pilot (1)",
-        "Cargo manager (1)Modified version",
-        "Gunner (1)",
-        "Cargo manager (1)"
-      ]
-    },
-    {
-      "Label": "Cargo capacity",
-      "Links": [
-        {
-          "Content": "kg",
-          "Href": "https://starwars.fandom.com/wiki/Kilogram/Legends"
-        }
-      ],
-      "Values": [
-        "10 kg"
-      ]
-    },
-    {
-      "Label": "Role(s)",
       "Links": [],
       "Values": [
-        "Reconnaissance",
-        "Patrol",
-        "Aerial assault"
+        "2"
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Other systems",
       "Links": [
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
-        },
-        {
-          "Content": "New Republic",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+          "Content": "Power harpoon launcher",
+          "Href": "https://starwars.fandom.com/wiki/Power_harpoon_launcher"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic",
-        "New Republic"
+        "Power harpoon launcher"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 445095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snowspeeder_Shop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 683765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_side_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 509295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vortex_Squadron_(Arda_I)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 791873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snowspeeder/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     }
   ]
 }

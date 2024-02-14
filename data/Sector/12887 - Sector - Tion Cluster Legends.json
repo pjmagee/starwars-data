@@ -172,6 +172,10 @@
           "Href": "https://starwars.fandom.com/wiki/Abraxin_system"
         },
         {
+          "Content": "Argoon system",
+          "Href": "https://starwars.fandom.com/wiki/Argoon_system"
+        },
+        {
           "Content": "Brigia system",
           "Href": "https://starwars.fandom.com/wiki/Brigia_system"
         },
@@ -210,10 +214,6 @@
         {
           "Content": "Livien system",
           "Href": "https://starwars.fandom.com/wiki/Livien_system"
-        },
-        {
-          "Content": "Newland system",
-          "Href": "https://starwars.fandom.com/wiki/Newland_system"
         },
         {
           "Content": "Omman system",
@@ -287,6 +287,7 @@
         "Soruus system",
         "Tion Hegemony",
         "Abraxin system",
+        "Argoon system",
         "Brigia system",
         "Caluula system",
         "Clariv system",
@@ -297,7 +298,6 @@
         "Kanaver system",
         "Kaon system",
         "Livien system",
-        "Newland system",
         "Omman system",
         "Orion system",
         "Raxus system",
@@ -437,8 +437,8 @@
           "Href": "https://starwars.fandom.com/wiki/Jaminere_Marches"
         },
         {
-          "Content": "Honorable Union of Desevro & Tion",
-          "Href": "https://starwars.fandom.com/wiki/Honorable_Union_of_Desevro_%26_Tion"
+          "Content": "Honorable Union of Desevro and Tion",
+          "Href": "https://starwars.fandom.com/wiki/Honorable_Union_of_Desevro_and_Tion"
         },
         {
           "Content": "Galactic Republic",
@@ -476,7 +476,7 @@
         "Xer's Empire",
         "Xim's empire",
         "Jaminere Marches",
-        "Honorable Union of Desevro & Tion",
+        "Honorable Union of Desevro and Tion",
         "Galactic Republic",
         "Darth Revan's Sith Empire",
         "Brotherhood of Darkness",
@@ -562,14 +562,26 @@
           "Href": "https://starwars.fandom.com/wiki/Tionese_War"
         },
         {
+          "Content": "Cadinth",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Cadinth_(Tionese_War)"
+        },
+        {
+          "Content": "Chandaar",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Chandaar_(Tionese_War)"
+        },
+        {
+          "Content": "Barseg",
+          "Href": "https://starwars.fandom.com/wiki/Bombing_of_Barseg"
+        },
+        {
           "Content": "Desevro",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Desevro"
+          "Href": "https://starwars.fandom.com/wiki/Fall_of_Desevro"
         }
       ],
       "Values": [
         "Xer's CampaignsPanna - Duinarbulon - Chandaar - Pasmin - Eibon - Nuswatta - Jaminere - Cadinth - Barseg - Caluula - Brigia - Tion - Amarin - Lorrad",
         "Post–Xer's CampaignsJhantoria",
-        "Tionese WarDesevro",
+        "Tionese WarCadinth - Jaminere - Chandaar - Barseg - Desevro",
         "Xer's Campaigns",
         "Post–Xer's Campaigns",
         "Tionese War"
@@ -764,12 +776,16 @@
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Panna_Prime"
         },
         {
-          "Content": "Dellalt",
+          "Content": "Argoon",
+          "Href": "https://starwars.fandom.com/wiki/Mission_at_Argoon"
+        },
+        {
+          "Content": "Dellalt system (III)",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Dellalt_(Galactic_Civil_War)"
         }
       ],
       "Values": [
-        "Galactic Civil WarSaheelindeel - Panna Prime - Dellalt",
+        "Galactic Civil WarSaheelindeel - Panna Prime - Argoon - Dellalt system (III)",
         "Galactic Civil War"
       ]
     },
@@ -818,6 +834,31 @@
   ],
   "Relationships": [
     {
+      "PageId": 19306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Panna/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 368316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jhantoria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 362008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desargorr_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 7017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianna_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 10729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cadinth/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 14054,
       "PageUrl": "https://starwars.fandom.com/wiki/Caluula/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -838,48 +879,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 22077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oor_VII",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 22180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orion_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 310320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Derellium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 86430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuswatta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 271134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arcan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 500891,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soruus_(planet)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 362008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Desargorr_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 7017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianna_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 15350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gbu",
+      "PageId": 20536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arramanx",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -888,49 +889,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 52172,
-      "PageUrl": "https://starwars.fandom.com/wiki/Desargorr",
+      "PageId": 2071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raxus_Prime/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 12888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cronese_Mandate/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 394802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xer's_Campaigns",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 13348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaminere/Legends",
+      "PageId": 20732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barseg",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 13349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aradian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 14222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Panna_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 13350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 27972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tionese/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
-      "PageId": 19306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Panna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 12775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dellalt/Legends",
+      "PageId": 14379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arcan_IV",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 370658,
       "PageUrl": "https://starwars.fandom.com/wiki/Greater_Tion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 310320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Derellium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 34976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 271134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arcan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 830,
@@ -948,53 +949,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 2071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raxus_Prime/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 20732,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barseg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arcan_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 34976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 14222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Panna_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 10729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cadinth/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 20536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arramanx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 27924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Panna_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 26372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Strike_Fear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 14647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaon",
+      "PageId": 14818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omman",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -1003,8 +959,63 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 16780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Devato",
+      "PageId": 13348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaminere/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aradian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianna/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 86430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuswatta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 52172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desargorr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 27924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Panna_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 15350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gbu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cronese_Mandate/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 22077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oor_VII",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 22180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orion_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 500891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soruus_(planet)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -1023,6 +1034,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 16780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devato",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 329106,
       "PageUrl": "https://starwars.fandom.com/wiki/Clariv",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -1038,9 +1054,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 14818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omman",
+      "PageId": 12775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dellalt/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 26372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Strike_Fear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 394802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xer's_Campaigns",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 535725,
   "PageUrl": "https://starwars.fandom.com/wiki/Maul's_lightsaber",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/85/Maul_lightsaber.png/revision/latest?cb=20160428060959",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5a/MaulsInquisitorLightsaber-SWTLC.png/revision/latest?cb=20210107221109",
   "Data": [
     {
       "Label": "Titles",
@@ -15,23 +15,29 @@
       "Label": "Model",
       "Links": [
         {
-          "Content": "cane",
-          "Href": "https://starwars.fandom.com/wiki/Cane_lightsaber"
-        },
-        {
-          "Content": "double-bladed lightsaber",
-          "Href": "https://starwars.fandom.com/wiki/Double-bladed_lightsaber"
+          "Content": "lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Lightsaber"
         }
       ],
       "Values": [
-        "Homemade cane double-bladed lightsaber"
+        "Homemade lightsaber"
       ]
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Double-bladed lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Double-bladed_lightsaber"
+        },
+        {
+          "Content": "Cane lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Cane_lightsaber"
+        }
+      ],
       "Values": [
-        "Double-bladed lightsaber"
+        "Double-bladed lightsaber",
+        "Cane lightsaber"
       ]
     },
     {
@@ -44,6 +50,13 @@
       ],
       "Values": [
         "Maul"
+      ]
+    },
+    {
+      "Label": "Hilt shape",
+      "Links": [],
+      "Values": [
+        "Cylindrical, straight"
       ]
     },
     {
@@ -86,7 +99,8 @@
         }
       ],
       "Values": [
-        "Lightsaber combat"
+        "Lightsaber combat",
+        "Mobility aid"
       ]
     },
     {

@@ -2,7 +2,7 @@
   "PageId": 599396,
   "PageUrl": "https://starwars.fandom.com/wiki/Great_Gran_Run",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a1/GranRun.jpg/revision/latest?cb=20210515183712",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a1/GranRun.jpg/revision/latest?cb=20220724121331",
   "Data": [
     {
       "Label": "Titles",
@@ -15,17 +15,16 @@
       "Label": "Regions",
       "Links": [
         {
-          "Content": "Expansion Region",
-          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
-        },
-        {
           "Content": "Mid Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
         }
       ],
       "Values": [
-        "Expansion Region",
-        "Mid Rim Territories"
+        "Mid Rim Territories - Expansion Region"
       ]
     },
     {
@@ -44,24 +43,86 @@
       "Label": "Planets",
       "Links": [
         {
-          "Content": "Noe'ha'on",
-          "Href": "https://starwars.fandom.com/wiki/Noe%27ha%27on"
+          "Content": "Cerea",
+          "Href": "https://starwars.fandom.com/wiki/Cerea"
+        },
+        {
+          "Content": "Chalcedon",
+          "Href": "https://starwars.fandom.com/wiki/Chalcedon"
         },
         {
           "Content": "Takodana",
           "Href": "https://starwars.fandom.com/wiki/Takodana"
+        },
+        {
+          "Content": "Chyron Belt",
+          "Href": "https://starwars.fandom.com/wiki/Chyron_Belt"
+        },
+        {
+          "Content": "Noe'ha'on",
+          "Href": "https://starwars.fandom.com/wiki/Noe%27ha%27on"
+        },
+        {
+          "Content": "Kinyen",
+          "Href": "https://starwars.fandom.com/wiki/Kinyen"
         }
       ],
       "Values": [
-        "Noe'ha'on - Takodana"
+        "Cerea - Chalcedon - Takodana - Chyron Belt - Noe'ha'on - Kinyen"
+      ]
+    },
+    {
+      "Label": "Junctions",
+      "Links": [
+        {
+          "Content": "Biox Detour",
+          "Href": "https://starwars.fandom.com/wiki/Biox_Detour"
+        },
+        {
+          "Content": "Corellian Trade Spine",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine"
+        }
+      ],
+      "Values": [
+        "Biox Detour -Corellian Trade Spine"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 473344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 510477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Takodana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 586219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chyron_Belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 565732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kinyen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 566061,
       "PageUrl": "https://starwars.fandom.com/wiki/Noe'ha'on",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 568762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chalcedon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 769165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerean_Reach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

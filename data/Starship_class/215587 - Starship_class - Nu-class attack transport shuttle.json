@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Line",
+      "Links": [
+        {
+          "Content": "Abecederian line",
+          "Href": "https://starwars.fandom.com/wiki/Abecederian_line"
+        }
+      ],
+      "Values": [
+        "Abecederian line"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Attack shuttle",
@@ -173,8 +185,16 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
         },
         {
           "Content": "Free Ryloth Movement",
@@ -183,41 +203,23 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Galactic Republic Navy",
         "Galactic Empire",
+        "Imperial Navy",
         "Free Ryloth Movement"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 702011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_battalion",
+      "PageId": 778015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tualon_Yaluna's_company",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 532559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valkyrie_2929_(Nu-class)",
+      "PageId": 499513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 603427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fil's_squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 606179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Galactic_Republic_regiment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 477722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 693540,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-9904's_Elite_Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 559080,
@@ -225,18 +227,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 456672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squad",
+      "PageId": 586490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 689011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nu-class_attack/transport_shuttle_(Florrum)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 750938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crosshair_and_Cody's_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 499513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
+      "PageId": 532559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valkyrie_2929_(Nu-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -250,19 +252,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 456672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 554885,
       "PageUrl": "https://starwars.fandom.com/wiki/Batonn_insurgents",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 586490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_service",
+      "PageId": 689011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nu-class_attack/transport_shuttle_(Florrum)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 603427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fil's_squad",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 606179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Galactic_Republic_regiment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 693540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 702011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 748789,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nu-class_attack_shuttle_(Coruscant)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 751079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Shuttle_995",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 652022,
       "PageUrl": "https://starwars.fandom.com/wiki/Tribunal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 29961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Acclamator_I-class_Assault_Ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 477722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

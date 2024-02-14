@@ -2,6 +2,7 @@
   "PageId": 588467,
   "PageUrl": "https://starwars.fandom.com/wiki/Darth_Arrid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +40,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Darth Vax",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vax"
+        }
+      ],
+      "Values": [
+        "Darth Vax"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -56,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 588468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

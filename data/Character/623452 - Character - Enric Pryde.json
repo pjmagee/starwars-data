@@ -2,7 +2,7 @@
   "PageId": 623452,
   "PageUrl": "https://starwars.fandom.com/wiki/Enric_Pryde",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/General_Pryde_TROSOCE.png/revision/latest?cb=20220202050031",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/General_Pryde_TROSOCE.png/revision/latest?cb=20220922023316",
   "Data": [
     {
       "Label": "Titles",
@@ -29,6 +29,10 @@
         {
           "Content": "27 BBY",
           "Href": "https://starwars.fandom.com/wiki/27_BBY"
+        },
+        {
+          "Content": "Alsakan",
+          "Href": "https://starwars.fandom.com/wiki/Alsakan"
         }
       ],
       "Values": [
@@ -133,16 +137,28 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
         },
         {
-          "Content": "Imperial Navy",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+          "Content": "Enric Pryde's battlegroup",
+          "Href": "https://starwars.fandom.com/wiki/Enric_Pryde%27s_battlegroup"
+        },
+        {
+          "Content": "Imperial Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
+        },
+        {
+          "Content": "Unknown Regions Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Unknown_Regions_Imperial_remnant"
         },
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
         },
         {
-          "Content": "Supreme Council",
-          "Href": "https://starwars.fandom.com/wiki/Supreme_Council"
+          "Content": "First Order Supreme Council",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Supreme_Council"
+        },
+        {
+          "Content": "Corporate Sector Authority",
+          "Href": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority"
         },
         {
           "Content": "Sith Eternal",
@@ -156,35 +172,31 @@
       "Values": [
         "Galactic Empire",
         "Imperial Officer Corps",
-        "Imperial Navy",
+        "Enric Pryde's battlegroup",
+        "Enric Pryde's regiment",
+        "Imperial Remnant",
+        "Unknown Regions Imperial remnant",
         "First Order",
-        "Supreme Council",
+        "First Order Supreme Council",
+        "Corporate Sector Authority (covertly)",
         "Sith Eternal",
         "Final Order"
+      ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Darth Sidious",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
+        }
+      ],
+      "Values": [
+        "Darth Sidious (Mentor)"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 642575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 639686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 499183,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 525995,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
     {
       "PageId": 526857,
       "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Navy",
@@ -196,29 +208,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 626663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 555583,
       "PageUrl": "https://starwars.fandom.com/wiki/27_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 639586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Final_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 629551,
-      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 639663,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Kijimi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 734145,
+      "PageUrl": "https://starwars.fandom.com/wiki/CSA_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 639742,
@@ -227,8 +224,53 @@
     },
     {
       "PageId": 639743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Imperial-class_Star_Destroyer)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Imperial-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 642575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Eternal_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 791029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Impervious_(Star_Destroyer)/Canon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 452582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Final_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 525995,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 639686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 639663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Kijimi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 626663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 733888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enric_Pryde's_battlegroup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

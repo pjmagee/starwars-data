@@ -91,10 +91,6 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Rrulinnian",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Rrulinn_species"
-        },
-        {
           "Content": "Tunroth",
           "Href": "https://starwars.fandom.com/wiki/Tunroth"
         }
@@ -137,19 +133,27 @@
       ]
     },
     {
-      "Label": "Imperial Period conflicts",
+      "Label": "Reconquest of the Rim",
       "Links": [
         {
-          "Content": "Reslian Purge",
-          "Href": "https://starwars.fandom.com/wiki/Reslian_Purge"
-        },
+          "Content": "Little Petrovi",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Little_Petrovi"
+        }
+      ],
+      "Values": [
+        "Little Petrovi"
+      ]
+    },
+    {
+      "Label": "Reslian Purge",
+      "Links": [
         {
-          "Content": "Saloch",
+          "Content": "Saloch²",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Saloch"
         }
       ],
       "Values": [
-        "Little Petrovi - Reslian Purge (Saloch)"
+        "Saloch²"
       ]
     },
     {
@@ -161,7 +165,7 @@
         },
         {
           "Content": "Abraxas",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Abraxas"
+          "Href": "https://starwars.fandom.com/wiki/Operation_on_Abraxas"
         },
         {
           "Content": "Kaal",
@@ -175,38 +179,43 @@
   ],
   "Relationships": [
     {
-      "PageId": 14082,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaal/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 21882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saloch",
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiroch-Saloch",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 21884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalok",
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiroch-Kalok",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 407949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Petrovi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 22262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sorotarr_VI",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 96567,
-      "PageUrl": "https://starwars.fandom.com/wiki/Radix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 408098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaal_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 20618,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bhuna_Sound",
+      "PageUrl": "https://starwars.fandom.com/wiki/Bhuna_Sound/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiroch-Reslia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 20508,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abraxas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 408034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Petrovi/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -225,6 +234,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 14082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaal/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 22262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorotarr_VI",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 18466,
       "PageUrl": "https://starwars.fandom.com/wiki/Sorotarr_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -240,11 +259,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 14359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jiroch-Reslia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 16328,
       "PageUrl": "https://starwars.fandom.com/wiki/Jiroch_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -255,24 +269,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 407949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Little_Petrovi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 20508,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abraxas",
+      "PageId": 96567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Radix",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 408098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaal_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 17116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saloch²",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

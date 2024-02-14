@@ -2,13 +2,42 @@
   "PageId": 585695,
   "PageUrl": "https://starwars.fandom.com/wiki/Pippip_3",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ad/Pippip-TimelinesMap.png/revision/latest?cb=20220531200841",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Pippip 3"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories",
+        "New Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "Q-4",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "Q-4"
       ]
     },
     {
@@ -41,7 +70,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -55,11 +84,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 580734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tallissan_Lintra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 593220,
       "PageUrl": "https://starwars.fandom.com/wiki/Dire_hound",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -68,6 +92,11 @@
       "PageId": 585694,
       "PageUrl": "https://starwars.fandom.com/wiki/Tallissan_Lintra's_farm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 580734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tallissan_Lintra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

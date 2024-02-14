@@ -77,7 +77,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-10",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -161,6 +161,10 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Core District",
+          "Href": "https://starwars.fandom.com/wiki/Core_District"
+        },
+        {
           "Content": "Great Library of Cinnagar",
           "Href": "https://starwars.fandom.com/wiki/Great_Library_of_Cinnagar"
         },
@@ -175,6 +179,10 @@
         {
           "Content": "Mining Guild",
           "Href": "https://starwars.fandom.com/wiki/Mining_Guild"
+        },
+        {
+          "Content": "Royal District",
+          "Href": "https://starwars.fandom.com/wiki/Royal_District"
         }
       ],
       "Values": [
@@ -182,7 +190,8 @@
         "Great Library of Cinnagar",
         "Hyperspace Navigator's Guildhouse",
         "Iron Citadel",
-        "Mining Guild regional headquarters"
+        "Mining Guild regional headquarters",
+        "Royal District"
       ]
     },
     {
@@ -221,6 +230,18 @@
         "310 billion",
         "71% Human",
         "29% other"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [
+        {
+          "Content": "Tetan",
+          "Href": "https://starwars.fandom.com/wiki/Tetan"
+        }
+      ],
+      "Values": [
+        "Tetan"
       ]
     },
     {
@@ -314,46 +335,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 90473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Navigators'_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 665396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 665397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 665398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 667469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keto_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 611429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 713861,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 713679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_refinery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 713655,
       "PageUrl": "https://starwars.fandom.com/wiki/Hyperspace_Navigator's_Guildhouse",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -364,24 +345,109 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 666045,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 667365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hyperspace_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 476092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 667339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naga_Sadow's_forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 667359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Empress_Teta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 672931,
       "PageUrl": "https://starwars.fandom.com/wiki/Iron_Citadel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 667333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_monarchy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 669398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Empire_(Exar_Kun)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 90473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Navigators'_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 736310,
+      "PageUrl": "https://starwars.fandom.com/wiki/Core_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 748077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sianna_Sekko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 713861,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 667329,
+      "PageUrl": "https://starwars.fandom.com/wiki/15th_Deep_Core_Reserve_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 784134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_'n'_Cream_Pie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 732196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 732197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 569844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 666045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 476610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_crusaders",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 713679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_refinery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 638828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 665394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 667469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keto_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 667339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naga_Sadow's_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 710429,
@@ -394,39 +460,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 638828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 787078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monument_to_lost_navigators",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 569844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 786296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sianna_Sekko's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 667329,
-      "PageUrl": "https://starwars.fandom.com/wiki/15th_Deep_Core_Reserve_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 665397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 665394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 665398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 667365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hyperspace_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 786058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_talisman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 669398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Empire_(Exar_Kun)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 667359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Empress_Teta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 476092,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

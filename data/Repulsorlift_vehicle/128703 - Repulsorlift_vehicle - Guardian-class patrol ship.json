@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Tion Mil/Sci Industries",
-          "Href": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries"
+          "Href": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries/Legends"
         }
       ],
       "Values": [
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Orbital and upper atmospheric patrol vessel"
@@ -158,25 +158,30 @@
         {
           "Content": "Imperial Intelligence",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Intelligence/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Army",
-        "Imperial Intelligence"
+        "Imperial Intelligence",
+        "Dark Empire"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 130305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 119919,
       "PageUrl": "https://starwars.fandom.com/wiki/Patrol_XLS",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 130305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

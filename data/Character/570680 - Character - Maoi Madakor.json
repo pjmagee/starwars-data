@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "32 BBY; Radiant VII (aboard the Saak'ak), Naboo system"
+        "32 BBY, Radiant VII (aboard the Saak'ak), Naboo system"
       ]
     },
     {
@@ -48,15 +48,22 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
       "Links": [
         {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "meter",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
         }
       ],
       "Values": [
-        "Female"
+        "1.63 meter"
       ]
     },
     {
@@ -93,12 +100,17 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Judicial Academy",
+          "Href": "https://starwars.fandom.com/wiki/Judicial_Academy"
+        },
+        {
           "Content": "Judicial Forces",
           "Href": "https://starwars.fandom.com/wiki/Judicial_Forces"
         }
       ],
       "Values": [
         "Galactic Republic",
+        "Judicial Academy",
         "Judicial Forces"
       ]
     }

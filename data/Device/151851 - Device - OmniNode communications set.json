@@ -13,7 +13,12 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Bothawui Communications Conglomerate",
+          "Href": "https://starwars.fandom.com/wiki/Bothawui_Communications_Conglomerate/Legends"
+        }
+      ],
       "Values": [
         "Bothawui Communications Conglomerate"
       ]
@@ -59,14 +64,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 51502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bothawui_Communications_Conglomerate/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 58206,
       "PageUrl": "https://starwars.fandom.com/wiki/11-17-series_mining_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 51502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bothawui_Communications_Conglomerate/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

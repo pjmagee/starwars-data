@@ -2,6 +2,7 @@
   "PageId": 170659,
   "PageUrl": "https://starwars.fandom.com/wiki/Argaloh_Adasca",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,22 +48,64 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Adasca",
           "Href": "https://starwars.fandom.com/wiki/House_of_Adasca"
-        },
+        }
+      ],
+      "Values": [
+        "House of Adasca"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Argaloh Adasca's father",
+          "Href": "https://starwars.fandom.com/wiki/Argaloh_Adasca%27s_father"
+        }
+      ],
+      "Values": [
+        "Argaloh Adasca's father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Alok Adasca",
+          "Href": "https://starwars.fandom.com/wiki/Alok_Adasca"
+        }
+      ],
+      "Values": [
+        "Alok Adasca"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "The Adasca BioMechanical Corporation of Arkania",
           "Href": "https://starwars.fandom.com/wiki/The_Adasca_BioMechanical_Corporation_of_Arkania"
         }
       ],
       "Values": [
-        "House of Adasca",
         "The Adasca BioMechanical Corporation of Arkania"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 152860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Argaloh_Adasca's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 167194,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alok_Adasca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

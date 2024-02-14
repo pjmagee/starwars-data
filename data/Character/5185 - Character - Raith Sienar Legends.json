@@ -2,7 +2,7 @@
   "PageId": 5185,
   "PageUrl": "https://starwars.fandom.com/wiki/Raith_Sienar/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/48/Sienar.jpg/revision/latest?cb=20071014070503",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ed/RaithSienarHS-NEGTC.png/revision/latest?cb=20221019213512",
   "Data": [
     {
       "Label": "Titles",
@@ -114,12 +114,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Sienar family",
           "Href": "https://starwars.fandom.com/wiki/Sienar_family/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "Sienar family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Narro Sienar",
+          "Href": "https://starwars.fandom.com/wiki/Narro_Sienar"
+        }
+      ],
+      "Values": [
+        "Narro Sienar"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Santhe/Sienar Technologies",
           "Href": "https://starwars.fandom.com/wiki/Santhe/Sienar_Technologies"
@@ -145,32 +165,66 @@
           "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems/Legends"
         },
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Republic Outland Regions Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "Sienar family",
         "Santhe/Sienar Technologies",
         "Republic Sienar Systems",
         "Sienar Design Systems",
         "Sienar Advanced Projects Laboratory",
         "Sienar Advanced Systems",
         "Sienar Fleet Systems",
+        "Galactic Republic",
+        "Republic Outland Regions Security Force",
         "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 22775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Sienar_Systems/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 99436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sky-mine_delivery_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 2871,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 25281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narro_Sienar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 695823,
       "PageUrl": "https://starwars.fandom.com/wiki/Robes_of_senatorial_favor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 1301,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Advanced_x1/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 599814,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Advanced_prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 22861,
@@ -183,29 +237,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 411630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raith_Sienar's_private_spire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 1301,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Advanced_x1/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 99436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sky-mine_delivery_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems/Legends",
+      "PageId": 22775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Sienar_Systems/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 599814,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE_Advanced_prototype",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 411630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raith_Sienar's_private_spire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

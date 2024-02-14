@@ -2,7 +2,7 @@
   "PageId": 143118,
   "PageUrl": "https://starwars.fandom.com/wiki/Tothis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3a/Tothis-TEA.jpg/revision/latest?cb=20220907160554",
   "Data": [
     {
       "Label": "Titles",
@@ -48,10 +48,29 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-3"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Authority Guardian Corridor",
+          "Href": "https://starwars.fandom.com/wiki/Authority_Guardian_Corridor"
+        }
+      ],
+      "Values": [
+        "Authority Guardian Corridor"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -69,11 +88,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 273129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Authority_Guardian_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 273571,
       "PageUrl": "https://starwars.fandom.com/wiki/Tothis_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -81,7 +95,12 @@
     {
       "PageId": 143117,
       "PageUrl": "https://starwars.fandom.com/wiki/Green_Planet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 273129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Authority_Guardian_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

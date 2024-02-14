@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Sarkhai",
-          "Href": "https://starwars.fandom.com/wiki/Sarkhai"
+          "Href": "https://starwars.fandom.com/wiki/Sarkhai/Legends"
         }
       ],
       "Values": [
@@ -28,11 +28,43 @@
       "Links": [
         {
           "Content": "Sarkhai",
-          "Href": "https://starwars.fandom.com/wiki/Sarkhai_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Sarkhai_(species)/Legends"
         }
       ],
       "Values": [
         "Sarkhai"
+      ]
+    },
+    {
+      "Label": "Matriarch(s)",
+      "Links": [
+        {
+          "Content": "Queen",
+          "Href": "https://starwars.fandom.com/wiki/Queen/Legends"
+        },
+        {
+          "Content": "Nyscha",
+          "Href": "https://starwars.fandom.com/wiki/Nyscha"
+        }
+      ],
+      "Values": [
+        "Queen Nyscha"
+      ]
+    },
+    {
+      "Label": "Patriarch(s)",
+      "Links": [
+        {
+          "Content": "King",
+          "Href": "https://starwars.fandom.com/wiki/King/Legends"
+        },
+        {
+          "Content": "Sethun",
+          "Href": "https://starwars.fandom.com/wiki/Sethun"
+        }
+      ],
+      "Values": [
+        "King Sethun"
       ]
     },
     {
@@ -56,5 +88,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 401509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nyscha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 401511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sethun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

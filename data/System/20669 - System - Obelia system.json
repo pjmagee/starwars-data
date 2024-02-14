@@ -17,10 +17,15 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies/Legends"
+        },
+        {
+          "Content": "Southern Core",
+          "Href": "https://starwars.fandom.com/wiki/Southern_Core"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "Southern Core"
       ]
     },
     {
@@ -29,34 +34,22 @@
         {
           "Content": "Tapani sector",
           "Href": "https://starwars.fandom.com/wiki/Tapani_sector/Legends"
+        },
+        {
+          "Content": "Pelagia Province",
+          "Href": "https://starwars.fandom.com/wiki/Pelagia_Province"
         }
       ],
       "Values": [
-        "Tapani sector"
+        "Tapani sector",
+        "Pelagia Province"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-13"
-      ]
-    },
-    {
-      "Label": "Quadrants/regions",
-      "Links": [
-        {
-          "Content": "Expanse",
-          "Href": "https://starwars.fandom.com/wiki/Expanse"
-        },
-        {
-          "Content": "Southern Core",
-          "Href": "https://starwars.fandom.com/wiki/Southern_Core"
-        }
-      ],
-      "Values": [
-        "Expanse",
-        "Southern Core"
       ]
     },
     {
@@ -79,14 +72,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tapani_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 41662,
       "PageUrl": "https://starwars.fandom.com/wiki/Pelagia_Province",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tapani_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

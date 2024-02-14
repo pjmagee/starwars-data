@@ -74,22 +74,47 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Fasha Teral-Organa",
+          "Href": "https://starwars.fandom.com/wiki/Fasha_Teral-Organa"
+        }
+      ],
+      "Values": [
+        "Fasha Teral-Organa"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         }
       ],
       "Values": [
-        "House of Organa",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 403830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fasha_Teral-Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

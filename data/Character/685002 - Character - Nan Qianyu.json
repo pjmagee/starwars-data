@@ -2,6 +2,7 @@
   "PageId": 685002,
   "PageUrl": "https://starwars.fandom.com/wiki/Nan_Qianyu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,16 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "82 BBY",
-          "Href": "https://starwars.fandom.com/wiki/82_BBY"
+          "Content": "200 BBY",
+          "Href": "https://starwars.fandom.com/wiki/200_BBY"
+        },
+        {
+          "Content": "Land",
+          "Href": "https://starwars.fandom.com/wiki/Land"
         }
       ],
       "Values": [
-        "82 BBY"
+        "200 BBY, Land"
       ]
     },
     {
@@ -28,12 +33,23 @@
         {
           "Content": "Nan family",
           "Href": "https://starwars.fandom.com/wiki/Nan_family"
+        },
+        {
+          "Content": "Nan Ming Capital",
+          "Href": "https://starwars.fandom.com/wiki/Nan_Ming_Capital"
         }
       ],
       "Values": [
-        "Nan family"
+        "Nan family",
+        "Nan Ming Capital"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nan_Ming_Capital",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

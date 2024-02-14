@@ -23,11 +23,11 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Dreadnought",
-          "Href": "https://starwars.fandom.com/wiki/Dreadnought"
+          "Href": "https://starwars.fandom.com/wiki/Dreadnaught"
         }
       ],
       "Values": [
@@ -43,9 +43,18 @@
     },
     {
       "Label": "Destroyed",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "10 ABY",
+          "Href": "https://starwars.fandom.com/wiki/10_ABY/Legends"
+        },
+        {
+          "Content": "Drearia",
+          "Href": "https://starwars.fandom.com/wiki/Drearia/Legends"
+        }
+      ],
       "Values": [
-        "10 ABY"
+        "10 ABY, Drearia"
       ]
     },
     {
@@ -54,10 +63,27 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Dark Empire"
+      ]
+    },
+    {
+      "Label": "Navy",
+      "Links": [
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
+        }
+      ],
+      "Values": [
+        "Imperial Navy"
       ]
     }
   ],

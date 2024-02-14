@@ -2,7 +2,7 @@
   "PageId": 534318,
   "PageUrl": "https://starwars.fandom.com/wiki/Class_four_container_transport",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/ff/Imperial_cargo_ship_docked.png/revision/latest?cb=20160317204453",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a7/ImperialCargoShip-SWRebelsRetro.png/revision/latest?cb=20231120061858",
   "Data": [
     {
       "Label": "Titles",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Bulk freighter",
@@ -103,10 +103,48 @@
       ]
     },
     {
+      "Label": "Escape craft",
+      "Links": [],
+      "Values": [
+        "6"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "pilots",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        },
+        {
+          "Content": "gunners",
+          "Href": "https://starwars.fandom.com/wiki/Gunner"
+        },
+        {
+          "Content": "captain",
+          "Href": "https://starwars.fandom.com/wiki/Captain"
+        },
+        {
+          "Content": "navigator",
+          "Href": "https://starwars.fandom.com/wiki/Navigator"
+        }
+      ],
+      "Values": [
+        "2 pilots4 gunners1 captain1 cargo master1 navigator"
+      ]
+    },
+    {
       "Label": "Cargo capacity",
       "Links": [],
       "Values": [
         "Up to 210 large containers"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [],
+      "Values": [
+        "Container-mounted sublight engines"
       ]
     },
     {
@@ -136,9 +174,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 592989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cargo_freighter_EF-75",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 555303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_loot_an_Imperial_cargo_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 750232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilco's_company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 534352,
@@ -146,9 +189,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 555303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_loot_an_Imperial_cargo_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 592989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cargo_freighter_EF-75",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 750195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_Three",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-8",
@@ -172,11 +172,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Bantha",
           "Href": "https://starwars.fandom.com/wiki/Bantha"
+        },
+        {
+          "Content": "Staga",
+          "Href": "https://starwars.fandom.com/wiki/Staga"
+        },
+        {
+          "Content": "Roba",
+          "Href": "https://starwars.fandom.com/wiki/Roba"
         },
         {
           "Content": "Nerf",
@@ -213,6 +221,10 @@
       "Label": "Major cities",
       "Links": [
         {
+          "Content": "Pandath",
+          "Href": "https://starwars.fandom.com/wiki/Pandath"
+        },
+        {
           "Content": "capital",
           "Href": "https://starwars.fandom.com/wiki/Capital"
         }
@@ -236,14 +248,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 110792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wes_Janson",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 722800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Speckled_scathe_begon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
       "PageId": 723573,
       "PageUrl": "https://starwars.fandom.com/wiki/Pandath",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 695250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 723602,
@@ -251,9 +268,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 557113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Taanab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 723577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_chapterhouse_(Taanab)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 697526,
+      "PageUrl": "https://starwars.fandom.com/wiki/2320_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 562094,
@@ -266,14 +288,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
+      "PageId": 557672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agricultural_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 590334,
       "PageUrl": "https://starwars.fandom.com/wiki/Taanab_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 723577,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_chapterhouse_(Taanab)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 557113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Taanab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 471813,
@@ -281,24 +308,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 557672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agricultural_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 697526,
-      "PageUrl": "https://starwars.fandom.com/wiki/2320_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 110792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wes_Janson",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 722800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Speckled_scathe_begon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 695250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 332388,
   "PageUrl": "https://starwars.fandom.com/wiki/Lexas_Prime_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -40,12 +41,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "U-10"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 209975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kessel_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

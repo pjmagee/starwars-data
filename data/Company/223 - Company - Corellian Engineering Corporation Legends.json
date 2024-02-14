@@ -12,14 +12,34 @@
       ]
     },
     {
-      "Label": "Parent company",
+      "Label": "Associations",
       "Links": [
+        {
+          "Content": "Corellia Mining Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellia_Mining_Corporation/Legends"
+        },
+        {
+          "Content": "Corporate Sector Authority",
+          "Href": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority/Legends"
+        },
+        {
+          "Content": "Duro Shipwrights' Guild",
+          "Href": "https://starwars.fandom.com/wiki/Duro_Shipwrights%27_Guild"
+        },
+        {
+          "Content": "Loronar Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Loronar_Corporation/Legends"
+        },
         {
           "Content": "Techno Union",
           "Href": "https://starwars.fandom.com/wiki/Techno_Union/Legends"
         }
       ],
       "Values": [
+        "Corellia Mining Corporation",
+        "Corporate Sector Authority",
+        "Duro Shipwrights' Guild",
+        "Loronar Corporation",
         "Techno Union"
       ]
     },
@@ -27,12 +47,8 @@
       "Label": "Subsidiaries",
       "Links": [
         {
-          "Content": "Vanjervalis Systems",
-          "Href": "https://starwars.fandom.com/wiki/Vanjervalis_Systems"
-        },
-        {
-          "Content": "Vaufthau Shipyards Ltd",
-          "Href": "https://starwars.fandom.com/wiki/Vaufthau_Shipyards_Ltd."
+          "Content": "Corellia StarDrive",
+          "Href": "https://starwars.fandom.com/wiki/Corellia_StarDrive"
         },
         {
           "Content": "Corellian Arms",
@@ -47,17 +63,22 @@
           "Href": "https://starwars.fandom.com/wiki/Saberhing_Development_Compact"
         },
         {
-          "Content": "Corellia Mining Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Corellia_Mining_Corporation/Legends"
+          "Content": "Vanjervalis Systems",
+          "Href": "https://starwars.fandom.com/wiki/Vanjervalis_Systems"
+        },
+        {
+          "Content": "Vaufthau Shipyards Ltd",
+          "Href": "https://starwars.fandom.com/wiki/Vaufthau_Shipyards_Ltd."
         }
       ],
       "Values": [
-        "Vanjervalis Systems",
-        "Vaufthau Shipyards Ltd",
-        "Keynne design bureau",
+        "Corellia StarDrive",
         "Corellian Arms",
         "Chempat Engineered Defenses",
-        "Saberhing Development Compact (jointly with Corellia Mining Corporation)"
+        "Keynne design bureau",
+        "Saberhing Development Compact",
+        "Vanjervalis Systems",
+        "Vaufthau Shipyards Ltd"
       ]
     },
     {
@@ -68,7 +89,7 @@
           "Href": "https://starwars.fandom.com/wiki/CEC_Island"
         },
         {
-          "Content": "Coronet",
+          "Content": "Coronet City",
           "Href": "https://starwars.fandom.com/wiki/Coronet_City/Legends"
         },
         {
@@ -77,29 +98,59 @@
         }
       ],
       "Values": [
-        "CEC Island, Coronet, Corellia"
+        "CEC Island, Coronet City, Corellia"
       ]
     },
     {
       "Label": "Location(s)",
       "Links": [
         {
-          "Content": "Corellian system",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_system"
+          "Content": "Corellian sector",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_sector/Legends"
         },
         {
-          "Content": "Vanjervalis system",
-          "Href": "https://starwars.fandom.com/wiki/Vanjervalis_system"
+          "Content": "Dathomir system",
+          "Href": "https://starwars.fandom.com/wiki/Dathomir_system/Legends"
+        },
+        {
+          "Content": "Duro system",
+          "Href": "https://starwars.fandom.com/wiki/Duro_system"
+        },
+        {
+          "Content": "Endor system",
+          "Href": "https://starwars.fandom.com/wiki/Endor_system/Legends"
         },
         {
           "Content": "Halyard 2",
           "Href": "https://starwars.fandom.com/wiki/Halyard_2"
+        },
+        {
+          "Content": "Karthakk system",
+          "Href": "https://starwars.fandom.com/wiki/Karthakk_system"
+        },
+        {
+          "Content": "Kashyyyk system",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends"
+        },
+        {
+          "Content": "Kessel system",
+          "Href": "https://starwars.fandom.com/wiki/Kessel_system/Legends"
+        },
+        {
+          "Content": "Vanjervalis system",
+          "Href": "https://starwars.fandom.com/wiki/Vanjervalis_system"
         }
       ],
       "Values": [
-        "Corellian system",
-        "Vanjervalis system",
-        "Halyard 2"
+        "Corellian sector",
+        "Dathomir system",
+        "Duro system",
+        "Endor system",
+        "Halyard 2",
+        "Karthakk system",
+        "Kashyyyk system",
+        "Kessel system",
+        "Vanjervalis system"
       ]
     },
     {
@@ -126,10 +177,6 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "Corporate Sector Authority",
-          "Href": "https://starwars.fandom.com/wiki/Corporate_Sector_Authority/Legends"
         },
         {
           "Content": "Galactic Empire",
@@ -163,7 +210,6 @@
       "Values": [
         "Corellia",
         "Galactic Republic",
-        "Corporate Sector Authority (Voting sponsor)",
         "Galactic Empire",
         "Alliance to Restore the Republic",
         "Alliance of Free Planets",
@@ -176,143 +222,193 @@
   ],
   "Relationships": [
     {
-      "PageId": 106036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_c20_retrofit_suite",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 295628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Y-series",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 114239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stellar_Damsel",
+      "PageId": 26371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bixby",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 11475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geddawai",
+      "PageId": 26374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korolev",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 114998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sable_III",
+      "PageId": 264867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Dancer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 11658,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empire_Forever",
+      "PageId": 266449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_YT-2400_light_freighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 11695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ecliptic_(Consular-class)",
+      "PageId": 267109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fricasseed_Nerf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 11696,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prominence_(Consular-class)",
+      "PageId": 269628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wanderer_(Action_IV_transport)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fleen",
+      "PageId": 2721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otana",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Sword",
+      "PageId": 273336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amber_Star",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Menagerie",
+      "PageId": 274124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hasty_Harpy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235820,
-      "PageUrl": "https://starwars.fandom.com/wiki/O.S.S._Telira",
+      "PageId": 606977,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diligent_(PB-950_patrol_boat)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 237908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cool_Shot",
+      "PageId": 60785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arrow_(corvette_group)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 237955,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(CR90_corvette)",
+      "PageId": 600454,
+      "PageUrl": "https://starwars.fandom.com/wiki/CEC_Island",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 513951,
+      "PageUrl": "https://starwars.fandom.com/wiki/HWK-1000_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 51594,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1150",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 203603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_of_the_Tion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 422821,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krayt_Fang",
+      "PageId": 208004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muvon_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 42304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Etherway",
+      "PageId": 212104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_A-175",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 42305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uwana_Buyer",
+      "PageId": 212216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Coral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 426036,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Miniad",
+      "PageId": 212597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karbarr's_Fortress",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 426125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salvation_(Corellian_Star_Shuttle)",
+      "PageId": 445517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starbolt-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 446485,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-929_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 44798,
+      "PageUrl": "https://starwars.fandom.com/wiki/HT-2200_medium_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 450268,
+      "PageUrl": "https://starwars.fandom.com/wiki/TZ-6_executive_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 167226,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ap/11_double_laser_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 164854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430145,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kingsmill",
+      "PageId": 165359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chalcedony_(freighter)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430146,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orion_(DP20_frigate)",
+      "PageId": 165447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Last_Hope_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Strathadam",
+      "PageId": 167420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chaser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thracian",
+      "PageId": 167514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Rider",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrasher_(DP20_frigate)",
+      "PageId": 168254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eyeshine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430150,
-      "PageUrl": "https://starwars.fandom.com/wiki/Victorious_(DP20_frigate)",
+      "PageId": 168561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Safonne's_Sword",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vindicta",
+      "PageId": 168800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress'_Diadem",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warspite_(DP20_frigate)",
+      "PageId": 169786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Rebel_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 430153,
-      "PageUrl": "https://starwars.fandom.com/wiki/Watchful",
+      "PageId": 170134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rampaging_Ranat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 5183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outrider/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 51924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razor_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 52414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 52935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen_of_Empire",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -333,6 +429,106 @@
     {
       "PageId": 9167,
       "PageUrl": "https://starwars.fandom.com/wiki/Last_Chance_(YT-1300_light_freighter)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 34457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action_II_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 35041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action_V_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 35626,
+      "PageUrl": "https://starwars.fandom.com/wiki/S-250_Chela-class_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 357605,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freight-loading_external_rover",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 357609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class-1_escape_pod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 358985,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-865_Aurore-class_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 35953,
+      "PageUrl": "https://starwars.fandom.com/wiki/XS-800_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 175936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stellar_Manx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 1808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hound's_Tooth/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 182775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Courageous_(YT-1300_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 182777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mystic_Burn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 543560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 307009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Ram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 309077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Cratsch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 31180,
+      "PageUrl": "https://starwars.fandom.com/wiki/No_Luck_Required",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 317956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Faithless/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loose_Cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantooine_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -381,926 +577,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 513951,
-      "PageUrl": "https://starwars.fandom.com/wiki/HWK-1000_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 51594,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1150",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 673993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bravis_Halcyon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Golan_Arms/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 203603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_of_the_Tion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 208004,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muvon_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 212104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Transport_A-175",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 212216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coral_(YT-1300_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 212597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karbarr's_Fortress",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 392855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dhoora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 401368,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Stone_Heart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 3307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khetanna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 196122,
-      "PageUrl": "https://starwars.fandom.com/wiki/White_Wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 1963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Consular-class_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 5182,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-2400_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 52019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action_IV_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 53780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Class_VI_bulk_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 53871,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hearst",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_StarDrive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 223072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanjervalis_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 338323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trickster_Decoy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 169786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Rebel_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 170134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rampaging_Ranat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 170260,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hornclaw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 171790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Petor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 171795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 172303,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_Day",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 199557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaaltura_V",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 378909,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cimigo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 379070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Timber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 379465,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Gunship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 38394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bakuran_Blade/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 385201,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Panada's_Kiss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 387507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Dac)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 3887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Karrde",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 55734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jeffrey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 55897,
-      "PageUrl": "https://starwars.fandom.com/wiki/Godar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 710238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inacc's_Crate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 39738,
-      "PageUrl": "https://starwars.fandom.com/wiki/S-100_Stinger-class_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 40502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capital_YV-class_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 40740,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-330_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 408104,
-      "PageUrl": "https://starwars.fandom.com/wiki/CE-2_Transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 41368,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-664_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 420955,
-      "PageUrl": "https://starwars.fandom.com/wiki/Consular_III-class_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 69345,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1250_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 69802,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-545_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 69966,
-      "PageUrl": "https://starwars.fandom.com/wiki/YZ-900_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 70007,
-      "PageUrl": "https://starwars.fandom.com/wiki/327-A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 403214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Benton_Maas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 143104,
-      "PageUrl": "https://starwars.fandom.com/wiki/Night_Havok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 143106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moondrake",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 144781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lanigiro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 278344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Martinette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 27846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ession_Strike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 28133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Archai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 282186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Distant_Wind",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 288452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reekeene's_Retribution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 28859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rabbit's_Foot/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 290909,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junker_(YT-2400_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tyed's_Valiant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482857,
-      "PageUrl": "https://starwars.fandom.com/wiki/One_Liner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Claw_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Night_Wind",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 617967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Rapier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 61946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dawn_Beat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 61947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amanda_Fallow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 622385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starspin_(YT-1210_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 62289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kern's_Pride",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 62291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lady_Sunfire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 357245,
-      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Marketing_Catalog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 357612,
-      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Engine_Guide,_Imperial_Edition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 357617,
-      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Buyers'_Guide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 441042,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-22_\"Screamer\"_speeder_bike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 2373,
-      "PageUrl": "https://starwars.fandom.com/wiki/CR-20_troop_carrier/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 240283,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-7700/E_interdiction_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 243453,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-class_Starfarer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 247961,
-      "PageUrl": "https://starwars.fandom.com/wiki/MT_dropship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 247975,
-      "PageUrl": "https://starwars.fandom.com/wiki/YZ-2500_heavy_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 24800,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1300_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 5960,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1930_transport/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 307114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dwynn_Biuval",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 357251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tem_Riffle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 172870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fiery_Dawn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 173434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Goldhawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 351370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Judicator_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 353233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Runner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 3545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Jewel/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 35624,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lady_Starstorm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 359112,
-      "PageUrl": "https://starwars.fandom.com/wiki/Birthright",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 538961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Choora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 539796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Opos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 539876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neenoc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 54034,
-      "PageUrl": "https://starwars.fandom.com/wiki/FarStar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 540420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nomannic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 540425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ritam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 543560,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 667128,
-      "PageUrl": "https://starwars.fandom.com/wiki/DeLucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 66802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kraken_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 33938,
-      "PageUrl": "https://starwars.fandom.com/wiki/Detainer_CC-2200_interdictor_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 34457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action_II_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 35041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action_V_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 35626,
-      "PageUrl": "https://starwars.fandom.com/wiki/S-250_Chela-class_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 357605,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freight-loading_external_rover",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 357609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Class-1_escape_pod",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 358985,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-865_Aurore-class_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 35953,
-      "PageUrl": "https://starwars.fandom.com/wiki/XS-800_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 65621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Consular_escape_pod",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 308835,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flash_Harrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 336943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Firebrand_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 344198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireborn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 346180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blunt_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 348679,
-      "PageUrl": "https://starwars.fandom.com/wiki/StarHauler_131-SX2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 348680,
-      "PageUrl": "https://starwars.fandom.com/wiki/StarHauler_131-T3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 536015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Dancer_(YT-1300_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 538221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Libro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 538223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hut_(YT-1300)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 66097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eridain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 662436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Star_(G9_Rigger-class_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 33822,
-      "PageUrl": "https://starwars.fandom.com/wiki/YZ-775_medium_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 33839,
-      "PageUrl": "https://starwars.fandom.com/wiki/Consular-class_cruiser_(Charger_c70_retrofit)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 33870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barloz-class_medium_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 64793,
-      "PageUrl": "https://starwars.fandom.com/wiki/HWK-290_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 684161,
-      "PageUrl": "https://starwars.fandom.com/wiki/PL-8_Piercer_Missile",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 307398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thom_Steele",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496711,
-      "PageUrl": "https://starwars.fandom.com/wiki/C-9X",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 102639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vengeance_(YV-260_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 213287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Far_Ranger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 22041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Big_Score",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 40544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_Star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zak's_Consular-class_cruiser/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Rodia)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Quell)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zahtjav_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 407864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackmist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 408047,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Flare_(Barloz-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 40826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Sea_Flower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 57826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masanya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 5797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moldy_Crow/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 7204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Punishing_One/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 72395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Python_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 73331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ammuud_Swooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 1928,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-47_airspeeder/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 125845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Buccaneer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 125859,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-260_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 126139,
-      "PageUrl": "https://starwars.fandom.com/wiki/BD-27_Transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 126141,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garman-class_Gas_Miner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 129686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crix-class_diplomatic_courier_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 129703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_light_assault_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 445517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starbolt-class_Assault_Carrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 446485,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-929_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 44798,
-      "PageUrl": "https://starwars.fandom.com/wiki/HT-2200_medium_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 450268,
-      "PageUrl": "https://starwars.fandom.com/wiki/TZ-6_executive_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 73653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Light_Attack_Fighter_Model_250",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 74663,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-5100_Shriek-class_bomber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 74857,
-      "PageUrl": "https://starwars.fandom.com/wiki/YM-2800_limpet_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 80546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_Pod_Deluxe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 152691,
-      "PageUrl": "https://starwars.fandom.com/wiki/AG-2G_quad_laser_cannon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 167226,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ap/11_double_laser_cannon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 101195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evader-GT_Ion_Drive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 666080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lifesaver_Emergency_Battery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 10733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Radiant_VII/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 107785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Organa_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 109570,
-      "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(Consular-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 229375,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frontier_Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 231130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sedawan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 232706,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flying_Fish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 23404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fa-Loh-Sui_(corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 410641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prosperity_(shuttle)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 411880,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 416798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Thunder_(DP20_frigate)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 416804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dream_Runner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 42065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starry_Ice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 7586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Shadow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 80280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grinning_Liar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 80623,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moonshadow_(Rik_Duel's)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 81072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sureshot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 82288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asteroid_Dancer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 3509,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-series/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
-    },
-    {
-      "PageId": 13250,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-9600_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 48731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian/B-wing_Ugly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 491714,
-      "PageUrl": "https://starwars.fandom.com/wiki/INT-66",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 49344,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1760_small_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 4964,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-2000_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 49642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Limping_Lady",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 8761,
       "PageUrl": "https://starwars.fandom.com/wiki/CC-7700_frigate/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
@@ -1341,44 +617,869 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 53255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chempat_Engineered_Defenses",
+      "PageId": 172870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fiery_Dawn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 173434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goldhawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 175843,
+      "PageUrl": "https://starwars.fandom.com/wiki/Riley_(transport)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 538221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Libro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 538223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hut_(YT-1300)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 538961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Choora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 539796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Opos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 539876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neenoc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 54034,
+      "PageUrl": "https://starwars.fandom.com/wiki/FarStar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 540420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nomannic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 540425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ritam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 250211,
+      "PageUrl": "https://starwars.fandom.com/wiki/HWK-2000",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 251266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nemesis-class_patrol_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 255152,
+      "PageUrl": "https://starwars.fandom.com/wiki/YX-1980_space_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 2552,
+      "PageUrl": "https://starwars.fandom.com/wiki/CSS-1_Corellian_Star_Shuttle/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 25899,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1000_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 25901,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-888_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 25905,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-666_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 259881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallant_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 264339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crix-class_assault_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 267118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clean_Sweep",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 27542,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranger-class_gunship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 144332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koh_(Twi'lek)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saberhing_Development_Compact",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 53627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Arms/Legends",
+      "PageId": 131732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adventure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 131734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Active",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 131735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pervail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 131736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bruizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 131864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon_(fake)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 133497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Striker_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 133499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 139216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blacktooth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 80280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grinning_Liar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 80623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moonshadow_(Rik_Duel's)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 81072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sureshot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 82288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asteroid_Dancer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 62843,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1200_medium_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 62949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interceptor-class_frigate/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 63506,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class-6_escape_pod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 673993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravis_Halcyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 101195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evader-GT_Ion_Drive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 229375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frontier_Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 231130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sedawan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 232706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flying_Fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 23404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fa-Loh-Sui_(corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 152556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Libra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 15539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Selu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 15831,
+      "PageUrl": "https://starwars.fandom.com/wiki/XR808g",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 50500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Take_That!",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 357245,
+      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Marketing_Catalog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 357612,
+      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Engine_Guide,_Imperial_Edition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 357617,
+      "PageUrl": "https://starwars.fandom.com/wiki/CEC_YT-1300_Buyers'_Guide/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 62174,
+      "PageUrl": "https://starwars.fandom.com/wiki/VCX-350_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 62175,
+      "PageUrl": "https://starwars.fandom.com/wiki/VCX-700_heavy_courier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 62177,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-929_armed_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 62453,
+      "PageUrl": "https://starwars.fandom.com/wiki/YU-410_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 62457,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-100_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 309350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devlin_(officer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 309353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 106036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_c20_retrofit_suite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 278344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Martinette",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 27846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ession_Strike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 28133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Archai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 282186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Distant_Wind",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 288452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reekeene's_Retribution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 28859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rabbit's_Foot/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 290909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junker_(YT-2400_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 61491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_scout_craft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 617967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Rapier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 61946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dawn_Beat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 61947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amanda_Fallow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 622385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starspin_(YT-1210_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 62289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kern's_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 62291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lady_Sunfire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 441042,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-22_\"Screamer\"_speeder_bike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 20129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_heavy_lifter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 20555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 211273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starrunner-class_starship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 216106,
+      "PageUrl": "https://starwars.fandom.com/wiki/G9_Rigger-class_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 9133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Golan_Arms/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 119038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duracrud",
+      "PageId": 278234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soly_Kantt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 278235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bon_(tech)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739283,
+      "PageUrl": "https://starwars.fandom.com/wiki/X41_maneuvering_thruster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 124018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaunty_Cavalier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 119543,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oo-Ta_Goo-Ta",
+      "PageId": 124386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helping_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 119616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Flare_(YT-1300_light_freighter)",
+      "PageId": 125546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spiral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 119665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blaze_of_Glory",
+      "PageId": 128079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Acceptance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 121715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steel_Fist",
+      "PageId": 129602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 122883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knight_Errant",
+      "PageId": 44628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lifeline_(YT-1300_light_freighter)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 449380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Scipio)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dynasty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 455227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starbound_Misfit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 37734,
+      "PageUrl": "https://starwars.fandom.com/wiki/VCX-820_escort_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 393321,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tel_Trevura's_JumpMaster_5000",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 170260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hornclaw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 171790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Petor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 171795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_(Assassin-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 172303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucky_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 536015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Dancer_(YT-1300_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 95388,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 5182,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-2400_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 52019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action_IV_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 53780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Class_VI_bulk_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 159528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asagov_Raider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 1609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 162289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neeva-Beelo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farrelly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blast_Radius",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Midnight_Star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 507318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alert",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 3509,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-series/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 233290,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-XC",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 23451,
+      "PageUrl": "https://starwars.fandom.com/wiki/CR25_troop_carrier/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 2364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action_VI_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 23657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tachyon_Flier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 10485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loronar_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 167452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Avatar-10/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 666080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lifesaver_Emergency_Battery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 24925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boolarg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slave_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 253382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagger_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 256325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Distant_Sunrise",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 257859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazy_Katarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 53871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hearst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 54989,
+      "PageUrl": "https://starwars.fandom.com/wiki/YG-4210",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 55769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Sandstorm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 197702,
+      "PageUrl": "https://starwars.fandom.com/wiki/H2-1_hyperdrive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 692997,
+      "PageUrl": "https://starwars.fandom.com/wiki/SF/6_Hybrid_Switchgear_Module",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 693517,
+      "PageUrl": "https://starwars.fandom.com/wiki/\"Savant\"_ship_slave_rig",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 359112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Birthright",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 359810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Personal_Profit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 362550,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Maker_(YT-1300)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 363470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mutilator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 67953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Action-Keynne_XII_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 11518,
+      "PageUrl": "https://starwars.fandom.com/wiki/CL-1c_Lancet_interceptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 115207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jackpot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 125845,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Buccaneer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 125859,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-260_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 126139,
+      "PageUrl": "https://starwars.fandom.com/wiki/BD-27_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 126141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garman-class_Gas_Miner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 129686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crix-class_diplomatic_courier_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 129703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_light_assault_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 73653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Light_Attack_Fighter_Model_250",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 74663,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-5100_Shriek-class_bomber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 74857,
+      "PageUrl": "https://starwars.fandom.com/wiki/YM-2800_limpet_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 235010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fleen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 235369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crimson_Sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 235798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Menagerie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 235820,
+      "PageUrl": "https://starwars.fandom.com/wiki/O.S.S._Telira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 237908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cool_Shot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 237955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 5960,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1930_transport/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 5961,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1210_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 5963,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-700_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 597796,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1100",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 312819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Noren_Krast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Benton_Maas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 24670,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaufthau_Shipyards_Ltd.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 706865,
+      "PageUrl": "https://starwars.fandom.com/wiki/NovaQuad-D_Drive_System",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 336943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firebrand_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 344198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireborn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 344823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorsal_Killer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 66097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eridain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 662436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Star_(G9_Rigger-class_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 39738,
+      "PageUrl": "https://starwars.fandom.com/wiki/S-100_Stinger-class_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 40502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_YV-class_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 40740,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-330_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 408104,
+      "PageUrl": "https://starwars.fandom.com/wiki/CE-2_Transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 41368,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-664_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 420955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Consular_III-class_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 307114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dwynn_Biuval",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 240493,
@@ -1396,33 +1497,233 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 43074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mayjeln_(freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 43610,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drunk_Dancer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 440225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ace's_XS_stock_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 44628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lifeline_(YT-1300_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 596808,
       "PageUrl": "https://starwars.fandom.com/wiki/Renegade's_Blood",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 95388,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic_(CR90_corvette)",
+      "PageId": 3307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khetanna/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 196122,
+      "PageUrl": "https://starwars.fandom.com/wiki/White_Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 1963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Consular-class_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 338323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trickster_Decoy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 369240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Predator's_Beak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 369639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Breath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 369640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dessin's_Dagger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 37503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Century_Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 37538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 69237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Janson_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 370859,
+      "PageUrl": "https://starwars.fandom.com/wiki/1D_servo_turret/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 307398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thom_Steele",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 295628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y-series",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 213287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Far_Ranger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 22041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Big_Score",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 57826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masanya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 5797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moldy_Crow/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 48731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian/B-wing_Ugly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 491714,
+      "PageUrl": "https://starwars.fandom.com/wiki/INT-66",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 49344,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1760_small_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 4964,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-2000_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 49642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Limping_Lady",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 247125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Copycat_Pod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 102639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vengeance_(YV-260_light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 401368,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Stone_Heart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 40544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_Star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zak's_Consular-class_cruiser/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Rodia)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Quell)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zahtjav_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 7204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Punishing_One/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 72395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Python_(Assassin-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 675789,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 64793,
+      "PageUrl": "https://starwars.fandom.com/wiki/HWK-290_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 684161,
+      "PageUrl": "https://starwars.fandom.com/wiki/PL-8_Piercer_Missile",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_StarDrive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 223072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanjervalis_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 696480,
+      "PageUrl": "https://starwars.fandom.com/wiki/SD-47",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 696483,
+      "PageUrl": "https://starwars.fandom.com/wiki/V-07_Hydrospanner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 496711,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-9X",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 378909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cimigo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 379070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Timber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 379465,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Gunship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 38394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakuran_Blade/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 385201,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Panada's_Kiss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -1471,31 +1772,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 11518,
-      "PageUrl": "https://starwars.fandom.com/wiki/CL-1c_Lancet_interceptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 115207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jackpot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 42808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grek-class_troop_shuttle/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 430293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millanti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 442331,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-560_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 72263,
       "PageUrl": "https://starwars.fandom.com/wiki/FA-504s_transport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
@@ -1511,229 +1787,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 696480,
-      "PageUrl": "https://starwars.fandom.com/wiki/SD-47",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 696483,
-      "PageUrl": "https://starwars.fandom.com/wiki/V-07_Hydrospanner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 131732,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adventure",
+      "PageId": 114239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stellar_Damsel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 131734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Active",
+      "PageId": 11475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geddawai",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 131735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pervail",
+      "PageId": 114998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sable_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 131736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bruizer",
+      "PageId": 11658,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire_Forever",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 131864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon_(fake)",
+      "PageId": 11695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ecliptic_(Consular-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 133497,
-      "PageUrl": "https://starwars.fandom.com/wiki/Striker_(corvette_group)",
+      "PageId": 11696,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prominence_(Consular-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 133499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(corvette_group)",
+      "PageId": 119038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duracrud",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 135132,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bez'ox_Mentzz",
+      "PageId": 119543,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oo-Ta_Goo-Ta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 139216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blacktooth",
+      "PageId": 119616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Flare_(YT-1300_light_freighter)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 26371,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bixby",
+      "PageId": 119665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blaze_of_Glory",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 26374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korolev",
+      "PageId": 42065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starry_Ice",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 264867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twi'lek_Dancer",
+      "PageId": 422821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krayt_Fang",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 266449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_YT-2400_light_freighter",
+      "PageId": 42304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Etherway",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 267109,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fricasseed_Nerf",
+      "PageId": 42305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uwana_Buyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 269628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wanderer_(Action_IV_transport)",
+      "PageId": 426036,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Miniad",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 2721,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otana",
+      "PageId": 426125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salvation_(Corellian_Star_Shuttle)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 273336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amber_Star",
+      "PageId": 7586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Shadow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 274124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hasty_Harpy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 60785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arrow_(corvette_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 61491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_scout_craft",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 233290,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-XC",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 23451,
-      "PageUrl": "https://starwars.fandom.com/wiki/CR25_troop_carrier/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 2364,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action_VI_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 23657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tachyon_Flier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 309350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Devlin_(officer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 309353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 24670,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vaufthau_Shipyards_Ltd.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 175843,
-      "PageUrl": "https://starwars.fandom.com/wiki/Riley_(transport)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 175936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stellar_Manx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 1808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hound's_Tooth/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 182775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Courageous_(YT-1300_light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 182777,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mystic_Burn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 359810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Personal_Profit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 360,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 362550,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Maker_(YT-1300)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 363470,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mutilator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 369240,
-      "PageUrl": "https://starwars.fandom.com/wiki/Predator's_Beak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 369639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Breath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 369640,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dessin's_Dagger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 547399,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 67953,
-      "PageUrl": "https://starwars.fandom.com/wiki/Action-Keynne_XII_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 606644,
-      "PageUrl": "https://starwars.fandom.com/wiki/CAV-11_\"Condor\"_airspeeder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 606940,
-      "PageUrl": "https://starwars.fandom.com/wiki/G35_\"Silver_Cloud\"_airspeeder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     },
     {
       "PageId": 35982,
@@ -1779,146 +1915,6 @@
       "PageId": 37514,
       "PageUrl": "https://starwars.fandom.com/wiki/WUD-500_star_yacht/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 167452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Avatar-10/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 692997,
-      "PageUrl": "https://starwars.fandom.com/wiki/SF/6_Hybrid_Switchgear_Module",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 693517,
-      "PageUrl": "https://starwars.fandom.com/wiki/\"Savant\"_ship_slave_rig",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 123577,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_V_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 124018,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaunty_Cavalier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 124386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Helping_Hand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 125546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spiral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 128079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Acceptance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 129602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 24925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boolarg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slave_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 253382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dagger_1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 256325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Distant_Sunrise",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 257859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lazy_Katarn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 449380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Scipio)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 453637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dynasty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 455227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starbound_Misfit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 606977,
-      "PageUrl": "https://starwars.fandom.com/wiki/Diligent_(PB-950_patrol_boat)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 279494,
-      "PageUrl": "https://starwars.fandom.com/wiki/Monarch-class_cargo_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 29353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heavy/Light_Attack_Fighter_500",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62174,
-      "PageUrl": "https://starwars.fandom.com/wiki/VCX-350_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62175,
-      "PageUrl": "https://starwars.fandom.com/wiki/VCX-700_heavy_courier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62177,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-929_armed_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62453,
-      "PageUrl": "https://starwars.fandom.com/wiki/YU-410_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62457,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-100_light_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 370859,
-      "PageUrl": "https://starwars.fandom.com/wiki/1D_servo_turret/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 144332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koh_(Twi'lek)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 187886,
@@ -1971,13 +1967,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 37503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Century_Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 37538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabra",
+      "PageId": 547399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jakarro's_XS_stock_light_freighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -1991,204 +1982,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 69237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Janson_(CR90_corvette)",
+      "PageId": 55486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Majestic_Gundark",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 37734,
-      "PageUrl": "https://starwars.fandom.com/wiki/VCX-820_escort_freighter",
+      "PageId": 65621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Consular_escape_pod",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 393321,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tel_Trevura's_JumpMaster_5000",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 312819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Noren_Krast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 247125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Copycat_Pod",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 706865,
-      "PageUrl": "https://starwars.fandom.com/wiki/NovaQuad-D_Drive_System",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 151432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 152556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Libra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 15539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Selu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 307009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ram_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 309077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Cratsch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 50500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Take_That!",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 507318,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alert",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Loose_Cannon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 250211,
-      "PageUrl": "https://starwars.fandom.com/wiki/HWK-2000",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 251266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nemesis-class_patrol_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 255152,
-      "PageUrl": "https://starwars.fandom.com/wiki/YX-1980_space_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 2552,
-      "PageUrl": "https://starwars.fandom.com/wiki/CSS-1_Corellian_Star_Shuttle/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 258179,
-      "PageUrl": "https://starwars.fandom.com/wiki/327-B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 25899,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1000_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 25901,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-888_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 25905,
-      "PageUrl": "https://starwars.fandom.com/wiki/YV-666_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 259881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallant_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 264339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crix-class_assault_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 267118,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clean_Sweep",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 27542,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ranger-class_gunship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 5961,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1210_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 5963,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-700_Transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 597796,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1100",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 278234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soly_Kantt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 278235,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bon_(tech)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 15831,
-      "PageUrl": "https://starwars.fandom.com/wiki/XR808g",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 159528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asagov_Raider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 1609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 162289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neeva-Beelo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Farrelly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 31180,
-      "PageUrl": "https://starwars.fandom.com/wiki/No_Luck_Required",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 317956,
-      "PageUrl": "https://starwars.fandom.com/wiki/Faithless/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 320294,
@@ -2196,118 +1997,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 63444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mantooine_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 641244,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Action_IV)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 20129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_heavy_lifter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 20555,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 211273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starrunner-class_starship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 216106,
-      "PageUrl": "https://starwars.fandom.com/wiki/G9_Rigger-class_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 54989,
-      "PageUrl": "https://starwars.fandom.com/wiki/YG-4210",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 55769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Sandstorm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 607594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saberhing_Development_Compact",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 163221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blast_Radius",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Midnight_Star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 164854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 165359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chalcedony_(freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 165447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Last_Hope_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 167420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chaser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 167514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_Rider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 168254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eyeshine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 168561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Safonne's_Sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 168800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress'_Diadem",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 327635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Ravager",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 327746,
       "PageUrl": "https://starwars.fandom.com/wiki/Fariso",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 329542,
-      "PageUrl": "https://starwars.fandom.com/wiki/Madersim",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -2321,23 +2012,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 5183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outrider/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 51924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razor_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 52414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stinger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 52935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen_of_Empire",
+      "PageId": 641244,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Action_IV)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -2346,9 +2022,109 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 600454,
-      "PageUrl": "https://starwars.fandom.com/wiki/CEC_Island",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 69345,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1250_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 69802,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-545_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 69966,
+      "PageUrl": "https://starwars.fandom.com/wiki/YZ-900_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 121715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steel_Fist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 122883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knight_Errant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 123577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_V_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kingsmill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orion_(DP20_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strathadam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thracian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrasher_(DP20_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Victorious_(DP20_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vindicta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warspite_(DP20_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 430153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Watchful",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 43074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mayjeln_(freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 43610,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drunk_Dancer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 440225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ace's_XS_stock_light_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 791873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snowspeeder/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 279494,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monarch-class_cargo_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 29353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy/Light_Attack_Fighter_500",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 301508,
@@ -2356,23 +2132,283 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
+      "PageId": 152691,
+      "PageUrl": "https://starwars.fandom.com/wiki/AG-2G_quad_laser_cannon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 357251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tem_Riffle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 53627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Arms/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 387507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Dac)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 3887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Karrde",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 392855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dhoora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 710238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inacc's_Crate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 606644,
+      "PageUrl": "https://starwars.fandom.com/wiki/CAV-11_\"Condor\"_airspeeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 606940,
+      "PageUrl": "https://starwars.fandom.com/wiki/G35_\"Silver_Cloud\"_airspeeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 2373,
+      "PageUrl": "https://starwars.fandom.com/wiki/CR-20_troop_carrier/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 240283,
+      "PageUrl": "https://starwars.fandom.com/wiki/CC-7700/E_interdiction_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 243453,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-class_Starfarer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 247961,
+      "PageUrl": "https://starwars.fandom.com/wiki/MT_dropship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 247975,
+      "PageUrl": "https://starwars.fandom.com/wiki/YZ-2500_heavy_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 24800,
+      "PageUrl": "https://starwars.fandom.com/wiki/YT-1300_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 53255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chempat_Engineered_Defenses",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 143104,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_Havok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 143106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moondrake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 144781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lanigiro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 151432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tyed's_Valiant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482857,
+      "PageUrl": "https://starwars.fandom.com/wiki/One_Liner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Claw_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_Wind",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 42808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grek-class_troop_shuttle/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 430293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millanti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 442331,
+      "PageUrl": "https://starwars.fandom.com/wiki/YV-560_light_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 308835,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flash_Harrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jeffrey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 55897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Godar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 33822,
+      "PageUrl": "https://starwars.fandom.com/wiki/YZ-775_medium_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 33839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Consular-class_cruiser_(Charger_c70_retrofit)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 33870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barloz-class_medium_freighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 346180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blunt_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 348679,
+      "PageUrl": "https://starwars.fandom.com/wiki/StarHauler_131-SX2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 348680,
+      "PageUrl": "https://starwars.fandom.com/wiki/StarHauler_131-T3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 351370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Judicator_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 353233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Runner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 3545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Jewel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 35624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lady_Starstorm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 667128,
+      "PageUrl": "https://starwars.fandom.com/wiki/DeLucia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 66802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kraken_(Assassin-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13250,
+      "PageUrl": "https://starwars.fandom.com/wiki/CC-9600_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 80546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_Pod_Deluxe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 10733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Radiant_VII/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 107785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bail_Organa_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 407864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackmist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 408047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solar_Flare_(Barloz-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 40826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Sea_Flower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 410641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prosperity_(shuttle)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 411880,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 416798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Thunder_(DP20_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 416804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dream_Runner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 73331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ammuud_Swooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 320032,
       "PageUrl": "https://starwars.fandom.com/wiki/XS_stock_light_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62843,
-      "PageUrl": "https://starwars.fandom.com/wiki/YT-1200_medium_freighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 62949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interceptor-class_frigate/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 63506,
-      "PageUrl": "https://starwars.fandom.com/wiki/Class-6_escape_pod",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]

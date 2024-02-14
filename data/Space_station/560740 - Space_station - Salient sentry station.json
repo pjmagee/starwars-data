@@ -46,18 +46,30 @@
       "Values": [
         "Salient system"
       ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-3",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-3"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 555072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 486840,
       "PageUrl": "https://starwars.fandom.com/wiki/Corporate_Sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 555072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

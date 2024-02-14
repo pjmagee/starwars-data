@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -68,7 +68,12 @@
     },
     {
       "Label": "Present for battles/events",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Attack on a rebel recruitment base",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_a_rebel_recruitment_base"
+        }
+      ],
       "Values": [
         "Attack on a rebel recruitment base"
       ]
@@ -98,5 +103,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 734837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_a_rebel_recruitment_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

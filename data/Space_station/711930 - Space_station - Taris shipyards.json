@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shipyard",
@@ -33,6 +33,18 @@
       ],
       "Values": [
         "Taris system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-7"
       ]
     },
     {
@@ -91,14 +103,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 711928,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Taris_shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 711853,
       "PageUrl": "https://starwars.fandom.com/wiki/Taris_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 711928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Taris_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

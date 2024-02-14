@@ -2,6 +2,7 @@
   "PageId": 12073,
   "PageUrl": "https://starwars.fandom.com/wiki/Udine_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-15"
@@ -33,14 +34,51 @@
       "Label": "Asteroids",
       "Links": [
         {
-          "Content": "Udine asteroids",
-          "Href": "https://starwars.fandom.com/wiki/Udine_asteroids"
+          "Content": "Udine asteroid field",
+          "Href": "https://starwars.fandom.com/wiki/Udine_asteroid_field"
         }
       ],
       "Values": [
-        "Udine asteroids"
+        "Udine asteroid field"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Minerals",
+          "Href": "https://starwars.fandom.com/wiki/Mineral/Legends"
+        }
+      ],
+      "Values": [
+        "Minerals (formerly)"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Pirates",
+          "Href": "https://starwars.fandom.com/wiki/Pirate/Legends"
+        }
+      ],
+      "Values": [
+        "Pirates"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 17306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Udine_asteroid_field",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

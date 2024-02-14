@@ -2,6 +2,7 @@
   "PageId": 730777,
   "PageUrl": "https://starwars.fandom.com/wiki/Far_Dostany",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -52,12 +53,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-7"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 730776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Far_Dostany_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

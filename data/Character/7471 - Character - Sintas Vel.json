@@ -81,7 +81,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Fett",
@@ -90,6 +90,30 @@
       ],
       "Values": [
         "Fett"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Boba Fett",
+          "Href": "https://starwars.fandom.com/wiki/Boba_Fett/Legends"
+        }
+      ],
+      "Values": [
+        "Boba Fett"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ailyn Vel",
+          "Href": "https://starwars.fandom.com/wiki/Ailyn_Vel"
+        }
+      ],
+      "Values": [
+        "Ailyn Vel"
       ]
     },
     {
@@ -105,5 +129,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 3550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ailyn_Vel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

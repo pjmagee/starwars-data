@@ -2,7 +2,7 @@
   "PageId": 552605,
   "PageUrl": "https://starwars.fandom.com/wiki/Csilla",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b1/Csilla.png/revision/latest?cb=20210906200355",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b1/Csilla.png/revision/latest?cb=20240213225457",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Chiss Space",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy"
+        }
+      ],
+      "Values": [
+        "Chiss Space"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -40,7 +52,7 @@
       "Links": [
         {
           "Content": "1",
-          "Href": "https://starwars.fandom.com/wiki/Csilla%27s_star"
+          "Href": "https://starwars.fandom.com/wiki/Csilla%27s_sun"
         }
       ],
       "Values": [
@@ -48,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "F-8",
@@ -79,7 +91,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Ice",
@@ -98,18 +110,24 @@
           "Href": "https://starwars.fandom.com/wiki/Convocate_Hall"
         },
         {
-          "Content": "Cupola",
-          "Href": "https://starwars.fandom.com/wiki/Cupola"
+          "Content": "Assembly Cupola",
+          "Href": "https://starwars.fandom.com/wiki/Assembly_Cupola"
         },
         {
           "Content": "Fleet headquarters",
-          "Href": "https://starwars.fandom.com/wiki/Fleet_headquarters"
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet_headquarters"
+        },
+        {
+          "Content": "Defense Force headquarters",
+          "Href": "https://starwars.fandom.com/wiki/Defense_Force_headquarters"
         }
       ],
       "Values": [
         "Convocate Hall",
-        "Cupola",
-        "Fleet headquarters"
+        "Assembly Cupola",
+        "Fleet headquarters",
+        "Defense Force headquarters",
+        "Defense Force command"
       ]
     },
     {
@@ -188,39 +206,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 682159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csaplar_spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 666750,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csilla_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 647107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mitth_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 663850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Irizi_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 727712,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defense_Force_headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 133584,
       "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Defense_Force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 566405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 714718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Markenday_Bar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 714739,
@@ -228,9 +221,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 704340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_mountain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 700268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Memorial_staff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 736276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Data_siphon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 684502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swish_grass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 660704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Csilla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 750298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Credit_chit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 744600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starflash_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 660364,
@@ -238,19 +256,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 660370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csaplar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 704340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_mountain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 690837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xodlak_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 666750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csilla_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 498015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 699458,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aristocra_(organization)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 664838,
@@ -261,6 +279,61 @@
       "PageId": 666704,
       "PageUrl": "https://starwars.fandom.com/wiki/Irizi_family_homestead",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 667248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Artificial_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 55545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 660370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csaplar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 566405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 682159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csaplar_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 714125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tactica",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 691586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starflash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 690837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xodlak_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 697856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet_headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 700361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xodlak_family_homestead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 666752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Csilla's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 666985,
@@ -278,44 +351,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 699458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aristocra_(organization)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 666752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Csilla's_star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 700268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Memorial_staff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 660704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Csilla",
+      "PageId": 714681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Final_Assault_on_Csilla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 55545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 727712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defense_Force_headquarters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 691586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starflash",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 647107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mitth_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 697856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fleet_headquarters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 663850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Irizi_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 700361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xodlak_family_homestead",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 498015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 726779,

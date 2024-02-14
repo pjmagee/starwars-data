@@ -64,7 +64,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-6"
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "rain forests",
@@ -123,15 +123,15 @@
         },
         {
           "Content": "Charnoq",
-          "Href": "https://starwars.fandom.com/wiki/Charnoq"
+          "Href": "https://starwars.fandom.com/wiki/Charnoq/Legends"
         },
         {
           "Content": "Corinathoth",
-          "Href": "https://starwars.fandom.com/wiki/Corinathoth"
+          "Href": "https://starwars.fandom.com/wiki/Corinathoth/Legends"
         },
         {
           "Content": "Fwit",
-          "Href": "https://starwars.fandom.com/wiki/Fwit"
+          "Href": "https://starwars.fandom.com/wiki/Fwit/Legends"
         },
         {
           "Content": "Mastiff phalone",
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Hutt",
@@ -237,8 +237,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 373653,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_2_(Consular-class_cruiser)",
+      "PageId": 272524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Maridun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 239919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tub/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -252,74 +257,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 239062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defense_of_Maridun/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 47721,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corinathoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 237066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lurmen/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 239111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mastiff_phalone/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 239921,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carrier_butterfly/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 600598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 26344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Maridun_(0_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 41609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fwit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 169279,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_(Battle_of_Maridun)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 406557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Quell)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 245939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squad_One_(Lok_Durd)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 254006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Maridun)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 289499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maridun_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 300117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Maridun_(8_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 3634,
@@ -327,9 +267,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 504834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maridun's_star/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 289499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maridun_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 26344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Maridun_(0_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 254006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Maridun)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 257997,
+      "PageUrl": "https://starwars.fandom.com/wiki/CIS_mobile_command_center/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 373653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_pilot_2_(Consular-class_cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 41609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fwit/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 37441,
@@ -337,9 +302,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 272524,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Maridun",
+      "PageId": 239062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defense_of_Maridun/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 406557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Consular-class_cruiser_(Quell)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 600598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 432,
@@ -347,9 +322,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 257997,
-      "PageUrl": "https://starwars.fandom.com/wiki/CIS_mobile_command_center/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 504834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maridun's_star/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 47721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corinathoth/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 163035,
@@ -377,9 +357,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 239919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tub/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 237066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lurmen/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 239111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mastiff_phalone/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 239921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrier_butterfly/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 11615,
@@ -395,6 +385,16 @@
       "PageId": 11618,
       "PageUrl": "https://starwars.fandom.com/wiki/Bex",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 300117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Maridun_(8_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 245939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_One_(Lok_Durd)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

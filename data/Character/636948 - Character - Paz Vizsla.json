@@ -24,6 +24,22 @@
       ]
     },
     {
+      "Label": "Died",
+      "Links": [
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+        },
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
+        }
+      ],
+      "Values": [
+        "c. 9 ABY, Mandalore"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -48,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -64,7 +87,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Vizsla",
@@ -73,11 +96,32 @@
         {
           "Content": "Clan Vizsla",
           "Href": "https://starwars.fandom.com/wiki/Clan_Vizsla"
+        },
+        {
+          "Content": "The Tribe",
+          "Href": "https://starwars.fandom.com/wiki/The_Tribe"
         }
       ],
       "Values": [
         "House Vizsla",
-        "Clan Vizsla"
+        "Clan Vizsla",
+        "The Tribe"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ragnar Vizsla",
+          "Href": "https://starwars.fandom.com/wiki/Ragnar_Vizsla"
+        },
+        {
+          "Content": "Foundling",
+          "Href": "https://starwars.fandom.com/wiki/Foundling"
+        }
+      ],
+      "Values": [
+        "Ragnar Vizsla (Foundling adoptive)"
       ]
     },
     {
@@ -88,20 +132,30 @@
           "Href": "https://starwars.fandom.com/wiki/Mandalorian"
         },
         {
-          "Content": "The Tribe",
-          "Href": "https://starwars.fandom.com/wiki/The_Tribe"
+          "Content": "Children of the Watch",
+          "Href": "https://starwars.fandom.com/wiki/Children_of_the_Watch"
         }
       ],
       "Values": [
         "Mandalorians",
-        "The Tribe"
+        "Children of the Watch"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 756792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ragnar_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_outside_a_Mandalorian_covert",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 720145,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Glavis_Ringworld",
+      "PageUrl": "https://starwars.fandom.com/wiki/Fight_for_the_Darksaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]

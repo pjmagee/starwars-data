@@ -20,7 +20,7 @@
         }
       ],
       "Values": [
-        "Clone Wars (late campaign)"
+        "Clone Wars (late conflict)"
       ]
     },
     {
@@ -44,7 +44,7 @@
         }
       ],
       "Values": [
-        "20 BBY"
+        "20 BBY, battle of the Onderon highlands"
       ]
     },
     {
@@ -93,13 +93,46 @@
         "Re-installation of King Ramsis Dendup",
         "Separatist withdrawal from Onderon"
       ]
+    },
+    {
+      "Label": "Battles",
+      "Links": [
+        {
+          "Content": "Attack on sector S-29",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_sector_S-29"
+        },
+        {
+          "Content": "Attempted execution of Ramsis Dendup",
+          "Href": "https://starwars.fandom.com/wiki/Attempted_execution_of_Ramsis_Dendup"
+        },
+        {
+          "Content": "Onderon highlands",
+          "Href": "https://starwars.fandom.com/wiki/Onderon_highlands"
+        }
+      ],
+      "Values": [
+        "Attack on sector S-29",
+        "Attack on the Onderon power generator",
+        "Attempted execution of Ramsis Dendup",
+        "Battle of the Onderon highlands"
+      ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 195224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderonian_Space_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
       "PageId": 557979,
       "PageUrl": "https://starwars.fandom.com/wiki/Onderon_power_generator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 465352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderon_rebels",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 545565,
@@ -107,18 +140,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 452388,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 195224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onderonian_Space_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 465352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onderon_rebels",
+      "PageId": 557980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_118",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -127,9 +150,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 557980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_118",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 748963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attempted_execution_of_Ramsis_Dendup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 748527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_sector_S-29",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 452388,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

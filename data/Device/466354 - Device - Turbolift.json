@@ -13,7 +13,12 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Transportation",
+          "Href": "https://starwars.fandom.com/wiki/Transport"
+        }
+      ],
       "Values": [
         "Transportation technology"
       ]
@@ -26,5 +31,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 782932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Turbolift_G-27",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 788215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_elevator_(D-Sector)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 788216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_elevator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

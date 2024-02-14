@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -33,6 +33,32 @@
       ],
       "Values": [
         "Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
       ]
     },
     {
@@ -73,23 +99,28 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         }
       ],
       "Values": [
         "DBY-827 heavy turbolaser turrets (8)",
-        "Medium dual turbolaser cannons (2)"
+        "Medium dual turbolaser cannons (2)",
+        "Laser cannons"
       ]
     },
     {
       "Label": "Docking bays",
       "Links": [
         {
-          "Content": "hangar",
+          "Content": "hangars",
           "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
-        "Ventral hangar"
+        "Ventral and starboard hangars"
       ]
     },
     {
@@ -125,32 +156,17 @@
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Destroyer"
+          "Content": "Command ship",
+          "Href": "https://starwars.fandom.com/wiki/Command_ship"
         },
         {
           "Content": "Flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
-        },
-        {
-          "Content": "Battleship",
-          "Href": "https://starwars.fandom.com/wiki/Battleship"
-        },
-        {
-          "Content": "Carrier",
-          "Href": "https://starwars.fandom.com/wiki/Carrier"
-        },
-        {
-          "Content": "Command ship",
-          "Href": "https://starwars.fandom.com/wiki/Command_ship"
         }
       ],
       "Values": [
-        "Destroyer",
-        "Flagship",
-        "Battleship",
-        "Carrier",
-        "Command ship"
+        "Command ship",
+        "Flagship"
       ]
     },
     {
@@ -246,24 +262,29 @@
           "Href": "https://starwars.fandom.com/wiki/Clone_Commander"
         },
         {
-          "Content": "CC-5052",
-          "Href": "https://starwars.fandom.com/wiki/CC-5052"
+          "Content": "Bly",
+          "Href": "https://starwars.fandom.com/wiki/Bly"
+        },
+        {
+          "Content": "Flash",
+          "Href": "https://starwars.fandom.com/wiki/Flash"
         }
       ],
       "Values": [
-        "Clone Commander CC-5052 \"Bly"
+        "Clone Commander Bly",
+        "Flash"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 648230,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aayla_Secura's_task_force",
+      "PageId": 644352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 644352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet_(Galactic_Republic)",
+      "PageId": 648230,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aayla_Secura's_task_force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]

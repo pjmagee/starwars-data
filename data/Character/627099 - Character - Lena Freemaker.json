@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Freemakers",
@@ -72,7 +72,62 @@
       "Values": [
         "Freemakers"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Pace Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO"
+        }
+      ],
+      "Values": [
+        "Pace Freemaker"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Zander Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Zander_Freemaker"
+        },
+        {
+          "Content": "Kordi Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO"
+        },
+        {
+          "Content": "Rowan Freemaker",
+          "Href": "https://starwars.fandom.com/wiki/Rowan_Freemaker/LEGO"
+        }
+      ],
+      "Values": [
+        "Zander Freemaker",
+        "Kordi Freemaker",
+        "Rowan Freemaker"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 538027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kordi_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zander_Freemaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rowan_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pace_Freemaker/LEGO",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 689255,
   "PageUrl": "https://starwars.fandom.com/wiki/Ghal_Tarpfen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5d/GhalTarpfen.jpg/revision/latest?cb=20210723001722",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/Ghal-ShadowsRemain.jpg/revision/latest?cb=20220126180051",
   "Data": [
     {
       "Label": "Titles",
@@ -48,6 +48,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.73 meters (5 ft, 8 in)"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [
         {
@@ -60,11 +83,40 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Ghal Tarpfen's family",
+          "Href": "https://starwars.fandom.com/wiki/Ghal_Tarpfen%27s_family"
+        }
+      ],
+      "Values": [
+        "Ghal Tarpfen's family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Gera",
+          "Href": "https://starwars.fandom.com/wiki/Gera"
+        },
+        {
+          "Content": "Rhal",
+          "Href": "https://starwars.fandom.com/wiki/Rhal"
+        }
+      ],
+      "Values": [
+        "Gera",
+        "Rhal"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Mon Calamari Guard",
@@ -76,14 +128,23 @@
         }
       ],
       "Values": [
-        "Ghal Tarpfen's family",
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Mon Calamari Guard",
         "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 716420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 716422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 643764,
       "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon",

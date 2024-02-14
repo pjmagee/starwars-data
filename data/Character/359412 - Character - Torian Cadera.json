@@ -2,7 +2,7 @@
   "PageId": 359412,
   "PageUrl": "https://starwars.fandom.com/wiki/Torian_Cadera",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/Torian.png/revision/latest?cb=20140811020504",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7e/Torian_Cadera_1.png/revision/latest?cb=20221210001538",
   "Data": [
     {
       "Label": "Titles",
@@ -61,7 +61,12 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blonde",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Blonde"
       ]
@@ -81,7 +86,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Cadera",
@@ -90,6 +95,23 @@
       ],
       "Values": [
         "Cadera"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jicoln Cadera",
+          "Href": "https://starwars.fandom.com/wiki/Jicoln_Cadera"
+        },
+        {
+          "Content": "Unnamed mother",
+          "Href": "https://starwars.fandom.com/wiki/Jicoln_Cadera%27s_wife"
+        }
+      ],
+      "Values": [
+        "Jicoln Cadera",
+        "Unnamed mother"
       ]
     },
     {
@@ -122,9 +144,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 648718,
-      "PageUrl": "https://starwars.fandom.com/wiki/TH-15B_War_Medic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 392129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Cadera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 502887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jicoln_Cadera's_wife",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 301759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jicoln_Cadera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 482025,
@@ -132,9 +164,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 392129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Cadera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 648718,
+      "PageUrl": "https://starwars.fandom.com/wiki/TH-15B_War_Medic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     }
   ]
 }

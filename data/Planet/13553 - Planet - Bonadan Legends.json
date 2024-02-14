@@ -56,7 +56,7 @@
         }
       ],
       "Values": [
-        "Bonadan"
+        "1: Bonadan"
       ]
     },
     {
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-3"
@@ -137,12 +137,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "13,100 km"
+        "13,100 kilometers"
       ]
     },
     {
@@ -153,11 +153,23 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Eroded wastes",
         "Industrial centers"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Bonadan shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Bonadan_shipyards"
+        }
+      ],
+      "Values": [
+        "Bonadan shipyards"
       ]
     },
     {
@@ -173,7 +185,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Duros",
@@ -304,84 +316,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 24348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_alloy_heavy_suit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 429602,
       "PageUrl": "https://starwars.fandom.com/wiki/Stephannis_Koss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 15734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solenbaran_Merchant_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 545200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_above_Bonadan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 23425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tortapo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 114894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 695214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bank_of_Bonadan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 202459,
-      "PageUrl": "https://starwars.fandom.com/wiki/In_the_Red",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 290515,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tingel_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 688669,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kwenn_Space_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 12289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Klin-Fa_Gi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 476021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_\"Machinist\"_gloves",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 163190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whitecap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 52067,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hallis_Saper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 17526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 590708,
@@ -389,9 +326,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
+      "PageId": 163190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whitecap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 744365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 114894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
       "PageId": 27339,
       "PageUrl": "https://starwars.fandom.com/wiki/Ebla_grain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 17526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 116580,
@@ -402,6 +359,71 @@
       "PageId": 27337,
       "PageUrl": "https://starwars.fandom.com/wiki/Ebla_beer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 12289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klin-Fa_Gi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 23425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tortapo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 545200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_above_Bonadan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 695214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bank_of_Bonadan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 24348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_alloy_heavy_suit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 290515,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tingel_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 202459,
+      "PageUrl": "https://starwars.fandom.com/wiki/In_the_Red",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 15734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solenbaran_Merchant_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 476021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bonadan_\"Machinist\"_gloves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 688669,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kwenn_Space_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 64142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spaceport_Southeast_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 52067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hallis_Saper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

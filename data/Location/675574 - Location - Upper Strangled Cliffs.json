@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Hydraatis",
+          "Href": "https://starwars.fandom.com/wiki/Hydraatis"
+        }
+      ],
+      "Values": [
+        "Hydraatis"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -34,14 +46,21 @@
       "Values": [
         "Nightbrother village"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Nightsisters",
+          "Href": "https://starwars.fandom.com/wiki/Nightsisters"
+        }
+      ],
+      "Values": [
+        "Nightsisters"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 452591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
     {
       "PageId": 675567,
       "PageUrl": "https://starwars.fandom.com/wiki/Strangled_Cliffs",
@@ -51,6 +70,11 @@
       "PageId": 675575,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nightbrother_village",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 452591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

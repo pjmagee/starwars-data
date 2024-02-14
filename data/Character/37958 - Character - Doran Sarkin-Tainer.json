@@ -48,10 +48,22 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
-        "Blond"
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Fair",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Fair"
       ]
     },
     {
@@ -59,6 +71,35 @@
       "Links": [],
       "Values": [
         "Brown"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Tyria Sarkin Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Tyria_Sarkin_Tainer"
+        },
+        {
+          "Content": "Kell Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Kell_Tainer"
+        }
+      ],
+      "Values": [
+        "Tyria Sarkin Tainer",
+        "Kell Tainer"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jesmin Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Jesmin_Tainer"
+        }
+      ],
+      "Values": [
+        "Jesmin Tainer"
       ]
     },
     {
@@ -97,6 +138,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 22622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kell_Tainer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 383727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jesmin_Tainer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 12293,
       "PageUrl": "https://starwars.fandom.com/wiki/Tyria_Sarkin_Tainer",

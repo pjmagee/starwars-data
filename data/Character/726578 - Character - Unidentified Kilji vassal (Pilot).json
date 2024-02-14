@@ -1,13 +1,15 @@
 {
   "PageId": 726578,
-  "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kilji_vassal_(Pilot)",
+  "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kilji_vassal_(pilot)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Unidentified Kilji Vassal (Pilot)"
+        "Unidentified Kilji vassal",
+        "(pilot)"
       ]
     },
     {
@@ -28,24 +30,15 @@
         {
           "Content": "Kilji Illumine",
           "Href": "https://starwars.fandom.com/wiki/Kilji_Illumine"
-        },
-        {
-          "Content": "Illumine Kilhorde",
-          "Href": "https://starwars.fandom.com/wiki/Illumine_Kilhorde"
         }
       ],
       "Values": [
-        "Kilji Illumine",
-        "Illumine Kilhorde"
+        "Kilji Illumine"
       ]
     },
     {
       "Label": "Masters",
       "Links": [
-        {
-          "Content": "Generalirius",
-          "Href": "https://starwars.fandom.com/wiki/Generalirius"
-        },
         {
           "Content": "Nakirre",
           "Href": "https://starwars.fandom.com/wiki/Nakirre"
@@ -56,10 +49,21 @@
         }
       ],
       "Values": [
-        "Generalirius Nakirre (Through enlightenment)",
+        "Nakirre",
         "Qilori"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 712902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakirre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 712955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whetstone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

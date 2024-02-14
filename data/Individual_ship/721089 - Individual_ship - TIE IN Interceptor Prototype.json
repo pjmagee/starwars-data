@@ -2,7 +2,7 @@
   "PageId": 721089,
   "PageUrl": "https://starwars.fandom.com/wiki/TIE/IN_Interceptor_Prototype",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/95/SecondSister-SWZ97.png/revision/latest?cb=20230228045703",
   "Data": [
     {
       "Label": "Titles",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -96,6 +96,23 @@
       ]
     },
     {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Escape from Bracca",
+          "Href": "https://starwars.fandom.com/wiki/Escape_from_Bracca"
+        },
+        {
+          "Content": "Skirmish on Ontotho",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Ontotho"
+        }
+      ],
+      "Values": [
+        "Escape from Bracca",
+        "Skirmish on Ontotho"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -137,11 +154,5 @@
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 695,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/IN_interceptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    }
-  ]
+  "Relationships": []
 }

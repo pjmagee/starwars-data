@@ -22,7 +22,146 @@
       "Values": [
         "Endor"
       ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Forest",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        }
+      ],
+      "Values": [
+        "Forest"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Arachne",
+          "Href": "https://starwars.fandom.com/wiki/Arachne"
+        },
+        {
+          "Content": "Bark mite",
+          "Href": "https://starwars.fandom.com/wiki/Bark_mite"
+        },
+        {
+          "Content": "Boar-wolf",
+          "Href": "https://starwars.fandom.com/wiki/Boar-wolf/Legends"
+        },
+        {
+          "Content": "Blurrg",
+          "Href": "https://starwars.fandom.com/wiki/Blurrg/Legends"
+        },
+        {
+          "Content": "Borgle bat",
+          "Href": "https://starwars.fandom.com/wiki/Borgle_bat"
+        },
+        {
+          "Content": "Condor dragon",
+          "Href": "https://starwars.fandom.com/wiki/Condor_dragon/Legends"
+        },
+        {
+          "Content": "Gorax",
+          "Href": "https://starwars.fandom.com/wiki/Gorax/Legends"
+        },
+        {
+          "Content": "Gurreck",
+          "Href": "https://starwars.fandom.com/wiki/Gurreck/Legends"
+        },
+        {
+          "Content": "Roba",
+          "Href": "https://starwars.fandom.com/wiki/Roba/Legends"
+        }
+      ],
+      "Values": [
+        "Arachne",
+        "Bark mite",
+        "Boar-wolf",
+        "Blurrg",
+        "Borgle bat",
+        "Condor dragon",
+        "Gorax",
+        "Gurreck",
+        "Roba"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Rainbow berry bush",
+          "Href": "https://starwars.fandom.com/wiki/Rainbow_berry_bush"
+        },
+        {
+          "Content": "Scrubwort",
+          "Href": "https://starwars.fandom.com/wiki/Scrubwort"
+        }
+      ],
+      "Values": [
+        "Rainbow berry bush",
+        "Scrubwort"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Central Panshee Ewok Village",
+          "Href": "https://starwars.fandom.com/wiki/Ewok_Tree_Village_(central)"
+        },
+        {
+          "Content": "Dulok Village",
+          "Href": "https://starwars.fandom.com/wiki/Dulok_Village_(Donkuwah)"
+        },
+        {
+          "Content": "Rebel outpost",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_outpost_(Endor)"
+        },
+        {
+          "Content": "Southeast Panshee Ewok Village",
+          "Href": "https://starwars.fandom.com/wiki/Ewok_Tree_Village_(southeast)"
+        },
+        {
+          "Content": "Research Outpost",
+          "Href": "https://starwars.fandom.com/wiki/Research_Outpost"
+        }
+      ],
+      "Values": [
+        "Central Panshee Ewok Village",
+        "Dulok Village",
+        "Rebel outpost",
+        "Southeast Panshee Ewok Village",
+        "Research Outpost"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 749464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewok_Tree_Village_(central)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 636376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewok_Tree_Village_(southeast)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 194887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Research_Outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 751976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_outpost_(Endor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 750611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dulok_Village_(Donkuwah)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    }
+  ]
 }

@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -60,24 +60,27 @@
       ]
     },
     {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "900 meters"
+      ]
+    },
+    {
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Destroyer-I ion engines",
+          "Content": "destroyer-I ion engines",
           "Href": "https://starwars.fandom.com/wiki/Destroyer-I_ion_engine"
         },
         {
-          "Content": "Cygnus Spaceworks",
-          "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks"
-        },
-        {
-          "Content": "Gemon-4 ion engines",
+          "Content": "gemon-4 ion engines",
           "Href": "https://starwars.fandom.com/wiki/Gemon-4_ion_engine"
         }
       ],
       "Values": [
-        "KDY Destroyer-I ion engines (3)",
-        "Cygnus Spaceworks Gemon-4 ion engines (4) (emergency use)"
+        "Three destroyer-I ion engines",
+        "Four gemon-4 ion engines"
       ]
     },
     {
@@ -96,12 +99,24 @@
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Deflector shield generator domes",
-          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator_dome"
+          "Content": "ISD-72x shield generator domes",
+          "Href": "https://starwars.fandom.com/wiki/ISD-72x_shield_generator_dome"
         }
       ],
       "Values": [
-        "Deflector shield generator domes (2)"
+        "Two ISD-72x shield generator domes"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -129,6 +144,23 @@
       ]
     },
     {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "E-11 medium blaster rifles",
+          "Href": "https://starwars.fandom.com/wiki/E-11_medium_blaster_rifle"
+        },
+        {
+          "Content": "Helmets",
+          "Href": "https://starwars.fandom.com/wiki/Helmet"
+        }
+      ],
+      "Values": [
+        "E-11 medium blaster rifles",
+        "Helmets"
+      ]
+    },
+    {
       "Label": "Docking bays",
       "Links": [
         {
@@ -137,7 +169,8 @@
         }
       ],
       "Values": [
-        "Ventral hangar"
+        "Lower hangar",
+        "Upper hangar"
       ]
     },
     {
@@ -154,11 +187,20 @@
         {
           "Content": "agent",
           "Href": "https://starwars.fandom.com/wiki/Agent"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "squads",
+          "Href": "https://starwars.fandom.com/wiki/Squad"
         }
       ],
       "Values": [
         "Imperial officers",
-        "At least 1 Imperial Security Bureau agent"
+        "At least 1 Imperial Security Bureau agent",
+        "Stormtroopers (several squads)"
       ]
     },
     {
@@ -174,15 +216,32 @@
       ]
     },
     {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Mission to free Wookiee prisoners",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_free_Wookiee_prisoners"
+        }
+      ],
+      "Values": [
+        "Mission to free Wookiee prisoners"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Security Bureau",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Imperial Security Bureau"
       ]
     },
     {
@@ -213,9 +272,26 @@
         "Hiram Zataire",
         "Alexsandr Kallus"
       ]
+    },
+    {
+      "Label": "Crewmembers",
+      "Links": [
+        {
+          "Content": "LS-005",
+          "Href": "https://starwars.fandom.com/wiki/LS-005"
+        }
+      ],
+      "Values": [
+        "LS-005"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 465725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_free_Wookiee_prisoners",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 592949,
       "PageUrl": "https://starwars.fandom.com/wiki/Squad_eight",
@@ -225,11 +301,6 @@
       "PageId": 592950,
       "PageUrl": "https://starwars.fandom.com/wiki/Squad_five",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 465725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_free_Wookiee_prisoners",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

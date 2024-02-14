@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-8"
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Magma",
@@ -73,7 +73,7 @@
           "Href": "https://starwars.fandom.com/wiki/Factory/Legends"
         },
         {
-          "Content": "Rainforests",
+          "Content": "Rain forests",
           "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
         }
       ],
@@ -81,7 +81,7 @@
         "Barren rocky wastes",
         "Magma pits",
         "Underground industrial factories",
-        "Formerly: Rainforests"
+        "Formerly: Rain forests"
       ]
     },
     {
@@ -114,7 +114,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -123,11 +123,16 @@
         {
           "Content": "Skakoans",
           "Href": "https://starwars.fandom.com/wiki/Skakoan/Legends"
+        },
+        {
+          "Content": "Yuuzhan Vong",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong"
         }
       ],
       "Values": [
         "Humans",
-        "Skakoans"
+        "Skakoans",
+        "Yuuzhan Vong"
       ]
     },
     {
@@ -237,14 +242,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 53320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doppelgänger_of_Dooku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 119717,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ore_conveyor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 98023,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Wasteland",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 433798,
@@ -252,8 +252,113 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 410280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 98024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unreal_City/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 545942,
       "PageUrl": "https://starwars.fandom.com/wiki/Tammia_Hollusen's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pulse_beat_sensor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 545961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Weapons_detection_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 97869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 119717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ore_conveyor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 62025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tammia_Hollusen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 62026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corwyth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 62028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arn_Horada",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 57211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vinoc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 27474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Metalorn_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 229422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 9407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Termin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 639373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Bail_Organa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 38924,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-B3_cortosis_battle_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 35347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karoc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 304334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Metalorn_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 53320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doppelgänger_of_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 382661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Metalorn_(Imperial_Period)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 39284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rise_of_the_Cortosis_Battle_Droids",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 34166,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vandalor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -272,104 +377,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 97869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union_Droid_Army/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 98024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unreal_City/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 34166,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vandalor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 410280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 639373,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Bail_Organa)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 98023,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Wasteland",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 304334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Metalorn_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 62025,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tammia_Hollusen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 62026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corwyth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 62028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arn_Horada",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pulse_beat_sensor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 545961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Weapons_detection_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 9407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Termin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 229422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Metalorn_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 682,
       "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 38924,
-      "PageUrl": "https://starwars.fandom.com/wiki/C-B3_cortosis_battle_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 35347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karoc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 57211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vinoc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 27474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Metalorn_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 382661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Metalorn_(Imperial_Period)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

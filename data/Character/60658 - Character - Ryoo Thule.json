@@ -2,6 +2,7 @@
   "PageId": 60658,
   "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Thule",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -82,6 +83,18 @@
       ]
     },
     {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Jobal Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Jobal Naberrie"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -94,5 +107,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 5370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

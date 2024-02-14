@@ -15,16 +15,17 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Western Reaches",
-          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
-        },
-        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Western Reaches, Outer Rim Territories"
+        "Outer Rim Territories",
+        "Western Reaches"
       ]
     },
     {
@@ -40,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-19",
@@ -49,6 +50,18 @@
       ],
       "Values": [
         "L-19"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Priate",
+          "Href": "https://starwars.fandom.com/wiki/Priate"
+        }
+      ],
+      "Values": [
+        "Priate"
       ]
     },
     {
@@ -91,7 +104,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Falleen",
@@ -156,7 +169,7 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Sith Order",
+          "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
         },
         {
@@ -177,9 +190,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 636118,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 471818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 482706,
@@ -192,14 +205,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 471818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 459370,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Grand_Inquisitor's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 506232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atravis_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 561327,
@@ -212,19 +220,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 636118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 431847,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Grand_Inquisitor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 506232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atravis_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 695205,
       "PageUrl": "https://starwars.fandom.com/wiki/Priate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 459370,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Grand_Inquisitor's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 776689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gertee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

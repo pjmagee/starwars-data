@@ -43,23 +43,6 @@
       ]
     },
     {
-      "Label": "Culture",
-      "Links": [
-        {
-          "Content": "Bounty hunters",
-          "Href": "https://starwars.fandom.com/wiki/Bounty_hunter"
-        },
-        {
-          "Content": "Smugglers",
-          "Href": "https://starwars.fandom.com/wiki/Smuggler"
-        }
-      ],
-      "Values": [
-        "Bounty hunters",
-        "Smugglers"
-      ]
-    },
-    {
       "Label": "Shape",
       "Links": [
         {
@@ -86,36 +69,41 @@
           "Href": "https://starwars.fandom.com/wiki/Krayt%27s_Claw"
         },
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
         "Krayt's Claw",
+        "Galactic Empire",
         "Alliance to Restore the Republic",
-        "New Republic",
-        "Galactic Empire"
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 595866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_X-8_Night_Sniper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
     {
       "PageId": 475260,
       "PageUrl": "https://starwars.fandom.com/wiki/C-21_Highsinger",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 595866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_X-8_Night_Sniper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 466335,
+      "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

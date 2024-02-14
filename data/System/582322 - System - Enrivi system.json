@@ -2,7 +2,7 @@
   "PageId": 582322,
   "PageUrl": "https://starwars.fandom.com/wiki/Enrivi_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/06/Enrivi-SWT.jpg/revision/latest?cb=20220603115700",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Mid Rim Territories"
+        "Mid Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -34,18 +39,30 @@
       "Values": [
         "Metatessu sector"
       ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-9"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 554545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Metatessu_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 590044,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Enrivi_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 554545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Metatessu_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

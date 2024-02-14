@@ -68,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -106,11 +113,32 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Rehtul Minnau",
+          "Href": "https://starwars.fandom.com/wiki/Rehtul_Minnau"
+        },
+        {
+          "Content": "Nandi",
+          "Href": "https://starwars.fandom.com/wiki/Nandi"
+        }
+      ],
+      "Values": [
+        "Rehtul Minnau",
+        "Nandi (Half-sister)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Royal House of Naboo",
           "Href": "https://starwars.fandom.com/wiki/Royal_House_of_Naboo/Legends"
+        },
+        {
+          "Content": "Royal Naboo Security Forces",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces/Legends"
         },
         {
           "Content": "Galactic Republic",
@@ -119,9 +147,26 @@
       ],
       "Values": [
         "Royal House of Naboo",
+        "Royal Naboo Security Forces",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 122100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nandi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 44563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rehtul_Minnau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 328467,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau's_spouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 109800,
   "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Abridon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +44,7 @@
       "Links": [
         {
           "Content": "Abridon",
-          "Href": "https://starwars.fandom.com/wiki/Abridon"
+          "Href": "https://starwars.fandom.com/wiki/Abridon/Legends"
         }
       ],
       "Values": [
@@ -67,5 +68,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koradin_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

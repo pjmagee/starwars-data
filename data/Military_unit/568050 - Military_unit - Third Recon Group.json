@@ -12,6 +12,30 @@
       ]
     },
     {
+      "Label": "Military unit type",
+      "Links": [
+        {
+          "Content": "Reconnaissance",
+          "Href": "https://starwars.fandom.com/wiki/Scout"
+        }
+      ],
+      "Values": [
+        "Reconnaissance"
+      ]
+    },
+    {
+      "Label": "Formation type",
+      "Links": [
+        {
+          "Content": "Regiment",
+          "Href": "https://starwars.fandom.com/wiki/Regiment"
+        }
+      ],
+      "Values": [
+        "Regiment"
+      ]
+    },
+    {
       "Label": "Commanding officer(s)",
       "Links": [
         {
@@ -41,6 +65,23 @@
       ],
       "Values": [
         "Sergeant Agarne"
+      ]
+    },
+    {
+      "Label": "Sub-units",
+      "Links": [
+        {
+          "Content": "company",
+          "Href": "https://starwars.fandom.com/wiki/Company"
+        },
+        {
+          "Content": "Group command",
+          "Href": "https://starwars.fandom.com/wiki/Group_command"
+        }
+      ],
+      "Values": [
+        "1 company",
+        "Group command"
       ]
     },
     {
@@ -99,17 +140,22 @@
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
         },
         {
-          "Content": "New Republic army",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic_army"
+          "Content": "New Republic Defense Force",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Force"
         }
       ],
       "Values": [
         "New Republic",
-        "New Republic army"
+        "New Republic Defense Force"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 79251,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 595233,
       "PageUrl": "https://starwars.fandom.com/wiki/Agarne",
@@ -121,8 +167,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 79251,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_army",
+      "PageId": 764214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Group_command",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]

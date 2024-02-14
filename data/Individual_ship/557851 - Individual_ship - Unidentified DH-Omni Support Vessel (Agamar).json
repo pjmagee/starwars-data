@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Supply ship",
@@ -74,10 +74,15 @@
         {
           "Content": "Sheathipede-class transport shuttles",
           "Href": "https://starwars.fandom.com/wiki/Sheathipede-class_transport_shuttle"
+        },
+        {
+          "Content": "Proton bombs",
+          "Href": "https://starwars.fandom.com/wiki/Proton_bomb"
         }
       ],
       "Values": [
-        "At least 3 Sheathipede-class transport shuttles"
+        "3 Sheathipede-class transport shuttles",
+        "Proton bombs"
       ]
     },
     {
@@ -117,15 +122,10 @@
       ]
     },
     {
-      "Label": "Communication systems",
-      "Links": [
-        {
-          "Content": "Equipped",
-          "Href": "https://starwars.fandom.com/wiki/Comm_unit"
-        }
-      ],
+      "Label": "Cargo handling systems",
+      "Links": [],
       "Values": [
-        "Equipped"
+        "Hangar cranes"
       ]
     },
     {
@@ -139,18 +139,6 @@
       "Values": [
         "External loudspeaker",
         "Ray shield"
-      ]
-    },
-    {
-      "Label": "Role(s)",
-      "Links": [
-        {
-          "Content": "Galactic Civil War",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
-        }
-      ],
-      "Values": [
-        "Military base (during the Galactic Civil War)"
       ]
     },
     {
@@ -238,9 +226,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 575239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agamar_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 541034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agamar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 592925,
@@ -253,9 +241,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 541034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agamar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 575239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agamar_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

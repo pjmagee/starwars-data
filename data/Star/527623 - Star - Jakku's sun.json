@@ -15,16 +15,34 @@
       "Label": "Region(s)",
       "Links": [
         {
-          "Content": "Western Reaches",
-          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
-        },
-        {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Western Reaches, Inner Rim"
+        "Inner Rim",
+        "Western Reaches"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Jakku's sector",
+          "Href": "https://starwars.fandom.com/wiki/Jakku%27s_sector"
+        },
+        {
+          "Content": "Tashtor sector",
+          "Href": "https://starwars.fandom.com/wiki/Tashtor_sector"
+        }
+      ],
+      "Values": [
+        "Jakku's sector",
+        "Tashtor sector"
       ]
     },
     {
@@ -40,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "I-13",

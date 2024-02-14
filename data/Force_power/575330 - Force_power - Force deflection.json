@@ -2,7 +2,7 @@
   "PageId": 575330,
   "PageUrl": "https://starwars.fandom.com/wiki/Force_deflection",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/70/PalpatineForceDeflect-SWAnnual1.png/revision/latest?cb=20200417055115",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3d/YodaDeflect-ST.png/revision/latest?cb=20210830050343",
   "Data": [
     {
       "Label": "Titles",
@@ -12,36 +12,30 @@
       ]
     },
     {
-      "Label": "Alignment",
-      "Links": [
-        {
-          "Content": "Dark side of the Force",
-          "Href": "https://starwars.fandom.com/wiki/Dark_side_of_the_Force"
-        },
-        {
-          "Content": "Light side of the Force",
-          "Href": "https://starwars.fandom.com/wiki/Light_side_of_the_Force"
-        }
-      ],
+      "Label": "Alternate name(s)",
+      "Links": [],
       "Values": [
-        "Dark side of the Force",
-        "Light side of the Force"
+        "Iron shield of will",
+        "The Hand Thing"
       ]
     },
     {
       "Label": "Purpose",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "fire",
+          "Href": "https://starwars.fandom.com/wiki/Fire"
+        }
+      ],
       "Values": [
-        "Deflecting energy-based attacks"
+        "Deflecting energy-based attacks",
+        "Blocking melee attacks or hurling grenades back at enemies",
+        "Reflecting energy attacks, such as fire or lightning at an attacker"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
-        {
-          "Content": "Force wielders",
-          "Href": "https://starwars.fandom.com/wiki/Force_wielder"
-        },
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
@@ -49,12 +43,16 @@
         {
           "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
+        },
+        {
+          "Content": "Force wielders",
+          "Href": "https://starwars.fandom.com/wiki/Force_wielder"
         }
       ],
       "Values": [
-        "Force wielders",
         "Jedi Order",
-        "Sith"
+        "Sith",
+        "Force wielders"
       ]
     }
   ],

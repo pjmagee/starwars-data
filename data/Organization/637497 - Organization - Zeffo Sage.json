@@ -12,31 +12,24 @@
       ]
     },
     {
-      "Label": "Organization type",
-      "Links": [
-        {
-          "Content": "Force-sensitive",
-          "Href": "https://starwars.fandom.com/wiki/Force-sensitive"
-        }
-      ],
-      "Values": [
-        "Force-sensitive trio"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Zeffo",
-          "Href": "https://starwars.fandom.com/wiki/Zeffo_(species)"
+          "Content": "Zeffonian",
+          "Href": "https://starwars.fandom.com/wiki/Zeffonian"
         }
       ],
       "Values": [
-        "Zeffo"
+        "Zeffonian"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 633502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_Guardian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
     {
       "PageId": 453519,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Force",
@@ -46,11 +39,6 @@
       "PageId": 458144,
       "PageUrl": "https://starwars.fandom.com/wiki/Force-sensitive",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 633502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_Guardian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     }
   ]
 }

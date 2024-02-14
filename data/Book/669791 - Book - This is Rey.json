@@ -2,12 +2,33 @@
   "PageId": 669791,
   "PageUrl": "https://starwars.fandom.com/wiki/This_is_Rey",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "This is Rey"
+      ]
+    },
+    {
+      "Label": "Author(s)",
+      "Links": [],
+      "Values": [
+        "Emeli Juhlin"
+      ]
+    },
+    {
+      "Label": "Illustrator",
+      "Links": [
+        {
+          "Content": "TomatoFarm",
+          "Href": "https://starwars.fandom.com/wiki/TomatoFarm"
+        }
+      ],
+      "Values": [
+        "Titmouse",
+        "TomatoFarm"
       ]
     },
     {
@@ -20,6 +41,22 @@
       ],
       "Values": [
         "Disney–Lucasfilm Press"
+      ]
+    },
+    {
+      "Label": "Release date",
+      "Links": [
+        {
+          "Content": "October 17",
+          "Href": "https://starwars.fandom.com/wiki/October_17"
+        },
+        {
+          "Content": "2023",
+          "Href": "https://starwars.fandom.com/wiki/2023"
+        }
+      ],
+      "Values": [
+        "October 17, 2023"
       ]
     },
     {
@@ -49,6 +86,22 @@
       ]
     },
     {
+      "Label": "Timeline",
+      "Links": [
+        {
+          "Content": "34 ABY",
+          "Href": "https://starwars.fandom.com/wiki/34_ABY"
+        },
+        {
+          "Content": "35 ABY",
+          "Href": "https://starwars.fandom.com/wiki/35_ABY"
+        }
+      ],
+      "Values": [
+        "34 ABY–35 ABY"
+      ]
+    },
+    {
       "Label": "Series",
       "Links": [
         {
@@ -64,7 +117,42 @@
         "Star Wars Galaxy of Adventures",
         "World of Reading"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "This is Luke",
+          "Href": "https://starwars.fandom.com/wiki/This_is_Luke"
+        }
+      ],
+      "Values": [
+        "This is Luke"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "These Are the Droids",
+          "Href": "https://starwars.fandom.com/wiki/These_Are_the_Droids"
+        }
+      ],
+      "Values": [
+        "These Are the Droids"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 789821,
+      "PageUrl": "https://starwars.fandom.com/wiki/These_Are_the_Droids",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 642416,
+      "PageUrl": "https://starwars.fandom.com/wiki/This_is_Luke",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    }
+  ]
 }

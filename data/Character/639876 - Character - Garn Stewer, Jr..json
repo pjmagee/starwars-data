@@ -2,7 +2,7 @@
   "PageId": 639876,
   "PageUrl": "https://starwars.fandom.com/wiki/Garn_Stewer,_Jr.",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c5/Garn_Stewer_Jr_TROSVD.jpg/revision/latest?cb=20211208211610",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0e/GarnStewerJr-TROSGG.png/revision/latest?cb=20230724014540",
   "Data": [
     {
       "Label": "Titles",
@@ -55,6 +55,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Garn Stewer",
+          "Href": "https://starwars.fandom.com/wiki/Garn_Stewer"
+        }
+      ],
+      "Values": [
+        "Garn Stewer"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -72,5 +84,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 557466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garn_Stewer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

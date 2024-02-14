@@ -2,6 +2,7 @@
   "PageId": 174850,
   "PageUrl": "https://starwars.fandom.com/wiki/Shaper_(creature)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,25 @@
       "Values": [
         "Togoria"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamp of Vapors",
+          "Href": "https://starwars.fandom.com/wiki/Swamp_of_Vapors"
+        }
+      ],
+      "Values": [
+        "Swamp of Vapors"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 174844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swamp_of_Vapors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

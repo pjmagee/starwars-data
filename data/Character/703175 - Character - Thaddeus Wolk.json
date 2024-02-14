@@ -2,6 +2,7 @@
   "PageId": 703175,
   "PageUrl": "https://starwars.fandom.com/wiki/Thaddeus_Wolk",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
         }
       ],
       "Values": [
-        "c. 231 BBY, Coruscant"
+        "231 BBY, Coruscant"
       ]
     },
     {
@@ -63,6 +64,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.96 meters (6 ft, 5 in)"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [
         {
@@ -87,5 +111,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 743224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_of_Thaddeus_Wolk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

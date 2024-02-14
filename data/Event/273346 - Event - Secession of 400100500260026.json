@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Conflict",
+      "Links": [],
+      "Values": [
+        "G0-T0 rebellion"
+      ]
+    },
+    {
       "Label": "Date",
       "Links": [
         {
@@ -27,12 +34,16 @@
       "Label": "Place",
       "Links": [
         {
+          "Content": "planets",
+          "Href": "https://starwars.fandom.com/wiki/Planet/Legends"
+        },
+        {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Sixteen planets in the Gordian Reach"
       ]
     },
     {
@@ -79,14 +90,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 13729,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 86452,
       "PageUrl": "https://starwars.fandom.com/wiki/3946_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 13729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

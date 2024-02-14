@@ -2,6 +2,7 @@
   "PageId": 442973,
   "PageUrl": "https://starwars.fandom.com/wiki/Kobble",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,24 +15,40 @@
       "Label": "Associated religion",
       "Links": [
         {
-          "Content": "Gungan",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
+          "Content": "Gungan religion",
+          "Href": "https://starwars.fandom.com/wiki/Gungan_religion"
         }
       ],
       "Values": [
-        "Gungan beliefs"
+        "Gungan religion"
+      ]
+    },
+    {
+      "Label": "Pantheon",
+      "Links": [
+        {
+          "Content": "Guds",
+          "Href": "https://starwars.fandom.com/wiki/Gud/Legends"
+        }
+      ],
+      "Values": [
+        "Guds"
       ]
     },
     {
       "Label": "Type of deity",
       "Links": [
         {
+          "Content": "Goddess",
+          "Href": "https://starwars.fandom.com/wiki/Deity/Legends"
+        },
+        {
           "Content": "food",
           "Href": "https://starwars.fandom.com/wiki/Foodstuff/Legends"
         }
       ],
       "Values": [
-        "Goddess of good food and feast"
+        "Goddess of good food and feasts"
       ]
     },
     {
@@ -57,19 +74,13 @@
       "Values": [
         "Naboo"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Gungans",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
-        }
-      ],
-      "Values": [
-        "Gungans"
-      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

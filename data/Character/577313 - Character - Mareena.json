@@ -19,12 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/19_BBY"
         },
         {
-          "Content": "river moon of Al'doleem",
-          "Href": "https://starwars.fandom.com/wiki/River_moon_of_Al%27doleem"
+          "Content": "Al'doleem",
+          "Href": "https://starwars.fandom.com/wiki/Al%27doleem"
         }
       ],
       "Values": [
-        "19 BBY, river moon of Al'doleem"
+        "19 BBY, Al'doleem"
       ]
     },
     {
@@ -71,6 +71,39 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Jogg",
+          "Href": "https://starwars.fandom.com/wiki/Jogg"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Jogg (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Colli",
+          "Href": "https://starwars.fandom.com/wiki/Colli"
+        },
+        {
+          "Content": "daughter",
+          "Href": "https://starwars.fandom.com/wiki/Colli%27s_sister"
+        }
+      ],
+      "Values": [
+        "Colli",
+        "A daughter"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -83,5 +116,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 577314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jogg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 577316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 577317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colli's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

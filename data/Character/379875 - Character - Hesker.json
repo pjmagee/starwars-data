@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -58,7 +65,7 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Pink"
+        "Fair"
       ]
     },
     {
@@ -69,15 +76,31 @@
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         },
         {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military_(Sith_Empire)"
+        },
+        {
           "Content": "Imperial Guard",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Guard"
         }
       ],
       "Values": [
         "Sith Empire",
+        "Imperial Military",
         "Imperial Guard"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 480839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_attack_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 358470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

@@ -24,37 +24,42 @@
         }
       ],
       "Values": [
-        "Near Redgill Lake; Dathomir"
+        "Near Redgill Lake, Dathomir"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Bright Sun Clan",
-          "Href": "https://starwars.fandom.com/wiki/Bright_Sun_Clan"
-        },
-        {
           "Content": "New Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
+        },
+        {
+          "Content": "Bright Sun Clan",
+          "Href": "https://starwars.fandom.com/wiki/Bright_Sun_Clan"
         }
       ],
       "Values": [
-        "Bright Sun Clan",
-        "New Jedi Order"
+        "New Jedi Order",
+        "Bright Sun Clan"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 301510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Bright_Sun_Hill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 295698,
       "PageUrl": "https://starwars.fandom.com/wiki/Redgill_Lake",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 301510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Bright_Sun_Hill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

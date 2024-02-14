@@ -43,11 +43,27 @@
       ]
     },
     {
+      "Label": "Shape",
+      "Links": [
+        {
+          "Content": "Pistol",
+          "Href": "https://starwars.fandom.com/wiki/Pistol"
+        }
+      ],
+      "Values": [
+        "Pistol-shaped"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Hidden Path",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Path"
         },
         {
           "Content": "Gideon's Imperial remnant",
@@ -68,6 +84,7 @@
       ],
       "Values": [
         "Galactic Empire",
+        "Hidden Path",
         "Gideon's Imperial remnant",
         "Morak Imperial remnants",
         "Trandoshan family",
@@ -77,14 +94,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 623816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_SE-14r_light_repeating_blasters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 785537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sana_Starros'_SE-14r_light_repeating_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 466335,
       "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 623816,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lando_Calrissian's_SE-14r_light_repeating_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

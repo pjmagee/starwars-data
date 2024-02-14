@@ -25,13 +25,18 @@
     },
     {
       "Label": "Sector",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Shasos sector",
+          "Href": "https://starwars.fandom.com/wiki/Shasos_sector/Legends"
+        }
+      ],
       "Values": [
         "Shasos sector"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-13"
@@ -63,6 +68,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 774072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shasos_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 444739,
       "PageUrl": "https://starwars.fandom.com/wiki/Bardotta/Legends",

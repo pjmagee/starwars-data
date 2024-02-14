@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,6 +81,35 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Mindak family",
+          "Href": "https://starwars.fandom.com/wiki/Mindak_family"
+        }
+      ],
+      "Values": [
+        "Mindak family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Theovor Mindak",
+          "Href": "https://starwars.fandom.com/wiki/Theovor_Mindak"
+        },
+        {
+          "Content": "A mother",
+          "Href": "https://starwars.fandom.com/wiki/Theovor_Mindak%27s_wife"
+        }
+      ],
+      "Values": [
+        "Theovor Mindak",
+        "A mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -86,5 +122,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 547328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theovor_Mindak's_wife",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 479339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mindak_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 378325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theovor_Mindak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

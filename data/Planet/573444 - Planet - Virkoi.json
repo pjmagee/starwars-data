@@ -2,7 +2,7 @@
   "PageId": 573444,
   "PageUrl": "https://starwars.fandom.com/wiki/Virkoi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/65/Harkrova-SWT.jpg/revision/latest?cb=20220603110054",
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +12,31 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Inner Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Inner Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-9"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -41,15 +65,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
-        },
-        {
-          "Content": "Imperial Security Bureau",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau"
         }
       ],
       "Values": [
-        "Galactic Empire",
-        "Imperial Security Bureau"
+        "Galactic Empire"
       ]
     }
   ],

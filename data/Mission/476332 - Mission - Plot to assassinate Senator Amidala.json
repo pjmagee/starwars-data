@@ -27,16 +27,28 @@
       "Label": "Objective",
       "Links": [
         {
-          "Content": "Assassination",
+          "Content": "Assassinate",
           "Href": "https://starwars.fandom.com/wiki/Assassin"
+        },
+        {
+          "Content": "Senator",
+          "Href": "https://starwars.fandom.com/wiki/Senator"
         },
         {
           "Content": "Padmé Amidala",
           "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala"
+        },
+        {
+          "Content": "Trade Federation",
+          "Href": "https://starwars.fandom.com/wiki/Trade_Federation"
+        },
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         }
       ],
       "Values": [
-        "Assassination of Padmé Amidala"
+        "Assassinate Senator Padmé Amidala and ensure the Trade Federation's allegiance with the Confederacy of Independent Systems"
       ]
     },
     {
@@ -57,10 +69,20 @@
         {
           "Content": "Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Coruscant"
+        },
+        {
+          "Content": "Federal District",
+          "Href": "https://starwars.fandom.com/wiki/Federal_District"
+        },
+        {
+          "Content": "Uscru District",
+          "Href": "https://starwars.fandom.com/wiki/Uscru_District"
         }
       ],
       "Values": [
-        "Coruscant"
+        "Coruscant",
+        "Federal District",
+        "Uscru District (2nd attempt)"
       ]
     },
     {
@@ -73,34 +95,25 @@
         {
           "Content": "Jango Fett",
           "Href": "https://starwars.fandom.com/wiki/Jango_Fett"
+        },
+        {
+          "Content": "Obi-Wan Kenobi",
+          "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi"
         }
       ],
       "Values": [
         "Assassination failed",
-        "Zam Wesell is killed by Jango Fett"
+        "Several Naboo are killed as collateral",
+        "Zam Wesell is killed by Jango Fett",
+        "Beginning of Obi-Wan Kenobi's investigation of Jango Fett"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 615164,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rinn_(Gand)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 615165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiver",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 23705,
       "PageUrl": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 472598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Crisis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 500514,
@@ -111,6 +124,11 @@
       "PageId": 500515,
       "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_subsector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 472598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_Crisis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

@@ -55,6 +55,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-6"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -84,14 +96,18 @@
         {
           "Content": "Breathable",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        },
+        {
+          "Content": "oxygen",
+          "Href": "https://starwars.fandom.com/wiki/Oxygen"
         }
       ],
       "Values": [
-        "Breathable (northern hemisphere)"
+        "Breathable (northern hemisphere; oxygen mix)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caves",
@@ -130,7 +146,7 @@
         }
       ],
       "Values": [
-        "Citadel",
+        "The Citadel",
         "Point Tarron",
         "Sulfur Sea"
       ]
@@ -147,6 +163,10 @@
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
         {
+          "Content": "Separatist holdouts",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts"
+        },
+        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
@@ -154,54 +174,35 @@
       "Values": [
         "Galactic Republic",
         "Confederacy of Independent Systems",
+        "Separatist holdouts",
         "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 588328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shuttle_81572",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 704395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_droid_unit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 713937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Lola_Sayu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 483368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Longshot",
+      "PageId": 483028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charger",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 551919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lola_Sayu_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 507199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdouts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 545416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Even_Piell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 483187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Lola_Sayu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 546666,
-      "PageUrl": "https://starwars.fandom.com/wiki/R2-D2's_battle_droid_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 600597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
+      "PageId": 455401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citadel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 612697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdout_(Citadel)",
+      "PageId": 788654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_strike_team",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -210,9 +211,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 472616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Osi_Sobeck",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 588327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lola_Sayu_defense_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 612697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdout_(Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 597923,
@@ -220,9 +226,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 455401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Citadel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 546665,
+      "PageUrl": "https://starwars.fandom.com/wiki/OOM-10",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 748588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Anooba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 483368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Longshot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Even_Piell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 531112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Script",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
     },
     {
       "PageId": 566171,
@@ -230,24 +256,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 528265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_medical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 588328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shuttle_81572",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 546665,
-      "PageUrl": "https://starwars.fandom.com/wiki/OOM-10",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 483187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Lola_Sayu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 588327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lola_Sayu_defense_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 546666,
+      "PageUrl": "https://starwars.fandom.com/wiki/R2-D2's_battle_droid_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 584936,
@@ -255,14 +271,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 507199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_holdouts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 528265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_medical_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 483028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 600597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 704395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Citadel_droid_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 748954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_BX-series_droid_commando_(The_Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 748958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_BX-series_droid_commando_2_(The_Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 749323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_(Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 586900,
@@ -273,6 +309,26 @@
       "PageId": 588273,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(R2-D2)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 713937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Lola_Sayu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 750382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Citadel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 472616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Osi_Sobeck",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 551919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lola_Sayu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

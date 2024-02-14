@@ -72,9 +72,16 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
-        "Brown, tan"
+        "Brown",
+        "Orange",
+        "Tan"
       ]
     },
     {
@@ -95,9 +102,77 @@
       "Values": [
         "Malastare"
       ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Carnivorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet"
+        }
+      ],
+      "Values": [
+        "Carnivorous",
+        "Energy"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 504360,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Beast_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 734749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Beast_Zappers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 632050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Benathy_homeworld",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 507552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malastarian_fuel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 665572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zillo_Beast_(Benathy)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_research_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 632006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_the_Benathy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 591196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zillo_Beast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 757254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloned_Zillo_Beast_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 756864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_904",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 465008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malastare",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 613193,
       "PageUrl": "https://starwars.fandom.com/wiki/Ord_Tellarom/LEGO",
@@ -109,38 +184,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 465008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malastare",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 504360,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Beast_incident",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 632006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_the_Benathy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 632050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Benathy_homeworld",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 591196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zillo_Beast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malastarian_fuel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 665572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zillo_Beast_(Benathy)",
+      "PageId": 762644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Specimen_A",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

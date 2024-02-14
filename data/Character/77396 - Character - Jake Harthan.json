@@ -66,22 +66,47 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
-        {
-          "Content": "Tion Hegemony",
-          "Href": "https://starwars.fandom.com/wiki/Tion_Hegemony/Legends"
-        },
         {
           "Content": "Harthan family",
           "Href": "https://starwars.fandom.com/wiki/Harthan_family"
         }
       ],
       "Values": [
-        "Tion Hegemony",
         "Harthan family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Harthan",
+          "Href": "https://starwars.fandom.com/wiki/Harthan"
+        }
+      ],
+      "Values": [
+        "Harthan"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Tion Hegemony",
+          "Href": "https://starwars.fandom.com/wiki/Tion_Hegemony/Legends"
+        }
+      ],
+      "Values": [
+        "Tion Hegemony"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 77395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harthan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

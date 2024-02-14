@@ -2,7 +2,7 @@
   "PageId": 351433,
   "PageUrl": "https://starwars.fandom.com/wiki/Feldwes",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7b/Feldwes-TEA.jpg/revision/latest?cb=20220930195250",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -29,10 +34,15 @@
         {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
+        },
+        {
+          "Content": "Back Reach",
+          "Href": "https://starwars.fandom.com/wiki/Back_Reach"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Gordian Reach",
+        "Back Reach"
       ]
     },
     {
@@ -48,10 +58,10 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
-        "Q-5"
+        "Q-6"
       ]
     },
     {
@@ -67,29 +77,24 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "B'trillans",
-          "Href": "https://starwars.fandom.com/wiki/B%27trillan"
-        },
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        },
-        {
-          "Content": "T'sarki",
-          "Href": "https://starwars.fandom.com/wiki/T%27sarki"
+          "Content": "Factories",
+          "Href": "https://starwars.fandom.com/wiki/Factory_world/Legends"
         }
       ],
       "Values": [
-        "B'trillans",
-        "Human",
-        "T'sarki"
+        "Factories"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 311070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Feldwes_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 273528,
       "PageUrl": "https://starwars.fandom.com/wiki/Ardan_Cross",

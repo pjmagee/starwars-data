@@ -17,10 +17,20 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
@@ -75,35 +85,35 @@
       "Label": "Clone Wars",
       "Links": [
         {
-          "Content": "Humbarine",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Humbarine"
+          "Content": "Bombardment of Humbarine",
+          "Href": "https://starwars.fandom.com/wiki/Bombardment_of_Humbarine/Legends"
         }
       ],
       "Values": [
-        "Humbarine"
+        "Bombardment of Humbarine"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 307215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Humbarine_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 14937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trellen_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
     {
       "PageId": 25290,
       "PageUrl": "https://starwars.fandom.com/wiki/Enhanced_Security_and_Enforcement_Act",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
+      "PageId": 307215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Humbarine_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 5269,
       "PageUrl": "https://starwars.fandom.com/wiki/Humbarine/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 14937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trellen_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

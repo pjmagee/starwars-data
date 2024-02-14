@@ -2,7 +2,7 @@
   "PageId": 475366,
   "PageUrl": "https://starwars.fandom.com/wiki/2-1B-series_medical_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/50/ROTS2-1bdroid.jpg/revision/latest?cb=20061207163818",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/04/21BSurgicalDroid-SithSnapshot.png/revision/latest?cb=20221030155742",
   "Data": [
     {
       "Label": "Titles",
@@ -60,6 +60,36 @@
       ]
     },
     {
+      "Label": "Sensor color",
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        }
+      ],
+      "Values": [
+        "Yellow",
+        "White",
+        "Purple (Under Scourge infection)"
+      ]
+    },
+    {
+      "Label": "Plating color",
+      "Links": [
+        {
+          "Content": "Gray",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Gray"
+      ]
+    },
+    {
       "Label": "Equipment",
       "Links": [
         {
@@ -83,8 +113,20 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Royal House of Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Royal_House_of_Naboo"
+        },
+        {
+          "Content": "Ajax Sigma's army",
+          "Href": "https://starwars.fandom.com/wiki/Ajax_Sigma%27s_army"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Death Watch",
+          "Href": "https://starwars.fandom.com/wiki/Death_Watch"
         },
         {
           "Content": "Galactic Empire",
@@ -99,6 +141,14 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
+        },
+        {
+          "Content": "vessel",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        },
+        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
         },
@@ -109,51 +159,20 @@
       ],
       "Values": [
         "Galactic Republic",
+        "Royal House of Naboo",
+        "Ajax Sigma's army",
         "Confederacy of Independent Systems",
+        "Death Watch",
         "Galactic Empire",
         "Partisans",
         "Alliance to Restore the Republic",
+        "Scourge (As a vessel)",
         "New Republic",
         "Resistance"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 693048,
-      "PageUrl": "https://starwars.fandom.com/wiki/BU-11",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 465224,
-      "PageUrl": "https://starwars.fandom.com/wiki/2-1B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 555030,
-      "PageUrl": "https://starwars.fandom.com/wiki/2-1B_Delta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 483041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 532046,
-      "PageUrl": "https://starwars.fandom.com/wiki/TB-2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 536972,
-      "PageUrl": "https://starwars.fandom.com/wiki/2MED2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 729656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B_droid_bartender",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
     {
       "PageId": 625430,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B_surgical_droid_(Naboo)",
@@ -165,14 +184,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
+      "PageId": 586752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guswan_Askreeth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693048,
+      "PageUrl": "https://starwars.fandom.com/wiki/BU-11",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 536972,
+      "PageUrl": "https://starwars.fandom.com/wiki/2MED2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 789051,
+      "PageUrl": "https://starwars.fandom.com/wiki/TB-5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 452675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 736969,
+      "PageUrl": "https://starwars.fandom.com/wiki/BV-RJ",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 603143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_flagship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 465224,
+      "PageUrl": "https://starwars.fandom.com/wiki/2-1B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 729656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B_droid_bartender",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 532046,
+      "PageUrl": "https://starwars.fandom.com/wiki/TB-2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 750290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B-series_medical_droid_(Darth_Vader)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 750378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B-series_medical_droid_(Jedi_Temple)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 750379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B-series_medical_droid_(Alderaan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
       "PageId": 560238,
       "PageUrl": "https://starwars.fandom.com/wiki/G2-1B7",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 586752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guswan_Askreeth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 777560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B-series_medical_droid_(Lobot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 483041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 555030,
+      "PageUrl": "https://starwars.fandom.com/wiki/2-1B_Delta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

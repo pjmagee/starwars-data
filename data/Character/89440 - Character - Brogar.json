@@ -36,31 +36,49 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
-        "None"
+        "He/him"
       ]
     },
     {
       "Label": "Eye color",
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Blue and black"
+      ]
+    },
+    {
+      "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Blue"
+        "Light brown"
       ]
     },
     {
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Brogar's Safe House",
-          "Href": "https://starwars.fandom.com/wiki/Brogar%27s_Safe_House"
+          "Content": "Brogar's Safe House and Cantina",
+          "Href": "https://starwars.fandom.com/wiki/Brogar%27s_Safe_House_and_Cantina"
         }
       ],
       "Values": [
-        "Brogar's Safe House"
+        "Brogar's Safe House and Cantina"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 90438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brogar's_Safe_House_and_Cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    }
+  ]
 }

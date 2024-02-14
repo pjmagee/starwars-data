@@ -2,7 +2,7 @@
   "PageId": 543371,
   "PageUrl": "https://starwars.fandom.com/wiki/Yar_Togna",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/53/YarTogna-SWT.jpg/revision/latest?cb=20220820185417",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trailing Sectors"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-18",
@@ -33,6 +38,30 @@
       ],
       "Values": [
         "P-18"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Sulfur",
+          "Href": "https://starwars.fandom.com/wiki/Sulfur"
+        },
+        {
+          "Content": "Oxygen",
+          "Href": "https://starwars.fandom.com/wiki/Oxygen"
+        }
+      ],
+      "Values": [
+        "Sulfur-rich",
+        "Oxygen-poor"
       ]
     },
     {
@@ -48,6 +77,81 @@
       ]
     },
     {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Volcanic",
+          "Href": "https://starwars.fandom.com/wiki/Volcano"
+        },
+        {
+          "Content": "mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        }
+      ],
+      "Values": [
+        "Flatlands",
+        "Volcanic mountains"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "springs",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "Mountain springs"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Moss",
+          "Href": "https://starwars.fandom.com/wiki/Moss"
+        },
+        {
+          "Content": "Nursery tree",
+          "Href": "https://starwars.fandom.com/wiki/Nursery_tree"
+        }
+      ],
+      "Values": [
+        "Moss",
+        "Nursery tree"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Float-jelly",
+          "Href": "https://starwars.fandom.com/wiki/Float-jelly"
+        }
+      ],
+      "Values": [
+        "Float-jelly"
+      ]
+    },
+    {
+      "Label": "Other lifeforms",
+      "Links": [
+        {
+          "Content": "Molds",
+          "Href": "https://starwars.fandom.com/wiki/Mold"
+        },
+        {
+          "Content": "Mushrooms",
+          "Href": "https://starwars.fandom.com/wiki/Mushroom"
+        }
+      ],
+      "Values": [
+        "Molds",
+        "Mushrooms"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -57,6 +161,27 @@
       ],
       "Values": [
         "Tognath"
+      ]
+    },
+    {
+      "Label": "Primary language(s)",
+      "Links": [
+        {
+          "Content": "Tognath",
+          "Href": "https://starwars.fandom.com/wiki/Tognath_(language)"
+        }
+      ],
+      "Values": [
+        "Tognath"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [],
+      "Values": [
+        "Mushrooms",
+        "Molds",
+        "Mosses"
       ]
     },
     {
@@ -74,9 +199,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 559674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conquering_of_Yar_Togna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 543369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tognath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 543357,
@@ -89,9 +214,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 543369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tognath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 559674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conquest_of_Yar_Togna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

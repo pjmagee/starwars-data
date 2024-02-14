@@ -2,12 +2,37 @@
   "PageId": 548429,
   "PageUrl": "https://starwars.fandom.com/wiki/Ro-Loo_Triangle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ro-Loo Triangle"
+      ]
+    },
+    {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Mid Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "P-16",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "P-16"
       ]
     },
     {
@@ -30,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ro-Loo_Triangle_Imperial_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

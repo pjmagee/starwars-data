@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -60,24 +60,55 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Outer Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sepan sector",
+          "Href": "https://starwars.fandom.com/wiki/Sepan_sector"
+        }
+      ],
+      "Values": [
+        "Sepan sector"
       ]
     },
     {
       "Label": "System",
       "Links": [
         {
-          "Content": "Gaerboud system",
-          "Href": "https://starwars.fandom.com/wiki/Gaerboud_system"
+          "Content": "Sepan system",
+          "Href": "https://starwars.fandom.com/wiki/Sepan_system"
         }
       ],
       "Values": [
-        "Gaerboud system"
+        "Sepan system"
+      ]
+    },
+    {
+      "Label": "Planet",
+      "Links": [
+        {
+          "Content": "Gaerboud IV",
+          "Href": "https://starwars.fandom.com/wiki/Gaerboud_IV"
+        }
+      ],
+      "Values": [
+        "Gaerboud IV"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "P-13"
       ]
     },
     {
@@ -115,7 +146,12 @@
   "Relationships": [
     {
       "PageId": 287451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaerboud_system",
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaerboud_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 18483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]

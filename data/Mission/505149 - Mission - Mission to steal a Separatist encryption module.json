@@ -69,14 +69,51 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Death",
+          "Href": "https://starwars.fandom.com/wiki/Death"
+        },
+        {
+          "Content": "Commander",
+          "Href": "https://starwars.fandom.com/wiki/Commander"
+        },
+        {
+          "Content": "Aut-O",
+          "Href": "https://starwars.fandom.com/wiki/Aut-O"
+        },
+        {
+          "Content": "D-Squad",
+          "Href": "https://starwars.fandom.com/wiki/D-Squad"
+        },
+        {
+          "Content": "Aut-O's flagship",
+          "Href": "https://starwars.fandom.com/wiki/Aut-O%27s_flagship"
+        },
+        {
+          "Content": "Abafar",
+          "Href": "https://starwars.fandom.com/wiki/Abafar"
         }
       ],
       "Values": [
-        "Galactic Republic forces successfully escape with the encryption module"
+        "Galactic Republic victory",
+        "Successful theft of the encryption module",
+        "Death of Commander Aut-O",
+        "D-Squad escapes Aut-O's flagship and crash lands on Abafar"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 685120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 476623,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 583968,
       "PageUrl": "https://starwars.fandom.com/wiki/D-Squad's_Neimoidian_shuttle",
@@ -86,16 +123,6 @@
       "PageId": 584369,
       "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 476623,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-Squad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 685120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

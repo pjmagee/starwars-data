@@ -2,7 +2,7 @@
   "PageId": 473708,
   "PageUrl": "https://starwars.fandom.com/wiki/Ossus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1e/Ossus-FDCR.png/revision/latest?cb=20160304050047",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3b/Ossus-FromTheDesertComesAStranger.png/revision/latest?cb=20220206205838",
   "Data": [
     {
       "Label": "Titles",
@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "At least 1"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [
         {
@@ -56,11 +63,11 @@
         }
       ],
       "Values": [
-        "At least 1: Ossus's forest moon"
+        "At least 2, including Ossus's forest moon"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-6",
@@ -109,7 +116,26 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -139,6 +165,10 @@
           "Href": "https://starwars.fandom.com/wiki/Eocho_Mountains"
         },
         {
+          "Content": "First Temple",
+          "Href": "https://starwars.fandom.com/wiki/First_Temple"
+        },
+        {
           "Content": "Great Jedi Library",
           "Href": "https://starwars.fandom.com/wiki/Great_Jedi_Library"
         },
@@ -147,15 +177,21 @@
           "Href": "https://starwars.fandom.com/wiki/Imhar_Canyon"
         },
         {
-          "Content": "Jedi Temple",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_Praxeum_(Ossus)"
+          "Content": "Jedi Temple of Luke Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Temple_of_Luke_Skywalker"
+        },
+        {
+          "Content": "Ossus City",
+          "Href": "https://starwars.fandom.com/wiki/Ossus_City"
         }
       ],
       "Values": [
         "Eocho Mountains",
+        "First Temple",
         "Great Jedi Library",
         "Imhar Canyon",
-        "Jedi Temple"
+        "Jedi Temple of Luke Skywalker",
+        "Ossus City"
       ]
     },
     {
@@ -168,11 +204,21 @@
         {
           "Content": "Kirruk",
           "Href": "https://starwars.fandom.com/wiki/Kirruk"
+        },
+        {
+          "Content": "Sorgan frog",
+          "Href": "https://starwars.fandom.com/wiki/Sorgan_frog"
+        },
+        {
+          "Content": "Mud yak",
+          "Href": "https://starwars.fandom.com/wiki/Mud_yak"
         }
       ],
       "Values": [
         "Kaddyr bug",
-        "Kirruk"
+        "Kirruk",
+        "Sorgan frog",
+        "Mud yak"
       ]
     },
     {
@@ -188,15 +234,30 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Quarren",
+          "Href": "https://starwars.fandom.com/wiki/Quarren"
+        },
+        {
+          "Content": "Twi'lek",
+          "Href": "https://starwars.fandom.com/wiki/Twi%27lek"
+        },
+        {
+          "Content": "Yoda's species",
+          "Href": "https://starwars.fandom.com/wiki/Yoda%27s_species"
         }
       ],
       "Values": [
-        "Human"
+        "Human",
+        "Quarren",
+        "Twi'lek",
+        "Yoda's species"
       ]
     },
     {
@@ -273,54 +334,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 500733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Med'eeth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 710286,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knossa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 713398,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 667372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ysannan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 723925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Stone_Guardian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 667572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imhar_Canyon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 668285,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ooroo_Canyon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 593078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uneti_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 710855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Knowledge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 710856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chamber_of_Antiquities",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 759358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_survivors_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 713579,
@@ -333,44 +349,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 667327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cron_Supernova",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 710264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaddyr_bug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 710288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kirruk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 593384,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 678278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_hut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 524426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 526837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_of_Luke_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695416,
+      "PageUrl": "https://starwars.fandom.com/wiki/12,000_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
       "PageId": 699871,
       "PageUrl": "https://starwars.fandom.com/wiki/Eocho_Mountains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 593207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rammahgon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 667511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cron_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 668282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gardens_of_T'alla",
+      "PageId": 552233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Library",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 710289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heritage_Tapestry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 639170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 515207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Tree_(Coruscant)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 593384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Praxeum_(Ossus)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 723925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Stone_Guardian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 713401,
@@ -388,19 +419,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 667385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus's_forest_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 524062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 272219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pontite_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 515207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Tree_(Coruscant)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 592511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 639121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sorgan_frog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 710286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knossa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 713398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 557672,
@@ -408,29 +449,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 452741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 272219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pontite_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 710264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaddyr_bug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 710288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kirruk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 552233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Library",
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 695416,
-      "PageUrl": "https://starwars.fandom.com/wiki/12,000_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 733629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke's_hut_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 515827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Training_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 593207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rammahgon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 667371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 759418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evacuation_of_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 593078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uneti_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 667385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus's_forest_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 667511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cron_Cluster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 710289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heritage_Tapestry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 452676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
       "PageId": 667753,
@@ -438,9 +519,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 667371,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna",
+      "PageId": 720570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mud_yak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 710855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Knowledge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 710856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chamber_of_Antiquities",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 667572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imhar_Canyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 668285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ooroo_Canyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 668282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gardens_of_T'alla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 500733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chronicles_of_Med'eeth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 532337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 639170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 592511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veris_Hydan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452576,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_High_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 667372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysannan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

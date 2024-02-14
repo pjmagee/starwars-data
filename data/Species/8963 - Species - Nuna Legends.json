@@ -2,7 +2,7 @@
   "PageId": 8963,
   "PageUrl": "https://starwars.fandom.com/wiki/Nuna/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/49/Nuna_bg.jpg/revision/latest?cb=20080404193307",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/80/Nuna-WIT.png/revision/latest?cb=20220914031043",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,18 @@
       ],
       "Values": [
         "Non-sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Reptavian",
+          "Href": "https://starwars.fandom.com/wiki/Reptavian/Legends"
+        }
+      ],
+      "Values": [
+        "Reptavian"
       ]
     },
     {
@@ -67,23 +79,52 @@
         {
           "Content": "Naboo",
           "Href": "https://starwars.fandom.com/wiki/Naboo/Legends"
+        },
+        {
+          "Content": "Saleucami",
+          "Href": "https://starwars.fandom.com/wiki/Saleucami/Legends"
         }
       ],
       "Values": [
-        "Naboo"
+        "Naboo",
+        "Saleucami"
+      ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Swamps"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Omnivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Omnivore"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 325171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roast_nuna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 27296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 325281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_drumsticks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 411314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tooka/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 337073,
@@ -96,29 +137,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 596171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 27296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 52968,
       "PageUrl": "https://starwars.fandom.com/wiki/Faa/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 404527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_Gumbo/Legends",
+      "PageId": 325171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roast_nuna/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 411314,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tooka/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 325281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_drumsticks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 596171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 404527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_Gumbo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

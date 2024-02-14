@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -98,6 +98,49 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Anoat sector",
+          "Href": "https://starwars.fandom.com/wiki/Anoat_sector/Legends"
+        }
+      ],
+      "Values": [
+        "Anoat sector"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Tinoon system",
+          "Href": "https://starwars.fandom.com/wiki/Tinoon_system"
+        }
+      ],
+      "Values": [
+        "Tinoon system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "K-18"
+      ]
+    },
+    {
       "Label": "Present for battles/events",
       "Links": [
         {
@@ -112,14 +155,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 287348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tinoon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 242414,
       "PageUrl": "https://starwars.fandom.com/wiki/Tinoon/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 287348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tinoon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

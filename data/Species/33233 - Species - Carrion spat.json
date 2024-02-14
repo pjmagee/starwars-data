@@ -24,19 +24,39 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Avian",
+          "Href": "https://starwars.fandom.com/wiki/Bird/Legends"
+        }
+      ],
+      "Values": [
+        "Avian"
+      ]
+    },
+    {
+      "Label": "Subspecies",
+      "Links": [
+        {
+          "Content": "Painted spat",
+          "Href": "https://starwars.fandom.com/wiki/Painted_spat"
+        }
+      ],
+      "Values": [
+        "Painted spat"
+      ]
+    },
+    {
       "Label": "Feather color",
       "Links": [
         {
           "Content": "color",
           "Href": "https://starwars.fandom.com/wiki/Color/Legends"
-        },
-        {
-          "Content": "males",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
         }
       ],
       "Values": [
-        "Varied in color; usually shades of green (common to both males and females)"
+        "Varied in color; usually shades of green"
       ]
     },
     {
@@ -45,29 +65,19 @@
         {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia/Legends"
+        },
+        {
+          "Content": "Talus",
+          "Href": "https://starwars.fandom.com/wiki/Talus/Legends"
         }
       ],
       "Values": [
-        "Corellia"
+        "Corellia",
+        "Talus"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 308178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gravefeather",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 58469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Beaches/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 609288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vella_plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
     {
       "PageId": 131,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellia/Legends",
@@ -91,6 +101,21 @@
     {
       "PageId": 709059,
       "PageUrl": "https://starwars.fandom.com/wiki/Betsy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 609288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vella_plains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 58469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gold_Beaches/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 308178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gravefeather",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]

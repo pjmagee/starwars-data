@@ -2,6 +2,7 @@
   "PageId": 496596,
   "PageUrl": "https://starwars.fandom.com/wiki/Ebor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tiure family",
@@ -45,7 +53,62 @@
       "Values": [
         "Tiure family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mama",
+          "Href": "https://starwars.fandom.com/wiki/Mama"
+        },
+        {
+          "Content": "Papa",
+          "Href": "https://starwars.fandom.com/wiki/Papa"
+        }
+      ],
+      "Values": [
+        "Mama",
+        "Papa"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jabba Desilijic Tiure's father",
+          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_father"
+        },
+        {
+          "Content": "Ziro Desilijic Tiure",
+          "Href": "https://starwars.fandom.com/wiki/Ziro_Desilijic_Tiure"
+        }
+      ],
+      "Values": [
+        "Jabba Desilijic Tiure's father",
+        "Ziro Desilijic Tiure"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 665343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mama",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Papa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 243579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ziro_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

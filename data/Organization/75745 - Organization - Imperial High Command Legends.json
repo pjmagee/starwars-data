@@ -15,7 +15,7 @@
       "Label": "Organization type",
       "Links": [],
       "Values": [
-        "Military Command"
+        "Central command division"
       ]
     },
     {
@@ -148,17 +148,22 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Imperial Remnant",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military/Legends"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Remnant"
+        "Imperial Military"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 134314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Command/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 88847,
       "PageUrl": "https://starwars.fandom.com/wiki/Army_Command",
@@ -180,18 +185,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 4772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 379,
       "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 134314,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Command/Legends",
+      "PageId": 4772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

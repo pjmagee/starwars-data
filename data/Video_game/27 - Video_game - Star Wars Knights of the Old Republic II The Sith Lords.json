@@ -87,15 +87,28 @@
           "Href": "https://starwars.fandom.com/wiki/Android_(operating_system)"
         },
         {
-          "Content": "iOS",
+          "Content": "iPhone",
           "Href": "https://starwars.fandom.com/wiki/IOS"
+        },
+        {
+          "Content": "June 8",
+          "Href": "https://starwars.fandom.com/wiki/June_8"
+        },
+        {
+          "Content": "2022",
+          "Href": "https://starwars.fandom.com/wiki/2022"
+        },
+        {
+          "Content": "Nintendo Switch",
+          "Href": "https://starwars.fandom.com/wiki/Nintendo_Switch"
         }
       ],
       "Values": [
         "December 6, 2004 (Xbox)",
         "February 8, 2005 ()",
         "July 21, 2015 (Mac and Linux)",
-        "December 18, 2020 (Android and iOS)"
+        "December 18, 2020 (Android and iPhone)",
+        "June 8, 2022 (Nintendo Switch)"
       ]
     },
     {
@@ -128,12 +141,94 @@
     },
     {
       "Label": "Platform(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "iOS",
+          "Href": "https://starwars.fandom.com/wiki/IOS"
+        },
+        {
+          "Content": "Android",
+          "Href": "https://starwars.fandom.com/wiki/Android_(operating_system)"
+        },
+        {
+          "Content": "Nintendo Switch",
+          "Href": "https://starwars.fandom.com/wiki/Nintendo_Switch"
+        }
+      ],
       "Values": [
         "Xbox",
         "Windows",
         "Mac",
-        "Linux"
+        "Linux",
+        "iOS",
+        "Android",
+        "Nintendo Switch"
+      ]
+    },
+    {
+      "Label": "Producer(s)",
+      "Links": [
+        {
+          "Content": "Chris Parker",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Parker"
+        },
+        {
+          "Content": "Michael Gallo",
+          "Href": "https://starwars.fandom.com/wiki/Michael_Gallo"
+        }
+      ],
+      "Values": [
+        "Chris Parker",
+        "Michael Gallo",
+        "Rachel Bryant"
+      ]
+    },
+    {
+      "Label": "Designer(s)",
+      "Links": [
+        {
+          "Content": "Chris Avellone",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Avellone"
+        }
+      ],
+      "Values": [
+        "Chris Avellone"
+      ]
+    },
+    {
+      "Label": "Programmer(s)",
+      "Links": [
+        {
+          "Content": "Chris Parker",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Parker"
+        }
+      ],
+      "Values": [
+        "Chris Parker"
+      ]
+    },
+    {
+      "Label": "Writer(s)",
+      "Links": [
+        {
+          "Content": "Chris Avellone",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Avellone"
+        }
+      ],
+      "Values": [
+        "Chris Avellone"
+      ]
+    },
+    {
+      "Label": "Composer(s)",
+      "Links": [
+        {
+          "Content": "Mark Griskey",
+          "Href": "https://starwars.fandom.com/wiki/Mark_Griskey"
+        }
+      ],
+      "Values": [
+        "Mark Griskey"
       ]
     },
     {
@@ -159,12 +254,29 @@
       "Values": [
         "Star Wars: Knights of the Old Republic"
       ]
+    },
+    {
+      "Label": "Next",
+      "Links": [
+        {
+          "Content": "Star Wars: Knights of the Old Republic 3",
+          "Href": "https://starwars.fandom.com/wiki/Star_Wars:_Knights_of_the_Old_Republic_3"
+        }
+      ],
+      "Values": [
+        "Star Wars: Knights of the Old Republic 3 (cancelled)"
+      ]
     }
   ],
   "Relationships": [
     {
       "PageId": 321759,
       "PageUrl": "https://starwars.fandom.com/wiki/Mystery_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 769606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korriban_motif",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {

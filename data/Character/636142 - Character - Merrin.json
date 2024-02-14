@@ -2,7 +2,7 @@
   "PageId": 636142,
   "PageUrl": "https://starwars.fandom.com/wiki/Merrin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3e/Merrin.png/revision/latest?cb=20191126000131",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/fb/Merrin_SWJediSurvivor.png/revision/latest?cb=20230429082518",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,22 @@
       ],
       "Values": [
         "Dathomir"
+      ]
+    },
+    {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "33",
+          "Href": "https://starwars.fandom.com/wiki/33_BBY"
+        },
+        {
+          "Content": "32 BBY",
+          "Href": "https://starwars.fandom.com/wiki/32_BBY"
+        }
+      ],
+      "Values": [
+        "c. 33–32 BBY"
       ]
     },
     {
@@ -52,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -72,13 +95,18 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "tattoos",
+          "Href": "https://starwars.fandom.com/wiki/Tattoo"
+        }
+      ],
       "Values": [
-        "Grey (with markings)"
+        "White (with gray tattoos)"
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Mother Talzin's clan",
@@ -97,21 +125,41 @@
           "Href": "https://starwars.fandom.com/wiki/Nightsisters"
         },
         {
-          "Content": "Mantis crew",
+          "Content": "Stinger Mantis crew",
           "Href": "https://starwars.fandom.com/wiki/Stinger_Mantis_crew"
+        },
+        {
+          "Content": "Hidden Path",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Path"
         }
       ],
       "Values": [
         "Nightsisters",
-        "Mantis crew"
+        "Stinger Mantis crew",
+        "Hidden Path"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 714701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viscus'_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 624378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_Mantis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 757628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teeno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 757555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merrin's_necklace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 764654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kata_Akuna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 637267,
@@ -119,9 +167,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
+      "PageId": 765048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_on_Tanalorr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 714701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viscus'_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 452685,
       "PageUrl": "https://starwars.fandom.com/wiki/Nightbrothers",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 766719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pilgrim's_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

@@ -24,27 +24,29 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Brown",
+          "Content": "Black",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Brown"
+        "Black"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
       ]
     },
     {
@@ -66,16 +68,22 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
-          "Content": "Alliance Military",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_Military"
+          "Content": "Rebel officer corps",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_officer_corps"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Alliance to Restore the Republic",
-        "Alliance Military"
+        "Rebel officer corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 772874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treatise_on_Starfighter_Tactics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    }
+  ]
 }

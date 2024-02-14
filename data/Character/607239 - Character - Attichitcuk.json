@@ -36,7 +36,30 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "2.26 meters (7 ft, 5 in)"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Chewbacca's family",
@@ -46,9 +69,43 @@
       "Values": [
         "Chewbacca's family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Chewbacca's mother",
+          "Href": "https://starwars.fandom.com/wiki/Chewbacca%27s_mother"
+        }
+      ],
+      "Values": [
+        "Chewbacca's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Chewbacca",
+          "Href": "https://starwars.fandom.com/wiki/Chewbacca"
+        }
+      ],
+      "Values": [
+        "Chewbacca"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 452815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 607023,
       "PageUrl": "https://starwars.fandom.com/wiki/Kachirho_Wookiee_Militia",

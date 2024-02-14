@@ -2,7 +2,7 @@
   "PageId": 708810,
   "PageUrl": "https://starwars.fandom.com/wiki/Zaina",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/Zaina-SWHunters.png/revision/latest?cb=20210914235035",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/Zaina-SWHunters.png/revision/latest?cb=20220812025545",
   "Data": [
     {
       "Label": "Titles",
@@ -24,15 +24,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Female"
+        "She/her"
       ]
     },
     {
@@ -83,13 +78,24 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "Hunters of the Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Hunters_of_the_Outer_Rim"
         }
       ],
       "Values": [
         "Alliance to Restore the Republic",
-        "New Republic"
+        "New Republic",
+        "Hunters of the Outer Rim"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 781306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veteran_Blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

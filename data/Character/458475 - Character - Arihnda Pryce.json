@@ -2,7 +2,7 @@
   "PageId": 458475,
   "PageUrl": "https://starwars.fandom.com/wiki/Arihnda_Pryce",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b5/Arihnda_Pryce.png/revision/latest?cb=20190705000336",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/GovernorPryce-TotOR2023.png/revision/latest?cb=20240128012606",
   "Data": [
     {
       "Label": "Titles",
@@ -43,12 +43,16 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "0 BBY",
-          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+          "Content": "1 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1_BBY"
+        },
+        {
+          "Content": "Imperial Complex",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)"
         }
       ],
       "Values": [
-        "0 BBY, Lothal"
+        "1 BBY, Imperial Complex, Lothal"
       ]
     },
     {
@@ -57,10 +61,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Lothalite",
+          "Href": "https://starwars.fandom.com/wiki/Lothalite"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Lothalite)"
       ]
     },
     {
@@ -73,6 +81,25 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.74 meters"
       ]
     },
     {
@@ -98,7 +125,36 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Light"
+        "Pale"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Pryce family",
+          "Href": "https://starwars.fandom.com/wiki/Pryce_family"
+        }
+      ],
+      "Values": [
+        "Pryce family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Talmoor Pryce",
+          "Href": "https://starwars.fandom.com/wiki/Talmoor_Pryce"
+        },
+        {
+          "Content": "Elainye Pryce",
+          "Href": "https://starwars.fandom.com/wiki/Elainye_Pryce"
+        }
+      ],
+      "Values": [
+        "Talmoor Pryce",
+        "Elainye Pryce"
       ]
     },
     {
@@ -119,31 +175,31 @@
         {
           "Content": "Imperial Officer Corps",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
+        },
+        {
+          "Content": "Lothal garrison",
+          "Href": "https://starwars.fandom.com/wiki/Lothal_garrison"
+        },
+        {
+          "Content": "7th Fleet",
+          "Href": "https://starwars.fandom.com/wiki/7th_Fleet"
         }
       ],
       "Values": [
         "Pryce Mining",
         "Higher Skies Advocacy Group",
         "Galactic Empire",
-        "Imperial Officer Corps"
+        "Imperial Officer Corps",
+        "Lothal garrison",
+        "7th Fleet (briefly)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 663198,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera's_bridge_officer_corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 570385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 465857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus'_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 592992,
@@ -151,9 +207,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 554936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 427493,
+      "PageUrl": "https://starwars.fandom.com/wiki/7th_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 161255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 570385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pryce_Mining",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 568577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elainye_Pryce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talmoor_Pryce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 663198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera's_bridge_officer_corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 585111,
@@ -164,6 +245,16 @@
       "PageId": 564593,
       "PageUrl": "https://starwars.fandom.com/wiki/Lothal_garrison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 465857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kanan_Jarrus'_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 554936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

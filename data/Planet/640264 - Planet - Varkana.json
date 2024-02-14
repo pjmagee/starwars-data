@@ -36,6 +36,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "O-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "O-6"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
@@ -58,20 +70,29 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Vargo Spaceport",
-          "Href": "https://starwars.fandom.com/wiki/Vargo_Spaceport"
+          "Content": "Darrb's house",
+          "Href": "https://starwars.fandom.com/wiki/Darrb%27s_house"
+        },
+        {
+          "Content": "Losha Tarkon's cantina",
+          "Href": "https://starwars.fandom.com/wiki/Losha_Tarkon%27s_cantina"
         }
       ],
       "Values": [
-        "Vargo Spaceport"
+        "Darrb's house",
+        "Losha Tarkon's cantina"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Gran",
           "Href": "https://starwars.fandom.com/wiki/Gran"
+        },
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
         },
         {
           "Content": "Morseerian",
@@ -80,6 +101,7 @@
       ],
       "Values": [
         "Gran",
+        "Human",
         "Morseerian"
       ]
     },
@@ -110,9 +132,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 640273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vargo_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 640972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tech_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 790155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darrb's_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 640272,
@@ -120,9 +147,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 725873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leechee's_Junk_Emporium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 745086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Macro_scope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 640350,
@@ -130,19 +157,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
+      "PageId": 640273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vargo_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 752022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Losha_Tarkon's_cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
       "PageId": 639471,
       "PageUrl": "https://starwars.fandom.com/wiki/Varkana_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 629692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pyre's_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 725873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leechee's_Junk_Emporium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 640972,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tech_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 695816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Blue_Milk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

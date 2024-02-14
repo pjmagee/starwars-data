@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Date",
+      "Label": "Begin",
       "Links": [
         {
           "Content": "3 ABY",
@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "c. 3 ABY"
+        "3 ABY"
       ]
     },
     {
@@ -45,10 +45,14 @@
         {
           "Content": "Sullust",
           "Href": "https://starwars.fandom.com/wiki/Sullust"
+        },
+        {
+          "Content": "Battle of Endor",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Endor"
         }
       ],
       "Values": [
-        "The Alliance Fleet is successfully assembled at Sullust"
+        "The Alliance Fleet is able to reassemble, but remains split for its own safety until regrouping at Sullust for the Battle of Endor"
       ]
     },
     {
@@ -63,8 +67,8 @@
           "Href": "https://starwars.fandom.com/wiki/Ambush_near_Felucia"
         },
         {
-          "Content": "Battle on Ab Dalis",
-          "Href": "https://starwars.fandom.com/wiki/Battle_on_Ab_Dalis"
+          "Content": "Battle of Ab Dalis",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ab_Dalis"
         },
         {
           "Content": "Battle of Panisia",
@@ -74,12 +78,32 @@
       "Values": [
         "Heist at the Imperial Museum",
         "Ambush near Felucia",
-        "Battle on Ab Dalis",
+        "Battle of Ab Dalis",
         "Battle of Panisia"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 633595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin's_Will",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 641183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 646355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 665030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seventh_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 578287,
       "PageUrl": "https://starwars.fandom.com/wiki/L'ulo_L'ampar's_A-wing",
@@ -96,29 +120,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 677125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_the_Imperial_Museum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 705922,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Ab_Dalis",
+      "PageId": 719637,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_near_Felucia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 665030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seventh_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 641183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 646355,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ellian_Zahra's_assault_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 720564,
@@ -126,14 +130,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 719637,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_near_Felucia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 677125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heist_at_the_Imperial_Museum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 633595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin's_Will",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 452818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 705922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ab_Dalis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

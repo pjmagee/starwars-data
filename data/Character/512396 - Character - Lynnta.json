@@ -2,6 +2,7 @@
   "PageId": 512396,
   "PageUrl": "https://starwars.fandom.com/wiki/Lynnta",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +32,7 @@
         }
       ],
       "Values": [
-        "c. 4 ABY, Mordal"
+        "4 ABY, Mordal"
       ]
     },
     {
@@ -45,7 +46,61 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Ballast family",
+          "Href": "https://starwars.fandom.com/wiki/Ballast_family"
+        }
+      ],
+      "Values": [
+        "Ballast family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Corwin Ballast",
+          "Href": "https://starwars.fandom.com/wiki/Corwin_Ballast"
+        }
+      ],
+      "Values": [
+        "Corwin Ballast"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Corwin Ballast's daughter",
+          "Href": "https://starwars.fandom.com/wiki/Corwin_Ballast%27s_daughter"
+        }
+      ],
+      "Values": [
+        "Corwin Ballast's daughter"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 573783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corwin_Ballast's_daughter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 512395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corwin_Ballast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

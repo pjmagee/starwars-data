@@ -28,12 +28,24 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Builder(s)",
       "Links": [
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
+        {
+          "Content": "engineers",
+          "Href": "https://starwars.fandom.com/wiki/Engineer"
+        }
+      ],
+      "Values": [
+        "Galactic Republic engineers"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
         {
           "Content": "Grand Army of the Republic",
           "Href": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic"
@@ -47,31 +59,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 495824,
-      "PageUrl": "https://starwars.fandom.com/wiki/PM-1203",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 499633,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 546863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Anaxes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 508361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 475259,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 686807,
       "PageUrl": "https://starwars.fandom.com/wiki/Clone_barracks",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -80,6 +67,31 @@
       "PageId": 686808,
       "PageUrl": "https://starwars.fandom.com/wiki/Platform_TT-3-9-7",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 475259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 508361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 546863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Anaxes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 495824,
+      "PageUrl": "https://starwars.fandom.com/wiki/PM-1203",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 499633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

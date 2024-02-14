@@ -65,7 +65,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-9"
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -173,44 +173,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 340966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Wasskah/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 350697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aedalus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 369369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Babbo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 373393,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duppa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 373396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vector_(convor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
       "PageId": 418977,
       "PageUrl": "https://starwars.fandom.com/wiki/Omma",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 339805,
-      "PageUrl": "https://starwars.fandom.com/wiki/Convor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 3362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 339808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Momong/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 412991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garnac's_hunting_guild/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 2101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trandosha/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 15559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 338472,
@@ -283,34 +268,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 2101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trandosha/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 339243,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_skull/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 412991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garnac's_hunting_guild/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 345708,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_hideout_(Wasskah)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 3362,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 339805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Convor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 15559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 339808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Momong/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 350697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aedalus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 369369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Babbo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 373393,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duppa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 373396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vector_(convor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 340966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Wasskah/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 339243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_skull/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

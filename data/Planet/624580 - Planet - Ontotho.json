@@ -49,7 +49,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -65,6 +65,10 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Ontotho Spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Ontotho_Spaceport"
+        },
+        {
           "Content": "Daa Camp",
           "Href": "https://starwars.fandom.com/wiki/Daa_Camp"
         },
@@ -73,8 +77,8 @@
           "Href": "https://starwars.fandom.com/wiki/Fylar_region"
         },
         {
-          "Content": "Ontotho Spaceport",
-          "Href": "https://starwars.fandom.com/wiki/Ontotho_Spaceport"
+          "Content": "Fylar Forest",
+          "Href": "https://starwars.fandom.com/wiki/Fylar_Forest"
         },
         {
           "Content": "Temple on Ontotho",
@@ -82,10 +86,13 @@
         }
       ],
       "Values": [
+        "Ontotho Spaceport",
+        "Ontotho-Fylar Border",
         "Daa Camp",
         "Fylar region",
-        "Ontotho Spaceport",
-        "Temple on Ontotho"
+        "Fylar Forest",
+        "Temple on Ontotho",
+        "Fylari Village"
       ]
     },
     {
@@ -101,15 +108,15 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Zeffo",
-          "Href": "https://starwars.fandom.com/wiki/Zeffo_(species)"
+          "Content": "Zeffonian",
+          "Href": "https://starwars.fandom.com/wiki/Zeffonian"
         }
       ],
       "Values": [
-        "Zeffo"
+        "Zeffonian"
       ]
     },
     {
@@ -163,34 +170,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 633046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fess",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 630579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dylanto_Daa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 630594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fylari_ambassador",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 631970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ontotho_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 633872,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daa_Camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 630589,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fylar_region",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 630580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daa_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 631965,
@@ -198,9 +180,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 630586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ontothon_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 633872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daa_Camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 631959,
+      "PageUrl": "https://starwars.fandom.com/wiki/En-Threelo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 627679,
@@ -218,14 +205,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 630580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daa_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 630579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dylanto_Daa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 631959,
-      "PageUrl": "https://starwars.fandom.com/wiki/En-Threelo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 630594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fylari_ambassador",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 630586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ontothon_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 647089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Energy_sphere",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 630589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fylar_region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 631973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Musk_teave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 630585,
@@ -238,6 +245,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 631970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ontotho_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 631962,
       "PageUrl": "https://starwars.fandom.com/wiki/Neralli",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -248,9 +260,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 647089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Energy_sphere",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 631968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Ontotho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 597584,
@@ -258,29 +270,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 630582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tambic_gas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 631973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Musk_teave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 631968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Ontotho",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 638251,
       "PageUrl": "https://starwars.fandom.com/wiki/Odu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 630582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tambic_gas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
       "PageId": 624675,
       "PageUrl": "https://starwars.fandom.com/wiki/Temple_on_Ontotho",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 633046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Purge_trooper_division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

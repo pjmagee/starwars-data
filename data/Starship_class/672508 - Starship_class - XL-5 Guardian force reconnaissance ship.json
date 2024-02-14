@@ -2,6 +2,7 @@
   "PageId": 672508,
   "PageUrl": "https://starwars.fandom.com/wiki/XL-5_Guardian_force_reconnaissance_ship",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Tion Mil/Sci Industries",
+          "Href": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries"
+        }
+      ],
+      "Values": [
+        "Tion Mil/Sci Industries"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Reconnaissance",
@@ -24,18 +37,6 @@
       ],
       "Values": [
         "Reconnaissance starship"
-      ]
-    },
-    {
-      "Label": "Role(s)",
-      "Links": [
-        {
-          "Content": "Transport",
-          "Href": "https://starwars.fandom.com/wiki/Transport"
-        }
-      ],
-      "Values": [
-        "Transport"
       ]
     },
     {
@@ -61,5 +62,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 752326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Mil/Sci_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

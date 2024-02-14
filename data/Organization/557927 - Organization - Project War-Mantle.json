@@ -15,35 +15,53 @@
       "Label": "Organization type",
       "Links": [],
       "Values": [
-        "Conscription and training program"
+        "Establishment of a conscription and volunteer military",
+        "Training program"
       ]
     },
     {
-      "Label": "Leader(s)",
+      "Label": "Founder(s)",
       "Links": [
         {
           "Content": "Vice Admiral",
           "Href": "https://starwars.fandom.com/wiki/Vice_Admiral"
         },
         {
-          "Content": "Rampart",
-          "Href": "https://starwars.fandom.com/wiki/Rampart"
+          "Content": "Edmon Rampart",
+          "Href": "https://starwars.fandom.com/wiki/Edmon_Rampart"
         }
       ],
       "Values": [
-        "Vice Admiral Rampart"
+        "Vice Admiral Edmon Rampart"
+      ]
+    },
+    {
+      "Label": "Leader(s)",
+      "Links": [],
+      "Values": [
+        "Vice Admiral Edmon Rampart"
       ]
     },
     {
       "Label": "Sub-group(s)",
       "Links": [
         {
-          "Content": "CT-9904's Elite Squad",
-          "Href": "https://starwars.fandom.com/wiki/CT-9904%27s_Elite_Squad"
+          "Content": "Elite Squad Trooper",
+          "Href": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper"
+        },
+        {
+          "Content": "TK stormtrooper",
+          "Href": "https://starwars.fandom.com/wiki/TK_stormtrooper"
+        },
+        {
+          "Content": "TK shock trooper",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_shock_trooper"
         }
       ],
       "Values": [
-        "CT-9904's Elite Squad"
+        "Elite Squad Trooper",
+        "TK stormtrooper",
+        "TK shock trooper"
       ]
     },
     {
@@ -88,6 +106,18 @@
       ]
     },
     {
+      "Label": "Date founded",
+      "Links": [
+        {
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        }
+      ],
+      "Values": [
+        "19 BBY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -107,8 +137,38 @@
   ],
   "Relationships": [
     {
+      "PageId": 479385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scorch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 467336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gregor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 583202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Instructor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
       "PageId": 677264,
       "PageUrl": "https://starwars.fandom.com/wiki/Elite_Squad_Trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 692811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Edmon_Rampart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703640,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 458520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

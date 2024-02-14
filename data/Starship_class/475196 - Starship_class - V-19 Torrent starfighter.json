@@ -2,7 +2,7 @@
   "PageId": 475196,
   "PageUrl": "https://starwars.fandom.com/wiki/V-19_Torrent_starfighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f6/V-19_Torrent_TCW.jpg/revision/latest?cb=20090311160752",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/57/V-19Torrent-TCW.png/revision/latest?cb=20230712043822",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -139,6 +139,18 @@
       ]
     },
     {
+      "Label": "Avionics",
+      "Links": [
+        {
+          "Content": "QY77.b avionics suite",
+          "Href": "https://starwars.fandom.com/wiki/QY77.b_avionics_suite"
+        }
+      ],
+      "Values": [
+        "QY77.b avionics suite"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -210,6 +222,18 @@
       ]
     },
     {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY"
+        }
+      ],
+      "Values": [
+        "22 BBY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -219,6 +243,14 @@
         {
           "Content": "Galactic Republic Navy",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Confederacy of Independent Systems Navy",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
         },
         {
           "Content": "Galactic Empire",
@@ -240,6 +272,8 @@
       "Values": [
         "Galactic Republic",
         "Galactic Republic Navy",
+        "Confederacy of Independent Systems (stolen)",
+        "Confederacy of Independent Systems Navy (stolen)",
         "Galactic Empire",
         "Imperial Navy",
         "Botajef Defense Force",
@@ -248,6 +282,46 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 780606,
+      "PageUrl": "https://starwars.fandom.com/wiki/V-19_test_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 499513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 592942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Group_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 507908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defender",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 507911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Galactic_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 523866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 674283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nevoota_Bee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 678841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Venator-class_Star_Destroyer_(Teth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 545015,
       "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Galactic_Republic)",
@@ -259,44 +333,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 674283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nevoota_Bee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 499679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slayn_&_Korpil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 523866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_Starfighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 678841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Venator-class_Star_Destroyer_(Teth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 507911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Galactic_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 499513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resolute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 584873,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 592942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Group_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 499679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slayn_&_Korpil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

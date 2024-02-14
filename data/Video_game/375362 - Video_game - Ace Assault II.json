@@ -32,9 +32,18 @@
     },
     {
       "Label": "Release date",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "November 5",
+          "Href": "https://starwars.fandom.com/wiki/November_5"
+        },
+        {
+          "Content": "2011",
+          "Href": "https://starwars.fandom.com/wiki/2011"
+        }
+      ],
       "Values": [
-        "2011"
+        "November 5, 2011"
       ]
     },
     {
@@ -76,14 +85,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 52348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_of_the_Fates",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
       "PageId": 365639,
       "PageUrl": "https://starwars.fandom.com/wiki/Ace_Assault",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 52348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_of_the_Fates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     }
   ]
 }

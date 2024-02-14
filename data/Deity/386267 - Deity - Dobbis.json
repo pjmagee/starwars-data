@@ -2,6 +2,7 @@
   "PageId": 386267,
   "PageUrl": "https://starwars.fandom.com/wiki/Dobbis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,24 @@
       "Label": "Associated religion",
       "Links": [
         {
-          "Content": "Gungan",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
+          "Content": "Gungan religion",
+          "Href": "https://starwars.fandom.com/wiki/Gungan_religion"
         }
       ],
       "Values": [
         "Gungan religion"
+      ]
+    },
+    {
+      "Label": "Pantheon",
+      "Links": [
+        {
+          "Content": "Guds",
+          "Href": "https://starwars.fandom.com/wiki/Gud/Legends"
+        }
+      ],
+      "Values": [
+        "Guds"
       ]
     },
     {
@@ -36,6 +49,18 @@
       ],
       "Values": [
         "Goddess of rain"
+      ]
+    },
+    {
+      "Label": "Artifacts",
+      "Links": [
+        {
+          "Content": "Statue of Dobbis",
+          "Href": "https://starwars.fandom.com/wiki/Dobbis_(statue)"
+        }
+      ],
+      "Values": [
+        "Statue of Dobbis"
       ]
     },
     {
@@ -61,19 +86,13 @@
       "Values": [
         "Naboo"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Gungans",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
-        }
-      ],
-      "Values": [
-        "Gungans"
-      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

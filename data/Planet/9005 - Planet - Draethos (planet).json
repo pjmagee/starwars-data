@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-4"
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Barren mountains, deep caves"
@@ -115,7 +115,7 @@
       "Links": [
         {
           "Content": "Draethos",
-          "Href": "https://starwars.fandom.com/wiki/Draethos_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Draethos/Legends"
         }
       ],
       "Values": [
@@ -189,14 +189,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 7557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Draethos/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 785035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Draethos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 44904,
       "PageUrl": "https://starwars.fandom.com/wiki/Draethos_(language)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 237340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talon_Slyter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 362637,
@@ -204,9 +209,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 7557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Draethos/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 237340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talon_Slyter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

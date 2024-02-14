@@ -2,6 +2,7 @@
   "PageId": 443242,
   "PageUrl": "https://starwars.fandom.com/wiki/Artagan_Truax",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -28,10 +29,14 @@
         {
           "Content": "33 BBY",
           "Href": "https://starwars.fandom.com/wiki/33_BBY/Legends"
+        },
+        {
+          "Content": "Cog Hive Seven",
+          "Href": "https://starwars.fandom.com/wiki/Cog_Hive_Seven"
         }
       ],
       "Values": [
-        "33 BBY"
+        "33 BBY, Cog Hive Seven"
       ]
     },
     {
@@ -76,5 +81,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 443318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eogan_Truax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

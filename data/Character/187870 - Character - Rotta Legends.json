@@ -48,6 +48,25 @@
       ]
     },
     {
+      "Label": "Gender",
+      "Links": [
+        {
+          "Content": "Male",
+          "Href": "https://starwars.fandom.com/wiki/Gender"
+        }
+      ],
+      "Values": [
+        "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -79,7 +98,7 @@
       ]
     },
     {
-      "Label": "Kajidic",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Desilijic",
@@ -95,7 +114,7 @@
       "Links": [
         {
           "Content": "Jabba Desilijic Tiure's criminal empire",
-          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_criminal_empire/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_criminal_empire"
         }
       ],
       "Values": [
@@ -105,14 +124,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 210455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Teth/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 252834,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Jabba's_Palace_(Clone_Wars)/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 210455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Teth/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

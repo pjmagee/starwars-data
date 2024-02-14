@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -24,8 +24,34 @@
       ]
     },
     {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Mining ship",
+          "Href": "https://starwars.fandom.com/wiki/Mining_ship"
+        },
+        {
+          "Content": "Dropship",
+          "Href": "https://starwars.fandom.com/wiki/Dropship/Legends"
+        }
+      ],
+      "Values": [
+        "Transport",
+        "Mining ship",
+        "Dropship"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
+        {
+          "Content": "Dynath Miners",
+          "Href": "https://starwars.fandom.com/wiki/Dynath_Miners"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
         {
           "Content": "Linear Miasma Scientists",
           "Href": "https://starwars.fandom.com/wiki/Linear_Miasma_Scientists"
@@ -35,16 +61,24 @@
           "Href": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces/Legends"
         },
         {
-          "Content": "Dynath Miners",
-          "Href": "https://starwars.fandom.com/wiki/Dynath_Miners"
+          "Content": "Yavin Four Labor and Mining Company",
+          "Href": "https://starwars.fandom.com/wiki/Yavin_Four_Labor_and_Mining_Company"
         }
       ],
       "Values": [
+        "Dynath Miners",
+        "Galactic Empire",
         "Linear Miasma Scientists",
         "Royal Naboo Security Forces",
-        "Dynath Miners"
+        "Yavin Four Labor and Mining Company"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Falling_Sunspot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

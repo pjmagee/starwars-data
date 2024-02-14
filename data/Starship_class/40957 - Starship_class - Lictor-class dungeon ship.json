@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Dungeon ship",
@@ -45,6 +45,18 @@
       ],
       "Values": [
         "Dungeon ship"
+      ]
+    },
+    {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
+      "Values": [
+        "7,800,000 credits"
       ]
     },
     {
@@ -180,10 +192,15 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Dark Empire"
       ]
     }
   ],

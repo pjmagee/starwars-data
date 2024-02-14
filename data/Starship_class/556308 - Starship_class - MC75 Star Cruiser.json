@@ -2,25 +2,13 @@
   "PageId": 556308,
   "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/99/MC75-SWS.png/revision/latest?cb=20210303024415",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/96/MC75StarCruiser-Fathead.png/revision/latest?cb=20230802022635",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "MC75 Star Cruiser"
-      ]
-    },
-    {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Mon Calamari Shipyards",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards"
-        }
-      ],
-      "Values": [
-        "Mon Calamari Shipyards"
       ]
     },
     {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Mon Calamari"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Mon Calamari Shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards"
+        }
+      ],
+      "Values": [
+        "Mon Calamari Shipyards"
       ]
     },
     {
@@ -57,16 +57,26 @@
         {
           "Content": "MC75 Ordnance Cruiser",
           "Href": "https://starwars.fandom.com/wiki/MC75_Ordnance_Cruiser"
+        },
+        {
+          "Content": "MC75B Star Cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC75B_Star_Cruiser"
+        },
+        {
+          "Content": "MC75C Star Cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC75C_Star_Cruiser"
         }
       ],
       "Values": [
-        "MC75 Star Cruiser",
+        "MC75",
         "MC75 Armored Cruiser",
-        "MC75 Ordnance Cruiser"
+        "MC75 Ordnance Cruiser",
+        "MC75B Star Cruiser",
+        "MC75C Star Cruiser"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Star Cruiser"
@@ -123,16 +133,21 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
+          "Content": "Gemon-15 sublight ion drives",
+          "Href": "https://starwars.fandom.com/wiki/Gemon-15_sublight_ion_drive"
+        },
+        {
           "Content": "KDY",
           "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
         },
         {
-          "Content": "Gemon-15 sublight ion drives",
-          "Href": "https://starwars.fandom.com/wiki/Gemon-15_sublight_ion_drive"
+          "Content": "sublight engine",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
         }
       ],
       "Values": [
-        "KDY Gemon-15 sublight ion drives (12) (repurposed)"
+        "Gemon-15 sublight ion drives (4)",
+        "Another type of KDY sublight engine (8)"
       ]
     },
     {
@@ -192,10 +207,22 @@
       ]
     },
     {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Navigation computer",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Navigation computer"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Point-defense laser cannons",
+          "Content": "Point-defense twin heavy laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         },
         {
@@ -216,11 +243,15 @@
         }
       ],
       "Values": [
-        "Point-defense laser cannons (20)",
+        "Point-defense twin heavy laser cannons (20)",
+        "5 port, 5 starboard, 5 aft, and 5 foreward",
         "Broadside turbolaser cannons (12)",
+        "6 port and 6 starboard",
         "Heavy ion cannons (4)",
+        "2 port and 2 starboard",
         "Proton torpedo launchers (12)",
-        "Tractor beam projectors (6)"
+        "3 port, 3 starboard, 3 aft, abd 3 foreward",
+        "Hull mounted Tractor beam projectors (6)"
       ]
     },
     {
@@ -256,7 +287,7 @@
         }
       ],
       "Values": [
-        "At least 12 starfighters",
+        "36 starfighters",
         "RZ-1 A-wing interceptors",
         "T-65B X-wing starfighters",
         "BTL-A4 Y-wing assault starfighter/bombers",
@@ -346,16 +377,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 592528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aspiration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 664933,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC-series_star_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
-    },
-    {
       "PageId": 587944,
       "PageUrl": "https://starwars.fandom.com/wiki/MC75_Ordnance_Cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
@@ -366,9 +387,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 669330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Coronet",
+      "PageId": 664933,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC-series_star_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 658136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temperance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 658137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Accordance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 592528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aspiration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663271,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75B_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 663276,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75C_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 531468,
@@ -381,13 +427,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 658136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temperance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 658137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Accordance",
+      "PageId": 669330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Coronet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

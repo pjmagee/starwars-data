@@ -24,15 +24,29 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her and they/them"
+      ]
+    },
+    {
+      "Label": "Hair color",
       "Links": [
         {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "Light brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Female"
+        "Light brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Dark"
       ]
     },
     {
@@ -63,6 +77,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 665840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hosnian_Prime_orbital_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
     {
       "PageId": 665890,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hosnian_Prime",

@@ -60,28 +60,87 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "Yasaburō clan",
           "Href": "https://starwars.fandom.com/wiki/Yasaburō_clan"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
-        "Yasaburō clan",
-        "Galactic Empire"
+        "Yasaburō clan"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Yasaburō",
+          "Href": "https://starwars.fandom.com/wiki/Yasaburō"
+        }
+      ],
+      "Values": [
+        "Yasaburō"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Lop",
+          "Href": "https://starwars.fandom.com/wiki/Lop"
+        }
+      ],
+      "Values": [
+        "Lop"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Security Bureau",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau"
+        }
+      ],
+      "Values": [
+        "Galactic EmpireImperial Security Bureau"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 702428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 710120,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tao's_Imperial_base",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 710101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yasaburō",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

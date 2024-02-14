@@ -19,16 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/19_BBY"
         },
         {
-          "Content": "18 BBY",
-          "Href": "https://starwars.fandom.com/wiki/18_BBY"
-        },
-        {
           "Content": "Cabarria",
           "Href": "https://starwars.fandom.com/wiki/Cabarria"
         }
       ],
       "Values": [
-        "Between 19 BBY and 18 BBY, Cabarria"
+        "19 BBY, Cabarria"
       ]
     },
     {
@@ -82,7 +78,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Chas",
@@ -92,7 +88,47 @@
       "Values": [
         "Chas"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Bhada Cha",
+          "Href": "https://starwars.fandom.com/wiki/Bhada_Cha"
+        }
+      ],
+      "Values": [
+        "Bhada Cha"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Chanath Cha",
+          "Href": "https://starwars.fandom.com/wiki/Chanath_Cha"
+        }
+      ],
+      "Values": [
+        "Chanath Cha"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 591486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bhada_Cha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 508972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chanath_Cha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 769879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cabarria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    }
+  ]
 }

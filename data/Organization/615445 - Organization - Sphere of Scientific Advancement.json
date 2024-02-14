@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Empress Acina",
-          "Href": "https://starwars.fandom.com/wiki/Acina"
+          "Href": "https://starwars.fandom.com/wiki/Darth_Acina"
         }
       ],
       "Values": [
@@ -39,6 +39,10 @@
       "Label": "Leader(s)",
       "Links": [
         {
+          "Content": "Dark Councilor",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Council"
+        },
+        {
           "Content": "Darth Malora",
           "Href": "https://starwars.fandom.com/wiki/Darth_Malora"
         },
@@ -48,8 +52,21 @@
         }
       ],
       "Values": [
+        "Dark Councilor",
         "Darth Malora",
         "Darth Savik"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Imperial Medical Corps",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Medical_Corps"
+        }
+      ],
+      "Values": [
+        "Imperial Medical Corps"
       ]
     },
     {
@@ -101,9 +118,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 378375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Technology",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 343977,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Malora",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 336985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Medical_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 396830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Biotic_Science",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 447528,
@@ -111,8 +143,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 336985,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Medical_Corps",
+      "PageId": 742930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Applied_Toxicology",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

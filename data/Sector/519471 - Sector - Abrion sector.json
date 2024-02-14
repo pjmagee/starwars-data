@@ -21,16 +21,25 @@
         {
           "Content": "The Slice",
           "Href": "https://starwars.fandom.com/wiki/The_Slice"
+        },
+        {
+          "Content": "Wild Space",
+          "Href": "https://starwars.fandom.com/wiki/Wild_Space"
         }
       ],
       "Values": [
         "Outer Rim Territories",
-        "The Slice"
+        "The Slice",
+        "Wild Space"
       ]
     },
     {
       "Label": "Systems",
       "Links": [
+        {
+          "Content": "Kamino system",
+          "Href": "https://starwars.fandom.com/wiki/Kamino_system"
+        },
         {
           "Content": "Rishi system",
           "Href": "https://starwars.fandom.com/wiki/Rishi_system"
@@ -41,6 +50,7 @@
         }
       ],
       "Values": [
+        "Kamino system",
         "Rishi system",
         "Scarif system"
       ]
@@ -114,10 +124,15 @@
         {
           "Content": "Ukians",
           "Href": "https://starwars.fandom.com/wiki/Ukian"
+        },
+        {
+          "Content": "Kaminoan",
+          "Href": "https://starwars.fandom.com/wiki/Kaminoan"
         }
       ],
       "Values": [
-        "Ukians"
+        "Ukians",
+        "Kaminoan"
       ]
     },
     {
@@ -162,6 +177,23 @@
       ]
     },
     {
+      "Label": "Imperial Era",
+      "Links": [
+        {
+          "Content": "Fall of Tipoca City",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_Kamino"
+        },
+        {
+          "Content": "Rescue of Hunter",
+          "Href": "https://starwars.fandom.com/wiki/Rescue_of_Hunter"
+        }
+      ],
+      "Values": [
+        "Fall of Tipoca City",
+        "Rescue of Hunter"
+      ]
+    },
+    {
       "Label": "Galactic Civil War",
       "Links": [
         {
@@ -176,34 +208,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 727273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roon_way",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 712241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Towl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 554978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Gate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 712271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_in_the_Abrion_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rishi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 627239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scarif_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 565733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Manda_Merchant_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 712242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jinnix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 706308,
@@ -211,14 +223,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 616537,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_Exclusion_Zone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 534079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ukio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 554978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Gate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 625337,
@@ -236,6 +243,36 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 453917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 135909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackwing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 542311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scarif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 616537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Navy_Exclusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 504058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rishi_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 565733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manda_Merchant_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 504057,
       "PageUrl": "https://starwars.fandom.com/wiki/Rishi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -246,14 +283,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 504058,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rishi_Moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 712267,
+      "PageUrl": "https://starwars.fandom.com/wiki/RL-18",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 542311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scarif",
+      "PageId": 732140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abrion_sector_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 504197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rishi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 712271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_in_the_Abrion_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 627239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scarif_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 534079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ukio",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 727273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roon_way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

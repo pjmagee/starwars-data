@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-20"
@@ -53,18 +53,30 @@
       "Values": [
         "Dyspeth"
       ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 250438,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dyspeth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
       "PageId": 25892,
       "PageUrl": "https://starwars.fandom.com/wiki/Varada_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 250438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dyspeth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

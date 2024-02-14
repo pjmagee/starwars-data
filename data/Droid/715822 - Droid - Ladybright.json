@@ -12,6 +12,30 @@
       ]
     },
     {
+      "Label": "Date destroyed",
+      "Links": [
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "Siroto",
+          "Href": "https://starwars.fandom.com/wiki/Siroto"
+        },
+        {
+          "Content": "planet",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_planet_(Fermata_Cage)"
+        }
+      ],
+      "Values": [
+        "Between 3 ABY and 4 ABY, Siroto, a planet"
+      ]
+    },
+    {
       "Label": "Gender",
       "Links": [
         {
@@ -27,12 +51,12 @@
       "Label": "Sensor color",
       "Links": [
         {
-          "Content": "Aqua",
+          "Content": "Blue",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Aqua"
+        "Blue"
       ]
     },
     {
@@ -48,14 +72,24 @@
         {
           "Content": "Orphans",
           "Href": "https://starwars.fandom.com/wiki/Orphans"
+        },
+        {
+          "Content": "Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
         }
       ],
       "Values": [
-        "Orphans"
+        "Orphans",
+        "Crimson Dawn"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 754518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_an_unidentified_planet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 715890,
       "PageUrl": "https://starwars.fandom.com/wiki/Siroto",

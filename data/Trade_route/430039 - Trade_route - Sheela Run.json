@@ -12,27 +12,31 @@
       ]
     },
     {
-      "Label": "Era(s)",
-      "Links": [
-        {
-          "Content": "Rise of the Empire era",
-          "Href": "https://starwars.fandom.com/wiki/Rise_of_the_Empire_era"
-        }
-      ],
-      "Values": [
-        "Rise of the Empire era"
-      ]
-    },
-    {
       "Label": "Regions",
       "Links": [
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim - Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Sectors",
+      "Links": [
+        {
+          "Content": "Hutt Space",
+          "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
+        }
+      ],
+      "Values": [
+        "Hutt Space"
       ]
     },
     {
@@ -46,18 +50,55 @@
       "Values": [
         "Nar Hekka"
       ]
+    },
+    {
+      "Label": "Junctions",
+      "Links": [
+        {
+          "Content": "Ootmian Pabol",
+          "Href": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends"
+        }
+      ],
+      "Values": [
+        "Ootmian Pabol"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 2528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 17276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 430040,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Hekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 13686,
       "PageUrl": "https://starwars.fandom.com/wiki/Nar_Hekka",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 430040,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nar_Hekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 772255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_(Nar_Hekka)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 3131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Y'Toub_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 270237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

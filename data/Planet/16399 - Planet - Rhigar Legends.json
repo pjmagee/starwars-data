@@ -51,8 +51,8 @@
       "Label": "Moons",
       "Links": [
         {
-          "Content": "Rhigar 1",
-          "Href": "https://starwars.fandom.com/wiki/Rhigar_1"
+          "Content": "Rhigar's forested moon",
+          "Href": "https://starwars.fandom.com/wiki/Rhigar%27s_forested_moon"
         },
         {
           "Content": "Asdroni",
@@ -64,13 +64,13 @@
         }
       ],
       "Values": [
-        "Rhigar 1",
+        "Rhigar's forested moon",
         "Asdroni",
         "Rhigar 3"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "E-9"
@@ -96,11 +96,21 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Snow",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        },
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
+        }
+      ],
       "Values": [
         "Snow",
-        "Ice"
+        "Ice",
+        "Mountains"
       ]
     },
     {
@@ -116,15 +126,20 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chiss",
           "Href": "https://starwars.fandom.com/wiki/Chiss/Legends"
+        },
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Chiss"
+        "Chiss",
+        "Human"
       ]
     },
     {
@@ -141,26 +156,22 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Empire of the Hand",
+          "Href": "https://starwars.fandom.com/wiki/Empire_of_the_Hand"
+        }
+      ],
       "Values": [
-        "Chiss Ascendancy"
+        "Chiss Ascendancy",
+        "Empire of the Hand"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 131933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Syndic_Mitth'raw'nuruodo_training_academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 336392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Path_of_the_Houses",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 131255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar_1",
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar's_forested_moon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
@@ -174,9 +185,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
+      "PageId": 335921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 23318,
       "PageUrl": "https://starwars.fandom.com/wiki/Nuruodo_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 336392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Path_of_the_Houses",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 45449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gimald_Nuruodo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 351968,
@@ -184,9 +210,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 335921,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 131933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Syndic_Mitth'raw'nuruodo_training_academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

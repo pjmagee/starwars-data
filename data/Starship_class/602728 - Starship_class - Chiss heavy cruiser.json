@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Heavy cruiser",
@@ -57,6 +57,22 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Electrostatic barrier generator",
+          "Href": "https://starwars.fandom.com/wiki/Electrostatic_barrier_generator"
+        },
+        {
+          "Content": "nodes",
+          "Href": "https://starwars.fandom.com/wiki/Electrostatic_barrier_node"
+        }
+      ],
+      "Values": [
+        "Electrostatic barrier generator nodes"
       ]
     },
     {
@@ -117,29 +133,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 626929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Chiss_heavy_cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 663822,
       "PageUrl": "https://starwars.fandom.com/wiki/Springhawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 666372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destrama",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 666428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grayshrike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 626929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Chiss)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 55545,
       "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 666428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grayshrike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

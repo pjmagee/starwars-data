@@ -2,6 +2,7 @@
   "PageId": 722291,
   "PageUrl": "https://starwars.fandom.com/wiki/Mythosaur_axe",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c2/Vera_Beroya.jpg/revision/latest?cb=20200629134118",
   "Data": [
     {
       "Label": "Titles",
@@ -51,6 +52,18 @@
       ]
     },
     {
+      "Label": "Shape",
+      "Links": [
+        {
+          "Content": "Axe",
+          "Href": "https://starwars.fandom.com/wiki/Ax"
+        }
+      ],
+      "Values": [
+        "Axe-like"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [],
       "Values": [
@@ -58,5 +71,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vera_Beroya's_mythosaur_axe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

@@ -12,10 +12,64 @@
       ]
     },
     {
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience"
+        }
+      ],
+      "Values": [
+        "Sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Insectoid",
+          "Href": "https://starwars.fandom.com/wiki/Insectoid"
+        }
+      ],
+      "Values": [
+        "Insectoid"
+      ]
+    },
+    {
+      "Label": "Average height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "Taller than 1.78 meters (5ft 10in)"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [],
       "Values": [
         "Green"
+      ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [
+        {
+          "Content": "Chitinous",
+          "Href": "https://starwars.fandom.com/wiki/Chitin"
+        }
+      ],
+      "Values": [
+        "Chitinous armor",
+        "Mandibles projected from face",
+        "Four arms ending in long two-toed claws protruding from their torsos"
       ]
     },
     {
@@ -26,5 +80,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 748568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 784343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Killik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

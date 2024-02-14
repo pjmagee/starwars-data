@@ -2,13 +2,25 @@
   "PageId": 730575,
   "PageUrl": "https://starwars.fandom.com/wiki/Corran",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e4/Corran_-_OWK.jpg/revision/latest?cb=20220528025501",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/1d/Corran-ChromeBlack2023sig.png/revision/latest?cb=20240124035352",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Corran"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Daiyu",
+          "Href": "https://starwars.fandom.com/wiki/Daiyu"
+        }
+      ],
+      "Values": [
+        "Daiyu"
       ]
     },
     {
@@ -36,10 +48,29 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
-        "Dark"
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Brown"
       ]
     },
     {
@@ -48,7 +79,25 @@
       "Values": [
         "Light"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Corran's mother",
+          "Href": "https://starwars.fandom.com/wiki/Corran%27s_mother"
+        }
+      ],
+      "Values": [
+        "Corran's mother"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 730710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corran's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

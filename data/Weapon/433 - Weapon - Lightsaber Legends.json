@@ -2,7 +2,7 @@
   "PageId": 433,
   "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/Lightsabers_negwt.jpg/revision/latest?cb=20090531120007",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d5/Lightsabers-NEGWT.png/revision/latest?cb=20221021230159",
   "Data": [
     {
       "Label": "Titles",
@@ -77,7 +77,7 @@
       "Label": "Shape",
       "Links": [],
       "Values": [
-        "Cylindrical"
+        "Cylindrical, straight"
       ]
     },
     {
@@ -110,16 +110,26 @@
     },
     {
       "Label": "Weight",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "kilogram",
+          "Href": "https://starwars.fandom.com/wiki/Kilogram/Legends"
+        }
+      ],
       "Values": [
-        "1 kg"
+        "1 kilogram"
       ]
     },
     {
       "Label": "Range",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "centimeters",
+          "Href": "https://starwars.fandom.com/wiki/Centimeter/Legends"
+        }
+      ],
       "Values": [
-        "130 cm"
+        "130 centimeters"
       ]
     },
     {
@@ -145,19 +155,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 362823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Allya's_Redemption",
+      "PageId": 324288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cunning_of_Tyranus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 50130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bnar's_Sacrifice",
+      "PageId": 332881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Focus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 20409,
@@ -170,24 +175,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 55190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kenobi's_Legacy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 462863,
-      "PageUrl": "https://starwars.fandom.com/wiki/ASP-19,_Lightsaber_Training_Configuration,_Mark_IX",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 35265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orbalisk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 221753,
       "PageUrl": "https://starwars.fandom.com/wiki/Felucian_Skullblade",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 252163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bondara's_Folly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 120021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mecho-organic_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 165866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Systech_aural_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 176811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_pike/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 636043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tovarskl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 367510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toro_Irana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_lanvarok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 11337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meetra_Surik_Crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 277626,
+      "PageUrl": "https://starwars.fandom.com/wiki/EG-07",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 394683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Octo-bladed_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 324488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Training_Droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 152568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spiral_mist-horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 171392,
+      "PageUrl": "https://starwars.fandom.com/wiki/JTR-47",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 48544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightfoil/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 57513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cortosis-weave_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
       "PageId": 22578,
@@ -220,9 +290,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 11337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meetra_Surik_Crystal",
+      "PageId": 369088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incineration",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 421865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_onk/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 421869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pastillion_ore/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 464962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravis_Sith_Lightsaber_Crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
       "PageId": 40913,
@@ -230,18 +315,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 277732,
-      "PageUrl": "https://starwars.fandom.com/wiki/EG_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+      "PageId": 421872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_training_staff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 116860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_shoto",
+      "PageId": 43127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Training_lightsaber/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 385790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forge_(Je'daii_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 6624,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrostaff/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 10049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ankarres_Sapphire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 101642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viridian_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 13035,
       "PageUrl": "https://starwars.fandom.com/wiki/Sith_sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 138297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sonic_rifle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
@@ -250,14 +360,124 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 467485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satele_Shan's_sparring_lightsaber",
+      "PageId": 195942,
+      "PageUrl": "https://starwars.fandom.com/wiki/CY-M_Prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 185300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long-handle_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 181064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supervolt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 462863,
+      "PageUrl": "https://starwars.fandom.com/wiki/ASP-19,_Lightsaber_Training_Configuration,_Mark_IX",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 277732,
+      "PageUrl": "https://starwars.fandom.com/wiki/EG_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 75050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sonic_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 76395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shockstaff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 55190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kenobi's_Legacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 274837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_emitter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 339470,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Tahv_aqueduct",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 41854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taozin/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 119899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vima-Da-Boda's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 471049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lacunas_Subartuk's_lightsaber",
+      "PageId": 127853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Knight_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 154357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_second_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 169171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exar_Kun's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 190586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protosaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 220149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 222676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscani_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 274495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sifo-Dyas'_lightsaber_(Adegan_crystal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 274602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_first_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 275646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lumiya's_lightwhip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 275674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurra_Sing's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 283498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bane's_Heart_(lightsaber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 429632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barab_ingot/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 560789,
@@ -275,124 +495,139 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 421872,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_training_staff/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 614029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tyvokka's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 43127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Training_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 615878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lowbacca's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 54416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fira",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 617334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adi_Gallia's_first_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 75050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sonic_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 76395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shockstaff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 385790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_lanvarok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 97296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ludo_Kressh's_War_Sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 41854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taozin/Legends",
+      "PageId": 35265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orbalisk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 172178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Windu's_Guile",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 283925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine's_lightsabers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 324288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cunning_of_Tyranus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 290606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 332881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Focus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 290636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tera_Sinube's_sabercane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 165866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Systech_aural_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 297655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Fisto's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 252163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bondara's_Folly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 297660,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 277626,
-      "PageUrl": "https://starwars.fandom.com/wiki/EG-07",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 297918,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ki-Adi-Mundi's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 176811,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_pike/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 298308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mace_Windu's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 185300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long-handle_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 298967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 429632,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barab_ingot/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 301023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 138297,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sonic_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 302581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 15003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightwhip/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 306594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_first_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 60654,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crossguard_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 306595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_third_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 10049,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ankarres_Sapphire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 308291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_second_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 101642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viridian_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 322715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luminara's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 329370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rahm_Kota's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 339876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ven_Zallow's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 344283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taselda's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 348489,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vima_Sunrider's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 353510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade's_first_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 357828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pong_Krell's_lightsabers/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 358485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nahdar_Vebb's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 358492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plo_Koon's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 358557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barriss_Offee's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 358876,
@@ -420,13 +655,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 360457,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xanatos's_lightsaber",
+      "PageId": 360424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Even_Piell's_lightsaber/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 360458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yaddle's_lightsaber",
+      "PageId": 360457,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xanatos's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
@@ -465,6 +700,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
+      "PageId": 364071,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
       "PageId": 364295,
       "PageUrl": "https://starwars.fandom.com/wiki/Jaina_Solo's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
@@ -492,6 +732,126 @@
     {
       "PageId": 366742,
       "PageUrl": "https://starwars.fandom.com/wiki/Kao_Cen_Darach's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 754758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oppo_Rancisis'_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 754782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Depa_Billaba's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 755284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mace_Windu's_practice_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 761014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaylin's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 761147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thexan's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 761216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arcann's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 761329,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senya_Tirall's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 45846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Battlemaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 116860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightsaber_shoto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 58115,
+      "PageUrl": "https://starwars.fandom.com/wiki/San-Ni_staff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 94854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adegan_lens",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 556468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paladins_of_the_Adamite_Tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 228658,
+      "PageUrl": "https://starwars.fandom.com/wiki/EG-5_Jedi_Hunter_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 239809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Training_Droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 97296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ludo_Kressh's_War_Sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 769088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Don-Wan_Kihotay's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 78134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Maul's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 91514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jinsu_Razor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 96292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Solo's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 15003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightwhip/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 60654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crossguard_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 362823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allya's_Redemption",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 371847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mace_Windu's_blue-bladed_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
@@ -570,6 +930,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
+      "PageId": 406888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
       "PageId": 411876,
       "PageUrl": "https://starwars.fandom.com/wiki/Tahl's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
@@ -605,29 +970,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 57513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cortosis-weave_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 467485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satele_Shan's_sparring_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 120021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mecho-organic_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 471049,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lacunas_Subartuk's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 324488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Training_Droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 421865,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_onk/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 421869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pastillion_ore/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 50130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bnar's_Sacrifice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 56116,
@@ -640,229 +995,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 369088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incineration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 119899,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vima-Da-Boda's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 127853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Knight_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 154357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_second_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 169171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exar_Kun's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 190586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Protosaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 220149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 222676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Windu's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 274495,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sifo-Dyas'_lightsaber_(Adegan_crystal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 274602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_first_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 275646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lumiya's_lightwhip",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 275674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurra_Sing's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 283498,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bane's_Heart_(lightsaber)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 283925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine's_lightsabers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 290606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 290636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tera_Sinube's_sabercane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 297655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kit_Fisto's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 297660,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 297918,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ki-Adi-Mundi's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 298308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mace_Windu's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 298967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 301023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 302581,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 306594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_first_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 306595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_third_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 308291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_second_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 322715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luminara_Unduli's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 329370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rahm_Kota's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 339876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ven_Zallow's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 344283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taselda's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 348489,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vima_Sunrider's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 353510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade's_first_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 357828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pong_Krell's_lightsabers/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 358485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nahdar_Vebb's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 358492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plo_Koon's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 358557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barriss_Offee's_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 94854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adegan_lens",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 367510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toro_Irana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 62197,
       "PageUrl": "https://starwars.fandom.com/wiki/Diatium_power_cell/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 171392,
-      "PageUrl": "https://starwars.fandom.com/wiki/JTR-47",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 339470,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Tahv_aqueduct",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 464962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bravis_Sith_Lightsaber_Crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 614029,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tyvokka's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 615878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lowbacca's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 617334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adi_Gallia's_first_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 172178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Windu's_Guile",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 622798,
@@ -886,7 +1026,7 @@
     },
     {
       "PageId": 642246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorana's_lightsaber",
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorana_Jinzler's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
@@ -900,29 +1040,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 677079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maulkiller's_lightsabers",
+      "PageId": 676738,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Barsen'thor's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 45846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Battlemaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 48544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightfoil/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 152568,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spiral_mist-horn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 274837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_emitter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 677079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maulkiller's_lightsabers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 681288,
@@ -935,53 +1060,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 78134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Maul's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 91514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jinsu_Razor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 96292,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Solo's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 6624,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrostaff/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 636043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tovarskl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 181064,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supervolt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 195942,
-      "PageUrl": "https://starwars.fandom.com/wiki/CY-M_Prototype",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 228658,
-      "PageUrl": "https://starwars.fandom.com/wiki/EG-5_Jedi_Hunter_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 239809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Training_Droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 58115,
-      "PageUrl": "https://starwars.fandom.com/wiki/San-Ni_staff",
+      "PageId": 54416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fira",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]

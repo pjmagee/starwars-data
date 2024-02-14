@@ -64,6 +64,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -83,12 +90,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Saresh family",
           "Href": "https://starwars.fandom.com/wiki/Saresh_family"
-        },
+        }
+      ],
+      "Values": [
+        "Saresh family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Guun Han Saresh's father",
+          "Href": "https://starwars.fandom.com/wiki/Guun_Han_Saresh%27s_father"
+        }
+      ],
+      "Values": [
+        "Guun Han Saresh's father"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
@@ -99,11 +126,16 @@
         }
       ],
       "Values": [
-        "Saresh family",
         "Jedi Order",
         "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 57512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circlet_of_Saresh/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    }
+  ]
 }

@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Dropship",
@@ -52,11 +52,16 @@
         {
           "Content": "Troop carrier",
           "Href": "https://starwars.fandom.com/wiki/Troop_carrier"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
         }
       ],
       "Values": [
         "Dropship",
-        "Troop carrier"
+        "Troop carrier",
+        "Starfighter"
       ]
     },
     {
@@ -166,6 +171,18 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Medium range sensors"
+      ]
+    },
+    {
       "Label": "Targeting systems",
       "Links": [
         {
@@ -207,26 +224,28 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "cockpit",
-          "Href": "https://starwars.fandom.com/wiki/Cockpit"
+          "Content": "Pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
         }
       ],
       "Values": [
-        "At least 3 (Seated, cockpit)"
+        "2",
+        "Pilot (1)",
+        "Comms operator (1)"
       ]
     },
     {
       "Label": "Minimum crew",
       "Links": [],
       "Values": [
-        "1"
+        "1}"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [],
       "Values": [
-        "Optional"
+        "10"
       ]
     },
     {
@@ -270,15 +289,23 @@
         {
           "Content": "transport",
           "Href": "https://starwars.fandom.com/wiki/Transport"
-        },
-        {
-          "Content": "starship",
-          "Href": "https://starwars.fandom.com/wiki/Starship"
         }
       ],
       "Values": [
         "Troop transport",
         "Personal starship"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "14 BBY",
+          "Href": "https://starwars.fandom.com/wiki/14_BBY"
+        }
+      ],
+      "Values": [
+        "By 14 BBY"
       ]
     },
     {
@@ -297,33 +324,38 @@
           "Href": "https://starwars.fandom.com/wiki/Inquisitorius"
         },
         {
-          "Content": "Ranc gang",
-          "Href": "https://starwars.fandom.com/wiki/Ranc_gang"
+          "Content": "Ranc Gang",
+          "Href": "https://starwars.fandom.com/wiki/Ranc_Gang"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Starfighter Corps",
         "Inquisitorius",
-        "Ranc gang"
+        "Ranc Gang"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 657619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
     {
       "PageId": 645342,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_guard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 670458,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exigent",
+      "PageId": 657619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 658135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overseer_(Imperial-class_Star_Destroyer)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 674021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuvar_system_defense_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

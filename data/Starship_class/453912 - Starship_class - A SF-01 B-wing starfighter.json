@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Slayn & Korpil",
-          "Href": "https://starwars.fandom.com/wiki/Slayn_%26_Korpil"
-        }
-      ],
-      "Values": [
-        "Slayn & Korpil"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Quarrie"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Slayn & Korpil",
+          "Href": "https://starwars.fandom.com/wiki/Slayn_%26_Korpil"
+        }
+      ],
+      "Values": [
+        "Slayn & Korpil"
       ]
     },
     {
@@ -55,11 +55,11 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "starfighter",
-          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+          "Content": "Heavy assault starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_assault_starfighter"
         }
       ],
       "Values": [
@@ -277,7 +277,7 @@
           "Href": "https://starwars.fandom.com/wiki/Gyrhil"
         },
         {
-          "Content": "R-9X heavy laser cannons",
+          "Content": "R-9X heavy laser cannon",
           "Href": "https://starwars.fandom.com/wiki/R-9X_heavy_laser_cannon"
         },
         {
@@ -285,7 +285,7 @@
           "Href": "https://starwars.fandom.com/wiki/72_twin_auto-blaster"
         },
         {
-          "Content": "Laser cannons",
+          "Content": "laser cannons",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
@@ -307,22 +307,29 @@
         {
           "Content": "Flex Tube proton torpedo launchers",
           "Href": "https://starwars.fandom.com/wiki/Flex_Tube_proton_torpedo_launcher"
+        },
+        {
+          "Content": "Composite-beam laser",
+          "Href": "https://starwars.fandom.com/wiki/Composite-beam_laser"
         }
       ],
       "Values": [
         "Energy weapons",
         "ArMek SW-7a ion cannons (3)",
-        "Gyrhil R-9X heavy laser cannons (1-4)",
-        "Gyrhil 72 twin auto-blaster (1)or",
-        "Laser cannons (4)",
+        "Gyrhil R-9X heavy laser cannon (1)",
+        "Gyrhil 72 twin auto-blaster (1-2)or",
+        "Gyrhil R-9X heavy laser cannons (4)",
         "Multiple ion cannonsOrdnance",
-        "Krupx MG9 proton torpedo launchers (2)or",
-        "Arakyd Industries Flex Tube proton torpedo launchers (2)as well as",
-        "Laser-guided bombs",
-        "Gyrhil 72 twin auto-blaster (1)",
-        "Multiple ion cannons",
         "Krupx MG9 proton torpedo launchers (2)",
-        "Arakyd Industries Flex Tube proton torpedo launchers (2)"
+        "4 torpedoes eachor",
+        "Arakyd Industries Flex Tube proton torpedo launchers (2)as well as",
+        "Laser-guided bombsAlternate configuration",
+        "Composite-beam laser",
+        "Gyrhil 72 twin auto-blaster (1-2)",
+        "Multiple ion cannons",
+        "4 torpedoes each",
+        "Arakyd Industries Flex Tube proton torpedo launchers (2)",
+        "Laser-guided bombs"
       ]
     },
     {
@@ -461,14 +468,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 623884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lodestar",
+      "PageId": 476422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 553487,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 616143,
@@ -476,23 +478,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 499679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slayn_&_Korpil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 499675,
       "PageUrl": "https://starwars.fandom.com/wiki/B-wing_heavy_assault_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 453203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 476422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
+      "PageId": 623884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lodestar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -506,6 +498,41 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 543399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starhawk-class_Battleship_Mark_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 556308,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 363938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Restoration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 553487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 701098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemini-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 499679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slayn_&_Korpil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 624501,
       "PageUrl": "https://starwars.fandom.com/wiki/Riot_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -516,14 +543,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 543399,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starhawk-class_Battleship_Mark_I",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 556308,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 624733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

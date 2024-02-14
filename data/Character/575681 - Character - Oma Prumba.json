@@ -2,6 +2,7 @@
   "PageId": 575681,
   "PageUrl": "https://starwars.fandom.com/wiki/Oma_Prumba",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,15 +36,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Female"
+        "She/her"
       ]
     },
     {
@@ -64,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 742008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boss_Meetup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

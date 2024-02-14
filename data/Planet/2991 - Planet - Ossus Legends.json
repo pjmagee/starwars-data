@@ -96,7 +96,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-6"
@@ -149,12 +149,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "29,000 km"
+        "29,000 kilometers"
       ]
     },
     {
@@ -194,7 +194,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -249,6 +249,14 @@
           "Href": "https://starwars.fandom.com/wiki/Jedi_Colony"
         },
         {
+          "Content": "Jedi Enclave",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Enclave_(Ossus)"
+        },
+        {
+          "Content": "Jedi meditation chamber",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_meditation_chamber"
+        },
+        {
           "Content": "Strike Base XR-484",
           "Href": "https://starwars.fandom.com/wiki/Strike_Base_XR-484"
         }
@@ -261,6 +269,8 @@
         "Gardens of T'alla",
         "Great Jedi Library",
         "Jedi Colony",
+        "Jedi Enclave",
+        "Jedi meditation chamber",
         "Strike Base XR-484"
       ]
     },
@@ -274,16 +284,25 @@
         {
           "Content": "Kingwood",
           "Href": "https://starwars.fandom.com/wiki/Kingwood"
+        },
+        {
+          "Content": "Wodobo bush",
+          "Href": "https://starwars.fandom.com/wiki/Wodobo_bush"
         }
       ],
       "Values": [
         "Dbergo tree",
-        "Kingwood"
+        "Kingwood",
+        "Wodobo bush"
       ]
     },
     {
       "Label": "Fauna",
       "Links": [
+        {
+          "Content": "Gokob",
+          "Href": "https://starwars.fandom.com/wiki/Gokob"
+        },
         {
           "Content": "Kaddyr bug",
           "Href": "https://starwars.fandom.com/wiki/Kaddyr_bug/Legends"
@@ -293,15 +312,20 @@
           "Href": "https://starwars.fandom.com/wiki/Kirruk/Legends"
         },
         {
-          "Content": "Gokob",
-          "Href": "https://starwars.fandom.com/wiki/Gokob"
+          "Content": "Ossus tree frog",
+          "Href": "https://starwars.fandom.com/wiki/Ossus_tree_frog"
+        },
+        {
+          "Content": "Tribis",
+          "Href": "https://starwars.fandom.com/wiki/Tribis"
         }
       ],
       "Values": [
-        "Tribis",
+        "Gokob",
         "Kaddyr bug",
         "Kirruk",
-        "Gokob"
+        "Ossus tree frog",
+        "Tribis"
       ]
     },
     {
@@ -317,15 +341,20 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Mutated Geonosian",
+          "Href": "https://starwars.fandom.com/wiki/Mutated_Geonosian"
         }
       ],
       "Values": [
-        "Human"
+        "Human",
+        "Mutated Geonosian"
       ]
     },
     {
@@ -378,6 +407,13 @@
         "75% other species",
         "15% other",
         "1% other"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Ossan/Ossun"
       ]
     },
     {
@@ -452,29 +488,39 @@
   ],
   "Relationships": [
     {
-      "PageId": 34783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vill_Goir",
+      "PageId": 80253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massacre_at_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 678702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scarjaw",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 703296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Pharov",
+      "PageId": 678703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razorclaw",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 679262,
-      "PageUrl": "https://starwars.fandom.com/wiki/R8-X8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 679167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Kinsho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 377550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Recusal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 759340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_survivors_(Ossus)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 33874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adegan_eel",
+      "PageId": 557946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kirruk/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 26947,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 88675,
@@ -482,58 +528,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 24861,
-      "PageUrl": "https://starwars.fandom.com/wiki/Matta_Tremayne",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 38430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rayf_Ysanna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 46012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragon-bird_robot_drone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 181735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Telos_Holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 249349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 415111,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holocron_of_Odan-Urr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 22241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 9627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hunt_(Jedi)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
       "PageId": 12390,
       "PageUrl": "https://starwars.fandom.com/wiki/Jem_Ysanna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 140722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jor_Torlin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 183283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Celeste_Morne",
+      "PageId": 43023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Okko",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -542,104 +543,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 723932,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Stone_Guardian/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
-    },
-    {
-      "PageId": 129801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Company_C",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 129802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battalion_9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 83573,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 83574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_Besh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 328422,
-      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 192549,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Sith–Imperial_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 88517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_Sith",
+      "PageId": 736531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haerudan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 88521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Quarren_Sith",
+      "PageId": 736775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fanrix",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 49750,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Academy_(Ossus)",
+      "PageId": 758777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_meditation_chamber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 712652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Academy_Ossus_Campus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 80253,
-      "PageUrl": "https://starwars.fandom.com/wiki/Massacre_at_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 43023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Okko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 50797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 43424,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaddyr_bug/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 43425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Goldie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 535591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knossa_Branch_Library/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 536168,
-      "PageUrl": "https://starwars.fandom.com/wiki/Relle_Talisman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 373204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evacuation_of_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 171211,
@@ -662,44 +578,94 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 171629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ralpe",
+      "PageId": 80161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Skywalker",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 613847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Colony",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 42055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bantha_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 42056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronto_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 22241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 174553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Praxeum_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 328422,
+      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 622533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_(Jedi)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 29383,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 631914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raven_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 172530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gokob",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 210634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_Jedi_Purge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 38430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rayf_Ysanna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Pharov",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 97681,
+      "PageUrl": "https://starwars.fandom.com/wiki/407th_Stormtrooper_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 678201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Colonization_Initiative",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 20119,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_battle_of_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 758786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna_gods",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
     },
     {
       "PageId": 631547,
       "PageUrl": "https://starwars.fandom.com/wiki/Geonosian_Serum",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 83619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Day",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
-    },
-    {
-      "PageId": 16426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Woodoo_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 171481,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 171482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veermok_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 631900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Strike_Base_XR-484",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 80943,
@@ -717,14 +683,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 222344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jin-Lo_Rayce",
+      "PageId": 320917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(First_Great_Schism)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 613813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 739475,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Roach",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 319963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Murra_(Ysanna)",
+      "PageId": 739477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broken_Wing_(Geonosian)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 12041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_High_Council_(New_Jedi_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 3782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 5315,
@@ -732,154 +718,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 109516,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conclave_on_Zonama_Sekot",
+      "PageId": 43534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conclave_on_Ossus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 196661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Kol_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 627998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ductavis_Holocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 83591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imhar_Canyon/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 678202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Assault_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 42055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bantha_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 42056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ronto_Clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 7814,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agricultural_Corps/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 20119,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_battle_of_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 268403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zabrak_Sith_(Ossus)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 679261,
-      "PageUrl": "https://starwars.fandom.com/wiki/R8-X4F",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 644331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mutated_Geonosian_hive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 67544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 25601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_trooper_(stormtrooper)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 80612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Project",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 322558,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eye_of_Ashlanae/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 3742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sedriss_QL",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 678702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scarjaw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 678703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razorclaw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 679167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Kinsho",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knossa/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 31867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eocho_Mountains/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 559677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Caves_(Ossus)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 560785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vault_of_Justice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 97681,
-      "PageUrl": "https://starwars.fandom.com/wiki/407th_Stormtrooper_Division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 85456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Empress_Teta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 172530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gokob",
+      "PageId": 43424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaddyr_bug/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 29301,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Library/Legends",
+      "PageId": 43425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goldie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 693769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_book",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 222344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jin-Lo_Rayce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 377550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Recusal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 32770,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysannan/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 83573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 83574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adega_Besh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 631900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strike_Base_XR-484",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 211406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Ossus_Jedi_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 26947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 82267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keeper_of_Antiquities",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 182461,
@@ -897,129 +788,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 622236,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sashana",
+      "PageId": 3134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ood_Bnar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 622290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Medeen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 679261,
+      "PageUrl": "https://starwars.fandom.com/wiki/R8-X4F",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 622533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_(Jedi)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 299406,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_City/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 15449,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 15450,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nerit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 710468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qel-Droma's_Grave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 361625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Keeper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 693769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_book",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 643809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mutated_Geonosian_queen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 412606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cilghal's_lab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 678201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Colonization_Initiative",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 237518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Knowledge/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 415295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_enclave_(Ossus)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 3782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adega_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 99896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concussion_bow/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 170101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(Second_Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 45980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Assembly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 174553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Praxeum_(Ossus)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 27375,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(Great_Sith_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 3794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odan-Urr/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 52878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ood_Bnar's_descendant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 80161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kol_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 286702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 298772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+      "PageId": 679262,
+      "PageUrl": "https://starwars.fandom.com/wiki/R8-X8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 535519,
@@ -1032,29 +813,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 29383,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Jedi_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 613847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Colony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 210634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Third_Jedi_Purge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 723932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Stone_Guardian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 12041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_High_Council_(New_Jedi_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 613813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Ossus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 3134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ood_Bnar",
+      "PageId": 88517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Twi'lek_Sith",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 88521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Quarren_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 9290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knossa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 83591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imhar_Canyon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 645520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_ancient_script/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 29301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Library/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 758775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ysanna_tribal_mask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
       "PageId": 644823,
@@ -1062,14 +863,279 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
+      "PageId": 678202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Assault_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 192549,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Sith–Imperial_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 268403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zabrak_Sith_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 52878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ood_Bnar's_descendant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 109516,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conclave_on_Zonama_Sekot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 183283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celeste_Morne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 54945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Classical_Ossan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 16426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Woodoo_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 237518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Knowledge/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 535591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knossa_Branch_Library/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 286702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 298772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 211406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Ossus_Jedi_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 140722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jor_Torlin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 3794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odan-Urr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ritual_of_ascent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 758676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mastery_ritual",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 85456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Empress_Teta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 25601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darktrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 24861,
+      "PageUrl": "https://starwars.fandom.com/wiki/Matta_Tremayne",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 80612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Project",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 322558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eye_of_Ashlanae/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 46012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon-bird_robot_drone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 644331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mutated_Geonosian_hive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 536168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relle_Talisman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 784521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 83619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 181735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Telos_Holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 249349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 415295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Enclave_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 99896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concussion_bow/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 319963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murra_(Ysanna)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 643809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mutated_Geonosian_queen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jiqal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sashana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Medeen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 31867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eocho_Mountains/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 559677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Caves_(Ossus)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 560785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vault_of_Justice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 365713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Special_Forces_(Sith_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 171481,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wampa_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 171482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veermok_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 170101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(Second_Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 34783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vill_Goir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 3742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sedriss_QL",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 67544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Ossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 33874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adegan_eel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 27375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(Great_Sith_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 679263,
       "PageUrl": "https://starwars.fandom.com/wiki/Ancient_ruins_(Ossus)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 82267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keeper_of_Antiquities",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 710468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qel-Droma's_Grave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 712652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Academy_Ossus_Campus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 50797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 415111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holocron_of_Odan-Urr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
+    },
+    {
+      "PageId": 627998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ductavis_Holocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
     },
     {
       "PageId": 266900,
@@ -1077,14 +1143,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 320917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ossus_(First_Great_Schism)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 299406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_City/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 557946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kirruk/Legends",
+      "PageId": 171629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ralpe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 196661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Kol_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 129801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Company_C",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 129802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battalion_9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 373204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evacuation_of_Ossus_(Lost_Tribe_of_Sith_emergence)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 45980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Assembly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 7814,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agricultural_Corps/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 743742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tribis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 739687,
+      "PageUrl": "https://starwars.fandom.com/wiki/R8-X4L",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 739691,
+      "PageUrl": "https://starwars.fandom.com/wiki/R8-X6",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 739693,
+      "PageUrl": "https://starwars.fandom.com/wiki/R8-X4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 412606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cilghal's_lab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 1236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geonosian/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 15449,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 15450,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nerit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 44271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dbergo_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 49750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Academy_(Ossus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 361625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus_Keeper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     }
   ]
 }

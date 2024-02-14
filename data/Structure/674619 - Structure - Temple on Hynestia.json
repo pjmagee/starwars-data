@@ -12,11 +12,28 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Jedi temple",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_temple"
+        },
+        {
+          "Content": "Bar",
+          "Href": "https://starwars.fandom.com/wiki/Cantina"
+        }
+      ],
+      "Values": [
+        "Jedi temple",
+        "Bar"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
           "Content": "Hynestia",
-          "Href": "https://starwars.fandom.com/wiki/Hynestia"
+          "Href": "https://starwars.fandom.com/wiki/Hynestia_Prime"
         }
       ],
       "Values": [
@@ -39,8 +56,13 @@
   "Relationships": [
     {
       "PageId": 609210,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hynestia",
+      "PageUrl": "https://starwars.fandom.com/wiki/Hynestia_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 452741,

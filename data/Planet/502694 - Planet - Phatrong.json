@@ -2,7 +2,7 @@
   "PageId": 502694,
   "PageUrl": "https://starwars.fandom.com/wiki/Phatrong",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f6/Phatrong-SWT.jpg/revision/latest?cb=20220608133133",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,27 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "P-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "P-6"
       ]
     },
     {
@@ -43,7 +60,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -146,6 +163,41 @@
   ],
   "Relationships": [
     {
+      "PageId": 510627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zuvio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 546499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebellion_on_the_Kambey_Plains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 546921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 593339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo_confederation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 707191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savina_Besatrix_Malagán",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Embo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 546486,
       "PageUrl": "https://starwars.fandom.com/wiki/Kambey_Plains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -154,41 +206,6 @@
       "PageId": 546488,
       "PageUrl": "https://starwars.fandom.com/wiki/Kwaidan_Peaks",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 476251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 546499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebellion_on_the_Kambey_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 593339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo_confederation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 546921,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyuzo_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 455191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Embo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 510627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zuvio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

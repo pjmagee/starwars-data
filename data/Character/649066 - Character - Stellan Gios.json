@@ -2,7 +2,7 @@
   "PageId": 649066,
   "PageUrl": "https://starwars.fandom.com/wiki/Stellan_Gios",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ea/TheHighRepublic-5-MayhewVirgin.jpg/revision/latest?cb=20210513173534",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/38/StellanGios-TRS.png/revision/latest?cb=20220709214242",
   "Data": [
     {
       "Label": "Titles",
@@ -28,7 +28,7 @@
         }
       ],
       "Values": [
-        "c. 230 BBY, Starlight Beacon, Eiram"
+        "230 BBY, Starlight Beacon, Eiram"
       ]
     },
     {
@@ -53,6 +53,29 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.80 meters (5 ft, 11 in)"
       ]
     },
     {
@@ -95,12 +118,17 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Red Group",
+          "Href": "https://starwars.fandom.com/wiki/Red_Group"
         }
       ],
       "Values": [
         "Jedi Order",
         "Jedi High Council",
-        "Galactic Republic"
+        "Galactic Republic",
+        "Red Group"
       ]
     },
     {
@@ -130,14 +158,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 700732,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 708573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gidameen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 720837,
       "PageUrl": "https://starwars.fandom.com/wiki/Hynestian-Hutt_Clan_treaty",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 700554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valo_Republic_Fair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 726763,
@@ -150,14 +183,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 708573,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gidameen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 643764,
       "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 700732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 646064,
@@ -171,13 +204,8 @@
     },
     {
       "PageId": 702279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rana_Kant's_lightsaber",
+      "PageUrl": "https://starwars.fandom.com/wiki/Kant's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 700554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valo_Republic_Fair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

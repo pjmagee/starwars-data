@@ -25,9 +25,14 @@
     },
     {
       "Label": "Line",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Delta-series fighter",
+          "Href": "https://starwars.fandom.com/wiki/Delta-series_fighter/Legends"
+        }
+      ],
       "Values": [
-        "Delta-series"
+        "Delta-series fighter"
       ]
     },
     {
@@ -38,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -63,7 +68,12 @@
     },
     {
       "Label": "Length",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
       "Values": [
         "Over 8 meters"
       ]
@@ -139,7 +149,12 @@
     },
     {
       "Label": "Consumables",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "weeks",
+          "Href": "https://starwars.fandom.com/wiki/Standard_week/Legends"
+        }
+      ],
       "Values": [
         "Two weeks"
       ]
@@ -182,13 +197,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 39650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 764757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta-series_fighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
       "PageId": 55433,
       "PageUrl": "https://starwars.fandom.com/wiki/Dreadnaught-Three",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 39650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

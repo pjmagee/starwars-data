@@ -2,6 +2,7 @@
   "PageId": 585263,
   "PageUrl": "https://starwars.fandom.com/wiki/Ylva",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,7 +60,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Scyre",
@@ -69,7 +70,42 @@
       "Values": [
         "Scyre"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Keldo",
+          "Href": "https://starwars.fandom.com/wiki/Keldo"
+        }
+      ],
+      "Values": [
+        "Keldo"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Frey",
+          "Href": "https://starwars.fandom.com/wiki/UV-8855"
+        }
+      ],
+      "Values": [
+        "Frey"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 576347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keldo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581855,
+      "PageUrl": "https://starwars.fandom.com/wiki/UV-8855",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

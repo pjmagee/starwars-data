@@ -48,22 +48,81 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Hair color",
+      "Links": [],
+      "Values": [
+        "Dark"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
-        {
-          "Content": "First Wavers",
-          "Href": "https://starwars.fandom.com/wiki/First_Wavers"
-        },
         {
           "Content": "Ree family",
           "Href": "https://starwars.fandom.com/wiki/Ree_family"
         }
       ],
       "Values": [
-        "First Wavers",
         "Ree family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Verine Ree",
+          "Href": "https://starwars.fandom.com/wiki/Verine_Ree"
+        }
+      ],
+      "Values": [
+        "Verine Ree"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Wynnet Ree",
+          "Href": "https://starwars.fandom.com/wiki/Wynnet_Ree"
+        },
+        {
+          "Content": "Ciena Ree",
+          "Href": "https://starwars.fandom.com/wiki/Ciena_Ree"
+        }
+      ],
+      "Values": [
+        "Wynnet Ree",
+        "Ciena Ree"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "First Wavers",
+          "Href": "https://starwars.fandom.com/wiki/First_Wavers"
+        }
+      ],
+      "Values": [
+        "First Wavers"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 512618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wynnet_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 499507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ciena_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Verine_Ree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

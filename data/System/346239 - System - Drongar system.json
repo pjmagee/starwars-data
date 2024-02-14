@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-5"
@@ -48,24 +48,33 @@
         {
           "Content": "Drongar",
           "Href": "https://starwars.fandom.com/wiki/Drongar/Legends"
+        },
+        {
+          "Content": "moons",
+          "Href": "https://starwars.fandom.com/wiki/Moon/Legends"
+        },
+        {
+          "Content": "gas giants",
+          "Href": "https://starwars.fandom.com/wiki/Gas_giant/Legends"
         }
       ],
       "Values": [
         "Drongar",
-        "2 moons"
+        "2 moons",
+        "3 gas giants"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 8801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drongar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 17489,
       "PageUrl": "https://starwars.fandom.com/wiki/Drongar_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 8801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drongar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

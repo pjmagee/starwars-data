@@ -15,21 +15,11 @@
       "Label": "Region(s)",
       "Links": [
         {
-          "Content": "Outer Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
-        },
-        {
-          "Content": "Mid Rim Territories",
-          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
-        },
-        {
           "Content": "The Slice",
           "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Outer Rim Territories",
-        "Mid Rim Territories",
         "The Slice"
       ]
     },
@@ -54,6 +44,14 @@
       "Label": "Other planets",
       "Links": [
         {
+          "Content": "Ankhural",
+          "Href": "https://starwars.fandom.com/wiki/Ankhural"
+        },
+        {
+          "Content": "Circumtore",
+          "Href": "https://starwars.fandom.com/wiki/Circumtore"
+        },
+        {
           "Content": "Cyrkon",
           "Href": "https://starwars.fandom.com/wiki/Cyrkon"
         },
@@ -74,12 +72,20 @@
           "Href": "https://starwars.fandom.com/wiki/Nal_Hutta"
         },
         {
+          "Content": "Nar Kaaga",
+          "Href": "https://starwars.fandom.com/wiki/Nar_Kaaga"
+        },
+        {
           "Content": "Nimban",
           "Href": "https://starwars.fandom.com/wiki/Nimban"
         },
         {
           "Content": "Ques",
           "Href": "https://starwars.fandom.com/wiki/Ques"
+        },
+        {
+          "Content": "Rorak",
+          "Href": "https://starwars.fandom.com/wiki/Rorak"
         },
         {
           "Content": "Saki",
@@ -103,13 +109,17 @@
         }
       ],
       "Values": [
+        "Ankhural",
+        "Circumtore",
         "Cyrkon",
         "Dotharian",
         "Kintan",
         "Klatooine",
         "Nal Hutta",
+        "Nar Kaaga",
         "Nimban",
         "Ques",
+        "Rorak",
         "Saki",
         "Sleheyron",
         "Sriluur",
@@ -258,81 +268,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 699246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zee-Nine_City_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 477678,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 644260,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 644261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Hutta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 644262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shag_Pabol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 498757,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ylesia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 610913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nimban",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 507658,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Clan–Republic_treaty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
-    },
-    {
-      "PageId": 565980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Si'Klaata_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 695269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toydar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 695270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Little_Toydar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 632562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ramesh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 632563,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 515990,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sriluur",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 515993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sleheyron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 622871,
       "PageUrl": "https://starwars.fandom.com/wiki/Riileb",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -353,9 +288,144 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 700148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drengir_crisis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 477678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 632562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ramesh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 632563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 504230,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Jabba's_Palace_(Clone_Wars)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 513365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Besadii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 453039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 546432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gank_homeworld",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 546435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 614509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keldooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 513165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cyrkon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 785805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ballum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 610913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nimban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 718022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Order_of_the_Night_Wind",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 617285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hollastin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 660220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Berserker_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 719308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quaymoon_betting_parlor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 507658,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Clan–Republic_treaty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 502669,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 565980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Si'Klaata_Cluster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 566239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Sleheyron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 699246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zee-Nine_City_Seven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 503667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kintan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 526777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ankhural",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 515990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sriluur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 515993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sleheyron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 665792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kwenn_Space_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 541862,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 582445,
@@ -363,8 +433,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 648384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dotharian",
+      "PageId": 582486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vodran's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 566281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ques",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -373,38 +448,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 453039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nal_Hutta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 463517,
       "PageUrl": "https://starwars.fandom.com/wiki/Dandoran",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 566239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Sleheyron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 695269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toydar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 718022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Order_of_the_Night_Wind",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 695270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Toydar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 700148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drengir_crisis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 660220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Berserker_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 513165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cyrkon",
+      "PageId": 498757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ylesia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -423,29 +483,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 617285,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hollastin",
+      "PageId": 648384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dotharian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 665792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kwenn_Space_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 614509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keldooine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 582486,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vodran's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 513365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Besadii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 534882,
@@ -458,44 +498,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 719308,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quaymoon_betting_parlor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 644260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ootmian_Pabol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 566281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ques",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 644261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pabol_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 526777,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ankhural",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 503667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kintan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 502669,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nar_Shaddaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 546432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gank_homeworld",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 546435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saki",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 541862,
-      "PageUrl": "https://starwars.fandom.com/wiki/Toydaria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 644262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shag_Pabol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

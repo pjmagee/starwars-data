@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Mayagil sector",
-          "Href": "https://starwars.fandom.com/wiki/Mayagil_sector"
+          "Href": "https://starwars.fandom.com/wiki/Mayagil_sector/Legends"
         }
       ],
       "Values": [
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-18"
@@ -52,6 +52,18 @@
       ],
       "Values": [
         "Kabal"
+      ]
+    },
+    {
+      "Label": "Space stations",
+      "Links": [
+        {
+          "Content": "Kabal Station",
+          "Href": "https://starwars.fandom.com/wiki/Kabal_Station"
+        }
+      ],
+      "Values": [
+        "Kabal Station"
       ]
     },
     {
@@ -91,24 +103,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 348183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kabal_(Galactic_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 127119,
       "PageUrl": "https://starwars.fandom.com/wiki/Collapsed_dwarf_star",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 13844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kabal/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mayagil_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 262246,
@@ -116,9 +113,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mayagil_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 13844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kabal/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 408419,
       "PageUrl": "https://starwars.fandom.com/wiki/Kabal's_moon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 478350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kabal_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 348183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kabal_(Galactic_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

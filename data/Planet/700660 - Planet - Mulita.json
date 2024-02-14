@@ -17,10 +17,15 @@
         {
           "Content": "Wild Space",
           "Href": "https://starwars.fandom.com/wiki/Wild_Space"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
         }
       ],
       "Values": [
-        "Wild Space"
+        "Wild Space",
+        "Occlusion Zone"
       ]
     },
     {
@@ -36,6 +41,25 @@
       ]
     },
     {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "H-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "H-19"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -43,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -70,14 +94,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 672006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drengir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 683395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_the_Amaxine_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 683953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_relay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 703506,
       "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Mulita",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 672006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drengir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 683107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helix_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

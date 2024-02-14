@@ -2,6 +2,7 @@
   "PageId": 158644,
   "PageUrl": "https://starwars.fandom.com/wiki/Briila",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,7 +60,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Beviin",
@@ -83,5 +84,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 98082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dinua_Jeban",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

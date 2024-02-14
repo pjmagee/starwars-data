@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Mammal",
+          "Href": "https://starwars.fandom.com/wiki/Mammal"
+        }
+      ],
+      "Values": [
+        "Mammal"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [
         {
@@ -29,23 +41,33 @@
         {
           "Content": "Batuu",
           "Href": "https://starwars.fandom.com/wiki/Batuu"
+        },
+        {
+          "Content": "Pacara",
+          "Href": "https://starwars.fandom.com/wiki/Pacara"
         }
       ],
       "Values": [
-        "Batuu"
+        "Batuu",
+        "Pacara"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 630146,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 638749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 569013,
       "PageUrl": "https://starwars.fandom.com/wiki/Batuu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 630146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     }
   ]
 }

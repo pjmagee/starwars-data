@@ -8,7 +8,20 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Great Scourge of Malachor"
+        "Great Scourge of Malachor",
+        "(The Great Scourge of Malachor, as seen in a Force vision by Darth Maul centuries later, pictured)"
+      ]
+    },
+    {
+      "Label": "Conflict",
+      "Links": [
+        {
+          "Content": "Sith Wars",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Wars"
+        }
+      ],
+      "Values": [
+        "Sith Wars"
       ]
     },
     {
@@ -17,10 +30,14 @@
         {
           "Content": "5000 BBY",
           "Href": "https://starwars.fandom.com/wiki/5000_BBY"
+        },
+        {
+          "Content": "1032 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1032_BBY"
         }
       ],
       "Values": [
-        "c. 5000 BBY"
+        "Between c. 5000 BBY and c. 1032 BBY"
       ]
     },
     {
@@ -48,6 +65,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 665684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
     {
       "PageId": 635624,
       "PageUrl": "https://starwars.fandom.com/wiki/Chorlian_sector",

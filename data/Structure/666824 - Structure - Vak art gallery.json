@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Art gallery"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -22,9 +29,26 @@
       "Values": [
         "Primea"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Vak Combine",
+          "Href": "https://starwars.fandom.com/wiki/Vak_Combine"
+        }
+      ],
+      "Values": [
+        "Vak Combine"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 666314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Primea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 666823,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Vak_curator",

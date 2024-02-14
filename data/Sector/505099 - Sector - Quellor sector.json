@@ -41,6 +41,28 @@
       ]
     },
     {
+      "Label": "Other planets",
+      "Links": [
+        {
+          "Content": "Deko Neimoidia",
+          "Href": "https://starwars.fandom.com/wiki/Deko_Neimoidia"
+        },
+        {
+          "Content": "Koru Neimoidia",
+          "Href": "https://starwars.fandom.com/wiki/Koru_Neimoidia"
+        },
+        {
+          "Content": "Quellor",
+          "Href": "https://starwars.fandom.com/wiki/Quellor"
+        }
+      ],
+      "Values": [
+        "Deko Neimoidia",
+        "Koru Neimoidia",
+        "Quellor"
+      ]
+    },
+    {
       "Label": "Trade routes",
       "Links": [
         {
@@ -61,23 +83,31 @@
         },
         {
           "Content": "Cato Neimoidia (I)",
-          "Href": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia"
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia_(Kenobi_and_Skywalker)"
         },
         {
           "Content": "(II)",
-          "Href": "https://starwars.fandom.com/wiki/Assault_on_Cato_Neimoidia"
+          "Href": "https://starwars.fandom.com/wiki/Rescue_of_Ruug_Quarnom"
         },
         {
           "Content": "(III)",
-          "Href": "https://starwars.fandom.com/wiki/Defense_of_Cato_Neimoidia"
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Cato_Neimoidia"
         },
         {
           "Content": "(IV)",
+          "Href": "https://starwars.fandom.com/wiki/Assault_on_Cato_Neimoidia"
+        },
+        {
+          "Content": "(V)",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Cato_Neimoidia_(501st_Legion)"
+        },
+        {
+          "Content": "(VI)",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Cato_Neimoidia"
         }
       ],
       "Values": [
-        "Quellor sector -Cato Neimoidia (I) (II) (III) (IV)"
+        "Quellor sector - Cato Neimoidia (I) (II) (III) (IV) (V) (VI)"
       ]
     },
     {
@@ -95,36 +125,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 695251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 695254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 625741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_the_Quellor_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 506843,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 552553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quellor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 464661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 625384,
       "PageUrl": "https://starwars.fandom.com/wiki/2nd_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
@@ -135,9 +135,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
+      "PageId": 625741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_the_Quellor_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 695249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deko_Neimoidia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 658680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koru_Neimoidia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 464661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 695254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 506843,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 695251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 625740,
       "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Home_Defense_Legions",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 552553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

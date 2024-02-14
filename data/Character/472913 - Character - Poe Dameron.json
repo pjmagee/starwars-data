@@ -2,7 +2,7 @@
   "PageId": 472913,
   "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8a/Poe_Dameron_Advanced_Graphics_TROS.png/revision/latest?cb=20191007065136",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6b/PoeDameron-Heroes2023.png/revision/latest?cb=20231022210306",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "2 ABY"
+        "2 ABY, Yavin 4"
       ]
     },
     {
@@ -60,10 +60,17 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
-          "Content": "meter",
+          "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
         },
         {
@@ -72,19 +79,19 @@
         }
       ],
       "Values": [
-        "1.72 meter (5ft 8in)"
+        "1.72 meters (5ft 8in)"
       ]
     },
     {
       "Label": "Mass",
       "Links": [
         {
-          "Content": "kilogram",
+          "Content": "kilograms",
           "Href": "https://starwars.fandom.com/wiki/Kilogram"
         }
       ],
       "Values": [
-        "80 kilogram"
+        "80 kilograms"
       ]
     },
     {
@@ -96,7 +103,7 @@
         }
       ],
       "Values": [
-        "Brown"
+        "Dark Brown"
       ]
     },
     {
@@ -114,12 +121,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Dameron family",
           "Href": "https://starwars.fandom.com/wiki/Dameron_family"
+        }
+      ],
+      "Values": [
+        "Dameron family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kes Dameron",
+          "Href": "https://starwars.fandom.com/wiki/Kes_Dameron"
         },
+        {
+          "Content": "Shara Bey",
+          "Href": "https://starwars.fandom.com/wiki/Shara_Bey"
+        }
+      ],
+      "Values": [
+        "Kes Dameron",
+        "Shara Bey"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Spice Runners of Kijimi",
           "Href": "https://starwars.fandom.com/wiki/Spice_Runners_of_Kijimi"
@@ -158,7 +190,6 @@
         }
       ],
       "Values": [
-        "Dameron family",
         "Spice Runners of Kijimi",
         "New Republic",
         "Rapier Squadron",
@@ -174,10 +205,6 @@
       "Label": "Masters",
       "Links": [
         {
-          "Content": "Shara Bey",
-          "Href": "https://starwars.fandom.com/wiki/Shara_Bey"
-        },
-        {
           "Content": "piloting",
           "Href": "https://starwars.fandom.com/wiki/Pilot"
         }
@@ -189,14 +216,154 @@
   ],
   "Relationships": [
     {
+      "PageId": 608351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 536289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Squadron_(Resistance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 542579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Admiral_Ackbar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 542621,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Finalizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 608526,
+      "PageUrl": "https://starwars.fandom.com/wiki/19_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 629551,
+      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 691607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Mirrin_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 563863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beloved_Bophine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 554080,
+      "PageUrl": "https://starwars.fandom.com/wiki/2_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 524089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 525787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_of_Hope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 586525,
       "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey's_wedding_ring",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 591479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_ship",
+      "PageId": 581306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_a_civilian_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 499181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 735115,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE_pilot_loyalty_card",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 686950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dameron_Xtreme_Cup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 632604,
+      "PageUrl": "https://starwars.fandom.com/wiki/StarRover",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 632641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Two-Seven-Oh-Five",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 632752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bestoon_Legacy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 546199,
+      "PageUrl": "https://starwars.fandom.com/wiki/TE4.4_field_quadnoculars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 635961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 642569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_air_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 719387,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backwards_tailslide",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 617858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Widowmaker_(maneuver)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 630181,
+      "PageUrl": "https://starwars.fandom.com/wiki/18_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 641823,
+      "PageUrl": "https://starwars.fandom.com/wiki/27_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 620325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_fighter_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 526251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_OR-Kappa-2722",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 642491,
@@ -209,104 +376,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 617847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Dassal_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 532759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 523951,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tuanul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 526251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_OR-Kappa-2722",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 563863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beloved_Bophine",
+      "PageId": 453100,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 642569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exegol_air_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 608980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rendezvous_with_the_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 569275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_L'ulo_L'ampar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 536289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Squadron_(Resistance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 508165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 691607,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Mirrin_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 661271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ragged_Claw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 663749,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vondel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 563865,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_flight_log",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
-      "PageId": 561221,
-      "PageUrl": "https://starwars.fandom.com/wiki/8_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 598172,
-      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 577775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raddus_(MC85_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 578340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey's_A-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 673234,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Rise_of_Skywalker_(music)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 674512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Friendship_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 573708,
@@ -314,19 +386,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
     },
     {
-      "PageId": 523887,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_fighter_jacket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 546199,
-      "PageUrl": "https://starwars.fandom.com/wiki/TE4.4_field_quadnoculars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 608351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 538525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_the_Resistance_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
       "PageId": 512889,
@@ -364,54 +426,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 620325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_fighter_wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 542579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Admiral_Ackbar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 542621,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Finalizer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 560622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe's_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 536509,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 453100,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 641823,
-      "PageUrl": "https://starwars.fandom.com/wiki/27_ABY",
+      "PageId": 561221,
+      "PageUrl": "https://starwars.fandom.com/wiki/8_ABY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 635961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Team_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 598172,
+      "PageUrl": "https://starwars.fandom.com/wiki/30_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 581306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_a_civilian_transport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 580603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snap_and_Karé's_wedding",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 523951,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tuanul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 611682,
@@ -419,69 +446,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 632604,
-      "PageUrl": "https://starwars.fandom.com/wiki/StarRover",
+      "PageId": 591479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa's_ship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 632641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Two-Seven-Oh-Five",
+      "PageId": 661271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ragged_Claw",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 499181,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 719387,
-      "PageUrl": "https://starwars.fandom.com/wiki/Backwards_tailslide",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
-    },
-    {
-      "PageId": 608526,
-      "PageUrl": "https://starwars.fandom.com/wiki/19_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 630181,
-      "PageUrl": "https://starwars.fandom.com/wiki/18_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 632752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
+      "PageId": 663749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vondel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 639718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bestoon_Legacy",
+      "PageId": 608980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rendezvous_with_the_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 617847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Dassal_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 734709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_book",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 577775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raddus_(MC85_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 554080,
-      "PageUrl": "https://starwars.fandom.com/wiki/2_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 578340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey's_A-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 538525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heroes_of_the_Resistance_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
+      "PageId": 523887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resistance_fighter_jacket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 686950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dameron_Xtreme_Cup",
+      "PageId": 569275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_L'ulo_L'ampar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 524089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 580603,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snap_and_Karé's_wedding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 525787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_of_Hope",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 508165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shara_Bey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 508166,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kes_Dameron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 532759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 673234,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Rise_of_Skywalker_(music)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 674512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Friendship_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 560622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe's_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 563865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_flight_log",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 536509,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Lor_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 593280,

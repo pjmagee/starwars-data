@@ -41,10 +41,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        },
+        {
+          "Content": "Onderonian",
+          "Href": "https://starwars.fandom.com/wiki/Onderonian/Legends"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Onderonian)"
       ]
     },
     {
@@ -98,6 +102,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Saw Gerrera",
+          "Href": "https://starwars.fandom.com/wiki/Saw_Gerrera"
+        }
+      ],
+      "Values": [
+        "Saw Gerrera"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -122,8 +138,13 @@
   ],
   "Relationships": [
     {
+      "PageId": 418635,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Daily_Rebellion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
       "PageId": 397242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Execution_of_Ramsis_Dendup_and_Saw_Gerrera",
+      "PageUrl": "https://starwars.fandom.com/wiki/Attempted_execution_of_Ramsis_Dendup_and_Saw_Gerrera",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
@@ -132,9 +153,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 418635,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Daily_Rebellion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+      "PageId": 395753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saw_Gerrera/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

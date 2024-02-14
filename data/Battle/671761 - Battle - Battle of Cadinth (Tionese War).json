@@ -2,6 +2,7 @@
   "PageId": 671761,
   "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Cadinth_(Tionese_War)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,22 @@
       ]
     },
     {
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "24,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/24,000_BBY"
+        },
+        {
+          "Content": "23,900 BBY",
+          "Href": "https://starwars.fandom.com/wiki/23,900_BBY"
+        }
+      ],
+      "Values": [
+        "Between 24,000 BBY and c. 23,900 BBY"
+      ]
+    },
+    {
       "Label": "Place",
       "Links": [
         {
@@ -36,11 +53,27 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
       "Values": [
-        "Republic victory"
+        "Galactic Republic victory"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allied_Tion_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 12887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Cluster/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

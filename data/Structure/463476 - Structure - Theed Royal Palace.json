@@ -24,6 +24,13 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Palace"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -47,6 +54,10 @@
       "Label": "Point(s) of interest",
       "Links": [
         {
+          "Content": "Queen's library",
+          "Href": "https://starwars.fandom.com/wiki/Queen%27s_library"
+        },
+        {
           "Content": "Theed Hangar",
           "Href": "https://starwars.fandom.com/wiki/Theed_Hangar"
         },
@@ -57,12 +68,18 @@
         {
           "Content": "Turret Room",
           "Href": "https://starwars.fandom.com/wiki/Turret_Room"
+        },
+        {
+          "Content": "Veruna's tower",
+          "Href": "https://starwars.fandom.com/wiki/Veruna%27s_tower"
         }
       ],
       "Values": [
+        "Queen's library",
         "Theed Hangar",
         "Throne room",
-        "Turret Room"
+        "Turret Room",
+        "Veruna's tower"
       ]
     },
     {
@@ -108,14 +125,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 534566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Hangar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 500445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ascension_gun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 659127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blood_sensor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 790782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Starport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 451978,
@@ -123,29 +140,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 619553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_scepter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 659127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blood-sensitive_sensor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 559733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Throne_room_(Theed_Royal_Palace)",
+      "PageId": 626237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliffs_of_Theed",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 659410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen's_library",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 452854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Advisory_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 615568,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veruna's_tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 586983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 534547,
@@ -153,13 +160,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 623478,
-      "PageUrl": "https://starwars.fandom.com/wiki/Turret_Room",
+      "PageId": 619456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 534566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 605804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 615568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veruna's_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 762938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_apartment_(Theed_Royal_Palace)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 626237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cliffs_of_Theed",
+      "PageId": 752283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_Theed_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 559733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Throne_room_(Theed_Royal_Palace)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -168,24 +200,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 500445,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ascension_gun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 762937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blood_alarm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 605804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe",
+      "PageId": 619553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_scepter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 619456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 452854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Advisory_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 586983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 623478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Turret_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 659410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen's_library",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

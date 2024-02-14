@@ -2,7 +2,7 @@
   "PageId": 478805,
   "PageUrl": "https://starwars.fandom.com/wiki/Monument_Plaza",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5a/Coruscant_Monument_Plaza.png/revision/latest?cb=20120907213015",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0f/Monument_Plaza_MandoS3.png/revision/latest?cb=20230316072253",
   "Data": [
     {
       "Label": "Titles",
@@ -12,26 +12,47 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Plaza"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
+        {
+          "Content": "Level 5,216",
+          "Href": "https://starwars.fandom.com/wiki/Level_5,216"
+        },
         {
           "Content": "Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Coruscant"
         }
       ],
       "Values": [
-        "Coruscant"
+        "Level 5,216, Coruscant"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "JCLD Galactic Shipping",
+          "Href": "https://starwars.fandom.com/wiki/JCLD_Galactic_Shipping"
+        },
+        {
+          "Content": "Samuel Crowe",
+          "Href": "https://starwars.fandom.com/wiki/Samuel_Crowe"
+        },
+        {
           "Content": "Umate",
           "Href": "https://starwars.fandom.com/wiki/Umate"
         }
       ],
       "Values": [
+        "JCLD Galactic Shipping",
+        "Samuel Crowe",
         "Umate"
       ]
     },
@@ -45,15 +66,25 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 685228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Level_5,216",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 452675,
       "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
@@ -65,13 +96,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 679980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Umate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 759166,
+      "PageUrl": "https://starwars.fandom.com/wiki/JCLD_Galactic_Shipping",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 685228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Level_5,216",
+      "PageId": 759171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Samuel_Crowe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 679980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

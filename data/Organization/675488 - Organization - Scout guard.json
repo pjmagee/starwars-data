@@ -13,25 +13,35 @@
     },
     {
       "Label": "Organization type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Soldier",
+          "Href": "https://starwars.fandom.com/wiki/Soldier"
+        }
+      ],
       "Values": [
-        "Enforcer organization"
+        "Soldier"
       ]
     },
     {
       "Label": "Leader(s)",
       "Links": [
         {
-          "Content": "Magistrate",
-          "Href": "https://starwars.fandom.com/wiki/Magistrate"
-        },
-        {
           "Content": "Morgan Elsbeth",
           "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth"
+        },
+        {
+          "Content": "Grand Admiral",
+          "Href": "https://starwars.fandom.com/wiki/Grand_Admiral"
+        },
+        {
+          "Content": "Thrawn",
+          "Href": "https://starwars.fandom.com/wiki/Mitth%27raw%27nuruodo"
         }
       ],
       "Values": [
-        "Magistrate Morgan Elsbeth"
+        "Morgan Elsbeth",
+        "Grand Admiral Thrawn"
       ]
     },
     {
@@ -44,42 +54,45 @@
         {
           "Content": "Corvus",
           "Href": "https://starwars.fandom.com/wiki/Corvus"
-        }
-      ],
-      "Values": [
-        "Calodan, Corvus"
-      ]
-    },
-    {
-      "Label": "Date fragmented",
-      "Links": [
+        },
         {
-          "Content": "9 ABY",
-          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+          "Content": "Seatos",
+          "Href": "https://starwars.fandom.com/wiki/Seatos"
         }
       ],
       "Values": [
-        "9 ABY"
+        "Calodan, Corvus",
+        "Seatos"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Morgan Elsbeth's army",
-          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_army"
+          "Content": "Morgan Elsbeth's forces",
+          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_forces"
+        },
+        {
+          "Content": "Thrawn's forces",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_forces"
         }
       ],
       "Values": [
-        "Morgan Elsbeth's army"
+        "Morgan Elsbeth's forces",
+        "Thrawn's forces"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 675510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 778783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eye_of_Sion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 780355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_starship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

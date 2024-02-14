@@ -11,10 +11,15 @@
       ]
     },
     {
-      "Label": "Eye color",
-      "Links": [],
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Salamander",
+          "Href": "https://starwars.fandom.com/wiki/Salamander"
+        }
+      ],
       "Values": [
-        "Blue"
+        "Salamander"
       ]
     },
     {
@@ -27,6 +32,18 @@
       ],
       "Values": [
         "Yavin 4"
+      ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Rivers",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "Rivers"
       ]
     }
   ],

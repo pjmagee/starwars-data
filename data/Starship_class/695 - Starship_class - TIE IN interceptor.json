@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -156,6 +156,18 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "I-a3a solar ionization reactor",
+          "Href": "https://starwars.fandom.com/wiki/I-a3a_solar_ionization_reactor"
+        }
+      ],
+      "Values": [
+        "I-a3a solar ionization reactor"
+      ]
+    },
+    {
       "Label": "Shielding",
       "Links": [],
       "Values": [
@@ -263,17 +275,13 @@
           "Href": "https://starwars.fandom.com/wiki/14_BBY"
         },
         {
-          "Content": "prototype",
-          "Href": "https://starwars.fandom.com/wiki/TIE/IN_Interceptor_Prototype"
-        },
-        {
           "Content": "3 BBY",
           "Href": "https://starwars.fandom.com/wiki/3_BBY"
         }
       ],
       "Values": [
-        "By 14 BBY (prototype)",
-        "3 BBY"
+        "By 14 BBY (prototype deployment)",
+        "3 BBY (official deployment)"
       ]
     },
     {
@@ -290,12 +298,17 @@
         {
           "Content": "Inquisitorius",
           "Href": "https://starwars.fandom.com/wiki/Inquisitorius"
+        },
+        {
+          "Content": "Gideon's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Starfighter Corps",
-        "Inquisitorius"
+        "Inquisitorius",
+        "Gideon's Imperial remnant"
       ]
     }
   ],
@@ -306,13 +319,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
+      "PageId": 458392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 515760,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 516102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 582018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 657619,
       "PageUrl": "https://starwars.fandom.com/wiki/Titan_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 483081,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
+      "PageId": 499762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inflictor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -321,19 +354,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 621551,
+      "PageUrl": "https://starwars.fandom.com/wiki/204th_Imperial_Fighter_Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 452338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 509998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 513793,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Executor-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 584541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fondor_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 658135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overseer_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 607109,
       "PageUrl": "https://starwars.fandom.com/wiki/Gradd's_squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 721089,
-      "PageUrl": "https://starwars.fandom.com/wiki/TIE/IN_Interceptor_Prototype",
+      "PageId": 583374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eviscerator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 458392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "PageId": 482545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 721089,
+      "PageUrl": "https://starwars.fandom.com/wiki/TIE/IN_Interceptor_Prototype",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 685789,
@@ -351,29 +424,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 482545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arquitens-class_command_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 621551,
-      "PageUrl": "https://starwars.fandom.com/wiki/204th_Imperial_Fighter_Wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 575714,
       "PageUrl": "https://starwars.fandom.com/wiki/Vixus_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 513793,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eclipse_(Executor-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 584475,
@@ -381,8 +434,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 515760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ravager",
+      "PageId": 701098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemini-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 758988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_TIE/IN_interceptor_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 483081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty's_Misrule",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 666089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Victorum",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

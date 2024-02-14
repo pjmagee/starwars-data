@@ -2,7 +2,7 @@
   "PageId": 586074,
   "PageUrl": "https://starwars.fandom.com/wiki/Fingerlip_garpon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/69/Fingerlip_garpon.png/revision/latest?cb=20210201162011",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8a/FingerlipGarpon-SWJSurvivor.png/revision/latest?cb=20231128234203",
   "Data": [
     {
       "Label": "Titles",
@@ -50,12 +50,17 @@
           "Href": "https://starwars.fandom.com/wiki/Ahch-To"
         },
         {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
+        },
+        {
           "Content": "Corellia",
           "Href": "https://starwars.fandom.com/wiki/Corellia"
         }
       ],
       "Values": [
         "Ahch-To",
+        "Koboh",
         "Corellia"
       ]
     },
@@ -65,23 +70,43 @@
         {
           "Content": "Ocean",
           "Href": "https://starwars.fandom.com/wiki/Ocean"
+        },
+        {
+          "Content": "Lake",
+          "Href": "https://starwars.fandom.com/wiki/Lake"
         }
       ],
       "Values": [
-        "Ocean"
+        "Ocean",
+        "Lake"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 453102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 754459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koboh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 524218,
       "PageUrl": "https://starwars.fandom.com/wiki/Ahch-To",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 453102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 607245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scalefin_fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 755276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rambler's_Reach_Valley",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

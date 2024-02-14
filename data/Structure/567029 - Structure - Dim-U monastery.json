@@ -15,6 +15,10 @@
       "Label": "Location",
       "Links": [
         {
+          "Content": "Kerner Plaza",
+          "Href": "https://starwars.fandom.com/wiki/Kerner_Plaza"
+        },
+        {
           "Content": "Mos Eisley",
           "Href": "https://starwars.fandom.com/wiki/Mos_Eisley"
         },
@@ -24,12 +28,17 @@
         }
       ],
       "Values": [
-        "Mos Eisley, Tatooine"
+        "Kerner Plaza, Mos Eisley, Tatooine"
       ]
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Dim-U",
+          "Href": "https://starwars.fandom.com/wiki/Dim-U"
+        }
+      ],
       "Values": [
         "Dim-U"
       ]
@@ -37,14 +46,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 552935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Curved_Street",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 568979,
       "PageUrl": "https://starwars.fandom.com/wiki/Kerner_Plaza",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 775239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dim-U",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     }
   ]
 }

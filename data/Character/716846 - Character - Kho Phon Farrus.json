@@ -15,12 +15,12 @@
       "Label": "Species",
       "Links": [
         {
-          "Content": "Humanoid",
-          "Href": "https://starwars.fandom.com/wiki/Humanoid"
+          "Content": "Alcedian",
+          "Href": "https://starwars.fandom.com/wiki/Alcedian"
         }
       ],
       "Values": [
-        "Humanoid"
+        "Alcedian"
       ]
     },
     {
@@ -36,29 +36,43 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "They/them"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "Red",
+          "Content": "Deep pink",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Red and purple"
+        "Deep pink and purple"
+      ]
+    },
+    {
+      "Label": "Feather color",
+      "Links": [],
+      "Values": [
+        "Light gray"
       ]
     },
     {
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Yellow"
+        "Black irises with yellow scelera"
       ]
     },
     {
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Gray"
+        "Light gray"
       ]
     },
     {
@@ -67,18 +81,53 @@
         {
           "Content": "University of Bar'leth",
           "Href": "https://starwars.fandom.com/wiki/University_of_Bar%27leth"
+        },
+        {
+          "Content": "Sana Starros' crew",
+          "Href": "https://starwars.fandom.com/wiki/Sana_Starros%27_crew"
+        },
+        {
+          "Content": "Crimson Dawn",
+          "Href": "https://starwars.fandom.com/wiki/Crimson_Dawn"
         }
       ],
       "Values": [
-        "University of Bar'leth"
+        "University of Bar'leth",
+        "Sana Starros' crew",
+        "Crimson Dawn"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 749825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sana_Starros'_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 754518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_an_unidentified_planet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 747914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus'_machine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 747910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus'_cape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
       "PageId": 722945,
       "PageUrl": "https://starwars.fandom.com/wiki/Kho_Phon_Farrus'_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

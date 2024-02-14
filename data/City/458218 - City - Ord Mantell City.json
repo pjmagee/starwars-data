@@ -33,11 +33,41 @@
         {
           "Content": "Cid's Parlor",
           "Href": "https://starwars.fandom.com/wiki/Cid%27s_Parlor"
+        },
+        {
+          "Content": "Civic capital authority spire",
+          "Href": "https://starwars.fandom.com/wiki/Civic_capital_authority_spire"
+        },
+        {
+          "Content": "Fifteen Moons Casino and Hotel",
+          "Href": "https://starwars.fandom.com/wiki/Fifteen_Moons_Casino_and_Hotel"
+        },
+        {
+          "Content": "Financial district",
+          "Href": "https://starwars.fandom.com/wiki/Financial_district"
+        },
+        {
+          "Content": "Rain Drop",
+          "Href": "https://starwars.fandom.com/wiki/Rain_Drop"
+        },
+        {
+          "Content": "Spice",
+          "Href": "https://starwars.fandom.com/wiki/Spice_(business)"
+        },
+        {
+          "Content": "Droid Repair",
+          "Href": "https://starwars.fandom.com/wiki/Droid_Repair"
         }
       ],
       "Values": [
         "Black Sun stronghold",
-        "Cid's Parlor"
+        "Cid's Parlor",
+        "Civic capital authority spire",
+        "Fifteen Moons Casino and Hotel",
+        "Financial district",
+        "Rain Drop",
+        "Spice",
+        "Droid Repair"
       ]
     },
     {
@@ -50,15 +80,50 @@
         {
           "Content": "Shadow Collective",
           "Href": "https://starwars.fandom.com/wiki/Shadow_Collective"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
         "Black Sun",
-        "Shadow Collective"
+        "Shadow Collective",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 693296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun_stronghold",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 455596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Mantell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 720300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_safe_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 695548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cid's_Parlor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 761730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_SP99",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 498511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Force_99",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 724280,
       "PageUrl": "https://starwars.fandom.com/wiki/Credit_Pusher",
@@ -80,39 +145,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
     },
     {
-      "PageId": 693296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun_stronghold",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 704022,
       "PageUrl": "https://starwars.fandom.com/wiki/Spanner_wrench",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 455596,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Mantell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 498511,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Force_99",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 453908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 720300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_safe_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 695548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cid's_Parlor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
     },
     {
       "PageId": 724288,
@@ -128,6 +163,11 @@
       "PageId": 724416,
       "PageUrl": "https://starwars.fandom.com/wiki/Droid_Repair",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 453908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_Sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 697219,

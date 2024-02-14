@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Kuat Drive Yards",
-          "Href": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards"
-        }
-      ],
-      "Values": [
-        "Kuat Drive Yards"
-      ]
-    },
-    {
       "Label": "Product line",
       "Links": [
         {
@@ -36,19 +24,7 @@
       ]
     },
     {
-      "Label": "Model",
-      "Links": [
-        {
-          "Content": "Imperial II-class Star Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_II-class_Star_Destroyer"
-        }
-      ],
-      "Values": [
-        "Imperial II-class Star Destroyer"
-      ]
-    },
-    {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -72,30 +48,6 @@
       ]
     },
     {
-      "Label": "MGLT",
-      "Links": [
-        {
-          "Content": "meters",
-          "Href": "https://starwars.fandom.com/wiki/Meter"
-        }
-      ],
-      "Values": [
-        "1,600 meters"
-      ]
-    },
-    {
-      "Label": "Maximum speed (atmosphere)",
-      "Links": [
-        {
-          "Content": "kilometers per hour",
-          "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
-        }
-      ],
-      "Values": [
-        "975 kilometers per hour"
-      ]
-    },
-    {
       "Label": "Engine unit(s)",
       "Links": [
         {
@@ -114,6 +66,13 @@
       "Values": [
         "KDY Destroyer-I ion engines (3)",
         "Cygnus Spaceworks Gemon-4 ion engines (4) (emergency use)"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -145,70 +104,99 @@
       ]
     },
     {
-      "Label": "Armament",
+      "Label": "Hull",
       "Links": [
         {
-          "Content": "Turbolaser",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
-          "Content": "ion cannon",
-          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
-        },
-        {
-          "Content": "Tractor beam projectors",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+          "Content": "Durasteel",
+          "Href": "https://starwars.fandom.com/wiki/Durasteel"
         }
       ],
       "Values": [
-        "Turbolaser batteries (60)",
-        "Heavy ion cannon emplacements (60)",
-        "Tractor beam projectors (10)"
+        "Imperial Durasteel"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [],
+      "Values": [
+        "Equipped",
+        "Detectors"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        }
+      ],
+      "Values": [
+        "Turbolasers"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "TIE line",
-          "Href": "https://starwars.fandom.com/wiki/TIE_line"
+          "Content": "TIE/ln space superiority starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
         },
         {
-          "Content": "starfighters",
-          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+          "Content": "TIE/IN interceptors",
+          "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "T-65B X-wing starfighters",
+          "Href": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter"
+        },
+        {
+          "Content": "UT-60D U-wing starfighter/support crafts",
+          "Href": "https://starwars.fandom.com/wiki/UT-60D_U-wing_starfighter/support_craft"
+        },
+        {
+          "Content": "RZ-1 A-wing interceptors",
+          "Href": "https://starwars.fandom.com/wiki/RZ-1_A-wing_interceptor"
+        },
+        {
+          "Content": "BTL-A4 Y-wing assault starfighter/bombers",
+          "Href": "https://starwars.fandom.com/wiki/BTL-A4_Y-wing_assault_starfighter/bomber"
+        },
+        {
+          "Content": "CR90 corvette",
+          "Href": "https://starwars.fandom.com/wiki/CR90_corvette"
         }
       ],
       "Values": [
-        "TIE line starfighters (72)"
+        "TIE/ln space superiority starfighters",
+        "TIE/IN interceptors",
+        "T-65B X-wing starfighters",
+        "UT-60D U-wing starfighter/support crafts",
+        "RZ-1 A-wing interceptors",
+        "BTL-A4 Y-wing assault starfighter/bombers",
+        "1 CR90 corvette"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Stormtroopers",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
-        },
-        {
-          "Content": "Imperial officers",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
         }
       ],
       "Values": [
-        "Stormtroopers (9,700)",
-        "Imperial officers"
-      ]
-    },
-    {
-      "Label": "Consumables",
-      "Links": [
-        {
-          "Content": "years",
-          "Href": "https://starwars.fandom.com/wiki/Standard_year"
-        }
-      ],
-      "Values": [
-        "2 years"
+        "Equipped",
+        "Bridge crew",
+        "Imperial Starfighter Pilots",
+        "Unidentified Boarding team"
       ]
     },
     {
@@ -224,15 +212,26 @@
       ]
     },
     {
-      "Label": "Destroyed",
+      "Label": "Other systems",
+      "Links": [],
+      "Values": [
+        "Internal systems"
+      ]
+    },
+    {
+      "Label": "Retired",
       "Links": [
         {
           "Content": "4 ABY",
           "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "Nadiri Dockyards",
+          "Href": "https://starwars.fandom.com/wiki/Nadiri_Dockyards"
         }
       ],
       "Values": [
-        "c. 4 ABY"
+        "c. 4 ABY, Nadiri Dockyards (dismantled and scrapped to help build the Starhawk)"
       ]
     },
     {
@@ -284,6 +283,13 @@
       "Values": [
         "Imperial Navy",
         "New Republic Defense Fleet"
+      ]
+    },
+    {
+      "Label": "Commander(s)",
+      "Links": [],
+      "Values": [
+        "Unidentified boarding captain"
       ]
     }
   ],

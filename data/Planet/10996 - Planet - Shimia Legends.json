@@ -17,10 +17,24 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
+        },
+        {
+          "Content": "Exploitation Region",
+          "Href": "https://starwars.fandom.com/wiki/Exploitation_Region"
+        },
+        {
+          "Content": "17,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/17,000_BBY"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trailing Sectors",
+        "Exploitation Region (c. 17,000 BBY)"
       ]
     },
     {
@@ -48,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-17"
@@ -58,12 +72,20 @@
       "Label": "Trade routes",
       "Links": [
         {
-          "Content": "Old Corellian Run",
-          "Href": "https://starwars.fandom.com/wiki/Old_Corellian_Run"
+          "Content": "Corellian Run",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Run/Legends"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Standard_Calendar"
+        },
+        {
+          "Content": "11,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/11,000_BBY"
         }
       ],
       "Values": [
-        "Old Corellian Run"
+        "Corellian Run (c. 17,000 BBY—c. 11,000 BBY)"
       ]
     },
     {
@@ -86,25 +108,30 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Grassy",
+          "Content": "Grass",
           "Href": "https://starwars.fandom.com/wiki/Grass/Legends"
         },
         {
-          "Content": "Mountains",
+          "Content": "Mountain",
           "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
         }
       ],
       "Values": [
-        "Grassy plains",
-        "Mountains"
+        "Grass-covered plains",
+        "Mountain ranges"
       ]
     },
     {
       "Label": "Surface water",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Seas",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
       "Values": [
         "Seas"
       ]
@@ -137,12 +164,16 @@
       "Label": "Population",
       "Links": [
         {
+          "Content": "system",
+          "Href": "https://starwars.fandom.com/wiki/Star_system/Legends"
+        },
+        {
           "Content": "25 ABY",
           "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
         }
       ],
       "Values": [
-        "10 million to 100 million (c. 25 ABY)"
+        "10–100 million (Shimia system) (c. 25 ABY)"
       ]
     },
     {
@@ -165,6 +196,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 49234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shimiese/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 10995,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacithhip/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 741745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Written_Shimiese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
       "PageId": 37098,
       "PageUrl": "https://starwars.fandom.com/wiki/Bok_Askol/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -178,11 +224,6 @@
       "PageId": 309493,
       "PageUrl": "https://starwars.fandom.com/wiki/Shimia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 10995,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pacithhip/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

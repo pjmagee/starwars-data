@@ -2,7 +2,7 @@
   "PageId": 496661,
   "PageUrl": "https://starwars.fandom.com/wiki/T-21_light_repeating_blaster",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/68/T-21_Blaster_DICE.png/revision/latest?cb=20151106042248",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/68/T-21_Blaster_DICE.png/revision/latest?cb=20230723015114",
   "Data": [
     {
       "Label": "Titles",
@@ -55,6 +55,18 @@
       ]
     },
     {
+      "Label": "Shape",
+      "Links": [
+        {
+          "Content": "Rifle",
+          "Href": "https://starwars.fandom.com/wiki/Rifle"
+        }
+      ],
+      "Values": [
+        "Rifle-shaped"
+      ]
+    },
+    {
       "Label": "Weight",
       "Links": [
         {
@@ -91,21 +103,41 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Grand Army of the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Grand_Army_of_the_Republic"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
           "Content": "Stormtrooper Corps",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps"
+        },
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
+        "Galactic Republic",
+        "Grand Army of the Republic",
         "Galactic Empire",
-        "Stormtrooper Corps"
+        "Stormtrooper Corps",
+        "Alliance to Restore the Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 555575,
+      "PageUrl": "https://starwars.fandom.com/wiki/KX-series_security_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
     {
       "PageId": 466335,
       "PageUrl": "https://starwars.fandom.com/wiki/BlasTech_Industries",

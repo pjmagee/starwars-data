@@ -2,12 +2,45 @@
   "PageId": 485674,
   "PageUrl": "https://starwars.fandom.com/wiki/Lum",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/54/Deep_Core_Faster.png/revision/latest?cb=20230118193639",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Lum"
+      ]
+    },
+    {
+      "Label": "Found",
+      "Links": [
+        {
+          "Content": "Axxila III",
+          "Href": "https://starwars.fandom.com/wiki/Axxila_III"
+        },
+        {
+          "Content": "Ipsidon",
+          "Href": "https://starwars.fandom.com/wiki/Ipsidon"
+        },
+        {
+          "Content": "Ord Mantell",
+          "Href": "https://starwars.fandom.com/wiki/Ord_Mantell"
+        },
+        {
+          "Content": "Serolonis",
+          "Href": "https://starwars.fandom.com/wiki/Serolonis"
+        },
+        {
+          "Content": "Wrea",
+          "Href": "https://starwars.fandom.com/wiki/Wrea"
+        }
+      ],
+      "Values": [
+        "Axxila III",
+        "Ipsidon",
+        "Ord Mantell",
+        "Serolonis",
+        "Wrea"
       ]
     },
     {
@@ -21,7 +54,30 @@
       "Values": [
         "Alcoholic beverage"
       ]
+    },
+    {
+      "Label": "Potable by",
+      "Links": [
+        {
+          "Content": "Human",
+          "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Latero",
+          "Href": "https://starwars.fandom.com/wiki/Latero"
+        }
+      ],
+      "Values": [
+        "Human",
+        "Latero"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 695820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core_(drink)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

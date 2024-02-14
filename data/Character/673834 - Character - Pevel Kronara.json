@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.75 meters (5 ft 9 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -45,6 +68,13 @@
       ],
       "Values": [
         "Silver"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Tan"
       ]
     },
     {
@@ -67,9 +97,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 723226,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Defense_Coalition_Outreach_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 673878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_conclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 789611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi-Republic_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 673833,
@@ -82,9 +117,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 673878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Starlight_Beacon_conclave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 723226,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Defense_Coalition_Outreach_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

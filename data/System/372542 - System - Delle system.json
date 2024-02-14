@@ -2,7 +2,7 @@
   "PageId": 372542,
   "PageUrl": "https://starwars.fandom.com/wiki/Delle_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ca/Delle-TEA.jpg/revision/latest?cb=20240116144238",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,24 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "Northern Dependencies",
+        "The Slice"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
@@ -34,17 +44,29 @@
       "Label": "Orbits",
       "Links": [
         {
-          "Content": "Delle",
-          "Href": "https://starwars.fandom.com/wiki/Delle"
-        },
-        {
           "Content": "Delle II",
           "Href": "https://starwars.fandom.com/wiki/Delle_II"
+        },
+        {
+          "Content": "farm worlds",
+          "Href": "https://starwars.fandom.com/wiki/Agriworld/Legends"
         }
       ],
       "Values": [
-        "Delle",
-        "Delle II"
+        "Delle II",
+        "Several farm worlds"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Perlemian Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends"
+        }
+      ],
+      "Values": [
+        "Perlemian Trade Route"
       ]
     }
   ],
@@ -55,14 +77,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 287973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 3840,
       "PageUrl": "https://starwars.fandom.com/wiki/Colonies/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

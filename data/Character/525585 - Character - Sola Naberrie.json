@@ -12,15 +12,31 @@
       ]
     },
     {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo"
+        }
+      ],
+      "Values": [
+        "Naboo"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo_(people)"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Naboo)"
       ]
     },
     {
@@ -62,7 +78,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Naberrie family",
@@ -72,6 +88,57 @@
       "Values": [
         "Naberrie family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Ruwee Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ruwee_Naberrie"
+        },
+        {
+          "Content": "Jobal Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Jobal_Naberrie"
+        }
+      ],
+      "Values": [
+        "Ruwee Naberrie",
+        "Jobal Naberrie"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Padmé Amidala",
+          "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala"
+        },
+        {
+          "Content": "Anakin Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        }
+      ],
+      "Values": [
+        "Padmé Amidala",
+        "Anakin Skywalker (brother-in-law)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ryoo Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ryoo_Naberrie"
+        },
+        {
+          "Content": "Pooja Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Pooja_Naberrie"
+        }
+      ],
+      "Values": [
+        "Ryoo Naberrie",
+        "Pooja Naberrie"
+      ]
     }
   ],
   "Relationships": [
@@ -79,6 +146,36 @@
       "PageId": 477147,
       "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_funeral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 464710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruwee_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 464719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pooja_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

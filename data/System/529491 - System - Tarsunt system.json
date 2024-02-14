@@ -24,6 +24,42 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Bothan Space",
+          "Href": "https://starwars.fandom.com/wiki/Bothan_Space"
+        }
+      ],
+      "Values": [
+        "Bothan Space"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-14",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-14"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Tarsunt",
+          "Href": "https://starwars.fandom.com/wiki/Tarsunt_(planet)"
+        }
+      ],
+      "Values": [
+        "Tarsunt"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -50,14 +86,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 623233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarsunt_(planet)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 479522,
       "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
-      "PageId": 623233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarsunt_(planet)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 12832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bothan_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

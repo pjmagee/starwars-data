@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Gray"
+      ]
+    },
+    {
       "Label": "Skin color",
       "Links": [],
       "Values": [
@@ -62,15 +69,21 @@
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         },
         {
-          "Content": "Imperial Military",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Military_(Sith_Empire)"
+          "Content": "Imperial Reconnaissance",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Reconnaissance"
         }
       ],
       "Values": [
         "Sith Empire",
-        "Imperial Military"
+        "Imperial Reconnaissance"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 499821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Reconnaissance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

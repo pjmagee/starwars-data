@@ -2,6 +2,7 @@
   "PageId": 669673,
   "PageUrl": "https://starwars.fandom.com/wiki/Maela",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,15 +36,22 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
       "Links": [
         {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
+          "Content": "mother",
+          "Href": "https://starwars.fandom.com/wiki/Maela%27s_mother"
         }
       ],
       "Values": [
-        "Female"
+        "A mother"
       ]
     },
     {
@@ -55,9 +63,16 @@
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Swarm transmission recovery and processing unit"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 673552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maela's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

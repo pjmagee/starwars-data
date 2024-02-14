@@ -2,6 +2,7 @@
   "PageId": 196904,
   "PageUrl": "https://starwars.fandom.com/wiki/Aerin_Dlarit",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,12 +48,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Dlarit family",
           "Href": "https://starwars.fandom.com/wiki/Dlarit_family"
-        },
+        }
+      ],
+      "Values": [
+        "Dlarit family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Erisi Dlarit",
+          "Href": "https://starwars.fandom.com/wiki/Erisi_Dlarit"
+        }
+      ],
+      "Values": [
+        "Erisi Dlarit"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Xucphra Corporation",
           "Href": "https://starwars.fandom.com/wiki/Xucphra_Corporation"
@@ -63,11 +84,16 @@
         }
       ],
       "Values": [
-        "Dlarit family",
         "Xucphra Corporation",
         "Thyferran Home Defense Corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 5328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Erisi_Dlarit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

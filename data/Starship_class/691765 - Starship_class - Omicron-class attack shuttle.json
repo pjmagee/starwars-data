@@ -2,7 +2,7 @@
   "PageId": 691765,
   "PageUrl": "https://starwars.fandom.com/wiki/Omicron-class_attack_shuttle",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/77/Marauder-BL.png/revision/latest?cb=20220110054023",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e5/HavocMarauder-SWCT.png/revision/latest?cb=20221022032848",
   "Data": [
     {
       "Label": "Titles",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "shuttle",
@@ -33,6 +33,28 @@
       ],
       "Values": [
         "Attack shuttle"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [],
+      "Values": [
+        "2 front laser cannons",
+        "1 aft laser turret"
       ]
     },
     {
@@ -65,14 +87,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 477722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 500626,
       "PageUrl": "https://starwars.fandom.com/wiki/Marauder_(Omicron-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 477722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

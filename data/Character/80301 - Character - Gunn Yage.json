@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -62,6 +69,47 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Yage family",
+          "Href": "https://starwars.fandom.com/wiki/Yage_family"
+        }
+      ],
+      "Values": [
+        "Yage family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Rulf Yage",
+          "Href": "https://starwars.fandom.com/wiki/Rulf_Yage"
+        },
+        {
+          "Content": "Nyna Calixte",
+          "Href": "https://starwars.fandom.com/wiki/Morrigan_Corde"
+        }
+      ],
+      "Values": [
+        "Rulf Yage",
+        "Nyna Calixte"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Cade Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Cade_Skywalker"
+        }
+      ],
+      "Values": [
+        "Cade Skywalker (half-brother)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,10 +119,6 @@
         {
           "Content": "Darth Krayt's Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Darth_Krayt%27s_Galactic_Empire"
-        },
-        {
-          "Content": "Imperial Navy",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy/Legends"
         },
         {
           "Content": "181st Imperial Fighter Wing",
@@ -92,7 +136,6 @@
       "Values": [
         "Fel Empire",
         "Darth Krayt's Galactic Empire",
-        "Imperial Navy",
         "181st Imperial Fighter Wing",
         "1st Imperial Center Core Defense Squadron",
         "Empire-in-exile"
@@ -100,6 +143,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 50780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cade_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 290991,
       "PageUrl": "https://starwars.fandom.com/wiki/First_Sith_Imperial_Strikeforce",
@@ -109,6 +157,16 @@
       "PageId": 161286,
       "PageUrl": "https://starwars.fandom.com/wiki/1st_Imperial_Center_Core_Defense_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 80261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rulf_Yage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 80264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morrigan_Corde",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

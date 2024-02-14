@@ -67,6 +67,30 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-3",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-3"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Hydian Way",
+          "Href": "https://starwars.fandom.com/wiki/Hydian_Way"
+        }
+      ],
+      "Values": [
+        "Hydian Way"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
         {
@@ -116,8 +140,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Salient's battle group",
-          "Href": "https://starwars.fandom.com/wiki/Salient%27s_battle_group"
+          "Content": "Salient Battle Group",
+          "Href": "https://starwars.fandom.com/wiki/Salient_Battle_Group"
         },
         {
           "Content": "Salient II's militias",
@@ -137,7 +161,7 @@
         }
       ],
       "Values": [
-        "Salient's battle group",
+        "Salient Battle Group",
         "Salient II's militias",
         "Confederacy of Independent Systems",
         "Zerpen Industries",
@@ -147,14 +171,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 538504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Partisans",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 556287,
       "PageUrl": "https://starwars.fandom.com/wiki/Salient_rebel_encampment",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 555072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 559832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_Battle_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 560645,
@@ -162,14 +191,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 538504,
-      "PageUrl": "https://starwars.fandom.com/wiki/Partisans",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 559832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_Battle_Group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 555072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

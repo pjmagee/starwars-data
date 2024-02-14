@@ -2,6 +2,7 @@
   "PageId": 40381,
   "PageUrl": "https://starwars.fandom.com/wiki/Kissek_Doran",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,49 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Tainer family",
+          "Href": "https://starwars.fandom.com/wiki/Tainer_family"
+        }
+      ],
+      "Values": [
+        "Tainer family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Kell Tainer's mother",
+          "Href": "https://starwars.fandom.com/wiki/Kell_Tainer%27s_mother"
+        }
+      ],
+      "Values": [
+        "Kell Tainer's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Kell Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Kell_Tainer"
+        }
+      ],
+      "Values": [
+        "Kell Tainer"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -76,5 +120,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 22622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kell_Tainer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

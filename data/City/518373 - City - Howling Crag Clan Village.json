@@ -41,7 +41,12 @@
     },
     {
       "Label": "Location",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Susk'kinad",
+          "Href": "https://starwars.fandom.com/wiki/Susk%27kinad"
+        }
+      ],
       "Values": [
         "Susk'kinad"
       ]
@@ -59,5 +64,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 738664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Susk'kinad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

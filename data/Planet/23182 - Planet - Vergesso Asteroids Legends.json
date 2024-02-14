@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-18"
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Asteroids",
@@ -136,7 +136,61 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Vergesso I",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_I"
+        },
+        {
+          "Content": "Vergesso II",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_II"
+        },
+        {
+          "Content": "Vergesso III",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_III"
+        },
+        {
+          "Content": "Vergesso Prime",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_Prime"
+        },
+        {
+          "Content": "Vergesso Base",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_Base"
+        },
+        {
+          "Content": "Vergesso IV",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_IV"
+        },
+        {
+          "Content": "Vergesso V",
+          "Href": "https://starwars.fandom.com/wiki/Vergesso_V"
+        }
+      ],
+      "Values": [
+        "Vergesso I",
+        "Vergesso II",
+        "Vergesso III",
+        "Vergesso Prime",
+        "Vergesso Base",
+        "Vergesso IV",
+        "Vergesso V"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Scree",
+          "Href": "https://starwars.fandom.com/wiki/Scree"
+        }
+      ],
+      "Values": [
+        "Scree"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -185,19 +239,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 13085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Five_Veils_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 41640,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 21145,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Bajic_Shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 17129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lybeya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 329151,
@@ -205,9 +249,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 17129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lybeya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 54481,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Vergesso_Asteroids",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 41640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 3124,
@@ -215,9 +264,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 54481,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Vergesso_Asteroids",
+      "PageId": 21145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Bajic_Shipyards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 13085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Five_Veils_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

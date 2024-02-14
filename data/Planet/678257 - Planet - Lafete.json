@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim"
+        }
+      ],
+      "Values": [
+        "Outer Rim"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [],
       "Values": [
@@ -19,7 +31,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -57,18 +69,38 @@
   ],
   "Relationships": [
     {
+      "PageId": 746748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze's_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 675513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beskar_spear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 721915,
       "PageUrl": "https://starwars.fandom.com/wiki/Port_of_Lafete",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 680741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lafete_diner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 525124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cushnip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 525125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 528270,
       "PageUrl": "https://starwars.fandom.com/wiki/Polystarch_portion_bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 724123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jorgan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
@@ -82,16 +114,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 675513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beskar_spear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 724123,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jorgan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
       "PageId": 618589,
       "PageUrl": "https://starwars.fandom.com/wiki/Fried_Endorian_Tip-Yip",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
@@ -102,8 +124,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
+      "PageId": 680741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lafete_diner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 678186,
       "PageUrl": "https://starwars.fandom.com/wiki/Shaak_kebab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 678187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roasted_sidi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 691275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kebab",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]

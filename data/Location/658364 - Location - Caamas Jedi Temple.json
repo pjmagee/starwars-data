@@ -2,6 +2,7 @@
   "PageId": 658364,
   "PageUrl": "https://starwars.fandom.com/wiki/Caamas_Jedi_Temple",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,17 +24,35 @@
       ]
     },
     {
+      "Label": "Location",
+      "Links": [
+        {
+          "Content": "Caamas",
+          "Href": "https://starwars.fandom.com/wiki/Caamas/Legends"
+        }
+      ],
+      "Values": [
+        "Caamas"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Jedi order",
+          "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
         }
       ],
       "Values": [
-        "Jedi order"
+        "Jedi Order"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamas/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

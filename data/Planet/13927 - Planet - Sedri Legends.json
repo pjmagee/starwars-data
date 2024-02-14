@@ -48,7 +48,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "3"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-8"
@@ -82,12 +89,12 @@
       "Label": "Class",
       "Links": [
         {
-          "Content": "water",
-          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+          "Content": "waterworld",
+          "Href": "https://starwars.fandom.com/wiki/Waterworld/Legends"
         }
       ],
       "Values": [
-        "Shallow water-world"
+        "Shallow waterworld"
       ]
     },
     {
@@ -127,7 +134,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Coral",
@@ -145,7 +152,12 @@
     },
     {
       "Label": "Surface water",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Saturated",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
+        }
+      ],
       "Values": [
         "Saturated"
       ]
@@ -154,20 +166,8 @@
       "Label": "Fauna",
       "Links": [
         {
-          "Content": "Anemonae",
-          "Href": "https://starwars.fandom.com/wiki/Anemonae"
-        },
-        {
-          "Content": "Oyster",
-          "Href": "https://starwars.fandom.com/wiki/Oyster"
-        },
-        {
           "Content": "Razort",
           "Href": "https://starwars.fandom.com/wiki/Razort"
-        },
-        {
-          "Content": "Sedri crab",
-          "Href": "https://starwars.fandom.com/wiki/Sedri_crab"
         },
         {
           "Content": "Stinger fish",
@@ -183,10 +183,7 @@
         }
       ],
       "Values": [
-        "Anemonae",
-        "Oyster",
         "Razort",
-        "Sedri crab",
         "Stinger fish",
         "Stink fish",
         "Twenchok"
@@ -213,7 +210,7 @@
       "Label": "Population",
       "Links": [],
       "Values": [
-        "less than 10,000"
+        "Less than 10,000"
       ]
     },
     {
@@ -222,21 +219,18 @@
         {
           "Content": "Fitsay",
           "Href": "https://starwars.fandom.com/wiki/Fitsay"
-        },
-        {
-          "Content": "capital",
-          "Href": "https://starwars.fandom.com/wiki/Capital/Legends"
         }
       ],
       "Values": [
-        "Fitsay (capital)"
+        "Fitsay"
       ]
     },
     {
       "Label": "Major imports",
       "Links": [],
       "Values": [
-        "High and mid technology"
+        "High technology",
+        "Mid technology"
       ]
     },
     {
@@ -266,29 +260,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 120620,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 200841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fitsay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 407762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_underwater_caves",
+      "PageId": 791978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Fitsay",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 405146,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tooch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 393319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragob",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 24883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sedrian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 127527,
@@ -296,39 +275,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 127661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gweld",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 406780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sedri_civil_war",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
       "PageId": 406537,
       "PageUrl": "https://starwars.fandom.com/wiki/Porm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 406268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Aquatic_Garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 405200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cardo_(Sedrian)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 405479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fala_(Sedrian)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 293764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 407762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_underwater_caves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 407766,
@@ -336,9 +290,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 414313,
-      "PageUrl": "https://starwars.fandom.com/wiki/Priest_House",
+      "PageId": 406268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Aquatic_Garrison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 228137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinkfish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 228158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stinger_fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 262462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Shell_Dome",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 393319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragob",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 402340,
@@ -361,9 +335,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 127661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gweld",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 17591,
       "PageUrl": "https://starwars.fandom.com/wiki/Sedri_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 791977,
+      "PageUrl": "https://starwars.fandom.com/wiki/Infiltration_of_the_Imperial_Aquatic_Garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 414310,
+      "PageUrl": "https://starwars.fandom.com/wiki/High_Priest_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 414311,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_of_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 414312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Audience_Hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 414313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Priest_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 405200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cardo_(Sedrian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 405479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fala_(Sedrian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 406873,
@@ -371,19 +385,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 262462,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Shell_Dome",
+      "PageId": 120620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 406872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Pews",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 24883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sedrian",
+      "PageId": 405146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tooch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 790956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spiny_urchin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 228137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stinkfish",
+      "PageId": 217841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twenchok/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 293764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 200841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fitsay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 406780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sedri_civil_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

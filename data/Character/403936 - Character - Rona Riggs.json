@@ -74,6 +74,23 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Corso Riggs's uncle",
+          "Href": "https://starwars.fandom.com/wiki/Corso_Riggs%27s_uncle"
+        },
+        {
+          "Content": "Rona Riggs's mother",
+          "Href": "https://starwars.fandom.com/wiki/Rona_Riggs%27s_mother"
+        }
+      ],
+      "Values": [
+        "Corso Riggs's uncle",
+        "Rona Riggs's mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -86,5 +103,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 547346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rona_Riggs's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 547453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corso_Riggs's_uncle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

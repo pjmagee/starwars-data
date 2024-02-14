@@ -28,7 +28,7 @@
       "Links": [
         {
           "Content": "Lol sector",
-          "Href": "https://starwars.fandom.com/wiki/Lol_sector"
+          "Href": "https://starwars.fandom.com/wiki/Lol_sector/Legends"
         }
       ],
       "Values": [
@@ -48,7 +48,14 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "Q-18"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Rainforests",
@@ -86,6 +93,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 17800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dom-Bradden_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 104421,
       "PageUrl": "https://starwars.fandom.com/wiki/Breen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -94,11 +106,6 @@
       "PageId": 12509,
       "PageUrl": "https://starwars.fandom.com/wiki/Affytechan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 17800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dom-Bradden_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

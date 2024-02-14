@@ -2,6 +2,7 @@
   "PageId": 727022,
   "PageUrl": "https://starwars.fandom.com/wiki/Sarvchi_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -71,5 +72,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 666354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarvchi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 726607,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy's_southeast_sectors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

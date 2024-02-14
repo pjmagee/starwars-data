@@ -41,9 +41,26 @@
       "Values": [
         "Iego"
       ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Carnivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Carnivore"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 243807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Iego/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
     {
       "PageId": 242778,
       "PageUrl": "https://starwars.fandom.com/wiki/Blue_Shadow_Virus/Legends",
@@ -53,11 +70,6 @@
       "PageId": 5223,
       "PageUrl": "https://starwars.fandom.com/wiki/Iego/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 243807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Iego/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

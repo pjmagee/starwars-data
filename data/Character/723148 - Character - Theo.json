@@ -2,6 +2,7 @@
   "PageId": 723148,
   "PageUrl": "https://starwars.fandom.com/wiki/Theo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -54,6 +55,23 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Hackrack Bep",
+          "Href": "https://starwars.fandom.com/wiki/Hackrack_Bep"
+        },
+        {
+          "Content": "Zian",
+          "Href": "https://starwars.fandom.com/wiki/Zian"
+        }
+      ],
+      "Values": [
+        "Hackrack Bep",
+        "Zian"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -66,5 +84,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 723151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hackrack_Bep",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

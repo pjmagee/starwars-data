@@ -2,7 +2,7 @@
   "PageId": 668833,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Gozanti-class_cruiser",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3b/Gozanti-class_cruiser_SWR.png/revision/latest?cb=20140926140535",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3b/Gozanti-class_cruiser_SWR.png/revision/latest?cb=20230730193841",
   "Data": [
     {
       "Label": "Titles",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Light cruiser",
@@ -155,7 +155,6 @@
         }
       ],
       "Values": [
-        "Imperial model",
         "Dorsal twin laser cannon turret (1)",
         "Ventral heavy laser cannon turret (1)"
       ]
@@ -231,10 +230,25 @@
     },
     {
       "Label": "Role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Fleet"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        }
+      ],
       "Values": [
+        "Fleet support vessel",
         "Freighter",
-        "Patrol vessel"
+        "Patrol vessel",
+        "Starfighter carrier"
       ]
     },
     {
@@ -255,13 +269,18 @@
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Navy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy",
         "Spectres (captured)",
-        "First Order"
+        "First Order",
+        "First Order Navy"
       ]
     }
   ],
@@ -272,8 +291,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 460272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 588335,
       "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 466452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_651",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 566139,
+      "PageUrl": "https://starwars.fandom.com/wiki/IGV-55_surveillance_vessel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
@@ -282,14 +316,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 579276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Requiem",
+      "PageId": 509998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilance_(Imperial-class_Star_Destroyer)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 460272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 674278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Gozanti-class_Assault_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 579276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Requiem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 585135,
@@ -302,14 +341,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 466452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Transport_651",
+      "PageId": 759392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Gozanti-class_cruiser_(Balmorra)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 566139,
-      "PageUrl": "https://starwars.fandom.com/wiki/IGV-55_surveillance_vessel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 734465,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperium_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

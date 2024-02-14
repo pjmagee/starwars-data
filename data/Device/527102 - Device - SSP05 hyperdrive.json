@@ -8,7 +8,7 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "SSP05"
+        "SSP05 hyperdrive"
       ]
     },
     {
@@ -64,6 +64,18 @@
       ]
     },
     {
+      "Label": "Material(s)",
+      "Links": [
+        {
+          "Content": "Coaxium",
+          "Href": "https://starwars.fandom.com/wiki/Coaxium"
+        }
+      ],
+      "Values": [
+        "Coaxium-coated reaction chamber"
+      ]
+    },
+    {
       "Label": "Capacity",
       "Links": [],
       "Values": [
@@ -85,14 +97,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 526815,
-      "PageUrl": "https://starwars.fandom.com/wiki/Isu-Sim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 453100,
       "PageUrl": "https://starwars.fandom.com/wiki/Millennium_Falcon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 526815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Isu-Sim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

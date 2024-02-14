@@ -53,6 +53,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "They/them"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.73 meters (5 ft, 8 in)"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -72,6 +95,22 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ceret",
+          "Href": "https://starwars.fandom.com/wiki/Ceret"
+        },
+        {
+          "Content": "bond-twin",
+          "Href": "https://starwars.fandom.com/wiki/Bond-twins"
+        }
+      ],
+      "Values": [
+        "Ceret (bond-twin)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -85,6 +124,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 675952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ceret",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 761615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 707450,
       "PageUrl": "https://starwars.fandom.com/wiki/Ransacker",

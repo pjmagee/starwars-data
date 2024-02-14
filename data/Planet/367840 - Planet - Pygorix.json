@@ -2,7 +2,7 @@
   "PageId": 367840,
   "PageUrl": "https://starwars.fandom.com/wiki/Pygorix",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/Pygorix-TEA.jpg/revision/latest?cb=20221002075810",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -29,10 +34,15 @@
         {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
+        },
+        {
+          "Content": "Back Reach",
+          "Href": "https://starwars.fandom.com/wiki/Back_Reach"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Gordian Reach",
+        "Back Reach"
       ]
     },
     {
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-6"
@@ -68,22 +78,31 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "station",
+          "Href": "https://starwars.fandom.com/wiki/Space_station/Legends"
+        },
+        {
+          "Content": "orbit",
+          "Href": "https://starwars.fandom.com/wiki/Orbit/Legends"
+        }
+      ],
       "Values": [
-        "Pygorix station"
+        "Customs station (in orbit)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 273528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardan_Cross",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 362336,
       "PageUrl": "https://starwars.fandom.com/wiki/Pygorix_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 273528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardan_Cross",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

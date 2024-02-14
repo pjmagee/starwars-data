@@ -19,15 +19,16 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Desert",
+          "Content": "Deserts",
           "Href": "https://starwars.fandom.com/wiki/Desert"
         }
       ],
       "Values": [
-        "Desert"
+        "Deserts",
+        "Prairies"
       ]
     },
     {
@@ -38,7 +39,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Ugnaught",
@@ -81,6 +82,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 540800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fish_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 720727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merry_Maker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 702737,
       "PageUrl": "https://starwars.fandom.com/wiki/Jordanna_Sparkburn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -89,11 +100,6 @@
       "PageId": 723024,
       "PageUrl": "https://starwars.fandom.com/wiki/Jordanna_Sparkburn's_aunt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 658444,
-      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 723649,
@@ -106,6 +112,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 757320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outpost_near_Tiikae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 695415,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tiikae",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -116,9 +127,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 720727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merry_Maker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 743488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sour_tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 742006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grass_shark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 658444,
+      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

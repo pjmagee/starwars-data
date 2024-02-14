@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Reptavian",
+          "Href": "https://starwars.fandom.com/wiki/Reptavian/Legends"
+        }
+      ],
+      "Values": [
+        "Reptavian"
+      ]
+    },
+    {
       "Label": "Average length",
       "Links": [
         {
@@ -21,6 +33,38 @@
       ],
       "Values": [
         "3 meters"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Blue",
+        "Yellow"
+      ]
+    },
+    {
+      "Label": "Feather color",
+      "Links": [],
+      "Values": [
+        "Indingo-sapphire"
+      ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [
+        {
+          "Content": "Egg",
+          "Href": "https://starwars.fandom.com/wiki/Egg/Legends"
+        }
+      ],
+      "Values": [
+        "Egg-laying"
       ]
     },
     {
@@ -34,9 +78,58 @@
       "Values": [
         "Naboo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Swamps"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Omnivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Omnivore"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 27296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 11256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountains/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 596171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 40076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 257720,
       "PageUrl": "https://starwars.fandom.com/wiki/Lasay_Swamp",
@@ -48,34 +141,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 40076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 596171,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Ryloth_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
       "PageId": 257724,
       "PageUrl": "https://starwars.fandom.com/wiki/Western_Great_Grass_Plains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 27296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 11256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountains/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

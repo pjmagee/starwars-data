@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
@@ -67,6 +67,18 @@
       ]
     },
     {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Imperial palace",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_palace_(Weerden)"
+        }
+      ],
+      "Values": [
+        "Imperial palace"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -81,6 +93,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 272384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Weerden_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 735958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_palace_(Weerden)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 32075,
       "PageUrl": "https://starwars.fandom.com/wiki/Laddinare_Torbin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -89,11 +111,6 @@
       "PageId": 23490,
       "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 272384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Weerden_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

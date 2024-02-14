@@ -30,17 +30,31 @@
         {
           "Content": "Rick McCallum",
           "Href": "https://starwars.fandom.com/wiki/Rick_McCallum"
+        },
+        {
+          "Content": "George Lucas",
+          "Href": "https://starwars.fandom.com/wiki/George_Lucas"
         }
       ],
       "Values": [
-        "Rick McCallum"
+        "Rick McCallumGeorge Lucas (Executive producer)"
       ]
     },
     {
       "Label": "Writer(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "John Ostrander",
+          "Href": "https://starwars.fandom.com/wiki/John_Ostrander"
+        },
+        {
+          "Content": "Jan Duursema",
+          "Href": "https://starwars.fandom.com/wiki/Jan_Duursema"
+        }
+      ],
       "Values": [
-        "George Lucas"
+        "George LucasJohn Ostrander (uncredited) ",
+        "Jan Duursema (uncredited) "
       ]
     },
     {
@@ -229,9 +243,99 @@
   ],
   "Relationships": [
     {
+      "PageId": 571579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._1_—_Imperial_Machine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
+    },
+    {
+      "PageId": 575254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._2_—_Legacy's_End",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
+    },
+    {
+      "PageId": 475425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Journeys:_Beginnings",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
+      "PageId": 574942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Thrawn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_series"
+    },
+    {
+      "PageId": 546687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_The_Prequel_Trilogy_–_A_Graphic_Novel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 250827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Times:_Blue_Harvest_0",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 599587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_saga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
+    },
+    {
+      "PageId": 670,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prequel_trilogy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
+    },
+    {
+      "PageId": 26595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Republic:_Into_the_Unknown",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_story_arc"
+    },
+    {
       "PageId": 263480,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Detours",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_series"
+    },
+    {
+      "PageId": 75435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Episode_III_Revenge_of_the_Sith_(junior_novelization)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 113397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Main_Title",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 114058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droid_march",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 114298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 114780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_and_Leia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 12030,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Emperor's_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 209202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 228758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Betrayal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 230238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Dark_Deeds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 288927,
@@ -245,7 +349,7 @@
     },
     {
       "PageId": 320790,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Arena_(musical_theme)",
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Arena",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
@@ -257,6 +361,56 @@
       "PageId": 324300,
       "PageUrl": "https://starwars.fandom.com/wiki/Mystery_of_the_Sith_motif",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 684275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Descent_motif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 72044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Princess_Leia's_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 444721,
+      "PageUrl": "https://starwars.fandom.com/wiki/LEGO_Star_Wars_Episode_III:_Revenge_of_the_Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Toy_line"
+    },
+    {
+      "PageId": 16492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_79",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 10562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Purge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 51763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Revenge_of_the_Sith_Scrapbook",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 597716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader_-_Dark_Lord_of_the_Sith_Vol._1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
+    },
+    {
+      "PageId": 602791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._3_—_The_Burning_Seas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
+    },
+    {
+      "PageId": 17,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Episode_II_Attack_of_the_Clones",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
+    },
+    {
+      "PageId": 18,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Episode_IV_A_New_Hope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
     },
     {
       "PageId": 333260,
@@ -294,119 +448,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
-      "PageId": 26595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Republic:_Into_the_Unknown",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_series"
-    },
-    {
-      "PageId": 599587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_saga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
-    },
-    {
-      "PageId": 670,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prequel_trilogy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
-    },
-    {
-      "PageId": 113397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Main_Title",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 114058,
-      "PageUrl": "https://starwars.fandom.com/wiki/Droid_march",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 114298,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yoda's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 12030,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Emperor's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 185868,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 209202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 228758,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Betrayal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 230238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin's_Dark_Deeds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 571579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._1_—_Imperial_Machine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
-      "PageId": 575254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._2_—_Legacy's_End",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
-      "PageId": 51763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Revenge_of_the_Sith_Scrapbook",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
-    },
-    {
-      "PageId": 75435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Episode_III:_Revenge_of_the_Sith_(junior_novelization)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
-    },
-    {
-      "PageId": 574942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Thrawn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_series"
-    },
-    {
-      "PageId": 597716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader_-_Dark_Lord_of_the_Sith_Vol._1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
-      "PageId": 602791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader:_Dark_Lord_of_the_Sith_Vol._3_—_The_Burning_Seas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
-      "PageId": 475425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Journeys:_Beginnings",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
-    },
-    {
       "PageId": 673235,
       "PageUrl": "https://starwars.fandom.com/wiki/Palpatine's_machinations_motif",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 684275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Descent_motif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 72044,
-      "PageUrl": "https://starwars.fandom.com/wiki/Princess_Leia's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 603262,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Clone_Wars:_Season_Seven",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
     },
     {
       "PageId": 237921,
@@ -419,44 +463,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
     },
     {
-      "PageId": 444721,
-      "PageUrl": "https://starwars.fandom.com/wiki/LEGO_Star_Wars_Episode_III:_Revenge_of_the_Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Toy_line"
-    },
-    {
       "PageId": 639013,
       "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Darth_Vader_-_Dark_Lord_of_the_Sith_Vol._2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
-      "PageId": 250827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Times:_Blue_Harvest_0",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
-    },
-    {
-      "PageId": 17,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Episode_II_Attack_of_the_Clones",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
-    },
-    {
-      "PageId": 18,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Episode_IV_A_New_Hope",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Movie"
-    },
-    {
-      "PageId": 10562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Purge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
-    },
-    {
-      "PageId": 546687,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_The_Prequel_Trilogy_–_A_Graphic_Novel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
-    },
-    {
-      "PageId": 16492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_79",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
     }
   ]
 }

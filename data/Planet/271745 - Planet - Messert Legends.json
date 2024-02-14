@@ -2,7 +2,7 @@
   "PageId": 271745,
   "PageUrl": "https://starwars.fandom.com/wiki/Messert/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ae/Messert-TEA.jpg/revision/latest?cb=20220920203123",
   "Data": [
     {
       "Label": "Titles",
@@ -19,24 +19,29 @@
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
         },
         {
-          "Content": "Kashyyyk Region",
-          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_Region"
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
         "Mid Rim",
-        "Kashyyyk Region"
+        "The Slice"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Kashyyyk Region",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_Region"
+        },
+        {
           "Content": "Mytaranor sector",
           "Href": "https://starwars.fandom.com/wiki/Mytaranor_sector/Legends"
         }
       ],
       "Values": [
+        "Kashyyyk Region",
         "Mytaranor sector"
       ]
     },
@@ -53,10 +58,10 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
-        "P-10"
+        "Q-10"
       ]
     },
     {
@@ -74,14 +79,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 282772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Randon_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 271744,
       "PageUrl": "https://starwars.fandom.com/wiki/Messert_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 282772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randon_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 51415,
   "PageUrl": "https://starwars.fandom.com/wiki/Immortal/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Imperial II-class Star Destroyer",
@@ -66,6 +67,14 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends"
         },
         {
+          "Content": "Death Star plans delivery",
+          "Href": "https://starwars.fandom.com/wiki/Death_Star_plans_delivery"
+        },
+        {
+          "Content": "Assault on the Tantive IV",
+          "Href": "https://starwars.fandom.com/wiki/Assault_on_the_Tantive_IV"
+        },
+        {
           "Content": "Capture of the Sidral II",
           "Href": "https://starwars.fandom.com/wiki/Capture_of_the_Sidral_II"
         },
@@ -92,6 +101,8 @@
       ],
       "Values": [
         "Galactic Civil War",
+        "Death Star plans delivery",
+        "Assault on the Tantive IV",
         "Capture of the Sidral II",
         "Battle of the Corellian system",
         "Attack on the Defiance",
@@ -125,5 +136,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 23936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celestial/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    }
+  ]
 }

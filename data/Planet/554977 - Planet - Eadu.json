@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "U-10",
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -114,12 +114,17 @@
         {
           "Content": "Eadu Flight Station",
           "Href": "https://starwars.fandom.com/wiki/Eadu_Flight_Station"
+        },
+        {
+          "Content": "Theoretical applications testing facility",
+          "Href": "https://starwars.fandom.com/wiki/Theoretical_applications_testing_facility"
         }
       ],
       "Values": [
         "Eadu Energy Conversion Laboratory",
         "Eadu Flight Station",
-        "Eaduan village cluster"
+        "Eaduan village cluster",
+        "Theoretical applications testing facility"
       ]
     },
     {
@@ -173,9 +178,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 703841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Andor_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 646649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antiseptic_coveralls",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 554975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eadu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 566487,
@@ -183,14 +193,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 665652,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Eadu)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 557593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Energy_Conversion_Laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 588280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kris_Elioup",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 757629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theoretical_applications_testing_facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 555614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cassian_Andor's_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 555686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chirrut_Îmwe's_lightbow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 653923,
@@ -198,24 +218,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 557593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Energy_Conversion_Laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 579153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uyohn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 560514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 557352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Flight_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 704129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_scientist_officer's_uniform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+      "PageId": 472480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 704134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_scientist_technician's_uniform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+      "PageId": 588280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kris_Elioup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 559539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal_research_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 537873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galen_Walton_Erso",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 557424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Deployment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 557595,
+      "PageUrl": "https://starwars.fandom.com/wiki/975th_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 556972,
@@ -243,19 +288,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 555614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cassian_Andor's_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 786990,
+      "PageUrl": "https://starwars.fandom.com/wiki/A2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 555686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chirrut's_lightbow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 703841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andor_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 556787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Fracture",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 788243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eadun_silver",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 665652,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Eadu)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 537050,
@@ -263,44 +313,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 579153,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uyohn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 557352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Flight_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 486070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 537873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galen_Walton_Erso",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 646649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antiseptic_coveralls",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 554975,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Eadu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 555420,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_ground_crew",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 472480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 556787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Fracture",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 546966,
@@ -308,19 +328,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 559539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal_research_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 788253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gehren_Rand's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 557424,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_Deployment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 557595,
-      "PageUrl": "https://starwars.fandom.com/wiki/975th_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 560514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eadu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

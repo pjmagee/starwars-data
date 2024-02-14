@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Inner Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Inner Rim Territories"
+      ]
+    },
+    {
       "Label": "Sector",
       "Links": [
         {
@@ -21,6 +33,18 @@
       ],
       "Values": [
         "Bartahn sector"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "L-15",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "L-15"
       ]
     },
     {
@@ -36,7 +60,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -85,16 +109,21 @@
       "Label": "Major exports",
       "Links": [
         {
-          "Content": "Unidentified fruit",
+          "Content": "fruit",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_fruit_(Charissia)"
         }
       ],
       "Values": [
-        "Unidentified fruit"
+        "A fruit"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 582789,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_creature_(Charissia)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
     {
       "PageId": 596538,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_fruit_(Charissia)",
@@ -104,11 +133,6 @@
       "PageId": 581995,
       "PageUrl": "https://starwars.fandom.com/wiki/Bartahn_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 582789,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_creature_(Charissia)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

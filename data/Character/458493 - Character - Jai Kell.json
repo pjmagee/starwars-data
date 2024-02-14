@@ -2,7 +2,7 @@
   "PageId": 458493,
   "PageUrl": "https://starwars.fandom.com/wiki/Jai_Kell",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/14/Jai_Kell_TO.png/revision/latest?cb=20180124135318",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/Jai_Kell_Senator.jpg/revision/latest?cb=20230827052540",
   "Data": [
     {
       "Label": "Titles",
@@ -21,18 +21,6 @@
       ],
       "Values": [
         "Lothal"
-      ]
-    },
-    {
-      "Label": "Born",
-      "Links": [
-        {
-          "Content": "18 BBY",
-          "Href": "https://starwars.fandom.com/wiki/18_BBY"
-        }
-      ],
-      "Values": [
-        "By 18 BBY"
       ]
     },
     {
@@ -64,6 +52,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.73 meters"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -90,6 +97,23 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Jai Kell's father",
+          "Href": "https://starwars.fandom.com/wiki/Jai_Kell%27s_father"
+        },
+        {
+          "Content": "Jai Kell's mother",
+          "Href": "https://starwars.fandom.com/wiki/Jai_Kell%27s_mother"
+        }
+      ],
+      "Values": [
+        "Jai Kell's father",
+        "Jai Kell's mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -107,15 +131,36 @@
         {
           "Content": "Lothal resistance group",
           "Href": "https://starwars.fandom.com/wiki/Lothal_resistance_group"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Senate",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Senate"
         }
       ],
       "Values": [
         "Galactic Empire",
         "LRC077",
         "Alliance to Restore the Republic",
-        "Lothal resistance group"
+        "Lothal resistance group",
+        "New Republic",
+        "New Republic Senate"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 779214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres_mural_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

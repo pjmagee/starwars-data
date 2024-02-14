@@ -2,24 +2,13 @@
   "PageId": 495833,
   "PageUrl": "https://starwars.fandom.com/wiki/Betancy",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Betancy"
-      ]
-    },
-    {
-      "Label": "Born",
-      "Links": [
-        {
-          "Content": "18 BBY",
-          "Href": "https://starwars.fandom.com/wiki/18_BBY"
-        }
-      ],
-      "Values": [
-        "By 18 BBY"
       ]
     },
     {
@@ -40,5 +29,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

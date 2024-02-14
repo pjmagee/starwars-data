@@ -2,6 +2,7 @@
   "PageId": 578117,
   "PageUrl": "https://starwars.fandom.com/wiki/Vala_(Scyre)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -26,12 +27,16 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "24 ABY",
-          "Href": "https://starwars.fandom.com/wiki/24_ABY"
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        },
+        {
+          "Content": "24 BBY",
+          "Href": "https://starwars.fandom.com/wiki/24_BBY"
         }
       ],
       "Values": [
-        "By 24 ABY, Parnassos"
+        "Between 19 BBY–24 BBY, Parnassos"
       ]
     },
     {
@@ -59,6 +64,18 @@
       ]
     },
     {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Siv",
+          "Href": "https://starwars.fandom.com/wiki/Siv"
+        }
+      ],
+      "Values": [
+        "Siv"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 578904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siv",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

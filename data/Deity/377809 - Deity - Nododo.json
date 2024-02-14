@@ -2,6 +2,7 @@
   "PageId": 377809,
   "PageUrl": "https://starwars.fandom.com/wiki/Nododo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,19 +15,43 @@
       "Label": "Associated religion",
       "Links": [
         {
-          "Content": "Gungan",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
+          "Content": "Gungan religion",
+          "Href": "https://starwars.fandom.com/wiki/Gungan_religion"
         }
       ],
       "Values": [
-        "Gungan beliefs"
+        "Gungan religion"
+      ]
+    },
+    {
+      "Label": "Pantheon",
+      "Links": [
+        {
+          "Content": "Guds",
+          "Href": "https://starwars.fandom.com/wiki/Gud/Legends"
+        }
+      ],
+      "Values": [
+        "Guds"
       ]
     },
     {
       "Label": "Type of deity",
+      "Links": [
+        {
+          "Content": "God",
+          "Href": "https://starwars.fandom.com/wiki/Deity/Legends"
+        }
+      ],
+      "Values": [
+        "God of trickery"
+      ]
+    },
+    {
+      "Label": "Powers",
       "Links": [],
       "Values": [
-        "Trickster god"
+        "Change appearance"
       ]
     },
     {
@@ -42,6 +67,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Area of influence",
       "Links": [
         {
@@ -52,19 +84,13 @@
       "Values": [
         "Naboo"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Gungans",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
-        }
-      ],
-      "Values": [
-        "Gungans"
-      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

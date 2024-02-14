@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Line",
+      "Links": [
+        {
+          "Content": "MC-series star cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC-series_star_cruiser"
+        }
+      ],
+      "Values": [
+        "MC-series star cruiser"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [
         {
@@ -32,19 +44,20 @@
         }
       ],
       "Values": [
-        "MC80 Star Cruiser"
+        "MC80 Star Cruiser",
+        "MC80 Liberty Type"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Star Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Star_Cruiser"
+          "Content": "Heavy Star Cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_Star_Cruiser"
         }
       ],
       "Values": [
-        "Star Cruiser"
+        "Heavy Star Cruiser"
       ]
     },
     {
@@ -159,33 +172,25 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Turbolaser",
+          "Content": "turbolaser",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
-          "Content": "Ion cannon",
+          "Content": "ion cannon",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
-        },
-        {
-          "Content": "Laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
           "Content": "Missile tubes",
           "Href": "https://starwars.fandom.com/wiki/Missile_launcher"
-        },
-        {
-          "Content": "Tractor beam projectors",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "Turbolaser batteries (48)",
-        "Ion cannon batteries (20)",
-        "Laser cannons (15)",
-        "Missile tubes (20)",
-        "Tractor beam projectors (6)",
-        "Broadside ion cannons (3) (optional)"
+        "Heavy turbolaser batteries (48)",
+        "Battleship ion cannon batteries (20)",
+        "Point-defense laser cannons",
+        "Missile tubes",
+        "Heavy tractor beam projectors (6)",
+        "Broadside heavy ion cannons (3 or more)"
       ]
     },
     {
@@ -202,7 +207,7 @@
       ],
       "Values": [
         "Squadrons (3-10)",
-        "36-120 starfighters"
+        "36-72 starfighters"
       ]
     },
     {
@@ -285,8 +290,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Mon Cala planetary defense services",
@@ -310,7 +315,7 @@
         }
       ],
       "Values": [
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Mon Cala planetary defense services",
         "Alliance to Restore the Republic",
         "Rebel Alliance Navy",
@@ -326,8 +331,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 669527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(MC80_Star_Cruiser)",
+      "PageId": 510534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 471046,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 363938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Restoration",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -341,9 +356,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 471046,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+      "PageId": 551518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freedom's_Dawn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 531468,
@@ -351,18 +366,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 363938,
-      "PageUrl": "https://starwars.fandom.com/wiki/Restoration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 551518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freedom's_Dawn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 510534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberty",
+      "PageId": 669527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(MC80_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

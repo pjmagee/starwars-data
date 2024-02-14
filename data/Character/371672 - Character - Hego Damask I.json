@@ -2,6 +2,7 @@
   "PageId": 371672,
   "PageUrl": "https://starwars.fandom.com/wiki/Hego_Damask_I",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Damask",
@@ -47,5 +48,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 364172,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caar_Damask",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

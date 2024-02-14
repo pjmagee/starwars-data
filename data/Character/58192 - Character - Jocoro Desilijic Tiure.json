@@ -2,24 +2,13 @@
   "PageId": 58192,
   "PageUrl": "https://starwars.fandom.com/wiki/Jocoro_Desilijic_Tiure",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Jocoro Desilijic Tiure"
-      ]
-    },
-    {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Du Hutta",
-          "Href": "https://starwars.fandom.com/wiki/Du_Hutta"
-        }
-      ],
-      "Values": [
-        "Du Hutta"
       ]
     },
     {
@@ -35,21 +24,23 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Desilijic",
           "Href": "https://starwars.fandom.com/wiki/Desilijic/Legends"
-        },
-        {
-          "Content": "kajidic",
-          "Href": "https://starwars.fandom.com/wiki/Kajidic/Legends"
         }
       ],
       "Values": [
-        "Desilijic kajidic"
+        "Desilijic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 269424,
+      "PageUrl": "https://starwars.fandom.com/wiki/Du_Hutta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

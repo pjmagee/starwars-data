@@ -2,6 +2,7 @@
   "PageId": 720573,
   "PageUrl": "https://starwars.fandom.com/wiki/Zlarb",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/63/Zlarb_CR_2.jpg/revision/latest?cb=20230614100617",
   "Data": [
     {
       "Label": "Titles",
@@ -36,11 +37,22 @@
     },
     {
       "Label": "Affiliation(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Zlarb's",
+          "Href": "https://starwars.fandom.com/wiki/Zlarb%27s"
+        }
+      ],
       "Values": [
         "Zlarb's"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 742817,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zlarb's",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    }
+  ]
 }

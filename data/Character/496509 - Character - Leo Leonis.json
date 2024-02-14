@@ -2,6 +2,7 @@
   "PageId": 496509,
   "PageUrl": "https://starwars.fandom.com/wiki/Leo_Leonis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,59 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Leonis family",
+          "Href": "https://starwars.fandom.com/wiki/Leonis_family"
+        }
+      ],
+      "Values": [
+        "Leonis family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Leo Leonis's father",
+          "Href": "https://starwars.fandom.com/wiki/Leo_Leonis%27s_father"
+        }
+      ],
+      "Values": [
+        "Leo Leonis's father"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Tepha Leonis",
+          "Href": "https://starwars.fandom.com/wiki/Tepha_Leonis"
+        }
+      ],
+      "Values": [
+        "Tepha Leonis"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Dhara Leonis",
+          "Href": "https://starwars.fandom.com/wiki/Dhara_Leonis"
+        },
+        {
+          "Content": "Zare Leonis",
+          "Href": "https://starwars.fandom.com/wiki/Zare_Leonis"
+        }
+      ],
+      "Values": [
+        "Dhara Leonis",
+        "Zare Leonis"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -64,5 +118,31 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 507640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tepha_Leonis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 482936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leo_Leonis's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 471344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leonis_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 458466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zare_Leonis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 458484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dhara_Leonis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

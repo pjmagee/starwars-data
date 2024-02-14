@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-16"
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -181,11 +181,11 @@
       "Links": [
         {
           "Content": "Greel Screamer",
-          "Href": "https://starwars.fandom.com/wiki/Greel_Screamer"
+          "Href": "https://starwars.fandom.com/wiki/Greel_screamer"
         },
         {
           "Content": "Timber Render",
-          "Href": "https://starwars.fandom.com/wiki/Timber_Render"
+          "Href": "https://starwars.fandom.com/wiki/Timber_render"
         }
       ],
       "Values": [
@@ -194,7 +194,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -222,7 +222,7 @@
         },
         {
           "Content": "Wookiees",
-          "Href": "https://starwars.fandom.com/wiki/Wookiee"
+          "Href": "https://starwars.fandom.com/wiki/Wookiee/Legends"
         }
       ],
       "Values": [
@@ -274,6 +274,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 58774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greel_Wood_Logging_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 80956,
       "PageUrl": "https://starwars.fandom.com/wiki/Greel_wood",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
@@ -282,11 +287,6 @@
       "PageId": 16641,
       "PageUrl": "https://starwars.fandom.com/wiki/Pii_system/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 58774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Greel_Wood_Logging_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

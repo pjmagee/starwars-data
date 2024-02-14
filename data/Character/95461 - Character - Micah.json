@@ -36,10 +36,22 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
-        "Gray"
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Warm gray",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Warm gray"
       ]
     },
     {
@@ -62,6 +74,10 @@
         {
           "Content": "Cybernetic",
           "Href": "https://starwars.fandom.com/wiki/Cybernetics/Legends"
+        },
+        {
+          "Content": "legs",
+          "Href": "https://starwars.fandom.com/wiki/Limb/Legends"
         }
       ],
       "Values": [
@@ -81,5 +97,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 203202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droo_Rawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 50797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

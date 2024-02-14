@@ -2,7 +2,7 @@
   "PageId": 515678,
   "PageUrl": "https://starwars.fandom.com/wiki/Faa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d3/Faa_scalefish.png/revision/latest?cb=20160913000118",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d3/Faa_scalefish.png/revision/latest?cb=20220930160412",
   "Data": [
     {
       "Label": "Titles",
@@ -12,15 +12,32 @@
       ]
     },
     {
+      "Label": "Subspecies",
+      "Links": [
+        {
+          "Content": "Big-mouth faa",
+          "Href": "https://starwars.fandom.com/wiki/Big-mouth_faa"
+        }
+      ],
+      "Values": [
+        "Big-mouth faa"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
           "Content": "Naboo",
           "Href": "https://starwars.fandom.com/wiki/Naboo"
+        },
+        {
+          "Content": "Koboh",
+          "Href": "https://starwars.fandom.com/wiki/Koboh"
         }
       ],
       "Values": [
-        "Naboo"
+        "Naboo",
+        "Koboh"
       ]
     },
     {
@@ -54,13 +71,18 @@
   ],
   "Relationships": [
     {
+      "PageId": 17274,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 451978,
       "PageUrl": "https://starwars.fandom.com/wiki/Naboo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 17274,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo/Legends",
+      "PageId": 712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manaan/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -43,15 +31,21 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Stormtrooper Corps",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps"
+          "Content": "Unidentified sandtrooper regiment",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_sandtrooper_regiment"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Stormtrooper Corps"
+        "Unidentified sandtrooper regiment"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 689958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sandtrooper_regiment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

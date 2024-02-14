@@ -2,6 +2,7 @@
   "PageId": 358046,
   "PageUrl": "https://starwars.fandom.com/wiki/Ressa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,44 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Ressa's husband",
+          "Href": "https://starwars.fandom.com/wiki/Ressa%27s_husband"
+        }
+      ],
+      "Values": [
+        "Ressa's husband"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "children",
+          "Href": "https://starwars.fandom.com/wiki/Youngling/Legends"
+        }
+      ],
+      "Values": [
+        "Several children"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 358541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ressa's_husband",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

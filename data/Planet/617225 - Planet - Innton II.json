@@ -48,7 +48,19 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends"
+        }
+      ],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Grasslands",
@@ -60,7 +72,8 @@
         }
       ],
       "Values": [
-        "Grasslands, Mountains"
+        "Grasslands",
+        "Mountains"
       ]
     },
     {
@@ -76,7 +89,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -112,16 +125,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 650013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_of_the_Nova_Defiant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 641697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Innton_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 674952,
       "PageUrl": "https://starwars.fandom.com/wiki/Skid_Lake",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -137,6 +140,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 672319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ivy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 650013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_of_the_Nova_Defiant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 678104,
       "PageUrl": "https://starwars.fandom.com/wiki/Senol_Forest",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -145,6 +158,11 @@
       "PageId": 678464,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_Cavern",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 641697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Innton_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

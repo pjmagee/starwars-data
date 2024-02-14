@@ -77,14 +77,29 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Confederacy military",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_military"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems",
+        "Confederacy military"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 611347,
+      "PageUrl": "https://starwars.fandom.com/wiki/EV-series",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
+      "PageId": 528265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_medical_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 476608,
       "PageUrl": "https://starwars.fandom.com/wiki/EV-A4-D",
@@ -94,16 +109,6 @@
       "PageId": 506854,
       "PageUrl": "https://starwars.fandom.com/wiki/MerenData",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 528265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_EV-series_medical_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 611347,
-      "PageUrl": "https://starwars.fandom.com/wiki/EV-series",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     }
   ]
 }

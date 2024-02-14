@@ -24,15 +24,13 @@
       ]
     },
     {
-      "Label": "Begin",
-      "Links": [],
-      "Values": [
-        "3 ABY"
-      ]
-    },
-    {
-      "Label": "End",
-      "Links": [],
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "3 ABY",
+          "Href": "https://starwars.fandom.com/wiki/3_ABY/Legends"
+        }
+      ],
       "Values": [
         "3 ABY"
       ]
@@ -45,6 +43,10 @@
           "Href": "https://starwars.fandom.com/wiki/Javin_sector"
         },
         {
+          "Content": "Javin",
+          "Href": "https://starwars.fandom.com/wiki/Javin/Legends"
+        },
+        {
           "Content": "Tungra sector",
           "Href": "https://starwars.fandom.com/wiki/Tungra_sector/Legends"
         },
@@ -55,6 +57,7 @@
       ],
       "Values": [
         "Javin sector",
+        "Javin",
         "Tungra sector",
         "Bruanii sector"
       ]
@@ -91,6 +94,10 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_the_Tungra_sector"
         },
         {
+          "Content": "Capture of Outpost D-34",
+          "Href": "https://starwars.fandom.com/wiki/Capture_of_Outpost_D-34"
+        },
+        {
           "Content": "Second Battle of Javin",
           "Href": "https://starwars.fandom.com/wiki/Second_Battle_of_Javin"
         },
@@ -103,17 +110,13 @@
         "Skirmish at Outpost D-34",
         "First Battle of Javin",
         "Battle of the Tungra sector",
+        "Capture of Outpost D-34",
         "Second Battle of Javin",
         "Battle of the Bruanii sector"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 41912,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(Imperial-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 109189,
       "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Javin",
@@ -130,9 +133,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 109612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Bruanii_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 98575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scutz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 213084,
@@ -140,8 +143,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 98575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scutz",
+      "PageId": 213613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Outpost_D-34",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 109612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Bruanii_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 41912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(Imperial-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

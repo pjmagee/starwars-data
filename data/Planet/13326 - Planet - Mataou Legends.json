@@ -2,7 +2,7 @@
   "PageId": 13326,
   "PageUrl": "https://starwars.fandom.com/wiki/Mataou/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/85/Mataou-TEA.jpg/revision/latest?cb=20231206155022",
   "Data": [
     {
       "Label": "Titles",
@@ -19,24 +19,43 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         },
         {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
+        },
+        {
           "Content": "Greater Javin",
           "Href": "https://starwars.fandom.com/wiki/Greater_Javin/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories; Greater Javin"
+        "Outer Rim Territories",
+        "Western Reaches",
+        "Greater Javin"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Javin sector",
+          "Href": "https://starwars.fandom.com/wiki/Javin_sector"
+        },
+        {
+          "Content": "400 BBY",
+          "Href": "https://starwars.fandom.com/wiki/400_BBY/Legends"
+        },
+        {
           "Content": "Anoat sector",
           "Href": "https://starwars.fandom.com/wiki/Anoat_sector/Legends"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Standard_Calendar"
         }
       ],
       "Values": [
-        "Anoat sector"
+        "Javin sector (prior to c. 400 BBY)",
+        "Anoat sector (c. 400 BBY—)"
       ]
     },
     {
@@ -52,14 +71,7 @@
       ]
     },
     {
-      "Label": "Suns",
-      "Links": [],
-      "Values": [
-        "1"
-      ]
-    },
-    {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-18"
@@ -119,14 +131,10 @@
         {
           "Content": "Type I",
           "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends"
-        },
-        {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Type I (breathable for Humans)"
+        "Type I (breathable)"
       ]
     },
     {
@@ -145,55 +153,78 @@
       "Label": "Gravity",
       "Links": [
         {
-          "Content": "Standard",
+          "Content": "standard",
           "Href": "https://starwars.fandom.com/wiki/Gravity/Legends"
         }
       ],
       "Values": [
-        "Standard (110%)"
+        "110% standard"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Desert",
+          "Content": "Deserts",
           "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
         }
       ],
       "Values": [
-        "Desert"
+        "Deserts"
       ]
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Drydock",
+          "Href": "https://starwars.fandom.com/wiki/Drydock"
+        },
+        {
+          "Content": "orbit",
+          "Href": "https://starwars.fandom.com/wiki/Orbit/Legends"
+        },
+        {
+          "Content": "Mataou fuel station",
+          "Href": "https://starwars.fandom.com/wiki/Mataou_fuel_station"
+        },
+        {
+          "Content": "orbit",
+          "Href": "https://starwars.fandom.com/wiki/Orbit/Legends"
+        },
+        {
+          "Content": "Standard Class starport",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Class_starport"
+        }
+      ],
       "Values": [
-        "Mataou Fuel Station"
+        "Drydock (in orbit)",
+        "Mataou fuel station (in orbit)",
+        "Standard Class starport"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Fauna",
       "Links": [
         {
-          "Content": "Human",
+          "Content": "Ro hypa",
+          "Href": "https://starwars.fandom.com/wiki/Ro_hypa/Legends"
+        }
+      ],
+      "Values": [
+        "Ro hypa"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Human"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Galactic Basic Standard",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Basic Standard"
+        "Humans"
       ]
     },
     {
@@ -224,40 +255,18 @@
     },
     {
       "Label": "Major exports",
-      "Links": [],
-      "Values": [
-        "Ro hypa venom"
-      ]
-    },
-    {
-      "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+          "Content": "venom",
+          "Href": "https://starwars.fandom.com/wiki/Poison/Legends"
         }
       ],
       "Values": [
-        "Galactic Republic",
-        "Galactic Empire"
+        "Ro hypa venom"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ison_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
     {
       "PageId": 93452,
       "PageUrl": "https://starwars.fandom.com/wiki/Mataou_system/Legends",
@@ -267,6 +276,21 @@
       "PageId": 152265,
       "PageUrl": "https://starwars.fandom.com/wiki/Ro_hypa/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 788115,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mataou_fuel_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ison_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

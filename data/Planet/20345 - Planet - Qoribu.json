@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Killik Colony Worlds",
+          "Href": "https://starwars.fandom.com/wiki/The_Colony"
+        }
+      ],
+      "Values": [
+        "Killik Colony Worlds"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -51,43 +63,49 @@
       "Label": "Moons",
       "Links": [
         {
-          "Content": "Jwlio",
-          "Href": "https://starwars.fandom.com/wiki/Jwlio"
-        },
-        {
           "Content": "Eyyl",
           "Href": "https://starwars.fandom.com/wiki/Eyyl"
         },
         {
-          "Content": "Zvbo",
-          "Href": "https://starwars.fandom.com/wiki/Zvbo"
+          "Content": "Jwlio",
+          "Href": "https://starwars.fandom.com/wiki/Jwlio"
         },
         {
-          "Content": "Ruu",
-          "Href": "https://starwars.fandom.com/wiki/Ruu"
+          "Content": "Kr",
+          "Href": "https://starwars.fandom.com/wiki/Kr"
         },
         {
           "Content": "Nrogu",
           "Href": "https://starwars.fandom.com/wiki/Nrogu"
         },
         {
-          "Content": "Kr",
-          "Href": "https://starwars.fandom.com/wiki/Kr"
+          "Content": "Ruu",
+          "Href": "https://starwars.fandom.com/wiki/Ruu_(moon)"
+        },
+        {
+          "Content": "Zvbo",
+          "Href": "https://starwars.fandom.com/wiki/Zvbo"
         }
       ],
       "Values": [
-        "55 (including Jwlio, Eyyl, Zvbo, Ruu, Nrogu, and Kr)"
+        "55",
+        "Eyyl",
+        "Jwlio",
+        "Kr",
+        "Nrogu",
+        "Ruu",
+        "Zvbo"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-7"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Gas giant",
@@ -101,19 +119,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 85533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 89601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Qoribu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 69067,
       "PageUrl": "https://starwars.fandom.com/wiki/Gyuel_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 85533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 20346,
@@ -132,7 +145,7 @@
     },
     {
       "PageId": 20349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruu",
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruu_(moon)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
@@ -146,9 +159,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 37437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Nest_Crisis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 146606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gyuel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 193226,
@@ -156,9 +169,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 146606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gyuel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 89601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Qoribu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 37437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Nest_Crisis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

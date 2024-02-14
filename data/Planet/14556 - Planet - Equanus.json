@@ -74,10 +74,41 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "K-3"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Barren"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
+        }
+      ],
+      "Values": [
+        "Oceans"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Fern-tree",
+          "Href": "https://starwars.fandom.com/wiki/Fern-tree"
+        }
+      ],
+      "Values": [
+        "Fern-tree"
       ]
     },
     {
@@ -114,11 +145,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 35011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Equani",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
       "PageId": 35009,
       "PageUrl": "https://starwars.fandom.com/wiki/Klo_Merit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -127,6 +153,11 @@
       "PageId": 18013,
       "PageUrl": "https://starwars.fandom.com/wiki/Nharl_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 35011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Equani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

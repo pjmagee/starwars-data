@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Organization type",
+      "Links": [
+        {
+          "Content": "Law enforcement agency",
+          "Href": "https://starwars.fandom.com/wiki/Law_enforcement_agency/Legends"
+        }
+      ],
+      "Values": [
+        "Law enforcement agency"
+      ]
+    },
+    {
       "Label": "Headquarters",
       "Links": [
         {
@@ -21,18 +33,6 @@
       ],
       "Values": [
         "Hapes"
-      ]
-    },
-    {
-      "Label": "Location(s)",
-      "Links": [
-        {
-          "Content": "Hapes Consortium",
-          "Href": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends"
-        }
-      ],
-      "Values": [
-        "Hapes Consortium"
       ]
     },
     {
@@ -53,12 +53,23 @@
         {
           "Content": "Hapes Consortium",
           "Href": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends"
+        },
+        {
+          "Content": "Hapan Royal House",
+          "Href": "https://starwars.fandom.com/wiki/Hapan_Royal_House"
         }
       ],
       "Values": [
-        "Hapes Consortium"
+        "Hapes Consortium",
+        "Hapan Royal House"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 119004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moreem_Espara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

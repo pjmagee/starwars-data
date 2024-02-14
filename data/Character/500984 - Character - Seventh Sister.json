@@ -64,6 +64,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.79 meters (5 ft, 10 in)"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -113,21 +136,44 @@
       "Label": "Masters",
       "Links": [
         {
+          "Content": "Yoda",
+          "Href": "https://starwars.fandom.com/wiki/Yoda"
+        },
+        {
           "Content": "Darth Sidious",
           "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
         },
         {
+          "Content": "dark side",
+          "Href": "https://starwars.fandom.com/wiki/Dark_side_of_the_Force"
+        },
+        {
           "Content": "Darth Vader",
           "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        },
+        {
+          "Content": "dark side",
+          "Href": "https://starwars.fandom.com/wiki/Dark_side_of_the_Force"
         }
       ],
       "Values": [
-        "Darth Sidious",
-        "Darth Vader"
+        "Yoda",
+        "Darth Sidious (dark side master)",
+        "Darth Vader (dark side master)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 452390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yoda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 516006,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_a_Republic_medical_station",

@@ -44,7 +44,7 @@
       "Links": [
         {
           "Content": "Death Star I",
-          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station/Legends"
+          "Href": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station"
         },
         {
           "Content": "Despayre",
@@ -57,7 +57,12 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        }
+      ],
       "Values": [
         "Decisive Imperial victory"
       ]
@@ -65,14 +70,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 177758,
       "PageUrl": "https://starwars.fandom.com/wiki/Fortressa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 2871,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Orbital_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

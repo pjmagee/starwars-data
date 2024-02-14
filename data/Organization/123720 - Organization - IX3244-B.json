@@ -2,6 +2,7 @@
   "PageId": 123720,
   "PageUrl": "https://starwars.fandom.com/wiki/IX3244-B",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -32,10 +33,19 @@
         {
           "Content": "Toss",
           "Href": "https://starwars.fandom.com/wiki/Toss"
+        },
+        {
+          "Content": "Lieutenant",
+          "Href": "https://starwars.fandom.com/wiki/Lieutenant/Legends"
+        },
+        {
+          "Content": "Kiviett",
+          "Href": "https://starwars.fandom.com/wiki/Kiviett"
         }
       ],
       "Values": [
-        "Captain Toss"
+        "Captain Toss",
+        "Lieutenant Kiviett"
       ]
     },
     {
@@ -44,12 +54,28 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Imperial Military"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 137153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiviett",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 137167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Toss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

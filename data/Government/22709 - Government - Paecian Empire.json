@@ -13,12 +13,7 @@
     },
     {
       "Label": "Organization type",
-      "Links": [
-        {
-          "Content": "Empire",
-          "Href": "https://starwars.fandom.com/wiki/Empire_(disambiguation)"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Empire"
       ]
@@ -27,12 +22,29 @@
       "Label": "Military branch",
       "Links": [
         {
-          "Content": "Kaarenth Impaler",
+          "Content": "Kaarenth Impalers",
           "Href": "https://starwars.fandom.com/wiki/Kaarenth_Impaler"
         }
       ],
       "Values": [
-        "Kaarenth Impaler"
+        "Kaarenth Impalers"
+      ]
+    },
+    {
+      "Label": "Planet",
+      "Links": [
+        {
+          "Content": "Paecia",
+          "Href": "https://starwars.fandom.com/wiki/Paecia/Legends"
+        },
+        {
+          "Content": "Dathomir",
+          "Href": "https://starwars.fandom.com/wiki/Dathomir/Legends"
+        }
+      ],
+      "Values": [
+        "Paecia",
+        "Dathomir"
       ]
     },
     {
@@ -48,7 +60,7 @@
       ]
     },
     {
-      "Label": "Formed from",
+      "Label": "Date dissolved",
       "Links": [
         {
           "Content": "3000 BBY",
@@ -58,18 +70,6 @@
       "Values": [
         "c. 3000 BBY"
       ]
-    },
-    {
-      "Label": "Date dissolved",
-      "Links": [
-        {
-          "Content": "2992 BBY",
-          "Href": "https://starwars.fandom.com/wiki/2992_BBY"
-        }
-      ],
-      "Values": [
-        "2992 BBY"
-      ]
     }
   ],
   "Relationships": [
@@ -77,6 +77,16 @@
       "PageId": 338952,
       "PageUrl": "https://starwars.fandom.com/wiki/2992_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 730996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paecia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 369775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paecia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 2018,

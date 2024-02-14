@@ -2,7 +2,7 @@
   "PageId": 545074,
   "PageUrl": "https://starwars.fandom.com/wiki/Doshan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ec/Doshan-EGTW.jpg/revision/latest?cb=20231218131433",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Outer Expansion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Outer Expansion Zone",
+        "Northern Dependencies"
       ]
     },
     {
@@ -48,44 +58,82 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-8"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Trandoshans",
-          "Href": "https://starwars.fandom.com/wiki/Trandoshan/Legends"
+          "Content": "Arakka",
+          "Href": "https://starwars.fandom.com/wiki/Arakka"
         },
         {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+          "Content": "Trandoshan",
+          "Href": "https://starwars.fandom.com/wiki/Trandoshan/Legends"
         }
       ],
       "Values": [
-        "Trandoshans",
-        "Humans"
+        "Arakka",
+        "Trandoshan nest"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Algae",
+          "Href": "https://starwars.fandom.com/wiki/Algae/Legends"
+        }
+      ],
+      "Values": [
+        "Algae"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Doshan blood worm",
+          "Href": "https://starwars.fandom.com/wiki/Doshan_blood_worm"
+        }
+      ],
+      "Values": [
+        "Doshan blood worm"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [],
+      "Values": [
+        "Trandoshans"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Waymancy Hollow",
-          "Href": "https://starwars.fandom.com/wiki/Waymancy_Hollow"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
-        "Waymancy Hollow",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     }
   ],

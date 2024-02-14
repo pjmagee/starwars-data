@@ -2,7 +2,7 @@
   "PageId": 720848,
   "PageUrl": "https://starwars.fandom.com/wiki/Laura_Racero",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/72/LauraRacero.png/revision/latest?cb=20220903040941",
   "Data": [
     {
       "Label": "Titles",
@@ -12,23 +12,55 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "March 3",
+          "Href": "https://starwars.fandom.com/wiki/March_3"
+        }
+      ],
+      "Values": [
+        "March 3"
+      ]
+    },
+    {
+      "Label": "Nationality",
+      "Links": [],
+      "Values": []
+    },
+    {
       "Label": "Occupation",
       "Links": [],
       "Values": [
-        "Artist"
+        "Digital artist",
+        "Graphic designer",
+        "Art director",
+        "Photographer"
+      ]
+    },
+    {
+      "Label": "Official website",
+      "Links": [
+        {
+          "Content": "lauraracero.com",
+          "Href": "https://lauraracero.com"
+        }
+      ],
+      "Values": [
+        "lauraracero.com"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 710942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
-    },
-    {
       "PageId": 710969,
       "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood_(audiobook)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Audiobook"
+    },
+    {
+      "PageId": 710942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
     }
   ]
 }

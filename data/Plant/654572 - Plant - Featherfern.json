@@ -2,13 +2,25 @@
   "PageId": 654572,
   "PageUrl": "https://starwars.fandom.com/wiki/Featherfern",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/20/FeatherfernBogano-JFO.jpg/revision/latest?cb=20201204220230",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/20/FeatherfernBogano-JFO.jpg/revision/latest?cb=20220630172236",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Featherfern"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Fern",
+          "Href": "https://starwars.fandom.com/wiki/Fern"
+        }
+      ],
+      "Values": [
+        "Fern"
       ]
     },
     {
@@ -22,18 +34,46 @@
       "Values": [
         "Bogano"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Mesas",
+          "Href": "https://starwars.fandom.com/wiki/Mesa"
+        }
+      ],
+      "Values": [
+        "Mesas"
+      ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [
+        {
+          "Content": "Purple",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "flowers",
+          "Href": "https://starwars.fandom.com/wiki/Flower"
+        }
+      ],
+      "Values": [
+        "Purple flowers"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 637666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fractured_Plain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 634107,
       "PageUrl": "https://starwars.fandom.com/wiki/Bogano",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 637666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fractured_Plain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

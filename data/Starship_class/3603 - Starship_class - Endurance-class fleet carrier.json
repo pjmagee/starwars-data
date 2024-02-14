@@ -2,7 +2,7 @@
   "PageId": 3603,
   "PageUrl": "https://starwars.fandom.com/wiki/Endurance-class_fleet_carrier",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9e/Endurance_class_EGTW.jpg/revision/latest?cb=20120425015700",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8d/EnduranceClassFleetCarrier-EGTW.png/revision/latest?cb=20230124051931",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Carrier",
@@ -265,19 +265,19 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
-        "New Republic"
+        "New Republic",
+        "Galactic Federation of Free Alliances"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 7848,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
     {
       "PageId": 26937,
       "PageUrl": "https://starwars.fandom.com/wiki/Endurance_(Endurance-class)",
@@ -287,6 +287,11 @@
       "PageId": 27382,
       "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(Endurance-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 7848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

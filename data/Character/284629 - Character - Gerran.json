@@ -2,6 +2,7 @@
   "PageId": 284629,
   "PageUrl": "https://starwars.fandom.com/wiki/Gerran",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,18 @@
       ]
     },
     {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Serra",
+          "Href": "https://starwars.fandom.com/wiki/Serra"
+        }
+      ],
+      "Values": [
+        "Serra"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -71,5 +84,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 162126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 285643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gerran's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

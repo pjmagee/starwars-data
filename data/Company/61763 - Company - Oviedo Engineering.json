@@ -12,29 +12,48 @@
       ]
     },
     {
-      "Label": "Founder(s)",
+      "Label": "Leader(s)",
       "Links": [
+        {
+          "Content": "Director General",
+          "Href": "https://starwars.fandom.com/wiki/Director_General"
+        },
         {
           "Content": "Lorca Oviedo",
           "Href": "https://starwars.fandom.com/wiki/Lorca_Oviedo"
         }
       ],
       "Values": [
-        "Lorca Oviedo"
-      ]
-    },
-    {
-      "Label": "Leader(s)",
-      "Links": [],
-      "Values": [
-        "Lorca Oviedo"
+        "Director General Lorca Oviedo"
       ]
     },
     {
       "Label": "Primary role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "weapon",
+          "Href": "https://starwars.fandom.com/wiki/Weapon/Legends"
+        }
+      ],
       "Values": [
-        "Arms manufacturer"
+        "Research-and-development organization",
+        "Military weapon systems manufacturer"
+      ]
+    },
+    {
+      "Label": "Founding",
+      "Links": [
+        {
+          "Content": "Years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year/Legends"
+        },
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "Years before 22 BBY"
       ]
     },
     {
@@ -46,7 +65,7 @@
         }
       ],
       "Values": [
-        "21 BBY"
+        "Around 21 BBY"
       ]
     },
     {
@@ -63,6 +82,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 759729,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conference_on_Aviles_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 172287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Director_General",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
     {
       "PageId": 41057,
       "PageUrl": "https://starwars.fandom.com/wiki/Lorca_Oviedo",

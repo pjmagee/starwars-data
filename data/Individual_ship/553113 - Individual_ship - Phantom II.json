@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -167,6 +167,10 @@
         {
           "Content": "Skirmish on Krownest",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Krownest"
+        },
+        {
+          "Content": "Mission to Corellia",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Corellia_(New_Republic)"
         }
       ],
       "Values": [
@@ -175,7 +179,8 @@
         "Skirmish over Mykapo",
         "Skirmish on Dathomir",
         "Rescue of Ketsu Onyo",
-        "Skirmish on Krownest"
+        "Skirmish on Krownest",
+        "Mission to Corellia"
       ]
     },
     {
@@ -200,6 +205,10 @@
         {
           "Content": "Spectres",
           "Href": "https://starwars.fandom.com/wiki/Spectres"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
@@ -207,7 +216,30 @@
         "Agamar garrison",
         "Alliance to Restore the Republic",
         "Phoenix Cell",
-        "Spectres"
+        "Spectres",
+        "New Republic"
+      ]
+    },
+    {
+      "Label": "Navy",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems Navy",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems Navy",
+        "Rebel Alliance Navy",
+        "New Republic Defense Fleet"
       ]
     },
     {
@@ -256,19 +288,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 553094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Agamar_(2_BBY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 461647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spectres",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 424062,
       "PageUrl": "https://starwars.fandom.com/wiki/Ghost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 575239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agamar_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 577312,
       "PageUrl": "https://starwars.fandom.com/wiki/Phantom_II_Expansion_Pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 553094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Agamar_(2_BBY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

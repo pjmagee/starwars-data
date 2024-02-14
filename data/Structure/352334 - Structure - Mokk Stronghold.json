@@ -33,17 +33,23 @@
         {
           "Content": "Mokk",
           "Href": "https://starwars.fandom.com/wiki/Mokk"
-        },
-        {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
         }
       ],
       "Values": [
-        "Mokk",
-        "Alliance to Restore the Republic (suspected)"
+        "Mokk"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 382443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mosa_Rishin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 18232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mokk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

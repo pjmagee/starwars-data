@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -97,14 +97,24 @@
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Karlini",
+          "Href": "https://starwars.fandom.com/wiki/Karlini"
+        }
+      ],
       "Values": [
         "Karlini"
       ]
     },
     {
       "Label": "Major cities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Karlini City",
+          "Href": "https://starwars.fandom.com/wiki/Karlini_City"
+        }
+      ],
       "Values": [
         "Karlini City"
       ]
@@ -146,11 +156,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 618820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karlini_silk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
       "PageId": 618897,
       "PageUrl": "https://starwars.fandom.com/wiki/Karlini_tea",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
@@ -159,6 +164,31 @@
       "PageId": 508641,
       "PageUrl": "https://starwars.fandom.com/wiki/Chommell_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 618820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karlini_silk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 762746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Governor's_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 758991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Official_legislative_recording_device",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 762744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karlini_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 769292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_mission_to_Karlinus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

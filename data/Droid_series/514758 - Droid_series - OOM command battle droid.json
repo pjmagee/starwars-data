@@ -2,7 +2,7 @@
   "PageId": 514758,
   "PageUrl": "https://starwars.fandom.com/wiki/OOM_command_battle_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/56/BF2-OOM-Commander-Battle-Droid.png/revision/latest?cb=20210507020324",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e8/OOMCBD-FFp67.png/revision/latest?cb=20231228135523",
   "Data": [
     {
       "Label": "Titles",
@@ -129,12 +129,24 @@
           "Href": "https://starwars.fandom.com/wiki/Confederacy_military"
         },
         {
+          "Content": "Separatist holdouts",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts"
+        },
+        {
+          "Content": "Desix Separatist holdout",
+          "Href": "https://starwars.fandom.com/wiki/Desix_Separatist_holdout"
+        },
+        {
           "Content": "Agamar garrison",
           "Href": "https://starwars.fandom.com/wiki/Agamar_garrison"
         },
         {
           "Content": "Klik-Klak's droid army",
           "Href": "https://starwars.fandom.com/wiki/Klik-Klak%27s_droid_army"
+        },
+        {
+          "Content": "Jul's droid army",
+          "Href": "https://starwars.fandom.com/wiki/Jul%27s_droid_army"
         }
       ],
       "Values": [
@@ -142,36 +154,19 @@
         "Trade Federation military",
         "Confederacy of Independent Systems",
         "Confederacy military",
+        "Separatist holdouts",
+        "Desix Separatist holdout",
         "Agamar garrison",
-        "Klik-Klak's droid army"
+        "Klik-Klak's droid army",
+        "Jul's droid army"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 590385,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_19",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 590386,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_17",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 475572,
-      "PageUrl": "https://starwars.fandom.com/wiki/OOM-9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 595163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Bothawui)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 596224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Ryloth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 790633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 647102,
@@ -187,16 +182,6 @@
       "PageId": 553602,
       "PageUrl": "https://starwars.fandom.com/wiki/Comlink_booster_pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 552817,
-      "PageUrl": "https://starwars.fandom.com/wiki/B1-268",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 600616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_droid_(Tatooine)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 603468,
@@ -219,8 +204,53 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 477525,
-      "PageUrl": "https://starwars.fandom.com/wiki/224",
+      "PageId": 466804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 474180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 575849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 584814,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_blockade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 6229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 592926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Six_(Agamar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 750922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desix_Separatist_holdout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 669966,
+      "PageUrl": "https://starwars.fandom.com/wiki/2163",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 678842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Teth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 678843,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_3_(Teth)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -239,39 +269,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 575849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
+      "PageId": 597987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 669966,
-      "PageUrl": "https://starwars.fandom.com/wiki/2163",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 678842,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Teth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 678843,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_3_(Teth)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 584814,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_blockade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 466804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
+      "PageId": 590385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_19",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 474180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "PageId": 590386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battlecruiser_17",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 557980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_118",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 722089,
@@ -284,9 +299,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 557980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Patrol_118",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 732260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Onderon)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 475572,
+      "PageUrl": "https://starwars.fandom.com/wiki/OOM-9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 477525,
+      "PageUrl": "https://starwars.fandom.com/wiki/224",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 749189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_C-9979_landing_craft_(Rugosa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 748707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_1_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 748972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Maridun)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 749036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Dooku's_frigate)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 749038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Devaron)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 751640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Desix)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 575239,
@@ -294,9 +349,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 592926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Squad_Six_(Agamar)",
+      "PageId": 751037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desix_droid_battalion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 595163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_(Bothawui)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 596224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Ryloth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 600616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_droid_(Tatooine)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 745596,
+      "PageUrl": "https://starwars.fandom.com/wiki/OWO-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 748369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_OOM_command_battle_droid_2_(Malevolence)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 552817,
+      "PageUrl": "https://starwars.fandom.com/wiki/B1-268",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]
 }

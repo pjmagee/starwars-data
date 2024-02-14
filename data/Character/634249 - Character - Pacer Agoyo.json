@@ -2,6 +2,7 @@
   "PageId": 634249,
   "PageUrl": "https://starwars.fandom.com/wiki/Pacer_Agoyo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -56,6 +64,30 @@
       ],
       "Values": [
         "Black"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Unnamed father",
+          "Href": "https://starwars.fandom.com/wiki/Pacer_Agoyo%27s_father"
+        }
+      ],
+      "Values": [
+        "Unnamed father"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Unnamed brother",
+          "Href": "https://starwars.fandom.com/wiki/Pacer_Agoyo%27s_brother"
+        }
+      ],
+      "Values": [
+        "Unnamed brother"
       ]
     },
     {
@@ -76,5 +108,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 635573,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacer_Agoyo's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 635982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pacer_Agoyo's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

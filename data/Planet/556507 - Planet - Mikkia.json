@@ -2,7 +2,7 @@
   "PageId": 556507,
   "PageUrl": "https://starwars.fandom.com/wiki/Mikkia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/03/Mikkia.jpg/revision/latest?cb=20220724071518",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,30 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-7"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Hydian Way",
+          "Href": "https://starwars.fandom.com/wiki/Hydian_Way"
+        }
+      ],
+      "Values": [
+        "Hydian Way"
+      ]
+    },
+    {
       "Label": "Climate",
       "Links": [],
       "Values": [
@@ -31,7 +55,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "jungles",
@@ -45,6 +69,13 @@
       "Values": [
         "Equatorial jungles",
         "Icy poles"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [],
+      "Values": [
+        "Red Mine mining complex"
       ]
     },
     {
@@ -72,6 +103,13 @@
       ]
     },
     {
+      "Label": "Major cities",
+      "Links": [],
+      "Values": [
+        "Charbana"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -91,8 +129,28 @@
   ],
   "Relationships": [
     {
+      "PageId": 491418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_Region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 518433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 782833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Groundquake_on_Mikkia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 455188,
       "PageUrl": "https://starwars.fandom.com/wiki/Tiplee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiplar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -104,16 +162,6 @@
       "PageId": 503349,
       "PageUrl": "https://starwars.fandom.com/wiki/Mikkian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 455189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiplar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 491418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_Region",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

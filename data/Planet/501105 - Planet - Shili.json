@@ -17,21 +17,14 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
-        }
-      ],
-      "Values": [
-        "Expansion Region"
-      ]
-    },
-    {
-      "Label": "Sector",
-      "Links": [
+        },
         {
           "Content": "Togruta space",
           "Href": "https://starwars.fandom.com/wiki/Togruta_space"
         }
       ],
       "Values": [
+        "Expansion Region",
         "Togruta space"
       ]
     },
@@ -72,7 +65,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-8",
@@ -84,7 +77,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Colorful",
@@ -97,6 +90,56 @@
       ],
       "Values": [
         "Colorful grasslands"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Ahsoka Tano's village",
+          "Href": "https://starwars.fandom.com/wiki/Ahsoka_Tano%27s_village"
+        }
+      ],
+      "Values": [
+        "Ahsoka Tano's village"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Grass",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        },
+        {
+          "Content": "Pine",
+          "Href": "https://starwars.fandom.com/wiki/Pine"
+        },
+        {
+          "Content": "trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
+        }
+      ],
+      "Values": [
+        "Grass",
+        "Pine trees"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Kybuck",
+          "Href": "https://starwars.fandom.com/wiki/Kybuck"
+        },
+        {
+          "Content": "Raxshir",
+          "Href": "https://starwars.fandom.com/wiki/Raxshir"
+        }
+      ],
+      "Values": [
+        "Kybuck",
+        "Raxshir"
       ]
     },
     {
@@ -138,14 +181,54 @@
   ],
   "Relationships": [
     {
+      "PageId": 739498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gantika",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 744267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano's_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 453246,
       "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 700270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Togruti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+      "PageId": 701015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Togruta_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 578281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shili_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 461012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 596013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 578283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shili's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 730694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pav-ti_Tano",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 460765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Togruta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 700267,
@@ -158,34 +241,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 578281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shili_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 578283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shili's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 460765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Togruta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 701015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Togruta_government",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 461012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ti",
+      "PageId": 744194,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nak-il_Tano",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 775716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tano_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 790783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shili_royal_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 726888,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic-Togruta_conflict",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 740838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raxshir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 744294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Squirrel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 700270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Togruti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     }
   ]
 }

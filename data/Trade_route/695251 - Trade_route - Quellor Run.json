@@ -2,7 +2,7 @@
   "PageId": 695251,
   "PageUrl": "https://starwars.fandom.com/wiki/Quellor_Run",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/60/Quellor-Run-SWT.jpg/revision/latest?cb=20220721222424",
   "Data": [
     {
       "Label": "Titles",
@@ -36,38 +36,105 @@
       ]
     },
     {
-      "Label": "Planets",
+      "Label": "Start point",
       "Links": [
-        {
-          "Content": "Cato Neimoidia",
-          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidia"
-        },
         {
           "Content": "Commenor",
           "Href": "https://starwars.fandom.com/wiki/Commenor"
-        },
+        }
+      ],
+      "Values": [
+        "Commenor"
+      ]
+    },
+    {
+      "Label": "End point",
+      "Links": [
         {
           "Content": "Quellor",
           "Href": "https://starwars.fandom.com/wiki/Quellor"
         }
       ],
       "Values": [
-        "Cato Neimoidia",
-        "Commenor",
         "Quellor"
+      ]
+    },
+    {
+      "Label": "Systems",
+      "Links": [
+        {
+          "Content": "Cato Neimoidia system",
+          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidia_system"
+        }
+      ],
+      "Values": [
+        "Cato Neimoidia system"
+      ]
+    },
+    {
+      "Label": "Planets",
+      "Links": [
+        {
+          "Content": "Narq",
+          "Href": "https://starwars.fandom.com/wiki/Narq"
+        },
+        {
+          "Content": "Cato Neimoidia",
+          "Href": "https://starwars.fandom.com/wiki/Cato_Neimoidia"
+        }
+      ],
+      "Values": [
+        "Commenor - Narq - Cato Neimoidia - Quellor"
+      ]
+    },
+    {
+      "Label": "Junctions",
+      "Links": [
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Trade Route"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 695254,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 498762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 515410,
       "PageUrl": "https://starwars.fandom.com/wiki/Commenor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 529534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narq",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 505099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 464661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 695254,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neri",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 506843,
@@ -78,21 +145,6 @@
       "PageId": 552553,
       "PageUrl": "https://starwars.fandom.com/wiki/Quellor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 464661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cato_Neimoidia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 498762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 505099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quellor_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

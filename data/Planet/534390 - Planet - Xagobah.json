@@ -2,7 +2,7 @@
   "PageId": 534390,
   "PageUrl": "https://starwars.fandom.com/wiki/Xagobah",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8f/Clakdor_on_TFA_Beginner_map.jpg/revision/latest?cb=20170522142548",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b7/Xagobah-SWT.jpg/revision/latest?cb=20220603132221",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Western Reaches"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-18",
@@ -36,22 +41,17 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
       "Links": [],
       "Values": [
-        "Canyons"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Native species",
-      "Links": [
-        {
-          "Content": "Xamster",
-          "Href": "https://starwars.fandom.com/wiki/Xamster"
-        }
-      ],
+      "Label": "Terrain",
+      "Links": [],
       "Values": [
-        "Xamster"
+        "Canyons"
       ]
     },
     {
@@ -74,19 +74,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 685152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial-Royalist_coalition",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
       "PageId": 554249,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Xagobah",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 516121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xamster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 515396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neva_Kee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 685149,
@@ -94,14 +94,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 685152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial-Royalist_coalition",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 515396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neva_Kee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

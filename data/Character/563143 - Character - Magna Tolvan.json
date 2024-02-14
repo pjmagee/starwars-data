@@ -2,7 +2,7 @@
   "PageId": 563143,
   "PageUrl": "https://starwars.fandom.com/wiki/Magna_Tolvan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/21/Tolvan_Aphra33_CloseUpCropped.jpg/revision/latest?cb=20190620003103",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/28/MagnaTolvan-DoctorAphra2020-21.png/revision/latest?cb=20231026122323",
   "Data": [
     {
       "Label": "Titles",
@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -49,9 +56,15 @@
     },
     {
       "Label": "Eye color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
+        }
+      ],
       "Values": [
-        "Silver"
+        "Blue",
+        "Purple (under Scourge infection)"
       ]
     },
     {
@@ -83,8 +96,8 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Military",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Military"
+          "Content": "Imperial Academy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Academy"
         },
         {
           "Content": "Imperial Officer Corps",
@@ -101,15 +114,30 @@
         {
           "Content": "Strike Team Misericorde",
           "Href": "https://starwars.fandom.com/wiki/Strike_Team_Misericorde"
+        },
+        {
+          "Content": "Magna Tolvan's crew",
+          "Href": "https://starwars.fandom.com/wiki/Magna_Tolvan%27s_crew"
+        },
+        {
+          "Content": "Sana Starros' crew",
+          "Href": "https://starwars.fandom.com/wiki/Sana_Starros%27_crew"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Military",
+        "Imperial Academy",
         "Imperial Officer Corps",
         "Inspectorate",
         "Alliance to Restore the Republic",
-        "Strike Team Misericorde"
+        "Strike Team Misericorde",
+        "Magna Tolvan's crew",
+        "Sana Starros' crew",
+        "Scourge (as a vessel)"
       ]
     },
     {
@@ -127,9 +155,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 508333,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thanoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 636844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unnamed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 622743,
@@ -137,9 +165,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 636844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unnamed",
+      "PageId": 781806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hawk's_End",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 782181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Magna_Tolvan's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 786420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Magna_Tolvan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 792365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_the_Silver_Arrow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 508333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thanoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

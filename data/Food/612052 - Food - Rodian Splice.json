@@ -12,11 +12,19 @@
       ]
     },
     {
-      "Label": "Found on",
+      "Label": "Found",
       "Links": [
         {
           "Content": "Barnahof",
           "Href": "https://starwars.fandom.com/wiki/Barnahof"
+        },
+        {
+          "Content": "Boxer Point Station",
+          "Href": "https://starwars.fandom.com/wiki/Boxer_Point_Station"
+        },
+        {
+          "Content": "Janx system",
+          "Href": "https://starwars.fandom.com/wiki/Janx_system"
         },
         {
           "Content": "Hubin",
@@ -25,6 +33,7 @@
       ],
       "Values": [
         "Barnahof",
+        "Boxer Point Station, Janx system",
         "Hubin"
       ]
     },
@@ -78,11 +87,16 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "sentient species",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_snouted_species"
         }
       ],
       "Values": [
         "Artiodac (if correctly mixed)",
-        "Human (if correctly mixed)"
+        "Human (if correctly mixed)",
+        "A sentient species"
       ]
     },
     {
@@ -101,7 +115,25 @@
         "Intoxication",
         "Death for most species (if incorrectly mixed)"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Sennifer's Beam and Balance",
+          "Href": "https://starwars.fandom.com/wiki/Sennifer%27s_Beam_and_Balance"
+        }
+      ],
+      "Values": [
+        "Sennifer's Beam and Balance"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 739466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sennifer's_Beam_and_Balance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    }
+  ]
 }

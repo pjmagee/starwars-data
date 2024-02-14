@@ -15,6 +15,10 @@
       "Label": "Manufacturer",
       "Links": [
         {
+          "Content": "Sienar Design Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Design_Systems"
+        },
+        {
           "Content": "Cygnus Spaceworks",
           "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks"
         },
@@ -28,6 +32,7 @@
         }
       ],
       "Values": [
+        "Sienar Design Systems",
         "Cygnus Spaceworks",
         "Sienar Fleet Systems",
         "Theed Engineering"
@@ -46,7 +51,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -61,12 +66,37 @@
       "Label": "Length",
       "Links": [
         {
+          "Content": "m",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        },
+        {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
         }
       ],
       "Values": [
-        "Just under 150 meters"
+        "99.7 m (327 ft) (Original)",
+        "Just under 150 meters (After modifications)"
+      ]
+    },
+    {
+      "Label": "Maximum speed (atmosphere)",
+      "Links": [
+        {
+          "Content": "kph",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
+        },
+        {
+          "Content": "mph",
+          "Href": "https://starwars.fandom.com/wiki/Mile_per_hour"
+        }
+      ],
+      "Values": [
+        "950 kph (590 mph) (Original)"
       ]
     },
     {
@@ -78,14 +108,44 @@
         }
       ],
       "Values": [
-        "Ion engines"
+        "Ion engines (After modifications)"
       ]
     },
     {
       "Label": "Hyperdrive rating",
       "Links": [],
       "Values": [
-        "Class 1"
+        "None (Original)",
+        "Class 1 (After modifications)"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [],
+      "Values": [
+        "Power plant (After modifications)"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Shield generators",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
+        },
+        {
+          "Content": "Particle shields",
+          "Href": "https://starwars.fandom.com/wiki/Particle_shield"
+        },
+        {
+          "Content": "Ray shields",
+          "Href": "https://starwars.fandom.com/wiki/Ray_shield"
+        }
+      ],
+      "Values": [
+        "Shield generators",
+        "Particle shields",
+        "Ray shields"
       ]
     },
     {
@@ -101,23 +161,66 @@
       ]
     },
     {
-      "Label": "Countermeasures",
+      "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "Cloaking device",
-          "Href": "https://starwars.fandom.com/wiki/Cloaking_device"
+          "Content": "Sensor",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
         }
       ],
       "Values": [
-        "Cloaking device"
+        "Sensor suite (scanners) (After modifications)"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "Computer",
+          "Href": "https://starwars.fandom.com/wiki/Computer"
+        }
+      ],
+      "Values": [
+        "Computer-assisted fire control (After modifications)"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Navigation computer",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Navigation computer (After modifications)"
+      ]
+    },
+    {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Cloaking devices",
+          "Href": "https://starwars.fandom.com/wiki/Cloaking_device"
+        },
+        {
+          "Content": "Stygium crystal",
+          "Href": "https://starwars.fandom.com/wiki/Stygium_crystal"
+        }
+      ],
+      "Values": [
+        "Cloaking devices (28) (Original)",
+        "Stygium crystal cloaking devices (After modifications)",
+        "Countermeasures suite",
+        "Jamming equipment"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+          "Content": "Flares",
+          "Href": "https://starwars.fandom.com/wiki/Flare"
         },
         {
           "Content": "Ion cannons",
@@ -130,39 +233,45 @@
         {
           "Content": "Proton torpedoes",
           "Href": "https://starwars.fandom.com/wiki/Proton_torpedo"
+        },
+        {
+          "Content": "Turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         }
       ],
       "Values": [
-        "Turbolasers",
-        "Ion cannons",
+        "Flares (Orignial)",
+        "Ion cannons (After modifications)",
         "Laser cannons",
-        "Proton torpedoes"
+        "Pintle guns (After modifications)",
+        "Proton torpedoes",
+        "Turbolasers (After modifications)"
       ]
     },
     {
       "Label": "Escape craft",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "Several",
           "Href": "https://starwars.fandom.com/wiki/Escape_pod"
         }
       ],
       "Values": [
-        "Equipped"
+        "Several (After modifications)"
       ]
     },
     {
       "Label": "Crew",
       "Links": [],
       "Values": [
-        "14 - 18"
+        "14 - 18 (After modifications)"
       ]
     },
     {
       "Label": "Minimum crew",
       "Links": [],
       "Values": [
-        "5"
+        "5 (After modifications)"
       ]
     },
     {
@@ -174,7 +283,39 @@
         }
       ],
       "Values": [
-        "Equipped"
+        "Equipped (After modifications)"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "HoloNet",
+          "Href": "https://starwars.fandom.com/wiki/HoloNet"
+        }
+      ],
+      "Values": [
+        "Hypercomm unit (After modifications)",
+        "Rectenna array (After modifications)",
+        "Imperial HoloNet relay (After modifications)"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Alluvial dampers",
+          "Href": "https://starwars.fandom.com/wiki/Alluvial_damper"
+        }
+      ],
+      "Values": [
+        "Alluvial dampers (After modifications)",
+        "Exterior and interior lights (After modifications)",
+        "Emergency lighting (After modifications)",
+        "Internal security systems (After modifications)",
+        "Landing gear (After modifications)",
+        "Maneuvering jets (After modifications)",
+        "Proximity alarms (After modifications)"
       ]
     },
     {
@@ -183,10 +324,14 @@
         {
           "Content": "34 ABY",
           "Href": "https://starwars.fandom.com/wiki/34_ABY"
+        },
+        {
+          "Content": "desert planet",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_desert_planet"
         }
       ],
       "Values": [
-        "34 ABY"
+        "34 ABY, over a desert planet"
       ]
     },
     {
@@ -272,8 +417,8 @@
           "Href": "https://starwars.fandom.com/wiki/Berch_Teller%27s_rebel_cell"
         },
         {
-          "Content": "Ranc gang",
-          "Href": "https://starwars.fandom.com/wiki/Ranc_gang"
+          "Content": "Ranc Gang",
+          "Href": "https://starwars.fandom.com/wiki/Ranc_Gang"
         },
         {
           "Content": "First Order",
@@ -288,7 +433,7 @@
         "Galactic Republic",
         "Galactic Empire",
         "Berch Teller's rebel cell (Appropriated)",
-        "Ranc gang",
+        "Ranc Gang",
         "First Order",
         "First Order Security Bureau"
       ]
@@ -303,11 +448,16 @@
         {
           "Content": "Imperial Navy",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+        },
+        {
+          "Content": "First Order Navy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
         }
       ],
       "Values": [
         "Galactic Republic Navy",
-        "Imperial Navy"
+        "Imperial Navy",
+        "First Order Navy"
       ]
     },
     {
@@ -395,13 +545,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 621404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Authorization_Code_TK-603",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
-    },
-    {
       "PageId": 589832,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Phindar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 482880,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Galidraan_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -410,14 +560,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
+      "PageId": 621404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Authorization_Code_TK-603",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 497806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executrix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 744073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin's_personal_guard_platoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 512043,
       "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_meditation_chamber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 482880,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Galidraan_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

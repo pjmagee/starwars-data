@@ -40,6 +40,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -62,16 +69,26 @@
       "Label": "Affiliation(s)",
       "Links": [
         {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
           "Content": "Warbird gang",
           "Href": "https://starwars.fandom.com/wiki/Warbird_gang"
         }
       ],
       "Values": [
+        "First Order",
         "Warbird gang"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 616768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galleon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 453791,
       "PageUrl": "https://starwars.fandom.com/wiki/Chance_cube",

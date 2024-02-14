@@ -2,6 +2,7 @@
   "PageId": 609293,
   "PageUrl": "https://starwars.fandom.com/wiki/Harmonberry_cake",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,25 @@
       "Values": [
         "Cake"
       ]
+    },
+    {
+      "Label": "Plant-based ingredients",
+      "Links": [
+        {
+          "Content": "Harmonberries",
+          "Href": "https://starwars.fandom.com/wiki/Harmonberry"
+        }
+      ],
+      "Values": [
+        "Harmonberries"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 738041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harmonberry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

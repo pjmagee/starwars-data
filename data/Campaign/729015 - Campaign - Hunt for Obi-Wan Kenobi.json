@@ -2,7 +2,7 @@
   "PageId": 729015,
   "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Obi-Wan_Kenobi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9c/Obi-Wan_Kenobi_wanted_poster.jpg/revision/latest?cb=20220510180251",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c9/KenobiWanted-OWKpII.png/revision/latest?cb=20221102184444",
   "Data": [
     {
       "Label": "Titles",
@@ -24,19 +24,35 @@
       ]
     },
     {
-      "Label": "Date",
+      "Label": "Begin",
       "Links": [
-        {
-          "Content": "19 BBY",
-          "Href": "https://starwars.fandom.com/wiki/19_BBY"
-        },
         {
           "Content": "9 BBY",
           "Href": "https://starwars.fandom.com/wiki/9_BBY"
+        },
+        {
+          "Content": "ambush on Alderaan",
+          "Href": "https://starwars.fandom.com/wiki/Ambush_on_Alderaan"
         }
       ],
       "Values": [
-        "19 BBY – 9 BBY"
+        "9 BBY, ambush on Alderaan"
+      ]
+    },
+    {
+      "Label": "End",
+      "Links": [
+        {
+          "Content": "9 BBY",
+          "Href": "https://starwars.fandom.com/wiki/9_BBY"
+        },
+        {
+          "Content": "fight on a barren moon",
+          "Href": "https://starwars.fandom.com/wiki/Fight_on_a_barren_moon"
+        }
+      ],
+      "Values": [
+        "9 BBY, fight on a barren moon"
       ]
     },
     {
@@ -49,46 +65,159 @@
         {
           "Content": "Daiyu",
           "Href": "https://starwars.fandom.com/wiki/Daiyu"
+        },
+        {
+          "Content": "Mapuzo",
+          "Href": "https://starwars.fandom.com/wiki/Mapuzo"
+        },
+        {
+          "Content": "Nur",
+          "Href": "https://starwars.fandom.com/wiki/Nur"
+        },
+        {
+          "Content": "Jabiim",
+          "Href": "https://starwars.fandom.com/wiki/Jabiim"
+        },
+        {
+          "Content": "barren moon",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_barren_moon"
         }
       ],
       "Values": [
         "Alderaan (indirectly)",
-        "Daiyu"
+        "Daiyu",
+        "Mapuzo",
+        "Nur",
+        "Jabiim",
+        "A barren moon"
+      ]
+    },
+    {
+      "Label": "Outcome",
+      "Links": [
+        {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi"
+        },
+        {
+          "Content": "Obi-Wan Kenobi",
+          "Href": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi"
+        },
+        {
+          "Content": "imprisonment",
+          "Href": "https://starwars.fandom.com/wiki/Prison"
+        },
+        {
+          "Content": "execution",
+          "Href": "https://starwars.fandom.com/wiki/Death_penalty"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Leia Organa",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo"
+        },
+        {
+          "Content": "House of Organa",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
+        },
+        {
+          "Content": "Reva Sevander",
+          "Href": "https://starwars.fandom.com/wiki/Reva_Sevander"
+        },
+        {
+          "Content": "Darth Vader",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        },
+        {
+          "Content": "Emperor",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Emperor"
+        },
+        {
+          "Content": "Palpatine",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
+        }
+      ],
+      "Values": [
+        "Jedi tactical victory",
+        "Obi-Wan Kenobi avoids imprisonment or execution by the Galactic Empire",
+        "Leia Organa is returned to the House of Organa",
+        "Redemption of Reva Sevander",
+        "Darth Vader ends his search for Kenobi after Emperor Palpatine questions him"
       ]
     },
     {
       "Label": "Battles",
       "Links": [
         {
-          "Content": "Kidnapping of Leia Organa",
-          "Href": "https://starwars.fandom.com/wiki/Kidnapping_of_Leia_Organa"
-        },
-        {
           "Content": "Mission to Daiyu",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Daiyu"
+        },
+        {
+          "Content": "Battle on Mapuzo",
+          "Href": "https://starwars.fandom.com/wiki/Battle_on_Mapuzo"
+        },
+        {
+          "Content": "Rescue of Leia Organa",
+          "Href": "https://starwars.fandom.com/wiki/Rescue_of_Leia_Organa"
+        },
+        {
+          "Content": "Attack on Jabiim",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_Jabiim"
         }
       ],
       "Values": [
-        "Kidnapping of Leia Organa",
-        "Mission to Daiyu"
+        "Ambush on Alderaan",
+        "Mission to Daiyu",
+        "Battle on Mapuzo",
+        "Rescue of Leia Organa",
+        "Attack on Jabiim",
+        "Fight on a barren moon"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 555481,
+      "PageUrl": "https://starwars.fandom.com/wiki/9_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 730514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_Princess_Leia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 731699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Leia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 731011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Mapuzo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 732572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Jabiim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 730529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_of_Leia_Organa",
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_on_Alderaan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 733156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fight_on_a_barren_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
       "PageId": 500663,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Purge",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 730514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Daiyu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

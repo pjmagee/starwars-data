@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Killik Colony Worlds",
+          "Href": "https://starwars.fandom.com/wiki/The_Colony"
+        }
+      ],
+      "Values": [
+        "Killik Colony Worlds"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -48,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-7"
@@ -67,7 +79,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Ethmane",
@@ -91,7 +103,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Killiks",
@@ -129,14 +141,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 89548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 69067,
       "PageUrl": "https://starwars.fandom.com/wiki/Gyuel_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 146606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gyuel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 12330,
@@ -149,9 +161,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 146606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gyuel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 89548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

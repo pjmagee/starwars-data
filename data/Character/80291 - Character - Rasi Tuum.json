@@ -24,15 +24,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
@@ -51,7 +46,24 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Brown"
+        "Brown (irises) and yellow (sclerae)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ahn",
+          "Href": "https://starwars.fandom.com/wiki/Ahn_Rasi_Tuum"
+        },
+        {
+          "Content": "Zho",
+          "Href": "https://starwars.fandom.com/wiki/Zho_Rasi_Tuum"
+        }
+      ],
+      "Values": [
+        "Ahn",
+        "Zho"
       ]
     },
     {
@@ -89,6 +101,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 286598,
+      "PageUrl": "operation:_Thunderstroke",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 344379,
       "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Roan_Fel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
@@ -97,11 +114,6 @@
       "PageId": 204086,
       "PageUrl": "https://starwars.fandom.com/wiki/Azlyn_Rae",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 286598,
-      "PageUrl": "operation:_Thunderstroke",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

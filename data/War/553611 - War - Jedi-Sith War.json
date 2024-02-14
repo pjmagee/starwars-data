@@ -75,6 +75,10 @@
           "Href": "https://starwars.fandom.com/wiki/Brotherhood_of_Darkness"
         },
         {
+          "Content": "Sith Wars",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Wars"
+        },
+        {
           "Content": "Republic Era",
           "Href": "https://starwars.fandom.com/wiki/Republic_Era"
         }
@@ -87,6 +91,7 @@
         "Death of all the Sith but Darth Bane who creates the Rule of Two",
         "Dissolution of the Brotherhood of Darkness",
         "The Sith are believed to be extinct",
+        "End of the Sith Wars",
         "Beginning of the Republic Era"
       ]
     },
@@ -100,6 +105,10 @@
         {
           "Content": "Liberation of Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Liberation_of_Coruscant"
+        },
+        {
+          "Content": "Defeat of the Sith",
+          "Href": "https://starwars.fandom.com/wiki/Defeat_of_the_Sith"
         }
       ],
       "Values": [
@@ -111,6 +120,26 @@
   ],
   "Relationships": [
     {
+      "PageId": 451711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Senator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 665684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 621147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood_of_Darkness",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 669628,
+      "PageUrl": "https://starwars.fandom.com/wiki/1032_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
       "PageId": 553613,
       "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Coruscant",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -119,26 +148,6 @@
       "PageId": 553801,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Coruscant_(Jedi-Sith_War)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 665697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Army_of_Light",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 621147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood_of_Darkness",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 451711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Senator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 451713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Chancellor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 681247,
@@ -151,23 +160,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
     },
     {
-      "PageId": 665684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 451710,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Senate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 669628,
-      "PageUrl": "https://starwars.fandom.com/wiki/1032_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
       "PageId": 554641,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_Military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 565202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 665697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Army_of_Light",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]

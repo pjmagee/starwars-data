@@ -81,24 +81,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Bill Smith",
-          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
-        },
-        {
-          "Content": "Eric S. Trautmann",
-          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
-        }
-      ],
-      "Values": [
-        "Paul Sudlow (Development and Editing)",
-        "Bill Smith (Additional Editing)",
-        "Eric S. Trautmann (Additional Editing)"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -153,6 +135,24 @@
         "Ray Lederer (Interior Illustrations)",
         "Christopher Trevas (Interior Illustrations)",
         "Mike Vilardi (Interior Illustrations)"
+      ]
+    },
+    {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Bill Smith",
+          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
+        },
+        {
+          "Content": "Eric S. Trautmann",
+          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
+        }
+      ],
+      "Values": [
+        "Paul Sudlow (Development and Editing)",
+        "Bill Smith (Additional Editing)",
+        "Eric S. Trautmann (Additional Editing)"
       ]
     },
     {
@@ -227,5 +227,31 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 202026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wildfire_(adventure)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 203493,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Masters_of_Exocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 204848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galaxy's_Edge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 195136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plant_Food",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    },
+    {
+      "PageId": 196881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Empires",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    }
+  ]
 }

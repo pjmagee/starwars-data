@@ -2,7 +2,7 @@
   "PageId": 32909,
   "PageUrl": "https://starwars.fandom.com/wiki/Ozu/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/56/Ozu.png/revision/latest?cb=20210525194335",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cb/Ozu-TEA.jpg/revision/latest?cb=20231202180155",
   "Data": [
     {
       "Label": "Titles",
@@ -19,24 +19,43 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         },
         {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
+        },
+        {
           "Content": "Greater Javin",
           "Href": "https://starwars.fandom.com/wiki/Greater_Javin/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories; Greater Javin"
+        "Outer Rim Territories",
+        "Western Reaches",
+        "Greater Javin"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Javin sector",
+          "Href": "https://starwars.fandom.com/wiki/Javin_sector"
+        },
+        {
+          "Content": "400 BBY",
+          "Href": "https://starwars.fandom.com/wiki/400_BBY/Legends"
+        },
+        {
           "Content": "Anoat sector",
           "Href": "https://starwars.fandom.com/wiki/Anoat_sector/Legends"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Standard_Calendar"
         }
       ],
       "Values": [
-        "Anoat sector"
+        "Javin sector (prior to c. 400 BBY)",
+        "Anoat sector (c. 400 BBY—)"
       ]
     },
     {
@@ -52,7 +71,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-18"
@@ -71,50 +90,40 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [
-        {
-          "Content": "Farmland",
-          "Href": "https://starwars.fandom.com/wiki/Farm/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Farmland"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+          "Content": "Farms",
+          "Href": "https://starwars.fandom.com/wiki/Farm/Legends"
         },
         {
-          "Content": "Lorrdians",
-          "Href": "https://starwars.fandom.com/wiki/Lorrdian/Legends"
-        },
-        {
-          "Content": "Sauvax",
-          "Href": "https://starwars.fandom.com/wiki/Sauvax"
+          "Content": "Fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel/Legends"
         }
       ],
       "Values": [
-        "Humans",
-        "Lorrdians",
-        "Sauvax"
+        "Farms",
+        "Fuel station"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 93456,
       "PageUrl": "https://starwars.fandom.com/wiki/Ozu_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

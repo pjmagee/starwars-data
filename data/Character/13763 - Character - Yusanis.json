@@ -2,6 +2,7 @@
   "PageId": 13763,
   "PageUrl": "https://starwars.fandom.com/wiki/Yusanis",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -51,6 +52,23 @@
       ]
     },
     {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Handmaiden Sisters",
+          "Href": "https://starwars.fandom.com/wiki/Handmaiden_Sisters"
+        },
+        {
+          "Content": "Brianna",
+          "Href": "https://starwars.fandom.com/wiki/Brianna"
+        }
+      ],
+      "Values": [
+        "Handmaiden Sisters",
+        "Brianna"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -68,5 +86,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 5,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brianna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

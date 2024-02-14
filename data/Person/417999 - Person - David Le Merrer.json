@@ -2,6 +2,7 @@
   "PageId": 417999,
   "PageUrl": "https://starwars.fandom.com/wiki/David_Le_Merrer",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -38,14 +39,20 @@
       "Label": "Official website",
       "Links": [
         {
-          "Content": "David le Merrer Portfolio",
-          "Href": "http://dlm-art.blogspot.be/"
+          "Content": "dlm-art.blogspot.com",
+          "Href": "https://dlm-art.blogspot.com"
         }
       ],
       "Values": [
-        "David le Merrer Portfolio"
+        "dlm-art.blogspot.com"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 465776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Servants_of_the_Empire:_Imperial_Justice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 700617,
   "PageUrl": "https://starwars.fandom.com/wiki/Kitrep_Soh",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/29/KitrepSoh.jpg/revision/latest?cb=20221215215026",
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.68 meters (5 ft, 6 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -76,7 +100,49 @@
       "Values": [
         "Green"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Soh family",
+          "Href": "https://starwars.fandom.com/wiki/Soh_family"
+        }
+      ],
+      "Values": [
+        "Soh family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Lina Soh",
+          "Href": "https://starwars.fandom.com/wiki/Lina_Soh"
+        }
+      ],
+      "Values": [
+        "Lina Soh"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 658577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lina_Soh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

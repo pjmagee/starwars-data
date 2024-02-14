@@ -119,7 +119,42 @@
       "Values": [
         "0345386256"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "A Guide to the Star Wars Universe",
+          "Href": "https://starwars.fandom.com/wiki/A_Guide_to_the_Star_Wars_Universe"
+        }
+      ],
+      "Values": [
+        "A Guide to the Star Wars Universe"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "A Guide to the Star Wars Universe, Third Edition, Revised and Expanded",
+          "Href": "https://starwars.fandom.com/wiki/A_Guide_to_the_Star_Wars_Universe,_Third_Edition,_Revised_and_Expanded"
+        }
+      ],
+      "Values": [
+        "A Guide to the Star Wars Universe, Third Edition, Revised and Expanded"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 113754,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Guide_to_the_Star_Wars_Universe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book"
+    },
+    {
+      "PageId": 119317,
+      "PageUrl": "https://starwars.fandom.com/wiki/A_Guide_to_the_Star_Wars_Universe,_Third_Edition,_Revised_and_Expanded",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Reference_book"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -33,6 +33,32 @@
       ],
       "Values": [
         "Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
       ]
     },
     {
@@ -60,11 +86,18 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [],
+      "Values": [
+        "Electrical conduits"
+      ]
+    },
+    {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "ARC-170 Starfighters",
-          "Href": "https://starwars.fandom.com/wiki/ARC-170_Starfighter"
+          "Content": "Aggressive ReConnaissance-170 starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Aggressive_ReConnaissance-170_starfighter"
         },
         {
           "Content": "Low Altitude Assault Transport/infantrys",
@@ -72,20 +105,64 @@
         }
       ],
       "Values": [
-        "ARC-170 Starfighters",
+        "Aggressive ReConnaissance-170 starfighters",
         "Low Altitude Assault Transport/infantrys"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "hangar",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
+      "Values": [
+        "Main hangar"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi"
+        },
+        {
+          "Content": "Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Master"
+        },
+        {
+          "Content": "Padawan",
+          "Href": "https://starwars.fandom.com/wiki/Padawan"
+        },
+        {
+          "Content": "Clone troopers",
+          "Href": "https://starwars.fandom.com/wiki/Clone_trooper"
+        },
+        {
+          "Content": "Chiata's unit",
+          "Href": "https://starwars.fandom.com/wiki/Chiata%27s_unit"
+        }
+      ],
+      "Values": [
+        "At least 2 Jedi",
+        "1 Jedi Master",
+        "1 Padawan",
+        "Clone troopers",
+        "Chiata's unit"
       ]
     },
     {
       "Label": "Communication systems",
       "Links": [
         {
-          "Content": "Holoprojector",
+          "Content": "holoprojector",
           "Href": "https://starwars.fandom.com/wiki/Holoprojector"
         }
       ],
       "Values": [
-        "At least 1 Holoprojector"
+        "At least 1 holoprojector"
       ]
     },
     {
@@ -175,5 +252,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 633447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeffo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

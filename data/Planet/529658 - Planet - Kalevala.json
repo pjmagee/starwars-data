@@ -2,7 +2,7 @@
   "PageId": 529658,
   "PageUrl": "https://starwars.fandom.com/wiki/Kalevala",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f9/Kalevala-Space.png/revision/latest?cb=20230302024844",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore_(star)"
+        }
+      ],
+      "Values": [
+        "Mandalore"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-7",
@@ -60,19 +72,57 @@
       ]
     },
     {
+      "Label": "Climate",
+      "Links": [],
+      "Values": [
+        "Rainy"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Cliffs",
+          "Href": "https://starwars.fandom.com/wiki/Cliff"
+        }
+      ],
+      "Values": [
+        "Plains",
+        "Hills",
+        "Cliffs"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Oceans",
+          "Href": "https://starwars.fandom.com/wiki/Ocean"
+        }
+      ],
+      "Values": [
+        "Oceans"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
+        {
+          "Content": "Kryze Castle",
+          "Href": "https://starwars.fandom.com/wiki/Kryze_Castle"
+        },
         {
           "Content": "Museum of Mythos",
           "Href": "https://starwars.fandom.com/wiki/Museum_of_Mythos"
         }
       ],
       "Values": [
+        "Kryze Castle",
         "Museum of Mythos"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -115,14 +165,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 455187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satine_Kryze",
+      "PageId": 456390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_rally_master_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 504384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_on_Kalevala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 631177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_Imperial_remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 756756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kryze_Castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 483809,
@@ -130,9 +190,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 505073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 581577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 618025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Museum_of_Mythos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 751815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Kryze_Castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 488242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerec",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 599042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_rally_master_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
       "PageId": 529704,
@@ -145,24 +225,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 504384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_on_Kalevala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 488242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerec",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618025,
-      "PageUrl": "https://starwars.fandom.com/wiki/Museum_of_Mythos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 695220,
       "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_(star)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 455187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satine_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 505073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

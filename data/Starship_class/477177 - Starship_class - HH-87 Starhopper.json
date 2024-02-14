@@ -19,7 +19,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -141,26 +141,31 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
         }
       ],
       "Values": [
         "Hutt Clan",
         "Zygerrian Slave Empire",
         "Ohnaka Gang",
-        "New Republic"
+        "New Republic",
+        "New Republic Defense Fleet"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 507216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rover",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 595054,
       "PageUrl": "https://starwars.fandom.com/wiki/MandalMotors",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 507216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rover",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

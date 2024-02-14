@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -36,15 +36,83 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [],
+      "Values": [
+        "KDY Destroyer-I ion engines (6)",
+        "Cygnus Spaceworks Gemon-4 ion engines (6)"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "deflector shield generator",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
+        }
+      ],
+      "Values": [
+        "Large deflector shield generator domes (12)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "rectennas",
+          "Href": "https://starwars.fandom.com/wiki/Rectenna"
+        }
+      ],
+      "Values": [
+        "Large rectennas (3)"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "turbolaser",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "turrets",
+          "Href": "https://starwars.fandom.com/wiki/Turret"
+        }
+      ],
+      "Values": [
+        "Double-barreled turbolaser turrets (48)"
+      ]
+    },
+    {
       "Label": "Complement",
       "Links": [
         {
           "Content": "TIE/ln space superiority starfighters",
           "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE/IN interceptors",
+          "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "Climate disruption arrays",
+          "Href": "https://starwars.fandom.com/wiki/Climate_disruption_array"
+        },
+        {
+          "Content": "Imperial II-class Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_II-class_Star_Destroyer"
+        },
+        {
+          "Content": "Dauntless",
+          "Href": "https://starwars.fandom.com/wiki/Dauntless_(Imperial_II-class)"
         }
       ],
       "Values": [
-        "TIE/ln space superiority starfighters"
+        "TIE/ln space superiority starfighters",
+        "TIE/IN interceptors",
+        "Climate disruption arrays",
+        "At least 1 Imperial II-class Star Destroyer",
+        "Dauntless"
       ]
     },
     {
@@ -56,7 +124,32 @@
         }
       ],
       "Values": [
-        "Multiple hangars"
+        "Many hangars of various sizes",
+        "Large, wide hangar bays (12)",
+        "Many landing pads",
+        "Internal extension landing pads (6)",
+        "External dorsal surface landing pads (36)"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Antennas",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Antennas"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [],
+      "Values": [
+        "Control towers (6)",
+        "Docking arms (24)",
+        "Fuel tanks"
       ]
     },
     {
@@ -140,6 +233,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 505722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fondor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 572786,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Fondor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -148,11 +246,6 @@
       "PageId": 572572,
       "PageUrl": "https://starwars.fandom.com/wiki/Fondor_Shipyards",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 505722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fondor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

@@ -24,23 +24,35 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-10"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Dremulae",
+          "Href": "https://starwars.fandom.com/wiki/Dremulae/Legends"
+        }
+      ],
+      "Values": [
+        "Dremulae"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 14911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dremulae/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 503,
       "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 14911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dremulae/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

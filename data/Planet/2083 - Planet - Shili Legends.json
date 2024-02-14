@@ -62,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-8"
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Cities",
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -185,6 +185,18 @@
       ],
       "Values": [
         "Togruti"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [
+        {
+          "Content": "25 ABY",
+          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
+        }
+      ],
+      "Values": [
+        "10 billion to 100 billion (c. 25 ABY)"
       ]
     },
     {
@@ -224,24 +236,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 545555,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kasuni_Tamm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 22479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Togruti/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 55641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raana_Tey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 380746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shili_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 2490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Togruta/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 585857,
@@ -249,38 +246,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 371530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lodish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 2232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ashla_(Jedi)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 263287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Buryn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 422693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vaash_Ti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 203902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akul",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 140058,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 235384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zaa_Vashee",
+      "PageId": 545555,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kasuni_Tamm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -289,8 +256,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 2490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Togruta/Legends",
+      "PageId": 422693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaash_Ti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 22479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Togruti/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 140058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ahsoka_Tano/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raana_Tey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 371530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lodish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 235384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zaa_Vashee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 380746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shili_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 263287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buryn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 203902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akul",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

@@ -24,7 +24,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sector 5",
+          "Href": "https://starwars.fandom.com/wiki/Sector_5"
+        }
+      ],
+      "Values": [
+        "Sector 5"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-10"
@@ -75,7 +87,7 @@
         },
         {
           "Content": "Kalimahr",
-          "Href": "https://starwars.fandom.com/wiki/Kalimahr"
+          "Href": "https://starwars.fandom.com/wiki/Kalimahr/Legends"
         },
         {
           "Content": "moons",
@@ -144,6 +156,18 @@
       ]
     },
     {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Koros-Tython hyperlane",
+          "Href": "https://starwars.fandom.com/wiki/Koros-Tython_hyperlane"
+        }
+      ],
+      "Values": [
+        "Koros-Tython hyperlane"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -156,7 +180,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [],
       "Values": [
         "Over a dozen"
@@ -192,71 +216,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 370942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_migration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 403525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tythan_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 15358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 355290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shikaakwa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 367149,
-      "PageUrl": "https://starwars.fandom.com/wiki/Despot_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 367177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 435363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_the_Tython_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 367762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fury_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 379276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tython_Orbital_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 367189,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rath_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 374286,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Ryo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 379606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sek_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
       "PageId": 367178,
       "PageUrl": "https://starwars.fandom.com/wiki/Sunspot/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -278,7 +237,7 @@
     },
     {
       "PageId": 367182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kalimahr",
+      "PageUrl": "https://starwars.fandom.com/wiki/Kalimahr/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -302,19 +261,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 403207,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Xesh_and_Daegen_Lok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 367144,
       "PageUrl": "https://starwars.fandom.com/wiki/Daegen_Lok",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 370942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_migration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 355290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shikaakwa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 403207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Xesh_and_Daegen_Lok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 375786,
       "PageUrl": "https://starwars.fandom.com/wiki/Oppressor_(Harrower-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 15358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 367640,
@@ -330,6 +304,76 @@
       "PageId": 417374,
       "PageUrl": "https://starwars.fandom.com/wiki/Zerist",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 12827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 367762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fury_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 379276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_Orbital_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 367177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 367189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rath_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 374286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Ryo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 379606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sek_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 403524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nine_Houses",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 403525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tythan_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Volke_House",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 775394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 435363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_the_Tython_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 540081,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stargazer_Uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 367149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Despot_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

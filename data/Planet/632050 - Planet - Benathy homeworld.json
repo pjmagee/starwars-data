@@ -17,14 +17,30 @@
         {
           "Content": "Wild Space",
           "Href": "https://starwars.fandom.com/wiki/Wild_Space"
+        },
+        {
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
         }
       ],
       "Values": [
-        "Wild Space"
+        "Wild Space (Mid Rim Territories)"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "I-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "I-7"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -86,14 +102,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 496324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 631622,
       "PageUrl": "https://starwars.fandom.com/wiki/Benathy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 496324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wild_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 665572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Zillo_Beast_(Benathy)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 631933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kristoff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 694113,

@@ -61,25 +61,50 @@
     },
     {
       "Label": "Date created",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "1050 BBY",
+          "Href": "https://starwars.fandom.com/wiki/1,050_BBY"
+        }
+      ],
       "Values": [
         "c. 1050 BBY"
+      ]
+    },
+    {
+      "Label": "Date destroyed",
+      "Links": [
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+        },
+        {
+          "Content": "Mandalore Imperial base",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore_Imperial_base"
+        },
+        {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
+        }
+      ],
+      "Values": [
+        "c. 9 ABY, Mandalore Imperial base, Mandalore"
       ]
     },
     {
       "Label": "Owners",
       "Links": [
         {
+          "Content": "Tarre Vizsla",
+          "Href": "https://starwars.fandom.com/wiki/Tarre_Vizsla"
+        },
+        {
           "Content": "Pre Vizsla",
           "Href": "https://starwars.fandom.com/wiki/Pre_Vizsla"
         },
         {
-          "Content": "Maul",
+          "Content": "Darth Maul",
           "Href": "https://starwars.fandom.com/wiki/Maul"
-        },
-        {
-          "Content": "Kanan Jarrus",
-          "Href": "https://starwars.fandom.com/wiki/Kanan_Jarrus"
         },
         {
           "Content": "Sabine Wren",
@@ -101,8 +126,7 @@
       "Values": [
         "Tarre Vizsla",
         "Pre Vizsla",
-        "Maul",
-        "Kanan Jarrus (briefly)",
+        "Darth Maul",
         "Sabine Wren",
         "Bo-Katan Kryze",
         "Gideon",
@@ -237,6 +261,10 @@
           "Href": "https://starwars.fandom.com/wiki/Mandalorian_resistance"
         },
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
           "Content": "Gideon's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
         },
@@ -256,6 +284,7 @@
         "House Kryze",
         "Clan Kryze",
         "Mandalorian resistance",
+        "Galactic Empire",
         "Gideon's Imperial remnant",
         "Clan Mudhorn"
       ]
@@ -263,44 +292,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 668751,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacking_of_the_Jedi_Temple",
+      "PageId": 580165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 762094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conflict_on_Mandalore",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 720145,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Glavis_Ringworld",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 56062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 556193,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 567160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 575101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_the_Old_Republic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
-    },
-    {
-      "PageId": 653247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Grogu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 635867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Purge_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 678178,
@@ -308,14 +307,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 580165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 575101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_the_Old_Republic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 640717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_of_a_Thousand_Tears",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 668751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacking_of_the_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 56062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 776175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_the_Darksaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 556193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 653247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Grogu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 720145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fight_for_the_Darksaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
       "PageId": 452741,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 567160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 762181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Plazir-15",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

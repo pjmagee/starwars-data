@@ -60,6 +60,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "O-6",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "O-6"
+      ]
+    },
+    {
       "Label": "Diameter",
       "Links": [],
       "Values": [
@@ -91,7 +103,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -139,8 +151,20 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
+        {
+          "Content": "Aleena",
+          "Href": "https://starwars.fandom.com/wiki/Aleena"
+        },
+        {
+          "Content": "Aqualish",
+          "Href": "https://starwars.fandom.com/wiki/Aqualish"
+        },
+        {
+          "Content": "Dug",
+          "Href": "https://starwars.fandom.com/wiki/Dug"
+        },
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
@@ -148,11 +172,19 @@
         {
           "Content": "Sullustan",
           "Href": "https://starwars.fandom.com/wiki/Sullustan"
+        },
+        {
+          "Content": "Tentacle-faced species",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_tentacle-faced_species"
         }
       ],
       "Values": [
+        "Aleena",
+        "Aqualish",
+        "Dug",
         "Human",
-        "Sullustan"
+        "Sullustan",
+        "Tentacle-faced species"
       ]
     },
     {
@@ -199,86 +231,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 524646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bounty_Emporium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 644124,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerky",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 496727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Power_Sliders",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 496746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dr._Evazan_Cosmetic_Surgery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 496734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pons_Ora",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 505151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Abafar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 505155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida_incident",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 518569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ewok_Jerky",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 422168,
-      "PageUrl": "https://starwars.fandom.com/wiki/Void_strider",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 497169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Borkus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 589407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eopie_stew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 589408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_Gumbo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 583968,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-Squad's_Neimoidian_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 545785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhydonium_mining_installation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 458411,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Void",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 458520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 516548,
       "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Snackbar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -294,9 +246,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 694968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abafed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 496734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pons_Ora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 743137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tauntaun_fondo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 497169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borkus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 471541,
@@ -304,9 +266,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 524475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Abafar_Junior_Dejarik_Club",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 518569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewok_Jerky",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 422168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Void_strider",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 524406,
@@ -321,6 +288,91 @@
     {
       "PageId": 524488,
       "PageUrl": "https://starwars.fandom.com/wiki/Land_O'_Capes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 524475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abafar_Junior_Dejarik_Club",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 524646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bounty_Emporium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 583968,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-Squad's_Neimoidian_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 644124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerky",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 458411,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Void",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 748833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_(Abafar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 505149,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_steal_a_Separatist_encryption_module",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 505151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_Abafar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 505155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 694968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abafed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 589407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eopie_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 589408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuna_Gumbo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 743139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dewback_slim_sip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 545785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhydonium_mining_installation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 458520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 496727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Power_Sliders",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 496746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dr._Evazan_Cosmetic_Surgery",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

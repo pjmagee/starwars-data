@@ -2,6 +2,7 @@
   "PageId": 358041,
   "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hethar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,22 @@
       ]
     },
     {
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "2 BBY",
+          "Href": "https://starwars.fandom.com/wiki/2_BBY/Legends"
+        },
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY/Legends"
+        }
+      ],
+      "Values": [
+        "Between 2 BBY and 9 ABY"
+      ]
+    },
+    {
       "Label": "Place",
       "Links": [
         {
@@ -47,5 +64,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

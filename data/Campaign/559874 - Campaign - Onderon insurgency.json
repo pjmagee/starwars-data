@@ -15,10 +15,6 @@
       "Label": "Conflict",
       "Links": [
         {
-          "Content": "Early rebellion against the Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Early_rebellion_against_the_Galactic_Empire"
-        },
-        {
           "Content": "Galactic Civil War",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
         },
@@ -28,7 +24,6 @@
         }
       ],
       "Values": [
-        "Early rebellion against the Galactic Empire",
         "Galactic Civil War",
         "Campaigns of Saw Gerrera's Partisans"
       ]
@@ -58,6 +53,23 @@
       ]
     },
     {
+      "Label": "Outcome",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Saw Gerrera",
+          "Href": "https://starwars.fandom.com/wiki/Saw_Gerrera"
+        }
+      ],
+      "Values": [
+        "Galactic Empire victory",
+        "Saw Gerrera declares Onderon lost and retreats"
+      ]
+    },
+    {
       "Label": "Battles",
       "Links": [
         {
@@ -77,19 +89,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 567603,
-      "PageUrl": "https://starwars.fandom.com/wiki/Early_rebellion_against_the_Galactic_Empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 541101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Campaigns_of_Saw_Gerrera's_Partisans",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
       "PageId": 693578,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Onderon_(Elite_Squad)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 692401,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Onderon_(Clone_Force_99)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 502611,
@@ -97,9 +104,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 692401,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Onderon_(Clone_Force_99)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 541101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Campaigns_of_Saw_Gerrera's_Partisans",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

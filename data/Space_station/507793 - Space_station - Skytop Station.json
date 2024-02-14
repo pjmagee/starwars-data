@@ -41,7 +41,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "core ship",
@@ -247,6 +247,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "P-11",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "P-11"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [
         {
@@ -268,6 +280,7 @@
       ],
       "Values": [
         "Hyper-Communications Cartel",
+        "Trade Federation",
         "Confederacy of Independent Systems"
       ]
     },
@@ -326,24 +339,14 @@
   ],
   "Relationships": [
     {
+      "PageId": 601766,
+      "PageUrl": "https://starwars.fandom.com/wiki/South_landing_bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 625370,
       "PageUrl": "https://starwars.fandom.com/wiki/Hyper-Communications_Cartel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 504241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 496054,
-      "PageUrl": "https://starwars.fandom.com/wiki/R3-S6",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 694857,
-      "PageUrl": "https://starwars.fandom.com/wiki/88th_Flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 608293,
@@ -351,9 +354,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
+      "PageId": 279888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruusan_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 501070,
       "PageUrl": "https://starwars.fandom.com/wiki/Gha_Nachkt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 694857,
+      "PageUrl": "https://starwars.fandom.com/wiki/88th_Flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 496054,
+      "PageUrl": "https://starwars.fandom.com/wiki/R3-S6",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 620272,
@@ -361,14 +379,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 279888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruusan_2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 749325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_1_(Skytop_Station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 601766,
-      "PageUrl": "https://starwars.fandom.com/wiki/South_landing_bay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 749326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_2_(Skytop_Station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 749327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_B1_battle_droid_3_(Skytop_Station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 504241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Skytop_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

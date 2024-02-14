@@ -2,7 +2,7 @@
   "PageId": 391351,
   "PageUrl": "https://starwars.fandom.com/wiki/Fabrin/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2a/Fabrin-TEA.jpg/revision/latest?cb=20230726090241",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -48,7 +53,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-12"
@@ -65,6 +70,47 @@
       "Values": [
         "Nanth'ri Route"
       ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Beaches",
+          "Href": "https://starwars.fandom.com/wiki/Beach/Legends"
+        }
+      ],
+      "Values": [
+        "Beaches",
+        "Plains"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Fabritech",
+          "Href": "https://starwars.fandom.com/wiki/Fabritech/Legends"
+        }
+      ],
+      "Values": [
+        "Fabritech headquarters",
+        "Manufacturing districts",
+        "Resorts"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [],
+      "Values": [
+        "Fabritech"
+      ]
     }
   ],
   "Relationships": [
@@ -74,14 +120,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 391209,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fabrin_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 15719,
       "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Route",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 391209,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fabrin_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

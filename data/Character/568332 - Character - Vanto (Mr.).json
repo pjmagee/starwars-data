@@ -2,6 +2,7 @@
   "PageId": 568332,
   "PageUrl": "https://starwars.fandom.com/wiki/Vanto_(Mr.)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,18 @@
       ]
     },
     {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Eli N. Vanto",
+          "Href": "https://starwars.fandom.com/wiki/Eli_N._Vanto"
+        }
+      ],
+      "Values": [
+        "Eli N. Vanto"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 564587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eli_N._Vanto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

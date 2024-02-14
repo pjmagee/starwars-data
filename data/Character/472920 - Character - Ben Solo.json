@@ -81,6 +81,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -93,7 +100,7 @@
         }
       ],
       "Values": [
-        "1.89 meters (6ft 2in)"
+        "1.89 meters (6ft, 2in)"
       ]
     },
     {
@@ -140,7 +147,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Solo family",
@@ -157,7 +164,35 @@
         {
           "Content": "House of Organa",
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
+        }
+      ],
+      "Values": [
+        "Solo family",
+        "Skywalker family",
+        "Elder Houses",
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo"
         },
+        {
+          "Content": "Leia Skywalker Organa Solo",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo"
+        }
+      ],
+      "Values": [
+        "Han Solo",
+        "Leia Skywalker Organa Solo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
@@ -172,10 +207,6 @@
         }
       ],
       "Values": [
-        "Solo family",
-        "Skywalker family",
-        "Elder Houses",
-        "House of Organa",
         "Jedi Order",
         "Knights of Ren",
         "First Order"
@@ -210,24 +241,44 @@
   ],
   "Relationships": [
     {
-      "PageId": 647072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Elphrona",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+      "PageId": 526857,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Navy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 613998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dathomir_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 526863,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 546201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doll",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 529136,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_High_Command",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 583884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pillio_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 629551,
+      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 465595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 554026,
+      "PageUrl": "https://starwars.fandom.com/wiki/5_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 554046,
+      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 594076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_helmet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
       "PageId": 545926,
@@ -235,19 +286,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 502844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snoke",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 583884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pillio_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 472942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 639590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 479480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+      "PageId": 640131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 632161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_TIE_whisper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grimtaash_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 639756,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Supreme_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 630474,
+      "PageUrl": "https://starwars.fandom.com/wiki/105th_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 628909,
@@ -255,39 +331,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 637161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 618451,
-      "PageUrl": "https://starwars.fandom.com/wiki/709th_Legion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 578723,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order-Resistance_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 604822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_division",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 651622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_the_Minemoon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 465595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 596052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_calligraphy_set",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 574274,
@@ -300,29 +346,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 639686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 452217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 639932,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 452394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 660307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Coruscant_(Kylo_Ren)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 674716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 639590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 452428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 452582,
@@ -330,29 +366,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 519066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Takodana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 618451,
+      "PageUrl": "https://starwars.fandom.com/wiki/709th_Legion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 579521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 588287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_personal_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 596052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_calligraphy_set",
+      "PageId": 546201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doll",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 515102,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 633345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Colossus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 535676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+      "PageId": 664389,
+      "PageUrl": "https://starwars.fandom.com/wiki/Supremacy_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 510429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 510593,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_command_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 523965,
@@ -370,24 +416,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 526857,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Navy",
+      "PageId": 639686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kef_Bir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 639932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mustafar_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 643886,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tamara_Ryvora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 519066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Takodana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 613998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Dathomir_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 637161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 742011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_Exegol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 579521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormtrooper_Corps_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 604822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_division",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 526863,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 651622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_the_Minemoon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 529136,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_High_Command",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 640131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vader's_wayfinder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 502844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snoke",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 585751,
@@ -395,54 +476,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 639756,
-      "PageUrl": "https://starwars.fandom.com/wiki/Supreme_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 515102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 630474,
-      "PageUrl": "https://starwars.fandom.com/wiki/105th_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 647072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Elphrona",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
-      "PageId": 611252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Massacre_on_Tehar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 632161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_TIE_whisper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 629551,
-      "PageUrl": "https://starwars.fandom.com/wiki/35_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 510429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Finalizer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 510593,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_command_shuttle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 639437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grimtaash_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 639742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steadfast_(Resurgent-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 588287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_personal_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 535676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cape",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
       "PageId": 553983,
@@ -450,19 +496,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 554026,
-      "PageUrl": "https://starwars.fandom.com/wiki/5_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 472942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 554046,
-      "PageUrl": "https://starwars.fandom.com/wiki/15_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 479480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 594076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kylo_Ren's_helmet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 674716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo's_theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 578723,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order-Resistance_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

@@ -40,6 +40,10 @@
           "Href": "https://starwars.fandom.com/wiki/Ewok"
         },
         {
+          "Content": "Gotals",
+          "Href": "https://starwars.fandom.com/wiki/Gotal"
+        },
+        {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
         },
@@ -58,6 +62,7 @@
       ],
       "Values": [
         "Ewoks",
+        "Gotals",
         "Humans",
         "Togrutas",
         "Twi'leks",
@@ -114,5 +119,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 756262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Field_Ration_Z_300",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    }
+  ]
 }

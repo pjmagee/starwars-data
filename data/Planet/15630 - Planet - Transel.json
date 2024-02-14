@@ -2,7 +2,7 @@
   "PageId": 15630,
   "PageUrl": "https://starwars.fandom.com/wiki/Transel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/06/Transel-TEA.jpg/revision/latest?cb=20231231230840",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies/Legends"
+        },
+        {
+          "Content": "Southern Core",
+          "Href": "https://starwars.fandom.com/wiki/Southern_Core"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "Southern Core"
       ]
     },
     {
@@ -36,10 +41,45 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-13"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Shipwrights' Trace",
+          "Href": "https://starwars.fandom.com/wiki/Shipwrights%27_Trace/Legends"
+        }
+      ],
+      "Values": [
+        "Shipwrights' Trace"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Core Galaxy Systems",
+          "Href": "https://starwars.fandom.com/wiki/Core_Galaxy_Systems"
+        },
+        {
+          "Content": "manufacturing plant",
+          "Href": "https://starwars.fandom.com/wiki/Factory/Legends"
+        }
+      ],
+      "Values": [
+        "Core Galaxy Systems manufacturing plant"
       ]
     },
     {
@@ -60,11 +100,6 @@
       "PageId": 273534,
       "PageUrl": "https://starwars.fandom.com/wiki/Transel_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 270897,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advance_on_Teyr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

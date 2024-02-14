@@ -27,12 +27,14 @@
       "Label": "Skin color",
       "Links": [
         {
-          "Content": "Pink",
+          "Content": "Blue",
           "Href": "https://starwars.fandom.com/wiki/Color"
         }
       ],
       "Values": [
-        "Pink"
+        "Blue",
+        "Pink",
+        "Tan"
       ]
     },
     {
@@ -50,18 +52,35 @@
         "Large foreheads",
         "Flattened heads"
       ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Sabata",
+          "Href": "https://starwars.fandom.com/wiki/Sabata"
+        }
+      ],
+      "Values": [
+        "Sabata"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 557833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leevan_Tenza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 602944,
       "PageUrl": "https://starwars.fandom.com/wiki/Gelan_Yees",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 557833,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leevan_Tenza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 731153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

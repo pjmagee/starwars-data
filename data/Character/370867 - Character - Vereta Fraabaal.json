@@ -78,15 +78,49 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Fraabaal family",
+          "Href": "https://starwars.fandom.com/wiki/Fraabaal_family"
+        }
+      ],
+      "Values": [
+        "Fraabaal family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Admiral Fraabaal",
+          "Href": "https://starwars.fandom.com/wiki/Fraabaal"
+        },
+        {
+          "Content": "Unnamed mother",
+          "Href": "https://starwars.fandom.com/wiki/Vereta_Fraabaal%27s_mother"
+        }
+      ],
+      "Values": [
+        "Admiral Fraabaal",
+        "Unnamed mother"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Lord Grathan's forces",
+          "Href": "https://starwars.fandom.com/wiki/Lord_Grathan%27s_forces"
         }
       ],
       "Values": [
-        "Sith Empire"
+        "Sith Empire",
+        "Lord Grathan's forces"
       ]
     },
     {
@@ -104,8 +138,23 @@
   ],
   "Relationships": [
     {
+      "PageId": 499804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fraabaal_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 370869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fraabaal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 370870,
       "PageUrl": "https://starwars.fandom.com/wiki/Grathan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vereta_Fraabaal's_mother",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

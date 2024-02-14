@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "Northern hemisphere, Wayland"
+        "Wayland"
       ]
     },
     {
@@ -46,7 +46,7 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Old Republic",
+          "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
@@ -54,27 +54,82 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
+          "Content": "Thrawn's confederation",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_confederation"
+        },
+        {
+          "Content": "Mount Tantiss project",
+          "Href": "https://starwars.fandom.com/wiki/Mount_Tantiss_project"
+        },
+        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
-        "Old Republic",
+        "Galactic Republic",
         "Galactic Empire",
+        "Thrawn's confederation",
+        "Mount Tantiss project",
         "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 760766,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Labyrinth_(Mount_Tantiss)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 569151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 497390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_project",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 781396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 296732,
       "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Mount_Tantiss",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 75656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Debble_Agreement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
       "PageId": 2107,
       "PageUrl": "https://starwars.fandom.com/wiki/Wayland",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 781678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_Bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 781871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emergency_Shuttle_Hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 755342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Throne_Room_Complex_(Wayland)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 756170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Chambers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 18993,
@@ -85,6 +140,11 @@
       "PageId": 710161,
       "PageUrl": "https://starwars.fandom.com/wiki/Cloning_Chamber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 760775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Tantiss_dig",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

@@ -15,12 +15,29 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
           "Content": "Western Reaches",
           "Href": "https://starwars.fandom.com/wiki/Western_Reaches"
         }
       ],
       "Values": [
+        "Outer Rim Territories",
         "Western Reaches"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-20",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-20"
       ]
     },
     {
@@ -38,6 +55,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 561997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wadi_Raffa_Turlin/Benthic_Extraction_settlement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 467701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 561999,
       "PageUrl": "https://starwars.fandom.com/wiki/Lantern_bug",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -53,19 +80,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 561997,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wadi_Raffa_Turlin/Benthic_Extraction_settlement",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 555064,
       "PageUrl": "https://starwars.fandom.com/wiki/Turlin/Benthic_Extraction",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 467701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Reaches",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

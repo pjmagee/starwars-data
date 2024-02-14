@@ -2,6 +2,7 @@
   "PageId": 397194,
   "PageUrl": "https://starwars.fandom.com/wiki/Kostanza_Dooku",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,14 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Dooku",
@@ -57,7 +65,47 @@
       "Values": [
         "House Dooku"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Dooku's brother",
+          "Href": "https://starwars.fandom.com/wiki/Dooku%27s_brother"
+        }
+      ],
+      "Values": [
+        "Dooku's brother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Adan Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Adan_Dooku"
+        }
+      ],
+      "Values": [
+        "Adan Dooku"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 404315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 397044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adan_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 396739,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

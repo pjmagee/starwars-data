@@ -16,7 +16,7 @@
       "Links": [
         {
           "Content": "Haor Chall Engineering",
-          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering"
         }
       ],
       "Values": [
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Landing craft"
@@ -158,7 +158,7 @@
         },
         {
           "Content": "Scarab-class Starfighters",
-          "Href": "https://starwars.fandom.com/wiki/Scarab-class_droid_starfighter"
+          "Href": "https://starwars.fandom.com/wiki/Scarab-class_starfighter/Legends"
         },
         {
           "Content": "Advanced Droid Bombers",
@@ -174,8 +174,7 @@
         "Starfighter Carrier",
         "Vulture Droids",
         "Scarab-class Starfighters",
-        "Advanced Droid Bombers",
-        "CIS mobile command center (1) and Sheathipede-class transport shuttle"
+        "Advanced Droid Bombers"
       ]
     },
     {
@@ -266,17 +265,52 @@
           "Href": "https://starwars.fandom.com/wiki/Trade_Federation_of_Planets"
         },
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Republic Outland Regions Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
         }
       ],
       "Values": [
         "Trade Federation",
+        "Galactic Republic",
+        "Republic Outland Regions Security Force",
         "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 357762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_supply_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 31017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Korvin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 28134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Arcus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 287720,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 2361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Recusant-class_light_destroyer/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
     {
       "PageId": 236542,
       "PageUrl": "https://starwars.fandom.com/wiki/L-2832",
@@ -293,9 +327,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
+      "PageId": 10211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saak'ak/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 209,
       "PageUrl": "https://starwars.fandom.com/wiki/Haor_Chall_Engineering",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 28671,
+      "PageUrl": "https://starwars.fandom.com/wiki/Captor-class_heavy_munitions_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 196222,
@@ -313,11 +357,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 287720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Recusant-class_light_destroyer/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 351402,
       "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -325,36 +364,6 @@
     {
       "PageId": 351641,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_C-9979_landing_craft",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 357762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_supply_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 10211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saak'ak/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 28134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Group_Arcus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 2361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Recusant-class_light_destroyer/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 28671,
-      "PageUrl": "https://starwars.fandom.com/wiki/Captor-class_heavy_munitions_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 31017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Korvin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

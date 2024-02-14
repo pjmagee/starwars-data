@@ -2,6 +2,7 @@
   "PageId": 694872,
   "PageUrl": "https://starwars.fandom.com/wiki/Altor-class_supply_ship",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ed/PikkasPride-SW2020-36.png/revision/latest?cb=20231128074440",
   "Data": [
     {
       "Label": "Titles",
@@ -14,11 +15,11 @@
       "Label": "Model",
       "Links": [],
       "Values": [
-        "Altor-class supply ship"
+        "Altor-class"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Supply ship",
@@ -77,14 +78,14 @@
       ],
       "Values": [
         "Fuel containers (6)",
-        "Refuelling arms"
+        "Refueling arms"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
-        "Refuelling",
+        "Refueling",
         "Repairs"
       ]
     },
@@ -96,15 +97,21 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Navy",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Navy"
+        "Alliance to Restore the Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 774592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pikka's_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

@@ -17,10 +17,15 @@
         {
           "Content": "Sienar Fleet Systems",
           "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
+        },
+        {
+          "Content": "Cygnus Spaceworks",
+          "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks"
         }
       ],
       "Values": [
-        "Sienar Fleet Systems"
+        "Sienar Fleet Systems",
+        "Cygnus Spaceworks"
       ]
     },
     {
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shuttle",
@@ -48,7 +53,62 @@
       ]
     },
     {
-      "Label": "Hyperdrive system",
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Credit"
+        }
+      ],
+      "Values": [
+        "240,000 credits"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "38 meters"
+      ]
+    },
+    {
+      "Label": "MGLT",
+      "Links": [
+        {
+          "Content": "MGLT",
+          "Href": "https://starwars.fandom.com/wiki/Megalight_per_hour"
+        }
+      ],
+      "Values": [
+        "70 MGLT"
+      ]
+    },
+    {
+      "Label": "Maximum speed (atmosphere)",
+      "Links": [
+        {
+          "Content": "kph",
+          "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
+        }
+      ],
+      "Values": [
+        "1,000 kph"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [],
+      "Values": [
+        "Cygnus HD7 engine array (2)"
+      ]
+    },
+    {
+      "Label": "Hyperdrive rating",
       "Links": [
         {
           "Content": "Equipped",
@@ -67,16 +127,127 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Close-range sensors"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "concussion missile launchers",
+          "Href": "https://starwars.fandom.com/wiki/Concussion_missile_launcher"
+        },
+        {
+          "Content": "blaster cannon",
+          "Href": "https://starwars.fandom.com/wiki/Blaster_cannon"
+        },
+        {
+          "Content": "turrets",
+          "Href": "https://starwars.fandom.com/wiki/Turret"
+        },
+        {
+          "Content": "Ion cannon",
+          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
+        }
+      ],
+      "Values": [
+        "8 laser cannons",
+        "2 concussion missile launchers",
+        "2 blaster cannon turrets",
+        "Ion cannon turret"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        },
+        {
+          "Content": "Gunners",
+          "Href": "https://starwars.fandom.com/wiki/Gunner"
+        }
+      ],
+      "Values": [
+        "Pilot (1)",
+        "Co-pilot/sensor operator (1)",
+        "Gunners (3)"
+      ]
+    },
+    {
       "Label": "Passengers",
       "Links": [],
       "Values": [
-        "75"
+        "54–75"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [
+        {
+          "Content": "tonnes",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        }
+      ],
+      "Values": [
+        "180 tonnes"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "month",
+          "Href": "https://starwars.fandom.com/wiki/Standard_month"
+        }
+      ],
+      "Values": [
+        "One month"
       ]
     },
     {
       "Label": "Role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Landing craft",
+          "Href": "https://starwars.fandom.com/wiki/Landing_craft"
+        },
+        {
+          "Content": "Troop",
+          "Href": "https://starwars.fandom.com/wiki/Troop"
+        },
+        {
+          "Content": "transport",
+          "Href": "https://starwars.fandom.com/wiki/Transport"
+        }
+      ],
       "Values": [
+        "Landing craft",
         "Troop transport"
       ]
     },
@@ -105,5 +276,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 548214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tellstar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 442972,
   "PageUrl": "https://starwars.fandom.com/wiki/Wamka_Pol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,17 +15,22 @@
       "Label": "Associated religion",
       "Links": [
         {
-          "Content": "Gungan",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
+          "Content": "Gungan religion",
+          "Href": "https://starwars.fandom.com/wiki/Gungan_religion"
         }
       ],
       "Values": [
-        "Gungan beliefs"
+        "Gungan religion"
       ]
     },
     {
       "Label": "Type of deity",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "God",
+          "Href": "https://starwars.fandom.com/wiki/Gud/Legends"
+        }
+      ],
       "Values": [
         "God of games"
       ]
@@ -52,19 +58,13 @@
       "Values": [
         "Naboo"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Gungans",
-          "Href": "https://starwars.fandom.com/wiki/Gungan/Legends"
-        }
-      ],
-      "Values": [
-        "Gungans"
-      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_religion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

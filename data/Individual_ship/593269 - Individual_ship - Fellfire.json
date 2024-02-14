@@ -2,25 +2,13 @@
   "PageId": 593269,
   "PageUrl": "https://starwars.fandom.com/wiki/Fellfire",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/32/TLJ_Resurgents_above_DQar.png/revision/latest?cb=20181206214414",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/64/FirstOrderArrivesOverDqar-TLJ.png/revision/latest?cb=20220815025959",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Fellfire"
-      ]
-    },
-    {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Kuat-Entralla Engineering",
-          "Href": "https://starwars.fandom.com/wiki/Kuat-Entralla_Engineering"
-        }
-      ],
-      "Values": [
-        "Kuat-Entralla Engineering"
       ]
     },
     {
@@ -36,19 +24,14 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
-        {
-          "Content": "Battlecruiser",
-          "Href": "https://starwars.fandom.com/wiki/Battlecruiser"
-        },
         {
           "Content": "Star Destroyer",
           "Href": "https://starwars.fandom.com/wiki/Star_Destroyer"
         }
       ],
       "Values": [
-        "Battlecruiser",
         "Star Destroyer"
       ]
     },
@@ -58,32 +41,41 @@
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "2,915.81 meters (9,566.29 feet)"
+        "2915.84 meters (9566.29 ft)"
       ]
     },
     {
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Gemon-8 ion engines",
-          "Href": "https://starwars.fandom.com/wiki/Gemon-8_ion_engine"
-        },
-        {
           "Content": "Destroyer Ion Engines",
           "Href": "https://starwars.fandom.com/wiki/Destroyer_Ion_Engine"
+        },
+        {
+          "Content": "Gemon-8 ion engines",
+          "Href": "https://starwars.fandom.com/wiki/Gemon-8_ion_engine"
         }
       ],
       "Values": [
-        "(8) Gemon-8 ion engines",
-        "(3) Destroyer Ion Engines"
+        "Destroyer Ion Engines (3)",
+        "Gemon-8 ion engines (8)"
       ]
     },
     {
       "Label": "Hyperdrive system",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
+        }
+      ],
       "Values": [
         "Equipped"
       ]
@@ -98,6 +90,18 @@
       ],
       "Values": [
         "III-a1a primary hypermatter-annihilation reactor"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Deflector shield generator",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
+        }
+      ],
+      "Values": [
+        "Deflector shield generator"
       ]
     },
     {
@@ -120,23 +124,12 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
-        },
-        {
-          "Content": "ion cannons",
-          "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
-        },
-        {
-          "Content": "Tractor beam projectors",
-          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         }
       ],
       "Values": [
-        "Over 1,500 turbolasers and ion cannons",
-        "Point-defense turrets",
-        "Point-defense missile emplacements",
-        "Tractor beam projectors"
+        "Laser cannons"
       ]
     },
     {
@@ -145,45 +138,22 @@
         {
           "Content": "TIE/fo space superiority fighters",
           "Href": "https://starwars.fandom.com/wiki/TIE/fo_space_superiority_fighter"
-        },
-        {
-          "Content": "TIE/sf space superiority fighters",
-          "Href": "https://starwars.fandom.com/wiki/TIE/sf_space_superiority_fighter"
-        },
-        {
-          "Content": "AAL-1971/9.1 Troop Transports",
-          "Href": "https://starwars.fandom.com/wiki/AAL-1971/9.1_Troop_Transport"
-        },
-        {
-          "Content": "Prefabricated ground base",
-          "Href": "https://starwars.fandom.com/wiki/Prefabricated_ground_base"
         }
       ],
       "Values": [
-        "Two starfighter wings",
-        "TIE/fo space superiority fighters",
-        "TIE/sf space superiority fighters",
-        "AAL-1971/9.1 Troop Transports (100)",
-        "Ground vehicles",
-        "Prefabricated ground base (1)"
+        "TIE/fo space superiority fighters"
       ]
     },
     {
-      "Label": "Crew",
+      "Label": "Docking bays",
       "Links": [
         {
-          "Content": "Officers",
-          "Href": "https://starwars.fandom.com/wiki/First_Order_officer"
-        },
-        {
-          "Content": "Stormtroopers",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_(First_Order)"
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
         }
       ],
       "Values": [
-        "Officers (19,000)",
-        "Enlisted (55,000)",
-        "Stormtroopers (Over 8,000)"
+        "Equipped"
       ]
     },
     {
@@ -202,27 +172,12 @@
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Carrier",
-          "Href": "https://starwars.fandom.com/wiki/Carrier"
-        },
-        {
-          "Content": "Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Destroyer"
-        },
-        {
-          "Content": "transport",
-          "Href": "https://starwars.fandom.com/wiki/Transport"
-        },
-        {
-          "Content": "Command ship",
-          "Href": "https://starwars.fandom.com/wiki/Command_ship"
+          "Content": "Warship",
+          "Href": "https://starwars.fandom.com/wiki/Warship"
         }
       ],
       "Values": [
-        "Carrier",
-        "Destroyer",
-        "Military transport",
-        "Command ship"
+        "Warship"
       ]
     },
     {

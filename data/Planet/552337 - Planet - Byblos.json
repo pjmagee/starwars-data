@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-12",
@@ -54,13 +54,33 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "University of Byblos",
+          "Href": "https://starwars.fandom.com/wiki/University_of_Byblos"
+        }
+      ],
       "Values": [
         "University of Byblos"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 776407,
+      "PageUrl": "https://starwars.fandom.com/wiki/University_of_Byblos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 498762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 784341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byblos_Square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
     {
       "PageId": 566170,
       "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run",
@@ -70,11 +90,6 @@
       "PageId": 612074,
       "PageUrl": "https://starwars.fandom.com/wiki/Herglic_Alley",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 498762,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

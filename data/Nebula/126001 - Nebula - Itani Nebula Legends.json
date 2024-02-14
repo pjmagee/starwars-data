@@ -24,19 +24,33 @@
       ]
     },
     {
-      "Label": "Space stations",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "N-14"
+      ]
+    },
+    {
+      "Label": "Suns",
       "Links": [
         {
-          "Content": "Darknon Station",
-          "Href": "https://starwars.fandom.com/wiki/Darknon_Station"
-        },
+          "Content": "stars",
+          "Href": "https://starwars.fandom.com/wiki/Star/Legends"
+        }
+      ],
+      "Values": [
+        "Small infant stars"
+      ]
+    },
+    {
+      "Label": "Space stations",
+      "Links": [
         {
           "Content": "Imperial research station",
           "Href": "https://starwars.fandom.com/wiki/Imperial_research_station_(Itani_Nebula)"
         }
       ],
       "Values": [
-        "Darknon Station",
         "Imperial research station"
       ]
     },
@@ -59,42 +73,78 @@
     },
     {
       "Label": "Distinctions",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "color",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        },
+        {
+          "Content": "Gas",
+          "Href": "https://starwars.fandom.com/wiki/Gas/Legends"
+        },
+        {
+          "Content": "clouds",
+          "Href": "https://starwars.fandom.com/wiki/Cloud/Legends"
+        },
+        {
+          "Content": "Ion storms",
+          "Href": "https://starwars.fandom.com/wiki/Ion_storm/Legends"
+        }
+      ],
       "Values": [
-        "Red-green color",
-        "Electromagnetic storms"
+        "Reddish-green color",
+        "Gas clouds",
+        "Ion storms",
+        "Magnetic storms"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Empire"
       ]
     },
     {
       "Label": "Galactic Civil War",
       "Links": [
         {
-          "Content": "Battle near the Itani Nebula",
+          "Content": "Itani Nebula",
           "Href": "https://starwars.fandom.com/wiki/Battle_near_the_Itani_Nebula"
         }
       ],
       "Values": [
-        "Battle near the Itani Nebula"
+        "Itani Nebula"
       ]
     },
     {
       "Label": "Local conflict",
       "Links": [
         {
-          "Content": "Ambush near Darknon Station",
+          "Content": "Darknon Station",
           "Href": "https://starwars.fandom.com/wiki/Ambush_near_Darknon_Station"
         }
       ],
       "Values": [
-        "Ambush near Darknon Station"
+        "Darknon Station"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 552150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_research_station_(Itani_Nebula)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 385925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Alliance_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 322967,
@@ -102,24 +152,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 15714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Itani_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 322625,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_near_the_Itani_Nebula",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 126002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darknon_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 15714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Itani_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 362683,
-      "PageUrl": "https://starwars.fandom.com/wiki/Itani_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 383727,
   "PageUrl": "https://starwars.fandom.com/wiki/Jesmin_Tainer",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -46,6 +54,35 @@
       "Links": [],
       "Values": [
         "Fair"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kell Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Kell_Tainer"
+        },
+        {
+          "Content": "Tyria Sarkin Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Tyria_Sarkin_Tainer"
+        }
+      ],
+      "Values": [
+        "Kell Tainer",
+        "Tyria Sarkin Tainer"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Doran Sarkin-Tainer",
+          "Href": "https://starwars.fandom.com/wiki/Doran_Sarkin-Tainer"
+        }
+      ],
+      "Values": [
+        "Doran Sarkin-Tainer"
       ]
     },
     {
@@ -81,5 +118,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 22622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kell_Tainer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doran_Sarkin-Tainer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

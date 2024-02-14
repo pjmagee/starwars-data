@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -36,17 +41,10 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-13"
-      ]
-    },
-    {
-      "Label": "Suns",
-      "Links": [],
-      "Values": [
-        "1: Sepan"
       ]
     },
     {
@@ -54,95 +52,152 @@
       "Links": [
         {
           "Content": "Dimok",
-          "Href": "https://starwars.fandom.com/wiki/Dimok"
+          "Href": "https://starwars.fandom.com/wiki/Dimok/Legends"
+        },
+        {
+          "Content": "Gaerboud IV",
+          "Href": "https://starwars.fandom.com/wiki/Gaerboud_IV"
         },
         {
           "Content": "Gerbaud 2",
           "Href": "https://starwars.fandom.com/wiki/Gerbaud_2"
         },
         {
+          "Content": "Kuthard",
+          "Href": "https://starwars.fandom.com/wiki/Kuthard"
+        },
+        {
           "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus"
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus/Legends"
         },
         {
           "Content": "Sepan 8",
           "Href": "https://starwars.fandom.com/wiki/Sepan_8"
-        },
-        {
-          "Content": "Kuthard",
-          "Href": "https://starwars.fandom.com/wiki/Kuthard"
         }
       ],
       "Values": [
         "Dimok",
+        "Gaerboud IV",
         "Gerbaud 2",
+        "Kuthard",
         "Ripoblus",
-        "Sepan 8",
-        "Kuthard"
+        "Sepan 8"
       ]
     },
     {
       "Label": "Space stations",
       "Links": [
         {
-          "Content": "Science Station Youst",
+          "Content": "Sentinel",
+          "Href": "https://starwars.fandom.com/wiki/Sentinel_(Deep_Space_Manufacturing_Facility)"
+        },
+        {
+          "Content": "Youst",
           "Href": "https://starwars.fandom.com/wiki/Science_Station_Youst"
         }
       ],
       "Values": [
-        "Science Station Youst"
+        "Sentinel",
+        "Youst"
       ]
     },
     {
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(species)"
+          "Content": "Sepan",
+          "Href": "https://starwars.fandom.com/wiki/Sepan"
         },
         {
           "Content": "Dimok",
-          "Href": "https://starwars.fandom.com/wiki/Dimok_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Dimok_(people)"
+        },
+        {
+          "Content": "Ripoblus",
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(people)"
         }
       ],
       "Values": [
-        "Ripoblus",
-        "Dimok"
+        "Sepan",
+        "Dimok",
+        "Ripoblus"
+      ]
+    },
+    {
+      "Label": "Major imports",
+      "Links": [
+        {
+          "Content": "Weapons",
+          "Href": "https://starwars.fandom.com/wiki/Weapon/Legends"
+        }
+      ],
+      "Values": [
+        "Weapons"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(species)"
-        },
-        {
-          "Content": "Dimok",
-          "Href": "https://starwars.fandom.com/wiki/Dimok_(species)"
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         }
       ],
       "Values": [
-        "Ripoblus",
-        "Dimok",
-        "Galactic Empire"
+        "Galactic Republic",
+        "Galactic Empire",
+        "Galactic Federation of Free Alliances"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 217298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sepan_8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 792687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 13988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dimok/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ripoblus/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 21857,
       "PageUrl": "https://starwars.fandom.com/wiki/Gerbaud_2",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 22258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 109147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 287452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Gaerboud_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 177622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_(Deep_Space_Manufacturing_Facility)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 109156,
@@ -150,28 +205,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 12829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 27794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 380348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuthard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 787626,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 27969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 787629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 13988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dimok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ripoblus",
+      "PageId": 287451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaerboud_IV",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -190,9 +240,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 27794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 12829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 22258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 380348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuthard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 27969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

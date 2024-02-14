@@ -2,6 +2,7 @@
   "PageId": 611769,
   "PageUrl": "https://starwars.fandom.com/wiki/Mythra",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -11,12 +12,37 @@
       ]
     },
     {
-      "Label": "Material type",
+      "Label": "Location(s)",
+      "Links": [
+        {
+          "Content": "Luster",
+          "Href": "https://starwars.fandom.com/wiki/Luster_(cruiser)"
+        }
+      ],
+      "Values": [
+        "Luster"
+      ]
+    },
+    {
+      "Label": "Properties",
       "Links": [],
       "Values": [
-        "Valuable substance"
+        "Valuable"
+      ]
+    },
+    {
+      "Label": "Use(s)",
+      "Links": [],
+      "Values": [
+        "Making seals of office"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 774618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solodoe_seal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    }
+  ]
 }

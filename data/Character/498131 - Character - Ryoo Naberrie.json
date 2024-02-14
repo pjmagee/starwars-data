@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo"
+        }
+      ],
+      "Values": [
+        "Naboo"
+      ]
+    },
+    {
       "Label": "Born",
       "Links": [
         {
@@ -20,7 +32,7 @@
         }
       ],
       "Values": [
-        "28 BBY"
+        "28 BBY, Naboo"
       ]
     },
     {
@@ -29,10 +41,14 @@
         {
           "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Naboo",
+          "Href": "https://starwars.fandom.com/wiki/Naboo_(people)"
         }
       ],
       "Values": [
-        "Human"
+        "Human (Naboo)"
       ]
     },
     {
@@ -70,11 +86,11 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Naberrie family",
@@ -84,6 +100,30 @@
       "Values": [
         "Naberrie family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Sola Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Sola_Naberrie"
+        }
+      ],
+      "Values": [
+        "Sola Naberrie"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Pooja Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Pooja_Naberrie"
+        }
+      ],
+      "Values": [
+        "Pooja Naberrie"
+      ]
     }
   ],
   "Relationships": [
@@ -91,6 +131,16 @@
       "PageId": 477147,
       "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_funeral",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 498146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pooja_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 525585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

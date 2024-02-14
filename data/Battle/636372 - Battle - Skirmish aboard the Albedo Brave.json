@@ -59,8 +59,8 @@
           "Href": "https://starwars.fandom.com/wiki/Death"
         },
         {
-          "Content": "Jedi General",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_General"
+          "Content": "Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Master"
         },
         {
           "Content": "Jaro Tapal",
@@ -80,23 +80,27 @@
         }
       ],
       "Values": [
-        "Death of Jedi General Jaro Tapal",
-        "Escape of Padawan Cal Kestis",
-        "Destruction of the Albedo Brave",
-        "Death of the entire 13th Battalion"
+        "Death of Jedi Master Jaro Tapal",
+        "Padawan Cal Kestis escapes",
+        "Destruction of the Albedo Brave, and deaths of the entire 13th Battalion"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 637983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Albedo_Brave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 636274,
       "PageUrl": "https://starwars.fandom.com/wiki/13th_Battalion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 637983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Albedo_Brave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 500663,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Purge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

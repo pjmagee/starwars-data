@@ -2,6 +2,7 @@
   "PageId": 484031,
   "PageUrl": "https://starwars.fandom.com/wiki/Sarsius_Torne",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -66,17 +67,18 @@
         {
           "Content": "Sun Guard",
           "Href": "https://starwars.fandom.com/wiki/Sun_Guard"
-        },
-        {
-          "Content": "Zeta Magnus' Empire",
-          "Href": "https://starwars.fandom.com/wiki/Dark_Worlds"
         }
       ],
       "Values": [
-        "Sun Guard",
-        "Zeta Magnus' Empire"
+        "Sun Guard"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 790376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeta_Magnus's_clone_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

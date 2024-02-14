@@ -2,25 +2,13 @@
   "PageId": 471665,
   "PageUrl": "https://starwars.fandom.com/wiki/IPV-2C_Stealth_Corvette",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a6/StealthShip-SWE.jpg/revision/latest?cb=20110916022124",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/21/StealthShip-SWE.png/revision/latest?cb=20220908172742",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "IPV-2C Stealth Corvette"
-      ]
-    },
-    {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Sienar Design Systems",
-          "Href": "https://starwars.fandom.com/wiki/Sienar_Design_Systems"
-        }
-      ],
-      "Values": [
-        "Sienar Design Systems"
       ]
     },
     {
@@ -36,6 +24,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Sienar Design Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Design_Systems"
+        }
+      ],
+      "Values": [
+        "Sienar Design Systems"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -141,17 +141,68 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Galactic Republic Navy",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic_Navy"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Navy",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy"
+        },
+        {
+          "Content": "Berch Teller's rebel cell",
+          "Href": "https://starwars.fandom.com/wiki/Berch_Teller%27s_rebel_cell"
+        },
+        {
+          "Content": "Ranc Gang",
+          "Href": "https://starwars.fandom.com/wiki/Ranc_Gang"
+        },
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Navy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
+        },
+        {
+          "Content": "First Order Security Bureau",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Security_Bureau"
+        }
+      ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic",
+        "Galactic Republic Navy",
+        "Galactic Empire",
+        "Imperial Navy",
+        "Berch Teller's rebel cell",
+        "Ranc Gang",
+        "First Order",
+        "First Order Navy",
+        "First Order Security Bureau"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 460134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 466984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 497806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executrix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 503890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 531467,
@@ -159,14 +210,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 466984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 503890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 460134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

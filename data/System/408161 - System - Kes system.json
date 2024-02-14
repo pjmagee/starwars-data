@@ -2,7 +2,7 @@
   "PageId": 408161,
   "PageUrl": "https://starwars.fandom.com/wiki/Kes_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9d/Kes-EGTW.jpg/revision/latest?cb=20210820192104",
   "Data": [
     {
       "Label": "Titles",
@@ -17,42 +17,85 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Arrowhead",
+          "Href": "https://starwars.fandom.com/wiki/Arrowhead"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "Northern Dependencies",
+        "The Slice",
+        "Arrowhead"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
       ]
     },
     {
-      "Label": "Orbits",
+      "Label": "Other objects",
       "Links": [
         {
-          "Content": "Kes",
-          "Href": "https://starwars.fandom.com/wiki/Kes_(Core_Worlds)"
+          "Content": "Hyperspace",
+          "Href": "https://starwars.fandom.com/wiki/Hyperspace/Legends"
+        },
+        {
+          "Content": "minefields",
+          "Href": "https://starwars.fandom.com/wiki/Mine/Legends"
         }
       ],
       "Values": [
-        "Kes"
+        "Hyperspace minefields"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Perlemian Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends"
+        }
+      ],
+      "Values": [
+        "Perlemian Trade Route"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 375268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 505,
       "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 17324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kes_(Core_Worlds)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

@@ -24,15 +24,29 @@
       ]
     },
     {
-      "Label": "Nebulae",
+      "Label": "Other planets",
+      "Links": [],
+      "Values": [
+        "12 planets"
+      ]
+    },
+    {
+      "Label": "Stations",
       "Links": [
         {
-          "Content": "Perann Nebula",
-          "Href": "https://starwars.fandom.com/wiki/Perann_Nebula"
+          "Content": "Orbital platforms",
+          "Href": "https://starwars.fandom.com/wiki/Orbital_platform/Legends"
         }
       ],
       "Values": [
-        "Perann Nebula"
+        "Orbital platforms"
+      ]
+    },
+    {
+      "Label": "Other objects",
+      "Links": [],
+      "Values": [
+        "12 stellar clusters"
       ]
     },
     {
@@ -41,28 +55,28 @@
         {
           "Content": "Sorcerers of Rhand",
           "Href": "https://starwars.fandom.com/wiki/Sorcerers_of_Rhand"
+        },
+        {
+          "Content": "Rhandites",
+          "Href": "https://starwars.fandom.com/wiki/Rhandites"
         }
       ],
       "Values": [
-        "Sorcerers of Rhand"
+        "Sorcerers of Rhand",
+        "Rhandites"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 285156,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perann_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 237665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sorcerers_of_Rhand",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 529501,
       "PageUrl": "https://starwars.fandom.com/wiki/Unknown_Regions/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 285157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhandites",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

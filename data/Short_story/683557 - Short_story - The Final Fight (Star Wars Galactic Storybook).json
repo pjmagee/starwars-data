@@ -2,6 +2,7 @@
   "PageId": 683557,
   "PageUrl": "https://starwars.fandom.com/wiki/The_Final_Fight_(Star_Wars_Galactic_Storybook)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/TheFinalFight.png/revision/latest?cb=20221207220658",
   "Data": [
     {
       "Label": "Titles",
@@ -92,7 +93,25 @@
       "Values": [
         "35 ABY"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "New Heroes for the Galaxy",
+          "Href": "https://starwars.fandom.com/wiki/New_Heroes_for_the_Galaxy"
+        }
+      ],
+      "Values": [
+        "New Heroes for the Galaxy"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 683548,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Heroes_for_the_Galaxy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

@@ -37,7 +37,12 @@
     },
     {
       "Label": "Races",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "color",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Several races distinguished by carapace color"
       ]
@@ -56,12 +61,7 @@
     },
     {
       "Label": "Skin color",
-      "Links": [
-        {
-          "Content": "Off-white",
-          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
         "Off-white, yellow, orange, green, dark green, black, brown"
       ]
@@ -126,19 +126,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 39021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 13272,
       "PageUrl": "https://starwars.fandom.com/wiki/Roon/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 13884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ast_Kikorie/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 302566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slis_Tieeer_Dualli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 39021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 13808,
@@ -146,9 +146,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 302566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slis_Tieeer_Dualli",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 13884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ast_Kikorie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

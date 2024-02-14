@@ -24,7 +24,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sector 5",
+          "Href": "https://starwars.fandom.com/wiki/Sector_5"
+        }
+      ],
+      "Values": [
+        "Sector 5"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -45,14 +57,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
       "PageId": 11144,
       "PageUrl": "https://starwars.fandom.com/wiki/Ojom/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 12827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 326562,
   "PageUrl": "https://starwars.fandom.com/wiki/Ebor/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -38,12 +39,19 @@
       "Label": "Gender",
       "Links": [
         {
-          "Content": "Hermaphrodite",
+          "Content": "Male",
           "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
         }
       ],
       "Values": [
-        "Hermaphrodite (masculine personality)"
+        "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -63,5 +71,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zorba_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 325715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mama/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

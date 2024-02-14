@@ -2,6 +2,7 @@
   "PageId": 412264,
   "PageUrl": "https://starwars.fandom.com/wiki/Balmorran_puppet_government",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -18,6 +19,34 @@
       ]
     },
     {
+      "Label": "Head of state",
+      "Links": [
+        {
+          "Content": "Darth Lachris",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Lachris"
+        }
+      ],
+      "Values": [
+        "Darth Lachris"
+      ]
+    },
+    {
+      "Label": "Head of government",
+      "Links": [
+        {
+          "Content": "Governor",
+          "Href": "https://starwars.fandom.com/wiki/Governor/Legends"
+        },
+        {
+          "Content": "Lysennius Melchiro",
+          "Href": "https://starwars.fandom.com/wiki/Lysennius_Melchiro"
+        }
+      ],
+      "Values": [
+        "Governor Lysennius Melchiro"
+      ]
+    },
+    {
       "Label": "Military branch",
       "Links": [
         {
@@ -30,7 +59,19 @@
       ]
     },
     {
-      "Label": "Capital",
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Balmorra system",
+          "Href": "https://starwars.fandom.com/wiki/Balmorra_system/Legends"
+        }
+      ],
+      "Values": [
+        "Balmorra system"
+      ]
+    },
+    {
+      "Label": "Planet",
       "Links": [
         {
           "Content": "Balmorra",
@@ -39,6 +80,23 @@
       ],
       "Values": [
         "Balmorra"
+      ]
+    },
+    {
+      "Label": "Capital",
+      "Links": [
+        {
+          "Content": "Sobrik",
+          "Href": "https://starwars.fandom.com/wiki/Sobrik"
+        },
+        {
+          "Content": "Balmorran Arms Factory",
+          "Href": "https://starwars.fandom.com/wiki/Balmorran_Arms_Factory"
+        }
+      ],
+      "Values": [
+        "Sobrik",
+        "Balmorran Arms Factory"
       ]
     },
     {
@@ -52,7 +110,49 @@
       "Values": [
         "Galactic Basic Standard"
       ]
+    },
+    {
+      "Label": "State religious body",
+      "Links": [
+        {
+          "Content": "Sith Order",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Order_(Sith_Empire)"
+        }
+      ],
+      "Values": [
+        "Sith Order"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "3642 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3642_BBY"
+        }
+      ],
+      "Values": [
+        "3642 BBY"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        }
+      ],
+      "Values": [
+        "Sith Empire"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 380627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lerek_Serrus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

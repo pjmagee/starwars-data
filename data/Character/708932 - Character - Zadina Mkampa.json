@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.70 meters (5 ft, 7 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -98,14 +121,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 712269,
+      "PageUrl": "https://starwars.fandom.com/wiki/War_cloud",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
       "PageId": 660082,
       "PageUrl": "https://starwars.fandom.com/wiki/Avon_Starros",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 712269,
-      "PageUrl": "https://starwars.fandom.com/wiki/War_cloud",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 782314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 757733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Groundquake_machine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

@@ -2,12 +2,37 @@
   "PageId": 548430,
   "PageUrl": "https://starwars.fandom.com/wiki/Inamorata",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Inamorata"
+      ]
+    },
+    {
+      "Label": "Region(s)",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "U-10",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "U-10"
       ]
     },
     {
@@ -35,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 731517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inamorata_Imperial_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

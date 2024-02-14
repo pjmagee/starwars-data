@@ -68,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -103,7 +110,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Lawquanes",
@@ -113,7 +120,52 @@
       "Values": [
         "Lawquanes"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Suu Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Suu_Lawquane"
+        },
+        {
+          "Content": "Cut Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Cut_Lawquane"
+        }
+      ],
+      "Values": [
+        "Suu Lawquane",
+        "Cut Lawquane (stepfather)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Shaeeah Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Shaeeah_Lawquane"
+        }
+      ],
+      "Values": [
+        "Shaeeah Lawquane"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 480179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cut_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suu_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaeeah_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 667809,
   "PageUrl": "https://starwars.fandom.com/wiki/Titan_Three_(Var-Shaa)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,18 +40,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Female",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Female"
-      ]
-    },
-    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -68,5 +57,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 658135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overseer_(Imperial-class_Star_Destroyer)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

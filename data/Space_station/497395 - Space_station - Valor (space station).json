@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -36,10 +36,15 @@
         {
           "Content": "Clone navigation officers",
           "Href": "https://starwars.fandom.com/wiki/Clone_navigation_officer"
+        },
+        {
+          "Content": "Clone troopers",
+          "Href": "https://starwars.fandom.com/wiki/Clone_trooper"
         }
       ],
       "Values": [
-        "Clone navigation officers"
+        "Clone navigation officers",
+        "Clone troopers"
       ]
     },
     {
@@ -108,6 +113,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-9",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-9"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -156,16 +173,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 486390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 505155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida_incident",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 505152,
       "PageUrl": "https://starwars.fandom.com/wiki/Republic_strategy_conference",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
@@ -174,6 +181,16 @@
       "PageId": 533342,
       "PageUrl": "https://starwars.fandom.com/wiki/Carida_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 505155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_incident",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 486390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

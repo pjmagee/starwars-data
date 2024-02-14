@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Tatooine",
-          "Href": "https://starwars.fandom.com/wiki/Tatooine/Legends"
-        }
-      ],
-      "Values": [
-        "Tatooine"
-      ]
-    },
-    {
       "Label": "Species",
       "Links": [
         {
@@ -36,22 +24,36 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Blue"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Fair"
       ]
     },
     {
@@ -67,5 +69,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 370022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Street_Performers_And_Panhandlers'_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

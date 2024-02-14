@@ -27,39 +27,39 @@
       "Label": "Penciller",
       "Links": [
         {
-          "Content": "Chris Sprouse",
-          "Href": "https://starwars.fandom.com/wiki/Chris_Sprouse"
-        },
-        {
           "Content": "Scott Koblish",
           "Href": "https://starwars.fandom.com/wiki/Scott_Koblish"
         },
         {
           "Content": "Stefano Landini",
           "Href": "https://starwars.fandom.com/wiki/Stefano_Landini"
+        },
+        {
+          "Content": "Chris Sprouse",
+          "Href": "https://starwars.fandom.com/wiki/Chris_Sprouse"
         }
       ],
       "Values": [
-        "Chris Sprouse",
         "Scott Koblish",
-        "Stefano Landini"
+        "Stefano Landini",
+        "Chris Sprouse"
       ]
     },
     {
       "Label": "Inker",
       "Links": [
         {
-          "Content": "Karl Story",
-          "Href": "https://starwars.fandom.com/wiki/Karl_Story"
-        },
-        {
           "Content": "Marc Deering",
           "Href": "https://starwars.fandom.com/wiki/Marc_Deering"
+        },
+        {
+          "Content": "Karl Story",
+          "Href": "https://starwars.fandom.com/wiki/Karl_Story"
         }
       ],
       "Values": [
-        "Karl Story",
-        "Marc Deering"
+        "Marc Deering",
+        "Karl Story"
       ]
     },
     {
@@ -90,17 +90,17 @@
       "Label": "Cover artist",
       "Links": [
         {
-          "Content": "Terry Dodson",
-          "Href": "https://starwars.fandom.com/wiki/Terry_Dodson"
-        },
-        {
           "Content": "Rachel Dodson",
           "Href": "https://starwars.fandom.com/wiki/Rachel_Dodson"
+        },
+        {
+          "Content": "Terry Dodson",
+          "Href": "https://starwars.fandom.com/wiki/Terry_Dodson"
         }
       ],
       "Values": [
-        "Terry Dodson",
-        "Rachel Dodson"
+        "Rachel Dodson",
+        "Terry Dodson"
       ]
     },
     {
@@ -109,10 +109,15 @@
         {
           "Content": "Mark Paniccia",
           "Href": "https://starwars.fandom.com/wiki/Mark_Paniccia"
+        },
+        {
+          "Content": "Tom Groneman",
+          "Href": "https://starwars.fandom.com/wiki/Tom_Groneman"
         }
       ],
       "Values": [
-        "Mark Paniccia"
+        "Mark Paniccia (editor)",
+        "Tom Groneman (assistant editor)"
       ]
     },
     {
@@ -215,11 +220,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 613562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Rebellion_—_Heroes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_paperback"
-    },
-    {
       "PageId": 615992,
       "PageUrl": "https://starwars.fandom.com/wiki/Age_of_Rebellion_-_Jabba_the_Hutt_1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
@@ -228,6 +228,11 @@
       "PageId": 615994,
       "PageUrl": "https://starwars.fandom.com/wiki/Age_of_Rebellion_-_Darth_Vader_1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_book"
+    },
+    {
+      "PageId": 613562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Age_of_Rebellion_—_Heroes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Comic_collection"
     }
   ]
 }

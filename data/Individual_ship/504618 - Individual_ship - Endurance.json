@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -44,7 +44,21 @@
         }
       ],
       "Values": [
-        "1,155 meters"
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
       ]
     },
     {
@@ -73,11 +87,26 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "Tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "DBY-827 heavy turbolaser turrets (8)",
-        "Medium dual turbolaser cannons (2)"
+        "8 DBY-827 heavy turbolaser turrets",
+        "2 Medium dual turbolaser cannons",
+        "Laser cannons",
+        "Proton torpedo launchers",
+        "Tractor beam projectors"
       ]
     },
     {
@@ -121,6 +150,27 @@
         "Equipped",
         "Pod one",
         "Pod two"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        }
+      ],
+      "Values": [
+        "Battleship",
+        "Starfighter carrier"
       ]
     },
     {
@@ -180,7 +230,7 @@
       "Links": [
         {
           "Content": "Fifth Fleet",
-          "Href": "https://starwars.fandom.com/wiki/Fifth_Fleet_(Galactic_Republic)"
+          "Href": "https://starwars.fandom.com/wiki/Fifth_Fleet"
         }
       ],
       "Values": [
@@ -232,8 +282,8 @@
           "Href": "https://starwars.fandom.com/wiki/Clone_Commander"
         },
         {
-          "Content": "CT-411",
-          "Href": "https://starwars.fandom.com/wiki/CT-411"
+          "Content": "Ponds",
+          "Href": "https://starwars.fandom.com/wiki/Ponds"
         },
         {
           "Content": "Clone Sergeant",
@@ -250,13 +300,28 @@
       ],
       "Values": [
         "Jedi General Anakin Skywalker",
-        "Clone Commander CT-411 \"Ponds",
-        "Clone Sergeant \"Stew",
+        "Clone Commander Ponds",
+        "Clone Sergeant Stew",
         "Unidentified clone navigation officer"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 728054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Endurance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 644352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 482937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Youth_Brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 504387,
       "PageUrl": "https://starwars.fandom.com/wiki/Sabotage_of_the_Endurance",
@@ -266,21 +331,6 @@
       "PageId": 504388,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vanqor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 728054,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(Endurance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 644352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fifth_Fleet_(Galactic_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 482937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Youth_Brigade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

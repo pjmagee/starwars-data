@@ -2,6 +2,7 @@
   "PageId": 364172,
   "PageUrl": "https://starwars.fandom.com/wiki/Caar_Damask",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +48,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Damask",
@@ -56,6 +57,47 @@
       ],
       "Values": [
         "Damask"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Hego Damask I",
+          "Href": "https://starwars.fandom.com/wiki/Hego_Damask_I"
+        }
+      ],
+      "Values": [
+        "Hego Damask I"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Caar Damask's first wife",
+          "Href": "https://starwars.fandom.com/wiki/Caar_Damask%27s_first_wife"
+        },
+        {
+          "Content": "Darth Plagueis's mother",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Plagueis%27s_mother"
+        }
+      ],
+      "Values": [
+        "Caar Damask's first wife",
+        "Darth Plagueis's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Hego Damask",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Plagueis/Legends"
+        }
+      ],
+      "Values": [
+        "Hego Damask"
       ]
     },
     {
@@ -71,5 +113,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 721,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Plagueis/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

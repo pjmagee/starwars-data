@@ -2,6 +2,7 @@
   "PageId": 554676,
   "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hypori",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e9/BattleOfHypori-ObiWan-3.png/revision/latest?cb=20240110235840",
   "Data": [
     {
       "Label": "Titles",
@@ -11,19 +12,27 @@
       ]
     },
     {
+      "Label": "Conflict",
+      "Links": [
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        }
+      ],
+      "Values": [
+        "Clone Wars"
+      ]
+    },
+    {
       "Label": "Date",
       "Links": [
         {
           "Content": "22 BBY",
           "Href": "https://starwars.fandom.com/wiki/22_BBY"
-        },
-        {
-          "Content": "19 BBY",
-          "Href": "https://starwars.fandom.com/wiki/19_BBY"
         }
       ],
       "Values": [
-        "Between 22 BBY and 19 BBY"
+        "22 BBY"
       ]
     },
     {
@@ -36,6 +45,27 @@
       ],
       "Values": [
         "Hypori"
+      ]
+    },
+    {
+      "Label": "Outcome",
+      "Links": [
+        {
+          "Content": "Confederacy of Independent Systems",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "slaughtered",
+          "Href": "https://starwars.fandom.com/wiki/Death"
+        }
+      ],
+      "Values": [
+        "Confederacy of Independent Systems victory",
+        "Galactic Republic forces slaughtered"
       ]
     }
   ],

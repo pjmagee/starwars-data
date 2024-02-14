@@ -2,6 +2,7 @@
   "PageId": 213029,
   "PageUrl": "https://starwars.fandom.com/wiki/Escro_1",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shuttle",
@@ -97,5 +98,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 173404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escro_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

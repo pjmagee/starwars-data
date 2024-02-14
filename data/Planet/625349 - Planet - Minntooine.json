@@ -2,7 +2,7 @@
   "PageId": 625349,
   "PageUrl": "https://starwars.fandom.com/wiki/Minntooine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/21/Minntoointe.png/revision/latest?cb=20221127201124",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,25 @@
       ],
       "Values": [
         "Perlemian Trade Route"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Major cities",
+      "Links": [
+        {
+          "Content": "Commerce Guild hub",
+          "Href": "https://starwars.fandom.com/wiki/Commerce_Guild_hub"
+        }
+      ],
+      "Values": [
+        "Commerce Guild hub"
       ]
     },
     {
@@ -43,9 +62,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 747065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Minntooine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 496453,
       "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 756118,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Wind",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 747066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commerce_Guild_hub",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

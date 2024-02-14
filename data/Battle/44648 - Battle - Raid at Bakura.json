@@ -39,16 +39,16 @@
       "Label": "Place",
       "Links": [
         {
-          "Content": "Bakura",
-          "Href": "https://starwars.fandom.com/wiki/Bakura/Legends"
-        },
-        {
           "Content": "Bakura Imperial Prison",
           "Href": "https://starwars.fandom.com/wiki/Bakura_Imperial_Prison"
+        },
+        {
+          "Content": "Bakura",
+          "Href": "https://starwars.fandom.com/wiki/Bakura/Legends"
         }
       ],
       "Values": [
-        "Bakura (Bakura Imperial Prison)"
+        "Bakura Imperial Prison, Bakura"
       ]
     },
     {
@@ -76,8 +76,18 @@
   ],
   "Relationships": [
     {
+      "PageId": 165747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakura_Imperial_Prison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 423070,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_GR-75_medium_transport_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 423071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_GR-75_medium_transport_2",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -86,14 +96,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 712410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_1_(GR-75_medium_transport)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 153713,
       "PageUrl": "https://starwars.fandom.com/wiki/Bakura_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 712410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_1_(GR-75_medium_transport)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

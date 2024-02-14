@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-12",
@@ -34,6 +34,18 @@
       "Values": [
         "P-12"
       ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Nanth'ri Trade Route"
+      ]
     }
   ],
   "Relationships": [
@@ -41,6 +53,11 @@
       "PageId": 491418,
       "PageUrl": "https://starwars.fandom.com/wiki/Expansion_Region",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

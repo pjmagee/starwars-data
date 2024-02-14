@@ -15,12 +15,25 @@
       "Label": "Homeworld",
       "Links": [
         {
-          "Content": "Outer Rim",
-          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+          "Content": "Nar Shaddaa",
+          "Href": "https://starwars.fandom.com/wiki/Nar_Shaddaa"
         }
       ],
       "Values": [
-        "Outer Rim"
+        "Neeva's homeworld",
+        "Nar Shaddaa"
+      ]
+    },
+    {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Nobilllian",
+          "Href": "https://starwars.fandom.com/wiki/Nobilllian"
+        }
+      ],
+      "Values": [
+        "Nobilllian"
       ]
     },
     {
@@ -33,6 +46,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -53,7 +73,37 @@
       "Values": [
         "Pink"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Neeva's mother",
+          "Href": "https://starwars.fandom.com/wiki/Neeva%27s_mother"
+        }
+      ],
+      "Values": [
+        "Neeva's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Neevaan",
+          "Href": "https://starwars.fandom.com/wiki/Neevaan"
+        }
+      ],
+      "Values": [
+        "Neevaan"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 767883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neevaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

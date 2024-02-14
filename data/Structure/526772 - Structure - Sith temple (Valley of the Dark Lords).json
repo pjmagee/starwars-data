@@ -12,6 +12,23 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Temple",
+          "Href": "https://starwars.fandom.com/wiki/Temple"
+        },
+        {
+          "Content": "Tomb",
+          "Href": "https://starwars.fandom.com/wiki/Burial"
+        }
+      ],
+      "Values": [
+        "Temple",
+        "Tomb"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
@@ -25,6 +42,23 @@
       ],
       "Values": [
         "Valley of the Dark Lords, Moraband"
+      ]
+    },
+    {
+      "Label": "Point(s) of interest",
+      "Links": [
+        {
+          "Content": "Tomb of Darth Bane",
+          "Href": "https://starwars.fandom.com/wiki/Tomb_of_Darth_Bane"
+        },
+        {
+          "Content": "Moraband execution chamber",
+          "Href": "https://starwars.fandom.com/wiki/Moraband_execution_chamber"
+        }
+      ],
+      "Values": [
+        "Tomb of Darth Bane",
+        "Moraband execution chamber"
       ]
     },
     {
@@ -42,6 +76,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 453522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_Darth_Bane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 526758,
       "PageUrl": "https://starwars.fandom.com/wiki/Moraband_execution_chamber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -52,19 +91,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 453522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_Darth_Bane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 452601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
       "PageId": 453515,
       "PageUrl": "https://starwars.fandom.com/wiki/Valley_of_the_Dark_Lords",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 452601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     }
   ]
 }

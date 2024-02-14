@@ -13,7 +13,12 @@
     },
     {
       "Label": "Type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Compass",
+          "Href": "https://starwars.fandom.com/wiki/Compass"
+        }
+      ],
       "Values": [
         "Compass"
       ]
@@ -173,5 +178,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 583556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Pillio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 452741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    }
+  ]
 }

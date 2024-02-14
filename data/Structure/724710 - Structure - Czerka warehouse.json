@@ -2,6 +2,7 @@
   "PageId": 724710,
   "PageUrl": "https://starwars.fandom.com/wiki/Czerka_warehouse",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -20,6 +21,13 @@
       ],
       "Values": [
         "40 BBY"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Warehouse"
       ]
     },
     {
@@ -47,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 616979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pijal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

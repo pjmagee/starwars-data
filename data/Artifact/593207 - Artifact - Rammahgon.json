@@ -54,9 +54,14 @@
     },
     {
       "Label": "Date created",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "35 ABY",
+          "Href": "https://starwars.fandom.com/wiki/35_ABY"
+        }
+      ],
       "Values": [
-        "Sometime before 4965 BBY"
+        "Over 5,000 years before 35 ABY"
       ]
     },
     {
@@ -144,14 +149,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 639735,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Precept",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
-    },
-    {
       "PageId": 585847,
       "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Jedi_texts",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 639735,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Precept",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
     }
   ]
 }

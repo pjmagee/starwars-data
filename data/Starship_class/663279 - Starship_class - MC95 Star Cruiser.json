@@ -2,7 +2,7 @@
   "PageId": 663279,
   "PageUrl": "https://starwars.fandom.com/wiki/MC95_Star_Cruiser",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/MC95-Frontal.png/revision/latest?cb=20211103051911",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/02/Rise_of_the_Resistance_Mon_Cala_cruiser.png/revision/latest?cb=20181201193538",
   "Data": [
     {
       "Label": "Titles",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -52,6 +52,18 @@
       ],
       "Values": [
         "Star Cruiser"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "Resurgent-class Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Resurgent-class_Star_Destroyer"
+        }
+      ],
+      "Values": [
+        "Bigger than a Resurgent-class Star Destroyer"
       ]
     },
     {
@@ -106,8 +118,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Mon Cala fleet",
@@ -127,7 +139,7 @@
         }
       ],
       "Values": [
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Mon Cala fleet",
         "Resistance",
         "Resistance navy",
@@ -137,14 +149,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 634978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aftab_Ackbar's_MC95_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 664933,
       "PageUrl": "https://starwars.fandom.com/wiki/MC-series_star_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 634978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aftab_Ackbar's_MC95_Star_Cruiser",
+      "PageId": 712653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardency",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 531468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

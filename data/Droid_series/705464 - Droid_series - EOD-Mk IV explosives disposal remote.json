@@ -2,6 +2,7 @@
   "PageId": 705464,
   "PageUrl": "https://starwars.fandom.com/wiki/EOD-Mk_IV_explosives_disposal_remote",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -57,11 +58,17 @@
       "Label": "Equipment",
       "Links": [],
       "Values": [
-        "Built-in explosives ordinance disposal kit",
+        "Built-in explosives ordnance disposal kit",
         "Controlled demolitions device",
         "Demolitions scanner"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 483041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

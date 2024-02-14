@@ -94,8 +94,30 @@
     },
     {
       "Label": "Platform(s)",
-      "Links": [],
-      "Values": []
+      "Links": [
+        {
+          "Content": "PC",
+          "Href": "https://starwars.fandom.com/wiki/Personal_computer"
+        },
+        {
+          "Content": "PlayStation 4",
+          "Href": "https://starwars.fandom.com/wiki/PlayStation_4"
+        },
+        {
+          "Content": "Xbox One",
+          "Href": "https://starwars.fandom.com/wiki/Xbox_One"
+        },
+        {
+          "Content": "Xbox Cloud Gaming",
+          "Href": "https://starwars.fandom.com/wiki/Xbox_Cloud_Gaming"
+        }
+      ],
+      "Values": [
+        "PC",
+        "PlayStation 4",
+        "Xbox One",
+        "Xbox Cloud Gaming"
+      ]
     },
     {
       "Label": "Series",
@@ -152,19 +174,34 @@
   ],
   "Relationships": [
     {
+      "PageId": 420415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Battlefront",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    },
+    {
       "PageId": 288927,
       "PageUrl": "https://starwars.fandom.com/wiki/General_Grievous's_theme",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 320790,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Arena_(musical_theme)",
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Arena",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
     },
     {
       "PageId": 321759,
       "PageUrl": "https://starwars.fandom.com/wiki/Mystery_motif",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 681916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iden_Versio's_Theme",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 683536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Battlefront_II_(Original_Video_Game_Soundtrack)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Soundtrack"
     },
     {
       "PageId": 52348,
@@ -175,21 +212,6 @@
       "PageId": 671835,
       "PageUrl": "https://starwars.fandom.com/wiki/Conspiracy_motif",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 681916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iden_Versio's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 420415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Battlefront",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
-    },
-    {
-      "PageId": 683536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars:_Battlefront_II_(Original_Video_Game_Soundtrack)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Soundtrack"
     }
   ]
 }

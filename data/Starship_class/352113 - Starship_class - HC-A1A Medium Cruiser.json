@@ -12,10 +12,24 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Medium cruiser"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Shielding",
+      "Links": [],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -29,14 +43,40 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Blackscale Clan",
+          "Href": "https://starwars.fandom.com/wiki/Blackscale_Clan/Legends"
+        },
+        {
           "Content": "Mercenaries",
           "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        },
+        {
+          "Content": "Coynite",
+          "Href": "https://starwars.fandom.com/wiki/Coynite/Legends"
+        },
+        {
+          "Content": "CDMC",
+          "Href": "https://starwars.fandom.com/wiki/Corellia_Deep_Mining_Company"
         }
       ],
       "Values": [
-        "Mercenaries"
+        "Blackscale Clan",
+        "Mercenaries",
+        "Coynite mercenaries",
+        "CDMC's mercenaries"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786934,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coyn's_Fury",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 785262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massassi_Reborn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

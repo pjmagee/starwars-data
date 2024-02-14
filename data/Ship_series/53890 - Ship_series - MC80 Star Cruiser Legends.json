@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Mon Calamari Shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends"
+        }
+      ],
+      "Values": [
+        "Mon Calamari Shipyards"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -54,52 +66,73 @@
         "MC80a Star Cruiser",
         "MC80B Star Cruiser"
       ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Command Ship",
+          "Href": "https://starwars.fandom.com/wiki/Command_ship/Legends"
+        },
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship/Legends"
+        },
+        {
+          "Content": "Carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier/Legends"
+        }
+      ],
+      "Values": [
+        "Passenger liner",
+        "Deep-space exploration vessel",
+        "Command Ship",
+        "Battleship",
+        "Carrier"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
+        }
+      ],
+      "Values": [
+        "Alliance to Restore the Republic",
+        "New Republic",
+        "Galactic Federation of Free Alliances"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 116655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Falcariae",
+      "PageId": 168750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knights",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 234748,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardent_(MC80_Liberty_type_Star_Cruiser)",
+      "PageId": 169897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Link",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 236971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Justice_(MC80_Liberty_type_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 38529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orthavan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 294448,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crucible_(MC80_Liberty_type_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 48935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reef_Home",
+      "PageId": 63709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Equity",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 174130,
       "PageUrl": "https://starwars.fandom.com/wiki/Stimsenj'kat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 356263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Renhoek_(MC80_Liberty_type_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 356264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lulsla_(MC80_Liberty_type_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -113,39 +146,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 667700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_MC80_Liberty_type_Star_Cruiser_(Pallaxides)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 57784,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cathleen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 129813,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_type_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 58335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yali",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 102617,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Home_One_type_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 131733,
       "PageUrl": "https://starwars.fandom.com/wiki/Tano",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 24642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 294448,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crucible_(MC80_Liberty_type_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 125002,
@@ -160,6 +168,66 @@
     {
       "PageId": 128243,
       "PageUrl": "https://starwars.fandom.com/wiki/Valorous_(MC80_Liberty_type_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 54528,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_evacuation_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 129813,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Liberty_type_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 234748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardent_(MC80_Liberty_type_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 234751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardent_(Attack_on_the_Inamo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 236971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Justice_(MC80_Liberty_type_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 24642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 57784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cathleen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 58335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yali",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 38529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orthavan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 102617,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Home_One_type_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 116655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Falcariae",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -183,23 +251,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 323711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solidarity_(MC80_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 141984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chie_(MC80_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 146585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odysseus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 48935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reef_Home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 55599,
       "PageUrl": "https://starwars.fandom.com/wiki/Maximus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 63709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Equity",
+      "PageId": 356263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Renhoek_(MC80_Liberty_type_Star_Cruiser)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 54528,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_evacuation_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 356264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lulsla_(MC80_Liberty_type_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 168750,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knights_(MC80a_Star_Cruiser)",
+      "PageId": 667700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_MC80_Liberty_type_Star_Cruiser_(Pallaxides)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

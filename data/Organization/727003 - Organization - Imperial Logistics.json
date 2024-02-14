@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Organization type",
+      "Links": [],
+      "Values": [
+        "Logistical management"
+      ]
+    },
+    {
       "Label": "Leader(s)",
       "Links": [
         {
@@ -45,24 +52,34 @@
         {
           "Content": "Sphere of Civil Administration",
           "Href": "https://starwars.fandom.com/wiki/Sphere_of_Civil_Administration"
+        },
+        {
+          "Content": "Ministry of Logistics",
+          "Href": "https://starwars.fandom.com/wiki/Ministry_of_Logistics"
         }
       ],
       "Values": [
         "Sith Empire",
-        "Sphere of Civil Administration"
+        "Sphere of Civil Administration",
+        "Ministry of Logistics"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 720218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Norok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 633726,
       "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Civil_Administration",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 364910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ministry_of_Logistics",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 720218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Norok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

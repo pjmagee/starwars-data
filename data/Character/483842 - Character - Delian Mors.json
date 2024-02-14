@@ -2,6 +2,7 @@
   "PageId": 483842,
   "PageUrl": "https://starwars.fandom.com/wiki/Delian_Mors",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Murra",
+          "Href": "https://starwars.fandom.com/wiki/Murra_(individual)"
+        }
+      ],
+      "Values": [
+        "Murra"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +67,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 500138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murra_(individual)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

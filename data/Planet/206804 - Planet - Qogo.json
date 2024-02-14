@@ -29,10 +29,75 @@
         {
           "Content": "Hapes Cluster",
           "Href": "https://starwars.fandom.com/wiki/Hapes_Cluster/Legends"
+        },
+        {
+          "Content": "Hapan Rim Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Hapan_Rim_Worlds"
+        },
+        {
+          "Content": "Transitory Mists",
+          "Href": "https://starwars.fandom.com/wiki/Transitory_Mists"
         }
       ],
       "Values": [
-        "Hapes Cluster"
+        "Hapes Cluster",
+        "Hapan Rim Worlds",
+        "Transitory Mists"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Maad system",
+          "Href": "https://starwars.fandom.com/wiki/Maad_system"
+        }
+      ],
+      "Values": [
+        "Maad system"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "Maad",
+          "Href": "https://starwars.fandom.com/wiki/Maad"
+        }
+      ],
+      "Values": [
+        "Maad"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "O-9"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "The Throat",
+          "Href": "https://starwars.fandom.com/wiki/The_Throat"
+        }
+      ],
+      "Values": [
+        "The Throat"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [
+        {
+          "Content": "Gas giant",
+          "Href": "https://starwars.fandom.com/wiki/Gas_giant/Legends"
+        }
+      ],
+      "Values": [
+        "Gas giant"
       ]
     },
     {
@@ -46,18 +111,6 @@
       "Values": [
         "Uroro Station"
       ]
-    },
-    {
-      "Label": "Affiliation",
-      "Links": [
-        {
-          "Content": "Hapes Consortium",
-          "Href": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends"
-        }
-      ],
-      "Values": [
-        "Hapes Consortium"
-      ]
     }
   ],
   "Relationships": [
@@ -65,6 +118,16 @@
       "PageId": 206802,
       "PageUrl": "https://starwars.fandom.com/wiki/Uroro_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 761256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 539008,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Throat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 237548,

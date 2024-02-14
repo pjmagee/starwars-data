@@ -2,7 +2,7 @@
   "PageId": 7298,
   "PageUrl": "https://starwars.fandom.com/wiki/Ottega_system/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f8/FalconIthor.jpg/revision/latest?cb=20070526233236",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Lesser Plooriod Cluster",
+          "Href": "https://starwars.fandom.com/wiki/Lesser_Plooriod_Cluster/Legends"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Lesser Plooriod Cluster",
+        "New Territories"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-6"
@@ -207,9 +217,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 212725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ottega_(Zaarin_insurrection)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 17180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 172639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treachery_at_Ottega",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 54944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tekba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 275912,
@@ -242,24 +262,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 290175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incident_near_Ithor_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 583,
       "PageUrl": "https://starwars.fandom.com/wiki/Ithor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 347339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ithor_(9_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 54944,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tekba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 474902,
@@ -292,9 +297,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 56783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Station_Alpha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
       "PageId": 12282,
       "PageUrl": "https://starwars.fandom.com/wiki/Daeshara'cor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Plooriod_Cluster/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 12709,
@@ -302,19 +317,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 17180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 212725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ottega",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 172639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Treachery_at_Ottega",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 290175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incident_near_Ithor_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 56783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Station_Alpha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 347339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ithor_(9_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

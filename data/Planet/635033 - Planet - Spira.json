@@ -2,13 +2,25 @@
   "PageId": 635033,
   "PageUrl": "https://starwars.fandom.com/wiki/Spira",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9c/BreakOnSpira-StarWars2020-29.png/revision/latest?cb=20231104101302",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Spira"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Core Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Core_Worlds"
+        }
+      ],
+      "Values": [
+        "Core Worlds"
       ]
     },
     {
@@ -19,7 +31,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Beaches",
@@ -28,6 +40,18 @@
       ],
       "Values": [
         "Beaches"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Amilyn Holdo's friend's mansion",
+          "Href": "https://starwars.fandom.com/wiki/Amilyn_Holdo%27s_friend%27s_mansion"
+        }
+      ],
+      "Values": [
+        "Amilyn Holdo's friend's mansion"
       ]
     },
     {
@@ -45,9 +69,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 471783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spiran_caf",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 719090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sacred_Jedi_text",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 750240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_TIE_squadron_(Spira)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 745038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auction_on_Spira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 744994,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amilyn_Holdo's_friend's_mansion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

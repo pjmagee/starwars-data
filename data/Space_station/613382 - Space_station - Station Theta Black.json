@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -21,6 +21,57 @@
       ],
       "Values": [
         "Space station"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [],
+      "Values": [
+        "Hanger with 2 entrance bays"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "First Order Sentry droid",
+          "Href": "https://starwars.fandom.com/wiki/Sentry_droid_(First_Order)"
+        }
+      ],
+      "Values": [
+        "At least 1 First Order Sentry droid"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [
+        {
+          "Content": "Dedlanite",
+          "Href": "https://starwars.fandom.com/wiki/Dedlanite"
+        }
+      ],
+      "Values": [
+        "Dedlanite",
+        "200 million kilograms"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Databanks",
+          "Href": "https://starwars.fandom.com/wiki/Databank"
+        }
+      ],
+      "Values": [
+        "Databanks"
       ]
     },
     {
@@ -65,25 +116,38 @@
         {
           "Content": "34 ABY",
           "Href": "https://starwars.fandom.com/wiki/34_ABY"
-        },
-        {
-          "Content": "mission to Station Theta Black",
-          "Href": "https://starwars.fandom.com/wiki/Mission_to_Station_Theta_Black"
         }
       ],
       "Values": [
-        "34 ABY, during the mission to Station Theta Black"
+        "34 ABY"
       ]
     },
     {
       "Label": "Present for battles/events",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Mission to Station Theta Black",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Station_Theta_Black"
+        }
+      ],
       "Values": [
         "Mission to Station Theta Black"
+      ]
+    },
+    {
+      "Label": "Sectors/areas",
+      "Links": [],
+      "Values": [
+        "Level two"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 789127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_sentry_droid_(Station_Theta_Black)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 613679,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Station_Theta_Black",

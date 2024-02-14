@@ -17,10 +17,20 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Outer Expansion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Outer Expansion Zone",
+        "Northern Dependencies"
       ]
     },
     {
@@ -85,6 +95,18 @@
       ]
     },
     {
+      "Label": "Sector capital",
+      "Links": [
+        {
+          "Content": "Myomar",
+          "Href": "https://starwars.fandom.com/wiki/Myomar/Legends"
+        }
+      ],
+      "Values": [
+        "Myomar"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -122,7 +144,7 @@
       ]
     },
     {
-      "Label": "New Sith Wars",
+      "Label": "Light and Darkness War",
       "Links": [
         {
           "Content": "Dorin",
@@ -173,12 +195,16 @@
       "Label": "Galactic Civil War",
       "Links": [
         {
+          "Content": "Myomar",
+          "Href": "https://starwars.fandom.com/wiki/Occupation_of_Myomar"
+        },
+        {
           "Content": "Dorin",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Dorin_(Galactic_Civil_War)"
         }
       ],
       "Values": [
-        "Dorin"
+        "Myomar - Dorin"
       ]
     },
     {
@@ -196,34 +222,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 96671,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Renliss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 307781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coth_Fuuras_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 391077,
-      "PageUrl": "https://starwars.fandom.com/wiki/Myomar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 42036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Myomar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 15945,
-      "PageUrl": "https://starwars.fandom.com/wiki/Celanon_Spur/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 1311,
       "PageUrl": "https://starwars.fandom.com/wiki/Dorin/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 269471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Expansion_Zone/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 280116,
@@ -231,13 +237,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
+      "PageId": 96671,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Renliss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 42036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myomar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 190097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorin_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 307781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coth_Fuuras_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 15945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celanon_Spur/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
       "PageId": 23490,
       "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 190097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dorin_system",
+      "PageId": 391077,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myomar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]

@@ -2,13 +2,25 @@
   "PageId": 50638,
   "PageUrl": "https://starwars.fandom.com/wiki/Razor_Runners",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/17/RazorRunnerTrooper-TOTC.jpg/revision/latest?cb=20110903234556",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/Razor_Runners.jpg/revision/latest?cb=20230201232825",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Razor Runners"
+      ]
+    },
+    {
+      "Label": "Organization type",
+      "Links": [
+        {
+          "Content": "Mercenaries",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        }
+      ],
+      "Values": [
+        "Mercenaries"
       ]
     },
     {
@@ -28,6 +40,18 @@
       ]
     },
     {
+      "Label": "Headquarters",
+      "Links": [
+        {
+          "Content": "Northern Jedi Ruins",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Jedi_Ruins"
+        }
+      ],
+      "Values": [
+        "Northern Jedi Ruins"
+      ]
+    },
+    {
       "Label": "Location(s)",
       "Links": [
         {
@@ -42,13 +66,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 296803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hal_Razor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 753768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Northern_Jedi_Ruins",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 311597,
       "PageUrl": "https://starwars.fandom.com/wiki/Relgon_Starkill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 296803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hal_Razor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

@@ -41,10 +41,15 @@
         {
           "Content": "Alderaan",
           "Href": "https://starwars.fandom.com/wiki/Alderaan"
+        },
+        {
+          "Content": "Birren",
+          "Href": "https://starwars.fandom.com/wiki/Birren"
         }
       ],
       "Values": [
-        "Alderaan"
+        "Alderaan",
+        "Birren"
       ]
     },
     {
@@ -62,8 +67,18 @@
   ],
   "Relationships": [
     {
+      "PageId": 785120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stuffed_Candlewick_Flower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 451697,
       "PageUrl": "https://starwars.fandom.com/wiki/Alderaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 537550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Birren",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]

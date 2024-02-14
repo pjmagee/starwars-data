@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -66,15 +71,20 @@
       "Label": "Native species",
       "Links": [
         {
+          "Content": "Sepan",
+          "Href": "https://starwars.fandom.com/wiki/Sepan"
+        },
+        {
           "Content": "Dimok",
-          "Href": "https://starwars.fandom.com/wiki/Dimok_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Dimok_(people)"
         },
         {
           "Content": "Ripoblus",
-          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(species)"
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_(people)"
         }
       ],
       "Values": [
+        "Sepan",
         "Dimok",
         "Ripoblus"
       ]
@@ -102,6 +112,18 @@
       ]
     },
     {
+      "Label": "Sepan Civil War",
+      "Links": [
+        {
+          "Content": "Sepan system",
+          "Href": "https://starwars.fandom.com/wiki/Third_mission_to_the_Sepan_sector"
+        }
+      ],
+      "Values": [
+        "Sepan system"
+      ]
+    },
+    {
       "Label": "Galactic Civil War",
       "Links": [
         {
@@ -117,62 +139,139 @@
       "Label": "Sepan Civil War",
       "Links": [
         {
-          "Content": "Sepan system",
-          "Href": "https://starwars.fandom.com/wiki/Sepan_campaign"
-        },
-        {
-          "Content": "(1)",
+          "Content": "Sepan system (I)",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_the_Sepan_system"
         },
         {
-          "Content": "(2)",
+          "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Science_Station_Youst"
         },
         {
-          "Content": "(3)",
+          "Content": "(III)",
           "Href": "https://starwars.fandom.com/wiki/Second_Battle_of_the_Sepan_system"
         },
         {
-          "Content": "(4)",
+          "Content": "Sepan 8",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Sepan_8"
         },
         {
-          "Content": "(5)",
+          "Content": "Gerbaud 2",
           "Href": "https://starwars.fandom.com/wiki/Raid_on_the_Tropsobor"
         }
       ],
       "Values": [
-        "Sepan system (1) (2) (3) (4) (5)"
+        "Sepan system (I) (II) (III) - Sepan 8 - Gerbaud 2"
       ]
     },
     {
       "Label": "Galactic Civil War",
       "Links": [
         {
+          "Content": "Gaerboud IV",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Gaerboud_IV"
+        },
+        {
           "Content": "Wann Tsir",
           "Href": "https://starwars.fandom.com/wiki/Siege_of_Wann_Tsir"
         }
       ],
       "Values": [
-        "Wann Tsir"
+        "Gaerboud IV - Wann Tsir"
+      ]
+    },
+    {
+      "Label": "Sepan Civil War",
+      "Links": [
+        {
+          "Content": "Kuthard",
+          "Href": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector"
+        }
+      ],
+      "Values": [
+        "Kuthard"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 13988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dimok/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ripoblus/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
     {
       "PageId": 21857,
       "PageUrl": "https://starwars.fandom.com/wiki/Gerbaud_2",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 22258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 391551,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kayuk_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 272390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wann_Tsir_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 177622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel_(Deep_Space_Manufacturing_Facility)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 276280,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tingel_Deepspace_Besh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 109156,
       "PageUrl": "https://starwars.fandom.com/wiki/Science_Station_Youst",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 24117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wann_Tsir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 787626,
+      "PageUrl": "https://starwars.fandom.com/wiki/Third_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 787629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peacekeeping_mission_to_the_Sepan_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 287451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaerboud_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 289223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raskane_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 18326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raskane_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 214550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kayuk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 22258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 18483,
@@ -183,51 +282,6 @@
       "PageId": 380348,
       "PageUrl": "https://starwars.fandom.com/wiki/Kuthard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 18326,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raskane_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dimok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13989,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ripoblus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 214550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kayuk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 289223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raskane_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 24117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wann_Tsir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 391551,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kayuk_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 276280,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tingel_Deepspace_Besh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 272390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wann_Tsir_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

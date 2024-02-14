@@ -79,7 +79,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-15"
@@ -170,7 +170,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -291,10 +291,6 @@
           "Href": "https://starwars.fandom.com/wiki/Coral/Legends"
         },
         {
-          "Content": "sea",
-          "Href": "https://starwars.fandom.com/wiki/Ocean/Legends"
-        },
-        {
           "Content": "venomous",
           "Href": "https://starwars.fandom.com/wiki/Poison/Legends"
         }
@@ -315,7 +311,15 @@
         {
           "Content": "Akwin",
           "Href": "https://starwars.fandom.com/wiki/Akwin"
-        },
+        }
+      ],
+      "Values": [
+        "Akwin"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
         {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
@@ -326,7 +330,6 @@
         }
       ],
       "Values": [
-        "Akwin",
         "Humans",
         "Lazerians"
       ]
@@ -427,34 +430,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 85049,
-      "PageUrl": "https://starwars.fandom.com/wiki/B'dasssa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 73009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 507262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aereena",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 16027,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kira_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 408138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kingdom_of_Devit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 316462,
       "PageUrl": "https://starwars.fandom.com/wiki/Dovin_Maur",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 332758,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lazeria_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 462614,
@@ -472,14 +455,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 507262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aereena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 73009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 12526,
       "PageUrl": "https://starwars.fandom.com/wiki/Akwin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 332819,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elgar",
+      "PageId": 743732,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alroy_Kever's_residence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 747044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_noble",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 747792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Akwin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 408132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caz_Ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 408133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dox_Ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 408140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Valley_(Lazerian_IV)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 16249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 85049,
+      "PageUrl": "https://starwars.fandom.com/wiki/B'dasssa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 462616,
@@ -487,23 +515,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 18785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harrin_Trade_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 16770,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 408138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kingdom_of_Devit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 747635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Lazerian_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 462619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Father_Ocean",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 408140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crystal_Valley_(Lazerian_IV)",
+      "PageId": 332819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elgar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -517,19 +540,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 16027,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kira_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 18785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harrin_Trade_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 462619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Father_Ocean",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 332758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lazeria_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 726054,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_embassy_(Lazerian_IV)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 16770,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 16249,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lazerian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 726064,
@@ -539,11 +572,6 @@
     {
       "PageId": 726068,
       "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Starport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 726070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Standard_Class_starport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

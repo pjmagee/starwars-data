@@ -71,6 +71,43 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [],
+      "Values": [
+        "Kott family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [],
+      "Values": [
+        "A father",
+        "A mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Corl",
+          "Href": "https://starwars.fandom.com/wiki/Corl"
+        },
+        {
+          "Content": "Gave",
+          "Href": "https://starwars.fandom.com/wiki/Gave"
+        },
+        {
+          "Content": "Set",
+          "Href": "https://starwars.fandom.com/wiki/Set_(Sila_Kott)"
+        }
+      ],
+      "Values": [
+        "Corl",
+        "Gave",
+        "Set"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -88,5 +125,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 779556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Set_(Sila_Kott)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

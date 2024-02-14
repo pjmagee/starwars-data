@@ -31,16 +31,20 @@
       "Label": "Date",
       "Links": [
         {
-          "Content": "21.95 BBY",
+          "Content": "21.9 BBY",
           "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
         },
         {
+          "Content": "month",
+          "Href": "https://starwars.fandom.com/wiki/Standard_month/Legends"
+        },
+        {
           "Content": "Battle of Geonosis",
-          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis/Legends"
+          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis"
         }
       ],
       "Values": [
-        "21.95 BBY, 1 month after the Battle of Geonosis"
+        "21.9 BBY (1 month after the Battle of Geonosis)"
       ]
     },
     {
@@ -59,16 +63,21 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "CIS",
+          "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
         }
       ],
       "Values": [
-        "CIS victory"
+        "Confederacy of Independent Systems victory"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 3681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Decimator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
     {
       "PageId": 236062,
       "PageUrl": "https://starwars.fandom.com/wiki/Ship_One_One",
@@ -78,11 +87,6 @@
       "PageId": 236063,
       "PageUrl": "https://starwars.fandom.com/wiki/Ship_Two",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 3681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Decimator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

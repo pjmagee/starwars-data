@@ -46,8 +46,8 @@
           "Href": "https://starwars.fandom.com/wiki/Brendol_Hux"
         },
         {
-          "Content": "Flight instructor",
-          "Href": "https://starwars.fandom.com/wiki/Flight_instructor"
+          "Content": "Commandant",
+          "Href": "https://starwars.fandom.com/wiki/Commandant"
         },
         {
           "Content": "Goran",
@@ -95,7 +95,7 @@
         "Commandant Deenlark",
         "Commander Harn",
         "Commandant Brendol Hux",
-        "Flight instructor Goran",
+        "Commandant Goran",
         "Captain Piers Roddance",
         "Lieutenant Chiron",
         "Sergeant Triosa Broog",
@@ -121,10 +121,14 @@
         {
           "Content": "Royal Imperial Academy",
           "Href": "https://starwars.fandom.com/wiki/Royal_Imperial_Academy"
+        },
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant"
         }
       ],
       "Values": [
-        "Royal Imperial Academy"
+        "Royal Imperial Academy, Coruscant"
       ]
     },
     {
@@ -135,20 +139,40 @@
           "Href": "https://starwars.fandom.com/wiki/Academy_for_Young_Imperials"
         },
         {
+          "Content": "Lothal",
+          "Href": "https://starwars.fandom.com/wiki/Lothal"
+        },
+        {
           "Content": "Arkanis Academy",
           "Href": "https://starwars.fandom.com/wiki/Arkanis_Academy"
+        },
+        {
+          "Content": "Arkanis",
+          "Href": "https://starwars.fandom.com/wiki/Arkanis"
         },
         {
           "Content": "Carida Academy",
           "Href": "https://starwars.fandom.com/wiki/Carida_Academy"
         },
         {
+          "Content": "Carida",
+          "Href": "https://starwars.fandom.com/wiki/Carida"
+        },
+        {
           "Content": "Corellia Imperial training center",
           "Href": "https://starwars.fandom.com/wiki/Imperial_training_center"
         },
         {
+          "Content": "Corellia",
+          "Href": "https://starwars.fandom.com/wiki/Corellia"
+        },
+        {
           "Content": "Corulag Military Academy",
           "Href": "https://starwars.fandom.com/wiki/Corulag_Military_Academy"
+        },
+        {
+          "Content": "Corulag",
+          "Href": "https://starwars.fandom.com/wiki/Corulag"
         },
         {
           "Content": "Defiance Flight Training Institute",
@@ -159,12 +183,24 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Eriadu"
         },
         {
+          "Content": "Eriadu",
+          "Href": "https://starwars.fandom.com/wiki/Eriadu"
+        },
+        {
           "Content": "Imperial Academy of Mandalore",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore"
         },
         {
+          "Content": "Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore"
+        },
+        {
           "Content": "Imperial Academy of Uyter",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Uyter"
+        },
+        {
+          "Content": "Uyter",
+          "Href": "https://starwars.fandom.com/wiki/Uyter"
         },
         {
           "Content": "Phelar Junior Academy",
@@ -175,8 +211,16 @@
           "Href": "https://starwars.fandom.com/wiki/Myomar_Academy"
         },
         {
+          "Content": "Myomar",
+          "Href": "https://starwars.fandom.com/wiki/Myomar"
+        },
+        {
           "Content": "Prefsbelt Fleet Camp",
           "Href": "https://starwars.fandom.com/wiki/Prefsbelt_Fleet_Camp"
+        },
+        {
+          "Content": "Prefsbelt IV",
+          "Href": "https://starwars.fandom.com/wiki/Prefsbelt_IV"
         },
         {
           "Content": "Pretor Flats Academy",
@@ -187,26 +231,34 @@
           "Href": "https://starwars.fandom.com/wiki/Raithal_Academy"
         },
         {
+          "Content": "Raithal",
+          "Href": "https://starwars.fandom.com/wiki/Raithal"
+        },
+        {
           "Content": "Skystrike Academy",
           "Href": "https://starwars.fandom.com/wiki/Skystrike_Academy"
+        },
+        {
+          "Content": "Montross",
+          "Href": "https://starwars.fandom.com/wiki/Montross"
         }
       ],
       "Values": [
-        "Academy for Young Imperials",
-        "Arkanis Academy",
-        "Carida Academy",
-        "Corellia Imperial training center",
-        "Corulag Military Academy",
+        "Academy for Young Imperials, Lothal",
+        "Arkanis Academy, Arkanis",
+        "Carida Academy, Carida",
+        "Corellia Imperial training center, Corellia",
+        "Corulag Military Academy, Corulag",
         "Defiance Flight Training Institute",
-        "Imperial Academy of Eriadu",
-        "Imperial Academy of Mandalore",
-        "Imperial Academy of Uyter",
-        "Phelar Junior Academy",
-        "Myomar Academy",
-        "Prefsbelt Fleet Camp",
-        "Pretor Flats Academy",
-        "Raithal Academy",
-        "Skystrike Academy"
+        "Imperial Academy of Eriadu, Eriadu",
+        "Imperial Academy of Mandalore, Mandalore",
+        "Imperial Academy of Uyter, Uyter",
+        "Phelar Junior Academy, Eriadu",
+        "Myomar Academy, Myomar",
+        "Prefsbelt Fleet Camp, Prefsbelt IV",
+        "Pretor Flats Academy, Lothal",
+        "Raithal Academy, Raithal",
+        "Skystrike Academy, Montross"
       ]
     },
     {
@@ -277,28 +329,93 @@
   ],
   "Relationships": [
     {
-      "PageId": 713888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 635580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Training_officer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 713889,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 737438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Three_(pilot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 461718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Academy_for_Young_Imperials",
+      "PageId": 554602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carver",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 543439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Training_datapad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 515776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 576301,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_training_center",
+      "PageId": 553222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Izak_Anzio",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 623472,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defiance_Flight_Training_Institute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 506694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Academy_Screening_Office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 657651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gunnery_instructor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 658717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garmen_Naadra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 658792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Camm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 471180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 534812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 8830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 594661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vensenor_Flight_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 594431,
       "PageUrl": "https://starwars.fandom.com/wiki/Bythen_Forral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 594456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Punfor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -312,193 +429,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 657651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gunnery_instructor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 486390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 471180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 164534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commandant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 523780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Concordance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
-    },
-    {
-      "PageId": 667767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blaise_Zirkonn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 568958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karyn_Faro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 623472,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nath_Tensent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 684302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fhaen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 503900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Imperial_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 553345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flight_instructor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 462822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maketh_Tua",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 540601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_Student_Outcomes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 535155,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Uyter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 540252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 527943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prefsbelt_Fleet_Camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 452330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wullf_Yularen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 616135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yrica_Quell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 674539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clipper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 568381,
-      "PageUrl": "https://starwars.fandom.com/wiki/Myomar_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 658717,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garmen_Naadra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 658792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Camm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 594429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vensenor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 594432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 471491,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cadet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 8830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 559957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Terrabe_Sector_Service_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 635580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Training_officer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 517830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ketsu_Onyo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 553222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Izak_Anzio",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 594661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vensenor_Flight_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 575703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarvyn_Lareka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 542858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skystrike_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yeoman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 583202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Instructor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 534812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interrogation_chair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 543439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Training_datapad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 515776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carida_Academy",
+      "PageId": 576301,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_training_center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -512,9 +444,104 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 452330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wullf_Yularen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 674539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clipper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 527943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prefsbelt_Fleet_Camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 482365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Currahee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 523702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pol_Andrissus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 553320,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Eriadu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yeoman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 583202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Instructor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 523780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Concordance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 563143,
+      "PageUrl": "https://starwars.fandom.com/wiki/Magna_Tolvan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Office_of_Student_Outcomes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 559957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Terrabe_Sector_Service_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 471491,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cadet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 568958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karyn_Faro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 535155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Uyter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 667767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blaise_Zirkonn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 461718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Academy_for_Young_Imperials",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 572544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Webb_Taffral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 568381,
+      "PageUrl": "https://starwars.fandom.com/wiki/Myomar_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 164534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commandant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 458127,
@@ -532,24 +559,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 554602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carver",
+      "PageId": 684302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fhaen",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 500711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Defiance_Flight_Training_Institute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 506694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Academy_Screening_Office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 635630,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 388326,
@@ -557,23 +569,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 458492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taskmaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 713888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 482365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Currahee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 713889,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 523702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pol_Andrissus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 635630,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Order_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 572544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Webb_Taffral",
+      "PageId": 575703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarvyn_Lareka",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -594,6 +606,51 @@
     {
       "PageId": 519742,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Well",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 458492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taskmaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 517830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ketsu_Onyo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 486390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carida",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 616135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yrica_Quell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 462822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maketh_Tua",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 540252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junior_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 542858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skystrike_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 553345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flight_instructor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 503900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Imperial_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

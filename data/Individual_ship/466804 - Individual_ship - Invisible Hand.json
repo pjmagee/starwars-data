@@ -32,20 +32,28 @@
       "Label": "Model",
       "Links": [
         {
-          "Content": "Providence-class Dreadnought",
+          "Content": "Providence-class carrier/destroyer",
           "Href": "https://starwars.fandom.com/wiki/Providence-class_Dreadnought"
         }
       ],
       "Values": [
-        "Modified Providence-class Dreadnought"
+        "Modified Providence-class carrier/destroyer"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
           "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
+          "Content": "Carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        },
+        {
+          "Content": "destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Destroyer"
         },
         {
           "Content": "Dreadnought",
@@ -54,6 +62,7 @@
       ],
       "Values": [
         "Battleship",
+        "Carrier/destroyer",
         "Dreadnought"
       ]
     },
@@ -61,12 +70,23 @@
       "Label": "Modified systems",
       "Links": [
         {
-          "Content": "hangars",
-          "Href": "https://starwars.fandom.com/wiki/Hangar"
+          "Content": "weapons",
+          "Href": "https://starwars.fandom.com/wiki/Weapon"
+        },
+        {
+          "Content": "Wizard's Tower",
+          "Href": "https://starwars.fandom.com/wiki/Wizard%27s_Tower"
+        },
+        {
+          "Content": "sensor pod",
+          "Href": "https://starwars.fandom.com/wiki/Sensor_pod"
         }
       ],
       "Values": [
-        "Expansive hangars"
+        "Major design modifications",
+        "Hangars expanded",
+        "Reinforced weapons systems",
+        "Wizard's Tower; comms/sensor pod retrofitted"
       ]
     },
     {
@@ -75,14 +95,10 @@
         {
           "Content": "meters",
           "Href": "https://starwars.fandom.com/wiki/Meter"
-        },
-        {
-          "Content": "ft",
-          "Href": "https://starwars.fandom.com/wiki/Foot"
         }
       ],
       "Values": [
-        "1,088 meters (3,569 ft, 7 in)"
+        "1,088 meters"
       ]
     },
     {
@@ -105,10 +121,14 @@
         {
           "Content": "G",
           "Href": "https://starwars.fandom.com/wiki/G_(unit)"
+        },
+        {
+          "Content": "space",
+          "Href": "https://starwars.fandom.com/wiki/Realspace"
         }
       ],
       "Values": [
-        "2,500G"
+        "2,500G (linear in open space)"
       ]
     },
     {
@@ -131,16 +151,12 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Nubian",
-          "Href": "https://starwars.fandom.com/wiki/Nubia_Star_Drives,_Inc."
-        },
-        {
           "Content": "Creveld-4 radial ion drives",
           "Href": "https://starwars.fandom.com/wiki/Creveld-4_radial_ion_drive"
         }
       ],
       "Values": [
-        "3 Nubian Creveld-4 radial ion drives"
+        "4 Creveld-4 radial ion drives (equipped with emergency boosters)"
       ]
     },
     {
@@ -155,53 +171,38 @@
       "Label": "Hyperdrive system",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "hyperdrive units",
           "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
         }
       ],
       "Values": [
-        "Equipped"
+        "Multiple hyperdrive units"
       ]
     },
     {
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "Power generator",
-          "Href": "https://starwars.fandom.com/wiki/Power_generator"
-        },
-        {
-          "Content": "Reactors",
+          "Content": "main reactor",
           "Href": "https://starwars.fandom.com/wiki/Reactor"
-        },
-        {
-          "Content": "tons",
-          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
-        },
-        {
-          "Content": "hypermatter",
-          "Href": "https://starwars.fandom.com/wiki/Hypermatter"
-        },
-        {
-          "Content": "fuel",
-          "Href": "https://starwars.fandom.com/wiki/Fuel"
         }
       ],
       "Values": [
-        "Power generator",
-        "Reactors (3; together annihilate up to 12,000 tons of hypermatter fuel)"
+        "1 main reactor",
+        "Subsidiary/auxiliary reactors"
       ]
     },
     {
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "deflector shield generators",
           "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         }
       ],
       "Values": [
-        "Equipped"
+        "2 deflector shield generators",
+        "1 atmospheric shield generator"
       ]
     },
     {
@@ -220,80 +221,78 @@
       "Label": "Sensor systems",
       "Links": [
         {
-          "Content": "Sensor",
-          "Href": "https://starwars.fandom.com/wiki/Sensor"
+          "Content": "sensor masts",
+          "Href": "https://starwars.fandom.com/wiki/Sensor_mast"
         }
       ],
       "Values": [
-        "Sensor masts",
-        "Sensor pod"
+        "Communications/sensor masts"
       ]
     },
     {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Quad",
+          "Content": "quad turbolaser turrets",
           "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
         },
         {
-          "Content": "turbolasers",
-          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+          "Content": "heavy laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_laser_cannon"
         },
         {
-          "Content": "laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+          "Content": "battleship ion cannons",
+          "Href": "https://starwars.fandom.com/wiki/Battleship_ion_cannon"
         },
         {
-          "Content": "Point-defense ion cannons",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_ion_cannon"
+          "Content": "mass-driver cannons",
+          "Href": "https://starwars.fandom.com/wiki/Mass-driver_cannon"
         },
         {
-          "Content": "Point-defense laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+          "Content": "warheads",
+          "Href": "https://starwars.fandom.com/wiki/Warhead"
         },
         {
           "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
-          "Content": "Mass-driver cannons",
-          "Href": "https://starwars.fandom.com/wiki/Mass-driver_cannon"
+          "Content": "Point-defense laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         },
         {
-          "Content": "Proton torpedo launchers",
-          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+          "Content": "Anti-aircraft cannons",
+          "Href": "https://starwars.fandom.com/wiki/Anti-aircraft_cannon"
         },
         {
-          "Content": "Tractor beam projectors",
+          "Content": "tractor beam projectors",
           "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "Quad turbolasers (14)",
-        "Dual laser cannons (34)",
-        "Point-defense ion cannons (12)",
+        "14 heavy quad turbolaser turrets",
+        "34 dual heavy laser cannons",
+        "2 battleship ion cannons",
+        "12 heavy mass-driver cannons (23 warheads each)",
+        "12 twin light ion cannons",
         "Point-defense laser cannons",
-        "Heavy ion cannons (2)",
-        "Mass-driver cannons (12)",
-        "Ion cannons (12)",
-        "Proton torpedo launchers (102)",
-        "Tractor beam projectors"
+        "Anti-aircraft cannons",
+        "Heavy tractor beam projectors"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "squadrons",
-          "Href": "https://starwars.fandom.com/wiki/Squadron"
-        },
-        {
           "Content": "droid starfighters",
           "Href": "https://starwars.fandom.com/wiki/Droid_starfighter"
         },
         {
-          "Content": "Droid tri-fighters",
+          "Content": "squadrons",
+          "Href": "https://starwars.fandom.com/wiki/Squadron"
+        },
+        {
+          "Content": "droid tri-fighters",
           "Href": "https://starwars.fandom.com/wiki/Droid_tri-fighter"
         },
         {
@@ -301,20 +300,20 @@
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
+          "Content": "assault vehicles",
+          "Href": "https://starwars.fandom.com/wiki/Assault_vehicle"
+        },
+        {
+          "Content": "Multi-Troop Transport",
+          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
+        },
+        {
           "Content": "Armored Assault Tanks",
           "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
         },
         {
-          "Content": "IG-227 Hailfire-class droid tanks",
+          "Content": "Hailfire droid tanks",
           "Href": "https://starwars.fandom.com/wiki/IG-227_Hailfire-class_droid_tank"
-        },
-        {
-          "Content": "LM-432 crab droids",
-          "Href": "https://starwars.fandom.com/wiki/LM-432_crab_droid"
-        },
-        {
-          "Content": "Multi-Troop Transports",
-          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
         },
         {
           "Content": "OG-9 homing spider droids",
@@ -322,14 +321,13 @@
         }
       ],
       "Values": [
-        "20 squadrons of droid starfighters",
-        "Droid tri-fighters (120)",
-        "Vulture-class droid starfighters (120)",
-        "440 ground assault vehicles",
+        "240 droid starfighters (20 squadrons)",
+        "120 droid tri-fighters",
+        "120 Vulture-class droid starfighters",
+        "440 assault vehicles",
+        "160 Multi-Troop Transport",
         "Armored Assault Tanks",
-        "IG-227 Hailfire-class droid tanks",
-        "LM-432 crab droids",
-        "Multi-Troop Transports (160)",
+        "Hailfire droid tanks",
         "OG-9 homing spider droids"
       ]
     },
@@ -337,7 +335,7 @@
       "Label": "Docking bays",
       "Links": [],
       "Values": [
-        "2 main hangars"
+        "1 main hangar (expanded in modification)"
       ]
     },
     {
@@ -360,24 +358,37 @@
           "Href": "https://starwars.fandom.com/wiki/Neimoidian"
         },
         {
-          "Content": "OOM command battle droids",
+          "Content": "OOM-series battle droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM-series_battle_droid"
+        },
+        {
+          "Content": "commanders",
           "Href": "https://starwars.fandom.com/wiki/OOM_command_battle_droid"
         },
         {
-          "Content": "OOM pilot battle droids",
+          "Content": "pilots",
           "Href": "https://starwars.fandom.com/wiki/OOM_pilot_battle_droid"
+        },
+        {
+          "Content": "cybernetically",
+          "Href": "https://starwars.fandom.com/wiki/Cybernetics"
         }
       ],
       "Values": [
-        "900",
+        "900 crewmembers",
         "Neimoidians",
-        "OOM command battle droids",
-        "OOM pilot battle droids"
+        "OOM-series battle droids (commanders and pilots)",
+        "Other conscripted crew",
+        "Partially cybernetically directed"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [
+        {
+          "Content": "legion",
+          "Href": "https://starwars.fandom.com/wiki/Legion"
+        },
         {
           "Content": "B1-series battle droids",
           "Href": "https://starwars.fandom.com/wiki/B1-series_battle_droid"
@@ -387,12 +398,16 @@
           "Href": "https://starwars.fandom.com/wiki/B2-series_super_battle_droid"
         },
         {
-          "Content": "OOM-series security droids",
-          "Href": "https://starwars.fandom.com/wiki/OOM-series_security_droid"
+          "Content": "Droidekas",
+          "Href": "https://starwars.fandom.com/wiki/Droideka"
         },
         {
-          "Content": "Q-series droidekas",
+          "Content": "Q-series",
           "Href": "https://starwars.fandom.com/wiki/Q-series_droideka"
+        },
+        {
+          "Content": "OOM-series security droids",
+          "Href": "https://starwars.fandom.com/wiki/OOM-series_security_droid"
         },
         {
           "Content": "battle droids",
@@ -400,11 +415,48 @@
         }
       ],
       "Values": [
+        "1 legion-sized invasion force",
         "B1-series battle droids",
         "B2-series super battle droids",
+        "Droidekas, including the Q-series",
         "OOM-series security droids",
-        "Q-series droidekas",
-        "1.5 million deactivated battle droids"
+        "Another 1.5 million deactivated battle droids"
+      ]
+    },
+    {
+      "Label": "Cargo handling systems",
+      "Links": [],
+      "Values": [
+        "Freight shaft",
+        "Hangar cranes",
+        "Heavy lift platforms"
+      ]
+    },
+    {
+      "Label": "Consumables",
+      "Links": [
+        {
+          "Content": "tonnes",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        },
+        {
+          "Content": "hypermatter",
+          "Href": "https://starwars.fandom.com/wiki/Hypermatter"
+        },
+        {
+          "Content": "fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel"
+        }
+      ],
+      "Values": [
+        "Approx. 12,000 tonnes of exotic hypermatter fuel (annihilated per second)"
+      ]
+    },
+    {
+      "Label": "Life support",
+      "Links": [],
+      "Values": [
+        "Air ducts (minimal atmospheric circulation)"
       ]
     },
     {
@@ -428,20 +480,12 @@
       "Label": "Other systems",
       "Links": [
         {
-          "Content": "engines",
-          "Href": "https://starwars.fandom.com/wiki/Engine"
+          "Content": "Artificial gravity generators",
+          "Href": "https://starwars.fandom.com/wiki/Artificial_gravity_generator"
         },
         {
           "Content": "Inertial compensator",
           "Href": "https://starwars.fandom.com/wiki/Acceleration_compensator"
-        },
-        {
-          "Content": "Ray shields",
-          "Href": "https://starwars.fandom.com/wiki/Ray_shield"
-        },
-        {
-          "Content": "Stabilizers",
-          "Href": "https://starwars.fandom.com/wiki/Stabilizer"
         },
         {
           "Content": "Tensor fields",
@@ -449,11 +493,9 @@
         }
       ],
       "Values": [
-        "Emergency airbrake panels",
-        "Emergency booster engines",
+        "Artificial gravity generators",
+        "Compressed reactant tanks",
         "Inertial compensator",
-        "Ray shields",
-        "Stabilizers",
         "Tensor fields"
       ]
     },
@@ -461,17 +503,22 @@
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Command ship",
-          "Href": "https://starwars.fandom.com/wiki/Command_ship"
+          "Content": "Naval",
+          "Href": "https://starwars.fandom.com/wiki/Navy"
         },
         {
-          "Content": "Flagship",
+          "Content": "flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
+        },
+        {
+          "Content": "planetary",
+          "Href": "https://starwars.fandom.com/wiki/Planet"
         }
       ],
       "Values": [
-        "Command ship",
-        "Flagship"
+        "Mobile command base",
+        "Naval flagship",
+        "Total planetary domination"
       ]
     },
     {
@@ -496,10 +543,15 @@
         {
           "Content": "Battle of Coruscant",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Coruscant"
+        },
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
         }
       ],
       "Values": [
-        "Battle of Coruscant"
+        "Battle of Coruscant",
+        "Other Clone Wars battles"
       ]
     },
     {
@@ -537,6 +589,18 @@
       ]
     },
     {
+      "Label": "Fleet",
+      "Links": [
+        {
+          "Content": "Coruscant attack fleet",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet"
+        }
+      ],
+      "Values": [
+        "Coruscant attack fleet"
+      ]
+    },
+    {
       "Label": "Owner(s)",
       "Links": [
         {
@@ -557,12 +621,12 @@
       "Label": "Commander(s)",
       "Links": [
         {
-          "Content": "Neimoidian captain",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Neimoidian_captain_(Invisible_Hand)"
+          "Content": "Lushros Dofine",
+          "Href": "https://starwars.fandom.com/wiki/Lushros_Dofine"
         }
       ],
       "Values": [
-        "Neimoidian captain"
+        "Lushros Dofine"
       ]
     },
     {
@@ -578,24 +642,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 543804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wizard's_Tower",
+      "PageId": 601339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hallway_328",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 503737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 452893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 543587,
-      "PageUrl": "https://starwars.fandom.com/wiki/31174",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 790633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 535690,
@@ -608,14 +662,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
+      "PageId": 749383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand's_main_hangar_bay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 606512,
       "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 550802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_Eta-2_Actis-class_light_interceptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 452893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 735601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aurebesh_script_(N-1_Starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
     },
     {
       "PageId": 603029,
@@ -623,8 +687,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 601339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hallway_328",
+      "PageId": 550802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker's_Eta-2_Actis-class_light_interceptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 503737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 543587,
+      "PageUrl": "https://starwars.fandom.com/wiki/31174",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 543804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wizard's_Tower",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

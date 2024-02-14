@@ -75,7 +75,7 @@
         }
       ],
       "Values": [
-        "White or red"
+        "White or yellow"
       ]
     },
     {
@@ -100,6 +100,10 @@
         {
           "Content": "Fett gotra",
           "Href": "https://starwars.fandom.com/wiki/Fett_gotra"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
         }
       ],
       "Values": [
@@ -107,24 +111,35 @@
         "Galactic Republic",
         "Galactic Empire",
         "Jabba's criminal empire",
-        "Fett gotra"
+        "Fett gotra",
+        "Plazir-15 government"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 622443,
+      "PageUrl": "https://starwars.fandom.com/wiki/LEP-10019",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 779532,
+      "PageUrl": "https://starwars.fandom.com/wiki/CH5-09",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 647169,
       "PageUrl": "https://starwars.fandom.com/wiki/LEP-171B",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 404165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_LEP_servant_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 452675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 497741,
-      "PageUrl": "https://starwars.fandom.com/wiki/BNI-393",
+      "PageId": 404165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_LEP_servant_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -138,13 +153,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 622443,
-      "PageUrl": "https://starwars.fandom.com/wiki/LEP-10019",
+      "PageId": 497741,
+      "PageUrl": "https://starwars.fandom.com/wiki/BNI-393",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 584298,
       "PageUrl": "https://starwars.fandom.com/wiki/LEP-86C8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 746600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_LEP_servant_droid_(Trueping's)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

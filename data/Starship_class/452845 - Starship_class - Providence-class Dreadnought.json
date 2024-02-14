@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Quarren",
+          "Href": "https://starwars.fandom.com/wiki/Quarren"
+        }
+      ],
+      "Values": [
+        "Quarren"
+      ]
+    },
+    {
       "Label": "Manufacturer",
       "Links": [
         {
@@ -29,32 +41,20 @@
       ]
     },
     {
-      "Label": "Designer",
-      "Links": [
-        {
-          "Content": "Quarren",
-          "Href": "https://starwars.fandom.com/wiki/Quarren"
-        }
-      ],
-      "Values": [
-        "Quarren"
-      ]
-    },
-    {
       "Label": "Model",
       "Links": [
         {
-          "Content": "Providence-class Carrier",
+          "Content": "Carrier variant",
           "Href": "https://starwars.fandom.com/wiki/Providence-class_Carrier"
         }
       ],
       "Values": [
         "Providence-class Dreadnought",
-        "Providence-class Carrier"
+        "Carrier variant"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
@@ -184,16 +184,28 @@
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "Equipped",
-          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
+          "Content": "deflector shielding",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield"
         },
         {
-          "Content": "thermal shield",
+          "Content": "thermal shields",
           "Href": "https://starwars.fandom.com/wiki/Thermal_shield"
         }
       ],
       "Values": [
-        "Equipped; thermal shield"
+        "Heavy deflector shielding (thermal shields)"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "armor",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        }
+      ],
+      "Values": [
+        "Thick armor"
       ]
     },
     {
@@ -224,31 +236,31 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "quad turbolaser cannons",
+          "Content": "quad heavy turbolaser batteries",
           "Href": "https://starwars.fandom.com/wiki/Quad_turbolaser_cannon"
         },
         {
-          "Content": "laser cannon",
-          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+          "Content": "heavy laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_laser_cannon"
         },
         {
-          "Content": "turrets",
-          "Href": "https://starwars.fandom.com/wiki/Turret"
+          "Content": "battleship ion cannons",
+          "Href": "https://starwars.fandom.com/wiki/Battleship_ion_cannon"
         },
         {
-          "Content": "point-defense ion cannons",
-          "Href": "https://starwars.fandom.com/wiki/Point-defense_ion_cannon"
+          "Content": "flak cannons",
+          "Href": "https://starwars.fandom.com/wiki/Flak_gun"
+        },
+        {
+          "Content": "mass-driver cannons",
+          "Href": "https://starwars.fandom.com/wiki/Mass-driver_cannon"
         },
         {
           "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
-          "Content": "flak guns",
-          "Href": "https://starwars.fandom.com/wiki/Flak_gun"
-        },
-        {
-          "Content": "Proton torpedo launchers",
+          "Content": "proton torpedo launchers",
           "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
         },
         {
@@ -261,68 +273,44 @@
         }
       ],
       "Values": [
-        "Heavy quad turbolaser cannons (14)",
-        "Dual heavy laser cannon turrets (34)",
-        "Twin light point-defense ion cannons (12)",
-        "Heavy ion cannons (2)",
-        "Heavy flak guns (12)",
-        "Ion cannons (12)",
-        "Proton torpedo launchers (102)",
-        "3 proton torpedoes each",
-        "Heavy tractor beam projectors (10)"
+        "14 quad heavy turbolaser batteries",
+        "34 dual heavy laser cannons",
+        "2 battleship ion cannons",
+        "12 heavy flak cannons/mass-driver cannons",
+        "12 twin light ion cannons",
+        "102 proton torpedo launchers (3 proton torpedoes each)",
+        "10 heavy tractor beam projectors"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
+          "Content": "starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
           "Content": "Vulture-class droid starfighters",
           "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
-          "Content": "Droid tri-fighters",
+          "Content": "droid tri-fighters",
           "Href": "https://starwars.fandom.com/wiki/Droid_tri-fighter"
         },
         {
-          "Content": "Hyena-class Droid Bombers",
-          "Href": "https://starwars.fandom.com/wiki/Hyena-class_Droid_Fighter/Bomber"
-        },
-        {
-          "Content": "HMP droid gunships",
-          "Href": "https://starwars.fandom.com/wiki/HMP_droid_gunship"
-        },
-        {
-          "Content": "droid",
-          "Href": "https://starwars.fandom.com/wiki/Droid"
-        },
-        {
-          "Content": "Armored Assault Tanks",
-          "Href": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I"
-        },
-        {
-          "Content": "Multi-Troop Transports",
-          "Href": "https://starwars.fandom.com/wiki/Multi-Troop_Transport"
-        },
-        {
-          "Content": "Landing craft",
+          "Content": "landing craft",
           "Href": "https://starwars.fandom.com/wiki/Landing_craft"
         },
         {
-          "Content": "Shuttles",
+          "Content": "shuttles",
           "Href": "https://starwars.fandom.com/wiki/Shuttle"
         }
       ],
       "Values": [
-        "Vulture-class droid starfighters (120)",
-        "Droid tri-fighters (120)",
-        "Hyena-class Droid Bombers (10)",
-        "HMP droid gunships",
-        "Hundreds of droid armored vehicles",
-        "Armored Assault Tanks",
-        "Multi-Troop Transports",
-        "Landing craft",
-        "Shuttles",
-        "Ship's boats"
+        "240 starfighters",
+        "120 Vulture-class droid starfighters",
+        "120 droid tri-fighters",
+        "100+ armored vehicles, landing craft, shuttles, and ship's boats"
       ]
     },
     {
@@ -433,24 +421,54 @@
       "Label": "Role(s)",
       "Links": [
         {
+          "Content": "Assault ship",
+          "Href": "https://starwars.fandom.com/wiki/Assault_ship"
+        },
+        {
+          "Content": "Blockade",
+          "Href": "https://starwars.fandom.com/wiki/Blockade"
+        },
+        {
           "Content": "Command ship",
           "Href": "https://starwars.fandom.com/wiki/Command_ship"
         },
         {
-          "Content": "Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Cruiser"
-        },
-        {
-          "Content": "carrier",
-          "Href": "https://starwars.fandom.com/wiki/Carrier"
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
         }
       ],
       "Values": [
-        "Battleship",
-        "Command ship",
-        "Cruiser-carrier",
+        "Configurable",
+        "Assault ship",
+        "Blockade vessel",
+        "Command ship (primary function)",
         "Planetary assault",
+        "Starfighter and vehicle carrier",
         "Theater command"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "32 BBY",
+          "Href": "https://starwars.fandom.com/wiki/32_BBY"
+        }
+      ],
+      "Values": [
+        "By 32 BBY"
+      ]
+    },
+    {
+      "Label": "Retired",
+      "Links": [
+        {
+          "Content": "Imperial Era",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
+        }
+      ],
+      "Values": [
+        "Imperial Era"
       ]
     },
     {
@@ -498,18 +516,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 597316,
-      "PageUrl": "https://starwars.fandom.com/wiki/Point-defense_ion_cannon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 483812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invincible",
+      "PageId": 466804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 483941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucid_Voice",
+      "PageId": 786442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Providence-class_carrier/destroyer_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 575849,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -518,33 +536,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 683232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 785589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Providence-class_Dreadnought_(Attack_on_a_Republic_fleet)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 532840,
       "PageUrl": "https://starwars.fandom.com/wiki/Invulnerable",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 485838,
-      "PageUrl": "https://starwars.fandom.com/wiki/Free_Dac_Volunteers_Engineering_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 575849,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_Providence-class_Dreadnought",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 584369,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 600000,
       "PageUrl": "https://starwars.fandom.com/wiki/Grievous's_Providence-class_Dreadnought_(Campaign_against_the_Shadow_Collective)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 466804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -568,9 +576,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 683232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Carrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 584369,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aut-O's_flagship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 747826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Providence-class_Dreadnought_(Dac)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 597316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Point-defense_ion_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 483812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invincible",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 483941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucid_Voice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 485838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Free_Dac_Volunteers_Engineering_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

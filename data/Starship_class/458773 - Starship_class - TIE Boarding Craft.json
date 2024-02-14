@@ -2,25 +2,13 @@
   "PageId": 458773,
   "PageUrl": "https://starwars.fandom.com/wiki/TIE_Boarding_Craft",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/df/TIE_boarding_craft-TFOWM.png/revision/latest?cb=20191019225525",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9b/TIEBoardingCraft-Fathead.png/revision/latest?cb=20230802021952",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "TIE Boarding Craft"
-      ]
-    },
-    {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Sienar Fleet Systems",
-          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
-        }
-      ],
-      "Values": [
-        "Sienar Fleet Systems"
       ]
     },
     {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Raith Sienar"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Sienar Fleet Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems"
+        }
+      ],
+      "Values": [
+        "Sienar Fleet Systems"
       ]
     },
     {
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Shuttle",
@@ -123,9 +123,14 @@
     },
     {
       "Label": "MGLT",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "megalight per hour",
+          "Href": "https://starwars.fandom.com/wiki/Megalight_per_hour"
+        }
+      ],
       "Values": [
-        "90"
+        "90 megalight per hour"
       ]
     },
     {
@@ -189,7 +194,12 @@
     },
     {
       "Label": "Navigation system",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "N-s4 Navcon",
+          "Href": "https://starwars.fandom.com/wiki/N-s4_Navcon"
+        }
+      ],
       "Values": [
         "N-s4 Navcon"
       ]
@@ -325,5 +335,26 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 595181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cantwell-class_Arrestor_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 778714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elk's_Cantwell-class_Arrestor_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 746531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Segra-Milo_Imperial_patrol's_air_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

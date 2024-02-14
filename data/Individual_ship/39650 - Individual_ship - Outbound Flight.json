@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Dreadnaught-class heavy cruisers",
@@ -67,6 +67,14 @@
       ]
     },
     {
+      "Label": "Hyperdrive rating",
+      "Links": [],
+      "Values": [
+        "Class 2",
+        "Class 18 (backup)"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -74,22 +82,26 @@
           "Href": "https://starwars.fandom.com/wiki/Turbolaser/Legends"
         },
         {
-          "Content": "laser cannons",
+          "Content": "laser cannon",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon/Legends"
+        },
+        {
+          "Content": "quad",
+          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon/Legends"
         },
         {
           "Content": "laser",
           "Href": "https://starwars.fandom.com/wiki/Laser/Legends"
         },
         {
-          "Content": "cannons",
+          "Content": "cannon",
           "Href": "https://starwars.fandom.com/wiki/Cannon/Legends"
         }
       ],
       "Values": [
-        "60 turbolaser batteries",
-        "60 laser cannons",
-        "120 quad laser cannons"
+        "15 turbolaser batteries",
+        "3 laser cannon batteries",
+        "5 quad laser cannon batteries"
       ]
     },
     {
@@ -98,10 +110,15 @@
         {
           "Content": "Delta-12 Skysprite-class",
           "Href": "https://starwars.fandom.com/wiki/Delta-12_Skysprite-class"
+        },
+        {
+          "Content": "shuttlecraft",
+          "Href": "https://starwars.fandom.com/wiki/Shuttle/Legends"
         }
       ],
       "Values": [
-        "1 Delta-12 Skysprite-class"
+        "1 Delta-12 Skysprite-class",
+        "Various shuttlecraft"
       ]
     },
     {
@@ -132,7 +149,7 @@
         }
       ],
       "Values": [
-        "45,000 civilians",
+        "46,000",
         "20 Jedi",
         "6 Jedi Masters",
         "13 Jedi Knights",
@@ -149,6 +166,13 @@
       ],
       "Values": [
         "10 years"
+      ]
+    },
+    {
+      "Label": "Availability",
+      "Links": [],
+      "Values": [
+        "Military, not available for sale"
       ]
     },
     {
@@ -176,10 +200,14 @@
         {
           "Content": "27 BBY",
           "Href": "https://starwars.fandom.com/wiki/27_BBY/Legends"
+        },
+        {
+          "Content": "planetoid",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_planetoid_(The_Redoubt)"
         }
       ],
       "Values": [
-        "27 BBY"
+        "27 BBY, a planetoid"
       ]
     },
     {
@@ -195,7 +223,8 @@
         }
       ],
       "Values": [
-        "Galactic Republic, Jedi"
+        "Galactic Republic",
+        "Jedi"
       ]
     },
     {
@@ -270,14 +299,54 @@
   ],
   "Relationships": [
     {
-      "PageId": 11568,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lorana_Jinzler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 400343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expedition_to_Outbound_Flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 4651,
       "PageUrl": "https://starwars.fandom.com/wiki/Jorus_C'baoth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 54333,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pakmillu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 370494,
+      "PageUrl": "https://starwars.fandom.com/wiki/Combined_Operations_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 788899,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_medic_(Outbound_Flight)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chas_Uliar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brace_Tarkosa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobe_Keely",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 55580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Evrios",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 174762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_Outbound_Flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 51795,
@@ -287,16 +356,6 @@
     {
       "PageId": 55267,
       "PageUrl": "https://starwars.fandom.com/wiki/Justyn_Ma'Ning",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 370494,
-      "PageUrl": "https://starwars.fandom.com/wiki/Combined_Operations_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 54333,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pakmillu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -330,33 +389,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 400343,
-      "PageUrl": "https://starwars.fandom.com/wiki/Expedition_to_Outbound_Flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 55534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chas_Uliar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 55537,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brace_Tarkosa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 55538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jobe_Keely",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 55580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Evrios",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 55586,
-      "PageUrl": "https://starwars.fandom.com/wiki/B'Crevnis",
+      "PageId": 11568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lorana_Jinzler",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

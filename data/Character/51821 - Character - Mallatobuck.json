@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Chewbacca's family",
@@ -46,7 +46,51 @@
       "Values": [
         "Chewbacca's family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Chewbacca",
+          "Href": "https://starwars.fandom.com/wiki/Chewbacca"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Chewbacca (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Lumpawaroo",
+          "Href": "https://starwars.fandom.com/wiki/Lumpawaroo"
+        }
+      ],
+      "Values": [
+        "Lumpawaroo"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 724161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jafloya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 565112,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lumpawaroo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

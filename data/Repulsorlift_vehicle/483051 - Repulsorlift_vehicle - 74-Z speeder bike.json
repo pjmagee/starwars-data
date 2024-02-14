@@ -2,7 +2,7 @@
   "PageId": 483051,
   "PageUrl": "https://starwars.fandom.com/wiki/74-Z_speeder_bike",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/47/Speeder_Bike_DICE.png/revision/latest?cb=20171102044625",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/47/Speeder_Bike_DICE.png/revision/latest?cb=20230723010519",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Speeder bike",
@@ -91,6 +91,46 @@
       ]
     },
     {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "Power generator",
+          "Href": "https://starwars.fandom.com/wiki/Power_generator"
+        },
+        {
+          "Content": "fuel cells",
+          "Href": "https://starwars.fandom.com/wiki/Fuel_cell"
+        }
+      ],
+      "Values": [
+        "Power generator with self-charging fuel cells"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "scanner",
+          "Href": "https://starwars.fandom.com/wiki/Scanner"
+        }
+      ],
+      "Values": [
+        "Forward multi-scanner array"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "Tracking sensor",
+          "Href": "https://starwars.fandom.com/wiki/Tracking_sensor"
+        }
+      ],
+      "Values": [
+        "Tracking sensor"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -116,9 +156,15 @@
     },
     {
       "Label": "Other systems",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Signal jammer",
+          "Href": "https://starwars.fandom.com/wiki/Signal_jammer"
+        }
+      ],
       "Values": [
-        "Terrain sensor"
+        "Terrain sensor",
+        "Signal jammer"
       ]
     },
     {
@@ -156,14 +202,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 666086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 458392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_I-class_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 527453,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hellhound_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
+      "PageId": 544759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Imperial_I-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 781255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Lancers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 552703,
@@ -172,7 +223,7 @@
     },
     {
       "PageId": 562776,
-      "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport_(original)",
+      "PageUrl": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport_(Prototype)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
@@ -196,9 +247,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 480727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 585080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 741352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aldhani_Garrison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 527453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hellhound_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
       "PageId": 677612,
@@ -211,9 +272,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 544759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Imperial_I-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 115989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sentinel-class_landing_craft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 666086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 110013,
@@ -226,9 +292,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 585080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 480727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aratech_Repulsor_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

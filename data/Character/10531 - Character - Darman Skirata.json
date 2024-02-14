@@ -66,6 +66,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "he/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -97,6 +104,54 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Clan Skirata",
+          "Href": "https://starwars.fandom.com/wiki/Clan_Skirata"
+        }
+      ],
+      "Values": [
+        "Clan Skirata"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kal Skirata",
+          "Href": "https://starwars.fandom.com/wiki/Kal_Skirata"
+        }
+      ],
+      "Values": [
+        "Kal Skirata (Adoptive)"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Etain Tur-Mukan",
+          "Href": "https://starwars.fandom.com/wiki/Etain_Tur-Mukan"
+        }
+      ],
+      "Values": [
+        "Etain Tur-Mukan"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Venku Skirata",
+          "Href": "https://starwars.fandom.com/wiki/Venku_Skirata"
+        }
+      ],
+      "Values": [
+        "Venku Skirata"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -112,10 +167,6 @@
           "Href": "https://starwars.fandom.com/wiki/Omega_Squad"
         },
         {
-          "Content": "Clan Skirata",
-          "Href": "https://starwars.fandom.com/wiki/Clan_Skirata"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
@@ -124,22 +175,25 @@
         "Galactic Republic",
         "Theta Squad",
         "Omega Squad",
-        "Clan Skirata",
         "Galactic Empire"
-      ]
-    },
-    {
-      "Label": "Masters",
-      "Links": [
-        {
-          "Content": "Kal Skirata",
-          "Href": "https://starwars.fandom.com/wiki/Kal_Skirata"
-        }
-      ],
-      "Values": [
-        "Kal Skirata"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 99108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Venku_Skirata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 168375,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 22678,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kal_Skirata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

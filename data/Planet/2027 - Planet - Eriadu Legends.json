@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-18"
@@ -147,12 +147,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "13,490 km"
+        "13,490 kilometers"
       ]
     },
     {
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Industrial cityscape",
@@ -206,7 +206,7 @@
       "Links": [
         {
           "Content": "Ja-Phelar Bay",
-          "Href": "https://starwars.fandom.com/wiki/Ja-Phelar_Bay"
+          "Href": "https://starwars.fandom.com/wiki/Bay_of_Conquest"
         },
         {
           "Content": "Eriadu Manufacturing Shipyards",
@@ -219,6 +219,10 @@
         {
           "Content": "Eriadu Planetary Security Launchport",
           "Href": "https://starwars.fandom.com/wiki/Eriadu_Planetary_Security_Launchport"
+        },
+        {
+          "Content": "Ja Knoll",
+          "Href": "https://starwars.fandom.com/wiki/Ja_Knoll"
         },
         {
           "Content": "Orrineswa River",
@@ -282,7 +286,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -445,9 +449,59 @@
   ],
   "Relationships": [
     {
-      "PageId": 7395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phelar/Legends",
+      "PageId": 91268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drost_Elegin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 589528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Eriadu_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 14163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eru_Matalis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 431795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Spaceport_Control",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 91802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 191912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Imperial_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 11531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Laslo_Dorits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 553649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Psyrel_Capanus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 91973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 25265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Town_Factoryville",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 14320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rella",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 375395,
@@ -455,13 +509,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 272503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Authority",
+      "PageId": 14476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boiny",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 11283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nebula_Front/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 431795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Spaceport_Control",
+      "PageId": 11521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stark_Veteran_Assembly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 13869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 366015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin's_mansion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 7395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 272503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Authority",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -470,9 +549,84 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "PageId": 375991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greater_Seswenna/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 10349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rivoche_Tarkin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 371474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_News_Service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 120028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deppo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 93125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Septoid/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 264140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_Memorial_Conference_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 306405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Eriadu_(pre–Battle_of_Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 402349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eriaduan_senator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon_Tarkin/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nothoiin_Corridor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 44883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Themion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Trade_Summit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 12283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelbis_Nu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 15139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rights_of_Sentience_League",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 11800,
@@ -488,6 +642,81 @@
       "PageId": 18439,
       "PageUrl": "https://starwars.fandom.com/wiki/Ranulph_Tarkin/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 31942,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan_rat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 326243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flow-mollusk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 55806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ja_highlands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 760563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ja_Knoll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 24194,
+      "PageUrl": "https://starwars.fandom.com/wiki/AccuTronics/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 2744,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Valorum/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 772706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chloride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 13832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_City/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 65152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Customs_and_Immigration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 11391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arwen_Cohl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 74636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 320726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bay_of_Conquest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 13048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oversector_Outer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 120,
@@ -510,233 +739,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 44263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Eriadu_(Great_Jedi_Purge)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 14476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boiny",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 553649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Psyrel_Capanus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 74636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Outland_Regions_Security_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 11283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nebula_Front/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 11521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stark_Veteran_Assembly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 13048,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oversector_Outer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 13869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 11531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Laslo_Dorits",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 24194,
-      "PageUrl": "https://starwars.fandom.com/wiki/AccuTronics/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 2744,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Valorum/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 5003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 589528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Eriadu_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 371775,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eris_Harro/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 371474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_News_Service",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 375991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Greater_Seswenna/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 91973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 15137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Trade_Summit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 120028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deppo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 676933,
       "PageUrl": "https://starwars.fandom.com/wiki/Tohn_Kalena",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 13832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_City/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 500057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Manufacturing_Shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 191912,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Imperial_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 877,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 31942,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriaduan_rat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 4709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nothoiin_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 187241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_prototype_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 306405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Eriadu_(pre–Battle_of_Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 320726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ja-Phelar_Bay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 12283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kelbis_Nu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 366015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin's_mansion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 55806,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 402349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Eriaduan_senator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 7294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gideon_Tarkin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 91802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 10349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rivoche_Tarkin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 11391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arwen_Cohl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wilhuff_Tarkin/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 44883,
-      "PageUrl": "https://starwars.fandom.com/wiki/Themion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 4443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_family/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 264140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_Memorial_Conference_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 14163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eru_Matalis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 13838,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_Hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 149656,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Governor's_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 14320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rella",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 91268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drost_Elegin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -745,14 +749,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 15139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rights_of_Sentience_League",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 44263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Eriadu_(Great_Jedi_Purge)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 65152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Customs_and_Immigration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 500057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Manufacturing_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 5003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 371775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eris_Harro/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 149656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_Governor's_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 187241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_prototype_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 13838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna_Hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

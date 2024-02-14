@@ -27,12 +27,12 @@
       "Label": "Died",
       "Links": [
         {
-          "Content": "3 ABY",
-          "Href": "https://starwars.fandom.com/wiki/3_ABY"
+          "Content": "10 BBY",
+          "Href": "https://starwars.fandom.com/wiki/10_BBY"
         }
       ],
       "Values": [
-        "By 3 ABY, Glee Anselm"
+        "By c. 10 BBY, Glee Anselm"
       ]
     },
     {
@@ -45,18 +45,6 @@
       ],
       "Values": [
         "Nautolan"
-      ]
-    },
-    {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
       ]
     },
     {
@@ -79,12 +67,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
-      "Links": [],
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Nakano Lash's family",
+          "Href": "https://starwars.fandom.com/wiki/Nakano_Lash%27s_family"
+        }
+      ],
       "Values": [
         "Nakano Lash's family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Nakano Lash's mother",
+          "Href": "https://starwars.fandom.com/wiki/Nakano_Lash%27s_mother"
+        }
+      ],
+      "Values": [
+        "Nakano Lash's mother"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Nakano Lash",
+          "Href": "https://starwars.fandom.com/wiki/Nakano_Lash"
+        }
+      ],
+      "Values": [
+        "Nakano Lash"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 638904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakano_Lash",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nakano_Lash's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 482850,
   "PageUrl": "https://starwars.fandom.com/wiki/IT-O_Interrogation_Unit",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8e/IT-O_Interrogation_Unit.jpg/revision/latest?cb=20150304052730",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/InterrogationDroid-SW100Objects.png/revision/latest?cb=20230419002958",
   "Data": [
     {
       "Label": "Titles",
@@ -63,7 +63,8 @@
       "Label": "Plating color",
       "Links": [],
       "Values": [
-        "Black"
+        "Black",
+        "White"
       ]
     },
     {
@@ -145,23 +146,58 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau"
         },
         {
+          "Content": "Ubrik Adelhard's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Ubrik_Adelhard%27s_Imperial_remnant"
+        },
+        {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
         },
         {
           "Content": "Gideon's Imperial remnant",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Security Bureau",
+        "Ubrik Adelhard's Imperial remnant",
         "New Republic",
-        "Gideon's Imperial remnant"
+        "Gideon's Imperial remnant",
+        "Plazir-15 government"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 624638,
+      "PageUrl": "https://starwars.fandom.com/wiki/IT-O",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 471818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 496581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Doctor_Ball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 703074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vendetta_(Freemarker_Adventures)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 458491,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Department_of_Military_Research",
@@ -170,16 +206,6 @@
     {
       "PageId": 555033,
       "PageUrl": "https://starwars.fandom.com/wiki/Pinprick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 496581,
-      "PageUrl": "https://starwars.fandom.com/wiki/Doctor_Ball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 624638,
-      "PageUrl": "https://starwars.fandom.com/wiki/IT-O",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

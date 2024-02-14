@@ -62,10 +62,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-6"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Overic Griplink",
+          "Href": "https://starwars.fandom.com/wiki/Overic_Griplink/Legends"
+        }
+      ],
+      "Values": [
+        "Overic Griplink"
       ]
     },
     {
@@ -117,7 +129,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -137,16 +149,11 @@
       "Label": "Fauna",
       "Links": [
         {
-          "Content": "Bats",
-          "Href": "https://starwars.fandom.com/wiki/Bat/Legends"
-        },
-        {
           "Content": "Tappratine",
           "Href": "https://starwars.fandom.com/wiki/Tappratine"
         }
       ],
       "Values": [
-        "Bats",
         "Tappratine"
       ]
     },
@@ -261,64 +268,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 34476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tappratine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 397431,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tassa's_father",
+      "PageId": 160317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Attal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 127008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hyos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 127015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kirl_(Codru-Ji)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 155090,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kassek-Ka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 294201,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Codru-Ji_clan_leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 62107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iyon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9223,
-      "PageUrl": "https://starwars.fandom.com/wiki/Capital_Codru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 397432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Codru-Ji_clan_leader_meeting",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 78939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_on_Munto_Codru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 272659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Overic_Griplink/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 203232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Munto_Codru",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     },
     {
       "PageId": 160319,
@@ -336,16 +288,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 160713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forbidden_Castle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 7304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Codru_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 28224,
       "PageUrl": "https://starwars.fandom.com/wiki/Codru-Ji",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -354,6 +296,81 @@
       "PageId": 28227,
       "PageUrl": "https://starwars.fandom.com/wiki/Wyrwulf",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 7304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Codru_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 9223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capital_Codru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 44897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Codruese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 62107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 397432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Codru-Ji_clan_leader_meeting",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 155090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kassek-Ka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 78939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kidnapping_on_Munto_Codru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 203232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assassination_on_Munto_Codru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 34476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tappratine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 272659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Overic_Griplink/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 397431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tassa's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 160713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forbidden_Castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 127008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hyos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 127015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kirl_(Codru-Ji)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 294201,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Codru-Ji_clan_leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -15,16 +15,12 @@
       "Label": "Conflict",
       "Links": [
         {
-          "Content": "Imperial Period conflicts",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Period"
-        },
-        {
           "Content": "Sarlacc Project campaign",
           "Href": "https://starwars.fandom.com/wiki/Sarlacc_Project_campaign"
         }
       ],
       "Values": [
-        "Imperial Period conflicts (Sarlacc Project campaign)"
+        "Sarlacc Project campaign"
       ]
     },
     {
@@ -53,23 +49,18 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Alderaanian Resistance",
+          "Href": "https://starwars.fandom.com/wiki/Alderaanian_Resistance"
+        }
+      ],
       "Values": [
-        "Resistance victory"
+        "Alderaanian Resistance victory"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 723447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alya_Aldrete's_smuggler_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 12833,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core_Security_Zone/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
     {
       "PageId": 284093,
       "PageUrl": "https://starwars.fandom.com/wiki/Byss_Defense_Fleet",
@@ -79,6 +70,16 @@
       "PageId": 176137,
       "PageUrl": "https://starwars.fandom.com/wiki/Super_Star_Destroyer_prototype",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 723447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alya_Aldrete's_smuggler_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 12833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core_Security_Zone/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

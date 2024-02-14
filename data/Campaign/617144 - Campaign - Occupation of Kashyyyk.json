@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Conflict",
+      "Links": [
+        {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
+        }
+      ],
+      "Values": [
+        "Galactic Civil War (late)"
+      ]
+    },
+    {
       "Label": "Begin",
       "Links": [
         {
@@ -20,7 +32,7 @@
         }
       ],
       "Values": [
-        "During or after 19 BBY"
+        "19 BBY"
       ]
     },
     {
@@ -29,10 +41,14 @@
         {
           "Content": "5 ABY",
           "Href": "https://starwars.fandom.com/wiki/5_ABY"
+        },
+        {
+          "Content": "Liberation of Kashyyyk",
+          "Href": "https://starwars.fandom.com/wiki/Liberation_of_Kashyyyk"
         }
       ],
       "Values": [
-        "5 ABY"
+        "5 ABY, Liberation of Kashyyyk"
       ]
     },
     {
@@ -71,6 +87,10 @@
           "Href": "https://starwars.fandom.com/wiki/Pacification_of_Kashyyyk"
         },
         {
+          "Content": "Mission to Kashyyyk",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Kashyyyk_(Clone_Force_99)"
+        },
+        {
           "Content": "Wookiee uprising",
           "Href": "https://starwars.fandom.com/wiki/Wookiee_uprising"
         },
@@ -89,14 +109,11 @@
         {
           "Content": "Wookiee revolt",
           "Href": "https://starwars.fandom.com/wiki/Wookiee_revolt"
-        },
-        {
-          "Content": "Liberation of Kashyyyk",
-          "Href": "https://starwars.fandom.com/wiki/Liberation_of_Kashyyyk"
         }
       ],
       "Values": [
         "Pacification of Kashyyyk",
+        "Mission to Kashyyyk",
         "Wookiee uprising",
         "Attack on an Imperial outpost",
         "Liberation on Kashyyyk",
@@ -108,19 +125,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 526937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Kashyyyk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 479497,
       "PageUrl": "https://starwars.fandom.com/wiki/Wookiee_revolt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 618959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 629696,
@@ -133,6 +140,16 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 618959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 526937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Kashyyyk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 219991,
       "PageUrl": "https://starwars.fandom.com/wiki/Liberation_on_Kashyyyk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
@@ -141,6 +158,11 @@
       "PageId": 637123,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_an_Imperial_outpost_(Choyyssyk)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 753612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kashyyyk_(Clone_Force_99)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

@@ -15,19 +15,7 @@
       "Label": "Organization type",
       "Links": [],
       "Values": [
-        "Government"
-      ]
-    },
-    {
-      "Label": "De facto\u00A0leader",
-      "Links": [
-        {
-          "Content": "Prince Militaire",
-          "Href": "https://starwars.fandom.com/wiki/Prince_Militaire"
-        }
-      ],
-      "Values": [
-        "Prince Militaire"
+        "Nation"
       ]
     },
     {
@@ -43,6 +31,37 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Holy Paataatus space",
+          "Href": "https://starwars.fandom.com/wiki/Holy_Paataatus_space"
+        }
+      ],
+      "Values": [
+        "Holy Paataatus space"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Nettehi system",
+          "Href": "https://starwars.fandom.com/wiki/Nettehi_system"
+        }
+      ],
+      "Values": [
+        "Nettehi system"
+      ]
+    },
+    {
+      "Label": "Planet",
+      "Links": [],
+      "Values": [
+        "Several"
+      ]
+    },
+    {
       "Label": "Capital",
       "Links": [
         {
@@ -55,18 +74,6 @@
       ]
     },
     {
-      "Label": "Date established",
-      "Links": [
-        {
-          "Content": "Nikardun conquests",
-          "Href": "https://starwars.fandom.com/wiki/Nikardun_conquests"
-        }
-      ],
-      "Values": [
-        "Before the Nikardun conquests"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -74,36 +81,20 @@
           "Href": "https://starwars.fandom.com/wiki/Nikardun_Destiny"
         },
         {
-          "Content": "rebelled",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_above_Nettehi"
+          "Content": "19 BBY",
+          "Href": "https://starwars.fandom.com/wiki/19_BBY"
+        },
+        {
+          "Content": "18 BBY",
+          "Href": "https://starwars.fandom.com/wiki/18_BBY"
         }
       ],
       "Values": [
-        "Nikardun Destiny (until rebelled)"
+        "Nikardun Destiny (19 BBY—18 BBY)"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 714763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus–Kilji_conflict",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 691666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_enhanced_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 696818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_gunboat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 714261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_attack_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
     {
       "PageId": 663828,
       "PageUrl": "https://starwars.fandom.com/wiki/Nettehi",
@@ -115,34 +106,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 719158,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pleknok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 726463,
       "PageUrl": "https://starwars.fandom.com/wiki/Holy_Paataatus_space",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 726847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_ascendancy's_east-zenith_sector",
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy's_east-zenith_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 687554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 698453,
+      "PageUrl": "https://starwars.fandom.com/wiki/Light_show",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 719158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pleknok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 696809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prince_Militaire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 714261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_attack_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 687550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_delegation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 719159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pleknok_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 726625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nettehi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 698483,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_above_Nettehi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 714255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_light_frigate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 663833,
@@ -155,14 +166,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 719159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pleknok_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 687554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 726625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nettehi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 714255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_light_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 691666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_enhanced_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 691668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_heavy_frigate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 696818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_gunboat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 726245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conquests_of_enlightenment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 714763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Illumine_Kilhorde",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

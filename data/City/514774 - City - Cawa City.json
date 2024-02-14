@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Location",
+      "Links": [
+        {
+          "Content": "Manufacturing district",
+          "Href": "https://starwars.fandom.com/wiki/Manufacturing_district"
+        }
+      ],
+      "Values": [
+        "Manufacturing district"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -43,19 +55,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 737479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Manufacturing_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 514055,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Cawa_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 514126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Feral_Group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 514775,
       "PageUrl": "https://starwars.fandom.com/wiki/Sterdic_IV",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 514126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Feral_Group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

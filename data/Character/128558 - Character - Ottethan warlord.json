@@ -2,12 +2,25 @@
   "PageId": 128558,
   "PageUrl": "https://starwars.fandom.com/wiki/Ottethan_warlord",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ottethan Warlord"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Ottethan",
+          "Href": "https://starwars.fandom.com/wiki/Ottethan/Legends"
+        }
+      ],
+      "Values": [
+        "Ottethan"
       ]
     },
     {
@@ -27,6 +40,18 @@
       ]
     },
     {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Ottethan",
+          "Href": "https://starwars.fandom.com/wiki/Ottethan_(species)"
+        }
+      ],
+      "Values": [
+        "Ottethan"
+      ]
+    },
+    {
       "Label": "Gender",
       "Links": [
         {
@@ -36,6 +61,18 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Neema-Da-Boda",
+          "Href": "https://starwars.fandom.com/wiki/Neema-Da-Boda"
+        }
+      ],
+      "Values": [
+        "Neema-Da-Boda"
       ]
     },
     {
@@ -51,5 +88,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 38460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neema-Da-Boda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

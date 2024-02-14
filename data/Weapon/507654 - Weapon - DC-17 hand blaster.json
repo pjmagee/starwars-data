@@ -2,7 +2,7 @@
   "PageId": 507654,
   "PageUrl": "https://starwars.fandom.com/wiki/DC-17_hand_blaster",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/DC-17-SWBFII.png/revision/latest?cb=20180420042357",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/DC-17-SWBFII.png/revision/latest?cb=20221008011258",
   "Data": [
     {
       "Label": "Titles",
@@ -25,21 +25,31 @@
     },
     {
       "Label": "Model",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "blaster pistol",
+          "Href": "https://starwars.fandom.com/wiki/Blaster_pistol"
+        }
+      ],
       "Values": [
-        "DC-17 hand blaster"
+        "DC-17 hand blaster pistol"
       ]
     },
     {
       "Label": "Type",
       "Links": [
         {
-          "Content": "Blaster pistol",
-          "Href": "https://starwars.fandom.com/wiki/Blaster_pistol"
+          "Content": "Heavy blaster pistol",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_blaster_pistol"
+        },
+        {
+          "Content": "Ascension gun",
+          "Href": "https://starwars.fandom.com/wiki/Ascension_gun"
         }
       ],
       "Values": [
-        "Blaster pistol"
+        "Heavy blaster pistol",
+        "Ascension gun"
       ]
     },
     {
@@ -55,10 +65,38 @@
       ]
     },
     {
+      "Label": "Shape",
+      "Links": [],
+      "Values": [
+        "Small"
+      ]
+    },
+    {
+      "Label": "Size",
+      "Links": [],
+      "Values": [
+        "Compact"
+      ]
+    },
+    {
+      "Label": "Weight",
+      "Links": [],
+      "Values": [
+        "Lightweight"
+      ]
+    },
+    {
       "Label": "Capacity",
       "Links": [],
       "Values": [
         "50 shots"
+      ]
+    },
+    {
+      "Label": "Purpose",
+      "Links": [],
+      "Values": [
+        "Ranged combat"
       ]
     },
     {
@@ -77,6 +115,14 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
+          "Content": "Stormtrooper Corps",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps"
+        },
+        {
+          "Content": "Rex's resistance network",
+          "Href": "https://starwars.fandom.com/wiki/Rex%27s_resistance_network"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
@@ -89,6 +135,8 @@
         "Galactic Republic",
         "Grand Army of the Republic",
         "Galactic Empire",
+        "Stormtrooper Corps",
+        "Rex's resistance network",
         "Alliance to Restore the Republic",
         "Phoenix Cell"
       ]

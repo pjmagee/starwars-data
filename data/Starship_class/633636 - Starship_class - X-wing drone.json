@@ -15,16 +15,16 @@
       "Label": "Line",
       "Links": [
         {
-          "Content": "X-wing",
+          "Content": "X-wing starfighter",
           "Href": "https://starwars.fandom.com/wiki/X-wing_starfighter"
         }
       ],
       "Values": [
-        "X-wing"
+        "X-wing starfighter"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Drone",
@@ -48,10 +48,46 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Antenna",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Antenna (1)"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        }
+      ],
+      "Values": [
+        "Laser cannons (4)"
+      ]
+    },
+    {
       "Label": "Crew",
       "Links": [],
       "Values": [
         "None"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "S-foils",
+          "Href": "https://starwars.fandom.com/wiki/S-foils"
+        }
+      ],
+      "Values": [
+        "S-foils"
       ]
     },
     {
@@ -84,5 +120,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 619483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thunderer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

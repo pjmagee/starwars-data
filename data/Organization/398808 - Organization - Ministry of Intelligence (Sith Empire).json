@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Organization type",
+      "Links": [],
+      "Values": [
+        "State intelligence and influence oversight"
+      ]
+    },
+    {
       "Label": "Leader(s)",
       "Links": [
         {
@@ -24,15 +31,69 @@
       ]
     },
     {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Imperial Intelligence",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Intelligence_(Sith_Empire)"
+        },
+        {
+          "Content": "Outreach Bureau",
+          "Href": "https://starwars.fandom.com/wiki/Outreach_Bureau"
+        },
+        {
+          "Content": "Intelligence Asset Recovery",
+          "Href": "https://starwars.fandom.com/wiki/Intelligence_Asset_Recovery"
+        }
+      ],
+      "Values": [
+        "Imperial Intelligence",
+        "Outreach Bureau",
+        "Intelligence Asset Recovery"
+      ]
+    },
+    {
       "Label": "Headquarters",
       "Links": [
         {
           "Content": "Imperial Citadel",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Citadel_(Sith_Empire)"
+        },
+        {
+          "Content": "Dromund Kaas",
+          "Href": "https://starwars.fandom.com/wiki/Dromund_Kaas"
         }
       ],
       "Values": [
-        "Imperial Citadel"
+        "Imperial Citadel, Dromund Kaas"
+      ]
+    },
+    {
+      "Label": "Date reorganized",
+      "Links": [
+        {
+          "Content": "3640 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3640_BBY"
+        },
+        {
+          "Content": "Sith Intelligence",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Intelligence"
+        }
+      ],
+      "Values": [
+        "3640 BBY, into Sith Intelligence"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "3640 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3640_BBY"
+        }
+      ],
+      "Values": [
+        "3640 BBY"
       ]
     },
     {
@@ -55,18 +116,18 @@
   ],
   "Relationships": [
     {
-      "PageId": 272707,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Intelligence_(Sith_Empire)",
+      "PageId": 341384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Minister_of_Intelligence_(Sith_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 378376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sphere_of_Imperial_Intelligence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 400658,
-      "PageUrl": "https://starwars.fandom.com/wiki/Intelligence_Asset_Recovery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 376983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_News_Network_(Sith_Empire)",
+      "PageId": 141598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -80,8 +141,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 141598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_Intelligence",
+      "PageId": 376983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_News_Network_(Sith_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 400658,
+      "PageUrl": "https://starwars.fandom.com/wiki/Intelligence_Asset_Recovery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 272707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Intelligence_(Sith_Empire)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

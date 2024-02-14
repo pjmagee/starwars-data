@@ -2,6 +2,7 @@
   "PageId": 721851,
   "PageUrl": "https://starwars.fandom.com/wiki/Mission_Abstract:_Investigate_link_between_Darth_Malgus_and_the_planet_Elom",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -54,14 +55,37 @@
       "Label": "Preceded by",
       "Links": [
         {
-          "Content": "Seeing Red",
-          "Href": "https://starwars.fandom.com/wiki/Seeing_Red"
+          "Content": "Intelligence Report: Historical Analysis of Manaan",
+          "Href": "https://starwars.fandom.com/wiki/Intelligence_Report:_Historical_Analysis_of_Manaan"
         }
       ],
       "Values": [
-        "Seeing Red"
+        "Intelligence Report: Historical Analysis of Manaan"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "All That's Left",
+          "Href": "https://starwars.fandom.com/wiki/All_That%27s_Left"
+        }
+      ],
+      "Values": [
+        "All That's Left"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 736543,
+      "PageUrl": "https://starwars.fandom.com/wiki/All_That's_Left",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    },
+    {
+      "PageId": 736632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Intelligence_Report:_Historical_Analysis_of_Manaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

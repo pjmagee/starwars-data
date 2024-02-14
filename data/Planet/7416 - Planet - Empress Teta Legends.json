@@ -81,7 +81,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-10"
@@ -105,13 +105,18 @@
         {
           "Content": "Koros Trunk Line",
           "Href": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends"
+        },
+        {
+          "Content": "Koros-Tython hyperlane",
+          "Href": "https://starwars.fandom.com/wiki/Koros-Tython_hyperlane"
         }
       ],
       "Values": [
         "Byss Run",
         "Carbonite Run",
         "Daragon Trail",
-        "Koros Trunk Line"
+        "Koros Trunk Line",
+        "Koros-Tython hyperlane"
       ]
     },
     {
@@ -194,7 +199,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -221,7 +226,7 @@
       "Links": [
         {
           "Content": "Core District",
-          "Href": "https://starwars.fandom.com/wiki/Core_District"
+          "Href": "https://starwars.fandom.com/wiki/Core_District/Legends"
         },
         {
           "Content": "Great Library of Cinnagar",
@@ -254,7 +259,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -301,7 +306,12 @@
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Tetan",
+          "Href": "https://starwars.fandom.com/wiki/Tetan/Legends"
+        }
+      ],
       "Values": [
         "Korosian, Tetan"
       ]
@@ -393,24 +403,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 231688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sargo_VenHalgon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 90803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Core_District/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 231721,
-      "PageUrl": "https://starwars.fandom.com/wiki/VenHalgon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 45469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vontaige",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 31654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Fashions",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 289927,
@@ -418,104 +418,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 8895,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hyperspace_Navigator's_Guild",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 90802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 535691,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Citywear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 213951,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aarrba's_Repair_Dock",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 22342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 7898,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krath/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 7680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 11772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 13076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_Trail",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 14474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 205545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_spellbook/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 7426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Koros_Major_(Great_Hyperspace_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 231451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Library_of_Cinnagar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 232824,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_war_room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 535689,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Nova_Steakhouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 535693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_Royal_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 4924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 95788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_gun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 4063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teta/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 203993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_Space_Traffic_Control_tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 8896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tk'lokk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 90796,
@@ -533,8 +438,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
+      "PageId": 4063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teta/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gav_Daragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7412,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 33850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krath_command_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 8895,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hyperspace_Navigator's_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 90533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Monument_to_Lost_Navigators",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 25772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Koros_Major",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 560773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sianna_Sekko",
+      "PageUrl": "https://starwars.fandom.com/wiki/Sianna_Sekko/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -543,99 +488,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 196739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Political_uprising_of_the_Empress_Teta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 7412,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 639248,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 90803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Core_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 33850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krath_command_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 17724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sebban_Keto",
+      "PageId": 7613,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satal_Keto/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 31654,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Fashions",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 203919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_Monarchy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 85456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Empress_Teta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 314957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 557948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eara_Lota/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 557949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alor_Keto/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aleema_Keto",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 24598,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kodoos_Repulsor_Ltd.",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 24616,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Spaceworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 192315,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Duel_in_the_Iron_Citadel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 195667,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Duel_in_the_Iron_Citadel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 25772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Koros_Major",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 26093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Empress_Teta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 420772,
@@ -643,34 +498,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 8896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tk'lokk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 7477,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jori_Daragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 41962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_amulet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 535692,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 23767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Hyperspace_Security_Net",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 560780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 90533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Monument_to_Lost_Navigators",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 7680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 45965,
@@ -698,24 +533,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 7455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gav_Daragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 7477,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jori_Daragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 45987,
       "PageUrl": "https://starwars.fandom.com/wiki/Farng",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 45998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Norgor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 535692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_District/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 7560,
@@ -723,9 +548,149 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 7613,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satal_Keto/Legends",
+      "PageId": 90802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 17724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sebban_Keto",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 203919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_Monarchy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 24598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kodoos_Repulsor_Ltd.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 24616,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Spaceworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 560780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tetan_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 231451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Library_of_Cinnagar/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 232824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_war_room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 535689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronet_Nova_Steakhouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 535693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 7426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Koros_Major_(Great_Hyperspace_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 535691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Citywear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 205545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_spellbook/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 45998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Norgor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 85456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Empress_Teta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 557948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eara_Lota/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 557949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alor_Keto/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 192315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Duel_in_the_Iron_Citadel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 195667,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Duel_in_the_Iron_Citadel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 9650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aleema_Keto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 314957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 231688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sargo_VenHalgon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 231721,
+      "PageUrl": "https://starwars.fandom.com/wiki/VenHalgon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 213951,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aarrba's_Repair_Dock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 22342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Guild/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 23767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Hyperspace_Security_Net",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 41962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_amulet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 26093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_Battle_of_Empress_Teta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 46129,
@@ -733,14 +698,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 74061,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iron_Citadel/Legends",
+      "PageId": 203993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cinnagar_Space_Traffic_Control_tower",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 11772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 13076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daragon_Trail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 14474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 45469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vontaige",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 7898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krath/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 95788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carbonite_gun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 4924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 7404,
       "PageUrl": "https://starwars.fandom.com/wiki/Unification_Wars_(Koros)/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 196739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Political_uprising_of_the_Empress_Teta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 74061,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iron_Citadel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 784265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros-Tython_hyperlane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

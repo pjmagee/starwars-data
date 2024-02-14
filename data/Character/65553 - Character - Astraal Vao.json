@@ -15,16 +15,16 @@
       "Label": "Species",
       "Links": [
         {
-          "Content": "Rutian",
-          "Href": "https://starwars.fandom.com/wiki/Rutian/Legends"
-        },
-        {
           "Content": "Twi'lek",
           "Href": "https://starwars.fandom.com/wiki/Twi%27lek/Legends"
+        },
+        {
+          "Content": "Rutian",
+          "Href": "https://starwars.fandom.com/wiki/Rutian/Legends"
         }
       ],
       "Values": [
-        "Rutian Twi'lek"
+        "Twi'lek (Rutian)"
       ]
     },
     {
@@ -37,6 +37,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -56,6 +63,18 @@
       "Links": [],
       "Values": [
         "Blue"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Shado Vao",
+          "Href": "https://starwars.fandom.com/wiki/Shado_Vao"
+        }
+      ],
+      "Values": [
+        "Shado Vao"
       ]
     },
     {
@@ -81,5 +100,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 80180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shado_Vao",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

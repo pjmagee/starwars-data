@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Industrial Automaton",
+          "Href": "https://starwars.fandom.com/wiki/Industrial_Automaton"
+        }
+      ],
+      "Values": [
+        "Industrial Automaton"
+      ]
+    },
+    {
       "Label": "Product line",
       "Links": [
         {
@@ -51,29 +63,34 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
+        },
+        {
           "Content": "Resistance",
           "Href": "https://starwars.fandom.com/wiki/Resistance"
         }
       ],
       "Values": [
+        "New Republic",
+        "Plazir-15 government",
         "Resistance"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 633485,
-      "PageUrl": "https://starwars.fandom.com/wiki/R6-LE5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
       "PageId": 707473,
       "PageUrl": "https://starwars.fandom.com/wiki/R6-W1CH",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 730626,
-      "PageUrl": "https://starwars.fandom.com/wiki/R6-SNO",
+      "PageId": 633485,
+      "PageUrl": "https://starwars.fandom.com/wiki/R6-LE5",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -85,6 +102,11 @@
       "PageId": 562119,
       "PageUrl": "https://starwars.fandom.com/wiki/R6-D8",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 483041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 717407,
   "PageUrl": "https://starwars.fandom.com/wiki/Choss",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ac/Choss.png/revision/latest?cb=20211230052321",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ac/Choss.png/revision/latest?cb=20230608163822",
   "Data": [
     {
       "Label": "Titles",
@@ -13,13 +13,18 @@
     },
     {
       "Label": "Atmosphere",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere"
+        }
+      ],
       "Values": [
         "Breathable"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -58,6 +63,33 @@
       "Values": [
         "Trees"
       ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Bith",
+          "Href": "https://starwars.fandom.com/wiki/Bith"
+        },
+        {
+          "Content": "Ithorian",
+          "Href": "https://starwars.fandom.com/wiki/Ithorian"
+        },
+        {
+          "Content": "Sullustan",
+          "Href": "https://starwars.fandom.com/wiki/Sullustan"
+        },
+        {
+          "Content": "Talz",
+          "Href": "https://starwars.fandom.com/wiki/Talz"
+        }
+      ],
+      "Values": [
+        "Bith",
+        "Ithorian",
+        "Sullustan",
+        "Talz"
+      ]
     }
   ],
   "Relationships": [
@@ -69,6 +101,51 @@
     {
       "PageId": 718251,
       "PageUrl": "https://starwars.fandom.com/wiki/Jesk's",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 743997,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jonna_(vendor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 743999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Droid_Shop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ari_Sari_Store",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_beauty_parlor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_business",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 744023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_store",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
     }
   ]

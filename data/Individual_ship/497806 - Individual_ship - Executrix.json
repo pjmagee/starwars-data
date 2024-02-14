@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -69,6 +69,27 @@
       ],
       "Values": [
         "1,600 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Destroyer-I ion engines",
+          "Href": "https://starwars.fandom.com/wiki/Destroyer-I_ion_engine"
+        },
+        {
+          "Content": "Cygnus Spaceworks",
+          "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks"
+        },
+        {
+          "Content": "Gemon-4 ion engines",
+          "Href": "https://starwars.fandom.com/wiki/Gemon-4_ion_engine"
+        }
+      ],
+      "Values": [
+        "KDY Destroyer-I ion engines (3)",
+        "Cygnus Spaceworks Gemon-4 ion engines (4) (emergency use)"
       ]
     },
     {
@@ -105,6 +126,19 @@
       "Values": [
         "Deflector shield generator domes (2)",
         "Navigational deflector generator"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "Antenna",
+          "Href": "https://starwars.fandom.com/wiki/Antenna"
+        }
+      ],
+      "Values": [
+        "Equipped",
+        "Antenna"
       ]
     },
     {
@@ -166,18 +200,48 @@
           "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
         },
         {
+          "Content": "C-patrol",
+          "Href": "https://starwars.fandom.com/wiki/C-patrol"
+        },
+        {
+          "Content": "TIE/sa bombers",
+          "Href": "https://starwars.fandom.com/wiki/TIE/sa_bomber"
+        },
+        {
+          "Content": "Alpha-3 Nimbus-class V-wing starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Alpha-3_Nimbus-class_V-wing_starfighter"
+        },
+        {
+          "Content": "Imperial Dropship Transports",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Dropship_Transport"
+        },
+        {
           "Content": "Transports",
           "Href": "https://starwars.fandom.com/wiki/Transport"
         },
         {
           "Content": "Transport three-six-six",
           "Href": "https://starwars.fandom.com/wiki/Transport_three-six-six"
+        },
+        {
+          "Content": "IPV-2C Stealth Corvette",
+          "Href": "https://starwars.fandom.com/wiki/IPV-2C_Stealth_Corvette"
+        },
+        {
+          "Content": "Carrion Spike",
+          "Href": "https://starwars.fandom.com/wiki/Carrion_Spike"
         }
       ],
       "Values": [
         "TIE/ln space superiority starfighters",
+        "C-patrol",
+        "TIE/sa bombers",
+        "Alpha-3 Nimbus-class V-wing starfighters",
+        "Imperial Dropship Transports",
         "Transports",
-        "Transport three-six-six"
+        "Transport three-six-six",
+        "At least 1 Modified IPV-2C Stealth Corvette",
+        "Carrion Spike"
       ]
     },
     {
@@ -196,25 +260,52 @@
       "Label": "Crew",
       "Links": [
         {
-          "Content": "Officers",
-          "Href": "https://starwars.fandom.com/wiki/Officer"
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "MSE-6 series repair droids",
+          "Href": "https://starwars.fandom.com/wiki/MSE-6_series_repair_droid"
         }
       ],
       "Values": [
-        "Officers (9,235)",
-        "Enlisted crew (27,850)"
+        "Imperial officers (9,235)",
+        "Enlisted crew (27,850)",
+        "Imperial Starfighter Pilots",
+        "Stormtroopers (9,700)",
+        "MSE-6 series repair droids"
       ]
     },
     {
       "Label": "Passengers",
       "Links": [
         {
-          "Content": "Stormtroopers",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+          "Content": "KX-series security droid",
+          "Href": "https://starwars.fandom.com/wiki/KX-series_security_droid"
         }
       ],
       "Values": [
-        "Stormtroopers (9,700)"
+        "At least 1 KX-series security droid"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Holotables",
+          "Href": "https://starwars.fandom.com/wiki/Holotable"
+        }
+      ],
+      "Values": [
+        "Holotables"
       ]
     },
     {
@@ -312,22 +403,36 @@
           "Href": "https://starwars.fandom.com/wiki/Rae_Sloane"
         },
         {
-          "Content": "Unidentified Imperial officer",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(C-patrol)"
-        },
-        {
           "Content": "Unidentified Imperial",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_(Executrix,_hangar)"
         },
         {
           "Content": "Unidentified Imperial",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_(Executrix,_ship_scanner)"
+        },
+        {
+          "Content": "Unidentified Imperial",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_(transport_three-six-six)"
+        },
+        {
+          "Content": "Unidentified Imperial officer",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(C-patrol)"
+        },
+        {
+          "Content": "Unidentified Imperial technician",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_technician_(Executrix)"
+        },
+        {
+          "Content": "Unidentified TIE fighter pilot",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_TIE_fighter_pilot"
         }
       ],
       "Values": [
         "Rae Sloane",
+        "Unidentified Imperial",
         "Unidentified Imperial officer",
-        "Unidentified Imperial"
+        "Unidentified Imperial technician",
+        "Unidentified TIE fighter pilot"
       ]
     }
   ],
@@ -336,6 +441,11 @@
       "PageId": 653923,
       "PageUrl": "https://starwars.fandom.com/wiki/Krennic's_guard_squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 744083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carrion_Spike_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

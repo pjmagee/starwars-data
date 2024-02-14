@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-19"
@@ -46,12 +46,12 @@
       "Label": "Suns",
       "Links": [
         {
-          "Content": "Kerest's star",
-          "Href": "https://starwars.fandom.com/wiki/Kerest%27s_star"
+          "Content": "Kerestian sun",
+          "Href": "https://starwars.fandom.com/wiki/Kerestian_sun"
         }
       ],
       "Values": [
-        "1: Kerest's star"
+        "1: Kerestian sun"
       ]
     },
     {
@@ -59,7 +59,7 @@
       "Links": [
         {
           "Content": "Kerest",
-          "Href": "https://starwars.fandom.com/wiki/Kerest"
+          "Href": "https://starwars.fandom.com/wiki/Kerest/Legends"
         },
         {
           "Content": "Pharna",
@@ -91,13 +91,8 @@
   ],
   "Relationships": [
     {
-      "PageId": 405766,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kerest's_star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
       "PageId": 13999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kerest",
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerest/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -114,6 +109,11 @@
       "PageId": 405768,
       "PageUrl": "https://starwars.fandom.com/wiki/Pharna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 405766,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerestian_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     }
   ]
 }

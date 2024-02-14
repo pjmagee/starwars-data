@@ -31,15 +31,15 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Gunship",
-          "Href": "https://starwars.fandom.com/wiki/Gunship/Legends"
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter/Legends"
         }
       ],
       "Values": [
-        "Gunship"
+        "Starfighter"
       ]
     },
     {
@@ -74,6 +74,13 @@
     },
     {
       "Label": "Shielding",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
       "Links": [],
       "Values": [
         "Equipped"
@@ -171,6 +178,7 @@
         }
       ],
       "Values": [
+        "Heavy fighter",
         "Gunship"
       ]
     },
@@ -178,27 +186,17 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Smugglers' Alliance",
-          "Href": "https://starwars.fandom.com/wiki/Smugglers%27_Alliance"
-        },
-        {
-          "Content": "Naboo Royal Space Fighter Corps",
-          "Href": "https://starwars.fandom.com/wiki/Naboo_Royal_Space_Fighter_Corps/Legends"
-        },
-        {
-          "Content": "Corellian Security Force",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Security_Force"
-        },
-        {
           "Content": "Hutt Cartel",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Cartel"
+        },
+        {
+          "Content": "Privateers",
+          "Href": "https://starwars.fandom.com/wiki/Privateer/Legends"
         }
       ],
       "Values": [
-        "Smugglers' Alliance",
-        "Naboo Royal Space Fighter Corps",
-        "Corellian Security Force",
-        "Hutt Cartel"
+        "Hutt Cartel",
+        "Privateers"
       ]
     }
   ],

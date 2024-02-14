@@ -12,6 +12,30 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        }
+      ],
+      "Values": [
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "P-12",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "P-12"
+      ]
+    },
+    {
       "Label": "Atmosphere",
       "Links": [
         {
@@ -32,11 +56,11 @@
         }
       ],
       "Values": [
-        "Frigid"
+        "Frigid, frosty "
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -55,13 +79,20 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_outpost_of_Kullgroon"
         },
         {
-          "Content": "Wastelands Of Kullgroon",
-          "Href": "https://starwars.fandom.com/wiki/Wastelands_Of_Kullgroon"
+          "Content": "Wastelands of Kullgroon",
+          "Href": "https://starwars.fandom.com/wiki/Wastelands_of_Kullgroon"
         }
       ],
       "Values": [
         "Imperial outpost of Kullgroon",
-        "Wastelands Of Kullgroon"
+        "Wastelands of Kullgroon"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [],
+      "Values": [
+        "tiny frozen fruit bulbs"
       ]
     },
     {
@@ -82,7 +113,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Petrusian",
@@ -108,19 +139,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 601919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wastelands_of_Kullgroon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 787044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kullgroon_Drop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
       "PageId": 606564,
       "PageUrl": "https://starwars.fandom.com/wiki/Kristiss'_group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 601483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Job_on_Kullgroon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 601479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_outpost_of_Kullgroon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 680990,
@@ -133,9 +164,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 601919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wastelands_of_Kullgroon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 599659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seizure_of_Petrusia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 601483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Job_on_Kullgroon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 601479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_outpost_of_Kullgroon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-10"
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -142,18 +142,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 307951,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ixtlar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 414037,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ixtlar_(Seventh_Alsakan_Conflict)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 82007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ixtlar_(Clone_Wars)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -162,9 +157,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 82007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ixtlar_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 307951,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ixtlar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

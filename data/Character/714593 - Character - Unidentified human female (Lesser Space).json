@@ -2,6 +2,7 @@
   "PageId": 714593,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_human_female_(Lesser_Space)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -46,7 +47,25 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 664837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vagaari_pirate_operations",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 691631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Lesser_Space_starship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

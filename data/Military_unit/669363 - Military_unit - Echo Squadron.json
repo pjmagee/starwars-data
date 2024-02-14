@@ -40,15 +40,47 @@
       ]
     },
     {
+      "Label": "Strength",
+      "Links": [
+        {
+          "Content": "Rebel pilots",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_pilot"
+        },
+        {
+          "Content": "New Republic pilots",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_pilot"
+        }
+      ],
+      "Values": [
+        "5 Rebel pilots (Alliance to Restore the Republic)",
+        "New Republic pilots (New Republic)"
+      ]
+    },
+    {
       "Label": "Vehicles",
       "Links": [
         {
           "Content": "T-65B X-wing starfighters",
           "Href": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter"
+        },
+        {
+          "Content": "RZ-1 A-wing interceptors",
+          "Href": "https://starwars.fandom.com/wiki/RZ-1_A-wing_interceptor"
+        },
+        {
+          "Content": "BTL-A4 Y-wing starfighters",
+          "Href": "https://starwars.fandom.com/wiki/BTL-A4_Y-wing_starfighter"
+        },
+        {
+          "Content": "UT-60D U-wing starfighter/support crafts",
+          "Href": "https://starwars.fandom.com/wiki/UT-60D_U-wing_starfighter/support_craft"
         }
       ],
       "Values": [
-        "T-65B X-wing starfighters"
+        "T-65B X-wing starfighters",
+        "RZ-1 A-wing interceptors",
+        "BTL-A4 Y-wing starfighters",
+        "UT-60D U-wing starfighter/support crafts"
       ]
     },
     {
@@ -105,41 +137,36 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Starfighter Corps",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Starfighter_Corps"
         }
       ],
       "Values": [
         "Alliance to Restore the Republic",
         "Gial Ackbar's fleet",
         "Rebel Alliance Starfighter Corps",
-        "New Republic"
+        "New Republic",
+        "New Republic Starfighter Corps"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 657627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_Five_(pilot)",
+      "PageId": 679474,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Two_(Fostar_Haven)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 677425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Leader_(Fostar_Haven)",
+      "PageId": 679475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Three_(Fostar_Haven)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 682626,
       "PageUrl": "https://starwars.fandom.com/wiki/Echo_Support",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 703032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gial_Ackbar's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 669527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(MC80_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 669440,
@@ -162,13 +189,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 679474,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Two_(Fostar_Haven)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 703032,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gial_Ackbar's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 679475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Three_(Fostar_Haven)",
+      "PageId": 671961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Five_(Fostar_Haven)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -177,14 +204,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 671961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Five_(Fostar_Haven)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 518021,
       "PageUrl": "https://starwars.fandom.com/wiki/Echo_Three",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 677425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Echo_Leader_(Fostar_Haven)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 657627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_Five_(pilot)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 669527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(MC80_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

@@ -76,7 +76,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Serenno",
@@ -86,22 +86,56 @@
       "Values": [
         "House Serenno"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Anya",
+          "Href": "https://starwars.fandom.com/wiki/Anya_(Serenno)"
+        },
+        {
+          "Content": "Gora",
+          "Href": "https://starwars.fandom.com/wiki/Gora"
+        }
+      ],
+      "Values": [
+        "Anya",
+        "Gora"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Dooku",
+          "Href": "https://starwars.fandom.com/wiki/Dooku"
+        },
+        {
+          "Content": "Ramil",
+          "Href": "https://starwars.fandom.com/wiki/Ramil"
+        }
+      ],
+      "Values": [
+        "Dooku",
+        "Ramil"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 716218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_assassinate_Jenza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 640716,
+      "PageUrl": "https://starwars.fandom.com/wiki/90_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 452893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 582714,
       "PageUrl": "https://starwars.fandom.com/wiki/101_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 640716,
-      "PageUrl": "https://starwars.fandom.com/wiki/90_BBY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
@@ -110,9 +144,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
+      "PageId": 716218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_assassinate_Jenza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 707650,
       "PageUrl": "https://starwars.fandom.com/wiki/Celebration_on_Serenno",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 622206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anya_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ramil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gora",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

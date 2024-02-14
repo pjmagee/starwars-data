@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -36,73 +36,147 @@
       ]
     },
     {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Ion drive",
+          "Href": "https://starwars.fandom.com/wiki/Ion_drive"
+        }
+      ],
+      "Values": [
+        "Ion drive thrusters (8)"
+      ]
+    },
+    {
       "Label": "Power plant",
       "Links": [
         {
-          "Content": "Reactor",
+          "Content": "Reactors",
           "Href": "https://starwars.fandom.com/wiki/Reactor"
         }
       ],
       "Values": [
-        "Reactor"
+        "Reactors"
       ]
     },
     {
-      "Label": "Escape craft",
+      "Label": "Armament",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "turbolasers",
+          "Href": "https://starwars.fandom.com/wiki/Turbolaser"
+        },
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "Tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+        }
+      ],
+      "Values": [
+        "Heavy turbolasers",
+        "Laser cannons",
+        "Proton torpedo launchers",
+        "Tractor beam projectors"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "Escape pod",
           "Href": "https://starwars.fandom.com/wiki/Escape_pod"
         }
       ],
       "Values": [
-        "Equipped"
+        "Escape pod bay"
+      ]
+    },
+    {
+      "Label": "Escape craft",
+      "Links": [],
+      "Values": [
+        "Escape pods"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
-          "Content": "13th Battalion",
-          "Href": "https://starwars.fandom.com/wiki/13th_Battalion"
-        }
-      ],
-      "Values": [
-        "13th Battalion"
-      ]
-    },
-    {
-      "Label": "Passengers",
-      "Links": [
-        {
           "Content": "Clone troopers",
           "Href": "https://starwars.fandom.com/wiki/Clone_trooper"
         },
         {
-          "Content": "GNK-series power droids",
-          "Href": "https://starwars.fandom.com/wiki/GNK-series_power_droid"
-        },
-        {
           "Content": "R2-series astromech droids",
           "Href": "https://starwars.fandom.com/wiki/R2-series_astromech_droid"
+        },
+        {
+          "Content": "GNK-series power droids",
+          "Href": "https://starwars.fandom.com/wiki/GNK-series_power_droid"
         }
       ],
       "Values": [
-        "Clone troopers ",
-        "GNK-series power droids ",
-        "R2-series astromech droids "
+        "Clone troopers",
+        "R2-series astromech droids",
+        "GNK-series power droids"
       ]
     },
     {
       "Label": "Role(s)",
       "Links": [
         {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
           "Content": "Command ship",
           "Href": "https://starwars.fandom.com/wiki/Command_ship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
         }
       ],
       "Values": [
-        "Command ship"
+        "Battleship",
+        "Command ship",
+        "Starfighter carrier"
       ]
     },
     {
@@ -194,6 +268,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 636372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Albedo_Brave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 636274,
+      "PageUrl": "https://starwars.fandom.com/wiki/13th_Battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 636045,
       "PageUrl": "https://starwars.fandom.com/wiki/Jaro_Tapal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -202,16 +286,6 @@
       "PageId": 636271,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Clone_Commander_(13th_Battalion)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 636274,
-      "PageUrl": "https://starwars.fandom.com/wiki/13th_Battalion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 636372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Albedo_Brave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

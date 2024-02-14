@@ -36,15 +36,10 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Male"
+        "He/him"
       ]
     },
     {
@@ -60,10 +55,17 @@
       ]
     },
     {
-      "Label": "Skin color",
+      "Label": "Eye color",
       "Links": [],
       "Values": [
         "Brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Dark"
       ]
     },
     {
@@ -85,6 +87,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 794218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Split_S",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
     {
       "PageId": 525255,
       "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Rebel_Alliance)",

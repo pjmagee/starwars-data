@@ -24,15 +24,27 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Cruiser"
+          "Content": "War cruiser",
+          "Href": "https://starwars.fandom.com/wiki/War_cruiser"
         }
       ],
       "Values": [
-        "Cruiser"
+        "War cruiser"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
       ]
     },
     {
@@ -48,7 +60,31 @@
       ]
     },
     {
-      "Label": "Shielding",
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "Spectrum lasers",
+          "Href": "https://starwars.fandom.com/wiki/Spectrum_laser"
+        }
+      ],
+      "Values": [
+        "Spectrum lasers"
+      ]
+    },
+    {
+      "Label": "Escape craft",
+      "Links": [
+        {
+          "Content": "two",
+          "Href": "https://starwars.fandom.com/wiki/Kilji_escape_pod"
+        }
+      ],
+      "Values": [
+        "At least two"
+      ]
+    },
+    {
+      "Label": "Other systems",
       "Links": [
         {
           "Content": "Electrostatic barriers",
@@ -60,68 +96,15 @@
       ]
     },
     {
-      "Label": "Hull",
-      "Links": [
-        {
-          "Content": "Nyix-alloy",
-          "Href": "https://starwars.fandom.com/wiki/Nyix-alloy"
-        }
-      ],
-      "Values": [
-        "Nyix-alloy"
-      ]
-    },
-    {
-      "Label": "Armament",
-      "Links": [
-        {
-          "Content": "Lasers",
-          "Href": "https://starwars.fandom.com/wiki/Laser"
-        }
-      ],
-      "Values": [
-        "Lasers"
-      ]
-    },
-    {
-      "Label": "Escape craft",
-      "Links": [],
-      "Values": [
-        "At least 2"
-      ]
-    },
-    {
-      "Label": "Communication systems",
-      "Links": [],
-      "Values": [
-        "Equipped"
-      ]
-    },
-    {
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Capital ship",
-          "Href": "https://starwars.fandom.com/wiki/Capital_ship"
-        },
-        {
           "Content": "Flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
-        },
-        {
-          "Content": "Aerial bombardment",
-          "Href": "https://starwars.fandom.com/wiki/Aerial_bombardment"
-        },
-        {
-          "Content": "Orbital bombardment",
-          "Href": "https://starwars.fandom.com/wiki/Orbital_bombardment"
         }
       ],
       "Values": [
-        "Capital ship",
-        "Flagship",
-        "Aerial bombardment",
-        "Orbital bombardment"
+        "Flagship"
       ]
     },
     {
@@ -137,7 +120,7 @@
         }
       ],
       "Values": [
-        "c. 18 BBY, Rapacc system"
+        "18 BBY, Rapacc system"
       ]
     },
     {
@@ -205,7 +188,7 @@
         },
         {
           "Content": "Vassal Four",
-          "Href": "https://starwars.fandom.com/wiki/Vassal_Four"
+          "Href": "https://starwars.fandom.com/wiki/Vassal_Four_(Anvil)"
         }
       ],
       "Values": [
@@ -225,19 +208,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 714110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Rapacc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 722159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kilji_way_of_order_and_enlightenment",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 712910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Illumine_Kilhorde",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 714121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crofyp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 726419,
@@ -245,14 +218,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
+      "PageId": 722159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kilji_way_of_order_and_enlightenment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 714110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Rapacc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 722168,
       "PageUrl": "https://starwars.fandom.com/wiki/Kilji_language",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 714121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crofyp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-6"
@@ -135,6 +135,14 @@
           "Href": "https://starwars.fandom.com/wiki/Dathomir_Station"
         },
         {
+          "Content": "Empire's Station I",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_I_(Dathomir_system)"
+        },
+        {
+          "Content": "Empire's Station II",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_II_(Dathomir_system)"
+        },
+        {
           "Content": "Last Nav Station",
           "Href": "https://starwars.fandom.com/wiki/Last_Nav_Station"
         },
@@ -149,6 +157,8 @@
       ],
       "Values": [
         "Dathomir Station",
+        "Empire's Station I",
+        "Empire's Station II",
         "Last Nav Station",
         "Mining Outpost",
         "Rancor Base"
@@ -179,18 +189,6 @@
       ]
     },
     {
-      "Label": "Other objects",
-      "Links": [
-        {
-          "Content": "Witch Blood Territory",
-          "Href": "https://starwars.fandom.com/wiki/Witch_Blood_Territory"
-        }
-      ],
-      "Values": [
-        "Witch Blood Territory"
-      ]
-    },
-    {
       "Label": "Quadrants/regions",
       "Links": [
         {
@@ -208,13 +206,18 @@
         {
           "Content": "Empire Blockade",
           "Href": "https://starwars.fandom.com/wiki/Empire_Blockade"
+        },
+        {
+          "Content": "Witch Blood Territory",
+          "Href": "https://starwars.fandom.com/wiki/Witch_Blood_Territory"
         }
       ],
       "Values": [
         "Dark Force",
         "Dathomir's Vitality",
         "Emperor's Hand",
-        "Empire Blockade"
+        "Empire Blockade",
+        "Witch Blood Territory"
       ]
     },
     {
@@ -242,13 +245,43 @@
   ],
   "Relationships": [
     {
-      "PageId": 405113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Last_Nav_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 249348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Force_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
-      "PageId": 45521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Base",
+      "PageId": 266106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heart_of_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 342952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Veil_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 308176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Price_of_Liberty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 786934,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coyn's_Fury",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 786938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coyn's_Tempest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 786936,
+      "PageUrl": "https://starwars.fandom.com/wiki/701st_TIE_wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 354601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Outpost_(Dathomir_system)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
@@ -258,7 +291,7 @@
     },
     {
       "PageId": 530777,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiberus_Anderlock",
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiberus_Anderlock/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -267,19 +300,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 7117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iron_Fist_(Executor-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 10498,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 729936,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 5657,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quelii_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 249659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 16932,
@@ -327,39 +355,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 10498,
-      "PageUrl": "https://starwars.fandom.com/wiki/Domir/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 5657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quelii_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
-      "PageId": 530228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nej'a_Berto'Lo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 249659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 249348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Force_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 354601,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Outpost_(Dathomir_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 2018,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 44364,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koratas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 729936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 308175,
@@ -369,6 +372,61 @@
     {
       "PageId": 151323,
       "PageUrl": "https://starwars.fandom.com/wiki/Hidden_Daggers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 44364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koratas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 359461,
+      "PageUrl": "https://starwars.fandom.com/wiki/Witchblood_Clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 405113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Last_Nav_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 45521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 7117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iron_Fist_(Executor-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 281238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_mission_to_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 530228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nej'a_Berto'Lo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 775906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Velocity_Mercenaries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 777005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rancor_Clan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]

@@ -80,8 +80,20 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "White",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "White"
       ]
@@ -98,6 +110,23 @@
       "Links": [],
       "Values": [
         "Red"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Demagol",
+          "Href": "https://starwars.fandom.com/wiki/Demagol"
+        },
+        {
+          "Content": "Sibyl",
+          "Href": "https://starwars.fandom.com/wiki/Sibyl_(Zeltron)"
+        }
+      ],
+      "Values": [
+        "Demagol",
+        "Sibyl"
       ]
     },
     {
@@ -124,6 +153,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 97665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Demagol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 254872,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Crucible",

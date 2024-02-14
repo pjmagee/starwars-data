@@ -86,17 +86,45 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Candra Tymon's father",
+          "Href": "https://starwars.fandom.com/wiki/Candra_Tymon%27s_father"
+        }
+      ],
+      "Values": [
+        "Candra Tymon's father"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "House Dooku",
           "Href": "https://starwars.fandom.com/wiki/House_Dooku"
+        },
+        {
+          "Content": "House Dooku security team",
+          "Href": "https://starwars.fandom.com/wiki/House_Dooku_security_team"
         }
       ],
       "Values": [
-        "House Dooku"
+        "House Dooku",
+        "House Dooku security team"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 784253,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Dooku_security_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 784262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Candra_Tymon's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

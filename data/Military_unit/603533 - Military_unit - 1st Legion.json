@@ -2,7 +2,7 @@
   "PageId": 603533,
   "PageUrl": "https://starwars.fandom.com/wiki/1st_Legion",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8c/Vader-1stLegion.png/revision/latest?cb=20231228175405",
   "Data": [
     {
       "Label": "Titles",
@@ -100,10 +100,15 @@
         {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Cold weather assault stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Cold_weather_assault_stormtrooper"
         }
       ],
       "Values": [
-        "Stormtroopers"
+        "Stormtroopers",
+        "Cold weather assault stormtroopers"
       ]
     },
     {
@@ -122,8 +127,8 @@
       "Label": "Notable battles",
       "Links": [
         {
-          "Content": "Skirmish on Batuu",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Batuu"
+          "Content": "Mission to Batuu",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Batuu_(Galactic_Empire)"
         },
         {
           "Content": "Skirmish aboard the Chimaera",
@@ -143,7 +148,7 @@
         }
       ],
       "Values": [
-        "Skirmish on Batuu",
+        "Mission to Batuu",
         "Skirmish aboard the Chimaera",
         "Battle of Mokivj",
         "Battle against Grysk forces",
@@ -154,12 +159,12 @@
       "Label": "Date founded",
       "Links": [
         {
-          "Content": "skirmish on Batuu",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Batuu"
+          "Content": "Batuu",
+          "Href": "https://starwars.fandom.com/wiki/Batuu"
         }
       ],
       "Values": [
-        "Sometime prior to the skirmish on Batuu"
+        "Sometime prior to the mission to Batuu"
       ]
     },
     {
@@ -182,14 +187,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 453238,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
       "PageId": 606245,
       "PageUrl": "https://starwars.fandom.com/wiki/Kimmund's_unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 453238,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 603536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kimmund",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

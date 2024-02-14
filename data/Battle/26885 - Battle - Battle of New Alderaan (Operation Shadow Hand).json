@@ -53,13 +53,23 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
+        }
+      ],
       "Values": [
-        "Imperial victory"
+        "Dark Empire victory"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 272168,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ash_Worlds/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
     {
       "PageId": 29325,
       "PageUrl": "https://starwars.fandom.com/wiki/Starhook_Ten",
@@ -69,11 +79,6 @@
       "PageId": 29326,
       "PageUrl": "https://starwars.fandom.com/wiki/Bespin_Bandit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 272168,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ash_Worlds/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

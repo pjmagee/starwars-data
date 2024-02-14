@@ -17,10 +17,15 @@
         {
           "Content": "Core Worlds",
           "Href": "https://starwars.fandom.com/wiki/Core_Worlds/Legends"
+        },
+        {
+          "Content": "Outer Core",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Core/Legends"
         }
       ],
       "Values": [
-        "Core Worlds"
+        "Core Worlds",
+        "Outer Core"
       ]
     },
     {
@@ -62,7 +67,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-9"
@@ -136,8 +141,10 @@
         }
       ],
       "Values": [
+        "Historic",
         "Breathable",
-        "Toxic (after devastation)"
+        "Modern",
+        "Toxic"
       ]
     },
     {
@@ -165,18 +172,25 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        },
         {
           "Content": "Jungle",
           "Href": "https://starwars.fandom.com/wiki/Jungle/Legends"
         }
       ],
       "Values": [
-        "Jungle",
+        "Historic",
+        "Forests",
         "Steppes",
         "Hills",
-        "Barren, rocky wasteland (after devastation)"
+        "Modern",
+        "Barren, rocky wasteland",
+        "Jungle"
       ]
     },
     {
@@ -193,6 +207,23 @@
       ],
       "Values": [
         "Marshy oceans (three landmasses)"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Caamas Jedi Temple",
+          "Href": "https://starwars.fandom.com/wiki/Caamas_Jedi_Temple"
+        },
+        {
+          "Content": "Palace of Memnii",
+          "Href": "https://starwars.fandom.com/wiki/Palace_of_Memnii"
+        }
+      ],
+      "Values": [
+        "Caamas Jedi Temple",
+        "Palace of Memnii"
       ]
     },
     {
@@ -224,7 +255,7 @@
       "Links": [
         {
           "Content": "Caamasi",
-          "Href": "https://starwars.fandom.com/wiki/Caamasi"
+          "Href": "https://starwars.fandom.com/wiki/Caamasi/Legends"
         }
       ],
       "Values": [
@@ -232,7 +263,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Bothan",
@@ -330,10 +361,6 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
         {
-          "Content": "Corellian Empire",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Empire"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
@@ -350,7 +377,6 @@
         "Infinite Empire",
         "Herglic Trade Empire",
         "Galactic Republic",
-        "Corellian Empire",
         "Galactic Empire",
         "New Republic",
         "Galactic Federation of Free Alliances"
@@ -359,34 +385,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 348162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla's_father",
+      "PageId": 3991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerilt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ylenic_It'kla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 348163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 442743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palace_of_Memnii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 13158,
-      "PageUrl": "https://starwars.fandom.com/wiki/Allynic_E'Kles",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 323800,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hespecia_Tik'kla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 44889,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caamasi_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 6966,
@@ -394,23 +400,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 13158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allynic_E'Kles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 135802,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Caamas",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 377870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Uquine",
+      "PageId": 661411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 144246,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamas_Firestorm",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 663005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Generator_Station_14",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 323800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hespecia_Tik'kla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 7372,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ylenic_It'kla",
+      "PageId": 13185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cirius",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 44889,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamasi_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 192307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nict",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 152960,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elek_D'cel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -424,44 +455,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 13185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cirius",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 377608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seventh_Alsakan_Conflict",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 192307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nict",
+      "PageId": 9695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 192946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ves_Volette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 294635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commenor_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 63263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaddatha_In'Kro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 8361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caamasi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 234475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jualya_Village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 3891,
@@ -469,28 +465,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
+      "PageId": 442743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_of_Memnii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 11873,
       "PageUrl": "https://starwars.fandom.com/wiki/Eeshrin_Ot'Hyne",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 152960,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elek_D'cel",
+      "PageId": 8361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamasi/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 380757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ves_Volette's_hamlet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 294635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commenor_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 192946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ves_Volette",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 3991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kerilt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 348162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 661411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 348163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 9695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elegos_A'Kla",
+      "PageId": 63263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaddatha_In'Kro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -499,14 +515,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 380757,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ves_Volette's_hamlet",
+      "PageId": 663005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shield_Generator_Station_14",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 144246,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caamas_Firestorm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 234475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jualya_Village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 658364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamas_Jedi_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 377608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seventh_Alsakan_Conflict",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

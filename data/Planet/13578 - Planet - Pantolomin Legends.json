@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
@@ -165,7 +165,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "jungle",
@@ -235,7 +235,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -314,74 +314,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 248432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Champions",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 236954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pantolomin_halfback",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 248427,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jervo's_World",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 355523,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant–Dantooine_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 327695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warp-top",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 41600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tregald",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 47894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lomin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 23490,
-      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 346009,
       "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Pantolomin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 16348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Panto_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 24658,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pantolomin_Shipwrights",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 17232,
       "PageUrl": "https://starwars.fandom.com/wiki/Panto",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 254416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Franchise",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 12408,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garik_Loran",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 497733,
@@ -396,6 +336,61 @@
     {
       "PageId": 497735,
       "PageUrl": "https://starwars.fandom.com/wiki/Kossi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 248427,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jervo's_World",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 254416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Franchise",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 355523,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant–Dantooine_hyperlane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 23490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Namadii_Corridor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 47894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lomin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 12408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garik_Loran",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 16348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Panto_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 236954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pantolomin_halfback",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 327695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warp-top",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 41600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tregald",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 248432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Champions",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

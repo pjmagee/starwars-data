@@ -88,6 +88,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -138,12 +145,83 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Naberrie",
           "Href": "https://starwars.fandom.com/wiki/House_Naberrie"
         },
+        {
+          "Content": "Skywalker family",
+          "Href": "https://starwars.fandom.com/wiki/Skywalker_family/Legends"
+        }
+      ],
+      "Values": [
+        "House Naberrie",
+        "Skywalker family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Ruwee Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends"
+        },
+        {
+          "Content": "Jobal Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Ruwee Naberrie",
+        "Jobal Naberrie"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Anakin Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
+        }
+      ],
+      "Values": [
+        "Anakin Skywalker"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Sola Naberrie",
+          "Href": "https://starwars.fandom.com/wiki/Sola_Naberrie/Legends"
+        }
+      ],
+      "Values": [
+        "Sola Naberrie"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Luke Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends"
+        },
+        {
+          "Content": "Leia Organa Solo",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Organa_Solo"
+        }
+      ],
+      "Values": [
+        "Luke Skywalker",
+        "Leia Organa Solo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Refugee Relief Movement",
           "Href": "https://starwars.fandom.com/wiki/Refugee_Relief_Movement/Legends"
@@ -181,10 +259,6 @@
           "Href": "https://starwars.fandom.com/wiki/Delegation_of_2000"
         },
         {
-          "Content": "Skywalker family",
-          "Href": "https://starwars.fandom.com/wiki/Skywalker_family/Legends"
-        },
-        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
@@ -194,7 +268,6 @@
         }
       ],
       "Values": [
-        "House Naberrie",
         "Refugee Relief Movement",
         "Apprentice Legislature",
         "Legislative Youth Program",
@@ -204,7 +277,6 @@
         "Loyalist Committee",
         "Security Committee",
         "Delegation of 2000",
-        "Skywalker family",
         "Galactic Empire",
         "Imperial Senate"
       ]
@@ -212,9 +284,54 @@
   ],
   "Relationships": [
     {
-      "PageId": 221283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 142232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sossen-7_sublight_engine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 445380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colonization_of_Ohma-D'un",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 446284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foreign_Affairs_scandal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 262816,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 670389,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peace_Rally_on_Commenor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 8432,
+      "PageUrl": "https://starwars.fandom.com/wiki/J-type_star_skiff",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 4707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ruwee_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 322820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_black_market_conspiracy/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 323824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Conference_on_the_Clone_War_Refugee_Crisis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 364684,
@@ -237,39 +354,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 305822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Transport_714",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+      "PageId": 144705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 333578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé's_Theme",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 446048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 36661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Across_the_Stars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+      "PageId": 406108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freedom_Day",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 372965,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_tusk_cat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 411304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Refugee_Relief_Movement_fundraiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 229469,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Meadow_Picnic",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
-    },
-    {
-      "PageId": 208535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_amulet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 412185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trial_of_Ahsoka_Tano/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 218158,
       "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Ziro_the_Hutt's_Coruscant_club",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 413701,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Senatorial_Delegation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 51167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Japor_snippet/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 64628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 202030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plot_to_assassinate_Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 701336,
@@ -285,91 +417,6 @@
       "PageId": 724801,
       "PageUrl": "https://starwars.fandom.com/wiki/Throne_room_gown/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 572218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conference_on_Gus_Talon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 24351,
-      "PageUrl": "https://starwars.fandom.com/wiki/H-type_Nubian_yacht/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 289661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Theed_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 135420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Anakin_Skywalker_and_Padmé_Amidala/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 178668,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Shmi_Skywalker_Lars/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 181627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Qui-Gon_Jinn/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 406404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Malevolence)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Rodia)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 8432,
-      "PageUrl": "https://starwars.fandom.com/wiki/J-type_star_skiff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 295771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Onaconda_Farr/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 299709,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Beast_incident/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 322820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_black_market_conspiracy/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 323824,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Conference_on_the_Clone_War_Refugee_Crisis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 142232,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sossen-7_sublight_engine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 406108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freedom_Day",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 411304,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alsakan_RRM_fundraiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 412185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trial_of_Ahsoka_Tano/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 248599,
@@ -397,39 +444,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
     },
     {
+      "PageId": 135420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Anakin_Skywalker_and_Padmé_Amidala/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 178668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Shmi_Skywalker_Lars/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 181627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Qui-Gon_Jinn/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 763131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadda-Bi-Boran_exodus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 3891,
       "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 413701,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Senatorial_Delegation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 262816,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Coruscant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 303347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 51167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Japor_snippet/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 445380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colonization_of_Ohma-D'un",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 446284,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foreign_Affairs_scandal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 154357,
@@ -437,9 +474,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
-      "PageId": 202030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plot_to_assassinate_Padmé_Amidala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 406404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Malevolence)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_H-type_Nubian_yacht_(Rodia)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 303347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 5370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 208535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_amulet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 235092,
@@ -447,14 +504,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 670389,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peace_Rally_on_Commenor",
+      "PageId": 572218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conference_on_Gus_Talon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 446048,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Scipio/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 372965,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_tusk_cat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 289661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Theed_(Clone_Wars)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 295771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Onaconda_Farr/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 299709,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zillo_Beast_incident/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 305822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transport_714",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 221283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kaliida_Nebula/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

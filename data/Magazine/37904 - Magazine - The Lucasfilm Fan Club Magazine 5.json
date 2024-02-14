@@ -103,12 +103,16 @@
       "Label": "Release date",
       "Links": [
         {
+          "Content": "October",
+          "Href": "https://starwars.fandom.com/wiki/October"
+        },
+        {
           "Content": "1988",
           "Href": "https://starwars.fandom.com/wiki/1988"
         }
       ],
       "Values": [
-        "Fall 1988"
+        "October 1988"
       ]
     },
     {
@@ -138,5 +142,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 625636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Collections",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 673995,
   "PageUrl": "https://starwars.fandom.com/wiki/Kavil_Dorne",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,18 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Dorne family",
+          "Href": "https://starwars.fandom.com/wiki/Dorne_family"
+        }
+      ],
+      "Values": [
+        "Dorne family"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -40,5 +53,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 407335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorne_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    }
+  ]
 }

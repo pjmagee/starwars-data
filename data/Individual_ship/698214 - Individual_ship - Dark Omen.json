@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -199,10 +199,15 @@
         {
           "Content": "7th Fleet",
           "Href": "https://starwars.fandom.com/wiki/7th_Fleet"
+        },
+        {
+          "Content": "Dark Omen's squadron",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Omen%27s_squadron"
         }
       ],
       "Values": [
-        "7th Fleet"
+        "7th Fleet",
+        "Dark Omen's squadron"
       ]
     },
     {
@@ -219,6 +224,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 790627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Omen's_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 427493,
       "PageUrl": "https://starwars.fandom.com/wiki/7th_Fleet",

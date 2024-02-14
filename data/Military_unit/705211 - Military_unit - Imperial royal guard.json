@@ -12,15 +12,19 @@
       ]
     },
     {
-      "Label": "Military unit type",
+      "Label": "Commanding officer(s)",
       "Links": [
         {
-          "Content": "Special forces",
-          "Href": "https://starwars.fandom.com/wiki/Special_forces"
+          "Content": "Clone Commander",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Commander"
+        },
+        {
+          "Content": "Scorch",
+          "Href": "https://starwars.fandom.com/wiki/Scorch"
         }
       ],
       "Values": [
-        "Special forces"
+        "Clone Commander Scorch"
       ]
     },
     {
@@ -32,7 +36,7 @@
         }
       ],
       "Values": [
-        "At least 12 clone commandos"
+        "Imperial clone commandos"
       ]
     },
     {
@@ -71,20 +75,41 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial cloning program",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_cloning_program"
-        },
-        {
-          "Content": "Imperial Special Forces",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Special_Forces"
+          "Content": "Advanced Science Division",
+          "Href": "https://starwars.fandom.com/wiki/Advanced_Science_Division"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial cloning program",
-        "Imperial Special Forces"
+        "Advanced Science Division"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 759303,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_Science_Division",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 479385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scorch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_research_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 759392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_Gozanti-class_cruiser_(Balmorra)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 458520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

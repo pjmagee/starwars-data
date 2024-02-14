@@ -2,7 +2,7 @@
   "PageId": 611249,
   "PageUrl": "https://starwars.fandom.com/wiki/Tehar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e4/Tehar-TimelinesMap.png/revision/latest?cb=20220531114811",
   "Data": [
     {
       "Label": "Titles",
@@ -15,16 +15,16 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Mid Rim",
-          "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim Territories"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "I-7",
@@ -36,22 +36,43 @@
       ]
     },
     {
-      "Label": "Points of interest",
+      "Label": "Class",
       "Links": [],
       "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "temple",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_temple_(Tehar)"
+        },
+        {
+          "Content": "the Force",
+          "Href": "https://starwars.fandom.com/wiki/The_Force"
+        },
+        {
+          "Content": "village",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_village_(Tehar)"
+        }
+      ],
+      "Values": [
+        "A temple of the Force",
         "A village"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Human",
+          "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
         }
       ],
       "Values": [
-        "Human"
+        "Humans"
       ]
     },
     {
@@ -64,6 +85,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 611252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tehar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 730900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_village_(Tehar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 730959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_temple_(Tehar)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 611247,
       "PageUrl": "https://starwars.fandom.com/wiki/Eila",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -72,11 +108,6 @@
       "PageId": 611248,
       "PageUrl": "https://starwars.fandom.com/wiki/Kel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 611252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Massacre_on_Tehar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

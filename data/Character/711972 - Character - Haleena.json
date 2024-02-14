@@ -2,6 +2,7 @@
   "PageId": 711972,
   "PageUrl": "https://starwars.fandom.com/wiki/Haleena",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,7 +60,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Lourna Dee's family",
@@ -69,7 +70,47 @@
       "Values": [
         "Lourna Dee's family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Yudiah Dee",
+          "Href": "https://starwars.fandom.com/wiki/Yudiah_Dee"
+        }
+      ],
+      "Values": [
+        "Yudiah Dee"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Lourna Dee",
+          "Href": "https://starwars.fandom.com/wiki/Lourna_Dee"
+        },
+        {
+          "Content": "Inun",
+          "Href": "https://starwars.fandom.com/wiki/Inun"
+        }
+      ],
+      "Values": [
+        "Lourna Dee",
+        "Inun"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 712057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yudiah_Dee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 679930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lourna_Dee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

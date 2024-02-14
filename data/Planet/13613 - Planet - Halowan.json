@@ -66,14 +66,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-9"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "desert",
@@ -99,21 +99,16 @@
         },
         {
           "Content": "Holowan Laboratories",
-          "Href": "https://starwars.fandom.com/wiki/Holowan_Laboratories/Legends"
-        },
-        {
-          "Content": "Holowan Mechanicals",
-          "Href": "https://starwars.fandom.com/wiki/Holowan_Mechanicals/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Holowan_Laboratories_(facility)"
         }
       ],
       "Values": [
         "Trans-system data storage library",
-        "Holowan Laboratories",
-        "Holowan Mechanicals"
+        "Holowan Laboratories"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -140,6 +135,14 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Holowan Laboratories",
+          "Href": "https://starwars.fandom.com/wiki/Holowan_Laboratories/Legends"
+        },
+        {
+          "Content": "Holowan Mechanicals",
+          "Href": "https://starwars.fandom.com/wiki/Holowan_Mechanicals/Legends"
+        },
+        {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
         },
@@ -149,32 +152,14 @@
         }
       ],
       "Values": [
+        "Holowan Laboratories",
+        "Holowan Mechanicals",
         "Galactic Republic",
         "Confederacy of Independent Systems"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 8468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Laboratories/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 106325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Massacre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 19390,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 8466,
-      "PageUrl": "https://starwars.fandom.com/wiki/IG-72",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
     {
       "PageId": 271977,
       "PageUrl": "https://starwars.fandom.com/wiki/Halowan_system",
@@ -194,6 +179,31 @@
       "PageId": 38860,
       "PageUrl": "https://starwars.fandom.com/wiki/IG-88D/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 19390,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-88A/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 8468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Laboratories/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 8466,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-72",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 106325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Massacre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 781591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holowan_Laboratories_(facility)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

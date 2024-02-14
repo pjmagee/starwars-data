@@ -2,7 +2,7 @@
   "PageId": 566200,
   "PageUrl": "https://starwars.fandom.com/wiki/Randon_Run",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/Randon-Run-SWT.jpg/revision/latest?cb=20220722164040",
   "Data": [
     {
       "Label": "Titles",
@@ -27,12 +27,12 @@
       "Label": "Sectors",
       "Links": [
         {
-          "Content": "Mytaranor sector",
+          "Content": "Mytaranor",
           "Href": "https://starwars.fandom.com/wiki/Mytaranor_sector"
         }
       ],
       "Values": [
-        "Mytaranor sector"
+        "Mytaranor"
       ]
     },
     {
@@ -60,15 +60,39 @@
       ]
     },
     {
+      "Label": "Systems",
+      "Links": [
+        {
+          "Content": "Bracca",
+          "Href": "https://starwars.fandom.com/wiki/Bracca_system"
+        },
+        {
+          "Content": "Kashyyyk",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_system"
+        }
+      ],
+      "Values": [
+        "Bracca - Kashyyyk"
+      ]
+    },
+    {
       "Label": "Planets",
       "Links": [
+        {
+          "Content": "Bracca",
+          "Href": "https://starwars.fandom.com/wiki/Bracca"
+        },
+        {
+          "Content": "Uyter",
+          "Href": "https://starwars.fandom.com/wiki/Uyter"
+        },
         {
           "Content": "Kashyyyk",
           "Href": "https://starwars.fandom.com/wiki/Kashyyyk"
         }
       ],
       "Values": [
-        "Lantillies - Kashyyyk - Randon"
+        "Lantillies - Bracca - Uyter - Kashyyyk - Randon"
       ]
     },
     {
@@ -96,34 +120,29 @@
         }
       ],
       "Values": [
-        "Perlemian Trade Route - Durkteel Loop - Great Kashyyyk Branch - Nightroad - Pabol Sleheyron"
+        "Perlemian Trade Route - Durkteel Loop, Great Kashyyyk Branch, and Nightroad - Pabol Sleheyron"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 659939,
-      "PageUrl": "https://starwars.fandom.com/wiki/Durkteel_Loop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 659940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Kashyyyk_Branch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 659941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightroad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 584626,
-      "PageUrl": "https://starwars.fandom.com/wiki/Randon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 519411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 455688,
       "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 479522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 584626,
+      "PageUrl": "https://starwars.fandom.com/wiki/Randon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
@@ -142,14 +161,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 479522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 519411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 525312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uyter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 519410,
@@ -160,6 +174,26 @@
       "PageId": 695239,
       "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 98199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bracca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 659939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Durkteel_Loop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 659940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Kashyyyk_Branch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 659941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightroad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

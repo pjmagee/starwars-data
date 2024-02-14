@@ -2,6 +2,7 @@
   "PageId": 340771,
   "PageUrl": "https://starwars.fandom.com/wiki/Noghri_Overclan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -96,11 +97,17 @@
         }
       ],
       "Values": [
-        "Galactic Empire (defected)",
+        "Galactic Empire (client)",
         "Thrawn's confederation (defected)",
         "New Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 41839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mal'ary'ush",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    }
+  ]
 }

@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "4"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [],
       "Values": [
@@ -55,7 +62,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-11"
@@ -141,7 +148,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Sulfurous",
@@ -161,10 +168,6 @@
       "Label": "Points of interest",
       "Links": [
         {
-          "Content": "Base Delta-Nine",
-          "Href": "https://starwars.fandom.com/wiki/Base_Delta-Nine"
-        },
-        {
           "Content": "Hinder Market",
           "Href": "https://starwars.fandom.com/wiki/Hinder_Market"
         },
@@ -178,7 +181,6 @@
         }
       ],
       "Values": [
-        "Base Delta-Nine",
         "Hinder Market",
         "Mallif Cove",
         "Tuldok Ranch"
@@ -209,7 +211,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -328,43 +330,13 @@
   ],
   "Relationships": [
     {
-      "PageId": 7056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Recopi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 663239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guttersnipe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 63226,
-      "PageUrl": "https://starwars.fandom.com/wiki/Base_Delta-Nine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 268790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seyugi_(culture)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 73608,
       "PageUrl": "https://starwars.fandom.com/wiki/Seyugi_Dervish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 296007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gull_Tuldok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 365330,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thoren_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 295976,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krendel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 296006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tuldok_clan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -373,14 +345,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
+      "PageId": 295976,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krendel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 14088,
       "PageUrl": "https://starwars.fandom.com/wiki/Recopi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 268790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seyugi_(culture)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 663239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guttersnipe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 7056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Recopi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 296006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tuldok_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 365330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thoren_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 296007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gull_Tuldok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

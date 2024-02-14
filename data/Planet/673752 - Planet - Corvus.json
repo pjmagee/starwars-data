@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forest",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Togruta",
@@ -121,29 +121,44 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Morgan Elsbeth's army",
-          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_army"
+          "Content": "Elsbeth's regime",
+          "Href": "https://starwars.fandom.com/wiki/Elsbeth%27s_regime"
         }
       ],
       "Values": [
-        "Morgan Elsbeth's army"
+        "Elsbeth's regime"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 675539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Calodan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 636841,
       "PageUrl": "https://starwars.fandom.com/wiki/Amban_phase-pulse_blaster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 675488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scout_guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 675513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beskar_spear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 676251,
+      "PageUrl": "https://starwars.fandom.com/wiki/IB-94_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 675518,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_herbivore_(Corvus)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 560550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -157,9 +172,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 675510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 675418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 763962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elsbeth's_regime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 673821,
@@ -167,28 +187,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 675513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beskar_spear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 675488,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scout_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 676251,
-      "PageUrl": "https://starwars.fandom.com/wiki/IB-94_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 675539,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberation_of_Calodan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 675510,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 465585,
       "PageUrl": "https://starwars.fandom.com/wiki/Tooka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 560550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

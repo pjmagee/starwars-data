@@ -76,6 +76,18 @@
       ]
     },
     {
+      "Label": "Average lifespan",
+      "Links": [
+        {
+          "Content": "Standard years",
+          "Href": "https://starwars.fandom.com/wiki/Standard_year"
+        }
+      ],
+      "Values": [
+        "35-40 Standard years"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
@@ -89,12 +101,17 @@
         {
           "Content": "Ryloth",
           "Href": "https://starwars.fandom.com/wiki/Ryloth"
+        },
+        {
+          "Content": "Tenoo",
+          "Href": "https://starwars.fandom.com/wiki/Tenoo"
         }
       ],
       "Values": [
         "Arvala-7",
         "Endor",
-        "Ryloth"
+        "Ryloth",
+        "Tenoo"
       ]
     },
     {
@@ -112,6 +129,31 @@
   ],
   "Relationships": [
     {
+      "PageId": 635376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arvala-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 730890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tenoo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 785518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miv'rah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 765592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_planet_(Faraz)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 456136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 458239,
       "PageUrl": "https://starwars.fandom.com/wiki/Zygerria",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -120,16 +162,6 @@
       "PageId": 458586,
       "PageUrl": "https://starwars.fandom.com/wiki/Ryloth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 635376,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arvala-7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 456136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

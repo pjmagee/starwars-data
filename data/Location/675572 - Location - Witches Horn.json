@@ -12,11 +12,18 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [],
+      "Values": [
+        "Cliff"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
         {
-          "Content": "Treacherous Approach",
-          "Href": "https://starwars.fandom.com/wiki/Treacherous_Approach"
+          "Content": "Strangled Cliffs",
+          "Href": "https://starwars.fandom.com/wiki/Strangled_Cliffs"
         },
         {
           "Content": "Dathomir",
@@ -24,20 +31,39 @@
         }
       ],
       "Values": [
-        "Treacherous Approach, Dathomir"
+        "Strangled Cliffs, Dathomir"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Rocky"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Nightsisters",
+          "Href": "https://starwars.fandom.com/wiki/Nightsisters"
+        }
+      ],
+      "Values": [
+        "Nightsisters"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 675567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strangled_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 452591,
       "PageUrl": "https://starwars.fandom.com/wiki/Dathomir",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 675573,
-      "PageUrl": "https://starwars.fandom.com/wiki/Treacherous_Approach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

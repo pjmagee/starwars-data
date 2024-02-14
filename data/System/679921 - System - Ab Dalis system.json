@@ -17,10 +17,32 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier",
+        "Occlusion Zone"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-17",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-17"
       ]
     },
     {
@@ -57,24 +79,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 731041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occlusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 680158,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Emergence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
       "PageId": 680132,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Garello_convoy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 685125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maree's_Diligence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 673836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ab_Dalis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 680018,
@@ -92,9 +114,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 680158,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Emergence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 685125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maree's_Diligence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 673836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ab_Dalis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

@@ -17,21 +17,31 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Western Reaches"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Senex-Juvex",
+          "Href": "https://starwars.fandom.com/wiki/Senex-Juvex/Legends"
+        },
+        {
           "Content": "Senex sector",
           "Href": "https://starwars.fandom.com/wiki/Senex_sector/Legends"
         }
       ],
       "Values": [
+        "Senex-Juvex",
         "Senex sector"
       ]
     },
@@ -48,14 +58,21 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-18"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forest",
@@ -81,14 +98,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 272499,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Petro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
       "PageId": 272820,
       "PageUrl": "https://starwars.fandom.com/wiki/Usnia_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 272499,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Petro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

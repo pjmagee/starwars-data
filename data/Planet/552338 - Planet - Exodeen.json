@@ -2,7 +2,7 @@
   "PageId": 552338,
   "PageUrl": "https://starwars.fandom.com/wiki/Exodeen",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/ExodeenTinnel.png/revision/latest?cb=20210317234845",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/24/Exodeen-SWT.jpg/revision/latest?cb=20220719220456",
   "Data": [
     {
       "Label": "Titles",
@@ -36,15 +36,15 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
-          "Content": "M-12",
+          "Content": "N-12",
           "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        "M-12"
+        "N-12"
       ]
     },
     {
@@ -53,23 +53,33 @@
         {
           "Content": "Hydian Way",
           "Href": "https://starwars.fandom.com/wiki/Hydian_Way"
+        },
+        {
+          "Content": "Nanth'ri Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Nanth%27ri_Trade_Route"
         }
       ],
       "Values": [
-        "Hydian Way"
+        "Hydian Way",
+        "Nanth'ri Trade Route"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 553892,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exodeen_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 506535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanth'ri_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
       "PageId": 518433,
       "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 553892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exodeen_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

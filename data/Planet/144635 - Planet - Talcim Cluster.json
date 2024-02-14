@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-20"
@@ -53,6 +53,18 @@
       "Values": [
         "Asteroid belt"
       ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Iron Mine",
+          "Href": "https://starwars.fandom.com/wiki/Iron_Mine"
+        }
+      ],
+      "Values": [
+        "Iron Mine"
+      ]
     }
   ],
   "Relationships": [
@@ -60,6 +72,11 @@
       "PageId": 12676,
       "PageUrl": "https://starwars.fandom.com/wiki/Cegul_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 792986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iron_Mine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

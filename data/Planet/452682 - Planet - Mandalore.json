@@ -2,7 +2,7 @@
   "PageId": 452682,
   "PageUrl": "https://starwars.fandom.com/wiki/Mandalore",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5e/Mandalore_SWCT.png/revision/latest?cb=20181015023000",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9d/MandaloreCh18.png/revision/latest?cb=20230308084552",
   "Data": [
     {
       "Label": "Titles",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-7",
@@ -159,7 +159,10 @@
         }
       ],
       "Values": [
-        "Hot and dry"
+        "Before the Purge",
+        "Hot and dry",
+        "After the Purge",
+        "Storms"
       ]
     },
     {
@@ -170,7 +173,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -195,6 +198,18 @@
         {
           "Content": "Domed cities",
           "Href": "https://starwars.fandom.com/wiki/Domed_city"
+        },
+        {
+          "Content": "Crystals",
+          "Href": "https://starwars.fandom.com/wiki/Crystal"
+        },
+        {
+          "Content": "Glass",
+          "Href": "https://starwars.fandom.com/wiki/Glass"
+        },
+        {
+          "Content": "Trinitite",
+          "Href": "https://starwars.fandom.com/wiki/Trinitite"
         }
       ],
       "Values": [
@@ -204,17 +219,29 @@
         "Jungles",
         "Seas",
         "Mountains",
-        "Modern",
+        "Before the Purge",
         "Desert",
-        "Domed cities"
+        "Domed cities",
+        "After the Purge",
+        "Crystals",
+        "Glass",
+        "Trinitite"
       ]
     },
     {
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Great Forge",
+          "Href": "https://starwars.fandom.com/wiki/Great_Forge"
+        },
+        {
           "Content": "Royal Academy of Government/Imperial Academy of Mandalore",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore"
+        },
+        {
+          "Content": "Imperial base",
+          "Href": "https://starwars.fandom.com/wiki/Mandalore_Imperial_base"
         },
         {
           "Content": "Mandalore Banking Center",
@@ -223,10 +250,6 @@
         {
           "Content": "Mandalore prison outpost",
           "Href": "https://starwars.fandom.com/wiki/Mandalore_prison_outpost"
-        },
-        {
-          "Content": "Mines of Mandalore",
-          "Href": "https://starwars.fandom.com/wiki/Mines_of_Mandalore"
         },
         {
           "Content": "Peace Park",
@@ -241,18 +264,24 @@
           "Href": "https://starwars.fandom.com/wiki/Statue_of_Tarre_Vizsla"
         },
         {
+          "Content": "Kryze command camp",
+          "Href": "https://starwars.fandom.com/wiki/Kryze_command_camp"
+        },
+        {
           "Content": "Sundari Royal Palace",
           "Href": "https://starwars.fandom.com/wiki/Sundari_Royal_Palace"
         }
       ],
       "Values": [
+        "Great Forge",
         "Royal Academy of Government/Imperial Academy of Mandalore",
+        "Imperial base",
         "Mandalore Banking Center",
         "Mandalore prison outpost",
-        "Mines of Mandalore",
         "Peace Park",
         "Royal prison",
         "Statue of Tarre Vizsla",
+        "Kryze command camp",
         "Sundari Royal Palace"
       ]
     },
@@ -262,10 +291,15 @@
         {
           "Content": "Tree of Te Ani'la",
           "Href": "https://starwars.fandom.com/wiki/Tree_of_Te_Ani%27la"
+        },
+        {
+          "Content": "cassius tree",
+          "Href": "https://starwars.fandom.com/wiki/Cassius_tree"
         }
       ],
       "Values": [
-        "Tree of Te Ani'la"
+        "Tree of Te Ani'la",
+        "cassius tree"
       ]
     },
     {
@@ -282,16 +316,38 @@
         {
           "Content": "Shriek-hawk",
           "Href": "https://starwars.fandom.com/wiki/Shriek-hawk"
+        },
+        {
+          "Content": "Unidentified reptavian",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_reptavian_(Mandalore)"
+        },
+        {
+          "Content": "Trinitaur",
+          "Href": "https://starwars.fandom.com/wiki/Trinitaur"
         }
       ],
       "Values": [
         "Galaar",
         "Mythosaur",
-        "Shriek-hawk"
+        "Shriek-hawk",
+        "Unidentified reptavian",
+        "Trinitaur"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Alamite",
+          "Href": "https://starwars.fandom.com/wiki/Alamite"
+        }
+      ],
+      "Values": [
+        "Alamite"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -323,32 +379,34 @@
       "Label": "Government",
       "Links": [
         {
-          "Content": "Duchess",
-          "Href": "https://starwars.fandom.com/wiki/Duke"
+          "Content": "Clans",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_clan"
         },
         {
           "Content": "Mand'alor",
           "Href": "https://starwars.fandom.com/wiki/Mand%27alor"
         },
         {
-          "Content": "Prime Minister",
-          "Href": "https://starwars.fandom.com/wiki/Prime_Minister"
+          "Content": "Mandalorian Government Council",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_Government_Council"
         },
         {
-          "Content": "Viceroy",
-          "Href": "https://starwars.fandom.com/wiki/Viceroy"
+          "Content": "Republic Era",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Era"
         },
         {
-          "Content": "Governor",
+          "Content": "Governorship",
           "Href": "https://starwars.fandom.com/wiki/Governor"
+        },
+        {
+          "Content": "Imperial Era",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Era"
         }
       ],
       "Values": [
-        "Duchess",
-        "Mand'alor",
-        "Prime Minister",
-        "Viceroy",
-        "Governor"
+        "Clans under the authority of the Mand'alor",
+        "Mandalorian Government Council (during the Republic Era)",
+        "Governorship (during the Imperial Era)"
       ]
     },
     {
@@ -362,7 +420,12 @@
     },
     {
       "Label": "Demonym",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Mandalorian",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian"
+        }
+      ],
       "Values": [
         "Mandalorian"
       ]
@@ -420,10 +483,6 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mandalorians",
-          "Href": "https://starwars.fandom.com/wiki/Mandalorian"
-        },
-        {
           "Content": "New Mandalorians",
           "Href": "https://starwars.fandom.com/wiki/New_Mandalorians"
         },
@@ -438,6 +497,10 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Gideon's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
         }
       ],
       "Values": [
@@ -445,19 +508,20 @@
         "New Mandalorians",
         "Galactic Republic",
         "Shadow Collective",
-        "Galactic Empire"
+        "Galactic Empire",
+        "Gideon's Imperial remnant"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 504390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_the_Sundari_docks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 533157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Personal_Combat_Shield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 455187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satine_Kryze",
+      "PageId": 456390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -466,69 +530,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 581570,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 504391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_black_market_conspiracy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 516169,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tour_guide_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 504738,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_conference",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 601764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cassius_Tea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 529687,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Protectors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 554138,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cubikahd",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 650690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Undercity",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 651376,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sector_11_(Mandalore)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 533157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Personal_Combat_Shield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 450970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gar_Saxon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 673747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Axe_Woves",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 644241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ronion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 609650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_resistance",
+      "PageId": 762231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_armored_commando",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 515700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shriek-hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 639298,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Mandalorian's_IB-94_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 471180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 555480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_shipping_company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 553672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_warehouse_district",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 752864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Police_captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 779606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mythosaur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 410237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Takeover_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 635867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Purge_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 456984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 562146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paralyzing_dart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 577455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almec's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 580165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 581638,
@@ -541,28 +615,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 650785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic–Mandalore_treaty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
-    },
-    {
-      "PageId": 456984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 322087,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 496867,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mando'a",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 631843,
       "PageUrl": "https://starwars.fandom.com/wiki/Grand_Salon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 722256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -571,34 +630,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 56062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+      "PageId": 640655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 538108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zak_Zaz",
+      "PageId": 461061,
+      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 752178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Infantry_Mandalorian_Armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 621371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 538159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Siddiq",
+      "PageId": 631177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_Imperial_remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 671823,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tree_of_Te_Ani'la",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 471180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 483824,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 595054,
+      "PageUrl": "https://starwars.fandom.com/wiki/MandalMotors",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 611374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 458176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twilight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 383949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_secret_service",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 679156,
+      "PageUrl": "https://starwars.fandom.com/wiki/Martial_traditionalists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 597227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Statue_of_Tarre_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 673747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Axe_Woves",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 636948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paz_Vizsla",
+      "PageId": 763766,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shield_commando_1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 529687,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Protectors",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 554250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Super_Commando",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 514213,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 482962,
@@ -616,174 +730,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 567225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cassius_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 597227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Statue_of_Tarre_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 544749,
-      "PageUrl": "https://starwars.fandom.com/wiki/CC-420_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 640717,
-      "PageUrl": "https://starwars.fandom.com/wiki/Night_of_a_Thousand_Tears",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 443992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 483926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korkie_Kryze",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 484026,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soniee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 612276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Royal_Palace_plaza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 505073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 467716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_civil_war_(Clone_Wars)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 505258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 562227,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian-Jedi_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 567160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 581648,
-      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 530191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Janard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 600170,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pyke_guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 529702,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529704,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Kryze",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 530967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Banking_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 531164,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Royal_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 531165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_prison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 483824,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 410237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Takeover_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 564519,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Krownest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 564579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_cataclysm",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 650830,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 452220,
       "PageUrl": "https://starwars.fandom.com/wiki/Rook_Kast",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 655208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keldabe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 496867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mando'a",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 545038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_(writing_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 553672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_warehouse_district",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 504382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 452519,
@@ -801,14 +750,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 498403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lagos",
+      "PageId": 497727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 581695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon's_Star_Destroyer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 621699,
+      "PageUrl": "https://starwars.fandom.com/wiki/332nd_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 581648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 583138,
@@ -821,19 +775,249 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 488217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+      "PageId": 564599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Customs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 563982,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_shipping_docks",
+      "PageId": 567163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Saxon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 631848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galaar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 480103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peace_Park",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
+      "PageId": 530967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Banking_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 531164,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 531165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_prison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 762094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conflict_on_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 555403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sundari_school_superintendent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 550639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Mandalorian_school",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 550731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Memorial_Shrine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Mandalorian_hospital",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 553673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Government_warehouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 443992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabine_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mines_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 720052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Living_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 650785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic–Mandalore_treaty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
+    },
+    {
+      "PageId": 678178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_rescue_of_Grogu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 498403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lagos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alrich_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tristan_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 763770,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shield_commando_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_(writing_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 762132,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Imperial_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 601764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cassius_Tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 674860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_light_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 497675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concordia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 567225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cassius_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 528920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ursa_Wren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 758411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spider_Tank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 762970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_mech_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 464101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 562739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mooga_smuggling_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 504382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 538108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zak_Zaz",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 538159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siddiq",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 636948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paz_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 516169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tour_guide_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 554250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Super_Commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 525978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_of_Neutral_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 782719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Remnants",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 787617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shadow_Council_(Imperial_Remnants)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 640717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Night_of_a_Thousand_Tears",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 483926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korkie_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 484026,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soniee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 644241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 655208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keldabe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 322087,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 757791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Living_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 581573,
@@ -851,24 +1035,89 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 598129,
-      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 773117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_shield_commando",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 514520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Mandalore",
+      "PageId": 638529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uj'alayi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 488217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 650690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Undercity",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 651376,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sector_11_(Mandalore)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 56062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 757725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cyborg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 704386,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_cloning_program",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 782380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_tabletop_game",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 581695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon's_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 563982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_shipping_docks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 760432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Forge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 474240,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Mandalorians",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 650830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mandalore",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 625839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 687124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electro_riot_baton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 653247,
       "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Grogu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 456390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bo-Katan_Kryze",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 537521,
@@ -886,84 +1135,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 555480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Mandalorian_shipping_company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 504391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_black_market_conspiracy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 504738,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_conference",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 638529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uj'alayi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 474240,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Mandalorians",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 577455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almec's_office",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 625839,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 631848,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galaar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 461061,
-      "PageUrl": "https://starwars.fandom.com/wiki/WESTAR-35_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 643148,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-0292",
+      "PageId": 635831,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Armorer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 621699,
-      "PageUrl": "https://starwars.fandom.com/wiki/332nd_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 748873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halloween",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
     },
     {
-      "PageId": 383949,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_secret_service",
+      "PageId": 635868,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Tribe",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 555451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ruling_Council_(New_Mandalorians)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 679156,
-      "PageUrl": "https://starwars.fandom.com/wiki/Martial_traditionalists",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 550639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Mandalorian_school",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 550731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Memorial_Shrine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 635821,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mythosaur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 651085,
@@ -971,9 +1160,174 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 635867,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Purge_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 643148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaughn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 515700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shriek-hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757728,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alamite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_reptavian_(Mandalore)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 758918,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuzzle_shrew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 762954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trinitaur",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 581628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arc_Pulse_Generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 514520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 761180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 757031,
+      "PageUrl": "https://starwars.fandom.com/wiki/Civic_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 529702,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529704,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 695220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 455187,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satine_Kryze",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 612276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Royal_Palace_plaza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 576117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Praetorian_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 555451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Government_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 673745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Children_of_the_Watch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 757784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trinitite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 504383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Coronet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 504390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_the_Sundari_docks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 453304,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloning",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 762953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Langskib",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 670348,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Kast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 505073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 512400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Regent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 598129,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 564519,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Krownest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 564579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_cataclysm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 455718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darksaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 687357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_battle_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 581570,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 722256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hangar_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 566471,
@@ -981,19 +1335,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 678178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_rescue_of_Grogu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 635831,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Armorer",
+      "PageId": 450970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gar_Saxon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 458176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twilight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 530191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Janard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 554138,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cubikahd",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
     },
     {
       "PageId": 453788,
@@ -1016,59 +1370,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 514213,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Wren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 467716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(19_BBY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 640655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 505258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Clan_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 671823,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tree_of_Te_Ani'la",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 562227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian-Jedi_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 512400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Regent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 720050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mines_of_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 580165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 562739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mooga_smuggling_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 564599,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Customs",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 695220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 552315,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundari_Mandalorian_hospital",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 553673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Government_warehouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 567160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War_(Imperial_Era)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 553954,
@@ -1076,38 +1395,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 480103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peace_Park",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 600170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pyke_Syndicate_Foot_Soldier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 555403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sundari_school_superintendent",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 762181,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Plazir-15",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 595054,
-      "PageUrl": "https://starwars.fandom.com/wiki/MandalMotors",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 611374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ardees_Beverage_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 497675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concordia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 525978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Council_of_Neutral_Systems",
+      "PageId": 609650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_resistance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 581628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arc_Pulse_Generator",
+      "PageId": 544749,
+      "PageUrl": "https://starwars.fandom.com/wiki/CC-420_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]

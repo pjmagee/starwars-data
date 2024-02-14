@@ -12,13 +12,20 @@
       ]
     },
     {
-      "Label": "Manufacturer",
+      "Label": "Designer",
       "Links": [
         {
           "Content": "Techno Union",
           "Href": "https://starwars.fandom.com/wiki/Techno_Union"
         }
       ],
+      "Values": [
+        "Techno Union"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [],
       "Values": [
         "Techno Union"
       ]
@@ -41,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Transport"
@@ -94,12 +101,17 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "Rocket thruster",
+          "Content": "rocket boosters",
           "Href": "https://starwars.fandom.com/wiki/Rocket_booster"
+        },
+        {
+          "Content": "Retrorockets",
+          "Href": "https://starwars.fandom.com/wiki/Retrorocket"
         }
       ],
       "Values": [
-        "Rocket thruster (6)"
+        "6 rocket boosters",
+        "Retrorockets"
       ]
     },
     {
@@ -139,10 +151,22 @@
       ]
     },
     {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensors",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Advanced sensors"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Laser cannon",
+          "Content": "laser cannon",
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
@@ -150,7 +174,7 @@
           "Href": "https://starwars.fandom.com/wiki/Missile_launcher"
         },
         {
-          "Content": "Turbolaser",
+          "Content": "turbolaser",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
@@ -159,9 +183,9 @@
         }
       ],
       "Values": [
-        "Laser cannon batteries (2)",
+        "2 laser cannon batteries",
         "Missile launchers",
-        "Turbolaser cannons (3)"
+        "Three turbolaser cannons"
       ]
     },
     {
@@ -170,17 +194,36 @@
         {
           "Content": "IG-227 Hailfire-class droid tanks",
           "Href": "https://starwars.fandom.com/wiki/IG-227_Hailfire-class_droid_tank"
+        },
+        {
+          "Content": "liters",
+          "Href": "https://starwars.fandom.com/wiki/Liter"
+        },
+        {
+          "Content": "fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel"
         }
       ],
       "Values": [
-        "100+ IG-227 Hailfire-class droid tanks"
+        "100+ IG-227 Hailfire-class droid tanks",
+        "1,000+ liters of fuel"
       ]
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "organic",
+          "Href": "https://starwars.fandom.com/wiki/Species"
+        },
+        {
+          "Content": "commander",
+          "Href": "https://starwars.fandom.com/wiki/Commander"
+        }
+      ],
       "Values": [
-        "190"
+        "190",
+        "1 organic commander"
       ]
     },
     {
@@ -188,12 +231,12 @@
       "Links": [
         {
           "Content": "IG-series battle droids",
-          "Href": "https://starwars.fandom.com/wiki/IG-series_battle_droid"
+          "Href": "https://starwars.fandom.com/wiki/IG_lancer_droid"
         }
       ],
       "Values": [
         "1,017",
-        "IG-series battle droids"
+        "100+ IG-series battle droids"
       ]
     },
     {
@@ -206,6 +249,58 @@
       ],
       "Values": [
         "12,400 tons"
+      ]
+    },
+    {
+      "Label": "Cargo handling systems",
+      "Links": [],
+      "Values": [
+        "Turbolift network"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "fuel cells",
+          "Href": "https://starwars.fandom.com/wiki/Fuel_cell"
+        }
+      ],
+      "Values": [
+        "6 fuel cells"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Bureaucratic",
+          "Href": "https://starwars.fandom.com/wiki/Bureaucrat"
+        },
+        {
+          "Content": "diplomatic",
+          "Href": "https://starwars.fandom.com/wiki/Diplomat"
+        },
+        {
+          "Content": "Cargo carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        },
+        {
+          "Content": "Landing craft",
+          "Href": "https://starwars.fandom.com/wiki/Landing_craft"
+        },
+        {
+          "Content": "Warship",
+          "Href": "https://starwars.fandom.com/wiki/Warship"
+        }
+      ],
+      "Values": [
+        "Multi-purpose",
+        "Bureaucratic and diplomatic transport (initial purpose)",
+        "Cargo carrier",
+        "Landing craft",
+        "Tax collection",
+        "Warship escort"
       ]
     },
     {

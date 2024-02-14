@@ -2,7 +2,7 @@
   "PageId": 666358,
   "PageUrl": "https://starwars.fandom.com/wiki/Jamiron",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/Rentor.jpg/revision/latest?cb=20211116205951",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/eb/Rentor.jpg/revision/latest?cb=20230129203627",
   "Data": [
     {
       "Label": "Titles",
@@ -25,7 +25,12 @@
     },
     {
       "Label": "System",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Jamiron system",
+          "Href": "https://starwars.fandom.com/wiki/Jamiron_system"
+        }
+      ],
       "Values": [
         "Jamiron system"
       ]
@@ -45,11 +50,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 714135,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_at_Jamiron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 726288,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Jamiron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -63,6 +63,16 @@
       "PageId": 727660,
       "PageUrl": "https://starwars.fandom.com/wiki/Jamiron_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 714135,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_at_Jamiron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 748490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_electronics_factory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

@@ -12,7 +12,20 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Model",
+      "Links": [
+        {
+          "Content": "Imperial Gozanti-class cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Gozanti-class_cruiser"
+        }
+      ],
+      "Values": [
+        "Imperial Gozanti-class cruiser",
+        "Gozanti-class Assault Carrier"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Gozanti-class Assault Carrier",
@@ -24,15 +37,125 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Engines",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Engines (3)"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [],
+      "Values": [
+        "Forward dorsal twin laser cannon turret (1)",
+        "Rear dorsal twin laser cannon turret (1)",
+        "Forward ventral twin laser cannon turret (1)"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [],
+      "Values": [
+        "Cargo bay"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "Gideon's Imperial remnant",
+          "Href": "https://starwars.fandom.com/wiki/Gideon%27s_Imperial_remnant"
+        },
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "security officer",
+          "Href": "https://starwars.fandom.com/wiki/Security_officer"
+        },
+        {
+          "Content": "deck officer",
+          "Href": "https://starwars.fandom.com/wiki/Deck_officer"
+        },
+        {
+          "Content": "stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Mandalorian resistance",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_resistance"
+        },
+        {
+          "Content": "Mandalorian warriors",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_warrior"
+        }
+      ],
+      "Values": [
+        "Gideon's Imperial remnant",
+        "3 Imperial officers",
+        "At least 1 security officer",
+        "At least 1 freighter pilot",
+        "At least 1 deck officer",
+        "At least 46 stormtroopers",
+        "Mandalorian resistance",
+        "Mandalorian warriors"
+      ]
+    },
+    {
+      "Label": "Cargo capacity",
+      "Links": [],
+      "Values": [
+        "Weapons crates"
+      ]
+    },
+    {
+      "Label": "Cargo handling systems",
+      "Links": [],
+      "Values": [
+        "Cargo control area"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Holoprojector",
+          "Href": "https://starwars.fandom.com/wiki/Holoprojector"
+        }
+      ],
+      "Values": [
+        "Equipped",
+        "Holoprojector"
+      ]
+    },
+    {
       "Label": "Present for battles/events",
       "Links": [
         {
           "Content": "Assault on the Imperial Gozanti freighter",
           "Href": "https://starwars.fandom.com/wiki/Assault_on_the_Imperial_Gozanti_freighter"
+        },
+        {
+          "Content": "Reconquest of Mandalore",
+          "Href": "https://starwars.fandom.com/wiki/Reconquest_of_Mandalore"
         }
       ],
       "Values": [
-        "Assault on the Imperial Gozanti freighter"
+        "Assault on the Imperial Gozanti freighter",
+        "Reconquest of Mandalore"
       ]
     },
     {
@@ -58,10 +181,15 @@
         {
           "Content": "Gideon's fleet",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_fleet"
+        },
+        {
+          "Content": "Mandalorian fleet",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_fleet"
         }
       ],
       "Values": [
-        "Gideon's fleet"
+        "Gideon's fleet",
+        "Mandalorian fleet"
       ]
     },
     {
@@ -75,9 +203,36 @@
       "Values": [
         "Unidentified Imperial captain"
       ]
+    },
+    {
+      "Label": "Crewmembers",
+      "Links": [
+        {
+          "Content": "Unidentified Imperial freighter pilot",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_freighter_pilot"
+        },
+        {
+          "Content": "Unidentified Imperial security officer",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_security_officer"
+        },
+        {
+          "Content": "Unidentified Imperial deck officer",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_deck_officer_(Trask)"
+        }
+      ],
+      "Values": [
+        "Unidentified Imperial freighter pilot",
+        "Unidentified Imperial security officer",
+        "Unidentified Imperial deck officer"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 674651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 673907,
       "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_the_Imperial_Gozanti_freighter",

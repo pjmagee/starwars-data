@@ -2,7 +2,7 @@
   "PageId": 17543,
   "PageUrl": "https://starwars.fandom.com/wiki/Kleeva",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ac/Kleeva.jpg/revision/latest?cb=20230524130129",
   "Data": [
     {
       "Label": "Titles",
@@ -19,12 +19,25 @@
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
         },
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        }
+      ],
+      "Values": [
+        "Mid Rim",
+        "The Slice"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
           "Content": "Hutt Space",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
         }
       ],
       "Values": [
-        "Mid Rim; Hutt Space"
+        "Hutt Space"
       ]
     },
     {
@@ -45,17 +58,39 @@
         {
           "Content": "Boonda's Moon",
           "Href": "https://starwars.fandom.com/wiki/Boonda%27s_Moon"
+        },
+        {
+          "Content": "Vultee-Pietsch",
+          "Href": "https://starwars.fandom.com/wiki/Vultee-Pietsch"
+        },
+        {
+          "Content": "moon",
+          "Href": "https://starwars.fandom.com/wiki/Moon/Legends"
         }
       ],
       "Values": [
-        "1: Boonda's Moon"
+        "Boonda's Moon",
+        "Vultee-Pietsch",
+        "At least 1 other moon"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-11"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Oktos Route",
+          "Href": "https://starwars.fandom.com/wiki/Oktos_Route"
+        }
+      ],
+      "Values": [
+        "Oktos Route"
       ]
     },
     {
@@ -69,14 +104,44 @@
       "Values": [
         "Gas giant"
       ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Poisonous",
+          "Href": "https://starwars.fandom.com/wiki/Poison/Legends"
+        }
+      ],
+      "Values": [
+        "Poisonous"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Violet",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        },
+        {
+          "Content": "clouds",
+          "Href": "https://starwars.fandom.com/wiki/Cloud/Legends"
+        }
+      ],
+      "Values": [
+        "Violet clouds"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "None"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 270431,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oktos_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
     {
       "PageId": 14432,
       "PageUrl": "https://starwars.fandom.com/wiki/Boonda's_Moon",
@@ -86,6 +151,16 @@
       "PageId": 174964,
       "PageUrl": "https://starwars.fandom.com/wiki/Kleeva_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 270431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oktos_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 769004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vultee-Pietsch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

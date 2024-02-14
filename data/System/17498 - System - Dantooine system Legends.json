@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-4"
@@ -119,8 +119,28 @@
       "Label": "Space stations",
       "Links": [
         {
+          "Content": "Alliance Station I",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Station_I_(Dantooine_system)"
+        },
+        {
+          "Content": "Alliance Station II",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_Station_II_(Dantooine_system)"
+        },
+        {
           "Content": "Dantooine Space Station",
           "Href": "https://starwars.fandom.com/wiki/Dantooine_Space_Station"
+        },
+        {
+          "Content": "Deep Space Station",
+          "Href": "https://starwars.fandom.com/wiki/Deep_Space_Station"
+        },
+        {
+          "Content": "Empire's Station I",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_I_(Dantooine_system)"
+        },
+        {
+          "Content": "Empire's Station II",
+          "Href": "https://starwars.fandom.com/wiki/Empire%27s_Station_II_(Dantooine_system)"
         },
         {
           "Content": "Legacy YT Indigo Blue",
@@ -132,7 +152,12 @@
         }
       ],
       "Values": [
+        "Alliance Station I",
+        "Alliance Station II",
         "Dantooine Space Station",
+        "Deep Space Station",
+        "Empire's Station I",
+        "Empire's Station II",
         "Legacy YT Indigo Blue",
         "RSF Outpost"
       ]
@@ -141,8 +166,8 @@
       "Label": "Asteroids",
       "Links": [
         {
-          "Content": "Dantooine's Second Star",
-          "Href": "https://starwars.fandom.com/wiki/Dantooine%27s_Second_Star"
+          "Content": "Blacklight Territory",
+          "Href": "https://starwars.fandom.com/wiki/Blacklight_Territory"
         },
         {
           "Content": "Wall of Dantooine",
@@ -150,7 +175,7 @@
         }
       ],
       "Values": [
-        "Dantooine's Second Star",
+        "Blacklight Territory",
         "Wall of Dantooine"
       ]
     },
@@ -170,47 +195,12 @@
       "Label": "Other objects",
       "Links": [
         {
-          "Content": "Area D-502",
-          "Href": "https://starwars.fandom.com/wiki/Area_D-502"
-        },
-        {
-          "Content": "Area D-513",
-          "Href": "https://starwars.fandom.com/wiki/Area_D-513"
-        },
-        {
-          "Content": "Area D-7s1",
-          "Href": "https://starwars.fandom.com/wiki/Area_D-7s1"
-        },
-        {
-          "Content": "Area Ferionic 7-IK",
-          "Href": "https://starwars.fandom.com/wiki/Area_Ferionic_7-IK"
-        },
-        {
-          "Content": "Blacklight Territory",
-          "Href": "https://starwars.fandom.com/wiki/Blacklight_Territory"
-        },
-        {
-          "Content": "Ebon Essentia",
-          "Href": "https://starwars.fandom.com/wiki/Ebon_Essentia"
-        },
-        {
-          "Content": "Ith'ril Eventide",
-          "Href": "https://starwars.fandom.com/wiki/Ith%27ril_Eventide_(space_area)"
-        },
-        {
-          "Content": "Sserician Eclipse",
-          "Href": "https://starwars.fandom.com/wiki/Sserician_Eclipse"
+          "Content": "Dantooine's Second Star",
+          "Href": "https://starwars.fandom.com/wiki/Dantooine%27s_Second_Star"
         }
       ],
       "Values": [
-        "Area D-502",
-        "Area D-513",
-        "Area D-7s1",
-        "Area Ferionic 7-IK",
-        "Blacklight Territory",
-        "Ebon Essentia (also known as Area E-2)",
-        "Ith'ril Eventide (also known as Area D-504)",
-        "Sserician Eclipse"
+        "Dantooine's Second Star"
       ]
     },
     {
@@ -229,27 +219,62 @@
       "Label": "Quadrants/regions",
       "Links": [
         {
-          "Content": "Dantooine's Wrath",
-          "Href": "https://starwars.fandom.com/wiki/Dantooine%27s_Wrath"
+          "Content": "Area D-502",
+          "Href": "https://starwars.fandom.com/wiki/Area_D-502"
+        },
+        {
+          "Content": "Area D-513",
+          "Href": "https://starwars.fandom.com/wiki/Area_D-513"
+        },
+        {
+          "Content": "Area D-7s1",
+          "Href": "https://starwars.fandom.com/wiki/Area_D-7s1"
+        },
+        {
+          "Content": "Area Ferionic 7-IK",
+          "Href": "https://starwars.fandom.com/wiki/Area_Ferionic_7-IK"
         },
         {
           "Content": "Asair's Ribbon",
           "Href": "https://starwars.fandom.com/wiki/Asair%27s_Ribbon"
         },
         {
-          "Content": "Isryn's Veil",
-          "Href": "https://starwars.fandom.com/wiki/Isryn%27s_Veil"
+          "Content": "Dantooine's Wrath",
+          "Href": "https://starwars.fandom.com/wiki/Dantooine%27s_Wrath"
+        },
+        {
+          "Content": "Ebon Essentia",
+          "Href": "https://starwars.fandom.com/wiki/Ebon_Essentia"
         },
         {
           "Content": "Gorvera Space",
           "Href": "https://starwars.fandom.com/wiki/Gorvera_Space"
+        },
+        {
+          "Content": "Isryn's Veil",
+          "Href": "https://starwars.fandom.com/wiki/Isryn%27s_Veil"
+        },
+        {
+          "Content": "Ith'ril Eventide",
+          "Href": "https://starwars.fandom.com/wiki/Ith%27ril_Eventide_(space_area)"
+        },
+        {
+          "Content": "Sserician Eclipse",
+          "Href": "https://starwars.fandom.com/wiki/Sserician_Eclipse"
         }
       ],
       "Values": [
-        "Dantooine's Wrath",
+        "Area D-502",
+        "Area D-513",
+        "Area D-7s1",
+        "Area Ferionic 7-IK",
         "Asair's Ribbon",
+        "Dantooine's Wrath",
+        "Ebon Essentia",
+        "Gorvera Space",
         "Isryn's Veil",
-        "Gorvera Space"
+        "Ith'ril Eventide",
+        "Sserician Eclipse"
       ]
     },
     {
@@ -300,50 +325,55 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems/Legends"
+        },
+        {
+          "Content": "Pentastar Alignment",
+          "Href": "https://starwars.fandom.com/wiki/Pentastar_Alignment"
+        },
+        {
+          "Content": "Imperial Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
+        },
+        {
+          "Content": "Yuuzhan Vong empire",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "Galactic Republic",
+        "Confederacy of Independent Systems",
+        "Pentastar Alignment",
+        "Imperial Remnant",
+        "Yuuzhan Vong empire"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 114907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dina/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 176492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Void_Wings",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 314121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Legacy_YT_Indigo_Blue",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
     {
       "PageId": 19887,
       "PageUrl": "https://starwars.fandom.com/wiki/Ferionic_Nebula",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     },
     {
-      "PageId": 261551,
-      "PageUrl": "https://starwars.fandom.com/wiki/Detritus_Satellites",
+      "PageId": 351998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zel'iphian_Slave_Traders_Guild",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 429683,
-      "PageUrl": "https://starwars.fandom.com/wiki/Valarian_Syndicate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 220403,
+      "PageUrl": "https://starwars.fandom.com/wiki/Parakus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raioballo_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 314121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Legacy_YT_Indigo_Blue",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
       "PageId": 343913,
@@ -353,6 +383,56 @@
     {
       "PageId": 343918,
       "PageUrl": "https://starwars.fandom.com/wiki/RSF_Outpost_(Dantooine_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 114907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dina/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 785171,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nova_Holiday",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raioballo_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 176492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Void_Wings",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 754941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire's_Station_I_(Dantooine_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 754961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empire's_Station_II_(Dantooine_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 261551,
+      "PageUrl": "https://starwars.fandom.com/wiki/Detritus_Satellites",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 754737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Station_II_(Dantooine_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 754738,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_Station_I_(Dantooine_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 754739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Space_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
@@ -396,9 +476,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 220403,
-      "PageUrl": "https://starwars.fandom.com/wiki/Parakus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 359343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aii`tkian_Anthropologists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 171323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blacklight_Pirates",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 372271,
+      "PageUrl": "https://starwars.fandom.com/wiki/Force_Assassins",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 715204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asteroid_Bandits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 429683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valarian_Syndicate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 775906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Velocity_Mercenaries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 776685,
+      "PageUrl": "https://starwars.fandom.com/wiki/O.S.S._D-502_Junk_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 121969,

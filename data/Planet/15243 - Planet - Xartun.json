@@ -55,7 +55,14 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "O-7"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -79,7 +86,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -134,14 +141,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 247797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xartun_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 245738,
       "PageUrl": "https://starwars.fandom.com/wiki/Nojin_Koolb",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 247797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xartun_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

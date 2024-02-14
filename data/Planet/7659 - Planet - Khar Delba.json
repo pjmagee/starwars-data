@@ -77,7 +77,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-5"
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Ice",
@@ -168,7 +168,7 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Adas's Sith Empire",
+          "Content": "Ancient Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Pre-Republic)"
         },
         {
@@ -177,12 +177,17 @@
         }
       ],
       "Values": [
-        "Adas's Sith Empire",
+        "Ancient Sith Empire",
         "Old Sith Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 8184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Khar_Delba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 5740,
       "PageUrl": "https://starwars.fandom.com/wiki/Horak-mul",
@@ -192,21 +197,6 @@
       "PageId": 283151,
       "PageUrl": "https://starwars.fandom.com/wiki/Naga_Sadow's_Khar_Delba_citadel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 279679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nache_Bhelfia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 279681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kamat_Aegit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 32193,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_war_behemoth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 31006,
@@ -219,14 +209,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 41962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sith_amulet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 284794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Khar_Delba_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 45160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Massassi_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 295916,
@@ -234,14 +219,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 32193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_war_behemoth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 284794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khar_Delba_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 279679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nache_Bhelfia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 279681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kamat_Aegit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 41962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_amulet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 4310,
       "PageUrl": "https://starwars.fandom.com/wiki/Khar_Shian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 8184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Khar_Delba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

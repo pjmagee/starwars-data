@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -36,27 +36,58 @@
       ]
     },
     {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
+      ]
+    },
+    {
       "Label": "Engine unit(s)",
       "Links": [
         {
           "Content": "Ion drive",
           "Href": "https://starwars.fandom.com/wiki/Ion_engine"
+        },
+        {
+          "Content": "Retrorockets",
+          "Href": "https://starwars.fandom.com/wiki/Retrorocket"
         }
       ],
       "Values": [
-        "Ion drive thrusters (8)"
+        "Ion drive thrusters (8)",
+        "Retrorockets"
       ]
     },
     {
       "Label": "Hyperdrive system",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "hyperdrive generators",
           "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
         }
       ],
       "Values": [
-        "Equipped"
+        "Multiple hyperdrive generators"
       ]
     },
     {
@@ -73,11 +104,26 @@
         {
           "Content": "cannons",
           "Href": "https://starwars.fandom.com/wiki/Cannon"
+        },
+        {
+          "Content": "Laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        },
+        {
+          "Content": "Proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "Tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
         }
       ],
       "Values": [
-        "DBY-827 heavy turbolaser turrets (8)",
-        "Medium dual turbolaser cannons (2)"
+        "8 DBY-827 heavy turbolaser turrets",
+        "2 medium dual turbolaser cannons",
+        "Laser cannons",
+        "Proton torpedo launchers",
+        "Tractor beam projectors"
       ]
     },
     {
@@ -139,12 +185,12 @@
       "Label": "Escape craft",
       "Links": [
         {
-          "Content": "Equipped",
+          "Content": "escape pods",
           "Href": "https://starwars.fandom.com/wiki/Escape_pod"
         }
       ],
       "Values": [
-        "Equipped"
+        "Several escape pods"
       ]
     },
     {
@@ -175,16 +221,12 @@
           "Href": "https://starwars.fandom.com/wiki/FX-7_medical_assistant_droid"
         },
         {
-          "Content": "C1-series astromech droid",
-          "Href": "https://starwars.fandom.com/wiki/C1-series_astromech_droid"
-        },
-        {
-          "Content": "R-series",
-          "Href": "https://starwars.fandom.com/wiki/R-series"
-        },
-        {
-          "Content": "astromech droids",
+          "Content": "Astromech droids",
           "Href": "https://starwars.fandom.com/wiki/Astromech_droid"
+        },
+        {
+          "Content": "C1-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/C1-series_astromech_droid"
         },
         {
           "Content": "R4 astromech droids",
@@ -199,22 +241,62 @@
         "Clone troopers",
         "Clone shock troopers",
         "FX-7 medical assistant droids",
-        "At least 1 C1-series astromech droid",
-        "R-series astromech droids",
+        "Astromech droids",
+        "C1-series astromech droids",
         "R4 astromech droids",
         "R5 series astromech droids"
+      ]
+    },
+    {
+      "Label": "Cargo handling systems",
+      "Links": [],
+      "Values": [
+        "Cargo lift"
       ]
     },
     {
       "Label": "Communication systems",
       "Links": [
         {
-          "Content": "Hyperwave comm scanners",
+          "Content": "hyperwave comm scanners",
           "Href": "https://starwars.fandom.com/wiki/Hyperwave_comm_scanner"
         }
       ],
       "Values": [
-        "Hyperwave comm scanners (2)"
+        "2 hyperwave comm scanners"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Surgical pods",
+          "Href": "https://starwars.fandom.com/wiki/Surgical_pod"
+        }
+      ],
+      "Values": [
+        "Surgical pods"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
+        }
+      ],
+      "Values": [
+        "Battleship",
+        "Starfighter carrier"
       ]
     },
     {
@@ -301,51 +383,56 @@
           "Href": "https://starwars.fandom.com/wiki/CT-5597"
         },
         {
+          "Content": "CH-33P",
+          "Href": "https://starwars.fandom.com/wiki/CH-33P"
+        },
+        {
           "Content": "Tribunal navigation officer",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Tribunal)"
         },
         {
           "Content": "Ridge",
           "Href": "https://starwars.fandom.com/wiki/Ridge"
+        },
+        {
+          "Content": "RG-G1",
+          "Href": "https://starwars.fandom.com/wiki/RG-G1"
+        },
+        {
+          "Content": "R7-A7",
+          "Href": "https://starwars.fandom.com/wiki/R7-A7"
+        },
+        {
+          "Content": "Unidentified clone trooper",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_clone_trooper_(332nd_Company)"
         }
       ],
       "Values": [
         "CT-5597 \"Jesse",
+        "CH-33P",
         "Tribunal navigation officer",
-        "Ridge"
+        "Ridge",
+        "RG-G1",
+        "R7-A7",
+        "Unidentified clone trooper"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 514543,
-      "PageUrl": "https://starwars.fandom.com/wiki/R7-A7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 482841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jesse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 652395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bay_12",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 482904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 653335,
       "PageUrl": "https://starwars.fandom.com/wiki/332nd_Division",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 652328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Tribunal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 652021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Tribunal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 652933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Tribunal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 652018,
@@ -363,11 +450,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 621699,
       "PageUrl": "https://starwars.fandom.com/wiki/332nd_Company",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
@@ -378,13 +460,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 482841,
-      "PageUrl": "https://starwars.fandom.com/wiki/CT-5597",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 652021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_the_Tribunal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 482904,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ridge",
+      "PageId": 458564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 514543,
+      "PageUrl": "https://starwars.fandom.com/wiki/R7-A7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 652395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bay_12",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 652328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_moon_(Tribunal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 652933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_clone_navigation_officer_(Tribunal)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

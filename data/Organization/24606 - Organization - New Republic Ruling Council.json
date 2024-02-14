@@ -97,23 +97,38 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "New Republic Senate",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Senate/Legends"
         }
       ],
       "Values": [
-        "New Republic"
+        "New Republic",
+        "New Republic Senate"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 366,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 777207,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inath_(Senator)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 11093,
       "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Provisional_Council",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 10347,
-      "PageUrl": "https://starwars.fandom.com/wiki/High_Council_(Galactic_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 369158,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_Chamber_(Imperial_Palace)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 15378,
@@ -121,14 +136,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 366,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 369158,
-      "PageUrl": "https://starwars.fandom.com/wiki/Council_Chamber_(Imperial_Palace)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 10347,
+      "PageUrl": "https://starwars.fandom.com/wiki/High_Council_(Galactic_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

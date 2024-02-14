@@ -107,12 +107,16 @@
       "Label": "Release date",
       "Links": [
         {
+          "Content": "January",
+          "Href": "https://starwars.fandom.com/wiki/January"
+        },
+        {
           "Content": "1989",
           "Href": "https://starwars.fandom.com/wiki/1989"
         }
       ],
       "Values": [
-        "Winter 1989"
+        "January 1989"
       ]
     },
     {
@@ -142,5 +146,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 625636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Collections",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    },
+    {
+      "PageId": 626662,
+      "PageUrl": "https://starwars.fandom.com/wiki/George_Lucas:_The_Force_Behind_Lucasfilm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Magazine_article"
+    }
+  ]
 }

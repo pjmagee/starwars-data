@@ -13,7 +13,12 @@
     },
     {
       "Label": "Leader(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Circle of Jedi Healers",
+          "Href": "https://starwars.fandom.com/wiki/Circle_of_Jedi_Healers/Legends"
+        }
+      ],
       "Values": [
         "Circle of Jedi Healers"
       ]
@@ -88,6 +93,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 31390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_healer/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
       "PageId": 238331,
       "PageUrl": "https://starwars.fandom.com/wiki/Halls_of_Healing",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -96,11 +106,6 @@
       "PageId": 91723,
       "PageUrl": "https://starwars.fandom.com/wiki/Healing_Crystals_of_Fire",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 31390,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_healer/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     }
   ]
 }

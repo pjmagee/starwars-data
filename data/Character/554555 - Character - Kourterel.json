@@ -2,6 +2,7 @@
   "PageId": 554555,
   "PageUrl": "https://starwars.fandom.com/wiki/Kourterel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,37 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Kourterel's family",
+          "Href": "https://starwars.fandom.com/wiki/Kourterel%27s_family"
+        }
+      ],
+      "Values": [
+        "Kourterel's family"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Kourterel's child",
+          "Href": "https://starwars.fandom.com/wiki/Kourterel%27s_child"
+        }
+      ],
+      "Values": [
+        "Kourterel's child"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -35,5 +67,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 792052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kourterel's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 554557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kourterel's_child",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

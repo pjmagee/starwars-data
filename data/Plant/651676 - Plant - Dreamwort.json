@@ -2,7 +2,7 @@
   "PageId": 651676,
   "PageUrl": "https://starwars.fandom.com/wiki/Dreamwort",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/da/Dreamwort.png/revision/latest?cb=20200426201635",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/da/Dreamwort.png/revision/latest?cb=20220716022807",
   "Data": [
     {
       "Label": "Titles",
@@ -22,18 +22,52 @@
       "Values": [
         "Zeffo"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Grassy",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        },
+        {
+          "Content": "lakes",
+          "Href": "https://starwars.fandom.com/wiki/Water"
+        }
+      ],
+      "Values": [
+        "Cliffs",
+        "Grassy patches",
+        "Near lakes"
+      ]
+    },
+    {
+      "Label": "Physical description",
+      "Links": [
+        {
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "flowers",
+          "Href": "https://starwars.fandom.com/wiki/Flower"
+        }
+      ],
+      "Values": [
+        "Yellow flowers"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 637688,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crash_Site",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 633447,
       "PageUrl": "https://starwars.fandom.com/wiki/Zeffo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 637688,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crash_Site",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

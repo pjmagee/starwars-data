@@ -2,7 +2,7 @@
   "PageId": 258926,
   "PageUrl": "https://starwars.fandom.com/wiki/Azca",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e7/Azca.jpg/revision/latest?cb=20091017132107",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e7/Azca.jpg/revision/latest?cb=20230112100406",
   "Data": [
     {
       "Label": "Titles",
@@ -24,17 +24,52 @@
       ]
     },
     {
-      "Label": "Caste",
+      "Label": "Eye color",
       "Links": [
         {
-          "Content": "Warrior caste",
-          "Href": "https://starwars.fandom.com/wiki/Warrior_caste"
+          "Content": "White",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
-        "Warrior caste"
+        "White"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "White"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Yuuzhan Vong empire",
+          "Href": "https://starwars.fandom.com/wiki/Yuuzhan_Vong_empire"
+        },
+        {
+          "Content": "Azca's fleet",
+          "Href": "https://starwars.fandom.com/wiki/Azca%27s_fleet"
+        }
+      ],
+      "Values": [
+        "Yuuzhan Vong empire",
+        "Azca's fleet"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 756433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azca's_miid_ro'ik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 756430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azca's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    }
+  ]
 }

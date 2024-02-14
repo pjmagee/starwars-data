@@ -2,7 +2,7 @@
   "PageId": 683174,
   "PageUrl": "https://starwars.fandom.com/wiki/Corleque",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e6/Admiral_Corleque.png/revision/latest?cb=20210720124104",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/DV38AdmiralCorleque.png/revision/latest?cb=20230920191435",
   "Data": [
     {
       "Label": "Titles",
@@ -71,13 +71,34 @@
         {
           "Content": "Imperial Navy's officer corps",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Navy%27s_officer_corps"
+        },
+        {
+          "Content": "Corleque's fleet",
+          "Href": "https://starwars.fandom.com/wiki/Corleque%27s_fleet"
+        },
+        {
+          "Content": "Schism Imperial",
+          "Href": "https://starwars.fandom.com/wiki/Schism_Imperial"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Navy's officer corps"
+        "Imperial Navy's officer corps",
+        "Corleque's fleet",
+        "Schism Imperial"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 781929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corleque's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 777612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_the_Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    }
+  ]
 }

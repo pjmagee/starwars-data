@@ -2,25 +2,13 @@
   "PageId": 643167,
   "PageUrl": "https://starwars.fandom.com/wiki/Eustacia_Okka",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/EustaciaOkka-DA2020-4.png/revision/latest?cb=20220126053832",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/EustaciaOkka-DA2020-4.png/revision/latest?cb=20231122165240",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Eustacia Okka"
-      ]
-    },
-    {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Mirialan",
-          "Href": "https://starwars.fandom.com/wiki/Mirialan"
-        }
-      ],
-      "Values": [
-        "Mirialan"
       ]
     },
     {
@@ -33,6 +21,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -71,13 +66,24 @@
         {
           "Content": "Shadow University",
           "Href": "https://starwars.fandom.com/wiki/Shadow_University"
+        },
+        {
+          "Content": "Sana Starros' crew",
+          "Href": "https://starwars.fandom.com/wiki/Sana_Starros%27_crew"
         }
       ],
       "Values": [
         "University of Bar'leth",
-        "Shadow University"
+        "Shadow University",
+        "Sana Starros' crew"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 752973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_the_Spark_Eternal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 581599,
   "PageUrl": "https://starwars.fandom.com/wiki/Ji_Banai",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,52 @@
       "Values": [
         "Human"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Kitster Chanchani Banai",
+          "Href": "https://starwars.fandom.com/wiki/Kitster_Chanchani_Banai"
+        },
+        {
+          "Content": "Tamora Spice",
+          "Href": "https://starwars.fandom.com/wiki/Tamora_Spice"
+        }
+      ],
+      "Values": [
+        "Kitster Chanchani Banai",
+        "Tamora Spice"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Elly Banai",
+          "Href": "https://starwars.fandom.com/wiki/Elly_Banai"
+        }
+      ],
+      "Values": [
+        "Elly Banai"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 155563,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tamora_Spice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 9044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kitster_Chanchani_Banai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 581600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elly_Banai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

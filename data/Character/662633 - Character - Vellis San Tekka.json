@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.75 meters (5 ft, 9 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -62,7 +85,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "San Tekka clan",
@@ -72,7 +95,42 @@
       "Values": [
         "San Tekka clan"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Marlowe San Tekka",
+          "Href": "https://starwars.fandom.com/wiki/Marlowe_San_Tekka"
+        }
+      ],
+      "Values": [
+        "Marlowe San Tekka"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
+          "Content": "Church of the Force",
+          "Href": "https://starwars.fandom.com/wiki/Church_of_the_Force"
+        }
+      ],
+      "Values": [
+        "Galactic Republic",
+        "Church of the Force"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 662632,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marlowe_San_Tekka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

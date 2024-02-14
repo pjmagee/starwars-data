@@ -86,6 +86,30 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Vala",
+          "Href": "https://starwars.fandom.com/wiki/Vala_(Scyre)"
+        }
+      ],
+      "Values": [
+        "Vala"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Torbi",
+          "Href": "https://starwars.fandom.com/wiki/Torbi"
+        }
+      ],
+      "Values": [
+        "Torbi"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -98,5 +122,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 585840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torbi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 578117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vala_(Scyre)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

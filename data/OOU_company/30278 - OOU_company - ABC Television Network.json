@@ -2,7 +2,7 @@
   "PageId": 30278,
   "PageUrl": "https://starwars.fandom.com/wiki/ABC_Television_Network",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:OOU_company",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/ABC.png/revision/latest?cb=20080623162752",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/ABC.png/revision/latest?cb=20230517182420",
   "Data": [
     {
       "Label": "Titles",
@@ -56,7 +56,7 @@
       "Links": [
         {
           "Content": "ABC official site",
-          "Href": "http://abc.go.com/"
+          "Href": "http://abc.go.com"
         }
       ],
       "Values": [
@@ -65,6 +65,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 277041,
+      "PageUrl": "ewoks:_Season_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
+    },
+    {
+      "PageId": 277042,
+      "PageUrl": "ewoks:_Season_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
+    },
     {
       "PageId": 118728,
       "PageUrl": "https://starwars.fandom.com/wiki/Ewoks_and_Droids_Adventure_Hour",
@@ -76,6 +86,11 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_series"
     },
     {
+      "PageId": 461726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Rebels:_Spark_of_Rebellion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    },
+    {
       "PageId": 686,
       "PageUrl": "https://starwars.fandom.com/wiki/Ewoks_(TV_series)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_series"
@@ -84,21 +99,6 @@
       "PageId": 130432,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Walt_Disney_Company",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:OOU_company"
-    },
-    {
-      "PageId": 461726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Wars_Rebels:_Spark_of_Rebellion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
-    },
-    {
-      "PageId": 277041,
-      "PageUrl": "ewoks:_Season_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
-    },
-    {
-      "PageId": 277042,
-      "PageUrl": "ewoks:_Season_Two",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
     }
   ]
 }

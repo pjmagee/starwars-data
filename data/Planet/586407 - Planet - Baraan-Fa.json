@@ -12,6 +12,30 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-17",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-17"
+      ]
+    },
+    {
       "Label": "Class",
       "Links": [],
       "Values": [
@@ -31,7 +55,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -83,7 +107,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -108,6 +132,16 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 565930,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sari_Nadle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776604,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karie_Neth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 604278,
       "PageUrl": "https://starwars.fandom.com/wiki/Kollowarie",
@@ -134,14 +168,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 565930,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sari_Nadle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 586885,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Rebel_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 779575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lanna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 15168,
   "PageUrl": "https://starwars.fandom.com/wiki/Ord_Tessebok",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/67/OrdTessebokOrindaCampaign-EGTW.jpg/revision/latest?cb=20230726204349",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,28 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
+        },
+        {
+          "Content": "Wild Space",
+          "Href": "https://starwars.fandom.com/wiki/Wild_Space/Legends"
+        },
+        {
+          "Content": "12,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/12,000_BBY/Legends"
+        },
+        {
+          "Content": "11,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/11,000_BBY"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "New Territories",
+        "Wild Space (c. 12,000 BBY–c. 11,000 BBY)"
       ]
     },
     {
@@ -48,7 +66,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-6"
@@ -68,14 +86,9 @@
     },
     {
       "Label": "Population",
-      "Links": [
-        {
-          "Content": "22 BBY",
-          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "2.5 billion (22 BBY)"
+        "2.5 billion"
       ]
     },
     {
@@ -84,23 +97,33 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        },
+        {
+          "Content": "Refugee Resettlement Coalition",
+          "Href": "https://starwars.fandom.com/wiki/Refugee_Relief_Movement/Legends"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic",
+        "Refugee Resettlement Coalition",
+        "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 391047,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Tessebok_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 332357,
       "PageUrl": "https://starwars.fandom.com/wiki/Entralla_Route/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 391047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Tessebok_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

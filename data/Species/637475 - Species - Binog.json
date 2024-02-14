@@ -17,10 +17,34 @@
         {
           "Content": "Amphi-mammalian",
           "Href": "https://starwars.fandom.com/wiki/Amphi-mammalian"
+        },
+        {
+          "Content": "Reptilian",
+          "Href": "https://starwars.fandom.com/wiki/Reptile"
         }
       ],
       "Values": [
-        "Amphi-mammalian"
+        "Amphi-mammalian",
+        "Reptilian"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Black"
       ]
     },
     {
@@ -38,6 +62,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 634107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bogano",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 637666,
       "PageUrl": "https://starwars.fandom.com/wiki/Fractured_Plain",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -46,11 +75,6 @@
       "PageId": 637670,
       "PageUrl": "https://starwars.fandom.com/wiki/Binog_Mesa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 634107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bogano",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

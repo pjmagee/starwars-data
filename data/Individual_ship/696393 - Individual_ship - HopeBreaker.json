@@ -24,15 +24,24 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "WarMaster",
           "Href": "https://starwars.fandom.com/wiki/WarMaster"
+        },
+        {
+          "Content": "Battle Dreadnought class",
+          "Href": "https://starwars.fandom.com/wiki/Battle_Dreadnought_class"
+        },
+        {
+          "Content": "Chiss",
+          "Href": "https://starwars.fandom.com/wiki/Chiss"
         }
       ],
       "Values": [
-        "WarMaster"
+        "WarMaster",
+        "Battle Dreadnought class (Chiss classification)"
       ]
     },
     {
@@ -68,17 +77,34 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Grysk Hegemony",
-          "Href": "https://starwars.fandom.com/wiki/Grysk_Hegemony"
+          "Content": "Grysks",
+          "Href": "https://starwars.fandom.com/wiki/Grysk"
         },
         {
           "Content": "Grysk military",
           "Href": "https://starwars.fandom.com/wiki/Grysk_military"
+        },
+        {
+          "Content": "Kilji Illumine",
+          "Href": "https://starwars.fandom.com/wiki/Kilji_Illumine"
         }
       ],
       "Values": [
-        "Grysk Hegemony",
-        "Grysk military"
+        "Grysks",
+        "Grysk military",
+        "Kilji Illumine (speculated)"
+      ]
+    },
+    {
+      "Label": "Navy",
+      "Links": [
+        {
+          "Content": "Grysk armada",
+          "Href": "https://starwars.fandom.com/wiki/Grysk_armada"
+        }
+      ],
+      "Values": [
+        "Grysk armada"
       ]
     },
     {
@@ -96,9 +122,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 737248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Grysk_commander_(HopeBreaker)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 714208,
       "PageUrl": "https://starwars.fandom.com/wiki/Jixtus's_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 699935,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_skirmish_over_Sunrise",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 700191,

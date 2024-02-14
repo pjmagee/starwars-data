@@ -2,7 +2,7 @@
   "PageId": 365713,
   "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Special_Forces_(Sith_Empire)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/93/Raven_Squad.jpg/revision/latest?cb=20220914111600",
   "Data": [
     {
       "Label": "Titles",
@@ -13,14 +13,87 @@
     },
     {
       "Label": "Military unit type",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Special forces",
+          "Href": "https://starwars.fandom.com/wiki/Special_forces/Legends"
+        }
+      ],
       "Values": [
-        "Special Operations"
+        "Special forces"
+      ]
+    },
+    {
+      "Label": "Sub-units",
+      "Links": [
+        {
+          "Content": "Kerse's squad",
+          "Href": "https://starwars.fandom.com/wiki/Kerse%27s_squad"
+        },
+        {
+          "Content": "Raven Squad",
+          "Href": "https://starwars.fandom.com/wiki/Raven_Squad"
+        }
+      ],
+      "Values": [
+        "Kerse's squad",
+        "Raven Squad"
+      ]
+    },
+    {
+      "Label": "Location(s)",
+      "Links": [
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant/Legends"
+        },
+        {
+          "Content": "Dromund Kaas",
+          "Href": "https://starwars.fandom.com/wiki/Dromund_Kaas"
+        },
+        {
+          "Content": "Tython",
+          "Href": "https://starwars.fandom.com/wiki/Tython/Legends"
+        },
+        {
+          "Content": "Korriban",
+          "Href": "https://starwars.fandom.com/wiki/Korriban"
+        },
+        {
+          "Content": "Corellia",
+          "Href": "https://starwars.fandom.com/wiki/Corellia/Legends"
+        },
+        {
+          "Content": "Ossus",
+          "Href": "https://starwars.fandom.com/wiki/Ossus/Legends"
+        },
+        {
+          "Content": "Mek-Sha",
+          "Href": "https://starwars.fandom.com/wiki/Mek-Sha"
+        },
+        {
+          "Content": "Manaan",
+          "Href": "https://starwars.fandom.com/wiki/Manaan/Legends"
+        }
+      ],
+      "Values": [
+        "Coruscant",
+        "Dromund Kaas",
+        "Tython",
+        "Korriban",
+        "Corellia",
+        "Ossus",
+        "Mek-Sha",
+        "Manaan"
       ]
     },
     {
       "Label": "Notable battles",
       "Links": [
+        {
+          "Content": "Sacking of Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Sacking_of_Coruscant"
+        },
         {
           "Content": "Grathan's revolt",
           "Href": "https://starwars.fandom.com/wiki/Grathan%27s_revolt"
@@ -32,13 +105,33 @@
         {
           "Content": "Korriban Incursion",
           "Href": "https://starwars.fandom.com/wiki/Korriban_Incursion"
+        },
+        {
+          "Content": "Invasion of Ossus",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Ossus"
+        },
+        {
+          "Content": "Mission to Mek-Sha",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Mek-Sha"
+        },
+        {
+          "Content": "Meridian Complex assault",
+          "Href": "https://starwars.fandom.com/wiki/Meridian_Complex_assault"
+        },
+        {
+          "Content": "Invasion of Manaan",
+          "Href": "https://starwars.fandom.com/wiki/Invasion_of_Manaan"
         }
       ],
       "Values": [
+        "Sacking of Coruscant",
         "Grathan's revolt",
         "Assault on Tython",
         "Korriban Incursion",
-        "Assault of the Bastion"
+        "Invasion of Ossus",
+        "Mission to Mek-Sha",
+        "Meridian Complex assault",
+        "Invasion of Manaan"
       ]
     },
     {
@@ -61,9 +154,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 631914,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raven_Squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 253394,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Army_(Sith_Empire)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 759971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anri's_master",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 340313,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerse's_squad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 361582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bryn_(Human)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

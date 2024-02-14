@@ -2,13 +2,25 @@
   "PageId": 299630,
   "PageUrl": "https://starwars.fandom.com/wiki/Ovair_family",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0b/Ovair_closeup.jpg/revision/latest?cb=20100417205237",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/40/Ovaircloseup.jpg/revision/latest?cb=20100417205237",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ovair family"
+      ]
+    },
+    {
+      "Label": "Family type",
+      "Links": [
+        {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith/Legends"
+        }
+      ],
+      "Values": [
+        "Undercover Sith lineage"
       ]
     },
     {
@@ -21,6 +33,40 @@
       ],
       "Values": [
         "Human"
+      ]
+    },
+    {
+      "Label": "Relatives",
+      "Links": [
+        {
+          "Content": "Barel Ovair's grandfather",
+          "Href": "https://starwars.fandom.com/wiki/Barel_Ovair%27s_grandfather"
+        },
+        {
+          "Content": "Barel Ovair's father",
+          "Href": "https://starwars.fandom.com/wiki/Barel_Ovair%27s_father"
+        },
+        {
+          "Content": "Barel Ovair",
+          "Href": "https://starwars.fandom.com/wiki/Barel_Ovair"
+        }
+      ],
+      "Values": [
+        "Barel Ovair's grandfather",
+        "Barel Ovair's father",
+        "Barel Ovair"
+      ]
+    },
+    {
+      "Label": "Other locations",
+      "Links": [
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant/Legends"
+        }
+      ],
+      "Values": [
+        "Coruscant"
       ]
     },
     {
@@ -58,5 +104,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 301944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barel_Ovair's_grandfather",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 302192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barel_Ovair's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 299583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barel_Ovair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

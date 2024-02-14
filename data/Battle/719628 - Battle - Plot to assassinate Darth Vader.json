@@ -2,7 +2,7 @@
   "PageId": 719628,
   "PageUrl": "https://starwars.fandom.com/wiki/Plot_to_assassinate_Darth_Vader",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/21/Vader13-VadervsIG88.png/revision/latest?cb=20220616154611",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,27 @@
       ]
     },
     {
+      "Label": "Conflict",
+      "Links": [
+        {
+          "Content": "Galactic Civil War",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Civil_War"
+        }
+      ],
+      "Values": [
+        "Galactic Civil War (late)"
+      ]
+    },
+    {
       "Label": "Date",
       "Links": [
         {
           "Content": "3 ABY",
           "Href": "https://starwars.fandom.com/wiki/3_ABY"
-        },
-        {
-          "Content": "4 ABY",
-          "Href": "https://starwars.fandom.com/wiki/4_ABY"
         }
       ],
       "Values": [
-        "Between 3 ABY and 4 ABY"
+        "3 ABY"
       ]
     },
     {
@@ -77,7 +85,12 @@
   "Relationships": [
     {
       "PageId": 566673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(X-wing_starfighter)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(T-65B_X-wing_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 498665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -86,9 +99,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 498665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 719600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Executor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

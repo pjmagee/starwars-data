@@ -2,13 +2,25 @@
   "PageId": 672005,
   "PageUrl": "https://starwars.fandom.com/wiki/Marchion_Ro",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/40/MarchionUnmasked.png/revision/latest?cb=20210618004306",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/40/MarchionUnmasked.png/revision/latest?cb=20230708205430",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Marchion Ro"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Ro homeworld",
+          "Href": "https://starwars.fandom.com/wiki/Ro_homeworld"
+        }
+      ],
+      "Values": [
+        "Ro homeworld"
       ]
     },
     {
@@ -33,6 +45,29 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.88 meters (6ft 2in)"
       ]
     },
     {
@@ -62,19 +97,38 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Ros",
-          "Href": "https://starwars.fandom.com/wiki/Ros_(family)"
-        },
+          "Content": "Ro family",
+          "Href": "https://starwars.fandom.com/wiki/Ro_family"
+        }
+      ],
+      "Values": [
+        "Ro family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Asgar Ro",
+          "Href": "https://starwars.fandom.com/wiki/Asgar_Ro"
+        }
+      ],
+      "Values": [
+        "Asgar Ro"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Nihil",
           "Href": "https://starwars.fandom.com/wiki/Nihil"
         }
       ],
       "Values": [
-        "Ros",
         "Nihil"
       ]
     },
@@ -84,42 +138,47 @@
         {
           "Content": "Krix Kamerat",
           "Href": "https://starwars.fandom.com/wiki/Krix_Kamerat"
+        },
+        {
+          "Content": "Nan",
+          "Href": "https://starwars.fandom.com/wiki/Nan"
         }
       ],
       "Values": [
-        "Krix Kamerat (Protégé)"
+        "Krix Kamerat (Protégé)",
+        "Nan (Protégée) "
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 720299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marchion_Ro's_broadcast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 697774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Quantxi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 668260,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krix_Kamerat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 643796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 681858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leveler_control_rod",
+      "PageId": 742103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rod_of_Seasons",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 697774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Showdown_on_Quantxi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 762348,
+      "PageUrl": "https://starwars.fandom.com/wiki/229_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 707451,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Grizal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 700004,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Leveler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 682655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nan",
+      "PageId": 679932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asgar_Ro",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -128,9 +187,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 643796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "PageId": 682655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marchion's_Declaration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 731810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deployment_of_the_stormseeds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 731819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil_celebration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 785620,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ministry_of_Protection",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 787929,
+      "PageUrl": "https://starwars.fandom.com/wiki/She'ar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 790364,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ministry_of_Advancement",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 790365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ministry_of_Information_(Nihil)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 668260,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krix_Kamerat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 723595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormseed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 791764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rystan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 681858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nameless_control_rods",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 785623,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pra-Tre_Veter's_execution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 787713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_of_the_Stormwall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 697792,
@@ -138,14 +262,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 700004,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Leveler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 723595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormseed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 707451,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Grizal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 681669,

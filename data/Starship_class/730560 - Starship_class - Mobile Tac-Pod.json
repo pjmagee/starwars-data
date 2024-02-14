@@ -2,6 +2,7 @@
   "PageId": 730560,
   "PageUrl": "https://starwars.fandom.com/wiki/Mobile_Tac-Pod",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6c/Tacpod_landed.png/revision/latest?cb=20230409114338",
   "Data": [
     {
       "Label": "Titles",
@@ -18,7 +19,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Transport",
@@ -28,7 +29,126 @@
       "Values": [
         "Transport"
       ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
+        }
+      ],
+      "Values": [
+        "Equipped (2)"
+      ]
+    },
+    {
+      "Label": "Armament",
+      "Links": [
+        {
+          "Content": "cannon",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
+        }
+      ],
+      "Values": [
+        "1 ball-mounted cannon",
+        "1 laser cannon turret",
+        "2 fixed laser cannons"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "pilot",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        }
+      ],
+      "Values": [
+        "1 pilot"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "At least 6"
+      ]
+    },
+    {
+      "Label": "Life support",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "comlink",
+          "Href": "https://starwars.fandom.com/wiki/Comlink"
+        }
+      ],
+      "Values": [
+        "Cockpit comlink"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Troop transport",
+          "Href": "https://starwars.fandom.com/wiki/Troop_transport"
+        }
+      ],
+      "Values": [
+        "Troop transport"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Preox-Morlana",
+          "Href": "https://starwars.fandom.com/wiki/Preox-Morlana"
+        },
+        {
+          "Content": "Pre-Mor Enforcement",
+          "Href": "https://starwars.fandom.com/wiki/Pre-Mor_Enforcement"
+        }
+      ],
+      "Values": [
+        "Preox-Morlana",
+        "Pre-Mor Enforcement"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 789683,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pre-Mor_Authority_Patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 739583,
+      "PageUrl": "https://starwars.fandom.com/wiki/East_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 740593,
+      "PageUrl": "https://starwars.fandom.com/wiki/North_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 740601,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 740682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Preox-Morlana_personnel_carrier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    }
+  ]
 }

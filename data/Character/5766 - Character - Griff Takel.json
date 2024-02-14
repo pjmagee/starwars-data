@@ -2,6 +2,7 @@
   "PageId": 5766,
   "PageUrl": "https://starwars.fandom.com/wiki/Griff_Takel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -20,18 +21,6 @@
       ],
       "Values": [
         "Esseles"
-      ]
-    },
-    {
-      "Label": "Died",
-      "Links": [
-        {
-          "Content": "1 ABY",
-          "Href": "https://starwars.fandom.com/wiki/1_ABY/Legends"
-        }
-      ],
-      "Values": [
-        "1 ABY, Esseles"
       ]
     },
     {
@@ -66,6 +55,18 @@
       ]
     },
     {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Miltin Takel",
+          "Href": "https://starwars.fandom.com/wiki/Miltin_Takel"
+        }
+      ],
+      "Values": [
+        "Miltin Takel"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -83,5 +84,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 5710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miltin_Takel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

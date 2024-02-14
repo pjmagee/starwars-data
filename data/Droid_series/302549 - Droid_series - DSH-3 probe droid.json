@@ -24,17 +24,38 @@
     },
     {
       "Label": "Class",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "probe droid",
+          "Href": "https://starwars.fandom.com/wiki/Probe_droid/Legends"
+        }
+      ],
       "Values": [
         "4th-degree probe droid"
+      ]
+    },
+    {
+      "Label": "Cost",
+      "Links": [
+        {
+          "Content": "credits",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Credit_Standard"
+        }
+      ],
+      "Values": [
+        "13,000 credits (licensed)"
       ]
     },
     {
       "Label": "Equipment",
       "Links": [
         {
-          "Content": "heuristic processor",
+          "Content": "Heuristic processor",
           "Href": "https://starwars.fandom.com/wiki/Heuristic_processor/Legends"
+        },
+        {
+          "Content": "sensor package",
+          "Href": "https://starwars.fandom.com/wiki/Sensor/Legends"
         },
         {
           "Content": "comlink",
@@ -42,8 +63,12 @@
         }
       ],
       "Values": [
-        "heuristic processor",
-        "internal comlink"
+        "Heuristic processor",
+        "Improved sensor package",
+        "Audio/video recording packages",
+        "Internal comlink",
+        "Locked access",
+        "Secondary backup battery"
       ]
     }
   ],

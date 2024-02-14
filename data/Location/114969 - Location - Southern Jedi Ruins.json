@@ -2,7 +2,7 @@
   "PageId": 114969,
   "PageUrl": "https://starwars.fandom.com/wiki/Southern_Jedi_Ruins",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/16/Southern_Jedi_Ruins.jpg/revision/latest?cb=20230201224055",
   "Data": [
     {
       "Label": "Titles",
@@ -16,11 +16,23 @@
       "Links": [
         {
           "Content": "1000 BBY",
-          "Href": "https://starwars.fandom.com/wiki/1000_BBY"
+          "Href": "https://starwars.fandom.com/wiki/1000_BBY/Legends"
         }
       ],
       "Values": [
         "Prior to 1000 BBY"
+      ]
+    },
+    {
+      "Label": "Destroyed",
+      "Links": [
+        {
+          "Content": "3996 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3996_BBY"
+        }
+      ],
+      "Values": [
+        "3996 BBY"
       ]
     },
     {
@@ -45,24 +57,34 @@
         {
           "Content": "Blackguard",
           "Href": "https://starwars.fandom.com/wiki/Blackguard_(Mustafar)/Legends"
+        },
+        {
+          "Content": "Treasure Hunters",
+          "Href": "https://starwars.fandom.com/wiki/Treasure_Hunters"
         }
       ],
       "Values": [
         "Jedi Order",
-        "Blackguard"
+        "Blackguard",
+        "Treasure Hunters"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 50684,
+      "PageUrl": "https://starwars.fandom.com/wiki/San'sii",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 336272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Smoking_Forest/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 113426,
       "PageUrl": "https://starwars.fandom.com/wiki/Blade_of_the_Betrayer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 398937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_the_Kursk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
       "PageId": 50140,
@@ -70,9 +92,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 50684,
-      "PageUrl": "https://starwars.fandom.com/wiki/San'sii",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 398937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cloak_of_the_Kursk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 775021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Treasure_Hunters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

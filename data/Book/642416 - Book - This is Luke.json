@@ -97,6 +97,22 @@
       ]
     },
     {
+      "Label": "Timeline",
+      "Links": [
+        {
+          "Content": "0 BBY",
+          "Href": "https://starwars.fandom.com/wiki/0_BBY"
+        },
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        }
+      ],
+      "Values": [
+        "0 BBY–4 ABY"
+      ]
+    },
+    {
       "Label": "Series",
       "Links": [
         {
@@ -112,7 +128,42 @@
         "Star Wars Galaxy of Adventures",
         "World of Reading"
       ]
+    },
+    {
+      "Label": "Preceded by",
+      "Links": [
+        {
+          "Content": "This is Leia",
+          "Href": "https://starwars.fandom.com/wiki/This_is_Leia"
+        }
+      ],
+      "Values": [
+        "This is Leia"
+      ]
+    },
+    {
+      "Label": "Followed by",
+      "Links": [
+        {
+          "Content": "This is Rey",
+          "Href": "https://starwars.fandom.com/wiki/This_is_Rey"
+        }
+      ],
+      "Values": [
+        "This is Rey"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 669791,
+      "PageUrl": "https://starwars.fandom.com/wiki/This_is_Rey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    },
+    {
+      "PageId": 789820,
+      "PageUrl": "https://starwars.fandom.com/wiki/This_is_Leia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Book"
+    }
+  ]
 }

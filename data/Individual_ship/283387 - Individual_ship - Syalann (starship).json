@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Destroyer",
@@ -69,9 +69,14 @@
     },
     {
       "Label": "Navy",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Nagai expeditionary force",
+          "Href": "https://starwars.fandom.com/wiki/Nagai_expeditionary_force"
+        }
+      ],
       "Values": [
-        "Nagai invasion fleet"
+        "Nagai expeditionary force"
       ]
     },
     {
@@ -99,14 +104,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 33931,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taikotelai_Akikoma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 143014,
       "PageUrl": "https://starwars.fandom.com/wiki/Nagai_expeditionary_force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 33931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taikotelai_Akikoma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

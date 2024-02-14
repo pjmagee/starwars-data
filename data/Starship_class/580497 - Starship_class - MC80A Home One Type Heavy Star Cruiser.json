@@ -27,31 +27,37 @@
       "Label": "Line",
       "Links": [
         {
+          "Content": "MC-series star cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC-series_star_cruiser"
+        }
+      ],
+      "Values": [
+        "MC-series star cruiser"
+      ]
+    },
+    {
+      "Label": "Model",
+      "Links": [
+        {
           "Content": "MC80 Star Cruiser",
           "Href": "https://starwars.fandom.com/wiki/MC80_Star_Cruiser"
         }
       ],
       "Values": [
-        "MC80 Star Cruiser"
+        "MC80 Star Cruiser",
+        "MC80A Home One Type"
       ]
     },
     {
-      "Label": "Model",
-      "Links": [],
-      "Values": [
-        "MC80A Home One Type Heavy Star Cruiser"
-      ]
-    },
-    {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Star Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Star_Cruiser"
+          "Content": "Heavy Star Cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_Star_Cruiser"
         }
       ],
       "Values": [
-        "Star Cruiser"
+        "Heavy Star Cruiser"
       ]
     },
     {
@@ -74,7 +80,7 @@
         }
       ],
       "Values": [
-        "1,200.0–1,300 meters (4,265 feet—)"
+        "1,200–1,300 meters (4,265 feet—)"
       ]
     },
     {
@@ -107,18 +113,23 @@
         {
           "Content": "M8.0 StarDrive engines",
           "Href": "https://starwars.fandom.com/wiki/M8.0_StarDrive_engine"
+        },
+        {
+          "Content": "M4.5-StarDrive manoeuvring engines",
+          "Href": "https://starwars.fandom.com/wiki/M4.5-StarDrive_manoeuvring_engine"
         }
       ],
       "Values": [
         "M8.0 StarDrive engines (4)",
-        "M4.5-StarDrive manoeuvering engines (6)"
+        "M4.5-StarDrive manoeuvring engines (6)"
       ]
     },
     {
       "Label": "Hyperdrive rating",
       "Links": [],
       "Values": [
-        "Class 1"
+        "Class 1 (primary)",
+        "Class 9 (backup)"
       ]
     },
     {
@@ -162,18 +173,34 @@
       ]
     },
     {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Navigation computer",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Navigation computer"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Turbolaser",
+          "Content": "turbolaser",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
-          "Content": "Ion cannon",
+          "Content": "ion cannon",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
-          "Content": "Tractor beam",
+          "Content": "Quad laser cannon",
+          "Href": "https://starwars.fandom.com/wiki/Quad_laser_cannon"
+        },
+        {
+          "Content": "tractor beam",
           "Href": "https://starwars.fandom.com/wiki/Tractor_beam"
         },
         {
@@ -182,9 +209,13 @@
         }
       ],
       "Values": [
-        "Turbolaser batteries (29)",
-        "Ion cannon batteries (36)",
-        "Tractor beam projectors (6)"
+        "Quad heavy turbolaser batteries (29-36)",
+        "9 foreward, 10 port, 10 starboard",
+        "Twin battleship ion cannon batteries (36)",
+        "12 foreward, 12 port, 12 starboard",
+        "Quad laser cannon batteries (80)",
+        "20 foreward, 30 port, 30 starboard",
+        "Hull mounted heavy tractor beam projectors (6)"
       ]
     },
     {
@@ -197,17 +228,52 @@
         {
           "Content": "starfighters",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "Shuttles",
+          "Href": "https://starwars.fandom.com/wiki/Shuttle"
+        },
+        {
+          "Content": "Landing craft",
+          "Href": "https://starwars.fandom.com/wiki/Landing_craft"
+        },
+        {
+          "Content": "Utility vehicles",
+          "Href": "https://starwars.fandom.com/wiki/Utility_vehicle"
         }
       ],
       "Values": [
-        "10 squadrons of starfighters"
+        "10 squadrons of starfighters",
+        "120 starfighters",
+        "Shuttles",
+        "Landing craft",
+        "Utility vehicles"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "Hangars",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
+      "Values": [
+        "Hangars (20)"
       ]
     },
     {
       "Label": "Crew",
       "Links": [],
       "Values": [
-        "5,402"
+        "5,402",
+        "Officers",
+        "Pilots",
+        "Enlisted crew"
       ]
     },
     {
@@ -272,8 +338,8 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Mon Cala monarchy",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Cala_monarchy"
+          "Content": "Mon Calamari monarchy",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_monarchy"
         },
         {
           "Content": "Mon Cala Mercantile Fleet",
@@ -309,7 +375,7 @@
         }
       ],
       "Values": [
-        "Mon Cala monarchy",
+        "Mon Calamari monarchy",
         "Mon Cala Mercantile Fleet",
         "Galactic Empire",
         "Mon Cala Imperial Trade Fleet",
@@ -324,6 +390,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 545192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nautilian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 476422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 664933,
       "PageUrl": "https://starwars.fandom.com/wiki/MC-series_star_cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
@@ -334,9 +410,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 531468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 601332,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_Flare",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 602351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(MC80A_Home_One_Type_Heavy_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 595034,
@@ -349,24 +430,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 476422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Home_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 545192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nautilian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 601332,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_Flare",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 602351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_(MC80A_Home_One_Type_Heavy_Star_Cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 531468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

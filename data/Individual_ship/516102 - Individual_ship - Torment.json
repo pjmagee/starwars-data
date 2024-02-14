@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -182,6 +182,26 @@
       "Label": "Complement",
       "Links": [
         {
+          "Content": "TIE line",
+          "Href": "https://starwars.fandom.com/wiki/TIE_line"
+        },
+        {
+          "Content": "starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "TIE/ln space superiority starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE/IN interceptors",
+          "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "Lambda-class T-4a shuttles",
+          "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
+        },
+        {
           "Content": "All Terrain Armored Transports",
           "Href": "https://starwars.fandom.com/wiki/All_Terrain_Armored_Transport_(Galactic_Civil_War)"
         },
@@ -194,36 +214,73 @@
           "Href": "https://starwars.fandom.com/wiki/Gozanti-class_cruiser"
         },
         {
-          "Content": "Lambda-class T-4a shuttles",
-          "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
-        },
-        {
-          "Content": "TIE line",
-          "Href": "https://starwars.fandom.com/wiki/TIE_line"
-        },
-        {
-          "Content": "starfighters",
-          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+          "Content": "Climate disruption arrays",
+          "Href": "https://starwars.fandom.com/wiki/Climate_disruption_array"
         }
       ],
       "Values": [
+        "TIE line starfighters (72)",
+        "TIE/ln space superiority starfighters",
+        "TIE/IN interceptors",
+        "At least 3 Lambda-class T-4a shuttles",
         "At least 2 All Terrain Armored Transports",
         "At least 2 All Terrain Scout Transports",
         "At least 2 Gozanti-class cruisers",
-        "At least 3 Lambda-class T-4a shuttles",
-        "TIE line starfighters (72)"
+        "Climate disruption arrays"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
         {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
+        },
+        {
           "Content": "Stormtroopers",
           "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Riot control stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper"
+        },
+        {
+          "Content": "Heavy Weapons Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper"
+        },
+        {
+          "Content": "Demolition Troopers",
+          "Href": "https://starwars.fandom.com/wiki/Demolition_Trooper"
+        },
+        {
+          "Content": "Scout troopers",
+          "Href": "https://starwars.fandom.com/wiki/Scout_trooper"
         }
       ],
       "Values": [
-        "Stormtroopers (9,700)"
+        "Imperial officers",
+        "Imperial Starfighter Pilots",
+        "Stormtroopers (9,700)",
+        "Riot control stormtroopers",
+        "Heavy Weapons Stormtroopers",
+        "Demolition Troopers",
+        "Scout troopers"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [
+        {
+          "Content": "Sentinel",
+          "Href": "https://starwars.fandom.com/wiki/Sentinel_(Contingency)"
+        }
+      ],
+      "Values": [
+        "At least 1 Sentinel"
       ]
     },
     {
@@ -271,27 +328,36 @@
       "Label": "Destroyed",
       "Links": [
         {
-          "Content": "Battle of Theed",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Theed"
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        },
+        {
+          "Content": "Naboo system",
+          "Href": "https://starwars.fandom.com/wiki/Naboo_system"
         }
       ],
       "Values": [
-        "Battle of Theed"
+        "4 ABY, Naboo system"
       ]
     },
     {
       "Label": "Present for battles/events",
       "Links": [
         {
+          "Content": "Contingency",
+          "Href": "https://starwars.fandom.com/wiki/Contingency"
+        },
+        {
           "Content": "Operation: Cinder",
           "Href": "https://starwars.fandom.com/wiki/Operation:_Cinder"
         },
         {
-          "Content": "Theed",
-          "Href": "https://starwars.fandom.com/wiki/Theed"
+          "Content": "Battle of Theed",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Theed"
         }
       ],
       "Values": [
+        "Contingency",
         "Operation: Cinder",
         "Battle of Theed"
       ]
@@ -345,5 +411,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 745985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment's_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

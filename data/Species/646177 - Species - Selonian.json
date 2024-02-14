@@ -2,7 +2,7 @@
   "PageId": 646177,
   "PageUrl": "https://starwars.fandom.com/wiki/Selonian",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/Leebon-THR4.png/revision/latest?cb=20231017090932",
   "Data": [
     {
       "Label": "Titles",
@@ -46,9 +46,36 @@
       "Values": [
         "Selonia"
       ]
+    },
+    {
+      "Label": "Language",
+      "Links": [
+        {
+          "Content": "Mandaba",
+          "Href": "https://starwars.fandom.com/wiki/Mandaba"
+        }
+      ],
+      "Values": [
+        "Mandaba"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 518834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 740094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leebon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heezo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 617835,
       "PageUrl": "https://starwars.fandom.com/wiki/Selonia",
@@ -58,11 +85,6 @@
       "PageId": 2022,
       "PageUrl": "https://starwars.fandom.com/wiki/Drall_(planet)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 518834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellia_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

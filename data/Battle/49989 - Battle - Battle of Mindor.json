@@ -51,7 +51,11 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "Death",
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "death",
           "Href": "https://starwars.fandom.com/wiki/Death/Legends"
         },
         {
@@ -59,18 +63,37 @@
           "Href": "https://starwars.fandom.com/wiki/Cronal"
         },
         {
+          "Content": "Luke Skywalker",
+          "Href": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends"
+        },
+        {
           "Content": "New Republic Army",
           "Href": "https://starwars.fandom.com/wiki/New_Republic_Army"
         }
       ],
       "Values": [
-        "Pyrrhic New Republic/Mandalorian victory",
-        "First Death of Cronal",
+        "Pyrrhic New Republic victory",
+        "First death of Cronal",
         "Luke Skywalker resigns from the New Republic Army"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 237022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rapid_Response_Task_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 285180,
+      "PageUrl": "https://starwars.fandom.com/wiki/23rd_Combat_Starfighter_Wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 237156,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Special_Operations",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 236971,
       "PageUrl": "https://starwars.fandom.com/wiki/Justice_(MC80_Liberty_type_Star_Cruiser)",
@@ -82,34 +105,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 237156,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Special_Operations",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 327,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
-      "PageId": 285180,
-      "PageUrl": "https://starwars.fandom.com/wiki/23rd_Combat_Starfighter_Wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 237022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rapid_Response_Task_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 326655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Bulwark-class_battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 4567,
       "PageUrl": "https://starwars.fandom.com/wiki/5_ABY/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 326655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Bulwark-class_battleship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

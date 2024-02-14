@@ -2,6 +2,7 @@
   "PageId": 31107,
   "PageUrl": "https://starwars.fandom.com/wiki/Tanis_Mothma",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,6 +48,42 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Mothma family",
+          "Href": "https://starwars.fandom.com/wiki/Mothma_family/Legends"
+        }
+      ],
+      "Values": [
+        "Mothma family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Mon Mothma's father",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Mothma%27s_father/Legends"
+        }
+      ],
+      "Values": [
+        "Mon Mothma's father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Mon Mothma",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends"
+        }
+      ],
+      "Values": [
+        "Mon Mothma"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -59,5 +96,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 131962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma's_father/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

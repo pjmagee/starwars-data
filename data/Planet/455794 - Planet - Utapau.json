@@ -72,7 +72,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-19",
@@ -182,16 +182,24 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
           "Href": "https://starwars.fandom.com/wiki/Desert"
+        },
+        {
+          "Content": "Grassy",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        },
+        {
+          "Content": "sinkholes",
+          "Href": "https://starwars.fandom.com/wiki/Sinkhole"
         }
       ],
       "Values": [
         "Desert",
-        "Plains",
+        "Grassy plains",
         "Large sinkholes",
         "Rocky"
       ]
@@ -222,7 +230,8 @@
       "Values": [
         "Shrapnel Field",
         "Sinkhole Crassnah",
-        "Taqual racing pit"
+        "Taqual racing pit",
+        "Utapau's small continent"
       ]
     },
     {
@@ -317,7 +326,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Amani",
@@ -466,78 +475,38 @@
   ],
   "Relationships": [
     {
-      "PageId": 671476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Utapau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 454290,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grievous",
+      "PageId": 535647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Timon_Medon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 473370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Medon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 505300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Tu-Anh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 652455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utai_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+      "PageId": 596503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Preevow_Sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 73963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 611287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wandering_Star",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 515518,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ginntho",
+      "PageId": 552851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pau'an_and_Utai_precursor_species",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 515672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rock-vulture",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 621170,
+      "PageUrl": "https://starwars.fandom.com/wiki/HB-9_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 515697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_flying_squid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 697034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Utapau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
-      "PageId": 465684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 595505,
-      "PageUrl": "https://starwars.fandom.com/wiki/2638",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 652045,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_unit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 608992,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood_of_Wire_and_Bone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 476339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Varactyl",
+      "PageId": 509051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jamel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -546,54 +515,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 552940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_super_tactical_droid_(Utapau)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 465684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 627483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Committee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 664646,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duo_Relay_Race",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 670836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coranth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 483006,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executive_Separatist_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 627485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City_Police",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 671352,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 596505,
-      "PageUrl": "https://starwars.fandom.com/wiki/Prasteen_Braak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 610778,
-      "PageUrl": "https://starwars.fandom.com/wiki/TN-5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 532820,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City_Morgue",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 640558,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sconto's_junk_shop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 652045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_unit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 465658,
@@ -611,69 +545,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 508961,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cheese",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 602733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pau'an_Warrior",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 603514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Security_Forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 538344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_paratrooper",
+      "PageId": 627485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City_Police",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 664645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taqual_racing_pit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Racing_track"
+      "PageId": 652452,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ocean-kelp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 453551,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 476695,
-      "PageUrl": "https://starwars.fandom.com/wiki/DT-57_\"Annihilator\"_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 597374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Greesto_Ftrak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 664644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leewau_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 475917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 497856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_plains_quadruped",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 621170,
-      "PageUrl": "https://starwars.fandom.com/wiki/HB-9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 472459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jen_June",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 658221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cave-mold",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
       "PageId": 618498,
@@ -681,44 +565,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 569956,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapese",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+      "PageId": 610778,
+      "PageUrl": "https://starwars.fandom.com/wiki/TN-5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 509051,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jamel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 729492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amani_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 559585,
-      "PageUrl": "https://starwars.fandom.com/wiki/Promenade_of_Seven_Guilds",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 657112,
-      "PageUrl": "https://starwars.fandom.com/wiki/World-ocean",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 658130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Civic_Level",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 658220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Level",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 658222,
-      "PageUrl": "https://starwars.fandom.com/wiki/Produce_Level",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 470879,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
       "PageId": 596556,
@@ -726,43 +580,43 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 559589,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Hall_of_the_Traders'_Guild",
+      "PageId": 596505,
+      "PageUrl": "https://starwars.fandom.com/wiki/Prasteen_Braak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 598129,
-      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+      "PageId": 627483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Committee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 697034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Utapau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 465896,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Utapau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 505300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Tu-Anh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 483006,
+      "PageUrl": "https://starwars.fandom.com/wiki/Executive_Separatist_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 228275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resputi-seal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 464643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 610772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krynbalt_Kyr",
+      "PageId": 202653,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raik",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 724485,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cracker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 597374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greesto_Ftrak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 724487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Runyip_cheese",
+      "PageId": 508961,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cheese",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
@@ -776,14 +630,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 618205,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sranfrak_Creek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 741363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_monk_cudgel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 515907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 724485,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cracker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 724487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Runyip_cheese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 742228,
+      "PageUrl": "https://starwars.fandom.com/wiki/2nd_Airborne_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 696411,
+      "PageUrl": "https://starwars.fandom.com/wiki/57,000_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
       "PageId": 550947,
@@ -791,9 +660,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 535647,
-      "PageUrl": "https://starwars.fandom.com/wiki/Timon_Medon",
+      "PageId": 694950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Port_Administration",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 559589,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grand_Hall_of_the_Traders'_Guild",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 658131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pahum_Cultural_Center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 591764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fyzen_Gor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 569956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 532820,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pau_City_Morgue",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 479360,
+      "PageUrl": "https://starwars.fandom.com/wiki/41st_Elite_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_Security_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 664644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leewau_Cluster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 568076,
@@ -806,28 +715,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 661469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wealth_Level",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 476695,
+      "PageUrl": "https://starwars.fandom.com/wiki/DT-57_\"Annihilator\"_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 479360,
-      "PageUrl": "https://starwars.fandom.com/wiki/41st_Elite_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 682677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 652452,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ocean-kelp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 671352,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_core_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 658221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cave-mold",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+      "PageId": 515907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 552851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pau'an_and_Utai_precursor_species",
+      "PageId": 730536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daho_Sejan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 116630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nos_monster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -836,29 +750,119 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 591764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fyzen_Gor",
+      "PageId": 610772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krynbalt_Kyr",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 620208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amani_village",
+      "PageId": 779524,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scraps_(Utai)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 661469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wealth_Level",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 627484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_Skyforce",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 649117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endente's_arms_dealing_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 694950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Port_Administration",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 664645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taqual_racing_pit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Racing_track"
     },
     {
       "PageId": 621175,
       "PageUrl": "https://starwars.fandom.com/wiki/Scoop_skimmer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 515518,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ginntho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rock-vulture",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapaun_flying_squid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 453551,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 559585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Promenade_of_Seven_Guilds",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 538344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_paratrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 608992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brotherhood_of_Wire_and_Bone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 671476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Utapau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 454290,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grievous",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 640558,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sconto's_junk_shop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 73963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 504971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Feethan_Ottraw_Scalable_Assemblies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 476339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varactyl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 598129,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT_X-42_heavy_flame_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 595505,
+      "PageUrl": "https://starwars.fandom.com/wiki/2638",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 670836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coranth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 457338,
@@ -881,9 +885,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 658131,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pahum_Cultural_Center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 777145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raik's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 452388,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 652455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utai_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 729492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amani_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 618205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sranfrak_Creek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 620208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amani_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 602733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pau'an_Warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 661657,
@@ -896,48 +930,58 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 696411,
-      "PageUrl": "https://starwars.fandom.com/wiki/57,000_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 472459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jen_June",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 464643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Utapau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 473370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tion_Medon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 664646,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duo_Relay_Race",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 475917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Techno_Union",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 682677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 552940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_super_tactical_droid_(Utapau)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 596503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Preevow_Sector",
+      "PageId": 657112,
+      "PageUrl": "https://starwars.fandom.com/wiki/World-ocean",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 470879,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+      "PageId": 658130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Civic_Level",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 465896,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Utapau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 658220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mining_Level",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 649117,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endente's_arms_dealing_group",
+      "PageId": 658222,
+      "PageUrl": "https://starwars.fandom.com/wiki/Produce_Level",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 627484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_Skyforce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 611287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wandering_Star",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 116630,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nos_monster",
+      "PageId": 497856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_plains_quadruped",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

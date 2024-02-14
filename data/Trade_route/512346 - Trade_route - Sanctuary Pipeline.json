@@ -29,10 +29,14 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Mid Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories - Mid Rim Territories - Outer Rim Territories"
       ]
     },
     {
@@ -67,12 +71,28 @@
       "Label": "End point",
       "Links": [
         {
-          "Content": "the galaxy",
-          "Href": "https://starwars.fandom.com/wiki/The_galaxy"
+          "Content": "Endor",
+          "Href": "https://starwars.fandom.com/wiki/Endor"
         }
       ],
       "Values": [
-        "Edge of the galaxy"
+        "Endor"
+      ]
+    },
+    {
+      "Label": "Systems",
+      "Links": [
+        {
+          "Content": "Sullust",
+          "Href": "https://starwars.fandom.com/wiki/Sullust_system"
+        },
+        {
+          "Content": "Endor",
+          "Href": "https://starwars.fandom.com/wiki/Endor_system"
+        }
+      ],
+      "Values": [
+        "Sullust - Endor"
       ]
     },
     {
@@ -81,10 +101,6 @@
         {
           "Content": "Murk",
           "Href": "https://starwars.fandom.com/wiki/Murk"
-        },
-        {
-          "Content": "Endor",
-          "Href": "https://starwars.fandom.com/wiki/Endor"
         }
       ],
       "Values": [
@@ -95,12 +111,12 @@
       "Label": "Junctions",
       "Links": [
         {
-          "Content": "Incisor Sidestep",
-          "Href": "https://starwars.fandom.com/wiki/Incisor_Sidestep"
-        },
-        {
           "Content": "Rimma Trade Route",
           "Href": "https://starwars.fandom.com/wiki/Rimma_Trade_Route"
+        },
+        {
+          "Content": "Incisor Sidestep",
+          "Href": "https://starwars.fandom.com/wiki/Incisor_Sidestep"
         },
         {
           "Content": "Bakura Trace",
@@ -108,37 +124,20 @@
         }
       ],
       "Values": [
-        "Incisor Sidestep",
-        "Rimma Trade Route",
-        "Bakura Trace"
+        "Rimma Trade Route - Incisor Sidestep - Bakura Trace"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 614476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incisor_Sidestep",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 695212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovise_Reach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 505359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sullust_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 653716,
-      "PageUrl": "https://starwars.fandom.com/wiki/Murk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 453274,
       "PageUrl": "https://starwars.fandom.com/wiki/Sullust",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 479522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 554967,
@@ -146,14 +145,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 479522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 653716,
+      "PageUrl": "https://starwars.fandom.com/wiki/Murk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 508117,
@@ -169,6 +163,26 @@
       "PageId": 456136,
       "PageUrl": "https://starwars.fandom.com/wiki/Endor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 778640,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sulon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 505359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sullust_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 614476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incisor_Sidestep",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 695212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovise_Reach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

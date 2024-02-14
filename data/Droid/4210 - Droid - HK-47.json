@@ -164,7 +164,7 @@
       "Links": [
         {
           "Content": "Systech Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Systech_Corporation"
+          "Href": "https://starwars.fandom.com/wiki/Systech_Corporation/Legends"
         },
         {
           "Content": "Sith Empire",
@@ -201,6 +201,10 @@
         {
           "Content": "Darth Malgus",
           "Href": "https://starwars.fandom.com/wiki/Darth_Malgus"
+        },
+        {
+          "Content": "HK-47's Droid Army",
+          "Href": "https://starwars.fandom.com/wiki/HK-47%27s_Droid_Army"
         }
       ],
       "Values": [
@@ -213,30 +217,31 @@
         "Revan",
         "Meetra Surik",
         "New Empire",
-        "Darth Malgus"
+        "Darth Malgus",
+        "HK-47's Droid Army"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 679045,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neimoidian_droid_factory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 68277,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic_Facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
     {
       "PageId": 84036,
       "PageUrl": "https://starwars.fandom.com/wiki/GK-5_sentry_droid",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 356638,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Hammerhead-class_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 385135,
+      "PageUrl": "https://starwars.fandom.com/wiki/HK-47's_Droid_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 321878,
+      "PageUrl": "https://starwars.fandom.com/wiki/HK-47_Carbine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 82109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Research_Facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 195139,
@@ -247,21 +252,6 @@
       "PageId": 65457,
       "PageUrl": "https://starwars.fandom.com/wiki/HK_protocol_pacifist_package",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 350339,
-      "PageUrl": "https://starwars.fandom.com/wiki/HK-57",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 350340,
-      "PageUrl": "https://starwars.fandom.com/wiki/HK-67",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 356818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Forward_Commander_Mk_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 84034,
@@ -299,14 +289,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
-      "PageId": 385135,
-      "PageUrl": "https://starwars.fandom.com/wiki/HK-47's_Droid_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 356687,
       "PageUrl": "https://starwars.fandom.com/wiki/Forward_Commander_Carbine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 350339,
+      "PageUrl": "https://starwars.fandom.com/wiki/HK-57",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 350340,
+      "PageUrl": "https://starwars.fandom.com/wiki/HK-67",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 356818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forward_Commander_Mk_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 356638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Hammerhead-class_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

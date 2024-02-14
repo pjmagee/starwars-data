@@ -36,15 +36,31 @@
       ]
     },
     {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Spaceport",
+          "Href": "https://starwars.fandom.com/wiki/Spaceport/Legends"
+        }
+      ],
+      "Values": [
+        "Spaceport"
+      ]
+    },
+    {
       "Label": "Location",
       "Links": [
+        {
+          "Content": "Agorn Mountain",
+          "Href": "https://starwars.fandom.com/wiki/Agorn_Mountain/Legends"
+        },
         {
           "Content": "Ossus",
           "Href": "https://starwars.fandom.com/wiki/Ossus/Legends"
         }
       ],
       "Values": [
-        "Ossus"
+        "Agorn Mountain, Ossus"
       ]
     },
     {
@@ -79,9 +95,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 2991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ossus/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 535520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agorn_Mountain/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 9290,
@@ -99,9 +115,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 535520,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agorn_Mountain/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 2991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ossus/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

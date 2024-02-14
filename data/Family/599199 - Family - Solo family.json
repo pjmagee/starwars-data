@@ -19,23 +19,23 @@
           "Href": "https://starwars.fandom.com/wiki/Human"
         },
         {
+          "Content": "Corellian",
+          "Href": "https://starwars.fandom.com/wiki/Corellian"
+        },
+        {
           "Content": "Alderaanian",
           "Href": "https://starwars.fandom.com/wiki/Alderaanian"
         },
         {
           "Content": "Chandrilan",
           "Href": "https://starwars.fandom.com/wiki/Chandrilan"
-        },
-        {
-          "Content": "Corellian",
-          "Href": "https://starwars.fandom.com/wiki/Corellian"
         }
       ],
       "Values": [
         "Human",
+        "Corellian",
         "Alderaanian",
-        "Chandrilan",
-        "Corellian"
+        "Chandrilan"
       ]
     },
     {
@@ -81,18 +81,6 @@
       ],
       "Values": [
         "Chandrila"
-      ]
-    },
-    {
-      "Label": "Earliest appearance",
-      "Links": [
-        {
-          "Content": "32 BBY",
-          "Href": "https://starwars.fandom.com/wiki/32_BBY"
-        }
-      ],
-      "Values": [
-        "32 BBY (Approximate date)"
       ]
     },
     {
@@ -280,16 +268,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 599007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 595885,
-      "PageUrl": "https://starwars.fandom.com/wiki/BX-778",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
       "PageId": 452394,
       "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -297,11 +275,6 @@
     {
       "PageId": 452428,
       "PageUrl": "https://starwars.fandom.com/wiki/Leia_Skywalker_Organa_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472920,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -313,6 +286,26 @@
       "PageId": 524426,
       "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 255665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo's_dice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 599007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 595885,
+      "PageUrl": "https://starwars.fandom.com/wiki/BX-778",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 472920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ben_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

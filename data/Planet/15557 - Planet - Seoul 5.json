@@ -36,14 +36,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-20"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -105,23 +105,28 @@
         {
           "Content": "Infinite Empire",
           "Href": "https://starwars.fandom.com/wiki/Infinite_Empire"
-        },
-        {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "Infinite Empire",
-        "Galactic Empire"
+        "Infinite Empire"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 61794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onrai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
       "PageId": 152234,
       "PageUrl": "https://starwars.fandom.com/wiki/Drezzel",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 792363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Seoul_5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 18484,
@@ -129,9 +134,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 61794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onrai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+      "PageId": 781326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_cosmic_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

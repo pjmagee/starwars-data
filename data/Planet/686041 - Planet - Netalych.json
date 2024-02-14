@@ -2,7 +2,7 @@
   "PageId": 686041,
   "PageUrl": "https://starwars.fandom.com/wiki/Netalych",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/ab/Netalych-SWT.jpg/revision/latest?cb=20220603114932",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Inner Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors"
         }
       ],
       "Values": [
-        "Inner Rim Territories"
+        "Inner Rim Territories",
+        "Trailing Sectors"
       ]
     },
     {
@@ -47,6 +52,18 @@
       "Links": [],
       "Values": [
         "7"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-14",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-14"
       ]
     },
     {
@@ -81,7 +98,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Glaciers"
@@ -151,19 +168,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 686042,
-      "PageUrl": "https://starwars.fandom.com/wiki/DN-949A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 685981,
       "PageUrl": "https://starwars.fandom.com/wiki/Netalych_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 688154,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Netalych",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 688609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fra_Raida",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 686042,
+      "PageUrl": "https://starwars.fandom.com/wiki/DN-949A",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 728186,
@@ -171,9 +188,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 688609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fra_Raida",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 688154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Netalych",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

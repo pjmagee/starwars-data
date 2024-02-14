@@ -12,15 +12,15 @@
       ]
     },
     {
-      "Label": "Manufacturer",
+      "Label": "Line",
       "Links": [
         {
-          "Content": "Mon Calamari Shipyards",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards"
+          "Content": "MC-series star cruiser",
+          "Href": "https://starwars.fandom.com/wiki/MC-series_star_cruiser"
         }
       ],
       "Values": [
-        "Mon Calamari Shipyards"
+        "MC-series star cruiser"
       ]
     },
     {
@@ -32,11 +32,12 @@
         }
       ],
       "Values": [
-        "MC75 Star Cruiser"
+        "MC75 Star Cruiser",
+        "MC75 Ordnance Cruiser"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -48,6 +49,18 @@
       ]
     },
     {
+      "Label": "Docking bays",
+      "Links": [
+        {
+          "Content": "hangar",
+          "Href": "https://starwars.fandom.com/wiki/Hangar"
+        }
+      ],
+      "Values": [
+        "1 hangar"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -55,13 +68,13 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
-          "Content": "Mon Calamari Exodus Fleet",
-          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Exodus_Fleet"
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
         }
       ],
       "Values": [
         "Alliance to Restore the Republic",
-        "Mon Calamari Exodus Fleet"
+        "Rebel Alliance Navy"
       ]
     }
   ],
@@ -72,14 +85,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
-      "PageId": 531468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 556308,
       "PageUrl": "https://starwars.fandom.com/wiki/MC75_Star_Cruiser",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 531468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

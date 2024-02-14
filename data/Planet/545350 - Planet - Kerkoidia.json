@@ -29,7 +29,19 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Kerkoidia system",
+          "Href": "https://starwars.fandom.com/wiki/Kerkoidia_system"
+        }
+      ],
+      "Values": [
+        "Kerkoidia system"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-15",
@@ -38,6 +50,36 @@
       ],
       "Values": [
         "N-15"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [],
+      "Values": [
+        "Savannah"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "grass",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        }
+      ],
+      "Values": [
+        "Blue grass"
       ]
     },
     {
@@ -50,6 +92,13 @@
       ],
       "Values": [
         "Kerkoiden"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Kerkoidian"
       ]
     },
     {
@@ -77,9 +126,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 602018,
-      "PageUrl": "https://starwars.fandom.com/wiki/Retail_Caucus_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 734648,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerkoidia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 541411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerkoiden",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 491418,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_Region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 497318,
@@ -92,19 +151,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 491418,
-      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_Region",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 787865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_blue_grass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 625391,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kerkoidian_Defense_Force",
+      "PageId": 602018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Retail_Caucus_droid_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 541411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kerkoiden",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 625391,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kerkoidian_Defense_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

@@ -15,6 +15,10 @@
       "Label": "Region",
       "Links": [
         {
+          "Content": "Hutt Space",
+          "Href": "https://starwars.fandom.com/wiki/Hutt_Space"
+        },
+        {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
         },
@@ -24,24 +28,13 @@
         }
       ],
       "Values": [
+        "Hutt Space",
         "Outer Rim Territories",
         "The Slice"
       ]
     },
     {
-      "Label": "Sector",
-      "Links": [
-        {
-          "Content": "Hutt Space",
-          "Href": "https://starwars.fandom.com/wiki/Hutt_Space"
-        }
-      ],
-      "Values": [
-        "Hutt Space"
-      ]
-    },
-    {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "S-9",
@@ -53,7 +46,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Desert",
@@ -62,6 +55,13 @@
       ],
       "Values": [
         "Desert"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [],
+      "Values": [
+        "paddy flower"
       ]
     },
     {
@@ -101,8 +101,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 475724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Castas",
+      "PageId": 518015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klatooine_paddy_frog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 483302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 509741,
+      "PageUrl": "https://starwars.fandom.com/wiki/Umpass-stay",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -111,28 +121,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 532337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 509741,
-      "PageUrl": "https://starwars.fandom.com/wiki/Umpass-stay",
+      "PageId": 475724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Castas",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 483302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hutt_Space",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 518015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Klatooine_paddy_frog",
+      "PageId": 532337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frog",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

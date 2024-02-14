@@ -2,7 +2,7 @@
   "PageId": 726759,
   "PageUrl": "https://starwars.fandom.com/wiki/Second_Division",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f9/Second-Division.png/revision/latest?cb=20220413222245",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b8/SecondDivision-CrimsonReign-2.png/revision/latest?cb=20231125062952",
   "Data": [
     {
       "Label": "Titles",
@@ -37,6 +37,18 @@
       ],
       "Values": [
         "3 ABY"
+      ]
+    },
+    {
+      "Label": "Dissolution",
+      "Links": [
+        {
+          "Content": "4 ABY",
+          "Href": "https://starwars.fandom.com/wiki/4_ABY"
+        }
+      ],
+      "Values": [
+        "Between 3 ABY and 4 ABY"
       ]
     },
     {
@@ -116,11 +128,16 @@
       "Label": "Notable battles",
       "Links": [
         {
+          "Content": "Skirmish on Lowik",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Lowik"
+        },
+        {
           "Content": "Battle of Panisia",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Panisia"
         }
       ],
       "Values": [
+        "Skirmish on Lowik",
         "Battle of Panisia"
       ]
     },
@@ -144,14 +161,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 674580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kondra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720248,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temporary_rebel_cell_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 682355,
       "PageUrl": "https://starwars.fandom.com/wiki/Tee-Six_(Spirit_of_Jedha)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 674580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kondra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 678792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spirit_of_Jedha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 682334,
@@ -159,9 +186,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 678792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spirit_of_Jedha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 720564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Panisia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 700443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Idrax_Snat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Valo_Security_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

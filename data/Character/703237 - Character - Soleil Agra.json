@@ -2,13 +2,25 @@
   "PageId": 703237,
   "PageUrl": "https://starwars.fandom.com/wiki/Soleil_Agra",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/Soleil_agra.jpg/revision/latest?cb=20211008183706",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f2/SoleilAgra-THRSoS1.png/revision/latest?cb=20230829055240",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Soleil Agra"
+      ]
+    },
+    {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Glee Anselm",
+          "Href": "https://starwars.fandom.com/wiki/Glee_Anselm"
+        }
+      ],
+      "Values": [
+        "Glee Anselm"
       ]
     },
     {
@@ -21,6 +33,29 @@
       ],
       "Values": [
         "Nautolan"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.75 meters (5 ft, 9 in)"
       ]
     },
     {
@@ -60,5 +95,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 770083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soleil_Agra's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

@@ -2,24 +2,13 @@
   "PageId": 124160,
   "PageUrl": "https://starwars.fandom.com/wiki/Sone",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Sone"
-      ]
-    },
-    {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Denon",
-          "Href": "https://starwars.fandom.com/wiki/Denon/Legends"
-        }
-      ],
-      "Values": [
-        "Denon"
       ]
     },
     {
@@ -45,7 +34,30 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Zam Wesell",
+          "Href": "https://starwars.fandom.com/wiki/Zam_Wesell/Legends"
+        },
+        {
+          "Content": "Clawdite",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Clawdite"
+        }
+      ],
+      "Values": [
+        "Zam Wesell",
+        "A Clawdite"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zam_Wesell/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

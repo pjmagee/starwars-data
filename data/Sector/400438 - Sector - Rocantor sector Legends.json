@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "Western Reaches"
       ]
     },
     {
@@ -107,11 +112,11 @@
       ]
     },
     {
-      "Label": "Imperial Period conflicts",
+      "Label": "Reconquest of the Rim",
       "Links": [
         {
           "Content": "Ord Vaug",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug_(Imperial_Period)"
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug"
         }
       ],
       "Values": [
@@ -127,7 +132,7 @@
         },
         {
           "Content": "Ord Vaug",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Vaug_(Galactic_Civil_War)"
+          "Href": "https://starwars.fandom.com/wiki/Liberation_of_Ord_Vaug"
         }
       ],
       "Values": [
@@ -137,18 +142,33 @@
   ],
   "Relationships": [
     {
+      "PageId": 272175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yabosta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 14738,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yabosta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 383980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serria_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 390997,
       "PageUrl": "https://starwars.fandom.com/wiki/Rocantor_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 14946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Vaug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 375035,
       "PageUrl": "https://starwars.fandom.com/wiki/Ord_Vaug_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 299990,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rainos_Cluster",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
@@ -157,29 +177,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 299990,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rainos_Cluster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 383980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serria_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
       "PageId": 14737,
       "PageUrl": "https://starwars.fandom.com/wiki/Skalokor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 14738,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yabosta",
+      "PageId": 14946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Vaug",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 272175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yabosta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

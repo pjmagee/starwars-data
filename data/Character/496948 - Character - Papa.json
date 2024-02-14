@@ -2,7 +2,7 @@
   "PageId": 496948,
   "PageUrl": "https://starwars.fandom.com/wiki/Papa",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/86/Ziro%27sFather-HFZ.png/revision/latest?cb=20130517040839",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/26/Papa-HuntForZiro.png/revision/latest?cb=20130517040839",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Kajidic",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Desilijic",
@@ -57,6 +57,40 @@
       ],
       "Values": [
         "Desilijic"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Mama",
+          "Href": "https://starwars.fandom.com/wiki/Mama"
+        }
+      ],
+      "Values": [
+        "Mama"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Unidentified son",
+          "Href": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure%27s_father"
+        },
+        {
+          "Content": "Ziro Desilijic Tiure",
+          "Href": "https://starwars.fandom.com/wiki/Ziro_Desilijic_Tiure"
+        },
+        {
+          "Content": "Ebor",
+          "Href": "https://starwars.fandom.com/wiki/Ebor"
+        }
+      ],
+      "Values": [
+        "Unidentified son",
+        "Ziro Desilijic Tiure",
+        "Ebor"
       ]
     },
     {
@@ -72,5 +106,26 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 665343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba_Desilijic_Tiure's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mama",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 243579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ziro_Desilijic_Tiure",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

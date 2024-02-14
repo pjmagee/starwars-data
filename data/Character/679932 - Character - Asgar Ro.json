@@ -2,7 +2,7 @@
   "PageId": 679932,
   "PageUrl": "https://starwars.fandom.com/wiki/Asgar_Ro",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/AsgarRo.png/revision/latest?cb=20220321124821",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0a/AsgarRo.png/revision/latest?cb=20231014033416",
   "Data": [
     {
       "Label": "Titles",
@@ -64,6 +64,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.83 meters (6ft)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -90,28 +113,74 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Ros",
-          "Href": "https://starwars.fandom.com/wiki/Ros_(family)"
+          "Content": "Ro family",
+          "Href": "https://starwars.fandom.com/wiki/Ro_family"
+        }
+      ],
+      "Values": [
+        "Ro family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Shalla Ro",
+          "Href": "https://starwars.fandom.com/wiki/Shalla_Ro"
         },
+        {
+          "Content": "Asgar Ro's father",
+          "Href": "https://starwars.fandom.com/wiki/Asgar_Ro%27s_father"
+        }
+      ],
+      "Values": [
+        "Shalla Ro",
+        "Asgar Ro's father"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Marchion Ro",
+          "Href": "https://starwars.fandom.com/wiki/Marchion_Ro"
+        }
+      ],
+      "Values": [
+        "Marchion Ro"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Nihil",
           "Href": "https://starwars.fandom.com/wiki/Nihil"
         }
       ],
       "Values": [
-        "Ros",
         "Nihil"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 643796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 679928,
       "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_of_the_Nihil",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 724668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asgar_Ro's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 679941,
@@ -119,9 +188,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 643796,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nihil",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 687307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shalla_Ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 672005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marchion_Ro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

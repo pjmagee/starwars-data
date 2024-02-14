@@ -86,22 +86,64 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Cortess",
           "Href": "https://starwars.fandom.com/wiki/House_Cortess"
-        },
+        }
+      ],
+      "Values": [
+        "House Cortess"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
         {
-          "Content": "Eagle's terrorist newtork",
+          "Content": "Peyar Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Peyar_Cortess"
+        }
+      ],
+      "Values": [
+        "Peyar Cortess"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Pashon Cortess",
+          "Href": "https://starwars.fandom.com/wiki/Pashon_Cortess"
+        }
+      ],
+      "Values": [
+        "Pashon Cortess"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Eagle",
           "Href": "https://starwars.fandom.com/wiki/Eagle"
         }
       ],
       "Values": [
-        "House Cortess",
-        "Eagle's terrorist newtork"
+        "Eagle's terrorist network"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 402909,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peyar_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pashon_Cortess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

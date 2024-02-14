@@ -60,22 +60,47 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Girard",
           "Href": "https://starwars.fandom.com/wiki/House_Girard"
-        },
+        }
+      ],
+      "Values": [
+        "House Girard"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Zacar Girard",
+          "Href": "https://starwars.fandom.com/wiki/Zacar_Girard"
+        }
+      ],
+      "Values": [
+        "Zacar Girard"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Sith Empire",
           "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
         }
       ],
       "Values": [
-        "House Girard",
         "Sith Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 426272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zacar_Girard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

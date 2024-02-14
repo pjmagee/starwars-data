@@ -64,13 +64,6 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [],
-      "Values": [
-        "Unknown"
-      ]
-    },
-    {
       "Label": "Eye color",
       "Links": [
         {
@@ -90,36 +83,19 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Partner(s)",
       "Links": [
-        {
-          "Content": "Sith Empire",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
-        }
-      ],
-      "Values": [
-        "Sith Empire",
-        "House Grathan"
-      ]
-    },
-    {
-      "Label": "Masters",
-      "Links": [
-        {
-          "Content": "Lord",
-          "Href": "https://starwars.fandom.com/wiki/Sith_Lord/Legends"
-        },
         {
           "Content": "Grathan",
           "Href": "https://starwars.fandom.com/wiki/Grathan"
         }
       ],
       "Values": [
-        "Lord Grathan"
+        "Grathan"
       ]
     },
     {
-      "Label": "Apprentices",
+      "Label": "Children",
       "Links": [
         {
           "Content": "Beelzlit Grathan",
@@ -129,12 +105,41 @@
       "Values": [
         "Beelzlit Grathan"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Sith Empire",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Empire_(Post–Great_Hyperspace_War)"
+        },
+        {
+          "Content": "Lord Grathan's forces",
+          "Href": "https://starwars.fandom.com/wiki/Lord_Grathan%27s_forces"
+        }
+      ],
+      "Values": [
+        "Sith Empire",
+        "Lord Grathan's forces"
+      ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [],
+      "Values": [
+        "Grathan"
+      ]
     }
   ],
   "Relationships": [
     {
       "PageId": 370870,
       "PageUrl": "https://starwars.fandom.com/wiki/Grathan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 381205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beelzlit_Grathan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

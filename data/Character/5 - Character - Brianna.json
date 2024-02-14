@@ -56,6 +56,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [],
       "Values": [
@@ -70,12 +77,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Arren Kae",
+          "Href": "https://starwars.fandom.com/wiki/Arren_Kae"
+        },
+        {
+          "Content": "Yusanis",
+          "Href": "https://starwars.fandom.com/wiki/Yusanis"
+        }
+      ],
+      "Values": [
+        "Arren Kae",
+        "Yusanis"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
       "Links": [
         {
           "Content": "Handmaiden Sisters",
           "Href": "https://starwars.fandom.com/wiki/Handmaiden_Sisters"
-        },
+        }
+      ],
+      "Values": [
+        "Handmaiden Sisters"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Lost Jedi",
           "Href": "https://starwars.fandom.com/wiki/Lost_Jedi"
@@ -110,6 +142,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 8581,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arren_Kae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 13763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yusanis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 22,
       "PageUrl": "https://starwars.fandom.com/wiki/Meetra_Surik",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -118,11 +165,6 @@
       "PageId": 387714,
       "PageUrl": "https://starwars.fandom.com/wiki/Duel_in_the_Telosian_Jedi_Academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 1305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

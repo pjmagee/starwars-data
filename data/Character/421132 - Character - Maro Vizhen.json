@@ -52,6 +52,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -61,6 +68,13 @@
       ],
       "Values": [
         "Black"
+      ]
+    },
+    {
+      "Label": "Eye color",
+      "Links": [],
+      "Values": [
+        "Brown"
       ]
     },
     {
@@ -80,13 +94,24 @@
         {
           "Content": "Imperial Diplomatic Service",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Diplomatic_Service"
+        },
+        {
+          "Content": "Special Operations",
+          "Href": "https://starwars.fandom.com/wiki/Special_Operations_(Diplomatic_Service)"
         }
       ],
       "Values": [
         "Sith Empire",
-        "Imperial Diplomatic Service"
+        "Imperial Diplomatic Service",
+        "Special Operations"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 478530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Special_Operations_(Diplomatic_Service)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

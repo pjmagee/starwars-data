@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,6 +81,42 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Adasca",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Adasca"
+        }
+      ],
+      "Values": [
+        "House of Adasca"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Argaloh Adasca",
+          "Href": "https://starwars.fandom.com/wiki/Argaloh_Adasca"
+        }
+      ],
+      "Values": [
+        "Argaloh Adasca"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Arkoh Adasca",
+          "Href": "https://starwars.fandom.com/wiki/Arkoh_Adasca"
+        }
+      ],
+      "Values": [
+        "Arkoh Adasca"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -86,5 +129,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 170659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Argaloh_Adasca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 132892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkoh_Adasca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

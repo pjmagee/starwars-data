@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Dreadnought",
@@ -103,6 +103,22 @@
       ]
     },
     {
+      "Label": "Shielding",
+      "Links": [
+        {
+          "Content": "Bridge",
+          "Href": "https://starwars.fandom.com/wiki/Bridge_(starship)"
+        },
+        {
+          "Content": "deflector shield generators",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
+        }
+      ],
+      "Values": [
+        "Bridge deflector shield generators"
+      ]
+    },
+    {
       "Label": "Hull",
       "Links": [
         {
@@ -115,6 +131,18 @@
       ]
     },
     {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "Tractor beam targeting array",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_targeting_array"
+        }
+      ],
+      "Values": [
+        "Tractor beam targeting array"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -122,18 +150,29 @@
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
         {
-          "Content": "Ion cannons",
+          "Content": "Turret",
+          "Href": "https://starwars.fandom.com/wiki/Turret"
+        },
+        {
+          "Content": "ion cannons",
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
           "Content": "Concussion missile",
           "Href": "https://starwars.fandom.com/wiki/Concussion_missile"
+        },
+        {
+          "Content": "laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         }
       ],
       "Values": [
         "Turbolasers (5,000)",
-        "Ion cannons",
-        "Concussion missile tubes"
+        "Twin heavy turbolaser batteries (750)",
+        "Turret-mounted twin light turbolaser batteries (1000)",
+        "Twin battleship ion cannons (100)",
+        "Assault Concussion missile tubes (125)",
+        "Turret-mounted quad laser cannons (250)"
       ]
     },
     {
@@ -156,6 +195,14 @@
           "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
         },
         {
+          "Content": "TIE Advanced x1",
+          "Href": "https://starwars.fandom.com/wiki/TIE_Advanced_x1"
+        },
+        {
+          "Content": "Darth Vader's TIE Advanced",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Vader%27s_TIE_Advanced"
+        },
+        {
           "Content": "Starfall",
           "Href": "https://starwars.fandom.com/wiki/Starfall"
         }
@@ -165,6 +212,8 @@
         "TIE/ln space superiority starfighters",
         "TIE/sa bombers",
         "TIE/IN interceptors",
+        "1 TIE Advanced x1",
+        "Darth Vader's TIE Advanced",
         "Starfall"
       ]
     },
@@ -182,9 +231,20 @@
     },
     {
       "Label": "Crew",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Pirates",
+          "Href": "https://starwars.fandom.com/wiki/Pirate"
+        }
+      ],
       "Values": [
-        "1,000s"
+        "1,000s",
+        "Imperial officers (Imperial control)",
+        "Pirates (Sovereign control)"
       ]
     },
     {
@@ -279,6 +339,14 @@
         {
           "Content": "Vinthar",
           "Href": "https://starwars.fandom.com/wiki/Vinthar"
+        },
+        {
+          "Content": "Kartessa",
+          "Href": "https://starwars.fandom.com/wiki/Kartessa"
+        },
+        {
+          "Content": "Kartessa's mother",
+          "Href": "https://starwars.fandom.com/wiki/Kartessa%27s_mother"
         }
       ],
       "Values": [
@@ -286,7 +354,9 @@
         "Oon-ai",
         "Shi Shu",
         "Carklin Ryoon",
-        "Vinthar"
+        "Vinthar",
+        "Kartessa",
+        "Kartessa's mother"
       ]
     }
   ],

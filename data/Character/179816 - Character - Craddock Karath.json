@@ -2,6 +2,7 @@
   "PageId": 179816,
   "PageUrl": "https://starwars.fandom.com/wiki/Craddock_Karath",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,18 @@
       ]
     },
     {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Saul Karath",
+          "Href": "https://starwars.fandom.com/wiki/Saul_Karath"
+        }
+      ],
+      "Values": [
+        "Saul Karath"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -76,5 +89,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 8335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saul_Karath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

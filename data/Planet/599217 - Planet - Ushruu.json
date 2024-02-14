@@ -2,13 +2,37 @@
   "PageId": 599217,
   "PageUrl": "https://starwars.fandom.com/wiki/Ushruu",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/63/Ushruu.jpg/revision/latest?cb=20220904175539",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Ushruu"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Expansion Region",
+          "Href": "https://starwars.fandom.com/wiki/Expansion_Region"
+        }
+      ],
+      "Values": [
+        "Expansion Region"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "O-13",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "O-13"
       ]
     },
     {
@@ -24,7 +48,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -51,38 +75,31 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Corellian hound",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_hound"
+        },
+        {
           "Content": "Vathyr",
           "Href": "https://starwars.fandom.com/wiki/Vathyr"
         }
       ],
       "Values": [
+        "Corellian hound",
         "Glorb",
         "Vathyr"
-      ]
-    },
-    {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Corellian hound",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_hound"
-        }
-      ],
-      "Values": [
-        "Corellian hound"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 599677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enchantress",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 599234,
       "PageUrl": "https://starwars.fandom.com/wiki/Chasm_(Ushruu)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 599677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enchantress",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

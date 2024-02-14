@@ -2,7 +2,7 @@
   "PageId": 708970,
   "PageUrl": "https://starwars.fandom.com/wiki/Felix_Tagge",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/68/FelixTagge.png/revision/latest?cb=20220131185534",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/68/FelixTagge.png/revision/latest?cb=20240117010933",
   "Data": [
     {
       "Label": "Titles",
@@ -21,18 +21,6 @@
       ],
       "Values": [
         "Human"
-      ]
-    },
-    {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
       ]
     },
     {
@@ -55,22 +43,69 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Tagge",
           "Href": "https://starwars.fandom.com/wiki/House_of_Tagge"
-        },
-        {
-          "Content": "Tagge Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
         }
       ],
       "Values": [
-        "House of Tagge",
-        "Tagge Corporation"
+        "House of Tagge"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Adelaide Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Adelaide_Tagge"
+        }
+      ],
+      "Values": [
+        "Adelaide Tagge"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Ronen Tagge",
+          "Href": "https://starwars.fandom.com/wiki/Ronen_Tagge"
+        }
+      ],
+      "Values": [
+        "Ronen Tagge"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Tagge Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Tagge_Corporation"
+        },
+        {
+          "Content": "Executive Board",
+          "Href": "https://starwars.fandom.com/wiki/Executive_Board"
+        }
+      ],
+      "Values": [
+        "Tagge Corporation",
+        "Executive Board"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 708966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adelaide_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 643169,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ronen_Tagge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

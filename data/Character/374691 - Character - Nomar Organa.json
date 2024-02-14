@@ -86,6 +86,30 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Organa",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
+        }
+      ],
+      "Values": [
+        "House of Organa"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Rehanna Rist",
+          "Href": "https://starwars.fandom.com/wiki/Rehanna_Rist"
+        }
+      ],
+      "Values": [
+        "Rehanna Rist (formerly)"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -95,18 +119,19 @@
         {
           "Content": "Galactic Republic",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
-        {
-          "Content": "House of Organa",
-          "Href": "https://starwars.fandom.com/wiki/House_of_Organa/Legends"
         }
       ],
       "Values": [
         "Jedi Order",
-        "Galactic Republic",
-        "House of Organa"
+        "Galactic Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 388761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rehanna_Rist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Corellian Engineering Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
-        }
-      ],
-      "Values": [
-        "Corellian Engineering Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,6 +24,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Corellian Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
+        }
+      ],
+      "Values": [
+        "Corellian Engineering Corporation"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Auxiliary craft",
@@ -109,5 +109,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

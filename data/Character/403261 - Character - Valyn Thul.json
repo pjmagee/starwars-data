@@ -74,7 +74,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Thul",
@@ -84,7 +84,35 @@
       "Values": [
         "House Thul"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Markus Andarius Thul",
+          "Href": "https://starwars.fandom.com/wiki/Markus_Andarius_Thul"
+        },
+        {
+          "Content": "Altana Thul",
+          "Href": "https://starwars.fandom.com/wiki/Altana_Thul"
+        }
+      ],
+      "Values": [
+        "Markus Andarius Thul",
+        "Altana Thul"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 388989,
+      "PageUrl": "https://starwars.fandom.com/wiki/Markus_Andarius_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 403259,
+      "PageUrl": "https://starwars.fandom.com/wiki/Altana_Thul",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

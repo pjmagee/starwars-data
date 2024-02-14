@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "T-5",
@@ -34,18 +34,26 @@
       "Values": [
         "T-5"
       ]
-    }
-  ],
-  "Relationships": [
-    {
-      "PageId": 8801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drongar/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Flora",
+      "Links": [
+        {
+          "Content": "Trees",
+          "Href": "https://starwars.fandom.com/wiki/Tree"
+        }
+      ],
+      "Values": [
+        "Trees"
+      ]
     }
-  ]
+  ],
+  "Relationships": []
 }

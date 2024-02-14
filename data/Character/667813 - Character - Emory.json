@@ -2,6 +2,7 @@
   "PageId": 667813,
   "PageUrl": "https://starwars.fandom.com/wiki/Emory",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,29 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Varko Grey",
+          "Href": "https://starwars.fandom.com/wiki/Varko_Grey"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Varko Grey (spouse)"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 667801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varko_Grey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

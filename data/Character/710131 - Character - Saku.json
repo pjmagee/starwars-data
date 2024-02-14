@@ -36,6 +36,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -60,7 +67,35 @@
       "Values": [
         "Light brown"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Haru",
+          "Href": "https://starwars.fandom.com/wiki/Haru"
+        },
+        {
+          "Content": "Asu",
+          "Href": "https://starwars.fandom.com/wiki/Asu"
+        }
+      ],
+      "Values": [
+        "Haru",
+        "Asu (brother-in-law)"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 710130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Haru",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 710133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

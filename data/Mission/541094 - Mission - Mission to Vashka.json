@@ -2,7 +2,6 @@
   "PageId": 541094,
   "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vashka",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission",
-  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -25,6 +24,18 @@
       ],
       "Values": [
         "Recover a steel case from Jor Tribulus"
+      ]
+    },
+    {
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "29 ABY",
+          "Href": "https://starwars.fandom.com/wiki/29_ABY"
+        }
+      ],
+      "Values": [
+        "29 ABY"
       ]
     },
     {
@@ -56,31 +67,5 @@
       ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 518718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delphi_Kloda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 518720,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delphi_Kloda's_competitor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 518724,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aric_Nightdrifter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 518730,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jor_Tribulus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 540484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_protocol_droid_(Suli's_cantina)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    }
-  ]
+  "Relationships": []
 }

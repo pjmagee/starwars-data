@@ -2,6 +2,7 @@
   "PageId": 707564,
   "PageUrl": "https://starwars.fandom.com/wiki/Jon_Wittick",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,7 +24,7 @@
         }
       ],
       "Values": [
-        "c. 231 BBY, Restitution"
+        "231 BBY, Restitution"
       ]
     },
     {
@@ -51,6 +52,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jon Wittick's sister",
+          "Href": "https://starwars.fandom.com/wiki/Jon_Wittick%27s_sister"
+        }
+      ],
+      "Values": [
+        "Jon Wittick's sister"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -68,5 +88,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 722538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Defense_of_the_Restitution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 707227,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lourna_Dee_(prison_ship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

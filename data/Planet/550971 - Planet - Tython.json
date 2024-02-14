@@ -36,6 +36,18 @@
       ]
     },
     {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "1",
+          "Href": "https://starwars.fandom.com/wiki/Tython_sun"
+        }
+      ],
+      "Values": [
+        "1"
+      ]
+    },
+    {
       "Label": "Moons",
       "Links": [
         {
@@ -44,11 +56,12 @@
         }
       ],
       "Values": [
+        "At least 2",
         "Ashla"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-10",
@@ -67,14 +80,31 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Atmosphere",
+      "Links": [],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
+        {
+          "Content": "Forest",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        },
+        {
+          "Content": "Grasslands",
+          "Href": "https://starwars.fandom.com/wiki/Grass"
+        },
         {
           "Content": "Mountains",
           "Href": "https://starwars.fandom.com/wiki/Mountain"
         }
       ],
       "Values": [
+        "Forest",
+        "Grasslands",
         "Mountains"
       ]
     },
@@ -90,10 +120,6 @@
           "Href": "https://starwars.fandom.com/wiki/Jedi_Temple_(Tython)"
         },
         {
-          "Content": "Martyrium of Frozen Tears",
-          "Href": "https://starwars.fandom.com/wiki/Martyrium_of_Frozen_Tears"
-        },
-        {
           "Content": "Meridional Ice Cap",
           "Href": "https://starwars.fandom.com/wiki/Meridional_Ice_Cap"
         }
@@ -101,7 +127,6 @@
       "Values": [
         "Force-henge",
         "Jedi Temple",
-        "Martyrium of Frozen Tears",
         "Meridional Ice Cap"
       ]
     },
@@ -109,12 +134,36 @@
       "Label": "Fauna",
       "Links": [
         {
+          "Content": "Bird",
+          "Href": "https://starwars.fandom.com/wiki/Bird"
+        },
+        {
           "Content": "Butterfly",
           "Href": "https://starwars.fandom.com/wiki/Butterfly"
+        },
+        {
+          "Content": "mammals",
+          "Href": "https://starwars.fandom.com/wiki/Mammal"
         }
       ],
       "Values": [
-        "Butterfly"
+        "Bird",
+        "Butterfly",
+        "Small mammals"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "Uninhabited"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [],
+      "Values": [
+        "Tythonian"
       ]
     },
     {
@@ -132,14 +181,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 675740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seeing_stone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 676302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tython_(9_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 638441,
       "PageUrl": "https://starwars.fandom.com/wiki/MK_sniper_rifle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 638279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meridional_Ice_Cap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 543878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 695028,
@@ -147,9 +206,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 621278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razor_Crest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 586948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bryce_(colonel)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 631177,
@@ -157,39 +216,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 669644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Artillery_stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 635145,
-      "PageUrl": "https://starwars.fandom.com/wiki/Martyrium_of_Frozen_Tears",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 676361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Stormtrooper_Commander_(Tython)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 676397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_(Tython)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 628863,
-      "PageUrl": "https://starwars.fandom.com/wiki/Model_201_mortar_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 674651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
       "PageId": 593064,
       "PageUrl": "https://starwars.fandom.com/wiki/Force-henge",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 559557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyberite",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
       "PageId": 675513,
@@ -202,19 +236,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
+      "PageId": 621278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razor_Crest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 676397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_Temple_(Tython)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 735086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 733145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad_(Tython)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 748644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_detachment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
       "PageId": 692907,
       "PageUrl": "https://starwars.fandom.com/wiki/Ashla_(moon)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 676302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Tython",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 786992,
+      "PageUrl": "https://starwars.fandom.com/wiki/Icon_of_Blessed_Balance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 675740,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seeing_stone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 676361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Stormtrooper_Commander_(Tython)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 628863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Model_201_mortar_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 638279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meridional_Ice_Cap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 786981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_temperate_region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 496766,
+      "PageUrl": "https://starwars.fandom.com/wiki/0-0-0",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 496768,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 452741,
@@ -222,19 +311,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
+      "PageId": 635145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Martyrium_of_Frozen_Tears",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 669644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Artillery_stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 533158,
       "PageUrl": "https://starwars.fandom.com/wiki/MM9_mini_concussion_rocket_launcher",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 543878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 586948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bryce",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 689542,
   "PageUrl": "https://starwars.fandom.com/wiki/Korbori",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/57/Korbori-SWT.jpg/revision/latest?cb=20220612204801",
   "Data": [
     {
       "Label": "Titles",
@@ -12,19 +12,53 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Region",
       "Links": [
         {
-          "Content": "Theelin",
-          "Href": "https://starwars.fandom.com/wiki/Theelin"
+          "Content": "Colonies",
+          "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Theelin"
+        "Colonies",
+        "The Interior"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "N-12",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "N-12"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Hydian Way",
+          "Href": "https://starwars.fandom.com/wiki/Hydian_Way"
+        }
+      ],
+      "Values": [
+        "Hydian Way"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 518433,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hydian_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
     {
       "PageId": 475263,
       "PageUrl": "https://starwars.fandom.com/wiki/Latts_Razzi",

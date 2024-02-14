@@ -2,7 +2,7 @@
   "PageId": 198385,
   "PageUrl": "https://starwars.fandom.com/wiki/Sphyrna-class_Hammerhead_corvette",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/Hammerhead_Corvette_USWNE.png/revision/latest?cb=20200119222636",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2d/Hammerhead_Corvette_USWNE.png/revision/latest?cb=20221007141035",
   "Data": [
     {
       "Label": "Titles",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "Label": "Maximum acceleration",
+      "Label": "Maximum atmospheric speed",
       "Links": [
         {
           "Content": "kph",
@@ -274,8 +274,8 @@
           "Href": "https://starwars.fandom.com/wiki/House_of_Organa"
         },
         {
-          "Content": "Alderaanian fleet",
-          "Href": "https://starwars.fandom.com/wiki/Alderaanian_fleet"
+          "Content": "Royal Alderaan Civil Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Alderaan_Civil_Fleet"
         },
         {
           "Content": "Alliance to Restore the Republic",
@@ -292,6 +292,10 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
         },
         {
           "Content": "New Republic Security Bureau",
@@ -312,11 +316,12 @@
       ],
       "Values": [
         "House of Organa",
-        "Alderaanian fleet",
+        "Royal Alderaan Civil Fleet",
         "Alliance to Restore the Republic",
         "Rebel Alliance Navy",
         "Phoenix Cell",
         "New Republic",
+        "New Republic Defense Fleet",
         "New Republic Security Bureau",
         "Resistance",
         "Resistance navy",
@@ -326,39 +331,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 566269,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hammerhead_Corvettes_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 459030,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 568452,
       "PageUrl": "https://starwars.fandom.com/wiki/Sterdic_Star",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 557180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lightmaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 566269,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hammerhead_Corvettes_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
       "PageId": 575671,
       "PageUrl": "https://starwars.fandom.com/wiki/Consonance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 585192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garel's_Honor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 483311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 620438,
@@ -369,6 +354,21 @@
       "PageId": 620446,
       "PageUrl": "https://starwars.fandom.com/wiki/Hammerhead_Torpedo_Corvette",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 528825,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Lothal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 483311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phoenix_Cell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 585192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garel's_Honor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 552939,
@@ -386,9 +386,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 528825,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_Lothal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 557180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightmaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

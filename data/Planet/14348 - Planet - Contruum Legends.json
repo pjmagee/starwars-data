@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-8"
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Mountains",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -156,6 +156,13 @@
       ],
       "Values": [
         "Galactic Basic Standard"
+      ]
+    },
+    {
+      "Label": "Population",
+      "Links": [],
+      "Values": [
+        "1 billion to 10 billion"
       ]
     },
     {
@@ -242,29 +249,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 378038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Contruum_rebellion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
       "PageId": 38366,
       "PageUrl": "https://starwars.fandom.com/wiki/Dena_Cracken",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 15099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vaathkree_Trade_Corridor/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 9699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pash_Cracken",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 582262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torian_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 17505,
@@ -272,9 +259,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 676098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Airen_Cracken's_mechanics_shop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+      "PageId": 582262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torian_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
       "PageId": 354086,
@@ -285,6 +272,26 @@
       "PageId": 11685,
       "PageUrl": "https://starwars.fandom.com/wiki/Airen_Cracken/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 676098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Airen_Cracken's_mechanics_shop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 9699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pash_Cracken",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 378038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Contruum_rebellion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 15099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vaathkree_Trade_Corridor/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

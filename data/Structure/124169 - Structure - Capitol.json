@@ -2,6 +2,7 @@
   "PageId": 124169,
   "PageUrl": "https://starwars.fandom.com/wiki/Capitol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/06/LessuCapitolFront.jpg/revision/latest?cb=20230506193917",
   "Data": [
     {
       "Label": "Titles",
@@ -14,8 +15,8 @@
       "Label": "Location",
       "Links": [
         {
-          "Content": "Lessu",
-          "Href": "https://starwars.fandom.com/wiki/Lessu"
+          "Content": "Lessu City",
+          "Href": "https://starwars.fandom.com/wiki/Lessu_City"
         },
         {
           "Content": "Ryloth",
@@ -23,7 +24,7 @@
         }
       ],
       "Values": [
-        "Lessu, Ryloth"
+        "Lessu City, Ryloth"
       ]
     },
     {
@@ -54,5 +55,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 500627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lessu_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 788919,
+      "PageUrl": "https://starwars.fandom.com/wiki/719_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    }
+  ]
 }

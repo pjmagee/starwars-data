@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Gunship",
@@ -50,37 +50,6 @@
       ]
     },
     {
-      "Label": "Length",
-      "Links": [
-        {
-          "Content": "meters",
-          "Href": "https://starwars.fandom.com/wiki/Meter"
-        }
-      ],
-      "Values": [
-        "38 meters"
-      ]
-    },
-    {
-      "Label": "Width",
-      "Links": [
-        {
-          "Content": "meters",
-          "Href": "https://starwars.fandom.com/wiki/Meter"
-        }
-      ],
-      "Values": [
-        "19 meters"
-      ]
-    },
-    {
-      "Label": "Height/depth",
-      "Links": [],
-      "Values": [
-        "29 meters"
-      ]
-    },
-    {
       "Label": "Maximum atmospheric speed",
       "Links": [],
       "Values": [
@@ -90,18 +59,6 @@
     {
       "Label": "Hyperdrive rating",
       "Links": [],
-      "Values": [
-        "Class 4"
-      ]
-    },
-    {
-      "Label": "Hyperdrive system",
-      "Links": [
-        {
-          "Content": "Class 4",
-          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
-        }
-      ],
       "Values": [
         "Class 4"
       ]
@@ -180,15 +137,40 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
+          "Content": "Blackscale Clan",
+          "Href": "https://starwars.fandom.com/wiki/Blackscale_Clan/Legends"
+        },
+        {
+          "Content": "Corellian Security Force",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Security_Force"
+        },
+        {
+          "Content": "Coynite",
+          "Href": "https://starwars.fandom.com/wiki/Coynite/Legends"
+        },
+        {
+          "Content": "mercenaries",
+          "Href": "https://starwars.fandom.com/wiki/Mercenary/Legends"
+        },
+        {
           "Content": "Hidden Daggers",
           "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
         }
       ],
       "Values": [
         "Galactic Empire",
+        "Blackscale Clan",
+        "Corellian Security Force",
+        "Coynite mercenaries",
         "Hidden Daggers"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coyn's_Tempest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

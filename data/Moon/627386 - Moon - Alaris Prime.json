@@ -65,7 +65,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-9",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forest",
@@ -118,10 +118,15 @@
         {
           "Content": "Jedi vault",
           "Href": "https://starwars.fandom.com/wiki/Jedi_vault"
+        },
+        {
+          "Content": "Yallow Shrine",
+          "Href": "https://starwars.fandom.com/wiki/Yallow_Shrine"
         }
       ],
       "Values": [
-        "Jedi vault"
+        "Jedi vault",
+        "Yallow Shrine"
       ]
     },
     {
@@ -137,7 +142,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Wookiees",
@@ -152,40 +157,30 @@
       "Label": "Affiliation",
       "Links": [
         {
+          "Content": "Yallow Fellowship",
+          "Href": "https://starwars.fandom.com/wiki/Yallow_Fellowship"
+        },
+        {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         }
       ],
       "Values": [
+        "Yallow Fellowship",
         "Jedi Order"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 643029,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Chewbacca's_camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 637252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_vault",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 519411,
       "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 44469,
-      "PageUrl": "https://starwars.fandom.com/wiki/Muja_fruit/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 695239,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 704590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Bikja",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 627385,
@@ -193,9 +188,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
+      "PageId": 44469,
+      "PageUrl": "https://starwars.fandom.com/wiki/Muja_fruit/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 643029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Chewbacca's_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 733748,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Mount_Bikja",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
       "PageId": 627561,
       "PageUrl": "https://starwars.fandom.com/wiki/Gnasp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 695239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashyyyk_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 637252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_vault",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

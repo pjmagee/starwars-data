@@ -2,7 +2,7 @@
   "PageId": 28350,
   "PageUrl": "https://starwars.fandom.com/wiki/Hunter-Killer_probot",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/ff/HKViperComp_negtd.jpg/revision/latest?cb=20071203045644",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/ce/HKprobot-NEGTD.png/revision/latest?cb=20221026001846",
   "Data": [
     {
       "Label": "Titles",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Probe droid",
@@ -229,23 +229,28 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Dark Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 128703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guardian-class_patrol_ship",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
       "PageId": 10519,
       "PageUrl": "https://starwars.fandom.com/wiki/Arakyd_Industries/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 128703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guardian-class_patrol_ship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
     }
   ]
 }

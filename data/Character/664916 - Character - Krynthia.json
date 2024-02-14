@@ -2,7 +2,7 @@
   "PageId": 664916,
   "PageUrl": "https://starwars.fandom.com/wiki/Krynthia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/71/Krynthia.png/revision/latest?cb=20220131185847",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/71/Krynthia.png/revision/latest?cb=20230613153157",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,10 @@
         {
           "Content": "10 BBY",
           "Href": "https://starwars.fandom.com/wiki/10_BBY"
-        },
-        {
-          "Content": "3 ABY",
-          "Href": "https://starwars.fandom.com/wiki/3_ABY"
         }
       ],
       "Values": [
-        "Between 10 BBY and 3 ABY"
+        "c. 10 BBY"
       ]
     },
     {
@@ -49,6 +45,13 @@
       ],
       "Values": [
         "Female"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
       ]
     },
     {
@@ -78,6 +81,54 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Royal line of the Unbroken Clan",
+          "Href": "https://starwars.fandom.com/wiki/Royal_line_of_the_Unbroken_Clan"
+        }
+      ],
+      "Values": [
+        "Royal line of the Unbroken Clan"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Krynthia's father",
+          "Href": "https://starwars.fandom.com/wiki/Krynthia%27s_father"
+        }
+      ],
+      "Values": [
+        "Krynthia's father"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Khamus",
+          "Href": "https://starwars.fandom.com/wiki/Khamus"
+        }
+      ],
+      "Values": [
+        "Khamus"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Cadeliah",
+          "Href": "https://starwars.fandom.com/wiki/Cadeliah"
+        }
+      ],
+      "Values": [
+        "Cadeliah"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -90,5 +141,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 664917,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cadeliah",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 658858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krynthia's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 644885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Khamus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -15,7 +15,7 @@
       "Label": "Region",
       "Links": [
         {
-          "Content": "Mid Rim Territories",
+          "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
         }
       ],
@@ -48,10 +48,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-16"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Rintonne shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Rintonne_shipyards"
+        }
+      ],
+      "Values": [
+        "Rintonne shipyards"
       ]
     },
     {
@@ -91,14 +103,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 5512,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lambda_sector/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
       "PageId": 95237,
       "PageUrl": "https://starwars.fandom.com/wiki/Rintonne_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 744368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rintonne_shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 5512,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lambda_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     }
   ]
 }

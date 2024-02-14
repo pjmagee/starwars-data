@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -156,7 +156,7 @@
       "Links": [
         {
           "Content": "subspace",
-          "Href": "https://starwars.fandom.com/wiki/Subspace"
+          "Href": "https://starwars.fandom.com/wiki/Subspace/Legends"
         },
         {
           "Content": "hyperdrive",
@@ -212,7 +212,7 @@
         },
         {
           "Content": "magnesium",
-          "Href": "https://starwars.fandom.com/wiki/Magnesium"
+          "Href": "https://starwars.fandom.com/wiki/Magnesium/Legends"
         },
         {
           "Content": "ceramic",
@@ -403,6 +403,10 @@
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         },
         {
+          "Content": "Galactic Federation of Free Alliances",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
+        },
+        {
           "Content": "Confederation",
           "Href": "https://starwars.fandom.com/wiki/Confederation"
         },
@@ -425,6 +429,14 @@
         {
           "Content": "Mandalorians",
           "Href": "https://starwars.fandom.com/wiki/Mandalorian/Legends"
+        },
+        {
+          "Content": "Zsinj's Empire",
+          "Href": "https://starwars.fandom.com/wiki/Zsinj%27s_Empire"
+        },
+        {
+          "Content": "Airam Clans",
+          "Href": "https://starwars.fandom.com/wiki/Airam_Clans"
         }
       ],
       "Values": [
@@ -433,19 +445,412 @@
         "Kota's Militia",
         "Alliance to Restore the Republic",
         "New Republic",
+        "Galactic Federation of Free Alliances",
         "Confederation",
         "Hutt Cartel",
         "Besadii kajidic",
         "Zann Consortium",
-        "Mandalorians"
+        "Mandalorians",
+        "Zsinj's Empire",
+        "Airam Clans"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 26371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bixby",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 26374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korolev",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 60785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arrow_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 158772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Charis_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 164854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 16529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bloodstar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 165447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Last_Hope_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 168561,
+      "PageUrl": "https://starwars.fandom.com/wiki/Safonne's_Sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 169786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Rebel_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 519091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duno_Dree's_transport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 51924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razor_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 90736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Imperial_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 543237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiller_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 54478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sundered_Heart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantooine_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63445,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dantooine_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 63446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 171584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beecon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 46186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lumiya's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 54034,
+      "PageUrl": "https://starwars.fandom.com/wiki/FarStar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 540425,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ritam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 540500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Control_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 259881,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallant_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 133497,
+      "PageUrl": "https://starwars.fandom.com/wiki/Striker_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 133499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 136495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ram's_Head",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 22070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scarlet_Thranta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 23404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fa-Loh-Sui_(corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 152523,
+      "PageUrl": "https://starwars.fandom.com/wiki/Storm_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 152556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Libra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 501684,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stormstrike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 106036,
       "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_c20_retrofit_suite",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 27846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ession_Strike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 61859,
+      "PageUrl": "https://starwars.fandom.com/wiki/1138_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 62289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kern's_Pride",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 30460,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saki_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 124807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triumph_(corvette_group)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 125546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spiral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 129602,
+      "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 784959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Radiant_Anthem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 785082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vallent_IX",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 171585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viper_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 171790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Petor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 53749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emancipator_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 53776,
+      "PageUrl": "https://starwars.fandom.com/wiki/Renthal's_Fist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 94552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 94553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 95191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thunder_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 95388,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 9827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaina's_Light/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 1609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163215,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farrelly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 163221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blast_Radius",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 514106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ast'ria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 258179,
+      "PageUrl": "https://starwars.fandom.com/wiki/327-B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 60063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vorknkx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 364984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Smokeswimmer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 235820,
+      "PageUrl": "https://starwars.fandom.com/wiki/O.S.S._Telira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 237955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 238195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Indefatigable_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 238196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vigilant_(CR90_corvette)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 59159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cutlass_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 706414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Overlord",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 706803,
+      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Weakest_Link",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 349253,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rescue_Doctor_Bledsoe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 659074,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hornet_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 659079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warrior_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 659080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Typhoon_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 66097,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eridain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 239667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thaere_Runner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 69237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Janson_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 57826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Masanya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10435,
+      "PageUrl": "https://starwars.fandom.com/wiki/Firestorm_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scorpion_IV",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borealis_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 10438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wolf-Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 406574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zahtjav_(starship)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 114239,
@@ -483,68 +888,78 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 235820,
-      "PageUrl": "https://starwars.fandom.com/wiki/O.S.S._Telira",
+      "PageId": 191583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lialic_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 237955,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aurora_(CR90_corvette)",
+      "PageId": 327635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Ravager",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 238195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Indefatigable_(CR90_corvette)",
+      "PageId": 64739,
+      "PageUrl": "https://starwars.fandom.com/wiki/To-phalion_Base",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 238196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vigilant_(CR90_corvette)/Legends",
+      "PageId": 65685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Constrictor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 239667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thaere_Runner",
+      "PageId": 121704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hart",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 59159,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cutlass_(CR90_corvette)",
+      "PageId": 121784,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 90736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Imperial_corvette)",
+      "PageId": 122661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leach",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 706414,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Overlord",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 706803,
-      "PageUrl": "https://starwars.fandom.com/wiki/Operation_Weakest_Link",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 171584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beecon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 169786,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talon_(Rebel_corvette)",
+      "PageId": 122664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clavier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 171585,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viper_(CR90_corvette)",
+      "PageId": 122665,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grapler",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 171790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Petor",
+      "PageId": 123577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_V_(CR90_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 767809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Wieler_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 767810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Tallon_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 767845,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Wieler_3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tyed's_Valiant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 482907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Claw_(CR90_corvette)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -573,28 +988,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 27846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ession_Strike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482252,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tyed's_Valiant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 482907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Claw_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 61859,
-      "PageUrl": "https://starwars.fandom.com/wiki/1138_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 62289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kern's_Pride",
+      "PageId": 350769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Agitator",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -603,88 +998,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 54034,
-      "PageUrl": "https://starwars.fandom.com/wiki/FarStar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 540425,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ritam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 540500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Control_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 543237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chiller_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 66800,
       "PageUrl": "https://starwars.fandom.com/wiki/Badlands_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 350769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Agitator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 53749,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emancipator_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 53776,
-      "PageUrl": "https://starwars.fandom.com/wiki/Renthal's_Fist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 66097,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eridain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 406574,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zahtjav_(starship)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 407864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blackmist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 57826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Masanya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 158772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Charis_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 10435,
-      "PageUrl": "https://starwars.fandom.com/wiki/Firestorm_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 10436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scorpion_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 10437,
-      "PageUrl": "https://starwars.fandom.com/wiki/Borealis_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 10438,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wolf-Pack",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -693,283 +1008,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 22070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Scarlet_Thranta",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 23404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fa-Loh-Sui_(corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 46186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lumiya's_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 121704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 121784,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 122661,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 122664,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clavier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 122665,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grapler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 94552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 94553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gotal_2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 95191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thunder_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 95388,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Republic_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 9827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaina's_Light/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 133497,
-      "PageUrl": "https://starwars.fandom.com/wiki/Striker_(corvette_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 133499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hammer_(corvette_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 136495,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ram's_Head",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 26371,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bixby",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 26374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korolev",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 60785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arrow_(corvette_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 364984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Smokeswimmer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 54478,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sundered_Heart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 123577,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_V_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 124807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triumph_(corvette_group)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 125546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spiral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 129602,
-      "PageUrl": "https://starwars.fandom.com/wiki/Intrepid_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 60063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vorknkx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 191583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lialic_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 69237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Janson_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 152523,
-      "PageUrl": "https://starwars.fandom.com/wiki/Storm_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 152556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Libra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 30460,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saki_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 501684,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormstrike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Backstab",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 258179,
-      "PageUrl": "https://starwars.fandom.com/wiki/327-B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 259881,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallant_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 349253,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rescue_Doctor_Bledsoe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 1609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tantive_IV/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163215,
-      "PageUrl": "https://starwars.fandom.com/wiki/Farrelly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 514106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ast'ria",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mantooine_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63445,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dantooine_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 63446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ryloth_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 163221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blast_Radius",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 164854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 16529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bloodstar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 165447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Last_Hope_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 168561,
-      "PageUrl": "https://starwars.fandom.com/wiki/Safonne's_Sword",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 327635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Star_Ravager",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 519091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duno_Dree's_CR90_corvette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 51924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razor_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 64739,
-      "PageUrl": "https://starwars.fandom.com/wiki/To-phalion_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 65685,
-      "PageUrl": "https://starwars.fandom.com/wiki/Constrictor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 659074,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hornet_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 659079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warrior_(CR90_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 659080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Typhoon_(CR90_corvette)",
+      "PageId": 407864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blackmist",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -64,6 +71,23 @@
       "Links": [],
       "Values": [
         "Fair"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Chagras",
+          "Href": "https://starwars.fandom.com/wiki/Chagras"
+        },
+        {
+          "Content": "Xelian",
+          "Href": "https://starwars.fandom.com/wiki/Xelian"
+        }
+      ],
+      "Values": [
+        "Chagras",
+        "Xelian"
       ]
     },
     {
@@ -91,14 +115,24 @@
   ],
   "Relationships": [
     {
+      "PageId": 336483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vilia_Calimondra's_empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 333345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xelian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 337555,
       "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Calimondretta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 336483,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vilia_Calimondra's_empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 325786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chagras",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

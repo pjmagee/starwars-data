@@ -2,6 +2,7 @@
   "PageId": 677491,
   "PageUrl": "https://starwars.fandom.com/wiki/SSB-1_Static_Pistol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -13,6 +14,10 @@
     {
       "Label": "Manufacturer",
       "Links": [
+        {
+          "Content": "Systech Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Systech_Corporation"
+        },
         {
           "Content": "SoroSuub Corporation",
           "Href": "https://starwars.fandom.com/wiki/SoroSuub_Corporation"
@@ -50,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 776800,
+      "PageUrl": "https://starwars.fandom.com/wiki/Systech_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

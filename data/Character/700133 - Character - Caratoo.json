@@ -2,6 +2,7 @@
   "PageId": 700133,
   "PageUrl": "https://starwars.fandom.com/wiki/Caratoo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -52,11 +53,22 @@
     },
     {
       "Label": "Affiliation(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Caratoo's band",
+          "Href": "https://starwars.fandom.com/wiki/Caratoo%27s_band"
+        }
+      ],
       "Values": [
         "Caratoo's band"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 755647,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caratoo's_band",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

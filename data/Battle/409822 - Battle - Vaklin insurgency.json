@@ -57,28 +57,18 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        }
+      ],
       "Values": [
-        "Imperial victory"
+        "Galactic Empire victory"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 409834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kren_Sallo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Purge/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 436517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_at_the_Temple_of_Imperfect_Repose",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
     {
       "PageId": 436264,
       "PageUrl": "https://starwars.fandom.com/wiki/Ambush_in_the_Howling_Ruins",
@@ -88,6 +78,21 @@
       "PageId": 436275,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Imperial_command_center",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 436517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_at_the_Temple_of_Imperfect_Repose",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 409834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kren_Sallo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Purge/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

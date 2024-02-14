@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Republic Engineering Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation"
-        }
-      ],
-      "Values": [
-        "Republic Engineering Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,6 +24,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Republic Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation"
+        }
+      ],
+      "Values": [
+        "Republic Engineering Corporation"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -202,14 +202,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 7848,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 54034,
       "PageUrl": "https://starwars.fandom.com/wiki/FarStar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 7848,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 27733,
   "PageUrl": "https://starwars.fandom.com/wiki/Sochi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/9f/Sochi-TEA.jpg/revision/latest?cb=20230724195147",
   "Data": [
     {
       "Label": "Titles",
@@ -16,10 +17,15 @@
         {
           "Content": "Inner Rim",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Inner Rim"
+        "Inner Rim",
+        "The Slice"
       ]
     },
     {
@@ -35,10 +41,17 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-9"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -54,30 +67,6 @@
       ]
     },
     {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Humans"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Galactic Basic Standard",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard/Legends"
-        }
-      ],
-      "Values": [
-        "Galactic Basic Standard"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -90,5 +79,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 390949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sochi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    }
+  ]
 }

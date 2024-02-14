@@ -2,6 +2,7 @@
   "PageId": 79517,
   "PageUrl": "https://starwars.fandom.com/wiki/Casal_Marskan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +40,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Ernek Marskan",
+          "Href": "https://starwars.fandom.com/wiki/Ernek_Marskan"
+        }
+      ],
+      "Values": [
+        "Ernek Marskan"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -56,5 +76,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 79511,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ernek_Marskan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

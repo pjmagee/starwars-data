@@ -2,13 +2,66 @@
   "PageId": 693642,
   "PageUrl": "https://starwars.fandom.com/wiki/Rystan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c6/Rystan.jpg/revision/latest?cb=20230401162004",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Rystan"
+      ]
+    },
+    {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories",
+        "Occlusion Zone"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "Rystan system",
+          "Href": "https://starwars.fandom.com/wiki/Rystan_system"
+        }
+      ],
+      "Values": [
+        "Rystan system"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "1",
+          "Href": "https://starwars.fandom.com/wiki/Rystan%27s_star"
+        }
+      ],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-20",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-20"
       ]
     },
     {
@@ -31,7 +84,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Dusty fields"
@@ -89,9 +142,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 685662,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ros_(family)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 731041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occlusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 693650,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Shrine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 791761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rystan's_star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 693644,
@@ -104,16 +167,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 693643,
-      "PageUrl": "https://starwars.fandom.com/wiki/Udi_Dis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 693649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kufa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 693653,
       "PageUrl": "https://starwars.fandom.com/wiki/Slarga",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -124,9 +177,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 693650,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Shrine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 791764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Rystan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 693643,
+      "PageUrl": "https://starwars.fandom.com/wiki/Udi_Dis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 693649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kufa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 685662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ro_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     }
   ]
 }

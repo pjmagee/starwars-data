@@ -27,17 +27,22 @@
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Battle over Jekara",
-          "Href": "https://starwars.fandom.com/wiki/Battle_over_Jekara"
+          "Content": "Attack on the Executor",
+          "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Executor"
         },
         {
           "Content": "Mission on Corellia",
           "Href": "https://starwars.fandom.com/wiki/Mission_on_Corellia"
+        },
+        {
+          "Content": "Mission to Bestine IV",
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV"
         }
       ],
       "Values": [
-        "Battle over Jekara",
-        "Mission on Corellia"
+        "Attack on the Executor",
+        "Mission on Corellia",
+        "Mission to Bestine IV"
       ]
     },
     {
@@ -87,5 +92,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 697064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Furball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 703866,
+      "PageUrl": "https://starwars.fandom.com/wiki/T'onga's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

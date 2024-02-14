@@ -2,6 +2,7 @@
   "PageId": 685001,
   "PageUrl": "https://starwars.fandom.com/wiki/Nan_Moyou",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,9 +13,14 @@
     },
     {
       "Label": "Born",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "212 BBY",
+          "Href": "https://starwars.fandom.com/wiki/212_BBY/Legends"
+        }
+      ],
       "Values": [
-        "c. 94 BBY"
+        "c. 212 BBY"
       ]
     },
     {
@@ -30,6 +36,18 @@
       ]
     },
     {
+      "Label": "Gender",
+      "Links": [
+        {
+          "Content": "Female",
+          "Href": "https://starwars.fandom.com/wiki/Gender"
+        }
+      ],
+      "Values": [
+        "Female"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -42,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Li_Qiong",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

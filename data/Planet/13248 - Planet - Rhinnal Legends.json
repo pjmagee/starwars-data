@@ -78,7 +78,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
@@ -131,12 +131,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "12,900 km"
+        "12,900 kilometers"
       ]
     },
     {
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Urban",
@@ -226,7 +226,7 @@
         },
         {
           "Content": "Jedi enclave",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_enclave_(Rhinnal)"
+          "Href": "https://starwars.fandom.com/wiki/Jedi_chapter_house_(Rhinnal)"
         },
         {
           "Content": "Rhinnal State Medical Academy",
@@ -272,7 +272,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -402,14 +402,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 277407,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_chapter_house_(Rhinnal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 751752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kieger_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
       "PageId": 155785,
       "PageUrl": "https://starwars.fandom.com/wiki/Berra_Sane",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 14093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhinnal_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 142545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gabal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 407367,
@@ -427,44 +442,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 183890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imono_Durshana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 277407,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_chapter_house_(Rhinnal)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 142541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frieste_River",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 13266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 429093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Supply",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 269553,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bormea/Darpa_Corridor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 365862,
       "PageUrl": "https://starwars.fandom.com/wiki/Circulation_Network",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 142545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gabal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 183890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imono_Durshana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 256238,
@@ -472,14 +457,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
+      "PageId": 13266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 269553,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bormea/Darpa_Corridor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 142541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frieste_River",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 429093,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Supply",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 592570,
       "PageUrl": "https://starwars.fandom.com/wiki/Annea_Lavic",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 14093,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhinnal_(star)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 39264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snow_falcon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

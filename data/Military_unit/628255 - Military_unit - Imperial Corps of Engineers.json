@@ -33,14 +33,29 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Military",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Military"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Imperial Military"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 8830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 683879,
+      "PageUrl": "https://starwars.fandom.com/wiki/I-C4a_combat_construction_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
     {
       "PageId": 628241,
       "PageUrl": "https://starwars.fandom.com/wiki/LJ-40_concussion_carbine",
@@ -50,11 +65,6 @@
       "PageId": 628276,
       "PageUrl": "https://starwars.fandom.com/wiki/M9_\"Boomer\"_heavy_pistol",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 683879,
-      "PageUrl": "https://starwars.fandom.com/wiki/I-C4a_combat_construction_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     }
   ]
 }

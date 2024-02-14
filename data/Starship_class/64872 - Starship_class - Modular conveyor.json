@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "freighter",
@@ -149,16 +149,26 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "Ripoblus government",
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_government"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Alliance to Restore the Republic",
+        "Ripoblus government",
         "Various: private and commercial"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 261234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorfan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 212674,
       "PageUrl": "https://starwars.fandom.com/wiki/Z-Cod_1",
@@ -167,16 +177,6 @@
     {
       "PageId": 212676,
       "PageUrl": "https://starwars.fandom.com/wiki/Z-Cod_2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 24440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Allegra_Enterprise_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 175550,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vendor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -200,8 +200,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 261234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorfan",
+      "PageId": 175550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vendor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -213,6 +213,11 @@
       "PageId": 158349,
       "PageUrl": "https://starwars.fandom.com/wiki/Ulzepdi",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 24440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allegra_Enterprise_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

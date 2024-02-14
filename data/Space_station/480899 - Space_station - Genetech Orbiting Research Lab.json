@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Orbiting",
@@ -219,6 +219,13 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "O-3"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -248,5 +255,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 4182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorsh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 7186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorsh_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 313117,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorsh_(star)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    }
+  ]
 }

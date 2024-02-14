@@ -2,7 +2,7 @@
   "PageId": 584857,
   "PageUrl": "https://starwars.fandom.com/wiki/Mantooine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/bf/Mantooine-TRF.jpg/revision/latest?cb=20220726172953",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "New Territories"
       ]
     },
     {
@@ -48,33 +53,45 @@
       ]
     },
     {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
-        },
-        {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
-        "Galactic Empire",
-        "Alliance to Restore the Republic"
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 590224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Mantooine)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 777203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 684426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantooine_Medallion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Medal"
+    },
+    {
       "PageId": 578783,
       "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 584791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Liberators",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 588038,
@@ -82,8 +99,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 590224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Mantooine)",
+      "PageId": 584791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Liberators",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]

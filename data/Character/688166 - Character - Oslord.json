@@ -2,6 +2,7 @@
   "PageId": 688166,
   "PageUrl": "https://starwars.fandom.com/wiki/Oslord",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -20,6 +21,18 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Black",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Black"
       ]
     },
     {
@@ -47,5 +60,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 786871,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oslord's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

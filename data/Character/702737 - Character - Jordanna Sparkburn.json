@@ -60,6 +60,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.73 meters (5 ft, 8 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -86,7 +109,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "San Tekka clan",
@@ -99,11 +122,6 @@
     }
   ],
   "Relationships": [
-    {
-      "PageId": 703771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Goddess",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 720727,
       "PageUrl": "https://starwars.fandom.com/wiki/Merry_Maker",
@@ -118,6 +136,11 @@
       "PageId": 703042,
       "PageUrl": "https://starwars.fandom.com/wiki/Remy_(vollka)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 703771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Goddess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

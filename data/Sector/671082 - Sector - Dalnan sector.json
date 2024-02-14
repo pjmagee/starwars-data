@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
       ]
     },
     {
@@ -31,13 +36,35 @@
           "Href": "https://starwars.fandom.com/wiki/Dalnan_system"
         },
         {
+          "Content": "Eiram system",
+          "Href": "https://starwars.fandom.com/wiki/Eiram_system"
+        },
+        {
           "Content": "Haileap system",
           "Href": "https://starwars.fandom.com/wiki/Haileap_system"
         }
       ],
       "Values": [
         "Dalnan system",
+        "Eiram system",
         "Haileap system"
+      ]
+    },
+    {
+      "Label": "Other planets",
+      "Links": [
+        {
+          "Content": "Aubadas",
+          "Href": "https://starwars.fandom.com/wiki/Aubadas"
+        },
+        {
+          "Content": "Gloam",
+          "Href": "https://starwars.fandom.com/wiki/Gloam"
+        }
+      ],
+      "Values": [
+        "Aubadas",
+        "Gloam"
       ]
     },
     {
@@ -49,7 +76,7 @@
         },
         {
           "Content": "Wevo",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Wevo"
+          "Href": "https://starwars.fandom.com/wiki/Tragedy_on_Wevo"
         },
         {
           "Content": "Dalna",
@@ -63,19 +90,59 @@
   ],
   "Relationships": [
     {
+      "PageId": 632358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 748744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hesperys_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 646286,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Frontier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 722340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jara_(Nautolan)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 746926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aubadas's_star",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 777838,
+      "PageUrl": "https://starwars.fandom.com/wiki/E'ronoh's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 677752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 682066,
       "PageUrl": "https://starwars.fandom.com/wiki/Haileap_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 722340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jara",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 724594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 664297,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wevo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 677759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eiram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 677761,
+      "PageUrl": "https://starwars.fandom.com/wiki/E'ronoh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 681816,
@@ -93,14 +160,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 632358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalna",
+      "PageId": 664297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wevo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 677771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 739423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gloam",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 724594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalnan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 746923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aubadas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

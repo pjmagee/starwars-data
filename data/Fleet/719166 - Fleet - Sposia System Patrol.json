@@ -2,6 +2,7 @@
   "PageId": 719166,
   "PageUrl": "https://starwars.fandom.com/wiki/Sposia_System_Patrol",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,12 +15,12 @@
       "Label": "Type",
       "Links": [
         {
-          "Content": "Planetary defense force",
-          "Href": "https://starwars.fandom.com/wiki/Planetary_defense_forces"
+          "Content": "System Patrol",
+          "Href": "https://starwars.fandom.com/wiki/System_Patrol"
         }
       ],
       "Values": [
-        "Planetary defense force"
+        "System Patrol"
       ]
     },
     {
@@ -79,5 +80,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 774373,
+      "PageUrl": "https://starwars.fandom.com/wiki/System_Patrol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

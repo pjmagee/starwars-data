@@ -20,17 +20,19 @@
       ]
     },
     {
-      "Label": "Alignment",
-      "Links": [],
-      "Values": [
-        "Both sides of the force"
-      ]
-    },
-    {
       "Label": "Area",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Control",
+          "Href": "https://starwars.fandom.com/wiki/Control"
+        },
+        {
+          "Content": "Alter",
+          "Href": "https://starwars.fandom.com/wiki/Alter"
+        }
+      ],
       "Values": [
-        "Control, sometimes Alter"
+        "Control or Alter"
       ]
     },
     {
@@ -41,14 +43,29 @@
       ]
     },
     {
-      "Label": "Inventor",
-      "Links": [],
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Order/Legends"
+        },
+        {
+          "Content": "One Sith",
+          "Href": "https://starwars.fandom.com/wiki/One_Sith"
+        }
+      ],
       "Values": [
-        "Unknown"
+        "Jedi Order",
+        "One Sith"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 360505,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anti-Caarite_virus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Disease"
+    },
     {
       "PageId": 294346,
       "PageUrl": "https://starwars.fandom.com/wiki/Healing_amulet",
@@ -60,9 +77,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 360505,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anti-Caarite_virus",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Disease"
+      "PageId": 91723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Healing_Crystals_of_Fire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 158726,
@@ -73,11 +90,6 @@
       "PageId": 721315,
       "PageUrl": "https://starwars.fandom.com/wiki/Mournful_Holocron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holocron_infobox"
-    },
-    {
-      "PageId": 91723,
-      "PageUrl": "https://starwars.fandom.com/wiki/Healing_Crystals_of_Fire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 237577,
   "PageUrl": "https://starwars.fandom.com/wiki/Valtaullu_Rift",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -21,7 +22,37 @@
       "Values": [
         "Unknown Regions"
       ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Unidentified reptoid species",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_reptoid_species"
+        }
+      ],
+      "Values": [
+        "Unidentified reptoid species"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Kanzer Exiles",
+          "Href": "https://starwars.fandom.com/wiki/Kanzer_Exiles"
+        }
+      ],
+      "Values": [
+        "Kanzer Exiles"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_reptoid_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "PageId": 593366,
   "PageUrl": "https://starwars.fandom.com/wiki/Lothal's_government",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/00/Spectres_mural_ceremony.jpg/revision/latest?cb=20230827054609",
   "Data": [
     {
       "Label": "Titles",
@@ -18,6 +19,18 @@
       ]
     },
     {
+      "Label": "Head of state",
+      "Links": [
+        {
+          "Content": "Governor of the Lothal sector",
+          "Href": "https://starwars.fandom.com/wiki/Governor_of_the_Lothal_sector"
+        }
+      ],
+      "Values": [
+        "Governor of the Lothal sector"
+      ]
+    },
+    {
       "Label": "Legislative branch",
       "Links": [
         {
@@ -30,15 +43,31 @@
       ]
     },
     {
-      "Label": "Planet",
+      "Label": "Capital",
       "Links": [
+        {
+          "Content": "Capital City",
+          "Href": "https://starwars.fandom.com/wiki/Capital_City"
+        },
         {
           "Content": "Lothal",
           "Href": "https://starwars.fandom.com/wiki/Lothal"
         }
       ],
       "Values": [
-        "Lothal"
+        "Capital City, Lothal"
+      ]
+    },
+    {
+      "Label": "Official language",
+      "Links": [
+        {
+          "Content": "Galactic Basic Standard",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Basic_Standard"
+        }
+      ],
+      "Values": [
+        "Galactic Basic Standard"
       ]
     },
     {
@@ -63,11 +92,16 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
         "Galactic Republic",
-        "Galactic Empire"
+        "Galactic Empire",
+        "New Republic"
       ]
     }
   ],

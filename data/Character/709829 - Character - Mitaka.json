@@ -19,12 +19,12 @@
           "Href": "https://starwars.fandom.com/wiki/19_BBY"
         },
         {
-          "Content": "5 ABY",
-          "Href": "https://starwars.fandom.com/wiki/5_ABY"
+          "Content": "3 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3_BBY"
         }
       ],
       "Values": [
-        "Between 19 BBY and 5 ABY"
+        "Between 19 BBY and 3 BBY"
       ]
     },
     {
@@ -76,9 +76,38 @@
       "Values": [
         "Fair"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
+        }
+      ],
+      "Values": [
+        "Jedi Order"
+      ]
+    },
+    {
+      "Label": "Apprentices",
+      "Links": [
+        {
+          "Content": "Tobi",
+          "Href": "https://starwars.fandom.com/wiki/Tobi"
+        }
+      ],
+      "Values": [
+        "Tobi"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 749520,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tobi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 709727,
       "PageUrl": "https://starwars.fandom.com/wiki/C03",

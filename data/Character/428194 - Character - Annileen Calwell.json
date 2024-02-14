@@ -2,6 +2,7 @@
   "PageId": 428194,
   "PageUrl": "https://starwars.fandom.com/wiki/Annileen_Calwell",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,6 +60,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -83,7 +91,59 @@
       "Values": [
         "Light"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Caelum Thaney",
+          "Href": "https://starwars.fandom.com/wiki/Caelum_Thaney"
+        },
+        {
+          "Content": "Nella Thaney",
+          "Href": "https://starwars.fandom.com/wiki/Nella_Thaney"
+        }
+      ],
+      "Values": [
+        "Caelum Thaney",
+        "Nella Thaney"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Dannar Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Dannar_Calwell"
+        }
+      ],
+      "Values": [
+        "Dannar Calwell"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Kallie Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Kallie_Calwell"
+        },
+        {
+          "Content": "Jabe Calwell",
+          "Href": "https://starwars.fandom.com/wiki/Jabe_Calwell"
+        }
+      ],
+      "Values": [
+        "Kallie Calwell",
+        "Jabe Calwell"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 428203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabe_Calwell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

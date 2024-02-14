@@ -2,6 +2,7 @@
   "PageId": 55589,
   "PageUrl": "https://starwars.fandom.com/wiki/O-Melie",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Kegan",
-          "Href": "https://starwars.fandom.com/wiki/Kegan"
+          "Href": "https://starwars.fandom.com/wiki/Kegan/Legends"
         }
       ],
       "Values": [
@@ -47,5 +48,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 34745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Olana_Chion/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

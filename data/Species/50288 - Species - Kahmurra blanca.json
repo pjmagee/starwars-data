@@ -2,7 +2,7 @@
   "PageId": 50288,
   "PageUrl": "https://starwars.fandom.com/wiki/Kahmurra_blanca",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0f/Murra_Blanca.jpg/revision/latest?cb=20060130040548",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6d/Kahmurra_blanca.jpg/revision/latest?cb=20220616181022",
   "Data": [
     {
       "Label": "Titles",
@@ -21,6 +21,18 @@
       ],
       "Values": [
         "Non-sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Mammal",
+          "Href": "https://starwars.fandom.com/wiki/Mammal/Legends"
+        }
+      ],
+      "Values": [
+        "Mammal"
       ]
     },
     {
@@ -54,12 +66,29 @@
       "Values": [
         "Talus"
       ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Herbivorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Herbivorous"
+      ]
     }
   ],
   "Relationships": [
     {
       "PageId": 33246,
       "PageUrl": "https://starwars.fandom.com/wiki/Murra/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 186920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kahmurra",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]

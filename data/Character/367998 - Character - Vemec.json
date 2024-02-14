@@ -2,6 +2,7 @@
   "PageId": 367998,
   "PageUrl": "https://starwars.fandom.com/wiki/Vemec",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,25 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Great House",
+          "Href": "https://starwars.fandom.com/wiki/Great_Houses_of_Serenno"
+        }
+      ],
+      "Values": [
+        "A Great House"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 785931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vemec's_servant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

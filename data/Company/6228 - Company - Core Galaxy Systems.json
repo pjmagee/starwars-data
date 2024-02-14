@@ -20,12 +20,17 @@
         }
       ],
       "Values": [
-        "Kuat Drive Yards (purchased)"
+        "Kuat Drive Yards (bought out)"
       ]
     },
     {
       "Label": "Primary role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Starship",
+          "Href": "https://starwars.fandom.com/wiki/Starship/Legends"
+        }
+      ],
       "Values": [
         "Starship manufacturer"
       ]
@@ -41,32 +46,46 @@
       "Values": [
         "Core Galaxy Systems Dreadnaught"
       ]
+    },
+    {
+      "Label": "Founding",
+      "Links": [
+        {
+          "Content": "20,000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/20,000_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "c. 20,000 BBY"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "500 BBY",
+          "Href": "https://starwars.fandom.com/wiki/500_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "c. 500 BBY"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 125025,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dynamic-class_freighter/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 109359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Davaab-type_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
     {
       "PageId": 556019,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Core_Galaxy_Systems_subsidiary",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 1305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 15630,
+      "PageUrl": "https://starwars.fandom.com/wiki/Transel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 68220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Core_Galaxy_Systems_Dreadnaught",
+      "PageId": 270315,
+      "PageUrl": "https://starwars.fandom.com/wiki/PTR-3_Vedette",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
@@ -75,8 +94,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 270315,
-      "PageUrl": "https://starwars.fandom.com/wiki/PTR-3_Vedette",
+      "PageId": 68220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Core_Galaxy_Systems_Dreadnaught",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 1305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ebon_Hawk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 125025,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dynamic-class_freighter/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 109359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Davaab-type_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]

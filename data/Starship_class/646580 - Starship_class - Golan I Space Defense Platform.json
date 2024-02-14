@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Line",
+      "Links": [
+        {
+          "Content": "Golan defense station",
+          "Href": "https://starwars.fandom.com/wiki/Golan_defense_station"
+        }
+      ],
+      "Values": [
+        "Golan defense station"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -31,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -118,8 +130,8 @@
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
         },
         {
-          "Content": "Patrol boats",
-          "Href": "https://starwars.fandom.com/wiki/Patrol_boat"
+          "Content": "Patrol ships",
+          "Href": "https://starwars.fandom.com/wiki/Patrol_ship"
         },
         {
           "Content": "Shuttles",
@@ -128,7 +140,7 @@
       ],
       "Values": [
         "TIE line starfighters (24)",
-        "Patrol boats (4)",
+        "Patrol ships (4)",
         "Shuttles (4)"
       ]
     },
@@ -214,6 +226,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 776762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Golan_defense_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
     {
       "PageId": 504973,
       "PageUrl": "https://starwars.fandom.com/wiki/Golan_Arms",

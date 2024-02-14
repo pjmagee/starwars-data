@@ -47,7 +47,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "H-7"
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Loose shale"
@@ -74,13 +74,18 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "valley",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_valley/Legends"
+        }
+      ],
       "Values": [
-        "Unidentified enclosed valley"
+        "A valley"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -130,9 +135,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 400343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expedition_to_Outbound_Flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 742183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_valley/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 89055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight_Colony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
       "PageId": 11247,
       "PageUrl": "https://starwars.fandom.com/wiki/The_Redoubt/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 39650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

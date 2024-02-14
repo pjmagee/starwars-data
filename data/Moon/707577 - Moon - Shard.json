@@ -39,7 +39,12 @@
     },
     {
       "Label": "Point(s) of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Shard Imperial base",
+          "Href": "https://starwars.fandom.com/wiki/Shard_Imperial_base"
+        }
+      ],
       "Values": [
         "Shard Imperial base"
       ]
@@ -57,5 +62,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 743921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Shard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 748396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fila",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748398,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shard_Imperial_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

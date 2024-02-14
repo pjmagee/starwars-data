@@ -67,6 +67,23 @@
       ]
     },
     {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain"
+        },
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        }
+      ],
+      "Values": [
+        "Mountains",
+        "Forests"
+      ]
+    },
+    {
       "Label": "Surface water",
       "Links": [
         {
@@ -79,19 +96,38 @@
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Points of interest",
       "Links": [
         {
-          "Content": "The Magys species",
-          "Href": "https://starwars.fandom.com/wiki/The_Magys_species"
+          "Content": "Sunrise mining compound",
+          "Href": "https://starwars.fandom.com/wiki/Sunrise_mining_compound"
         }
       ],
       "Values": [
-        "The Magys species"
+        "Sunrise mining compound"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Fauna",
+      "Links": [],
+      "Values": [
+        "Several predators"
+      ]
+    },
+    {
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "The Magys's people",
+          "Href": "https://starwars.fandom.com/wiki/The_Magys%27s_people"
+        }
+      ],
+      "Values": [
+        "The Magys's people"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Agbui",
@@ -99,23 +135,56 @@
         }
       ],
       "Values": [
-        "Agbui"
+        "Agbui (Temporarily)"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [],
+      "Values": [
+        "Sunrise government"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Grysk Hegemony",
-          "Href": "https://starwars.fandom.com/wiki/Grysk_Hegemony"
+          "Content": "Grysks",
+          "Href": "https://starwars.fandom.com/wiki/Grysk"
+        },
+        {
+          "Content": "Agbui",
+          "Href": "https://starwars.fandom.com/wiki/Agbui"
+        },
+        {
+          "Content": "Chiss Ascendancy",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy"
         }
       ],
       "Values": [
-        "Grysk Hegemony"
+        "The Magys's people",
+        "Grysks",
+        "Agbui",
+        "Chiss Ascendancy"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 774102,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise_mining_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 696178,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise's_civil_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 728737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grysk_explosive_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
     {
       "PageId": 701287,
       "PageUrl": "https://starwars.fandom.com/wiki/Nyix_brooch",
@@ -127,9 +196,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 728737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grysk_explosive_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+      "PageId": 691675,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nyix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 735617,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys's_companion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 726609,
@@ -138,23 +212,18 @@
     },
     {
       "PageId": 726612,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_Grysk_slavers",
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_against_the_Grysk",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 691649,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 691875,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys's_people",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 691675,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nyix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 696178,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise's_civil_war",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 714029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 699935,
@@ -167,14 +236,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 691875,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys's_people",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 691649,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 714029,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sunrise_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 737587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grysk_occupation_of_Sunrise",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

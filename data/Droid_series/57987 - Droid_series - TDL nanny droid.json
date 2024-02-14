@@ -2,7 +2,7 @@
   "PageId": 57987,
   "PageUrl": "https://starwars.fandom.com/wiki/TDL_nanny_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/57/TDL_Nanny_Droid.jpg/revision/latest?cb=20060705121617",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0e/TDLNannyDroid-FF94.png/revision/latest?cb=20231008033614",
   "Data": [
     {
       "Label": "Titles",
@@ -72,14 +72,24 @@
         {
           "Content": "AA-1 VerboBrain",
           "Href": "https://starwars.fandom.com/wiki/AA-1_VerboBrain/Legends"
+        },
+        {
+          "Content": "liter",
+          "Href": "https://starwars.fandom.com/wiki/Liter/Legends"
         }
       ],
       "Values": [
-        "AA-1 VerboBrain"
+        "AA-1 VerboBrain",
+        "Internal 2 liter liquid reservoir for feeding"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 15873,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
     {
       "PageId": 24194,
       "PageUrl": "https://starwars.fandom.com/wiki/AccuTronics/Legends",
@@ -88,11 +98,6 @@
     {
       "PageId": 73782,
       "PageUrl": "https://starwars.fandom.com/wiki/TDL-3.5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 15873,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nanna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     }
   ]

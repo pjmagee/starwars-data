@@ -2,6 +2,7 @@
   "PageId": 227203,
   "PageUrl": "https://starwars.fandom.com/wiki/Gibbit_bird",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Avian",
-          "Href": "https://starwars.fandom.com/wiki/Avian"
+          "Href": "https://starwars.fandom.com/wiki/Bird"
         }
       ],
       "Values": [
@@ -54,5 +55,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 513159,
   "PageUrl": "https://starwars.fandom.com/wiki/R4_astromech_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0d/R4astromech-JFO.png/revision/latest?cb=20200201031712",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0d/R4astromech-JFO.png/revision/latest?cb=20220921045658",
   "Data": [
     {
       "Label": "Titles",
@@ -59,12 +59,24 @@
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
         {
+          "Content": "Sith",
+          "Href": "https://starwars.fandom.com/wiki/Sith"
+        },
+        {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "Fett gotra",
+          "Href": "https://starwars.fandom.com/wiki/Fett_gotra"
+        },
+        {
+          "Content": "Plazir-15 government",
+          "Href": "https://starwars.fandom.com/wiki/Plazir-15%27s_government"
         },
         {
           "Content": "Resistance",
@@ -74,42 +86,45 @@
       "Values": [
         "Galactic Republic",
         "Jedi Order",
+        "Sith",
         "Galactic Empire",
         "New Republic",
+        "Fett gotra",
+        "Plazir-15 government",
         "Resistance"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 625975,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-I9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 631180,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-P_Astromech",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    },
+    {
       "PageId": 607523,
       "PageUrl": "https://starwars.fandom.com/wiki/R4-D6",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 483041,
-      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 481890,
-      "PageUrl": "https://starwars.fandom.com/wiki/264",
+      "PageId": 612871,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-D12",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 495898,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4_courier_droid",
+      "PageId": 785335,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-6D0",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 495954,
-      "PageUrl": "https://starwars.fandom.com/wiki/M5-BZ",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 712379,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4-MS",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 503890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 545235,
@@ -122,29 +137,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 612871,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4-D12",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 625975,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4-I9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 564433,
-      "PageUrl": "https://starwars.fandom.com/wiki/D4-R4B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 567021,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4-P44",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 503890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Negotiator",
+      "PageId": 363938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Restoration",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 712379,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-MS",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 718714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_R4_server_droid_(Boba_Fett's_Palace)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 583366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invincible_Faith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 481890,
+      "PageUrl": "https://starwars.fandom.com/wiki/264",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 495954,
+      "PageUrl": "https://starwars.fandom.com/wiki/M5-BZ",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
       "PageId": 575802,
@@ -155,11 +175,6 @@
       "PageId": 577841,
       "PageUrl": "https://starwars.fandom.com/wiki/R4-X2",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 631180,
-      "PageUrl": "https://starwars.fandom.com/wiki/R4-P_Astromech",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     },
     {
       "PageId": 582250,
@@ -175,6 +190,31 @@
       "PageId": 652022,
       "PageUrl": "https://starwars.fandom.com/wiki/Tribunal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 564433,
+      "PageUrl": "https://starwars.fandom.com/wiki/D4-R4B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 567021,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4-P44",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 483041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Industrial_Automaton",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 554779,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 495898,
+      "PageUrl": "https://starwars.fandom.com/wiki/R4_courier_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
     }
   ]
 }

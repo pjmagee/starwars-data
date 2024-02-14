@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-5"
@@ -99,7 +99,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -146,6 +146,10 @@
     {
       "Label": "Fauna",
       "Links": [
+        {
+          "Content": "Arboreal octopus",
+          "Href": "https://starwars.fandom.com/wiki/Arboreal_octopus/Legends"
+        },
         {
           "Content": "Bark rat",
           "Href": "https://starwars.fandom.com/wiki/Bark_rat/Legends"
@@ -215,49 +219,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 434175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chol_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 1588,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nexu/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 585182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reevo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 356556,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Cholganna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 434186,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_green_bug",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 385676,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cholganna_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 584920,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route-Cholganna_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 432514,
-      "PageUrl": "https://starwars.fandom.com/wiki/Camp_Danger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 434177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cholganna_system's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
       "PageId": 113326,
@@ -270,6 +234,31 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
+      "PageId": 1588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nexu/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 432514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Camp_Danger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 584920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route-Cholganna_hyperlane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 585182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reevo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 585175,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Retreat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
       "PageId": 585177,
       "PageUrl": "https://starwars.fandom.com/wiki/Tethyrr_River_Valley",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -280,9 +269,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 585175,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Retreat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 356556,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Cholganna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 434177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cholganna_system's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 385676,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cholganna_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 434175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chol_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
     }
   ]
 }

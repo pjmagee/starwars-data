@@ -24,14 +24,38 @@
       ]
     },
     {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Bat",
+          "Href": "https://starwars.fandom.com/wiki/Bat/Legends"
+        }
+      ],
+      "Values": [
+        "Bat"
+      ]
+    },
+    {
+      "Label": "Subspecies",
+      "Links": [],
+      "Values": [
+        "Gackle stalker"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
+        {
+          "Content": "Devaron",
+          "Href": "https://starwars.fandom.com/wiki/Devaron/Legends"
+        },
         {
           "Content": "Yavin 4",
           "Href": "https://starwars.fandom.com/wiki/Yavin_4/Legends"
         }
       ],
       "Values": [
+        "Devaron",
         "Yavin 4"
       ]
     },
@@ -50,6 +74,21 @@
   ],
   "Relationships": [
     {
+      "PageId": 739939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vin'Rith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yavin_4/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 2020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devaron/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 257728,
       "PageUrl": "https://starwars.fandom.com/wiki/Yunteh_Mountains",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
@@ -63,16 +102,6 @@
       "PageId": 257731,
       "PageUrl": "https://starwars.fandom.com/wiki/Val'Arnos_Jungle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 2020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Devaron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yavin_4/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

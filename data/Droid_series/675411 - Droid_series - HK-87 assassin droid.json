@@ -2,13 +2,25 @@
   "PageId": 675411,
   "PageUrl": "https://starwars.fandom.com/wiki/HK-87_assassin_droid",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/58/HK87-TMCh13.png/revision/latest?cb=20201128174544",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d0/Hk-87_droid_leader_part_1_full_body.png/revision/latest?cb=20240201085925",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "HK-87 assassin droid"
+      ]
+    },
+    {
+      "Label": "Model",
+      "Links": [
+        {
+          "Content": "HK-model gladiator droid",
+          "Href": "https://starwars.fandom.com/wiki/HK-model_gladiator_droid"
+        }
+      ],
+      "Values": [
+        "HK-model gladiator droid"
       ]
     },
     {
@@ -36,23 +48,50 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Armament",
       "Links": [
         {
-          "Content": "Morgan Elsbeth's army",
-          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_army"
+          "Content": "E-5 blaster rifle",
+          "Href": "https://starwars.fandom.com/wiki/E-5_blaster_rifle"
+        },
+        {
+          "Content": "Electrostaff",
+          "Href": "https://starwars.fandom.com/wiki/Electrostaff"
         }
       ],
       "Values": [
-        "Morgan Elsbeth's army"
+        "E-5 blaster rifle",
+        "Electrostaff"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Imperial Remnants",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Remnants"
+        },
+        {
+          "Content": "Morgan Elsbeth's forces",
+          "Href": "https://starwars.fandom.com/wiki/Morgan_Elsbeth%27s_forces"
+        }
+      ],
+      "Values": [
+        "Imperial Remnants",
+        "Morgan Elsbeth's forces"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 675510,
-      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 783266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_HK-87_assassin_droid_leader",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 780355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth's_starship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

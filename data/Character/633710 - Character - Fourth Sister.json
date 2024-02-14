@@ -2,13 +2,25 @@
   "PageId": 633710,
   "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Sister",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/74/FourthSister-OWK.png/revision/latest?cb=20220504202331",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/aa/RyaKihlstedtasFourthSister-ImperialForcesSignature.png/revision/latest?cb=20231120051534",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Fourth Sister"
+      ]
+    },
+    {
+      "Label": "Species",
+      "Links": [
+        {
+          "Content": "Humanoid",
+          "Href": "https://starwars.fandom.com/wiki/Humanoid"
+        }
+      ],
+      "Values": [
+        "Humanoid"
       ]
     },
     {
@@ -24,7 +36,30 @@
       ]
     },
     {
-      "Label": "Skin color",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.68 meters (5 ft, 6 in)"
+      ]
+    },
+    {
+      "Label": "Eye color",
       "Links": [
         {
           "Content": "Yellow",
@@ -33,6 +68,13 @@
       ],
       "Values": [
         "Yellow"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Yellow (with burgundy tattoos)"
       ]
     },
     {
@@ -56,7 +98,35 @@
         "Galactic Empire",
         "Inquisitorius"
       ]
+    },
+    {
+      "Label": "Masters",
+      "Links": [
+        {
+          "Content": "Darth Sidious",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Sidious"
+        },
+        {
+          "Content": "Darth Vader",
+          "Href": "https://starwars.fandom.com/wiki/Anakin_Skywalker"
+        }
+      ],
+      "Values": [
+        "Darth Sidious",
+        "Darth Vader"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 452390,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 731005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fourth_Sister's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

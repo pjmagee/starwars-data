@@ -83,6 +83,10 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Bamayar"
         },
         {
+          "Content": "Battle of Ord Tiddell",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Tiddell"
+        },
+        {
           "Content": "Attack on Haidoral Prime",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_Haidoral_Prime"
         },
@@ -96,7 +100,7 @@
         },
         {
           "Content": "Mission to Bestine IV",
-          "Href": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV"
+          "Href": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV_(Twenty-First)"
         },
         {
           "Content": "Battle in the Metatessu sector",
@@ -117,8 +121,8 @@
       ],
       "Values": [
         "Battle on Phorsa Gedd",
-        "Battle of Ord Tiddell",
         "Battle of Bamayar",
+        "Battle of Ord Tiddell",
         "Attack on Haidoral Prime",
         "Battle in the Kontahr sector",
         "Coyerti campaign",
@@ -131,6 +135,26 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 590044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Enrivi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 553998,
+      "PageUrl": "https://starwars.fandom.com/wiki/3_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 554080,
+      "PageUrl": "https://starwars.fandom.com/wiki/2_ABY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 778661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Tiddell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 554302,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Phorsa_Gedd",
@@ -147,54 +171,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 452818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
       "PageId": 508489,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Haidoral_Prime",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 590044,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Enrivi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 606186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saurin_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 650229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 525702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Twenty-First",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 525705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bitter_Pill_Company",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 548299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Apailana's_Promise",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 525700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coyerti_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 501866,
-      "PageUrl": "https://starwars.fandom.com/wiki/61st_Mobile_Infantry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 653117,
@@ -207,14 +186,49 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 525702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twenty-First",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 525705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bitter_Pill_Company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 501866,
+      "PageUrl": "https://starwars.fandom.com/wiki/61st_Mobile_Infantry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 606186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saurin_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 548299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Apailana's_Promise",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 650229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bestine_IV_(Twenty-First)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 452818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
       "PageId": 610940,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bamayar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 553998,
-      "PageUrl": "https://starwars.fandom.com/wiki/3_ABY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+      "PageId": 525700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coyerti_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

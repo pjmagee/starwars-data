@@ -20,7 +20,7 @@
         }
       ],
       "Values": [
-        "90 BBY"
+        "90 BBY (partially)"
       ]
     },
     {
@@ -48,13 +48,23 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Planetary Council",
+          "Href": "https://starwars.fandom.com/wiki/Council_(Serenno)"
+        }
+      ],
       "Values": [
         "Planetary Council"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 754910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Council_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 622225,
       "PageUrl": "https://starwars.fandom.com/wiki/Carannia",

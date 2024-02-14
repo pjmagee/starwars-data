@@ -17,10 +17,20 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Lesser Plooriod Cluster",
+          "Href": "https://starwars.fandom.com/wiki/Lesser_Plooriod_Cluster/Legends"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Lesser Plooriod Cluster",
+        "New Territories"
       ]
     },
     {
@@ -74,10 +84,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-6"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Celanon Spur",
+          "Href": "https://starwars.fandom.com/wiki/Celanon_Spur/Legends"
+        }
+      ],
+      "Values": [
+        "Celanon Spur"
       ]
     },
     {
@@ -86,18 +108,47 @@
       "Values": [
         "Terrestrial"
       ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Ursmal",
+          "Href": "https://starwars.fandom.com/wiki/Ursmal"
+        }
+      ],
+      "Values": [
+        "Ursmal"
+      ]
+    },
+    {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Ottegan mead",
+          "Href": "https://starwars.fandom.com/wiki/Ottegan_mead"
+        }
+      ],
+      "Values": [
+        "Ottegan mead"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 7298,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 17180,
       "PageUrl": "https://starwars.fandom.com/wiki/Ottega_(star)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
     },
     {
-      "PageId": 7298,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ottega_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 166341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ottegan_mead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     }
   ]
 }

@@ -77,9 +77,21 @@
     },
     {
       "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Dark brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Dark"
+        "Fair"
       ]
     },
     {
@@ -88,10 +100,15 @@
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Wraith Squadron",
+          "Href": "https://starwars.fandom.com/wiki/Wraith_Squadron"
         }
       ],
       "Values": [
-        "New Republic"
+        "New Republic",
+        "Wraith Squadron"
       ]
     }
   ],

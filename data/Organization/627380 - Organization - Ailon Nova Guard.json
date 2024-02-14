@@ -2,6 +2,7 @@
   "PageId": 627380,
   "PageUrl": "https://starwars.fandom.com/wiki/Ailon_Nova_Guard",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -23,6 +24,18 @@
       ]
     },
     {
+      "Label": "Date founded",
+      "Links": [
+        {
+          "Content": "Clone Wars",
+          "Href": "https://starwars.fandom.com/wiki/Clone_Wars"
+        }
+      ],
+      "Values": [
+        "Eons prior to the Clone Wars"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -31,9 +44,15 @@
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Galactic Republic (hired)"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 780050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eklot_sword",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    }
+  ]
 }

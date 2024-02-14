@@ -27,12 +27,16 @@
       "Label": "Species",
       "Links": [
         {
-          "Content": "Prod's species",
-          "Href": "https://starwars.fandom.com/wiki/Prod%27s_species"
+          "Content": "alien",
+          "Href": "https://starwars.fandom.com/wiki/Alien/Legends"
+        },
+        {
+          "Content": "species",
+          "Href": "https://starwars.fandom.com/wiki/Species/Legends"
         }
       ],
       "Values": [
-        "Prod's species"
+        "An alien species"
       ]
     },
     {
@@ -63,5 +67,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 408755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Special_Loathsome_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

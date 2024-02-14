@@ -2,7 +2,7 @@
   "PageId": 620153,
   "PageUrl": "https://starwars.fandom.com/wiki/Mantero",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d0/Mantero_Clone_Wars.png/revision/latest?cb=20230309100103",
   "Data": [
     {
       "Label": "Titles",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-5",
@@ -88,24 +88,41 @@
         {
           "Content": "Serenno Mausoleum",
           "Href": "https://starwars.fandom.com/wiki/Serenno_Mausoleum"
+        },
+        {
+          "Content": "Demici Memorial",
+          "Href": "https://starwars.fandom.com/wiki/Demici_Memorial"
         }
       ],
       "Values": [
         "Mantero Cemetery Spaceport",
-        "Serenno Mausoleum"
+        "Serenno Mausoleum",
+        "Demici Memorial"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "House Serenno",
+          "Href": "https://starwars.fandom.com/wiki/House_Serenno"
+        }
+      ],
+      "Values": [
+        "House Serenno"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 725296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Serenno's_funeral_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 713767,
       "PageUrl": "https://starwars.fandom.com/wiki/Demici_Memorial",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 785922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seven_gods",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
     },
     {
       "PageId": 632408,
@@ -118,9 +135,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 622224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 754314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 622282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Countess_Anya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 469808,
@@ -128,9 +150,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 622282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Countess_Anya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 725296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Serenno's_funeral_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 622224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "PageId": 358605,
   "PageUrl": "https://starwars.fandom.com/wiki/Ranquiv",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,43 +15,68 @@
       "Label": "Species",
       "Links": [
         {
-          "Content": "Nuso Esva's species",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_species"
+          "Content": "Storm-hair",
+          "Href": "https://starwars.fandom.com/wiki/Storm-hair"
         }
       ],
       "Values": [
-        "Nuso Esva's species"
+        "Storm-hair"
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Eye color",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
+          "Content": "Yellow",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
-        "Male"
+        "Yellow"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Multicolored"
       ]
     },
     {
       "Label": "Affiliation(s)",
       "Links": [
         {
-          "Content": "Nuso Esva's navy",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_navy"
+          "Content": "Nuso Esva's realm",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_realm"
         },
         {
-          "Content": "Chosen",
-          "Href": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)"
+          "Content": "Poln Minor Chosen squadron",
+          "Href": "https://starwars.fandom.com/wiki/Poln_Minor_Chosen_squadron"
         }
       ],
       "Values": [
-        "Nuso Esva's navy",
-        "Chosen"
+        "Nuso Esva's realm",
+        "Poln Minor Chosen squadron"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 356948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 753804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poln_Minor_Chosen_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

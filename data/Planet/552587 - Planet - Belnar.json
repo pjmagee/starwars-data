@@ -2,7 +2,7 @@
   "PageId": 552587,
   "PageUrl": "https://starwars.fandom.com/wiki/Belnar",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/BelnarYabol.png/revision/latest?cb=20210514133240",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/24/Belnar-TFABG.jpg/revision/latest?cb=20230512082744",
   "Data": [
     {
       "Label": "Titles",
@@ -17,14 +17,19 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies"
+        },
+        {
+          "Content": "The Interior",
+          "Href": "https://starwars.fandom.com/wiki/The_Interior"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Interior"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "M-9",
@@ -38,14 +43,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 554300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Belnar_Insurrections",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
       "PageId": 498762,
       "PageUrl": "https://starwars.fandom.com/wiki/Colonies",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 554300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Belnar_Insurrections",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

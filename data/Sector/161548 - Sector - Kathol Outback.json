@@ -20,7 +20,7 @@
         },
         {
           "Content": "Kathol sector",
-          "Href": "https://starwars.fandom.com/wiki/Kathol_sector"
+          "Href": "https://starwars.fandom.com/wiki/Kathol_sector/Legends"
         }
       ],
       "Values": [
@@ -116,6 +116,18 @@
       ]
     },
     {
+      "Label": "Other objects",
+      "Links": [
+        {
+          "Content": "Marcol Void",
+          "Href": "https://starwars.fandom.com/wiki/Marcol_Void"
+        }
+      ],
+      "Values": [
+        "Marcol Void"
+      ]
+    },
+    {
       "Label": "Native species",
       "Links": [
         {
@@ -175,19 +187,19 @@
       "Label": "Galactic Civil War",
       "Links": [
         {
-          "Content": "DarkStryder Campaign",
-          "Href": "https://starwars.fandom.com/wiki/DarkStryder_Campaign"
-        },
-        {
           "Content": "Binaros (I)",
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Binaros"
         },
         {
-          "Content": "Binaros (II)",
+          "Content": "(II)",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_near_Binaros"
         },
         {
-          "Content": "Episol",
+          "Content": "(III)",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Binaros"
+        },
+        {
+          "Content": "Episol system",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Episol"
         },
         {
@@ -203,7 +215,7 @@
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Uukaablis"
         },
         {
-          "Content": "Qu'mock",
+          "Content": "Qu'mock system",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Qu%27mock"
         },
         {
@@ -215,20 +227,21 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Danoor"
         },
         {
-          "Content": "Hunt for Jorj Car'das",
-          "Href": "https://starwars.fandom.com/wiki/Hunt_for_Jorj_Car%27das"
-        },
-        {
           "Content": "Exocron (II)",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Exocron"
         }
       ],
       "Values": [
-        "DarkStryder Campaign (Binaros (I) - Binaros (II) - Episol - Dayark - Pitann - Uukaablis - Qu'mock - Exocron (I) - Danoor) - Hunt for Jorj Car'das (Exocron (II))"
+        "Binaros (I) (II) (III) - Episol system - Dayark - Pitann - Uukaablis - Qu'mock system - Exocron (I) - Danoor - Exocron (II)"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 271925,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galtea_Binary_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 68399,
       "PageUrl": "https://starwars.fandom.com/wiki/Binaros_system",
@@ -240,9 +253,119 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 166154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marcol_Void",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 116579,
+      "PageUrl": "https://starwars.fandom.com/wiki/Timbra_Ott",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 18737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Episol_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 18746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ehjenla_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 20594,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bresan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 20596,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dolstan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 20597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swedlan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 20617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binaros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 199590,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qektoth_Confederation_Space_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 13780,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dayark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 17476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exocron_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 80827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jangelle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kathol_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 13779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ehjenla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exocron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Danoor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uukaablis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 13795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pitann",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 19527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nepe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 17631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uukaablis_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 146157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shatuun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 22232,
       "PageUrl": "https://starwars.fandom.com/wiki/Sapella",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 65005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swedlan_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 137964,
@@ -283,121 +406,6 @@
       "PageId": 146153,
       "PageUrl": "https://starwars.fandom.com/wiki/Dolstan_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 20594,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bresan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 20596,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dolstan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 20597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Swedlan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 20617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Binaros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 146157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shatuun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 19527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nepe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 166154,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marcol_Void",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 80827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jangelle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 865,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kathol_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 65005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Swedlan_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13779,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ehjenla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exocron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Danoor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uukaablis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 13795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pitann",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 199590,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qektoth_Confederation_Space_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 271925,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galtea_Binary_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 18737,
-      "PageUrl": "https://starwars.fandom.com/wiki/Episol_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 18746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ehjenla_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 13780,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dayark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 17631,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uukaablis_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 17476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Exocron_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 116579,
-      "PageUrl": "https://starwars.fandom.com/wiki/Timbra_Ott",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

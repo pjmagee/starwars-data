@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Sienar Fleet Systems",
-          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems/Legends"
-        }
-      ],
-      "Values": [
-        "Sienar Fleet Systems"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -38,6 +26,18 @@
       "Values": [
         "Darth Vader",
         "Raith Sienar"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Sienar Fleet Systems",
+          "Href": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems/Legends"
+        }
+      ],
+      "Values": [
+        "Sienar Fleet Systems"
       ]
     },
     {
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -263,18 +263,38 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Starfighter Corps",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter_Corps_(Galactic_Empire)"
+        },
+        {
+          "Content": "Order of the Sith Lords",
+          "Href": "https://starwars.fandom.com/wiki/Order_of_the_Sith_Lords"
+        },
+        {
+          "Content": "Belt-Runner I",
+          "Href": "https://starwars.fandom.com/wiki/Belt-Runner_I"
+        },
+        {
+          "Content": "New Jedi Order",
+          "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Starfighter Corps",
+        "Order of the Sith Lords",
+        "Belt-Runner I",
+        "New Jedi Order"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 41103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pursuit-class_light_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 84275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Storm_Squadron_(Imperial)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 340967,
@@ -282,13 +302,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 113378,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced_x1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 41103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pursuit-class_light_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 435574,
       "PageUrl": "https://starwars.fandom.com/wiki/Enforcement_(Pursuit-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 113378,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Vader's_TIE_Advanced_x1",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

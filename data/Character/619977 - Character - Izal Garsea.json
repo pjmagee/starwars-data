@@ -36,7 +36,7 @@
         }
       ],
       "Values": [
-        "c. 16 ABY, Meridian"
+        "16 ABY, Meridian"
       ]
     },
     {
@@ -90,15 +90,40 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Garsea family",
+          "Href": "https://starwars.fandom.com/wiki/Garsea_family"
+        }
+      ],
+      "Values": [
+        "Garsea family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Ixel Garsea",
+          "Href": "https://starwars.fandom.com/wiki/Ixel_Garsea"
+        },
+        {
+          "Content": "Izal Garsea's father",
+          "Href": "https://starwars.fandom.com/wiki/Izal_Garsea%27s_father"
+        }
+      ],
+      "Values": [
+        "Ixel Garsea",
+        "Izal Garsea's father"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
           "Content": "Ana Tolla's crew",
           "Href": "https://starwars.fandom.com/wiki/Ana_Tolla%27s_crew"
-        },
-        {
-          "Content": "Garsea family",
-          "Href": "https://starwars.fandom.com/wiki/Garsea_family"
         },
         {
           "Content": "Ohnaka Transport Solutions",
@@ -107,21 +132,20 @@
       ],
       "Values": [
         "Ana Tolla's crew",
-        "Garsea family",
         "Ohnaka Transport Solutions"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 628496,
-      "PageUrl": "https://starwars.fandom.com/wiki/Meridian_(light_freighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 630182,
       "PageUrl": "https://starwars.fandom.com/wiki/16_ABY",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 628496,
+      "PageUrl": "https://starwars.fandom.com/wiki/Meridian_(light_freighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

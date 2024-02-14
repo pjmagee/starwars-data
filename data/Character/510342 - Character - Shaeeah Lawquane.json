@@ -68,6 +68,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -99,11 +106,11 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Blue (with light patches)"
+        "Blue (with patches)"
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Lawquanes",
@@ -113,7 +120,52 @@
       "Values": [
         "Lawquanes"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Suu Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Suu_Lawquane"
+        },
+        {
+          "Content": "Cut Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Cut_Lawquane"
+        }
+      ],
+      "Values": [
+        "Suu Lawquane",
+        "Cut Lawquane (stepfather)"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jek Lawquane",
+          "Href": "https://starwars.fandom.com/wiki/Jek_Lawquane"
+        }
+      ],
+      "Values": [
+        "Jek Lawquane"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 480179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cut_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suu_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jek_Lawquane",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

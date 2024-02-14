@@ -2,6 +2,7 @@
   "PageId": 661661,
   "PageUrl": "https://starwars.fandom.com/wiki/Fyr_assault_carbine",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -12,7 +13,12 @@
     },
     {
       "Label": "Manufacturer",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Glunok",
+          "Href": "https://starwars.fandom.com/wiki/Glunok"
+        }
+      ],
       "Values": [
         "Glunok"
       ]
@@ -44,5 +50,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 604508,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galladinium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 776478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glunok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 776479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Loose_Cannon_Arms",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

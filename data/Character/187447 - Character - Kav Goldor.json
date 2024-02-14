@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Tatooine",
-          "Href": "https://starwars.fandom.com/wiki/Tatooine/Legends"
-        }
-      ],
-      "Values": [
-        "Tatooine"
-      ]
-    },
-    {
       "Label": "Species",
       "Links": [
         {
@@ -70,18 +58,37 @@
       "Values": [
         "Amber"
       ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Fair"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Mos Espa Militia",
+          "Href": "https://starwars.fandom.com/wiki/Mos_Espa_Militia"
+        }
+      ],
+      "Values": [
+        "Mos Espa Militia"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 385521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Militia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
       "PageId": 720380,
       "PageUrl": "https://starwars.fandom.com/wiki/Bounty_Hunter_Armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 385521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Militia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

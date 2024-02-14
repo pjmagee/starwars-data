@@ -51,6 +51,10 @@
       "Label": "Outcome",
       "Links": [
         {
+          "Content": "Jedi",
+          "Href": "https://starwars.fandom.com/wiki/Jedi"
+        },
+        {
           "Content": "Sith",
           "Href": "https://starwars.fandom.com/wiki/Sith"
         },
@@ -63,18 +67,33 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "Sith Wars",
+          "Href": "https://starwars.fandom.com/wiki/Sith_Wars"
+        },
+        {
           "Content": "Darth Bane",
           "Href": "https://starwars.fandom.com/wiki/Darth_Bane"
+        },
+        {
+          "Content": "Rule of Two",
+          "Href": "https://starwars.fandom.com/wiki/Rule_of_Two"
         }
       ],
       "Values": [
-        "Defeat of the Sith",
+        "Jedi victory",
+        "The Sith are defeated and driven into hiding",
         "A new era for the Galactic Republic begins",
-        "Darth Bane escapes"
+        "End of the Jedi-Sith War and the Sith Wars",
+        "Darth Bane escapes and reforms the Sith Order into the Rule of Two"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 452601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
     {
       "PageId": 553611,
       "PageUrl": "https://starwars.fandom.com/wiki/Jedi-Sith_War",

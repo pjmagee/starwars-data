@@ -64,15 +64,17 @@
       ]
     },
     {
-      "Label": "Hair color",
-      "Links": [
-        {
-          "Content": "Golden Red",
-          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
-        }
-      ],
+      "Label": "Pronouns",
+      "Links": [],
       "Values": [
-        "Golden Red"
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [],
+      "Values": [
+        "Copper red"
       ]
     },
     {
@@ -87,6 +89,47 @@
       "Links": [],
       "Values": [
         "Fair"
+      ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Djo family",
+          "Href": "https://starwars.fandom.com/wiki/Djo_family"
+        }
+      ],
+      "Values": [
+        "Djo family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Teneniel Djo",
+          "Href": "https://starwars.fandom.com/wiki/Teneniel_Djo"
+        },
+        {
+          "Content": "Isolder",
+          "Href": "https://starwars.fandom.com/wiki/Isolder"
+        }
+      ],
+      "Values": [
+        "Teneniel Djo",
+        "Isolder"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Allana Djo Solo",
+          "Href": "https://starwars.fandom.com/wiki/Allana_Djo_Solo"
+        }
+      ],
+      "Values": [
+        "Allana Djo Solo"
       ]
     },
     {
@@ -117,10 +160,6 @@
           "Href": "https://starwars.fandom.com/wiki/Hapan_Royal_House"
         },
         {
-          "Content": "Djo family",
-          "Href": "https://starwars.fandom.com/wiki/Djo_family"
-        },
-        {
           "Content": "Solo family",
           "Href": "https://starwars.fandom.com/wiki/House_of_Solo"
         }
@@ -132,61 +171,25 @@
         "Galactic Federation of Free Alliances",
         "Jedi Coalition",
         "Hapan Royal House",
-        "Djo family",
         "Solo family"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 373183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Jagged_Fel_and_Jaina_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 239233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thunder_Wraith",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 9163,
       "PageUrl": "https://starwars.fandom.com/wiki/Off_Chance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 53466,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rock_Dragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 6179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teneniel_Djo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 169847,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Mara_Jade_Skywalker",
+      "PageId": 373183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Jagged_Fel_and_Jaina_Solo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 237964,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Solo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 288554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Knightings_on_Dac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 119014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 86036,
-      "PageUrl": "https://starwars.fandom.com/wiki/DD-11A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 399337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tenel_Ka_Djo's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 418559,
@@ -199,6 +202,21 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
+      "PageId": 86036,
+      "PageUrl": "https://starwars.fandom.com/wiki/DD-11A",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 53466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rock_Dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 169847,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Mara_Jade_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
       "PageId": 373199,
       "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen_II",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
@@ -207,6 +225,31 @@
       "PageId": 69550,
       "PageUrl": "https://starwars.fandom.com/wiki/Big_Eye",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 119014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 399337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tenel_Ka_Djo's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 38875,
+      "PageUrl": "https://starwars.fandom.com/wiki/Allana_Djo_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 237964,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 288554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knightings_on_Dac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
       "PageId": 344549,

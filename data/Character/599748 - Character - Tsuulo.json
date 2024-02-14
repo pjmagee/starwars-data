@@ -2,6 +2,7 @@
   "PageId": 599748,
   "PageUrl": "https://starwars.fandom.com/wiki/Tsuulo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -30,12 +31,12 @@
           "Href": "https://starwars.fandom.com/wiki/13_BBY"
         },
         {
-          "Content": "Corellia",
-          "Href": "https://starwars.fandom.com/wiki/Corellia"
+          "Content": "Corellia system",
+          "Href": "https://starwars.fandom.com/wiki/Corellia_system"
         }
       ],
       "Values": [
-        "13 BBY, Corellia"
+        "13 BBY, Corellia system"
       ]
     },
     {
@@ -75,6 +76,35 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Tsuulo's father",
+          "Href": "https://starwars.fandom.com/wiki/Tsuulo%27s_father"
+        },
+        {
+          "Content": "Tsuulo's mother",
+          "Href": "https://starwars.fandom.com/wiki/Tsuulo%27s_mother"
+        }
+      ],
+      "Values": [
+        "Tsuulo's father",
+        "Tsuulo's mother"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Reezo",
+          "Href": "https://starwars.fandom.com/wiki/Reezo"
+        }
+      ],
+      "Values": [
+        "Reezo"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -87,5 +117,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 600929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reezo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

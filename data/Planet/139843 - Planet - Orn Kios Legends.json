@@ -2,7 +2,7 @@
   "PageId": 139843,
   "PageUrl": "https://starwars.fandom.com/wiki/Orn_Kios/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/be/OrnKios-TEA.jpg/revision/latest?cb=20231204105314",
   "Data": [
     {
       "Label": "Titles",
@@ -19,24 +19,48 @@
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         },
         {
+          "Content": "Western Reaches",
+          "Href": "https://starwars.fandom.com/wiki/Western_Reaches/Legends"
+        },
+        {
           "Content": "Greater Javin",
           "Href": "https://starwars.fandom.com/wiki/Greater_Javin/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories; Greater Javin"
+        "Outer Rim Territories",
+        "Western Reaches",
+        "Greater Javin"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Javin sector",
+          "Href": "https://starwars.fandom.com/wiki/Javin_sector"
+        },
+        {
+          "Content": "400 BBY",
+          "Href": "https://starwars.fandom.com/wiki/400_BBY/Legends"
+        },
+        {
+          "Content": "Anoat sector",
+          "Href": "https://starwars.fandom.com/wiki/Anoat_sector/Legends"
+        },
+        {
+          "Content": "BBY",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Standard_Calendar"
+        },
+        {
           "Content": "Yarith sector",
           "Href": "https://starwars.fandom.com/wiki/Yarith_sector/Legends"
         }
       ],
       "Values": [
-        "Yarith sector"
+        "Javin sector (prior to c. 400 BBY)",
+        "Anoat sector (c. 400 BBY—)",
+        "Yarith sector (generations after c. 400 BBY)"
       ]
     },
     {
@@ -52,7 +76,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-18"
@@ -71,31 +95,26 @@
       ]
     },
     {
-      "Label": "Atmosphere",
-      "Links": [
-        {
-          "Content": "Type I",
-          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Type I (breathable)"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Surface water",
       "Links": [
         {
-          "Content": "swamps",
-          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+          "Content": "Present",
+          "Href": "https://starwars.fandom.com/wiki/Water/Legends"
         }
       ],
       "Values": [
-        "Numerous swamps"
+        "Present"
       ]
     },
     {
-      "Label": "Native species",
+      "Label": "Points of interest",
       "Links": [
         {
           "Content": "Ornki",
@@ -103,27 +122,39 @@
         }
       ],
       "Values": [
-        "Ornki"
+        "Ornki settlements"
       ]
     },
     {
-      "Label": "Demonym",
+      "Label": "Fauna",
       "Links": [
         {
-          "Content": "Ornki",
-          "Href": "https://starwars.fandom.com/wiki/Ornki"
+          "Content": "Fish",
+          "Href": "https://starwars.fandom.com/wiki/Fish/Legends"
         }
       ],
       "Values": [
-        "Ornki"
+        "Fish"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 798,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 362625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orn_Kios_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 545382,
@@ -131,9 +162,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 362625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orn_Kios_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Trade_Spine/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 634865,
   "PageUrl": "https://starwars.fandom.com/wiki/Grefna",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/35/Grefna.png/revision/latest?cb=20191103172425",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/35/Grefna.png/revision/latest?cb=20230526072110",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,11 @@
         }
       ],
       "Values": [
-        "Green and yellow"
+        "Green",
+        "Yellow",
+        "Red",
+        "Purple",
+        "Blue"
       ]
     },
     {
@@ -55,5 +59,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onderon/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

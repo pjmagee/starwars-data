@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -131,20 +131,41 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
-        },
+        }
+      ],
+      "Values": [
+        "Mid Rim"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Ado sector",
           "Href": "https://starwars.fandom.com/wiki/Ado_sector"
-        },
+        }
+      ],
+      "Values": [
+        "Ado sector"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
         {
           "Content": "StarForge Nebula",
           "Href": "https://starwars.fandom.com/wiki/StarForge_Nebula"
         }
       ],
       "Values": [
-        "Mid Rim",
-        "Ado sector",
         "StarForge Nebula"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "M-17"
       ]
     },
     {
@@ -249,19 +270,29 @@
   ],
   "Relationships": [
     {
+      "PageId": 359024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crost_Lib'eyay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 264783,
       "PageUrl": "https://starwars.fandom.com/wiki/Weezo's_Gun_Shop",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
     },
     {
+      "PageId": 130960,
+      "PageUrl": "https://starwars.fandom.com/wiki/Far_Orbit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 12854,
+      "PageUrl": "https://starwars.fandom.com/wiki/StarForge_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
       "PageId": 397343,
       "PageUrl": "https://starwars.fandom.com/wiki/Just_Armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
-    },
-    {
-      "PageId": 248946,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jarik",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 413310,
@@ -274,19 +305,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
     },
     {
-      "PageId": 12854,
-      "PageUrl": "https://starwars.fandom.com/wiki/StarForge_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+      "PageId": 248946,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jarik",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 130960,
-      "PageUrl": "https://starwars.fandom.com/wiki/Far_Orbit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 396548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holodarts",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 396337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lean_Nuuti_Bar_and_Grill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 396556,
@@ -294,14 +320,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 359024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crost_Lib'eyay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 396337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lean_Nuuti_Bar_and_Grill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 396548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holodarts",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

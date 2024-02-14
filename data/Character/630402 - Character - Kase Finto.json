@@ -2,6 +2,7 @@
   "PageId": 630402,
   "PageUrl": "https://starwars.fandom.com/wiki/Kase_Finto",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -40,11 +41,22 @@
     },
     {
       "Label": "Affiliation(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Finto Gang",
+          "Href": "https://starwars.fandom.com/wiki/Finto_Gang"
+        }
+      ],
       "Values": [
         "Finto Gang"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 745311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Finto_Gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

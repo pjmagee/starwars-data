@@ -2,6 +2,7 @@
   "PageId": 9434,
   "PageUrl": "https://starwars.fandom.com/wiki/Jonash_Solo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,66 @@
       "Values": [
         "Male"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "House of Solo",
+          "Href": "https://starwars.fandom.com/wiki/House_of_Solo"
+        }
+      ],
+      "Values": [
+        "House of Solo"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Dalla Solo",
+          "Href": "https://starwars.fandom.com/wiki/Dalla_Solo"
+        }
+      ],
+      "Values": [
+        "Dalla Solo"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Tiion Sal-Solo",
+          "Href": "https://starwars.fandom.com/wiki/Tiion_Sal-Solo"
+        }
+      ],
+      "Values": [
+        "Tiion Sal-Solo"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo/Legends"
+        }
+      ],
+      "Values": [
+        "Han Solo"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 9437,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denn_Solo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

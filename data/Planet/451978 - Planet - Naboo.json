@@ -95,7 +95,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-17",
@@ -191,7 +191,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamps",
@@ -222,6 +222,10 @@
           "Href": "https://starwars.fandom.com/wiki/Emperor%27s_Retreat"
         },
         {
+          "Content": "Funeral Temple",
+          "Href": "https://starwars.fandom.com/wiki/Funeral_Temple"
+        },
+        {
           "Content": "Gallo Mountains",
           "Href": "https://starwars.fandom.com/wiki/Gallo_Mountains"
         },
@@ -239,7 +243,7 @@
         },
         {
           "Content": "Kwilaan Spaceport",
-          "Href": "https://starwars.fandom.com/wiki/Kwilaan_Spaceport"
+          "Href": "https://starwars.fandom.com/wiki/Kwilaan_Starport"
         },
         {
           "Content": "Lake Country",
@@ -248,6 +252,14 @@
         {
           "Content": "Lake Paonga",
           "Href": "https://starwars.fandom.com/wiki/Lake_Paonga"
+        },
+        {
+          "Content": "Theed Royal Academy",
+          "Href": "https://starwars.fandom.com/wiki/Theed_Royal_Academy"
+        },
+        {
+          "Content": "Rish Loo's laboratory",
+          "Href": "https://starwars.fandom.com/wiki/Rish_Loo%27s_laboratory"
         },
         {
           "Content": "Solleu River",
@@ -260,10 +272,15 @@
         {
           "Content": "Varykino",
           "Href": "https://starwars.fandom.com/wiki/Varykino"
+        },
+        {
+          "Content": "Virdugo Plunge",
+          "Href": "https://starwars.fandom.com/wiki/Virdugo_Plunge"
         }
       ],
       "Values": [
         "Emperor's Retreat",
+        "Funeral Temple",
         "Gallo Mountains",
         "Great Grass Plains",
         "Gungan Sentry Post",
@@ -271,9 +288,12 @@
         "Kwilaan Spaceport",
         "Lake Country",
         "Lake Paonga",
+        "Theed Royal Academy",
+        "Rish Loo's laboratory",
         "Solleu River",
         "Theed Royal Palace",
-        "Varykino"
+        "Varykino",
+        "Virdugo Plunge"
       ]
     },
     {
@@ -368,12 +388,20 @@
           "Href": "https://starwars.fandom.com/wiki/Laa"
         },
         {
+          "Content": "long-necked creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_long-necked_creature"
+        },
+        {
           "Content": "Mee",
           "Href": "https://starwars.fandom.com/wiki/Mee"
         },
         {
           "Content": "Mott",
           "Href": "https://starwars.fandom.com/wiki/Mott"
+        },
+        {
+          "Content": "Narglatch",
+          "Href": "https://starwars.fandom.com/wiki/Narglatch"
         },
         {
           "Content": "Nuna",
@@ -424,6 +452,10 @@
           "Href": "https://starwars.fandom.com/wiki/Shaak"
         },
         {
+          "Content": "six-legged horned creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_six-legged_horned_creature"
+        },
+        {
           "Content": "Slitherfish",
           "Href": "https://starwars.fandom.com/wiki/Slitherfish"
         },
@@ -467,8 +499,10 @@
         "Ikopi",
         "Kaadu",
         "Laa",
+        "A long-necked creature",
         "Mee",
         "Mott",
+        "Narglatch",
         "Nuna",
         "Odupiendo",
         "Ollopom",
@@ -481,6 +515,7 @@
         "See",
         "Soo",
         "Shaak",
+        "A six-legged horned creature",
         "Slitherfish",
         "Slug-beetle",
         "Tee",
@@ -503,7 +538,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Elders",
@@ -675,10 +710,10 @@
         }
       ],
       "Values": [
-        "Gungan stew",
         "Art",
         "Cultural items",
         "Grain",
+        "Gungan stew",
         "Plasma",
         "Wine"
       ]
@@ -728,119 +763,184 @@
   ],
   "Relationships": [
     {
-      "PageId": 504673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 504801,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_Theed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 581265,
       "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Theed",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 454264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabé",
+      "PageId": 457067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Qui-Gon_Jinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 477147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_funeral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 482921,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Anakin_Skywalker_and_Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 486471,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Refugee_Conference",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 500636,
+      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light_(847th)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 532011,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nabooian_whiskey",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 539859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fruit_juice",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 539874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Domaine_de_la_Maison_sur_le_Lac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 531892,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calm_Tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 531893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snow_Wolves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 531894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wildfire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 758810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diplomatic_corps_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 565121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Fountain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 641311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bioweapon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 603762,
+      "PageUrl": "https://starwars.fandom.com/wiki/28_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 457797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Japor_snippet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 693931,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Otoh_Gunga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 573276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kayana",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 599702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bursa_leader",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618904,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tonra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daneska_Varbarós",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corin_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 703175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thaddeus_Wolk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726853,
-      "PageUrl": "https://starwars.fandom.com/wiki/Antraya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 726854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kharl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 707747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spearhead",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 708054,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spinnaker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 519038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Bongameken_Cooperative",
+      "PageId": 552225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Palace_Space_Vessel_Engineering_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 484076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 553586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_Energy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 501256,
-      "PageUrl": "https://starwars.fandom.com/wiki/Holographic_disguise_matrix",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 504686,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_personal_energy_shield",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 679281,
-      "PageUrl": "https://starwars.fandom.com/wiki/2767",
+      "PageId": 625430,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B_surgical_droid_(Naboo)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 697756,
-      "PageUrl": "https://starwars.fandom.com/wiki/R2-N3",
+      "PageId": 631342,
+      "PageUrl": "https://starwars.fandom.com/wiki/1234",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 558937,
-      "PageUrl": "https://starwars.fandom.com/wiki/Caves_of_Eleuabad",
+      "PageId": 550843,
+      "PageUrl": "https://starwars.fandom.com/wiki/Camp_Four",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 711323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Flight_A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 552108,
+      "PageUrl": "https://starwars.fandom.com/wiki/Virdugo_Plunge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 711325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flight_B",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 552184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 723999,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallo's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 552185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Landing_Plaza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 543878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 757969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_House_of_Learning",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 623752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_detonator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 554083,
+      "PageUrl": "https://starwars.fandom.com/wiki/36_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 629431,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Technologies",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 788358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Simmered_Golden_Pheasant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 516043,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 671255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Garden",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 675348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kwilaan_Starport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 514128,
@@ -863,6 +963,1526 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
+      "PageId": 51711,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_power_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 714241,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Retreat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 684136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Time_of_Suffering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 709063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_tribal_war",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 709152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti–Gungan_wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 551057,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ion_pulse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 552331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_catapult",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 498024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Melodic_Order",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 553614,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palo_Jemabie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 451980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dee'ja_Peak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 452857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 474276,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 495851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 697756,
+      "PageUrl": "https://starwars.fandom.com/wiki/R2-N3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 577300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 496763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Handmaidens",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Palace_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500266,
+      "PageUrl": "https://starwars.fandom.com/wiki/Security_Guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Space_Fighter_Corps",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 589182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Voorpak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 589183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shiro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 589197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 579751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 580003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bassa_Bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 705882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bubble_wort_projector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 464719,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 510773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 652834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rally_on_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 659066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chommell_sector_summit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 604750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 724988,
+      "PageUrl": "https://starwars.fandom.com/wiki/Polar_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 717293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jewel_of_Yavin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 664441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_Padmé's_tomb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 550763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lunker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 550765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roo-Roo_Page's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 621475,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ameé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 553265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Farseein",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 553582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electromag_rail",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 527250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rish_Loo's_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 531473,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Country",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 681246,
+      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 630261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binks'_forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 681037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millaflower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 470850,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veermok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 470874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 475282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Opee_sea_killer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 704903,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zalaaca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 709148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 475757,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 691434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Sentry_Post",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 500392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Satine's_Lament",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 622335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Globe_of_Peace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 739599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Jedi_artifact",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 11116,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugor_Nass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ellé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Versé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618649,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mariek_Panaka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 656110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Horace_Vancil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703175,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thaddeus_Wolk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 523384,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mechno-chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 608541,
+      "PageUrl": "https://starwars.fandom.com/wiki/7169",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 735028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rum_custard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 498005,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marina_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 499812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varykino_Villa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 709062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_Quarter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 594545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hiram_Zataire's_vineyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 595905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_boathouse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 559935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incense",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 284592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 312055,
+      "PageUrl": "https://starwars.fandom.com/wiki/S-5_Security-grade_blaster/ascension_gun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 647010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan-Naboo_dispute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 496502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dormé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 594101,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miré",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 631245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_whistle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 324863,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Toydaria",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 558734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Broadberry_Meadow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 558736,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ellié_Arcadium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 498020,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rescue_the_survivors_of_Alderaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 135282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 577679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tik-tak_bird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 790782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Starport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 658788,
+      "PageUrl": "https://starwars.fandom.com/wiki/Head_of_Security",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 514064,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sosha_Soruna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 514690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Korro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 695070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maxiron_Agolerga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 484076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 554774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Room_of_Morning_Mists",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 746586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_river",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 23705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 582273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 527318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phasma's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 452432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452809,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lyonie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497869,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yané",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497872,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moteé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rish_Loo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ryoo_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pooja_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 532072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roo-Roo_Page",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 760778,
+      "PageUrl": "https://starwars.fandom.com/wiki/Irya_Kirsch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 659127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blood-sensitive_sensor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 525554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 626237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliffs_of_Theed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 628854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Shoril",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 27548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Locap",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 477140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Apailana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 477531,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kwilaan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 551978,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omar_Berenko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 552052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 476340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emerald_wine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 586983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_group",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 586987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_resistance",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 728710,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nooroyo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 626236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_University",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 571982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tobler_Ceel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 639874,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shasa_Zaro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 746798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viiveenn's_doll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 524426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 478753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Grass_Plains",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 691054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_market_square",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 695761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Varykino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 745985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torment's_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 767865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gooberfish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 720813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_orphanage_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 676020,
+      "PageUrl": "https://starwars.fandom.com/wiki/4,000_BBY",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 566764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Naboo_(Kyber_Saber)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 652818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Naboo_(First_Order)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 523618,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peppi_Bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 523781,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thadlé_Berenko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 625746,
+      "PageUrl": "https://starwars.fandom.com/wiki/Praltal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 576611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Langua",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 669966,
+      "PageUrl": "https://starwars.fandom.com/wiki/2163",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 673338,
+      "PageUrl": "https://starwars.fandom.com/wiki/1933",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 679281,
+      "PageUrl": "https://starwars.fandom.com/wiki/2767",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 534547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_Plaza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 534552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_Courtyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 704162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Convergence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 229469,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Meadow_Picnic",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Music"
+    },
+    {
+      "PageId": 566180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pelikki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 552061,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen_Yram's_Needle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guido's_Tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 552107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Royal_Academy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 525585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sola_Naberrie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 623857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shoril",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 501256,
+      "PageUrl": "https://starwars.fandom.com/wiki/Holographic_disguise_matrix",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 504686,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_personal_energy_shield",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 514085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Climate_disruption_array",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 515426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Swamptoe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 765706,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tooke-trap_plant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 453197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_(people)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 663808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_Padmé_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 452927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sio_Bibble",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jar_Jar_Binks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roos_Tarpals",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498438,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neeyutnee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perri-Teeka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 764354,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Theed_civilian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 271810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hazmat_suit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 553009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Time_of_Peace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 553739,
+      "PageUrl": "https://starwars.fandom.com/wiki/Coronation_of_Queen_Amidala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 569195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Futhark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 574036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Futhork",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 735601,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Aurebesh_script_(N-1_Starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 569163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pik-pok_fish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 571713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Odupiendo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 558727,
+      "PageUrl": "https://starwars.fandom.com/wiki/Parnelli_Museum_of_Art",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 558728,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Perri-Teeka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 558730,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concert_Hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 558731,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pergola's_Bridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 504801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plan_to_kidnap_Chancellor_Palpatine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 455689,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rabé_Tonsort",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455698,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saché",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eirtaé",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 455802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ric_Olié",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mul_Sanaka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 708409,
+      "PageUrl": "https://starwars.fandom.com/wiki/Foreign_residence_gown",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 744762,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_swimsuit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 619456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 568107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veruna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 502120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlote_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 508340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grass",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 541691,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_lettuce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 553585,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cambylictus_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 568236,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen's_Heart",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 655860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Conservatory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 656134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Odeon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 658104,
+      "PageUrl": "https://starwars.fandom.com/wiki/City_Bigspace_Refreshment_Bubble",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 658106,
+      "PageUrl": "https://starwars.fandom.com/wiki/Banqueting_rotunda",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 658107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triumphal_Arch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 659067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountain_University",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 719306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_farmer_(booma)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 719651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_farmer_(supplies)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 707747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spearhead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 708054,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spinnaker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 519443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shiraya",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 709053,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nabu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 553635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Era",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
+    },
+    {
+      "PageId": 578265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_warehouse_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 466651,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Grand_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 469582,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 701121,
+      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Saak'ak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 584668,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pheasant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 586528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Golden_pheasant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 604747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732124,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tepoh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 735029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mudslide_disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 618580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Braised_Shaak_Roast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 618754,
+      "PageUrl": "https://starwars.fandom.com/wiki/Smoked_Kaadu_Ribs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 618897,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karlini_tea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 619429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Five-blossom_bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 545337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Droid_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 534566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Hangar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 734877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yané_and_Saché's_house",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 507902,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viral_bomb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 515285,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atlatl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 656133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Neurotransmitter_Affection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
+    },
+    {
+      "PageId": 667767,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blaise_Zirkonn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 667768,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zerala_Dinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 638979,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moenia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 451985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_High_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 508641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chommell_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 463476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 605804,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 454144,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 572910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Commodex_Tahn's_villa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 572645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 572738,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hela_Brandes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Graf_Zapalo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607055,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lufta_Shif",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 607056,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hugo_Eckener",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 742008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Boss_Meetup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 759234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_mining_disaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 764598,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Reformations",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 626233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soshinyday_blobball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 642487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 659058,
+      "PageUrl": "https://starwars.fandom.com/wiki/Day_of_Ascendancy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 465089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 485410,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 488217,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 496306,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 496319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 499229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_initiative",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 499874,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Matter_of_Using_Toydarian_Territory_to_Aid_the_Shipment_of_Relief_Supplies_to_the_Citizens_of_Ryloth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 532103,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enhanced_Privacy_Invasion_Bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 762747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Chommell_sector_bill",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
+    },
+    {
+      "PageId": 615420,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quarsh_Panaka's_private_residence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 615568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veruna's_tower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 591346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glombo_shell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 736985,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_locket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 446200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quarsh_Panaka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 528070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bowrun_Stradalla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 528071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Niamora_Ingidge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 528090,
+      "PageUrl": "https://starwars.fandom.com/wiki/Steen_Morwinn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 590032,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karté",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 565120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plaza_of_the_Catalan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 762938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_apartment_(Theed_Royal_Palace)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 471513,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clone_ordnance_specialist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 549356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guarlara",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 574146,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn's_villa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 472517,
+      "PageUrl": "https://starwars.fandom.com/wiki/Booma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 458374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_bongo_submarine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Aquatic_vehicle"
+    },
+    {
+      "PageId": 105370,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gregar_Typho",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 606014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 606015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 732421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reyé_Hollis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_drum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 498604,
+      "PageUrl": "https://starwars.fandom.com/wiki/1138_(Trade_Federation)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 682677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 578079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onoam",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 622152,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ohma-D'un",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 589938,
+      "PageUrl": "https://starwars.fandom.com/wiki/Algae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 623919,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ollopom",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 623998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peko-peko",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 600597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 625860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Veda_pearl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 603527,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duja",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 475572,
+      "PageUrl": "https://starwars.fandom.com/wiki/OOM-9",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 479100,
+      "PageUrl": "https://starwars.fandom.com/wiki/G8-R3",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 646577,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paonga_Fresca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 664305,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Villages",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 711323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Flight_A",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 711325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flight_B",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 723999,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallo's_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 660885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 619455,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue-algae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 628113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bhansgrek",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 575681,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oma_Prumba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aro_N'cookaala",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 777046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_chair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 666030,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_of_Parnelli",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 457374,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Paonga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 660697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Western_Provinces",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 660742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_cemetery",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 661394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Camp_three",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 663065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amidalans",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 652704,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pastoral_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 656139,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jafani",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 656208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_planetary_legislative_assembly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 514937,
       "PageUrl": "https://starwars.fandom.com/wiki/Shaak",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
@@ -881,91 +2501,6 @@
       "PageId": 515456,
       "PageUrl": "https://starwars.fandom.com/wiki/Blarth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 625278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enarc_Run",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 625353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Old_Trade_Federation_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 641311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bioweapon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 496502,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dormé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 623857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shoril",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 638979,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moenia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 452680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 475572,
-      "PageUrl": "https://starwars.fandom.com/wiki/OOM-9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 639600,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 658444,
-      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 532011,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nabooian_whiskey",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 539859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fruit_juice",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 539874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Domaine_de_la_Maison_sur_le_Lac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 550843,
-      "PageUrl": "https://starwars.fandom.com/wiki/Camp_Four",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 23705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 663065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amidalans",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 515677,
@@ -1013,78 +2548,128 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 623919,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ollopom",
+      "PageId": 757707,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nosna_fish",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 623998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peko-peko",
+      "PageId": 699436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tomarian's_theater",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 700944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 515258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Theed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 752568,
+      "PageUrl": "https://starwars.fandom.com/wiki/2943",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 752283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_Theed_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 558937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caves_of_Eleuabad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 559733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Throne_room_(Theed_Royal_Palace)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 504324,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nuvo_Vindi's_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 504349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attempted_kidnapping_of_Roo-Roo_Page",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 523615,
+      "PageUrl": "https://starwars.fandom.com/wiki/Church_of_the_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 626231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slitherfish",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 463476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Royal_Palace",
+      "PageId": 618903,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naberrie_family_house",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 579751,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_garrison_(Naboo)",
+      "PageId": 619216,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_music_academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 580003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bassa_Bridge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 691434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Sentry_Post",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 573276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kayana",
+      "PageId": 454264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabé",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 667767,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blaise_Zirkonn",
+      "PageId": 455245,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jamillia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 667768,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zerala_Dinn",
+      "PageId": 726853,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antraya",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 451980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dee'ja_Peak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 726854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kharl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 452857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 452923,
+      "PageUrl": "https://starwars.fandom.com/wiki/R2-D2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 474276,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+      "PageId": 567628,
+      "PageUrl": "https://starwars.fandom.com/wiki/Freedom_of_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 541526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 578069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_miners'_strikes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 628854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Shoril",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 584295,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_sardine_fritter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 712927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Torada_Collective",
+      "PageId": 567765,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_group_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 583599,
+      "PageUrl": "https://starwars.fandom.com/wiki/Danger_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 550870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Fighter_Pilot",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -1093,208 +2678,48 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 470850,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veermok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 470874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nuna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 475282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Opee_sea_killer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 586528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Golden_pheasant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 589182,
-      "PageUrl": "https://starwars.fandom.com/wiki/Voorpak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 589197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 663808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tomb_of_Padmé_Amidala",
+      "PageId": 639262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Livet_Tower",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 559935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Incense",
+      "PageId": 641487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     },
     {
-      "PageId": 553614,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palo_Jemabie",
+      "PageId": 745282,
+      "PageUrl": "https://starwars.fandom.com/wiki/SPF_1138",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 504673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 547263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hogan_Tinmar",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 604747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 693217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_crest_headdress",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 708409,
-      "PageUrl": "https://starwars.fandom.com/wiki/Foreign_residence_gown",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 553582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electromag_rail",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 703507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_drum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 553300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn's_protocol_droid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 553009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Time_of_Peace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 553739,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coronation_of_Queen_Amidala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 567628,
-      "PageUrl": "https://starwars.fandom.com/wiki/Freedom_of_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 646577,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paonga_Fresca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 501095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_first_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 671255,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Garden",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 531892,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calm_Tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 531893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snow_Wolves",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 531894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wildfire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 545337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Droid_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 496763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Handmaidens",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 610975,
-      "PageUrl": "https://starwars.fandom.com/wiki/Buggles",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 568236,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen's_Heart",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 58533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tooke-trap_plant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 589938,
-      "PageUrl": "https://starwars.fandom.com/wiki/Algae",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 498001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Junn's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 498008,
-      "PageUrl": "https://starwars.fandom.com/wiki/Club_Deeja",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 595905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_boathouse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 600597,
-      "PageUrl": "https://starwars.fandom.com/wiki/Separatist_command_center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 712926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn_shrine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 714241,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emperor's_Retreat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 542439,
-      "PageUrl": "https://starwars.fandom.com/wiki/ELG-3A_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 610185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aro_N'cookaala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 495851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Keren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 629431,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Technologies",
+      "PageId": 504953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Defense_League",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 608541,
-      "PageUrl": "https://starwars.fandom.com/wiki/7169",
+      "PageId": 584298,
+      "PageUrl": "https://starwars.fandom.com/wiki/LEP-86C8",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 584819,
+      "PageUrl": "https://starwars.fandom.com/wiki/R2-R9",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
@@ -1308,43 +2733,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 527250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rish_Loo's_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 704162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Convergence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 622152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ohma-D'un",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 660885,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rori",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 571713,
-      "PageUrl": "https://starwars.fandom.com/wiki/Odupiendo",
+      "PageId": 478751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kaadu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 534566,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Hangar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 478752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fambaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 639262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Livet_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 480161,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sando_aqua_monster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 641487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Spaceport",
+      "PageId": 481010,
+      "PageUrl": "https://starwars.fandom.com/wiki/Narglatch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 723888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kolvor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 712926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn_shrine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -1353,59 +2768,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 452715,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 514071,
+      "PageUrl": "https://starwars.fandom.com/wiki/Governor_of_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 547275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Open-Closed_war",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 551057,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ion_pulse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 552331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_catapult",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 464719,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jobal_Naberrie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 578068,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dalné",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 594101,
-      "PageUrl": "https://starwars.fandom.com/wiki/Miré",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 647316,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_senator_(Julen_Rakab)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 721024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_teenager",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 631245,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_whistle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 631342,
-      "PageUrl": "https://starwars.fandom.com/wiki/1234",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+      "PageId": 562666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tahn_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 586595,
@@ -1418,264 +2788,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 525554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
+      "PageId": 662416,
+      "PageUrl": "https://starwars.fandom.com/wiki/Denta_bean_bun",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 642487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+      "PageId": 712927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Torada_Collective",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 659058,
-      "PageUrl": "https://starwars.fandom.com/wiki/Day_of_Ascendancy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+      "PageId": 610975,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buggles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
     },
     {
-      "PageId": 516043,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lianorm_Swamp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 691054,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_market_square",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 695761,
-      "PageUrl": "https://starwars.fandom.com/wiki/Varykino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 498020,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_rescue_the_survivors_of_Alderaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 504324,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nuvo_Vindi's_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 504349,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attempted_kidnapping_of_Roo-Roo_Page",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 568107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veruna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 578079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onoam",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 566180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pelikki",
+      "PageId": 456003,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 569163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pik-pok_fish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 472517,
-      "PageUrl": "https://starwars.fandom.com/wiki/Booma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 603762,
-      "PageUrl": "https://starwars.fandom.com/wiki/28_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 647010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan-Naboo_dispute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452432,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teckla_Minnau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lyonie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497869,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yané",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497872,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moteé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 497911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rish_Loo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 514064,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sosha_Soruna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 514690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Korro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 532072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roo-Roo_Page",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 547263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hogan_Tinmar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 562421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perri-Teeka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477723,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 479100,
-      "PageUrl": "https://starwars.fandom.com/wiki/G8-R3",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 553635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_Era",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Era"
-    },
-    {
-      "PageId": 552108,
-      "PageUrl": "https://starwars.fandom.com/wiki/Virdugo_Plunge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Landing_Plaza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 554774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Room_of_Morning_Mists",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 498794,
-      "PageUrl": "https://starwars.fandom.com/wiki/Colo_claw_fish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 78836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tusk-cat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 565121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silver_Fountain",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 658788,
-      "PageUrl": "https://starwars.fandom.com/wiki/Head_of_Security",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 623752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_detonator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 572910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_Commodex_Tahn's_villa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 664441,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_the_Tomb_of_Padmé_Amidala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 361277,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ars_Veruna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Sidious",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452809,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sio_Bibble",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jar_Jar_Binks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472945,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cordé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498421,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roos_Tarpals",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498438,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neeyutnee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ellé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Versé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 618649,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mariek_Panaka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 618832,
@@ -1693,78 +2823,73 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 656110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Horace_Vancil",
+      "PageId": 618904,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tonra",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 504953,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Defense_League",
+      "PageId": 618905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daneska_Varbarós",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 618935,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corin_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 519038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Gunga_Bongameken_Cooperative",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 519443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shiraya",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+      "PageId": 762937,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blood_alarm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 709053,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nabu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+      "PageId": 762939,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suppressant_shot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 498604,
-      "PageUrl": "https://starwars.fandom.com/wiki/1138_(Trade_Federation)",
+      "PageId": 563242,
+      "PageUrl": "https://starwars.fandom.com/wiki/TR-350",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 669966,
-      "PageUrl": "https://starwars.fandom.com/wiki/2163",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 673338,
-      "PageUrl": "https://starwars.fandom.com/wiki/1933",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 584295,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_sardine_fritter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 569195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Futhark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 574036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Futhork",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 558734,
-      "PageUrl": "https://starwars.fandom.com/wiki/Broadberry_Meadow",
+      "PageId": 505096,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solleu_River",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 558736,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ellié_Arcadium",
+      "PageId": 507901,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_swamps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 701121,
-      "PageUrl": "https://starwars.fandom.com/wiki/Escape_from_the_Saak'ak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+      "PageId": 508094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Sacred_Place",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 507150,
-      "PageUrl": "https://starwars.fandom.com/wiki/Falumpaset",
+      "PageId": 531099,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elders_(Naboo)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 574146,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn's_villa",
+      "PageId": 531693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gualama",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 78836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tusk-cat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 746697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_hospital",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
@@ -1773,123 +2898,148 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 622335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Globe_of_Peace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 721024,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_teenager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 693931,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Otoh_Gunga",
+      "PageId": 775235,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_mountain_village_(Padmé_Amidala)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 541526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_(Naboo)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 452854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Advisory_Council",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 461214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_shock_trooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 507150,
+      "PageUrl": "https://starwars.fandom.com/wiki/Falumpaset",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 507900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_laboratory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 743383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabé's_hut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 452715,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 547275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Open-Closed_War",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 515035,
+      "PageUrl": "https://starwars.fandom.com/wiki/Invasions_of_Naboo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 532051,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jan-gwa_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 623478,
+      "PageUrl": "https://starwars.fandom.com/wiki/Turret_Room",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 593450,
+      "PageUrl": "https://starwars.fandom.com/wiki/Officer_corps_(Gungans)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 772906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Naboo_(Asajj_Ventress)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 625278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enarc_Run",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 625353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old_Trade_Federation_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 598923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Otoh_Langua",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 455245,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jamillia",
+      "PageId": 709061,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Spearhead",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 361277,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ars_Veruna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 455689,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rabé_Tonsort",
+      "PageId": 472945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cordé",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 455698,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saché",
+      "PageId": 578068,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dalné",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 455700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eirtaé",
+      "PageId": 647316,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_senator_(Julen_Rakab)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 500911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mul_Sanaka",
+      "PageId": 740764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dams_Denna",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 550763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lunker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 477723,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
-      "PageId": 550765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roo-Roo_Page's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 553300,
+      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn's_protocol_droid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 514085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Climate_disruption_array",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 639600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palpatine_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
-      "PageId": 523384,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mechno-chair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 604750,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_stew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 465089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Military_Creation_Act",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 485410,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reduced_military_spending_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 488217,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_Defense_Resolution",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 496306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_financial_reform_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 496319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Republic_military_enhancement_bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 499229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confederate–Republic_peace_initiative",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 499874,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Matter_of_Using_Toydarian_Territory_to_Aid_the_Shipment_of_Relief_Supplies_to_the_Citizens_of_Ryloth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 457374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Paonga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 559733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Throne_room_(Theed_Royal_Palace)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 565120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plaza_of_the_Catalan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 658444,
+      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 658103,
       "PageUrl": "https://starwars.fandom.com/wiki/City_Bigspace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 658104,
-      "PageUrl": "https://starwars.fandom.com/wiki/City_Bigspace_Refreshment_Bubble",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
@@ -1918,954 +3068,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 458564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Coruscant_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 466651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Grand_Army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 469582,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bravo_Flight",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 728710,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Nooroyo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 478751,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kaadu",
+      "PageId": 498794,
+      "PageUrl": "https://starwars.fandom.com/wiki/Colo_claw_fish",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 478752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fambaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 480161,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sando_aqua_monster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 481010,
-      "PageUrl": "https://starwars.fandom.com/wiki/Narglatch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 723888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kolvor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 558727,
-      "PageUrl": "https://starwars.fandom.com/wiki/Parnelli_Museum_of_Art",
+      "PageId": 498001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Junn's_palace",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 558728,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hall_of_Perri-Teeka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 558730,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concert_Hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 558731,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pergola's_Bridge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 625860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veda_pearl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 527318,
-      "PageUrl": "https://starwars.fandom.com/wiki/Phasma's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
-      "PageId": 717293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jewel_of_Yavin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 454144,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 515258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Theed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 598923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Otoh_Langua",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 709061,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Spearhead",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 603527,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duja",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 552225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Palace_Space_Vessel_Engineering_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 553586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_Energy_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 553265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Farseein",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 477147,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_funeral",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 482921,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Anakin_Skywalker_and_Padmé_Amidala",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 486471,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alderaan_Refugee_Conference",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 500636,
-      "PageUrl": "https://starwars.fandom.com/wiki/Festival_of_Light_(847th)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 626233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soshinyday_blobball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 451985,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_High_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 577300,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaak_Ridge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 578265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_warehouse_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 664305,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Villages",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 471513,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_ordnance_specialist",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 502120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlote_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 508340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grass",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 541691,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_lettuce",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 553585,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cambylictus_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 531099,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elders_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 531693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gualama",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 594545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hiram_Zataire's_vineyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 284592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 312055,
-      "PageUrl": "https://starwars.fandom.com/wiki/S-5_blaster_pistol",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 554083,
-      "PageUrl": "https://starwars.fandom.com/wiki/36_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 105370,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gregar_Typho",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 446200,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quarsh_Panaka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 528070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bowrun_Stradalla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 528071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Niamora_Ingidge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 528090,
-      "PageUrl": "https://starwars.fandom.com/wiki/Steen_Morwinn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 528092,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mif_Zinner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 575681,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oma_Prumba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 590032,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karté",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 532051,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jan-gwa_city",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 531473,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Country",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 709062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ancient_Quarter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 550870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_pilot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 453197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_(people)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 577679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tik-tak_bird",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 655860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Conservatory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 656134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_Odeon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 658106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Banqueting_rotunda",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 658107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Triumphal_Arch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 684136,
-      "PageUrl": "https://starwars.fandom.com/wiki/Time_of_Suffering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 709063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_tribal_war",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 709152,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti–Gungan_wars",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 656133,
-      "PageUrl": "https://starwars.fandom.com/wiki/Neurotransmitter_Affection",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
-    },
-    {
-      "PageId": 515035,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasions_of_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
-      "PageId": 455802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ric_Olié",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Apailana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 477531,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kwilaan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551978,
-      "PageUrl": "https://starwars.fandom.com/wiki/Omar_Berenko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 551998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jafan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 552052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yram",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 621475,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Queen_of_Naboo_(40_BBY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 271810,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hazmat_suit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 457067,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Qui-Gon_Jinn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 618580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Braised_Shaak_Roast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 618754,
-      "PageUrl": "https://starwars.fandom.com/wiki/Smoked_Kaadu_Ribs",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 618897,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karlini_tea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 619429,
-      "PageUrl": "https://starwars.fandom.com/wiki/Five-blossom_bread",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 532103,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enhanced_Privacy_Invasion_Bill",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Law"
-    },
-    {
-      "PageId": 660697,
-      "PageUrl": "https://starwars.fandom.com/wiki/Western_Provinces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 660742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_cemetery",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 661394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Camp_three",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 452854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Advisory_Council",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 461214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_shock_trooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 549356,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guarlara",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 51711,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_power_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 615420,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quarsh_Panaka's_private_residence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 615568,
-      "PageUrl": "https://starwars.fandom.com/wiki/Veruna's_tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 618903,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naberrie_family_house",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 619216,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_music_academy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 514071,
-      "PageUrl": "https://starwars.fandom.com/wiki/Governor_of_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 515285,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atlatl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 705882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bubble_wort_projector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 510773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Commodex_Tahn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 719306,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_farmer_(female)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 719651,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Naboo_farmer_(male)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 576611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Otoh_Langua",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 452923,
-      "PageUrl": "https://starwars.fandom.com/wiki/R2-D2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 625430,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_2-1B_surgical_droid_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 524426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 562666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tahn_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 476340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emerald_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 19562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solleu_River/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 534547,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palace_Plaza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 534552,
-      "PageUrl": "https://starwars.fandom.com/wiki/Palace_Courtyard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 623478,
-      "PageUrl": "https://starwars.fandom.com/wiki/Turret_Room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 626237,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cliffs_of_Theed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 630261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Binks'_forces",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 523615,
-      "PageUrl": "https://starwars.fandom.com/wiki/Church_of_the_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 508641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chommell_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 456003,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 582273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 584668,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pheasant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 704903,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zalaaca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 709148,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 709488,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grizmallti/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 552061,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen_Yram's_Needle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 552106,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guido's_Tower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 552107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Royal_Academy_of_Theed",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 659067,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Mountain_University",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 676020,
-      "PageUrl": "https://starwars.fandom.com/wiki/4000_BBY",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
-    },
-    {
-      "PageId": 457797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Japor_snippet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 498024,
-      "PageUrl": "https://starwars.fandom.com/wiki/Melodic_Order",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Band"
-    },
-    {
-      "PageId": 566764,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Naboo_(Kyber_Saber)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 652818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Naboo_(First_Order)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 11116,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugor_Nass",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 606014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 606015,
-      "PageUrl": "https://starwars.fandom.com/wiki/Najeema_Boddee's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 563242,
-      "PageUrl": "https://starwars.fandom.com/wiki/TR-350",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 578069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_miners'_strikes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 662416,
-      "PageUrl": "https://starwars.fandom.com/wiki/Denta_bean_bun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 478753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Grass_Plains",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 675348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kwilaan_Starport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 567765,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_group_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 500265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Palace_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 500266,
-      "PageUrl": "https://starwars.fandom.com/wiki/Security_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 500267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_Royal_Space_Fighter_Corps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 619455,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue-algae",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 628113,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bhansgrek",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 543878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 507900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_laboratory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 720813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_orphanage_(Naboo)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 500392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Satine's_Lament",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 507902,
-      "PageUrl": "https://starwars.fandom.com/wiki/Viral_bomb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 458374,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_bongo_submarine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Aquatic_vehicle"
-    },
-    {
-      "PageId": 605804,
-      "PageUrl": "https://starwars.fandom.com/wiki/Padmé_Amidala's_wardrobe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 523618,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peppi_Bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 523781,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thadlé_Berenko",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 571982,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tobler_Ceel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Graf_Zapalo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607055,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lufta_Shif",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607056,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hugo_Eckener",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 639874,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shasa_Zaro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 619456,
-      "PageUrl": "https://starwars.fandom.com/wiki/Second_coronation_of_Réillata",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 652834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rally_on_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 659066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Summit_on_Naboo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 682677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Protein",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 498005,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marina_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 499812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Varykino_Villa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 681246,
-      "PageUrl": "https://starwars.fandom.com/wiki/San_Tekka_compound",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 583599,
-      "PageUrl": "https://starwars.fandom.com/wiki/Danger_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 586983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_group",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 586987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_resistance",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 135282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 352066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Stormsniper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 515426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Swamptoe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 27548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Locap",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 626231,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slitherfish",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 475757,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_Temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 699436,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tomarian's_theater",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 700944,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gallo_Temple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 572645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 572704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hollé",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 572738,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hela_Brandes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 607968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 625746,
-      "PageUrl": "https://starwars.fandom.com/wiki/Praltal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 584298,
-      "PageUrl": "https://starwars.fandom.com/wiki/LEP-86C8",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 584819,
-      "PageUrl": "https://starwars.fandom.com/wiki/R2-R9",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 505096,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solleu_River",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 507901,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_swamps",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 508094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Sacred_Place",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 593450,
-      "PageUrl": "https://starwars.fandom.com/wiki/Officer_corps_(Gungans)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 652704,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pastoral_Collective",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 656139,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jafani",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 656208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Naboo_planetary_legislative_assembly",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 681037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millaflower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 626236,
-      "PageUrl": "https://starwars.fandom.com/wiki/Theed_University",
+      "PageId": 498008,
+      "PageUrl": "https://starwars.fandom.com/wiki/Club_Deeja",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 726480,
       "PageUrl": "https://starwars.fandom.com/wiki/Political_academy",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 542439,
+      "PageUrl": "https://starwars.fandom.com/wiki/ELG-3A_blaster_pistol",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

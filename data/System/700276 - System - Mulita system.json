@@ -17,10 +17,15 @@
         {
           "Content": "Wild Space",
           "Href": "https://starwars.fandom.com/wiki/Wild_Space"
+        },
+        {
+          "Content": "Occlusion Zone",
+          "Href": "https://starwars.fandom.com/wiki/Occlusion_Zone"
         }
       ],
       "Values": [
-        "Wild Space"
+        "Wild Space",
+        "Occlusion Zone"
       ]
     },
     {
@@ -32,6 +37,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 731041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occlusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
     {
       "PageId": 700660,
       "PageUrl": "https://starwars.fandom.com/wiki/Mulita",

@@ -2,7 +2,7 @@
   "PageId": 436364,
   "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Snivvian_Sith",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/Snivviansith.jpg/revision/latest?cb=20131206134802",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/Snivviansith.jpg/revision/latest?cb=20220701181045",
   "Data": [
     {
       "Label": "Titles",
@@ -40,15 +40,34 @@
       ]
     },
     {
-      "Label": "Gender",
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
       "Links": [
         {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
-        "Male"
+        "Brown"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [
+        {
+          "Content": "Sith tattoos",
+          "Href": "https://starwars.fandom.com/wiki/Sith_tattoo"
+        }
+      ],
+      "Values": [
+        "Red and black (Sith tattoos)"
       ]
     },
     {
@@ -57,15 +76,10 @@
         {
           "Content": "One Sith",
           "Href": "https://starwars.fandom.com/wiki/One_Sith"
-        },
-        {
-          "Content": "Cadomai Prime",
-          "Href": "https://starwars.fandom.com/wiki/Cadomai_Prime/Legends"
         }
       ],
       "Values": [
-        "One Sith",
-        "Cadomai Prime (infiltrate)"
+        "One Sith"
       ]
     }
   ],

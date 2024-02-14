@@ -12,7 +12,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Republic"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -21,6 +33,22 @@
       ],
       "Values": [
         "Space station"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "Tatooine",
+          "Href": "https://starwars.fandom.com/wiki/Tatooine/Legends"
+        },
+        {
+          "Content": "ore",
+          "Href": "https://starwars.fandom.com/wiki/Ore/Legends"
+        }
+      ],
+      "Values": [
+        "Tatooine ore-made alloys"
       ]
     },
     {
@@ -72,19 +100,22 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "P-6"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
-        "Service and supply depot"
+        "Supply depot"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
-        {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
-        },
         {
           "Content": "Suvam Tan",
           "Href": "https://starwars.fandom.com/wiki/Suvam_Tan"
@@ -96,13 +127,32 @@
       ]
     },
     {
-      "Label": "Owner(s)",
+      "Label": "Destroyed",
       "Links": [
         {
-          "Content": "Suvam Tan",
-          "Href": "https://starwars.fandom.com/wiki/Suvam_Tan"
+          "Content": "3637 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3637_BBY"
         }
       ],
+      "Values": [
+        "After 3637 BBY"
+      ]
+    },
+    {
+      "Label": "Present for battles/events",
+      "Links": [
+        {
+          "Content": "Skirmish on Yavin Station",
+          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Yavin_Station"
+        }
+      ],
+      "Values": [
+        "Skirmish on Yavin Station"
+      ]
+    },
+    {
+      "Label": "Owner(s)",
+      "Links": [],
       "Values": [
         "Suvam Tan"
       ]
@@ -110,24 +160,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 644856,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Yavin_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 43208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mantle_of_the_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
       "PageId": 38750,
       "PageUrl": "https://starwars.fandom.com/wiki/Heart_of_the_Guardian",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 6044,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yavin_22",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 2110,
@@ -140,9 +175,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
+      "PageId": 644856,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Yavin_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 6044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yavin_22",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 80332,
       "PageUrl": "https://starwars.fandom.com/wiki/Light_exoskeleton",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 234695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_sensory_implant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 43208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantle_of_the_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     }
   ]
 }

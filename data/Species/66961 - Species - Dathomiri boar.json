@@ -12,6 +12,58 @@
       ]
     },
     {
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Non-sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience/Legends"
+        }
+      ],
+      "Values": [
+        "Non-sentient"
+      ]
+    },
+    {
+      "Label": "Classification",
+      "Links": [
+        {
+          "Content": "Pig",
+          "Href": "https://starwars.fandom.com/wiki/Swine"
+        },
+        {
+          "Content": "rodent",
+          "Href": "https://starwars.fandom.com/wiki/Rodent/Legends"
+        }
+      ],
+      "Values": [
+        "Pig-rodent"
+      ]
+    },
+    {
+      "Label": "Average height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
+      "Values": [
+        "3 meters"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Brown",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
+      "Values": [
+        "Brown"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
@@ -22,7 +74,30 @@
       "Values": [
         "Dathomir"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Forests",
+          "Href": "https://starwars.fandom.com/wiki/Forest/Legends"
+        },
+        {
+          "Content": "Jungles",
+          "Href": "https://starwars.fandom.com/wiki/Jungle/Legends"
+        }
+      ],
+      "Values": [
+        "Forests",
+        "Jungles"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

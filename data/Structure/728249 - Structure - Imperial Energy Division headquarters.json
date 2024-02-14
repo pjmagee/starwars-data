@@ -38,9 +38,31 @@
       "Values": [
         "Central District, Coruscant"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Imperial Energy Division",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Energy_Division"
+        }
+      ],
+      "Values": [
+        "Galactic Empire",
+        "Imperial Energy Division"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 555089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Central_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 635357,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Energy_Division",

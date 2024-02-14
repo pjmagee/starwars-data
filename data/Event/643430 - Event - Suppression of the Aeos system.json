@@ -15,12 +15,12 @@
       "Label": "Date",
       "Links": [
         {
-          "Content": "35 ABY",
-          "Href": "https://starwars.fandom.com/wiki/35_ABY"
+          "Content": "34 ABY",
+          "Href": "https://starwars.fandom.com/wiki/34_ABY"
         }
       ],
       "Values": [
-        "35 ABY"
+        "34 ABY"
       ]
     },
     {
@@ -48,7 +48,7 @@
         }
       ],
       "Values": [
-        "Aeosian village and surrounding area destroyed"
+        "Aeosian village and surrounding area destroyed, including civilians"
       ]
     },
     {
@@ -60,7 +60,8 @@
         }
       ],
       "Values": [
-        "First Order"
+        "First Order",
+        "Aeosian kingdom"
       ]
     },
     {
@@ -81,13 +82,24 @@
         {
           "Content": "Tierny",
           "Href": "https://starwars.fandom.com/wiki/Tierny"
+        },
+        {
+          "Content": "Aeosian Queen",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Aeosian_Queen"
         }
       ],
       "Values": [
         "Commander Pyre",
-        "Agent Tierny"
+        "Agent Tierny",
+        "Aeosian Queen"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 619483,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thunderer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

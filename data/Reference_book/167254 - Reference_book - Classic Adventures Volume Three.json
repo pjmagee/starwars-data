@@ -48,18 +48,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Eric S. Trautmann",
-          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
-        }
-      ],
-      "Values": [
-        "Eric S. Trautmann"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -84,6 +72,18 @@
       ]
     },
     {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Eric S. Trautmann",
+          "Href": "https://starwars.fandom.com/wiki/Eric_S._Trautmann"
+        }
+      ],
+      "Values": [
+        "Eric S. Trautmann"
+      ]
+    },
+    {
       "Label": "Publisher",
       "Links": [
         {
@@ -99,12 +99,16 @@
       "Label": "Publication date",
       "Links": [
         {
+          "Content": "June 17",
+          "Href": "https://starwars.fandom.com/wiki/June_17"
+        },
+        {
           "Content": "1996",
           "Href": "https://starwars.fandom.com/wiki/1996"
         }
       ],
       "Values": [
-        "1996"
+        "June 17, 1996"
       ]
     },
     {
@@ -134,5 +138,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 29752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_in_the_Undercity",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:RPG_adventure"
+    }
+  ]
 }

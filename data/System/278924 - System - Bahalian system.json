@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-18"
@@ -56,22 +56,27 @@
     },
     {
       "Label": "Trade routes",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Llanic Spice Run",
+          "Href": "https://starwars.fandom.com/wiki/Llanic_Spice_Run/Legends"
+        }
+      ],
       "Values": [
-        "Llanic Spice Route"
+        "Llanic Spice Run"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 15984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Llanic_Spice_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 12564,
       "PageUrl": "https://starwars.fandom.com/wiki/Astal_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 15984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Llanic_Spice_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

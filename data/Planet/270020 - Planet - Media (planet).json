@@ -2,7 +2,7 @@
   "PageId": 270020,
   "PageUrl": "https://starwars.fandom.com/wiki/Media_(planet)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/67/Media-TEA.jpg/revision/latest?cb=20230622125410",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-4"
@@ -65,18 +65,49 @@
       "Values": [
         "Lucaya Cross"
       ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
+      "Links": [
+        {
+          "Content": "Urban",
+          "Href": "https://starwars.fandom.com/wiki/City/Legends"
+        }
+      ],
+      "Values": [
+        "Urban"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Tiss'shar",
+          "Href": "https://starwars.fandom.com/wiki/Tiss%27shar"
+        }
+      ],
+      "Values": [
+        "Tiss'shar"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 270021,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucaya_Cross",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 272005,
       "PageUrl": "https://starwars.fandom.com/wiki/Media_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 270021,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucaya_Cross",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

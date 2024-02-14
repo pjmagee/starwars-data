@@ -73,15 +73,36 @@
           "Href": "https://starwars.fandom.com/wiki/Forbidden_Fortress_of_the_Gorax"
         },
         {
+          "Content": "Solitary Hutt",
+          "Href": "https://starwars.fandom.com/wiki/Solitary_Hutt"
+        },
+        {
           "Content": "Tao-Ni Security Compound",
           "Href": "https://starwars.fandom.com/wiki/Tao-Ni_Security_Compound"
         }
       ],
       "Values": [
         "Forbidden Fortress of the Gorax",
+        "Solitary Hutt",
         "Tao-Ni Security Compound"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 351318,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tao-Ni_Security_Compound",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 433726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Endor_(Ewok-Gorax_conflict)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 751394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solitary_Hutt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    }
+  ]
 }

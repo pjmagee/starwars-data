@@ -48,12 +48,48 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Jerjerrod family",
           "Href": "https://starwars.fandom.com/wiki/Jerjerrod_family"
+        }
+      ],
+      "Values": [
+        "Jerjerrod family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Jax Jerjerrod",
+          "Href": "https://starwars.fandom.com/wiki/Jax_Jerjerrod"
         },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage"
+        }
+      ],
+      "Values": [
+        "Jax Jerjerrod (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Jothan Tiaan Jerjerrod",
+          "Href": "https://starwars.fandom.com/wiki/Jothan_Tiaan_Jerjerrod"
+        }
+      ],
+      "Values": [
+        "Jothan Tiaan Jerjerrod"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "First Order",
           "Href": "https://starwars.fandom.com/wiki/First_Order"
@@ -64,11 +100,21 @@
         }
       ],
       "Values": [
-        "Jerjerrod family",
         "First Order",
         "First Order Security Bureau"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 555972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jothan_Tiaan_Jerjerrod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 566373,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jax_Jerjerrod",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

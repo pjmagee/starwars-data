@@ -27,12 +27,16 @@
       "Label": "Classification",
       "Links": [
         {
-          "Content": "Cameloid",
-          "Href": "https://starwars.fandom.com/wiki/Camel"
+          "Content": "Mammalian",
+          "Href": "https://starwars.fandom.com/wiki/Mammal/Legends"
+        },
+        {
+          "Content": "cameloid",
+          "Href": "https://starwars.fandom.com/wiki/Camel/Legends"
         }
       ],
       "Values": [
-        "Cameloid"
+        "Mammalian cameloid"
       ]
     },
     {
@@ -48,6 +52,13 @@
       ]
     },
     {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Pale"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
@@ -58,9 +69,43 @@
       "Values": [
         "Tatooine"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Desert",
+          "Href": "https://starwars.fandom.com/wiki/Desert/Legends"
+        }
+      ],
+      "Values": [
+        "Desert"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Herbivore",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Herbivore"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 441096,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rooh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 447013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zardossa_Stix/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
     {
       "PageId": 47,
       "PageUrl": "https://starwars.fandom.com/wiki/Tatooine/Legends",
@@ -70,11 +115,6 @@
       "PageId": 404528,
       "PageUrl": "https://starwars.fandom.com/wiki/Eopie_stew/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 447013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zardossa_Stix/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

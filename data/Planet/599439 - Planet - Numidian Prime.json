@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "L-7",
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Jungles",
@@ -117,11 +117,16 @@
         {
           "Content": "Mol's hideout",
           "Href": "https://starwars.fandom.com/wiki/Mol%27s_hideout"
+        },
+        {
+          "Content": "temple",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_temple_(Numidian_Prime)"
         }
       ],
       "Values": [
         "Jungle outpost",
-        "Mol's hideout"
+        "Mol's hideout",
+        "A temple"
       ]
     },
     {
@@ -144,29 +149,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 622044,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Numidian_Prime",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 630846,
       "PageUrl": "https://starwars.fandom.com/wiki/Jungle_outpost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 464548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
-    },
-    {
-      "PageId": 635622,
-      "PageUrl": "https://starwars.fandom.com/wiki/Numidian_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 725085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Predavorexx",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 765486,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_temple_(Numidian_Prime)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 620646,
@@ -174,9 +164,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 622044,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Numidian_Prime",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
       "PageId": 620661,
       "PageUrl": "https://starwars.fandom.com/wiki/Mol's_hideout",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 725085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Predavorexx",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 635622,
+      "PageUrl": "https://starwars.fandom.com/wiki/Numidian_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 464548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sabacc",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 777609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Wilmar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

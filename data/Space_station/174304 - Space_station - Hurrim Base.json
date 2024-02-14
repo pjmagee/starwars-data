@@ -2,7 +2,7 @@
   "PageId": 174304,
   "PageUrl": "https://starwars.fandom.com/wiki/Hurrim_Base",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/43/HurrimBaseBattle.png/revision/latest?cb=20240126222901",
   "Data": [
     {
       "Label": "Titles",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -117,15 +117,29 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
-        },
-        {
-          "Content": "Danjar sector",
-          "Href": "https://starwars.fandom.com/wiki/Danjar_sector"
         }
       ],
       "Values": [
-        "Outer Rim Territories",
+        "Outer Rim Territories"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Danjar sector",
+          "Href": "https://starwars.fandom.com/wiki/Danjar_sector/Legends"
+        }
+      ],
+      "Values": [
         "Danjar sector"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "N-18"
       ]
     },
     {
@@ -174,9 +188,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 59359,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hurrim",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 12680,
+      "PageUrl": "https://starwars.fandom.com/wiki/Danjar_sector/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 174449,
@@ -184,9 +198,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 12680,
-      "PageUrl": "https://starwars.fandom.com/wiki/Danjar_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+      "PageId": 59359,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hurrim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

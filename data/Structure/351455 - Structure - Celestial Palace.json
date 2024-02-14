@@ -2,6 +2,7 @@
   "PageId": 351455,
   "PageUrl": "https://starwars.fandom.com/wiki/Celestial_Palace",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,18 +15,25 @@
       "Label": "Location",
       "Links": [
         {
-          "Content": "Thuruht",
-          "Href": "https://starwars.fandom.com/wiki/Thuruht"
-        },
-        {
-          "Content": "Reo system",
-          "Href": "https://starwars.fandom.com/wiki/Reo_system"
+          "Content": "astronomical object",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_astronomical_object_(Reo_system)"
         }
       ],
       "Values": [
-        "Thuruht, Reo system"
+        "An astronomical object"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 762086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bururru_religious_panel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 762552,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_astronomical_object_(Reo_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

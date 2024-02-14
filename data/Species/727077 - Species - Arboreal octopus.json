@@ -2,6 +2,7 @@
   "PageId": 727077,
   "PageUrl": "https://starwars.fandom.com/wiki/Arboreal_octopus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -33,7 +34,25 @@
       "Values": [
         "Cholganna"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Forest",
+          "Href": "https://starwars.fandom.com/wiki/Forest"
+        }
+      ],
+      "Values": [
+        "Forest"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 498756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cholganna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

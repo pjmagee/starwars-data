@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -79,6 +79,18 @@
       ]
     },
     {
+      "Label": "Sector",
+      "Links": [
+        {
+          "Content": "Sector 5",
+          "Href": "https://starwars.fandom.com/wiki/Sector_5"
+        }
+      ],
+      "Values": [
+        "Sector 5"
+      ]
+    },
+    {
       "Label": "System",
       "Links": [
         {
@@ -100,6 +112,13 @@
       ],
       "Values": [
         "Furies Gate"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "L-10"
       ]
     },
     {
@@ -167,14 +186,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 403525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tythan_military",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 367177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+      "PageId": 367184,
+      "PageUrl": "https://starwars.fandom.com/wiki/Furies_Gate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 272975,
@@ -182,14 +196,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 367184,
-      "PageUrl": "https://starwars.fandom.com/wiki/Furies_Gate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 435366,
       "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Fury_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 367177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tythos",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 403525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tythan_military",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

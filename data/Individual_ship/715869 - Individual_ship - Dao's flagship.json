@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -33,6 +33,32 @@
       ],
       "Values": [
         "Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,137 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "548 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "268 meters"
       ]
     },
     {
@@ -61,9 +87,29 @@
     },
     {
       "Label": "Armament",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "DBY-827 heavy turbolaser turrets",
+          "Href": "https://starwars.fandom.com/wiki/DBY-827_heavy_turbolaser_turret"
+        },
+        {
+          "Content": "point-defense laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
+        },
+        {
+          "Content": "proton torpedo launchers",
+          "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
+        },
+        {
+          "Content": "tractor beam projectors",
+          "Href": "https://starwars.fandom.com/wiki/Tractor_beam_projector"
+        }
+      ],
       "Values": [
-        "Equipped"
+        "8 DBY-827 heavy turbolaser turrets",
+        "52 point-defense laser cannons",
+        "4 proton torpedo launchers",
+        "6 tractor beam projectors"
       ]
     },
     {
@@ -99,12 +145,26 @@
       "Label": "Role(s)",
       "Links": [
         {
+          "Content": "Battleship",
+          "Href": "https://starwars.fandom.com/wiki/Battleship"
+        },
+        {
           "Content": "Flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
+        },
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "carrier",
+          "Href": "https://starwars.fandom.com/wiki/Carrier"
         }
       ],
       "Values": [
-        "Flagship"
+        "Battleship",
+        "Flagship",
+        "Starfighter carrier"
       ]
     },
     {

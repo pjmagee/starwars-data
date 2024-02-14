@@ -60,7 +60,14 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "L-17"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forested",
@@ -110,6 +117,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 275059,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alessia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
       "PageId": 372503,
       "PageUrl": "https://starwars.fandom.com/wiki/Tarsa_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
@@ -118,11 +130,6 @@
       "PageId": 435629,
       "PageUrl": "https://starwars.fandom.com/wiki/Imperial_relay_station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 275059,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alessia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

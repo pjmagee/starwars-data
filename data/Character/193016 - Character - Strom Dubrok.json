@@ -24,23 +24,11 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Hair color",
       "Links": [
         {
           "Content": "Brown",
-          "Href": "https://starwars.fandom.com/wiki/Brown"
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         }
       ],
       "Values": [
@@ -52,6 +40,13 @@
       "Links": [],
       "Values": [
         "Dark"
+      ]
+    },
+    {
+      "Label": "Skin color",
+      "Links": [],
+      "Values": [
+        "Light"
       ]
     },
     {
@@ -72,5 +67,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 668717,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Calamari_Orbital_Shipyards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

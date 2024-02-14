@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-11",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Oceans",
@@ -45,6 +45,18 @@
       ],
       "Values": [
         "Oceans"
+      ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "Glumbrig eel",
+          "Href": "https://starwars.fandom.com/wiki/Glumbrig_eel"
+        }
+      ],
+      "Values": [
+        "Glumbrig eel"
       ]
     },
     {
@@ -62,14 +74,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 479048,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mantu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 477940,
       "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 476852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chata_Hyoki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 769502,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glumbrig_eel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 453160,
@@ -77,8 +94,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 476852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chata_Hyoki",
+      "PageId": 479048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

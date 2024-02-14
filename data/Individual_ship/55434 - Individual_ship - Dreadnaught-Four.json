@@ -2,6 +2,7 @@
   "PageId": 55434,
   "PageUrl": "https://starwars.fandom.com/wiki/Dreadnaught-Four",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -54,7 +55,7 @@
       "Links": [
         {
           "Content": "Battle of Outbound Flight",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Outbound_Flight"
+          "Href": "https://starwars.fandom.com/wiki/Battle_for_Outbound_Flight"
         },
         {
           "Content": "Battle of the Redoubt",
@@ -122,5 +123,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 739586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_Dreadnaught-Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 775113,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outbound_Flight_remembrance_ceremony",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    }
+  ]
 }

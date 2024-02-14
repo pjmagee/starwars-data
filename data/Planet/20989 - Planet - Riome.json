@@ -48,14 +48,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "M-18"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Ice",
@@ -68,13 +68,28 @@
     },
     {
       "Label": "Native species",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Sea-snake",
+          "Href": "https://starwars.fandom.com/wiki/Sea-snake"
+        }
+      ],
       "Values": [
-        "Sea snake"
+        "Sea-snake"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 751734,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sea-snake",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 17882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dorvalla_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
     {
       "PageId": 20990,
       "PageUrl": "https://starwars.fandom.com/wiki/Caba'Zan",
@@ -84,11 +99,6 @@
       "PageId": 19912,
       "PageUrl": "https://starwars.fandom.com/wiki/Patch_Bruit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 17882,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dorvalla_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

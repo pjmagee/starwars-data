@@ -17,21 +17,31 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "The Slice"
       ]
     },
     {
       "Label": "Sector",
       "Links": [
         {
+          "Content": "Kashyyyk Region",
+          "Href": "https://starwars.fandom.com/wiki/Kashyyyk_Region"
+        },
+        {
           "Content": "Halla sector",
           "Href": "https://starwars.fandom.com/wiki/Halla_sector/Legends"
         }
       ],
       "Values": [
+        "Kashyyyk Region",
         "Halla sector"
       ]
     },
@@ -48,7 +58,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Orbital position",
+      "Links": [],
+      "Values": [
+        "1"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "R-8"
@@ -67,13 +84,6 @@
       ]
     },
     {
-      "Label": "Primary terrain",
-      "Links": [],
-      "Values": [
-        "Industrial"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -88,14 +98,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 271353,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 756557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_senator_(Peg_Shar_I)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 313731,
       "PageUrl": "https://starwars.fandom.com/wiki/Peg_Shar_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 271353,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lesser_Lantillian_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

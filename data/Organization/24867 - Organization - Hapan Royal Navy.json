@@ -13,30 +13,38 @@
     },
     {
       "Label": "Organization type",
-      "Links": [
-        {
-          "Content": "Navy",
-          "Href": "https://starwars.fandom.com/wiki/Navy/Legends"
-        }
-      ],
+      "Links": [],
       "Values": [
-        "Navy"
+        "Military"
       ]
     },
     {
       "Label": "Leader(s)",
       "Links": [
         {
-          "Content": "Prince",
-          "Href": "https://starwars.fandom.com/wiki/Prince/Legends"
-        },
-        {
-          "Content": "Isolder",
-          "Href": "https://starwars.fandom.com/wiki/Isolder"
+          "Content": "Royal High Commander",
+          "Href": "https://starwars.fandom.com/wiki/Royal_High_Commander"
         }
       ],
       "Values": [
-        "Prince Isolder"
+        "Royal High Commander"
+      ]
+    },
+    {
+      "Label": "Sub-group(s)",
+      "Links": [
+        {
+          "Content": "Royal Space Marines",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Space_Marines"
+        },
+        {
+          "Content": "SigTel",
+          "Href": "https://starwars.fandom.com/wiki/SigTel"
+        }
+      ],
+      "Values": [
+        "Royal Space Marines",
+        "SigTel"
       ]
     },
     {
@@ -49,18 +57,6 @@
       ],
       "Values": [
         "Hapes"
-      ]
-    },
-    {
-      "Label": "Date fragmented",
-      "Links": [
-        {
-          "Content": "25 ABY",
-          "Href": "https://starwars.fandom.com/wiki/25_ABY/Legends"
-        }
-      ],
-      "Values": [
-        "25 ABY"
       ]
     },
     {
@@ -78,46 +74,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 85530,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aleson_Gray",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 1079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
-    },
-    {
-      "PageId": 85533,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 660160,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Treaty",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
-    },
-    {
-      "PageId": 372674,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vhork_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 374028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Volgh_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 376272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aegel_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 419281,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luvalle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 119209,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Eighth_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
@@ -128,14 +84,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
-      "PageId": 119014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen",
+      "PageId": 85533,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendall",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 164042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Benwick_Chell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 164240,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crimpler",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 660160,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Treaty",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Treaty"
     },
     {
       "PageId": 24868,
       "PageUrl": "https://starwars.fandom.com/wiki/Song_of_War",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 85530,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aleson_Gray",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 373199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen_II",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 376287,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daphoros",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 419281,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luvalle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 1079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
       "PageId": 376273,
@@ -158,29 +154,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
+      "PageId": 119014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 374928,
       "PageUrl": "https://starwars.fandom.com/wiki/Stella-class_frigate",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 373199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dragon_Queen_II",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 372674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vhork_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 376287,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daphoros",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 374028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Volgh_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 164042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Benwick_Chell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 376272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aegel_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 164240,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crimpler",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 4339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Battle_Dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 13147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Miy'til_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

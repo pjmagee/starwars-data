@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Ruggle Schmong",
+          "Href": "https://starwars.fandom.com/wiki/Ruggle_Schmong"
+        }
+      ],
+      "Values": [
+        "Ruggle Schmong"
+      ]
+    },
+    {
       "Label": "Manufacturer",
       "Links": [
         {
@@ -29,18 +41,6 @@
       ]
     },
     {
-      "Label": "Designer",
-      "Links": [
-        {
-          "Content": "Ruggle Schmong",
-          "Href": "https://starwars.fandom.com/wiki/Ruggle_Schmong"
-        }
-      ],
-      "Values": [
-        "Ruggle Schmong"
-      ]
-    },
-    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Battleship",
@@ -123,12 +123,12 @@
       "Label": "Engine unit(s)",
       "Links": [
         {
-          "Content": "engines",
-          "Href": "https://starwars.fandom.com/wiki/Engine"
+          "Content": "sublight engines",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
         }
       ],
       "Values": [
-        "Equipped with 16 engines"
+        "16 sublight engines"
       ]
     },
     {
@@ -149,6 +149,23 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "power generator",
+          "Href": "https://starwars.fandom.com/wiki/Power_generator"
+        },
+        {
+          "Content": "waste heat",
+          "Href": "https://starwars.fandom.com/wiki/Waste_heat_sink"
+        }
+      ],
+      "Values": [
+        "Primary power generator",
+        "Secondary power plant (waste heat capture and distribution)"
       ]
     },
     {
@@ -207,6 +224,10 @@
           "Href": "https://starwars.fandom.com/wiki/Mega-ion_cannon"
         },
         {
+          "Content": "weapon",
+          "Href": "https://starwars.fandom.com/wiki/Weapon"
+        },
+        {
           "Content": "turbolasers",
           "Href": "https://starwars.fandom.com/wiki/Turbolaser"
         },
@@ -223,7 +244,7 @@
           "Href": "https://starwars.fandom.com/wiki/Ion_cannon"
         },
         {
-          "Content": "Point-defense",
+          "Content": "point-defense",
           "Href": "https://starwars.fandom.com/wiki/Point-defense_laser_cannon"
         },
         {
@@ -231,7 +252,7 @@
           "Href": "https://starwars.fandom.com/wiki/Laser_cannon"
         },
         {
-          "Content": "Proton torpedo launchers",
+          "Content": "proton torpedo launchers",
           "Href": "https://starwars.fandom.com/wiki/Proton_torpedo_launcher"
         },
         {
@@ -240,29 +261,33 @@
         }
       ],
       "Values": [
-        "Mega-ion cannons (2)",
-        "Dual turbolasers (500)",
-        "Twin heavy turbolaser battery turrets (20)",
-        "Twin medium turbolaser battery turrets (20)",
-        "Twin light turbolaser battery turrets (200)",
+        "2 Mega-ion cannons (primary weapon)",
+        "500 dual turbolasers",
+        "20 twin heavy turbolaser battery turrets",
+        "20 twin medium turbolaser battery turrets",
+        "200 twin light turbolaser battery turrets",
         "Flak guns",
         "Ion cannons",
-        "Point-defense twin light laser cannon turrets (400)",
-        "Proton torpedo launchers (10)",
+        "400 point-defense twin light laser cannon turrets",
+        "10 proton torpedo launchers",
         "5 torpedoes each",
-        "Heavy tractor beam emitters (2)"
+        "2 heavy tractor beam emitters"
       ]
     },
     {
       "Label": "Complement",
       "Links": [
         {
-          "Content": "Vulture-class droid starfighters",
-          "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
+          "Content": "droid starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Droid_starfighter"
         },
         {
-          "Content": "Hyena-class Droid Bombers",
+          "Content": "Hyena-class Droid Fighter/Bombers",
           "Href": "https://starwars.fandom.com/wiki/Hyena-class_Droid_Fighter/Bomber"
+        },
+        {
+          "Content": "Variable Geometry Self-Propelled Battle Droid, Mark Is",
+          "Href": "https://starwars.fandom.com/wiki/Variable_Geometry_Self-Propelled_Battle_Droid,_Mark_I"
         },
         {
           "Content": "Droch-class boarding ships",
@@ -278,14 +303,22 @@
         }
       ],
       "Values": [
-        "Vulture-class droid starfighters (144)",
-        "Hyena-class Droid Bombers (48)",
+        "Ammunition",
+        "200+ droid starfighters",
+        "48 Hyena-class Droid Fighter/Bombers",
+        "144 Variable Geometry Self-Propelled Battle Droid, Mark Is",
         "Droch-class boarding ships",
         "Landing craft",
         "Ground combat vehicles",
         "Shuttles",
-        "Ship's boats",
-        "Utility vehicles"
+        "Other utility vehicles"
+      ]
+    },
+    {
+      "Label": "Docking bays",
+      "Links": [],
+      "Values": [
+        "Several"
       ]
     },
     {
@@ -302,6 +335,13 @@
       ],
       "Values": [
         "23,350 officers, droids and other enlisted crew"
+      ]
+    },
+    {
+      "Label": "Minimum crew",
+      "Links": [],
+      "Values": [
+        "900"
       ]
     },
     {
@@ -325,7 +365,7 @@
         }
       ],
       "Values": [
-        "85,000 tons (encumbrance)"
+        "85,000 tons"
       ]
     },
     {
@@ -353,15 +393,57 @@
       ]
     },
     {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Communications unit",
+          "Href": "https://starwars.fandom.com/wiki/Comm_unit"
+        }
+      ],
+      "Values": [
+        "Communications unit",
+        "Internal communications"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "Plasma rotors",
+          "Href": "https://starwars.fandom.com/wiki/Plasma_rotor"
+        }
+      ],
+      "Values": [
+        "Plasma rotors"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [
         {
           "Content": "Flagship",
           "Href": "https://starwars.fandom.com/wiki/Flagship"
+        },
+        {
+          "Content": "Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Fleet"
         }
       ],
       "Values": [
-        "Flagship"
+        "Flagship",
+        "Fleet destruction"
+      ]
+    },
+    {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY"
+        }
+      ],
+      "Values": [
+        "By 22 BBY"
       ]
     },
     {
@@ -384,6 +466,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 474180,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 485838,
       "PageUrl": "https://starwars.fandom.com/wiki/Free_Dac_Volunteers_Engineering_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
@@ -392,11 +479,6 @@
       "PageId": 486848,
       "PageUrl": "https://starwars.fandom.com/wiki/Pammant_Docks",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 474180,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malevolence",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

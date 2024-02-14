@@ -2,13 +2,25 @@
   "PageId": 453660,
   "PageUrl": "https://starwars.fandom.com/wiki/Delta-7_Aethersprite-class_light_interceptor",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/79/Jedi_Starfighter_EpII.png/revision/latest?cb=20150722030412",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/79/Jedi_Starfighter_EpII.png/revision/latest?cb=20240206050216",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Delta-7 Aethersprite-class light interceptor"
+      ]
+    },
+    {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Walex Blissex",
+          "Href": "https://starwars.fandom.com/wiki/Walex_Cantwell_Blissex_I"
+        }
+      ],
+      "Values": [
+        "Walex Blissex"
       ]
     },
     {
@@ -28,7 +40,7 @@
       "Links": [
         {
           "Content": "Delta-series",
-          "Href": "https://starwars.fandom.com/wiki/Delta-series"
+          "Href": "https://starwars.fandom.com/wiki/Delta-series_fighter"
         }
       ],
       "Values": [
@@ -43,7 +55,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -178,8 +190,8 @@
       "Label": "Armament",
       "Links": [
         {
-          "Content": "quad-pulse laser cannons",
-          "Href": "https://starwars.fandom.com/wiki/Quad-pulse_laser_cannon"
+          "Content": "SDS 8/5 dual laser cannons",
+          "Href": "https://starwars.fandom.com/wiki/SDS_8/5_dual_laser_cannon"
         }
       ],
       "Values": [
@@ -273,41 +285,26 @@
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
         {
+          "Content": "Galactic Republic",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
+        },
+        {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
         "Jedi Order",
+        "Galactic Republic",
         "Alliance to Restore the Republic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 631846,
-      "PageUrl": "https://starwars.fandom.com/wiki/Delta-series",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
-    },
-    {
-      "PageId": 563262,
-      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn's_Delta-7_Aethersprite-class_light_interceptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 563263,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_Delta-7_Aethersprite-class_light_interceptor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 170598,
       "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Alliance_Starfighter_Corps",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 499428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Systems_Engineering",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 575879,
@@ -320,8 +317,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
+      "PageId": 631846,
+      "PageUrl": "https://starwars.fandom.com/wiki/Delta-series_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
       "PageId": 601942,
       "PageUrl": "https://starwars.fandom.com/wiki/Jocasta_Nu's_Delta-7B_Aethersprite-class_light_interceptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 784450,
+      "PageUrl": "https://starwars.fandom.com/wiki/SDS_8/5_dual_laser_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 658273,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plo_Koon's_Delta-7_Aethersprite-class_light_interceptor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -330,8 +342,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 658273,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plo_Koon's_Delta-7_Aethersprite-class_light_interceptor",
+      "PageId": 499428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Systems_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 563262,
+      "PageUrl": "https://starwars.fandom.com/wiki/Qui-Gon_Jinn's_Delta-7_Aethersprite-class_light_interceptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 563263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_Delta-7_Aethersprite-class_light_interceptor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

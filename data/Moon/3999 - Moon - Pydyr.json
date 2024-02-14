@@ -15,16 +15,12 @@
       "Label": "Region(s)",
       "Links": [
         {
-          "Content": "Wild Space",
-          "Href": "https://starwars.fandom.com/wiki/Wild_Space/Legends"
-        },
-        {
-          "Content": "Borderland Regions",
-          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
         }
       ],
       "Values": [
-        "Wild Space; Borderland Regions"
+        "Outer Rim Territories"
       ]
     },
     {
@@ -33,10 +29,15 @@
         {
           "Content": "Mortex sector",
           "Href": "https://starwars.fandom.com/wiki/Mortex_sector"
+        },
+        {
+          "Content": "Almanian sector",
+          "Href": "https://starwars.fandom.com/wiki/Almanian_sector"
         }
       ],
       "Values": [
-        "Mortex sector"
+        "Mortex sector",
+        "Almanian sector"
       ]
     },
     {
@@ -64,14 +65,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-5"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Oceans",
@@ -103,7 +104,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -124,7 +125,7 @@
       "Links": [
         {
           "Content": "Pydyrian language",
-          "Href": "https://starwars.fandom.com/wiki/Pydyrian_language"
+          "Href": "https://starwars.fandom.com/wiki/Pydyrian_(language)"
         }
       ],
       "Values": [
@@ -177,34 +178,9 @@
   ],
   "Relationships": [
     {
-      "PageId": 294905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sarasu_Taalon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 7468,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almania/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 29439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akanah_Norand_Goss_Pell",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 328443,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fallanassi_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 327923,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Fallanassi_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 221162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Pydyr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+      "PageId": 70128,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_Uprising",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     },
     {
       "PageId": 11998,
@@ -212,14 +188,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
     },
     {
-      "PageId": 70128,
-      "PageUrl": "https://starwars.fandom.com/wiki/Almanian_Uprising",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+      "PageId": 29915,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pydyrian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 225311,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Pydyr",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 447252,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pydyrian_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
     },
     {
       "PageId": 330571,
@@ -232,13 +208,53 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 29915,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pydyrian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 9291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corocus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 221162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Pydyr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 774371,
+      "PageUrl": "https://starwars.fandom.com/wiki/PanComm_S-thread_booth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 327923,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_in_the_Fallanassi_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 328443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fallanassi_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 7468,
+      "PageUrl": "https://starwars.fandom.com/wiki/Almania/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
       "PageId": 16302,
       "PageUrl": "https://starwars.fandom.com/wiki/Wuja_Wojaine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 225311,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Pydyr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 29439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akanah_Norand_Goss_Pell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 294905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sarasu_Taalon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]

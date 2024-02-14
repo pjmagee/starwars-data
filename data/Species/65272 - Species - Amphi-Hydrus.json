@@ -2,7 +2,7 @@
   "PageId": 65272,
   "PageUrl": "https://starwars.fandom.com/wiki/Amphi-Hydrus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/30/Amphi-Hydrus.jpg/revision/latest?cb=20060408025438",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e1/Amphi-Hydrus.png/revision/latest?cb=20240113005627",
   "Data": [
     {
       "Label": "Titles",
@@ -25,7 +25,12 @@
     },
     {
       "Label": "Skin color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Green",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
         "Green and brown"
       ]
@@ -34,19 +39,19 @@
       "Label": "Eye color",
       "Links": [],
       "Values": [
-        "Red"
+        "Orange"
       ]
     },
     {
       "Label": "Distinctions",
       "Links": [
         {
-          "Content": "Telepathic",
-          "Href": "https://starwars.fandom.com/wiki/Telepathy/Legends"
+          "Content": "Force-sensitive",
+          "Href": "https://starwars.fandom.com/wiki/Force-sensitive/Legends"
         }
       ],
       "Values": [
-        "Telepathic"
+        "Force-sensitive"
       ]
     },
     {
@@ -60,18 +65,30 @@
       "Values": [
         "Dac"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+        }
+      ],
+      "Values": [
+        "Swamps"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 945,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 12599,
       "PageUrl": "https://starwars.fandom.com/wiki/Calamari_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

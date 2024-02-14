@@ -2,6 +2,7 @@
   "PageId": 654501,
   "PageUrl": "https://starwars.fandom.com/wiki/Denise_Gough",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/94/Denise_Gough.jpg/revision/latest?cb=20221230010953",
   "Data": [
     {
       "Label": "Titles",
@@ -11,6 +12,28 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "February 28",
+          "Href": "https://starwars.fandom.com/wiki/February_28"
+        },
+        {
+          "Content": "1980",
+          "Href": "https://starwars.fandom.com/wiki/1980"
+        }
+      ],
+      "Values": [
+        "February 28, 1980",
+        " , "
+      ]
+    },
+    {
+      "Label": "Nationality",
+      "Links": [],
+      "Values": []
+    },
+    {
       "Label": "Occupation",
       "Links": [],
       "Values": [
@@ -18,5 +41,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 730047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andor_Season_One",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
+    },
+    {
+      "PageId": 730048,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andor_Season_Two",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_season"
+    },
+    {
+      "PageId": 611484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Andor_(television_series)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_series"
+    }
+  ]
 }

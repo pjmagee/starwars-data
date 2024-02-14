@@ -13,7 +13,12 @@
     },
     {
       "Label": "Genre(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Galan-Kalank",
+          "Href": "https://starwars.fandom.com/wiki/Galan-Kalank"
+        }
+      ],
       "Values": [
         "Galan-Kalank"
       ]
@@ -36,7 +41,12 @@
     },
     {
       "Label": "Affiliation",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Atchapat Family",
+          "Href": "https://starwars.fandom.com/wiki/Atchapat_Family"
+        }
+      ],
       "Values": [
         "Atchapat Family"
       ]
@@ -44,14 +54,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 721718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Barg'no_Atchapat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 751819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galan-Kalank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:IU_media"
+    },
+    {
+      "PageId": 751818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atchapat_Family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 721716,
       "PageUrl": "https://starwars.fandom.com/wiki/Svi'no_Atchapat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Musician"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 721718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barg'no_Atchapat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

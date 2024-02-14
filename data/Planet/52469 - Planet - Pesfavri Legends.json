@@ -2,7 +2,7 @@
   "PageId": 52469,
   "PageUrl": "https://starwars.fandom.com/wiki/Pesfavri/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d0/Pesfavri-TEA.jpg/revision/latest?cb=20220825093654",
   "Data": [
     {
       "Label": "Titles",
@@ -27,12 +27,12 @@
       "Label": "Sector",
       "Links": [
         {
-          "Content": "Chiss Ascendancy",
+          "Content": "Chiss Space",
           "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy/Legends"
         }
       ],
       "Values": [
-        "Chiss Ascendancy"
+        "Chiss Space"
       ]
     },
     {
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "G-8"
@@ -67,7 +67,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Chiss Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Defense_Fleet"
+        }
+      ],
+      "Values": [
+        "Chiss Defense Fleet base"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chiss",
@@ -76,18 +88,6 @@
       ],
       "Values": [
         "Chiss"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Cheunh",
-          "Href": "https://starwars.fandom.com/wiki/Cheunh/Legends"
-        }
-      ],
-      "Values": [
-        "Cheunh"
       ]
     },
     {
@@ -100,14 +100,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 335916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pesfavri_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
       "PageId": 344188,
       "PageUrl": "https://starwars.fandom.com/wiki/Way_of_Schesa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 335916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pesfavri_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 666547,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Defense_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 674234,
   "PageUrl": "https://starwars.fandom.com/wiki/Pikka_Adren",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/65/Pikka-adren-concept-art.png/revision/latest?cb=20220212024425",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/65/Pikka-adren-concept-art.png/revision/latest?cb=20230815213744",
   "Data": [
     {
       "Label": "Titles",
@@ -36,6 +36,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.68 meters (5 ft, 6 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -58,7 +81,19 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Tan"
+        "Dark"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Joss Adren",
+          "Href": "https://starwars.fandom.com/wiki/Joss_Adren"
+        }
+      ],
+      "Values": [
+        "Joss Adren"
       ]
     },
     {
@@ -76,9 +111,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 674233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joss_Adren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 680154,
       "PageUrl": "https://starwars.fandom.com/wiki/Aurora_III",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 785045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

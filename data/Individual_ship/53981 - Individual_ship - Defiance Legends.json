@@ -12,7 +12,31 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Mon Calamari Shipyards",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Shipyards/Legends"
+        }
+      ],
+      "Values": [
+        "Mon Calamari Shipyards"
+      ]
+    },
+    {
+      "Label": "Product line",
+      "Links": [
+        {
+          "Content": "Mon Calamari Star Cruisers",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Calamari_Star_Cruiser"
+        }
+      ],
+      "Values": [
+        "Mon Calamari Star Cruisers"
+      ]
+    },
+    {
+      "Label": "Model",
       "Links": [
         {
           "Content": "MC80 Home One type Star Cruiser",
@@ -24,20 +48,61 @@
       ]
     },
     {
-      "Label": "Role(s)",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Battleship",
-          "Href": "https://starwars.fandom.com/wiki/Battleship/Legends"
-        },
-        {
-          "Content": "Carrier",
-          "Href": "https://starwars.fandom.com/wiki/Carrier/Legends"
+          "Content": "Star Cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Star_Cruiser/Legends"
         }
       ],
       "Values": [
-        "Battleship",
-        "Carrier"
+        "Star Cruiser"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
+      "Values": [
+        "1,200 meters"
+      ]
+    },
+    {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "Red Group",
+          "Href": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)/Legends"
+        },
+        {
+          "Content": "Blue Group",
+          "Href": "https://starwars.fandom.com/wiki/Blue_Squadron_(Rebel_Alliance)/Legends"
+        },
+        {
+          "Content": "Green Group",
+          "Href": "https://starwars.fandom.com/wiki/Green_Squadron_(Rebel_Alliance)/Legends"
+        }
+      ],
+      "Values": [
+        "Red Group",
+        "Blue Group",
+        "Green Group"
+      ]
+    },
+    {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Command ship",
+          "Href": "https://starwars.fandom.com/wiki/Command_ship/Legends"
+        }
+      ],
+      "Values": [
+        "Command ship"
       ]
     },
     {
@@ -56,20 +121,12 @@
           "Href": "https://starwars.fandom.com/wiki/Calamarian_Revolt"
         },
         {
-          "Content": "Battle of Turkana",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Turkana/Legends"
-        },
-        {
           "Content": "Attack on the Defiance",
           "Href": "https://starwars.fandom.com/wiki/Attack_on_the_Defiance"
         },
         {
           "Content": "Evacuation of Yavin",
           "Href": "https://starwars.fandom.com/wiki/Evacuation_of_Yavin"
-        },
-        {
-          "Content": "Imperial",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
           "Content": "Battle of Sullust",
@@ -88,10 +145,8 @@
         "Subjugation of Mon Calamari",
         "Galactic Civil War",
         "Calamarian Revolt",
-        "Battle of Turkana",
         "Attack on the Defiance",
         "Evacuation of Yavin",
-        "Numerous minor battles with Imperial forces",
         "Battle of Sullust",
         "Battle of Endor",
         "Battle of Bilbringi"
@@ -124,16 +179,11 @@
         {
           "Content": "New Republic Defense Fleet",
           "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet/Legends"
-        },
-        {
-          "Content": "Third Battle Group",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic_Third_Fleet"
         }
       ],
       "Values": [
         "Alliance Fleet",
-        "New Republic Defense Fleet",
-        "Third Battle Group"
+        "New Republic Defense Fleet"
       ]
     },
     {
@@ -142,10 +192,15 @@
         {
           "Content": "Defiance Task Force",
           "Href": "https://starwars.fandom.com/wiki/Defiance_Task_Force"
+        },
+        {
+          "Content": "New Republic Third Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Third_Fleet"
         }
       ],
       "Values": [
-        "Defiance Task Force"
+        "Defiance Task Force",
+        "New Republic Third Fleet"
       ]
     },
     {
@@ -164,16 +219,16 @@
       "Label": "Crewmembers",
       "Links": [
         {
-          "Content": "Devers",
-          "Href": "https://starwars.fandom.com/wiki/Devers_(Rebel_Alliance)"
-        },
-        {
           "Content": "Keyan Farlander",
           "Href": "https://starwars.fandom.com/wiki/Keyan_Farlander/Legends"
         },
         {
           "Content": "Breth Gart",
           "Href": "https://starwars.fandom.com/wiki/Breth_Gart"
+        },
+        {
+          "Content": "Devers",
+          "Href": "https://starwars.fandom.com/wiki/Devers_(Rebel_Alliance)"
         },
         {
           "Content": "Olin Garn",
@@ -184,30 +239,40 @@
           "Href": "https://starwars.fandom.com/wiki/Ace_Azzameen/Legends"
         },
         {
-          "Content": "Voxx",
-          "Href": "https://starwars.fandom.com/wiki/Voxx"
+          "Content": "Jorgis",
+          "Href": "https://starwars.fandom.com/wiki/Jorgis"
+        },
+        {
+          "Content": "Natalie Darr",
+          "Href": "https://starwars.fandom.com/wiki/Natalie_Darr"
         }
       ],
       "Values": [
-        "Devers",
         "Keyan Farlander",
         "Breth Gart",
+        "Devers",
         "Olin Garn",
         "Ace Azzameen",
-        "Voxx"
+        "Jorgis",
+        "Natalie Darr"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 28633,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Third_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
     {
       "PageId": 7166,
       "PageUrl": "https://starwars.fandom.com/wiki/Gold_Squadron_(Rebel_Alliance)/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 28633,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_Third_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 7165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 58677,
@@ -217,7 +282,7 @@
     {
       "PageId": 5631,
       "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Rebel_Alliance)/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

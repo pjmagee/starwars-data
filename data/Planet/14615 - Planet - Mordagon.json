@@ -2,7 +2,7 @@
   "PageId": 14615,
   "PageUrl": "https://starwars.fandom.com/wiki/Mordagon",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b2/Mordagon-TEA.jpg/revision/latest?cb=20230730170731",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -48,30 +53,18 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-12"
-      ]
-    },
-    {
-      "Label": "Native species",
-      "Links": [
-        {
-          "Content": "Mordageen",
-          "Href": "https://starwars.fandom.com/wiki/Mordageen"
-        }
-      ],
-      "Values": [
-        "Mordageen"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 391082,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mordagon_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 30714,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mordageen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 1146,
@@ -79,9 +72,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 30714,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mordageen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 391082,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mordagon_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

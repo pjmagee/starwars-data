@@ -84,7 +84,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-7"
@@ -115,12 +115,12 @@
       "Label": "Diameter",
       "Links": [
         {
-          "Content": "km",
+          "Content": "kilometers",
           "Href": "https://starwars.fandom.com/wiki/Kilometer/Legends"
         }
       ],
       "Values": [
-        "2,730 km"
+        "2,730 kilometers"
       ]
     },
     {
@@ -160,7 +160,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocks",
@@ -222,19 +222,19 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Demon",
+          "Content": "Maelibi",
           "Href": "https://starwars.fandom.com/wiki/Maelibus"
         }
       ],
       "Values": [
-        "Demon"
+        "Maelibi"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
-          "Content": "Angel",
+          "Content": "Diathim",
           "Href": "https://starwars.fandom.com/wiki/Diathim/Legends"
         },
         {
@@ -255,7 +255,7 @@
         }
       ],
       "Values": [
-        "Angel",
+        "Diathim",
         "Human",
         "Ithorian",
         "Nikto",
@@ -369,24 +369,44 @@
   ],
   "Relationships": [
     {
-      "PageId": 242791,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xandu/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 273828,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thicket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 242755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jaybo_Hood/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 243807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Iego/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 242756,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amit_Noloff/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 274066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Thicket",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 242808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taquito/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 12877,
+      "PageUrl": "https://starwars.fandom.com/wiki/Extrictarium_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 242773,
+      "PageUrl": "https://starwars.fandom.com/wiki/Millius_Prime/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 661411,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 40905,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Scatter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 40906,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Boneyard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 29146,
@@ -397,6 +417,86 @@
       "PageId": 29147,
       "PageUrl": "https://starwars.fandom.com/wiki/Maelibus",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 293572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliffhold_meeting_hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 293578,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iego_council/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clicksticks_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211949,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alkasaners_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anno_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211951,
+      "PageUrl": "https://starwars.fandom.com/wiki/Demon_Stickers_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211952,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Bantha_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whyrens_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211954,
+      "PageUrl": "https://starwars.fandom.com/wiki/To_Endure_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211955,
+      "PageUrl": "https://starwars.fandom.com/wiki/Greelcane_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 211956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brightrods_Tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 17562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iego_system/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 414402,
+      "PageUrl": "https://starwars.fandom.com/wiki/Frontier_Inn/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 418297,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Iego_structure/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 204098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rawk's_Nest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 90012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flax'Supt'ai",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 413437,
@@ -419,79 +519,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 204098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rawk's_Nest",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 242744,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drol/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
-    },
-    {
-      "PageId": 273828,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thicket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 12877,
-      "PageUrl": "https://starwars.fandom.com/wiki/Extrictarium_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 242785,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cliffhold/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 293572,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cliffhold_meeting_hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 274066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_the_Thicket",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 414402,
-      "PageUrl": "https://starwars.fandom.com/wiki/Frontier_Inn/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 418297,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Iego_structure/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
       "PageId": 204107,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Iego",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 243807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Iego/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 293578,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iego_council/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 661411,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carnivorous_plant/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 90012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flax'Supt'ai",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 242773,
-      "PageUrl": "https://starwars.fandom.com/wiki/Millius_Prime/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 242791,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xandu/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 242809,
@@ -499,9 +534,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 17562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iego_system/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+      "PageId": 242744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Drol/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 242755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaybo_Hood/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 242756,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amit_Noloff/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 242808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taquito/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 242785,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cliffhold/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     }
   ]
 }

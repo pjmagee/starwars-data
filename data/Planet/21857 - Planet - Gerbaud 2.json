@@ -2,7 +2,7 @@
   "PageId": 21857,
   "PageUrl": "https://starwars.fandom.com/wiki/Gerbaud_2",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/fd/Gerbaud_2.jpg/revision/latest?cb=20240127040631",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Expansion Region",
           "Href": "https://starwars.fandom.com/wiki/Expansion_Region/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Expansion Region"
+        "Expansion Region",
+        "The Slice"
       ]
     },
     {
@@ -48,25 +53,40 @@
       ]
     },
     {
-      "Label": "Suns",
-      "Links": [],
-      "Values": [
-        "1: Sepan"
-      ]
-    },
-    {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "P-13"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        }
+      ],
+      "Values": [
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 386002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Tropsobor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 18483,
       "PageUrl": "https://starwars.fandom.com/wiki/Sepan_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 27969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sepan_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

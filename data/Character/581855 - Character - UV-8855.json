@@ -27,12 +27,12 @@
       "Label": "Born",
       "Links": [
         {
-          "Content": "19 ABY",
-          "Href": "https://starwars.fandom.com/wiki/19_ABY"
+          "Content": "18 ABY",
+          "Href": "https://starwars.fandom.com/wiki/18_ABY"
         }
       ],
       "Values": [
-        "19 ABY, Parnassos"
+        "18 ABY, Parnassos"
       ]
     },
     {
@@ -91,24 +91,63 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Scyre",
           "Href": "https://starwars.fandom.com/wiki/Scyre"
-        },
-        {
-          "Content": "First Order",
-          "Href": "https://starwars.fandom.com/wiki/First_Order"
         }
       ],
       "Values": [
-        "Scyre",
-        "First Order"
+        "Scyre"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Keldo",
+          "Href": "https://starwars.fandom.com/wiki/Keldo"
+        },
+        {
+          "Content": "Ylva",
+          "Href": "https://starwars.fandom.com/wiki/Ylva"
+        }
+      ],
+      "Values": [
+        "Keldo",
+        "Ylva"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "Stormtrooper Corps",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper_Corps_(First_Order)"
+        }
+      ],
+      "Values": [
+        "First Order",
+        "Stormtrooper Corps"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 585263,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ylva",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 576347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Keldo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
     {
       "PageId": 616595,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Parnassos",

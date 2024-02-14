@@ -72,6 +72,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -108,6 +115,18 @@
       ]
     },
     {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Ozzel family",
+          "Href": "https://starwars.fandom.com/wiki/Ozzel_family/Legends"
+        }
+      ],
+      "Values": [
+        "Ozzel family"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -117,6 +136,10 @@
         {
           "Content": "Republic Navy",
           "Href": "https://starwars.fandom.com/wiki/Republic_Navy"
+        },
+        {
+          "Content": "44th Special Operations Division",
+          "Href": "https://starwars.fandom.com/wiki/44th_Special_Operations_Division"
         },
         {
           "Content": "Galactic Empire",
@@ -129,32 +152,28 @@
         {
           "Content": "Death Squadron",
           "Href": "https://starwars.fandom.com/wiki/Death_Squadron/Legends"
-        },
-        {
-          "Content": "Ozzel family",
-          "Href": "https://starwars.fandom.com/wiki/Ozzel_family"
         }
       ],
       "Values": [
         "Galactic Republic",
         "Republic Navy",
+        "44th Special Operations Division",
         "Galactic Empire",
         "Imperial Navy",
-        "Death Squadron",
-        "Ozzel family"
+        "Death Squadron"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 52479,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reprisal_(Imperial_II-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 265298,
       "PageUrl": "https://starwars.fandom.com/wiki/44th_Special_Operations_Division",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 725,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 6133,
@@ -162,9 +181,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 52479,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reprisal_(Imperial_II-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Squadron/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

@@ -15,16 +15,16 @@
       "Label": "Model",
       "Links": [
         {
-          "Content": "ST-70 Assault Ship",
-          "Href": "https://starwars.fandom.com/wiki/ST-70_Assault_Ship"
+          "Content": "ST-70 class Razor Crest M-111",
+          "Href": "https://starwars.fandom.com/wiki/ST-70_class_Razor_Crest_M-111"
         }
       ],
       "Values": [
-        "ST-70 Assault Ship"
+        "ST-70 class Razor Crest M-111"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Gunship",
@@ -33,6 +33,32 @@
       ],
       "Values": [
         "Gunship"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "80 ft"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "54 ft"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "28 ft"
       ]
     },
     {
@@ -133,12 +159,12 @@
           "Href": "https://starwars.fandom.com/wiki/Mission_to_Arvala-7"
         },
         {
-          "Content": "Rescue of Grogu",
-          "Href": "https://starwars.fandom.com/wiki/Rescue_of_Grogu"
+          "Content": "Incident on Nevarro",
+          "Href": "https://starwars.fandom.com/wiki/Incident_on_Nevarro"
         },
         {
           "Content": "Rescue of Qin",
-          "Href": "https://starwars.fandom.com/wiki/Rescue_of_Qin"
+          "Href": "https://starwars.fandom.com/wiki/Bothan-Five_incident"
         },
         {
           "Content": "Mission to Trask",
@@ -149,17 +175,17 @@
           "Href": "https://starwars.fandom.com/wiki/Second_skirmish_on_Nevarro"
         },
         {
-          "Content": "Skirmish on Tython",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Tython"
+          "Content": "Battle of Tython",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Tython_(9_ABY)"
         }
       ],
       "Values": [
         "Mission to Arvala-7",
-        "Rescue of Grogu",
+        "Incident on Nevarro",
         "Rescue of Qin",
         "Mission to Trask",
         "Second skirmish on Nevarro",
-        "Skirmish on Tython"
+        "Battle of Tython"
       ]
     },
     {
@@ -189,14 +215,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 676302,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Tython_(9_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 641415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ranzar_Malk's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 639045,
       "PageUrl": "https://starwars.fandom.com/wiki/Q9-0",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 677635,
-      "PageUrl": "https://starwars.fandom.com/wiki/Drum_blaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 635806,
@@ -204,14 +235,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 676302,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Tython",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 641415,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ranzar_Malk's_crew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 734744,
+      "PageUrl": "https://starwars.fandom.com/wiki/Belsmuth_Consolidations_Ltd.",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

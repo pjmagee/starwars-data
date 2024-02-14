@@ -1,6 +1,6 @@
 {
   "PageId": 639438,
-  "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_space_station",
+  "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_Space_Station",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station",
   "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/0c/Snokes_home.jpg/revision/latest?cb=20191219034344",
   "Data": [
@@ -8,11 +8,11 @@
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Amaxine space station"
+        "Amaxine Space Station"
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Space station",
@@ -36,10 +36,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
       ]
     },
     {
@@ -55,15 +60,27 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [],
+      "Values": [
+        "J-19"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Amaxine warriors",
           "Href": "https://starwars.fandom.com/wiki/Amaxine_warriors"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
-        "Amaxine warriors"
+        "Amaxine warriors",
+        "Galactic Empire"
       ]
     },
     {
@@ -82,12 +99,17 @@
       "Label": "Present for battles/events",
       "Links": [
         {
-          "Content": "Skirmish on the Amaxine station",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_on_the_Amaxine_station"
+          "Content": "Mission on the Amaxine station",
+          "Href": "https://starwars.fandom.com/wiki/Mission_on_the_Amaxine_station"
+        },
+        {
+          "Content": "Battle at the Amaxine Station",
+          "Href": "https://starwars.fandom.com/wiki/Battle_at_the_Amaxine_Station"
         }
       ],
       "Values": [
-        "Skirmish on the Amaxine station"
+        "Mission on the Amaxine station",
+        "Battle at the Amaxine Station"
       ]
     }
   ],
@@ -98,44 +120,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 683028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_system_(Amaxine_station)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 683063,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hague",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 705823,
       "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_armor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     },
     {
-      "PageId": 691625,
-      "PageUrl": "https://starwars.fandom.com/wiki/Affie_Hollow's_father",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 683395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_the_Amaxine_station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 682991,
-      "PageUrl": "https://starwars.fandom.com/wiki/Binding_statues",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 683107,
-      "PageUrl": "https://starwars.fandom.com/wiki/Helix_ring",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 683953,
-      "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_relay",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 683028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_system_(Amaxine_station)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 698420,
@@ -143,9 +135,59 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 682991,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binding_statues",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 683395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_on_the_Amaxine_station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 683953,
+      "PageUrl": "https://starwars.fandom.com/wiki/Amaxine_relay",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 749385,
+      "PageUrl": "https://starwars.fandom.com/wiki/Null_Blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 683063,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hague",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 756712,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_at_the_Amaxine_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 496768,
+      "PageUrl": "https://starwars.fandom.com/wiki/BT-1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
       "PageId": 683032,
       "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_star_(Amaxine_station)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 683107,
+      "PageUrl": "https://starwars.fandom.com/wiki/Helix_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 787568,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grease_pencil",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 691625,
+      "PageUrl": "https://starwars.fandom.com/wiki/Affie_Hollow's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

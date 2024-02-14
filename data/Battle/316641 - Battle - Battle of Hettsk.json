@@ -2,7 +2,7 @@
   "PageId": 316641,
   "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hettsk",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/33/Amorris-TEA.jpg/revision/latest?cb=20220707082243",
   "Data": [
     {
       "Label": "Titles",
@@ -53,9 +53,23 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Imperial",
+          "Href": "https://starwars.fandom.com/wiki/Thrawn%27s_confederation"
+        },
+        {
+          "Content": "Greni",
+          "Href": "https://starwars.fandom.com/wiki/Greni"
+        },
+        {
+          "Content": "Bross",
+          "Href": "https://starwars.fandom.com/wiki/Bross"
+        }
+      ],
       "Values": [
-        "Imperial victory"
+        "Imperial victory",
+        "Greni and Bross captured"
       ]
     }
   ],
@@ -64,11 +78,6 @@
       "PageId": 273690,
       "PageUrl": "https://starwars.fandom.com/wiki/Belsmuth_sector/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 10000,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

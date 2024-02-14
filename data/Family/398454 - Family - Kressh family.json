@@ -2,12 +2,25 @@
   "PageId": 398454,
   "PageUrl": "https://starwars.fandom.com/wiki/Kressh_family",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6f/HappyLudo.jpg/revision/latest?cb=20190325045126",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Kressh family"
+      ]
+    },
+    {
+      "Label": "Family type",
+      "Links": [
+        {
+          "Content": "Sith Pureblood",
+          "Href": "https://starwars.fandom.com/wiki/Sith_(species)/Legends"
+        }
+      ],
+      "Values": [
+        "Sith Pureblood lineage"
       ]
     },
     {
@@ -36,6 +49,28 @@
       ],
       "Values": [
         "Ludo Kressh"
+      ]
+    },
+    {
+      "Label": "Relatives",
+      "Links": [
+        {
+          "Content": "Elcho Kressh",
+          "Href": "https://starwars.fandom.com/wiki/Elcho_Kressh"
+        },
+        {
+          "Content": "Vodal Kressh",
+          "Href": "https://starwars.fandom.com/wiki/Vodal_Kressh"
+        },
+        {
+          "Content": "Exal Kressh",
+          "Href": "https://starwars.fandom.com/wiki/Exal_Kressh"
+        }
+      ],
+      "Values": [
+        "Elcho Kressh",
+        "Vodal Kressh",
+        "Exal Kressh"
       ]
     },
     {
@@ -76,7 +111,7 @@
         }
       ],
       "Values": [
-        "3678 BBY(de jure)"
+        "3678 BBY (de jure)"
       ]
     },
     {
@@ -97,5 +132,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 370795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vodal_Kressh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 304165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Exal_Kressh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

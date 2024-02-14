@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Product line",
-      "Links": [
-        {
-          "Content": "Star Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Star_Destroyer/Legends"
-        }
-      ],
-      "Values": [
-        "Star Destroyer"
-      ]
-    },
-    {
       "Label": "Model",
       "Links": [
         {
@@ -45,6 +33,18 @@
       ],
       "Values": [
         "Imperious-class Star Destroyer"
+      ]
+    },
+    {
+      "Label": "Type",
+      "Links": [
+        {
+          "Content": "Star Destroyer",
+          "Href": "https://starwars.fandom.com/wiki/Star_Destroyer/Legends"
+        }
+      ],
+      "Values": [
+        "Star Destroyer"
       ]
     },
     {
@@ -171,7 +171,7 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Mon_Calamari_(Second_Imperial_Civil_War)"
         },
         {
-          "Content": "Battle of  Ralltiir",
+          "Content": "Battle of Ralltiir",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Ralltiir_(Second_Imperial_Civil_War)"
         },
         {
@@ -182,7 +182,7 @@
       "Values": [
         "Second Imperial Civil War",
         "Battle of Mon Calamari",
-        "Battle of  Ralltiir",
+        "Battle of Ralltiir",
         "Battle of the Arkanis sector"
       ]
     },
@@ -284,11 +284,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 193002,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mon_Calamari_(Second_Imperial_Civil_War)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
       "PageId": 192314,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Core_Fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
@@ -296,7 +291,12 @@
     {
       "PageId": 81234,
       "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Alliance_Remnant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 193002,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mon_Calamari_(Second_Imperial_Civil_War)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

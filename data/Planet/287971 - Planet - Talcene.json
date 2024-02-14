@@ -2,7 +2,7 @@
   "PageId": 287971,
   "PageUrl": "https://starwars.fandom.com/wiki/Talcene",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7f/Talcene-TEA.jpg/revision/latest?cb=20231225214151",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "The Slice",
+        "Trans-Hydian"
       ]
     },
     {
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-8"
@@ -60,36 +70,33 @@
         {
           "Content": "Perlemian Trade Route",
           "Href": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends"
-        },
-        {
-          "Content": "Talcene Transit",
-          "Href": "https://starwars.fandom.com/wiki/Talcene_Transit/Legends"
         }
       ],
       "Values": [
-        "Perlemian Trade Route",
-        "Talcene Transit"
+        "Perlemian Trade Route"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+          "Content": "Urban",
+          "Href": "https://starwars.fandom.com/wiki/City/Legends"
         }
       ],
       "Values": [
-        "Humans"
+        "Urban"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
     {
       "PageId": 117754,
       "PageUrl": "https://starwars.fandom.com/wiki/Shea_Hublin",
@@ -104,6 +111,11 @@
       "PageId": 347883,
       "PageUrl": "https://starwars.fandom.com/wiki/Talcene_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

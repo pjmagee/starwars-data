@@ -59,6 +59,10 @@
           "Href": "https://starwars.fandom.com/wiki/Boba_Fett%27s_Palace"
         },
         {
+          "Content": "Jabba's casino",
+          "Href": "https://starwars.fandom.com/wiki/Jabba%27s_casino"
+        },
+        {
           "Content": "Mos Espa city center",
           "Href": "https://starwars.fandom.com/wiki/Mos_Espa_city_center"
         },
@@ -80,7 +84,7 @@
         },
         {
           "Content": "Sanctuary",
-          "Href": "https://starwars.fandom.com/wiki/Sanctuary_(cantina)"
+          "Href": "https://starwars.fandom.com/wiki/Garsa%27s_Sanctuary"
         },
         {
           "Content": "Upper sprawl",
@@ -94,6 +98,7 @@
       "Values": [
         "Akim's Munch",
         "Boba Fett's Palace",
+        "Jabba's casino",
         "Mos Espa city center",
         "Mos Espa Grand Arena",
         "Mos Espa outskirts",
@@ -130,9 +135,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 458175,
-      "PageUrl": "https://starwars.fandom.com/wiki/Boba_Fett's_Palace",
+      "PageId": 733147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aqualish_Quarter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 718094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_City_Hall",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 561330,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alta-wave_calibration_device",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 561331,
+      "PageUrl": "https://starwars.fandom.com/wiki/T3_web_comber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 729142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Franikhad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
       "PageId": 575980,
@@ -140,44 +165,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 531836,
-      "PageUrl": "https://starwars.fandom.com/wiki/Watto's_junkshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+      "PageId": 717908,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_outside_of_the_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 720557,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_the_Sanctuary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 539506,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Market",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 539562,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xelric_Draw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 539575,
-      "PageUrl": "https://starwars.fandom.com/wiki/Slave_Quarters_Row",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 556980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karmova_drum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 534576,
-      "PageUrl": "https://starwars.fandom.com/wiki/Watto's_box",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 691007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Way",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 719034,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chase_through_Mos_Espa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 452688,
@@ -185,19 +180,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 571368,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_medcenter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 691007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Way",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 683924,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wrench",
+      "PageId": 556980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karmova_drum",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 581522,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jabba's_criminal_empire",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 717314,
@@ -225,9 +215,109 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
+      "PageId": 552114,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akim's_Munch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 756436,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa's_first_cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 539506,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_Market",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 539562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xelric_Draw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 539575,
+      "PageUrl": "https://starwars.fandom.com/wiki/Slave_Quarters_Row",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 719405,
+      "PageUrl": "https://starwars.fandom.com/wiki/Worker's_District",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 719545,
+      "PageUrl": "https://starwars.fandom.com/wiki/Upper_sprawl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 719546,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_city_center",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 717363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garsa's_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 721110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Mos_Espa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 683924,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wrench",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 758308,
+      "PageUrl": "https://starwars.fandom.com/wiki/Disintegrator_staff/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 720557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombing_of_Garsa's_Sanctuary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 534576,
+      "PageUrl": "https://starwars.fandom.com/wiki/Watto's_box",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 581522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba's_criminal_empire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 531836,
+      "PageUrl": "https://starwars.fandom.com/wiki/Watto's_junkshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
       "PageId": 177960,
       "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Tatooine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 571368,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_medcenter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 780239,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jabba's_casino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 649805,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ayalayli_thornwood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 717289,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daimyo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
       "PageId": 548254,
@@ -235,9 +325,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 721110,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_Mos_Espa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 756346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Egg-seed",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 756429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Natchgas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 758315,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plug-8G_Cluster_Array_engine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 721272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 624333,
@@ -260,64 +365,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 729142,
-      "PageUrl": "https://starwars.fandom.com/wiki/Franikhad",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 719405,
-      "PageUrl": "https://starwars.fandom.com/wiki/Worker's_District",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 719545,
-      "PageUrl": "https://starwars.fandom.com/wiki/Upper_sprawl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 719546,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_city_center",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 721272,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552114,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akim's_Munch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 561331,
-      "PageUrl": "https://starwars.fandom.com/wiki/T3_web_comber",
+      "PageId": 751725,
+      "PageUrl": "https://starwars.fandom.com/wiki/Articulation_pin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 718094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mos_Espa_City_Hall",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 756349,
+      "PageUrl": "https://starwars.fandom.com/wiki/Egg-seed_dispenser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 717908,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ambush_outside_of_the_Sanctuary",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 756432,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thermo-static_cleaner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 719034,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chase_through_Mos_Espa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 756490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aeromagnifier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 717363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_(cantina)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+      "PageId": 756764,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thermic_baster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
-      "PageId": 717289,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daimyo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 756769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old-style_bread_oven",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 756928,
+      "PageUrl": "https://starwars.fandom.com/wiki/Old-style_bread_oven/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     }
   ]
 }

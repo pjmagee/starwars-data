@@ -2,12 +2,25 @@
   "PageId": 92196,
   "PageUrl": "https://starwars.fandom.com/wiki/Moog",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Moog"
+      ]
+    },
+    {
+      "Label": "Designation",
+      "Links": [
+        {
+          "Content": "Non-sentient",
+          "Href": "https://starwars.fandom.com/wiki/Sentience/Legends"
+        }
+      ],
+      "Values": [
+        "Non-sentient"
       ]
     },
     {
@@ -21,7 +34,20 @@
       "Values": [
         "Dathomir"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [],
+      "Values": [
+        "Lairs"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

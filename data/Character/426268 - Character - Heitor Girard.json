@@ -60,12 +60,32 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Girard",
           "Href": "https://starwars.fandom.com/wiki/House_Girard"
-        },
+        }
+      ],
+      "Values": [
+        "House Girard"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Aitalla Girard",
+          "Href": "https://starwars.fandom.com/wiki/Aitalla_Girard"
+        }
+      ],
+      "Values": [
+        "Aitalla Girard"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "House of Thul",
           "Href": "https://starwars.fandom.com/wiki/House_of_Thul"
@@ -76,11 +96,16 @@
         }
       ],
       "Values": [
-        "House Girard",
         "House of Thul",
         "Sith Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 401600,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aitalla_Girard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -37,7 +37,12 @@
     },
     {
       "Label": "Sensor color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blue",
+          "Href": "https://starwars.fandom.com/wiki/Color"
+        }
+      ],
       "Values": [
         "Blue"
       ]
@@ -72,14 +77,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 653639,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunt_for_Fyzen_Gor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
-    },
-    {
       "PageId": 618149,
       "PageUrl": "https://starwars.fandom.com/wiki/Second_skirmish_in_the_Mesulan_Remnants_Belt",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 653639,
+      "PageUrl": "https://starwars.fandom.com/wiki/Search_for_the_Phylanx_Redux_Transmitter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     }
   ]
 }

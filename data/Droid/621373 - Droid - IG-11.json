@@ -2,7 +2,7 @@
   "PageId": 621373,
   "PageUrl": "https://starwars.fandom.com/wiki/IG-11",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/48/IG-11_Sideshow.png/revision/latest?cb=20200103031615",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2c/MarshalIG-11.jpg/revision/latest?cb=20230425134709",
   "Data": [
     {
       "Label": "Titles",
@@ -29,11 +29,16 @@
         {
           "Content": "Nevarro",
           "Href": "https://starwars.fandom.com/wiki/Nevarro"
+        },
+        {
+          "Content": "IG-12",
+          "Href": "https://starwars.fandom.com/wiki/IG-12"
         }
       ],
       "Values": [
-        "c. 9 ABY, Arvala-7 (later rebuilt)",
-        "c. 9 ABY, Nevarro"
+        "9 ABY, Arvala-7 (later rebuilt)",
+        "9 ABY, Nevarro (later rebuilt)",
+        "c. 9 ABY, Nevarro (later repurposed as IG-12) (later rebuilt from IG-12's remains)"
       ]
     },
     {
@@ -82,11 +87,16 @@
         {
           "Content": "Nurse droid",
           "Href": "https://starwars.fandom.com/wiki/Nanny_droid"
+        },
+        {
+          "Content": "Police droid",
+          "Href": "https://starwars.fandom.com/wiki/Police_droid"
         }
       ],
       "Values": [
         "Assassin droid",
-        "Nurse droid (after reprogramming)"
+        "Nurse droid (after reprogramming)",
+        "Police droid (after second reprogramming)"
       ]
     },
     {
@@ -118,6 +128,14 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him",
+        "It/its"
+      ]
+    },
+    {
       "Label": "Sensor color",
       "Links": [
         {
@@ -142,12 +160,38 @@
         {
           "Content": "Bounty Hunters' Guild",
           "Href": "https://starwars.fandom.com/wiki/Bounty_Hunters%27_Guild"
+        },
+        {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic"
         }
       ],
       "Values": [
-        "Bounty Hunters' Guild"
+        "Bounty Hunters' Guild",
+        "New Republic"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 675084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Statue_of_IG-11",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 639562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clash_on_Nevarro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 762135,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-12",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 496690,
+      "PageUrl": "https://starwars.fandom.com/wiki/IG-series",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid_series"
+    }
+  ]
 }

@@ -36,10 +36,22 @@
       ]
     },
     {
-      "Label": "Hair color",
+      "Label": "Pronouns",
       "Links": [],
       "Values": [
-        "Silver"
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Hair color",
+      "Links": [
+        {
+          "Content": "Color",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
+      "Values": [
+        "Color"
       ]
     },
     {
@@ -57,10 +69,6 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Trioculus' Empire",
-          "Href": "https://starwars.fandom.com/wiki/Trioculus%27_Empire"
-        },
-        {
           "Content": "Central Committee of Grand Moffs",
           "Href": "https://starwars.fandom.com/wiki/Central_Committee_of_Grand_Moffs"
         },
@@ -69,13 +77,16 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Remnant"
         },
         {
+          "Content": "Council of Moffs",
+          "Href": "https://starwars.fandom.com/wiki/Council_of_Moffs/Legends"
+        },
+        {
           "Content": "Sinister Triumvirate",
           "Href": "https://starwars.fandom.com/wiki/Sinister_Triumvirate"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Trioculus' Empire",
         "Central Committee of Grand Moffs",
         "Imperial Remnant",
         "Council of Moffs",

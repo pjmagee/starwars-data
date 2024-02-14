@@ -2,6 +2,7 @@
   "PageId": 30590,
   "PageUrl": "https://starwars.fandom.com/wiki/Allaya_Djo",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -63,7 +64,7 @@
       ]
     },
     {
-      "Label": "Clan(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Singing Mountain Clan",
@@ -72,6 +73,52 @@
       ],
       "Values": [
         "Singing Mountain Clan"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Augwynne Djo",
+          "Href": "https://starwars.fandom.com/wiki/Augwynne_Djo"
+        }
+      ],
+      "Values": [
+        "Augwynne Djo"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Gethzerion",
+          "Href": "https://starwars.fandom.com/wiki/Gethzerion"
+        },
+        {
+          "Content": "Barukka",
+          "Href": "https://starwars.fandom.com/wiki/Barukka"
+        },
+        {
+          "Content": "Kara'Teel",
+          "Href": "https://starwars.fandom.com/wiki/Kara%27Teel"
+        }
+      ],
+      "Values": [
+        "Gethzerion",
+        "Barukka",
+        "Kara'Teel"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Teneniel Djo",
+          "Href": "https://starwars.fandom.com/wiki/Teneniel_Djo"
+        }
+      ],
+      "Values": [
+        "Teneniel Djo"
       ]
     },
     {
@@ -92,5 +139,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 6179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teneniel_Djo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37206,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kara'Teel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Augwynne_Djo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

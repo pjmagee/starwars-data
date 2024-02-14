@@ -2,6 +2,7 @@
   "PageId": 172355,
   "PageUrl": "https://starwars.fandom.com/wiki/Elya_Omas",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -35,6 +36,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "She/her"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Cal Omas",
+          "Href": "https://starwars.fandom.com/wiki/Cal_Omas"
+        }
+      ],
+      "Values": [
+        "Cal Omas"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -47,5 +67,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 3399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cal_Omas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

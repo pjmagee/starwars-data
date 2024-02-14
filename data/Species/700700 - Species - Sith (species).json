@@ -2,6 +2,7 @@
   "PageId": 700700,
   "PageUrl": "https://starwars.fandom.com/wiki/Sith_(species)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a4/Sith_DoctorAphra29.png/revision/latest?cb=20230224012440",
   "Data": [
     {
       "Label": "Titles",
@@ -19,16 +20,29 @@
         }
       ],
       "Values": [
-        "Red"
+        "Red",
+        "Tan"
       ]
     },
     {
       "Label": "Distinctions",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "dark side of the Force",
+          "Href": "https://starwars.fandom.com/wiki/Dark_side_of_the_Force"
+        }
+      ],
       "Values": [
-        "Tentacles"
+        "Tentacles",
+        "Frequent use of the dark side of the Force"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 757339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Sith_Darkseeker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

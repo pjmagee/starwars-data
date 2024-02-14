@@ -2,7 +2,7 @@
   "PageId": 547232,
   "PageUrl": "https://starwars.fandom.com/wiki/Ubduria",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d7/Ubduria-SWT.jpg/revision/latest?cb=20220614123817",
   "Data": [
     {
       "Label": "Titles",
@@ -17,22 +17,27 @@
         {
           "Content": "Inner Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Inner_Rim_Territories"
+        },
+        {
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Inner Rim Territories"
+        "Inner Rim Territories",
+        "New Territories"
       ]
     },
     {
-      "Label": "Trade routes",
+      "Label": "Grid square",
       "Links": [
         {
-          "Content": "Vaathkree Trade Corridor",
-          "Href": "https://starwars.fandom.com/wiki/Vaathkree_Trade_Corridor"
+          "Content": "N-8",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
         }
       ],
       "Values": [
-        "Vaathkree Trade Corridor"
+        "N-8"
       ]
     },
     {
@@ -48,28 +53,23 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Primary language(s)",
       "Links": [
         {
-          "Content": "Ubdurian empire",
-          "Href": "https://starwars.fandom.com/wiki/Ubdurian_empire"
+          "Content": "Ubdurian",
+          "Href": "https://starwars.fandom.com/wiki/Ubdurian_(language)"
         }
       ],
       "Values": [
-        "Ubdurian empire"
+        "Ubdurian"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 536905,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ubdurian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 548325,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_crusades",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 477940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     },
     {
       "PageId": 548327,
@@ -77,9 +77,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 477940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inner_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+      "PageId": 548325,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_crusades",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 536905,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ubdurian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

@@ -84,7 +84,12 @@
     },
     {
       "Label": "Cybernetics",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "armor and mechanical weapons",
+          "Href": "https://starwars.fandom.com/wiki/Seripas%27s_armor"
+        }
+      ],
       "Values": [
         "Entire body covered with armor and mechanical weapons"
       ]
@@ -104,14 +109,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 728195,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seripas's_armor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
-    },
-    {
       "PageId": 530811,
       "PageUrl": "https://starwars.fandom.com/wiki/Halo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 728195,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seripas's_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
     }
   ]
 }

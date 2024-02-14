@@ -2,29 +2,42 @@
   "PageId": 270279,
   "PageUrl": "https://starwars.fandom.com/wiki/Kor_Besadii",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/BootanaHutta-TEA.jpg/revision/latest?cb=20230624095811",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Kor Besadii"
+        "Kor Besadii",
+        "(The Bootana Hutta region, with Kor Besadii represented by the number 3)"
       ]
     },
     {
       "Label": "Region",
       "Links": [
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
           "Content": "Hutt Space",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "The Slice",
+        "Hutt Space"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Bootana Hutta",
           "Href": "https://starwars.fandom.com/wiki/Bootana_Hutta"
         }
       ],
       "Values": [
-        "Hutt Space",
         "Bootana Hutta"
       ]
     },
@@ -41,22 +54,10 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-10"
-      ]
-    },
-    {
-      "Label": "Trade routes",
-      "Links": [
-        {
-          "Content": "Kor Hestilic–Kor Besadii hyperlane",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Kor_Hestilic–Kor_Besadii_hyperlane"
-        }
-      ],
-      "Values": [
-        "Kor Hestilic–Kor Besadii hyperlane"
       ]
     },
     {
@@ -67,31 +68,7 @@
       ]
     },
     {
-      "Label": "Atmosphere",
-      "Links": [
-        {
-          "Content": "Type I",
-          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends#Type_I"
-        }
-      ],
-      "Values": [
-        "Type I (breathable)"
-      ]
-    },
-    {
-      "Label": "Gravity",
-      "Links": [
-        {
-          "Content": "Standard",
-          "Href": "https://starwars.fandom.com/wiki/Gravity/Legends"
-        }
-      ],
-      "Values": [
-        "Standard"
-      ]
-    },
-    {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Swamps",
@@ -115,69 +92,19 @@
       ]
     },
     {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Hutts",
-          "Href": "https://starwars.fandom.com/wiki/Hutt/Legends"
-        }
-      ],
-      "Values": [
-        "Hutts"
-      ]
-    },
-    {
-      "Label": "Primary language(s)",
-      "Links": [
-        {
-          "Content": "Huttese",
-          "Href": "https://starwars.fandom.com/wiki/Huttese/Legends"
-        }
-      ],
-      "Values": [
-        "Huttese"
-      ]
-    },
-    {
-      "Label": "Major imports",
-      "Links": [
-        {
-          "Content": "Slaves",
-          "Href": "https://starwars.fandom.com/wiki/Slavery/Legends"
-        }
-      ],
-      "Values": [
-        "Slaves"
-      ]
-    },
-    {
       "Label": "Affiliation",
       "Links": [
         {
           "Content": "Besadii",
-          "Href": "https://starwars.fandom.com/wiki/Besadii"
-        },
-        {
-          "Content": "kajidic",
-          "Href": "https://starwars.fandom.com/wiki/Kajidic/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Besadii/Legends"
         }
       ],
       "Values": [
-        "Besadii kajidic"
+        "Besadii"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 646428,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Kor_Hestilic–Kor_Besadii_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 391525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Besadii_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
     {
       "PageId": 5055,
       "PageUrl": "https://starwars.fandom.com/wiki/Besadii/Legends",
@@ -187,6 +114,11 @@
       "PageId": 628091,
       "PageUrl": "https://starwars.fandom.com/wiki/Gercor's_Retreat",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 391525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Besadii_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

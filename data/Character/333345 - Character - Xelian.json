@@ -67,6 +67,47 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Vilia Calimondra",
+          "Href": "https://starwars.fandom.com/wiki/Vilia_Calimondra"
+        }
+      ],
+      "Values": [
+        "Vilia Calimondra"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Chagras",
+          "Href": "https://starwars.fandom.com/wiki/Chagras"
+        }
+      ],
+      "Values": [
+        "Chagras"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Odion",
+          "Href": "https://starwars.fandom.com/wiki/Odion"
+        },
+        {
+          "Content": "Daiman",
+          "Href": "https://starwars.fandom.com/wiki/Daiman"
+        }
+      ],
+      "Values": [
+        "Odion",
+        "Daiman"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -79,5 +120,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 333346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vilia_Calimondra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 325786,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chagras",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

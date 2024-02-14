@@ -2,6 +2,7 @@
   "PageId": 55971,
   "PageUrl": "https://starwars.fandom.com/wiki/Dagger-D_police_fighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -15,7 +16,7 @@
       "Links": [
         {
           "Content": "Duro Shipwrights Guild",
-          "Href": "https://starwars.fandom.com/wiki/Duro_Shipwrights_Guild"
+          "Href": "https://starwars.fandom.com/wiki/Duro_Shipwrights%27_Guild"
         },
         {
           "Content": "FreiTek Incorporated",
@@ -35,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -75,6 +76,10 @@
         {
           "Content": "Novaldex",
           "Href": "https://starwars.fandom.com/wiki/Novaldex/Legends"
+        },
+        {
+          "Content": "BlasterDrive",
+          "Href": "https://starwars.fandom.com/wiki/BlasterDrive"
         }
       ],
       "Values": [
@@ -153,5 +158,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 55972,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duro_Defense_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    }
+  ]
 }

@@ -2,13 +2,25 @@
   "PageId": 1367,
   "PageUrl": "https://starwars.fandom.com/wiki/World_Devastator",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/b/b5/WD_NEGWT.jpg/revision/latest?cb=20080722200849",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f1/WorldDevastator-NEGWT.png/revision/latest?cb=20221022154213",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "World Devastator"
+      ]
+    },
+    {
+      "Label": "Designer",
+      "Links": [
+        {
+          "Content": "Qwi Xux",
+          "Href": "https://starwars.fandom.com/wiki/Qwi_Xux"
+        }
+      ],
+      "Values": [
+        "Qwi Xux"
       ]
     },
     {
@@ -189,14 +201,44 @@
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Dark Empire",
+          "Href": "https://starwars.fandom.com/wiki/Dark_Empire"
         }
       ],
       "Values": [
-        "Galactic Empire"
+        "Galactic Empire",
+        "Dark Empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 15733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Silencer-7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 128000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Inquisitor-4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 130288,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battlespeeder",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 24580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Department_of_Military_Research/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 247301,
+      "PageUrl": "https://starwars.fandom.com/wiki/World_Devastator_(New_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
     {
       "PageId": 1938,
       "PageUrl": "https://starwars.fandom.com/wiki/TIE/D_automated_starfighter",
@@ -223,33 +265,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 24580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Department_of_Military_Research/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 35731,
       "PageUrl": "https://starwars.fandom.com/wiki/Nullifier-5",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 247301,
-      "PageUrl": "https://starwars.fandom.com/wiki/World_Devastator_(New_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 130288,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battlespeeder",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
-    },
-    {
-      "PageId": 128000,
-      "PageUrl": "https://starwars.fandom.com/wiki/Inquisitor-4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 15733,
-      "PageUrl": "https://starwars.fandom.com/wiki/Silencer-7",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

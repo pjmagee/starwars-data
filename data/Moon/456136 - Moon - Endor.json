@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "Galactic Frontier",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Frontier"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Galactic Frontier"
       ]
     },
     {
@@ -60,7 +65,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "H-16",
@@ -154,7 +159,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -191,6 +196,10 @@
           "Href": "https://starwars.fandom.com/wiki/Death_Star%27s_shield_generator"
         },
         {
+          "Content": "General Syndulla's camp",
+          "Href": "https://starwars.fandom.com/wiki/General_Syndulla%27s_camp"
+        },
+        {
           "Content": "Imperial outpost",
           "Href": "https://starwars.fandom.com/wiki/Imperial_outpost_(Endor)"
         },
@@ -213,15 +222,12 @@
         {
           "Content": "Research Station 9",
           "Href": "https://starwars.fandom.com/wiki/Research_Station_9"
-        },
-        {
-          "Content": "Syndulla's camp",
-          "Href": "https://starwars.fandom.com/wiki/Syndulla%27s_camp"
         }
       ],
       "Values": [
         "Campalan mountain range",
         "Death Star's shield generator",
+        "General Syndulla's camp",
         "Happy Grove Forest",
         "Imperial outpost",
         "Imperial Turbolaser Outpost",
@@ -229,8 +235,7 @@
         "Lake Sui",
         "Mount Krana",
         "Platform 4",
-        "Research Station 9",
-        "Syndulla's camp"
+        "Research Station 9"
       ]
     },
     {
@@ -336,16 +341,16 @@
           "Href": "https://starwars.fandom.com/wiki/Horse"
         },
         {
+          "Content": "Munyip",
+          "Href": "https://starwars.fandom.com/wiki/Munyip"
+        },
+        {
           "Content": "Pulga",
           "Href": "https://starwars.fandom.com/wiki/Pulga"
         },
         {
           "Content": "Rakazzak beast",
           "Href": "https://starwars.fandom.com/wiki/Rakazzak_beast"
-        },
-        {
-          "Content": "Munyip",
-          "Href": "https://starwars.fandom.com/wiki/Munyip"
         },
         {
           "Content": "Rugger",
@@ -390,9 +395,9 @@
         "Kroolok",
         "Lantern bird",
         "Pony",
+        "Munyip",
         "Pulga",
         "Rakazzak beast",
-        "Munyip",
         "Rugger",
         "Splledark",
         "Temptor",
@@ -435,7 +440,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Gorax",
@@ -539,34 +544,74 @@
   ],
   "Relationships": [
     {
-      "PageId": 548293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_One_(Endor)",
+      "PageId": 501966,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wam_Lufba",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 726705,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_youngling",
+      "PageId": 502204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Logray",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 484076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 642866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_military_uniform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 591993,
-      "PageUrl": "https://starwars.fandom.com/wiki/Root_stew",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+      "PageId": 457069,
+      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 705363,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star's_shield_generator_garrison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 595893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Campalan_mountain_range",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 657818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Din_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+      "PageId": 778597,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Tree_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 777554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_(Rilo_Grenth)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 552037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Sui",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 552038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Marudi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 541702,
+      "PageUrl": "https://starwars.fandom.com/wiki/Temptor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 543878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 544137,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_blue_butterfly",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_Tarlandia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 515434,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_outpost_(Endor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
       "PageId": 512710,
@@ -579,89 +624,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 515126,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rakazzak_beast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 515487,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bordok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 726507,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 695212,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ovise_Reach",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 695219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bakura_Trace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 466560,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gradd",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 512718,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asha_Fahn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 631014,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flitchee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 649826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_advisor_(black_robe)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 633023,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor-la",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 689753,
-      "PageUrl": "https://starwars.fandom.com/wiki/Warrick_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 453404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ewokese",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 227268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tip-yip",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 62356,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pulga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 62357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gaupa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 582829,
-      "PageUrl": "https://starwars.fandom.com/wiki/Syndulla's_camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 583638,
-      "PageUrl": "https://starwars.fandom.com/wiki/Platform_4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 510039,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 458018,
@@ -669,148 +634,53 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
-      "PageId": 709265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rorkid_bread",
+      "PageId": 592619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Endor_green_bug",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 593492,
+      "PageUrl": "https://starwars.fandom.com/wiki/Geejaw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 511535,
+      "PageUrl": "https://starwars.fandom.com/wiki/Snar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 511536,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gemma",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 511541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sunberry_wine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
     },
     {
-      "PageId": 711345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brub_berry",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 711347,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ground-apple_stock",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 711348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ground-apple",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 1481,
-      "PageUrl": "https://starwars.fandom.com/wiki/DS-2_Death_Star_II_Mobile_Battle_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
-      "PageId": 586747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Horse",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 586787,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chicken",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 711336,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kublag",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 711339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moon_moth",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 711341,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kurnbeast",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 711342,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spilesnark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 576560,
-      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
+      "PageId": 709264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brub-brub_bush",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 711343,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hut_of_Healing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 711344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raventhorn_root",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 711351,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_(Endor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 640808,
-      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Endor",
+      "PageId": 452884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Endor",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 609954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ra-Lee",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 609958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Makrit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 610065,
-      "PageUrl": "https://starwars.fandom.com/wiki/Buzza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 610130,
-      "PageUrl": "https://starwars.fandom.com/wiki/Great_Devourer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 716052,
-      "PageUrl": "https://starwars.fandom.com/wiki/Roasted_\"rugger\"",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 610860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salma_Sands",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 610861,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dulok_camp",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 687772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kroolok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 594439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_figurine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 512083,
-      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_an_Imperial_outpost",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 512799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dogfight_in_the_Hudalla_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 496344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nicki",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paploo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 496365,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chirpa",
+      "PageId": 466560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gradd",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -824,329 +694,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 718199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sithmas",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
-    },
-    {
-      "PageId": 515434,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_outpost_(Endor)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 610086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Krana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 692792,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tulgah_Heights",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 607109,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gradd's_squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 537050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_Initiative",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 676608,
-      "PageUrl": "https://starwars.fandom.com/wiki/Iguana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 471694,
-      "PageUrl": "https://starwars.fandom.com/wiki/Joh_Yowza",
+      "PageId": 548293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_One_(Endor)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 471912,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 513806,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nippet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 513807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Romba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 595987,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peekpa's_sister",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 518564,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum_(language)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 552037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Sui",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 552038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lake_Marudi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 496700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 501968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rugger",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 501970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lantern_bird",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 501981,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dulok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 502123,
-      "PageUrl": "https://starwars.fandom.com/wiki/Condor_dragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 502125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Munyip",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 568079,
-      "PageUrl": "https://starwars.fandom.com/wiki/Place_of_Sickness",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 498759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wunka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498760,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leektar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 516167,
-      "PageUrl": "https://starwars.fandom.com/wiki/Emarr_Ottkreg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 562690,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tokkat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 645221,
-      "PageUrl": "https://starwars.fandom.com/wiki/Big_Tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 705906,
-      "PageUrl": "https://starwars.fandom.com/wiki/Limestone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 512346,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_Pipeline",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 610807,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sunberry_wine",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 453203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 592619,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Endor_green_bug",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 593492,
-      "PageUrl": "https://starwars.fandom.com/wiki/Geejaw",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 596012,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wistie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 452884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Endor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 709258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bothan_Spynet_intelligence_operation",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 642866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Alliance_military_uniform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 635777,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gurreck_Gravy",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 510812,
-      "PageUrl": "https://starwars.fandom.com/wiki/Special_Forces_Trackers_Unit",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 512098,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Squadron_(Rebel_Alliance)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 512392,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_(planet)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 508329,
-      "PageUrl": "https://starwars.fandom.com/wiki/Redwood_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 540851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_tree",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 552174,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orchid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
-    },
-    {
-      "PageId": 526858,
-      "PageUrl": "https://starwars.fandom.com/wiki/Splledark",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 529440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blurrg",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 496268,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star's_shield_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 625870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Staff_of_power",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 175334,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 589275,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chukha-Trok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 545192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nautilian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 550125,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Tree_tribe",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 452583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ewok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 694894,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gorph",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 694948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Grass_Trekker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 510039,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 512580,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Horn_of_the_Soul_Trees",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 501966,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wam_Lufba",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 502204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Logray",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 532709,
-      "PageUrl": "https://starwars.fandom.com/wiki/SLD-26_planetary_shield_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 691755,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trombone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 442294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Han_Solo_and_Leia_Organa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 457069,
-      "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Anakin_Skywalker",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 452338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Executor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 483876,
-      "PageUrl": "https://starwars.fandom.com/wiki/Renegade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 660349,
@@ -1169,73 +719,23 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 514017,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bow",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 703398,
-      "PageUrl": "https://starwars.fandom.com/wiki/SW-7_ion_cannon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 511535,
-      "PageUrl": "https://starwars.fandom.com/wiki/Snar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 511536,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gemma",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 511541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 67202,
-      "PageUrl": "https://starwars.fandom.com/wiki/Widdle_Warrick",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 729224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yub_Nub_Yuzzum_Marinade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 584667,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Endor_green_bird",
+      "PageId": 711336,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kublag",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 528895,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca's_bowcaster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 666569,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endorian_herb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 560957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 541702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Temptor",
+      "PageId": 711339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moon_moth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 543878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Butterfly",
+      "PageId": 711341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kurnbeast",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 544137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Endor_blue_butterfly",
+      "PageId": 711342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spilesnark",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -1244,13 +744,213 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
+      "PageId": 512718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asha_Fahn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 532709,
+      "PageUrl": "https://starwars.fandom.com/wiki/SLD-26_planetary_shield_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 729224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yub_Nub_Yuzzum_Marinade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 741883,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seed_bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 781255,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ghost_Lancers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 781257,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gamma_Squad_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 781796,
+      "PageUrl": "https://starwars.fandom.com/wiki/Theta_Squad_(Galactic_Empire)/Canon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 596012,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wistie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 594439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_figurine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 781131,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adversary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 135282,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 1481,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-2_Death_Star_II_Mobile_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 512083,
+      "PageUrl": "https://starwars.fandom.com/wiki/Assault_on_an_Imperial_outpost",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 512799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dogfight_in_the_Hudalla_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 471694,
+      "PageUrl": "https://starwars.fandom.com/wiki/Joh_Yowza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 471912,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teebo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 513806,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nippet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 513807,
+      "PageUrl": "https://starwars.fandom.com/wiki/Romba",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780557,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-246",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780558,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-093",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780559,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-121",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780793,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Scout_trooper_(Endor_2)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780795,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Scout_trooper_(Endor_3)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 780840,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rell_(Imperial)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 484076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fireworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 512580,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacred_Horn_of_the_Soul_Trees",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 595987,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peekpa's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 631014,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flitchee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 442294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Han_Solo_and_Leia_Organa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 453404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewokese",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 676608,
+      "PageUrl": "https://starwars.fandom.com/wiki/Iguana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 585080,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 512392,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_(planet)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 705906,
+      "PageUrl": "https://starwars.fandom.com/wiki/Limestone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 459751,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ekelarc_Yong",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 541276,
       "PageUrl": "https://starwars.fandom.com/wiki/Weechee_(Ewok)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 57187,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kneesaa",
+      "PageUrl": "https://starwars.fandom.com/wiki/Kneesaa_a_Jari_Kintaka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 776562,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nanta",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 746798,
+      "PageUrl": "https://starwars.fandom.com/wiki/Viiveenn's_doll",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 692792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tulgah_Heights",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 748487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tempest_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 625164,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pebimarus_Xorn",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -1259,24 +959,109 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 514958,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harbinger_(Tector-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 452583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ewok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 595893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Campalan_mountain_range",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 687772,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kroolok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 585080,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brenna's_brigade",
+      "PageId": 498759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wunka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 562690,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tokkat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 545023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tsiraki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 510812,
+      "PageUrl": "https://starwars.fandom.com/wiki/Special_Forces_Trackers_Unit",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 135282,
-      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 512098,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gray_Squadron_(Rebel_Alliance)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 625870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Staff_of_power",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 691755,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trombone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 591993,
+      "PageUrl": "https://starwars.fandom.com/wiki/Root_stew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 508329,
+      "PageUrl": "https://starwars.fandom.com/wiki/Redwood_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 540851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 552174,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orchid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 512346,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sanctuary_Pipeline",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 175334,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wicket_Wystri_Warrick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 584667,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Endor_green_bird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 586747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Horse",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 586787,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chicken",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 582829,
+      "PageUrl": "https://starwars.fandom.com/wiki/General_Syndulla's_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 583638,
+      "PageUrl": "https://starwars.fandom.com/wiki/Platform_4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 583736,
@@ -1284,9 +1069,54 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 459751,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ekelarc_Yong",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 518564,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 560957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor_strike_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 526858,
+      "PageUrl": "https://starwars.fandom.com/wiki/Splledark",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 529440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blurrg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 780522,
+      "PageUrl": "https://starwars.fandom.com/wiki/Forest_frog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 781148,
+      "PageUrl": "https://starwars.fandom.com/wiki/Antary",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 514017,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 640808,
+      "PageUrl": "https://starwars.fandom.com/wiki/Uprising_on_Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 633023,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endor-la",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 483876,
+      "PageUrl": "https://starwars.fandom.com/wiki/Renegade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 572647,
@@ -1294,24 +1124,344 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 625164,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Imperial_advisor_(purple_robe)",
+      "PageId": 635777,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gurreck_Gravy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 607109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gradd's_squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 703398,
+      "PageUrl": "https://starwars.fandom.com/wiki/SW-7_ion_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 766619,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Endor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 589275,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chukha-Trok",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 515795,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pride_of_Tarlandia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 568079,
+      "PageUrl": "https://starwars.fandom.com/wiki/Place_of_Sickness",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 709264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Brub-brub_bush",
+      "PageId": 685528,
+      "PageUrl": "https://starwars.fandom.com/wiki/FS-451",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 645221,
+      "PageUrl": "https://starwars.fandom.com/wiki/Big_Tree",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 576560,
+      "PageUrl": "https://starwars.fandom.com/wiki/Conifer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
-      "PageId": 711344,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raventhorn_root",
+      "PageId": 596013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 62356,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pulga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 62357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gaupa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 718199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sithmas",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Holiday"
+    },
+    {
+      "PageId": 610130,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Devourer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779550,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raab_Krao",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779551,
+      "PageUrl": "https://starwars.fandom.com/wiki/TK-290",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 779554,
+      "PageUrl": "https://starwars.fandom.com/wiki/GR-792",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 689753,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warrick_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 227268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tip-yip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515126,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rakazzak_beast",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 515487,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bordok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 537050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tarkin_Initiative",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 726705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_youngling",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 765559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Warok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mount_Krana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 610860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salma_Sands",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 610861,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dulok_camp",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 550125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bright_Tree_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 550231,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Ewok_tribe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 726507,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_brick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 709265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rorkid_bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 711345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Brub_berry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 711347,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ground-apple_stock",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 711348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ground-apple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 716052,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roasted_\"rugger\"",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 711343,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hut_of_Healing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 711351,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Hall_(Endor)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 609954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ra-Lee",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 609958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Makrit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 610065,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buzza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 666569,
+      "PageUrl": "https://starwars.fandom.com/wiki/Endorian_herb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 781084,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knettleberry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 781085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Knettleroot",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 694894,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorph",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 694948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Grass_Trekker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 748199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Snack_Bar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Store"
+    },
+    {
+      "PageId": 777237,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kintaka_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 787147,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_human_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 657818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Din_Nebula",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 790415,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flower-flier",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 496344,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nicki",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paploo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496365,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chirpa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 67202,
+      "PageUrl": "https://starwars.fandom.com/wiki/Widdle_Warrick",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 502123,
+      "PageUrl": "https://starwars.fandom.com/wiki/Condor_dragon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 502125,
+      "PageUrl": "https://starwars.fandom.com/wiki/Munyip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 528895,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chewbacca's_bowcaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 780592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Capture_of_Hoyel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 695212,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ovise_Reach",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 695219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bakura_Trace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 709258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bothan_Spynet_intelligence_operation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 516167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Emarr_Ottkreg",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 496700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yuzzum",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rugger",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lantern_bird",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501981,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dulok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 501982,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gorax",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 496268,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Star's_shield_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

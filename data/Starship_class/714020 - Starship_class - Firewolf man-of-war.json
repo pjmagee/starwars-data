@@ -12,7 +12,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Man-of-war",
@@ -24,6 +24,30 @@
       ]
     },
     {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Hyperdrive rating",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -31,26 +55,26 @@
           "Href": "https://starwars.fandom.com/wiki/Chiss_Ascendancy"
         },
         {
-          "Content": "Chiss Expansionary Defense Fleet",
-          "Href": "https://starwars.fandom.com/wiki/Chiss_Expansionary_Defense_Fleet"
+          "Content": "Chiss Defense Force",
+          "Href": "https://starwars.fandom.com/wiki/Chiss_Defense_Force"
         }
       ],
       "Values": [
         "Chiss Ascendancy",
-        "Chiss Expansionary Defense Fleet"
+        "Chiss Defense Force"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 714211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bellicose_(Firewolf)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 133584,
       "PageUrl": "https://starwars.fandom.com/wiki/Chiss_Defense_Force",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 714211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bellicose_(Firewolf_man-of-war)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

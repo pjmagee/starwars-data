@@ -36,15 +36,15 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Shuttle",
-          "Href": "https://starwars.fandom.com/wiki/Shuttle"
+          "Content": "Assault shuttle",
+          "Href": "https://starwars.fandom.com/wiki/Assault_shuttle"
         }
       ],
       "Values": [
-        "Shuttle"
+        "Assault shuttle"
       ]
     },
     {
@@ -99,7 +99,7 @@
       "Label": "Engine unit(s)",
       "Links": [],
       "Values": [
-        "Cygnus HD7 engine array (2)"
+        "HD7 engine array (2)"
       ]
     },
     {
@@ -126,12 +126,28 @@
       "Label": "Shielding",
       "Links": [
         {
-          "Content": "shields",
-          "Href": "https://starwars.fandom.com/wiki/Deflector_shield"
+          "Content": "deflector shield generators",
+          "Href": "https://starwars.fandom.com/wiki/Deflector_shield_generator"
         }
       ],
       "Values": [
-        "Powerful shields"
+        "Four deflector shield generators"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "armored",
+          "Href": "https://starwars.fandom.com/wiki/Armor"
+        },
+        {
+          "Content": "Lambda-class",
+          "Href": "https://starwars.fandom.com/wiki/Lambda-class_T-4a_shuttle"
+        }
+      ],
+      "Values": [
+        "Heavily armored (25% heavier than Lambda-class)"
       ]
     },
     {
@@ -190,6 +206,23 @@
       ]
     },
     {
+      "Label": "Complement",
+      "Links": [
+        {
+          "Content": "E-Web heavy repeating blaster cannons",
+          "Href": "https://starwars.fandom.com/wiki/E-Web_heavy_repeating_blaster_cannon"
+        },
+        {
+          "Content": "74-Z speeder bikes",
+          "Href": "https://starwars.fandom.com/wiki/74-Z_speeder_bike"
+        }
+      ],
+      "Values": [
+        "12 E-Web heavy repeating blaster cannons",
+        "6 74-Z speeder bikes"
+      ]
+    },
+    {
       "Label": "Crew",
       "Links": [
         {
@@ -209,9 +242,14 @@
     },
     {
       "Label": "Passengers",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "squads",
+          "Href": "https://starwars.fandom.com/wiki/Squad"
+        }
+      ],
       "Values": [
-        "54 - 75"
+        "54 - 75 (six squads)"
       ]
     },
     {
@@ -249,21 +287,20 @@
       "Label": "Role(s)",
       "Links": [
         {
-          "Content": "Landing craft",
-          "Href": "https://starwars.fandom.com/wiki/Landing_craft"
+          "Content": "starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
         },
         {
-          "Content": "Troop",
-          "Href": "https://starwars.fandom.com/wiki/Troop"
-        },
-        {
-          "Content": "transport",
-          "Href": "https://starwars.fandom.com/wiki/Transport"
+          "Content": "Assault ship",
+          "Href": "https://starwars.fandom.com/wiki/Assault_ship"
         }
       ],
       "Values": [
-        "Landing craft",
-        "Troop transport"
+        "Air/starfighter support",
+        "Assault ship",
+        "Light cargo vessel",
+        "Rapid deployment vessel",
+        "Short-range scout"
       ]
     },
     {
@@ -284,21 +321,31 @@
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         }
       ],
       "Values": [
         "Galactic Empire",
         "Imperial Navy",
         "Phoenix Cell (stolen)",
-        "Alliance to Restore the Republic (stolen)"
+        "Alliance to Restore the Republic (stolen)",
+        "Rebel Alliance Navy",
+        "Scourge (corrupted)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 542959,
-      "PageUrl": "https://starwars.fandom.com/wiki/Reklam_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 607135,
+      "PageUrl": "https://starwars.fandom.com/wiki/ID-83",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 565302,
@@ -311,13 +358,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 699544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Task_Force_99's_Sentinel-class_landing_craft",
+      "PageId": 505366,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Complex_(Lothal)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 542959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reklam_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 471818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sovereign",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 483964,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lagos_(Sentinel-class)",
+      "PageId": 472514,
+      "PageUrl": "https://starwars.fandom.com/wiki/Relentless",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 453229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Devastator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 776718,
+      "PageUrl": "https://starwars.fandom.com/wiki/Scourge_01",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -326,9 +393,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 477722,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 581695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tiber_Saxon's_Star_Destroyer",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 482545,
@@ -336,14 +403,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 607135,
-      "PageUrl": "https://starwars.fandom.com/wiki/ID-83",
+      "PageId": 699544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Task_Force_99's_Sentinel-class_landing_craft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 548214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tellstar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 483964,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lagos_(Sentinel-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 554936,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chimaera",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 555445,
       "PageUrl": "https://starwars.fandom.com/wiki/Last_Chance",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 477722,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

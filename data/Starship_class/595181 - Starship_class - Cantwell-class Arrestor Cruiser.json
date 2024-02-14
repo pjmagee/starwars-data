@@ -2,7 +2,7 @@
   "PageId": 595181,
   "PageUrl": "https://starwars.fandom.com/wiki/Cantwell-class_Arrestor_Cruiser",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/1/10/Arrestor_cruiser.png/revision/latest?cb=20180609102912",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/69/Andor-Arrestor.png/revision/latest?cb=20221116193305",
   "Data": [
     {
       "Label": "Titles",
@@ -31,15 +31,15 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
-          "Content": "Cruiser",
-          "Href": "https://starwars.fandom.com/wiki/Cruiser"
+          "Content": "Arrestor cruiser",
+          "Href": "https://starwars.fandom.com/wiki/Arrestor_cruiser"
         }
       ],
       "Values": [
-        "Cruiser"
+        "Arrestor cruiser"
       ]
     },
     {
@@ -55,6 +55,45 @@
       ]
     },
     {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1,363.13 meters"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "667.42 meters"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "229.78 meters"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "sublight engine",
+          "Href": "https://starwars.fandom.com/wiki/Sublight_engine"
+        }
+      ],
+      "Values": [
+        "1 primary sublight engine",
+        "2 secondary sublight engines"
+      ]
+    },
+    {
       "Label": "Hyperdrive rating",
       "Links": [],
       "Values": [
@@ -63,10 +102,27 @@
       ]
     },
     {
-      "Label": "Sensor systems",
-      "Links": [],
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "hull",
+          "Href": "https://starwars.fandom.com/wiki/Hull"
+        }
+      ],
       "Values": [
-        "Medium range"
+        "Reinforced hull"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "sensor",
+          "Href": "https://starwars.fandom.com/wiki/Sensor"
+        }
+      ],
+      "Values": [
+        "Medium range sensor mast"
       ]
     },
     {
@@ -99,16 +155,8 @@
       ],
       "Values": [
         "Turret-mounted twin heavy ion cannons (3)",
-        "1 port",
-        "1 starboard",
-        "1 ventral",
         "Light laser cannons (12)",
-        "3 forward",
-        "3 starboard",
-        "3 port",
-        "3 aft",
-        "RT-17 repulsor-tractor beam emitters (3)",
-        "1 forward"
+        "Articulated RT-17 repulsor-tractor beam emitters (3)"
       ]
     },
     {
@@ -123,6 +171,14 @@
           "Href": "https://starwars.fandom.com/wiki/Squadron"
         },
         {
+          "Content": "TIE fighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE Boarding Craft",
+          "Href": "https://starwars.fandom.com/wiki/TIE_Boarding_Craft"
+        },
+        {
           "Content": "shuttles",
           "Href": "https://starwars.fandom.com/wiki/Shuttle"
         },
@@ -133,6 +189,8 @@
       ],
       "Values": [
         "24 starfighters (two squadrons)",
+        "Several TIE fighters",
+        "At least one TIE Boarding Craft",
         "Various shuttles, landing craft, and utility vehicles"
       ]
     },
@@ -153,10 +211,20 @@
         {
           "Content": "pilots",
           "Href": "https://starwars.fandom.com/wiki/Pilot"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Imperial Navy Troopers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Navy_Trooper"
         }
       ],
       "Values": [
-        "2,770 officers, pilots and enlisted crew"
+        "2,770 officers, pilots and enlisted crew",
+        "Stormtroopers",
+        "Imperial Navy Troopers"
       ]
     },
     {
@@ -185,6 +253,25 @@
       ]
     },
     {
+      "Label": "Life support",
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Life_support"
+        }
+      ],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Role(s)",
       "Links": [],
       "Values": [
@@ -200,7 +287,7 @@
         }
       ],
       "Values": [
-        "13 BBY or earlier"
+        "By 13 BBY"
       ]
     },
     {
@@ -226,5 +313,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 460133,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kuat_Drive_Yards",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

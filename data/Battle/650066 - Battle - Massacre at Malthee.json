@@ -2,6 +2,7 @@
   "PageId": 650066,
   "PageUrl": "https://starwars.fandom.com/wiki/Massacre_at_Malthee",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -14,7 +15,7 @@
       "Label": "Conflict",
       "Links": [
         {
-          "Content": "Imperial Period conflicts",
+          "Content": "Imperial Period",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Period"
         }
       ],
@@ -30,12 +31,12 @@
           "Href": "https://starwars.fandom.com/wiki/5_BBY/Legends"
         },
         {
-          "Content": "0 ABY",
-          "Href": "https://starwars.fandom.com/wiki/0_ABY/Legends"
+          "Content": "2 BBY",
+          "Href": "https://starwars.fandom.com/wiki/2_BBY/Legends"
         }
       ],
       "Values": [
-        "Between 5 BBY and 0 ABY"
+        "Between 5 BBY and 2 BBY"
       ]
     },
     {
@@ -58,14 +59,20 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "Galactic Empire",
+          "Content": "Imperial",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "Galactic Empire victory"
+        "Imperial victory"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 396834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bes_Ber_Bikade_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

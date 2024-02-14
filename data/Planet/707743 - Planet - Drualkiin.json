@@ -2,7 +2,7 @@
   "PageId": 707743,
   "PageUrl": "https://starwars.fandom.com/wiki/Drualkiin",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d9/LittleKessel.png/revision/latest?cb=20210906120849",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/7d/Drualkiin-BMF29.jpg/revision/latest?cb=20230719123928",
   "Data": [
     {
       "Label": "Titles",
@@ -17,12 +17,47 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "T-10",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "T-10"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Triellus Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Triellus_Trade_Route"
+        }
+      ],
+      "Values": [
+        "Triellus Trade Route"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 486070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Triellus_Trade_Route",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    }
+  ]
 }

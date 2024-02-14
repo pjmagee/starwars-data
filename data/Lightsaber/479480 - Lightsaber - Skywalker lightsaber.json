@@ -2,7 +2,7 @@
   "PageId": 479480,
   "PageUrl": "https://starwars.fandom.com/wiki/Skywalker_lightsaber",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/6e/RebuiltSkywalkerLightsaber-TROSVD.jpg/revision/latest?cb=20200307214949",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d9/SkywalkerLightsaberRepaired-SW100Objects.png/revision/latest?cb=20230420131754",
   "Data": [
     {
       "Label": "Titles",
@@ -13,16 +13,21 @@
     },
     {
       "Label": "Model",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Lightsaber"
+        }
+      ],
       "Values": [
-        "Handcrafted"
+        "Handcrafted lightsaber"
       ]
     },
     {
       "Label": "Type",
       "Links": [],
       "Values": [
-        "Single-blade"
+        "Standard lightsaber"
       ]
     },
     {
@@ -31,15 +36,10 @@
         {
           "Content": "Jedi",
           "Href": "https://starwars.fandom.com/wiki/Jedi"
-        },
-        {
-          "Content": "Sith",
-          "Href": "https://starwars.fandom.com/wiki/Sith"
         }
       ],
       "Values": [
-        "Jedi",
-        "Sith"
+        "Jedi"
       ]
     },
     {
@@ -95,7 +95,7 @@
         }
       ],
       "Values": [
-        "3 ABY"
+        "c. 3 ABY"
       ]
     },
     {
@@ -104,10 +104,6 @@
         {
           "Content": "Padmé Amidala",
           "Href": "https://starwars.fandom.com/wiki/Padmé_Amidala"
-        },
-        {
-          "Content": "Grievous",
-          "Href": "https://starwars.fandom.com/wiki/Grievous"
         },
         {
           "Content": "Obi-Wan Kenobi",
@@ -120,10 +116,6 @@
         {
           "Content": "Maz Kanata",
           "Href": "https://starwars.fandom.com/wiki/Maz_Kanata"
-        },
-        {
-          "Content": "Finn",
-          "Href": "https://starwars.fandom.com/wiki/Finn"
         },
         {
           "Content": "Rey",
@@ -141,14 +133,19 @@
       "Values": [
         "Anakin Skywalker",
         "Padmé Amidala (briefly)",
-        "Grievous (briefly)",
         "Obi-Wan Kenobi",
         "Luke Skywalker",
         "Maz Kanata",
-        "Finn (briefly)",
         "Rey",
         "Leia Organa",
         "Ben Solo"
+      ]
+    },
+    {
+      "Label": "Hilt shape",
+      "Links": [],
+      "Values": [
+        "Cylindrical, straight"
       ]
     },
     {
@@ -188,6 +185,13 @@
       ]
     },
     {
+      "Label": "Blade type",
+      "Links": [],
+      "Values": [
+        "Single-blade"
+      ]
+    },
+    {
       "Label": "Blade color",
       "Links": [
         {
@@ -207,15 +211,69 @@
       ]
     },
     {
+      "Label": "Modification(s)",
+      "Links": [],
+      "Values": [
+        "Wrist strap around the center of the hilt handgrip"
+      ]
+    },
+    {
+      "Label": "Protection type",
+      "Links": [
+        {
+          "Content": "Leather",
+          "Href": "https://starwars.fandom.com/wiki/Leather"
+        }
+      ],
+      "Values": [
+        "Leather wrist strap"
+      ]
+    },
+    {
+      "Label": "Capacity",
+      "Links": [
+        {
+          "Content": "Power cell",
+          "Href": "https://starwars.fandom.com/wiki/Power_cell"
+        },
+        {
+          "Content": "activation matrix",
+          "Href": "https://starwars.fandom.com/wiki/Emitter_matrix"
+        }
+      ],
+      "Values": [
+        "Power cell and activation matrix"
+      ]
+    },
+    {
+      "Label": "Range",
+      "Links": [],
+      "Values": [
+        "Close-range"
+      ]
+    },
+    {
+      "Label": "Other markings",
+      "Links": [],
+      "Values": [
+        "Weld marks in the center"
+      ]
+    },
+    {
       "Label": "Purpose",
       "Links": [
         {
           "Content": "Lightsaber combat",
           "Href": "https://starwars.fandom.com/wiki/Lightsaber_combat"
+        },
+        {
+          "Content": "Skywalker family",
+          "Href": "https://starwars.fandom.com/wiki/Skywalker_family"
         }
       ],
       "Values": [
-        "Lightsaber combat"
+        "Lightsaber combat",
+        "Skywalker family heirloom"
       ]
     },
     {
@@ -234,8 +292,20 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
         },
         {
+          "Content": "7th Sky Corps",
+          "Href": "https://starwars.fandom.com/wiki/7th_Sky_Corps"
+        },
+        {
+          "Content": "302nd Battalion",
+          "Href": "https://starwars.fandom.com/wiki/302nd_Battalion"
+        },
+        {
           "Content": "501st Legion",
           "Href": "https://starwars.fandom.com/wiki/501st_Legion"
+        },
+        {
+          "Content": "Office of the Chancellor",
+          "Href": "https://starwars.fandom.com/wiki/Office_of_the_Chancellor"
         },
         {
           "Content": "Sith",
@@ -263,10 +333,14 @@
         }
       ],
       "Values": [
+        "Skywalker family",
         "Jedi Order",
         "Jedi High Council",
         "Galactic Republic",
+        "7th Sky Corps",
+        "302nd Battalion",
         "501st Legion",
+        "Office of the Chancellor",
         "Sith",
         "Galactic Empire",
         "Alliance to Restore the Republic",
@@ -283,14 +357,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 456404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Mustafar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
       "PageId": 660956,
       "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Cloud_City",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 456404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Mustafar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

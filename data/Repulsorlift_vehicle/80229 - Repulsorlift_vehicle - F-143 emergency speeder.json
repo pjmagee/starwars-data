@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [],
       "Values": [
         "Speeder"
@@ -67,6 +67,13 @@
       ]
     },
     {
+      "Label": "Shielding",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
@@ -77,6 +84,29 @@
       "Values": [
         "Dousers",
         "Tractor beam projector"
+      ]
+    },
+    {
+      "Label": "Crew",
+      "Links": [
+        {
+          "Content": "captain",
+          "Href": "https://starwars.fandom.com/wiki/Captain"
+        },
+        {
+          "Content": "pilots",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
+        }
+      ],
+      "Values": [
+        "3 (captain and two pilots)"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [],
+      "Values": [
+        "Several firefighters"
       ]
     },
     {
@@ -109,5 +139,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 514429,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rothana_Heavy_Engineering",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    }
+  ]
 }

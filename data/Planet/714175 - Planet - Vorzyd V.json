@@ -2,7 +2,7 @@
   "PageId": 714175,
   "PageUrl": "https://starwars.fandom.com/wiki/Vorzyd_V",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c0/VorzydV-TrailofShadows2.jpg/revision/latest?cb=20230123215130",
   "Data": [
     {
       "Label": "Titles",
@@ -44,7 +44,12 @@
     },
     {
       "Label": "Points of interest",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Efavan",
+          "Href": "https://starwars.fandom.com/wiki/Efavan"
+        }
+      ],
       "Values": [
         "Efavan"
       ]
@@ -52,9 +57,39 @@
   ],
   "Relationships": [
     {
+      "PageId": 740247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Efavan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
       "PageId": 565819,
       "PageUrl": "https://starwars.fandom.com/wiki/Vorzyd_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 753159,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Vorzyd_V",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 748655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Galactic_Republic_agent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748656,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barmbat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 748657,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dags",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 740249,
+      "PageUrl": "https://starwars.fandom.com/wiki/Casino_86",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "PageId": 529367,
   "PageUrl": "https://starwars.fandom.com/wiki/Nworb_Yorel",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8b/NworbYorel.jpg/revision/latest?cb=20160125175823",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/02/Big_Nworb_Yorel_the_Bad.jpg/revision/latest?cb=20220806115841",
   "Data": [
     {
       "Label": "Titles",
@@ -12,27 +12,15 @@
       ]
     },
     {
-      "Label": "Homeworld",
-      "Links": [
-        {
-          "Content": "Kashyyyk",
-          "Href": "https://starwars.fandom.com/wiki/Kashyyyk/Legends"
-        }
-      ],
-      "Values": [
-        "Kashyyyk"
-      ]
-    },
-    {
       "Label": "Species",
       "Links": [
         {
-          "Content": "Human/Legends",
+          "Content": "Human",
           "Href": "https://starwars.fandom.com/wiki/Human/Legends"
         }
       ],
       "Values": [
-        "Human/Legends"
+        "Human"
       ]
     },
     {
@@ -51,7 +39,7 @@
       "Label": "Hair color",
       "Links": [
         {
-          "Content": "brown",
+          "Content": "Brown",
           "Href": "https://starwars.fandom.com/wiki/Color/Legends"
         },
         {
@@ -60,7 +48,7 @@
         }
       ],
       "Values": [
-        "Bald (brown eyebrows)"
+        "Bald (Brown eyebrows)"
       ]
     },
     {
@@ -95,11 +83,22 @@
     },
     {
       "Label": "Affiliation(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Canopy bandits",
+          "Href": "https://starwars.fandom.com/wiki/Canopy_bandits"
+        }
+      ],
       "Values": [
-        "Canopy Bandits"
+        "Canopy bandits"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 735963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Canopy_bandits",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 436342,
   "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Cadomai_Prime",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cc/Duel_on_Cadomai_Prime.png/revision/latest?cb=20141213012342",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/cc/Duel_on_Cadomai_Prime.png/revision/latest?cb=20220701181716",
   "Data": [
     {
       "Label": "Titles",
@@ -49,18 +49,18 @@
     },
     {
       "Label": "Outcome",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "One Sith",
+          "Href": "https://starwars.fandom.com/wiki/One_Sith"
+        }
+      ],
       "Values": [
         "Darth Wredd kills a member of the One Sith"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 436450,
-      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Wredd's_insurgency",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
     {
       "PageId": 847,
       "PageUrl": "https://starwars.fandom.com/wiki/Aparo_sector/Legends",
@@ -70,6 +70,11 @@
       "PageId": 4595,
       "PageUrl": "https://starwars.fandom.com/wiki/Catarlo_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 436450,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Wredd's_insurgency",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

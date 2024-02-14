@@ -27,26 +27,48 @@
       ]
     },
     {
-      "Label": "Vehicles",
+      "Label": "Strength",
       "Links": [
         {
-          "Content": "Starfighters",
-          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+          "Content": "Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Pilot"
         }
       ],
       "Values": [
-        "Starfighters"
+        "Pilots"
+      ]
+    },
+    {
+      "Label": "Vehicles",
+      "Links": [
+        {
+          "Content": "starfighters",
+          "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "ships",
+          "Href": "https://starwars.fandom.com/wiki/Starship"
+        }
+      ],
+      "Values": [
+        "Custom-designed starfighters",
+        "Support ships"
       ]
     },
     {
       "Label": "Notable battles",
       "Links": [
         {
+          "Content": "Separatist Crisis",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_Crisis"
+        },
+        {
           "Content": "First Battle of Geonosis",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis"
         }
       ],
       "Values": [
+        "Separatist Crisis",
         "First Battle of Geonosis"
       ]
     },
@@ -56,10 +78,15 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Confederacy of Independent Systems Navy",
+          "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems_Navy"
         }
       ],
       "Values": [
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems",
+        "Confederacy of Independent Systems Navy"
       ]
     }
   ],

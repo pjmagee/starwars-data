@@ -2,24 +2,13 @@
   "PageId": 31109,
   "PageUrl": "https://starwars.fandom.com/wiki/Lieda_Mothma",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Lieda Mothma"
-      ]
-    },
-    {
-      "Label": "Species",
-      "Links": [
-        {
-          "Content": "Human",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
-      "Values": [
-        "Human"
       ]
     },
     {
@@ -35,22 +24,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
-        },
-        {
-          "Content": "New Republic",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+          "Content": "Mothma family",
+          "Href": "https://starwars.fandom.com/wiki/Mothma_family/Legends"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic",
-        "New Republic"
+        "Mothma family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Mon Mothma",
+          "Href": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends"
+        }
+      ],
+      "Values": [
+        "Mon Mothma"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jobin",
+          "Href": "https://starwars.fandom.com/wiki/Jobin"
+        }
+      ],
+      "Values": [
+        "Jobin"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 1232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mon_Mothma/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 37174,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jobin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

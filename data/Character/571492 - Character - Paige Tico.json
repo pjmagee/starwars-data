@@ -2,7 +2,7 @@
   "PageId": 571492,
   "PageUrl": "https://starwars.fandom.com/wiki/Paige_Tico",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e5/PaigeTicoCardTrader.png/revision/latest?cb=20180121060557",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/e3/PaigeTicoBomberCommand.png/revision/latest?cb=20171202233914",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "6 ABY"
+        "c. 6 ABY, Hays Minor"
       ]
     },
     {
@@ -106,15 +106,52 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Tico family",
           "Href": "https://starwars.fandom.com/wiki/Tico_family"
+        }
+      ],
+      "Values": [
+        "Tico family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Hue Tico",
+          "Href": "https://starwars.fandom.com/wiki/Hue_Tico"
         },
         {
-          "Content": "Central Ridge Mining",
-          "Href": "https://starwars.fandom.com/wiki/Central_Ridge_Mining"
+          "Content": "Thanya Tico",
+          "Href": "https://starwars.fandom.com/wiki/Thanya_Tico"
+        }
+      ],
+      "Values": [
+        "Hue Tico",
+        "Thanya Tico"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Rose Tico",
+          "Href": "https://starwars.fandom.com/wiki/Rose_Tico"
+        }
+      ],
+      "Values": [
+        "Rose Tico"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
+        {
+          "Content": "Central Ridge Mining Company",
+          "Href": "https://starwars.fandom.com/wiki/Central_Ridge_Mining_Company"
         },
         {
           "Content": "Resistance",
@@ -122,12 +159,11 @@
         },
         {
           "Content": "Cobalt Squadron",
-          "Href": "https://starwars.fandom.com/wiki/Cobalt_Squadron_(Resistance)"
+          "Href": "https://starwars.fandom.com/wiki/Cobalt_Squadron"
         }
       ],
       "Values": [
-        "Tico family",
-        "Central Ridge Mining",
+        "Central Ridge Mining Company",
         "Resistance",
         "Cobalt Squadron"
       ]
@@ -135,14 +171,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 585837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hue_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 585838,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thanya_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 586744,
       "PageUrl": "https://starwars.fandom.com/wiki/Haysian_ore_medallion",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 586826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Little_Vixen",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 566271,
@@ -150,14 +191,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
+      "PageId": 592933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paige's_medallion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
       "PageId": 586436,
       "PageUrl": "https://starwars.fandom.com/wiki/Cobalt_Hammer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 592933,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paige's_medallion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+      "PageId": 586826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Little_Vixen",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 568537,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rose_Tico",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

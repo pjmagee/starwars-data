@@ -67,6 +67,23 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "West Haslip",
+          "Href": "https://starwars.fandom.com/wiki/West_Haslip"
+        },
+        {
+          "Content": "Nieka Haslip",
+          "Href": "https://starwars.fandom.com/wiki/Nieka_Haslip"
+        }
+      ],
+      "Values": [
+        "West Haslip",
+        "Nieka Haslip"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -84,5 +101,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 374439,
+      "PageUrl": "https://starwars.fandom.com/wiki/West_Haslip",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

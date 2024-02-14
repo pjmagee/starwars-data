@@ -2,6 +2,7 @@
   "PageId": 34895,
   "PageUrl": "https://starwars.fandom.com/wiki/Scerra_Horn",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -45,7 +46,63 @@
       "Values": [
         "Female"
       ]
+    },
+    {
+      "Label": "Family",
+      "Links": [
+        {
+          "Content": "Horn family",
+          "Href": "https://starwars.fandom.com/wiki/Horn_family"
+        }
+      ],
+      "Values": [
+        "Horn family"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Nejaa Halcyon",
+          "Href": "https://starwars.fandom.com/wiki/Nejaa_Halcyon"
+        },
+        {
+          "Content": "spouse",
+          "Href": "https://starwars.fandom.com/wiki/Marriage/Legends"
+        },
+        {
+          "Content": "Rostek Horn",
+          "Href": "https://starwars.fandom.com/wiki/Rostek_Horn"
+        }
+      ],
+      "Values": [
+        "Nejaa Halcyon (spouse)",
+        "Rostek Horn (spouse)"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Hal Horn",
+          "Href": "https://starwars.fandom.com/wiki/Hal_Horn"
+        }
+      ],
+      "Values": [
+        "Hal Horn"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 9697,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rostek_Horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 5421,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hal_Horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "S-3",
@@ -41,13 +41,19 @@
       "Values": [
         "Terrestrial"
       ]
+    },
+    {
+      "Label": "Fauna",
+      "Links": [
+        {
+          "Content": "creature",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Farana_creature"
+        }
+      ],
+      "Values": [
+        "A creature"
+      ]
     }
   ],
-  "Relationships": [
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    }
-  ]
+  "Relationships": []
 }

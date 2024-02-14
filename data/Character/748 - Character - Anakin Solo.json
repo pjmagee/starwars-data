@@ -84,6 +84,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -122,7 +129,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House of Solo",
@@ -131,7 +138,50 @@
         {
           "Content": "Skywalker family",
           "Href": "https://starwars.fandom.com/wiki/Skywalker_family/Legends"
+        }
+      ],
+      "Values": [
+        "House of Solo",
+        "Skywalker family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Han Solo",
+          "Href": "https://starwars.fandom.com/wiki/Han_Solo/Legends"
         },
+        {
+          "Content": "Leia Organa Solo",
+          "Href": "https://starwars.fandom.com/wiki/Leia_Organa_Solo"
+        }
+      ],
+      "Values": [
+        "Han Solo",
+        "Leia Organa Solo"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Jaina Solo Fel",
+          "Href": "https://starwars.fandom.com/wiki/Jaina_Solo_Fel"
+        },
+        {
+          "Content": "Jacen Solo",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Caedus"
+        }
+      ],
+      "Values": [
+        "Jaina Solo Fel",
+        "Jacen Solo"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "New Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
@@ -146,8 +196,6 @@
         }
       ],
       "Values": [
-        "House of Solo",
-        "Skywalker family",
         "New Jedi Order",
         "Myrkr strike team",
         "New Republic"
@@ -178,8 +226,58 @@
   ],
   "Relationships": [
     {
+      "PageId": 322,
+      "PageUrl": "https://starwars.fandom.com/wiki/Han_Solo/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 5310,
       "PageUrl": "https://starwars.fandom.com/wiki/Ikrit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jaina_Solo_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 123196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wedding_of_Luke_Skywalker_and_Mara_Jade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 340967,
+      "PageUrl": "https://starwars.fandom.com/wiki/Calrissian_Runner",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 79634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Confrontation_on_Crseih_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 198737,
+      "PageUrl": "https://starwars.fandom.com/wiki/Darth_Caedus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 306595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_third_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 96292,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Solo's_lightsaber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 319,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -188,18 +286,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 319,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 340967,
-      "PageUrl": "https://starwars.fandom.com/wiki/Calrissian_Runner",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 617,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker",
+      "PageId": 342,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leia_Organa_Solo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -208,24 +296,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 79634,
-      "PageUrl": "https://starwars.fandom.com/wiki/Confrontation_on_Crseih_Station",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
       "PageId": 414596,
       "PageUrl": "https://starwars.fandom.com/wiki/Book_chip",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 306595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obi-Wan_Kenobi's_third_lightsaber/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 96292,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anakin_Solo's_lightsaber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     }
   ]
 }

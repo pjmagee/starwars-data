@@ -48,10 +48,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "K-10"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Metellos Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Metellos_Trade_Route/Legends"
+        }
+      ],
+      "Values": [
+        "Metellos Trade Route"
       ]
     },
     {
@@ -81,9 +93,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 29903,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Orooturoo_species",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
       "PageId": 90,
       "PageUrl": "https://starwars.fandom.com/wiki/Metellos_Trade_Route/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 339000,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orooturoo_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 9352,
@@ -94,16 +116,6 @@
       "PageId": 13219,
       "PageUrl": "https://starwars.fandom.com/wiki/Widek_Bypass",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 339000,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orooturoo_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 29903,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Orooturoo_species",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

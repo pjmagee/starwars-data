@@ -15,12 +15,12 @@
       "Label": "Users",
       "Links": [
         {
-          "Content": "Dathomirian",
-          "Href": "https://starwars.fandom.com/wiki/Dathomirian/Legends"
+          "Content": "Witches of Dathomir",
+          "Href": "https://starwars.fandom.com/wiki/Witches_of_Dathomir"
         }
       ],
       "Values": [
-        "Dathomirian"
+        "Witches of Dathomir"
       ]
     },
     {
@@ -29,14 +29,46 @@
         {
           "Content": "Dathomir",
           "Href": "https://starwars.fandom.com/wiki/Dathomir/Legends"
+        },
+        {
+          "Content": "Paecia",
+          "Href": "https://starwars.fandom.com/wiki/Paecia/Legends"
         }
       ],
       "Values": [
-        "Dathomir"
+        "Dathomir",
+        "Paecia"
+      ]
+    },
+    {
+      "Label": "Related languages",
+      "Links": [
+        {
+          "Content": "Dathomiri",
+          "Href": "https://starwars.fandom.com/wiki/Dathomiri_(language)"
+        }
+      ],
+      "Values": [
+        "Dathomiri"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 730996,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paecia/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 369775,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paecia_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 376907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomiri_(language)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
     {
       "PageId": 22709,
       "PageUrl": "https://starwars.fandom.com/wiki/Paecian_Empire",

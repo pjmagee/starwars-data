@@ -2,7 +2,7 @@
   "PageId": 637534,
   "PageUrl": "https://starwars.fandom.com/wiki/Voxx_Cluster",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/e/ec/Voxx_cluster.jpg/revision/latest?cb=20191202164505",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/2/2f/VoxxCluster-TheVoxxVortex5000.png/revision/latest?cb=20221203082340",
   "Data": [
     {
       "Label": "Titles",
@@ -12,28 +12,78 @@
       ]
     },
     {
+      "Label": "Region",
+      "Links": [
+        {
+          "Content": "Outer Rim Territories",
+          "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice"
+        }
+      ],
+      "Values": [
+        "Outer Rim Territories",
+        "The Slice"
+      ]
+    },
+    {
+      "Label": "System",
+      "Links": [
+        {
+          "Content": "star system",
+          "Href": "https://starwars.fandom.com/wiki/Star_system"
+        }
+      ],
+      "Values": [
+        "A star system"
+      ]
+    },
+    {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "S-7",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "S-7"
+      ]
+    },
+    {
       "Label": "Points of interest",
       "Links": [
+        {
+          "Content": "Starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Racing_starfighter"
+        },
+        {
+          "Content": "racing",
+          "Href": "https://starwars.fandom.com/wiki/Sky_race"
+        },
         {
           "Content": "Vranki's Hotel and Casino",
           "Href": "https://starwars.fandom.com/wiki/Vranki%27s_Hotel_and_Casino"
         }
       ],
       "Values": [
+        "Starfighter racing circuit",
         "Vranki's Hotel and Casino"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 636837,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vranki's_Hotel_and_Casino",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 638091,
       "PageUrl": "https://starwars.fandom.com/wiki/Voxx_Vortex_5000",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 636837,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vranki's_Hotel_and_Casino",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

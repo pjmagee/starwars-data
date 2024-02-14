@@ -2,7 +2,7 @@
   "PageId": 539941,
   "PageUrl": "https://starwars.fandom.com/wiki/Crushank_Nebulae",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/3/3b/Cylo_base_space_whales.jpg/revision/latest?cb=20150518044652",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/9/97/CyloWhaleBase-DV2015-5.jpg/revision/latest?cb=20240127100201",
   "Data": [
     {
       "Label": "Titles",
@@ -24,6 +24,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "M-19",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "M-19"
+      ]
+    },
+    {
       "Label": "Space stations",
       "Links": [
         {
@@ -36,7 +48,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Whale-ships",
@@ -74,6 +86,11 @@
   ],
   "Relationships": [
     {
+      "PageId": 501323,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cylo's_research_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
       "PageId": 572752,
       "PageUrl": "https://starwars.fandom.com/wiki/Cylo_Directive",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
@@ -82,11 +99,6 @@
       "PageId": 634446,
       "PageUrl": "https://starwars.fandom.com/wiki/Cylo's_whale_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 501323,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cylo's_research_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

@@ -60,14 +60,14 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-19"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Plains",
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Human",
@@ -100,7 +100,7 @@
         },
         {
           "Content": "Caamasi",
-          "Href": "https://starwars.fandom.com/wiki/Caamasi"
+          "Href": "https://starwars.fandom.com/wiki/Caamasi/Legends"
         },
         {
           "Content": "Anzati",
@@ -199,61 +199,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 371548,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Susevfi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 82422,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jacob_Nive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 376584,
-      "PageUrl": "https://starwars.fandom.com/wiki/Leonia_Tavira's_palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 18454,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suarbi_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 82852,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dustrose",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 67700,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yumfla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 12283,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kelbis_Nu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 9633,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nejaa_Halcyon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 25926,
-      "PageUrl": "https://starwars.fandom.com/wiki/Suarbi_7",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 301214,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Susevfi",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
-      "PageId": 117642,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jensaarai/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 18667,
       "PageUrl": "https://starwars.fandom.com/wiki/Nikkos_Tyris",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
@@ -262,6 +207,66 @@
       "PageId": 18456,
       "PageUrl": "https://starwars.fandom.com/wiki/Suarbi_(star)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 376584,
+      "PageUrl": "https://starwars.fandom.com/wiki/Leonia_Tavira's_palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 117642,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jensaarai/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 82422,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jacob_Nive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 12283,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kelbis_Nu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 82852,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dustrose",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 301214,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_on_Susevfi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
+    },
+    {
+      "PageId": 67700,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yumfla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 9633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nejaa_Halcyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 18454,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suarbi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 371548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Susevfi",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 24046,
+      "PageUrl": "https://starwars.fandom.com/wiki/Caamasi_Remnant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 25926,
+      "PageUrl": "https://starwars.fandom.com/wiki/Suarbi_7",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

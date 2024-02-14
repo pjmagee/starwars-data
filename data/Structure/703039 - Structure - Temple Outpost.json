@@ -25,7 +25,12 @@
     },
     {
       "Label": "Location",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Falaston",
+          "Href": "https://starwars.fandom.com/wiki/Falaston"
+        }
+      ],
       "Values": [
         "Falaston"
       ]
@@ -44,6 +49,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 535612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedi_temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
     {
       "PageId": 727395,
       "PageUrl": "https://starwars.fandom.com/wiki/Falaston",

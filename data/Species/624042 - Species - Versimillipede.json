@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Classification",
-      "Links": [
-        {
-          "Content": "Reptile",
-          "Href": "https://starwars.fandom.com/wiki/Reptile"
-        }
-      ],
-      "Values": [
-        "Reptile"
-      ]
-    },
-    {
       "Label": "Skin color",
       "Links": [
         {
@@ -34,7 +22,30 @@
       "Values": [
         "Brown"
       ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [
+        {
+          "Content": "Eyes",
+          "Href": "https://starwars.fandom.com/wiki/Eye"
+        }
+      ],
+      "Values": [
+        "Eyes on stalks"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 542783,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jedha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 740572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kenari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

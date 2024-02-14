@@ -17,31 +17,53 @@
         {
           "Content": "Mid Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim_Territories"
+        },
+        {
+          "Content": "Near Perlemian",
+          "Href": "https://starwars.fandom.com/wiki/Near_Perlemian"
         }
       ],
       "Values": [
-        "Mid Rim Territories"
+        "Mid Rim Territories",
+        "Near Perlemian"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Alliance to Restore the Republic",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Mid Rim revolutionaries",
-          "Href": "https://starwars.fandom.com/wiki/Mid_Rim_revolutionaries"
+          "Content": "Alliance to Restore the Republic",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         }
       ],
       "Values": [
-        "Alliance to Restore the Republic",
-        "Mid Rim revolutionaries"
+        "Galactic Empire",
+        "Alliance to Restore the Republic"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 780528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Near_Perlemian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 778661,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Tiddell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 479522,
       "PageUrl": "https://starwars.fandom.com/wiki/Mid_Rim_Territories",

@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Repulsorlift",
@@ -83,15 +83,38 @@
       ]
     },
     {
-      "Label": "Sensor systems",
+      "Label": "Power plant",
       "Links": [
         {
-          "Content": "Equipped",
-          "Href": "https://starwars.fandom.com/wiki/Sensor"
+          "Content": "reactor",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        },
+        {
+          "Content": "Power generators",
+          "Href": "https://starwars.fandom.com/wiki/Power_generator"
+        },
+        {
+          "Content": "repulsor coil",
+          "Href": "https://starwars.fandom.com/wiki/Repulsor_coil"
         }
       ],
       "Values": [
-        "Equipped"
+        "Four-chambered multi-reactor power plant (general power)",
+        "Power generators (1 for each repulsor coil)"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [],
+      "Values": [
+        "Turret-mounted battlefield sensor package"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [],
+      "Values": [
+        "Stereoscopic rangefinder camera"
       ]
     },
     {
@@ -116,6 +139,14 @@
         {
           "Content": "projectile launchers",
           "Href": "https://starwars.fandom.com/wiki/Projectile_launcher"
+        },
+        {
+          "Content": "Bunker-buster shells",
+          "Href": "https://starwars.fandom.com/wiki/Bunker-buster"
+        },
+        {
+          "Content": "Armor-piercing shells",
+          "Href": "https://starwars.fandom.com/wiki/Armor-piercing_missile"
         }
       ],
       "Values": [
@@ -123,7 +154,10 @@
         "Lateral lasers (4)",
         "Lateral range-finding lasers (2)",
         "Lateral antipersonnel lasers (2)",
-        "Hull-mounted energized projectile launchers (6)"
+        "Hull-mounted energized projectile launchers (6)",
+        "Bunker-buster shells",
+        "Armor-piercing shells",
+        "High-energy shells"
       ]
     },
     {
@@ -157,9 +191,26 @@
     },
     {
       "Label": "Cargo capacity",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "metric tons",
+          "Href": "https://starwars.fandom.com/wiki/Metric_ton"
+        }
+      ],
       "Values": [
-        "10"
+        "10 metric tons"
+      ]
+    },
+    {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "Control and Command",
+          "Href": "https://starwars.fandom.com/wiki/Lucrehulk-class_Droid_Control_Ship"
+        }
+      ],
+      "Values": [
+        "Control and Command receiver antenna"
       ]
     },
     {
@@ -186,6 +237,26 @@
           "Href": "https://starwars.fandom.com/wiki/Death_Watch"
         },
         {
+          "Content": "Nightsisters",
+          "Href": "https://starwars.fandom.com/wiki/Nightsisters"
+        },
+        {
+          "Content": "Separatist holdout",
+          "Href": "https://starwars.fandom.com/wiki/Separatist_holdouts"
+        },
+        {
+          "Content": "Desix Separatist holdout",
+          "Href": "https://starwars.fandom.com/wiki/Desix_Separatist_holdout"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        },
+        {
+          "Content": "Bedlam Raiders",
+          "Href": "https://starwars.fandom.com/wiki/Bedlam_Raiders"
+        },
+        {
           "Content": "Hutt Clan",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Clan"
         },
@@ -204,6 +275,11 @@
         "Confederacy of Independent Systems",
         "Separatist Droid Army",
         "Death Watch",
+        "Nightsisters",
+        "Separatist holdout",
+        "Desix Separatist holdout",
+        "Galactic Empire",
+        "Bedlam Raiders",
         "Hutt Clan",
         "Alliance to Restore the Republic",
         "Alliance Army"
@@ -212,19 +288,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 516859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 507799,
       "PageUrl": "https://starwars.fandom.com/wiki/Core_ship",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 663609,
-      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 572307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Profusion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 647472,
@@ -232,34 +303,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 545337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Droid_Army",
+      "PageId": 629127,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ventress's_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 603374,
-      "PageUrl": "https://starwars.fandom.com/wiki/TJ-55's_battle_droid_battalion",
+      "PageId": 629986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 452845,
-      "PageUrl": "https://starwars.fandom.com/wiki/Providence-class_Dreadnought",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 477322,
-      "PageUrl": "https://starwars.fandom.com/wiki/C-9979_landing_craft",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 596870,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 466804,
       "PageUrl": "https://starwars.fandom.com/wiki/Invisible_Hand",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 6229,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 620478,
@@ -272,23 +333,68 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 6229,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_Battleship",
+      "PageId": 750922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desix_Separatist_holdout",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 753504,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incinerator_tank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 60634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lucrehulk-class_LH-3210_cargo_freighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 545337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Droid_Army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 596870,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vuutun_Palaa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 477322,
+      "PageUrl": "https://starwars.fandom.com/wiki/C-9979_landing_craft",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 516859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 749189,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_C-9979_landing_craft_(Rugosa)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 663609,
+      "PageUrl": "https://starwars.fandom.com/wiki/Malastare_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 751037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Desix_droid_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 774810,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_droid_battalion_(Kaller)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 603374,
+      "PageUrl": "https://starwars.fandom.com/wiki/TJ-55's_battle_droid_battalion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 625740,
       "PageUrl": "https://starwars.fandom.com/wiki/Trade_Federation_Home_Defense_Legions",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 629127,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ventress's_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 629986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Whorm_Loathsom's_army",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {

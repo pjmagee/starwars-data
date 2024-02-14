@@ -51,16 +51,21 @@
       "Label": "Asteroids",
       "Links": [
         {
-          "Content": "The Junkyard",
+          "Content": "Junkyard",
           "Href": "https://starwars.fandom.com/wiki/Junkyard"
+        },
+        {
+          "Content": "Gem",
+          "Href": "https://starwars.fandom.com/wiki/Gem_(Junkyard)"
         }
       ],
       "Values": [
-        "The Junkyard"
+        "Junkyard",
+        "Gem"
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chiss",
@@ -83,28 +88,18 @@
           "Href": "https://starwars.fandom.com/wiki/Clarr_family"
         },
         {
-          "Content": "Grysk Hegemony",
-          "Href": "https://starwars.fandom.com/wiki/Grysk_Hegemony"
+          "Content": "Grysks",
+          "Href": "https://starwars.fandom.com/wiki/Grysk"
         }
       ],
       "Values": [
         "Chiss Ascendancy",
         "Clarr family",
-        "Grysk Hegemony"
+        "Grysks"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 727695,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar's_sun",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 720910,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clarr_family_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
     {
       "PageId": 713544,
       "PageUrl": "https://starwars.fandom.com/wiki/Rhigar",
@@ -114,6 +109,16 @@
       "PageId": 714557,
       "PageUrl": "https://starwars.fandom.com/wiki/Junkyard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 727695,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rhigar's_sun",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 720910,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clarr_family_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

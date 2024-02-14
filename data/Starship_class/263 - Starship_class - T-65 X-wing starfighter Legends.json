@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Incom Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
-        }
-      ],
-      "Values": [
-        "Incom Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -33,6 +21,18 @@
       ],
       "Values": [
         "Vors Voorhorian"
+      ]
+    },
+    {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Incom Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends"
+        }
+      ],
+      "Values": [
+        "Incom Corporation"
       ]
     },
     {
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -189,12 +189,12 @@
           "Href": "https://starwars.fandom.com/wiki/Novaldex/Legends"
         },
         {
-          "Content": "O4-Z cryogenic power cell",
-          "Href": "https://starwars.fandom.com/wiki/O4-Z_cryogenic_power_cell"
+          "Content": "O4-Z power generator",
+          "Href": "https://starwars.fandom.com/wiki/O4-Z_power_generator"
         }
       ],
       "Values": [
-        "Novaldex O4-Z cryogenic power cell",
+        "Novaldex O4-Z power generator",
         "Ionization reactor"
       ]
     },
@@ -212,10 +212,15 @@
         {
           "Content": "SBD",
           "Href": "https://starwars.fandom.com/wiki/SBD"
+        },
+        {
+          "Content": "Thermal shielding",
+          "Href": "https://starwars.fandom.com/wiki/Thermal_shielding"
         }
       ],
       "Values": [
-        "Chempat \"Defender\" deflector shield generator (rated 50 SBD)"
+        "Chempat \"Defender\" deflector shield generator (rated 50 SBD)",
+        "Thermal shielding"
       ]
     },
     {
@@ -463,27 +468,19 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+          "Content": "Alliance of Free Planets",
+          "Href": "https://starwars.fandom.com/wiki/Alliance_of_Free_Planets"
         },
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
         },
         {
-          "Content": "Hidden Daggers",
-          "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
+          "Content": "Asteroid Bandits",
+          "Href": "https://starwars.fandom.com/wiki/Asteroid_Bandits"
         },
         {
-          "Content": "Lok Revenants",
-          "Href": "https://starwars.fandom.com/wiki/Lok_Revenants/Legends"
-        },
-        {
-          "Content": "Royal Naboo Security Forces",
-          "Href": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces/Legends"
-        },
-        {
-          "Content": "Ay'Nat pirates",
+          "Content": "Ay'Nat",
           "Href": "https://starwars.fandom.com/wiki/Ay%27Nat"
         },
         {
@@ -491,77 +488,80 @@
           "Href": "https://starwars.fandom.com/wiki/Canyon_Corsairs"
         },
         {
-          "Content": "Shador",
-          "Href": "https://starwars.fandom.com/wiki/Shador"
-        },
-        {
-          "Content": "Alliance of Free Planets",
-          "Href": "https://starwars.fandom.com/wiki/Alliance_of_Free_Planets"
-        },
-        {
           "Content": "Corellian Security Force",
           "Href": "https://starwars.fandom.com/wiki/Corellian_Security_Force"
-        },
-        {
-          "Content": "Hapes Consortium",
-          "Href": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends"
-        },
-        {
-          "Content": "New Republic",
-          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
         },
         {
           "Content": "Galactic Federation of Free Alliances",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Federation_of_Free_Alliances"
         },
         {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
+        },
+        {
+          "Content": "Hapes Consortium",
+          "Href": "https://starwars.fandom.com/wiki/Hapes_Consortium/Legends"
+        },
+        {
+          "Content": "Hidden Daggers",
+          "Href": "https://starwars.fandom.com/wiki/Hidden_Daggers"
+        },
+        {
+          "Content": "Linear Miasma Scientists",
+          "Href": "https://starwars.fandom.com/wiki/Linear_Miasma_Scientists"
+        },
+        {
+          "Content": "Lok Revenants",
+          "Href": "https://starwars.fandom.com/wiki/Lok_Revenants/Legends"
+        },
+        {
           "Content": "New Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/New_Jedi_Order"
         },
         {
-          "Content": "Confederation",
-          "Href": "https://starwars.fandom.com/wiki/Confederation"
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
+          "Content": "Royal Naboo Security Forces",
+          "Href": "https://starwars.fandom.com/wiki/Royal_Naboo_Security_Forces/Legends"
+        },
+        {
+          "Content": "Shador",
+          "Href": "https://starwars.fandom.com/wiki/Shador"
         }
       ],
       "Values": [
-        "Galactic Empire",
+        "Alliance of Free Planets",
         "Alliance to Restore the Republic",
-        "Hidden Daggers",
-        "Lok Revenants",
-        "Royal Naboo Security Forces",
+        "Asteroid Bandits",
         "Ay'Nat pirates",
         "Canyon Corsairs",
-        "Shador",
-        "Alliance of Free Planets",
         "Corellian Security Force",
-        "Hapes Consortium",
-        "New Republic",
         "Galactic Federation of Free Alliances",
+        "Galactic Empire",
+        "Hapes Consortium",
+        "Hidden Daggers",
+        "Linear Miasma Scientists",
+        "Lok Revenants",
         "New Jedi Order",
-        "Confederation"
+        "New Republic",
+        "Royal Naboo Security Forces",
+        "Shador"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 452157,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Dactillions",
+      "PageId": 528688,
+      "PageUrl": "https://starwars.fandom.com/wiki/94th_Fighter/Attack_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 703,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 200726,
-      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(New_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 267475,
-      "PageUrl": "https://starwars.fandom.com/wiki/High_Flight_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 285866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Elomin_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 182929,
@@ -574,39 +574,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 164186,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tanquilla_Beach/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+      "PageId": 177758,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fortressa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 40148,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65XJ3_X-wing_starfighter",
+      "PageId": 452157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soaring_Dactillions",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 31320,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vindicator_(New_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 8396,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chir'daki",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 438089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Transport_Expansion_Pack",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
-    },
-    {
-      "PageId": 141984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chie_(MC40a_light_cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 145199,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Dog",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 282779,
-      "PageUrl": "https://starwars.fandom.com/wiki/Screamer_(Nagai_starfighter)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 49664,
-      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_(tandem)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 539900,
@@ -614,14 +599,79 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 429832,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tension_strut",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 257747,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65AC4_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 38871,
-      "PageUrl": "https://starwars.fandom.com/wiki/High_Flight_Beta_Squadron",
+      "PageId": 25909,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80a_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 27094,
+      "PageUrl": "https://starwars.fandom.com/wiki/Namana-class_light_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 131743,
+      "PageUrl": "https://starwars.fandom.com/wiki/Angelus",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 267475,
+      "PageUrl": "https://starwars.fandom.com/wiki/High_Flight_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 164186,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tanquilla_Beach/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    },
+    {
+      "PageId": 155250,
+      "PageUrl": "https://starwars.fandom.com/wiki/Re",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 155251,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ta_(MC40a_light_cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 200726,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(New_Republic)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 282779,
+      "PageUrl": "https://starwars.fandom.com/wiki/Screamer_(Nagai_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 740340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cerise_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 740341,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reseda_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 384247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_X-wing_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 509291,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dust_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 198,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incom_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 11767,
@@ -639,24 +689,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 8396,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chir'daki",
+      "PageId": 472891,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Team_(Isis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 40148,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65XJ3_X-wing_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 285866,
-      "PageUrl": "https://starwars.fandom.com/wiki/Elomin_task_force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 5813,
-      "PageUrl": "https://starwars.fandom.com/wiki/Home_One/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 121503,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 24517,
@@ -664,29 +704,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 102617,
-      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Home_One_type_Star_Cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 438089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Transport_Expansion_Pack",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 4339,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Battle_Dragon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 131743,
-      "PageUrl": "https://starwars.fandom.com/wiki/Angelus",
+      "PageId": 5813,
+      "PageUrl": "https://starwars.fandom.com/wiki/Home_One/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 528688,
-      "PageUrl": "https://starwars.fandom.com/wiki/94th_Fighter/Attack_Squadron",
+      "PageId": 703,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rogue_Squadron/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 177758,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fortressa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 7165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 7167,
+      "PageUrl": "https://starwars.fandom.com/wiki/Green_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 102617,
+      "PageUrl": "https://starwars.fandom.com/wiki/MC80_Home_One_type_Star_Cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
       "PageId": 343515,
@@ -694,8 +739,28 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 509291,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dust_Squadron",
+      "PageId": 429832,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tension_strut",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 54913,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quenfis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 54941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Pelagia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 382111,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lightspeed_Panthers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 38871,
+      "PageUrl": "https://starwars.fandom.com/wiki/High_Flight_Beta_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
@@ -709,39 +774,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Card_game"
     },
     {
-      "PageId": 54941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Pelagia",
+      "PageId": 5631,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Rebel_Alliance)/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 121503,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_One",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 384247,
-      "PageUrl": "https://starwars.fandom.com/wiki/Advanced_X-wing_fighter",
+      "PageId": 141984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chie_(MC80_Star_Cruiser)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 145199,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_Dog",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 49664,
+      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_(tandem)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 4339,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hapan_Battle_Dragon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 155250,
-      "PageUrl": "https://starwars.fandom.com/wiki/Re",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 155251,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ta_(MC40a_light_cruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 257747,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65AC4_X-wing_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 27094,
-      "PageUrl": "https://starwars.fandom.com/wiki/Namana-class_light_cruiser",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 31320,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vindicator_(New_Republic)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

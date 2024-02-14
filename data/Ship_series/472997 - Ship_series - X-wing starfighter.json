@@ -2,7 +2,7 @@
   "PageId": 472997,
   "PageUrl": "https://starwars.fandom.com/wiki/X-wing_starfighter",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/60/Xwing-SWB.jpg/revision/latest?cb=20160704070524",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/0/00/Xwing-ROOCE.png/revision/latest?cb=20230516042654",
   "Data": [
     {
       "Label": "Titles",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -73,7 +73,7 @@
         },
         {
           "Content": "T-85 X-wing starfighter",
-          "Href": "https://starwars.fandom.com/wiki/T-85_X-wing"
+          "Href": "https://starwars.fandom.com/wiki/T-85_X-wing_starfighter"
         }
       ],
       "Values": [
@@ -95,12 +95,20 @@
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
         },
         {
+          "Content": "Rebel Alliance Navy",
+          "Href": "https://starwars.fandom.com/wiki/Rebel_Alliance_Navy"
+        },
+        {
           "Content": "Jedi Order",
           "Href": "https://starwars.fandom.com/wiki/Jedi_Order"
         },
         {
           "Content": "New Republic",
           "Href": "https://starwars.fandom.com/wiki/New_Republic"
+        },
+        {
+          "Content": "New Republic Defense Fleet",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic_Defense_Fleet"
         },
         {
           "Content": "Amaxine warriors",
@@ -111,30 +119,37 @@
           "Href": "https://starwars.fandom.com/wiki/Resistance"
         },
         {
-          "Content": "Am's Galactic Empire",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire_(Am_and_Karre)"
+          "Content": "Resistance navy",
+          "Href": "https://starwars.fandom.com/wiki/Resistance_navy"
+        },
+        {
+          "Content": "First Order",
+          "Href": "https://starwars.fandom.com/wiki/First_Order"
+        },
+        {
+          "Content": "First Order Navy",
+          "Href": "https://starwars.fandom.com/wiki/First_Order_Navy"
         }
       ],
       "Values": [
         "Alliance to Restore the Republic",
+        "Rebel Alliance Navy",
         "Jedi Order",
         "New Republic",
+        "New Republic Defense Fleet",
         "Amaxine warriors",
         "Resistance",
-        "Am's Galactic Empire"
+        "Resistance navy",
+        "First Order (stolen)",
+        "First Order Navy (stolen)"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 592662,
-      "PageUrl": "https://starwars.fandom.com/wiki/X-322",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 628220,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-series_X-wing_line",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+      "PageId": 539293,
+      "PageUrl": "https://starwars.fandom.com/wiki/Precision_air_team",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 499196,
@@ -148,28 +163,13 @@
     },
     {
       "PageId": 566673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(X-wing_starfighter)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Five_(T-65B_X-wing_starfighter)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 524051,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-85_X-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 642900,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 623884,
-      "PageUrl": "https://starwars.fandom.com/wiki/Lodestar",
+      "PageId": 524089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 539293,
-      "PageUrl": "https://starwars.fandom.com/wiki/Precision_air_team",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 584136,
@@ -177,14 +177,104 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 325619,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter",
+      "PageId": 632752,
+      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 637211,
+      "PageUrl": "https://starwars.fandom.com/wiki/Venisa_Doza's_X-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 642900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 633636,
+      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_drone",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 637487,
+      "PageUrl": "https://starwars.fandom.com/wiki/B-class_X-wing",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 794218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Split_S",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
     },
     {
       "PageId": 575947,
       "PageUrl": "https://starwars.fandom.com/wiki/Temmin_Wexley's_T-65C-A2_X-wing_starfighter",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 628220,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-series_X-wing_line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 788806,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
+    },
+    {
+      "PageId": 623884,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lodestar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 719645,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Incom_personnel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 732693,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halo_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 524051,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-85_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 557162,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65C-A2_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 453203,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 611829,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter_Exterior_Variant_/2",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 611832,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter_Exterior_Variant_/1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 557165,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cavern_Angels",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 592662,
+      "PageUrl": "https://starwars.fandom.com/wiki/X-322",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 501866,
+      "PageUrl": "https://starwars.fandom.com/wiki/61st_Mobile_Infantry",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 584454,
@@ -212,9 +302,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 453203,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blade_Squadron",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 735109,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dagobah-Bog-Be-Gone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 325619,
+      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 741141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_One_(T-65B_X-wing_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 744819,
+      "PageUrl": "https://starwars.fandom.com/wiki/Red_Six_(T-65B_X-wing_starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 623886,
@@ -222,59 +327,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
-      "PageId": 501866,
-      "PageUrl": "https://starwars.fandom.com/wiki/61st_Mobile_Infantry",
+      "PageId": 624733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_Squadron",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 557165,
-      "PageUrl": "https://starwars.fandom.com/wiki/Cavern_Angels",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 611829,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter_Exterior_Variant_/2",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 611832,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65B_X-wing_starfighter_Exterior_Variant_/1",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 719645,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Incom_personnel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 632752,
-      "PageUrl": "https://starwars.fandom.com/wiki/Poe_Dameron's_X-wing_fighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 637211,
-      "PageUrl": "https://starwars.fandom.com/wiki/Venisa_Doza's_X-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 557162,
-      "PageUrl": "https://starwars.fandom.com/wiki/T-65C-A2_X-wing_starfighter",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 524089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Black_One",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 633636,
-      "PageUrl": "https://starwars.fandom.com/wiki/X-wing_drone",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 637487,
-      "PageUrl": "https://starwars.fandom.com/wiki/B-class_X-wing",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

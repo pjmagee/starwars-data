@@ -2,7 +2,7 @@
   "PageId": 2469,
   "PageUrl": "https://starwars.fandom.com/wiki/Roos_Tarpals/Legends",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d5/TarpalsHS-SWE.png/revision/latest?cb=20211214030207",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/c/c8/Tarpals-FFp47.png/revision/latest?cb=20220830034024",
   "Data": [
     {
       "Label": "Titles",
@@ -32,7 +32,7 @@
         }
       ],
       "Values": [
-        "c. 21 BBY, Naboo"
+        "21 BBY, Naboo"
       ]
     },
     {
@@ -116,29 +116,49 @@
         {
           "Content": "Gungan Grand Army",
           "Href": "https://starwars.fandom.com/wiki/Gungan_Grand_Army/Legends"
+        },
+        {
+          "Content": "Roos Tarpals' family",
+          "Href": "https://starwars.fandom.com/wiki/Roos_Tarpals%27_family"
+        },
+        {
+          "Content": "Roos Tarpals' gang",
+          "Href": "https://starwars.fandom.com/wiki/Roos_Tarpals%27_gang"
         }
       ],
       "Values": [
         "Gungan society",
-        "Gungan Grand Army"
+        "Gungan Grand Army",
+        "Roos Tarpals' family",
+        "Roos Tarpals' gang"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 750920,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roos_Tarpals'_gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
     {
       "PageId": 62707,
       "PageUrl": "https://starwars.fandom.com/wiki/Militiagung/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 7851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Grand_Army/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 750441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Roos_Tarpals'_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 406108,
       "PageUrl": "https://starwars.fandom.com/wiki/Freedom_Day",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 7851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gungan_Grand_Army/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

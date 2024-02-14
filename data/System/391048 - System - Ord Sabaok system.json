@@ -2,7 +2,7 @@
   "PageId": 391048,
   "PageUrl": "https://starwars.fandom.com/wiki/Ord_Sabaok_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/5/5b/OrdSabaok-EGTW.jpg/revision/latest?cb=20220806093407",
   "Data": [
     {
       "Label": "Titles",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "J-13"
@@ -41,18 +41,30 @@
       "Values": [
         "Ord Sabaok"
       ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Humans",
+          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
+        }
+      ],
+      "Values": [
+        "Humans"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 16073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Sabaok",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 505,
       "PageUrl": "https://starwars.fandom.com/wiki/Core_Worlds/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 16073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ord_Sabaok",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

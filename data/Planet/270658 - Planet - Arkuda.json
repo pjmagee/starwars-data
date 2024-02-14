@@ -2,7 +2,7 @@
   "PageId": 270658,
   "PageUrl": "https://starwars.fandom.com/wiki/Arkuda",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/fc/Arkuda-TEA.jpg/revision/latest?cb=20221002081615",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Trans-Hydian",
+          "Href": "https://starwars.fandom.com/wiki/Trans-Hydian"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Trans-Hydian"
       ]
     },
     {
@@ -29,10 +34,15 @@
         {
           "Content": "Gordian Reach",
           "Href": "https://starwars.fandom.com/wiki/Gordian_Reach/Legends"
+        },
+        {
+          "Content": "Loop Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Loop_Worlds"
         }
       ],
       "Values": [
-        "Gordian Reach"
+        "Gordian Reach",
+        "Loop Worlds"
       ]
     },
     {
@@ -48,7 +58,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "Q-6"
@@ -58,16 +68,28 @@
       "Label": "Trade routes",
       "Links": [
         {
+          "Content": "Junction-Tierell Loop",
+          "Href": "https://starwars.fandom.com/wiki/Junction-Tierell_Loop/Legends"
+        },
+        {
           "Content": "Korphir Trace",
           "Href": "https://starwars.fandom.com/wiki/Korphir_Trace"
         }
       ],
       "Values": [
+        "Junction-Tierell Loop",
         "Korphir Trace"
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Terrain",
       "Links": [],
       "Values": [
         "Rocky"
@@ -77,16 +99,21 @@
       "Label": "Native species",
       "Links": [
         {
-          "Content": "Arkudans",
+          "Content": "Arkudan",
           "Href": "https://starwars.fandom.com/wiki/Arkudan"
         }
       ],
       "Values": [
-        "Arkudans"
+        "Arkudan"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 270659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arkudan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
     {
       "PageId": 271422,
       "PageUrl": "https://starwars.fandom.com/wiki/Arkuda_system",
@@ -101,11 +128,6 @@
       "PageId": 271155,
       "PageUrl": "https://starwars.fandom.com/wiki/Junction-Tierell_Loop/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 270659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Arkudan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     }
   ]
 }

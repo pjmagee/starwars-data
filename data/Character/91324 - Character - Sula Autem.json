@@ -67,7 +67,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Autem family",
@@ -77,7 +77,52 @@
       "Values": [
         "Autem family"
       ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Sagoro Autem",
+          "Href": "https://starwars.fandom.com/wiki/Sagoro_Autem"
+        }
+      ],
+      "Values": [
+        "Sagoro Autem"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Reymet Autem",
+          "Href": "https://starwars.fandom.com/wiki/Reymet_Autem"
+        },
+        {
+          "Content": "Lissa Autem",
+          "Href": "https://starwars.fandom.com/wiki/Lissa_Autem"
+        }
+      ],
+      "Values": [
+        "Reymet Autem",
+        "Lissa Autem"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 91326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lissa_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 8490,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sagoro_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 32588,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reymet_Autem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

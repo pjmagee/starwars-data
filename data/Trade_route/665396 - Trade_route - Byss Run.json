@@ -2,7 +2,7 @@
   "PageId": 665396,
   "PageUrl": "https://starwars.fandom.com/wiki/Byss_Run",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/88/Byss-Run-SWT.jpg/revision/latest?cb=20220728194530",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,14 @@
         {
           "Content": "Deep Core",
           "Href": "https://starwars.fandom.com/wiki/Deep_Core"
+        },
+        {
+          "Content": "Core Worlds",
+          "Href": "https://starwars.fandom.com/wiki/Core_Worlds"
         }
       ],
       "Values": [
-        "Deep Core"
+        "Deep CoreCore Worlds"
       ]
     },
     {
@@ -29,18 +33,58 @@
         {
           "Content": "Koros sector",
           "Href": "https://starwars.fandom.com/wiki/Koros_sector"
+        },
+        {
+          "Content": "Corusca sector",
+          "Href": "https://starwars.fandom.com/wiki/Corusca_sector"
         }
       ],
       "Values": [
-        "Koros sector"
+        "Koros sectorCorusca sector"
+      ]
+    },
+    {
+      "Label": "Start point",
+      "Links": [
+        {
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant"
+        }
+      ],
+      "Values": [
+        "Coruscant"
+      ]
+    },
+    {
+      "Label": "End point",
+      "Links": [
+        {
+          "Content": "Byss",
+          "Href": "https://starwars.fandom.com/wiki/Byss"
+        }
+      ],
+      "Values": [
+        "Byss"
+      ]
+    },
+    {
+      "Label": "Systems",
+      "Links": [
+        {
+          "Content": "Empress Teta system",
+          "Href": "https://starwars.fandom.com/wiki/Empress_Teta_system"
+        }
+      ],
+      "Values": [
+        "Empress Teta system"
       ]
     },
     {
       "Label": "Planets",
       "Links": [
         {
-          "Content": "Empress Teta",
-          "Href": "https://starwars.fandom.com/wiki/Empress_Teta"
+          "Content": "Coruscant",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant"
         },
         {
           "Content": "Prakith",
@@ -52,15 +96,51 @@
         }
       ],
       "Values": [
-        "Empress Teta - Prakith - Byss"
+        "Coruscant - Empress Teta - Prakith - Byss"
+      ]
+    },
+    {
+      "Label": "Junctions",
+      "Links": [
+        {
+          "Content": "Carbonite Run",
+          "Href": "https://starwars.fandom.com/wiki/Carbonite_Run"
+        },
+        {
+          "Content": "Koros Trunk Line",
+          "Href": "https://starwars.fandom.com/wiki/Koros_Trunk_Line"
+        }
+      ],
+      "Values": [
+        "Carbonite Run/Koros Trunk Line"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 11772,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_Trunk_Line/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+      "PageId": 500078,
+      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 569844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 665394,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atale",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 665399,
+      "PageUrl": "https://starwars.fandom.com/wiki/Koros_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 46129,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atale/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
       "PageId": 550961,
@@ -76,31 +156,6 @@
       "PageId": 550968,
       "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 665399,
-      "PageUrl": "https://starwars.fandom.com/wiki/Koros_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 569844,
-      "PageUrl": "https://starwars.fandom.com/wiki/Empress_Teta_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 665394,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atale",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 500078,
-      "PageUrl": "https://starwars.fandom.com/wiki/Deep_Core",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
-    },
-    {
-      "PageId": 46129,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atale/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     }
   ]
 }

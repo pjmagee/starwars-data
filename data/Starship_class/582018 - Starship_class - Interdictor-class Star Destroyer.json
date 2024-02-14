@@ -43,7 +43,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Heavy cruiser",
@@ -86,12 +86,24 @@
       "Label": "Maximum atmospheric speed",
       "Links": [
         {
-          "Content": "kph",
+          "Content": "km/h",
           "Href": "https://starwars.fandom.com/wiki/Kilometer_per_hour"
         }
       ],
       "Values": [
-        "975 kph"
+        "975 km/h"
+      ]
+    },
+    {
+      "Label": "Engine unit(s)",
+      "Links": [
+        {
+          "Content": "Engines",
+          "Href": "https://starwars.fandom.com/wiki/Engine"
+        }
+      ],
+      "Values": [
+        "Engines (3)"
       ]
     },
     {
@@ -112,6 +124,18 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Auxilliary reactors"
       ]
     },
     {
@@ -139,11 +163,23 @@
       ]
     },
     {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "Navicomputor",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Navicomputor"
+      ]
+    },
+    {
       "Label": "Armament",
       "Links": [
         {
-          "Content": "Gravity well projectors",
-          "Href": "https://starwars.fandom.com/wiki/Gravity_well_projector"
+          "Content": "G7-X gravity well projectors",
+          "Href": "https://starwars.fandom.com/wiki/G7-X_gravity_well_projector"
         },
         {
           "Content": "Quad laser cannons",
@@ -151,8 +187,9 @@
         }
       ],
       "Values": [
-        "Gravity well projectors (4)",
-        "Quad laser cannons (20)"
+        "G7-X gravity well projectors (4)",
+        "Quad laser cannons (20)",
+        "5 dorsal, 5 ventral, 4 port, 4 starboard, 2 aft"
       ]
     },
     {
@@ -165,10 +202,28 @@
         {
           "Content": "starfighters",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "TIE/ln fighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE/IN interceptors",
+          "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "TIE/sa bombers",
+          "Href": "https://starwars.fandom.com/wiki/TIE/sa_bomber"
+        },
+        {
+          "Content": "TIE/ca \"Punisher\" Starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ca_\"Punisher\"_Starfighter"
         }
       ],
       "Values": [
-        "TIE line starfighters (24)"
+        "TIE line starfighters (24)",
+        "Typically one squadron of TIE/ln fighters or TIE/IN interceptors",
+        "Typically one squadron of TIE/sa bombers or TIE/ca \"Punisher\" Starfighters"
       ]
     },
     {
@@ -207,7 +262,7 @@
         }
       ],
       "Values": [
-        "Over 2,800",
+        "2,807",
         "Imperial officers",
         "Imperial weapons technicians",
         "Stormtroopers"
@@ -215,7 +270,12 @@
     },
     {
       "Label": "Passengers",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "troops",
+          "Href": "https://starwars.fandom.com/wiki/Troop"
+        }
+      ],
       "Values": [
         "80 troops"
       ]
@@ -230,6 +290,13 @@
       ],
       "Values": [
         "16 months"
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [],
+      "Values": [
+        "Power trunking"
       ]
     },
     {
@@ -269,28 +336,23 @@
   ],
   "Relationships": [
     {
-      "PageId": 694888,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor_line",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
-    },
-    {
-      "PageId": 460134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 567230,
       "PageUrl": "https://starwars.fandom.com/wiki/Konstantine's_Interdictor-class_Star_Destroyer",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 585140,
-      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor_(Interdictor-class_Star_Destroyer)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 694888,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor_line",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ship_series"
     },
     {
       "PageId": 586434,
       "PageUrl": "https://starwars.fandom.com/wiki/Spectral",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 585140,
+      "PageUrl": "https://starwars.fandom.com/wiki/Interdictor_(Interdictor-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -299,9 +361,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 518833,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Interdictor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 460134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sienar_Fleet_Systems",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     }
   ]
 }

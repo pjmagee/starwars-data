@@ -2,29 +2,42 @@
   "PageId": 270291,
   "PageUrl": "https://starwars.fandom.com/wiki/Kor_Desilijic",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/af/BootanaHutta-TEA.jpg/revision/latest?cb=20230624095811",
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
-        "Kor Desilijic"
+        "Kor Desilijic",
+        "(The Bootana Hutta region, with Kor Desilijic represented by the number 12)"
       ]
     },
     {
       "Label": "Region",
       "Links": [
         {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
           "Content": "Hutt Space",
           "Href": "https://starwars.fandom.com/wiki/Hutt_Space/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "The Slice",
+        "Hutt Space"
+      ]
+    },
+    {
+      "Label": "Sector",
+      "Links": [
         {
           "Content": "Bootana Hutta",
           "Href": "https://starwars.fandom.com/wiki/Bootana_Hutta"
         }
       ],
       "Values": [
-        "Hutt Space",
         "Bootana Hutta"
       ]
     },
@@ -41,22 +54,10 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-11"
-      ]
-    },
-    {
-      "Label": "Trade routes",
-      "Links": [
-        {
-          "Content": "Groth–Kor Desilijic hyperlane",
-          "Href": "https://starwars.fandom.com/wiki/Unidentified_Groth–Kor_Desilijic_hyperlane"
-        }
-      ],
-      "Values": [
-        "Groth–Kor Desilijic hyperlane"
       ]
     },
     {
@@ -67,20 +68,20 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
-          "Content": "mountains",
-          "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
+          "Content": "swamps",
+          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
         },
         {
-          "Content": "Swamps",
-          "Href": "https://starwars.fandom.com/wiki/Swamp/Legends"
+          "Content": "mountain",
+          "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
         }
       ],
       "Values": [
-        "Rocky mountains",
-        "Swamps"
+        "Lowlands and swamps",
+        "Rocky mountain ranges"
       ]
     },
     {
@@ -96,7 +97,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Hutts",
@@ -113,28 +114,14 @@
         {
           "Content": "Desilijic",
           "Href": "https://starwars.fandom.com/wiki/Desilijic/Legends"
-        },
-        {
-          "Content": "kajidic",
-          "Href": "https://starwars.fandom.com/wiki/Kajidic/Legends"
         }
       ],
       "Values": [
-        "Desilijic kajidic"
+        "Desilijic"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 417769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Groth–Kor_Desilijic_hyperlane",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 391526,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Desilijic_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
     {
       "PageId": 5052,
       "PageUrl": "https://starwars.fandom.com/wiki/Desilijic/Legends",
@@ -144,6 +131,11 @@
       "PageId": 628090,
       "PageUrl": "https://starwars.fandom.com/wiki/Rasmal_Valley_Palace",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 391526,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kor_Desilijic_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

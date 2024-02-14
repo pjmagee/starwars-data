@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Yasaburō clan",
@@ -70,9 +70,41 @@
       "Values": [
         "Yasaburō clan"
       ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Lop",
+          "Href": "https://starwars.fandom.com/wiki/Lop"
+        },
+        {
+          "Content": "Ochō",
+          "Href": "https://starwars.fandom.com/wiki/Ochō"
+        }
+      ],
+      "Values": [
+        "Lop",
+        "Ochō"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 709677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ochō",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 702428,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 710120,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tao's_Imperial_base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
     {
       "PageId": 710200,
       "PageUrl": "https://starwars.fandom.com/wiki/Yasaburō_clan",
@@ -82,11 +114,6 @@
       "PageId": 710474,
       "PageUrl": "https://starwars.fandom.com/wiki/Yasaburō_family_heirloom_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 710120,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_Tao's_Imperial_base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     }
   ]
 }

@@ -2,12 +2,20 @@
   "PageId": 555164,
   "PageUrl": "https://starwars.fandom.com/wiki/Mario_Vernazza",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Person",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Mario Vernazza"
+      ]
+    },
+    {
+      "Label": "Nationality",
+      "Links": [],
+      "Values": [
+        "Italian-British"
       ]
     },
     {
@@ -18,5 +26,21 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 548417,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Antilles_Extraction",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    },
+    {
+      "PageId": 563822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Secret_Cargo",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    },
+    {
+      "PageId": 579406,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rebel_Assault",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Television_episode"
+    }
+  ]
 }

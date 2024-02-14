@@ -2,6 +2,7 @@
   "PageId": 39243,
   "PageUrl": "https://starwars.fandom.com/wiki/Tola_(Galactic_Civil_War)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -38,12 +39,19 @@
       "Label": "Gender",
       "Links": [
         {
-          "Content": "Female",
+          "Content": "Male",
           "Href": "https://starwars.fandom.com/wiki/Gender/Legends"
         }
       ],
       "Values": [
-        "Female"
+        "Male"
+      ]
+    },
+    {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
       ]
     },
     {
@@ -64,5 +72,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 33187,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Hope",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

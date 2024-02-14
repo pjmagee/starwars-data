@@ -17,6 +17,10 @@
         {
           "Content": "Baktoid Armor Workshop",
           "Href": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop"
+        },
+        {
+          "Content": "Buuper Torsckil Abbey Devices",
+          "Href": "https://starwars.fandom.com/wiki/Buuper_Torsckil_Abbey_Devices"
         }
       ],
       "Values": [
@@ -32,7 +36,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -85,7 +89,7 @@
         }
       ],
       "Values": [
-        "1,200 kph"
+        "61,000 kph"
       ]
     },
     {
@@ -93,6 +97,42 @@
       "Links": [],
       "Values": [
         "Class 2"
+      ]
+    },
+    {
+      "Label": "Hyperdrive range",
+      "Links": [
+        {
+          "Content": "Sector",
+          "Href": "https://starwars.fandom.com/wiki/Tarabba_sector"
+        }
+      ],
+      "Values": [
+        "Sector"
+      ]
+    },
+    {
+      "Label": "Hyperdrive system",
+      "Links": [
+        {
+          "Content": "Hyperdrive motivator",
+          "Href": "https://starwars.fandom.com/wiki/Hyperdrive_motivator"
+        }
+      ],
+      "Values": [
+        "Hyperdrive motivator"
+      ]
+    },
+    {
+      "Label": "Power plant",
+      "Links": [
+        {
+          "Content": "reactors",
+          "Href": "https://starwars.fandom.com/wiki/Reactor"
+        }
+      ],
+      "Values": [
+        "Port and starboard wing-mounted reactors"
       ]
     },
     {
@@ -105,6 +145,63 @@
       ],
       "Values": [
         "Equipped"
+      ]
+    },
+    {
+      "Label": "Sensor systems",
+      "Links": [
+        {
+          "Content": "scanner",
+          "Href": "https://starwars.fandom.com/wiki/Scanner"
+        }
+      ],
+      "Values": [
+        "Airpseed sensors",
+        "Active scanner array"
+      ]
+    },
+    {
+      "Label": "Targeting systems",
+      "Links": [
+        {
+          "Content": "Rangefinder",
+          "Href": "https://starwars.fandom.com/wiki/Rangefinder"
+        }
+      ],
+      "Values": [
+        "Rangefinder with targeting processor"
+      ]
+    },
+    {
+      "Label": "Navigation system",
+      "Links": [
+        {
+          "Content": "navigation computer",
+          "Href": "https://starwars.fandom.com/wiki/Navigation_computer"
+        }
+      ],
+      "Values": [
+        "Local-range navigation computer"
+      ]
+    },
+    {
+      "Label": "Avionics",
+      "Links": [],
+      "Values": [
+        "Pilot-assist flight instruments"
+      ]
+    },
+    {
+      "Label": "Countermeasures",
+      "Links": [
+        {
+          "Content": "Jamming device",
+          "Href": "https://starwars.fandom.com/wiki/Jammer"
+        }
+      ],
+      "Values": [
+        "Jamming device",
+        "Data buffers"
       ]
     },
     {
@@ -144,6 +241,35 @@
       ]
     },
     {
+      "Label": "Communication systems",
+      "Links": [
+        {
+          "Content": "comlink",
+          "Href": "https://starwars.fandom.com/wiki/Comlink"
+        }
+      ],
+      "Values": [
+        "Wing-mounted comlink "
+      ]
+    },
+    {
+      "Label": "Other systems",
+      "Links": [
+        {
+          "Content": "repulsorlifts",
+          "Href": "https://starwars.fandom.com/wiki/Repulsorlift"
+        },
+        {
+          "Content": "Inertial compensator",
+          "Href": "https://starwars.fandom.com/wiki/Inertial_compensator"
+        }
+      ],
+      "Values": [
+        "Wing-mounted maneuvering repulsorlifts",
+        "Inertial compensator"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -163,19 +289,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 516859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
       "PageId": 507793,
       "PageUrl": "https://starwars.fandom.com/wiki/Skytop_Station",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     },
     {
-      "PageId": 627484,
-      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_Skyforce",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 512085,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xanadu_Blood",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 601744,
@@ -183,9 +304,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 512085,
-      "PageUrl": "https://starwars.fandom.com/wiki/Xanadu_Blood",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 737907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Buuper_Torsckil_Abbey_Devices",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 516859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baktoid_Armor_Workshop",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 627484,
+      "PageUrl": "https://starwars.fandom.com/wiki/Utapau_Skyforce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     }
   ]
 }

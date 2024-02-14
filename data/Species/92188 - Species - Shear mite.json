@@ -36,6 +36,30 @@
       ]
     },
     {
+      "Label": "Average height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_standard_meter"
+        }
+      ],
+      "Values": [
+        "0.5 meters"
+      ]
+    },
+    {
+      "Label": "Distinctions",
+      "Links": [
+        {
+          "Content": "Acid",
+          "Href": "https://starwars.fandom.com/wiki/Acid/Legends"
+        }
+      ],
+      "Values": [
+        "Acid secretion"
+      ]
+    },
+    {
       "Label": "Homeworld",
       "Links": [
         {
@@ -46,7 +70,42 @@
       "Values": [
         "Dathomir"
       ]
+    },
+    {
+      "Label": "Habitat",
+      "Links": [
+        {
+          "Content": "Mountains",
+          "Href": "https://starwars.fandom.com/wiki/Mountain/Legends"
+        }
+      ],
+      "Values": [
+        "Mountains"
+      ]
+    },
+    {
+      "Label": "Diet",
+      "Links": [
+        {
+          "Content": "Silicavorous",
+          "Href": "https://starwars.fandom.com/wiki/Diet/Legends"
+        }
+      ],
+      "Values": [
+        "Silicavorous"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 738664,
+      "PageUrl": "https://starwars.fandom.com/wiki/Susk'kinad",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 2018,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    }
+  ]
 }

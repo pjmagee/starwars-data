@@ -2,6 +2,7 @@
   "PageId": 241710,
   "PageUrl": "https://starwars.fandom.com/wiki/Griff_Praji",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -59,7 +60,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Praji",
@@ -69,7 +70,42 @@
       "Values": [
         "House Praji"
       ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Tannon Praji",
+          "Href": "https://starwars.fandom.com/wiki/Tannon_Praji/Legends"
+        }
+      ],
+      "Values": [
+        "Tannon Praji"
+      ]
+    },
+    {
+      "Label": "Children",
+      "Links": [
+        {
+          "Content": "Nahdonnis Praji",
+          "Href": "https://starwars.fandom.com/wiki/Nahdonnis_Praji"
+        }
+      ],
+      "Values": [
+        "Nahdonnis Praji"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 15943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tannon_Praji/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 4811,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nahdonnis_Praji",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

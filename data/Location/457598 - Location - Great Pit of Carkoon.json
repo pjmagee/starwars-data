@@ -20,15 +20,19 @@
         }
       ],
       "Values": [
-        "c. 9 ABY, Tatooine"
+        "9 ABY, Tatooine"
       ]
     },
     {
       "Label": "Location",
       "Links": [
         {
-          "Content": "Dune Sea",
-          "Href": "https://starwars.fandom.com/wiki/Dune_Sea"
+          "Content": "B'omarr Flats",
+          "Href": "https://starwars.fandom.com/wiki/B%27omarr_Flats"
+        },
+        {
+          "Content": "Northern Dune Sea",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dune_Sea"
         },
         {
           "Content": "Tatooine",
@@ -36,36 +40,41 @@
         }
       ],
       "Values": [
-        "Dune Sea, Tatooine"
+        "B'omarr Flats, Northern Dune Sea, Tatooine"
       ]
     },
     {
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Hutt Clan",
-          "Href": "https://starwars.fandom.com/wiki/Hutt_Clan"
+          "Content": "Jabba's criminal empire",
+          "Href": "https://starwars.fandom.com/wiki/Jabba%27s_criminal_empire"
         }
       ],
       "Values": [
-        "Hutt Clan"
+        "Jabba's criminal empire"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 518408,
+      "PageUrl": "https://starwars.fandom.com/wiki/Northern_Dune_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
     {
       "PageId": 452688,
       "PageUrl": "https://starwars.fandom.com/wiki/Tatooine",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 571156,
-      "PageUrl": "https://starwars.fandom.com/wiki/B'omarr_Flats",
+      "PageId": 478176,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dune_Sea",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 478176,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dune_Sea",
+      "PageId": 571156,
+      "PageUrl": "https://starwars.fandom.com/wiki/B'omarr_Flats",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]

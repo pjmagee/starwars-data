@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Homeworld",
+      "Links": [
+        {
+          "Content": "Skustell",
+          "Href": "https://starwars.fandom.com/wiki/Skustell"
+        }
+      ],
+      "Values": [
+        "Skustell"
+      ]
+    },
+    {
       "Label": "Species",
       "Links": [
         {
@@ -33,6 +45,22 @@
       ],
       "Values": [
         "Male"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "2.04 meters (6 ft, 8 in)"
       ]
     },
     {
@@ -74,14 +102,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 595998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duel_over_Duro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
-    },
-    {
       "PageId": 608973,
       "PageUrl": "https://starwars.fandom.com/wiki/Pablo-Jill's_lightsaber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    },
+    {
+      "PageId": 595998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duel_over_Duro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Duel"
     }
   ]
 }

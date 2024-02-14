@@ -2,7 +2,7 @@
   "PageId": 10000,
   "PageUrl": "https://starwars.fandom.com/wiki/Thrawn_campaign",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a4/Thrawn%27s_campaign.jpg/revision/latest?cb=20110127232057",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/f/f6/ThrawnsCampaigns-TEA.jpg/revision/latest?cb=20110127232057",
   "Data": [
     {
       "Label": "Titles",
@@ -71,6 +71,10 @@
       "Label": "Outcome",
       "Links": [
         {
+          "Content": "New Republic",
+          "Href": "https://starwars.fandom.com/wiki/New_Republic/Legends"
+        },
+        {
           "Content": "Assassination",
           "Href": "https://starwars.fandom.com/wiki/Death/Legends"
         },
@@ -100,6 +104,7 @@
         }
       ],
       "Values": [
+        "Pyrrhic New Republic victory",
         "Assassination of Grand Admiral Thrawn",
         "Cessation of Noghri servitude to the Galactic Empire",
         "New Republic loses military and economic strength",
@@ -110,12 +115,16 @@
       "Label": "Battles",
       "Links": [
         {
+          "Content": "Raid on the Draukyze system",
+          "Href": "https://starwars.fandom.com/wiki/Raid_on_the_Draukyze_system"
+        },
+        {
           "Content": "Raid on Saarn",
           "Href": "https://starwars.fandom.com/wiki/Raid_on_Saarn"
         },
         {
-          "Content": "Raid on the Draukyze system",
-          "Href": "https://starwars.fandom.com/wiki/Raid_on_the_Draukyze_system"
+          "Content": "Obroa-skai information raid",
+          "Href": "https://starwars.fandom.com/wiki/Obroa-skai_information_raid"
         },
         {
           "Content": "Destruction of the Elomin task force",
@@ -154,7 +163,7 @@
           "Href": "https://starwars.fandom.com/wiki/Taanab_operation"
         },
         {
-          "Content": "Raid on Sarka",
+          "Content": "Battle of Sarka",
           "Href": "https://starwars.fandom.com/wiki/Raid_on_Sarka"
         },
         {
@@ -178,16 +187,12 @@
           "Href": "https://starwars.fandom.com/wiki/Raid_on_Pantolomin"
         },
         {
-          "Content": "Battle for the Katana Fleet",
+          "Content": "Battle for the Katana fleet",
           "Href": "https://starwars.fandom.com/wiki/Battle_for_the_Katana_fleet"
         },
         {
           "Content": "Battle of Sheris",
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Sheris"
-        },
-        {
-          "Content": "Battle of Hettsk",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Hettsk"
         },
         {
           "Content": "Battle of Bimmisaari",
@@ -202,8 +207,8 @@
           "Href": "https://starwars.fandom.com/wiki/Siege_of_Svivren"
         },
         {
-          "Content": "Battle of Ando",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ando_(Thrawn_campaign)"
+          "Content": "Battle of Ord Pardron",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Pardron"
         },
         {
           "Content": "Battle of Crondre",
@@ -214,8 +219,8 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Filve"
         },
         {
-          "Content": "Battle of Ord Pardron",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Pardron"
+          "Content": "Battle of Ando",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ando_(Thrawn_campaign)"
         },
         {
           "Content": "Battle at Ukio",
@@ -234,16 +239,16 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Woostri"
         },
         {
-          "Content": "Battle of Qat Chrystac",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Qat_Chrystac"
+          "Content": "Battle of Ord Mantell",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(9_ABY)"
         },
         {
           "Content": "Destruction of Nomad City",
           "Href": "https://starwars.fandom.com/wiki/Destruction_of_Nomad_City"
         },
         {
-          "Content": "Battle of Ord Mantell",
-          "Href": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(9_ABY)"
+          "Content": "Battle of Qat Chrystac",
+          "Href": "https://starwars.fandom.com/wiki/Battle_of_Qat_Chrystac"
         },
         {
           "Content": "Raid on Coruscant",
@@ -290,7 +295,7 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Abregado-Rae"
         },
         {
-          "Content": "First Battle of Xa Fel",
+          "Content": "Battle of Xa Fel",
           "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Xa_Fel"
         },
         {
@@ -299,8 +304,8 @@
         }
       ],
       "Values": [
-        "Raid on Saarn (early stages)",
-        "Raid on the Draukyze system (early stages)",
+        "Raid on the Draukyze system",
+        "Raid on Saarn",
         "Obroa-skai information raid",
         "Destruction of the Elomin task force",
         "Mission to Bimmisaari",
@@ -311,29 +316,28 @@
         "Rescue on Myrkr",
         "Battle of Sluis Van",
         "Taanab operation",
-        "Raid on Sarka",
+        "Battle of Sarka",
         "Raid on Linuri",
         "Raid on New Cov",
         "Mission to Honoghr",
         "Rescue on the Chimaera",
         "Raid on Pantolomin",
-        "Battle for the Katana Fleet",
+        "Battle for the Katana fleet",
         "Battle of Sheris",
-        "Battle of Hettsk",
         "Battle of Bimmisaari",
         "Battle of Baros",
         "Siege of Svivren",
-        "Battle of Ando",
+        "Battle of Ord Pardron",
         "Battle of Crondre",
         "Battle of Filve",
-        "Battle of Ord Pardron",
+        "Battle of Ando",
         "Battle at Ukio",
         "Battle of Eriadu",
         "Mission to Poderis",
         "Battle of Woostri",
-        "Battle of Qat Chrystac",
-        "Destruction of Nomad City",
         "Battle of Ord Mantell",
+        "Destruction of Nomad City",
+        "Battle of Qat Chrystac",
         "Raid on Coruscant",
         "Ambush on Trogan",
         "Raid on Bilbringi",
@@ -345,7 +349,7 @@
         "Battle of Ketaris",
         "Battle of Ithor",
         "Battle of Abregado-Rae",
-        "First Battle of Xa Fel",
+        "Battle of Xa Fel",
         "Assault on Mount Tantiss",
         "Battle of Bilbringi"
       ]
@@ -353,8 +357,118 @@
   ],
   "Relationships": [
     {
-      "PageId": 197940,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Generis",
+      "PageId": 316641,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hettsk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 316644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jendorn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 345833,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Crondre",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 346007,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Saarn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 346009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Pantolomin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 346196,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sheris",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 346338,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Poderis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 8567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(9_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 155426,
+      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_Sector_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 285654,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ando_(Thrawn_campaign)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 285655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Pardron",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 10091,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 261864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Coruscant_(Thrawn_Crisis)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 24984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nomad_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 4878,
+      "PageUrl": "https://starwars.fandom.com/wiki/Katana_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 145234,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Qat_Chrystac",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 132086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shuttle_37",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 23463,
+      "PageUrl": "https://starwars.fandom.com/wiki/Katana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 23466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Peregrine_(Dreadnaught-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 385191,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Myrkr_Base",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 385192,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Chazwa",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 15541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Coruscant",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 7774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bilbringi_(9_ABY)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -368,69 +482,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 333086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_the_Chimaera",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 333088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kashyyyk_(Thrawn_campaign)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 38529,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orthavan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 155426,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atrivis_Sector_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 385191,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Myrkr_Base",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 385192,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_at_Chazwa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 442278,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bpfassh",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 54499,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_the_Katana_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 140672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bimmisaari",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 7774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bilbringi_(9_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 10037,
-      "PageUrl": "https://starwars.fandom.com/wiki/Obroa-skai_information_raid",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 10089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sluis_Van",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 728627,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hettsk",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 296732,
@@ -443,19 +497,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 344095,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Honoghr",
+      "PageId": 66487,
+      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_First_Fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 346345,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Woostri",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 344267,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Sarka",
+      "PageId": 346521,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ketaris_(9_ABY)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 344270,
-      "PageUrl": "https://starwars.fandom.com/wiki/Taanab_operation",
+      "PageId": 347335,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Eriadu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 347337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yag'Dhul_(Thrawn_campaign)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 6066,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adamant_(Victory-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 5730,
@@ -463,23 +532,38 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
     },
     {
-      "PageId": 156841,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bpfassh",
+      "PageId": 344672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_New_Cov",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 285654,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ando_(Thrawn_campaign)",
+      "PageId": 345001,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Linuri",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 285655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Pardron",
+      "PageId": 345183,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Draukyze_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 285929,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Elomin_task_force",
+      "PageId": 333086,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_on_the_Chimaera",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 333088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Kashyyyk_(Thrawn_campaign)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 327,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galactic_Civil_War/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
+    },
+    {
+      "PageId": 197940,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fall_of_Generis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
@@ -488,9 +572,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 10091,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Galactic_Empire)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+      "PageId": 54499,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_for_the_Katana_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 285929,
+      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Elomin_task_force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 286265,
+      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Svivren",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 777312,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Myomar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
     },
     {
       "PageId": 7196,
@@ -513,64 +612,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 73973,
-      "PageUrl": "https://starwars.fandom.com/wiki/Harrier",
+      "PageId": 156841,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Bpfassh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 38529,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orthavan",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 23463,
-      "PageUrl": "https://starwars.fandom.com/wiki/Katana",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 51614,
+      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Xa_Fel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 23466,
-      "PageUrl": "https://starwars.fandom.com/wiki/Peregrine_(Dreadnaught-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 442278,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bpfassh",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 41205,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crusader_(Victory-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 24983,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nomad_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 140672,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Bimmisaari",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 10037,
+      "PageUrl": "https://starwars.fandom.com/wiki/Obroa-skai_information_raid",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 10089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sluis_Van",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 344095,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Honoghr",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 344267,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Sarka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 344270,
+      "PageUrl": "https://starwars.fandom.com/wiki/Taanab_operation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 142187,
       "PageUrl": "https://starwars.fandom.com/wiki/Svelte-class_Imperial_shuttle",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 145234,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Qat_Chrystac",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346196,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Sheris",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346338,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Poderis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346345,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Woostri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346521,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ketaris_(9_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 347335,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Eriadu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 347337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Yag'Dhul_(Thrawn_campaign)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 347338,
@@ -603,104 +702,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
-      "PageId": 4878,
-      "PageUrl": "https://starwars.fandom.com/wiki/Katana_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 728627,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Hettsk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 344672,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_New_Cov",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 345001,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Linuri",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 345183,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Draukyze_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 345833,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Crondre",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346007,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Saarn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 346009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Pantolomin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 51614,
-      "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Xa_Fel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 66487,
-      "PageUrl": "https://starwars.fandom.com/wiki/New_Republic_First_Fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 132086,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shuttle_37",
+      "PageId": 41205,
+      "PageUrl": "https://starwars.fandom.com/wiki/Crusader_(Victory-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 261864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Coruscant_(Thrawn_Crisis)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 15541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Coruscant",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 6066,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adamant_(Victory-class)",
+      "PageId": 73973,
+      "PageUrl": "https://starwars.fandom.com/wiki/Harrier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 316641,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Hettsk",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 316644,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Jendorn",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 24983,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_Nomad_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 24984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_Nomad_City",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 286265,
-      "PageUrl": "https://starwars.fandom.com/wiki/Siege_of_Svivren",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 8567,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Ord_Mantell_(9_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

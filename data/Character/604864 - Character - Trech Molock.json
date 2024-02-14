@@ -24,18 +24,6 @@
       ]
     },
     {
-      "Label": "Gender",
-      "Links": [
-        {
-          "Content": "Male",
-          "Href": "https://starwars.fandom.com/wiki/Gender"
-        }
-      ],
-      "Values": [
-        "Male"
-      ]
-    },
-    {
       "Label": "Hair color",
       "Links": [
         {
@@ -51,7 +39,7 @@
       "Label": "Skin color",
       "Links": [],
       "Values": [
-        "Fair"
+        "Light"
       ]
     },
     {
@@ -62,20 +50,21 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         },
         {
-          "Content": "Imperial Army",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_Army"
-        },
-        {
           "Content": "Imperial Officer Corps",
           "Href": "https://starwars.fandom.com/wiki/Imperial_Officer_Corps"
         }
       ],
       "Values": [
         "Galactic Empire",
-        "Imperial Army",
         "Imperial Officer Corps"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 453101,
+      "PageUrl": "https://starwars.fandom.com/wiki/DS-1_Death_Star_Mobile_Battle_Station",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
+    }
+  ]
 }

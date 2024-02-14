@@ -31,7 +31,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Corvette",
@@ -257,12 +257,24 @@
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         },
         {
-          "Content": "Zaarin splinter government",
-          "Href": "https://starwars.fandom.com/wiki/Zaarin_splinter_government"
+          "Content": "Dimok government",
+          "Href": "https://starwars.fandom.com/wiki/Dimok_government"
+        },
+        {
+          "Content": "Ripoblus government",
+          "Href": "https://starwars.fandom.com/wiki/Ripoblus_government"
+        },
+        {
+          "Content": "Zaarin coup forces",
+          "Href": "https://starwars.fandom.com/wiki/Zaarin_coup_forces"
         },
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic/Legends"
+        },
+        {
+          "Content": "Airam Clans",
+          "Href": "https://starwars.fandom.com/wiki/Airam_Clans"
         },
         {
           "Content": "Maw Irregular Fleet",
@@ -272,21 +284,39 @@
       "Values": [
         "Corellian Defense Force",
         "Galactic Empire",
-        "Zaarin splinter government",
+        "Dimok government",
+        "Ripoblus government",
+        "Zaarin coup forces",
         "Alliance to Restore the Republic",
+        "Airam Clans",
         "Maw Irregular Fleet"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 212699,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chemeti_1",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 307009,
+      "PageUrl": "https://starwars.fandom.com/wiki/Z-Ram",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 168740,
       "PageUrl": "https://starwars.fandom.com/wiki/Mescue",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 212699,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chemeti_1",
+      "PageId": 158348,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chemeti's_impostor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 447759,
+      "PageUrl": "https://starwars.fandom.com/wiki/Archer_(Assassin-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -310,33 +340,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 70007,
-      "PageUrl": "https://starwars.fandom.com/wiki/327-A",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 66802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kraken_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 537924,
       "PageUrl": "https://starwars.fandom.com/wiki/Runeer",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 72395,
-      "PageUrl": "https://starwars.fandom.com/wiki/Python_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 109163,
-      "PageUrl": "https://starwars.fandom.com/wiki/Galliot",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 122754,
-      "PageUrl": "https://starwars.fandom.com/wiki/Moori",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -345,23 +350,33 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 447759,
-      "PageUrl": "https://starwars.fandom.com/wiki/Archer_(Assassin-class)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
       "PageId": 69276,
       "PageUrl": "https://starwars.fandom.com/wiki/Selander",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 307009,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ram_(Assassin-class)",
+      "PageId": 72395,
+      "PageUrl": "https://starwars.fandom.com/wiki/Python_(Assassin-class)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 158348,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chemeti's_impostor",
+      "PageId": 70007,
+      "PageUrl": "https://starwars.fandom.com/wiki/327-A",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 122754,
+      "PageUrl": "https://starwars.fandom.com/wiki/Moori",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 66802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kraken_(Assassin-class)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 109163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Galliot",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

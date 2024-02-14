@@ -34,9 +34,26 @@
       "Values": [
         "Jakku Observatory"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Anchorite sect",
+          "Href": "https://starwars.fandom.com/wiki/Anchorite_sect"
+        }
+      ],
+      "Values": [
+        "Anchorite sect"
+      ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 567307,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jakku_Observatory",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
     {
       "PageId": 499122,
       "PageUrl": "https://starwars.fandom.com/wiki/Jakku",
@@ -46,11 +63,6 @@
       "PageId": 640871,
       "PageUrl": "https://starwars.fandom.com/wiki/Anchorite_sect",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 567307,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jakku_Observatory",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]
 }

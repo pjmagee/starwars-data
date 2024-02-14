@@ -48,6 +48,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.75 meters (5 ft, 9 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -74,7 +97,7 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Graf family",
@@ -84,19 +107,21 @@
       "Values": [
         "Graf family"
       ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Xylan Graf's mother",
+          "Href": "https://starwars.fandom.com/wiki/Xylan_Graf%27s_mother"
+        }
+      ],
+      "Values": [
+        "Xylan Graf's mother"
+      ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 703771,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Goddess",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 703774,
-      "PageUrl": "https://starwars.fandom.com/wiki/Resplendent_Pearl",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 714308,
       "PageUrl": "https://starwars.fandom.com/wiki/253_BBY",
@@ -106,6 +131,21 @@
       "PageId": 703167,
       "PageUrl": "https://starwars.fandom.com/wiki/Plinka",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 725015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Xylan_Graf's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 703771,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vengeful_Goddess",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 703774,
+      "PageUrl": "https://starwars.fandom.com/wiki/Resplendent_Pearl",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

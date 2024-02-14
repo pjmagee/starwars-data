@@ -15,12 +15,12 @@
       "Label": "Founder(s)",
       "Links": [
         {
-          "Content": "CEC",
+          "Content": "Corellian Engineering Corporation",
           "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends"
         }
       ],
       "Values": [
-        "Former CEC Executive"
+        "Former Corellian Engineering Corporation Executive"
       ]
     },
     {
@@ -49,9 +49,26 @@
     },
     {
       "Label": "Primary role(s)",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Starship",
+          "Href": "https://starwars.fandom.com/wiki/Starship/Legends"
+        }
+      ],
       "Values": [
         "Starship manufacturer"
+      ]
+    },
+    {
+      "Label": "Major product(s)",
+      "Links": [
+        {
+          "Content": "Coruscant-class heavy courier",
+          "Href": "https://starwars.fandom.com/wiki/Coruscant-class_Heavy_Courier"
+        }
+      ],
+      "Values": [
+        "Coruscant-class heavy courier"
       ]
     },
     {
@@ -63,34 +80,31 @@
         }
       ],
       "Values": [
-        "5000 BBY"
+        "c. 5000 BBY"
+      ]
+    },
+    {
+      "Label": "Date dissolved",
+      "Links": [
+        {
+          "Content": "3000 BBY",
+          "Href": "https://starwars.fandom.com/wiki/3000_BBY"
+        }
+      ],
+      "Values": [
+        "c. 3000 BBY"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 24439,
-      "PageUrl": "https://starwars.fandom.com/wiki/Akin-Dower",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
-    },
-    {
-      "PageId": 542185,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard's_Blade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 407822,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outrider_(Thranta-class_corvette)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
     {
       "PageId": 458068,
       "PageUrl": "https://starwars.fandom.com/wiki/Spearpoint",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 2310,
-      "PageUrl": "https://starwars.fandom.com/wiki/Marauder_Starjacker",
+      "PageId": 542185,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard's_Blade",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
@@ -99,13 +113,8 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
-      "PageId": 439846,
-      "PageUrl": "https://starwars.fandom.com/wiki/NovaDive",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
-      "PageId": 439851,
-      "PageUrl": "https://starwars.fandom.com/wiki/Flashfire",
+      "PageId": 276190,
+      "PageUrl": "https://starwars.fandom.com/wiki/Thranta-class_corvette",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
@@ -114,13 +123,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 276190,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thranta-class_corvette",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+      "PageId": 2310,
+      "PageUrl": "https://starwars.fandom.com/wiki/Marauder_Starjacker",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 670279,
-      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_(starfighter)",
+      "PageId": 215998,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quartermaster-class_supply_carrier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     },
     {
@@ -134,19 +143,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
+      "PageId": 670279,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vanguard_(starfighter)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
       "PageId": 16003,
       "PageUrl": "https://starwars.fandom.com/wiki/Coruscant-class_Heavy_Courier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 215998,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quartermaster-class_supply_carrier",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 557555,
       "PageUrl": "https://starwars.fandom.com/wiki/Alpha-class_heavy_transport",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 24439,
+      "PageUrl": "https://starwars.fandom.com/wiki/Akin-Dower",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 439846,
+      "PageUrl": "https://starwars.fandom.com/wiki/NovaDive",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 439851,
+      "PageUrl": "https://starwars.fandom.com/wiki/Flashfire",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 407822,
+      "PageUrl": "https://starwars.fandom.com/wiki/Outrider_(Thranta-class_corvette)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]
 }

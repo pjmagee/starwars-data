@@ -2,12 +2,25 @@
   "PageId": 729850,
   "PageUrl": "https://starwars.fandom.com/wiki/Political_coup_on_Jabiim",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
       "Links": [],
       "Values": [
         "Political coup on Jabiim"
+      ]
+    },
+    {
+      "Label": "Date",
+      "Links": [
+        {
+          "Content": "22 BBY",
+          "Href": "https://starwars.fandom.com/wiki/22_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "22 BBY"
       ]
     },
     {
@@ -39,5 +52,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 12685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Phelleem_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    }
+  ]
 }

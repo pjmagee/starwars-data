@@ -86,6 +86,35 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Amanoa",
+          "Href": "https://starwars.fandom.com/wiki/Amanoa"
+        },
+        {
+          "Content": "Ommin",
+          "Href": "https://starwars.fandom.com/wiki/Ommin/Legends"
+        }
+      ],
+      "Values": [
+        "Amanoa",
+        "Ommin"
+      ]
+    },
+    {
+      "Label": "Partner(s)",
+      "Links": [
+        {
+          "Content": "Oron Kira",
+          "Href": "https://starwars.fandom.com/wiki/Oron_Kira"
+        }
+      ],
+      "Values": [
+        "Oron Kira"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -100,6 +129,16 @@
   ],
   "Relationships": [
     {
+      "PageId": 8844,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oron_Kira",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 211242,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Iziz_Royal_Palace",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
       "PageId": 211236,
       "PageUrl": "https://starwars.fandom.com/wiki/Binding_Ceremony_of_Oron_Kira_and_Galia",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
@@ -108,11 +147,6 @@
       "PageId": 221520,
       "PageUrl": "https://starwars.fandom.com/wiki/Funeral_of_Amanoa",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 211242,
-      "PageUrl": "https://starwars.fandom.com/wiki/Raid_on_the_Iziz_Royal_Palace",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     }
   ]
 }

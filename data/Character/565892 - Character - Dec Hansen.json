@@ -79,12 +79,37 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "Hansen family",
           "Href": "https://starwars.fandom.com/wiki/Hansen_family"
+        }
+      ],
+      "Values": [
+        "Hansen family"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Dec Hansen's father",
+          "Href": "https://starwars.fandom.com/wiki/Dec_Hansen%27s_father"
         },
+        {
+          "Content": "Dec Hansen's mother",
+          "Href": "https://starwars.fandom.com/wiki/Dec_Hansen%27s_mother"
+        }
+      ],
+      "Values": [
+        "Dec Hansen's father",
+        "Dec Hansen's mother"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Resistance",
           "Href": "https://starwars.fandom.com/wiki/Resistance"
@@ -95,11 +120,21 @@
         }
       ],
       "Values": [
-        "Hansen family",
         "Resistance",
         "J-Squadron"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 566372,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dec_Hansen's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 580958,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dec_Hansen's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

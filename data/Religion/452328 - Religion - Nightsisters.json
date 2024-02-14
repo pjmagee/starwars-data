@@ -2,7 +2,7 @@
   "PageId": 452328,
   "PageUrl": "https://starwars.fandom.com/wiki/Nightsisters",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/62/DaughtersOfDathomir-TSWB.png/revision/latest?cb=20201021050119",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/d/d7/Nightsisters_symbol_-_JFO.svg/revision/latest?cb=20230205053622",
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +39,10 @@
           "Href": "https://starwars.fandom.com/wiki/Nardithi_Nightsisters"
         },
         {
+          "Content": "Great Mothers",
+          "Href": "https://starwars.fandom.com/wiki/Great_Mothers"
+        },
+        {
           "Content": "Mother Talzin's clan",
           "Href": "https://starwars.fandom.com/wiki/Mother_Talzin%27s_clan"
         },
@@ -51,6 +55,7 @@
         "Army of the Dead",
         "Nightbrothers",
         "Nardithi Nightsisters",
+        "Great Mothers",
         "Mother Talzin's clan",
         "Spiderclan"
       ]
@@ -103,7 +108,16 @@
     },
     {
       "Label": "Deities",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Winged Goddess",
+          "Href": "https://starwars.fandom.com/wiki/Winged_Goddess"
+        },
+        {
+          "Content": "Fanged God",
+          "Href": "https://starwars.fandom.com/wiki/Fanged_God"
+        }
+      ],
       "Values": [
         "Winged Goddess",
         "Fanged God"
@@ -135,11 +149,16 @@
       "Label": "Planet of origin",
       "Links": [
         {
+          "Content": "Peridea",
+          "Href": "https://starwars.fandom.com/wiki/Peridea"
+        },
+        {
           "Content": "Dathomir",
           "Href": "https://starwars.fandom.com/wiki/Dathomir"
         }
       ],
       "Values": [
+        "Peridea",
         "Dathomir"
       ]
     },
@@ -154,28 +173,35 @@
       "Values": [
         "20 BBY"
       ]
+    },
+    {
+      "Label": "Date of restoration",
+      "Links": [
+        {
+          "Content": "9 ABY",
+          "Href": "https://starwars.fandom.com/wiki/9_ABY"
+        }
+      ],
+      "Values": [
+        "9 ABY"
+      ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 677204,
-      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_generator",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 680355,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_robes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 605137,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nardithi_Nightsisters",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+      "PageId": 778866,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsisters'_Temple",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 682162,
-      "PageUrl": "https://starwars.fandom.com/wiki/Initiate",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 682164,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_acolyte",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 638272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Split_saber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 639282,
@@ -183,14 +209,74 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 697134,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nightsister_spirit",
+      "PageId": 614747,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chain_Sickle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 712225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zalem",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 659827,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_family",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+      "PageId": 784362,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomirian_Noodles",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 675567,
+      "PageUrl": "https://starwars.fandom.com/wiki/Strangled_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 675572,
+      "PageUrl": "https://starwars.fandom.com/wiki/Witches_Horn",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 675574,
+      "PageUrl": "https://starwars.fandom.com/wiki/Upper_Strangled_Cliffs",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 455968,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mother_(title)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 551340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savage's_spear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 663022,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zeldin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 500233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_lair",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 675826,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spell_of_protection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 748456,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teleportation_(Force_power)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 530036,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_crystal_ball",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 697134,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Nightsister_spirit",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 452489,
@@ -203,116 +289,6 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
     },
     {
-      "PageId": 706050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Adepts_(Nightbrother)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 614769,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tainted_Nightsister_Crystal",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 572299,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 685179,
-      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Orb",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 691446,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merging_potion",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 663022,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zeldin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 680355,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_robes",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 631842,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Talzin's_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 455968,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mother_(title)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
-    },
-    {
-      "PageId": 556193,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 500233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_lair",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 551340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Savage's_spear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 530036,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_crystal_ball",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 593611,
-      "PageUrl": "https://starwars.fandom.com/wiki/Jerserra",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 630076,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nelsel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 672666,
-      "PageUrl": "https://starwars.fandom.com/wiki/Yenna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 534541,
-      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_(Nightsister)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 531476,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_arena",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 680358,
-      "PageUrl": "https://starwars.fandom.com/wiki/Enchanted_Nightsister_blade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 685177,
-      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Staff",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 497380,
-      "PageUrl": "https://starwars.fandom.com/wiki/Daka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 453519,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Force",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
-    },
-    {
       "PageId": 565139,
       "PageUrl": "https://starwars.fandom.com/wiki/Force_healing",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
@@ -321,6 +297,46 @@
       "PageId": 592833,
       "PageUrl": "https://starwars.fandom.com/wiki/Chant_of_Resurrection",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 593029,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sith_alchemy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 631842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Talzin's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 500219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_village",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 507554,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Sleeper",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
+    },
+    {
+      "PageId": 682162,
+      "PageUrl": "https://starwars.fandom.com/wiki/Initiate",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 682164,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_acolyte",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 676855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_pike",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 630076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nelsel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 554165,
@@ -333,14 +349,44 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 614747,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chain_Sickle",
+      "PageId": 680358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Enchanted_Nightsister_blade",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
       "PageId": 452750,
       "PageUrl": "https://starwars.fandom.com/wiki/Talzin",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 497380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Daka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 453655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Armored_Assault_Tank_Mk_I",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Repulsorlift_vehicle"
+    },
+    {
+      "PageId": 691446,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merging_potion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 664679,
+      "PageUrl": "https://starwars.fandom.com/wiki/Duskblade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 694956,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spiderclan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 572299,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Finding",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
       "PageId": 453169,
@@ -353,29 +399,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 675826,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spell_of_protection",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
-    },
-    {
-      "PageId": 592834,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomirian_language",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 601970,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paecian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 455947,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Dathomir",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 685314,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir_cup",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+      "PageId": 675414,
+      "PageUrl": "https://starwars.fandom.com/wiki/Morgan_Elsbeth",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 600013,
@@ -383,9 +409,19 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
-      "PageId": 636142,
-      "PageUrl": "https://starwars.fandom.com/wiki/Merrin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+      "PageId": 780208,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_runic_alphabet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 685314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomir_cup",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 453519,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Force",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
     },
     {
       "PageId": 636469,
@@ -393,49 +429,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 359397,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asajj_Ventress's_lightsabers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
-    },
-    {
-      "PageId": 475337,
-      "PageUrl": "https://starwars.fandom.com/wiki/Army_of_the_Dead",
+      "PageId": 781540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Mothers",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 676855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_pike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 509984,
-      "PageUrl": "https://starwars.fandom.com/wiki/Luce",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 509986,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talia_(Nightsister)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 575763,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talia's_twin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452685,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrothers",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 453371,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dathomiri_clan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 512519,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shaman",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+      "PageId": 531476,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_arena",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 514017,
@@ -443,34 +444,64 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 680854,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Resurrection",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
-    },
-    {
-      "PageId": 529379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shelish",
+      "PageId": 506228,
+      "PageUrl": "https://starwars.fandom.com/wiki/Karis",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 694956,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spiderclan",
+      "PageId": 506534,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asajj_Ventress's_mother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 778790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Arcana",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 614769,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tainted_Nightsister_Crystal",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 753041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alchemist",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 475337,
+      "PageUrl": "https://starwars.fandom.com/wiki/Army_of_the_Dead",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 531480,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_energy_bow",
+      "PageId": 475986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sheathipede-class_transport_shuttle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
+    },
+    {
+      "PageId": 556193,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Dathomir",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 685177,
+      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Staff",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 534013,
-      "PageUrl": "https://starwars.fandom.com/wiki/Talzin's_sword",
+      "PageId": 693379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_sword",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
-      "PageId": 592898,
-      "PageUrl": "https://starwars.fandom.com/wiki/Baptism",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 636142,
+      "PageUrl": "https://starwars.fandom.com/wiki/Merrin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 359397,
+      "PageUrl": "https://starwars.fandom.com/wiki/Asajj_Ventress's_lightsabers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
     },
     {
       "PageId": 637104,
@@ -488,13 +519,98 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
     },
     {
+      "PageId": 509984,
+      "PageUrl": "https://starwars.fandom.com/wiki/Luce",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 509986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talia_(Nightsister)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 575763,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talia's_twin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 458144,
       "PageUrl": "https://starwars.fandom.com/wiki/Force-sensitive",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
     },
     {
-      "PageId": 693379,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ichor_sword",
+      "PageId": 240945,
+      "PageUrl": "https://starwars.fandom.com/wiki/Alchemy",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Force_power"
+    },
+    {
+      "PageId": 534541,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hunter_(Nightsister)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 677204,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_generator",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 592898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Baptism",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 592834,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomirian_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 601970,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paecian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 512519,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shaman",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Title_infobox"
+    },
+    {
+      "PageId": 685179,
+      "PageUrl": "https://starwars.fandom.com/wiki/Witches'_Orb",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 706050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Adepts_(Nightbrother)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529379,
+      "PageUrl": "https://starwars.fandom.com/wiki/Shelish",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 593611,
+      "PageUrl": "https://starwars.fandom.com/wiki/Jerserra",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 672666,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yenna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 452685,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrothers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 453371,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dathomiri_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 531480,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_energy_bow",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     },
     {
@@ -503,39 +619,39 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 712225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zalem",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 507554,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Sleeper",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Pet"
-    },
-    {
-      "PageId": 664679,
-      "PageUrl": "https://starwars.fandom.com/wiki/Duskblade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 506228,
-      "PageUrl": "https://starwars.fandom.com/wiki/Karis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 506534,
-      "PageUrl": "https://starwars.fandom.com/wiki/Asajj_Ventress's_mother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
       "PageId": 351180,
       "PageUrl": "https://starwars.fandom.com/wiki/Nightsister_speeder",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Ground_vehicle"
     },
     {
-      "PageId": 500219,
-      "PageUrl": "https://starwars.fandom.com/wiki/Nightbrother_village",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 680854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Talisman_of_Resurrection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
+    },
+    {
+      "PageId": 781441,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aktropaw",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 781442,
+      "PageUrl": "https://starwars.fandom.com/wiki/Klothow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 781443,
+      "PageUrl": "https://starwars.fandom.com/wiki/Lakesis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 659827,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maul's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 534013,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blade_of_Talzin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
     }
   ]
 }

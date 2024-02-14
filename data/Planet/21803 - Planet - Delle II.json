@@ -17,10 +17,20 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies/Legends"
+        },
+        {
+          "Content": "Northern Dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Northern_Dependencies/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "Northern Dependencies",
+        "The Slice"
       ]
     },
     {
@@ -36,10 +46,29 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-9"
+      ]
+    },
+    {
+      "Label": "Trade routes",
+      "Links": [
+        {
+          "Content": "Perlemian Trade Route",
+          "Href": "https://starwars.fandom.com/wiki/Perlemian_Trade_Route/Legends"
+        }
+      ],
+      "Values": [
+        "Perlemian Trade Route"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
       ]
     },
     {
@@ -51,18 +80,16 @@
         }
       ],
       "Values": [
-        "Hemmel crop"
-      ]
-    },
-    {
-      "Label": "Major exports",
-      "Links": [],
-      "Values": [
-        "Hemmel crop"
+        "Hemmel"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 207068,
+      "PageUrl": "https://starwars.fandom.com/wiki/Hemmel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
     {
       "PageId": 372542,
       "PageUrl": "https://starwars.fandom.com/wiki/Delle_system",

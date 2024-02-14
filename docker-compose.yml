@@ -5,6 +5,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
     volumes:
       - starwars-db:/data/db
 
@@ -24,7 +26,7 @@ services:
       ASPNETCORE_URLS: https://*:7051;http://*:5051
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
-      SWDATA_Settings__MongoConnectionString: "mongodb://admin:password@database:27017"
+      SWDATA_Settings__MongoConnectionString: mongodb://admin:password@database:27017
     volumes:
      - ~/.aspnet/https:/https:ro
 
@@ -37,12 +39,12 @@ services:
     profiles: ["process"]
     entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
-      DOTNET_ENVIRONMENT: Production
+      DOTNET_ENVIRONMENT: Development
       SWDATA_Settings__DataDirectory: /data
       SWDATA_Settings__PageNamespace: 0
       SWDATA_Settings__PageLimit: 500
       SWDATA_Settings__PageStart: 1
-      SWDATA_Settings__FirstPageOnly: "false"
+      SWDATA_Settings__FirstPageOnly: false
     command: download
     volumes:
       # - starwars-data:/data
@@ -72,9 +74,9 @@ services:
     image: pjmagee/starwars-data-cli:latest
     entrypoint: ["dotnet", "StarWarsData.CLI.dll"]
     environment:
-      DOTNET_ENVIRONMENT: "Development"
-      SWDATA_Settings__DataDirectory: "/data"
-      SWDATA_Settings__MongoConnectionString: "mongodb://admin:password@database:27017"
+      DOTNET_ENVIRONMENT: Development
+      SWDATA_Settings__DataDirectory: /data
+      SWDATA_Settings__MongoConnectionString: mongodb://admin:password@database:27017
     command: populate
     volumes:
       # - starwars-data:/data

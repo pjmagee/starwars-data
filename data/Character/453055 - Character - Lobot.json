@@ -48,6 +48,13 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
       "Label": "Height",
       "Links": [
         {
@@ -65,10 +72,15 @@
         {
           "Content": "Blue",
           "Href": "https://starwars.fandom.com/wiki/Color"
+        },
+        {
+          "Content": "Scourge infection",
+          "Href": "https://starwars.fandom.com/wiki/Scourge_of_the_droids"
         }
       ],
       "Values": [
-        "Blue"
+        "Blue",
+        "Purple (under Scourge infection)"
       ]
     },
     {
@@ -102,12 +114,20 @@
           "Href": "https://starwars.fandom.com/wiki/Imperial_Military"
         },
         {
+          "Content": "Landonis Balthazar Calrissian's crew",
+          "Href": "https://starwars.fandom.com/wiki/Landonis_Balthazar_Calrissian%27s_crew"
+        },
+        {
           "Content": "Cloud City",
           "Href": "https://starwars.fandom.com/wiki/Cloud_City"
         },
         {
           "Content": "Alliance to Restore the Republic",
           "Href": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic"
+        },
+        {
+          "Content": "Scourge",
+          "Href": "https://starwars.fandom.com/wiki/Scourge"
         },
         {
           "Content": "New Republic",
@@ -117,17 +137,29 @@
       "Values": [
         "Galactic Empire",
         "Imperial Military",
+        "Landonis Balthazar Calrissian's crew",
         "Cloud City",
         "Alliance to Restore the Republic",
+        "Scourge (as a vessel)",
         "New Republic"
       ]
     }
   ],
   "Relationships": [
     {
+      "PageId": 752539,
+      "PageUrl": "https://starwars.fandom.com/wiki/Landonis_Balthazar_Calrissian's_crew",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
       "PageId": 535672,
       "PageUrl": "https://starwars.fandom.com/wiki/Code_Force_Seven",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Tactics"
+    },
+    {
+      "PageId": 506088,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperialis",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 36970,
@@ -140,9 +172,14 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
-      "PageId": 506088,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperialis",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+      "PageId": 780219,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Jabba's_Palace_(Lando_Calrissian)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 785151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Epikonia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     }
   ]
 }

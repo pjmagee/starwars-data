@@ -2,6 +2,7 @@
   "PageId": 453371,
   "PageUrl": "https://starwars.fandom.com/wiki/Dathomiri_clan",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -47,11 +48,15 @@
         },
         {
           "Content": "Howling Crag",
-          "Href": "https://starwars.fandom.com/wiki/Howling_Crag_(clan)"
+          "Href": "https://starwars.fandom.com/wiki/Howling_Crag"
         },
         {
           "Content": "Nightsisters",
           "Href": "https://starwars.fandom.com/wiki/Nightsisters"
+        },
+        {
+          "Content": "Great Mothers",
+          "Href": "https://starwars.fandom.com/wiki/Great_Mothers"
         },
         {
           "Content": "Nardithi Nightsisters",
@@ -71,6 +76,7 @@
         "Blue Coral Divers Clan",
         "Howling Crag",
         "Nightsisters",
+        "Great Mothers",
         "Nardithi Nightsisters",
         "Mother Talzin's clan",
         "Spiderclan"
@@ -101,5 +107,16 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 631842,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mother_Talzin's_clan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 781540,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Mothers",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    }
+  ]
 }

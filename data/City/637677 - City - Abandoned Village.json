@@ -24,32 +24,45 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Climate",
       "Links": [
         {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic"
-        },
+          "Content": "Cold",
+          "Href": "https://starwars.fandom.com/wiki/Temperature"
+        }
+      ],
+      "Values": [
+        "Cold"
+      ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
-        "Galactic RepublicGalactic Empire"
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 457328,
-      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
       "PageId": 633447,
       "PageUrl": "https://starwars.fandom.com/wiki/Zeffo",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 756617,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guardian_(outfit)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
+    },
+    {
+      "PageId": 457328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Imperial_Security_Bureau",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     }
   ]
 }

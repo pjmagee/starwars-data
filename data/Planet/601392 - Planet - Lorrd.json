@@ -17,26 +17,19 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories"
-        }
-      ],
-      "Values": [
-        "Outer Rim Territories"
-      ]
-    },
-    {
-      "Label": "Sector",
-      "Links": [
+        },
         {
-          "Content": "Corporate Sector",
-          "Href": "https://starwars.fandom.com/wiki/Corporate_Sector"
+          "Content": "New Territories",
+          "Href": "https://starwars.fandom.com/wiki/New_Territories"
         }
       ],
       "Values": [
-        "Corporate Sector"
+        "Outer Rim Territories",
+        "New Territories"
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "N-4",
@@ -46,6 +39,18 @@
       "Values": [
         "N-4"
       ]
+    },
+    {
+      "Label": "Affiliation",
+      "Links": [
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
+        }
+      ],
+      "Values": [
+        "Galactic Empire"
+      ]
     }
   ],
   "Relationships": [
@@ -53,11 +58,6 @@
       "PageId": 601391,
       "PageUrl": "https://starwars.fandom.com/wiki/Freemarch",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 451988,
-      "PageUrl": "https://starwars.fandom.com/wiki/Outer_Rim_Territories",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
     }
   ]
 }

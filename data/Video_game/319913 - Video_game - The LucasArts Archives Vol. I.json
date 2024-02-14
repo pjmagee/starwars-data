@@ -29,14 +29,10 @@
         {
           "Content": "1995",
           "Href": "https://starwars.fandom.com/wiki/1995"
-        },
-        {
-          "Content": "1996",
-          "Href": "https://starwars.fandom.com/wiki/1996"
         }
       ],
       "Values": [
-        "1995, 1996"
+        "1995"
       ]
     },
     {
@@ -45,16 +41,30 @@
         {
           "Content": "PC",
           "Href": "https://starwars.fandom.com/wiki/Personal_computer"
-        },
-        {
-          "Content": "Mac",
-          "Href": "https://starwars.fandom.com/wiki/Mac"
         }
       ],
       "Values": [
-        "Windows PC, Mac"
+        "Windows PC"
+      ]
+    },
+    {
+      "Label": "Next",
+      "Links": [
+        {
+          "Content": "The LucasArts Archives Vol. II: Star Wars Collection",
+          "Href": "https://starwars.fandom.com/wiki/The_LucasArts_Archives_Vol._II:_Star_Wars_Collection"
+        }
+      ],
+      "Values": [
+        "The LucasArts Archives Vol. II: Star Wars Collection"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 317071,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_LucasArts_Archives_Vol._II:_Star_Wars_Collection",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Video_game"
+    }
+  ]
 }

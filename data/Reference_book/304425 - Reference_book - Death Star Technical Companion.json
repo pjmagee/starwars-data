@@ -36,18 +36,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Bill Smith",
-          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
-        }
-      ],
-      "Values": [
-        "Bill Smith"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -58,6 +46,18 @@
       "Values": [
         "Lucasfilm Ltd",
         "John Paul Lona"
+      ]
+    },
+    {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Bill Smith",
+          "Href": "https://starwars.fandom.com/wiki/Bill_Smith"
+        }
+      ],
+      "Values": [
+        "Bill Smith"
       ]
     },
     {
@@ -76,12 +76,16 @@
       "Label": "Publication date",
       "Links": [
         {
+          "Content": "June",
+          "Href": "https://starwars.fandom.com/wiki/June"
+        },
+        {
           "Content": "1991",
           "Href": "https://starwars.fandom.com/wiki/1991"
         }
       ],
       "Values": [
-        "1991"
+        "June 1991"
       ]
     },
     {
@@ -111,5 +115,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 311011,
+      "PageUrl": "https://starwars.fandom.com/wiki/With_All_These_TIEs,_Why_Did_We_Win_at_Yavin?",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

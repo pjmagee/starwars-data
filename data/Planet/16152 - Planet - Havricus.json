@@ -2,7 +2,7 @@
   "PageId": 16152,
   "PageUrl": "https://starwars.fandom.com/wiki/Havricus",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/a/a1/Havricus-TEA.jpg/revision/latest?cb=20220925185433",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,20 @@
         {
           "Content": "Colonies",
           "Href": "https://starwars.fandom.com/wiki/Colonies/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
+        },
+        {
+          "Content": "Southern Core",
+          "Href": "https://starwars.fandom.com/wiki/Southern_Core"
         }
       ],
       "Values": [
-        "Colonies"
+        "Colonies",
+        "The Slice",
+        "Southern Core"
       ]
     },
     {
@@ -36,7 +46,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "N-12"
@@ -55,28 +65,28 @@
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Fauna",
       "Links": [
         {
-          "Content": "Galactic Republic",
-          "Href": "https://starwars.fandom.com/wiki/Galactic_Republic/Legends"
+          "Content": "Stone mite",
+          "Href": "https://starwars.fandom.com/wiki/Stone_mite/Legends"
         }
       ],
       "Values": [
-        "Galactic Republic"
+        "Stone mite"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 797,
-      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
       "PageId": 391451,
       "PageUrl": "https://starwars.fandom.com/wiki/Havricus_system",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 797,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Run/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     }
   ]
 }

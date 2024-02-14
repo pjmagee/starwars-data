@@ -51,7 +51,12 @@
     },
     {
       "Label": "Date dissolved",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "380 BBY",
+          "Href": "https://starwars.fandom.com/wiki/380_BBY/Legends"
+        }
+      ],
       "Values": [
         "380 BBY"
       ]
@@ -71,14 +76,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 136538,
-      "PageUrl": "https://starwars.fandom.com/wiki/Afarathu_Cave",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
       "PageId": 338552,
       "PageUrl": "https://starwars.fandom.com/wiki/380_BBY/Legends",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Year"
+    },
+    {
+      "PageId": 136538,
+      "PageUrl": "https://starwars.fandom.com/wiki/Afarathu_Cave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     }
   ]
 }

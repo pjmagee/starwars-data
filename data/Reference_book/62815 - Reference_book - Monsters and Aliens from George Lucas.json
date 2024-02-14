@@ -25,18 +25,6 @@
       ]
     },
     {
-      "Label": "Editor(s)",
-      "Links": [
-        {
-          "Content": "Mark Greenberg",
-          "Href": "https://starwars.fandom.com/wiki/Mark_Greenberg"
-        }
-      ],
-      "Values": [
-        "Mark Greenberg"
-      ]
-    },
-    {
       "Label": "Illustrator(s)",
       "Links": [
         {
@@ -85,6 +73,18 @@
       ]
     },
     {
+      "Label": "Editor(s)",
+      "Links": [
+        {
+          "Content": "Mark Greenberg",
+          "Href": "https://starwars.fandom.com/wiki/Mark_Greenberg"
+        }
+      ],
+      "Values": [
+        "Mark Greenberg"
+      ]
+    },
+    {
       "Label": "Publisher",
       "Links": [
         {
@@ -100,8 +100,8 @@
       "Label": "Publication date",
       "Links": [
         {
-          "Content": "November 1",
-          "Href": "https://starwars.fandom.com/wiki/November_1"
+          "Content": "November",
+          "Href": "https://starwars.fandom.com/wiki/November"
         },
         {
           "Content": "1993",
@@ -109,7 +109,7 @@
         }
       ],
       "Values": [
-        "November 1, 1993"
+        "November 1993"
       ]
     },
     {
@@ -153,5 +153,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 160155,
+      "PageUrl": "https://starwars.fandom.com/wiki/Musings_of_an_Ithorian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Short_story"
+    }
+  ]
 }

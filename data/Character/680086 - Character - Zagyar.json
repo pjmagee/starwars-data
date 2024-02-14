@@ -48,6 +48,29 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        },
+        {
+          "Content": "ft",
+          "Href": "https://starwars.fandom.com/wiki/Foot"
+        }
+      ],
+      "Values": [
+        "1.70 meters (5 ft, 7 in)"
+      ]
+    },
+    {
       "Label": "Hair color",
       "Links": [
         {
@@ -85,6 +108,11 @@
     }
   ],
   "Relationships": [
+    {
+      "PageId": 792634,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zagyar's_blaster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
     {
       "PageId": 697792,
       "PageUrl": "https://starwars.fandom.com/wiki/Squall_Spider",

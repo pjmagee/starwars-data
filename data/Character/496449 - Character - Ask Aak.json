@@ -48,6 +48,25 @@
       ]
     },
     {
+      "Label": "Pronouns",
+      "Links": [],
+      "Values": [
+        "He/him"
+      ]
+    },
+    {
+      "Label": "Height",
+      "Links": [
+        {
+          "Content": "meters",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "1.80 meters"
+      ]
+    },
+    {
       "Label": "Eye color",
       "Links": [
         {
@@ -91,14 +110,14 @@
   ],
   "Relationships": [
     {
-      "PageId": 695911,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bormus_testing_facility",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 619533,
       "PageUrl": "https://starwars.fandom.com/wiki/Malastare_delegation",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 695911,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bormus_testing_facility",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

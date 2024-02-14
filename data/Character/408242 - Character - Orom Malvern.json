@@ -48,22 +48,74 @@
       ]
     },
     {
-      "Label": "Affiliation(s)",
+      "Label": "Family",
       "Links": [
         {
           "Content": "House Malvern",
           "Href": "https://starwars.fandom.com/wiki/House_Malvern/Legends"
-        },
+        }
+      ],
+      "Values": [
+        "House Malvern"
+      ]
+    },
+    {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "father",
+          "Href": "https://starwars.fandom.com/wiki/Orom_Malvern%27s_father"
+        }
+      ],
+      "Values": [
+        "A father"
+      ]
+    },
+    {
+      "Label": "Sibling(s)",
+      "Links": [
+        {
+          "Content": "Cretia Borgin",
+          "Href": "https://starwars.fandom.com/wiki/Cretia_Borgin"
+        }
+      ],
+      "Values": [
+        "Cretia Borgin"
+      ]
+    },
+    {
+      "Label": "Affiliation(s)",
+      "Links": [
         {
           "Content": "Galactic Empire",
           "Href": "https://starwars.fandom.com/wiki/Galactic_Empire/Legends"
         }
       ],
       "Values": [
-        "House Malvern",
         "Galactic Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 408247,
+      "PageUrl": "https://starwars.fandom.com/wiki/Cretia_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 783182,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku_regency_conclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 408249,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Malvern/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 408954,
+      "PageUrl": "https://starwars.fandom.com/wiki/Orom_Malvern's_father",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

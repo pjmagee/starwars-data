@@ -37,9 +37,14 @@
     },
     {
       "Label": "Hair color",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Blonde",
+          "Href": "https://starwars.fandom.com/wiki/Color/Legends"
+        }
+      ],
       "Values": [
-        "Blond"
+        "Blonde"
       ]
     },
     {
@@ -58,9 +63,15 @@
         }
       ],
       "Values": [
-        "Galactic Empire (briefly)"
+        "Galactic Empire"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 792363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Seoul_5",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    }
+  ]
 }

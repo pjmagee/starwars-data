@@ -36,10 +36,22 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "L-18"
+      ]
+    },
+    {
+      "Label": "Orbits",
+      "Links": [
+        {
+          "Content": "Goibniu",
+          "Href": "https://starwars.fandom.com/wiki/Goibniu"
+        }
+      ],
+      "Values": [
+        "Goibniu"
       ]
     },
     {
@@ -69,19 +81,24 @@
   ],
   "Relationships": [
     {
-      "PageId": 129586,
-      "PageUrl": "https://starwars.fandom.com/wiki/Goibniu_Platform",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
-    },
-    {
       "PageId": 288598,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Goibniu",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
+      "PageId": 792733,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goibniu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
       "PageId": 882,
       "PageUrl": "https://starwars.fandom.com/wiki/Videnda_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 129586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Goibniu_Platform",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Space_station"
     }
   ]
 }

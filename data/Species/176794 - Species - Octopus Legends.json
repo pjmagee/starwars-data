@@ -27,17 +27,22 @@
       "Label": "Classification",
       "Links": [
         {
-          "Content": "Cephalopoid",
-          "Href": "https://starwars.fandom.com/wiki/Cephalopoid"
+          "Content": "Cephalopods",
+          "Href": "https://starwars.fandom.com/wiki/Cephalopod/Legends"
         }
       ],
       "Values": [
-        "Cephalopoid"
+        "Cephalopods"
       ]
     },
     {
       "Label": "Races",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Arboreal octopus",
+          "Href": "https://starwars.fandom.com/wiki/Arboreal_octopus/Legends"
+        }
+      ],
       "Values": [
         "Arboreal octopus"
       ]
@@ -74,5 +79,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 111761,
+      "PageUrl": "https://starwars.fandom.com/wiki/Binks's_Woe",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "PageId": 497675,
   "PageUrl": "https://starwars.fandom.com/wiki/Concordia",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/8e/Concordia-BoBFCh5.png/revision/latest?cb=20220130072413",
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/8/85/Concordia_TMCh18.png/revision/latest?cb=20230312065314",
   "Data": [
     {
       "Label": "Titles",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "O-7",
@@ -103,19 +103,20 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
           "Href": "https://starwars.fandom.com/wiki/Forest"
         },
         {
-          "Content": "mountains",
+          "Content": "Mountains",
           "Href": "https://starwars.fandom.com/wiki/Mountain"
         }
       ],
       "Values": [
-        "Forests, mountains"
+        "Forests",
+        "Mountains"
       ]
     },
     {
@@ -128,11 +129,16 @@
         {
           "Content": "Deathwatch hideout",
           "Href": "https://starwars.fandom.com/wiki/Deathwatch_hideout"
+        },
+        {
+          "Content": "Unidentified Concordia city",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_Concordia_city"
         }
       ],
       "Values": [
         "Concordian mines",
-        "Deathwatch hideout"
+        "Deathwatch hideout",
+        "Unidentified Concordia city"
       ]
     },
     {
@@ -148,7 +154,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
@@ -174,6 +180,18 @@
       "Values": [
         "Galactic Basic Standard",
         "Concordian"
+      ]
+    },
+    {
+      "Label": "Government",
+      "Links": [
+        {
+          "Content": "Governorship",
+          "Href": "https://starwars.fandom.com/wiki/Governor"
+        }
+      ],
+      "Values": [
+        "Governorship"
       ]
     },
     {
@@ -203,6 +221,18 @@
       ]
     },
     {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Beskar",
+          "Href": "https://starwars.fandom.com/wiki/Beskar"
+        }
+      ],
+      "Values": [
+        "Beskar"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -227,88 +257,23 @@
   ],
   "Relationships": [
     {
-      "PageId": 636971,
-      "PageUrl": "https://starwars.fandom.com/wiki/Way_of_the_Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 673745,
-      "PageUrl": "https://starwars.fandom.com/wiki/Children_of_the_Watch",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 56062,
-      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 482962,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 484089,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 505073,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 505258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Civil_War",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
-    },
-    {
-      "PageId": 529702,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 529742,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 545038,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_(writing_system)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 554357,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concordian_mines",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 452682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 504382,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 683604,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Concordia_city",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 591583,
-      "PageUrl": "https://starwars.fandom.com/wiki/Concordian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
       "PageId": 561453,
       "PageUrl": "https://starwars.fandom.com/wiki/Deathwatch_hideout",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 625839,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
+      "PageId": 608830,
+      "PageUrl": "https://starwars.fandom.com/wiki/Din_Djarin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 752864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Police_captain",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 640655,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
@@ -322,19 +287,99 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 453790,
-      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
+      "PageId": 554357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concordian_mines",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 482962,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_Guard",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
-      "PageId": 640655,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_warrior",
+      "PageId": 484089,
+      "PageUrl": "https://starwars.fandom.com/wiki/Clan_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 452682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 545038,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian_(writing_system)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Script"
+    },
+    {
+      "PageId": 683604,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Concordia_city",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 504382,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_on_Concordia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 56062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Beskar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 625839,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch_Warrior",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 635868,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Tribe",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 643842,
       "PageUrl": "https://starwars.fandom.com/wiki/Torrent_wisp_tree",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Plant"
+    },
+    {
+      "PageId": 529702,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Vizsla",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 529742,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalorian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 591583,
+      "PageUrl": "https://starwars.fandom.com/wiki/Concordian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 636971,
+      "PageUrl": "https://starwars.fandom.com/wiki/Way_of_the_Mandalore",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 673745,
+      "PageUrl": "https://starwars.fandom.com/wiki/Children_of_the_Watch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+    },
+    {
+      "PageId": 505073,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mandalore_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 453790,
+      "PageUrl": "https://starwars.fandom.com/wiki/Death_Watch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 505258,
+      "PageUrl": "https://starwars.fandom.com/wiki/Great_Clan_Wars",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

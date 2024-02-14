@@ -37,14 +37,10 @@
         {
           "Content": "months",
           "Href": "https://starwars.fandom.com/wiki/Standard_month"
-        },
-        {
-          "Content": "First Battle of Geonosis",
-          "Href": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis"
         }
       ],
       "Values": [
-        "20 BBY 1 year and 9 months after the First Battle of Geonosis"
+        "20 BBY (One year and nine months into the Clone Wars)"
       ]
     },
     {
@@ -63,27 +59,29 @@
       "Label": "Outcome",
       "Links": [
         {
-          "Content": "Separatist",
+          "Content": "Separatist Alliance",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
         },
         {
-          "Content": "Jedi General",
-          "Href": "https://starwars.fandom.com/wiki/Jedi_General"
+          "Content": "Jedi Master",
+          "Href": "https://starwars.fandom.com/wiki/Jedi_Master"
         },
         {
           "Content": "Even Piell",
           "Href": "https://starwars.fandom.com/wiki/Even_Piell"
-        },
-        {
-          "Content": "captive",
-          "Href": "https://starwars.fandom.com/wiki/Prisoner"
         }
       ],
       "Values": [
-        "Separatist victory",
-        "Jedi General Even Piell and his crew taken captive"
+        "Separatist Alliance victory",
+        "Capture of Jedi Master Even Piell and his crew"
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 747136,
+      "PageUrl": "https://starwars.fandom.com/wiki/Even_Piell's_cruiser",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    }
+  ]
 }

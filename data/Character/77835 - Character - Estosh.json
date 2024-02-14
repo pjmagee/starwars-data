@@ -12,6 +12,18 @@
       ]
     },
     {
+      "Label": "Born",
+      "Links": [
+        {
+          "Content": "27 BBY",
+          "Href": "https://starwars.fandom.com/wiki/27_BBY/Legends"
+        }
+      ],
+      "Values": [
+        "After 27 BBY"
+      ]
+    },
+    {
       "Label": "Died",
       "Links": [
         {
@@ -57,14 +69,29 @@
         {
           "Content": "Vagaari Empire",
           "Href": "https://starwars.fandom.com/wiki/Vagaari_Empire"
+        },
+        {
+          "Content": "Geroon Remnant",
+          "Href": "https://starwars.fandom.com/wiki/Geroon_Remnant"
         }
       ],
       "Values": [
-        "Vagaari Empire"
+        "Vagaari Empire",
+        "Geroon Remnant"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 739612,
+      "PageUrl": "https://starwars.fandom.com/wiki/Vagaari_stasis_collar",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 739586,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_aboard_Dreadnaught-Four",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
     {
       "PageId": 55434,
       "PageUrl": "https://starwars.fandom.com/wiki/Dreadnaught-Four",

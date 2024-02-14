@@ -36,7 +36,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-6",
@@ -45,6 +45,13 @@
       ],
       "Values": [
         "R-6"
+      ]
+    },
+    {
+      "Label": "Suns",
+      "Links": [],
+      "Values": [
+        "At least 1"
       ]
     },
     {
@@ -65,15 +72,42 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Native species",
+      "Links": [
+        {
+          "Content": "Neti",
+          "Href": "https://starwars.fandom.com/wiki/Neti"
+        },
+        {
+          "Content": "Ysanna",
+          "Href": "https://starwars.fandom.com/wiki/Ysanna"
+        }
+      ],
+      "Values": [
+        "Neti",
+        "Ysanna"
+      ]
+    },
+    {
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Humans",
           "Href": "https://starwars.fandom.com/wiki/Human"
+        },
+        {
+          "Content": "Quarren",
+          "Href": "https://starwars.fandom.com/wiki/Quarren"
+        },
+        {
+          "Content": "Yoda's species",
+          "Href": "https://starwars.fandom.com/wiki/Yoda%27s_species"
         }
       ],
       "Values": [
-        "Humans"
+        "Humans",
+        "Quarren",
+        "Yoda's species"
       ]
     },
     {
@@ -113,14 +147,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 73963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
+      "PageId": 272220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mephite_crystal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 667326,
-      "PageUrl": "https://starwars.fandom.com/wiki/Auril_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
       "PageId": 639160,
@@ -133,8 +162,13 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
     },
     {
-      "PageId": 272220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mephite_crystal",
+      "PageId": 667326,
+      "PageUrl": "https://starwars.fandom.com/wiki/Auril_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 73963,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kyber_crystal",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
     }
   ]

@@ -36,10 +36,65 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Suns",
+      "Links": [
+        {
+          "Content": "stars",
+          "Href": "https://starwars.fandom.com/wiki/Star/Legends"
+        }
+      ],
+      "Values": [
+        "Several stars"
+      ]
+    },
+    {
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "I-5"
+      ]
+    },
+    {
+      "Label": "Class",
+      "Links": [],
+      "Values": [
+        "Terrestrial"
+      ]
+    },
+    {
+      "Label": "Atmosphere",
+      "Links": [
+        {
+          "Content": "Breathable",
+          "Href": "https://starwars.fandom.com/wiki/Atmosphere/Legends"
+        }
+      ],
+      "Values": [
+        "Breathable"
+      ]
+    },
+    {
+      "Label": "Surface water",
+      "Links": [
+        {
+          "Content": "Dreaming Waters",
+          "Href": "https://starwars.fandom.com/wiki/Dreaming_Waters"
+        }
+      ],
+      "Values": [
+        "Dreaming Waters"
+      ]
+    },
+    {
+      "Label": "Points of interest",
+      "Links": [
+        {
+          "Content": "Mines",
+          "Href": "https://starwars.fandom.com/wiki/Mining/Legends"
+        }
+      ],
+      "Values": [
+        "Mines"
       ]
     },
     {
@@ -47,11 +102,28 @@
       "Links": [
         {
           "Content": "Quesoth",
-          "Href": "https://starwars.fandom.com/wiki/Quesoth/Legends"
+          "Href": "https://starwars.fandom.com/wiki/Quesoth"
         }
       ],
       "Values": [
         "Quesoth"
+      ]
+    },
+    {
+      "Label": "Other species",
+      "Links": [
+        {
+          "Content": "Storm-hairs",
+          "Href": "https://starwars.fandom.com/wiki/Storm-hair"
+        },
+        {
+          "Content": "Stromma",
+          "Href": "https://starwars.fandom.com/wiki/Stromma"
+        }
+      ],
+      "Values": [
+        "Storm-hairs",
+        "Stromma"
       ]
     },
     {
@@ -69,18 +141,6 @@
       "Values": [
         "Quesoth Common Speak",
         "Quesoth Soldier Speak"
-      ]
-    },
-    {
-      "Label": "Government",
-      "Links": [
-        {
-          "Content": "Circling",
-          "Href": "https://starwars.fandom.com/wiki/Circling"
-        }
-      ],
-      "Values": [
-        "Circling"
       ]
     },
     {
@@ -109,31 +169,21 @@
       "Label": "Affiliation",
       "Links": [
         {
-          "Content": "Nuso Esva's Empire",
-          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_Empire"
+          "Content": "Nuso Esva's realm",
+          "Href": "https://starwars.fandom.com/wiki/Nuso_Esva%27s_realm"
+        },
+        {
+          "Content": "Chosen",
+          "Href": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)"
         }
       ],
       "Values": [
-        "Nuso Esva's Empire"
+        "Nuso Esva's realm",
+        "Chosen"
       ]
     }
   ],
   "Relationships": [
-    {
-      "PageId": 387067,
-      "PageUrl": "https://starwars.fandom.com/wiki/Queen_of_the_Red_(8_ABY)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 356941,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth_Common_Speak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
-    {
-      "PageId": 356950,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth_Soldier_Speak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
-    },
     {
       "PageId": 356965,
       "PageUrl": "https://starwars.fandom.com/wiki/Jirvin",
@@ -150,9 +200,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 356944,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Quethold",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "PageId": 739986,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circling_ring",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 740898,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stromma_diplomatic_enclave",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 357015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dreaming_Waters",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 357019,
+      "PageUrl": "https://starwars.fandom.com/wiki/Setting_Sun_Avenue",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 356948,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
     },
     {
       "PageId": 356956,
@@ -170,19 +240,69 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
     },
     {
+      "PageId": 737750,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trevik's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 636163,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_realm",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 356941,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth_Common_Speak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 356950,
+      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth_Soldier_Speak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 740900,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stromma_contingent",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 737933,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circling_of_the_White",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 737934,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circling_of_the_Red",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
       "PageId": 349583,
       "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 357019,
-      "PageUrl": "https://starwars.fandom.com/wiki/Setting_Sun_Avenue",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+      "PageId": 737829,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bowlcarrier_vest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 357046,
-      "PageUrl": "https://starwars.fandom.com/wiki/Circling",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+      "PageId": 737944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Nuso_Esva's_language",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Language"
+    },
+    {
+      "PageId": 357105,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dwelling_of_Guests",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 751887,
+      "PageUrl": "https://starwars.fandom.com/wiki/Stromma_cannon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 737882,
+      "PageUrl": "https://starwars.fandom.com/wiki/Trevik's_home",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
       "PageId": 397812,
@@ -190,18 +310,18 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 356948,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chosen_(Nuso_Esva)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 356944,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attack_on_the_Red_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
     },
     {
       "PageId": 356935,
-      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth/Legends",
+      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
       "PageId": 356963,
-      "PageUrl": "https://starwars.fandom.com/wiki/Soldier_(Quesoth)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Quesoth_Soldier",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
@@ -210,9 +330,34 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
     },
     {
-      "PageId": 357105,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dwelling_of_Guests",
+      "PageId": 737885,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Circling",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 738016,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Chosen_(Quethold)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 739854,
+      "PageUrl": "https://starwars.fandom.com/wiki/Circling_of_the_First_of_the_Red",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 740015,
+      "PageUrl": "https://starwars.fandom.com/wiki/Midli_of_the_Seventh_of_the_Red",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 740047,
+      "PageUrl": "https://starwars.fandom.com/wiki/Palace_(Red_City)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 387067,
+      "PageUrl": "https://starwars.fandom.com/wiki/Queen_of_the_Red_(8_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     }
   ]
 }

@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Corellian Engineering Corporation",
-          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
-        }
-      ],
-      "Values": [
-        "Corellian Engineering Corporation"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -36,7 +24,19 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Corellian Engineering Corporation",
+          "Href": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation"
+        }
+      ],
+      "Values": [
+        "Corellian Engineering Corporation"
+      ]
+    },
+    {
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Cruiser",
@@ -67,6 +67,18 @@
       ]
     },
     {
+      "Label": "Year introduced",
+      "Links": [
+        {
+          "Content": "241 BBY",
+          "Href": "https://starwars.fandom.com/wiki/241_BBY"
+        }
+      ],
+      "Values": [
+        "c. 241 BBY"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -81,14 +93,19 @@
   ],
   "Relationships": [
     {
-      "PageId": 692327,
-      "PageUrl": "https://starwars.fandom.com/wiki/Crown_of_Corellia_Dining_Room",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+      "PageId": 629482,
+      "PageUrl": "https://starwars.fandom.com/wiki/Halcyon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     },
     {
       "PageId": 720733,
       "PageUrl": "https://starwars.fandom.com/wiki/Wanderlight",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 459030,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
     },
     {
       "PageId": 727106,
@@ -103,26 +120,6 @@
     {
       "PageId": 727112,
       "PageUrl": "https://starwars.fandom.com/wiki/Sterling_(starcruiser)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 671693,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sublight_Lounge",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 671782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Atrium_(Halcyon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 671783,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bridge_(Halcyon)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 629482,
-      "PageUrl": "https://starwars.fandom.com/wiki/Halcyon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
     }
   ]

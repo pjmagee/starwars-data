@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "Hutt dependencies",
+          "Href": "https://starwars.fandom.com/wiki/Hutt_dependencies"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "Hutt dependencies"
       ]
     },
     {
@@ -36,7 +41,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "T-10"
@@ -83,7 +88,12 @@
     },
     {
       "Label": "Space stations",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Deep Space Station",
+          "Href": "https://starwars.fandom.com/wiki/Deep_Space_Station"
+        }
+      ],
       "Values": [
         "Deep Space Station",
         "Imperial Claw Station",
@@ -161,7 +171,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Kessel",
@@ -238,51 +248,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 371220,
-      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_near_Kessel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 474889,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maw_Nebulae",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
-      "PageId": 943,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kessel/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 957,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kessa/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
-    },
-    {
-      "PageId": 362740,
-      "PageUrl": "https://starwars.fandom.com/wiki/Maw_Imperial_Prison",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 376350,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kreetan_Narrows",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 447673,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kessel_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 603528,
-      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_mission_to_Kessel",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 13802,
-      "PageUrl": "https://starwars.fandom.com/wiki/Garrison_Moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
       "PageId": 17103,
       "PageUrl": "https://starwars.fandom.com/wiki/Senna_(planet)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
@@ -298,6 +263,56 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
     },
     {
+      "PageId": 784957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kessel_(1_ABY)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 13802,
+      "PageUrl": "https://starwars.fandom.com/wiki/Garrison_Moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 376350,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kreetan_Narrows",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 957,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kessa/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 784959,
+      "PageUrl": "https://starwars.fandom.com/wiki/Radiant_Anthem",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
+      "PageId": 447673,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_the_Kessel_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 362740,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maw_Imperial_Prison",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 371220,
+      "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_near_Kessel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 223,
+      "PageUrl": "https://starwars.fandom.com/wiki/Corellian_Engineering_Corporation/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
+      "PageId": 327635,
+      "PageUrl": "https://starwars.fandom.com/wiki/Star_Ravager",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Individual_ship"
+    },
+    {
       "PageId": 205195,
       "PageUrl": "https://starwars.fandom.com/wiki/Skirmish_in_the_Maw",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -306,6 +321,21 @@
       "PageId": 206066,
       "PageUrl": "https://starwars.fandom.com/wiki/Battle_of_Kessel_(11_ABY)",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 603528,
+      "PageUrl": "https://starwars.fandom.com/wiki/Rescue_mission_to_Kessel",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 474889,
+      "PageUrl": "https://starwars.fandom.com/wiki/Maw_Nebulae",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
+    },
+    {
+      "PageId": 943,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kessel/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }

@@ -36,19 +36,7 @@
       ]
     },
     {
-      "Label": "Model",
-      "Links": [
-        {
-          "Content": "Imperial II-class Star Destroyer",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_II-class_Star_Destroyer"
-        }
-      ],
-      "Values": [
-        "Imperial II-class Star Destroyer"
-      ]
-    },
-    {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Star Destroyer",
@@ -117,6 +105,13 @@
       ]
     },
     {
+      "Label": "Hyperdrive system",
+      "Links": [],
+      "Values": [
+        "Equipped"
+      ]
+    },
+    {
       "Label": "Power plant",
       "Links": [
         {
@@ -142,6 +137,18 @@
       ],
       "Values": [
         "Deflector shield generator domes (2)"
+      ]
+    },
+    {
+      "Label": "Hull",
+      "Links": [
+        {
+          "Content": "Durasteel",
+          "Href": "https://starwars.fandom.com/wiki/Durasteel"
+        }
+      ],
+      "Values": [
+        "Imperial Durasteel"
       ]
     },
     {
@@ -176,15 +183,71 @@
         {
           "Content": "starfighters",
           "Href": "https://starwars.fandom.com/wiki/Starfighter"
+        },
+        {
+          "Content": "TIE/ln space superiority starfighters",
+          "Href": "https://starwars.fandom.com/wiki/TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "Iden Versio's TIE/ln space superiority starfighter",
+          "Href": "https://starwars.fandom.com/wiki/Iden_Versio%27s_TIE/ln_space_superiority_starfighter"
+        },
+        {
+          "Content": "TIE/IN interceptor",
+          "Href": "https://starwars.fandom.com/wiki/TIE/IN_interceptor"
+        },
+        {
+          "Content": "TIE/sa bombers",
+          "Href": "https://starwars.fandom.com/wiki/TIE/sa_bomber"
         }
       ],
       "Values": [
-        "TIE line starfighters (72)"
+        "TIE line starfighters (72)",
+        "TIE/ln space superiority starfighters",
+        "Iden Versio's TIE/ln space superiority starfighter",
+        "At least 1 TIE/IN interceptor",
+        "TIE/sa bombers"
+      ]
+    },
+    {
+      "Label": "Escape craft",
+      "Links": [
+        {
+          "Content": "Escape pods",
+          "Href": "https://starwars.fandom.com/wiki/Escape_pod"
+        }
+      ],
+      "Values": [
+        "Escape pods"
       ]
     },
     {
       "Label": "Crew",
       "Links": [
+        {
+          "Content": "Imperial officers",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+        },
+        {
+          "Content": "Imperial technicians",
+          "Href": "https://starwars.fandom.com/wiki/Technician/Legends"
+        },
+        {
+          "Content": "Imperial Starfighter Pilots",
+          "Href": "https://starwars.fandom.com/wiki/Imperial_Starfighter_Pilot"
+        },
+        {
+          "Content": "Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
+        },
+        {
+          "Content": "Heavy Weapons Stormtroopers",
+          "Href": "https://starwars.fandom.com/wiki/Heavy_Weapons_Stormtrooper"
+        },
+        {
+          "Content": "Scout troopers",
+          "Href": "https://starwars.fandom.com/wiki/Scout_trooper"
+        },
         {
           "Content": "Jumptroopers",
           "Href": "https://starwars.fandom.com/wiki/Jumptrooper"
@@ -194,24 +257,37 @@
           "Href": "https://starwars.fandom.com/wiki/Riot_control_stormtrooper"
         },
         {
-          "Content": "Scout troopers",
-          "Href": "https://starwars.fandom.com/wiki/Scout_trooper"
+          "Content": "R4-series astromech droids",
+          "Href": "https://starwars.fandom.com/wiki/R4-series_agromech_droid"
         },
         {
-          "Content": "Stormtroopers",
-          "Href": "https://starwars.fandom.com/wiki/Stormtrooper"
-        },
-        {
-          "Content": "Imperial officers",
-          "Href": "https://starwars.fandom.com/wiki/Imperial_officer"
+          "Content": "MSE-6 series repair droids",
+          "Href": "https://starwars.fandom.com/wiki/MSE-6_series_repair_droid"
         }
       ],
       "Values": [
+        "Imperial officers",
+        "Imperial technicians",
+        "Imperial Starfighter Pilots",
+        "Stormtroopers (9,700)",
+        "Heavy Weapons Stormtroopers",
+        "Scout troopers",
         "Jumptroopers",
         "Riot control stormtroopers",
-        "Scout troopers",
-        "Stormtroopers (9,700)",
-        "Imperial officers"
+        "R4-series astromech droids",
+        "MSE-6 series repair droids"
+      ]
+    },
+    {
+      "Label": "Passengers",
+      "Links": [
+        {
+          "Content": "Sentinel",
+          "Href": "https://starwars.fandom.com/wiki/Sentinel_(Contingency)"
+        }
+      ],
+      "Values": [
+        "At least 1 Sentinel"
       ]
     },
     {
@@ -239,6 +315,18 @@
       ]
     },
     {
+      "Label": "Role(s)",
+      "Links": [
+        {
+          "Content": "Command ship",
+          "Href": "https://starwars.fandom.com/wiki/Command_ship"
+        }
+      ],
+      "Values": [
+        "Command ship"
+      ]
+    },
+    {
       "Label": "Destroyed",
       "Links": [
         {
@@ -262,6 +350,14 @@
           "Href": "https://starwars.fandom.com/wiki/Battle_of_Endor"
         },
         {
+          "Content": "Contingency",
+          "Href": "https://starwars.fandom.com/wiki/Contingency"
+        },
+        {
+          "Content": "Operation: Cinder",
+          "Href": "https://starwars.fandom.com/wiki/Operation:_Cinder"
+        },
+        {
           "Content": "Skirmish on Vardos",
           "Href": "https://starwars.fandom.com/wiki/Skirmish_on_Vardos"
         },
@@ -272,6 +368,8 @@
       ],
       "Values": [
         "Battle of Endor",
+        "Contingency",
+        "Operation: Cinder",
         "Skirmish on Vardos",
         "Battle of Jakku"
       ]
@@ -301,6 +399,18 @@
       ]
     },
     {
+      "Label": "Fleet",
+      "Links": [
+        {
+          "Content": "Admiral Versio's fleet",
+          "Href": "https://starwars.fandom.com/wiki/Admiral_Versio%27s_fleet"
+        }
+      ],
+      "Values": [
+        "Admiral Versio's fleet"
+      ]
+    },
+    {
       "Label": "Commander(s)",
       "Links": [
         {
@@ -316,12 +426,12 @@
       "Label": "Crewmembers",
       "Links": [
         {
-          "Content": "Unidentified Imperial officer",
+          "Content": "Imperial officer",
           "Href": "https://starwars.fandom.com/wiki/Unidentified_Imperial_officer_(Eviscerator)"
         }
       ],
       "Values": [
-        "Unidentified Imperial officer"
+        "An Imperial officer"
       ]
     }
   ],
@@ -330,6 +440,11 @@
       "PageId": 568821,
       "PageUrl": "https://starwars.fandom.com/wiki/Garrick_Versio",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 775328,
+      "PageUrl": "https://starwars.fandom.com/wiki/Admiral_Versio's_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     }
   ]
 }

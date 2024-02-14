@@ -60,6 +60,18 @@
       ]
     },
     {
+      "Label": "Grid square",
+      "Links": [
+        {
+          "Content": "R-3",
+          "Href": "https://starwars.fandom.com/wiki/Standard_Galactic_Grid"
+        }
+      ],
+      "Values": [
+        "R-3"
+      ]
+    },
+    {
       "Label": "Point(s) of interest",
       "Links": [
         {
@@ -79,8 +91,8 @@
           "Href": "https://starwars.fandom.com/wiki/Epiphany_moon%27s_militia"
         },
         {
-          "Content": "Salient's battle group",
-          "Href": "https://starwars.fandom.com/wiki/Salient%27s_battle_group"
+          "Content": "Salient Battle Group",
+          "Href": "https://starwars.fandom.com/wiki/Salient_Battle_Group"
         },
         {
           "Content": "Confederacy of Independent Systems",
@@ -97,7 +109,7 @@
       ],
       "Values": [
         "Epiphany moon's militia",
-        "Salient's battle group",
+        "Salient Battle Group",
         "Confederacy of Independent Systems",
         "Zerpen Industries",
         "Galactic Empire (during occupation)"
@@ -106,19 +118,19 @@
   ],
   "Relationships": [
     {
+      "PageId": 555633,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zerpen_Industries",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+    },
+    {
       "PageId": 555348,
       "PageUrl": "https://starwars.fandom.com/wiki/Zerpen_Industries_headquarters",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     },
     {
-      "PageId": 555072,
-      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 555633,
-      "PageUrl": "https://starwars.fandom.com/wiki/Zerpen_Industries",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Company"
+      "PageId": 561070,
+      "PageUrl": "https://starwars.fandom.com/wiki/Epiphany_moon's_militia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
     },
     {
       "PageId": 555361,
@@ -126,9 +138,9 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     },
     {
-      "PageId": 561070,
-      "PageUrl": "https://starwars.fandom.com/wiki/Epiphany_moon's_militia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 555072,
+      "PageUrl": "https://starwars.fandom.com/wiki/Salient_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

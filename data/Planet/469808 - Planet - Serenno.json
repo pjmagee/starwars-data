@@ -24,7 +24,8 @@
         }
       ],
       "Values": [
-        "Outer Rim Territories; Northern Dependencies"
+        "Outer Rim Territories",
+        "Northern Dependencies"
       ]
     },
     {
@@ -77,7 +78,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "P-5",
@@ -125,7 +126,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Forests",
@@ -159,8 +160,20 @@
       "Label": "Points of interest",
       "Links": [
         {
+          "Content": "Abyssin Outpost",
+          "Href": "https://starwars.fandom.com/wiki/Abyssin_Outpost"
+        },
+        {
           "Content": "Aparian Wastes",
           "Href": "https://starwars.fandom.com/wiki/Aparian_Wastes"
+        },
+        {
+          "Content": "Borgin Castle",
+          "Href": "https://starwars.fandom.com/wiki/Borgin_Castle"
+        },
+        {
+          "Content": "Carannian hills",
+          "Href": "https://starwars.fandom.com/wiki/Carannian_hills"
         },
         {
           "Content": "Carannia Spaceport",
@@ -177,15 +190,32 @@
         {
           "Content": "Great Assembly House",
           "Href": "https://starwars.fandom.com/wiki/Great_Assembly_House"
+        },
+        {
+          "Content": "Serenno Camp",
+          "Href": "https://starwars.fandom.com/wiki/Serenno_Camp"
+        },
+        {
+          "Content": "Unidentified forest",
+          "Href": "https://starwars.fandom.com/wiki/Unidentified_forest"
+        },
+        {
+          "Content": "Upper forest region",
+          "Href": "https://starwars.fandom.com/wiki/Upper_forest_region"
         }
       ],
       "Values": [
+        "Abyssin Outpost",
         "Aparian Wastes",
         "Borgin Castle",
+        "Carannian hills",
         "Carannia Spaceport",
         "Castle Serenno",
         "Delgaldon Plains",
-        "Great Assembly House"
+        "Great Assembly House",
+        "Serenno Camp",
+        "Unidentified forest",
+        "Upper forest region"
       ]
     },
     {
@@ -211,7 +241,7 @@
       ]
     },
     {
-      "Label": "Immigrated species",
+      "Label": "Other species",
       "Links": [
         {
           "Content": "Chiss",
@@ -246,9 +276,14 @@
     },
     {
       "Label": "Government",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Serenno government",
+          "Href": "https://starwars.fandom.com/wiki/Serenno_government"
+        }
+      ],
       "Values": [
-        "Planetary Council"
+        "Serenno government"
       ]
     },
     {
@@ -281,12 +316,17 @@
         {
           "Content": "Saffia",
           "Href": "https://starwars.fandom.com/wiki/Saffia"
+        },
+        {
+          "Content": "Serenno City",
+          "Href": "https://starwars.fandom.com/wiki/Serenno_City"
         }
       ],
       "Values": [
         "Carannia (capital)",
         "Fiyaro",
-        "Saffia"
+        "Saffia",
+        "Serenno City"
       ]
     },
     {
@@ -311,6 +351,10 @@
         {
           "Content": "Confederacy of Independent Systems",
           "Href": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems"
+        },
+        {
+          "Content": "Galactic Empire",
+          "Href": "https://starwars.fandom.com/wiki/Galactic_Empire"
         }
       ],
       "Values": [
@@ -318,50 +362,46 @@
         "House Serenno",
         "Galactic Republic",
         "Sith",
-        "Confederacy of Independent Systems"
+        "Confederacy of Independent Systems",
+        "Galactic Empire"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 722927,
-      "PageUrl": "https://starwars.fandom.com/wiki/Fiyaro",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 716218,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_assassinate_Jenza",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 714932,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spurs_of_Celanon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
-    },
-    {
-      "PageId": 496500,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sinrich",
+      "PageId": 600682,
+      "PageUrl": "https://starwars.fandom.com/wiki/Chrodber",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 659859,
-      "PageUrl": "https://starwars.fandom.com/wiki/Ramil's_droid_army",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+      "PageId": 603662,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serennian_cloak",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
     },
     {
-      "PageId": 622233,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tirra'Taka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 504799,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tournament_on_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
     },
     {
-      "PageId": 623331,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spine-wolves",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+      "PageId": 627313,
+      "PageUrl": "https://starwars.fandom.com/wiki/D-4",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
     },
     {
-      "PageId": 728180,
-      "PageUrl": "https://starwars.fandom.com/wiki/D'Astan_campaign",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+      "PageId": 623444,
+      "PageUrl": "https://starwars.fandom.com/wiki/CZ-94",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 551340,
+      "PageUrl": "https://starwars.fandom.com/wiki/Savage's_spear",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 623447,
+      "PageUrl": "https://starwars.fandom.com/wiki/Glute",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
       "PageId": 632299,
@@ -374,9 +414,324 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
+      "PageId": 659859,
+      "PageUrl": "https://starwars.fandom.com/wiki/Ramil's_droid_army",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 452969,
+      "PageUrl": "https://starwars.fandom.com/wiki/Castle_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 621659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendoh_Voss",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632310,
+      "PageUrl": "https://starwars.fandom.com/wiki/Razorclaw_Gang",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 739141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solha's_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 752674,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kendoh_Voss'_family",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 710890,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_forest",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 284592,
+      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 496500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sinrich",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 785922,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seven_gods",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Deity"
+    },
+    {
+      "PageId": 632296,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dianectric_Menagerie",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 750358,
+      "PageUrl": "https://starwars.fandom.com/wiki/Upper_forest_region",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 500606,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Serenno_(Nightsisters)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 597284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_defense_fleet",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 659860,
+      "PageUrl": "https://starwars.fandom.com/wiki/Incident_on_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 452893,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 498261,
+      "PageUrl": "https://starwars.fandom.com/wiki/Onca",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 722927,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fiyaro",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 750243,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_City",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 525554,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
+    },
+    {
+      "PageId": 659907,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Abyssin_guard",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
       "PageId": 718789,
       "PageUrl": "https://starwars.fandom.com/wiki/Serenno's_sun",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Star"
+    },
+    {
+      "PageId": 631845,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spike_(Serenno)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 512882,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 750232,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilco's_company",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 559400,
+      "PageUrl": "https://starwars.fandom.com/wiki/Electrified_laser_blade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 755792,
+      "PageUrl": "https://starwars.fandom.com/wiki/Borgin_Castle",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 728197,
+      "PageUrl": "https://starwars.fandom.com/wiki/Attacks_on_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 728317,
+      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 622225,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carannia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 622294,
+      "PageUrl": "https://starwars.fandom.com/wiki/Saffia",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
+    },
+    {
+      "PageId": 659857,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_droid_commander",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
+    },
+    {
+      "PageId": 715151,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_great_hall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 715383,
+      "PageUrl": "https://starwars.fandom.com/wiki/Portmaster's_office",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 718749,
+      "PageUrl": "https://starwars.fandom.com/wiki/Belsallian_Sea",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 718782,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carannian_hills",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 685440,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spikebat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 498459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kiera_Swan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 632404,
+      "PageUrl": "https://starwars.fandom.com/wiki/Oster",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 754314,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_government",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
+    },
+    {
+      "PageId": 504801,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plan_to_kidnap_Chancellor_Palpatine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 680028,
+      "PageUrl": "https://starwars.fandom.com/wiki/Izzet_Noor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 422525,
+      "PageUrl": "https://starwars.fandom.com/wiki/Carannia_Spaceport",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 728180,
+      "PageUrl": "https://starwars.fandom.com/wiki/D'Astan_campaign",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 716218,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_assassinate_Jenza",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 603658,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solha's_brother",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 603659,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solha's_sister",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 707650,
+      "PageUrl": "https://starwars.fandom.com/wiki/Celebration_on_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 750466,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occupation_of_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Campaign"
+    },
+    {
+      "PageId": 750170,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Castle_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 667544,
+      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 750363,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bombardment_of_Serenno",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 603587,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serennian",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 695464,
+      "PageUrl": "https://starwars.fandom.com/wiki/Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 696380,
+      "PageUrl": "https://starwars.fandom.com/wiki/Omega's_Zygerrian_energy_bow",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 759644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eastern_ridge",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 620153,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mantero",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 622233,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tirra'Taka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 623331,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spine-wolves",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 623815,
+      "PageUrl": "https://starwars.fandom.com/wiki/Sacanium",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
+    },
+    {
+      "PageId": 603595,
+      "PageUrl": "https://starwars.fandom.com/wiki/Solha",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 664629,
+      "PageUrl": "https://starwars.fandom.com/wiki/Aparian_Wastes",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 711429,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Demici",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 711430,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Nalju",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
     },
     {
       "PageId": 479043,
@@ -391,166 +746,6 @@
     {
       "PageId": 479198,
       "PageUrl": "https://starwars.fandom.com/wiki/Sixtat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 623447,
-      "PageUrl": "https://starwars.fandom.com/wiki/Glute",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 632310,
-      "PageUrl": "https://starwars.fandom.com/wiki/Razorclaw_Gang",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
-    },
-    {
-      "PageId": 505855,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Serenno_(Krayt's_Claw)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 620153,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mantero",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
-    },
-    {
-      "PageId": 685440,
-      "PageUrl": "https://starwars.fandom.com/wiki/Spikebat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 551340,
-      "PageUrl": "https://starwars.fandom.com/wiki/Savage's_spear",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 622225,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carannia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 622294,
-      "PageUrl": "https://starwars.fandom.com/wiki/Saffia",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:City"
-    },
-    {
-      "PageId": 632296,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dianectric_Menagerie",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 622287,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Malvern",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 622288,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Borgin",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 632614,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Hakka",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 525554,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bread",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Food"
-    },
-    {
-      "PageId": 500606,
-      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Serenno_(Nightsisters)",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
-    },
-    {
-      "PageId": 631845,
-      "PageUrl": "https://starwars.fandom.com/wiki/The_Spike",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 659857,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_droid_commander",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 711429,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Demici",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 711430,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Nalju",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 603587,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serennian",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
-    },
-    {
-      "PageId": 622224,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 667544,
-      "PageUrl": "https://starwars.fandom.com/wiki/Battle_on_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 452893,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 472444,
-      "PageUrl": "https://starwars.fandom.com/wiki/Bulduga",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498261,
-      "PageUrl": "https://starwars.fandom.com/wiki/Onca",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 498459,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kiera_Swan",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 632404,
-      "PageUrl": "https://starwars.fandom.com/wiki/Oster",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 452969,
-      "PageUrl": "https://starwars.fandom.com/wiki/Castle_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 600682,
-      "PageUrl": "https://starwars.fandom.com/wiki/Chrodber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 623815,
-      "PageUrl": "https://starwars.fandom.com/wiki/Sacanium",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Substance"
-    },
-    {
-      "PageId": 603595,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solha",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 603658,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solha's_brother",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 603659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Solha's_sister",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
@@ -584,129 +779,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
     },
     {
-      "PageId": 603662,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serennian_cloak",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Clothing"
-    },
-    {
-      "PageId": 504799,
-      "PageUrl": "https://starwars.fandom.com/wiki/Tournament_on_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
-    },
-    {
-      "PageId": 664629,
-      "PageUrl": "https://starwars.fandom.com/wiki/Aparian_Wastes",
+      "PageId": 755557,
+      "PageUrl": "https://starwars.fandom.com/wiki/Fellidrone's_Apartment",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 496559,
-      "PageUrl": "https://starwars.fandom.com/wiki/Box",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 284592,
-      "PageUrl": "https://starwars.fandom.com/wiki/Long-barreled_blaster_rifle",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
-    },
-    {
-      "PageId": 728197,
-      "PageUrl": "https://starwars.fandom.com/wiki/Attacks_on_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 728317,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blockade_of_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 710890,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_forest",
+      "PageId": 756045,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_Camp",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 18954,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dark_Acolyte/Legends",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
-    },
-    {
-      "PageId": 621659,
-      "PageUrl": "https://starwars.fandom.com/wiki/Kendoh_Voss",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 659907,
-      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_Abyssin_guard",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 680028,
-      "PageUrl": "https://starwars.fandom.com/wiki/Izzet_Noor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 597284,
-      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_defense_fleet",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
-    },
-    {
-      "PageId": 623444,
-      "PageUrl": "https://starwars.fandom.com/wiki/CZ-94",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 627313,
-      "PageUrl": "https://starwars.fandom.com/wiki/D-4",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Droid"
-    },
-    {
-      "PageId": 512882,
-      "PageUrl": "https://starwars.fandom.com/wiki/House_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
-    },
-    {
-      "PageId": 715151,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_great_hall",
+      "PageId": 756417,
+      "PageUrl": "https://starwars.fandom.com/wiki/Abyssin_Outpost",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 715383,
-      "PageUrl": "https://starwars.fandom.com/wiki/Portmaster's_office",
+      "PageId": 758284,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_prison",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
     },
     {
-      "PageId": 718749,
-      "PageUrl": "https://starwars.fandom.com/wiki/Belsallian_Sea",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 718782,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carannian_hills",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 720980,
-      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_sleeping_chamber",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
-    },
-    {
-      "PageId": 422525,
-      "PageUrl": "https://starwars.fandom.com/wiki/Carannia_Spaceport",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
-    },
-    {
-      "PageId": 659860,
-      "PageUrl": "https://starwars.fandom.com/wiki/Invasion_of_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
-    },
-    {
-      "PageId": 559400,
-      "PageUrl": "https://starwars.fandom.com/wiki/Electrified_laser_blade",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
-    },
-    {
-      "PageId": 707650,
-      "PageUrl": "https://starwars.fandom.com/wiki/Celebration_on_Serenno",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+      "PageId": 505855,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mission_to_Serenno_(Krayt's_Claw)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
     },
     {
       "PageId": 622210,
@@ -716,6 +811,76 @@
     {
       "PageId": 623505,
       "PageUrl": "https://starwars.fandom.com/wiki/Belsallian_Cantina",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 687357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Heavy_battle_armor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Armor"
+    },
+    {
+      "PageId": 700423,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kresto",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 720980,
+      "PageUrl": "https://starwars.fandom.com/wiki/Dooku's_sleeping_chamber",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Location"
+    },
+    {
+      "PageId": 750200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Romar_Adell's_domicile",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
+    },
+    {
+      "PageId": 622224,
+      "PageUrl": "https://starwars.fandom.com/wiki/Serenno_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
+    },
+    {
+      "PageId": 750154,
+      "PageUrl": "https://starwars.fandom.com/wiki/Wilco",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750157,
+      "PageUrl": "https://starwars.fandom.com/wiki/Romar_Adell",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 714932,
+      "PageUrl": "https://starwars.fandom.com/wiki/Spurs_of_Celanon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
+    },
+    {
+      "PageId": 472444,
+      "PageUrl": "https://starwars.fandom.com/wiki/Bulduga",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 782357,
+      "PageUrl": "https://starwars.fandom.com/wiki/Graygon_Eckt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 622287,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Malvern",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 622288,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Borgin",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 632614,
+      "PageUrl": "https://starwars.fandom.com/wiki/House_Hakka",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Family"
+    },
+    {
+      "PageId": 496559,
+      "PageUrl": "https://starwars.fandom.com/wiki/Box",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
     }
   ]

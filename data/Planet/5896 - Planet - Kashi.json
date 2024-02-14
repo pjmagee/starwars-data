@@ -2,7 +2,7 @@
   "PageId": 5896,
   "PageUrl": "https://starwars.fandom.com/wiki/Kashi",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/4/46/Kashi-TEA.jpg/revision/latest?cb=20220601114917",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Outer Rim Territories",
           "Href": "https://starwars.fandom.com/wiki/Outer_Rim_Territories/Legends"
+        },
+        {
+          "Content": "The Slice",
+          "Href": "https://starwars.fandom.com/wiki/The_Slice/Legends"
         }
       ],
       "Values": [
-        "Outer Rim Territories"
+        "Outer Rim Territories",
+        "The Slice"
       ]
     },
     {
@@ -55,39 +60,41 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "S-7"
       ]
     },
     {
-      "Label": "Immigrated species",
-      "Links": [
-        {
-          "Content": "Humans",
-          "Href": "https://starwars.fandom.com/wiki/Human/Legends"
-        }
-      ],
+      "Label": "Class",
+      "Links": [],
       "Values": [
-        "Humans"
+        "Terrestrial"
       ]
     },
     {
-      "Label": "Affiliation",
+      "Label": "Government",
       "Links": [
         {
-          "Content": "Kashi Mer Dynasty",
+          "Content": "Monarchy",
           "Href": "https://starwars.fandom.com/wiki/Kashi_Mer_Dynasty"
-        },
-        {
-          "Content": "Legions of Lettow",
-          "Href": "https://starwars.fandom.com/wiki/Legions_of_Lettow"
         }
       ],
       "Values": [
-        "Kashi Mer Dynasty",
-        "Legions of Lettow"
+        "Monarchy"
+      ]
+    },
+    {
+      "Label": "Demonym",
+      "Links": [
+        {
+          "Content": "Kashi",
+          "Href": "https://starwars.fandom.com/wiki/Kashi_Mer"
+        }
+      ],
+      "Values": [
+        "Kashi"
       ]
     }
   ],
@@ -98,24 +105,24 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Artifact"
     },
     {
-      "PageId": 637591,
-      "PageUrl": "https://starwars.fandom.com/wiki/Krispus_Eleaor",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
-    },
-    {
-      "PageId": 187208,
-      "PageUrl": "https://starwars.fandom.com/wiki/Orixon_Nebula",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Nebula"
-    },
-    {
       "PageId": 187199,
       "PageUrl": "https://starwars.fandom.com/wiki/Kashi_Mer_Dynasty",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Government"
     },
     {
-      "PageId": 48702,
-      "PageUrl": "https://starwars.fandom.com/wiki/Guardians_of_Breath",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Religion"
+      "PageId": 637591,
+      "PageUrl": "https://starwars.fandom.com/wiki/Krispus_Eleaor",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 637705,
+      "PageUrl": "https://starwars.fandom.com/wiki/Guardians_of_the_Breath",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Organization"
+    },
+    {
+      "PageId": 63033,
+      "PageUrl": "https://starwars.fandom.com/wiki/Kashi_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

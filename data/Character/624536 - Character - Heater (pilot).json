@@ -2,6 +2,7 @@
   "PageId": 624536,
   "PageUrl": "https://starwars.fandom.com/wiki/Heater_(pilot)",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character",
+  "ImageUrl": null,
   "Data": [
     {
       "Label": "Titles",
@@ -39,6 +40,18 @@
       ]
     },
     {
+      "Label": "Parent(s)",
+      "Links": [
+        {
+          "Content": "Barson Nestroph",
+          "Href": "https://starwars.fandom.com/wiki/Barson_Nestroph"
+        }
+      ],
+      "Values": [
+        "Barson Nestroph"
+      ]
+    },
+    {
       "Label": "Affiliation(s)",
       "Links": [
         {
@@ -65,5 +78,11 @@
       ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 624548,
+      "PageUrl": "https://starwars.fandom.com/wiki/Barson_Nestroph",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    }
+  ]
 }

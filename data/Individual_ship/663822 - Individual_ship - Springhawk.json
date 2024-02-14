@@ -24,7 +24,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Heavy cruiser",
@@ -44,7 +44,12 @@
     },
     {
       "Label": "Shielding",
-      "Links": [],
+      "Links": [
+        {
+          "Content": "Equipped",
+          "Href": "https://starwars.fandom.com/wiki/Electrostatic_barrier_generator"
+        }
+      ],
       "Values": [
         "Equipped"
       ]
@@ -52,6 +57,10 @@
     {
       "Label": "Armament",
       "Links": [
+        {
+          "Content": "Breacher",
+          "Href": "https://starwars.fandom.com/wiki/Breacher"
+        },
         {
           "Content": "Crippler nets",
           "Href": "https://starwars.fandom.com/wiki/Crippler_net"
@@ -66,9 +75,10 @@
         }
       ],
       "Values": [
-        "Crippler nets",
+        "Breacher missile tubesCrippler nets",
         "Plasma spheres",
-        "Spectrum lasers"
+        "Spectrum lasers",
+        "Breacher missile tubes"
       ]
     },
     {
@@ -137,8 +147,8 @@
           "Href": "https://starwars.fandom.com/wiki/Skirmish_against_the_Watith"
         },
         {
-          "Content": "Skirmish above Hoxim",
-          "Href": "https://starwars.fandom.com/wiki/Skirmish_above_Hoxim"
+          "Content": "Hoxim incident",
+          "Href": "https://starwars.fandom.com/wiki/Hoxim_incident"
         },
         {
           "Content": "Attack on Rapacc",
@@ -154,7 +164,7 @@
         "Attack on the Paataatus",
         "Skirmish above Nettehi",
         "Skirmish against the Watith",
-        "Skirmish above Hoxim",
+        "Hoxim incident",
         "Attack on Rapacc",
         "Senior Captain Thrawn's last stand"
       ]
@@ -187,11 +197,16 @@
       "Label": "Fleet",
       "Links": [
         {
+          "Content": "Mitth'raw'nuruodo's picket group",
+          "Href": "https://starwars.fandom.com/wiki/Mitth%27raw%27nuruodo%27s_picket_group"
+        },
+        {
           "Content": "Picket Force Six",
           "Href": "https://starwars.fandom.com/wiki/Picket_Force_Six"
         }
       ],
       "Values": [
+        "Mitth'raw'nuruodo's picket group",
         "Picket Force Six"
       ]
     },
@@ -224,8 +239,8 @@
           "Href": "https://starwars.fandom.com/wiki/Che%27ri"
         },
         {
-          "Content": "Azmordi",
-          "Href": "https://starwars.fandom.com/wiki/Azmordi"
+          "Content": "Tumaz'mor'diamir",
+          "Href": "https://starwars.fandom.com/wiki/Tumaz%27mor%27diamir"
         },
         {
           "Content": "Elod'al'vumic",
@@ -236,25 +251,60 @@
         "Plikh'ar'illmorf",
         "Ufsa'mak'ro",
         "Che'ri",
-        "Azmordi",
+        "Tumaz'mor'diamir",
         "Elod'al'vumic"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 726916,
-      "PageUrl": "https://starwars.fandom.com/wiki/Gribblehex",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+      "PageId": 741566,
+      "PageUrl": "https://starwars.fandom.com/wiki/Breacher_Two_(Springhawk)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Weapon"
+    },
+    {
+      "PageId": 735617,
+      "PageUrl": "https://starwars.fandom.com/wiki/The_Magys's_companion",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Character"
+    },
+    {
+      "PageId": 750500,
+      "PageUrl": "https://starwars.fandom.com/wiki/Diagnostic_patch",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
     },
     {
       "PageId": 714754,
-      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet_(Sunrise)",
+      "PageUrl": "https://starwars.fandom.com/wiki/Thrawn's_fleet",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {
       "PageId": 663860,
       "PageUrl": "https://starwars.fandom.com/wiki/Picket_Force_Six",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
+    },
+    {
+      "PageId": 706076,
+      "PageUrl": "https://starwars.fandom.com/wiki/Soothement_bubble",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 706200,
+      "PageUrl": "https://starwars.fandom.com/wiki/Plasma_tank",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Device"
+    },
+    {
+      "PageId": 670062,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tap-click",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 726916,
+      "PageUrl": "https://starwars.fandom.com/wiki/Gribblehex",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Game"
+    },
+    {
+      "PageId": 775865,
+      "PageUrl": "https://starwars.fandom.com/wiki/Mitth'raw'nuruodo's_picket_group",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Fleet"
     },
     {

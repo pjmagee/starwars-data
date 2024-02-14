@@ -12,18 +12,6 @@
       ]
     },
     {
-      "Label": "Manufacturer",
-      "Links": [
-        {
-          "Content": "Cygnus Spaceworks",
-          "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks/Legends"
-        }
-      ],
-      "Values": [
-        "Cygnus Spaceworks"
-      ]
-    },
-    {
       "Label": "Designer",
       "Links": [
         {
@@ -40,6 +28,18 @@
       ]
     },
     {
+      "Label": "Manufacturer",
+      "Links": [
+        {
+          "Content": "Cygnus Spaceworks",
+          "Href": "https://starwars.fandom.com/wiki/Cygnus_Spaceworks/Legends"
+        }
+      ],
+      "Values": [
+        "Cygnus Spaceworks"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Starfighter",
@@ -318,11 +318,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 696818,
-      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_gunboat",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
-    },
-    {
       "PageId": 699935,
       "PageUrl": "https://starwars.fandom.com/wiki/First_skirmish_over_Sunrise",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
@@ -336,6 +331,11 @@
       "PageId": 539806,
       "PageUrl": "https://starwars.fandom.com/wiki/Destruction_of_the_Missile_Boat_facilities",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 696818,
+      "PageUrl": "https://starwars.fandom.com/wiki/Paataatus_gunboat",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Starship_class"
     }
   ]
 }

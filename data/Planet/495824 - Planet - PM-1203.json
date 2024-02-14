@@ -60,7 +60,7 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [
         {
           "Content": "R-7",
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "Label": "Primary terrain",
+      "Label": "Terrain",
       "Links": [
         {
           "Content": "Caverns",
@@ -153,6 +153,28 @@
       ]
     },
     {
+      "Label": "Major exports",
+      "Links": [
+        {
+          "Content": "Fuel",
+          "Href": "https://starwars.fandom.com/wiki/Fuel"
+        },
+        {
+          "Content": "Starship",
+          "Href": "https://starwars.fandom.com/wiki/Starship"
+        },
+        {
+          "Content": "Weapons",
+          "Href": "https://starwars.fandom.com/wiki/Weapon"
+        }
+      ],
+      "Values": [
+        "Fuel",
+        "Starship parts",
+        "Weapons"
+      ]
+    },
+    {
       "Label": "Affiliation",
       "Links": [
         {
@@ -167,21 +189,6 @@
   ],
   "Relationships": [
     {
-      "PageId": 632677,
-      "PageUrl": "https://starwars.fandom.com/wiki/Azure_system",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
-    },
-    {
-      "PageId": 593864,
-      "PageUrl": "https://starwars.fandom.com/wiki/Azure_sector",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
-    },
-    {
-      "PageId": 508361,
-      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 471734,
       "PageUrl": "https://starwars.fandom.com/wiki/Fort_Anaxes",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Structure"
@@ -189,7 +196,22 @@
     {
       "PageId": 475259,
       "PageUrl": "https://starwars.fandom.com/wiki/Rescue_of_Tseebo",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Mission"
+    },
+    {
+      "PageId": 508361,
+      "PageUrl": "https://starwars.fandom.com/wiki/Anaxes_asteroid_belt",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 593864,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azure_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 632677,
+      "PageUrl": "https://starwars.fandom.com/wiki/Azure_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     }
   ]
 }

@@ -24,6 +24,37 @@
       ]
     },
     {
+      "Label": "Owners",
+      "Links": [
+        {
+          "Content": "Darth Chratis",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Chratis"
+        },
+        {
+          "Content": "Zao",
+          "Href": "https://starwars.fandom.com/wiki/Zao"
+        },
+        {
+          "Content": "Yarael Poof",
+          "Href": "https://starwars.fandom.com/wiki/Yarael_Poof/Legends"
+        },
+        {
+          "Content": "Yarael Poof's lightsaber",
+          "Href": "https://starwars.fandom.com/wiki/Yarael_Poof%27s_lightsaber/Legends"
+        },
+        {
+          "Content": "Darth Nihl",
+          "Href": "https://starwars.fandom.com/wiki/Darth_Nihl"
+        }
+      ],
+      "Values": [
+        "Darth Chratis (Darth Chratis's lightsaber)",
+        "Zao (Zao's lightsaber)",
+        "Yarael Poof (Yarael Poof's lightsaber)",
+        "Darth Nihl (Darth Nihl's lightsaber)"
+      ]
+    },
+    {
       "Label": "Cost",
       "Links": [],
       "Values": [
@@ -36,7 +67,25 @@
       "Values": [
         "2 kg"
       ]
+    },
+    {
+      "Label": "Purpose",
+      "Links": [
+        {
+          "Content": "Lightsaber combat",
+          "Href": "https://starwars.fandom.com/wiki/Lightsaber_combat/Legends"
+        }
+      ],
+      "Values": [
+        "Lightsaber combat"
+      ]
     }
   ],
-  "Relationships": []
+  "Relationships": [
+    {
+      "PageId": 360459,
+      "PageUrl": "https://starwars.fandom.com/wiki/Yarael_Poof's_lightsaber/Legends",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Lightsaber"
+    }
+  ]
 }

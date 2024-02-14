@@ -2,7 +2,7 @@
   "PageId": 397732,
   "PageUrl": "https://starwars.fandom.com/wiki/Teirasa_system",
   "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System",
-  "ImageUrl": null,
+  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/6/63/Teirasa-EGTW.jpg/revision/latest?cb=20220928200646",
   "Data": [
     {
       "Label": "Titles",
@@ -17,10 +17,15 @@
         {
           "Content": "Mid Rim",
           "Href": "https://starwars.fandom.com/wiki/Mid_Rim"
+        },
+        {
+          "Content": "Trailing Sectors",
+          "Href": "https://starwars.fandom.com/wiki/Trailing_Sectors/Legends"
         }
       ],
       "Values": [
-        "Mid Rim"
+        "Mid Rim",
+        "Trailing Sectors"
       ]
     },
     {
@@ -36,35 +41,40 @@
       ]
     },
     {
-      "Label": "Grid coordinates",
+      "Label": "Grid square",
       "Links": [],
       "Values": [
         "O-16"
       ]
     },
     {
-      "Label": "Orbits",
+      "Label": "Native species",
       "Links": [
         {
-          "Content": "Teirasa",
-          "Href": "https://starwars.fandom.com/wiki/Teirasa"
+          "Content": "Teirasan",
+          "Href": "https://starwars.fandom.com/wiki/Teirasan"
         }
       ],
       "Values": [
-        "Teirasa"
+        "Teirasan"
       ]
     }
   ],
   "Relationships": [
     {
-      "PageId": 388271,
-      "PageUrl": "https://starwars.fandom.com/wiki/Teirasa",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
       "PageId": 340953,
       "PageUrl": "https://starwars.fandom.com/wiki/Iskin_sector",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Sector"
+    },
+    {
+      "PageId": 388272,
+      "PageUrl": "https://starwars.fandom.com/wiki/Teirasan",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Species"
+    },
+    {
+      "PageId": 378462,
+      "PageUrl": "https://starwars.fandom.com/wiki/Twelfth_Pius_Dea_Crusade",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:War"
     }
   ]
 }

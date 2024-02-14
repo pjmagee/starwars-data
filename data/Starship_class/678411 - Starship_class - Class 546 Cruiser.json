@@ -12,6 +12,13 @@
       ]
     },
     {
+      "Label": "Line",
+      "Links": [],
+      "Values": [
+        "Modified Arquitens-class command cruiser"
+      ]
+    },
+    {
       "Label": "Model",
       "Links": [],
       "Values": [
@@ -19,7 +26,7 @@
       ]
     },
     {
-      "Label": "Class",
+      "Label": "Type",
       "Links": [
         {
           "Content": "Arquitens-class command cruiser",
@@ -41,6 +48,32 @@
       ],
       "Values": [
         "Class 546 program"
+      ]
+    },
+    {
+      "Label": "Length",
+      "Links": [
+        {
+          "Content": "m",
+          "Href": "https://starwars.fandom.com/wiki/Meter"
+        }
+      ],
+      "Values": [
+        "381 m"
+      ]
+    },
+    {
+      "Label": "Width",
+      "Links": [],
+      "Values": [
+        "163 m"
+      ]
+    },
+    {
+      "Label": "Height/depth",
+      "Links": [],
+      "Values": [
+        "66 m"
       ]
     },
     {
@@ -178,15 +211,35 @@
         {
           "Content": "Gideon's fleet",
           "Href": "https://starwars.fandom.com/wiki/Gideon%27s_fleet"
+        },
+        {
+          "Content": "Mandalorian resistance",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_resistance"
+        },
+        {
+          "Content": "Mandalorian fleet",
+          "Href": "https://starwars.fandom.com/wiki/Mandalorian_fleet"
         }
       ],
       "Values": [
         "Gideon's Imperial remnant",
-        "Gideon's fleet"
+        "Gideon's fleet",
+        "Mandalorian resistance",
+        "Mandalorian fleet"
       ]
     }
   ],
   "Relationships": [
+    {
+      "PageId": 733145,
+      "PageUrl": "https://starwars.fandom.com/wiki/Unidentified_stormtrooper_squad_(Tython)",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
+    {
+      "PageId": 748644,
+      "PageUrl": "https://starwars.fandom.com/wiki/Tython_detachment",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Military_unit"
+    },
     {
       "PageId": 674860,
       "PageUrl": "https://starwars.fandom.com/wiki/Gideon's_light_cruiser",

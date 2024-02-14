@@ -29,26 +29,26 @@
         {
           "Content": "Eriadu system",
           "Href": "https://starwars.fandom.com/wiki/Eriadu_system"
+        },
+        {
+          "Content": "Patriim system",
+          "Href": "https://starwars.fandom.com/wiki/Patriim_system/Canon"
         }
       ],
       "Values": [
-        "Eriadu system"
+        "Eriadu system",
+        "Patriim system"
       ]
     },
     {
       "Label": "Other planets",
       "Links": [
         {
-          "Content": "Eriadu",
-          "Href": "https://starwars.fandom.com/wiki/Eriadu"
-        },
-        {
           "Content": "Seswenna",
           "Href": "https://starwars.fandom.com/wiki/Seswenna"
         }
       ],
       "Values": [
-        "Eriadu",
         "Seswenna"
       ]
     },
@@ -67,6 +67,18 @@
       "Values": [
         "Hydian Way",
         "Rimma Trade Route"
+      ]
+    },
+    {
+      "Label": "Sector capital",
+      "Links": [
+        {
+          "Content": "Eriadu",
+          "Href": "https://starwars.fandom.com/wiki/Eriadu"
+        }
+      ],
+      "Values": [
+        "Eriadu"
       ]
     },
     {
@@ -89,19 +101,29 @@
   ],
   "Relationships": [
     {
-      "PageId": 680042,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system",
+      "PageId": 731041,
+      "PageUrl": "https://starwars.fandom.com/wiki/Occlusion_Zone",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Region"
+    },
+    {
+      "PageId": 787110,
+      "PageUrl": "https://starwars.fandom.com/wiki/Reventine",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 680141,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu's_inhabited_moon",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+    },
+    {
+      "PageId": 793692,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patriim_system/Canon",
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
-      "PageId": 501264,
-      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
-    },
-    {
-      "PageId": 466050,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+      "PageId": 680042,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu_system",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:System"
     },
     {
       "PageId": 518433,
@@ -114,9 +136,29 @@
       "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Trade_route"
     },
     {
-      "PageId": 680141,
-      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu's_inhabited_moon",
-      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Moon"
+      "PageId": 557495,
+      "PageUrl": "https://starwars.fandom.com/wiki/Patriim",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 787713,
+      "PageUrl": "https://starwars.fandom.com/wiki/Expansion_of_the_Stormwall",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Event"
+    },
+    {
+      "PageId": 466050,
+      "PageUrl": "https://starwars.fandom.com/wiki/Eriadu",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
+    },
+    {
+      "PageId": 787724,
+      "PageUrl": "https://starwars.fandom.com/wiki/Raid_in_the_Seswenna_sector",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle"
+    },
+    {
+      "PageId": 501264,
+      "PageUrl": "https://starwars.fandom.com/wiki/Seswenna",
+      "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Planet"
     }
   ]
 }
