@@ -22,12 +22,14 @@ public class TimelineController : ControllerBase
         _contextAccessor = contextAccessor;
     }
 
-    [HttpGet]
-    public async Task<GroupedTimelineResult> GetTimelineEvents([FromQuery] TimelineQueryParams queryParams)
+    [HttpGet("events")]
+    public async Task<GroupedTimelineResult?> GetTimelineEvents([FromQuery] TimelineQueryParams queryParams)
     {
+        if (queryParams.Categories is null || queryParams.Categories.Length == 0) return null;
+        
         return await _timelineService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }
 
     [HttpGet("categories")]
-    public async Task<IEnumerable<string>> GetTimelineCategories() => _collectionFilters.Keys;
+    public IEnumerable<string> GetTimelineCategories() => _collectionFilters.Keys;
 }

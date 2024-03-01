@@ -24,7 +24,7 @@ public class RecordToEventsTransformer
                 {
                     Title = r.PageTitle,
                     DateEvent = GetDateEvent(data),
-                    Demarcation = link.Content.Contains("ABY") ? Demarcation.ABY : link.Content.Contains("BBY") ? Demarcation.BBY : Demarcation.Unset,
+                    Demarcation = link.Content.Contains("ABY") ? Demarcation.Aby : link.Content.Contains("BBY") ? Demarcation.Bby : Demarcation.Unset,
                     Year = ParseYear(link.Content),
                     Template = r.Template,
                     ImageUrl = r.ImageUrl,

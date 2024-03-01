@@ -36,10 +36,10 @@ public class TimelineService
 
         foreach (var collection in collections)
         {
-            if (_collectionFilters.ContainsKey(collection))
+            if (_collectionFilters.TryGetValue(collection, out var filter))
             {
                 records.AddRange(await _mongoDb.GetCollection<BsonDocument>(collection)
-                    .Find(_collectionFilters[collection])
+                    .Find(filter)
                     .Project(_mongoDefinitions.ExcludeRelationships)
                     .As<Record>()
                     .ToListAsync());

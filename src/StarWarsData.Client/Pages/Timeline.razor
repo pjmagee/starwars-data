@@ -106,7 +106,6 @@
     private async Task LoadCategories()
     {
         _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
-        StateHasChanged();
     }
 
     private async Task Paginate(int page)
@@ -121,8 +120,8 @@
             query.Add("Categories", $"{c}");
         }
 
-        _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline?{query}");
-        _pages = _pagedResult.Total / _pagedResult.Size;
+        _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
+        _pages = _pagedResult is not null ? _pagedResult.Total / _pagedResult.Size : 0;
     }
 
     private string GetColor(TimelineEvent timelineEvent)
@@ -130,49 +129,41 @@
         return timelineEvent.Template switch 
         {
             "Event" => Colors.LightBlue.Lighten1,
-            
             "Trade_route" => Colors.Cyan.Default,
-            
             "Campaign" => Colors.Shades.Black,
             "Mission" => Colors.Grey.Darken4,
-            
             "Battle" => Colors.Red.Darken1,
             "Duel" => Colors.Red.Darken2,
             "Fleet" => Colors.Red.Darken3,
             "War" => Colors.Red.Darken4,
-            
             "Disease" => Colors.Green.Darken4,
-            
             "Location" => Colors.Blue.Lighten1,
             "City" => Colors.Blue.Darken1,
-            
             "Law" => Colors.Green .Darken1,
             "Treaty" => Colors.Green .Darken2,
-            
             "Election" => Colors.Blue.Darken3,
-            
             "Character" => Colors.Brown.Default,
-            
             "Government" => Colors.Amber.Darken1,
             "Organization" => Colors.Amber.Lighten1,
             "Company" => Colors.Amber.Darken3,
-            
             "Religion" => Colors.Purple.Lighten1,
             "Holocron" => Colors.Purple.Darken1,
             "Lightsaber" => Colors.Purple.Darken2,
-            
             "Droid" => Colors.BlueGrey.Darken2,
             "Artifact" => Colors.BlueGrey.Darken3,
-            
             _ => Colors.Blue.Default
-            };
+        };
     }
 
     private async Task SelectedValuesChanged(IEnumerable<string> selectedCategories)
     {
         _selectedCategories = new List<string>(selectedCategories);
 
-        await Paginate(1);
+        if (_selectedCategories.Count > 0)
+        {
+            await Paginate(1);
+        }
+        
         StateHasChanged();
     }
 

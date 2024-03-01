@@ -63,7 +63,7 @@ public class InfoboxDownloader
     {
         do
         {
-            using (var pages = await JsonDocument.ParseAsync(await _httpClient.GetStreamAsync("?" + GetPagesWithInfoboxes(), token)))
+            using (var pages = await JsonDocument.ParseAsync(await _httpClient.GetStreamAsync("?" + GetPagesWithInfoboxes(), token), cancellationToken: token))
             {
                 _shouldContinue = pages.RootElement.TryGetProperty("continue", out var continueElement);
 
@@ -91,7 +91,7 @@ public class InfoboxDownloader
                         }
                         catch (Exception exception)
                         {
-                            _logger.LogError(exception.Message);
+                            _logger.LogError(exception, "error: {Error}", exception.Message);
                         }
                     });
                 }

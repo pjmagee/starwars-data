@@ -20,7 +20,7 @@ RUN dotnet restore "StarWarsData.CLI/StarWarsData.CLI.csproj"
 COPY ["src/", "."]
 RUN dotnet build StarWarsData.CLI/StarWarsData.CLI.csproj -c Release -o /app/build
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS web-build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS web-build
 WORKDIR /src/
 
 COPY ["src/global.json", "."]
