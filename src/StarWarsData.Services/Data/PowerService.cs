@@ -38,8 +38,7 @@ public class PowerService
                     var name = x["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].ToString();
 
                     var alignmentData = x["Data"].AsBsonArray.FirstOrDefault(i => i["Label"] == "Alignment");
-                    var affiliationData = x["Data"].AsBsonArray
-                        .FirstOrDefault(i => i["Label"].AsString.Contains("Affilation"));
+                    var affiliationData = x["Data"].AsBsonArray.FirstOrDefault(i => i["Label"].AsString.Contains("Affilation"));
 
                     var alignments = new HashSet<string>();
                     var areaValues = new HashSet<string>();

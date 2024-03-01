@@ -18,16 +18,18 @@ public class TimelineEvent : IComparable<TimelineEvent>
     
     public int CompareTo(TimelineEvent? other)
     {
+        if (other is null) return 1;
+        
         switch (Demarcation)
         {
-            case Demarcation.BBY when other.Demarcation == Demarcation.ABY: return -1;
-            case Demarcation.ABY when other.Demarcation == Demarcation.BBY: return 1;
+            case Demarcation.Bby when other.Demarcation == Demarcation.Aby: return -1;
+            case Demarcation.Aby when other.Demarcation == Demarcation.Bby: return 1;
         }
 
         return Demarcation switch
         {
-            Demarcation.BBY when other.Demarcation == Demarcation.BBY => other.Year.CompareTo(Year),
-            Demarcation.BBY when other.Demarcation == Demarcation.ABY => other.Year.CompareTo(Year),
+            Demarcation.Bby when other.Demarcation == Demarcation.Bby => other.Year.CompareTo(Year),
+            Demarcation.Bby when other.Demarcation == Demarcation.Aby => other.Year.CompareTo(Year),
             _ => Year.CompareTo(other.Year)
         };
     }

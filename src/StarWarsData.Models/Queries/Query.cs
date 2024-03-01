@@ -11,5 +11,5 @@ public class TimelineQueryParams
 {
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 50;
-    public string[] Categories { get; set; }
+    public string[] Categories { get; set; } = [];
 }

@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile
       target: web
     image: pjmagee/starwars-data-web
+    depends_on:
+      - database
     ports:
       - "7051:7051"
       - "5051:5051"
@@ -28,7 +30,7 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       SWDATA_Settings__MongoConnectionString: mongodb://admin:password@database:27017
     volumes:
-     - ~/.aspnet/https:/https:ro
+     - ~/.aspnet/https:/https
 
   download:
     build:
