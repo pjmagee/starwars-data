@@ -6,58 +6,100 @@ namespace StarWarsData.Models;
 public sealed record UserPrompt(string Question);
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum ChartKind
+public enum AskChartType
 {
     Bar,
-    Pie,
     Donut,
     Line,
-    Stacked,
+    Pie,
+    StackedBar,
     TimeSeries
 }
 
-public enum AggOp
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TimeSeriesDisplayType
 {
-    Count,
-    Sum,
-    Avg,
-    Min,
-    Max
+    Line,
+    Area
 }
 
-public class RowDto
+[Description("A chart to render")]
+public class AskChart
 {
-    public string Label { get; set; }
-    public double Value { get; set; }
+    [JsonPropertyName("chartType")] 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [Description("The type of chart to render")]
+    public AskChartType AskChartType { get; set; }
 
-    public RowDto(string label, double value)
-    {
-        Label = label;
-        Value = value;
+    /// <summary>
+    /// Only used when ChartType == TimeSeries
+    /// </summary>
+    [JsonPropertyName("timeSeriesDisplayType")]
+    public TimeSeriesDisplayType? TimeSeriesDisplayType { get; set; }
 
-    }
-}
-
-[Description("The chart data")]
-public class ChartSpec
-{
-    [JsonPropertyName("kind")]
-    [Description("The kind of the chart")]
-    public ChartKind Kind { get; set; }
-    
-    [JsonPropertyName("labels")]
-    [Description("The labels of the chart")]
-    public string[] Labels { get; set; }
-    
-    [JsonPropertyName("series")]
-    [Description("The series of the chart")]
-    public double[] Series { get; set; }
-    
-    [JsonPropertyName("title")]
+    [JsonPropertyName("title")] 
     [Description("The title of the chart")]
     public string? Title { get; set; }
-    
-    [JsonPropertyName("legend")]
-    
-    public string? Legend { get; set; }
+
+    /// <summary>
+    /// Category labels for X-axis (bar, line, stacked)
+    /// </summary>
+    [JsonPropertyName("xAxisLabels")]
+    public List<string>? XAxisLabels { get; set; }
+
+    /// <summary>
+    /// Slice labels for pie/donut charts
+    /// </summary>
+    [JsonPropertyName("labels")]
+    public List<string>? Labels { get; set; }
+
+    /// <summary>
+    /// Numeric series for bar/line/stacked/scatter/bubble
+    /// </summary>
+    [JsonPropertyName("series")]
+    public List<AskChartSeries>? Series { get; set; }
+
+    /// <summary>
+    /// Time-series data: date + value pairs, per series
+    /// </summary>
+    [JsonPropertyName("timeSeries")]
+    public List<AskTimeSeriesChartSeries>? TimeSeries { get; set; }
+
+    [JsonPropertyName("options")] public AskChartOptions? Options { get; set; }
+}
+
+public class AskChartSeries
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = default!;
+
+    [JsonPropertyName("data")] public List<double> Data { get; set; } = new();
+}
+
+public class AskTimeSeriesChartSeries
+{
+    [JsonPropertyName("name")] public string Name { get; set; } = default!;
+
+    [JsonPropertyName("data")] public List<TimeSeriesDataPointDto> Data { get; set; } = new();
+}
+
+public class TimeSeriesDataPointDto
+{
+    [JsonPropertyName("x")] public DateTime X { get; set; }
+
+    [JsonPropertyName("y")] public double Y { get; set; }
+}
+
+public class AskChartOptions
+{
+    /// <summary>
+    /// e.g. ["#FF6384","#36A2EB",…] or Material colors
+    /// </summary>
+    [JsonPropertyName("chartPalette")]
+    public List<string>? ChartPalette { get; set; }
+
+    /// <summary>
+    /// for stacking bar/area charts
+    /// </summary>
+    [JsonPropertyName("stacked")]
+    public bool? Stacked { get; set; }
 }

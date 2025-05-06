@@ -61,7 +61,7 @@ builder.Services
     .AddSingleton<CollectionFilters>()
     .AddSingleton<YearComparer>()
     .AddSingleton<YearHelper>()
-    .AddSingleton<TemplateHelper>() // Register TemplateHelper
+    .AddSingleton<TemplateHelper>()
     .AddScoped<RecordToEventsTransformer>()
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
@@ -99,7 +99,8 @@ builder.Services
 BsonClassMap.RegisterClassMap(new RecordClassMap());
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
+builder.Services
+    .AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 

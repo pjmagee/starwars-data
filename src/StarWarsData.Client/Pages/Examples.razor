@@ -1,0 +1,17 @@
+@page "/examples"
+
+<h3>examples</h3>
+
+<MudChart 
+    ChartType="ChartType.Bar" 
+    InputData="@([1, 2, 3])" ChartSeries="@([new(){ Data = [1, 2, 3], Visible = true}])"
+    XAxisLabels="@(["a", "b", "c"])"
+    InputLabels="@(["a", "b", "c"])" />
+
+<MudChart ChartType="ChartType.Pie" InputData="@([1, 2, 3])" InputLabels="@(["a", "b", "c"])" />
+
+<MudChart ChartType="ChartType.Line" InputData="@([1, 2, 3])" InputLabels="@(["a", "b", "c"])" />
+
+@code {
+    
+}

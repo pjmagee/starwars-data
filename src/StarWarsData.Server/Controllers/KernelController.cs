@@ -11,6 +11,7 @@ using ModelContextProtocol.Protocol.Transport;
 using ModelContextProtocol.Protocol.Types;
 using OpenAI.Chat;
 using StarWarsData.Services.Plugins;
+using FunctionResultContent = Microsoft.SemanticKernel.FunctionResultContent;
 
 #pragma warning disable SKEXP0001
 
@@ -18,6 +19,7 @@ namespace StarWarsData.Server.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Produces("application/json")]
 public class KernelController : ControllerBase
 {
     readonly ILogger<KernelController> _logger;
@@ -34,7 +36,7 @@ public class KernelController : ControllerBase
     }
 
     [HttpPost("ask")]
-    public async Task<ChartSpec?> Ask([FromBody] UserPrompt p, CancellationToken cancellationToken = default)
+    public async Task<AskChart?> Ask([FromBody] UserPrompt p, CancellationToken cancellationToken = default)
     {
         var transport = new StdioClientTransport(new()
             {
@@ -79,8 +81,10 @@ public class KernelController : ControllerBase
                 1. Find the closest collection in the database relevant to the users question.
                 2. Find all the relevant fields, values, data points from the records in the collection.
                 3. End with calling the build_chart function from the ChartToolkit plugin.
+                
+                LIMIT YOUR FINDS 
 
-                Your final message should contain ONLY the JSON output of the chart.
+                Your final message should contain ONLY the JSON output of the build_chart function.
                 """
             );
 
@@ -98,20 +102,25 @@ public class KernelController : ControllerBase
                         cancellationToken: cancellationToken
                     );
 
-                if (chatMessage is not null)
+                var chartJson = chatHistory
+                    .Where(chat => chat.Role == AuthorRole.Tool)
+                    .SelectMany(x => x.Items.OfType<FunctionResultContent>())
+                    .Where(x => x.FunctionName == "render_chart")
+                    .Select(x => x.Result?.ToString())
+                    .LastOrDefault();
+                
+                if (!string.IsNullOrWhiteSpace(chartJson))
                 {
-                    var response = chatMessage.Content;
-                    var chart = JsonSerializer.Deserialize<ChartSpec>(response);
-                    return chart;
+                    var chartspec = JsonSerializer.Deserialize<AskChart>(chartJson);
+                    return chartspec;
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error during chat completion");
             }
-
-
-            return null;
         }
+        
+        return null;
     }
 }
