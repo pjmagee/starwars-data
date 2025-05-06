@@ -27,100 +27,98 @@ public class KernelController : ControllerBase
     readonly IMongoDatabase _db;
     readonly Settings _settings;
 
+    StdioClientTransport _transport;
+
     public KernelController(ILogger<KernelController> logger, Kernel kernel, IMongoDatabase db, Settings settings)
     {
         _logger = logger;
         _kernel = kernel;
         _db = db;
         _settings = settings;
-    }
-
-    [HttpPost("ask")]
-    public async Task<AskChart?> Ask([FromBody] UserPrompt p, CancellationToken cancellationToken = default)
-    {
-        var transport = new StdioClientTransport(new()
+        _transport = new StdioClientTransport(new()
             {
                 Name = "MongoDB",
                 Command = "npx",
                 Arguments = ["-y", "mongodb-mcp-server", "--connectionString", _settings.MongoConnectionString]
             }
         );
+    }
 
-        await using (IMcpClient mcpClient = await McpClientFactory.CreateAsync(transport, cancellationToken: cancellationToken))
+    [HttpPost("ask")]
+    public async Task<AskChart?> Ask([FromBody] UserPrompt p, CancellationToken cancellationToken = default)
+    {
+        await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(_transport, cancellationToken: cancellationToken);
+        var tools = await mcpClient.ListToolsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+        _kernel.Plugins.Clear();
+        _kernel.Plugins.AddFromType<ChartToolkit>(pluginName: "ChartToolkit");
+        IEnumerable<KernelFunction> functions = tools.Select(aiFunction => aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction());
+        _kernel.Plugins.AddFromFunctions(pluginName: "MongoDB", functions: functions);
+
+        OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
         {
-            var tools = await mcpClient.ListToolsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            _kernel.Plugins.Clear();
-            _kernel.Plugins.AddFromType<ChartToolkit>(pluginName: "ChartToolkit");
-            _kernel.Plugins.AddFromFunctions(pluginName: "MongoDB", functions: tools.Select(aiFunction => aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction()));
-
-            OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
-            {
-                FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(options: new FunctionChoiceBehaviorOptions()
-                    {
-                        AllowConcurrentInvocation = true,
-                        AllowStrictSchemaAdherence = false,
-                        RetainArgumentTypes = true,
-                        AllowParallelCalls = true
-                    }
-                ),
-                Temperature = 0,
-            };
-
-            var chatHistory = new ChatHistory();
-
-            // 4️⃣ Build your chat history and let SK do the function‐calling
-            chatHistory.AddSystemMessage(
-                """
-                You are a helpful chart assistant.
-
-                IMPORTANT: 
-                ONLY EXECUTE READ COMMANDS AND QUERIES. DO NOT EXECUTE WRITE/MODIFY COMMANDS.
-                DO NOT ADD ANY ADDITIONAL TEXT TO THE FINAL MESSAGE. PURE JSON OUTPUT ONLY.
-
-                1. Find the closest collection in the database relevant to the users question.
-                2. Find all the relevant fields, values, data points from the records in the collection.
-                3. End with calling the build_chart function from the ChartToolkit plugin.
-                
-                LIMIT YOUR FINDS 
-
-                Your final message should contain ONLY the JSON output of the build_chart function.
-                """
-            );
-
-            chatHistory.AddUserMessage(p.Question);
-
-            var chatCompletion = _kernel.GetRequiredService<IChatCompletionService>();
-
-            try
-            {
-                var chatMessage = await chatCompletion
-                    .GetChatMessageContentAsync(
-                        chatHistory: chatHistory,
-                        kernel: _kernel,
-                        executionSettings: settings,
-                        cancellationToken: cancellationToken
-                    );
-
-                var chartJson = chatHistory
-                    .Where(chat => chat.Role == AuthorRole.Tool)
-                    .SelectMany(x => x.Items.OfType<FunctionResultContent>())
-                    .Where(x => x.FunctionName == "render_chart")
-                    .Select(x => x.Result?.ToString())
-                    .LastOrDefault();
-                
-                if (!string.IsNullOrWhiteSpace(chartJson))
+            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(options: new FunctionChoiceBehaviorOptions()
                 {
-                    var chartspec = JsonSerializer.Deserialize<AskChart>(chartJson);
-                    return chartspec;
+                    AllowConcurrentInvocation = true,
+                    AllowStrictSchemaAdherence = false,
+                    RetainArgumentTypes = true,
+                    AllowParallelCalls = true
                 }
-            }
-            catch (Exception ex)
+            ),
+            Temperature = 0,
+        };
+
+        var chatHistory = new ChatHistory();
+
+        // 4️⃣ Build your chat history and let SK do the function‐calling
+        chatHistory.AddSystemMessage(
+            """
+            You are a helpful chart building assistant.
+
+            IMPORTANT: 
+            ONLY EXECUTE READ COMMANDS AND QUERIES. DO NOT EXECUTE WRITE/MODIFY COMMANDS.
+            
+            You are to assist in providing a chart based on the users question.
+
+            1. Find the closest collection in the database relevant to the users question.
+            2. Find relevant data from the records in the collection.
+            3. End with calling the render_chart function from the ChartToolkit plugin.
+            
+            Your final message should contain ONLY the JSON output of the render_chart function.
+            """
+        );
+
+        chatHistory.AddUserMessage(p.Question);
+
+        var chatCompletion = _kernel.GetRequiredService<IChatCompletionService>();
+
+        try
+        {
+            var chatMessage = await chatCompletion
+                .GetChatMessageContentAsync(
+                    chatHistory: chatHistory,
+                    kernel: _kernel,
+                    executionSettings: settings,
+                    cancellationToken: cancellationToken
+                );
+
+            var chartJson = chatHistory
+                .Where(chat => chat.Role == AuthorRole.Tool)
+                .SelectMany(x => x.Items.OfType<FunctionResultContent>())
+                .Where(x => x.FunctionName == "render_chart")
+                .Select(x => x.Result?.ToString())
+                .LastOrDefault();
+
+            if (!string.IsNullOrWhiteSpace(chartJson))
             {
-                _logger.LogError(ex, "Error during chat completion");
+                return JsonSerializer.Deserialize<AskChart>(chartJson);
             }
         }
-        
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during chat completion");
+        }
+
         return null;
     }
 }

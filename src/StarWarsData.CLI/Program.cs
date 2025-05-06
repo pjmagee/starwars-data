@@ -21,53 +21,18 @@ using StarWarsData.Services.Plugins;
 
 #pragma warning disable SKEXP0010
 
-CommandLineBuilder BuildCommandLine()
+async Task DeleteVectorIndexes(IHost host, CancellationToken cancellationToken)
 {
-    var root = new RootCommand();
-    
-    // infobox download
-    // infobox relationships
-    var infoBoxCommand = new Command("infobox");
-    infoBoxCommand.AddCommand(new Command("download") { Handler = CommandHandler.Create<IHost, CancellationToken>(DownloadInfoboxes) });
-    infoBoxCommand.AddCommand(new Command("relationships") { Handler = CommandHandler.Create<IHost, CancellationToken>(ProcessRelationships) });
-    root.AddCommand(infoBoxCommand);
-    
-    // mongo populate
-    // mongo embedding
-    var mongoCommand = new Command("mongo");
-    mongoCommand.AddCommand(new Command("create-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateOpenAiEmbeddings) });
-    mongoCommand.AddCommand(new Command("delete-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteOpenAiEmbeddings) });
+    using var scope = host.Services.CreateScope();
+    var service = scope.ServiceProvider.GetRequiredService<RecordService>();
+    await service.DeleteVectorIndexesAsync(cancellationToken);
+}
 
-    async Task DeleteOpenAiEmbeddings(IHost host, CancellationToken token)
-    {
-        using var scope = host.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<RecordService>();
-        await service.DeleteOpenAiEmbeddingsAsync(token);
-    }
-
-    mongoCommand.AddCommand(new Command("populate-database") { Handler = CommandHandler.Create<IHost, CancellationToken>(PopulateDatabase) });
-    mongoCommand.AddCommand(new Command("delete-collections") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteCollections) });
-    mongoCommand.AddCommand(new Command("create-timeline") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateTimeline) });
-    mongoCommand.AddCommand(new Command("create-index-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateVectorIndexes) });
-    mongoCommand.AddCommand(new Command("delete-index-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteVectorIndexes) });
-
-    async Task DeleteVectorIndexes(IHost arg1, CancellationToken arg2)
-    {
-        using var scope = arg1.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<RecordService>();
-        await service.DeleteVectorIndexesAsync(arg2);
-    }
-
-    async Task CreateVectorIndexes(IHost arg1, CancellationToken arg2)
-    {
-        using var scope = arg1.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<RecordService>();
-        await service.CreateVectorIndexesAsync(arg2);
-    }
-
-    root.AddCommand(mongoCommand);
-    
-    return new CommandLineBuilder(root);
+async Task CreateVectorIndexes(IHost arg1, CancellationToken arg2)
+{
+    using var scope = arg1.Services.CreateScope();
+    var service = scope.ServiceProvider.GetRequiredService<RecordService>();
+    await service.CreateVectorIndexesAsync(arg2);
 }
 
 async Task DeleteCollections(IHost host, CancellationToken token)
@@ -110,6 +75,41 @@ async Task ProcessRelationships(IHost host, CancellationToken token)
     using var scope = host.Services.CreateScope();
     var service = scope.ServiceProvider.GetRequiredService<InfoboxRelationshipProcessor>();
     await service.ExecuteAsync(token);
+}
+
+CommandLineBuilder BuildCommandLine()
+{
+    var root = new RootCommand();
+    
+    // infobox download
+    // infobox relationships
+    var infoBoxCommand = new Command("infobox");
+    infoBoxCommand.AddCommand(new Command("download") { Handler = CommandHandler.Create<IHost, CancellationToken>(DownloadInfoboxes) });
+    infoBoxCommand.AddCommand(new Command("relationships") { Handler = CommandHandler.Create<IHost, CancellationToken>(ProcessRelationships) });
+    root.AddCommand(infoBoxCommand);
+    
+    // mongo populate
+    // mongo embedding
+    var mongoCommand = new Command("mongo");
+    mongoCommand.AddCommand(new Command("create-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateOpenAiEmbeddings) });
+    mongoCommand.AddCommand(new Command("delete-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteOpenAiEmbeddings) });
+
+    async Task DeleteOpenAiEmbeddings(IHost host, CancellationToken token)
+    {
+        using var scope = host.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<RecordService>();
+        await service.DeleteOpenAiEmbeddingsAsync(token);
+    }
+
+    mongoCommand.AddCommand(new Command("populate-database") { Handler = CommandHandler.Create<IHost, CancellationToken>(PopulateDatabase) });
+    mongoCommand.AddCommand(new Command("delete-collections") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteCollections) });
+    mongoCommand.AddCommand(new Command("create-timeline") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateTimeline) });
+    mongoCommand.AddCommand(new Command("create-index-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(CreateVectorIndexes) });
+    mongoCommand.AddCommand(new Command("delete-index-embeddings") { Handler = CommandHandler.Create<IHost, CancellationToken>(DeleteVectorIndexes) });
+
+    root.AddCommand(mongoCommand);
+    
+    return new CommandLineBuilder(root);
 }
 
 await BuildCommandLine()
