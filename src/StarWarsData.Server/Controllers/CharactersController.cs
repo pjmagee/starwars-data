@@ -8,9 +8,9 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class CharactersController : ControllerBase
 {
-    private readonly ILogger<CharactersController> _logger;
-    private readonly CharacterService _characterService;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<CharactersController> _logger;
+    readonly CharacterService _characterService;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public CharactersController(ILogger<CharactersController> logger, CharacterService characterService, IHttpContextAccessor contextAccessor)
     {
@@ -20,8 +20,14 @@ public class CharactersController : ControllerBase
     }
 
     [HttpGet("charts/births-deaths")]
-    public async Task<PagedChartData<int>> GetBirthDeaths([FromQuery] QueryParams query) => await _characterService.GetBirthAndDeathsByYear(query.Page, query.PageSize);
+    public async Task<PagedChartData<int>> GetBirthDeaths([FromQuery] QueryParams query)
+    {
+        return await _characterService.GetBirthAndDeathsByYear(query.Page, query.PageSize);
+    }
 
     [HttpGet("charts/lifespans")]
-    public async Task<PagedChartData<double>> GetLifespans([FromQuery] QueryParams query) => await _characterService.GetLifeSpans(query.Page, query.PageSize);
+    public async Task<PagedChartData<double>> GetLifespans([FromQuery] QueryParams query)
+    {
+        return await _characterService.GetLifeSpans(query.Page, query.PageSize);
+    }
 }

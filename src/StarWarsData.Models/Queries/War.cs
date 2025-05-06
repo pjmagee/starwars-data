@@ -15,9 +15,9 @@ public class War
     {
         try
         {
-            var name = document["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].ToString();
-            var start = document["Data"].AsBsonArray.First(i => i["Label"] == "Beginning")["Links"][0]["Content"].ToString();
-            var end = document["Data"].AsBsonArray.First(i => i["Label"] == "End")["Links"][0]["Content"].ToString();
+            var name = document["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].ToString()!;
+            var start = document["Data"].AsBsonArray.First(i => i["Label"] == "Beginning")["Links"][0]["Content"].ToString()!;
+            var end = document["Data"].AsBsonArray.First(i => i["Label"] == "End")["Links"][0]["Content"].ToString()!;
             var years = 0d;
 
             if (start.Contains("BBY") && end.Contains("ABY"))

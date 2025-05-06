@@ -8,9 +8,9 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class CategoriesController : ControllerBase
 {
-    private readonly ILogger<CategoriesController> _logger;
-    private readonly RecordService _recordService;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<CategoriesController> _logger;
+    readonly RecordService _recordService;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public CategoriesController(ILogger<CategoriesController> logger, RecordService recordService, IHttpContextAccessor contextAccessor)
     {
@@ -22,7 +22,7 @@ public class CategoriesController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<string>> Get()
     {
-        return await _recordService.GetCollections(_contextAccessor.HttpContext!.RequestAborted);
+        return await _recordService.GetCollectionNames(_contextAccessor.HttpContext!.RequestAborted);
     }
 
     [HttpGet("{category}")]

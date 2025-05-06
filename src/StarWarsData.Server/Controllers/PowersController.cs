@@ -8,9 +8,9 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class PowersController : ControllerBase
 {
-    private readonly ILogger<PowersController> _logger;
-    private readonly PowerService _service;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<PowersController> _logger;
+    readonly PowerService _service;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public PowersController(ILogger<PowersController> logger, PowerService service, IHttpContextAccessor contextAccessor)
     {

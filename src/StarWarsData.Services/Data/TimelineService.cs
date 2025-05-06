@@ -1,69 +1,83 @@
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
-using StarWarsData.Models.Mongo;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services.Mongo;
+using StarWarsData.Services.Helpers;
+using TimelineEvent = StarWarsData.Models.Mongo.TimelineEvent; // Add using for TemplateHelper
 
 namespace StarWarsData.Services.Data;
 
 public class TimelineService
 {
     private readonly ILogger<TimelineService> _logger;
-    private readonly Settings _settings;
-    private readonly MongoClient _mongoClient;
-    private readonly RecordToEventsTransformer _transformer;
-    private readonly MongoDefinitions _mongoDefinitions;
-    private readonly CollectionFilters _collectionFilters;
+    private readonly IMongoCollection<TimelineEvent> _timelineEventsCollection;
+    private readonly TemplateHelper _templateHelper;
 
-    private IMongoDatabase _mongoDb;
-
-    public TimelineService(ILogger<TimelineService> logger, Settings settings, RecordToEventsTransformer transformer, MongoDefinitions mongoDefinitions, CollectionFilters collectionFilters)
+    public TimelineService(
+        ILogger<TimelineService> logger, 
+        Settings settings, 
+        RecordToEventsTransformer transformer, 
+        MongoDefinitions mongoDefinitions, 
+        CollectionFilters collectionFilters, 
+        IMongoDatabase database,
+        TemplateHelper templateHelper)
     {
         _logger = logger;
-        _settings = settings;
-        _transformer = transformer;
-        _mongoDefinitions = mongoDefinitions;
-        _collectionFilters = collectionFilters;
-        _mongoClient = new MongoClient(settings.MongoConnectionString);
-        _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
+        _templateHelper = templateHelper;
+        _timelineEventsCollection = database.GetCollection<TimelineEvent>("Timeline_events");
     }
     
-    public async Task<GroupedTimelineResult> GetTimelineEvents(IEnumerable<string> collections, int page = 1, int pageSize = 20)
+    public async Task<GroupedTimelineResult> GetTimelineEvents(IList<string> templates, int page = 1, int pageSize = 20)
     {
-        List<Record> records = new List<Record>();
-
-        foreach (var collection in collections)
+        var filter = Builders<TimelineEvent>.Filter.Empty;
+        
+        if (templates.Any())
         {
-            if (_collectionFilters.TryGetValue(collection, out var filter))
-            {
-                records.AddRange(await _mongoDb.GetCollection<BsonDocument>(collection)
-                    .Find(filter)
-                    .Project(_mongoDefinitions.ExcludeRelationships)
-                    .As<Record>()
-                    .ToListAsync());
-            }
+            // Filter using the CleanedTemplate field
+            filter = Builders<TimelineEvent>.Filter.In(x => x.CleanedTemplate, templates);
         }
 
-        var timelineEvents = records
-            .AsParallel()
-            .SelectMany(r => _transformer.Transform(r))
-            .OrderBy(x => x)
-            .ToList();
+        var sort = Builders<TimelineEvent>.Sort.Ascending(x => x.Demarcation).Ascending(x => x.Year);
+        var timelineEventDocuments = await _timelineEventsCollection
+            .Find(filter)
+            .Sort(sort)
+            .Skip((page - 1) * pageSize)
+            .Limit(pageSize)
+            .ToListAsync();
+
+        var timelineEvents = timelineEventDocuments.Select(doc => new Models.Queries.TimelineEvent
+        {
+            Title = doc.Title,
+            Template = doc.CleanedTemplate, // Use CleanedTemplate for display
+            ImageUrl = doc.ImageUrl,
+            Demarcation = doc.Demarcation,
+            Year = doc.Year,
+            Properties = doc.Properties,
+            DateEvent = doc.DateEvent
+        }).ToList();
+
+        timelineEvents.Sort();
 
         var groupedByYear = timelineEvents
             .GroupBy(x => x.DisplayYear)
             .Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
 
-        var total = groupedByYear.Count();
+        var total = await _timelineEventsCollection.CountDocumentsAsync(filter);
 
         return new GroupedTimelineResult
         {
-            Total = total,
+            Total = (int)total,
             Size = pageSize,
             Page = page,
-            Items = groupedByYear.Skip((page - 1) * pageSize).Take(pageSize)
+            Items = groupedByYear
         };
+    }
+
+    public async Task<List<string>> GetDistinctTemplatesAsync()
+    {
+        var templates = await _timelineEventsCollection.Distinct<string>("Template", FilterDefinition<TimelineEvent>.Empty).ToListAsync();
+        // Use helper method
+        return templates.Select(_templateHelper.CleanTemplate).Distinct().OrderBy(x => x).ToList(); 
     }
 }

@@ -12,6 +12,9 @@ public class Settings
     public int PageStart { get; set; } = 1;
     public int PageLimit { get; set; } = 500;
     public bool FirstPageOnly { get; set; } = true;
+    
+    public string OpenAiKey { get; set; } = null!;
+    public string EmbeddingModelId { get; set; } = null!;
     public IEnumerable<string> TimelineCollections { get; set; } = null!;
 
 }

@@ -1,12 +1,26 @@
 @page "/births-and-deaths"
+
 @inject HttpClient Http
 
 <PageTitle>Births and Deaths</PageTitle>
 
 @if (_pagedResult is not null)
 {
-    <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate"/>
-    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" XAxisLabels="@Labels" Width="100%" Height="800px" LegendPosition="Position.Top" />
+    <MudPagination 
+        @ref="_pagination" 
+        Class="ma-4 sticky" 
+        ShowFirstButton="true" 
+        ShowLastButton="true" 
+        Count="_pages" 
+        SelectedChanged="Paginate"/>
+    
+    <MudChart
+        ChartType="ChartType.Bar" 
+        ChartSeries="@Series" 
+        XAxisLabels="@Labels"
+        Width="100%" 
+        Height="800px" 
+        LegendPosition="Position.Top" />
 }
 
 @code {
@@ -41,7 +55,7 @@
         query.Add("PageSize", $"{_pageSize}");
 
         _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"characters/charts/births-deaths?{query}");
-        _pages = _pagedResult.Total / _pagedResult.PageSize;
+        _pages = _pagedResult!.Total / _pagedResult.PageSize;
     }
 
 }

@@ -1,4 +1,3 @@
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models;
@@ -12,8 +11,6 @@ public class InfoboxRelationshipProcessor
     private readonly Settings _settings;
     
     private const string WikiFragment = "/wiki/";
-
-    private readonly JsonSerializerOptions _options = new() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true };
     
     public InfoboxRelationshipProcessor(ILogger<InfoboxRelationshipProcessor> logger, Settings settings)
     {
@@ -31,7 +28,7 @@ public class InfoboxRelationshipProcessor
             .Select(file =>
             {
                 using var stream = file.OpenRead();
-                var record = JsonSerializer.Deserialize<Record>(stream, _options)!;
+                var record = JsonSerializer.Deserialize<Record>(stream, RecordSerializerContext.Default.Record)!;
                             
                 string url = record.PageUrl.Split(WikiFragment).Last().Replace(" ", "_").ToLower();
                         
@@ -57,12 +54,12 @@ public class InfoboxRelationshipProcessor
         if (loaded.Record.Relationships.Any())
         {
             await using var stream = loaded.File.OpenWrite();
-            await JsonSerializer.SerializeAsync(stream, loaded.Record, _options, token);
+            await JsonSerializer.SerializeAsync(stream, loaded.Record, RecordSerializerContext.Default.Record, token);
             await stream.FlushAsync(token);
         }
 	    
         loaded.Processed = true;
 	    
-        _logger.LogInformation($"{files.Count(f => f.Processed)} / {files.Count}");
+        _logger.LogInformation("{Count} / {FilesCount}", files.Count(f => f.Processed), files.Count);
     }
 }

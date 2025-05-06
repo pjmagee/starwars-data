@@ -5,7 +5,13 @@
 
 @if (_chartData is not null)
 {
-    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" XAxisLabels="@Labels" Width="100%" Height="800px" LegendPosition="Position.Top" />
+    <MudChart 
+        ChartType="ChartType.Bar" 
+        ChartSeries="@Series" 
+        XAxisLabels="@Labels" 
+        Width="100%" 
+        Height="800px" 
+        LegendPosition="Position.Top" />
 }
 
 @code {

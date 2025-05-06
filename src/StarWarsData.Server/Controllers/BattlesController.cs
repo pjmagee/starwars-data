@@ -8,9 +8,9 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class BattlesController : ControllerBase
 {
-    private readonly ILogger<BattlesController> _logger;
-    private readonly BattleService _service;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<BattlesController> _logger;
+    readonly BattleService _service;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public BattlesController(ILogger<BattlesController> logger, BattleService service, IHttpContextAccessor contextAccessor)
     {

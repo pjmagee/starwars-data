@@ -8,9 +8,9 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class SearchController : ControllerBase
 {
-    private readonly ILogger<SearchController> _logger;
-    private readonly RecordService _recordService;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<SearchController> _logger;
+    readonly RecordService _recordService;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public SearchController(ILogger<SearchController> logger, RecordService recordService, IHttpContextAccessor contextAccessor)
     {

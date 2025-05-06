@@ -9,10 +9,10 @@ namespace StarWarsData.Server.Controllers;
 [Route("[controller]")]
 public class TimelineController : ControllerBase
 {
-    private readonly ILogger<TimelineController> _logger;
-    private readonly TimelineService _timelineService;
-    private readonly CollectionFilters _collectionFilters;
-    private readonly IHttpContextAccessor _contextAccessor;
+    readonly ILogger<TimelineController> _logger;
+    readonly TimelineService _timelineService;
+    readonly CollectionFilters _collectionFilters;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public TimelineController(ILogger<TimelineController> logger, TimelineService timelineService, CollectionFilters collectionFilters, IHttpContextAccessor contextAccessor)
     {
@@ -25,11 +25,15 @@ public class TimelineController : ControllerBase
     [HttpGet("events")]
     public async Task<GroupedTimelineResult?> GetTimelineEvents([FromQuery] TimelineQueryParams queryParams)
     {
-        if (queryParams.Categories is null || queryParams.Categories.Length == 0) return null;
-        
-        return await _timelineService.GetTimelineEvents(queryParams.Categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
+        // Let the service handle an empty or null category list (treat as "all categories")
+        var categories = queryParams.Categories;
+        return await _timelineService.GetTimelineEvents(categories, queryParams?.Page ?? 1, queryParams?.PageSize ?? 50);
     }
 
     [HttpGet("categories")]
-    public IEnumerable<string> GetTimelineCategories() => _collectionFilters.Keys;
+    public async Task<IEnumerable<string>> GetTimelineCategories()
+    {
+        return await _timelineService.GetDistinctTemplatesAsync();
+    }
 }
+

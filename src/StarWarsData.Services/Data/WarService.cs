@@ -16,17 +16,20 @@ public class WarService
     private readonly MongoDefinitions _mongoDefinitions;
     private readonly Settings _settings;
     private readonly MongoClient _mongoClient;
+    private IMongoDatabase _db;
 
-    private IMongoDatabase _mongoDb;
-
-    public WarService(ILogger<WarService> logger, YearHelper yearHelper, MongoDefinitions mongoDefinitions, Settings settings)
+    public WarService(
+        ILogger<WarService> logger, 
+        YearHelper yearHelper, 
+        MongoDefinitions mongoDefinitions,
+        IMongoDatabase db,
+        Settings settings)
     {
         _logger = logger;
         _yearHelper = yearHelper;
         _mongoDefinitions = mongoDefinitions;
         _settings = settings;
-        _mongoClient = new MongoClient(settings.MongoConnectionString);
-        _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
+        _db = db;
     }
 
     public async Task<PagedChartData<int>> GetWarsByBattles(int page = 1, int pageSize = 10)
@@ -38,7 +41,7 @@ public class WarService
             Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Major battles")
         });
         
-        List<BsonDocument> results = await _mongoDb
+        List<BsonDocument> results = await _db
             .GetCollection<BsonDocument>("War")
             .Find(filter)
             .Project(_mongoDefinitions.ExcludeRelationships)
@@ -85,7 +88,7 @@ public class WarService
             Builders<BsonDocument>.Filter.Regex("Data.Links.Href", new BsonRegularExpression(new Regex("_(ABY|BBY)")))
         });
         
-        List<BsonDocument> results = await _mongoDb
+        List<BsonDocument> results = await _db
             .GetCollection<BsonDocument>("War")
             .Find(filter)
             .Project(_mongoDefinitions.ExcludeRelationships)

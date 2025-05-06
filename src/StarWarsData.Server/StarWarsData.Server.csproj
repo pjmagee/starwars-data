@@ -1,20 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
-        <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="8.0.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0-preview.3.25172.1" />
+        <PackageReference Include="Microsoft.SemanticKernel.Connectors.MongoDB" Version="1.48.0-preview" />
+        <PackageReference Include="Microsoft.SemanticKernel.Plugins.Memory" Version="1.48.0-alpha" />
+        <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.11" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,12 +26,6 @@
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>           
         </Content>
         <Content Update="appsettings.Development.json">
-            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-            <DependentUpon>appsettings.json</DependentUpon>
-        </Content>
-        <Content Update="appsettings.Production.json">
             <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

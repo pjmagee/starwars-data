@@ -1,0 +1,90 @@
+@page "/ask"
+@using MudBlazor.Charts
+@inject HttpClient Http
+
+<MudTextField @bind-Value="_prompt"
+              Placeholder="Ask for a chart…"
+              Variant="Variant.Filled"
+              Class="mb-2" />
+
+<MudButton OnClick="Load" Color="Color.Primary">Run</MudButton>
+
+@* Dynamically render the right chart *@
+<div class="mt-4">
+    @_chartFragment
+</div>
+
+@code {
+    
+    string _prompt = "";
+    private RenderFragment? _chartFragment;
+
+    public async Task Load()
+    {
+        var response = await Http.PostAsJsonAsync("kernel/ask", new UserPrompt(_prompt));
+
+        if (response.IsSuccessStatusCode)
+        {
+            var chartSpec = await response.Content.ReadFromJsonAsync<ChartSpec>();
+            _chartFragment = chartSpec is not null ? BuildFragment(chartSpec) : null;
+            StateHasChanged();
+        }
+        else
+        {
+            _chartFragment = null;
+            StateHasChanged();
+        }
+        
+    }
+
+    RenderFragment BuildFragment(ChartSpec spec) => builder =>
+    {
+        int seq = 0;
+
+        switch (spec.Kind)
+        {
+            // ---------------- Pie / Donut / Bar / Line ----------------
+            case ChartKind.Pie or ChartKind.Donut or ChartKind.Bar
+                or ChartKind.Line:
+                builder.OpenComponent(seq++, typeof(MudChart));
+                builder.AddAttribute(seq++, "ChartType",
+                    spec.Kind switch
+                    {
+                        ChartKind.Pie => ChartType.Pie,
+                        ChartKind.Donut => ChartType.Donut,
+                        ChartKind.Line => ChartType.Line,
+                        _ => ChartType.Bar
+                    }
+                );
+
+                builder.AddAttribute(seq++, "InputLabels", spec.Labels);
+                builder.AddAttribute(seq++, "InputData", spec.Series);
+                builder.CloseComponent();
+                break;
+
+            // ---------------- Stacked Bar ------------------------------
+            case ChartKind.Stacked:
+                builder.OpenComponent(seq++, typeof(StackedBar));
+                builder.AddAttribute(seq++, "Labels", spec.Labels);
+                builder.AddAttribute(seq++, "Series", spec.Series);
+                builder.CloseComponent();
+                break;
+
+            // ---------------- Time-series ------------------------------
+            case ChartKind.TimeSeries:
+                builder.OpenComponent(seq++, typeof(TimeSeries));
+                builder.AddAttribute(seq++, "ChildContent",
+                    (RenderFragment)(seriesBuilder =>
+                    {
+                        seriesBuilder.OpenComponent(0, typeof(TimeSeriesChartSeries));
+                        seriesBuilder.AddAttribute(1, "Name", spec.Title ?? "Series");
+                        seriesBuilder.AddAttribute(2, "Items", spec.Labels.Zip(spec.Series, (lbl, val) => new TimeSeriesChartSeries.TimeValue(DateTime.Parse(lbl), val)).ToList());
+                        seriesBuilder.CloseComponent();
+                    })
+                );
+
+                builder.CloseComponent();
+                break;
+        }
+    };
+}

@@ -1,5 +1,4 @@
 using System.Collections.Specialized;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Web;
@@ -12,30 +11,30 @@ using StarWarsData.Services.Helpers;
 
 namespace StarWarsData.Services.Wiki;
 
+[JsonSerializable(typeof(Record), GenerationMode = JsonSourceGenerationMode.Default)]
+[JsonSourceGenerationOptions(AllowTrailingCommas = false, WriteIndented = true)]
+public partial class RecordSerializerContext : JsonSerializerContext
+{
+    
+}
+
 public class InfoboxDownloader
 {
-    private readonly ILogger<InfoboxDownloader> _logger;
-    private readonly Settings _settings;
-    private readonly HttpClient _httpClient;
-    private readonly DirectoryInfo _dataDirectory;
-    
-    private static readonly char[] TrimValues = { '\'', '"', ',', '.', ':', '-' };
-    private static readonly char[] TrimContents = { '\'', '"', ',', '.' };
+    readonly ILogger<InfoboxDownloader> _logger;
+    readonly Settings _settings;
+    readonly HttpClient _httpClient;
+    readonly DirectoryInfo _dataDirectory;
 
-    private static readonly Uri FandomUri = new Uri("https://starwars.fandom.com/");
-    private static readonly Uri FandomWikiUri = new Uri(FandomUri, new Uri("/wiki/", UriKind.Relative));
+    readonly static char[] TrimValues = { '\'', '"', ',', '.', ':', '-' };
+    readonly static char[] TrimContents = { '\'', '"', ',', '.' };
 
-    private static readonly char[] InvalidChars = Path.GetInvalidFileNameChars();
-    
-    private static readonly JsonSerializerOptions Options = new ()
-    {
-        WriteIndented = true,        
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-    };
-    
-    private bool _shouldContinue;
-    private int _pwpcontinue = 1;
+    readonly static Uri FandomUri = new("https://starwars.fandom.com/");
+    readonly static Uri FandomWikiUri = new(FandomUri, new Uri("/wiki/", UriKind.Relative));
+
+    readonly static char[] InvalidChars = Path.GetInvalidFileNameChars();
+
+    bool _shouldContinue;
+    int _pwpContinue = 1;
     
     public InfoboxDownloader(ILogger<InfoboxDownloader> logger, Settings settings, HttpClient httpClient)
     {
@@ -43,10 +42,10 @@ public class InfoboxDownloader
         _settings = settings;
         _httpClient = httpClient;
         _dataDirectory = new DirectoryInfo(settings.DataDirectory);
-        _pwpcontinue = _settings.PageStart;
+        _pwpContinue = _settings.PageStart;
     }
-    
-    private string GetPagesWithInfoboxes()
+
+    string GetPagesWithInfoboxes()
     {
         NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
         queryString.Add("action", "query");
@@ -54,7 +53,7 @@ public class InfoboxDownloader
         queryString.Add("pwppropname", "infoboxes");
         queryString.Add("pwpprop", "ids|title|value");
         queryString.Add("pwplimit", $"{_settings.PageLimit}");
-        queryString.Add("pwpcontinue", $"{_pwpcontinue}");
+        queryString.Add("pwpcontinue", $"{_pwpContinue}");
         queryString.Add("format", "json");
         return queryString.ToString()!;
     }
@@ -63,44 +62,50 @@ public class InfoboxDownloader
     {
         do
         {
-            using (var pages = await JsonDocument.ParseAsync(await _httpClient.GetStreamAsync("?" + GetPagesWithInfoboxes(), token), cancellationToken: token))
+            // Get the API response
+            using var response = await _httpClient.GetAsync($"api.php?{GetPagesWithInfoboxes()}", HttpCompletionOption.ResponseHeadersRead, token);
+            response.EnsureSuccessStatusCode();
+            
+            // Parse the JSON from the stream
+            await using var stream = await response.Content.ReadAsStreamAsync(token);
+            using var pages = await JsonDocument.ParseAsync(stream, default, token);
+
+            _shouldContinue = pages.RootElement.TryGetProperty("continue", out var continueElement);
+
+            if (_shouldContinue)
             {
-                _shouldContinue = pages.RootElement.TryGetProperty("continue", out var continueElement);
-
-                if (_shouldContinue)
-                {
-                    _pwpcontinue = int.Parse(continueElement.GetProperty("pwpcontinue").GetString()!);
-                }
-
-                if (_settings.FirstPageOnly)
-                {
-                    _shouldContinue = false;
-                }
-
-                if (pages.RootElement.TryGetProperty("query", out var queryElement) && queryElement.TryGetProperty("pageswithprop", out var pagesWithPropElement))
-                {
-                    var wikiPages = pagesWithPropElement.EnumerateArray().Where(x => x.GetProperty("ns").GetInt32().Equals(_settings.PageNamespace)).ToList();
-
-                    var options = new ParallelOptions { CancellationToken = token };
-
-                    await Parallel.ForEachAsync(wikiPages, options, async (wikiPage, t) =>
-                    {
-                        try
-                        {
-                            await ProcessWikiPage(wikiPage, t);
-                        }
-                        catch (Exception exception)
-                        {
-                            _logger.LogError(exception, "error: {Error}", exception.Message);
-                        }
-                    });
-                }
+                _pwpContinue = int.Parse(continueElement.GetProperty("pwpcontinue").GetString()!);
             }
+
+            if (_settings.FirstPageOnly)
+            {
+                _shouldContinue = false;
+            }
+
+            if (pages.RootElement.TryGetProperty("query", out var queryElement) && queryElement.TryGetProperty("pageswithprop", out var pagesWithPropElement))
+            {
+                var wikiPages = pagesWithPropElement.EnumerateArray().Where(x => x.GetProperty("ns").GetInt32().Equals(_settings.PageNamespace)).ToList();
+
+                var options = new ParallelOptions { CancellationToken = token };
+
+                await Parallel.ForEachAsync(wikiPages, options, async (wikiPage, t) =>
+                {
+                    try
+                    {
+                        await ProcessWikiPage(wikiPage, t);
+                    }
+                    catch (Exception exception)
+                    {
+                        _logger.LogError(exception, "error: {Error}", exception.Message);
+                    }
+                });
+            }
+
         }
         while (_shouldContinue);
     }
 
-    private async Task ProcessWikiPage(JsonElement page, CancellationToken cancellationToken)
+    async Task ProcessWikiPage(JsonElement page, CancellationToken cancellationToken)
     {
         Record record = new Record();
         
@@ -176,32 +181,32 @@ public class InfoboxDownloader
         await Save(record, cancellationToken);
     }
 
-    private async Task<string> GetLabelValue(string label)
+    async Task<string> GetLabelValue(string label)
     {
         using var context = BrowsingContext.New();
         using var doc = await context.OpenAsync(r => r.Content(label));
-        doc.QuerySelectorAll("sup").Do(sup => sup.Remove());
-        return doc.Body.TextContent.Trim(TrimContents);
+        doc.QuerySelectorAll("sup").Do(static sup => sup.Remove());
+        return doc.Body?.TextContent.Trim(TrimContents) ?? string.Empty;
     }
 
-    private async Task<string?> GetTemplateValue(string html)
+    async Task<string?> GetTemplateValue(string html)
     {
         using var context = BrowsingContext.New();
         using var doc = await context.OpenAsync(r => r.Content(html.Replace("\\", string.Empty)));
         
         return doc
             .QuerySelectorAll("a")
-            .Select(x => new HyperLink { Content = x.TextContent.Trim(TrimContents), Href = x.GetAttribute("href") })
+            .Select(static x => new HyperLink { Content = x.TextContent.Trim(TrimContents), Href = x.GetAttribute("href") ?? string.Empty })
             .FirstOrDefault()?.Href;
     }
-    
-    private async Task<DataValue> GetDataValue(string html)
+
+    async Task<DataValue> GetDataValue(string html)
     {
         using var context = BrowsingContext.New();
         using var doc = await context.OpenAsync(r => r.Content(html.Replace("\\", string.Empty)));
-        doc.QuerySelectorAll("sup").Do(sup => sup.Remove());
-        doc.QuerySelectorAll("br").Do(br => br.Insert(AdjacentPosition.BeforeBegin, "\n"));
-        doc.QuerySelectorAll("li").Do(li => li.Insert(AdjacentPosition.BeforeBegin, "\n"));
+        doc.QuerySelectorAll("sup").Do(static sup => sup.Remove());
+        doc.QuerySelectorAll("br").Do(static br => br.Insert(AdjacentPosition.BeforeBegin, "\n"));
+        doc.QuerySelectorAll("li").Do(static li => li.Insert(AdjacentPosition.BeforeBegin, "\n"));
 
         HyperLink LinkSelector(IElement x)
         {
@@ -224,8 +229,8 @@ public class InfoboxDownloader
             Values = doc.Body
                 .Text()
                 .Split('\n')
-                .Concat(doc.QuerySelectorAll("li").SelectMany(x => x.Text().Split('\n')))
-                .Select(x => x.Trim(TrimValues)).Where(line => !string.IsNullOrWhiteSpace(line)).Distinct().ToList(),
+                .Concat(doc.QuerySelectorAll("li").SelectMany(static x =>  x.Text().Split('\n')))
+                .Select(static x => x.Trim(TrimValues)).Where(static line => !string.IsNullOrWhiteSpace(line)).Distinct().ToList(),
                     
             Links = doc.QuerySelectorAll("a")
                 .Select(LinkSelector)
@@ -233,27 +238,31 @@ public class InfoboxDownloader
         };
     }
 
-    private async Task Save(Record record, CancellationToken token)
+    async Task Save(Record record, CancellationToken token)
     {
-        var fileTitle = record.PageTitle;
-        var fileId = record.PageId;
-        var template = record.Template?.Split(':').Last()!;
-        Array.ForEach(InvalidChars, c => fileTitle = fileTitle.Replace(c.ToString(), " ").Trim());
-
-        var path = Path.Combine(_dataDirectory.FullName, template!, $"{fileId} - {template} - {fileTitle}.json");
-
-        var dirPath = Path.Combine($"{_dataDirectory.FullName}", template);
-        
-        if (Directory.Exists(dirPath))
+        try
         {
-            await File.WriteAllTextAsync(path, JsonSerializer.Serialize(record, Options), token);
-        }
-        else
-        {
+            var fileTitle = record.PageTitle;
+            var fileId = record.PageId;
+            var template = record.Template?.Split(':').Last() ?? "Unknown";
+            Array.ForEach(InvalidChars, c => fileTitle = fileTitle.Replace(c, ' ').Trim());
+    
+            var dirPath = Path.Combine(_dataDirectory.FullName, template);
+            var path = Path.Combine(dirPath, $"{fileId} - {template} - {fileTitle}.json");
+            
+            // Ensure directory exists
             Directory.CreateDirectory(dirPath);
-            await File.WriteAllTextAsync(path, JsonSerializer.Serialize(record, Options), token);
+            
+            // Serialize and save the record
+            var json = JsonSerializer.Serialize(record, RecordSerializerContext.Default.Options);
+            await File.WriteAllTextAsync(path, json, token);
+            
+            _logger.LogInformation("Saved {Path}", path);
         }
-        
-        _logger.LogInformation("Saved {Path}", path);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to save record with ID {RecordId}: {ErrorMessage}", 
+                record.PageId, ex.Message);
+        }
     }
 }

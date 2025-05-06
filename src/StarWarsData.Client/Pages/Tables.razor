@@ -1,4 +1,5 @@
 ﻿@page "/tables"
+
 @inject HttpClient Http
 
 <PageTitle>Tables</PageTitle>
@@ -9,17 +10,36 @@
 }
 else
 {
-    <MudSelect T="string" ValueChanged="@ValueChanged" Class="mb-8" Placeholder="Select a Star wars Data category">
+    <MudSelect
+        T="string"
+        ValueChanged="@ValueChanged"
+        Class="mb-8"
+        Placeholder="Select a Star wars Data category">
+        
         @foreach (var item in _categories)
         {
-            <MudSelectItem Value="@item" T="string">@item</MudSelectItem>
+            <MudSelectItem Value="@item" T="string">
+                @item
+            </MudSelectItem>
         }
+        
     </MudSelect>
 }
 
 @if (_category is not null)
 {
-    <MudTable ServerData="@(new Func<TableState, Task<TableData<Record>>>(ServerReload))" FixedHeader="true" FixedFooter="true" Height="1000px" ReadOnly="true" Dense="true" @ref="_table" Bordered="true" Striped="true" HorizontalScrollbar="true">
+    <MudTable 
+        ServerData="ServerReload" 
+        FixedHeader="true"
+        FixedFooter="true" 
+        Height="1000px" 
+        ReadOnly="true" 
+        Dense="true" 
+        @ref="_table" 
+        Bordered="true"
+        Striped="true" 
+        HorizontalScrollbar="true">
+        
         <HeaderContent>
             <MudTh>Id</MudTh>
             <MudTh>Page</MudTh>
@@ -48,22 +68,22 @@ else
                 <MudTd DataLabel="@label">
                     @if (data is not null)
                     {
-                        <MudList Dense="true" DisablePadding="true" DisableGutters="true" Class="mb-4">
+                        <MudList T="string" Gutters="false" Padding="false" Dense="true" Class="mb-4">
                             @foreach (var link in data.Links)
                             {
-                                <MudListItem Dense="true" DisableGutters="true" DisableRipple="true">
+                                <MudListItem Dense="true" Gutters="false" Ripple="false">
                                     <MudLink Class="ma-1" Href="@link.Href">@link.Content</MudLink>
                                 </MudListItem>
                             }
                             @foreach (var value in data.Values.Where(v => !data.Links.Any(l => l.Content.Equals(v, StringComparison.OrdinalIgnoreCase))))
                             {
-                                <MudListItem Dense="true" DisableGutters="true" DisableRipple="true">@value</MudListItem>
+                                <MudListItem Dense="true" Gutters="false" Ripple="false">@value</MudListItem>
                             }
                         </MudList>
                     }
                 </MudTd>
             }
-            <MudTh DataLabel="Relationships">
+            <MudTh>
                 @if (context.Relationships.Any())
                 {
                     <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context))">@(context.ShowRelationships ? "Hide" : "Show")</MudButton>    
@@ -74,7 +94,7 @@ else
             @if (context.ShowRelationships)
             {
                 <MudTr>
-                    <td colspan="@(DynamicHeaders.Count() + 4)">
+                    <MudTd colspan="@(DynamicHeaders.Count() + 4)">
                         <MudCard Elevation="0">
                             <MudCardHeader>
                                 <CardHeaderContent>
@@ -82,7 +102,12 @@ else
                                 </CardHeaderContent>
                             </MudCardHeader>
                             <MudCardContent Class="pa-0">
-                                <MudTable Items="@context.Relationships" Context="Relationship" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="0">
+                                <MudTable 
+                                    Items="@context.Relationships" 
+                                    Context="Relationship"
+                                    Hover="true"
+                                    Breakpoint="Breakpoint.Sm" 
+                                    Elevation="0">
                                     <HeaderContent>
                                         <MudTh>Page</MudTh>
                                         <MudTh>Template</MudTh>
@@ -94,7 +119,7 @@ else
                                 </MudTable>
                             </MudCardContent>
                         </MudCard>
-                    </td>
+                    </MudTd>
                 </MudTr>
             }
         </ChildRowContent>
@@ -139,10 +164,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _categories = (await Http.GetFromJsonAsync<string[]>("Categories")).OrderBy(x => x).ToArray();
+        string[]? categories = (await Http.GetFromJsonAsync<string[]>("Categories"))!;
+        _categories = categories.OrderBy(x => x).ToArray();
     }
 
-    private async Task<TableData<Record>> ServerReload(TableState state)
+    private async Task<TableData<Record>> ServerReload(TableState state, CancellationToken ct)
     {
         if (_category == null)
             return new TableData<Record>() { Items = Enumerable.Empty<Record>(), TotalItems = 0 };
@@ -157,5 +183,4 @@ else
         _category = arg;
         return _table.ReloadServerData();
     }
-
 }

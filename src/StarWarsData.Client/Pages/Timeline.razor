@@ -1,5 +1,7 @@
 ﻿@page "/timeline"
 
+@using System.Web
+@using TimelineEvent = StarWarsData.Models.Queries.TimelineEvent
 @inject HttpClient Http
 
 <PageTitle>Timeline</PageTitle>
@@ -21,9 +23,24 @@
     <MudItem xs="10">
         @if (_pagedResult is not null)
         {
-            <MudStack Row="false" Spacing="4" Justify="Justify.SpaceBetween">
-                <MudPagination @ref="_pagination" Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_pages" SelectedChanged="Paginate"/>
-                <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" DisableModifiers="true">
+            <MudStack 
+                Row="false" 
+                Spacing="4" 
+                Justify="Justify.SpaceBetween">
+                
+                <MudPagination
+                    @bind-Selected="CurrentPage" 
+                    Class="ma-4 sticky" 
+                    ShowFirstButton="true" 
+                    ShowLastButton="true" 
+                    Count="_pages" />
+                
+                <MudTimeline 
+                    TimelineOrientation="TimelineOrientation.Vertical" 
+                    TimelineAlign="TimelineAlign.Default" 
+                    TimelinePosition="TimelinePosition.Alternate" 
+                    Class="ma-4" 
+                    Modifiers="false">
 
                     @{
                         var isStart = true;
@@ -85,22 +102,40 @@
 </MudGrid>
 
 <MudScrollToTop>
-    <MudFab Color="Color.Tertiary" Icon="@Icons.Filled.ArrowCircleUp" />
+    <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
 </MudScrollToTop>
 
 @code {
 
     private GroupedTimelineResult? _pagedResult;
     private string[]? _categories;
-    private List<string>? _selectedCategories;
+    // Initialize _selectedCategories to prevent null issues
+    private List<string> _selectedCategories = new(); 
 
     private int _pages = 1;
     private int _pageSize = 15;
-    private MudPagination _pagination;
+    
+    // Change _currentPage to a property to trigger data loading on change
+    private int _currentPage = 1;
+    private int CurrentPage
+    {
+        get => _currentPage;
+        set
+        {
+            if (_currentPage != value)
+            {
+                _currentPage = value;
+                // Use Task.Run to avoid blocking and handle async void pattern safely
+                _ = Task.Run(() => LoadDataForCurrentPage()); 
+            }
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
         await LoadCategories();
+        // Load the first page initially using the helper method
+        await LoadDataForCurrentPage(); 
     }
 
     private async Task LoadCategories()
@@ -108,63 +143,83 @@
         _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
     }
 
-    private async Task Paginate(int page)
+    // This method is no longer needed as LoadDataForCurrentPage handles pagination logic
+    // private async Task Paginate(int page)
+    // {
+    //     ...
+    // }
+
+    // Helper method to load data based on CurrentPage (property) and _selectedCategories
+    private async Task LoadDataForCurrentPage()
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
-
-        query.Add("Page", $"{page}");
+        query.Add("Page", $"{CurrentPage}"); // Use property CurrentPage
         query.Add("PageSize", $"{_pageSize}");
-
-        foreach (var c in _selectedCategories ?? Enumerable.Empty<string>())
+        foreach (var c in _selectedCategories)
         {
             query.Add("Categories", $"{c}");
         }
-
         _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
-        _pages = _pagedResult is not null ? _pagedResult.Total / _pagedResult.Size : 0;
+        
+        // Ensure _pagedResult and Total are checked before division
+        _pages = (_pagedResult is not null && _pagedResult.Total > 0 && _pagedResult.Size > 0) 
+                 ? (int)Math.Ceiling((double)_pagedResult.Total / _pagedResult.Size) 
+                 : 0;
+        
+        // Reset current page if it becomes invalid after filtering/data change
+        if (CurrentPage > _pages && _pages > 0) // Check _pages > 0 to avoid setting to 0
+        { 
+            _currentPage = 1; // Reset backing field directly to avoid re-triggering setter
+            // Re-fetch data for page 1 if the page was reset
+            await LoadDataForCurrentPage(); // Call again to load page 1 data
+            return; 
+        } else if (_pages == 0) {
+             _currentPage = 1; // Reset backing field to 1 if there are no pages
+        }
+        
+        await InvokeAsync(StateHasChanged); // Ensure UI updates after fetching data
     }
 
     private string GetColor(TimelineEvent timelineEvent)
     {
-        return timelineEvent.Template switch 
+        return timelineEvent.Template!.ToLower() switch 
         {
-            "Event" => Colors.LightBlue.Lighten1,
-            "Trade_route" => Colors.Cyan.Default,
-            "Campaign" => Colors.Shades.Black,
-            "Mission" => Colors.Grey.Darken4,
-            "Battle" => Colors.Red.Darken1,
-            "Duel" => Colors.Red.Darken2,
-            "Fleet" => Colors.Red.Darken3,
-            "War" => Colors.Red.Darken4,
-            "Disease" => Colors.Green.Darken4,
-            "Location" => Colors.Blue.Lighten1,
-            "City" => Colors.Blue.Darken1,
-            "Law" => Colors.Green .Darken1,
-            "Treaty" => Colors.Green .Darken2,
-            "Election" => Colors.Blue.Darken3,
-            "Character" => Colors.Brown.Default,
-            "Government" => Colors.Amber.Darken1,
-            "Organization" => Colors.Amber.Lighten1,
-            "Company" => Colors.Amber.Darken3,
-            "Religion" => Colors.Purple.Lighten1,
-            "Holocron" => Colors.Purple.Darken1,
-            "Lightsaber" => Colors.Purple.Darken2,
-            "Droid" => Colors.BlueGrey.Darken2,
-            "Artifact" => Colors.BlueGrey.Darken3,
+            "event" => Colors.LightBlue.Lighten1,
+            "trade_route" => Colors.Cyan.Default,
+            "campaign" => Colors.Shades.Black,
+            "mission" => Colors.Gray.Darken4,
+            "battle" => Colors.Red.Darken1,
+            "duel" => Colors.Red.Darken2,
+            "fleet" => Colors.Red.Darken3,
+            "war" => Colors.Red.Darken4,
+            "disease" => Colors.Green.Darken4,
+            "location" => Colors.Blue.Lighten1,
+            "city" => Colors.Blue.Darken1,
+            "law" => Colors.Green .Darken1,
+            "treaty" => Colors.Green .Darken2,
+            "election" => Colors.Blue.Darken3,
+            "character" => Colors.Brown.Default,
+            "government" => Colors.Amber.Darken1,
+            "organization" => Colors.Amber.Lighten1,
+            "company" => Colors.Amber.Darken3,
+            "religion" => Colors.Purple.Lighten1,
+            "holocron" => Colors.Purple.Darken1,
+            "lightsaber" => Colors.Purple.Darken2,
+            "droid" => Colors.BlueGray.Darken2,
+            "artifact" => Colors.BlueGray.Darken3,
             _ => Colors.Blue.Default
         };
     }
 
-    private async Task SelectedValuesChanged(IEnumerable<string> selectedCategories)
+    // Update signature to match delegate, handle potential nulls
+    private async Task SelectedValuesChanged(IEnumerable<string?>? selectedCategories)
     {
-        _selectedCategories = new List<string>(selectedCategories);
-
-        if (_selectedCategories.Count > 0)
-        {
-            await Paginate(1);
-        }
-        
-        StateHasChanged();
+        // Filter out nulls and update the list
+        _selectedCategories = selectedCategories?.Where(s => s != null).Select(s => s!).ToList() ?? new List<string>();
+        // Reset to page 1 when categories change
+        _currentPage = 1; // Reset backing field directly
+        await LoadDataForCurrentPage(); // Load data for the new page 1
     }
 
 }
+

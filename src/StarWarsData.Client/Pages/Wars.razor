@@ -8,7 +8,13 @@
          @if (_durations is not null)
          {
              <MudStack>
-                 <MudPagination Class="ma-4 sticky" ShowFirstButton="true" ShowLastButton="true" Count="_durationsPages" SelectedChanged="Durations"  />
+                 <MudPagination 
+                     Class="ma-4 sticky" 
+                     ShowFirstButton="true" 
+                     ShowLastButton="true"
+                     Count="_durationsPages" 
+                     SelectedChanged="Durations"  />
+                 
                  <MudChart
                      ChartType="ChartType.Line" 
                      ChartSeries="DurationsData" 
@@ -49,8 +55,8 @@
     
     private int _pageSize = 5;
     
-    private readonly ChartOptions _duratonOptions = new() { DisableLegend = false, XAxisLines = false, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
-    private readonly ChartOptions _battlesOptions = new() { DisableLegend = false, XAxisLines = false, YAxisLines = true, YAxisTicks = 100 };
+    private readonly ChartOptions _duratonOptions = new() { ShowLegend = true, XAxisLines = false, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
+    private readonly ChartOptions _battlesOptions = new() { ShowLegend = true, XAxisLines = false, YAxisLines = true, YAxisTicks = 100 };
 
     private List<ChartSeries> DurationsData => _durations!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
     private List<ChartSeries> BattlesData => _battles!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
