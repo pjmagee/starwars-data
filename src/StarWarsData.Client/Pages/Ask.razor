@@ -44,92 +44,63 @@
         switch (spec.AskChartType)
         {
             case AskChartType.Bar:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Bar);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartSeries), spec.Series!.Select(s => new ChartSeries() { Name = s.Name, Data = s.Data.ToArray() }).ToList()); 
+                builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
             case AskChartType.Line:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Line);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartSeries), spec.Series!.Select(s => new ChartSeries() { Name = s.Name, Data = s.Data.ToArray() }).ToList()); 
+                builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
             case AskChartType.Pie:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Pie);
+                builder.AddAttribute(seq++, nameof(MudChart.InputData), spec.Series!.SelectMany(x => x.Data).ToArray()); 
+                builder.AddAttribute(seq++, nameof(MudChart.InputLabels), spec.Labels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
             case AskChartType.Donut:
             {
                 builder.OpenComponent<MudChart>(seq++);
-                
-                var mudType = spec.AskChartType switch
-                {
-                    AskChartType.Bar => ChartType.Bar,
-                    AskChartType.Line => ChartType.Line,
-                    AskChartType.Pie => ChartType.Pie,
-                    AskChartType.Donut => ChartType.Donut,
-                    AskChartType.StackedBar => throw new NotSupportedException(),
-                    AskChartType.TimeSeries => throw new NotSupportedException(),
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-                
-                builder.AddAttribute(seq++, nameof(MudChart.ChartType), mudType);
-
-                // The labels describing data values. Applies to Pie and Donut charts.
-                // The number of labels in this array is typically the same as the number of values in the InputData property.
-     
-                if (spec.Labels?.Any() == true && mudType == ChartType.Pie || mudType != ChartType.Donut)
-                {
-                    builder.AddAttribute(seq++, nameof(MudChart.InputLabels), spec.Labels!.ToArray());
-                    builder.AddAttribute(seq++, nameof(MudChart.InputData), spec.Series!.SelectMany(x => x.Data).ToArray());
-                }
-                else
-                {
-                    if (spec.Series?.Any() == true)
-                    {
-                        var chartSeries = spec.Series.Select(s => new ChartSeries() { Name = s.Name, Data = s.Data.ToArray() }).ToList();
-                        builder.AddAttribute(seq++, nameof(MudChart.ChartSeries), chartSeries);
-                    }
-                }
-                
-                // line, bar and stacked
-                if (spec.XAxisLabels?.Any() == true)
-                {
-                    builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels.ToArray());
-                }
-                
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Donut);
+                builder.AddAttribute(seq++, nameof(MudChart.InputData), spec.Series!.SelectMany(x => x.Data).ToArray());
+                builder.AddAttribute(seq++, nameof(MudChart.InputLabels), spec.Labels!.ToArray());
                 builder.CloseComponent();
                 break;
             }
             case AskChartType.StackedBar:
             {
-                builder.OpenComponent<StackedBar>(seq++);
+                builder.OpenComponent<MudChart>(seq++);
                 builder.AddAttribute(seq++, nameof(StackedBar.ChartType), ChartType.StackedBar);
-                
                 var series =  spec.Series?.Select(s => new ChartSeries() { Name = s.Name, Data = s.Data.ToArray() }).ToList();
                 builder.AddAttribute(seq++, nameof(StackedBar.ChartSeries), series);
-                
-                if (spec.XAxisLabels?.Any() == true)
-                {
-                    builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels.ToArray());
-                }
-                 
-                builder.CloseComponent();
-                break;
-            } 
-            // TimeSeries → <MudTimeSeriesChart> (completely different API)
-            case AskChartType.TimeSeries:
-            {
-                builder.OpenComponent<MudTimeSeriesChart>(seq++);
-                builder.AddAttribute(seq++, nameof(MudTimeSeriesChart.ChartType), ChartType.Timeseries);
-                
-                if (spec.TimeSeries?.Any() == true)
-                {
-                    var timeSeries = spec.TimeSeries.Select((ts, idx) => new TimeSeriesChartSeries()
-                        {
-                            Index = idx,
-                            Name = ts.Name,
-                            Data = ts.Data.Select(dp => new TimeSeriesChartSeries.TimeValue(dp.X, dp.Y)).ToList()
-                        }
-                    ).ToList();
-
-                    builder.AddAttribute(seq++, nameof(TimeSeries.ChartSeries), timeSeries);
-                }
+                builder.AddAttribute(seq++, nameof(StackedBar.XAxisLabels), spec.XAxisLabels?.ToArray());
                 builder.CloseComponent();
                 break;
             }
-
-            default:
+            case AskChartType.TimeSeries:
             {
-                builder.AddContent(seq++, $"Unknown chart type: {spec.AskChartType}");
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(TimeSeries.ChartType), ChartType.Timeseries);
+                builder.AddAttribute(seq++, nameof(TimeSeries.ChartSeries), spec.TimeSeries!.Select((ts, idx) => new TimeSeriesChartSeries()
+                    {
+                        Index = idx,
+                        Name = ts.Name,
+                        Data = ts.Data.Select(dp => new TimeSeriesChartSeries.TimeValue(dp.X, dp.Y)).ToList()
+                    }
+                ).ToList());
+                builder.CloseComponent();
                 break;
             }
         }

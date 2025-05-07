@@ -26,8 +26,7 @@ public class KernelController : ControllerBase
     readonly Kernel _kernel;
     readonly IMongoDatabase _db;
     readonly Settings _settings;
-
-    StdioClientTransport _transport;
+    readonly IClientTransport _transport;
 
     public KernelController(ILogger<KernelController> logger, Kernel kernel, IMongoDatabase db, Settings settings)
     {
