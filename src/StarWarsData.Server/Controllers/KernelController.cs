@@ -38,7 +38,14 @@ public class KernelController : ControllerBase
             {
                 Name = "MongoDB",
                 Command = "npx",
-                Arguments = ["-y", "mongodb-mcp-server", "--connectionString", _settings.MongoConnectionString]
+                Arguments =
+                [
+                    "-y",
+                    "mongodb-mcp-server",
+                    "--connectionString",
+                    _settings.MongoConnectionString,
+                    "--readOnly"
+                ]
             }
         );
     }
@@ -52,7 +59,7 @@ public class KernelController : ControllerBase
         _kernel.Plugins.Clear();
         _kernel.Plugins.AddFromType<ChartToolkit>(pluginName: "ChartToolkit");
         IEnumerable<KernelFunction> functions = tools.Select(aiFunction => aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction());
-        _kernel.Plugins.AddFromFunctions(pluginName: "MongoDB", functions: functions);
+        _kernel.Plugins.AddFromFunctions(pluginName: "MongoDBToolkit", functions: functions);
 
         OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
         {
@@ -65,6 +72,7 @@ public class KernelController : ControllerBase
                 }
             ),
             Temperature = 0,
+            ReasoningEffort = ChatReasoningEffortLevel.Medium
         };
 
         var chatHistory = new ChatHistory();
@@ -72,18 +80,29 @@ public class KernelController : ControllerBase
         // 4️⃣ Build your chat history and let SK do the function‐calling
         chatHistory.AddSystemMessage(
             """
-            You are a helpful chart building assistant.
-
-            IMPORTANT: 
-            ONLY EXECUTE READ COMMANDS AND QUERIES. DO NOT EXECUTE WRITE/MODIFY COMMANDS.
+            You are a precise and helpful chart-building assistant.
             
-            You are to assist in providing a chart based on the users question.
+            GOAL:
+            Help the user visualize data by finding relevant records and rendering an appropriate chart using the ChartToolkit plugin.
 
-            1. Find the closest collection in the database relevant to the users question.
-            2. Find relevant data from the records in the collection.
-            3. End with calling the render_chart function from the ChartToolkit plugin.
+            CAPABILITIES:
+            ✅ You can call tools from MongoDBToolkit (the data is here)
+            ✅ You can call the tool from ChartToolkit (to render the chart)
             
-            Your final message should contain ONLY the JSON output of the render_chart function.
+            STRATEGY:
+            1. Identify the scope of the user’s question (e.g., time period, category, filters).
+            2. Extract only the relevant records and fields.
+            3. Choose the right chart type based on data structure and user intent.
+            4. Generate a JSON call to `render_chart(...)`.
+
+            RULES (FOLLOW STRICTLY):
+            1. Only select and aggregate data relevant to the user’s question.
+            2. Keep fields minimal — include only what’s needed for the chart.
+            3. Do not include extra commentary or explanation in your final message.
+            4. Your final message MUST be the JSON function call to `render_chart`.
+
+            FINAL OUTPUT:
+            Only output a single JSON object that represents the render_chart function call.
             """
         );
 

@@ -11,21 +11,18 @@ public class PowerService
 {
     private readonly ILogger<PowerService> _logger;
     private readonly Settings _settings;
-    private readonly MongoClient _mongoClient;
+    private readonly IMongoDatabase _db;
 
-    private IMongoDatabase _mongoDb;
-
-    public PowerService(ILogger<PowerService> logger, Settings settings)
+    public PowerService(ILogger<PowerService> logger, IMongoDatabase db, Settings settings)
     {
         _logger = logger;
         _settings = settings;
-        _mongoClient = new MongoClient(settings.MongoConnectionString);
-        _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
+        _db = db;
     }
 
     public async Task<ChartData<int>> GetPowersChart()
     {
-        List<BsonDocument> results = await _mongoDb
+        List<BsonDocument> results = await _db
             .GetCollection<BsonDocument>("Force_power")
             .Find(Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Titles"))
             .Project(Builders<BsonDocument>.Projection.Exclude(doc => doc["Relationships"]))

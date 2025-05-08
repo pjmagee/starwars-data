@@ -1,0 +1,103 @@
+@page "/galactic-map"
+@inject HttpClient Http
+
+<MudPaper Class="galactic-grid-with-headers">
+    <div class="header-cell empty-header" style="grid-column:1; grid-row:1"></div>
+    @for (int i = 0; i < Alphabet.Length; i++)
+    {
+        <div class="header-cell col-header" style="grid-column:@(i + 2); grid-row:1">@Alphabet[i]</div>
+    }
+    @for (int row = 1; row <= Rows; row++)
+    {
+        <div class="header-cell row-header" style="grid-column:1; grid-row:@(row + 1)">@row</div>
+        @for (int col = 0; col < Columns; col++)
+        {
+            var key = Alphabet[col] + "-" + row;
+            var cell = Grid.TryGetValue(key, out var c) ? c : null;
+            var sectorClass = cell?.Sector is not null ? "sector-" + cell.Sector.Replace(" ", "-").ToLower() : "";
+            <div class=@($"cell {sectorClass}")>
+                @if (cell != null && (cell.Systems.Count > 0 || cell.PlanetsWithoutSystem.Count > 0))
+                {
+                    <MudIconButton
+                        Icon="@Icons.Material.Filled.Info" 
+                        Size="Size.Small"
+                        Color="Color.Primary" OnClick="@(() => ToggleOpen(key))" />   
+                    <MudPopover
+                        Open="@(_openCellKey == key)"
+                        Square=true Delay=100>
+                        <div class="popover-content">
+                            @if (cell.Systems.Count > 0)
+                            {
+                                <b>Systems:</b>
+                                <ul class="popover-list">
+                                    @foreach (var sys in cell.Systems)
+                                    {
+                                        <li>
+                                            <b>@sys.Name</b>
+                                            <ul>
+                                                @foreach (var planet in sys.Planets)
+                                                {
+                                                    <li>@planet.Name</li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            @if (cell.PlanetsWithoutSystem.Count > 0)
+                            {
+                                <b>Planets:</b>
+                                <ul>
+                                    @foreach (var planet in cell.PlanetsWithoutSystem)
+                                    {
+                                        <li>@planet.Name</li>
+                                    }
+                                </ul>
+                            }
+                            <MudButton Color="Color.Error" OnClick="@(() => ToggleOpen(null))" Class="close-btn">Close</MudButton>
+                        </div>
+                    </MudPopover>
+                }
+            </div>
+        }
+    }
+</MudPaper>
+
+@code {
+    private const int Columns = 26; // A-Z
+    private const int Rows = 20;    // 1-20
+    private readonly static string[] Alphabet = Enumerable.Range('A', Columns).Select(x => ((char)x).ToString()).ToArray();
+
+    private Dictionary<string, GalaxyGridCell> Grid = new();
+
+    private string? _openCellKey;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>("GalaxyMap/grid") ?? Array.Empty<GalaxyGridCell>();
+        Grid = cells.ToDictionary(c => c.Letter + "-" + c.Number);
+    }
+
+    private string GetTooltip(GalaxyGridCell cell)
+    {
+        var tooltip = string.Empty;
+        foreach (var sys in cell.Systems)
+        {
+            tooltip += "System: " + sys.Name + "\n";
+            foreach (var planet in sys.Planets)
+                tooltip += "- " + planet.Name + "\n";
+        }
+        if (cell.PlanetsWithoutSystem.Count > 0)
+        {
+            tooltip += "Planets:\n";
+            foreach (var planet in cell.PlanetsWithoutSystem)
+                tooltip += "- " + planet.Name + "\n";
+        }
+        return tooltip;
+    }
+
+    private void ToggleOpen(string? key)
+    {
+        _openCellKey = key == _openCellKey ? null : key;
+    }
+}
