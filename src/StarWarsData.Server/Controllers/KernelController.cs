@@ -10,6 +10,7 @@ using ModelContextProtocol.Client;
 using ModelContextProtocol.Protocol.Transport;
 using ModelContextProtocol.Protocol.Types;
 using OpenAI.Chat;
+using StarWarsData.Models.Queries;
 using StarWarsData.Services.Plugins;
 using FunctionResultContent = Microsoft.SemanticKernel.FunctionResultContent;
 

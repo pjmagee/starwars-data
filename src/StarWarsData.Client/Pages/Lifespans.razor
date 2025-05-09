@@ -48,6 +48,6 @@
         query.Add("PageSize", $"{_pageSize}");
 
         _pagedResult = await Http.GetFromJsonAsync<PagedChartData<double>>($"characters/charts/lifespans?{query}");
-        _pages = _pagedResult.Total / _pagedResult.PageSize;
+        _pages = _pagedResult!.Total / _pagedResult.PageSize;
     }
 }

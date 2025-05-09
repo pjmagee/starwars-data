@@ -25,13 +25,9 @@
     min-height: 40px;
 }
 
-.popover-content {
-    padding: 12px;
-    min-width: 200px;
-}
-
-.popover-list {
-    margin-bottom: 8px;
+.cell.selected {
+    border: 2px solid var(--mud-palette-primary);
+    background-color: rgba(126, 111, 255, 0.2);
 }
 
 .close-btn {
@@ -79,4 +75,35 @@
 .empty-header {
     background: transparent;
     border: none;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.popover-close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: #fff;
+    background: transparent;
+}
+
+.galaxy-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 64px); /* adjust for app bar height */
+    box-sizing: border-box;
+}
+
+.galaxy-grid-panel {
+    flex: 8 1 0;
+    min-width: 0;
+    overflow: auto;
+}
+
+.galaxy-details-panel {
+    flex: 2 1 0;
+    min-width: 200px;
+    overflow: auto;
+    border-left: 1px solid rgba(255,255,255,0.1);
 }

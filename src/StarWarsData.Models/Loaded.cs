@@ -1,4 +1,4 @@
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Models;
 

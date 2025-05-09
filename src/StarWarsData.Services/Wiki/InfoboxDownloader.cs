@@ -6,7 +6,7 @@ using AngleSharp;
 using AngleSharp.Dom;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models;
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Entities;
 using StarWarsData.Services.Helpers;
 
 namespace StarWarsData.Services.Wiki;

@@ -1,103 +1,244 @@
 @page "/galactic-map"
 @inject HttpClient Http
 
-<MudPaper Class="galactic-grid-with-headers">
-    <div class="header-cell empty-header" style="grid-column:1; grid-row:1"></div>
-    @for (int i = 0; i < Alphabet.Length; i++)
-    {
-        <div class="header-cell col-header" style="grid-column:@(i + 2); grid-row:1">@Alphabet[i]</div>
-    }
-    @for (int row = 1; row <= Rows; row++)
-    {
-        <div class="header-cell row-header" style="grid-column:1; grid-row:@(row + 1)">@row</div>
-        @for (int col = 0; col < Columns; col++)
-        {
-            var key = Alphabet[col] + "-" + row;
-            var cell = Grid.TryGetValue(key, out var c) ? c : null;
-            var sectorClass = cell?.Sector is not null ? "sector-" + cell.Sector.Replace(" ", "-").ToLower() : "";
-            <div class=@($"cell {sectorClass}")>
-                @if (cell != null && (cell.Systems.Count > 0 || cell.PlanetsWithoutSystem.Count > 0))
+<MudStack Row="false">
+    
+    <!-- Region filter legend -->
+    <MudPaper Elevation="10">
+        <MudChipSet T="string" @bind-SelectedValues="_selectedRegions" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
+            @foreach (var kv in _regionColors)
+            {
+                <MudChip Value="@kv.Key" Style="@($"background-color:{kv.Value}; color:#fff;")" />
+            }
+        </MudChipSet>
+    </MudPaper>
+    
+    <MudStack Row="true" Spacing="2" Class="h-100">
+        <!-- Left column: Tabs lists -->
+        <MudPaper Class="pa-2 galaxy-left" Style="width:20%; height:100%; overflow-y:auto;">
+            <MudText Typo="Typo.h6">Regions</MudText>
+            <MudList Dense="true" T="RegionDto" Style="max-height:150px; overflow-y:auto;">
+                @foreach (var r in CellRegions)
                 {
-                    <MudIconButton
-                        Icon="@Icons.Material.Filled.Info" 
-                        Size="Size.Small"
-                        Color="Color.Primary" OnClick="@(() => ToggleOpen(key))" />   
-                    <MudPopover
-                        Open="@(_openCellKey == key)"
-                        Square=true Delay=100>
-                        <div class="popover-content">
-                            @if (cell.Systems.Count > 0)
-                            {
-                                <b>Systems:</b>
-                                <ul class="popover-list">
-                                    @foreach (var sys in cell.Systems)
-                                    {
-                                        <li>
-                                            <b>@sys.Name</b>
-                                            <ul>
-                                                @foreach (var planet in sys.Planets)
-                                                {
-                                                    <li>@planet.Name</li>
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                            @if (cell.PlanetsWithoutSystem.Count > 0)
-                            {
-                                <b>Planets:</b>
-                                <ul>
-                                    @foreach (var planet in cell.PlanetsWithoutSystem)
-                                    {
-                                        <li>@planet.Name</li>
-                                    }
-                                </ul>
-                            }
-                            <MudButton Color="Color.Error" OnClick="@(() => ToggleOpen(null))" Class="close-btn">Close</MudButton>
-                        </div>
-                    </MudPopover>
+                    <MudListItem T="RegionDto" Text="@r.Name" OnClick="() => LoadDetails(EntityType.Region, r.Id)" />
                 }
-            </div>
-        }
-    }
-</MudPaper>
+            </MudList>
+            <MudText Typo="Typo.h6">Sectors</MudText>
+            <MudList Dense="true" T="SectorDto" Style="max-height:150px; overflow-y:auto;">
+                @foreach (var s in CellSectors)
+                {
+                    <MudListItem T="SectorDto" Text="@s.Name" OnClick="() => LoadDetails(EntityType.Sector, s.Id)" />
+                }
+            </MudList>
+            <MudText Typo="Typo.h6">Systems</MudText>
+            <MudList Dense="true" T="SystemDto" Style="max-height:150px; overflow-y:auto;">
+                @foreach (var sys in CellSystems)
+                {
+                    <MudListItem T="SystemDto" Text="@sys.Name" OnClick="() => LoadDetails(EntityType.System, sys.Id)" />
+                }
+            </MudList>
+            <MudText Typo="Typo.h6">Planets</MudText>
+            <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
+                @foreach (var p in CellPlanets)
+                {
+                    <MudListItem T="GalaxyMapItem" Text="@p.Name" OnClick="() => LoadDetails(EntityType.CelestialBody, p.Id)" />
+                }
+            </MudList>
+        </MudPaper>
+        
+        <!-- Center column: Galaxy map / Regions legend/chips -->
+        <MudStack Row="false">
+           
+            <!-- Galaxy map grid -->
+            <MudPaper Elevation="10" Class="galactic-grid-with-headers galaxy-center h-100">
+                
+                <div class="header-cell empty-header"></div>
+
+                @for (int i = 0; i < Alphabet.Length; i++)
+                {
+                    <div class="header-cell col-header">@Alphabet[i]</div>
+                }
+                @for (int row = 1; row <= Rows; row++)
+                {
+                    <div class="header-cell row-header">@row</div>
+
+                    @for (int col = 0; col < Columns; col++)
+                    {
+                        var key = Alphabet[col] + "-" + row;
+                        var cell = Grid.TryGetValue(key, out var c) ? c : null;
+                        <div class="@("cell" + (key == _selectedCellKey ? " selected" : ""))">
+                            @if (cell != null && cell.Region != null && _selectedRegions.Contains(cell.Region))
+                            {
+                                <MudIconButton Icon="@Icons.Material.Filled.Info"
+                                               Style="@($"color:{GetInfoIconColor(cell.Region)}")"
+                                               Size="Size.Small"
+                                               OnClick="() => ToggleSelect(key)"/>
+                            }
+                        </div>
+                    }
+                }
+            </MudPaper>
+        </MudStack>
+        
+        <!-- Right column: Details pane -->
+        <MudPaper Class="pa-4 galaxy-right h-100" Style="width:20%; overflow-y:auto;">
+            @if (_loadingDetails)
+            {
+                <MudProgressCircular Indeterminate="true" />
+            }
+            else if (SelectedDetails is RegionDto rdto)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6">@rdto.Name</MudText>
+                    </MudCardHeader>
+                </MudCard>
+            }
+            else if (SelectedDetails is SectorDto sdto)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6">@sdto.Name</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>Sector ID: @sdto.Id</MudText>
+                    </MudCardContent>
+                </MudCard>
+            }
+            else if (SelectedDetails is SystemDetailsDto sysd)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6">@sysd.Name</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>Grid: @sysd.GridSquare</MudText>
+                        <MudText>Planets: @string.Join(", ", sysd.Planets)</MudText>
+                        <MudText>Neighbors: @string.Join(", ", sysd.Neighbors)</MudText>
+                    </MudCardContent>
+                </MudCard>
+            }
+            else if (SelectedDetails is CelestialBodyDetailsDto bdto)
+            {
+                <MudCard>
+                    <MudCardHeader><MudText Typo="Typo.h6">@bdto.Name</MudText></MudCardHeader>
+                    <MudCardContent>
+                        <MudText>Class: @bdto.Class</MudText>
+                        <MudText>Grid: @bdto.GridSquare</MudText>
+                        <MudText>Sector: @bdto.Sector</MudText>
+                        <MudText>Region: @bdto.Region</MudText>
+                        @foreach (var kv in bdto.AdditionalData)
+                        {
+                            <MudText>@kv.Key: @string.Join(", ", kv.Value)</MudText>
+                        }
+                    </MudCardContent>
+                </MudCard>
+            }
+            else
+            {
+                <MudText>Select an item to view details.</MudText>
+            }
+        </MudPaper>
+    </MudStack>
+    
+</MudStack>
+
 
 @code {
-    private const int Columns = 26; // A-Z
-    private const int Rows = 20;    // 1-20
+    private const int Columns = 26;
+    private const int Rows = 20;
     private readonly static string[] Alphabet = Enumerable.Range('A', Columns).Select(x => ((char)x).ToString()).ToArray();
 
     private Dictionary<string, GalaxyGridCell> Grid = new();
-
     private string? _openCellKey;
+    private string? _selectedCellKey;
+    private bool _loadingDetails;
+    private object? SelectedDetails;
+    private EntityType _selectedType;
+    private Dictionary<string, string> _regionColors = new();
+    private List<RegionDto> CellRegions = new();
+    private List<SectorDto> CellSectors = new();
+    private List<SystemDto> CellSystems = new();
+    private List<GalaxyMapItem> CellPlanets = new();
+    private IReadOnlyCollection<string> _selectedRegions = new List<string>();
 
     protected override async Task OnInitializedAsync()
     {
-        var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>("GalaxyMap/grid") ?? Array.Empty<GalaxyGridCell>();
-        Grid = cells.ToDictionary(c => c.Letter + "-" + c.Number);
+        var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>("GalaxyMap/grid");
+        Grid = cells?.ToDictionary(c => c.Letter + "-" + c.Number) ?? new();
+        GenerateRegionColors();
     }
 
-    private string GetTooltip(GalaxyGridCell cell)
+    private void GenerateRegionColors()
     {
-        var tooltip = string.Empty;
-        foreach (var sys in cell.Systems)
+        var rnd = new Random(42);
+        foreach (var region in Grid.Values.Select(c => c.Region).Where(r => !string.IsNullOrEmpty(r)).Distinct())
         {
-            tooltip += "System: " + sys.Name + "\n";
-            foreach (var planet in sys.Planets)
-                tooltip += "- " + planet.Name + "\n";
+            var hue = rnd.Next(0, 360);
+            _regionColors[region!] = $"hsl({hue}, 60%, 50%)";
         }
-        if (cell.PlanetsWithoutSystem.Count > 0)
-        {
-            tooltip += "Planets:\n";
-            foreach (var planet in cell.PlanetsWithoutSystem)
-                tooltip += "- " + planet.Name + "\n";
-        }
-        return tooltip;
     }
 
     private void ToggleOpen(string? key)
     {
         _openCellKey = key == _openCellKey ? null : key;
     }
+
+    private void ToggleSelect(string? key)
+    {
+        _selectedCellKey = key == _selectedCellKey ? null : key;
+        if (_selectedCellKey != null)
+        {
+            var cell = Grid[_selectedCellKey];
+            CellRegions = cell.RegionId.HasValue && !string.IsNullOrEmpty(cell.Region)
+                ? new List<RegionDto> { new RegionDto { Name = cell.Region!, Id = cell.RegionId.Value } }
+                : new List<RegionDto>();
+            CellSectors = cell.SectorId.HasValue && !string.IsNullOrEmpty(cell.Sector)
+                ? new List<SectorDto> { new SectorDto { Name = cell.Sector!, Id = cell.SectorId.Value } }
+                : new List<SectorDto>();
+            CellSystems = cell.Systems.Select(s => new SystemDto { Name = s.Name, Id = s.Id }).ToList();
+            CellPlanets = cell.Systems.SelectMany(s => s.Planets)
+                .Concat(cell.PlanetsWithoutSystem)
+                .ToList();
+        }
+        else
+        {
+            CellRegions.Clear();
+            CellSectors.Clear();
+            CellSystems.Clear();
+            CellPlanets.Clear();
+        }
+    }
+
+    private async Task LoadDetails(EntityType type, int id)
+    {
+        try
+        {
+            _loadingDetails = true;
+            _selectedType = type;
+            SelectedDetails = type switch
+            {
+                EntityType.System => await Http.GetFromJsonAsync<SystemDetailsDto>($"GalaxyMap/system/{id}"),
+                EntityType.CelestialBody => await Http.GetFromJsonAsync<CelestialBodyDetailsDto>($"GalaxyMap/celestialbody/{id}"),
+                EntityType.Sector => await Http.GetFromJsonAsync<SectorDto>($"GalaxyMap/sector/{id}"),
+                _ => null
+            };
+        }
+        catch { }
+        finally { _loadingDetails = false; }
+    }
+
+    private int GetCellPlanetCount(GalaxyGridCell cell)
+    {
+        return cell.Systems.Sum(s => s.Planets.Count) + cell.PlanetsWithoutSystem.Count;
+    }
+
+    private string GetInfoIconColor(string? region)
+    {
+        if (region != null && _regionColors.TryGetValue(region, out var color))
+            return color;
+        return "#ccc";
+    }
+
+    enum EntityType { System, CelestialBody, Sector, Region }
 }

@@ -1,8 +1,7 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using Microsoft.Extensions.AI;
 
-namespace StarWarsData.Models;
+namespace StarWarsData.Models.Queries;
 
 public sealed record UserPrompt(string Question);
 

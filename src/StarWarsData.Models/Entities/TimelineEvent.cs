@@ -1,25 +1,46 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Queries;
 
-namespace StarWarsData.Models.Queries;
+namespace StarWarsData.Models.Entities;
 
 public class TimelineEvent : IComparable<TimelineEvent>
 {
+    [BsonIgnore]
     public string DisplayTitle => $"{DateEvent} {Title} ({Template})".Trim();
-    
-    // Updated DisplayYear to handle null Year
+    [BsonIgnore]
     public string DisplayYear => Year.HasValue ? $"{Year.Value:##,###} {Demarcation}" : "Unknown Year";
+    [BsonIgnore]
     public string? DisplayImageWithoutRevision => ImageUrl?.Split(new [] {"/revision" }, StringSplitOptions.RemoveEmptyEntries)[0];
-    public string? Title { get; set; } // Made nullable
-    public string? Template { get; set; } // Made nullable
+    
+    
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+
+    [BsonElement("Title")]
+    public string? Title { get; set; }
+
+    [BsonElement("Template")]
+    public string? Template { get; set; }
+
+    [BsonElement("CleanedTemplate")]
+    public string? CleanedTemplate { get; set; }
+
+    [BsonElement("ImageUrl")]
     public string? ImageUrl { get; set; }
-    
-    [BsonRepresentation(BsonType.String)] // Add this attribute
+
+    [BsonElement("Demarcation")]
+    [BsonRepresentation(BsonType.String)]
     public Demarcation Demarcation { get; set; }
-    
-    public float? Year { get; set; } // Changed to nullable float
-    public List<InfoboxProperty> Properties { get; set; }
+
+    [BsonElement("Year")]
+    public float? Year { get; set; }
+
+    [BsonElement("Properties")]
+    public List<InfoboxProperty> Properties { get; set; } = new(); // Initialize to avoid nulls
+
+    [BsonElement("DateEvent")]
     public string? DateEvent { get; set; }
     
     public int CompareTo(TimelineEvent? other)
@@ -48,4 +69,3 @@ public class TimelineEvent : IComparable<TimelineEvent>
         };
     }
 }
-

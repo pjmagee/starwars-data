@@ -1,9 +1,8 @@
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace StarWarsData.Models.Mongo;
+namespace StarWarsData.Models.Entities;
 
-[Serializable]
 public class HyperLink
 {
     [BsonElement, JsonInclude]

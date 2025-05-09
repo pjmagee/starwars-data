@@ -1,5 +1,5 @@
 using MongoDB.Bson;
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services.Helpers;
 
@@ -14,16 +14,17 @@ public class YearHelper(YearComparer yearComparer)
             return false;
         
         var containsYear =  char.IsDigit(hyperLink.Content.First());
+
+        var isDemarcationPresent =
+            hyperLink.Content.Contains(YearComparer.Bby, StringComparison.OrdinalIgnoreCase) ||
+            hyperLink.Content.Contains(YearComparer.Aby, StringComparison.OrdinalIgnoreCase
+            );
         
-        var containsDemarcation = hyperLink.Content
-            .Contains(YearComparer.Bby, StringComparison.OrdinalIgnoreCase) || 
-                                  hyperLink.Content.Contains(YearComparer.Aby, StringComparison.OrdinalIgnoreCase);
-        
-        var linkContainsDemarcation = containsDemarcation && (
+        var linkContainsDemarcation = isDemarcationPresent && (
             hyperLink.Href.Contains("_BBY", StringComparison.OrdinalIgnoreCase) || 
             hyperLink.Href.Contains("_ABY", StringComparison.OrdinalIgnoreCase));
         
-        return containsYear && containsDemarcation && linkContainsDemarcation;
+        return containsYear && isDemarcationPresent && linkContainsDemarcation;
     }
     
     public bool IsValidLink(BsonValue link)

@@ -19,7 +19,7 @@
     private ChartData<double>? _chartData;
     public string[] Labels => _chartData!.Labels;
 
-    public List<ChartSeries> Series => _chartData.Series.Select(x =>
+    public List<ChartSeries> Series => _chartData!.Series.Select(x =>
     {
         return new ChartSeries()
         {

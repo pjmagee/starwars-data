@@ -1,5 +1,5 @@
 using MongoDB.Bson.Serialization;
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services.Mongo;
 

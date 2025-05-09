@@ -2,9 +2,22 @@ using StarWarsData.Models.Queries;
 
 namespace StarWarsData.Services.Helpers;
 
+/// <summary>
+/// For context:
+/// 19 BBY = The year of Revenge of the Sith (when Anakin turns into Darth Vader).
+/// 0 BBY / 0 ABY = A New Hope (Death Star goes boom).
+/// 4 ABY = Return of the Jedi (Vader dies, Palpatine gets yeeted down a shaft).
+/// </summary>
 public class YearComparer : Comparer<string>
 {
+    /// <summary>
+    /// Before Battle of Yavin (BBY)
+    /// </summary>
     public const string Bby = "BBY";
+    
+    /// <summary>
+    /// After Battle of Yavin (ABY)
+    /// </summary>
     public const string Aby = "ABY";
     
     public override int Compare(string? x, string? y)

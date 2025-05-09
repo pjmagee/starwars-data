@@ -4,7 +4,7 @@ using StarWarsData.Models;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services.Mongo;
 using StarWarsData.Services.Helpers;
-using TimelineEvent = StarWarsData.Models.Mongo.TimelineEvent; // Add using for TemplateHelper
+using TimelineEvent = StarWarsData.Models.Entities.TimelineEvent; // Add using for TemplateHelper
 
 namespace StarWarsData.Services.Data;
 
@@ -16,10 +16,7 @@ public class TimelineService
 
     public TimelineService(
         ILogger<TimelineService> logger, 
-        Settings settings, 
-        RecordToEventsTransformer transformer, 
-        MongoDefinitions mongoDefinitions, 
-        CollectionFilters collectionFilters, 
+        Settings settings,
         IMongoDatabase database,
         TemplateHelper templateHelper)
     {
@@ -46,10 +43,10 @@ public class TimelineService
             .Limit(pageSize)
             .ToListAsync();
 
-        var timelineEvents = timelineEventDocuments.Select(doc => new Models.Queries.TimelineEvent
+        var timelineEvents = timelineEventDocuments.Select(doc => new TimelineEvent
         {
             Title = doc.Title,
-            Template = doc.CleanedTemplate, // Use CleanedTemplate for display
+            Template = doc.CleanedTemplate,
             ImageUrl = doc.ImageUrl,
             Demarcation = doc.Demarcation,
             Year = doc.Year,
@@ -77,7 +74,6 @@ public class TimelineService
     public async Task<List<string>> GetDistinctTemplatesAsync()
     {
         var templates = await _timelineEventsCollection.Distinct<string>("Template", FilterDefinition<TimelineEvent>.Empty).ToListAsync();
-        // Use helper method
         return templates.Select(_templateHelper.CleanTemplate).Distinct().OrderBy(x => x).ToList(); 
     }
 }

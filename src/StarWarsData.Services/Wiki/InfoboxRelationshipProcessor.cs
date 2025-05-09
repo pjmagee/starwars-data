@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models;
-using StarWarsData.Models.Mongo;
+using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services.Wiki;
 

@@ -7,6 +7,7 @@ using Microsoft.SemanticKernel.Embeddings;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
+using StarWarsData.Models.Queries;
 
 namespace StarWarsData.Services.Plugins;
 

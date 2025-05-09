@@ -1,4 +1,5 @@
 ﻿@page "/tables"
+@using StarWarsData.Models.Entities
 
 @inject HttpClient Http
 
@@ -140,7 +141,7 @@ else
     private string[]? _categories;
     private string? _category;
 
-    private MudTable<Record> _table;
+    private MudTable<Record>? _table;
     private PagedResult? _pagedResult;
 
     private IEnumerable<string> DynamicHeaders

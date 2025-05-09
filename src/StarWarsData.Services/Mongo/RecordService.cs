@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.VectorData;
 using MongoDB.Driver;
 using StarWarsData.Models;
-using StarWarsData.Models.Mongo;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services.Data;
 using StarWarsData.Services.Helpers;
@@ -14,7 +13,8 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Embeddings;
 using Microsoft.SemanticKernel.Text;
 using MongoDB.Bson;
-using TimelineEvent = StarWarsData.Models.Mongo.TimelineEvent;
+using StarWarsData.Models.Entities;
+using TimelineEvent = StarWarsData.Models.Entities.TimelineEvent;
 
 #pragma warning disable SKEXP0001
 #pragma warning disable SKEXP0050

@@ -5,7 +5,7 @@ using Microsoft.Extensions.VectorData;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace StarWarsData.Models.Mongo;
+namespace StarWarsData.Models.Entities;
 
 [Serializable]
 public class Record

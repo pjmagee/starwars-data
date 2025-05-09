@@ -1,105 +1,84 @@
 ﻿@page "/timeline"
-
-@using System.Web
-@using TimelineEvent = StarWarsData.Models.Queries.TimelineEvent
+@using StarWarsData.Models.Entities
 @inject HttpClient Http
 
 <PageTitle>Timeline</PageTitle>
 
-<MudGrid>
-    <MudItem xs="2">
-        @if (_categories is not null)
-        {
-            <MudSelect T="string" MultiSelection="true" Dense="true" SelectedValues="_selectedCategories" SelectedValuesChanged="SelectedValuesChanged">
-                @foreach (var category in _categories)
-                {
-                    <MudSelectItem T="string" Value="category">
-                        @category.Replace("_infobox", string.Empty).Replace("_", " ")
-                    </MudSelectItem>
-                }
-            </MudSelect>
-        }
-    </MudItem>
-    <MudItem xs="10">
-        @if (_pagedResult is not null)
-        {
-            <MudStack 
-                Row="false" 
-                Spacing="4" 
-                Justify="Justify.SpaceBetween">
-                
-                <MudPagination
-                    @bind-Selected="CurrentPage" 
-                    Class="ma-4 sticky" 
-                    ShowFirstButton="true" 
-                    ShowLastButton="true" 
-                    Count="_pages" />
-                
-                <MudTimeline 
-                    TimelineOrientation="TimelineOrientation.Vertical" 
-                    TimelineAlign="TimelineAlign.Default" 
-                    TimelinePosition="TimelinePosition.Alternate" 
-                    Class="ma-4" 
-                    Modifiers="false">
+<MudStack Direction="Direction.Column" Spacing="4" AlignItems="AlignItems.Center">
+    @if (_categories is not null)
+    {
+        <MudSelect T="string"
+                   @bind-SelectedValues="_selectedCategories"
+                   MultiSelection="true" Dense="false" FullWidth="true">
+            @foreach (var category in _categories)
+            {
+                <MudSelectItem T="string" Value="@category">
+                    @category.Replace("_infobox", string.Empty).Replace("_", " ")
+                </MudSelectItem>
+            }
+        </MudSelect>
+    }
 
-                    @{
-                        var isStart = true;
-                    }
+    @if (_pagedResult is not null)
+    {
+        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
 
-                    @foreach (var timelineEvents in _pagedResult.Items)
-                    {
-                        var contentAlign = isStart ? Align.Left : Align.Right;
-                        var yearAlign = isStart ? Align.Right : Align.Left;
+        <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
+            @{
+                var isStart = true;
+            }
 
-                        <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
-                            <ItemOpposite>
-                                <MudText Color="Color.Info" Typo="Typo.h5" Align="yearAlign">@timelineEvents.Year</MudText>
-                            </ItemOpposite>
-                            <ItemContent>
-                                <MudExpansionPanels Dense="true" MultiExpansion="true" Style="max-height: 600px; overflow: auto;">
-                                    @foreach (var timelineEvent in timelineEvents.Events)
-                                    {
-                                        var color = GetColor(timelineEvent);
+            @foreach (var timelineEvents in _pagedResult!.Items)
+            {
+                var contentAlign = isStart ? Align.Left : Align.Right;
+                var yearAlign = isStart ? Align.Right : Align.Left;
 
-                                        <MudExpansionPanel Text="@timelineEvent.DisplayTitle" Style="@($"color:{color}; text-align:{contentAlign};")">
-                                            <MudCard Outlined="true" Class="ma-2">
-                                                @if (timelineEvent.DisplayImageWithoutRevision is not null)
+                <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
+                    <ItemOpposite>
+                        <MudText Color="Color.Info" Typo="Typo.h5" Align="@yearAlign">@timelineEvents.Year</MudText>
+                    </ItemOpposite>
+                    <ItemContent>
+                        <MudExpansionPanels Dense="true" MultiExpansion="true" Style="max-height: 600px; overflow: auto;">
+                            @foreach (var timelineEvent in timelineEvents.Events)
+                            {
+                                var color = GetColor(timelineEvent);
+
+                                <MudExpansionPanel Text="@timelineEvent.DisplayTitle" Style="@($"color:{color}; text-align:{contentAlign};")">
+                                    <MudCard Outlined="true" Class="ma-2">
+                                        @if (timelineEvent.DisplayImageWithoutRevision is not null)
+                                        {
+                                            <MudImage Fluid="true" Src="@timelineEvent.DisplayImageWithoutRevision" Alt="" Class="rounded-lg ma-2"/>
+                                        }
+                                        <MudCardContent>
+                                            @foreach (var item in timelineEvent.Properties)
+                                            {
+                                                @if (item.Links.Count > 0 || item.Values.Count > 0)
                                                 {
-                                                    <MudImage Fluid="true" Src="@timelineEvent.DisplayImageWithoutRevision" Alt="" Class="rounded-lg ma-2"/>
-                                                }
-                                                <MudCardContent>
-                                                    @foreach (var item in timelineEvent.Properties)
-                                                    {
-                                                        @if (item.Links.Count > 0 || item.Values.Count > 0)
+                                                    <MudText Typo="Typo.body2">
+                                                        <b>@item.Label: </b>
+                                                        @foreach (var link in item.Links)
                                                         {
-                                                            <MudText Typo="Typo.body2">
-                                                                <b>@item.Label: </b>
-                                                                @foreach (var link in item.Links)
-                                                                {
-                                                                    <MudLink Class="mr-1" Underline="Underline.Always" Href="@link.Href">@link.Content</MudLink>
-                                                                }
-
-                                                                @string.Join(", ", item.Values.Where(x => !item.Links.Any(l => l.Content.Equals(x, StringComparison.OrdinalIgnoreCase))))
-                                                            </MudText>
+                                                            <MudLink Class="mr-1" Underline="Underline.Always" Href="@link.Href">@link.Content</MudLink>
                                                         }
-                                                    }
-                                                </MudCardContent>
-                                            </MudCard>
-                                        </MudExpansionPanel>
-                                    }
-                                </MudExpansionPanels>
-                            </ItemContent>
 
-                        </MudTimelineItem>
+                                                        @string.Join(", ", item.Values.Where(x => !item.Links.Any(l => l.Content.Equals(x, StringComparison.OrdinalIgnoreCase))))
+                                                    </MudText>
+                                                }
+                                            }
+                                        </MudCardContent>
+                                    </MudCard>
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </ItemContent>
+                </MudTimelineItem>
 
-                        isStart = !isStart;
-                    }
-                </MudTimeline>
-            </MudStack>
-        }
-    </MudItem>
-
-</MudGrid>
+                @* toggle for next item *@
+                isStart = !isStart;
+            }
+        </MudTimeline>
+    }
+</MudStack>
 
 <MudScrollToTop>
     <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
@@ -110,7 +89,7 @@
     private GroupedTimelineResult? _pagedResult;
     private string[]? _categories;
     // Initialize _selectedCategories to prevent null issues
-    private List<string> _selectedCategories = new(); 
+    private IEnumerable<string> _selectedCategories = new List<string>(); 
 
     private int _pages = 1;
     private int _pageSize = 15;
