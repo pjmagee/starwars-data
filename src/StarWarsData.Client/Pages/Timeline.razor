@@ -1,10 +1,10 @@
 ﻿@page "/timeline"
-@using StarWarsData.Models.Entities
+
 @inject HttpClient Http
 
 <PageTitle>Timeline</PageTitle>
 
-<MudStack Direction="Direction.Column" Spacing="4" AlignItems="AlignItems.Center">
+<MudStack Row="false" Spacing="4" AlignItems="AlignItems.Center">
     @if (_categories is not null)
     {
         <MudSelect T="string"
@@ -81,7 +81,7 @@
 </MudStack>
 
 <MudScrollToTop>
-    <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
+    <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" />
 </MudScrollToTop>
 
 @code {
@@ -122,18 +122,13 @@
         _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
     }
 
-    // This method is no longer needed as LoadDataForCurrentPage handles pagination logic
-    // private async Task Paginate(int page)
-    // {
-    //     ...
-    // }
-
-    // Helper method to load data based on CurrentPage (property) and _selectedCategories
     private async Task LoadDataForCurrentPage()
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
-        query.Add("Page", $"{CurrentPage}"); // Use property CurrentPage
+        
+        query.Add("Page", $"{CurrentPage}");
         query.Add("PageSize", $"{_pageSize}");
+
         foreach (var c in _selectedCategories)
         {
             query.Add("Categories", $"{c}");

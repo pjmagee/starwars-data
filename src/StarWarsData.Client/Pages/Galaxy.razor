@@ -1,6 +1,14 @@
 @page "/galactic-map"
 @inject HttpClient Http
 
+<style>
+  /* make details pane scrollable */
+  .scrollable-panel {
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+  }
+</style>
+
 <MudStack Row="false">
     
     <!-- Region filter legend -->
@@ -81,7 +89,7 @@
         </MudStack>
         
         <!-- Right column: Details pane -->
-        <MudPaper Class="pa-4 galaxy-right h-100" Style="width:20%; overflow-y:auto;">
+        <MudPaper Class="pa-4 galaxy-right h-100 scrollable-panel" Style="width:20%;">
             @if (_loadingDetails)
             {
                 <MudProgressCircular Indeterminate="true" />
@@ -121,15 +129,37 @@
             else if (SelectedDetails is CelestialBodyDetailsDto bdto)
             {
                 <MudCard>
-                    <MudCardHeader><MudText Typo="Typo.h6">@bdto.Name</MudText></MudCardHeader>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6">@bdto.Name</MudText>
+                    </MudCardHeader>
                     <MudCardContent>
-                        <MudText>Class: @bdto.Class</MudText>
-                        <MudText>Grid: @bdto.GridSquare</MudText>
-                        <MudText>Sector: @bdto.Sector</MudText>
-                        <MudText>Region: @bdto.Region</MudText>
-                        @foreach (var kv in bdto.AdditionalData)
+                        <MudGrid Spacing="2">
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Class:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@bdto.Class</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Grid:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@bdto.GridSquare</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Sector:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@bdto.Sector</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Region:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@bdto.Region</MudText></MudItem>
+                        </MudGrid>
+                        
+                        @if (bdto.AdditionalData.Any() == true)
                         {
-                            <MudText>@kv.Key: @string.Join(", ", kv.Value)</MudText>
+                            <MudDivider Class="my-2" />
+                            <MudText Typo="Typo.subtitle1">Additional Data</MudText>
+                            <!-- dynamic fields in two-column grid -->
+                            <MudGrid Spacing="2">
+                              @foreach (var kv in bdto.AdditionalData)
+                              {
+                                <MudItem xs="4">
+                                  <MudText Typo="Typo.subtitle2" Class="font-weight-bold">@kv.Key</MudText>
+                                </MudItem>
+                                <MudItem xs="8">
+                                  <MudText Typo="Typo.body2">@string.Join(", ", kv.Value)</MudText>
+                                </MudItem>
+                              }
+                            </MudGrid>
                         }
                     </MudCardContent>
                 </MudCard>
@@ -240,5 +270,22 @@
         return "#ccc";
     }
 
-    enum EntityType { System, CelestialBody, Sector, Region }
+    enum EntityType { 
+        /// <summary>
+        /// Represents a star system.
+        /// </summary>
+        System,
+        /// <summary>
+        /// Represents a celestial body, such as a planet or moon.
+        /// </summary>
+        CelestialBody,
+        /// <summary>
+        /// Represents a sector of space.
+        /// </summary>
+        Sector,
+        /// <summary>
+        /// Represents a region of space.
+        /// </summary>
+        Region
+    }
 }

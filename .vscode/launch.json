@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "name": "Launch and Debug Hosted Blazor WebAssembly App",
+            "type": "blazorwasm",
+            "request": "launch",
+            "hosted": true,
+            "serverReadyAction":{
+                "action": "openExternally",
+                "killOnServerStop": false
+            },
+            "url": "https://localhost:7274/ask",
+            "program": "${workspaceFolder}/src/StarWarsData.Server/bin/Debug/net10.0/StarWarsData.Server.dll",
+            "cwd": "${workspaceFolder}/src/StarWarsData.Server/bin/Debug/net10.0",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:7274;http://localhost:5266"
+            }
+        }
+    ]
+}

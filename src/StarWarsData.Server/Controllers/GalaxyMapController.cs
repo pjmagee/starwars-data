@@ -4,8 +4,6 @@ using StarWarsData.Services.Data;
 using StarWarsData.Models;
 using StarWarsData.Models.Queries;
 
-#pragma warning disable SKEXP0001
-
 namespace StarWarsData.Server.Controllers;
 
 [ApiController]

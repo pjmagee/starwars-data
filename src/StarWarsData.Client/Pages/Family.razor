@@ -1,0 +1,233 @@
+@page "/families"
+@inject HttpClient Http
+@using Blazor.Diagrams.Components
+@using Blazor.Diagrams.Core
+@using Blazor.Diagrams.Core.Anchors
+@using Blazor.Diagrams.Core.Geometry
+@using Blazor.Diagrams.Core.Models
+@using Blazor.Diagrams.Core.PathGenerators
+@using Blazor.Diagrams.Core.Routers
+@using Blazor.Diagrams.Options
+@using StarWarsData.Client.Components
+@using StarWarsData.Client.Models
+
+<PageTitle>Family</PageTitle>
+
+<MudContainer Class="pa-4">
+    <MudAutocomplete T="CharacterSearchDto"
+                     Label="Select Character"
+                     ValueChanged="OnCharacterSelected"
+                     SearchFunc="SearchCharactersAsync"
+                     ToStringFunc="dto => dto?.Name"
+                     AdornmentIcon="@Icons.Material.Filled.Search"
+                     AdornmentColor="Color.Primary"
+                     Clearable="true"
+                     DebounceInterval="300"
+                     MinCharacters="3"
+                     Class="mb-4"/>
+
+    @if (_forest is not null)
+    {
+        <style>
+            .diagram-container {
+                width: 100%;
+                height: 800px;
+                border: 1px solid black; /* Just visual */
+            }
+        </style>
+        <div class="diagram-container">
+            <CascadingValue Value="Diagram" IsFixed="true">
+                <DiagramCanvas></DiagramCanvas>
+            </CascadingValue>
+        </div>
+    }
+</MudContainer>
+
+@code {
+
+    private List<TreeNode>? _forest;
+    private readonly Dictionary<int, NodeModel> _nodeModels = new();
+    private BlazorDiagram Diagram { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        var options = new BlazorDiagramOptions
+        {
+            AllowMultiSelection = false,
+            AllowPanning = true,
+            GridSnapToCenter = true,
+            Zoom = { ScaleFactor = 1.1, Enabled = true },
+            Links = { 
+                DefaultRouter = new OrthogonalRouter(shapeMargin: 0),
+                DefaultPathGenerator = new StraightPathGenerator(),
+            },
+        };
+
+        Diagram = new BlazorDiagram(options);
+        Diagram.RegisterComponent<CharacterNode, CharacterWidget>();
+    }
+
+    private async Task<IEnumerable<CharacterSearchDto>> SearchCharactersAsync(string value, CancellationToken token)
+    {
+        var list = await Http.GetFromJsonAsync<List<CharacterSearchDto>>($"characters/search?search={value}", cancellationToken: token);
+        return list ?? [];
+    }
+
+    private async Task OnCharacterSelected(CharacterSearchDto? characterDto)
+    {
+        _forest = null;
+        if (characterDto == null) return;
+        _forest = await BuildFamilyAsync(characterDto.Id);
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_forest is not null && !firstRender)
+        {
+            SetupDiagram(_forest);
+        }
+
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task<List<TreeNode>> BuildFamilyAsync(int characterId)
+    {
+        var roots = new HashSet<int>();
+
+        async Task TraverseAncestors(int id)
+        {
+            var dto = await FetchRelationsByIdAsync(id);
+
+            if (dto == null)
+            {
+                roots.Add(id);
+                return;
+            }
+
+            var parentIds = new List<int>();
+
+            foreach (var pName in dto.Parents)
+            {
+                var match = (await SearchCharactersAsync(pName, CancellationToken.None)).FirstOrDefault();
+                if (match != null) parentIds.Add(match.Id);
+            }
+
+            if (parentIds.Count == 0)
+                roots.Add(id);
+            else
+                foreach (var pid in parentIds)
+                    await TraverseAncestors(pid);
+        }
+
+        await TraverseAncestors(characterId);
+        
+        var list = new List<TreeNode>();
+
+        foreach (var rid in roots)
+        {
+            list.Add(await BuildTreeByIdAsync(rid, new HashSet<int>()));
+        }
+
+        return list;
+    }
+
+    private async Task<TreeNode> BuildTreeByIdAsync(int id, HashSet<int> seen)
+    {
+        if (seen.Contains(id))
+        {
+            return new TreeNode
+            {
+                Id = id,
+                Data = (await FetchRelationsByIdAsync(id))!
+            };
+        }
+
+        seen.Add(id);
+
+        var dto = (await FetchRelationsByIdAsync(id))!;
+        var node = new TreeNode
+        {
+            Id = id,
+            Data = dto
+        };
+
+        node.Parents = new List<TreeNode>();
+
+        foreach (var pName in dto.Parents)
+        {
+            var matches = await SearchCharactersAsync(pName, CancellationToken.None);
+            if (matches.FirstOrDefault()?.Id is int pId)
+                node.Parents.Add(await BuildTreeByIdAsync(pId, seen));
+        }
+
+        // build child nodes by resolving names to IDs
+        node.Children = new List<TreeNode>();
+
+        foreach (var cName in dto.Children)
+        {
+            var matches = await SearchCharactersAsync(cName, CancellationToken.None);
+            if (matches.FirstOrDefault()?.Id is int cId)
+                node.Children.Add(await BuildTreeByIdAsync(cId, seen));
+        }
+
+        return node;
+    }
+
+    private async Task<CharacterRelationsDto?> FetchRelationsByIdAsync(int id)
+    {
+        return await Http.GetFromJsonAsync<CharacterRelationsDto>($"characters/{id}/relations");
+    }
+
+    private void SetupDiagram(List<TreeNode> forest)
+    {
+        Diagram.Nodes.Clear();
+        Diagram.Links.Clear();
+        _nodeModels.Clear();
+        Diagram.SuspendSorting = true;
+        BuildNodeModels(forest, 0, 0);
+        Diagram.SuspendSorting = false;
+        Diagram.Refresh();
+    }
+
+    private int _columnSpacing = 200;
+
+    private void BuildNodeModels(List<TreeNode> nodes, int depth, int startX)
+    {
+        int x = startX;
+
+        foreach (var node in nodes)
+        {
+            CharacterNode characterNode = Diagram.Nodes.Add(new CharacterNode(node.Data, new Point(x, depth * 150)));
+            _nodeModels[node.Id] = characterNode;
+
+            if (node.Parents.Any())
+                characterNode.AddPort(alignment: PortAlignment.Top);
+
+            if (node.Children.Any())
+                characterNode.AddPort(alignment: PortAlignment.Bottom);
+
+            foreach (var parent in node.Parents)
+            {
+                if (_nodeModels.TryGetValue(parent.Id, out var parentNode))
+                {
+                    var source = new ShapeIntersectionAnchor(parentNode);
+                    var target = new ShapeIntersectionAnchor(characterNode);
+                    Diagram.Links.Add(new LinkModel(source, target));
+                }
+            }
+
+            if (node.Children.Any())
+                BuildNodeModels(node.Children, depth + 1, x);
+
+            x += _columnSpacing;
+        }
+    }
+
+    private class TreeNode
+    {
+        public int Id { get; set; }
+        public CharacterRelationsDto Data { get; set; } = null!;
+        public List<TreeNode> Parents { get; set; } = new();
+        public List<TreeNode> Children { get; set; } = new();
+    }
+}

@@ -69,7 +69,9 @@ builder.Services
     .AddScoped<WarService>()
     .AddScoped<PowerService>()
     .AddScoped<CharacterService>()
-    .AddScoped<MapService>(); // Add map service for galaxy mapping
+    .AddScoped<MapService>() // Add map service for galaxy mapping
+    .AddScoped<FamilyService>()
+    .AddScoped<CharacterRelationsService>();
 
 // https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/semantic-kernel/
 // https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/semantic-kernel-csharp/#std-label-semantic-kernel-csharp

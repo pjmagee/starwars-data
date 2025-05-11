@@ -15,7 +15,7 @@ public class CharacterService
         private readonly MongoDefinitions _mongoDefinitions;
         private readonly Settings _settings;
         private readonly MongoClient _mongoClient;
-        private readonly IMongoDatabase _mongoDb;
+        private readonly IMongoDatabase _db;
 
         private FilterDefinition<BsonDocument> BornAndDied => Builders<BsonDocument>.Filter.And(
             Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Born"),
@@ -23,19 +23,23 @@ public class CharacterService
             _mongoDefinitions.DataLinksContentYear,
             _mongoDefinitions.DataLinksHrefYear);
 
-        public CharacterService(ILogger<CharacterService> logger, YearHelper yearHelper, MongoDefinitions mongoDefinitions, Settings settings)
+        public CharacterService(
+            ILogger<CharacterService> logger, 
+            YearHelper yearHelper, 
+            IMongoDatabase db,
+            MongoDefinitions mongoDefinitions, 
+            Settings settings)
         {
             _logger = logger;
             _yearHelper = yearHelper;
             _mongoDefinitions = mongoDefinitions;
             _settings = settings;
-            _mongoClient = new MongoClient(settings.MongoConnectionString);
-            _mongoDb = _mongoClient.GetDatabase(settings.MongoDbName);
+            _db = db;
         }
 
         public async Task<PagedChartData<double>> GetLifeSpans(int page = 1, int pageSize = 20)
         {
-            List<BsonDocument> results = await _mongoDb
+            List<BsonDocument> results = await _db
                 .GetCollection<BsonDocument>("Character")
                 .Find(BornAndDied)
                 .Project(_mongoDefinitions.ExcludeRelationships)
@@ -72,7 +76,7 @@ public class CharacterService
     
         public async Task<PagedChartData<int>> GetBirthAndDeathsByYear(int page = 1, int pageSize = 20)
         {
-            List<BsonDocument> results = await _mongoDb
+            List<BsonDocument> results = await _db
                 .GetCollection<BsonDocument>("Character")
                 .Find(BornAndDied)
                 .Project(_mongoDefinitions.ExcludeRelationships)

@@ -1,14 +1,19 @@
 @page "/ask"
 @inject HttpClient Http
+@using System.ComponentModel.DataAnnotations
 
-<MudContainer>
-    <MudTextField
-        @bind-Value="_prompt" 
-        Label="Ask for a chart…" Variant="Variant.Filled"
-        Required="true"
-        Immediate="true" Class="mb-2" />
-    <MudButton ButtonType="ButtonType.Submit" OnClick="Load" Color="Color.Primary">Run</MudButton>
-</MudContainer>
+<EditForm Model="_model" OnValidSubmit="Load">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <MudContainer>
+        <MudTextField
+            @bind-Value="_model.Prompt"
+            Label="Ask for a chart…" Variant="Variant.Filled"
+            Required="true"
+            Immediate="true" Class="mb-2" />
+        <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Run</MudButton>
+    </MudContainer>
+</EditForm>
 
 <MudPaper>
     @_chartFragment
@@ -16,12 +21,16 @@
 
 @code {
 
-    string _prompt = "";
+    private AskModel _model = new();
+    public class AskModel {
+        [Required(ErrorMessage = "Please enter a question.")]
+        public string Prompt { get; set; } = string.Empty;
+    }
     private RenderFragment? _chartFragment;
 
     private async Task Load()
     {
-        var response = await Http.PostAsJsonAsync("semantic/ask", new UserPrompt(_prompt));
+        var response = await Http.PostAsJsonAsync("kernel/ask", new UserPrompt(_model.Prompt));
 
         if (response.IsSuccessStatusCode)
         {

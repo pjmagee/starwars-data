@@ -6,6 +6,9 @@
 - Use C# for the back-end
 - Use latest .NET 10 SDK
 - Use MudBlazor for the UI components
+- Use filescoped namespaces
+- Use optimal filtering, sorting, projecting techniques for data operations using MongoDB Driver
+- Use the latest C# language features
 
 ## Error Handling
 

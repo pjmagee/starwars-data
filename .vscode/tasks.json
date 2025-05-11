@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "build"
+		},
+		{
+			"type": "dotnet",
+			"task": "clean",
+			"group": {
+				"kind": "none",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "clean"
+		}
+	]
+}

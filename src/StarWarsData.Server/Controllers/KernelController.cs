@@ -72,8 +72,7 @@ public class KernelController : ControllerBase
                     AllowParallelCalls = true
                 }
             ),
-            Temperature = 0,
-            ReasoningEffort = ChatReasoningEffortLevel.Medium
+            Temperature = 0
         };
 
         var chatHistory = new ChatHistory();
@@ -87,20 +86,19 @@ public class KernelController : ControllerBase
             Help the user visualize data by finding relevant records and rendering an appropriate chart using the ChartToolkit plugin.
 
             CAPABILITIES:
-            ✅ You can call tools from MongoDBToolkit (the data is here)
-            ✅ You can call the tool from ChartToolkit (to render the chart)
+            ✅ 1. Call tools from MongoDBToolkit to fetch data
+            ✅ 2. Call the tool from ChartToolkit to render the chart
             
             STRATEGY:
             1. Identify the scope of the user’s question (e.g., time period, category, filters).
-            2. Extract only the relevant records and fields.
-            3. Choose the right chart type based on data structure and user intent.
-            4. Generate a JSON call to `render_chart(...)`.
+            2. Identify collection schema and fields needed for the chart.
+            3. Choose the right chart type based on the user’s question.
+            4. Call the `render_chart(...)` function.
 
             RULES (FOLLOW STRICTLY):
             1. Only select and aggregate data relevant to the user’s question.
             2. Keep fields minimal — include only what’s needed for the chart.
             3. Do not include extra commentary or explanation in your final message.
-            4. Your final message MUST be the JSON function call to `render_chart`.
 
             FINAL OUTPUT:
             Only output a single JSON object that represents the render_chart function call.

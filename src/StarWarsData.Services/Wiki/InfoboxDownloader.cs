@@ -1,6 +1,5 @@
 using System.Collections.Specialized;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Web;
 using AngleSharp;
 using AngleSharp.Dom;
@@ -10,13 +9,6 @@ using StarWarsData.Models.Entities;
 using StarWarsData.Services.Helpers;
 
 namespace StarWarsData.Services.Wiki;
-
-[JsonSerializable(typeof(Record), GenerationMode = JsonSourceGenerationMode.Default)]
-[JsonSourceGenerationOptions(AllowTrailingCommas = false, WriteIndented = true)]
-public partial class RecordSerializerContext : JsonSerializerContext
-{
-    
-}
 
 public class InfoboxDownloader
 {
@@ -210,7 +202,7 @@ public class InfoboxDownloader
 
         HyperLink LinkSelector(IElement x)
         {
-            var href = x.GetAttribute("href");
+            var href = x.GetAttribute("href")!;
 
             if (href.StartsWith("/wiki/"))
             {

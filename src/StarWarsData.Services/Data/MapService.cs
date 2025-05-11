@@ -1,10 +1,6 @@
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 

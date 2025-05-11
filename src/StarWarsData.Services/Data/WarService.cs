@@ -14,26 +14,24 @@ public class WarService
     private readonly ILogger<WarService> _logger;
     private readonly YearHelper _yearHelper;
     private readonly MongoDefinitions _mongoDefinitions;
-    private readonly Settings _settings;
-    private readonly MongoClient _mongoClient;
     private IMongoDatabase _db;
 
     public WarService(
         ILogger<WarService> logger, 
         YearHelper yearHelper, 
         MongoDefinitions mongoDefinitions,
-        IMongoDatabase db,
-        Settings settings)
+        IMongoDatabase db)
     {
         _logger = logger;
         _yearHelper = yearHelper;
         _mongoDefinitions = mongoDefinitions;
-        _settings = settings;
         _db = db;
     }
 
     public async Task<PagedChartData<int>> GetWarsByBattles(int page = 1, int pageSize = 10)
     {
+        _logger.LogInformation("Getting wars by battles");
+
         var filter = Builders<BsonDocument>.Filter.And(new[] 
         { 
             Builders<BsonDocument>.Filter.AnyEq("Data.Label", "Beginning"),
@@ -118,7 +116,7 @@ public class WarService
             ChartData = new()
             {
                 Labels = wars.Select(war => war.Name).ToArray(),
-                Series = new List<Series<double>>(new []{series })
+                Series = [series]
             }
         };
     }
