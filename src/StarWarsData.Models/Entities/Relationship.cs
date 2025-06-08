@@ -4,7 +4,6 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace StarWarsData.Models.Entities;
 
-[Serializable]
 public class Relationship
 {
     [JsonIgnore,  BsonIgnore] 

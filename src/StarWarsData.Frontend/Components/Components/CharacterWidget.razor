@@ -1,0 +1,29 @@
+@using Blazor.Diagrams.Components.Renderers;
+
+<!-- This will be a Character component that will display the character -->
+@if (Node is not null)
+{
+    <MudCard Outlined="true">
+        <MudCardHeader>
+            <CardHeaderAvatar>
+                <MudAvatar Color="Color.Secondary">P</MudAvatar>
+            </CardHeaderAvatar>
+            <CardHeaderContent>
+                <MudText Typo="Typo.body1">@Node.Character.Name</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText>Born: @Node.Character.Born</MudText>
+            <MudText>Died: @Node.Character.Died</MudText>
+        </MudCardContent>
+        @foreach(var port in Node.Ports)
+        {
+            <PortRenderer @key="port" Port="port" />
+        }
+    </MudCard>
+}
+
+@code {
+    [Parameter] 
+    public CharacterNode? Node { get; set; } = null!;
+}

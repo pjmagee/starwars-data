@@ -4,11 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Models", "Star
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Services", "StarWarsData.Services\StarWarsData.Services.csproj", "{596CE9A4-1D7F-4D05-9A75-4A486DF5AC92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.CLI", "StarWarsData.CLI\StarWarsData.CLI.csproj", "{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Frontend", "StarWarsData.Frontend\StarWarsData.Frontend.csproj", "{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Server", "StarWarsData.Server\StarWarsData.Server.csproj", "{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.ServiceDefaults", "StarWarsData.ServiceDefaults\StarWarsData.ServiceDefaults.csproj", "{8662D85D-296A-4DE7-A220-E8FD457AB75F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.Client", "StarWarsData.Client\StarWarsData.Client.csproj", "{EF7683AA-368E-4254-8A1C-19473C04DAE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.AppHost", "StarWarsData.AppHost\StarWarsData.AppHost.csproj", "{43FC5F4C-B7B2-4958-ABC1-4F6EC0CF9570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsData.ApiService", "StarWarsData.ApiService\StarWarsData.ApiService.csproj", "{F84EF46A-607D-4700-9CAE-F7E345338CB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,17 +26,24 @@ Global
 		{596CE9A4-1D7F-4D05-9A75-4A486DF5AC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{596CE9A4-1D7F-4D05-9A75-4A486DF5AC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{596CE9A4-1D7F-4D05-9A75-4A486DF5AC92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3D117BD-84A5-4FEB-A4E5-11C96A197FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFADF8AE-182E-4A4B-AEED-2FF9F2C5DEA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF7683AA-368E-4254-8A1C-19473C04DAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF7683AA-368E-4254-8A1C-19473C04DAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF7683AA-368E-4254-8A1C-19473C04DAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF7683AA-368E-4254-8A1C-19473C04DAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8662D85D-296A-4DE7-A220-E8FD457AB75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8662D85D-296A-4DE7-A220-E8FD457AB75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8662D85D-296A-4DE7-A220-E8FD457AB75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8662D85D-296A-4DE7-A220-E8FD457AB75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43FC5F4C-B7B2-4958-ABC1-4F6EC0CF9570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43FC5F4C-B7B2-4958-ABC1-4F6EC0CF9570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43FC5F4C-B7B2-4958-ABC1-4F6EC0CF9570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43FC5F4C-B7B2-4958-ABC1-4F6EC0CF9570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F84EF46A-607D-4700-9CAE-F7E345338CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F84EF46A-607D-4700-9CAE-F7E345338CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F84EF46A-607D-4700-9CAE-F7E345338CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F84EF46A-607D-4700-9CAE-F7E345338CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

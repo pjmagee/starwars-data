@@ -13,7 +13,6 @@ public class TimelineEvent : IComparable<TimelineEvent>
     [BsonIgnore]
     public string? DisplayImageWithoutRevision => ImageUrl?.Split(new [] {"/revision" }, StringSplitOptions.RemoveEmptyEntries)[0];
     
-    
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }

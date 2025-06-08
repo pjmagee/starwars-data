@@ -1,0 +1,156 @@
+@page "/ask"
+@inject IHttpClientFactory HttpClientFactory
+
+
+
+<EditForm Model="_model" OnValidSubmit="Load">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <MudContainer>
+        <MudTextField
+            @bind-Value="_model.Prompt"
+            Label="Ask for a chart…" Variant="Variant.Filled"
+            Required="true"
+            Immediate="true" Class="mb-2"/>
+        <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Run</MudButton>
+    </MudContainer>
+</EditForm>
+
+<MudPaper Width="600px">
+    @_chartFragment
+</MudPaper>
+
+@code {
+
+    private AskModel _model = new();
+
+    public class AskModel
+    {
+        [Required(ErrorMessage = "Please enter a question.")]
+        public string Prompt { get; set; } = string.Empty;
+    }
+
+    private RenderFragment? _chartFragment;
+    
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    private async Task Load()
+    {
+        var response = await Http.PostAsJsonAsync("kernel/ask", new UserPrompt(_model.Prompt));
+
+        if (response.IsSuccessStatusCode)
+        {
+            var chartSpec = await response.Content.ReadFromJsonAsync<AskChart>();
+
+            if (chartSpec is not null)
+            {
+                _chartFragment = RenderChart(chartSpec);
+            }
+            else
+            {
+                _chartFragment = null;
+            }
+
+            StateHasChanged();
+        }
+        else
+        {
+            _chartFragment = null;
+            StateHasChanged();
+        }
+
+    }
+
+    RenderFragment RenderChart(AskChart spec) => builder =>
+    {
+        var seq = 0;
+
+        switch (spec.AskChartType)
+        {
+            case AskChartType.Bar:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Bar);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartSeries), spec.Series!.Select(s => new ChartSeries()
+                        {
+                            Name = s.Name,
+                            Data = s.Data.ToArray()
+                        }
+                    ).ToList()
+                );
+
+                builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.Line:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Line);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartSeries), spec.Series!.Select(s => new ChartSeries()
+                        {
+                            Name = s.Name,
+                            Data = s.Data.ToArray()
+                        }
+                    ).ToList()
+                );
+
+                builder.AddAttribute(seq++, nameof(MudChart.XAxisLabels), spec.XAxisLabels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.Pie:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Pie);
+                builder.AddAttribute(seq++, nameof(MudChart.InputData), spec.Series!.SelectMany(x => x.Data).ToArray());
+                builder.AddAttribute(seq++, nameof(MudChart.InputLabels), spec.Labels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.Donut:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(MudChart.ChartType), ChartType.Donut);
+                builder.AddAttribute(seq++, nameof(MudChart.InputData), spec.Series!.SelectMany(x => x.Data).ToArray());
+                builder.AddAttribute(seq++, nameof(MudChart.InputLabels), spec.Labels!.ToArray());
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.StackedBar:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(StackedBar.ChartType), ChartType.StackedBar);
+                var series = spec.Series?.Select(s => new ChartSeries()
+                    {
+                        Name = s.Name,
+                        Data = s.Data.ToArray()
+                    }
+                ).ToList();
+
+                builder.AddAttribute(seq++, nameof(StackedBar.ChartSeries), series);
+                builder.AddAttribute(seq++, nameof(StackedBar.XAxisLabels), spec.XAxisLabels?.ToArray());
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.TimeSeries:
+            {
+                builder.OpenComponent<MudChart>(seq++);
+                builder.AddAttribute(seq++, nameof(TimeSeries.ChartType), ChartType.Timeseries);
+                builder.AddAttribute(seq++, nameof(TimeSeries.ChartSeries), spec.TimeSeries!.Select((ts, idx) => new
+                        TimeSeriesChartSeries()
+                        {
+                            Index = idx,
+                            Name = ts.Name,
+                            Data = ts.Data.Select(dp => new TimeSeriesChartSeries.TimeValue(dp.X, dp.Y)).ToList()
+                        }
+                    ).ToList()
+                );
+
+                builder.CloseComponent();
+                break;
+            }
+        }
+    };
+
+}

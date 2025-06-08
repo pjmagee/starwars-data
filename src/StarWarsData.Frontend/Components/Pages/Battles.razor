@@ -1,0 +1,48 @@
+@page "/battles"
+@inject IHttpClientFactory HttpClientFactory
+
+
+<PageTitle>Battles</PageTitle>
+
+@if (_victories is not null)
+{
+    <MudPagination 
+        Class="ma-4 sticky" 
+        ShowFirstButton="true" 
+        ShowLastButton="true" 
+        Count="_victoriesPages" 
+        SelectedChanged="Victories"/>
+    
+    <MudChart 
+        ChartType="ChartType.Bar" 
+        ChartSeries="@VictoriesSeries"
+        XAxisLabels="_victories!.ChartData.Labels" 
+        Width="100%" Height="800px"
+        LegendPosition="Position.Top" />
+}
+
+@code {
+
+    private List<ChartSeries> VictoriesSeries => _victories!.ChartData.Series.Select(x => new ChartSeries(){ Name = x.Name,  Data = x.Data.ToArray()  }).ToList();
+    
+    private PagedChartData<double>? _victories;
+    private int _victoriesPages = 1;
+    private int _pageSize = 10;
+    
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Victories(1);
+    }
+
+    private async Task Victories(int page)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        query.Add("Page", $"{page}");
+        query.Add("PageSize", $"{_pageSize}");
+        
+        _victories = await Http.GetFromJsonAsync<PagedChartData<double>>($"battles/charts/victories?{query}");
+        _victoriesPages = _victories!.Total / _victories.PageSize;
+    }
+}

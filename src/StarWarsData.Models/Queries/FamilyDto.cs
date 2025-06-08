@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace StarWarsData.Models.Queries;
 
 public class FamilyDto

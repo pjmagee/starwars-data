@@ -2,13 +2,14 @@
 
 ## General Guidelines
 
-- Use Blazor for the front-end
+- Use .NET Aspire for orchestration
+- Use CosmosDB for data storage (Aspire for local)
+- Use Blazor (MudBlazor) for the front-end
 - Use C# for the back-end
-- Use latest .NET 10 SDK
-- Use MudBlazor for the UI components
-- Use filescoped namespaces
-- Use optimal filtering, sorting, projecting techniques for data operations using MongoDB Driver
+- Use latest .NET 10 SDK, and latest C# language features (e.g filescoped namespaces, top-level statements, etc.)
+- Use optimal filtering, sorting, projecting techniques for data operations using CosmosDB
 - Use the latest C# language features
+
 
 ## Error Handling
 
@@ -22,3 +23,10 @@
 - Use the MongoDB MCP Server which has tools to query and understand the schema and database.
 - Database Name: starwars-data-raw
 - You should read, understand and query the schema before writing any code when fetching data from the database.
+
+
+## Documentation
+
+- https://learn.microsoft.com/en-us/dotnet/aspire/
+- https://learn.microsoft.com/en-us/dotnet/aspire/database/azure-cosmos-db-integration?tabs=dotnet-cli
+- https://learn.microsoft.com/en-us/dotnet/aspire/database/azure-cosmos-db-entity-framework-integration?tabs=dotnet-cli

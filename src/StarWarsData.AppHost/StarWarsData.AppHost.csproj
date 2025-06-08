@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.2.1" />
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>59ee3b5d-5913-4ff8-8856-9fd5265fdca1</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.0" />
+        <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="9.3.0" />
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StarWarsData.ApiService\StarWarsData.ApiService.csproj" />
+      <ProjectReference Include="..\StarWarsData.Frontend\StarWarsData.Frontend.csproj" />
+    </ItemGroup>
+
+</Project>
