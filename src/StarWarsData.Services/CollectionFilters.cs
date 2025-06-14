@@ -12,7 +12,10 @@ public class CollectionFilters : Dictionary<string, FilterDefinition<BsonDocumen
         MongoDefinitions mongoDefinitions
     )
     {
-        var regexAndFilter = Builders<BsonDocument>.Filter.And(mongoDefinitions.DataLinksContentYear, mongoDefinitions.DataLinksContentYear);
+        var regexAndFilter = Builders<BsonDocument>.Filter.And(
+            mongoDefinitions.DataLinksContentYear,
+            mongoDefinitions.DataLinksContentYear
+        );
 
         foreach (var collection in settingsOptions.Value.TimelineCollections.Distinct())
         {

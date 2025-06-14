@@ -13,15 +13,16 @@ public class PowersController : ControllerBase
     readonly IHttpContextAccessor _contextAccessor;
 
     public PowersController(
-        ILogger<PowersController> logger, 
-        PowerService service, 
-        IHttpContextAccessor contextAccessor)
+        ILogger<PowersController> logger,
+        PowerService service,
+        IHttpContextAccessor contextAccessor
+    )
     {
         _logger = logger;
         _service = service;
         _contextAccessor = contextAccessor;
     }
-    
+
     [HttpGet("charts/categories")]
     public async Task<ChartData<int>> GetPowersChart() => await _service.GetPowersChart();
 }

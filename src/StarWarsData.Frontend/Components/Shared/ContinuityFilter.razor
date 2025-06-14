@@ -1,0 +1,102 @@
+@using StarWarsData.Models.Entities
+@using StarWarsData.Frontend.Services
+@implements IDisposable
+
+<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="mr-4">    
+      <MudSwitch 
+        T="bool" 
+        Value="_canonEnabled" 
+        ValueChanged="OnCanonChanged"
+        Label="Canon" 
+        Color="Color.Primary" 
+        Size="Size.Small"
+        Class="ma-0" />
+    
+    <MudSwitch 
+        T="bool" 
+        Value="_legendsEnabled" 
+        ValueChanged="OnLegendsChanged"
+        Label="Legends" 
+        Color="Color.Secondary" 
+        Size="Size.Small"
+        Class="ma-0" />
+</MudStack>
+
+@code {
+    private bool _canonEnabled = true;
+    private bool _legendsEnabled = true;
+
+    [Inject] private ContinuityService ContinuityService { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        // Initialize based on current continuity service state
+        UpdateSwitchesFromService();
+        
+        // Subscribe to continuity changes
+        ContinuityService.OnChange += OnContinuityServiceChanged;
+    }
+
+    public void Dispose()
+    {
+        ContinuityService.OnChange -= OnContinuityServiceChanged;
+    }    
+    
+    private void UpdateSwitchesFromService()
+    {
+        var currentContinuity = ContinuityService.SelectedContinuity;
+        
+        switch (currentContinuity)
+        {
+            case Continuity.Canon:
+                _canonEnabled = true;
+                _legendsEnabled = false;
+                break;
+            case Continuity.Legends:
+                _canonEnabled = false;
+                _legendsEnabled = true;
+                break;
+            case null: // Both
+            default:
+                _canonEnabled = true;
+                _legendsEnabled = true;
+                break;
+        }
+    }
+
+    private async void OnContinuityServiceChanged()
+    {
+        UpdateSwitchesFromService();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void OnCanonChanged(bool value)
+    {
+        _canonEnabled = value;
+        UpdateContinuityService();
+    }
+
+    private void OnLegendsChanged(bool value)
+    {
+        _legendsEnabled = value;
+        UpdateContinuityService();
+    }    private void UpdateContinuityService()
+    {
+        if (!_canonEnabled && !_legendsEnabled)
+        {
+            // When neither is selected, force both to be enabled
+            _canonEnabled = true;
+            _legendsEnabled = true;
+        }
+        
+        Continuity? newContinuity = (_canonEnabled, _legendsEnabled) switch
+        {
+            (true, true) => null, // Both - no filtering
+            (true, false) => Continuity.Canon,
+            (false, true) => Continuity.Legends,
+            _ => null // Default to no filtering
+        };
+        
+        ContinuityService.SetContinuity(newContinuity);
+    }
+}

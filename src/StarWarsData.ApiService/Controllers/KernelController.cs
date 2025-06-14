@@ -5,7 +5,6 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol.Transport;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Queries;
@@ -29,13 +28,17 @@ public class KernelController : ControllerBase
 
     public KernelController(
         ILogger<KernelController> logger,
-        Kernel kernel, IMongoDatabase db, IOptions<SettingsOptions> settingsOptions)
+        Kernel kernel,
+        IMongoDatabase db,
+        IOptions<SettingsOptions> settingsOptions
+    )
     {
         _logger = logger;
         _kernel = kernel;
         _db = db;
         _settingsOptions = settingsOptions.Value;
-        _transport = new StdioClientTransport(new()
+        _transport = new StdioClientTransport(
+            new()
             {
                 Name = "MongoDB",
                 Command = "npx",
@@ -45,34 +48,45 @@ public class KernelController : ControllerBase
                     "mongodb-mcp-server",
                     "--connectionString",
                     Environment.GetEnvironmentVariable("ConnectionStrings__mongodb")!,
-                    "--readOnly"
-                ]
+                    "--readOnly",
+                ],
             }
         );
     }
 
     [HttpPost("ask")]
-    public async Task<AskChart?> Ask([FromBody] UserPrompt p, CancellationToken cancellationToken = default)
+    public async Task<AskChart?> Ask(
+        [FromBody] UserPrompt p,
+        CancellationToken cancellationToken = default
+    )
     {
-        await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(_transport, cancellationToken: cancellationToken);
-        var tools = await mcpClient.ListToolsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(
+            _transport,
+            cancellationToken: cancellationToken
+        );
+        var tools = await mcpClient
+            .ListToolsAsync(cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _kernel.Plugins.Clear();
         _kernel.Plugins.AddFromType<ChartToolkit>(pluginName: "ChartToolkit");
-        IEnumerable<KernelFunction> functions = tools.Select(aiFunction => aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction());
+        IEnumerable<KernelFunction> functions = tools.Select(aiFunction =>
+            aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction()
+        );
         _kernel.Plugins.AddFromFunctions(pluginName: "MongoDBToolkit", functions: functions);
 
         OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
         {
-            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(options: new FunctionChoiceBehaviorOptions()
+            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(
+                options: new FunctionChoiceBehaviorOptions()
                 {
                     AllowConcurrentInvocation = true,
                     AllowStrictSchemaAdherence = false,
                     RetainArgumentTypes = true,
-                    AllowParallelCalls = true
+                    AllowParallelCalls = true,
                 }
             ),
-            Temperature = 0
+            Temperature = 0,
         };
 
         var chatHistory = new ChatHistory();
@@ -81,14 +95,14 @@ public class KernelController : ControllerBase
         chatHistory.AddSystemMessage(
             """
             You are a precise and helpful chart-building assistant.
-            
+
             GOAL:
             Answer the users question by building a chart with the appropriate data.
 
             CAPABILITIES:
             ✅ 1. Call tools from MongoDBToolkit to fetch data
             ✅ 2. Call the tool from ChartToolkit to render the chart
-            
+
             STRATEGY:
             1. Identify the scope of the user’s question
             2. Identify collection schema and fields needed for the chart.
@@ -110,13 +124,12 @@ public class KernelController : ControllerBase
 
         try
         {
-            var chatMessage = await chatCompletion
-                .GetChatMessageContentAsync(
-                    chatHistory: chatHistory,
-                    kernel: _kernel,
-                    executionSettings: settings,
-                    cancellationToken: cancellationToken
-                );
+            var chatMessage = await chatCompletion.GetChatMessageContentAsync(
+                chatHistory: chatHistory,
+                kernel: _kernel,
+                executionSettings: settings,
+                cancellationToken: cancellationToken
+            );
 
             var chartJson = chatHistory
                 .Where(chat => chat.Role == AuthorRole.Tool)

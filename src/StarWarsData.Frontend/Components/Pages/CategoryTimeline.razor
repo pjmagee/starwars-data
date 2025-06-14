@@ -1,0 +1,38 @@
+@page "/timeline/{category}"
+
+<PageTitle>@($"{FormatCategoryName(Category)} Timeline")</PageTitle>
+
+<MudText Typo="Typo.h3" Class="mb-4">@FormatCategoryName(Category) Timeline</MudText>
+<MudText Typo="Typo.body1" Class="mb-4">Events related to @FormatCategoryName(Category).ToLower() in the Star Wars universe.</MudText>
+
+<TimelineComponent Category="@Category" ShowCategoryFilter="false" />
+
+@code {
+    
+    [Parameter] 
+    public string Category { get; set; } = string.Empty;
+
+    private string FormatCategoryName(string? category)
+    {
+        if (string.IsNullOrEmpty(category))
+            return "Unknown";
+            
+        return ToTitleCase(category.Replace("_infobox", "").Replace("_", " "));
+    }
+
+    private string ToTitleCase(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return input;
+
+        var words = input.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].Length > 0)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+        }
+        return string.Join(" ", words);
+    }
+}

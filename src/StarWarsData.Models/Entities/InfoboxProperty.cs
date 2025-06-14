@@ -1,26 +1,25 @@
-using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace StarWarsData.Models.Entities;
 
 public class HyperLink
 {
-    [BsonElement, JsonInclude]
+    [BsonElement]
     public string Content { get; set; } = null!;
-    
-    [BsonElement, JsonInclude]
+
+    [BsonElement]
     public string Href { get; set; } = null!;
 }
 
 public class InfoboxProperty
 {
-    [JsonInclude, BsonElement]
+    [BsonElement]
     public string? Label { get; set; }
 
-    [JsonInclude, BsonElement]
+    [BsonElement]
     public List<HyperLink> Links { get; set; }
 
-    [JsonInclude, BsonElement]
+    [BsonElement]
     public List<string> Values { get; set; }
 
     public InfoboxProperty(string label, DataValue dataValue)
@@ -33,11 +32,11 @@ public class InfoboxProperty
     public InfoboxProperty()
     {
         Label = null;
-        Links = new List<HyperLink>();
-        Values = new List<string>();
+        Links = [];
+        Values = [];
     }
 }
-    
+
 public class DataValue
 {
     [BsonElement]

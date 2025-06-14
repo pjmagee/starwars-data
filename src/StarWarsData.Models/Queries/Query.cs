@@ -1,3 +1,5 @@
+using StarWarsData.Models.Entities;
+
 namespace StarWarsData.Models.Queries;
 
 public class QueryParams
@@ -12,4 +14,5 @@ public class TimelineQueryParams
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 50;
     public string[] Categories { get; set; } = [];
+    public Continuity? Continuity { get; set; } = null; // null means "both"
 }

@@ -11,9 +11,7 @@ public class ChartToolkit
 {
     [KernelFunction(name: "render_chart")]
     [Description("Build a chart from the provided data")]
-    public string RenderChart(
-        [Description("The chart to render")]
-        AskChart chart)
+    public string RenderChart([Description("The chart to render")] AskChart chart)
     {
         return JsonSerializer.Serialize(chart);
     }

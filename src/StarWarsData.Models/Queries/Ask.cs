@@ -13,47 +13,49 @@ public enum AskChartType
     Line,
     Pie,
     StackedBar,
-    TimeSeries
+    TimeSeries,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TimeSeriesDisplayType
 {
     Line,
-    Area
+    Area,
 }
 
 public class AskResponse
 {
-    [JsonPropertyName("chart")] 
+    [JsonPropertyName("chart")]
     public AskChart? Chart { get; set; }
 }
 
 [Description("A chart to render")]
 public class AskChart
 {
-    [JsonPropertyName("chartType")] 
+    [JsonPropertyName("chartType")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
     [Description("The type of chart to render")]
     public AskChartType AskChartType { get; set; }
-    
+
     [JsonPropertyName("timeSeriesDisplayType")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    [Description("The type of time series chart to render (line or area) and only used when ChartType == TimeSeries")]
+    [Description(
+        "The type of time series chart to render (line or area) and only used when ChartType == TimeSeries"
+    )]
     public TimeSeriesDisplayType? TimeSeriesDisplayType { get; set; }
 
-    [JsonPropertyName("title")] 
+    [JsonPropertyName("title")]
     [Description("The title of the chart")]
     public string? Title { get; set; }
-    
+
     [JsonPropertyName("xAxisLabels")]
     [Description("Category labels for X-axis (bar, line, stacked)")]
     public List<string>? XAxisLabels { get; set; }
-    
+
     [JsonPropertyName("labels")]
     [Description("Slice labels for pie/donut charts")]
     public List<string>? Labels { get; set; }
-    
+
     [JsonPropertyName("series")]
     [Description("Numeric series for bar, line, stacked")]
     public List<AskChartSeries>? Series { get; set; }
@@ -62,31 +64,32 @@ public class AskChart
     [Description("Time-series data: date + value pairs, per series")]
     public List<AskTimeSeriesChartSeries>? TimeSeries { get; set; }
 
-    [JsonPropertyName("options")] public AskChartOptions? Options { get; set; }
+    [JsonPropertyName("options")]
+    public AskChartOptions? Options { get; set; }
 }
 
 [Description("A series of data for a chart")]
 public class AskChartSeries
 {
-    [JsonPropertyName("name")] 
+    [JsonPropertyName("name")]
     [Description("The name of the series")]
     public string Name { get; set; } = default!;
 
-    [JsonPropertyName("data")] 
+    [JsonPropertyName("data")]
     [Description("The data points for the series")]
-    public List<double> Data { get; set; } = new();
+    public List<double> Data { get; set; } = [];
 }
 
 [Description("A series of data for a time series chart")]
 public class AskTimeSeriesChartSeries
 {
-    [JsonPropertyName("name")] 
+    [JsonPropertyName("name")]
     [Description("The name of the series")]
     public string Name { get; set; } = default!;
 
-    [JsonPropertyName("data")] 
+    [JsonPropertyName("data")]
     [Description("The data points for the series")]
-    public List<TimeSeriesDataPointDto> Data { get; set; } = new();
+    public List<TimeSeriesDataPointDto> Data { get; set; } = [];
 }
 
 [Description("A data point for a time series chart")]

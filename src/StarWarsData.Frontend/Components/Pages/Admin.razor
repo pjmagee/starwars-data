@@ -1,349 +1,126 @@
 @page "/admin"
 @inject IHttpClientFactory HttpClientFactory
-@inject IJSRuntime Js
+@inject ISnackbar Snackbar
+@inject StarWarsData.Frontend.Services.EndpointService EndpointService
 
 <PageTitle>Admin</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-16 px-8">
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
     <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-6">Admin Panel</MudText>
-    <MudText Typo="Typo.subtitle1" Class="mb-8">Manage data synchronisation and processing jobs</MudText>
-    <MudGrid>        <!-- Infobox Operations -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">Wookieepedia</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Download and process infoboxes</MudText>
-                    </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudStack Spacing="2">
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                                StartIcon="@Icons.Material.Filled.Download"
-                                OnClick="@(() => StartJobHandler(DownloadInfoboxesEndpoint, DownloadInfoboxesName))"
-                                Disabled="_isLoading" FullWidth="true">
-                                Download Infoboxes
-                            </MudButton>
-                            <MudButton Variant="Variant.Filled" Color="Color.Secondary"
-                                StartIcon="@Icons.Material.Filled.AccountTree"
-                                OnClick="@(() => StartJobHandler(ProcessRelationshipsEndpoint, ProcessRelationshipsName))"
-                                Disabled="_isLoading" FullWidth="true">
-                                Process Relationships
-                            </MudButton>
-                        </MudStack>
-                    </MudCardContent>
-            </MudCard>
-        </MudItem>        <!-- MongoDB Operations -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">MongoDB</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Database and embedding operations</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Filled" Color="Color.Warning"
-                            StartIcon="@Icons.Material.Filled.Psychology"
-                            OnClick="@(() => StartJobHandler(CreateEmbeddingsEndpoint, CreateEmbeddingsName))"
-                            Disabled="_isLoading"
-                            FullWidth="true">
-                            Create Embeddings
-                        </MudButton>
-                        <MudButton Variant="Variant.Filled" Color="Color.Success"
-                            StartIcon="@Icons.Material.Filled.Timeline"
-                            OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint, CreateTimelineEventsName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Create Timeline Events
-                        </MudButton>
-                    </MudStack>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>        <!-- Wookieepedia Pages Operations -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">Wookieepedia Pages</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Download and sync page content</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                            StartIcon="@Icons.Material.Filled.CloudSync"
-                            OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint, SyncWookieepediaName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Sync Wookieepedia Pages
-                        </MudButton>
-                    </MudStack>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
+    <MudText Typo="Typo.subtitle1" Class="mb-8">Start background jobs and monitor their progress</MudText>
 
-        <!-- Cleanup Operations -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">Cleanup</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Delete collections and data</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Outlined" Color="Color.Error"
-                            StartIcon="@Icons.Material.Filled.Delete"
-                            OnClick="@(() => StartJobHandler(DeleteCollectionsEndpoint, DeleteCollectionsName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Delete Collections
-                        </MudButton>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Error"
-                            StartIcon="@Icons.Material.Filled.DeleteSweep"
-                            OnClick="@(() => StartJobHandler(DeleteEmbeddingsEndpoint, DeleteEmbeddingsName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Delete Embeddings
-                        </MudButton>
-                        
-                    </MudStack>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
+    <!-- Job Actions -->
+    <MudPaper Class="pa-6 mb-6" Elevation="2">
+        <MudText Typo="Typo.h5" Class="mb-4">Available Jobs</MudText>
+        <MudStack Spacing="3">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download"
+                OnClick="@(() => StartJobHandler(DownloadInfoboxesEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Download Infoboxes
+            </MudButton>
 
-        <!-- Index Operations -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">Vector Indexes</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Manage vector search indexes</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Outlined" Color="Color.Primary"
-                            StartIcon="@Icons.Material.Filled.Add"
-                            OnClick="@(() => StartJobHandler(CreateVectorIndexEndpoint, CreateVectorIndexName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Create Vector Indexes
-                        </MudButton>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Error"
-                            StartIcon="@Icons.Material.Filled.Remove"
-                            OnClick="@(() => StartJobHandler(DeleteVectorIndexEndpoint, DeleteVectorIndexName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Delete Vector Indexes
-                        </MudButton>
-                    </MudStack>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.CloudSync"
+                OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Sync Wookieepedia Pages
+            </MudButton>
 
-        <!-- Character Relationships -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Class="h-100">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5">Character Data</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Process character relationships</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary"
-                            StartIcon="@Icons.Material.Filled.Group"
-                            OnClick="@(() => StartJobHandler(AddCharacterRelationshipsEndpoint, AddCharacterRelationshipsName))"
-                            Disabled="_isLoading" FullWidth="true">
-                            Add Character Relationships
-                        </MudButton>
-                    </MudStack>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.AccountTree"
+                OnClick="@(() => StartJobHandler(ProcessRelationshipsEndpoint))" Disabled="_isLoading"
+                Size="Size.Large">
+                Process Relationships
+            </MudButton>
 
-    <!-- Job Status Section -->
-    <MudPaper Class="pa-4 mt-8" Elevation="2">
-        <MudText Typo="Typo.h5" GutterBottom="true">Job Status</MudText>
-        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-            <MudText Typo="Typo.body1">Auto-refresh:</MudText>
-            <MudSwitch T="bool" @bind-Value="_autoRefresh" Color="Color.Primary" />
-            <MudButton StartIcon="@Icons.Material.Filled.Refresh" OnClick="RefreshJobs" Disabled="_isLoading" Size="Size.Small">
-                Refresh
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Psychology"
+                OnClick="@(() => StartJobHandler(CreateEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Create Embeddings
+            </MudButton>            <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Timeline"
+                OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint))" Disabled="_isLoading"
+                Size="Size.Large">
+                Create Categorized Timeline Events
+            </MudButton>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Group"
+                OnClick="@(() => StartJobHandler(AddCharacterRelationshipsEndpoint))" Disabled="_isLoading"
+                Size="Size.Large">
+                Add Character Relationships
+            </MudButton>
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                OnClick="@(() => StartJobHandler(CreateVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Create Vector Indexes
+            </MudButton>
+
+            <MudDivider Class="my-2" />
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
+                OnClick="@(() => StartJobHandler(DeleteCollectionsEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Delete Collections
+            </MudButton>
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteSweep"
+                OnClick="@(() => StartJobHandler(DeleteEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Delete Embeddings
+            </MudButton>
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove"
+                OnClick="@(() => StartJobHandler(DeleteVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                Delete Vector Indexes
             </MudButton>
         </MudStack>
-
-        @if (_jobs.Any())
-        {
-            <MudTable T="JobInfo" Items="_jobs" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Loading="_isLoading"
-                LoadingProgressColor="Color.Info">
-                <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    <MudTh>Status</MudTh>
-                    <MudTh>Created</MudTh>
-                    <MudTh>Started</MudTh>
-                    <MudTh>Completed</MudTh>
-                    <MudTh>Duration</MudTh>
-                    <MudTh>Actions</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Name">@context.Name</MudTd>
-                    <MudTd DataLabel="Status">
-                        <MudChip T="string" Color="@GetStatusColor(context.Status)" Size="Size.Small"
-                            Icon="@GetStatusIcon(context.Status)">
-                            @context.Status.ToString()
-                        </MudChip>
-                    </MudTd>
-                    <MudTd DataLabel="Created">@context.CreatedAt.ToString("HH:mm:ss")</MudTd>
-                    <MudTd DataLabel="Started">@(context.StartedAt?.ToString("HH:mm:ss") ?? "-")</MudTd>
-                    <MudTd DataLabel="Completed">@(context.CompletedAt?.ToString("HH:mm:ss") ?? "-")</MudTd>
-                    <MudTd DataLabel="Duration">@GetDuration(context)</MudTd>
-                    <MudTd DataLabel="Actions">
-                        @if (context.Status == JobStatus.Running || context.Status == JobStatus.Pending)
-                        {
-                            <MudIconButton Icon="@Icons.Material.Filled.Stop" Color="Color.Error" Size="Size.Small"
-                                OnClick="@(() => CancelJob(context.Id))" />
-                        }
-                    </MudTd>
-                </RowTemplate>
-            </MudTable>
-        }
-        else
-        {
-            <MudAlert Severity="Severity.Info" Class="mt-4">
-                No jobs have been started yet. Use the buttons above to start data processing jobs.
-            </MudAlert>
-        }
-
+    </MudPaper> <!-- Hangfire Dashboard -->
+    <MudPaper Class="pa-6" Elevation="2">
+        <MudText Typo="Typo.h5" Class="mb-4">Job Monitoring</MudText>
+        <MudText Typo="Typo.body1" Class="mb-4">
+            Monitor job progress, view logs, and manage running jobs in the Hangfire Dashboard.
+        </MudText>        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Dashboard"
+            Href="@_hangfireDashboardUrl" Target="_blank" Size="Size.Large" Disabled="@(_hangfireDashboardUrl == null)">
+            Open Hangfire Dashboard
+        </MudButton>
     </MudPaper>
 </MudContainer>
 
-@code {
-    // Constants for API endpoints and job names
+@code {    // API endpoints for job creation
     private const string DownloadInfoboxesEndpoint = "admin/infobox/download";
-    private const string DownloadInfoboxesName = "Download Infoboxes";
     private const string ProcessRelationshipsEndpoint = "admin/infobox/relationships";
-    private const string ProcessRelationshipsName = "Process Relationships";
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
-    private const string CreateEmbeddingsName = "Create Embeddings";
-    private const string CreateTimelineEventsEndpoint = "admin/mongo/create-timeline-events";
-    private const string CreateTimelineEventsName = "Create Timeline Events";
+    private const string CreateTimelineEventsEndpoint = "admin/mongo/create-categorized-timeline-events";
     private const string SyncWookieepediaEndpoint = "admin/wookieepedia/sync";
-    private const string SyncWookieepediaName = "Sync Wookieepedia Pages";
     private const string DeleteCollectionsEndpoint = "admin/mongo/delete-collections";
-    private const string DeleteCollectionsName = "Delete Collections";
     private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";
-    private const string DeleteEmbeddingsName = "Delete Embeddings";
     private const string CreateVectorIndexEndpoint = "admin/mongo/create-index-embeddings";
-    private const string CreateVectorIndexName = "Create Vector Indexes";
     private const string DeleteVectorIndexEndpoint = "admin/mongo/delete-index-embeddings";
-    private const string DeleteVectorIndexName = "Delete Vector Indexes";
-    private const string AddCharacterRelationshipsEndpoint = "admin/mongo/add-character-relationships";
-    private const string AddCharacterRelationshipsName = "Add Character Relationships";
-
-    private List<JobInfo> _jobs = new();
-    private bool _isLoading = false;
-    private bool _autoRefresh = true;
-    private Timer? _refreshTimer;
-    
+    private const string AddCharacterRelationshipsEndpoint = "admin/mongo/add-character-relationships";    private bool _isLoading = false;
+    private string? _hangfireDashboardUrl;
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
-    protected async Task OnAfterRenderAsync()
+    protected override void OnInitialized()
     {
-        await RefreshJobs();
-
-        _refreshTimer = new Timer(async _ =>
-        {
-            if (_autoRefresh)
-            {
-                await InvokeAsync(RefreshJobs);
-            }
-        }, null, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
+        _hangfireDashboardUrl = EndpointService.GetHangfireDashboardUrl();
     }
-
-    private async Task StartJobHandler(string endpoint, string jobName)
+    
+    private async Task StartJobHandler(string endpoint)
     {
         try
         {
             _isLoading = true;
             var response = await Http.PostAsync($"api/{endpoint}", null);
             if (response.IsSuccessStatusCode)
-                await RefreshJobs();
+            {
+                Snackbar.Add("Job started successfully! Check Hangfire dashboard for status.", Severity.Success);
+            }
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
-                await Js.InvokeVoidAsync("console.error", $"Failed to start job: {error}");
+                Snackbar.Add($"Failed to start job: {error}", Severity.Error);
             }
         }
         catch (Exception ex)
         {
-            await Js.InvokeVoidAsync("console.error", $"Error starting job: {ex.Message}");
+            Snackbar.Add($"Error starting job: {ex.Message}", Severity.Error);
         }
         finally
         {
             _isLoading = false;
         }
-    }
-
-    private async Task RefreshJobs()
-    {
-        try
-        {
-            _isLoading = true;
-            var response = await Http.GetAsync("api/admin/jobs");
-            if (response.IsSuccessStatusCode)
-                _jobs = await response.Content.ReadFromJsonAsync<List<JobInfo>>() ?? new List<JobInfo>();
-        }
-        catch (Exception ex)
-        {
-            await Js.InvokeVoidAsync("console.error", $"Error refreshing jobs: {ex.Message}");
-        }
-        finally
-        {
-            _isLoading = false;
-            StateHasChanged();
-        }
-    }
-
-    private async Task CancelJob(Guid jobId)
-    {
-        try
-        {
-            var response = await Http.DeleteAsync($"api/admin/jobs/{jobId}");
-            if (response.IsSuccessStatusCode)
-                await RefreshJobs();
-        }
-        catch (Exception ex)
-        {
-            await Js.InvokeVoidAsync("console.error", $"Error canceling job: {ex.Message}");
-        }
-    }
-
-    private Color GetStatusColor(JobStatus status) => status switch
-    {
-        JobStatus.Pending => Color.Warning,
-        JobStatus.Running => Color.Info,
-        JobStatus.Completed => Color.Success,
-        JobStatus.Failed => Color.Error,
-        JobStatus.Cancelled => Color.Default,
-        _ => Color.Default
-    };    
-    
-    private string GetStatusIcon(JobStatus status) => status switch
-    {
-        JobStatus.Pending => Icons.Material.Filled.Schedule,
-        JobStatus.Running => Icons.Material.Filled.PlayArrow,
-        JobStatus.Completed => Icons.Material.Filled.CheckCircle,
-        JobStatus.Failed => Icons.Material.Filled.Error,
-        JobStatus.Cancelled => Icons.Material.Filled.Cancel,
-        _ => Icons.Material.Filled.Help
-    };    private string GetDuration(JobInfo job)
-    {
-        if (job.CompletedAt != null && job.StartedAt != null)
-        {
-            var duration = job.CompletedAt.Value - job.StartedAt.Value;
-            return $"{duration.Minutes} min {duration.Seconds} sec";
-        }
-        return "-";
     }
 }

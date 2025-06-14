@@ -1,111 +1,34 @@
 # Star Wars Data
 
-Extracted infobox data from https://starwars.fandom.com/.
+A Blazor WebAssembly application that downloads data from Wookiepedia. The data is processed and stored in several MongoDB databases and collections.
 
-This repository contains various categories of data related to Star Wars by grouping and extracting page content based on pages that have an infobox template. The structure of the infobox is parsed 
-in the most generic way possible and both text and links are stored for each property of the infobox.
+## Features
 
-## Docker
+- Download data from Wookiepedia
+- Process data and store in MongoDB
+- Ask AI and render chart data from the MongoDB database
+- Charts on various slices of star wars data such as wars, force powers, etc
+- Data tables based off different categories of data
+- A galaxy map that shows the regions, sectors, systems and planets of the star wars galaxy.
+- A family tree that shows the relationships between characters
+- A timeline that shows the events of the star wars galaxy filtered by various categories
 
-```sh
-docker compose build # build the projects
-docker compose up download # download the data
-docker compose up process # process relationships
-docker compose up database # start mongodb
-docker compose up populate # populate mongodb
-docker compose up web # serve api, swagger and blazor wasm app
-```
+## Job Management
 
-## Data folder JSON Structure
+Background jobs for data processing are managed using Hangfire with MongoDB persistence. The Hangfire dashboard is available at `/hangfire` when running the API service, providing:
 
-```json
-{
-  "PageId": 4719,
-  "PageUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Kamino",
-  "TemplateUrl": "https://starwars.fandom.com/wiki/Template:Battle",
-  "ImageUrl": "https://static.wikia.nocookie.net/starwars/images/7/70/BattleofKamino2.jpg/revision/latest?cb=20150710040413",
-  "Data": [
-    {
-      "Label": "Titles",
-      "Links": [],
-      "Values": [
-        "First Battle of Kamino"
-      ]
-    },
-    {
-      "Label": "Conflict",
-      "Links": [
-        {
-          "Content": "Clone Wars",
-          "Href": "/wiki/Clone_Wars/Legends"
-        }
-      ],
-      "Values": [
-        "Clone Wars"
-      ]
-    },
-    {
-      "Label": "Date",
-      "Links": [
-        {
-          "Content": "21.83 BBY",
-          "Href": "/wiki/22_BBY/Legends"
-        },
-        {
-          "Content": "Battle of Geonosis",
-          "Href": "/wiki/First_Battle_of_Geonosis/Legends"
-        }
-      ],
-      "Values": [
-        "21.83 BBY, 2 months after the Battle of Geonosis"
-      ]
-    },
-    {
-      "Label": "Place",
-      "Links": [
-        {
-          "Content": "Kamino",
-          "Href": "/wiki/Kamino/Legends"
-        }
-      ],
-      "Values": [
-        "Kamino"
-      ]
-    },
-    {
-      "Label": "Outcome",
-      "Links": [
-        {
-          "Content": "Republic",
-          "Href": "/wiki/Galactic_Republic/Legends"
-        }
-      ],
-      "Values": [
-        "Republic victory"
-      ]
-    }
-  ],
-  "Relationships": [
-    {
-      "PageId": 43996,
-      "PageUrl": "https://starwars.fandom.com/wiki/Shark_(starfighter)",
-      "TemplateUrl": "/wiki/Template:Individual_ship"
-    },
-    {
-      "PageId": 25913,
-      "PageUrl": "https://starwars.fandom.com/wiki/Blue_Squadron_(Jedi_Order)",
-      "Template": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 25917,
-      "PageUrl": "https://starwars.fandom.com/wiki/Red_Squadron_(Galactic_Republic)%2fLegends",
-      "Template": "https://starwars.fandom.com/wiki/Template:Military_unit"
-    },
-    {
-      "PageId": 258,
-      "PageUrl": "https://starwars.fandom.com/wiki/Clone_Wars%2fLegends",
-      "Template": "https://starwars.fandom.com/wiki/Template:War"
-    }
-  ]
-}
-```
+- Real-time job status monitoring
+- Job queue management
+- Job retry and cancellation capabilities
+- Detailed job execution logs
+- Historical job performance metrics
+
+## Technologies
+
+- Blazor UI WebAssembly
+- MudBlazor
+- MongoDB
+- Hangfire (Background job processing with MongoDB persistence)
+- Semantic Kernel and Mongo MCP server
+- C# .NET
+- Aspire Orchestrator

@@ -13,15 +13,17 @@ public class BattlesController : ControllerBase
     readonly IHttpContextAccessor _contextAccessor;
 
     public BattlesController(
-        ILogger<BattlesController> logger, 
-        BattleService service, 
-        IHttpContextAccessor contextAccessor)
+        ILogger<BattlesController> logger,
+        BattleService service,
+        IHttpContextAccessor contextAccessor
+    )
     {
         _logger = logger;
         _service = service;
         _contextAccessor = contextAccessor;
     }
-    
+
     [HttpGet("charts/victories")]
-    public async Task<PagedChartData<int>> GetBirthsDeathsByYear([FromQuery] QueryParams query) => await _service.GetBattlesByYear(query.Page, query.PageSize);
+    public async Task<PagedChartData<int>> GetBirthsDeathsByYear([FromQuery] QueryParams query) =>
+        await _service.GetBattlesByYear(query.Page, query.PageSize);
 }

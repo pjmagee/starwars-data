@@ -1,9 +1,5 @@
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using StarWarsData.Models;
-using StarWarsData.ApiService.Jobs;
-using StarWarsData.Models.Entities;
 using StarWarsData.Services;
 
 namespace StarWarsData.ApiService.Controllers;
@@ -18,63 +14,47 @@ public class AdminController : ControllerBase
     readonly PageDownloader _pageDownloader;
     readonly RecordService _recordService;
 
-    readonly IBackgroundJobQueue _jobQueue;
-    readonly IMongoCollection<JobInfo> _jobCollection;
-
     public AdminController(
         ILogger<AdminController> logger,
         InfoboxDownloader infoboxDownloader,
         InfoboxRelationshipProcessor infoboxRelationshipProcessor,
         PageDownloader pageDownloader,
-        RecordService recordService,
-        IBackgroundJobQueue jobQueue,
-        IOptions<SettingsOptions> settingsOptions,
-        IMongoClient mongoClient)
+        RecordService recordService
+    )
     {
         _logger = logger;
         _infoboxDownloader = infoboxDownloader;
         _infoboxRelationshipProcessor = infoboxRelationshipProcessor;
         _pageDownloader = pageDownloader;
         _recordService = recordService;
-        _jobQueue = jobQueue;
-        var db = mongoClient.GetDatabase(settingsOptions.Value.RawDb);
-        _jobCollection = db.GetCollection<JobInfo>("jobs");
     }
 
     [HttpGet("jobs")]
-    public async Task<ActionResult<IEnumerable<JobInfo>>> GetAllJobs()
+    public ActionResult GetAllJobs()
     {
-        try
-        {
-            var jobs = await _jobCollection.Find(FilterDefinition<JobInfo>.Empty).ToListAsync();
-            return Ok(jobs);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error fetching all jobs");
-            return StatusCode(500, new
-                {
-                    error = ex.Message
-                }
-            );
-        }
+        // Redirect to Hangfire dashboard for job management
+        return Redirect("/hangfire");
     }
 
     [HttpGet("jobs/{id:guid}")]
-    public async Task<ActionResult<JobInfo>> GetJob(Guid id)
+    public ActionResult GetJob(Guid id)
     {
-        var job = await _jobCollection.Find(j => j.Id == id).FirstOrDefaultAsync();
-        if (job == null) return NotFound();
-        return Ok(job);
+        // Redirect to Hangfire dashboard for specific job
+        return Redirect($"/hangfire/jobs/details/{id}");
     }
 
     [HttpDelete("jobs/{id:guid}")]
     public IActionResult CancelJob(Guid id)
     {
-        if (_jobQueue.TryCancel(id))
+        try
+        {
+            BackgroundJob.Delete(id.ToString());
             return NoContent();
-
-        return NotFound();
+        }
+        catch
+        {
+            return NotFound();
+        }
     }
 
     [HttpPost("infobox/download")]
@@ -82,7 +62,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _infoboxDownloader.ExecuteAsync(ct), "InfoboxDownload");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _infoboxDownloader.DownloadInfoboxesAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -96,7 +78,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _infoboxRelationshipProcessor.ExecuteAsync(ct), "InfoboxRelationships");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _infoboxRelationshipProcessor.CreateRelationshipsAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -110,7 +94,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.ProcessEmbeddingsAsync(ct), "CreateEmbeddings");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.ProcessEmbeddingsAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -124,21 +110,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.DeleteOpenAiEmbeddingsAsync(ct), "DeleteEmbeddings");
-            return Ok(jobId);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/populate-database")]
-    public ActionResult<Guid> EnqueuePopulateDatabase()
-    {
-        try
-        {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.PopulateAsync(ct), "PopulateDatabase");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.DeleteOpenAiEmbeddingsAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -152,7 +126,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.DeleteCollections(ct), "DeleteCollections");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.DeleteCollections(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -162,11 +138,31 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("mongo/create-timeline-events")]
+    [Obsolete("Use create-categorized-timeline-events instead")]
     public ActionResult<Guid> EnqueueCreateTimelineEvents()
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.CreateTimelineEvents(ct), "CreateTimelineEvents");
+            // Redirect to the new categorized method
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.CreateCategorizedTimelineEvents(CancellationToken.None)
+            );
+            return Ok(jobId);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/create-categorized-timeline-events")]
+    public ActionResult<Guid> EnqueueCreateCategorizedTimelineEvents()
+    {
+        try
+        {
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.CreateCategorizedTimelineEvents(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -180,7 +176,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.CreateVectorIndexesAsync(ct), "CreateIndexEmbeddings");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.CreateVectorIndexesAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -194,7 +192,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(ct => _recordService.DeleteVectorIndexesAsync(ct), "DeleteIndexEmbeddings");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.DeleteVectorIndexesAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -208,7 +208,9 @@ public class AdminController : ControllerBase
     {
         try
         {
-            var jobId = _jobQueue.Enqueue(_ => _recordService.AddCharacterRelationshipsAsync(), "AddCharacterRelationships");
+            var jobId = BackgroundJob.Enqueue(() =>
+                _recordService.AddCharacterRelationshipsAsync()
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)
@@ -218,13 +220,13 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("wookieepedia/sync")]
-    public ActionResult<Guid> EnqueueSyncWookieepediaToMongoDb()
+    public ActionResult<Guid> EnqueueDownloadPages()
     {
         try
         {
-            _logger.LogInformation("Received request to sync Wookieepedia to MongoDB");
-            var jobId = _jobQueue.Enqueue(async ct => { await _pageDownloader.SyncToMongoDbAsync(ct); }, "SyncWookieepediaToMongoDB");
-            _logger.LogInformation("Enqueued SyncWookieepediaToMongoDB job with ID {JobId}", jobId);
+            var jobId = BackgroundJob.Enqueue(() =>
+                _pageDownloader.SyncToMongoDbAsync(CancellationToken.None)
+            );
             return Ok(jobId);
         }
         catch (InvalidOperationException ex)

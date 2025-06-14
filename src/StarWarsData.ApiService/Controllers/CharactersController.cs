@@ -14,10 +14,11 @@ public class CharactersController : ControllerBase
     readonly IHttpContextAccessor _contextAccessor;
 
     public CharactersController(
-        ILogger<CharactersController> logger, 
-        CharacterService characterService, 
+        ILogger<CharactersController> logger,
+        CharacterService characterService,
         CharacterRelationsService relationsService,
-        IHttpContextAccessor contextAccessor)
+        IHttpContextAccessor contextAccessor
+    )
     {
         _logger = logger;
         _characterService = characterService;
@@ -36,7 +37,7 @@ public class CharactersController : ControllerBase
     {
         return await _characterService.GetLifeSpans(query.Page, query.PageSize);
     }
-    
+
     [HttpGet("search")]
     public async Task<ActionResult<List<CharacterSearchDto>>> Search([FromQuery] string search)
     {
@@ -48,7 +49,8 @@ public class CharactersController : ControllerBase
     public async Task<ActionResult<CharacterRelationsDto>> GetCharacterRelations(int id)
     {
         var rel = await _relationsService.GetRelationsByIdAsync(id);
-        if (rel == null) return NotFound();
+        if (rel == null)
+            return NotFound();
         return Ok(rel);
     }
 

@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using System.Web;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -6,26 +5,25 @@ namespace StarWarsData.Models.Entities;
 
 public class Relationship
 {
-    [JsonIgnore,  BsonIgnore] 
-    public string PageTitle => HttpUtility.UrlDecode(PageUrl!.Split(["/wiki/"], StringSplitOptions.RemoveEmptyEntries).Last()).Replace("_", " ");
+    [BsonIgnore]
+    public string PageTitle =>
+        HttpUtility
+            .UrlDecode(PageUrl!.Split(["/wiki/"], StringSplitOptions.RemoveEmptyEntries).Last())
+            .Replace("_", " ");
 
-    [JsonIgnore,  BsonIgnore] 
+    [BsonIgnore]
     public string Template => TemplateUrl!.Split(':').LastOrDefault() ?? string.Empty;
-    
-    
-    [JsonInclude, BsonElement] 
+
+    [BsonElement]
     public int PageId { get; set; }
 
-    [JsonInclude, BsonElement] 
+    [BsonElement]
     public string PageUrl { get; set; } = null!;
 
-    [JsonInclude, BsonElement] 
+    [BsonElement]
     public string TemplateUrl { get; set; } = null!;
 
-    public Relationship()
-    {
-        
-    }
+    public Relationship() { }
 
     public Relationship(Loaded loaded)
     {

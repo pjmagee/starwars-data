@@ -12,7 +12,11 @@ public class SearchController : ControllerBase
     readonly RecordService _recordService;
     readonly IHttpContextAccessor _contextAccessor;
 
-    public SearchController(ILogger<SearchController> logger, RecordService recordService, IHttpContextAccessor contextAccessor)
+    public SearchController(
+        ILogger<SearchController> logger,
+        RecordService recordService,
+        IHttpContextAccessor contextAccessor
+    )
     {
         _logger = logger;
         _recordService = recordService;
@@ -22,6 +26,11 @@ public class SearchController : ControllerBase
     [HttpGet]
     public async Task<PagedResult> Get([FromQuery] QueryParams queryParams)
     {
-        return await _recordService.GetSearchResult(queryParams.Search, queryParams.Page, queryParams.PageSize, _contextAccessor.HttpContext!.RequestAborted);
+        return await _recordService.GetSearchResult(
+            queryParams.Search,
+            queryParams.Page,
+            queryParams.PageSize,
+            _contextAccessor.HttpContext!.RequestAborted
+        );
     }
 }

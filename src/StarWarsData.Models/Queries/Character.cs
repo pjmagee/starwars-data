@@ -13,9 +13,15 @@ public class Character
     {
         try
         {
-            var name = document["Data"].AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0].ToString();
-            var born = document["Data"].AsBsonArray.First(i => i["Label"] == "Born")["Links"][0]["Content"].ToString();
-            var died = document["Data"].AsBsonArray.First(i => i["Label"] == "Died")["Links"][0]["Content"].ToString();
+            var name = document["Data"]
+                .AsBsonArray.First(i => i["Label"] == "Titles")["Values"][0]
+                .ToString();
+            var born = document["Data"]
+                .AsBsonArray.First(i => i["Label"] == "Born")["Links"][0]["Content"]
+                .ToString();
+            var died = document["Data"]
+                .AsBsonArray.First(i => i["Label"] == "Died")["Links"][0]["Content"]
+                .ToString();
             var years = 0f;
 
             if (born.Contains("BBY") && died.Contains("ABY"))
@@ -27,7 +33,13 @@ public class Character
                 years = Math.Abs(float.Parse(died.Split(' ')[0]) - float.Parse(born.Split(' ')[0]));
             }
 
-            return new Character { Name = name, Born = born, Died = died, Years = years };
+            return new Character
+            {
+                Name = name,
+                Born = born,
+                Died = died,
+                Years = years,
+            };
         }
         catch
         {

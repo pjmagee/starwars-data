@@ -39,7 +39,8 @@ public class GalaxyMapController : ControllerBase
         try
         {
             var sector = await _mapService.GetSectorAsync(id);
-            if (sector == null) return NotFound();
+            if (sector == null)
+                return NotFound();
             return Ok(sector);
         }
         catch (Exception ex)
@@ -70,7 +71,8 @@ public class GalaxyMapController : ControllerBase
         try
         {
             var region = await _mapService.GetRegionAsync(id);
-            if (region == null) return NotFound();
+            if (region == null)
+                return NotFound();
             return Ok(region);
         }
         catch (Exception ex)
@@ -86,7 +88,8 @@ public class GalaxyMapController : ControllerBase
         try
         {
             var system = await _mapService.GetSystemDetailsAsync(id);
-            if (system == null) return NotFound();
+            if (system == null)
+                return NotFound();
             return Ok(system);
         }
         catch (Exception ex)
@@ -102,7 +105,8 @@ public class GalaxyMapController : ControllerBase
         try
         {
             var body = await _mapService.GetCelestialBodyDetailsAsync(id);
-            if (body == null) return NotFound();
+            if (body == null)
+                return NotFound();
             return Ok(body);
         }
         catch (Exception ex)

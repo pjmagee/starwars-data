@@ -26,8 +26,8 @@ public class SystemDetailsDto
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? GridSquare { get; set; }
-    public List<string> Planets { get; set; } = new List<string>();
-    public List<string> Neighbors { get; set; } = new List<string>();
+    public List<string> Planets { get; set; } = [];
+    public List<string> Neighbors { get; set; } = [];
 }
 
 public class CelestialBodyDetailsDto
@@ -38,8 +38,9 @@ public class CelestialBodyDetailsDto
     public string? GridSquare { get; set; }
     public string? Sector { get; set; }
     public string? Region { get; set; }
+
     // all other infobox properties
-    public Dictionary<string, List<string>> AdditionalData { get; set; } = new();
+    public Dictionary<string, List<string>> AdditionalData { get; set; } = [];
 }
 
 // new DTOs for hierarchy

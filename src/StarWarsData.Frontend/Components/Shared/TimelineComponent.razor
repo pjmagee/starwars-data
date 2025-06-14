@@ -1,0 +1,325 @@
+@using StarWarsData.Models.Queries
+@using StarWarsData.Frontend.Services
+@using System.Web
+@inject IHttpClientFactory HttpClientFactory
+@inject ContinuityService ContinuityService
+@implements IDisposable
+
+<MudStack Row="false" Spacing="4" AlignItems="AlignItems.Center">
+    @if (ShowCategoryFilter && _categories is not null)
+    {
+        <MudSelect T="string"
+                   @bind-SelectedValues="_selectedCategories"
+                   MultiSelection="true" Dense="false" FullWidth="true">
+            @foreach (var category in _categories)
+            {
+                <MudSelectItem T="string" Value="@category">
+                    @category.Replace("_infobox", string.Empty).Replace("_", " ")
+                </MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+    @if (_pagedResult is not null)
+    {
+        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+
+        <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
+            @{
+                var isStart = true;
+            }
+
+            @foreach (var timelineEvents in _pagedResult!.Items)
+            {
+                var contentAlign = isStart ? Align.Left : Align.Right;
+                var yearAlign = isStart ? Align.Right : Align.Left;
+
+                <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
+                    <ItemOpposite>
+                        <MudText Color="Color.Info" Typo="Typo.h5" Align="@yearAlign">@timelineEvents.Year</MudText>
+                    </ItemOpposite>
+                    <ItemContent>
+                        <MudExpansionPanels Dense="true" MultiExpansion="true" Style="max-height: 600px; overflow: auto;">
+                            @foreach (var timelineEvent in timelineEvents.Events)
+                            {
+                                var color = GetColor(timelineEvent);
+
+                                <MudExpansionPanel Text="@timelineEvent.DisplayTitle" Style="@($"color:{color}; text-align:{contentAlign};")">
+                                    <MudCard Outlined="true" Class="ma-2">
+                                        @if (timelineEvent.DisplayImageWithoutRevision is not null)
+                                        {
+                                            <MudImage Fluid="true" Src="@timelineEvent.DisplayImageWithoutRevision" Alt="" Class="rounded-lg ma-2"/>
+                                        }
+                                        <MudCardContent>
+                                            @foreach (var item in timelineEvent.Properties)
+                                            {
+                                                @if (item.Links.Count > 0 || item.Values.Count > 0)
+                                                {
+                                                    <MudText Typo="Typo.body2">
+                                                        <b>@item.Label: </b>
+                                                        @foreach (var link in item.Links)
+                                                        {
+                                                            <MudLink Class="mr-1" Underline="Underline.Always" Href="@link.Href">@link.Content</MudLink>
+                                                        }
+
+                                                        @string.Join(", ", item.Values.Where(x => !item.Links.Any(l => l.Content.Equals(x, StringComparison.OrdinalIgnoreCase))))
+                                                    </MudText>
+                                                }
+                                            }
+                                        </MudCardContent>
+                                    </MudCard>
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </ItemContent>
+                </MudTimelineItem>
+
+                @* toggle for next item *@
+                isStart = !isStart;
+            }
+        </MudTimeline>
+    }
+</MudStack>
+
+<MudScrollToTop>
+    <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" />
+</MudScrollToTop>
+
+@code {
+    
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private GroupedTimelineResult? _pagedResult;
+    private string[]? _categories;
+    private IEnumerable<string> _selectedCategories = new List<string>(); 
+    private Dictionary<string, string> _templateColorMap = new();
+
+    private int _pages = 1;
+    private int _pageSize = 15;
+    
+    private int _currentPage = 1;
+    private int CurrentPage
+    {
+        get => _currentPage;
+        set
+        {
+            if (_currentPage != value)
+            {
+                _currentPage = value;
+                // Use Task.Run to avoid blocking and handle async void pattern safely
+                _ = Task.Run(() => LoadDataForCurrentPage()); 
+            }
+        }
+    }
+
+    [Parameter] public string? Category { get; set; }
+    
+    [Parameter] public bool ShowCategoryFilter { get; set; } = true;    // Define a comprehensive color palette for dynamic assignment
+    
+    private readonly List<string> _colorPalette = new()
+    {
+        Colors.Red.Darken1,
+        Colors.Blue.Darken1,
+        Colors.Green.Darken1,
+        Colors.Purple.Darken1,
+        Colors.Amber.Darken1,
+        Colors.Brown.Default,
+        Colors.Cyan.Default,
+        Colors.Orange.Darken1,
+        Colors.Indigo.Darken1,
+        Colors.Teal.Darken1,
+        Colors.DeepPurple.Darken1,
+        Colors.LightGreen.Darken1,
+        Colors.Pink.Darken1,
+        Colors.BlueGray.Darken1,
+        Colors.DeepOrange.Darken1,
+        Colors.Lime.Darken1,
+        Colors.Red.Darken3,
+        Colors.Blue.Darken3,
+        Colors.Green.Darken3,
+        Colors.Purple.Darken3,
+        Colors.Gray.Darken2,
+        Colors.Red.Lighten1,
+        Colors.Blue.Lighten1,
+        Colors.Green.Lighten1,
+        Colors.Purple.Lighten1
+    };    protected override async Task OnInitializedAsync()
+    {
+        await InitializeColorMapping();
+        
+        if (ShowCategoryFilter)
+        {
+            await LoadCategories();
+        }
+        
+        // Subscribe to continuity changes
+        ContinuityService.OnChange += OnContinuityChanged;
+        
+        // Load the first page initially using the helper method
+        await LoadDataForCurrentPage(); 
+    }
+
+    public void Dispose()
+    {
+        ContinuityService.OnChange -= OnContinuityChanged;
+    }
+
+    private async void OnContinuityChanged()
+    {
+        // Reset to page 1 when continuity changes
+        _currentPage = 1;
+        await LoadDataForCurrentPage();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task InitializeColorMapping()
+    {
+        try
+        {
+            // Get all available categories to create consistent color mapping
+            var allCategories = await Http.GetFromJsonAsync<string[]>("Timeline/available-categories");
+            
+            if (allCategories != null)
+            {
+                // Create consistent color mapping based on template names
+                var sortedCategories = allCategories.OrderBy(x => x).ToList();
+                
+                for (int i = 0; i < sortedCategories.Count; i++)
+                {
+                    var template = sortedCategories[i];
+                    var cleanedTemplate = template.Replace("_infobox", "").ToLower();
+                    
+                    // Use modulo to cycle through colors if we have more categories than colors
+                    var colorIndex = i % _colorPalette.Count;
+                    _templateColorMap[cleanedTemplate] = _colorPalette[colorIndex];
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Fall back to default color if API call fails
+            Console.WriteLine($"Error loading categories for color mapping: {ex.Message}");
+        }
+    }    protected override async Task OnParametersSetAsync()
+    {
+        // Re-initialize color mapping if it's empty (component reused with different parameters)
+        if (!_templateColorMap.Any())
+        {
+            await InitializeColorMapping();
+        }
+        
+        await LoadDataForCurrentPage();
+    }
+
+    private async Task LoadCategories()
+    {
+        _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
+    }    private async Task LoadDataForCurrentPage()
+    {
+        if (!string.IsNullOrEmpty(Category))
+        {
+            // Load category-specific timeline with continuity filtering
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query.Add("Page", CurrentPage.ToString());
+            query.Add("PageSize", _pageSize.ToString());
+            
+            var continuityParam = ContinuityService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuityParam))
+            {
+                query.Add("continuity", continuityParam);
+            }
+            
+            _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/categories/{Category}/events?{query}");
+        }
+        else
+        {
+            // Load mixed timeline with category and continuity filtering
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query.Add("Page", CurrentPage.ToString());
+            query.Add("PageSize", _pageSize.ToString());
+
+            foreach (var c in _selectedCategories)
+            {
+                query.Add("Categories", c);
+            }
+            
+            var continuityParam = ContinuityService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuityParam))
+            {
+                query.Add("continuity", continuityParam);
+            }
+            
+            _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
+        }
+        
+        // Ensure _pagedResult and Total are checked before division
+        _pages = (_pagedResult is not null && _pagedResult.Total > 0 && _pagedResult.Size > 0) 
+                 ? (int)Math.Ceiling((double)_pagedResult.Total / _pagedResult.Size) 
+                 : 0;
+        
+        // Reset current page if it becomes invalid after filtering/data change
+        if (CurrentPage > _pages && _pages > 0) // Check _pages > 0 to avoid setting to 0
+        { 
+            _currentPage = 1; // Reset backing field directly to avoid re-triggering setter
+            // Re-fetch data for page 1 if the page was reset
+            await LoadDataForCurrentPage(); // Call again to load page 1 data
+            return; 
+        } else if (_pages == 0) {
+             _currentPage = 1; // Reset backing field to 1 if there are no pages
+        }
+        
+        await InvokeAsync(StateHasChanged); // Ensure UI updates after fetching data
+    }
+    
+    private string GetColor(TimelineEvent timelineEvent)
+    {
+        if (string.IsNullOrEmpty(timelineEvent.Template))
+            return Colors.Blue.Default;
+
+        var cleanedTemplate = timelineEvent.Template.Replace("_infobox", "").ToLower();
+        
+        // Try to get color from dynamic mapping first
+        if (_templateColorMap.TryGetValue(cleanedTemplate, out var mappedColor))
+        {
+            return mappedColor;
+        }
+        
+        // Fallback to specific mappings for known templates
+        return cleanedTemplate switch 
+        {
+            "event" => Colors.LightBlue.Lighten1,
+            "trade_route" => Colors.Cyan.Default,
+            "campaign" => Colors.Shades.Black,
+            "mission" => Colors.Gray.Darken4,
+            "battle" => Colors.Red.Darken1,
+            "duel" => Colors.Red.Darken2,
+            "fleet" => Colors.Red.Darken3,
+            "war" => Colors.Red.Darken4,
+            "disease" => Colors.Green.Darken4,
+            "location" => Colors.Blue.Lighten1,
+            "city" => Colors.Blue.Darken1,
+            "law" => Colors.Green.Darken1,
+            "treaty" => Colors.Green.Darken2,
+            "election" => Colors.Blue.Darken3,
+            "character" => Colors.Brown.Default,
+            "government" => Colors.Amber.Darken1,
+            "organization" => Colors.Amber.Lighten1,
+            "company" => Colors.Amber.Darken3,
+            "religion" => Colors.Purple.Lighten1,
+            "holocron" => Colors.Purple.Darken1,
+            "lightsaber" => Colors.Purple.Darken2,
+            "droid" => Colors.BlueGray.Darken2,
+            "artifact" => Colors.BlueGray.Darken3,
+            _ => Colors.Blue.Default
+        };
+    }
+
+    // Update signature to match delegate, handle potential nulls
+    private async Task SelectedValuesChanged(IEnumerable<string?>? selectedCategories)
+    {
+        // Filter out nulls and update the list
+        _selectedCategories = selectedCategories?.Where(s => s != null).Select(s => s!).ToList() ?? new List<string>();
+        // Reset to page 1 when categories change
+        _currentPage = 1; // Reset backing field directly
+        await LoadDataForCurrentPage(); // Load data for the new page 1
+    }
+}

@@ -140,7 +140,7 @@ else
     private string[]? _categories;
     private string? _category;
 
-    private MudTable<InfoboxRecord>? _table;
+    private MudTable<Infobox>? _table;
     private PagedResult? _pagedResult;
     
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
@@ -159,7 +159,7 @@ else
         }
     }
 
-    private void ShowBtnPress(InfoboxRecord record)
+    private void ShowBtnPress(Infobox record)
     {
         record.ShowRelationships = !record.ShowRelationships;
     }
@@ -170,19 +170,23 @@ else
         _categories = categories.OrderBy(x => x).ToArray();
     }
 
-    private async Task<TableData<InfoboxRecord>> ServerReload(TableState state, CancellationToken ct)
+    private async Task<TableData<Infobox>> ServerReload(TableState state, CancellationToken ct)
     {
         if (_category == null)
-            return new TableData<InfoboxRecord>() { Items = Enumerable.Empty<InfoboxRecord>(), TotalItems = 0 };
+            return new TableData<Infobox>() { Items = Enumerable.Empty<Infobox>(), TotalItems = 0 };
 
         _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Categories/{_category}?Page={(state.Page + 1)}&PageSize={state.PageSize}");
 
-        return new TableData<InfoboxRecord>() { TotalItems = _pagedResult.Total, Items = _pagedResult.Items };
+        return new TableData<Infobox>() { TotalItems = _pagedResult.Total, Items = _pagedResult.Items };
     }
 
     private Task ValueChanged(string arg)
     {
         _category = arg;
-        return _table.ReloadServerData();
+
+        if (_table is not null)
+            return _table.ReloadServerData();
+
+        return Task.CompletedTask;
     }
 }

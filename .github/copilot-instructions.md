@@ -28,5 +28,6 @@
 ## Documentation
 
 - https://learn.microsoft.com/en-us/dotnet/aspire/
-- https://learn.microsoft.com/en-us/dotnet/aspire/database/azure-cosmos-db-integration?tabs=dotnet-cli
-- https://learn.microsoft.com/en-us/dotnet/aspire/database/azure-cosmos-db-entity-framework-integration?tabs=dotnet-cli
+- https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/integrations-overview
+- https://learn.microsoft.com/en-us/dotnet/aspire/database/mongodb-integration?tabs=dotnet-cli
+

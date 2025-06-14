@@ -27,7 +27,8 @@ public class PageDownloader
         HttpClient httpClient,
         IOptions<SettingsOptions> settings,
         IMongoClient mongoClient,
-        ILogger<PageDownloader> logger)
+        ILogger<PageDownloader> logger
+    )
     {
         _http = httpClient;
         _logger = logger;
@@ -49,16 +50,21 @@ public class PageDownloader
         return "?" + nvc;
     }
 
-    public async Task<Page> FetchPageAsync(string title, CancellationToken cancellationToken = default)
+    public async Task<Page> FetchPageAsync(
+        string title,
+        CancellationToken cancellationToken = default
+    )
     {
         // First get the page ID
-        var pageInfoUrl = BuildQueryString(new Dictionary<string, string?>
-        {
-            ["action"] = "query",
-            ["titles"] = title,
-            ["format"] = "json",
-            ["formatversion"] = "2"
-        });
+        var pageInfoUrl = BuildQueryString(
+            new Dictionary<string, string?>
+            {
+                ["action"] = "query",
+                ["titles"] = title,
+                ["format"] = "json",
+                ["formatversion"] = "2",
+            }
+        );
         var pageInfoJson = await _http.GetStringAsync(pageInfoUrl, cancellationToken);
         using var pageInfoDoc = JsonDocument.Parse(pageInfoJson);
 
@@ -69,7 +75,11 @@ public class PageDownloader
         return await BuildPageDocumentAsync(pageId, title, cancellationToken);
     }
 
-    async Task<Page> BuildPageDocumentAsync(int pageId, string title, CancellationToken cancellationToken)
+    async Task<Page> BuildPageDocumentAsync(
+        int pageId,
+        string title,
+        CancellationToken cancellationToken
+    )
     {
         var infoboxTask = FetchInfoboxAsync(title, cancellationToken);
         var categoriesTask = FetchCategoriesAsync(title, cancellationToken);
@@ -80,42 +90,54 @@ public class PageDownloader
         await Task.WhenAll(infoboxTask, categoriesTask, sectionsTask, imagesTask, pageInfoTask);
 
         var pageInfo = await pageInfoTask;
+        var infobox = await infoboxTask;
+        var categories = await categoriesTask;
+
         var page = new Page
         {
             PageId = pageId,
             Title = title,
-            Infobox = await infoboxTask,
-            Categories = await categoriesTask,
+            Infobox = infobox,
+            Categories = categories,
             Sections = await sectionsTask,
             Images = await imagesTask,
             WikiUrl = $"{WikiBase}{Uri.EscapeDataString(title.Replace(' ', '_'))}",
             LastModified = pageInfo.lastModified,
-            Summary = pageInfo.summary
+            Summary = pageInfo.summary,
+            Continuity = DetermineContinuity(infobox, categories, title),
         };
 
         return page;
     }
-    async Task<List<InfoboxProperty>> FetchInfoboxAsync(string title, CancellationToken cancellationToken)
+
+    async Task<List<InfoboxProperty>> FetchInfoboxAsync(
+        string title,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
-            var url = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["prop"] = "pageprops",
-                ["ppprop"] = "infoboxes",
-                ["titles"] = title,
-                ["format"] = "json",
-                ["formatversion"] = "2"
-            });
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "query",
+                    ["prop"] = "pageprops",
+                    ["ppprop"] = "infoboxes",
+                    ["titles"] = title,
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                }
+            );
 
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
             var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
             var firstPage = pages.EnumerateArray().First();
 
-            if (firstPage.TryGetProperty("pageprops", out var pageProps) &&
-                pageProps.TryGetProperty("infoboxes", out var infoboxProp))
+            if (
+                firstPage.TryGetProperty("pageprops", out var pageProps)
+                && pageProps.TryGetProperty("infoboxes", out var infoboxProp)
+            )
             {
                 var infoboxRaw = infoboxProp.GetString();
                 if (!string.IsNullOrEmpty(infoboxRaw))
@@ -132,6 +154,7 @@ public class PageDownloader
 
         return new List<InfoboxProperty>();
     }
+
     async Task<List<InfoboxProperty>> ConvertJsonElementToInfoboxProperties(JsonElement jsonElement)
     {
         var properties = new List<InfoboxProperty>();
@@ -143,35 +166,75 @@ public class PageDownloader
             {
                 var infobox = jsonElement.EnumerateArray().FirstOrDefault();
 
-                if (infobox.ValueKind == JsonValueKind.Object && infobox.TryGetProperty("data", out var data) && data.ValueKind == JsonValueKind.Array)
+                if (
+                    infobox.ValueKind == JsonValueKind.Object
+                    && infobox.TryGetProperty("data", out var data)
+                    && data.ValueKind == JsonValueKind.Array
+                )
                 {
                     foreach (var item in data.EnumerateArray())
                     {
-                        if (item.TryGetProperty("type", out var typeProperty) && item.TryGetProperty("data", out var dataProperty) && typeProperty.ValueKind == JsonValueKind.String)
+                        if (
+                            item.TryGetProperty("type", out var typeProperty)
+                            && item.TryGetProperty("data", out var dataProperty)
+                            && typeProperty.ValueKind == JsonValueKind.String
+                        )
                         {
-                            if (typeProperty.ValueEquals("title") && dataProperty.TryGetProperty("value", out var titleDataValue))
+                            if (
+                                typeProperty.ValueEquals("title")
+                                && dataProperty.TryGetProperty("value", out var titleDataValue)
+                            )
                             {
-                                properties.Add(new InfoboxProperty("Titles", await GetDataValue(titleDataValue.GetString()!)));
+                                properties.Add(
+                                    new InfoboxProperty(
+                                        "Titles",
+                                        await GetDataValue(titleDataValue.GetString()!)
+                                    )
+                                );
                             }
-                            else if (typeProperty.ValueEquals("group") && dataProperty.TryGetProperty("value", out var groupDataValue) && groupDataValue.ValueKind == JsonValueKind.Array)
+                            else if (
+                                typeProperty.ValueEquals("group")
+                                && dataProperty.TryGetProperty("value", out var groupDataValue)
+                                && groupDataValue.ValueKind == JsonValueKind.Array
+                            )
                             {
                                 var dataValues = groupDataValue
                                     .EnumerateArray()
-                                    .Where(x => x.TryGetProperty("type", out var t) &&
-                                                t.ValueKind == JsonValueKind.String && t.ValueEquals("data") &&
-                                                x.TryGetProperty("data", out var d) &&
-                                                d.ValueKind == JsonValueKind.Object);
+                                    .Where(x =>
+                                        x.TryGetProperty("type", out var t)
+                                        && t.ValueKind == JsonValueKind.String
+                                        && t.ValueEquals("data")
+                                        && x.TryGetProperty("data", out var d)
+                                        && d.ValueKind == JsonValueKind.Object
+                                    );
 
                                 foreach (var dataValueItem in dataValues)
                                 {
-                                    if (dataValueItem.TryGetProperty("data", out var dataValueItemData) && dataValueItemData.ValueKind == JsonValueKind.Object)
+                                    if (
+                                        dataValueItem.TryGetProperty(
+                                            "data",
+                                            out var dataValueItemData
+                                        )
+                                        && dataValueItemData.ValueKind == JsonValueKind.Object
+                                    )
                                     {
-                                        if (dataValueItemData.TryGetProperty("label", out var label) &&
-                                            label.ValueKind == JsonValueKind.String && !label.ValueEquals(string.Empty) &&
-                                            dataValueItemData.TryGetProperty("value", out var value) &&
-                                            value.ValueKind == JsonValueKind.String)
+                                        if (
+                                            dataValueItemData.TryGetProperty("label", out var label)
+                                            && label.ValueKind == JsonValueKind.String
+                                            && !label.ValueEquals(string.Empty)
+                                            && dataValueItemData.TryGetProperty(
+                                                "value",
+                                                out var value
+                                            )
+                                            && value.ValueKind == JsonValueKind.String
+                                        )
                                         {
-                                            properties.Add(new InfoboxProperty(await GetLabelValue(label.GetString()!), await GetDataValue(value.GetString()!)));
+                                            properties.Add(
+                                                new InfoboxProperty(
+                                                    await GetLabelValue(label.GetString()!),
+                                                    await GetDataValue(value.GetString()!)
+                                                )
+                                            );
                                         }
                                     }
                                 }
@@ -214,24 +277,21 @@ public class PageDownloader
                 href = new Uri(new Uri("https://starwars.fandom.com/"), href).ToString();
             }
 
-            return new HyperLink
-            {
-                Content = x.TextContent.Trim(' ', '"', ',', '.'),
-                Href = href
-            };
+            return new HyperLink { Content = x.TextContent.Trim(' ', '"', ',', '.'), Href = href };
         }
 
         return new DataValue
         {
-            Values = doc.Body?
-                .Text()
-                .Split('\n')
-                .Concat(doc.QuerySelectorAll("li").SelectMany(static x => x.Text().Split('\n')))
-                .Select(static x => x.Trim(' ', '\'', '"', ',', '.', ':', '-')).Where(static line => !string.IsNullOrWhiteSpace(line)).Distinct().ToList() ?? new List<string>(),
+            Values =
+                doc.Body?.Text()
+                    .Split('\n')
+                    .Concat(doc.QuerySelectorAll("li").SelectMany(static x => x.Text().Split('\n')))
+                    .Select(static x => x.Trim(' ', '\'', '"', ',', '.', ':', '-'))
+                    .Where(static line => !string.IsNullOrWhiteSpace(line))
+                    .Distinct()
+                    .ToList() ?? new List<string>(),
 
-            Links = doc.QuerySelectorAll("a")
-                .Select(LinkSelector)
-                .ToList()
+            Links = doc.QuerySelectorAll("a").Select(LinkSelector).ToList(),
         };
     }
 
@@ -239,15 +299,17 @@ public class PageDownloader
     {
         try
         {
-            var url = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["prop"] = "categories",
-                ["titles"] = title,
-                ["format"] = "json",
-                ["formatversion"] = "2",
-                ["cllimit"] = _config.PageLimit.ToString()
-            });
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "query",
+                    ["prop"] = "categories",
+                    ["titles"] = title,
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                    ["cllimit"] = _config.PageLimit.ToString(),
+                }
+            );
 
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
@@ -256,7 +318,8 @@ public class PageDownloader
 
             if (firstPage.TryGetProperty("categories", out var categoriesElement))
             {
-                return categoriesElement.EnumerateArray()
+                return categoriesElement
+                    .EnumerateArray()
                     .Select(c => c.GetProperty("title").GetString())
                     .Where(c => c != null)
                     .Cast<string>()
@@ -271,19 +334,24 @@ public class PageDownloader
         return new List<string>();
     }
 
-    async Task<List<ArticleSection>> FetchSectionsWithAngleSharpAsync(string title, CancellationToken cancellationToken)
+    async Task<List<ArticleSection>> FetchSectionsWithAngleSharpAsync(
+        string title,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
             // Get the full page HTML content
-            var parseUrl = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "parse",
-                ["page"] = title,
-                ["format"] = "json",
-                ["formatversion"] = "2",
-                ["prop"] = "text|sections"
-            });
+            var parseUrl = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "parse",
+                    ["page"] = title,
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                    ["prop"] = "text|sections",
+                }
+            );
             var parseJson = await _http.GetStringAsync(parseUrl, cancellationToken);
             using var parseDoc = JsonDocument.Parse(parseJson);
 
@@ -300,20 +368,25 @@ public class PageDownloader
                 return sections;
 
             // Parse HTML with AngleSharp
-            using var document = await _browsingContext.OpenAsync(req => req.Content(htmlContent), cancellationToken);
+            using var document = await _browsingContext.OpenAsync(
+                req => req.Content(htmlContent),
+                cancellationToken
+            );
 
             // Extract lead section (before first heading)
             var leadContent = ExtractLeadSection(document);
             if (!string.IsNullOrEmpty(leadContent))
             {
-                sections.Add(new ArticleSection
-                {
-                    Heading = "Lead",
-                    Content = leadContent,
-                    PlainText = StripHtmlAndClean(leadContent),
-                    Level = 0,
-                    Links = ExtractLinks(leadContent)
-                });
+                sections.Add(
+                    new ArticleSection
+                    {
+                        Heading = "Lead",
+                        Content = leadContent,
+                        PlainText = StripHtmlAndClean(leadContent),
+                        Level = 0,
+                        Links = ExtractLinks(leadContent),
+                    }
+                );
             }
 
             // Process each section
@@ -324,17 +397,23 @@ public class PageDownloader
                 var sectionLevel = sectionEl.GetProperty("level").GetInt32();
 
                 // Get section content
-                var sectionContent = await FetchSectionContentAsync(title, sectionIndex, cancellationToken);
+                var sectionContent = await FetchSectionContentAsync(
+                    title,
+                    sectionIndex,
+                    cancellationToken
+                );
                 if (!string.IsNullOrEmpty(sectionContent))
                 {
-                    sections.Add(new ArticleSection
-                    {
-                        Heading = sectionHeading,
-                        Content = sectionContent,
-                        PlainText = StripHtmlAndClean(sectionContent),
-                        Level = sectionLevel,
-                        Links = ExtractLinks(sectionContent)
-                    });
+                    sections.Add(
+                        new ArticleSection
+                        {
+                            Heading = sectionHeading,
+                            Content = sectionContent,
+                            PlainText = StripHtmlAndClean(sectionContent),
+                            Level = sectionLevel,
+                            Links = ExtractLinks(sectionContent),
+                        }
+                    );
                 }
             }
 
@@ -423,33 +502,43 @@ public class PageDownloader
         return links.Distinct().ToList();
     }
 
-    async Task<string> FetchSectionContentAsync(string title, int sectionIndex, CancellationToken cancellationToken)
+    async Task<string> FetchSectionContentAsync(
+        string title,
+        int sectionIndex,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
-            var url = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "parse",
-                ["prop"] = "text",
-                ["page"] = title,
-                ["section"] = sectionIndex.ToString(),
-                ["disableeditsection"] = "1",
-                ["format"] = "json",
-                ["formatversion"] = "2"
-            });
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "parse",
+                    ["prop"] = "text",
+                    ["page"] = title,
+                    ["section"] = sectionIndex.ToString(),
+                    ["disableeditsection"] = "1",
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                }
+            );
 
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
 
-            return doc.RootElement
-                      .GetProperty("parse")
-                      .GetProperty("text")
-                      .GetProperty("*")
-                      .GetString() ?? string.Empty;
+            return doc.RootElement.GetProperty("parse")
+                    .GetProperty("text")
+                    .GetProperty("*")
+                    .GetString() ?? string.Empty;
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "Failed to fetch section {Index} for {Title}", sectionIndex, title);
+            _logger.LogWarning(
+                ex,
+                "Failed to fetch section {Index} for {Title}",
+                sectionIndex,
+                title
+            );
             return string.Empty;
         }
     }
@@ -458,17 +547,19 @@ public class PageDownloader
     {
         try
         {
-            var url = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["generator"] = "images",
-                ["titles"] = title,
-                ["prop"] = "imageinfo",
-                ["iiprop"] = "url|size|mediatype",
-                ["gimlimit"] = _config.PageLimit.ToString(),
-                ["format"] = "json",
-                ["formatversion"] = "2"
-            });
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "query",
+                    ["generator"] = "images",
+                    ["titles"] = title,
+                    ["prop"] = "imageinfo",
+                    ["iiprop"] = "url|size|mediatype",
+                    ["gimlimit"] = _config.PageLimit.ToString(),
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                }
+            );
 
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
@@ -476,19 +567,23 @@ public class PageDownloader
             if (!doc.RootElement.GetProperty("query").TryGetProperty("pages", out var pages))
                 return new List<MediaInfo>();
 
-            return pages.EnumerateObject()
+            return pages
+                .EnumerateObject()
                 .Where(p => p.Value.TryGetProperty("imageinfo", out _))
                 .Select(p =>
                 {
-                    var imageInfo = p.Value.GetProperty("imageinfo")[0]; var title = p.Value.GetProperty("title").GetString() ?? "Unknown";
+                    var imageInfo = p.Value.GetProperty("imageinfo")[0];
+                    var title = p.Value.GetProperty("title").GetString() ?? "Unknown";
                     var url = imageInfo.GetProperty("url").GetString() ?? string.Empty;
-                    var size = imageInfo.TryGetProperty("size", out var sizeEl) ? (long?)sizeEl.GetInt64() : null;
+                    var size = imageInfo.TryGetProperty("size", out var sizeEl)
+                        ? (long?)sizeEl.GetInt64()
+                        : null;
 
                     return new MediaInfo
                     {
                         Title = title,
                         Url = url,
-                        Size = size
+                        Size = size,
                     };
                 })
                 .ToList();
@@ -500,20 +595,25 @@ public class PageDownloader
         }
     }
 
-    async Task<(DateTime lastModified, string? summary)> FetchPageInfoAsync(string title, CancellationToken cancellationToken)
+    async Task<(DateTime lastModified, string? summary)> FetchPageInfoAsync(
+        string title,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
-            var url = BuildQueryString(new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["prop"] = "revisions",
-                ["rvprop"] = "timestamp|comment",
-                ["titles"] = title,
-                ["rvlimit"] = "1",
-                ["format"] = "json",
-                ["formatversion"] = "2"
-            });
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "query",
+                    ["prop"] = "revisions",
+                    ["rvprop"] = "timestamp|comment",
+                    ["titles"] = title,
+                    ["rvlimit"] = "1",
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                }
+            );
 
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
@@ -521,7 +621,10 @@ public class PageDownloader
             var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
             var firstPage = pages.EnumerateArray().First();
 
-            if (firstPage.TryGetProperty("revisions", out var revisions) && revisions.GetArrayLength() > 0)
+            if (
+                firstPage.TryGetProperty("revisions", out var revisions)
+                && revisions.GetArrayLength() > 0
+            )
             {
                 var latestRevision = revisions[0];
                 var timestamp = latestRevision.GetProperty("timestamp").GetString();
@@ -541,6 +644,7 @@ public class PageDownloader
         }
         return (DateTime.UtcNow, null);
     }
+
     public async Task SyncToMongoDbAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Starting Wookieepedia sync to MongoDB with integrated pagination");
@@ -554,11 +658,17 @@ public class PageDownloader
             do
             {
                 // Get a batch of page titles from the API
-                var (pageTitles, nextContinue) = await GetPageTitlesBatchAsync(apContinue, cancellationToken);
+                var (pageTitles, nextContinue) = await GetPageTitlesBatchAsync(
+                    apContinue,
+                    cancellationToken
+                );
                 _logger.LogInformation("Processing batch of {Count} pages", pageTitles.Count);
 
                 // Process this batch with limited parallelism to avoid overwhelming the API
-                var (batchSynced, batchFailed) = await ProcessPageBatchAsync(pageTitles, cancellationToken);
+                var (batchSynced, batchFailed) = await ProcessPageBatchAsync(
+                    pageTitles,
+                    cancellationToken
+                );
                 syncedCount += batchSynced;
                 failedCount += batchFailed;
 
@@ -568,10 +678,13 @@ public class PageDownloader
                 }
 
                 apContinue = nextContinue;
-
             } while (apContinue != null && !cancellationToken.IsCancellationRequested);
 
-            _logger.LogInformation("Wookieepedia sync completed. Synced: {Synced}, Failed: {Failed}", syncedCount, failedCount);
+            _logger.LogInformation(
+                "Wookieepedia sync completed. Synced: {Synced}, Failed: {Failed}",
+                syncedCount,
+                failedCount
+            );
         }
         catch (Exception ex)
         {
@@ -579,7 +692,11 @@ public class PageDownloader
             throw;
         }
     }
-    async Task<(int synced, int failed)> ProcessPageBatchAsync(List<string> pageTitles, CancellationToken cancellationToken)
+
+    async Task<(int synced, int failed)> ProcessPageBatchAsync(
+        List<string> pageTitles,
+        CancellationToken cancellationToken
+    )
     {
         // Use semaphore to limit concurrent requests (avoid overwhelming the API)
         using var semaphore = new SemaphoreSlim(5, 5); // Max 5 concurrent requests
@@ -592,83 +709,97 @@ public class PageDownloader
                 var pageDoc = await FetchPageAsync(title, cancellationToken);
                 if (pageDoc != null)
                 {
-                    var filter = Builders<Page>.Filter.Eq(x => x.PageId, pageDoc.PageId);
-                    var options = new ReplaceOptions { IsUpsert = true };
-                    await _pagesCollection.ReplaceOneAsync(filter, pageDoc, options, cancellationToken);
-                    return (synced: 1, failed: 0);
-                }
-                else
-                {
-                    _logger.LogWarning("Failed to download page: {Title}", title);
-                    return (synced: 0, failed: 1);
+                    // Upsert the page document into MongoDB
+                    await _pagesCollection.ReplaceOneAsync(
+                        Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
+                        pageDoc,
+                        new ReplaceOptions { IsUpsert = true },
+                        cancellationToken
+                    );
+
+                    return 1; // Synced
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error syncing page {Title}: {Error}", title, ex.Message);
-                return (synced: 0, failed: 1);
+                _logger.LogError(ex, "Failed to process page {Title}: {Error}", title, ex.Message);
             }
             finally
             {
                 semaphore.Release();
-                // Small delay to be respectful to the API
-                await Task.Delay(100, cancellationToken);
             }
+
+            return 0; // Failed
         });
 
         var results = await Task.WhenAll(tasks);
-        return (results.Sum(r => r.synced), results.Sum(r => r.failed));
+        return (results.Sum(r => r), results.Length - results.Sum(r => r));
     }
-    
-    async Task<(List<string> titles, string? continueToken)> GetPageTitlesBatchAsync(string? apContinue, CancellationToken cancellationToken)
-    {
-        var titles = new List<string>();
 
+    async Task<(List<string> pageTitles, string? continueToken)> GetPageTitlesBatchAsync(
+        string? continueToken,
+        CancellationToken cancellationToken
+    )
+    {
         try
         {
-            var queryParams = new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["list"] = "allpages",
-                ["apnamespace"] = _config.PageNamespace.ToString(),
-                ["aplimit"] = _config.PageLimit.ToString(),
-                ["format"] = "json",
-                ["formatversion"] = "2",
-                ["apcontinue"] = apContinue
-            };
+            var url = BuildQueryString(
+                new Dictionary<string, string?>
+                {
+                    ["action"] = "query",
+                    ["list"] = "allpages",
+                    ["aplimit"] = _config.PageLimit.ToString(),
+                    ["format"] = "json",
+                    ["formatversion"] = "2",
+                    ["apcontinue"] = continueToken,
+                }
+            );
 
-            var url = BuildQueryString(queryParams);
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
 
-            var pages = doc.RootElement
-                           .GetProperty("query")
-                           .GetProperty("allpages")
-                           .EnumerateArray();
-
-            foreach (var page in pages)
+            if (doc.RootElement.TryGetProperty("continue", out var continueElement))
             {
-                if (cancellationToken.IsCancellationRequested)
-                    break;
+                var newContinueToken = continueElement.GetProperty("apcontinue").GetString();
+                var pageTitles = doc
+                    .RootElement.GetProperty("query")
+                    .GetProperty("allpages")
+                    .EnumerateArray()
+                    .Select(p => p.GetProperty("title").GetString())
+                    .ToList();
 
-                var title = page.GetProperty("title").GetString();
-                if (!string.IsNullOrEmpty(title))
-                {
-                    titles.Add(title);
-                }
+                return (pageTitles, newContinueToken);
             }
-
-            // Check for continuation
-            var nextContinue = doc.RootElement.TryGetProperty("continue", out var cont)
-                             ? cont.GetProperty("apcontinue").GetString()
-                             : null;
-
-            return (titles, nextContinue);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error fetching page titles batch");
-            throw;
+            _logger.LogError(ex, "Failed to fetch page titles batch: {Error}", ex.Message);
         }
+
+        return (new List<string>(), null);
+    }
+
+    /// <summary>
+    /// Determines the continuity of a page based on its title
+    /// </summary>
+    /// <param name="infobox">The page's infobox properties (unused)</param>
+    /// <param name="categories">The page's categories (unused)</param>
+    /// <param name="title">The page title</param>
+    /// <returns>The determined continuity</returns>
+    Continuity DetermineContinuity(
+        List<InfoboxProperty> infobox,
+        List<string> categories,
+        string title
+    )
+    {
+        // Simple URL-based continuity determination
+        // If "/Legends" is found in the title, it's Legends content
+        // Otherwise, it's Canon content
+        if (title?.Contains("/Legends", StringComparison.OrdinalIgnoreCase) == true)
+        {
+            return Continuity.Legends;
+        }
+
+        return Continuity.Canon;
     }
 }

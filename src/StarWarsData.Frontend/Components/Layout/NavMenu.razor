@@ -1,13 +1,72 @@
-﻿<MudNavMenu>
+﻿@using StarWarsData.Frontend.Services
+@inject NavigationService NavigationService
+
+<MudNavMenu>
     <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">Data tables</MudNavLink>
-    <MudNavLink Href="/timeline" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Timeline">Timeline events</MudNavLink>
+    
+    <MudNavGroup Title="Timeline" Icon="@Icons.Material.Filled.Timeline" Expanded="false">
+        <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline">All Events</MudNavLink>
+        @if (_timelineCategories != null)
+        {
+            @foreach (var category in _timelineCategories.Take(10)) // Limit to first 10 to avoid overwhelming the menu
+            {
+                var displayName = FormatCategoryName(category);
+                var href = $"/timeline/{category}";
+                <MudNavLink Href="@href" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Schedule">@displayName</MudNavLink>
+            }
+        }
+    </MudNavGroup>
+    
     <MudNavLink Href="/births-and-deaths" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">Births & Deaths</MudNavLink>
     <MudNavLink Href="/battles" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.TrendingUp">Battle victories</MudNavLink>
     <MudNavLink Href="/wars" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.DataExploration">Wars</MudNavLink>
     <MudNavLink Href="/lifespans" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Timelapse">Character lifespans</MudNavLink>
     <MudNavLink Href="/powers" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.WavingHand">Force powers</MudNavLink>
     <MudNavLink Href="/galactic-map" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Map">Galactic Map</MudNavLink>
-    <MudNavLink Href="/families" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">Family Charts</MudNavLink>    <MudNavLink Href="/ask" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Search">Ask AI</MudNavLink>
+    <MudNavLink Href="/families" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">Family Charts</MudNavLink>    
+    <MudNavLink Href="/ask" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Search">Ask AI</MudNavLink>
     <MudDivider Class="my-2" />
     <MudNavLink Href="/admin" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin</MudNavLink>
 </MudNavMenu>
+
+@code {
+    private List<string>? _timelineCategories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _timelineCategories = await NavigationService.GetTimelineCategoriesAsync();
+        }
+        catch (Exception ex)
+        {
+            // Log error but don't break the navigation
+            Console.WriteLine($"Error loading timeline categories: {ex.Message}");
+            _timelineCategories = new List<string>();
+        }
+    }
+
+    private string FormatCategoryName(string category)
+    {
+        if (string.IsNullOrEmpty(category))
+            return "Unknown";
+            
+        return ToTitleCase(category.Replace("_infobox", "").Replace("_", " "));
+    }
+
+    private string ToTitleCase(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return input;
+
+        var words = input.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].Length > 0)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+        }
+        return string.Join(" ", words);
+    }
+}

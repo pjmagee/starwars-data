@@ -1,67 +1,65 @@
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Web;
 using Microsoft.Extensions.VectorData;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace StarWarsData.Models.Entities;
 
-[Serializable]
-public class InfoboxRecord
+public class Infobox
 {
-    [JsonIgnore]
     [BsonIgnore]
-    public string PageTitle => HttpUtility.UrlDecode(PageUrl!.Split(["/wiki/"], StringSplitOptions.None).Last()).Replace("_", " ");
-    
-    [JsonIgnore]
-    [BsonIgnore] 
+    public string PageTitle =>
+        HttpUtility
+            .UrlDecode(PageUrl!.Split(["/wiki/"], StringSplitOptions.None).Last())
+            .Replace("_", " ");
+
+    [BsonIgnore]
     public string Template => TemplateUrl.Split(':').Last().Replace("_infobox", string.Empty);
-    
-    [JsonInclude]
+
     [BsonId]
-    [BsonElement]
-    [VectorStoreRecordKey]
+    [BsonRepresentation(BsonType.Int32)]
+    [VectorStoreKey]
     public int PageId { get; set; }
-    
-    [JsonInclude]
-    [BsonElement] 
+
+    [BsonElement]
     public string PageUrl { get; set; } = null!;
-    
-    [JsonInclude]
-    [BsonElement] 
+
+    [BsonElement]
     public string TemplateUrl { get; set; } = null!;
-    
-    [JsonInclude]
-    [BsonElement] 
+
+    [BsonElement]
     public string? ImageUrl { get; set; }
-    
-    [JsonInclude]
+
     [BsonElement]
-    [VectorStoreRecordData] 
-    public List<InfoboxProperty> Data { get; set; } = new();
-    
-    [JsonInclude]
+    [VectorStoreData]
+    public List<InfoboxProperty> Data { get; set; } = [];
+
     [BsonElement]
-    [VectorStoreRecordData] 
-    public List<Relationship> Relationships { get; set; } = new();
-    
-    [JsonIgnore]
+    [VectorStoreData]
+    public List<Relationship> Relationships { get; set; } = [];
+
+    [BsonElement("continuity")]
+    public Continuity Continuity { get; set; } = Continuity.Unknown;
+
     [BsonIgnore]
     public bool ShowRelationships { get; set; } = false;
-    
-    [JsonIgnore]
+
     [BsonElement("embedding")]
-    [VectorStoreRecordVector(Dimensions: 4, DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw)]
+    [VectorStoreVector(
+        4,
+        DistanceFunction = DistanceFunction.CosineSimilarity,
+        IndexKind = IndexKind.Hnsw
+    )]
     public ReadOnlyMemory<float> Embedding { get; set; }
-    
+
     /// <summary>
     /// Canonical text that we’ll send to the embedding model.
-    /// • Uses InfoboxProperty.Label / Values / Links.Content  
-    /// • Uses Relationship.PageTitle and Template (no raw URLs)  
+    /// • Uses InfoboxProperty.Label / Values / Links.Content
+    /// • Uses Relationship.PageTitle and Template (no raw URLs)
     /// • Stays far below the 8 191-token hard limit
     /// </summary>
-    [JsonIgnore, BsonIgnore]
+    [BsonIgnore]
     public string EmbeddingText
     {
         get
@@ -75,8 +73,10 @@ public class InfoboxRecord
             // 2️⃣ Infobox rows
             foreach (var prop in Data.Where(p => !string.IsNullOrWhiteSpace(p.Label)))
             {
-                var vals   = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v));
-                var anchor = prop.Links.Where(l => !string.IsNullOrWhiteSpace(l.Content)).Select(l => l.Content)                 ?? [];
+                var vals = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v));
+                var anchor =
+                    prop.Links.Where(l => !string.IsNullOrWhiteSpace(l.Content))
+                        .Select(l => l.Content) ?? [];
                 var joined = string.Join(", ", vals.Concat(anchor));
 
                 if (joined.Length > 0)

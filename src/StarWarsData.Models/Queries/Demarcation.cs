@@ -4,5 +4,5 @@ public enum Demarcation
 {
     Unset,
     Aby,
-    Bby
+    Bby,
 }

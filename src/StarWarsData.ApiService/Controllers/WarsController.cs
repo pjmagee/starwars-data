@@ -13,18 +13,25 @@ public class WarsController : ControllerBase
     readonly IHttpContextAccessor _contextAccessor;
 
     public WarsController(
-        ILogger<WarsController> logger, 
-        WarService service, 
-        IHttpContextAccessor contextAccessor)
+        ILogger<WarsController> logger,
+        WarService service,
+        IHttpContextAccessor contextAccessor
+    )
     {
         _logger = logger;
         _service = service;
         _contextAccessor = contextAccessor;
     }
-    
+
     [HttpGet("charts/duration")]
-    public async Task<PagedChartData<double>> GetWarsByDuration([FromQuery] QueryParams query) => await _service.GetWarsByDuration(query.Page, query.PageSize);
-    
+    public async Task<PagedChartData<double>> GetWarsByDuration([FromQuery] QueryParams query)
+    {
+        return await _service.GetWarsByDuration(query.Page, query.PageSize);
+    }
+
     [HttpGet("charts/battles")]
-    public async Task<PagedChartData<int>> GetWarsByBattles([FromQuery] QueryParams query) => await _service.GetWarsByBattles(query.Page, query.PageSize);
+    public async Task<PagedChartData<int>> GetWarsByBattles([FromQuery] QueryParams query)
+    {
+        return await _service.GetWarsByBattles(query.Page, query.PageSize);
+    }
 }
