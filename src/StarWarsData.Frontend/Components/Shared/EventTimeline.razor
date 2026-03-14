@@ -9,7 +9,8 @@
     @if (ShowCategoryFilter && _categories is not null)
     {
         <MudSelect T="string"
-                   @bind-SelectedValues="_selectedCategories"
+                   SelectedValues="_selectedCategories"
+                   SelectedValuesChanged="SelectedValuesChanged"
                    MultiSelection="true" Dense="false" FullWidth="true">
             @foreach (var category in _categories)
             {
@@ -90,7 +91,7 @@
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     private GroupedTimelineResult? _pagedResult;
     private string[]? _categories;
-    private IEnumerable<string> _selectedCategories = new List<string>(); 
+    private IReadOnlyCollection<string> _selectedCategories = new List<string>();
     private Dictionary<string, string> _templateColorMap = new();
 
     private int _pages = 1;
@@ -314,7 +315,7 @@
     }
 
     // Update signature to match delegate, handle potential nulls
-    private async Task SelectedValuesChanged(IEnumerable<string?>? selectedCategories)
+    private async Task SelectedValuesChanged(IReadOnlyCollection<string?>? selectedCategories)
     {
         // Filter out nulls and update the list
         _selectedCategories = selectedCategories?.Where(s => s != null).Select(s => s!).ToList() ?? new List<string>();

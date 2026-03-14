@@ -6,13 +6,10 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Keycloak.Authentication" Version="9.3.1-preview.1.25305.6" />
-    <PackageReference
-      Include="Microsoft.AspNetCore.Components.WebAssembly.Server"
-      Version="10.0.0-preview.5.25277.114"
-    />
-    <PackageReference Include="MudBlazor" Version="8.7.0" />
-    <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.3" />
+    <PackageReference Include="Aspire.Keycloak.Authentication" Version="9.4.1-preview.1.25408.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.5" />
+    <PackageReference Include="MudBlazor" Version="9.1.0" />
+    <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.4.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarWarsData.ServiceDefaults\StarWarsData.ServiceDefaults.csproj" />

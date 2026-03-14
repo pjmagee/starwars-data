@@ -5,13 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.MongoDB.Driver.v3" Version="9.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0-preview.5.25277.114" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0-preview.5.25277.114" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.56.0" />
-    <PackageReference Include="ModelContextProtocol" Version="0.2.0-preview.3" />
-    <PackageReference Include="OpenAI" Version="2.2.0-beta.4" />
-    <PackageReference Include="System.Text.Json" Version="10.0.0-preview.5.25277.114" />
+    <PackageReference Include="Aspire.MongoDB.Driver.v3" Version="9.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.0.0-rc4" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.3.0" />
+    <PackageReference Include="ModelContextProtocol" Version="1.1.0" />
+    <PackageReference Include="OpenAI" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarWarsData.Models\StarWarsData.Models.csproj" />
@@ -19,7 +18,7 @@
     <ProjectReference Include="..\StarWarsData.Services\StarWarsData.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.20" />
-    <PackageReference Include="Hangfire.Mongo" Version="1.11.6" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.23" />
+    <PackageReference Include="Hangfire.Mongo" Version="1.13.1" />
   </ItemGroup>
 </Project>

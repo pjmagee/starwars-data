@@ -1,0 +1,248 @@
+@page "/"
+@page "/ask"
+@inject IHttpClientFactory HttpClientFactory
+
+<PageTitle>Ask AI — Star Wars Data</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="pa-4">
+
+    <MudText Typo="Typo.h4" Class="mb-1">Ask the Star Wars Archive</MudText>
+    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
+        Ask any question about the Star Wars universe and get charts, timelines, or family trees powered by AI.
+    </MudText>
+
+    <EditForm Model="_model" OnValidSubmit="Load">
+        <DataAnnotationsValidator />
+        <MudGrid Spacing="2">
+            <MudItem xs="12" sm="10">
+                <MudTextField @bind-Value="_model.Prompt"
+                              Label="Ask a question…"
+                              Variant="Variant.Outlined"
+                              Required="true"
+                              Immediate="true"
+                              FullWidth="true"
+                              Disabled="_loading"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search" />
+            </MudItem>
+            <MudItem xs="12" sm="2">
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           FullWidth="true"
+                           Disabled="_loading"
+                           StartIcon="@Icons.Material.Filled.AutoAwesome">
+                    @(_loading ? "Thinking…" : "Ask")
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+
+    @if (!_loading && _chartFragment is null && !_hasResult)
+    {
+        <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">Example questions</MudText>
+        <MudGrid Spacing="2">
+            @foreach (var example in _examples)
+            {
+                var prompt = example;
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
+                        <MudText Typo="Typo.body2">@prompt</MudText>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+
+    @if (_loading)
+    {
+        <MudStack AlignItems="AlignItems.Center" Class="mt-8">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+            <MudText Typo="Typo.body2" Color="Color.Secondary">Querying the galaxy…</MudText>
+        </MudStack>
+    }
+
+    @if (!_loading && _error is not null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mt-4">@_error</MudAlert>
+    }
+
+    @if (!_loading && _chartFragment is not null)
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-6" Style="width:100%">
+            @if (_chartTitle is not null)
+            {
+                <MudText Typo="Typo.h6" Class="mb-4">@_chartTitle</MudText>
+            }
+            @_chartFragment
+        </MudPaper>
+    }
+
+</MudContainer>
+
+@code {
+
+    private AskModel _model = new();
+    private RenderFragment? _chartFragment;
+    private bool _loading;
+    private bool _hasResult;
+    private string? _error;
+    private string? _chartTitle;
+
+    private readonly string[] _examples =
+    [
+        "How many wars happened between 0 ABY and 200 ABY?",
+        "How many characters had a lifespan between 200 and 300 years old?",
+        "How many light side Force powers are there vs dark side?",
+        "Show the family tree of Luke Skywalker",
+        "Show the family tree of Darth Vader",
+        "How many battles occurred per era?",
+        "What species have the longest average lifespans?",
+        "How many characters were born in each century BBY?",
+    ];
+
+    public class AskModel
+    {
+        [Required(ErrorMessage = "Please enter a question.")]
+        public string Prompt { get; set; } = string.Empty;
+    }
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    private void UseExample(string prompt)
+    {
+        _model.Prompt = prompt;
+        _ = SubmitAsync();
+    }
+
+    private async Task Load() => await SubmitAsync();
+
+    private async Task SubmitAsync()
+    {
+        _loading = true;
+        _chartFragment = null;
+        _chartTitle = null;
+        _error = null;
+        _hasResult = false;
+        StateHasChanged();
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("kernel/ask", new UserPrompt(_model.Prompt));
+
+            if (response.IsSuccessStatusCode)
+            {
+                var chartSpec = await response.Content.ReadFromJsonAsync<AskChart>();
+
+                if (chartSpec is not null)
+                {
+                    _chartTitle = chartSpec.Title;
+                    _chartFragment = RenderChart(chartSpec);
+                    _hasResult = true;
+                }
+                else
+                {
+                    _error = "The AI returned no chart data. Try rephrasing your question.";
+                }
+            }
+            else
+            {
+                _error = $"Request failed ({(int)response.StatusCode}). Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = $"Unexpected error: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    RenderFragment RenderChart(AskChart spec) => spec.AskChartType switch
+    {
+        AskChartType.FamilyTree => RenderFamilyTree(spec),
+        _ => RenderMudChart(spec),
+    };
+
+    RenderFragment RenderFamilyTree(AskChart spec) => builder =>
+    {
+        if (spec.FamilyTreeCharacterId is null)
+        {
+            builder.AddContent(0, "No character ID returned for family tree.");
+            return;
+        }
+
+        builder.OpenComponent<FamilyTreeViewer>(0);
+        builder.AddAttribute(1, "CharacterId", spec.FamilyTreeCharacterId.Value);
+        builder.AddAttribute(2, "CharacterName", spec.FamilyTreeCharacterName ?? "Character");
+        builder.CloseComponent();
+    };
+
+    RenderFragment RenderMudChart(AskChart spec) => builder =>
+    {
+        var seq = 0;
+
+        switch (spec.AskChartType)
+        {
+            case AskChartType.Bar:
+            case AskChartType.Line:
+            case AskChartType.StackedBar:
+            {
+                var chartType = spec.AskChartType == AskChartType.Bar ? ChartType.Bar
+                    : spec.AskChartType == AskChartType.Line ? ChartType.Line
+                    : ChartType.StackedBar;
+
+                builder.OpenComponent<MudChart<double>>(seq++);
+                builder.AddAttribute(seq++, "ChartType", chartType);
+                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double>
+                {
+                    Name = s.Name,
+                    Data = s.Data.ToArray()
+                }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.XAxisLabels?.ToArray() ?? []);
+                builder.AddAttribute(seq++, "Width", "100%");
+                builder.AddAttribute(seq++, "Height", "400px");
+                builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.Pie:
+            case AskChartType.Donut:
+            {
+                var chartType = spec.AskChartType == AskChartType.Pie ? ChartType.Pie : ChartType.Donut;
+                builder.OpenComponent<MudChart<double>>(seq++);
+                builder.AddAttribute(seq++, "ChartType", chartType);
+                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double>
+                {
+                    Name = s.Name,
+                    Data = s.Data.ToArray()
+                }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.Labels?.ToArray() ?? []);
+                builder.AddAttribute(seq++, "Width", "100%");
+                builder.AddAttribute(seq++, "Height", "400px");
+                builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
+                builder.CloseComponent();
+                break;
+            }
+            case AskChartType.TimeSeries:
+            {
+                builder.OpenComponent<MudChart<double>>(seq++);
+                builder.AddAttribute(seq++, "ChartType", ChartType.Timeseries);
+                builder.AddAttribute(seq++, "ChartSeries", spec.TimeSeries?.Select(ts => new ChartSeries<double>
+                {
+                    Name = ts.Name,
+                    Data = ts.Data.Select(dp => dp.Y).ToArray()
+                }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.TimeSeries?.FirstOrDefault()?.Data
+                    .Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
+                builder.AddAttribute(seq++, "Width", "100%");
+                builder.AddAttribute(seq++, "Height", "400px");
+                builder.CloseComponent();
+                break;
+            }
+        }
+    };
+}

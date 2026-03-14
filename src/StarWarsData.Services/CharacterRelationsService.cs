@@ -95,7 +95,7 @@ namespace StarWarsData.Services
                 .Select(async link =>
                     await _mongoDb
                         .GetCollection<Infobox>("Character")
-                        .Find(r => r.PageUrl == link.Href)
+                        .Find(r => r.WikiUrl == link.Href)
                         .Project(r => r.PageId)
                         .FirstOrDefaultAsync()
                 );
@@ -267,7 +267,7 @@ namespace StarWarsData.Services
                 {
                     if (!lnk.Href.Contains("/Legends"))
                         continue;
-                    var rec = await coll.Find(r => r.PageUrl == lnk.Href).FirstOrDefaultAsync();
+                    var rec = await coll.Find(r => r.WikiUrl == lnk.Href).FirstOrDefaultAsync();
                     if (rec != null && seenIds.Add(rec.PageId))
                     {
                         list.Add(MapToFamilyNode(rec));

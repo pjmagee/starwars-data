@@ -42,17 +42,17 @@ public class InfoboxToEventsTransformer
                     );
                     continue;
                 }
+
                 yield return new TimelineEvent
                 {
                     Title = r.PageTitle,
                     DateEvent = GetDateEvent(data),
                     Demarcation = GetDemarcation(link),
                     Year = year.Value,
-                    TemplateUri = r.TemplateUrl,
-                    Template = _templateHelper.GetTemplateFromUri(r.TemplateUrl),
+                    Template = r.Template,
                     ImageUrl = r.ImageUrl,
                     Properties = r.Data,
-                    Continuity = r.Continuity, // Inherit continuity from source infobox
+                    Continuity = r.Continuity,
                 };
             }
         }

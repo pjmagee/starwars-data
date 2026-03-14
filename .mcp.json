@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "aspire": {
+      "command": "aspire",
+      "args": [
+        "mcp",
+        "start"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "mediawiki-mcp-server": {
+      "command": "npx",
+      "args": [
+        "@professional-wiki/mediawiki-mcp-server@latest"
+      ],
+      "env": {
+        "CONFIG": "./wiki.config.json"
+      }
+    },
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mongodb-js/mongodb-mcp-server"
+      ],
+      "env": {
+        "MDB_MCP_CONNECTION_STRING": "$MDB_MCP_CONNECTION_STRING"
+      }
+    }
+  }
+}

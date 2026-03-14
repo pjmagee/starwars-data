@@ -1,32 +1,71 @@
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
+using Hangfire.Storage;
 
 namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AdminController : ControllerBase
-{
-    readonly ILogger<AdminController> _logger;
-    readonly InfoboxDownloader _infoboxDownloader;
+{    readonly ILogger<AdminController> _logger;
+    readonly InfoboxExtractor _infoboxExtractor;
     readonly InfoboxRelationshipProcessor _infoboxRelationshipProcessor;
     readonly PageDownloader _pageDownloader;
     readonly RecordService _recordService;
 
     public AdminController(
         ILogger<AdminController> logger,
-        InfoboxDownloader infoboxDownloader,
+        InfoboxExtractor infoboxExtractor,
         InfoboxRelationshipProcessor infoboxRelationshipProcessor,
         PageDownloader pageDownloader,
         RecordService recordService
     )
     {
         _logger = logger;
-        _infoboxDownloader = infoboxDownloader;
+        _infoboxExtractor = infoboxExtractor;
         _infoboxRelationshipProcessor = infoboxRelationshipProcessor;
         _pageDownloader = pageDownloader;
         _recordService = recordService;
+    }
+
+    bool IsJobAlreadyActive(Type type, string methodName)
+    {
+        try
+        {
+            var monitoring = JobStorage.Current.GetMonitoringApi();
+            foreach (var q in monitoring.Queues())
+            {
+                var processing = monitoring.ProcessingJobs(0, 100);
+                foreach (var kv in processing)
+                {
+                    var job = kv.Value.Job;
+                    if (job?.Type == type && job.Method?.Name == methodName)
+                        return true;
+                }
+
+                var enqueued = monitoring.EnqueuedJobs(q.Name, 0, 100);
+                foreach (var kv in enqueued)
+                {
+                    var job = kv.Value.Job;
+                    if (job?.Type == type && job.Method?.Name == methodName)
+                        return true;
+                }
+            }
+
+            var scheduled = monitoring.ScheduledJobs(0, 100);
+            foreach (var kv in scheduled)
+            {
+                var job = kv.Value.Job;
+                if (job?.Type == type && job.Method?.Name == methodName)
+                    return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to inspect existing jobs; proceeding with enqueue");
+        }
+        return false;
     }
 
     [HttpGet("jobs")]
@@ -57,15 +96,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("infobox/download")]
-    public ActionResult<Guid> EnqueueInfoboxDownload()
+    [HttpPost("download/pages")]
+    public ActionResult<string> SyncWikiPages()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _infoboxDownloader.DownloadInfoboxesAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(PageDownloader), nameof(PageDownloader.SyncToMongoDbAsync)))
+                return Conflict(new { error = "Page download job already running" });
+            var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.SyncToMongoDbAsync(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -73,15 +112,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("infobox/relationships")]
-    public ActionResult<Guid> EnqueueInfoboxRelationships()
+    [HttpPost("process/infobox-relationships")]
+    public ActionResult<string> ProcessInfoboxRelationships()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _infoboxRelationshipProcessor.CreateRelationshipsAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(InfoboxRelationshipProcessor), nameof(InfoboxRelationshipProcessor.CreateRelationshipsAsync)))
+                return Conflict(new { error = "Infobox relationship processing already running" });
+            var jobId = BackgroundJob.Enqueue<InfoboxRelationshipProcessor>(s => s.CreateRelationshipsAsync(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -90,14 +129,14 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("mongo/create-embeddings")]
-    public ActionResult<Guid> EnqueueCreateEmbeddings()
+    public ActionResult<string> EnqueueCreateEmbeddings()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.ProcessEmbeddingsAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.ProcessEmbeddingsAsync)))
+                return Conflict(new { error = "Embeddings creation already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.ProcessEmbeddingsAsync(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -106,14 +145,14 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("mongo/delete-embeddings")]
-    public ActionResult<Guid> EnqueueDeleteEmbeddings()
+    public ActionResult<string> EnqueueDeleteEmbeddings()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.DeleteOpenAiEmbeddingsAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteOpenAiEmbeddingsAsync)))
+                return Conflict(new { error = "Embeddings deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -121,15 +160,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("mongo/delete-collections")]
-    public ActionResult<Guid> EnqueueDeleteCollections()
+    [HttpPost("mongo/delete-infobox-collections")]
+    public ActionResult<string> EnqueueDeleteCollections()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.DeleteCollections(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteInfoboxCollections)))
+                return Conflict(new { error = "Infobox collections deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteInfoboxCollections(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -137,17 +176,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("mongo/create-timeline-events")]
-    [Obsolete("Use create-categorized-timeline-events instead")]
-    public ActionResult<Guid> EnqueueCreateTimelineEvents()
+    [HttpPost("mongo/delete-page-infobox-collections")]
+    public ActionResult<string> EnqueueDeletePageInfoboxCollections()
     {
         try
         {
-            // Redirect to the new categorized method
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.CreateCategorizedTimelineEvents(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeletePageInfoboxCollections)))
+                return Conflict(new { error = "Extracted infobox collections deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeletePageInfoboxCollections(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -155,15 +192,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("mongo/create-categorized-timeline-events")]
-    public ActionResult<Guid> EnqueueCreateCategorizedTimelineEvents()
+    [HttpPost("mongo/delete-pages")]
+    public ActionResult<string> EnqueueDeletePages()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.CreateCategorizedTimelineEvents(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeletePagesCollections)))
+                return Conflict(new { error = "Pages deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeletePagesCollections(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -171,31 +208,15 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("mongo/create-index-embeddings")]
-    public ActionResult<Guid> EnqueueCreateIndexEmbeddings()
+    [HttpPost("mongo/delete-timeline-events")]
+    public ActionResult<string> EnqueueDeleteTimelineEvents()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.CreateVectorIndexesAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/delete-index-embeddings")]
-    public ActionResult<Guid> EnqueueDeleteIndexEmbeddings()
-    {
-        try
-        {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.DeleteVectorIndexesAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteTimelineCollections)))
+                return Conflict(new { error = "Timeline events deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteTimelineCollections(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -204,14 +225,14 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("mongo/add-character-relationships")]
-    public ActionResult<Guid> EnqueueAddCharacterRelationships()
+    public ActionResult<string> EnqueueAddCharacterRelationships()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _recordService.AddCharacterRelationshipsAsync()
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.AddCharacterRelationshipsAsync)))
+                return Conflict(new { error = "Character relationships job already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.AddCharacterRelationshipsAsync());
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {
@@ -219,15 +240,63 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("wookieepedia/sync")]
-    public ActionResult<Guid> EnqueueDownloadPages()
+    [HttpPost("extract/infoboxes")]
+    public ActionResult<string> ExtractInfoboxes()
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue(() =>
-                _pageDownloader.SyncToMongoDbAsync(CancellationToken.None)
-            );
-            return Ok(jobId);
+            if (IsJobAlreadyActive(typeof(InfoboxExtractor), nameof(InfoboxExtractor.ExtractInfoboxesAsync)))
+                return Conflict(new { error = "Infobox extraction already running" });
+            var jobId = BackgroundJob.Enqueue<InfoboxExtractor>(s => s.ExtractInfoboxesAsync(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/create-categorized-timeline-events")]
+    public ActionResult<string> EnqueueCreateCategorizedTimelineEvents()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateCategorizedTimelineEvents)))
+                return Conflict(new { error = "Categorized timeline events job already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateCategorizedTimelineEvents(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/create-index-embeddings")]
+    public ActionResult<string> EnqueueCreateVectorIndexes()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateVectorIndexesAsync)))
+                return Conflict(new { error = "Vector index creation already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateVectorIndexesAsync(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/delete-index-embeddings")]
+    public ActionResult<string> EnqueueDeleteVectorIndexes()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteVectorIndexesAsync)))
+                return Conflict(new { error = "Vector index deletion already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteVectorIndexesAsync(CancellationToken.None));
+            return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
         {

@@ -1,0 +1,52 @@
+{
+	"servers": {
+		"MongoDB": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"mongodb-mcp-server",
+				"--connectionString",
+				"mongodb://${input:MONGODB_USERNAME}:${input:MONGODB_PASSWORD}@192.168.1.102:27017/?authSource=admin"
+			]
+		},
+		"aspire": {
+			"type": "stdio",
+			"command": "aspire",
+			"args": [
+				"mcp",
+				"start"
+			]
+		},
+		"mediawiki-mcp-server": {
+			"command": "npx",
+			"args": [
+				"@professional-wiki/mediawiki-mcp-server@latest"
+			],
+			"env": {
+				"CONFIG": "./wiki.config.json"
+			}
+		},
+		"playwright": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@playwright/mcp@latest"
+			]
+		}
+	},
+	"inputs": [
+		{
+			"id": "MONGODB_USERNAME",
+			"type": "promptString",
+			"description": "MongoDB username",
+			"default": "admin"
+		},
+		{
+			"id": "MONGODB_PASSWORD",
+			"type": "promptString",
+			"description": "MongoDB password",
+			"password": true
+		}
+	]
+}

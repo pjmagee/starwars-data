@@ -1,19 +1,14 @@
 using System.Collections.Concurrent;
 using AngleSharp.Common;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.SemanticKernel.Embeddings;
-using Microsoft.SemanticKernel.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 using TimelineEvent = StarWarsData.Models.Entities.TimelineEvent;
-
-#pragma warning disable SKEXP0001
-#pragma warning disable SKEXP0050
-#pragma warning disable SKEXP0010
 
 namespace StarWarsData.Services;
 
@@ -24,20 +19,18 @@ public class RecordService
     readonly SettingsOptions _settingsOptions;
     readonly IMongoClient _mongoClient;
     readonly string _infoboxDb;
+    readonly string _pageInfoboxDb;
     readonly string _structuredDbName;
     readonly string _timelineEventsDbName;
-
     readonly YearHelper _yearHelper;
-
-    // readonly IVectorStore _vectorStore;
-    readonly ITextEmbeddingGenerationService _textEmbeddingGenerationService;
+    readonly IEmbeddingGenerator<string, Embedding<float>> _textEmbeddingGenerationService;
 
     public RecordService(
         ILogger<RecordService> logger,
         IOptions<SettingsOptions> settingsOptions,
         YearHelper yearHelper,
         IMongoClient mongoClient,
-        ITextEmbeddingGenerationService textEmbeddingGenerationService,
+        IEmbeddingGenerator<string, Embedding<float>> textEmbeddingGenerationService,
         InfoboxToEventsTransformer recordToEventsTransformer
     )
     {
@@ -45,6 +38,7 @@ public class RecordService
         _settingsOptions = settingsOptions.Value;
         _mongoClient = mongoClient;
         _infoboxDb = _settingsOptions.InfoboxDb;
+    _pageInfoboxDb = _settingsOptions.PageInfoboxDb;
         _structuredDbName = _settingsOptions.StructuredDb;
         _timelineEventsDbName = _settingsOptions.TimelineEventsDb;
         _yearHelper = yearHelper;
@@ -54,19 +48,52 @@ public class RecordService
 
     public async Task<List<string>> GetCollectionNames(CancellationToken cancellationToken)
     {
-        var db = _mongoClient.GetDatabase(_infoboxDb);
+        var db = _mongoClient.GetDatabase(_pageInfoboxDb);
         var names = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         List<string> results = await names.ToListAsync(cancellationToken);
         return results.OrderBy(x => x).ToList();
     }
 
-    public async Task DeleteCollections(CancellationToken cancellationToken)
+    public async Task DeleteInfoboxCollections(CancellationToken cancellationToken)
     {
         var infoboxDb = _mongoClient.GetDatabase(_infoboxDb);
         var collections = await GetCollectionNames(cancellationToken);
         foreach (var collection in collections)
         {
             await infoboxDb.DropCollectionAsync(collection, cancellationToken);
+        }
+    }
+
+    public async Task DeletePagesCollections(CancellationToken cancellationToken)
+    {
+        var pagesDb = _mongoClient.GetDatabase(_settingsOptions.PagesDb);
+        var collections = await pagesDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var collectionList = await collections.ToListAsync(cancellationToken);
+        foreach (var collection in collectionList)
+        {
+            await pagesDb.DropCollectionAsync(collection, cancellationToken);
+        }
+    }
+
+    public async Task DeleteTimelineCollections(CancellationToken cancellationToken)
+    {
+        var timelineDb = _mongoClient.GetDatabase(_timelineEventsDbName);
+        var collections = await timelineDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var collectionList = await collections.ToListAsync(cancellationToken);
+        foreach (var collection in collectionList)
+        {
+            await timelineDb.DropCollectionAsync(collection, cancellationToken);
+        }
+    }
+
+    public async Task DeletePageInfoboxCollections(CancellationToken cancellationToken)
+    {
+        var pageInfoboxDb = _mongoClient.GetDatabase(_settingsOptions.PageInfoboxDb);
+        var collectionsCursor = await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var collectionList = await collectionsCursor.ToListAsync(cancellationToken);
+        foreach (var collection in collectionList)
+        {
+            await pageInfoboxDb.DropCollectionAsync(collection, cancellationToken);
         }
     }
 
@@ -124,11 +151,11 @@ public class RecordService
         CancellationToken token = default
     )
     {
-        var rawDb = _mongoClient.GetDatabase(_infoboxDb);
+        var db = _mongoClient.GetDatabase(_pageInfoboxDb);
         return await GetPagerResultAsync(
             page,
             pageSize,
-            rawDb.GetCollection<Infobox>(collectionName),
+            db.GetCollection<Infobox>(collectionName),
             searchText,
             token
         );
@@ -163,87 +190,10 @@ public class RecordService
         };
     }
 
-    public async Task ProcessEmbeddingsAsync(CancellationToken cancellationToken)
-    {
-        ReadOnlyMemory<float> MaxPool(IList<ReadOnlyMemory<float>> embeddings)
-        {
-            int dim = embeddings[0].Length;
-
-            // initialize with the smallest possible floats
-            var maxPooled = new float[dim];
-
-            for (int j = 0; j < dim; j++)
-            {
-                maxPooled[j] = float.MinValue;
-            }
-
-            // “let only the biggest values through”
-            foreach (var emb in embeddings)
-            {
-                var span = emb.Span;
-
-                for (int j = 0; j < dim; j++)
-                {
-                    // compare current max with this chunk’s value
-                    if (span[j] > maxPooled[j])
-                    {
-                        maxPooled[j] = span[j];
-                    }
-                }
-            }
-
-            return maxPooled;
-        }
-
-        var rawDb = _mongoClient.GetDatabase(_infoboxDb);
-        foreach (var collectionName in await GetCollectionNames(cancellationToken))
-        {
-            // var vecCol = _vectorStore.GetCollection<string, Record>(collectionName);
-            var collection = rawDb.GetCollection<Infobox>(collectionName);
-            var filter =
-                Builders<Infobox>.Filter.Exists("embedding")
-                & Builders<Infobox>.Filter.Exists("Data");
-            var count = await collection.CountDocumentsAsync(
-                filter,
-                cancellationToken: cancellationToken
-            );
-            if (count == 0)
-                continue;
-
-            _logger.LogInformation(
-                "Processing {Count} records in {Collection}",
-                count,
-                collectionName
-            );
-
-            var cursor = await collection.FindAsync(filter, cancellationToken: cancellationToken);
-
-            while (await cursor.MoveNextAsync(cancellationToken))
-            {
-                var records = cursor.Current.ToList();
-
-                foreach (var record in records)
-                {
-                    var chunked = TextChunker.SplitPlainTextLines(
-                        record.EmbeddingText,
-                        maxTokensPerLine: 800
-                    );
-                    IList<ReadOnlyMemory<float>> embedding =
-                        await _textEmbeddingGenerationService.GenerateEmbeddingsAsync(
-                            chunked,
-                            cancellationToken: cancellationToken
-                        );
-                    record.Embedding = MaxPool(embedding);
-                }
-
-                // await vecCol.UpsertAsync(records, cancellationToken);
-            }
-        }
-    }
-
     public async Task CreateTimelineEvents(CancellationToken token)
     {
-        // Use TimelineEventDocument for the collection type in structured zone
+    // NOTE: switched to use extracted page infobox database rather than raw infobox db
+    // so timeline events derive from unified extracted schema.
         var structuredDb = _mongoClient.GetDatabase(_structuredDbName);
         var timelineEventsCollection = structuredDb.GetCollection<TimelineEvent>("Timeline_events");
         // Use TimelineEventDocument for the filter
@@ -284,9 +234,11 @@ public class RecordService
         _logger.LogInformation("Indexes created for Timeline_events collection");
 
         const int batchSize = 1000;
-        // get raw zone template collections
-        var infoboxDb = _mongoClient.GetDatabase(_infoboxDb);
-        var collectionNames = await GetCollectionNames(token);
+        // get extracted infobox template collections
+        var pageInfoboxDb = _mongoClient.GetDatabase(_pageInfoboxDb);
+        var collectionNames = await (
+            await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: token)
+        ).ToListAsync(token);
         var parallelOptions = new ParallelOptions { CancellationToken = token };
 
         collectionNames = collectionNames.Except(["Timeline_events"]).ToList();
@@ -301,7 +253,7 @@ public class RecordService
                     "Creating timeline events for {CollectionName}",
                     collectionName
                 );
-                var collection = infoboxDb.GetCollection<Infobox>(collectionName);
+                var collection = pageInfoboxDb.GetCollection<Infobox>(collectionName);
                 // Each parallel task needs its own batch and counter
                 var batch = new List<TimelineEvent>(batchSize);
                 int totalAdded = 0;
@@ -382,12 +334,14 @@ public class RecordService
     {
         // Create timeline-events database and collections per category
         var timelineEventsDb = _mongoClient.GetDatabase(_timelineEventsDbName);
-
-        // Get all collection names from infobox database
-        var collectionNames = await GetCollectionNames(token);
+        // Get all collection names from EXTRACTED infobox database, not raw
+        var pageInfoboxDb = _mongoClient.GetDatabase(_pageInfoboxDb);
+        var collectionNames = await (
+            await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: token)
+        ).ToListAsync(token);
 
         const int batchSize = 1000;
-        var infoboxDb = _mongoClient.GetDatabase(_infoboxDb);
+    // We'll read records from extracted page infobox database
 
         var parallelOptions = new ParallelOptions { CancellationToken = token };
 
@@ -447,7 +401,7 @@ public class RecordService
                     );
 
                     // Process records from infobox collection
-                    var infoboxCollection = infoboxDb.GetCollection<Infobox>(collectionName);
+                    var infoboxCollection = pageInfoboxDb.GetCollection<Infobox>(collectionName);
                     var cursor = infoboxCollection
                         .Find(FilterDefinition<Infobox>.Empty)
                         .ToCursor(ct);
@@ -703,5 +657,10 @@ public class RecordService
         );
         List<string> results = await names.ToListAsync(cancellationToken);
         return results.OrderBy(x => x).ToList();
+    }
+
+    public Task ProcessEmbeddingsAsync(CancellationToken none)
+    {
+        throw new NotImplementedException();
     }
 }

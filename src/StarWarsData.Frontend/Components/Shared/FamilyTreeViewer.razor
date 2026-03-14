@@ -1,0 +1,163 @@
+@inject IHttpClientFactory HttpClientFactory
+
+@if (_loading)
+{
+    <MudStack AlignItems="AlignItems.Center" Class="mt-4">
+        <MudProgressCircular Indeterminate="true" Color="Color.Secondary" />
+        <MudText Typo="Typo.body2">Loading family tree for @CharacterName…</MudText>
+    </MudStack>
+}
+else if (_error is not null)
+{
+    <MudAlert Severity="Severity.Warning">@_error</MudAlert>
+}
+else if (_forest is not null)
+{
+    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-2">Family tree for @CharacterName</MudText>
+    <div class="diagram-container">
+        <CascadingValue Value="Diagram" IsFixed="true">
+            <DiagramCanvas></DiagramCanvas>
+        </CascadingValue>
+    </div>
+}
+
+<style>
+    .diagram-container {
+        width: 100%;
+        height: 600px;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 4px;
+    }
+</style>
+
+@code {
+    [Parameter, EditorRequired] public int CharacterId { get; set; }
+    [Parameter] public string CharacterName { get; set; } = "Character";
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private BlazorDiagram Diagram { get; set; } = null!;
+    private List<TreeNode>? _forest;
+    private bool _loading = true;
+    private string? _error;
+    private readonly Dictionary<int, NodeModel> _nodeModels = new();
+
+    protected override void OnInitialized()
+    {
+        var options = new BlazorDiagramOptions
+        {
+            AllowMultiSelection = false,
+            AllowPanning = true,
+            GridSnapToCenter = true,
+            Zoom = { ScaleFactor = 1.1, Enabled = true },
+            Links =
+            {
+                DefaultRouter = new NormalRouter(),
+                DefaultPathGenerator = new SmoothPathGenerator(),
+            },
+        };
+        Diagram = new BlazorDiagram(options);
+        Diagram.RegisterComponent<CharacterNode, CharacterCard>();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _loading = true;
+        _error = null;
+        _forest = null;
+        StateHasChanged();
+
+        try
+        {
+            _forest = await BuildFamilyTreeAsync(CharacterId);
+        }
+        catch (Exception ex)
+        {
+            _error = $"Could not load family tree: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_forest is not null && !_loading)
+            SetupDiagram(_forest);
+        return Task.CompletedTask;
+    }
+
+    private void SetupDiagram(List<TreeNode> forest)
+    {
+        Diagram.Nodes.Clear();
+        Diagram.Links.Clear();
+        _nodeModels.Clear();
+        Diagram.SuspendSorting = true;
+        BuildNodeModels(forest, 0, 0);
+        Diagram.SuspendSorting = false;
+        Diagram.Refresh();
+    }
+
+    private const int ColumnSpacing = 220;
+
+    private void BuildNodeModels(List<TreeNode> nodes, int depth, int startX)
+    {
+        int x = startX;
+        foreach (var node in nodes)
+        {
+            var point = new Blazor.Diagrams.Core.Geometry.Point(x, depth * 160);
+            var characterNode = new CharacterNode(node.Data, point);
+            Diagram.Nodes.Add(characterNode);
+            _nodeModels[node.Id] = characterNode;
+
+            foreach (var parent in node.Parents)
+            {
+                if (_nodeModels.TryGetValue(parent.Id, out var parentNode))
+                {
+                    var link = Diagram.Links.Add(new LinkModel(parentNode, characterNode));
+                    link.PathGenerator = new SmoothPathGenerator();
+                }
+            }
+
+            if (node.Children.Any())
+                BuildNodeModels(node.Children, depth + 1, x);
+
+            x += ColumnSpacing;
+        }
+    }
+
+    private async Task<List<TreeNode>> BuildFamilyTreeAsync(int rootId)
+    {
+        var dto = await Http.GetFromJsonAsync<ImmediateFamilyDto>($"characters/{rootId}/immediate");
+        if (dto?.Root == null) return [];
+
+        var nodes = new Dictionary<int, TreeNode>
+        {
+            [dto.Root.Id] = new TreeNode { Id = dto.Root.Id, Data = dto.Root }
+        };
+
+        void AddRel(FamilyNodeDto member, bool asChild)
+        {
+            if (!nodes.TryGetValue(member.Id, out var node))
+                nodes[member.Id] = node = new TreeNode { Id = member.Id, Data = member };
+            if (asChild)
+                nodes[dto.Root.Id].Children.Add(node);
+            else
+                nodes[dto.Root.Id].Parents.Add(node);
+        }
+
+        foreach (var p in dto.Parents) AddRel(p, asChild: false);
+        foreach (var c in dto.Children) AddRel(c, asChild: true);
+
+        return [.. nodes.Values];
+    }
+
+    private class TreeNode
+    {
+        public int Id { get; set; }
+        public FamilyNodeDto Data { get; set; } = null!;
+        public List<TreeNode> Parents { get; set; } = [];
+        public List<TreeNode> Children { get; set; } = [];
+    }
+}

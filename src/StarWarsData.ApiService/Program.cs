@@ -3,8 +3,9 @@ using Hangfire;
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
-using Microsoft.SemanticKernel;
+using ModelContextProtocol.Client;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
@@ -14,10 +15,7 @@ using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
-
-#pragma warning disable CS0618
-#pragma warning disable SKEXP0010
-#pragma warning disable SKEXP0001
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +30,7 @@ builder
     .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile(
         $"appsettings.{builder.Environment.EnvironmentName}.json",
-        optional: false,
+        optional: true,
         reloadOnChange: true
     )
     .AddEnvironmentVariables(prefix: "ASPNETCORE_")
@@ -41,7 +39,8 @@ builder
 builder.AddMongoDBClient(connectionName: "mongodb");
 
 builder
-    .Services.AddOptions()
+    .Services
+    .AddOptions()
     .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
     .AddLogging()
     .AddHttpContextAccessor()
@@ -62,20 +61,49 @@ builder
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
-        return new OpenAIClient(new ApiKeyCredential(settingsOptions.Value.OpenAiKey));
+        return new OpenAIClient(
+            new ApiKeyCredential(settingsOptions.Value.OpenAiKey),
+            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
+        );
     })
     .AddSingleton<CollectionFilters>()
     .AddScoped<CharacterRelationsService>()
-    .AddSingleton<InfoboxDownloader>()
+    .AddSingleton<InfoboxExtractor>()
     .AddSingleton<InfoboxRelationshipProcessor>()
     .AddSingleton<PageDownloader>()
-    .AddOpenAIChatCompletion(modelId: "gpt-4o-mini")
-    .AddOpenAITextEmbeddingGeneration(modelId: "text-embedding-3-small")
-    .AddSingleton<KernelPluginCollection>(sp => [])
-    .AddTransient(sp =>
+    .AddSingleton<IChatClient>(sp =>
+        sp.GetRequiredService<OpenAIClient>()
+            .GetChatClient("gpt-4o-mini")
+            .AsIChatClient()
+    )
+    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp =>
+        sp.GetRequiredService<OpenAIClient>()
+            .GetEmbeddingClient("text-embedding-3-small")
+            .AsIEmbeddingGenerator()
+    )
+    .AddSingleton<McpClient>(sp =>
     {
-        KernelPluginCollection pluginCollection = sp.GetRequiredService<KernelPluginCollection>();
-        return new Kernel(sp, pluginCollection);
+        var logger = sp.GetRequiredService<ILogger<Program>>();
+        var transport = new StdioClientTransport(new StdioClientTransportOptions
+        {
+            Name = "MongoDB",
+            Command = "npx",
+            Arguments =
+            [
+                "-y",
+                "@mongodb-js/mongodb-mcp-server",
+                "--connectionString",
+                Environment.GetEnvironmentVariable("MDB_MCP_CONNECTION_STRING")!,
+                "--readOnly",
+            ],
+        });
+        logger.LogInformation("Initializing MongoDB MCP client...");
+        var client = McpClient.CreateAsync(transport, new McpClientOptions
+        {
+            InitializationTimeout = TimeSpan.FromMinutes(2)
+        }).GetAwaiter().GetResult();
+        logger.LogInformation("MongoDB MCP client initialized.");
+        return client;
     });
 
 // Add Hangfire services
@@ -107,16 +135,6 @@ builder.Services.AddHangfire(
 );
 
 builder.Services.AddHangfireServer();
-
-builder
-    .Services.AddHttpClient<InfoboxDownloader>(
-        (serviceProvider, client) =>
-        {
-            var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
-            client.BaseAddress = new Uri(settingsOptions.Value.StarWarsBaseUrl);
-        }
-    )
-    .SetHandlerLifetime(TimeSpan.FromMinutes(10));
 
 builder.Services.AddHttpClient<PageDownloader>(
     (serviceProvider, client) =>

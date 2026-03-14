@@ -16,7 +16,7 @@
     <MudChart 
         ChartType="ChartType.Line" 
         ChartSeries="SeriesData"
-        XAxisLabels="Labels" 
+        ChartLabels="Labels" 
         Width="100%" 
         Height="800px"  
         LegendPosition="Position.Top" 
@@ -29,10 +29,10 @@
     private int _pages = 1;
     private int _pageSize = 5;
     private MudPagination _pagination = null!;
-    private readonly ChartOptions _options = new() { ShowLegend = false, XAxisLines = true, YAxisLines = true, YAxisFormat = "##,###0 years", MaxNumYAxisTicks = 25 };
+    private readonly LineChartOptions _options = new() { XAxisLines = true, YAxisLines = true, YAxisFormat = "##,###0 years", MaxNumYAxisTicks = 25 };
 
     private string[] Labels => _pagedResult!.ChartData.Labels;
-    private List<ChartSeries> SeriesData => _pagedResult!.ChartData.Series.Take(1).Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = "Ages" }).ToList();
+    private List<ChartSeries<double>> SeriesData => _pagedResult!.ChartData.Series.Take(1).Select(x => new ChartSeries<double>() { Data = x.Data.ToArray(), Name = "Ages" }).ToList();
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     
     protected override async Task OnInitializedAsync()

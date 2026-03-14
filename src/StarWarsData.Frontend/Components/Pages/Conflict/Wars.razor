@@ -18,7 +18,7 @@
                  <MudChart
                      ChartType="ChartType.Line" 
                      ChartSeries="DurationsData" 
-                     XAxisLabels="_durations!.ChartData.Labels" 
+                     ChartLabels="_durations!.ChartData.Labels" 
                      Width="100%"
                      Height="500px"
                      LegendPosition="Position.Bottom"
@@ -34,7 +34,7 @@
                  <MudChart 
                      ChartType="ChartType.Bar"
                      ChartSeries="@BattlesData" 
-                     XAxisLabels="_battles!.ChartData.Labels" 
+                     ChartLabels="_battles!.ChartData.Labels" 
                      Width="100%" 
                      Height="500px"
                      LegendPosition="Position.Bottom" />
@@ -56,11 +56,11 @@
     
     private int _pageSize = 5;
     
-    private readonly ChartOptions _duratonOptions = new() { ShowLegend = true, XAxisLines = false, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
-    private readonly ChartOptions _battlesOptions = new() { ShowLegend = true, XAxisLines = false, YAxisLines = true, YAxisTicks = 100 };
+    private readonly LineChartOptions _duratonOptions = new() { XAxisLines = false, YAxisLines = true, YAxisFormat = "##,###0 years", YAxisTicks = 100 };
+    private readonly BarChartOptions _battlesOptions = new() { XAxisLines = false, YAxisLines = true, YAxisTicks = 100 };
 
-    private List<ChartSeries> DurationsData => _durations!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
-    private List<ChartSeries> BattlesData => _battles!.ChartData.Series.Select(x => new ChartSeries() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
+    private List<ChartSeries<double>> DurationsData => _durations!.ChartData.Series.Select(x => new ChartSeries<double>() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
+    private List<ChartSeries<double>> BattlesData => _battles!.ChartData.Series.Select(x => new ChartSeries<double>() { Data = x.Data.ToArray(), Name = x.Name }).ToList();
 
     protected override async Task OnInitializedAsync()
     {

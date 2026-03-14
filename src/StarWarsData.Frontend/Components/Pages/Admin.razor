@@ -1,72 +1,100 @@
 @page "/admin"
 @inject IHttpClientFactory HttpClientFactory
 @inject ISnackbar Snackbar
-@inject StarWarsData.Frontend.Services.EndpointService EndpointService
+@inject EndpointService EndpointService
 
 <PageTitle>Admin</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
     <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-6">Admin Panel</MudText>
-    <MudText Typo="Typo.subtitle1" Class="mb-8">Start background jobs and monitor their progress</MudText>
-
-    <!-- Job Actions -->
+    <MudText Typo="Typo.subtitle1" Class="mb-8">Start background jobs and monitor their progress</MudText>    <!-- Job Actions -->
     <MudPaper Class="pa-6 mb-6" Elevation="2">
-        <MudText Typo="Typo.h5" Class="mb-4">Available Jobs</MudText>
-        <MudStack Spacing="3">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download"
-                OnClick="@(() => StartJobHandler(DownloadInfoboxesEndpoint))" Disabled="_isLoading" Size="Size.Large">
-                Download Infoboxes
+        <MudText Typo="Typo.h5" Class="mb-4">Data Management Jobs</MudText>
+        
+        <!-- Infobox Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Primary">Infobox Operations</MudText>
+        <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.DataObject"
+                OnClick="@(() => StartJobHandler(ExtractInfoboxesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Extract Infoboxes (from Pages DB)
             </MudButton>
-
-            <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.CloudSync"
-                OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint))" Disabled="_isLoading" Size="Size.Large">
-                Sync Wookieepedia Pages
-            </MudButton>
-
+            
             <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.AccountTree"
-                OnClick="@(() => StartJobHandler(ProcessRelationshipsEndpoint))" Disabled="_isLoading"
-                Size="Size.Large">
-                Process Relationships
+                OnClick="@(() => StartJobHandler(ProcessRelationshipsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Process Infobox Relationships
             </MudButton>
-
-            <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Psychology"
-                OnClick="@(() => StartJobHandler(CreateEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Large">
-                Create Embeddings
-            </MudButton>            <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Timeline"
-                OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint))" Disabled="_isLoading"
-                Size="Size.Large">
-                Create Categorized Timeline Events
+            
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
+                OnClick="@(() => StartJobHandler(DeleteInfoboxCollectionsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Delete Raw Infobox Collections
             </MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever"
+                OnClick="@(() => StartJobHandler(DeletePageInfoboxCollectionsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Delete Extracted Infobox Collections
+            </MudButton>
+        </MudStack>        <!-- Pages Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Secondary">Pages Operations</MudText>
+        <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.CloudSync"
+                OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Download Pages (to starwars-raw database)
+            </MudButton>
+            
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
+                OnClick="@(() => StartJobHandler(DeletePagesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Delete Pages Database (starwars-raw)
+            </MudButton>
+        </MudStack>
 
+        <!-- Timeline Events Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Success">Timeline Events Operations</MudText>
+        <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Timeline"
+                OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Create Timeline Events (from infobox to timeline DB)
+            </MudButton>
+            
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
+                OnClick="@(() => StartJobHandler(DeleteTimelineEventsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Delete Timeline Events Collections
+            </MudButton>
+        </MudStack>
+
+        <!-- Character Relationships -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Tertiary">Character Operations</MudText>
+        <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Group"
-                OnClick="@(() => StartJobHandler(AddCharacterRelationshipsEndpoint))" Disabled="_isLoading"
-                Size="Size.Large">
-                Add Character Relationships
+                OnClick="@(() => StartJobHandler(AddCharacterRelationshipsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Create Character Relationships (infobox to character DB ETL)
+            </MudButton>
+        </MudStack>
+
+        <MudDivider Class="my-4" />
+
+        <!-- Advanced Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Warning">Advanced Operations</MudText>
+        <MudStack Spacing="2">
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Psychology"
+                OnClick="@(() => StartJobHandler(CreateEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Create Embeddings
             </MudButton>
 
-            <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                OnClick="@(() => StartJobHandler(CreateVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Large">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                OnClick="@(() => StartJobHandler(CreateVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Create Vector Indexes
             </MudButton>
 
-            <MudDivider Class="my-2" />
-
-            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
-                OnClick="@(() => StartJobHandler(DeleteCollectionsEndpoint))" Disabled="_isLoading" Size="Size.Large">
-                Delete Collections
-            </MudButton>
-
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteSweep"
-                OnClick="@(() => StartJobHandler(DeleteEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                OnClick="@(() => StartJobHandler(DeleteEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Delete Embeddings
             </MudButton>
 
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove"
-                OnClick="@(() => StartJobHandler(DeleteVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Large">
+                OnClick="@(() => StartJobHandler(DeleteVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Delete Vector Indexes
             </MudButton>
         </MudStack>
-    </MudPaper> <!-- Hangfire Dashboard -->
+    </MudPaper><!-- Hangfire Dashboard -->
     <MudPaper Class="pa-6" Elevation="2">
         <MudText Typo="Typo.h5" Class="mb-4">Job Monitoring</MudText>
         <MudText Typo="Typo.body1" Class="mb-4">
@@ -78,17 +106,25 @@
     </MudPaper>
 </MudContainer>
 
-@code {    // API endpoints for job creation
-    private const string DownloadInfoboxesEndpoint = "admin/infobox/download";
-    private const string ProcessRelationshipsEndpoint = "admin/infobox/relationships";
-    private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
+@code {    
+    // API endpoints for job creation
+    private const string ExtractInfoboxesEndpoint = "admin/extract/infoboxes";
+    private const string ProcessRelationshipsEndpoint = "admin/process/infobox-relationships";
+    private const string DeleteInfoboxCollectionsEndpoint = "admin/mongo/delete-infobox-collections";
+    private const string DeletePageInfoboxCollectionsEndpoint = "admin/mongo/delete-page-infobox-collections";
+    
+    private const string SyncWookieepediaEndpoint = "admin/download/pages";
+    private const string DeletePagesEndpoint = "admin/mongo/delete-pages";
+    
     private const string CreateTimelineEventsEndpoint = "admin/mongo/create-categorized-timeline-events";
-    private const string SyncWookieepediaEndpoint = "admin/wookieepedia/sync";
-    private const string DeleteCollectionsEndpoint = "admin/mongo/delete-collections";
+    private const string DeleteTimelineEventsEndpoint = "admin/mongo/delete-timeline-events";
+    
+    private const string AddCharacterRelationshipsEndpoint = "admin/mongo/add-character-relationships";
+    
+    private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
     private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";
     private const string CreateVectorIndexEndpoint = "admin/mongo/create-index-embeddings";
-    private const string DeleteVectorIndexEndpoint = "admin/mongo/delete-index-embeddings";
-    private const string AddCharacterRelationshipsEndpoint = "admin/mongo/add-character-relationships";    private bool _isLoading = false;
+    private const string DeleteVectorIndexEndpoint = "admin/mongo/delete-index-embeddings";private bool _isLoading = false;
     private string? _hangfireDashboardUrl;
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
@@ -107,6 +143,11 @@
             if (response.IsSuccessStatusCode)
             {
                 Snackbar.Add("Job started successfully! Check Hangfire dashboard for status.", Severity.Success);
+            }
+            else if ((int)response.StatusCode == 409)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Job not started: {error}", Severity.Warning);
             }
             else
             {

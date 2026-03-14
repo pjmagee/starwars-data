@@ -21,7 +21,7 @@ public class MapService
     {
         _logger = logger;
         _settingsOptions = settingsOptions.Value;
-        _db = mongoClient.GetDatabase(_settingsOptions.InfoboxDb);
+        _db = mongoClient.GetDatabase(_settingsOptions.PageInfoboxDb);
     }
 
     public async Task<IEnumerable<GalaxyMapItem>> GetPlanets()
@@ -65,7 +65,7 @@ public class MapService
         return planets;
     }
 
-    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells()
+    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells(Continuity? continuity = null)
     {
         var col = _db.GetCollection<Infobox>("CelestialBody");
         // preload system, sector, and region name->Id maps
@@ -87,6 +87,8 @@ public class MapService
             d => d.Label == "Class" && d.Values.Contains("Terrestrial")
         );
         var filter = Builders<Infobox>.Filter.And(gridFilter, classFilter);
+        if (continuity.HasValue)
+            filter = Builders<Infobox>.Filter.And(filter, Builders<Infobox>.Filter.Eq(r => r.Continuity, continuity.Value));
         var recs = await col.Find(filter).ToListAsync();
 
         // Optionally, get sector info from Region/Sector fields
@@ -157,6 +159,31 @@ public class MapService
                 cell.PlanetsWithoutSystem.Add(planet);
             }
         }
+        // Overlay nebulas onto grid cells
+        var nebulaCol = _db.GetCollection<Infobox>("Nebula");
+        var nebulaGridFilter = Builders<Infobox>.Filter.ElemMatch(r => r.Data, d => d.Label == "Grid square");
+        var nebulaFilter = continuity.HasValue
+            ? Builders<Infobox>.Filter.And(nebulaGridFilter, Builders<Infobox>.Filter.Eq(r => r.Continuity, continuity.Value))
+            : nebulaGridFilter;
+        var nebulaRecs = await nebulaCol.Find(nebulaFilter).ToListAsync();
+        foreach (var rec in nebulaRecs)
+        {
+            var gridProp = rec.Data.FirstOrDefault(d => d.Label == "Grid square");
+            if (gridProp?.Values == null || gridProp.Values.Count == 0) continue;
+            var loc = gridProp.Values.First();
+            var parts = loc.Split('-', 2);
+            if (parts.Length != 2) continue;
+            var letter = parts[0].Trim();
+            if (!int.TryParse(parts[1], out var number)) continue;
+            var key = $"{letter}-{number}";
+            if (!grid.TryGetValue(key, out var cell))
+            {
+                cell = new GalaxyGridCell { Letter = letter, Number = number };
+                grid[key] = cell;
+            }
+            cell.Nebulas.Add(new GalaxyMapItem { Id = rec.PageId, Letter = letter, Number = number, Name = rec.PageTitle });
+        }
+
         return grid.Values;
     }
 

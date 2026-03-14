@@ -4,9 +4,9 @@ namespace StarWarsData.Models.Queries;
 
 public class War
 {
-    public string Name { get; set; }
-    public string Beginning { get; set; }
-    public string End { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Beginning { get; set; } = string.Empty;
+    public string End { get; set; } = string.Empty;
     public double Years { get; set; }
 
     public int Battles { get; set; } = 0;

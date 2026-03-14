@@ -43,9 +43,7 @@ public class TimelineService
         // If templates are specified, filter collections; otherwise use all
         var collectionsToQuery = templates.Any()
             ? availableCollections
-                .Where(collection =>
-                    templates.Contains(_templateHelper.GetTemplateFromUri(collection))
-                )
+                .Where(c => templates.Contains(c))
                 .ToList()
             : availableCollections;
 

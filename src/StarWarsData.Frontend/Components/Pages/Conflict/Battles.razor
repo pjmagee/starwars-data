@@ -16,14 +16,14 @@
     <MudChart 
         ChartType="ChartType.Bar" 
         ChartSeries="@VictoriesSeries"
-        XAxisLabels="_victories!.ChartData.Labels" 
+        ChartLabels="_victories!.ChartData.Labels" 
         Width="100%" Height="800px"
         LegendPosition="Position.Top" />
 }
 
 @code {
 
-    private List<ChartSeries> VictoriesSeries => _victories!.ChartData.Series.Select(x => new ChartSeries(){ Name = x.Name,  Data = x.Data.ToArray()  }).ToList();
+    private List<ChartSeries<double>> VictoriesSeries => _victories!.ChartData.Series.Select(x => new ChartSeries<double>(){ Name = x.Name,  Data = x.Data.ToArray()  }).ToList();
     
     private PagedChartData<double>? _victories;
     private int _victoriesPages = 1;

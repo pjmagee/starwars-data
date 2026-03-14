@@ -7,7 +7,7 @@ namespace StarWarsData.Models.Entities;
 public class TimelineEvent : IComparable<TimelineEvent>
 {
     [BsonIgnore]
-    public string DisplayTitle => $"{DateEvent} {Title} ({TemplateUri})".Trim();
+    public string DisplayTitle => $"{DateEvent} {Title}".Trim();
 
     [BsonIgnore]
     public string DisplayYear =>

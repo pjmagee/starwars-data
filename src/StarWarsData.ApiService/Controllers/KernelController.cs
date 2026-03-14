@@ -1,17 +1,13 @@
-using System.Text.Json;
+using Microsoft.Agents.AI;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 using ModelContextProtocol.Client;
-using MongoDB.Driver;
+using OpenAI;
+using OpenAI.Chat;
 using StarWarsData.Models;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services;
-using FunctionResultContent = Microsoft.SemanticKernel.FunctionResultContent;
-
-#pragma warning disable SKEXP0001
 
 namespace StarWarsData.ApiService.Controllers;
 
@@ -21,133 +17,127 @@ namespace StarWarsData.ApiService.Controllers;
 public class KernelController : ControllerBase
 {
     readonly ILogger<KernelController> _logger;
-    readonly Kernel _kernel;
-    readonly IMongoDatabase _db;
+    readonly OpenAIClient _openAiClient;
     readonly SettingsOptions _settingsOptions;
-    readonly IClientTransport _transport;
+    readonly McpClient _mcpClient;
 
     public KernelController(
         ILogger<KernelController> logger,
-        Kernel kernel,
-        IMongoDatabase db,
-        IOptions<SettingsOptions> settingsOptions
+        OpenAIClient openAiClient,
+        IOptions<SettingsOptions> settingsOptions,
+        McpClient mcpClient
     )
     {
         _logger = logger;
-        _kernel = kernel;
-        _db = db;
+        _openAiClient = openAiClient;
         _settingsOptions = settingsOptions.Value;
-        _transport = new StdioClientTransport(
-            new()
-            {
-                Name = "MongoDB",
-                Command = "npx",
-                Arguments =
-                [
-                    "-y",
-                    "mongodb-mcp-server",
-                    "--connectionString",
-                    Environment.GetEnvironmentVariable("ConnectionStrings__mongodb")!,
-                    "--readOnly",
-                ],
-            }
-        );
+        _mcpClient = mcpClient;
     }
 
     [HttpPost("ask")]
-    public async Task<AskChart?> Ask(
+    public async Task<ActionResult<AskChart>> Ask(
         [FromBody] UserPrompt p,
         CancellationToken cancellationToken = default
     )
     {
-        await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(
-            _transport,
-            cancellationToken: cancellationToken
-        );
-        var tools = await mcpClient
-            .ListToolsAsync(cancellationToken: cancellationToken)
-            .ConfigureAwait(false);
+        using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
 
-        _kernel.Plugins.Clear();
-        _kernel.Plugins.AddFromType<ChartToolkit>(pluginName: "ChartToolkit");
-        IEnumerable<KernelFunction> functions = tools.Select(aiFunction =>
-            aiFunction.WithName(aiFunction.Name.Replace('-', '_')).AsKernelFunction()
-        );
-        _kernel.Plugins.AddFromFunctions(pluginName: "MongoDBToolkit", functions: functions);
+        _logger.LogInformation("Starting MCP client for question: {Question}", p.Question);
 
-        OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
+        var mcpTools = await _mcpClient.ListToolsAsync(cancellationToken: cts.Token);
+        if (_logger.IsEnabled(LogLevel.Information))
+            _logger.LogInformation(
+                "MCP tools available ({Count}): {Tools}",
+                mcpTools.Count,
+                string.Join(", ", mcpTools.Select(t => t.Name))
+            );
+
+        var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(
-                options: new FunctionChoiceBehaviorOptions()
-                {
-                    AllowConcurrentInvocation = true,
-                    AllowStrictSchemaAdherence = false,
-                    RetainArgumentTypes = true,
-                    AllowParallelCalls = true,
-                }
-            ),
-            Temperature = 0,
+            "find",
+            "aggregate",
+            "count",
+            "list_collections",
+            "list_databases",
+            "collection_schema",
         };
 
-        var chatHistory = new ChatHistory();
+        var chartToolkit = new ChartToolkit();
+        var tools = new List<AITool> { chartToolkit.AsAIFunction() };
+        tools.AddRange(
+            mcpTools
+                .Select(t => t.WithName(t.Name.Replace('-', '_')))
+                .Where(t => allowedMcpTools.Contains(t.Name))
+                .Cast<AITool>()
+        );
+        _logger.LogInformation("Total tools registered: {Count}", tools.Count);
 
-        // 4️⃣ Build your chat history and let SK do the function‐calling
-        chatHistory.AddSystemMessage(
-            """
-            You are a precise and helpful chart-building assistant.
+        ChatClient chatClient = _openAiClient.GetChatClient(_settingsOptions.OpenAiModel);
+        _logger.LogInformation("Using model: {Model}", _settingsOptions.OpenAiModel);
+
+        ChatClientAgent agent = chatClient.AsAIAgent(
+            instructions: """
+            You are a precise Star Wars data assistant that builds charts and family trees.
 
             GOAL:
-            Answer the users question by building a chart with the appropriate data.
+            Answer the user's question by building a chart or family tree. Never ask the user for clarification — always make reasonable assumptions and proceed.
+
+            DATABASE: starwars-extracted-infoboxes
+            Each collection is named after the infobox type (e.g. Character, Battle, War, ForcePower, Species).
+            Documents have a "Data" array of { Label, Values[], Links[] } objects.
 
             CAPABILITIES:
-            ✅ 1. Call tools from MongoDBToolkit to fetch data
-            ✅ 2. Call the tool from ChartToolkit to render the chart
+            1. Call MongoDB tools to fetch and aggregate data.
+            2. Call render_chart to produce the final output.
 
             STRATEGY:
-            1. Identify the scope of the user’s question
-            2. Identify collection schema and fields needed for the chart.
-            3. Choose the right chart type based on the user’s question.
-            4. Call the `render_chart(...)` with the data retrieved from MongoDBToolkit.
+            1. Decide: chart or family tree?
+            2. Family tree: find the character in the Character collection (match on name or "Titles" field), get their PageId, call render_chart with chartType=FamilyTree, familyTreeCharacterId (integer PageId), and familyTreeCharacterName.
+            3. Chart: pick the best collection and aggregation. If ambiguous, make the most reasonable assumption and proceed.
+            4. Call render_chart with the result.
 
-            RULES (FOLLOW STRICTLY):
-            1. Only select and aggregate data relevant to the user’s question.
-            2. Do not include extra commentary or explanation in your final message.
+            CHART TYPE SELECTION:
+            - Bar: counts/comparisons across categories
+            - Line: trends over time
+            - Pie/Donut: proportions of a whole
+            - StackedBar: multiple series across categories
+            - TimeSeries: data points with actual dates
+            - FamilyTree: family, relatives, ancestry
 
-            FINAL OUTPUT:
-            Only output a single JSON object that represents the render_chart function call.
-            """
+            RULES:
+            - Never ask the user questions. Make assumptions and proceed.
+            - No commentary in final output.
+            - Always call render_chart exactly once as your final action.
+            """,
+            tools: tools
         );
-
-        chatHistory.AddUserMessage(p.Question);
-
-        var chatCompletion = _kernel.GetRequiredService<IChatCompletionService>();
 
         try
         {
-            var chatMessage = await chatCompletion.GetChatMessageContentAsync(
-                chatHistory: chatHistory,
-                kernel: _kernel,
-                executionSettings: settings,
-                cancellationToken: cancellationToken
+            AgentSession session = await agent.CreateSessionAsync(cts.Token);
+            AgentResponse response = await agent.RunAsync(
+                p.Question,
+                session,
+                cancellationToken: cts.Token
             );
 
-            var chartJson = chatHistory
-                .Where(chat => chat.Role == AuthorRole.Tool)
-                .SelectMany(x => x.Items.OfType<FunctionResultContent>())
-                .Where(x => x.FunctionName == "render_chart")
-                .Select(x => x.Result?.ToString())
-                .LastOrDefault();
+            _logger.LogInformation(
+                "Response.Text: {Text}",
+                response.Text?[..Math.Min(500, response.Text?.Length ?? 0)]
+            );
 
-            if (!string.IsNullOrWhiteSpace(chartJson))
+            if (chartToolkit.Result is not null)
             {
-                return JsonSerializer.Deserialize<AskChart>(chartJson);
+                _logger.LogInformation("render_chart was called, returning typed result");
+                return Ok(chartToolkit.Result);
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during chat completion");
+            _logger.LogError(ex, "Error during agent run");
+            return StatusCode(500, ex.Message);
         }
 
-        return null;
+        return NoContent();
     }
 }

@@ -14,6 +14,7 @@ public enum AskChartType
     Pie,
     StackedBar,
     TimeSeries,
+    FamilyTree,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -66,6 +67,14 @@ public class AskChart
 
     [JsonPropertyName("options")]
     public AskChartOptions? Options { get; set; }
+
+    [JsonPropertyName("familyTreeCharacterId")]
+    [Description("The character PageId to render a family tree for (only used when chartType == FamilyTree)")]
+    public int? FamilyTreeCharacterId { get; set; }
+
+    [JsonPropertyName("familyTreeCharacterName")]
+    [Description("The character name to render a family tree for (only used when chartType == FamilyTree)")]
+    public string? FamilyTreeCharacterName { get; set; }
 }
 
 [Description("A series of data for a chart")]

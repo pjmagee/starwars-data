@@ -24,6 +24,7 @@ builder.Services.AddHttpClient(
     client =>
     {
         client.BaseAddress = new Uri("http+https://apiservice:80");
+        client.Timeout = TimeSpan.FromMinutes(5);
     }
 );
 

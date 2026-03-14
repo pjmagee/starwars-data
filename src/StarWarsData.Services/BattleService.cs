@@ -117,7 +117,7 @@ public class BattleService
             .AsBsonArray.First(i => i["Label"] == "Date")["Links"][0]
             .AsBsonValue;
         var outcomes = document["Data"].AsBsonArray.First(i => i["Label"] == "Outcome")["Values"];
-        var link = document["PageUrl"].AsString;
+        var link = document.GetValue("PageUrl", BsonNull.Value).IsBsonNull ? string.Empty : document["PageUrl"].AsString;
 
         if (_yearHelper.IsValidLink(date))
         {

@@ -58,8 +58,10 @@
         };
 
         Diagram = new BlazorDiagram(options);
-        Diagram.RegisterComponent<CharacterNode, CharacterWidget>();
+        Diagram.RegisterComponent<CharacterNode, CharacterCard>();
     }
+
+
 
     private async Task<IEnumerable<CharacterSearchDto>> SearchCharactersAsync(string value, CancellationToken token)
     {
@@ -104,13 +106,13 @@
         foreach (TreeNode node in nodes)
         {
             var point = new Blazor.Diagrams.Core.Geometry.Point(x, depth * 150);
-            var characterNode = new NodeModel(node.Data.Id.ToString(), point);
+            var characterNode = new CharacterNode(node.Data, point);
             Diagram.Nodes.Add(characterNode);
-            _nodeModels[node.Id] = characterNode;
+            _nodeModels[node.Data.Id] = characterNode;
  
             foreach (var parent in node.Parents)
             {
-                if (_nodeModels.TryGetValue(parent.Id, out var parentNode))
+                if (_nodeModels.TryGetValue(parent.Data.Id, out var parentNode))
                 {
                     var link = Diagram.Links.Add(new LinkModel(parentNode, characterNode));
                     link.PathGenerator = new SmoothPathGenerator();

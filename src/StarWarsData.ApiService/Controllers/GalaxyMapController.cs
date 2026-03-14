@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services;
 
@@ -130,9 +131,9 @@ public class GalaxyMapController : ControllerBase
     }
 
     [HttpGet("grid")]
-    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells()
+    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells([FromQuery] Continuity? continuity = null)
     {
-        return await _mapService.GetGalaxyGridCells();
+        return await _mapService.GetGalaxyGridCells(continuity);
     }
 
     [HttpGet("regions/{regionId:int}/sectors")]

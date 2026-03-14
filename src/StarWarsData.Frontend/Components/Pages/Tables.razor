@@ -53,12 +53,12 @@ else
         <RowTemplate>
             <MudTd DataLabel="Id">@context.PageId</MudTd>
             <MudTd DataLabel="Page">
-                <MudLink Href="@context.PageUrl">@context.PageTitle</MudLink>
+                <MudLink Href="@context.WikiUrl">@context.PageTitle</MudLink>
             </MudTd>
             <MudTd DataLabel="Image">
                 @if (!string.IsNullOrEmpty(context.ImageUrl))
                 {
-                    <MudImage Src="@context.ImageUrl.Split("/revision", StringSplitOptions.RemoveEmptyEntries)[0]"/>
+                    <img src="@context.ImageUrl.Split("/revision", StringSplitOptions.RemoveEmptyEntries)[0]" style="max-height:150px;width:auto;display:block;" />
                 }
             </MudTd>
             @foreach (var label in DynamicHeaders)
@@ -175,7 +175,8 @@ else
         if (_category == null)
             return new TableData<Infobox>() { Items = Enumerable.Empty<Infobox>(), TotalItems = 0 };
 
-        _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Categories/{_category}?Page={(state.Page + 1)}&PageSize={state.PageSize}");
+    var encoded = Uri.EscapeDataString(_category);
+    _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}");
 
         return new TableData<Infobox>() { TotalItems = _pagedResult.Total, Items = _pagedResult.Items };
     }

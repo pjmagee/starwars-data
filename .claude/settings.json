@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__MongoDB__list-databases",
+      "Bash(powershell -Command \"[System.Environment]::GetEnvironmentVariable\\(''MDB_MCP_CONNECTION_STRING'', ''User''\\)\")",
+      "mcp__MongoDB__connect",
+      "mcp__MongoDB__list-collections"
+    ]
+  }
+}

@@ -27,6 +27,7 @@ public class InfoboxDownloader
 
     bool _shouldContinue;
     int _pwpContinue = 1;
+    HashSet<int> _existingPageIds = [];
 
     public InfoboxDownloader(
         ILogger<InfoboxDownloader> logger,
@@ -57,6 +58,9 @@ public class InfoboxDownloader
 
     public async Task DownloadInfoboxesAsync(CancellationToken token)
     {
+        _existingPageIds = await LoadExistingPageIdsAsync(token);
+        _logger.LogInformation("Resuming infobox download — {Count} pages already in DB will be skipped", _existingPageIds.Count);
+
         do
         {
             // Get the API response
@@ -95,7 +99,7 @@ public class InfoboxDownloader
                     )
                     .ToList();
 
-                var options = new ParallelOptions { CancellationToken = token };
+                var options = new ParallelOptions { CancellationToken = token, MaxDegreeOfParallelism = 4 };
 
                 await Parallel.ForEachAsync(
                     wikiPages,
@@ -112,12 +116,23 @@ public class InfoboxDownloader
                         }
                     }
                 );
+
+                await Task.Delay(250, token);
             }
         } while (_shouldContinue);
     }
 
     async Task ProcessWikiPage(JsonElement page, CancellationToken cancellationToken)
     {
+        if (page.TryGetProperty("pageid", out var pageIdEl) && pageIdEl.TryGetInt32(out int existingPageId))
+        {
+            if (_existingPageIds.Contains(existingPageId))
+            {
+                _logger.LogDebug("Skipping PageId {PageId} — already downloaded", existingPageId);
+                return;
+            }
+        }
+
         Infobox record = new Infobox();
 
         if (
@@ -130,7 +145,8 @@ public class InfoboxDownloader
         if (page.TryGetProperty("title", out var title) && title.ValueKind == JsonValueKind.String)
         {
             var titleValue = title.GetString()!;
-            record.PageUrl = new Uri(FandomWikiUri, titleValue.Replace(" ", "_")).ToString();
+            record.WikiUrl = new Uri(FandomWikiUri, titleValue.Replace(" ", "_")).ToString();
+            record.PageTitle = titleValue; // ensure PageTitle populated
         }
 
         if (
@@ -235,10 +251,14 @@ public class InfoboxDownloader
                                 && dataProperty.TryGetProperty("value", out var navigationDataValue)
                             )
                             {
-                                record.TemplateUrl = new Uri(
-                                    FandomUri,
-                                    await GetTemplateValue(navigationDataValue.GetString()!)
-                                ).ToString();
+                                var templateRelative = await GetTemplateValue(navigationDataValue.GetString()!);
+                                if (!string.IsNullOrWhiteSpace(templateRelative))
+                                {
+                                    var fullTemplateUri = new Uri(FandomUri, templateRelative);
+                                    var fullTemplateUrl = fullTemplateUri.ToString();
+                                    record.TemplateUrl = fullTemplateUrl;
+                                    record.Template = fullTemplateUrl; // keep Template consistent with PageDownloader (full URL)
+                                }
                             }
                         }
                     }
@@ -248,6 +268,31 @@ public class InfoboxDownloader
 
         // Determine continuity before saving
         record.Continuity = DetermineContinuity(record);
+        record.DownloadedAt = DateTime.UtcNow;
+
+        // Fallback if template still not set
+        if (string.IsNullOrWhiteSpace(record.Template))
+        {
+            record.Template = "Template:Unknown";
+            record.TemplateUrl ??= "https://starwars.fandom.com/wiki/Template:Unknown";
+        }
+
+        // Filter by TargetTemplates / ExcludedTemplates
+        var collectionName = SanitizeTemplateName(record.Template);
+
+        var targets = _settingsOptions.TargetTemplates.ToList();
+        if (targets.Count > 0 && !targets.Contains(collectionName, StringComparer.OrdinalIgnoreCase))
+        {
+            _logger.LogDebug("Skipping PageId {PageId} — template '{Template}' not in TargetTemplates", record.PageId, collectionName);
+            return;
+        }
+
+        var excluded = _settingsOptions.ExcludedTemplates.ToList();
+        if (excluded.Count > 0 && excluded.Contains(collectionName, StringComparer.OrdinalIgnoreCase))
+        {
+            _logger.LogDebug("Skipping PageId {PageId} — template '{Template}' is in ExcludedTemplates", record.PageId, collectionName);
+            return;
+        }
 
         await Save(record, cancellationToken);
     }
@@ -262,7 +307,7 @@ public class InfoboxDownloader
         // Simple URL-based continuity determination
         // If "/Legends" is found in the URL, it's Legends content
         // Otherwise, it's Canon content
-        if (infobox.PageUrl?.Contains("/Legends", StringComparison.OrdinalIgnoreCase) == true)
+        if (infobox.WikiUrl?.Contains("/Legends", StringComparison.OrdinalIgnoreCase) == true)
         {
             return Continuity.Legends;
         }
@@ -328,19 +373,39 @@ public class InfoboxDownloader
         };
     }
 
+    async Task<HashSet<int>> LoadExistingPageIdsAsync(CancellationToken token)
+    {
+        var ids = new HashSet<int>();
+        var collectionNames = await (await _rawDb.ListCollectionNamesAsync(cancellationToken: token)).ToListAsync(token);
+
+        foreach (var name in collectionNames)
+        {
+            var col = _rawDb.GetCollection<Infobox>(name);
+            var pageIds = await col.Find(FilterDefinition<Infobox>.Empty)
+                .Project(x => x.PageId)
+                .ToListAsync(token);
+            foreach (var id in pageIds)
+                ids.Add(id);
+        }
+
+        return ids;
+    }
+
     async Task Save(Infobox record, CancellationToken token)
     {
         try
         {
-            var collection = _rawDb.GetCollection<Infobox>(record.Template);
+            var collectionName = SanitizeTemplateName(record.Template);
+            var collection = _rawDb.GetCollection<Infobox>(collectionName);
             var filter = Builders<Infobox>.Filter.Eq(x => x.PageId, record.PageId);
             var options = new ReplaceOptions { IsUpsert = true };
             await collection.ReplaceOneAsync(filter, record, options, token);
 
             _logger.LogInformation(
-                "Saved InfoboxRecord for PageId {PageId} - {PageTitle}",
+                "Saved InfoboxRecord for PageId {PageId} - {PageTitle} (Collection: {Collection})",
                 record.PageId,
-                record.PageTitle
+                record.PageTitle,
+                collectionName
             );
         }
         catch (Exception ex)
@@ -352,5 +417,30 @@ public class InfoboxDownloader
                 ex.Message
             );
         }
+    }
+
+    static string SanitizeTemplateName(string? template)
+    {
+        if (string.IsNullOrWhiteSpace(template)) return "Unknown";
+
+        // Extract final segment after '/wiki/' if present
+        var working = template;
+        var wikiIdx = working.IndexOf("/wiki/", StringComparison.OrdinalIgnoreCase);
+        if (wikiIdx >= 0)
+        {
+            working = working[(wikiIdx + 6)..];
+        }
+
+        // Remove leading 'Template:' prefix but keep suffix part after last ':'
+        var lastColon = working.LastIndexOf(':');
+        if (lastColon >= 0 && lastColon < working.Length - 1)
+        {
+            working = working[(lastColon + 1)..];
+        }
+
+        // Clean any URL leftover fragments
+        working = working.Split('?', '#')[0];
+
+        return string.IsNullOrWhiteSpace(working) ? "Unknown" : working.Trim();
     }
 }

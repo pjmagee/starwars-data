@@ -12,6 +12,8 @@ public class GalaxyGridCell
     // Region information
     public string? Region { get; set; }
     public int? RegionId { get; set; }
+
+    public List<GalaxyMapItem> Nebulas { get; set; } = [];
 }
 
 public class SystemWithPlanets

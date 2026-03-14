@@ -5,30 +5,22 @@ namespace StarWarsData.Models.Entities;
 
 public class Relationship
 {
-    [BsonIgnore]
-    public string PageTitle =>
-        HttpUtility
-            .UrlDecode(PageUrl!.Split(["/wiki/"], StringSplitOptions.RemoveEmptyEntries).Last())
-            .Replace("_", " ");
-
-    [BsonIgnore]
-    public string Template => TemplateUrl!.Split(':').LastOrDefault() ?? string.Empty;
 
     [BsonElement]
     public int PageId { get; set; }
 
     [BsonElement]
-    public string PageUrl { get; set; } = null!;
+    public string WikiUrl { get; set; } = null!;    [BsonElement]
+    public string Template { get; set; } = null!;
 
     [BsonElement]
-    public string TemplateUrl { get; set; } = null!;
+    public string? PageTitle { get; set; }
 
-    public Relationship() { }
-
-    public Relationship(Loaded loaded)
+    public Relationship() { }    public Relationship(Loaded loaded)
     {
-        this.PageId = loaded.Record.PageId;
-        this.TemplateUrl = loaded.Record.TemplateUrl;
-        this.PageUrl = loaded.Record.PageUrl;
+        this.PageId = loaded.Record?.PageId ?? 0;
+        this.Template = loaded.Record?.Template ?? string.Empty;
+        this.WikiUrl = loaded.Record?.WikiUrl ?? string.Empty;
+        this.PageTitle = loaded.Record?.PageTitle;
     }
 }

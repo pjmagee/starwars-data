@@ -1,5 +1,7 @@
 @page "/galactic-map"
 @inject IHttpClientFactory HttpClientFactory
+@inject StarWarsData.Frontend.Services.ContinuityService ContinuityService
+@implements IDisposable
 
 <style>
   /* make details pane scrollable */
@@ -12,13 +14,17 @@
 <MudStack Row="false">
     
     <!-- Region filter legend -->
-    <MudPaper Elevation="10">
-        <MudChipSet T="string" @bind-SelectedValues="_selectedRegions" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
-            @foreach (var kv in _regionColors)
-            {
-                <MudChip Value="@kv.Key" Style="@($"background-color:{kv.Value}; color:#fff;")" />
-            }
-        </MudChipSet>
+    <MudPaper Elevation="10" Class="pa-2">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="SelectAllRegions">Select All</MudButton>
+            <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="DeselectAllRegions">Deselect All</MudButton>
+            <MudChipSet T="string" @bind-SelectedValues="_selectedRegions" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
+                @foreach (var kv in _regionColors)
+                {
+                    <MudChip Value="@kv.Key" Style="@($"background-color:{kv.Value}; color:#fff;")" />
+                }
+            </MudChipSet>
+        </MudStack>
     </MudPaper>
     
     <MudStack Row="true" Spacing="2" Class="h-100">
@@ -52,6 +58,16 @@
                     <MudListItem T="GalaxyMapItem" Text="@p.Name" OnClick="() => LoadDetails(EntityType.CelestialBody, p.Id)" />
                 }
             </MudList>
+            @if (CellNebulas.Any())
+            {
+                <MudText Typo="Typo.h6">Nebulas</MudText>
+                <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
+                    @foreach (var n in CellNebulas)
+                    {
+                        <MudListItem T="GalaxyMapItem" Text="@n.Name" />
+                    }
+                </MudList>
+            }
         </MudPaper>
         
         <!-- Center column: Galaxy map / Regions legend/chips -->
@@ -74,7 +90,9 @@
                     {
                         var key = Alphabet[col] + "-" + row;
                         var cell = Grid.TryGetValue(key, out var c) ? c : null;
-                        <div class="@("cell" + (key == _selectedCellKey ? " selected" : ""))">
+                        var hasNebula = cell?.Nebulas.Count > 0;
+                        var nebulaStyle = hasNebula ? "background:rgba(138,43,226,0.15);" : "";
+                        <div class="@("cell" + (key == _selectedCellKey ? " selected" : ""))" style="@nebulaStyle">
                             @if (cell != null && cell.Region != null && _selectedRegions.Contains(cell.Region))
                             {
                                 <MudIconButton Icon="@Icons.Material.Filled.Info"
@@ -190,16 +208,47 @@
     private List<SectorDto> CellSectors = new();
     private List<SystemDto> CellSystems = new();
     private List<GalaxyMapItem> CellPlanets = new();
+    private List<GalaxyMapItem> CellNebulas = new();
     private IReadOnlyCollection<string> _selectedRegions = new List<string>();
     
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnInitializedAsync()
     {
-        var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>("GalaxyMap/grid");
-        Grid = cells?.ToDictionary(c => c.Letter + "-" + c.Number) ?? new();
-        GenerateRegionColors();
+        ContinuityService.OnChange += OnContinuityChanged;
+        await LoadGrid();
     }
+
+    public void Dispose()
+    {
+        ContinuityService.OnChange -= OnContinuityChanged;
+    }
+
+    private async void OnContinuityChanged()
+    {
+        await LoadGrid();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task LoadGrid()
+    {
+        var param = ContinuityService.GetContinuityQueryParam();
+        var url = param is not null ? $"GalaxyMap/grid?continuity={param}" : "GalaxyMap/grid";
+        var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>(url);
+        Grid = cells?.ToDictionary(c => c.Letter + "-" + c.Number) ?? new();
+        _selectedCellKey = null;
+        CellRegions.Clear();
+        CellSectors.Clear();
+        CellSystems.Clear();
+        CellPlanets.Clear();
+        CellNebulas.Clear();
+        GenerateRegionColors();
+        _selectedRegions = _regionColors.Keys.ToList();
+    }
+
+    private void SelectAllRegions() => _selectedRegions = _regionColors.Keys.ToList();
+
+    private void DeselectAllRegions() => _selectedRegions = new List<string>();
 
     private void GenerateRegionColors()
     {
@@ -232,6 +281,7 @@
             CellPlanets = cell.Systems.SelectMany(s => s.Planets)
                 .Concat(cell.PlanetsWithoutSystem)
                 .ToList();
+            CellNebulas = cell.Nebulas.ToList();
         }
         else
         {
@@ -239,6 +289,7 @@
             CellSectors.Clear();
             CellSystems.Clear();
             CellPlanets.Clear();
+            CellNebulas.Clear();
         }
     }
 
@@ -253,6 +304,7 @@
                 EntityType.System => await Http.GetFromJsonAsync<SystemDetailsDto>($"GalaxyMap/system/{id}"),
                 EntityType.CelestialBody => await Http.GetFromJsonAsync<CelestialBodyDetailsDto>($"GalaxyMap/celestialbody/{id}"),
                 EntityType.Sector => await Http.GetFromJsonAsync<SectorDto>($"GalaxyMap/sector/{id}"),
+                EntityType.Region => await Http.GetFromJsonAsync<RegionDto>($"GalaxyMap/regions/{id}"),
                 _ => null
             };
         }

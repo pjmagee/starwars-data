@@ -16,7 +16,7 @@
     <MudChart
         ChartType="ChartType.Bar" 
         ChartSeries="@Series" 
-        XAxisLabels="@Labels"
+        ChartLabels="@Labels"
         Width="100%" 
         Height="800px" 
         LegendPosition="Position.Top" />
@@ -33,9 +33,9 @@
 
     public string[] Labels => _pagedResult!.ChartData.Labels;
 
-    public List<ChartSeries> Series => _pagedResult!.ChartData.Series.Select(x =>
+    public List<ChartSeries<double>> Series => _pagedResult!.ChartData.Series.Select(x =>
     {
-        return new ChartSeries()
+        return new ChartSeries<double>()
         {
             Name = x.Name,
             Data = x.Data.ToArray()
