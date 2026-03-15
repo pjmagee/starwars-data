@@ -96,6 +96,23 @@ public class AdminController : ControllerBase
         }
     }
 
+    [HttpPost("download/page")]
+    public async Task<ActionResult<string>> DownloadSinglePage([FromQuery] string title, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+            return BadRequest(new { error = "title query parameter is required" });
+        try
+        {
+            await _pageDownloader.DownloadAndSavePageAsync(title, cancellationToken);
+            return Ok(new { message = $"Page '{title}' downloaded and infobox extracted." });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to download page {Title}", title);
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
     [HttpPost("download/pages")]
     public ActionResult<string> SyncWikiPages()
     {

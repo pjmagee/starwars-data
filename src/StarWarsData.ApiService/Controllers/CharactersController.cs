@@ -9,33 +9,15 @@ namespace StarWarsData.ApiService.Controllers;
 public class CharactersController : ControllerBase
 {
     readonly ILogger<CharactersController> _logger;
-    readonly CharacterService _characterService;
     readonly CharacterRelationsService _relationsService;
-    readonly IHttpContextAccessor _contextAccessor;
 
     public CharactersController(
         ILogger<CharactersController> logger,
-        CharacterService characterService,
-        CharacterRelationsService relationsService,
-        IHttpContextAccessor contextAccessor
+        CharacterRelationsService relationsService
     )
     {
         _logger = logger;
-        _characterService = characterService;
         _relationsService = relationsService;
-        _contextAccessor = contextAccessor;
-    }
-
-    [HttpGet("charts/births-deaths")]
-    public async Task<PagedChartData<int>> GetBirthDeaths([FromQuery] QueryParams query)
-    {
-        return await _characterService.GetBirthAndDeathsByYear(query.Page, query.PageSize);
-    }
-
-    [HttpGet("charts/lifespans")]
-    public async Task<PagedChartData<double>> GetLifespans([FromQuery] QueryParams query)
-    {
-        return await _characterService.GetLifeSpans(query.Page, query.PageSize);
     }
 
     [HttpGet("search")]
@@ -72,5 +54,15 @@ public class CharactersController : ControllerBase
     {
         var family = await _relationsService.GetImmediateFamilyAsync(id);
         return Ok(family);
+    }
+
+    /// <summary>
+    /// Fetch multi-generation family tree up to maxDepth hops from the root.
+    /// </summary>
+    [HttpGet("{id:int}/tree")]
+    public async Task<ActionResult<FamilyTreeResult>> GetFamilyTree(int id, [FromQuery] int maxDepth = 3)
+    {
+        var tree = await _relationsService.GetFamilyTreeAsync(id, maxDepth);
+        return Ok(tree);
     }
 }

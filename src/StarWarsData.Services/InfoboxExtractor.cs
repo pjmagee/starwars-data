@@ -93,6 +93,21 @@ public class InfoboxExtractor
         _logger.LogInformation("Infobox extraction completed. Processed: {ProcessedCount}, Errors: {ErrorCount}", processedCount, errorCount);
     }
 
+    /// <summary>
+    /// Extracts and saves the infobox for a single page already present in the raw pages DB.
+    /// </summary>
+    public async Task ExtractPageAsync(int pageId, CancellationToken cancellationToken = default)
+    {
+        var page = await _pagesCollection.Find(p => p.PageId == pageId).FirstOrDefaultAsync(cancellationToken);
+        if (page == null)
+        {
+            _logger.LogWarning("ExtractPageAsync: page {PageId} not found in raw pages DB", pageId);
+            return;
+        }
+        await ProcessPageInfobox(page, cancellationToken);
+        _logger.LogInformation("Extracted infobox for page {PageId}: {Title}", pageId, page.Title);
+    }
+
     async Task ProcessPageInfobox(Page page, CancellationToken cancellationToken)
     {
         if (page.Infobox == null || (page.Infobox.Data.Count == 0 && string.IsNullOrEmpty(page.Infobox.ImageUrl) && string.IsNullOrEmpty(page.Infobox.Template)))
@@ -154,7 +169,7 @@ public class InfoboxExtractor
         }
     }
 
-    static string SanitizeTemplateName(string? template)
+    public static string SanitizeTemplateName(string? template)
     {
         if (string.IsNullOrWhiteSpace(template)) return "Unknown";
 

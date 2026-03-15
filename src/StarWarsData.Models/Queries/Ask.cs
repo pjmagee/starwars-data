@@ -3,17 +3,24 @@ using System.Text.Json.Serialization;
 
 namespace StarWarsData.Models.Queries;
 
-public sealed record UserPrompt(string Question);
+public sealed record UserPrompt(string Question, string? Continuity = null);
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AskChartType
 {
+    [Description("Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series.")]
     Bar,
+    [Description("Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Donut,
+    [Description("Line chart — trends over an ordinal axis. Requires xAxisLabels and series.")]
     Line,
+    [Description("Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Pie,
+    [Description("Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series.")]
     StackedBar,
+    [Description("Time series chart — data points with real ISO dates. Requires timeSeries.")]
     TimeSeries,
+    [Description("Family tree — renders a character relationship diagram. Requires familyTreeCharacterId (integer PageId) and familyTreeCharacterName.")]
     FamilyTree,
 }
 
@@ -58,7 +65,7 @@ public class AskChart
     public List<string>? Labels { get; set; }
 
     [JsonPropertyName("series")]
-    [Description("Numeric series for bar, line, stacked")]
+    [Description("Numeric series. For Bar/Line/StackedBar: each series has one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry.")]
     public List<AskChartSeries>? Series { get; set; }
 
     [JsonPropertyName("timeSeries")]
@@ -69,11 +76,11 @@ public class AskChart
     public AskChartOptions? Options { get; set; }
 
     [JsonPropertyName("familyTreeCharacterId")]
-    [Description("The character PageId to render a family tree for (only used when chartType == FamilyTree)")]
+    [Description("The character's integer _id (PageId) from MongoDB. Must be an integer, not a string. Only used when chartType == FamilyTree.")]
     public int? FamilyTreeCharacterId { get; set; }
 
     [JsonPropertyName("familyTreeCharacterName")]
-    [Description("The character name to render a family tree for (only used when chartType == FamilyTree)")]
+    [Description("The character's PageTitle from MongoDB. Only used when chartType == FamilyTree.")]
     public string? FamilyTreeCharacterName { get; set; }
 }
 

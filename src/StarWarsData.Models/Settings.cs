@@ -54,23 +54,13 @@ public class SettingsOptions
 
     public IEnumerable<string> TimelineCollections { get; set; } = [];
     
-    // New model: download pages by enumerating ALL templates (namespace 10) and
-    // for each template pulling up to PagesPerTemplate pages that embed it.
-    // This deprecates the separate raw infobox download step; infobox data is
-    // later extracted from the stored raw pages.
-    public bool DownloadPagesByTemplate { get; set; } = false;
-
-    // Target number of pages to fetch per template when DownloadPagesByTemplate is enabled.
-    public int PagesPerTemplate { get; set; } = 100;
-
-    // Automatically run infobox extraction after page download completes (if enabled).
+    // Automatically run infobox extraction after page download completes.
     public bool AutoExtractInfoboxes { get; set; } = false;
 
-    // When non-empty, only templates whose title matches one of these names (after "Template:" prefix)
-    // will be processed during template-driven page download. Empty means process all templates.
+    // Infobox templates to save — pages whose infobox template is not in this list are skipped.
     public IEnumerable<string> TargetTemplates { get; set; } = [];
 
-    // Templates to skip entirely during template-driven page download (real-world/out-of-universe infoboxes).
+    // Infobox templates to always skip (real-world/out-of-universe infoboxes).
     public IEnumerable<string> ExcludedTemplates { get; set; } = [];
 
     // Page categories that indicate a page should be skipped (e.g. real-world, meta, OOU articles).

@@ -22,7 +22,7 @@ namespace StarWarsData.Services
         {
             _logger = logger;
             _settingsOptions = settingsOptions;
-            _mongoDb = mongoClient.GetDatabase(settingsOptions.Value.InfoboxDb);
+            _mongoDb = mongoClient.GetDatabase(settingsOptions.Value.PageInfoboxDb);
         }
 
         /// <summary>
@@ -236,7 +236,8 @@ namespace StarWarsData.Services
         }
 
         /// <summary>
-        /// Fetch only the immediate family members for a character (parents, partners, siblings, children)
+        /// Fetch only immediate family (up 1 generation: parents, down 1 generation: children)
+        /// using batched WikiUrl $in queries instead of per-link round-trips.
         /// </summary>
         public async Task<ImmediateFamilyDto> GetImmediateFamilyAsync(int rootId)
         {
@@ -248,42 +249,153 @@ namespace StarWarsData.Services
                 return new ImmediateFamilyDto();
             }
 
-            // map root data
-            var dto = new ImmediateFamilyDto { Root = MapToFamilyNode(root) };
+            // collect all hrefs needed in one pass, URL-decoded for consistent matching
+            List<string> HrefsForLabel(string label) =>
+                root.Data
+                    .Where(p => p.Label?.Equals(label, StringComparison.OrdinalIgnoreCase) == true)
+                    .SelectMany(p => p.Links ?? [])
+                    .Select(l => Uri.UnescapeDataString(l.Href ?? ""))
+                    .Where(h => !string.IsNullOrWhiteSpace(h))
+                    .Distinct()
+                    .ToList();
 
-            // helper to resolve links by label to full FamilyNodeDto
-            async Task<List<FamilyNodeDto>> resolve(string label)
+            var parentHrefs   = HrefsForLabel("Parent(s)");
+            var siblingHrefs  = HrefsForLabel("Sibling(s)");
+            var childrenHrefs = HrefsForLabel("Children");
+            var partnerHrefs  = HrefsForLabel("Partner(s)");
+
+            // batch-fetch all related Character docs in one query
+            // WikiUrl may be stored encoded (%2F) or decoded — query both forms
+            var allHrefs = parentHrefs.Concat(siblingHrefs).Concat(childrenHrefs).Concat(partnerHrefs).Distinct().ToList();
+            // Build both decoded and %2F-encoded variants to cover all storage forms
+            // e.g. ".../Legends" stored as ".../Legends" or "...%2FLegends"
+            var allHrefsVariants = allHrefs
+                .SelectMany(h => new[] { h, h.Replace("/Legends", "%2FLegends").Replace("/Canon", "%2FCanon") })
+                .Distinct()
+                .ToList();
+            var related = allHrefs.Count == 0
+                ? []
+                : await coll.Find(r => allHrefsVariants.Contains(r.WikiUrl!)).ToListAsync();
+
+            // build lookup by decoded WikiUrl
+            var byUrl = related
+                .Where(r => r.WikiUrl != null)
+                .GroupBy(r => Uri.UnescapeDataString(r.WikiUrl!))
+                .ToDictionary(g => g.Key, g => g.First());
+
+            List<FamilyNodeDto> Resolve(List<string> hrefs) =>
+                hrefs
+                    .Where(h => byUrl.ContainsKey(h))
+                    .Select(h => byUrl[h])
+                    .DistinctBy(r => r.PageId)
+                    .Select(MapToFamilyNode)
+                    .ToList();
+
+            return new ImmediateFamilyDto
             {
-                var prop = root.Data.FirstOrDefault(p =>
-                    p.Label?.Equals(label, StringComparison.OrdinalIgnoreCase) == true
-                );
-                if (prop?.Links == null)
-                    return [];
+                Root     = MapToFamilyNode(root),
+                Parents  = Resolve(parentHrefs),
+                Siblings = Resolve(siblingHrefs),
+                Children = Resolve(childrenHrefs),
+                Partners = Resolve(partnerHrefs),
+            };
+        }
 
-                var seenIds = new HashSet<int>();
-                var list = new List<FamilyNodeDto>();
+        /// <summary>
+        /// Fetch a multi-generation family tree up to <paramref name="maxDepth"/> relationship hops
+        /// from the root. Returns all discovered nodes keyed by PageId, plus the root id.
+        /// </summary>
+        public async Task<FamilyTreeResult> GetFamilyTreeAsync(int rootId, int maxDepth = 3)
+        {
+            var coll     = _mongoDb.GetCollection<Infobox>("Character");
+            var visited     = new Dictionary<int, FamilyNodeDto>();
+            var edges       = new List<FamilyEdge>();
+            var bfsDepths   = new Dictionary<int, int> { [rootId] = 0 };
+            var generations = new Dictionary<int, int> { [rootId] = 0 };
+            var queue       = new Queue<int>();
+            queue.Enqueue(rootId);
 
-                foreach (var lnk in prop.Links.Where(l => !string.IsNullOrWhiteSpace(l.Href)))
+            while (queue.Count > 0)
+            {
+                var currentId = queue.Dequeue();
+                if (visited.ContainsKey(currentId)) continue;
+
+                var doc = await coll.Find(r => r.PageId == currentId).FirstOrDefaultAsync();
+                if (doc == null) continue;
+
+                var node = MapToFamilyNode(doc);
+                node.Generation = generations.TryGetValue(currentId, out var gen) ? gen : 0;
+                visited[currentId] = node;
+
+                int depth = bfsDepths[currentId];
+                if (depth >= maxDepth) continue;
+
+                // Resolve children hrefs → edges (parent → child direction only)
+                var childHrefs = doc.Data
+                    .Where(p => p.Label?.Equals("Children", StringComparison.OrdinalIgnoreCase) == true)
+                    .SelectMany(p => p.Links ?? [])
+                    .Select(l => Uri.UnescapeDataString(l.Href ?? ""))
+                    .Where(h => !string.IsNullOrWhiteSpace(h))
+                    .Distinct()
+                    .ToList();
+
+                // Collect all relation hrefs for BFS traversal (all directions)
+                var allHrefs = new[] { "Parent(s)", "Partner(s)", "Sibling(s)", "Children" }
+                    .SelectMany(label => doc.Data
+                        .Where(p => p.Label?.Equals(label, StringComparison.OrdinalIgnoreCase) == true)
+                        .SelectMany(p => p.Links ?? [])
+                        .Select(l => Uri.UnescapeDataString(l.Href ?? "")))
+                    .Where(h => !string.IsNullOrWhiteSpace(h))
+                    .Distinct()
+                    .ToList();
+
+                if (allHrefs.Count == 0) continue;
+
+                var variants = allHrefs
+                    .SelectMany(h => new[] { h, h.Replace("/Legends", "%2FLegends").Replace("/Canon", "%2FCanon") })
+                    .Distinct()
+                    .ToList();
+
+                var neighbours = await coll
+                    .Find(r => variants.Contains(r.WikiUrl!))
+                    .Project(r => new { r.PageId, r.WikiUrl })
+                    .ToListAsync();
+
+                // Build a WikiUrl→PageId lookup (decoded)
+                var urlToId = neighbours
+                    .Where(n => n.WikiUrl != null)
+                    .ToDictionary(n => Uri.UnescapeDataString(n.WikiUrl!), n => n.PageId);
+
+                // Record parent→child edges for rendering
+                foreach (var href in childHrefs)
                 {
-                    if (!lnk.Href.Contains("/Legends"))
-                        continue;
-                    var rec = await coll.Find(r => r.WikiUrl == lnk.Href).FirstOrDefaultAsync();
-                    if (rec != null && seenIds.Add(rec.PageId))
-                    {
-                        list.Add(MapToFamilyNode(rec));
-                    }
+                    if (urlToId.TryGetValue(href, out var childId) && childId != 0)
+                        edges.Add(new FamilyEdge { FromId = currentId, ToId = childId });
                 }
 
-                return list;
+                // Collect parent hrefs to determine ancestor direction
+                var parentHrefs = doc.Data
+                    .Where(p => p.Label?.Equals("Parent(s)", StringComparison.OrdinalIgnoreCase) == true)
+                    .SelectMany(p => p.Links ?? [])
+                    .Select(l => Uri.UnescapeDataString(l.Href ?? ""))
+                    .Where(h => !string.IsNullOrWhiteSpace(h))
+                    .ToHashSet();
+
+                int currentGen = generations.TryGetValue(currentId, out var cg) ? cg : 0;
+
+                foreach (var n in neighbours.Where(n => n.PageId != 0 && !visited.ContainsKey(n.PageId)))
+                {
+                    bfsDepths[n.PageId] = depth + 1;
+                    // Determine generation direction: is this neighbour a parent of currentId?
+                    var decodedUrl = n.WikiUrl != null ? Uri.UnescapeDataString(n.WikiUrl) : "";
+                    int neighbourGen = parentHrefs.Contains(decodedUrl) ? currentGen - 1 : currentGen + 1;
+                    if (!generations.ContainsKey(n.PageId))
+                        generations[n.PageId] = neighbourGen;
+                    queue.Enqueue(n.PageId);
+                }
             }
 
-            // populate each relationship list
-            dto.Parents = await resolve("Parent(s)");
-            dto.Partners = await resolve("Partner(s)");
-            dto.Siblings = await resolve("Sibling(s)");
-            dto.Children = await resolve("Children");
-
-            return dto;
+            return new FamilyTreeResult { RootId = rootId, Nodes = visited, Edges = edges };
         }
 
         /// <summary>

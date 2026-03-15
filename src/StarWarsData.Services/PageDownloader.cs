@@ -18,11 +18,13 @@ public class PageDownloader
     readonly IBrowsingContext _browsingContext;
     readonly IMongoDatabase _mongoDatabase;
     readonly IMongoCollection<Page> _pagesCollection;
+    readonly IMongoCollection<JobState> _jobStateCollection;
 
     readonly SettingsOptions _config;
     readonly InfoboxExtractor? _infoboxExtractor; // optional for auto extraction
 
     const string WikiBase = "https://starwars.fandom.com/wiki/";
+    const string PageDownloadJobName = "PageDownload";
 
     public PageDownloader(
         HttpClient httpClient,
@@ -37,6 +39,7 @@ public class PageDownloader
         _config = settings.Value;
         _mongoDatabase = mongoClient.GetDatabase(settings.Value.PagesDb);
         _pagesCollection = _mongoDatabase.GetCollection<Page>("Pages");
+        _jobStateCollection = _mongoDatabase.GetCollection<JobState>("JobState");
         _infoboxExtractor = infoboxExtractor;
 
         var angleConfig = Configuration.Default.WithDefaultLoader();
@@ -94,7 +97,6 @@ public class PageDownloader
 
         await Task.WhenAll(infoboxTask, categoriesTask, sectionsTask, imagesTask, pageInfoTask);
 
-        var pageInfo = pageInfoTask.Result;
         var infobox = infoboxTask.Result;
         var categories = categoriesTask.Result;
         var sections = sectionsTask.Result;
@@ -109,8 +111,7 @@ public class PageDownloader
             Sections = sections,
             Images = images,
             WikiUrl = $"{WikiBase}{Uri.EscapeDataString(title.Replace(' ', '_'))}",
-            LastModified = pageInfo.lastModified,
-            Summary = pageInfo.summary,
+            LastModified = pageInfoTask.Result,
             Continuity = DetermineContinuity(title, categories),
             DownloadedAt = DateTime.UtcNow,
         };
@@ -466,9 +467,9 @@ public class PageDownloader
                     ? int.Parse(sectionEl.GetProperty("level").GetString()!)
                     : sectionEl.GetProperty("level").GetInt32();
 
-                // Find matching heading element in the parsed document
+                // Find matching heading element — TextContent may include "[edit]" spans so use Contains
                 var headingEl = headings.FirstOrDefault(h =>
-                    string.Equals(h.TextContent.Trim(), sectionHeading.Trim(), StringComparison.OrdinalIgnoreCase));
+                    h.TextContent.Trim().StartsWith(sectionHeading.Trim(), StringComparison.OrdinalIgnoreCase));
 
                 if (headingEl == null) continue;
 
@@ -693,7 +694,7 @@ public class PageDownloader
         }
     }
 
-    async Task<(DateTime lastModified, string? summary)> FetchPageInfoAsync(
+    async Task<DateTime> FetchPageInfoAsync(
         string title,
         CancellationToken cancellationToken
     )
@@ -705,7 +706,7 @@ public class PageDownloader
                 {
                     ["action"] = "query",
                     ["prop"] = "revisions",
-                    ["rvprop"] = "timestamp|comment",
+                    ["rvprop"] = "timestamp",
                     ["titles"] = title,
                     ["rvlimit"] = "1",
                     ["format"] = "json",
@@ -719,21 +720,11 @@ public class PageDownloader
             var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
             var firstPage = pages.EnumerateArray().First();
 
-            if (
-                firstPage.TryGetProperty("revisions", out var revisions)
-                && revisions.GetArrayLength() > 0
-            )
+            if (firstPage.TryGetProperty("revisions", out var revisions) && revisions.GetArrayLength() > 0)
             {
-                var latestRevision = revisions[0];
-                var timestamp = latestRevision.GetProperty("timestamp").GetString();
-                var comment = latestRevision.TryGetProperty("comment", out var commentEl)
-                    ? commentEl.GetString()
-                    : null;
-
+                var timestamp = revisions[0].GetProperty("timestamp").GetString();
                 if (DateTime.TryParse(timestamp, out var lastModified))
-                {
-                    return (lastModified, comment);
-                }
+                    return lastModified;
             }
         }
         catch (Exception ex)
@@ -741,21 +732,42 @@ public class PageDownloader
             _logger.LogWarning(ex, "Failed to fetch page info for {Title}", title);
         }
 
-        return (DateTime.UtcNow, null);
+        return DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Downloads a single wiki page by title, saves it to the raw pages DB, and optionally extracts its infobox.
+    /// </summary>
+    public async Task DownloadAndSavePageAsync(string title, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Downloading single page: {Title}", title);
+        var page = await FetchPageAsync(title, cancellationToken);
+        await _pagesCollection.ReplaceOneAsync(
+            Builders<Page>.Filter.Eq(p => p.PageId, page.PageId),
+            page,
+            new ReplaceOptions { IsUpsert = true },
+            cancellationToken
+        );
+        _logger.LogInformation("Saved page {PageId} ({Title}) to raw pages DB", page.PageId, title);
+
+        if (_infoboxExtractor != null)
+            await _infoboxExtractor.ExtractPageAsync(page.PageId, cancellationToken);
     }
 
     public async Task SyncToMongoDbAsync(CancellationToken cancellationToken)
     {
-        // Single supported mode when enabled: enumerate all templates and download X pages per template
-        if (_config.DownloadPagesByTemplate)
-        {
-            await DownloadPagesByTemplateAsync(cancellationToken);
-            return;
-        }
+        // Resume from last saved position if available
+        var jobState = await _jobStateCollection
+            .Find(s => s.JobName == PageDownloadJobName)
+            .FirstOrDefaultAsync(cancellationToken);
 
-        _logger.LogInformation("Starting Wookieepedia sync to MongoDB with integrated pagination");
+        string? apContinue = jobState?.ContinueToken;
 
-        string? apContinue = null;
+        if (apContinue != null)
+            _logger.LogInformation("Resuming page download from saved position: {Token}", apContinue);
+        else
+            _logger.LogInformation("Starting Wookieepedia page download from the beginning");
+
         var syncedCount = 0;
         var failedCount = 0;
 
@@ -763,263 +775,50 @@ public class PageDownloader
         {
             do
             {
-                var (pageTitles, nextContinue) = await GetPageTitlesBatchAsync(
-                    apContinue,
-                    cancellationToken
-                );
+                var (pageTitles, nextContinue) = await GetPageTitlesBatchAsync(apContinue, cancellationToken);
 
                 _logger.LogInformation("Processing batch of {Count} pages", pageTitles.Count);
 
-                var (batchSynced, batchFailed) = await ProcessPageBatchAsync(
-                    pageTitles,
-                    cancellationToken
-                );
+                var (batchSynced, batchFailed) = await ProcessPageBatchAsync(pageTitles, cancellationToken);
 
                 syncedCount += batchSynced;
                 failedCount += batchFailed;
 
-                if (syncedCount % 100 == 0)
-                {
-                    _logger.LogInformation("Synced {Count} pages so far...", syncedCount);
-                }
-
                 apContinue = nextContinue;
+
+                // Persist progress after every batch so a cancel can resume from here
+                await _jobStateCollection.ReplaceOneAsync(
+                    s => s.JobName == PageDownloadJobName,
+                    new JobState { JobName = PageDownloadJobName, ContinueToken = apContinue, UpdatedAt = DateTime.UtcNow },
+                    new ReplaceOptions { IsUpsert = true },
+                    cancellationToken
+                );
+
+                _logger.LogInformation("Synced {Synced} pages so far (failed: {Failed})", syncedCount, failedCount);
+
             } while (apContinue != null && !cancellationToken.IsCancellationRequested);
 
-            _logger.LogInformation(
-                "Wookieepedia sync completed. Synced: {Synced}, Failed: {Failed}",
-                syncedCount,
-                failedCount
-            );
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                // Job completed fully — clear the saved position
+                await _jobStateCollection.DeleteOneAsync(s => s.JobName == PageDownloadJobName, CancellationToken.None);
+                _logger.LogInformation("Page download complete. Synced: {Synced}, Failed: {Failed}", syncedCount, failedCount);
+
+                if (_config.AutoExtractInfoboxes && _infoboxExtractor != null)
+                {
+                    _logger.LogInformation("AutoExtractInfoboxes enabled — starting extraction.");
+                    await _infoboxExtractor.ExtractInfoboxesAsync(CancellationToken.None);
+                }
+            }
+            else
+            {
+                _logger.LogInformation("Page download cancelled. Progress saved — next run will resume from saved position.");
+            }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during Wookieepedia sync: {Error}", ex.Message);
+            _logger.LogError(ex, "Error during page download");
             throw;
-        }
-    }
-
-    async Task<HashSet<string>> LoadExistingTitlesAsync(CancellationToken token)
-    {
-        var titles = await _pagesCollection
-            .Find(FilterDefinition<Page>.Empty)
-            .Project(p => p.Title)
-            .ToListAsync(token);
-
-        return new HashSet<string>(titles, StringComparer.OrdinalIgnoreCase);
-    }
-
-    /// <summary>
-    /// New raw page ingestion mode: enumerate every template (namespace 10) without prefix filtering
-    /// and for each template fetch up to PagesPerTemplate pages that embed it. Pages are stored in the
-    /// raw pages DB; infobox extraction can run afterwards to populate infobox collections.
-    /// </summary>
-    async Task DownloadPagesByTemplateAsync(CancellationToken token)
-    {
-        var perTemplate = Math.Max(1, _config.PagesPerTemplate);
-        _logger.LogInformation("Starting template-driven page download. Target {PerTemplate} pages per template", perTemplate);
-
-        const int TemplateNamespace = 10;
-        const int MaxConcurrentPages = 4;
-        string? apContinue = null;
-        var processedTemplates = 0;
-        var totalPagesFetched = 0;
-        var seenTitles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        using var pageSemaphore = new SemaphoreSlim(MaxConcurrentPages, MaxConcurrentPages);
-
-        // Load existing titles once at job start — avoids re-downloading already stored pages
-        var existingTitles = await LoadExistingTitlesAsync(token);
-        seenTitles.UnionWith(existingTitles);
-        _logger.LogInformation("Resuming page download — {Count} pages already in DB will be skipped", existingTitles.Count);
-
-        while (!token.IsCancellationRequested)
-        {
-            var templateQuery = new Dictionary<string, string?>
-            {
-                ["action"] = "query",
-                ["list"] = "allpages",
-                ["apnamespace"] = TemplateNamespace.ToString(),
-                ["aplimit"] = _config.PageLimit.ToString(),
-                ["format"] = "json",
-                ["formatversion"] = "2",
-                ["apcontinue"] = apContinue
-            };
-
-            JsonDocument? templateDoc = null;
-            try
-            {
-                var url = BuildQueryString(templateQuery);
-                var json = await _http.GetStringAsync(url, token);
-                templateDoc = JsonDocument.Parse(json);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Failed to fetch template batch");
-                break;
-            }
-
-            using (templateDoc)
-            {
-                if (templateDoc!.RootElement.TryGetProperty("continue", out var contEl) && contEl.TryGetProperty("apcontinue", out var apc))
-                    apContinue = apc.GetString();
-                else
-                    apContinue = null;
-
-                var targetSet = _config.TargetTemplates
-                    .Select(t => t.Trim())
-                    .Where(t => !string.IsNullOrEmpty(t))
-                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                var excludedSet = _config.ExcludedTemplates
-                    .Select(t => t.Trim())
-                    .Where(t => !string.IsNullOrEmpty(t))
-                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                var templates = templateDoc.RootElement.GetProperty("query").GetProperty("allpages")
-                    .EnumerateArray()
-                    .Select(p => p.GetProperty("title").GetString())
-                    .Where(t => !string.IsNullOrEmpty(t))
-                    .Cast<string>()
-                    .Where(t =>
-                    {
-                        var name = t.Replace("Template:", "", StringComparison.OrdinalIgnoreCase).Trim();
-                        if (excludedSet.Contains(name)) return false;
-                        return targetSet.Count == 0 || targetSet.Contains(name);
-                    })
-                    .ToList();
-
-                foreach (var templateTitle in templates)
-                {
-                    if (token.IsCancellationRequested) break;
-                    processedTemplates++;
-                    var collected = 0;
-                    string? eiContinue = null;
-
-                    while (!token.IsCancellationRequested && collected < perTemplate)
-                    {
-                        var embeddedQuery = new Dictionary<string, string?>
-                        {
-                            ["action"] = "query",
-                            ["list"] = "embeddedin",
-                            ["eititle"] = templateTitle,
-                            ["eilimit"] = _config.PageLimit.ToString(),
-                            ["einamespace"] = _config.PageNamespace.ToString(),
-                            ["format"] = "json",
-                            ["formatversion"] = "2",
-                            ["eicontinue"] = eiContinue
-                        };
-
-                        JsonDocument? embeddedDoc = null;
-                        try
-                        {
-                            var eUrl = BuildQueryString(embeddedQuery);
-                            var eJson = await _http.GetStringAsync(eUrl, token);
-                            embeddedDoc = JsonDocument.Parse(eJson);
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.LogDebug(ex, "Embeddedin query failed for {Template}", templateTitle);
-                            break;
-                        }
-
-                        using (embeddedDoc)
-                        {
-                            if (embeddedDoc!.RootElement.TryGetProperty("continue", out var eCont) && eCont.TryGetProperty("eicontinue", out var eic))
-                                eiContinue = eic.GetString();
-                            else
-                                eiContinue = null;
-
-                            if (embeddedDoc.RootElement.TryGetProperty("query", out var qEl) && qEl.TryGetProperty("embeddedin", out var eiArray) && eiArray.ValueKind == JsonValueKind.Array)
-                            {
-                                var pageTitlesToFetch = new List<string>();
-
-                                foreach (var emb in eiArray.EnumerateArray())
-                                {
-                                    if (collected + pageTitlesToFetch.Count >= perTemplate) break;
-                                    var pageTitle = emb.TryGetProperty("title", out var tEl) ? tEl.GetString() : null;
-                                    if (string.IsNullOrEmpty(pageTitle)) continue;
-                                    if (!seenTitles.Add(pageTitle)) continue;
-                                    pageTitlesToFetch.Add(pageTitle);
-                                }
-
-                                var excludedCategories = _config.ExcludedCategories
-                                    .Select(c => c.Trim())
-                                    .Where(c => !string.IsNullOrEmpty(c))
-                                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                                var pageTasks = pageTitlesToFetch.Select(async pageTitle =>
-                                {
-                                    await pageSemaphore.WaitAsync(token);
-                                    try
-                                    {
-                                        var pageDoc = await FetchPageAsync(pageTitle, token);
-                                        if (excludedCategories.Count > 0 && pageDoc.Categories.Any(c =>
-                                            excludedCategories.Any(ec => c.Contains(ec, StringComparison.OrdinalIgnoreCase))))
-                                        {
-                                            _logger.LogDebug("Skipping page {Page} — matches excluded category", pageTitle);
-                                            return 0;
-                                        }
-                                        await _pagesCollection.ReplaceOneAsync(
-                                            Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
-                                            pageDoc,
-                                            new ReplaceOptions { IsUpsert = true },
-                                            token
-                                        );
-                                        return 1;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        _logger.LogDebug(ex, "Failed to fetch page {Page}", pageTitle);
-                                        return 0;
-                                    }
-                                    finally
-                                    {
-                                        pageSemaphore.Release();
-                                    }
-                                });
-
-                                var results = await Task.WhenAll(pageTasks);
-                                var batchFetched = results.Sum();
-                                collected += batchFetched;
-                                totalPagesFetched += batchFetched;
-                            }
-                        }
-
-                        if (eiContinue == null || collected >= perTemplate) break;
-                        await Task.Delay(150, token);
-                    }
-
-                    if (processedTemplates % 50 == 0)
-                    {
-                        _logger.LogInformation("Processed {ProcessedTemplates} templates, pages fetched so far {TotalPages}", processedTemplates, totalPagesFetched);
-                    }
-                }
-            }
-
-            if (apContinue == null) break;
-        }
-
-        _logger.LogInformation("Template-driven page download complete. Templates processed: {Templates}, Pages fetched: {Pages}", processedTemplates, totalPagesFetched);
-
-        if (_config.AutoExtractInfoboxes)
-        {
-            try
-            {
-                _logger.LogInformation("AutoExtractInfoboxes enabled: starting extraction job inline.");
-                var extractor = _infoboxExtractor;
-                if (extractor != null)
-                {
-                    await extractor.ExtractInfoboxesAsync(token);
-                }
-                else
-                {
-                    _logger.LogWarning("InfoboxExtractor service not available for auto extraction.");
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Auto infobox extraction failed");
-            }
         }
     }
 
@@ -1028,40 +827,57 @@ public class PageDownloader
         CancellationToken cancellationToken
     )
     {
-        // Use semaphore to limit concurrent requests (avoid overwhelming the API)
-        using var semaphore = new SemaphoreSlim(5, 5); // Max 5 concurrent requests
+        using var semaphore = new SemaphoreSlim(8, 8);
+
+        var excludedCategories = _config.ExcludedCategories
+            .Select(c => c.Trim()).Where(c => !string.IsNullOrEmpty(c))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var targetTemplates = _config.TargetTemplates
+            .Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         var tasks = pageTitles.Select(async title =>
+        {
+            await semaphore.WaitAsync(cancellationToken);
+            try
             {
-                await semaphore.WaitAsync(cancellationToken);
+                var pageDoc = await FetchPageAsync(title, cancellationToken);
 
-                try
+                // Skip pages in excluded categories
+                if (excludedCategories.Count > 0 && pageDoc.Categories.Any(c =>
+                    excludedCategories.Any(ec => c.Contains(ec, StringComparison.OrdinalIgnoreCase))))
                 {
-                    var pageDoc = await FetchPageAsync(title, cancellationToken);
-
-                    if (pageDoc != null)
-                    {
-                        await _pagesCollection.ReplaceOneAsync(
-                            Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
-                            pageDoc,
-                            new ReplaceOptions { IsUpsert = true },
-                            cancellationToken
-                        );
-                        return 1; // Synced
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Failed to process page {Title}: {Error}", title, ex.Message);
-                }
-                finally
-                {
-                    semaphore.Release();
+                    _logger.LogDebug("Skipping {Title} — excluded category", title);
+                    return 0;
                 }
 
-                return 0; // Failed
+                // Skip pages whose infobox template is not in the whitelist
+                var template = pageDoc.Infobox?.Template;
+                if (targetTemplates.Count > 0 && (template == null || !targetTemplates.Contains(InfoboxExtractor.SanitizeTemplateName(template))))
+                {
+                    _logger.LogDebug("Skipping {Title} — infobox template '{Template}' not in TargetTemplates", title, template);
+                    return 0;
+                }
+
+                await _pagesCollection.ReplaceOneAsync(
+                    Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
+                    pageDoc,
+                    new ReplaceOptions { IsUpsert = true },
+                    cancellationToken
+                );
+                return 1;
             }
-        );
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to process page {Title}: {Error}", title, ex.Message);
+                return 0;
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        });
 
         var results = await Task.WhenAll(tasks);
         return (results.Sum(r => r), results.Length - results.Sum(r => r));
@@ -1091,20 +907,20 @@ public class PageDownloader
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
 
+            string? newContinueToken = null;
             if (doc.RootElement.TryGetProperty("continue", out var continueElement))
-            {
-                var newContinueToken = continueElement.GetProperty("apcontinue").GetString();
-                var pageTitles = doc
-                    .RootElement.GetProperty("query")
-                    .GetProperty("allpages")
-                    .EnumerateArray()
-                    .Select(p => p.GetProperty("title").GetString())
-                    .Where(title => title != null)
-                    .Cast<string>()
-                    .ToList();
+                newContinueToken = continueElement.GetProperty("apcontinue").GetString();
 
-                return (pageTitles, newContinueToken);
-            }
+            var pageTitles = doc
+                .RootElement.GetProperty("query")
+                .GetProperty("allpages")
+                .EnumerateArray()
+                .Select(p => p.GetProperty("title").GetString())
+                .Where(title => title != null)
+                .Cast<string>()
+                .ToList();
+
+            return (pageTitles, newContinueToken);
         }
         catch (Exception ex)
         {

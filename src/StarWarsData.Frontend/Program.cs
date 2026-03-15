@@ -19,6 +19,8 @@ builder
 //.AddTransient<AuthorizationHandler>();
 
 // Register a named HttpClient for the API service
+// RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
+#pragma warning disable EXTEXP0001
 builder.Services.AddHttpClient(
     "StarWarsData",
     client =>
@@ -26,7 +28,8 @@ builder.Services.AddHttpClient(
         client.BaseAddress = new Uri("http+https://apiservice:80");
         client.Timeout = TimeSpan.FromMinutes(5);
     }
-);
+).RemoveAllResilienceHandlers();
+#pragma warning restore EXTEXP0001
 
 var app = builder.Build();
 

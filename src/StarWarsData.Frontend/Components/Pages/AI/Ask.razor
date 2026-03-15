@@ -1,6 +1,8 @@
 @page "/"
 @page "/ask"
 @inject IHttpClientFactory HttpClientFactory
+@inject ContinuityService ContinuityService
+@using StarWarsData.Frontend.Models
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
@@ -38,7 +40,7 @@
         </MudGrid>
     </EditForm>
 
-    @if (!_loading && _chartFragment is null && !_hasResult)
+    @if (!_loading && !_hasResult && _turns.Count == 0)
     {
         <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">Example questions</MudText>
         <MudGrid Spacing="2">
@@ -54,11 +56,54 @@
         </MudGrid>
     }
 
-    @if (_loading)
+    @if (_turns.Count > 0)
     {
-        <MudStack AlignItems="AlignItems.Center" Class="mt-8">
-            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
-            <MudText Typo="Typo.body2" Color="Color.Secondary">Querying the galaxy…</MudText>
+        <MudStack Class="mt-6" Spacing="3">
+            @foreach (var turn in _turns)
+            {
+                @if (turn.Role == TurnRole.User)
+                {
+                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:var(--mud-palette-background-grey)">
+                        <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
+                        <MudText Typo="Typo.body1">@turn.Content</MudText>
+                    </MudPaper>
+                }
+                else if (turn.Role == TurnRole.ToolCall)
+                {
+                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary)">
+                        @if (turn.IsComplete)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" Style="margin-top:2px" />
+                        }
+                        else
+                        {
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="margin-top:2px" />
+                        }
+                        <MudStack Spacing="0">
+                            <MudText Typo="Typo.body2" Style="font-weight:600">@FriendlyToolName(turn.ToolName)</MudText>
+                            @if (!string.IsNullOrEmpty(turn.Content))
+                            {
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">@turn.Content</MudText>
+                            }
+                        </MudStack>
+                    </MudPaper>
+                }
+                else if (turn.Role == TurnRole.Assistant)
+                {
+                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3">
+                        <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
+                        <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@turn.Content</MudText>
+                    </MudPaper>
+                }
+            }
+
+            @if (_loading)
+            {
+                <MudPaper Elevation="0" Class="pa-3 d-flex align-center gap-2" Style="background:transparent">
+                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">Working…</MudText>
+                </MudPaper>
+            }
         </MudStack>
     }
 
@@ -69,7 +114,7 @@
 
     @if (!_loading && _chartFragment is not null)
     {
-        <MudPaper Outlined="true" Class="pa-4 mt-6" Style="width:100%">
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
             @if (_chartTitle is not null)
             {
                 <MudText Typo="Typo.h6" Class="mb-4">@_chartTitle</MudText>
@@ -78,9 +123,32 @@
         </MudPaper>
     }
 
+    @if (!_loading && _treeNodes is not null)
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            @if (_chartTitle is not null)
+            {
+                <MudText Typo="Typo.h6" Class="mb-4">@_chartTitle</MudText>
+            }
+            <div style="width:100%;height:650px;">
+                <CascadingValue Value="_treeDiagram" IsFixed="true">
+                    <DiagramCanvas></DiagramCanvas>
+                </CascadingValue>
+            </div>
+        </MudPaper>
+    }
+
 </MudContainer>
 
 @code {
+
+    enum TurnRole { User, Assistant, ToolCall }
+
+    record Turn(TurnRole Role, string? ToolName = null)
+    {
+        public string Content { get; set; } = string.Empty;
+        public bool IsComplete { get; set; }
+    }
 
     private AskModel _model = new();
     private RenderFragment? _chartFragment;
@@ -88,6 +156,15 @@
     private bool _hasResult;
     private string? _error;
     private string? _chartTitle;
+    private readonly List<Turn> _turns = [];
+    private readonly Dictionary<string, string> _toolCallNames = [];
+    private readonly Dictionary<string, Turn> _toolCallTurns = [];
+    private Turn? _currentAssistantTurn;
+
+    // tree diagram state
+    private BlazorDiagram _treeDiagram = null!;
+    private Dictionary<int, FamilyNodeDto>? _treeNodes;
+    private readonly Dictionary<int, NodeModel> _treeNodeModels = new();
 
     private readonly string[] _examples =
     [
@@ -95,7 +172,7 @@
         "How many characters had a lifespan between 200 and 300 years old?",
         "How many light side Force powers are there vs dark side?",
         "Show the family tree of Luke Skywalker",
-        "Show the family tree of Darth Vader",
+        "Show the family tree of Han Solo",
         "How many battles occurred per era?",
         "What species have the longest average lifespans?",
         "How many characters were born in each century BBY?",
@@ -109,10 +186,23 @@
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
+    protected override void OnInitialized()
+    {
+        _treeDiagram = new BlazorDiagram(new BlazorDiagramOptions
+        {
+            AllowMultiSelection = false,
+            AllowPanning = true,
+            Zoom = { Enabled = true },
+        });
+        _treeDiagram.RegisterComponent<DiagramNode, TreeNodeWidget>();
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender) => Task.CompletedTask;
+
     private void UseExample(string prompt)
     {
         _model.Prompt = prompt;
-        _ = SubmitAsync();
+        _ = InvokeAsync(SubmitAsync);
     }
 
     private async Task Load() => await SubmitAsync();
@@ -121,34 +211,175 @@
     {
         _loading = true;
         _chartFragment = null;
+        _treeNodes      = null;
+        _lastTreeResult = null;
+        _treeDiagram.Nodes.Clear();
+        _treeDiagram.Links.Clear();
+        _treeNodeModels.Clear();
         _chartTitle = null;
         _error = null;
         _hasResult = false;
+        _turns.Clear();
+        _toolCallNames.Clear();
+        _toolCallTurns.Clear();
+        _currentAssistantTurn = null;
         StateHasChanged();
+
+        var continuity = ContinuityService.GetContinuityQueryParam() ?? "Both";
+        var userMessage = $"[CONTINUITY: {continuity}] {_model.Prompt}";
+        _turns.Add(new Turn(TurnRole.User) { Content = _model.Prompt, IsComplete = true });
+
+        var body = new { messages = new[] { new { role = "user", content = userMessage } } };
+        using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
 
         try
         {
-            var response = await Http.PostAsJsonAsync("kernel/ask", new UserPrompt(_model.Prompt));
-
-            if (response.IsSuccessStatusCode)
+            using var request = new HttpRequestMessage(HttpMethod.Post, "kernel/stream")
             {
-                var chartSpec = await response.Content.ReadFromJsonAsync<AskChart>();
+                Content = JsonContent.Create(body),
+            };
+            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
 
-                if (chartSpec is not null)
+            using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _error = $"Request failed ({(int)response.StatusCode}). Please try again.";
+                return;
+            }
+
+            await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
+            using var reader = new System.IO.StreamReader(stream);
+
+            AskChart? chart = null;
+
+            while (!reader.EndOfStream && !cts.Token.IsCancellationRequested)
+            {
+                var line = await reader.ReadLineAsync(cts.Token);
+                if (string.IsNullOrEmpty(line)) continue;
+                if (!line.StartsWith("data:")) continue;
+
+                var json = line["data:".Length..].Trim();
+                if (json == "[DONE]") break;
+
+                try
                 {
-                    _chartTitle = chartSpec.Title;
-                    _chartFragment = RenderChart(chartSpec);
-                    _hasResult = true;
+                    using var doc = JsonDocument.Parse(json);
+                    var root = doc.RootElement;
+                    var eventType = root.TryGetProperty("type", out var t) ? t.GetString() : null;
+
+                    switch (eventType)
+                    {
+                        case "TOOL_CALL_START":
+                        {
+                            var callId   = root.TryGetProperty("toolCallId",   out var ci) ? ci.GetString() : null;
+                            var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
+                            if (callId is not null && toolName is not null)
+                                _toolCallNames[callId] = toolName;
+                            var turn = new Turn(TurnRole.ToolCall, toolName);
+                            _turns.Add(turn);
+                            if (callId is not null)
+                                _toolCallTurns[callId] = turn;
+                            break;
+                        }
+                        case "TOOL_CALL_ARGS":
+                        {
+                            var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+                            if (callId is not null && _toolCallTurns.TryGetValue(callId, out var turn))
+                            {
+                                var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
+                                if (delta is not null) turn.Content += delta;
+                            }
+                            break;
+                        }
+                        case "TOOL_CALL_END":
+                        {
+                            var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+                            if (callId is not null && _toolCallTurns.TryGetValue(callId, out var turn))
+                                turn.IsComplete = true;
+                            break;
+                        }
+                        case "TOOL_CALL_RESULT":
+                        {
+                            var callId   = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+                            var toolName = callId is not null && _toolCallNames.TryGetValue(callId, out var n) ? n : null;
+                            if (toolName == "render_chart" && root.TryGetProperty("content", out var contentEl))
+                            {
+                                if (contentEl.ValueKind == JsonValueKind.Object)
+                                    chart = JsonSerializer.Deserialize<AskChart>(contentEl.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                                else if (contentEl.ValueKind == JsonValueKind.String)
+                                {
+                                    var inner = contentEl.GetString();
+                                    if (inner?.StartsWith("\"") == true)
+                                        inner = JsonSerializer.Deserialize<string>(inner);
+                                    if (inner is not null)
+                                        chart = JsonSerializer.Deserialize<AskChart>(inner, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                                }
+                            }
+                            break;
+                        }
+                        case "TEXT_MESSAGE_START":
+                            _currentAssistantTurn = new Turn(TurnRole.Assistant);
+                            _turns.Add(_currentAssistantTurn);
+                            break;
+                        case "TEXT_MESSAGE_CONTENT":
+                        {
+                            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
+                            if (delta is not null && _currentAssistantTurn is not null)
+                                _currentAssistantTurn.Content += delta;
+                            break;
+                        }
+                        case "TEXT_MESSAGE_END":
+                            if (_currentAssistantTurn is not null) _currentAssistantTurn.IsComplete = true;
+                            _currentAssistantTurn = null;
+                            break;
+                        case "RUN_ERROR":
+                            _error = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
+                            break;
+                    }
+                }
+                catch (JsonException) { }
+
+                StateHasChanged();
+            }
+
+            if (chart is not null)
+            {
+                _chartTitle = chart.Title;
+                _hasResult  = true;
+
+                if (chart.AskChartType == AskChartType.FamilyTree)
+                {
+                    if (chart.FamilyTreeCharacterId is null)
+                        _error = $"\"{chart.FamilyTreeCharacterName ?? "Character"}\" was not found in the database.";
+                    else
+                    {
+                        var result = await Http.GetFromJsonAsync<FamilyTreeResult>($"characters/{chart.FamilyTreeCharacterId.Value}/tree?maxDepth=3");
+                        if (result?.Nodes is { Count: > 0 })
+                        {
+                            _treeNodes      = result.Nodes;
+                            _lastTreeResult = result;
+                            SetupTreeDiagram(result.RootId);
+                        }
+                        else
+                        {
+                            _error = $"No family data found for \"{chart.FamilyTreeCharacterName}\".";
+                        }
+                    }
                 }
                 else
                 {
-                    _error = "The AI returned no chart data. Try rephrasing your question.";
+                    _chartFragment = RenderMudChart(chart);
                 }
             }
-            else
+            else if (_error is null && !_hasResult && _turns.All(t => t.Role != TurnRole.Assistant))
             {
-                _error = $"Request failed ({(int)response.StatusCode}). Please try again.";
+                _error = "The AI returned no chart data. Try rephrasing your question.";
             }
+        }
+        catch (OperationCanceledException)
+        {
+            _error = "Request timed out. The query took too long — try a simpler question.";
         }
         catch (Exception ex)
         {
@@ -161,30 +392,102 @@
         }
     }
 
-    RenderFragment RenderChart(AskChart spec) => spec.AskChartType switch
+    // Trim date strings like "19 BBY, Polis Massa" → "19 BBY"
+    private static string TrimDate(string s)
     {
-        AskChartType.FamilyTree => RenderFamilyTree(spec),
-        _ => RenderMudChart(spec),
-    };
+        var comma = s.IndexOf(',');
+        return comma >= 0 ? s[..comma].Trim() : s.Trim();
+    }
 
-    RenderFragment RenderFamilyTree(AskChart spec) => builder =>
+    private static List<(string Key, string Value)> NodeAttributes(FamilyNodeDto d)
     {
-        if (spec.FamilyTreeCharacterId is null)
+        var attrs = new List<(string, string)>();
+        if (!string.IsNullOrWhiteSpace(d.Born)) attrs.Add(("Born", TrimDate(d.Born)));
+        if (!string.IsNullOrWhiteSpace(d.Died)) attrs.Add(("Died", TrimDate(d.Died)));
+        return attrs;
+    }
+
+    private FamilyTreeResult? _lastTreeResult;
+
+    /// <summary>
+    /// Lay out the multi-gen tree using Generation values assigned by the service BFS.
+    /// Generation 0 = root row, negative = ancestor rows above, positive = descendant rows below.
+    /// </summary>
+    private void SetupTreeDiagram(int rootId)
+    {
+        _treeDiagram.Nodes.Clear();
+        _treeDiagram.Links.Clear();
+        _treeNodeModels.Clear();
+
+        if (_treeNodes is null || _treeNodes.Count == 0) return;
+
+        _treeDiagram.SuspendSorting = true;
+
+        const double nodeW = 210;
+        const double nodeH = 85;
+        const double hGap  = 40;
+        const double vGap  = 60;
+
+        // Group nodes by generation
+        var byGen = _treeNodes.Values
+            .GroupBy(n => n.Generation)
+            .OrderBy(g => g.Key)
+            .ToList();
+
+        // Compute max row width so all rows can be centred on the same axis
+        int maxInRow = byGen.Max(g => g.Count());
+        double maxRowW = maxInRow * nodeW + (maxInRow - 1) * hGap;
+
+        foreach (var genGroup in byGen)
         {
-            builder.AddContent(0, "No character ID returned for family tree.");
-            return;
+            var row   = genGroup.OrderBy(n => n.Name).ToList();
+            double rowW  = row.Count * nodeW + (row.Count - 1) * hGap;
+            double startX = (maxRowW - rowW) / 2.0;
+            double y      = genGroup.Key * (nodeH + vGap);
+
+            for (int i = 0; i < row.Count; i++)
+            {
+                var n  = row[i];
+                double x = startX + i * (nodeW + hGap);
+                var dn = new DiagramNode(n.Name, NodeAttributes(n),
+                    new Blazor.Diagrams.Core.Geometry.Point(x, y));
+                _treeDiagram.Nodes.Add(dn);
+                _treeNodeModels[n.Id] = dn;
+            }
         }
 
-        builder.OpenComponent<FamilyTreeViewer>(0);
-        builder.AddAttribute(1, "CharacterId", spec.FamilyTreeCharacterId.Value);
-        builder.AddAttribute(2, "CharacterName", spec.FamilyTreeCharacterName ?? "Character");
-        builder.CloseComponent();
+        // Draw edges from the result
+        if (_lastTreeResult is not null)
+        {
+            foreach (var edge in _lastTreeResult.Edges)
+            {
+                if (_treeNodeModels.TryGetValue(edge.FromId, out var from) &&
+                    _treeNodeModels.TryGetValue(edge.ToId,   out var to))
+                {
+                    _treeDiagram.Links.Add(new LinkModel(from, to));
+                }
+            }
+        }
+
+        _treeDiagram.SuspendSorting = false;
+        _treeDiagram.Refresh();
+    }
+
+    private static string FriendlyToolName(string? name) => name switch
+    {
+        "render_chart"        => "Rendering chart",
+        "sample_label_values" => "Sampling field values",
+        "find"                => "Querying collection",
+        "aggregate"           => "Aggregating data",
+        "count"               => "Counting documents",
+        "list_collections"    => "Listing collections",
+        "collection_schema"   => "Reading schema",
+        _                     => name ?? "Using tool",
     };
 
     RenderFragment RenderMudChart(AskChart spec) => builder =>
     {
         var seq = 0;
-
         switch (spec.AskChartType)
         {
             case AskChartType.Bar:
@@ -194,14 +497,9 @@
                 var chartType = spec.AskChartType == AskChartType.Bar ? ChartType.Bar
                     : spec.AskChartType == AskChartType.Line ? ChartType.Line
                     : ChartType.StackedBar;
-
                 builder.OpenComponent<MudChart<double>>(seq++);
                 builder.AddAttribute(seq++, "ChartType", chartType);
-                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double>
-                {
-                    Name = s.Name,
-                    Data = s.Data.ToArray()
-                }).ToList());
+                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double> { Name = s.Name, Data = s.Data.ToArray() }).ToList());
                 builder.AddAttribute(seq++, "ChartLabels", spec.XAxisLabels?.ToArray() ?? []);
                 builder.AddAttribute(seq++, "Width", "100%");
                 builder.AddAttribute(seq++, "Height", "400px");
@@ -215,11 +513,7 @@
                 var chartType = spec.AskChartType == AskChartType.Pie ? ChartType.Pie : ChartType.Donut;
                 builder.OpenComponent<MudChart<double>>(seq++);
                 builder.AddAttribute(seq++, "ChartType", chartType);
-                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double>
-                {
-                    Name = s.Name,
-                    Data = s.Data.ToArray()
-                }).ToList());
+                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double> { Name = s.Name, Data = s.Data.ToArray() }).ToList());
                 builder.AddAttribute(seq++, "ChartLabels", spec.Labels?.ToArray() ?? []);
                 builder.AddAttribute(seq++, "Width", "100%");
                 builder.AddAttribute(seq++, "Height", "400px");
@@ -231,13 +525,8 @@
             {
                 builder.OpenComponent<MudChart<double>>(seq++);
                 builder.AddAttribute(seq++, "ChartType", ChartType.Timeseries);
-                builder.AddAttribute(seq++, "ChartSeries", spec.TimeSeries?.Select(ts => new ChartSeries<double>
-                {
-                    Name = ts.Name,
-                    Data = ts.Data.Select(dp => dp.Y).ToArray()
-                }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.TimeSeries?.FirstOrDefault()?.Data
-                    .Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
+                builder.AddAttribute(seq++, "ChartSeries", spec.TimeSeries?.Select(ts => new ChartSeries<double> { Name = ts.Name, Data = ts.Data.Select(dp => dp.Y).ToArray() }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.TimeSeries?.FirstOrDefault()?.Data.Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
                 builder.AddAttribute(seq++, "Width", "100%");
                 builder.AddAttribute(seq++, "Height", "400px");
                 builder.CloseComponent();

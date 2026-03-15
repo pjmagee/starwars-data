@@ -1,0 +1,27 @@
+@using Blazor.Diagrams.Components.Renderers
+@using StarWarsData.Frontend.Models
+
+<div class="tree-node @(Node?.Selected == true ? "selected" : "")">
+    <div class="tree-node-name">@Node?.Label</div>
+    @if (Node?.Attributes is { Count: > 0 })
+    {
+        <div class="tree-node-attrs">
+            @foreach (var (key, value) in Node.Attributes)
+            {
+                <div class="tree-node-attr">
+                    <span class="tree-node-attr-key">@key</span>
+                    <span class="tree-node-attr-value">@value</span>
+                </div>
+            }
+        </div>
+    }
+    @foreach (var port in Node?.Ports ?? [])
+    {
+        <PortRenderer @key="port" Port="port" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public DiagramNode? Node { get; set; }
+}

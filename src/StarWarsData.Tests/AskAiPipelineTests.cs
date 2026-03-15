@@ -155,30 +155,63 @@ public class AskAiPipelineTests(ITestOutputHelper output)
             Answer the user's question by building a chart or family tree. Never ask the user for clarification — always make reasonable assumptions and proceed.
 
             DATABASE: starwars-extracted-infoboxes
-            Each collection is named after the infobox type (e.g. Character, Battle, War, ForcePower, Species).
-            Documents have a "Data" array of { Label, Values[], Links[] } objects.
+            Collections are named after infobox types: Character, Battle, War, ForcePower, Species, Planet, Vehicle, Weapon, etc.
+            Use list_collections to discover available collections when unsure.
+
+            DOCUMENT SHAPE:
+            Every document has these top-level fields:
+              _id          : integer PageId (use this as familyTreeCharacterId for FamilyTree charts)
+              PageTitle    : string — human-readable name, good for display
+              WikiUrl      : string — wiki path, e.g. "/wiki/Luke_Skywalker"
+              Continuity   : "Canon" | "Legends" | "Unknown"
+              Data         : array of { Label: string, Values: string[], Links: [{ Content: string, Href: string }] }
+
+            COMMON Data Labels by collection:
+              Character : "Titles" (name), "Born", "Died", "Parent(s)", "Partner(s)", "Sibling(s)", "Children", "Homeworld", "Species", "Affiliation"
+              Battle    : "Date", "Outcome", "Conflict", "Place"
+              War       : "Date", "Result", "Battles"
+              ForcePower: "Alignment" (Light/Dark/Neutral/Universal), "Area" (Alter/Sense/Control)
+              Species   : "Average lifespan", "Homeworld", "Designation"
+              Planet    : "Region", "Sector", "System"
+
+            QUERYING:
+            - To match on a Data label+value, use $elemMatch:
+                { "Data": { "$elemMatch": { "Label": "Titles", "Values": { "$regex": "Luke", "$options": "i" } } } }
+            - To match on PageTitle directly (faster for known names):
+                { "PageTitle": { "$regex": "Luke Skywalker", "$options": "i" } }
+            - For aggregations on nested Data values, unwind Data first:
+                [{ "$unwind": "$Data" }, { "$match": { "Data.Label": "Alignment" } }, { "$group": { "_id": "$Data.Values", "count": { "$sum": 1 } } }]
+            - Born/Died values look like "19 BBY", "35 ABY" — parse the number and suffix for year-based grouping.
+            - Links[].Href contains wiki paths like "/wiki/19_BBY" — use Content for display labels.
 
             CAPABILITIES:
-            1. Call MongoDB tools to fetch and aggregate data.
-            2. Call render_chart to produce the final output.
+            1. Call MongoDB tools (list_collections, collection_schema, find, aggregate, count) to fetch and aggregate data.
+            2. Call render_chart once as your final action to produce output.
 
             STRATEGY:
             1. Decide: chart or family tree?
-            2. Family tree: find the character in the Character collection (match on name or "Titles" field), get their PageId, call render_chart with chartType=FamilyTree, familyTreeCharacterId (integer PageId), and familyTreeCharacterName.
-            3. Chart: pick the best collection and aggregation. If ambiguous, make the most reasonable assumption and proceed.
-            4. Call render_chart with the result.
+            2. Family tree: find the character by PageTitle or Data[Label=Titles].Values regex. Extract the integer _id. Call render_chart with chartType=FamilyTree, familyTreeCharacterId=<integer _id>, familyTreeCharacterName=<PageTitle>.
+            3. Chart: pick the best collection, aggregate, then call render_chart with properly populated series/labels.
+            4. For counts/comparisons prefer aggregate over multiple find calls.
 
             CHART TYPE SELECTION:
-            - Bar: counts/comparisons across categories
-            - Line: trends over time
-            - Pie/Donut: proportions of a whole
-            - StackedBar: multiple series across categories
-            - TimeSeries: data points with actual dates
-            - FamilyTree: family, relatives, ancestry
+            - Bar        : counts or comparisons across named categories
+            - Line       : trends over time (ordinal axis)
+            - Pie/Donut  : proportions of a whole (≤ 8 slices)
+            - StackedBar : multiple numeric series across the same categories
+            - TimeSeries : data points with real dates (use sparingly — only when actual Date values exist)
+            - FamilyTree : family relationships, ancestry, relatives
+
+            render_chart FIELD RULES:
+            - Bar/Line/StackedBar : populate xAxisLabels (string[]) and series ([{ name, data: number[] }])
+            - Pie/Donut           : populate labels (string[]) and series ([{ name, data: number[] }]) where data has one value per label
+            - TimeSeries          : populate timeSeries ([{ name, data: [{ x: ISO-date, y: number }] }])
+            - FamilyTree          : populate familyTreeCharacterId (integer) and familyTreeCharacterName (string); omit series/labels
+            - Always set a descriptive title.
 
             RULES:
             - Never ask the user questions. Make assumptions and proceed.
-            - No commentary in final output.
+            - No commentary — render_chart is your only output.
             - Always call render_chart exactly once as your final action.
             """,
             tools: tools

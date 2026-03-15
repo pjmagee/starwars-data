@@ -36,11 +36,12 @@ public class InfoboxRelationshipProcessor
             var records = await collection
                 .Find(FilterDefinition<Infobox>.Empty)
                 .ToListAsync(cancellationToken);
-                
+
             allFiles.AddRange(
                 records.Select(record =>
                 {
-                    string url = record.WikiUrl.Split(WikiFragment)
+                    string url = record
+                        .WikiUrl.Split(WikiFragment)
                         .Last()
                         .Replace(" ", "_")
                         .ToLower();

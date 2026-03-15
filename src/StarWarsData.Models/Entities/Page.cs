@@ -32,9 +32,6 @@ public class Page
     [BsonElement("lastModified")]
     public DateTime LastModified { get; set; }
 
-    [BsonElement("summary")]
-    public string? Summary { get; set; }
-
     [BsonElement("continuity")]
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
