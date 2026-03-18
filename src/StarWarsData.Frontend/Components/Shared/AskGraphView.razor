@@ -1,0 +1,155 @@
+@inject IHttpClientFactory HttpClientFactory
+@using StarWarsData.Frontend.Models
+
+<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+
+    @if (_loading)
+    {
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
+            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading relationship graph…</MudText>
+        </MudStack>
+    }
+    else if (_error is not null)
+    {
+        <MudAlert Severity="Severity.Error">@_error</MudAlert>
+    }
+    else if (_treeNodes is not null)
+    {
+        <div style="width:100%;height:650px;">
+            <CascadingValue Value="_diagram" IsFixed="true">
+                <DiagramCanvas></DiagramCanvas>
+            </CascadingValue>
+        </div>
+    }
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public GraphDescriptor Descriptor { get; set; } = null!;
+
+    private BlazorDiagram _diagram = null!;
+    private Dictionary<int, GraphNodeDto>? _treeNodes;
+    private GraphResult? _graphResult;
+    private readonly Dictionary<int, NodeModel> _nodeModels = new();
+    private bool _loading = true;
+    private string? _error;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override void OnInitialized()
+    {
+        _diagram = new BlazorDiagram(new BlazorDiagramOptions
+        {
+            AllowMultiSelection = false,
+            AllowPanning = true,
+            Zoom = { Enabled = true },
+        });
+        _diagram.RegisterComponent<DiagramNode, TreeNodeWidget>();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _loading = true;
+        _error = null;
+        _treeNodes = null;
+        _graphResult = null;
+        _diagram.Nodes.Clear();
+        _diagram.Links.Clear();
+        _nodeModels.Clear();
+
+        try
+        {
+            var collection = Uri.EscapeDataString(Descriptor.Collection);
+            var result = await Http.GetFromJsonAsync<GraphResult>(
+                $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={Descriptor.MaxDepth}");
+
+            if (result?.Nodes is { Count: > 0 })
+            {
+                _treeNodes = result.Nodes;
+                _graphResult = result;
+                LayoutDiagram(result.RootId);
+            }
+            else
+            {
+                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\".";
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = $"Failed to load graph: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void LayoutDiagram(int rootId)
+    {
+        if (_treeNodes is null || _treeNodes.Count == 0) return;
+
+        _diagram.SuspendSorting = true;
+
+        const double nodeW = 210;
+        const double nodeH = 85;
+        const double hGap  = 40;
+        const double vGap  = 60;
+
+        var byGen = _treeNodes.Values
+            .GroupBy(n => n.Generation)
+            .OrderBy(g => g.Key)
+            .ToList();
+
+        int maxInRow = byGen.Max(g => g.Count());
+        double maxRowW = maxInRow * nodeW + (maxInRow - 1) * hGap;
+
+        foreach (var genGroup in byGen)
+        {
+            var row = genGroup.OrderBy(n => n.Name).ToList();
+            double rowW = row.Count * nodeW + (row.Count - 1) * hGap;
+            double startX = (maxRowW - rowW) / 2.0;
+            double y = genGroup.Key * (nodeH + vGap);
+
+            for (int i = 0; i < row.Count; i++)
+            {
+                var n = row[i];
+                double x = startX + i * (nodeW + hGap);
+                var dn = new DiagramNode(n.Name, NodeAttributes(n),
+                    new Blazor.Diagrams.Core.Geometry.Point(x, y));
+                _diagram.Nodes.Add(dn);
+                _nodeModels[n.Id] = dn;
+            }
+        }
+
+        if (_graphResult is not null)
+        {
+            foreach (var edge in _graphResult.Edges)
+            {
+                if (_nodeModels.TryGetValue(edge.FromId, out var from) &&
+                    _nodeModels.TryGetValue(edge.ToId,   out var to))
+                {
+                    _diagram.Links.Add(new LinkModel(from, to));
+                }
+            }
+        }
+
+        _diagram.SuspendSorting = false;
+        _diagram.Refresh();
+    }
+
+    private static string TrimDate(string s)
+    {
+        var comma = s.IndexOf(',');
+        return comma >= 0 ? s[..comma].Trim() : s.Trim();
+    }
+
+    private static List<(string Key, string Value)> NodeAttributes(GraphNodeDto d)
+    {
+        var attrs = new List<(string, string)>();
+        if (!string.IsNullOrWhiteSpace(d.Born)) attrs.Add(("Born", TrimDate(d.Born)));
+        if (!string.IsNullOrWhiteSpace(d.Died)) attrs.Add(("Died", TrimDate(d.Died)));
+        return attrs;
+    }
+}

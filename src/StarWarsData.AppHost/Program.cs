@@ -10,18 +10,8 @@ var apiService = builder
     .WithEnvironment("Settings__OpenAiKey", openApi)
     // Phase 1 — Download raw data
     .WithHttpCommand(
-        path: "/api/admin/download/infoboxes",
-        displayName: "1a. Download Infoboxes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Downloads raw infobox data from the Star Wars wiki API into starwars-raw-infoboxes.",
-            IconName = "ArrowDownload",
-            IsHighlighted = false,
-        })
-    .WithHttpCommand(
         path: "/api/admin/download/pages",
-        displayName: "1b. Download Pages",
+        displayName: "1. Download Pages",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
@@ -29,67 +19,35 @@ var apiService = builder
             IconName = "ArrowDownload",
             IsHighlighted = false,
         })
-    // Phase 2 — Extract & process
-    .WithHttpCommand(
-        path: "/api/admin/extract/infoboxes",
-        displayName: "2a. Extract Infoboxes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Extracts structured infoboxes from raw pages into starwars-extracted-infoboxes. Requires Phase 1b.",
-            IconName = "DocumentBulletList",
-            IsHighlighted = false,
-        })
-    .WithHttpCommand(
-        path: "/api/admin/process/infobox-relationships",
-        displayName: "2b. Process Relationships",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Builds infobox relationships in starwars-raw-infoboxes. Requires Phase 1a.",
-            IconName = "DataTreemap",
-            IsHighlighted = false,
-        })
-    // Phase 3 — Timeline events
+    // Phase 2 — Timeline events
     .WithHttpCommand(
         path: "/api/admin/mongo/create-categorized-timeline-events",
-        displayName: "3. Build Timeline Events",
+        displayName: "2. Build Timeline Events",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates categorized timeline events in starwars-timeline-events. Requires Phase 2a.",
+            Description = "Creates categorized timeline events in starwars-timeline-events from Pages. Requires Phase 1.",
             IconName = "Timeline",
             IsHighlighted = false,
         })
-    // Phase 4 — Character relationships
-    .WithHttpCommand(
-        path: "/api/admin/mongo/add-character-relationships",
-        displayName: "4. Add Character Relationships",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Builds character relationship graph in starwars-structured. Requires Phase 2b.",
-            IconName = "PeopleTeam",
-            IsHighlighted = false,
-        })
-    // Phase 5 — Embeddings (optional)
+    // Phase 3 — Embeddings (optional)
     .WithHttpCommand(
         path: "/api/admin/mongo/create-embeddings",
-        displayName: "5a. Create Embeddings",
+        displayName: "3a. Create Embeddings",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Generates OpenAI embeddings. Requires OpenAI key and Phase 2.",
+            Description = "Generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
             IconName = "Sparkle",
             IsHighlighted = false,
         })
     .WithHttpCommand(
         path: "/api/admin/mongo/create-index-embeddings",
-        displayName: "5b. Create Vector Indexes",
+        displayName: "3b. Create Vector Indexes",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates MongoDB vector indexes. Run after 5a.",
+            Description = "Creates MongoDB vector indexes. Run after 3a.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         });

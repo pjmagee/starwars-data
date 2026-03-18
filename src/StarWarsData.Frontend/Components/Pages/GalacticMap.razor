@@ -1,6 +1,6 @@
 @page "/galactic-map"
 @inject IHttpClientFactory HttpClientFactory
-@inject StarWarsData.Frontend.Services.ContinuityService ContinuityService
+@inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
 @implements IDisposable
 
 <style>
@@ -215,13 +215,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ContinuityService.OnChange += OnContinuityChanged;
+        GlobalFilterService.OnChange += OnContinuityChanged;
         await LoadGrid();
     }
 
     public void Dispose()
     {
-        ContinuityService.OnChange -= OnContinuityChanged;
+        GlobalFilterService.OnChange -= OnContinuityChanged;
     }
 
     private async void OnContinuityChanged()
@@ -232,7 +232,7 @@
 
     private async Task LoadGrid()
     {
-        var param = ContinuityService.GetContinuityQueryParam();
+        var param = GlobalFilterService.GetContinuityQueryParam();
         var url = param is not null ? $"GalaxyMap/grid?continuity={param}" : "GalaxyMap/grid";
         var cells = await Http.GetFromJsonAsync<IEnumerable<GalaxyGridCell>>(url);
         Grid = cells?.ToDictionary(c => c.Letter + "-" + c.Number) ?? new();

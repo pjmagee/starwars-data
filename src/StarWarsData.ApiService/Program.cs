@@ -64,9 +64,7 @@ builder
         );
     })
     .AddSingleton<CollectionFilters>()
-    .AddScoped<CharacterRelationsService>()
-    .AddSingleton<InfoboxExtractor>()
-    .AddSingleton<InfoboxRelationshipProcessor>()
+    .AddScoped<RelationshipGraphService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IChatClient>(sp =>
         sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient()
@@ -116,15 +114,13 @@ builder
             "find",
             "aggregate",
             "count",
-            "list_collections",
-            "list_databases",
-            "collection_schema",
         };
 
         var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
-        var chartToolkit = new ChartToolkit();
+        var componentToolkit = new ComponentToolkit();
         var dataExplorer = new DataExplorerToolkit(sp.GetRequiredService<IMongoClient>());
-        var tools = new List<AITool> { chartToolkit.AsAIFunction() };
+        var tools = new List<AITool>();
+        tools.AddRange(componentToolkit.AsAIFunctions());
         tools.AddRange(dataExplorer.AsAIFunctions());
         tools.AddRange(
             mcpTools
@@ -134,70 +130,49 @@ builder
         );
 
         const string instructions = """
-        You are a precise Star Wars data assistant that builds charts and family trees.
+        You are a Star Wars data assistant. Answer questions with visualizations. Never ask for clarification.
 
-        GOAL:
-        Answer the user's question by building a chart or family tree. Never ask the user for clarification — always make reasonable assumptions and proceed.
+        CONTINUITY: User messages start with [CONTINUITY: Canon|Legends|Both]. Add {"continuity":"Canon"} or {"continuity":"Legends"} to filters. "Both" = no filter.
 
-        CONTINUITY:
-        The user's message begins with a tag like [CONTINUITY: Canon], [CONTINUITY: Legends], or [CONTINUITY: Both].
-        - [CONTINUITY: Canon]   → add { "Continuity": "Canon" } to every MongoDB filter. Never include Legends documents.
-        - [CONTINUITY: Legends] → add { "Continuity": "Legends" } to every MongoDB filter. Never include Canon documents.
-        - [CONTINUITY: Both]    → no Continuity filter — include all documents.
-        find filter example (Canon):     { "Continuity": "Canon", "Data": { "$elemMatch": { "Label": "Titles", "Values": { "$regex": "Luke", "$options": "i" } } } }
-        aggregate $match example (Canon): { "$match": { "Continuity": "Canon", "Data.Label": "Alignment" } }
+        VISUALIZATION HINT: Messages may include [PREFER: chart|table|data_table|graph|timeline]. You MUST use the preferred output type unless it is truly impossible. This is the user's explicit choice.
 
-        DATABASE: starwars-extracted-infoboxes
-        Collections are named after infobox types: Character, Battle, War, ForcePower, Species, Planet, Vehicle, Weapon, etc.
-        Use list_collections to discover available collections when unsure.
+        DATA MODEL: All data lives in database "starwars-raw-pages", collection "Pages". Each page may have an embedded infobox.
+        The infobox type (Character, Battle, Species, Food, etc.) is stored in the infobox.Template field as a URL.
+        All exploration tools accept an "infoboxType" parameter — this is NOT a MongoDB collection name. It is matched via regex against infobox.Template.
+        Use list_infobox_types to discover valid infoboxType values.
 
-        DOCUMENT SHAPE:
-        Every document has these top-level fields:
-          _id          : integer PageId (use this as familyTreeCharacterId for FamilyTree charts)
-          PageTitle    : string — human-readable name, good for display
-          WikiUrl      : string — wiki path, e.g. "/wiki/Luke_Skywalker"
-          Continuity   : "Canon" | "Legends" | "Unknown" — top-level filterable field
-          Data         : array of { Label: string, Values: string[], Links: [{ Content: string, Href: string }] }
+        EXPLORATION TOOLS (prefer these over raw MongoDB):
+        - search_pages_by_name(infoboxType, name) — find entities by name
+        - get_page_by_id(infoboxType, id) — get full infobox for a known PageId
+        - get_page_property(infoboxType, id, label) — get one property's values for a known PageId
+        - search_pages_by_property(infoboxType, label, value) — find entities by a property value
+        - search_pages_by_date(infoboxType, date) — find entities by BBY/ABY date
+        - search_pages_by_link(infoboxType, wikiUrl) — find entities that reference a given wikiUrl
+        - sample_property_values(infoboxType, label) — see distinct values for a property before aggregating
+        - list_infobox_types() — discover valid infoboxType values
+        - list_timeline_categories() — discover timeline category names
+        - find, aggregate, count — raw MongoDB on starwars-raw-pages.Pages (use only when exploration tools are insufficient)
 
-        COMMON Data Labels by collection:
-          Character : "Titles" (name), "Born", "Died", "Parent(s)", "Partner(s)", "Sibling(s)", "Children", "Homeworld", "Species", "Affiliation"
-          Battle    : "Date", "Outcome", "Conflict", "Place"
-          War       : "Date", "Result", "Battles"
-          ForcePower: "Alignment", "Area" (Alter/Sense/Control)
-          Species   : "Average lifespan", "Homeworld", "Designation"
-          Planet    : "Region", "Sector", "System"
-
-        QUERYING:
-        - All infobox documents use a "Titles" label in Data as the canonical name. Always use $elemMatch to search by name across any collection:
-            { "Data": { "$elemMatch": { "Label": "Titles", "Values": { "$regex": "<name>", "$options": "i" } } } }
-        - Data.Values is an array — $unwind "$Data.Values" after $unwind "$Data" before grouping.
-        - Born/Died values look like "19 BBY" / "35 ABY".
-
-        CAPABILITIES:
-        1. find_by_title(collection, name, continuity?, limit?)            — look up any entity by name via Data.Titles.Values
-        2. get_by_id(collection, id)                                       — get full infobox for a known id
-        3. get_label_values(collection, id, label)                         — get values of one label for a known id
-        4. find_by_label_value(collection, label, value, continuity?, limit?) — find entities where a label matches a value (e.g. Homeworld=Tatooine)
-        5. find_by_date(collection, date, dateLabel?, continuity?, limit?) — find entities by BBY/ABY date (e.g. '19 BBY', '4 ABY')
-        6. find_related(collection, wikiUrl, continuity?, limit?)          — find entities that reference a given WikiUrl in their links
-        7. sample_label_values(collection, label, continuity?)             — see real value patterns for a Data.Label before aggregating
-        8. MongoDB tools (find, aggregate, count, list_collections, collection_schema) — for custom queries
-        9. render_chart                                                     — your single final output action
-
-        STRATEGY:
-        1. Decide: chart or family tree?
-        2. Family tree — do exactly this, no more:
-           a. Call find_by_title(collection="Character", name="<name>", continuity=<from tag>), limit 1.
-           b. If no result, DO NOT call render_chart. Output plain text: "Character not found in the database."
-           c. If found, take its id and name, then call render_chart(chartType="FamilyTree", familyTreeCharacterId=<id>, familyTreeCharacterName=<name>, title=...).
-        3. Chart: use find_by_title or sample_label_values to explore data, then aggregate, then render_chart.
-        4. For counts/comparisons prefer aggregate over multiple find calls.
+        OUTPUT (call exactly one as final action):
+        - render_table(title, infoboxType, fields, search?, pageSize?) — paginated table, frontend fetches data. Do NOT query data yourself.
+        - render_data_table(title, columns, rows) — ad-hoc table with data YOU provide from queries/aggregations.
+        - render_chart(chartType, title, xAxisLabels?, labels?, series?, timeSeries?) — chart with data YOU aggregated.
+        - render_graph(rootEntityId, rootEntityName, title, infoboxType?, maxDepth?) — relationship graph, frontend fetches.
+        - render_timeline(title, categories, pageSize?, yearFrom?, yearFromDemarcation?, yearTo?, yearToDemarcation?, search?) — timeline from starwars-timeline-events DB. Call list_timeline_categories first. Use year range + search to scope to a specific entity or period.
 
         RULES:
-        - Never ask the user questions. Make assumptions and proceed.
-        - No commentary — render_chart is your only output, UNLESS a family tree character is not found (then output a plain text explanation).
-        - Always call render_chart exactly once as your final action, unless the character was not found.
-        - For family trees: exactly one find call then render_chart — never more.
+        - Call exactly one output tool as final action. No commentary after.
+        - render_table/render_graph/render_timeline: frontend fetches data — don't query rows.
+        - render_data_table/render_chart: YOU must query and provide the data.
+        - render_table fields MUST match actual infobox.Data label names exactly (e.g. "Homeworld", "Species", "Born", "Died").
+          Before calling render_table, use get_page_by_id on one result to see valid labels for that infobox type.
+          Data is stored in both Links (hyperlinks) and Values (plain text) — the frontend reads both.
+        - For "family tree" or "relationships" queries → use render_graph. Search the entity by name first to get the PageId.
+        - For entity-specific timelines (e.g. "timeline of Anakin Skywalker", "events during Anakin's life"):
+          1. Look up the entity's date properties (Born, Died, Date, etc.) to get year range
+          2. Pass yearFrom/yearFromDemarcation/yearTo/yearToDemarcation to render_timeline to scope events to that period
+          3. Use the search parameter to filter event titles by the entity's name (e.g. "Skywalker")
+        - Keep tool calls minimal — avoid unnecessary discovery calls.
         """;
 
         return openAiClient
@@ -206,7 +181,6 @@ builder
             .AsAIAgent(instructions: instructions, tools: tools);
     });
 
-// Add Hangfire services
 builder.Services.AddHangfire(
     (provider, config) =>
     {
@@ -219,8 +193,8 @@ builder.Services.AddHangfire(
             {
                 MigrationOptions = new MongoMigrationOptions
                 {
-                    MigrationStrategy = new MigrateMongoMigrationStrategy(),
-                    BackupStrategy = new CollectionMongoBackupStrategy(),
+                    MigrationStrategy = new DropMongoMigrationStrategy(),
+                    BackupStrategy = new NoneMongoBackupStrategy(),
                 },
                 CheckConnection = true,
                 /*

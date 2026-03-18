@@ -1,0 +1,28 @@
+@using StarWarsData.Models.Queries
+
+<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+    <MudTable T="List<string>" Items="Descriptor.Rows" Dense="true" Hover="true" Striped="true" Bordered="true">
+        <HeaderContent>
+            @foreach (var col in Descriptor.Columns)
+            {
+                <MudTh>@col</MudTh>
+            }
+        </HeaderContent>
+        <RowTemplate>
+            @for (var i = 0; i < Descriptor.Columns.Count; i++)
+            {
+                var idx = i;
+                <MudTd DataLabel="@Descriptor.Columns[idx]">@(idx < context.Count ? context[idx] : "—")</MudTd>
+            }
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public DataTableDescriptor Descriptor { get; set; } = null!;
+}

@@ -34,15 +34,9 @@ public class Infobox
     public List<InfoboxProperty> Data { get; set; } = [];
 
     [BsonElement]
-    public List<Relationship> Relationships { get; set; } = [];
-
-    [BsonElement]
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
     [BsonElement("downloadedAt")]
     public DateTime DownloadedAt { get; set; }
-
-    [BsonIgnore]
-    public bool ShowRelationships { get; set; } = false;
 }

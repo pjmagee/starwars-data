@@ -21,7 +21,6 @@ public class PageDownloader
     readonly IMongoCollection<JobState> _jobStateCollection;
 
     readonly SettingsOptions _config;
-    readonly InfoboxExtractor? _infoboxExtractor; // optional for auto extraction
 
     const string WikiBase = "https://starwars.fandom.com/wiki/";
     const string PageDownloadJobName = "PageDownload";
@@ -30,8 +29,7 @@ public class PageDownloader
         HttpClient httpClient,
         IOptions<SettingsOptions> settings,
         IMongoClient mongoClient,
-        ILogger<PageDownloader> logger,
-        InfoboxExtractor? infoboxExtractor = null
+        ILogger<PageDownloader> logger
     )
     {
         _http = httpClient;
@@ -40,7 +38,6 @@ public class PageDownloader
         _mongoDatabase = mongoClient.GetDatabase(settings.Value.PagesDb);
         _pagesCollection = _mongoDatabase.GetCollection<Page>("Pages");
         _jobStateCollection = _mongoDatabase.GetCollection<JobState>("JobState");
-        _infoboxExtractor = infoboxExtractor;
 
         var angleConfig = Configuration.Default.WithDefaultLoader();
         _browsingContext = BrowsingContext.New(angleConfig);
@@ -113,6 +110,7 @@ public class PageDownloader
             WikiUrl = $"{WikiBase}{Uri.EscapeDataString(title.Replace(' ', '_'))}",
             LastModified = pageInfoTask.Result,
             Continuity = DetermineContinuity(title, categories),
+            Universe = DetermineUniverse(categories),
             DownloadedAt = DateTime.UtcNow,
         };
 
@@ -750,8 +748,6 @@ public class PageDownloader
         );
         _logger.LogInformation("Saved page {PageId} ({Title}) to raw pages DB", page.PageId, title);
 
-        if (_infoboxExtractor != null)
-            await _infoboxExtractor.ExtractPageAsync(page.PageId, cancellationToken);
     }
 
     public async Task SyncToMongoDbAsync(CancellationToken cancellationToken)
@@ -804,11 +800,7 @@ public class PageDownloader
                 await _jobStateCollection.DeleteOneAsync(s => s.JobName == PageDownloadJobName, CancellationToken.None);
                 _logger.LogInformation("Page download complete. Synced: {Synced}, Failed: {Failed}", syncedCount, failedCount);
 
-                if (_config.AutoExtractInfoboxes && _infoboxExtractor != null)
-                {
-                    _logger.LogInformation("AutoExtractInfoboxes enabled — starting extraction.");
-                    await _infoboxExtractor.ExtractInfoboxesAsync(CancellationToken.None);
-                }
+
             }
             else
             {
@@ -829,36 +821,12 @@ public class PageDownloader
     {
         using var semaphore = new SemaphoreSlim(8, 8);
 
-        var excludedCategories = _config.ExcludedCategories
-            .Select(c => c.Trim()).Where(c => !string.IsNullOrEmpty(c))
-            .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-        var targetTemplates = _config.TargetTemplates
-            .Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t))
-            .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
         var tasks = pageTitles.Select(async title =>
         {
             await semaphore.WaitAsync(cancellationToken);
             try
             {
                 var pageDoc = await FetchPageAsync(title, cancellationToken);
-
-                // Skip pages in excluded categories
-                if (excludedCategories.Count > 0 && pageDoc.Categories.Any(c =>
-                    excludedCategories.Any(ec => c.Contains(ec, StringComparison.OrdinalIgnoreCase))))
-                {
-                    _logger.LogDebug("Skipping {Title} — excluded category", title);
-                    return 0;
-                }
-
-                // Skip pages whose infobox template is not in the whitelist
-                var template = pageDoc.Infobox?.Template;
-                if (targetTemplates.Count > 0 && (template == null || !targetTemplates.Contains(InfoboxExtractor.SanitizeTemplateName(template))))
-                {
-                    _logger.LogDebug("Skipping {Title} — infobox template '{Template}' not in TargetTemplates", title, template);
-                    return 0;
-                }
 
                 await _pagesCollection.ReplaceOneAsync(
                     Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
@@ -950,5 +918,24 @@ public class PageDownloader
         }
 
         return Continuity.Unknown;
+    }
+
+    static readonly string[] OutOfUniverseMarkers =
+    [
+        "Real-world articles",
+        "Out-of-universe articles",
+        "Canceled projects",
+        "Hoax articles",
+        "Wookieepedia administration",
+    ];
+
+    Universe DetermineUniverse(List<string> categories)
+    {
+        if (categories.Any(c => OutOfUniverseMarkers.Any(m => c.Contains(m, StringComparison.OrdinalIgnoreCase))))
+        {
+            return Universe.OutOfUniverse;
+        }
+
+        return Universe.InUniverse;
     }
 }

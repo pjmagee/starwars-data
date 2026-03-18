@@ -1,0 +1,82 @@
+<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+    @_fragment
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public ChartDescriptor Descriptor { get; set; } = null!;
+
+    private RenderFragment? _fragment;
+
+    protected override void OnParametersSet()
+    {
+        _fragment = BuildChart(Descriptor);
+    }
+
+    private static readonly Dictionary<AskChartType, ChartType> ChartTypeMap = new()
+    {
+        [AskChartType.Bar] = ChartType.Bar,
+        [AskChartType.Line] = ChartType.Line,
+        [AskChartType.StackedBar] = ChartType.StackedBar,
+        [AskChartType.Pie] = ChartType.Pie,
+        [AskChartType.Donut] = ChartType.Donut,
+        [AskChartType.TimeSeries] = ChartType.Timeseries,
+        [AskChartType.Radar] = ChartType.Radar,
+    };
+
+    private static RenderFragment BuildChart(ChartDescriptor spec) => builder =>
+    {
+        var seq = 0;
+        var mudChartType = ChartTypeMap.GetValueOrDefault(spec.ChartType, ChartType.Bar);
+
+        builder.OpenComponent<MudChart<double>>(seq++);
+        builder.AddAttribute(seq++, "ChartType", mudChartType);
+        builder.AddAttribute(seq++, "Width", "100%");
+        builder.AddAttribute(seq++, "Height", "400px");
+        builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
+
+        switch (spec.ChartType)
+        {
+            case AskChartType.TimeSeries:
+                builder.AddAttribute(seq++, "ChartSeries",
+                    spec.TimeSeries?.Select(ts => new ChartSeries<double>
+                    {
+                        Name = ts.Name,
+                        Data = ts.Data.Select(dp => dp.Y).ToArray()
+                    }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels",
+                    spec.TimeSeries?.FirstOrDefault()?.Data
+                        .Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
+                break;
+
+            case AskChartType.Pie:
+            case AskChartType.Donut:
+                builder.AddAttribute(seq++, "ChartSeries",
+                    spec.Series?.Select(s => new ChartSeries<double>
+                    {
+                        Name = s.Name,
+                        Data = s.Data.ToArray()
+                    }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.Labels?.ToArray() ?? []);
+                break;
+
+            default: // Bar, Line, StackedBar, Radar
+                builder.AddAttribute(seq++, "ChartSeries",
+                    spec.Series?.Select(s => new ChartSeries<double>
+                    {
+                        Name = s.Name,
+                        Data = s.Data.ToArray()
+                    }).ToList());
+                builder.AddAttribute(seq++, "ChartLabels", spec.XAxisLabels?.ToArray() ?? []);
+                break;
+        }
+
+        if (spec.Options?.ChartPalette is { Count: > 0 })
+        {
+            builder.AddAttribute(seq++, "ChartPalette", spec.Options.ChartPalette.ToArray());
+        }
+
+        builder.CloseComponent();
+    };
+}

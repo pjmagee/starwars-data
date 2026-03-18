@@ -27,6 +27,9 @@ public class TimelineController : ControllerBase
         _contextAccessor = contextAccessor;
     }
 
+    [HttpGet("eras")]
+    public Era[] GetEras() => Era.CanonEras;
+
     [HttpGet("events")]
     public async Task<GroupedTimelineResult?> GetTimelineEvents(
         [FromQuery] TimelineQueryParams queryParams
@@ -37,8 +40,14 @@ public class TimelineController : ControllerBase
         return await _timelineService.GetTimelineEvents(
             categories,
             queryParams.Continuity,
+            queryParams.Universe,
             queryParams?.Page ?? 1,
-            queryParams?.PageSize ?? 50
+            queryParams?.PageSize ?? 50,
+            queryParams?.YearFrom,
+            queryParams?.YearFromDemarcation,
+            queryParams?.YearTo,
+            queryParams?.YearToDemarcation,
+            queryParams?.Search
         );
     }
 
@@ -52,6 +61,7 @@ public class TimelineController : ControllerBase
     public async Task<GroupedTimelineResult?> GetCategoryTimelineEvents(
         string category,
         [FromQuery] Continuity? continuity = null,
+        [FromQuery] Universe? universe = null,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 50
     )
@@ -59,6 +69,7 @@ public class TimelineController : ControllerBase
         return await _timelineService.GetCategoryTimelineEvents(
             category,
             continuity,
+            universe,
             page,
             pageSize
         );

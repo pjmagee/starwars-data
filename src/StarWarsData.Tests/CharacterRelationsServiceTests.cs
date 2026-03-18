@@ -1,11 +1,10 @@
-using MongoDB.Driver;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services;
 
 namespace StarWarsData.Tests;
 
 /// <summary>
-/// Unit tests for <see cref="CharacterRelationsService"/> using a shared in-process MongoDB container.
+/// Unit tests for <see cref="RelationshipGraphService"/> using a shared in-process MongoDB container.
 ///
 /// Character dataset (Skywalker family):
 ///   Shmi (1) ──parent──► Anakin (2) ──parent──► Luke (3) ──parent──► Ben (5)
@@ -18,9 +17,9 @@ namespace StarWarsData.Tests;
 ///   Shmi and Leia stored with %2F-encoded suffix (exercises the URL-normalisation fix)
 /// </summary>
 [Collection("Mongo")]
-public class CharacterRelationsServiceTests(MongoFixture fixture)
+public class RelationshipGraphServiceTests(MongoFixture fixture)
 {
-    private CharacterRelationsService Svc => fixture.Service;
+    private RelationshipGraphService Svc => fixture.Service;
 
     // ── PageId constants ──────────────────────────────────────────────────────
     public const int ShmiId   = 1;
@@ -46,12 +45,12 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     private const string BenHref    = "https://starwars.fandom.com/wiki/Ben_Skywalker";
     private const string MaraHref   = "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker";
 
-    // ── GetImmediateFamilyAsync ───────────────────────────────────────────────
+    // ── GetImmediateRelationsAsync ───────────────────────────────────────────────
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_Luke_ReturnsParentsAndSiblingsAndChildren()
+    public async Task GetImmediateRelationsAsync_Luke_ReturnsParentsAndSiblingsAndChildren()
     {
-        var result = await Svc.GetImmediateFamilyAsync(LukeId);
+        var result = await Svc.GetImmediateRelationsAsync(LukeId);
 
         Assert.NotNull(result.Root);
         Assert.Equal(LukeId, result.Root.Id);
@@ -64,28 +63,28 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     }
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_ResolveEncodedWikiUrl_FindsShmi()
+    public async Task GetImmediateRelationsAsync_ResolveEncodedWikiUrl_FindsShmi()
     {
         // Shmi's WikiUrl is stored encoded (%2FLegends); Anakin's Parent(s) href is decoded.
         // The service must normalise both sides.
-        var result = await Svc.GetImmediateFamilyAsync(AnakinId);
+        var result = await Svc.GetImmediateRelationsAsync(AnakinId);
 
         Assert.Contains(result.Parents, p => p.Id == ShmiId);
     }
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_ResolveEncodedWikiUrl_FindsLeia()
+    public async Task GetImmediateRelationsAsync_ResolveEncodedWikiUrl_FindsLeia()
     {
         // Leia's WikiUrl is stored encoded (%2FLegends); Luke's Sibling(s) href is decoded.
-        var result = await Svc.GetImmediateFamilyAsync(LukeId);
+        var result = await Svc.GetImmediateRelationsAsync(LukeId);
 
         Assert.Contains(result.Siblings, s => s.Id == LeiaId);
     }
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_UnknownId_ReturnsEmptyDto()
+    public async Task GetImmediateRelationsAsync_UnknownId_ReturnsEmptyDto()
     {
-        var result = await Svc.GetImmediateFamilyAsync(9999);
+        var result = await Svc.GetImmediateRelationsAsync(9999);
 
         Assert.Null(result.Root);
         Assert.Empty(result.Parents);
@@ -93,9 +92,9 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     }
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_Ben_HasLukeAsParent()
+    public async Task GetImmediateRelationsAsync_Ben_HasLukeAsParent()
     {
-        var result = await Svc.GetImmediateFamilyAsync(BenId);
+        var result = await Svc.GetImmediateRelationsAsync(BenId);
 
         Assert.NotNull(result.Root);
         Assert.Equal(BenId, result.Root.Id);
@@ -105,23 +104,23 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     }
 
     [Fact]
-    public async Task GetImmediateFamilyAsync_BornAndDied_AreMapped()
+    public async Task GetImmediateRelationsAsync_BornAndDied_AreMapped()
     {
-        var result = await Svc.GetImmediateFamilyAsync(LukeId);
+        var result = await Svc.GetImmediateRelationsAsync(LukeId);
 
         Assert.Equal("19 BBY", result.Root.Born);
         Assert.Equal("",       result.Root.Died);
     }
 
-    // ── GetFamilyTreeAsync ────────────────────────────────────────────────────
+    // ── GetRelationshipGraphAsync ────────────────────────────────────────────────────
 
     [Fact]
-    public async Task GetFamilyTreeAsync_Luke_DefaultDepth_IncludesThreeGenerations()
+    public async Task GetRelationshipGraphAsync_Luke_DefaultDepth_IncludesThreeGenerations()
     {
         // depth 0: Luke
         // depth 1: Anakin, Leia, Ben, Mara
         // depth 2: Shmi (parent of Anakin)
-        var result = await Svc.GetFamilyTreeAsync(LukeId, maxDepth: 3);
+        var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 3);
 
         Assert.Equal(LukeId, result.RootId);
         Assert.Contains(LukeId,   result.Nodes.Keys);
@@ -133,9 +132,9 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     }
 
     [Fact]
-    public async Task GetFamilyTreeAsync_MaxDepth1_OnlyImmediateRelatives()
+    public async Task GetRelationshipGraphAsync_MaxDepth1_OnlyImmediateRelatives()
     {
-        var result = await Svc.GetFamilyTreeAsync(LukeId, maxDepth: 1);
+        var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 1);
 
         Assert.Contains(LukeId,   result.Nodes.Keys);
         Assert.Contains(AnakinId, result.Nodes.Keys);
@@ -148,26 +147,26 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
     }
 
     [Fact]
-    public async Task GetFamilyTreeAsync_MaxDepth0_OnlyRoot()
+    public async Task GetRelationshipGraphAsync_MaxDepth0_OnlyRoot()
     {
-        var result = await Svc.GetFamilyTreeAsync(LukeId, maxDepth: 0);
+        var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 0);
 
         Assert.Single(result.Nodes);
         Assert.Contains(LukeId, result.Nodes.Keys);
     }
 
     [Fact]
-    public async Task GetFamilyTreeAsync_UnknownRoot_ReturnsEmptyNodes()
+    public async Task GetRelationshipGraphAsync_UnknownRoot_ReturnsEmptyNodes()
     {
-        var result = await Svc.GetFamilyTreeAsync(9999, maxDepth: 3);
+        var result = await Svc.GetRelationshipGraphAsync(9999, maxDepth: 3);
 
         Assert.Empty(result.Nodes);
     }
 
     [Fact]
-    public async Task GetFamilyTreeAsync_NodeNamesAndDates_AreMapped()
+    public async Task GetRelationshipGraphAsync_NodeNamesAndDates_AreMapped()
     {
-        var result = await Svc.GetFamilyTreeAsync(LukeId, maxDepth: 1);
+        var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 1);
 
         var luke = result.Nodes[LukeId];
         Assert.Equal("Luke Skywalker", luke.Name);
@@ -176,46 +175,46 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
 
     // ── Dataset builder (public so MongoFixture can access it) ───────────────
 
-    public static List<Infobox> BuildDataset() =>
+    public static List<Page> BuildDataset() =>
     [
-        MakeCharacter(ShmiId,   ShmiUrl,   "Shmi Skywalker",       "72 BBY", "22 BBY",
+        MakeCharacterPage(ShmiId,   ShmiUrl,   "Shmi Skywalker",       "72 BBY", "22 BBY",
             parents:  [],
             siblings: [],
             children: [(AnakinHref, "Anakin Skywalker")],
             partners: []),
 
-        MakeCharacter(AnakinId, AnakinUrl, "Anakin Skywalker",     "41 BBY", "4 ABY",
+        MakeCharacterPage(AnakinId, AnakinUrl, "Anakin Skywalker",     "41 BBY", "4 ABY",
             parents:  [(ShmiHref, "Shmi Skywalker")],
             siblings: [],
             children: [(LukeHref, "Luke Skywalker"), (LeiaHref, "Leia Organa Solo")],
             partners: []),
 
-        MakeCharacter(LukeId,   LukeUrl,   "Luke Skywalker",       "19 BBY", "",
+        MakeCharacterPage(LukeId,   LukeUrl,   "Luke Skywalker",       "19 BBY", "",
             parents:  [(AnakinHref, "Anakin Skywalker")],
             siblings: [(LeiaHref,   "Leia Organa Solo")],
             children: [(BenHref,    "Ben Skywalker")],
             partners: [(MaraHref,   "Mara Jade Skywalker")]),
 
-        MakeCharacter(LeiaId,   LeiaUrl,   "Leia Organa Solo",     "19 BBY", "",
+        MakeCharacterPage(LeiaId,   LeiaUrl,   "Leia Organa Solo",     "19 BBY", "",
             parents:  [(AnakinHref, "Anakin Skywalker")],
             siblings: [(LukeHref,   "Luke Skywalker")],
             children: [],
             partners: []),
 
-        MakeCharacter(BenId,    BenUrl,    "Ben Skywalker",        "26 ABY", "",
+        MakeCharacterPage(BenId,    BenUrl,    "Ben Skywalker",        "26 ABY", "",
             parents:  [(LukeHref, "Luke Skywalker")],
             siblings: [],
             children: [],
             partners: []),
 
-        MakeCharacter(MaraId,   MaraUrl,   "Mara Jade Skywalker",  "17 BBY", "40 ABY",
+        MakeCharacterPage(MaraId,   MaraUrl,   "Mara Jade Skywalker",  "17 BBY", "40 ABY",
             parents:  [],
             siblings: [],
             children: [(BenHref, "Ben Skywalker")],
             partners: [(LukeHref, "Luke Skywalker")]),
     ];
 
-    private static Infobox MakeCharacter(
+    private static Page MakeCharacterPage(
         int id, string wikiUrl, string name, string born, string died,
         (string href, string content)[] parents,
         (string href, string content)[] siblings,
@@ -225,22 +224,29 @@ public class CharacterRelationsServiceTests(MongoFixture fixture)
         static List<HyperLink> ToLinks((string href, string content)[] items) =>
             items.Select(x => new HyperLink { Href = x.href, Content = x.content }).ToList();
 
-        return new Infobox
+        return new Page
         {
-            PageId    = id,
-            WikiUrl   = wikiUrl,
-            Template  = "Character",
-            PageTitle = name,
-            Data =
-            [
-                new() { Label = "Titles",    Values = [name],                               Links = [] },
-                new() { Label = "Born",      Values = [born],                               Links = [] },
-                new() { Label = "Died",      Values = [died],                               Links = [] },
-                new() { Label = "Parent(s)", Values = parents.Select(x => x.content).ToList(),  Links = ToLinks(parents) },
-                new() { Label = "Sibling(s)",Values = siblings.Select(x => x.content).ToList(), Links = ToLinks(siblings) },
-                new() { Label = "Children",  Values = children.Select(x => x.content).ToList(), Links = ToLinks(children) },
-                new() { Label = "Partner(s)",Values = partners.Select(x => x.content).ToList(), Links = ToLinks(partners) },
-            ],
+            PageId = id,
+            Title = name,
+            WikiUrl = wikiUrl,
+            Continuity = Continuity.Legends,
+            Sections = [],
+            Categories = [],
+            Images = [],
+            Infobox = new PageInfobox
+            {
+                Template = "https://starwars.fandom.com/wiki/Template:Character",
+                Data =
+                [
+                    new() { Label = "Titles",    Values = [name],                               Links = [] },
+                    new() { Label = "Born",      Values = [born],                               Links = [] },
+                    new() { Label = "Died",      Values = [died],                               Links = [] },
+                    new() { Label = "Parent(s)", Values = parents.Select(x => x.content).ToList(),  Links = ToLinks(parents) },
+                    new() { Label = "Sibling(s)",Values = siblings.Select(x => x.content).ToList(), Links = ToLinks(siblings) },
+                    new() { Label = "Children",  Values = children.Select(x => x.content).ToList(), Links = ToLinks(children) },
+                    new() { Label = "Partner(s)",Values = partners.Select(x => x.content).ToList(), Links = ToLinks(partners) },
+                ],
+            },
         };
     }
 }

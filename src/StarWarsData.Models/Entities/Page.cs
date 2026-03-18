@@ -36,6 +36,10 @@ public class Page
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
+    [BsonElement("universe")]
+    [BsonRepresentation(BsonType.String)]
+    public Universe Universe { get; set; } = Universe.Unknown;
+
     [BsonElement("downloadedAt")]
     public DateTime DownloadedAt { get; set; }
 }

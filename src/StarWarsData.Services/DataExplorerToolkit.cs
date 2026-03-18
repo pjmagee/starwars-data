@@ -6,29 +6,55 @@ using MongoDB.Driver;
 
 namespace StarWarsData.Services;
 
+/// <summary>
+/// AI tools for querying the starwars-raw-pages.Pages collection.
+/// All data lives in a single "Pages" collection. Each page may have an embedded "infobox" object.
+/// The infobox type (Character, Battle, Species, etc.) is determined by the infobox.Template field.
+/// These tools filter Pages by infobox type automatically using a regex on infobox.Template.
+/// </summary>
 public class DataExplorerToolkit(IMongoClient mongoClient)
 {
-    const string Database = "starwars-extracted-infoboxes";
+    const string Database = "starwars-raw-pages";
+    const string Collection = "Pages";
+    const string TimelineDatabase = "starwars-timeline-events";
+
+    IMongoCollection<BsonDocument> Pages =>
+        mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(Collection);
+
+    /// <summary>
+    /// Builds a regex filter on infobox.Template that matches the given type name at the end of the URL.
+    /// e.g. "Character" matches "https://starwars.fandom.com/wiki/Template:Character"
+    /// </summary>
+    static BsonDocument TemplateFilter(string infoboxType) =>
+        new("infobox.Template", new BsonDocument("$regex", new BsonRegularExpression($":{infoboxType}$", "i")));
+
+    static BsonDocument WithTemplate(string infoboxType, BsonDocument extra)
+    {
+        var filter = TemplateFilter(infoboxType);
+        foreach (var el in extra)
+            filter[el.Name] = el.Value;
+        return filter;
+    }
 
     [Description(
-        "Find documents in any infobox collection by matching the 'Titles' label in their Data array. "
-            + "Use this to look up any named entity (character, battle, species, planet, etc.) by name. "
+        "Search the Pages collection for entities by name. "
+            + "Queries the single 'Pages' collection in the 'starwars-raw-pages' database, "
+            + "filtering by infobox type (via infobox.Template regex) and matching the 'Titles' label in infobox.Data. "
             + "Returns id, name, continuity, and wikiUrl for each match."
     )]
-    public async Task<string> FindByTitle(
+    public async Task<string> SearchByName(
         [Description(
-            "The infobox collection to search, e.g. Character, Battle, Species, CelestialBody, War"
+            "The infobox type name to filter by. This is NOT a MongoDB collection name — it filters Pages by infobox.Template regex. "
+                + "Use list_infobox_types to discover valid values. Examples: Character, Battle, Species, CelestialBody, War, ForcePower, Food, Droid"
         )]
-            string collection,
-        [Description("The name to search for, e.g. 'Luke Skywalker', 'Battle of Yavin'")]
+            string infoboxType,
+        [Description("The entity name to search for (case-insensitive regex), e.g. 'Luke Skywalker', 'Battle of Yavin'")]
             string name,
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null,
         [Description("Max results to return, default 5")] int limit = 5
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-
         var titleMatch = new BsonDocument(
             "$elemMatch",
             new BsonDocument
@@ -38,25 +64,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             }
         );
 
-        var filter = new BsonDocument("Data", titleMatch);
+        var filter = WithTemplate(infoboxType, new BsonDocument("infobox.Data", titleMatch));
         if (continuity is not null)
-            filter["Continuity"] = continuity;
+            filter["continuity"] = continuity;
 
-        var docs = await col.Find(filter)
+        var docs = await Pages.Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
                 {
                     { "_id", 1 },
-                    { "Continuity", 1 },
-                    { "WikiUrl", 1 },
+                    { "continuity", 1 },
+                    { "wikiUrl", 1 },
                     {
                         "Data",
                         new BsonDocument(
                             "$filter",
                             new BsonDocument
                             {
-                                { "input", "$Data" },
+                                { "input", "$infobox.Data" },
                                 { "as", "d" },
                                 {
                                     "cond",
@@ -76,28 +102,34 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 .AsBsonArray.FirstOrDefault()
                 ?["Values"].AsBsonArray.FirstOrDefault()
                 ?.AsString ?? "",
-            continuity = d.Contains("Continuity") ? d["Continuity"].AsString : "",
-            wikiUrl = d.Contains("WikiUrl") ? d["WikiUrl"].AsString : "",
+            continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
+            wikiUrl = d.Contains("wikiUrl") ? d["wikiUrl"].AsString : "",
         });
 
         return JsonSerializer.Serialize(results);
     }
 
     [Description(
-        "Get all Data label values for a specific document by its integer id. "
-            + "Use this to inspect the full infobox of a known entity."
+        "Get the full infobox data for a specific page by its integer PageId (_id). "
+            + "Queries the 'Pages' collection filtered by infobox type and _id. "
+            + "Returns all infobox.Data labels and values for the entity."
     )]
-    public async Task<string> GetById(
-        [Description("The infobox collection, e.g. Character, Battle, Species")] string collection,
-        [Description("The integer _id (PageId) of the document")] int id
+    public async Task<string> GetPageById(
+        [Description(
+            "The infobox type name to filter by (e.g. Character, Battle, Species). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
+        )]
+            string infoboxType,
+        [Description("The integer _id (PageId) of the page")] int id
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-        var doc = await col.Find(new BsonDocument("_id", id)).FirstOrDefaultAsync();
+        var filter = WithTemplate(infoboxType, new BsonDocument("_id", id));
+        var doc = await Pages.Find(filter).FirstOrDefaultAsync();
         if (doc == null)
             return "{}";
 
-        var data = doc["Data"]
+        var infobox = doc["infobox"].AsBsonDocument;
+        var data = infobox["Data"]
             .AsBsonArray.OfType<BsonDocument>()
             .Select(d => new
             {
@@ -109,48 +141,46 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             new
             {
                 id = doc["_id"].AsInt32,
-                continuity = doc.Contains("Continuity") ? doc["Continuity"].AsString : "",
-                wikiUrl = doc.Contains("WikiUrl") ? doc["WikiUrl"].AsString : "",
+                continuity = doc.Contains("continuity") ? doc["continuity"].AsString : "",
+                wikiUrl = doc.Contains("wikiUrl") ? doc["wikiUrl"].AsString : "",
                 data,
             }
         );
     }
 
     [Description(
-        "Returns distinct values and counts for a given Data.Label in a collection. "
-            + "Call this before aggregating on any Data field so you can see the real value patterns."
+        "Get distinct values and counts for a specific infobox.Data label across pages of a given type. "
+            + "Queries the 'Pages' collection, groups by infobox.Data.Values for the given label. "
+            + "Use this to explore what values exist for a field before writing aggregations."
     )]
     public async Task<string> SampleLabelValues(
         [Description(
-            "The infobox collection to query, e.g. ForcePower, Character, Battle, Species"
+            "The infobox type name (e.g. ForcePower, Character, Battle, Species). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
         )]
-            string collection,
-        [Description("The Data.Label to sample, e.g. Alignment, Area, Born, Died, Homeworld")]
+            string infoboxType,
+        [Description("The infobox.Data label to sample, e.g. Alignment, Area, Born, Died, Homeworld, Origin")]
             string label,
-        [Description("Optional Continuity filter: 'Canon', 'Legends', or omit for all")]
+        [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-
-        var matchStage = new BsonDocument(
-            "$match",
-            continuity is not null
-                ? new BsonDocument { { "Continuity", continuity }, { "Data.Label", label } }
-                : new BsonDocument("Data.Label", label)
-        );
+        var matchDoc = TemplateFilter(infoboxType);
+        matchDoc["infobox.Data.Label"] = label;
+        if (continuity is not null)
+            matchDoc["continuity"] = continuity;
 
         var pipeline = new[]
         {
-            matchStage,
-            new BsonDocument("$unwind", "$Data"),
-            new BsonDocument("$match", new BsonDocument("Data.Label", label)),
-            new BsonDocument("$unwind", "$Data.Values"),
+            new BsonDocument("$match", matchDoc),
+            new BsonDocument("$unwind", "$infobox.Data"),
+            new BsonDocument("$match", new BsonDocument("infobox.Data.Label", label)),
+            new BsonDocument("$unwind", "$infobox.Data.Values"),
             new BsonDocument(
                 "$group",
                 new BsonDocument
                 {
-                    { "_id", "$Data.Values" },
+                    { "_id", "$infobox.Data.Values" },
                     { "count", new BsonDocument("$sum", 1) },
                 }
             ),
@@ -158,7 +188,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             new BsonDocument("$limit", 30),
         };
 
-        var results = await col.Aggregate<BsonDocument>(pipeline).ToListAsync();
+        var results = await Pages.Aggregate<BsonDocument>(pipeline).ToListAsync();
 
         var values = results.Select(d => new
         {
@@ -170,21 +200,22 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
-        "Find documents in a collection where a specific Data label contains a matching value. "
-            + "Useful for filtering by Homeworld, Affiliation, Species, Outcome, Place, Type, etc. "
-            + "Example: find all Characters with Homeworld='Tatooine', or Battles with Place='Yavin'."
+        "Search pages where a specific infobox.Data label contains a matching value. "
+            + "Queries the 'Pages' collection filtered by infobox type and an $elemMatch on infobox.Data. "
+            + "Example: find all Character pages with Homeworld containing 'Tatooine', or Battle pages with Place containing 'Yavin'."
     )]
-    public async Task<string> FindByLabelValue(
+    public async Task<string> SearchByProperty(
         [Description(
-            "The infobox collection, e.g. Character, Battle, CelestialBody, StarshipClass"
+            "The infobox type name (e.g. Character, Battle, CelestialBody, Food). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
         )]
-            string collection,
+            string infoboxType,
         [Description(
-            "The Data.Label to filter on, e.g. Homeworld, Affiliation(s), Place, Outcome, Type, Species"
+            "The infobox.Data label to filter on, e.g. Homeworld, Affiliation(s), Place, Outcome, Origin, Species"
         )]
             string label,
         [Description(
-            "The value to match (case-insensitive regex), e.g. 'Tatooine', 'Rebel Alliance', 'Victory'"
+            "The value to match (case-insensitive regex), e.g. 'Tatooine', 'Rebel Alliance', 'Corellia'"
         )]
             string value,
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
@@ -192,10 +223,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-
-        var filter = new BsonDocument(
-            "Data",
+        var filter = WithTemplate(infoboxType, new BsonDocument(
+            "infobox.Data",
             new BsonDocument(
                 "$elemMatch",
                 new BsonDocument
@@ -204,25 +233,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                     { "Values", new BsonDocument("$regex", new BsonRegularExpression(value, "i")) },
                 }
             )
-        );
+        ));
         if (continuity is not null)
-            filter["Continuity"] = continuity;
+            filter["continuity"] = continuity;
 
-        var docs = await col.Find(filter)
+        var docs = await Pages.Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
                 {
                     { "_id", 1 },
-                    { "Continuity", 1 },
-                    { "WikiUrl", 1 },
+                    { "continuity", 1 },
+                    { "wikiUrl", 1 },
                     {
                         "Data",
                         new BsonDocument(
                             "$filter",
                             new BsonDocument
                             {
-                                { "input", "$Data" },
+                                { "input", "$infobox.Data" },
                                 { "as", "d" },
                                 {
                                     "cond",
@@ -254,8 +283,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 matchValue = data.FirstOrDefault(x => x["Label"].AsString == label)
                     ?["Values"].AsBsonArray.Select(v => v.AsString)
                     .ToList(),
-                continuity = d.Contains("Continuity") ? d["Continuity"].AsString : "",
-                wikiUrl = d.Contains("WikiUrl") ? d["WikiUrl"].AsString : "",
+                continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
+                wikiUrl = d.Contains("wikiUrl") ? d["wikiUrl"].AsString : "",
             };
         });
 
@@ -263,21 +292,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
-        "Get the values of a specific Data label for a known document. "
-            + "Use this to read a single field from a document you already have the id for. "
-            + "Example: get the 'Affiliation(s)' or 'Children' values for a character id."
+        "Get the values of a specific infobox.Data label for a page you already know the id of. "
+            + "Queries the 'Pages' collection by _id and infobox type, returns just the requested label's values. "
+            + "Example: get 'Affiliation(s)' or 'Children' values for a character with a known PageId."
     )]
-    public async Task<string> GetLabelValues(
-        [Description("The infobox collection, e.g. Character, Battle, Species")] string collection,
-        [Description("The integer _id (PageId) of the document")] int id,
+    public async Task<string> GetPropertyValues(
         [Description(
-            "The Data.Label to retrieve, e.g. 'Affiliation(s)', 'Children', 'Parent(s)', 'Homeworld', 'Outcome'"
+            "The infobox type name (e.g. Character, Battle, Species). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
+        )]
+            string infoboxType,
+        [Description("The integer _id (PageId) of the page")] int id,
+        [Description(
+            "The infobox.Data label to retrieve, e.g. 'Affiliation(s)', 'Children', 'Parent(s)', 'Homeworld', 'Outcome'"
         )]
             string label
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-        var doc = await col.Find(new BsonDocument("_id", id))
+        var filter = WithTemplate(infoboxType, new BsonDocument("_id", id));
+        var doc = await Pages.Find(filter)
             .Project(
                 new BsonDocument(
                     "Data",
@@ -285,7 +318,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                         "$filter",
                         new BsonDocument
                         {
-                            { "input", "$Data" },
+                            { "input", "$infobox.Data" },
                             { "as", "d" },
                             {
                                 "cond",
@@ -309,26 +342,27 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
-        "Find documents in a collection whose Born, Died, or Date label contains a specific BBY/ABY year. "
-            + "Use this to find characters born/died in a specific year, or battles/events on a specific date. "
-            + "Examples: date='19 BBY', date='4 ABY', date='0 BBY'. Matches partial strings so '19 BBY' matches '19 BBY, Polis Massa'."
+        "Search pages whose Born, Died, or Date infobox.Data label contains a specific BBY/ABY year string. "
+            + "Queries the 'Pages' collection filtered by infobox type and an $elemMatch on the date label. "
+            + "Matches partial strings so '19 BBY' also matches '19 BBY, Polis Massa'."
     )]
-    public async Task<string> FindByDate(
-        [Description("The infobox collection, e.g. Character, Battle, Event, War, Duel, Campaign")]
-            string collection,
+    public async Task<string> SearchByDate(
+        [Description(
+            "The infobox type name (e.g. Character, Battle, Event, War, Duel, Campaign). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
+        )]
+            string infoboxType,
         [Description("The BBY/ABY date string to search for, e.g. '19 BBY', '4 ABY', '0 BBY'")]
             string date,
-        [Description("Which date label to search: 'Born', 'Died', or 'Date'. Defaults to 'Date'")]
+        [Description("Which infobox.Data label to search: 'Born', 'Died', or 'Date'. Defaults to 'Date'")]
             string dateLabel = "Date",
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null,
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-
-        var filter = new BsonDocument(
-            "Data",
+        var filter = WithTemplate(infoboxType, new BsonDocument(
+            "infobox.Data",
             new BsonDocument(
                 "$elemMatch",
                 new BsonDocument
@@ -337,25 +371,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                     { "Values", new BsonDocument("$regex", new BsonRegularExpression(date, "i")) },
                 }
             )
-        );
+        ));
         if (continuity is not null)
-            filter["Continuity"] = continuity;
+            filter["continuity"] = continuity;
 
-        var docs = await col.Find(filter)
+        var docs = await Pages.Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
                 {
                     { "_id", 1 },
-                    { "Continuity", 1 },
-                    { "WikiUrl", 1 },
+                    { "continuity", 1 },
+                    { "wikiUrl", 1 },
                     {
                         "Data",
                         new BsonDocument(
                             "$filter",
                             new BsonDocument
                             {
-                                { "input", "$Data" },
+                                { "input", "$infobox.Data" },
                                 { "as", "d" },
                                 {
                                     "cond",
@@ -387,8 +421,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 date = data.FirstOrDefault(x => x["Label"].AsString == dateLabel)
                     ?["Values"].AsBsonArray.Select(v => v.AsString)
                     .ToList(),
-                continuity = d.Contains("Continuity") ? d["Continuity"].AsString : "",
-                wikiUrl = d.Contains("WikiUrl") ? d["WikiUrl"].AsString : "",
+                continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
+                wikiUrl = d.Contains("wikiUrl") ? d["wikiUrl"].AsString : "",
             };
         });
 
@@ -396,17 +430,18 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
-        "Find documents in any collection that reference another entity by its WikiUrl in their Data links. "
-            + "Use this to find relationships — e.g. all Battles where a Character participated, "
-            + "or all Characters affiliated with an Organization."
+        "Search pages that reference a given entity by its wikiUrl in their infobox.Data links. "
+            + "Queries the 'Pages' collection filtered by infobox type and an $elemMatch on infobox.Data.Links.Href. "
+            + "Use this for cross-references — e.g. find all Battle pages that link to a specific Character's wikiUrl."
     )]
-    public async Task<string> FindRelated(
+    public async Task<string> SearchByLink(
         [Description(
-            "The collection to search for references, e.g. Battle, Character, Organization, Event"
+            "The infobox type name to search within (e.g. Battle, Character, Organization, Event). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
         )]
-            string collection,
+            string infoboxType,
         [Description(
-            "The WikiUrl of the entity to find references to, e.g. 'https://starwars.fandom.com/wiki/Luke_Skywalker/Legends'"
+            "The wikiUrl of the entity to find references to, e.g. 'https://starwars.fandom.com/wiki/Luke_Skywalker'"
         )]
             string wikiUrl,
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
@@ -414,10 +449,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var col = mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(collection);
-
-        var filter = new BsonDocument(
-            "Data",
+        var filter = WithTemplate(infoboxType, new BsonDocument(
+            "infobox.Data",
             new BsonDocument(
                 "$elemMatch",
                 new BsonDocument
@@ -440,25 +473,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                     },
                 }
             )
-        );
+        ));
         if (continuity is not null)
-            filter["Continuity"] = continuity;
+            filter["continuity"] = continuity;
 
-        var docs = await col.Find(filter)
+        var docs = await Pages.Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
                 {
                     { "_id", 1 },
-                    { "Continuity", 1 },
-                    { "WikiUrl", 1 },
+                    { "continuity", 1 },
+                    { "wikiUrl", 1 },
                     {
                         "Data",
                         new BsonDocument(
                             "$filter",
                             new BsonDocument
                             {
-                                { "input", "$Data" },
+                                { "input", "$infobox.Data" },
                                 { "as", "d" },
                                 {
                                     "cond",
@@ -479,21 +512,60 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 .FirstOrDefault()
                 ?["Values"].AsBsonArray.FirstOrDefault()
                 ?.AsString ?? "",
-            continuity = d.Contains("Continuity") ? d["Continuity"].AsString : "",
-            wikiUrl = d.Contains("WikiUrl") ? d["WikiUrl"].AsString : "",
+            continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
+            wikiUrl = d.Contains("wikiUrl") ? d["wikiUrl"].AsString : "",
         });
 
         return JsonSerializer.Serialize(results);
     }
 
+    [Description(
+        "List all distinct infobox type names from the Pages collection. "
+            + "Aggregates distinct infobox.Template values from the 'starwars-raw-pages.Pages' collection and returns sanitized names. "
+            + "Use this to discover what infoboxType values are valid for other tools (e.g. Character, Battle, Species, Food, Droid)."
+    )]
+    public async Task<string> ListInfoboxTypes()
+    {
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
+        };
+        var cursor = await Pages.Aggregate<BsonDocument>(pipeline).ToListAsync();
+        var names = cursor
+            .Select(d => d["_id"].IsBsonNull ? null : d["_id"].AsString)
+            .Where(n => !string.IsNullOrWhiteSpace(n))
+            .Select(n => RecordService.SanitizeTemplateName(n!))
+            .Where(n => n != "Unknown")
+            .Distinct()
+            .OrderBy(x => x)
+            .ToList();
+        return JsonSerializer.Serialize(names);
+    }
+
+    [Description(
+        "List all timeline event category names from the 'starwars-timeline-events' database. "
+            + "Each category is a MongoDB collection name in that database (e.g. 'Battle', 'Character', 'War'). "
+            + "Use this before render_timeline to discover valid category names."
+    )]
+    public async Task<string> ListTimelineCategories()
+    {
+        var db = mongoClient.GetDatabase(TimelineDatabase);
+        var cursor = await db.ListCollectionNamesAsync();
+        var names = await cursor.ToListAsync();
+        return JsonSerializer.Serialize(names.OrderBy(x => x));
+    }
+
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
-            AIFunctionFactory.Create(FindByTitle, "find_by_title"),
-            AIFunctionFactory.Create(GetById, "get_by_id"),
-            AIFunctionFactory.Create(GetLabelValues, "get_label_values"),
-            AIFunctionFactory.Create(FindByLabelValue, "find_by_label_value"),
-            AIFunctionFactory.Create(FindByDate, "find_by_date"),
-            AIFunctionFactory.Create(FindRelated, "find_related"),
-            AIFunctionFactory.Create(SampleLabelValues, "sample_label_values"),
+            AIFunctionFactory.Create(SearchByName, "search_pages_by_name"),
+            AIFunctionFactory.Create(GetPageById, "get_page_by_id"),
+            AIFunctionFactory.Create(GetPropertyValues, "get_page_property"),
+            AIFunctionFactory.Create(SearchByProperty, "search_pages_by_property"),
+            AIFunctionFactory.Create(SearchByDate, "search_pages_by_date"),
+            AIFunctionFactory.Create(SearchByLink, "search_pages_by_link"),
+            AIFunctionFactory.Create(SampleLabelValues, "sample_property_values"),
+            AIFunctionFactory.Create(ListInfoboxTypes, "list_infobox_types"),
+            AIFunctionFactory.Create(ListTimelineCategories, "list_timeline_categories"),
         ];
 }

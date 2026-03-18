@@ -17,10 +17,4 @@ public class PageInfobox
 
     [BsonElement]
     public List<InfoboxProperty> Data { get; set; } = [];
-
-    [BsonElement]
-    public List<Relationship> Relationships { get; set; } = [];
-
-    [BsonIgnore]
-    public bool ShowRelationships { get; set; } = false;
 }

@@ -83,46 +83,7 @@ else
                     }
                 </MudTd>
             }
-            <MudTh>
-                @if (context.Relationships.Any())
-                {
-                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context))">@(context.ShowRelationships ? "Hide" : "Show")</MudButton>    
-                }
-            </MudTh>
         </RowTemplate>
-        <ChildRowContent>
-            @if (context.ShowRelationships)
-            {
-                <MudTr>
-                    <MudTd colspan="@(DynamicHeaders.Count() + 4)">
-                        <MudCard Elevation="0">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudText Typo="Typo.body1">Mentioned</MudText>
-                                </CardHeaderContent>
-                            </MudCardHeader>
-                            <MudCardContent Class="pa-0">
-                                <MudTable 
-                                    Items="@context.Relationships" 
-                                    Context="Relationship"
-                                    Hover="true"
-                                    Breakpoint="Breakpoint.Sm" 
-                                    Elevation="0">
-                                    <HeaderContent>
-                                        <MudTh>Page</MudTh>
-                                        <MudTh>Template</MudTh>
-                                    </HeaderContent>
-                                    <RowTemplate>
-                                        <MudTd DataLabel="Page">@Relationship.PageTitle</MudTd>
-                                        <MudTd DataLabel="Template">@Relationship.Template</MudTd>
-                                    </RowTemplate>
-                                </MudTable>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudTd>
-                </MudTr>
-            }
-        </ChildRowContent>
         <NoRecordsContent>
             <MudText>No matching records found</MudText>
         </NoRecordsContent>
@@ -157,11 +118,6 @@ else
                 }
             }
         }
-    }
-
-    private void ShowBtnPress(Infobox record)
-    {
-        record.ShowRelationships = !record.ShowRelationships;
     }
 
     protected override async Task OnInitializedAsync()

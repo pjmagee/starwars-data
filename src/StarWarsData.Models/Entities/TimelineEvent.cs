@@ -48,6 +48,9 @@ public class TimelineEvent : IComparable<TimelineEvent>
     [BsonElement("Continuity")]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
+    [BsonElement("Universe")]
+    public Universe Universe { get; set; } = Universe.Unknown;
+
     public int CompareTo(TimelineEvent? other)
     {
         if (other is null)

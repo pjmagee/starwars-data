@@ -12,9 +12,6 @@ public class MongoDefinitions
             "Data.Links.Href",
             new BsonRegularExpression(new Regex("_(ABY|BBY)"))
         );
-        ExcludeRelationships = Builders<BsonDocument>.Projection.Exclude(doc =>
-            doc["Relationships"]
-        );
         DataLinksContentYear = Builders<BsonDocument>.Filter.Regex(
             "Data.Links.Content",
             new BsonRegularExpression(new Regex(".*\\s+(ABY|BBY)"))
@@ -25,5 +22,5 @@ public class MongoDefinitions
 
     public FilterDefinition<BsonDocument> DataLinksHrefYear { get; }
 
-    public ProjectionDefinition<BsonDocument> ExcludeRelationships { get; }
+
 }

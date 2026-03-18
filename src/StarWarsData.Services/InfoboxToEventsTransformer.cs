@@ -8,8 +8,8 @@ namespace StarWarsData.Services;
 public class InfoboxToEventsTransformer
 {
     readonly YearHelper _yearHelper;
-    readonly ILogger<InfoboxToEventsTransformer> _logger; // Added logger
-    readonly TemplateHelper _templateHelper; // Added TemplateHelper
+    readonly ILogger<InfoboxToEventsTransformer> _logger;
+    readonly TemplateHelper _templateHelper;
 
     public InfoboxToEventsTransformer(
         ILogger<InfoboxToEventsTransformer> logger,
@@ -22,37 +22,42 @@ public class InfoboxToEventsTransformer
         _templateHelper = templateHelper;
     }
 
-    // Change the return type to IEnumerable<TimelineEventDocument>
-    public IEnumerable<TimelineEvent> Transform(Infobox r)
+    public IEnumerable<TimelineEvent> Transform(Page page)
     {
-        foreach (var data in r.Data)
-        {
-            foreach (var link in data.Links.Where(_yearHelper.IsValidLink))
-            {
-                var year = ParseYear(link.Content); // Get nullable year
+        if (page.Infobox == null) yield break;
 
-                // Skip if year parsing failed
+        var template = page.Infobox.Template ?? "Unknown";
+        var title = page.Title;
+        var imageUrl = page.Infobox.ImageUrl;
+        var data = page.Infobox.Data;
+
+        foreach (var prop in data)
+        {
+            foreach (var link in prop.Links.Where(_yearHelper.IsValidLink))
+            {
+                var year = ParseYear(link.Content);
+
                 if (year == null)
                 {
-                    // Removed trailing period from log message again
                     _logger.LogWarning(
                         "Could not parse year from link content '{LinkContent}' for page '{PageTitle}'. Skipping this event",
                         link.Content,
-                        r.PageTitle
+                        title
                     );
                     continue;
                 }
 
                 yield return new TimelineEvent
                 {
-                    Title = r.PageTitle,
-                    DateEvent = GetDateEvent(data),
+                    Title = title,
+                    DateEvent = GetDateEvent(prop),
                     Demarcation = GetDemarcation(link),
                     Year = year.Value,
-                    Template = r.Template,
-                    ImageUrl = r.ImageUrl,
-                    Properties = r.Data,
-                    Continuity = r.Continuity,
+                    Template = template,
+                    ImageUrl = imageUrl,
+                    Properties = data,
+                    Continuity = page.Continuity,
+                    Universe = page.Universe,
                 };
             }
         }
@@ -70,13 +75,11 @@ public class InfoboxToEventsTransformer
             _ => data.Label,
         };
 
-    // Updated to return float? and use TryParse
     float? ParseYear(string text)
     {
         var yearString = new String(
             text.Split(' ', '-')[0].Where(c => !char.IsLetter(c)).ToArray()
         );
-        // Use InvariantCulture for consistent parsing regardless of system locale
         if (
             float.TryParse(
                 yearString,
@@ -88,7 +91,7 @@ public class InfoboxToEventsTransformer
         {
             return result;
         }
-        _logger.LogWarning("Failed to parse year from text: {Text}", text); // Added logging for parse failure
-        return null; // Return null if parsing fails
+        _logger.LogWarning("Failed to parse year from text: {Text}", text);
+        return null;
     }
 }

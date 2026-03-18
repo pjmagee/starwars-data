@@ -1,0 +1,66 @@
+@inject IHttpClientFactory HttpClientFactory
+
+<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+    <MudTable @ref="_table" T="Infobox" ServerData="ServerReload" Dense="true" Hover="true" Striped="true" Bordered="true"
+              RowsPerPage="Descriptor.PageSize">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            @foreach (var field in Descriptor.Fields)
+            {
+                <MudTh>@field</MudTh>
+            }
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.PageTitle</MudTd>
+            @foreach (var field in Descriptor.Fields)
+            {
+                <MudTd DataLabel="@field">@GetFieldValue(context, field)</MudTd>
+            }
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public TableDescriptor Descriptor { get; set; } = null!;
+
+    private MudTable<Infobox>? _table;
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    private async Task<TableData<Infobox>> ServerReload(TableState state, CancellationToken ct)
+    {
+        var encoded = Uri.EscapeDataString(Descriptor.Collection);
+        var url = $"Categories/{encoded}?Page={state.Page + 1}&PageSize={state.PageSize}";
+
+        if (!string.IsNullOrWhiteSpace(Descriptor.Search))
+            url += $"&Search={Uri.EscapeDataString(Descriptor.Search)}";
+
+        var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);
+
+        return new TableData<Infobox>
+        {
+            TotalItems = result?.Total ?? 0,
+            Items = result?.Items ?? [],
+        };
+    }
+
+    private static string GetFieldValue(Infobox infobox, string label)
+    {
+        var prop = infobox.Data.FirstOrDefault(d =>
+            string.Equals(d.Label, label, StringComparison.OrdinalIgnoreCase));
+
+        if (prop is null) return "—";
+
+        // Many infobox properties store data as Links (hyperlinks) rather than plain Values.
+        // Combine both sources, preferring link content text.
+        var linkTexts = prop.Links?.Select(l => l.Content).Where(c => !string.IsNullOrEmpty(c)).ToList() ?? [];
+        var plainValues = prop.Values?.Where(v => !string.IsNullOrEmpty(v) && !linkTexts.Contains(v, StringComparer.OrdinalIgnoreCase)).ToList() ?? [];
+
+        var all = linkTexts.Concat(plainValues).ToList();
+        return all.Count > 0 ? string.Join(", ", all) : "—";
+    }
+}

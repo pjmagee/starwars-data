@@ -5,23 +5,31 @@ namespace StarWarsData.Models.Queries;
 
 public sealed record UserPrompt(string Question, string? Continuity = null);
 
+// ── Chart subtypes (Bar, Line, Pie, etc.) ──────────────────────────────
+
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AskChartType
 {
     [Description("Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series.")]
     Bar,
+
     [Description("Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Donut,
+
     [Description("Line chart — trends over an ordinal axis. Requires xAxisLabels and series.")]
     Line,
+
     [Description("Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Pie,
+
     [Description("Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series.")]
     StackedBar,
+
     [Description("Time series chart — data points with real ISO dates. Requires timeSeries.")]
     TimeSeries,
-    [Description("Family tree — renders a character relationship diagram. Requires familyTreeCharacterId (integer PageId) and familyTreeCharacterName.")]
-    FamilyTree,
+
+    [Description("Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series.")]
+    Radar,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -31,30 +39,64 @@ public enum TimeSeriesDisplayType
     Area,
 }
 
-public class AskResponse
+// ── Component Descriptors ──────────────────────────────────────────────
+
+[Description("Table component configuration — the frontend fetches paginated data from the API")]
+public class TableDescriptor
 {
-    [JsonPropertyName("chart")]
-    public AskChart? Chart { get; set; }
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the table")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("collection")]
+    [Description("The MongoDB collection to query (e.g. Character, Battle, Planet, ForcePower)")]
+    public string Collection { get; set; } = string.Empty;
+
+    [JsonPropertyName("fields")]
+    [Description("Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields.")]
+    public List<string> Fields { get; set; } = [];
+
+    [JsonPropertyName("search")]
+    [Description("Optional text search to filter results")]
+    public string? Search { get; set; }
+
+    [JsonPropertyName("pageSize")]
+    [Description("Number of rows per page (default 25)")]
+    public int PageSize { get; set; } = 25;
 }
 
-[Description("A chart to render")]
-public class AskChart
+[Description("Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results")]
+public class DataTableDescriptor
 {
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the table")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("columns")]
+    [Description("Column headers for the table")]
+    public List<string> Columns { get; set; } = [];
+
+    [JsonPropertyName("rows")]
+    [Description("Row data — each row is a list of string values matching the columns order")]
+    public List<List<string>> Rows { get; set; } = [];
+}
+
+[Description("Chart component configuration — data is embedded since aggregations are unique per query")]
+public class ChartDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the chart")]
+    public string Title { get; set; } = string.Empty;
+
     [JsonPropertyName("chartType")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
     [Description("The type of chart to render")]
-    public AskChartType AskChartType { get; set; }
+    public AskChartType ChartType { get; set; }
 
     [JsonPropertyName("timeSeriesDisplayType")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    [Description(
-        "The type of time series chart to render (line or area) and only used when ChartType == TimeSeries"
-    )]
+    [Description("Line or Area display, only used when chartType == TimeSeries")]
     public TimeSeriesDisplayType? TimeSeriesDisplayType { get; set; }
-
-    [JsonPropertyName("title")]
-    [Description("The title of the chart")]
-    public string? Title { get; set; }
 
     [JsonPropertyName("xAxisLabels")]
     [Description("Category labels for X-axis (bar, line, stacked)")]
@@ -65,27 +107,81 @@ public class AskChart
     public List<string>? Labels { get; set; }
 
     [JsonPropertyName("series")]
-    [Description("Numeric series. For Bar/Line/StackedBar: each series has one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry.")]
-    public List<AskChartSeries>? Series { get; set; }
+    [Description("Numeric series. For Bar/Line/StackedBar: one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry.")]
+    public List<ChartSeries>? Series { get; set; }
 
     [JsonPropertyName("timeSeries")]
     [Description("Time-series data: date + value pairs, per series")]
-    public List<AskTimeSeriesChartSeries>? TimeSeries { get; set; }
+    public List<TimeSeriesChartSeries>? TimeSeries { get; set; }
 
     [JsonPropertyName("options")]
-    public AskChartOptions? Options { get; set; }
-
-    [JsonPropertyName("familyTreeCharacterId")]
-    [Description("The character's integer _id (PageId) from MongoDB. Must be an integer, not a string. Only used when chartType == FamilyTree.")]
-    public int? FamilyTreeCharacterId { get; set; }
-
-    [JsonPropertyName("familyTreeCharacterName")]
-    [Description("The character's PageTitle from MongoDB. Only used when chartType == FamilyTree.")]
-    public string? FamilyTreeCharacterName { get; set; }
+    public ChartOptions? Options { get; set; }
 }
 
-[Description("A series of data for a chart")]
-public class AskChartSeries
+[Description("Relationship graph component configuration — the frontend fetches graph data from the API")]
+public class GraphDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the graph")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("rootEntityId")]
+    [Description("The entity's integer _id (PageId) from MongoDB")]
+    public int RootEntityId { get; set; }
+
+    [JsonPropertyName("rootEntityName")]
+    [Description("The entity's PageTitle from MongoDB")]
+    public string RootEntityName { get; set; } = string.Empty;
+
+    [JsonPropertyName("collection")]
+    [Description("The MongoDB collection to query (default Character)")]
+    public string Collection { get; set; } = "Character";
+
+    [JsonPropertyName("maxDepth")]
+    [Description("How many generations to traverse (default 3)")]
+    public int MaxDepth { get; set; } = 3;
+}
+
+[Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]
+public class TimelineDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the timeline")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("categories")]
+    [Description("Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"]). Use available-categories to discover valid names.")]
+    public List<string> Categories { get; set; } = [];
+
+    [JsonPropertyName("pageSize")]
+    [Description("Number of year groups per page (default 15)")]
+    public int PageSize { get; set; } = 15;
+
+    [JsonPropertyName("yearFrom")]
+    [Description("Start of year range filter (e.g. 41 for 41 BBY)")]
+    public float? YearFrom { get; set; }
+
+    [JsonPropertyName("yearFromDemarcation")]
+    [Description("BBY or ABY for the start year")]
+    public string? YearFromDemarcation { get; set; }
+
+    [JsonPropertyName("yearTo")]
+    [Description("End of year range filter (e.g. 4 for 4 ABY)")]
+    public float? YearTo { get; set; }
+
+    [JsonPropertyName("yearToDemarcation")]
+    [Description("BBY or ABY for the end year")]
+    public string? YearToDemarcation { get; set; }
+
+    [JsonPropertyName("search")]
+    [Description("Optional text to filter timeline event titles")]
+    public string? Search { get; set; }
+}
+
+// ── Chart data types ───────────────────────────────────────────────────
+
+[Description("A named series of numeric data")]
+public class ChartSeries
 {
     [JsonPropertyName("name")]
     [Description("The name of the series")]
@@ -96,8 +192,8 @@ public class AskChartSeries
     public List<double> Data { get; set; } = [];
 }
 
-[Description("A series of data for a time series chart")]
-public class AskTimeSeriesChartSeries
+[Description("A named series of time-series data")]
+public class TimeSeriesChartSeries
 {
     [JsonPropertyName("name")]
     [Description("The name of the series")]
@@ -105,11 +201,11 @@ public class AskTimeSeriesChartSeries
 
     [JsonPropertyName("data")]
     [Description("The data points for the series")]
-    public List<TimeSeriesDataPointDto> Data { get; set; } = [];
+    public List<TimeSeriesDataPoint> Data { get; set; } = [];
 }
 
 [Description("A data point for a time series chart")]
-public class TimeSeriesDataPointDto
+public class TimeSeriesDataPoint
 {
     [JsonPropertyName("x")]
     [Description("The date of the data point")]
@@ -120,17 +216,11 @@ public class TimeSeriesDataPointDto
     public double Y { get; set; }
 }
 
-public class AskChartOptions
+public class ChartOptions
 {
-    /// <summary>
-    /// e.g. ["#FF6384","#36A2EB",…] or Material colors
-    /// </summary>
     [JsonPropertyName("chartPalette")]
     public List<string>? ChartPalette { get; set; }
 
-    /// <summary>
-    /// for stacking bar/area charts
-    /// </summary>
     [JsonPropertyName("stacked")]
     public bool? Stacked { get; set; }
 }

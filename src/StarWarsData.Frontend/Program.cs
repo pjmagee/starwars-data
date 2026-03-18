@@ -13,7 +13,7 @@ builder
     .AddHttpContextAccessor()
     .AddScoped<EndpointService>()
     .AddScoped<NavigationService>()
-    .AddSingleton<ContinuityService>();
+    .AddSingleton<GlobalFilterService>();
 
 // TODO: Login
 //.AddTransient<AuthorizationHandler>();

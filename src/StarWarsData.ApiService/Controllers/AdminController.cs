@@ -1,30 +1,24 @@
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
-using Hangfire.Storage;
 
 namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AdminController : ControllerBase
-{    readonly ILogger<AdminController> _logger;
-    readonly InfoboxExtractor _infoboxExtractor;
-    readonly InfoboxRelationshipProcessor _infoboxRelationshipProcessor;
+{
+    readonly ILogger<AdminController> _logger;
     readonly PageDownloader _pageDownloader;
     readonly RecordService _recordService;
 
     public AdminController(
         ILogger<AdminController> logger,
-        InfoboxExtractor infoboxExtractor,
-        InfoboxRelationshipProcessor infoboxRelationshipProcessor,
         PageDownloader pageDownloader,
         RecordService recordService
     )
     {
         _logger = logger;
-        _infoboxExtractor = infoboxExtractor;
-        _infoboxRelationshipProcessor = infoboxRelationshipProcessor;
         _pageDownloader = pageDownloader;
         _recordService = recordService;
     }
@@ -71,14 +65,12 @@ public class AdminController : ControllerBase
     [HttpGet("jobs")]
     public ActionResult GetAllJobs()
     {
-        // Redirect to Hangfire dashboard for job management
         return Redirect("/hangfire");
     }
 
     [HttpGet("jobs/{id:guid}")]
     public ActionResult GetJob(Guid id)
     {
-        // Redirect to Hangfire dashboard for specific job
         return Redirect($"/hangfire/jobs/details/{id}");
     }
 
@@ -97,14 +89,17 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("download/page")]
-    public async Task<ActionResult<string>> DownloadSinglePage([FromQuery] string title, CancellationToken cancellationToken)
+    public async Task<ActionResult<string>> DownloadSinglePage(
+        [FromQuery] string title,
+        CancellationToken cancellationToken
+    )
     {
         if (string.IsNullOrWhiteSpace(title))
             return BadRequest(new { error = "title query parameter is required" });
         try
         {
             await _pageDownloader.DownloadAndSavePageAsync(title, cancellationToken);
-            return Ok(new { message = $"Page '{title}' downloaded and infobox extracted." });
+            return Ok(new { message = $"Page '{title}' downloaded." });
         }
         catch (Exception ex)
         {
@@ -118,25 +113,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(PageDownloader), nameof(PageDownloader.SyncToMongoDbAsync)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(PageDownloader),
+                    nameof(PageDownloader.SyncToMongoDbAsync)
+                )
+            )
                 return Conflict(new { error = "Page download job already running" });
-            var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.SyncToMongoDbAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("process/infobox-relationships")]
-    public ActionResult<string> ProcessInfoboxRelationships()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(InfoboxRelationshipProcessor), nameof(InfoboxRelationshipProcessor.CreateRelationshipsAsync)))
-                return Conflict(new { error = "Infobox relationship processing already running" });
-            var jobId = BackgroundJob.Enqueue<InfoboxRelationshipProcessor>(s => s.CreateRelationshipsAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<PageDownloader>(s =>
+                s.SyncToMongoDbAsync(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -150,9 +136,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.ProcessEmbeddingsAsync)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.ProcessEmbeddingsAsync)
+                )
+            )
                 return Conflict(new { error = "Embeddings creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.ProcessEmbeddingsAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.ProcessEmbeddingsAsync(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -166,41 +159,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteOpenAiEmbeddingsAsync)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.DeleteOpenAiEmbeddingsAsync)
+                )
+            )
                 return Conflict(new { error = "Embeddings deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/delete-infobox-collections")]
-    public ActionResult<string> EnqueueDeleteCollections()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteInfoboxCollections)))
-                return Conflict(new { error = "Infobox collections deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteInfoboxCollections(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/delete-page-infobox-collections")]
-    public ActionResult<string> EnqueueDeletePageInfoboxCollections()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeletePageInfoboxCollections)))
-                return Conflict(new { error = "Extracted infobox collections deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeletePageInfoboxCollections(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -214,9 +182,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeletePagesCollections)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.DeletePagesCollections)
+                )
+            )
                 return Conflict(new { error = "Pages deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeletePagesCollections(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.DeletePagesCollections(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -230,41 +205,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteTimelineCollections)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.DeleteTimelineCollections)
+                )
+            )
                 return Conflict(new { error = "Timeline events deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteTimelineCollections(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/add-character-relationships")]
-    public ActionResult<string> EnqueueAddCharacterRelationships()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.AddCharacterRelationshipsAsync)))
-                return Conflict(new { error = "Character relationships job already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.AddCharacterRelationshipsAsync());
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("extract/infoboxes")]
-    public ActionResult<string> ExtractInfoboxes()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(InfoboxExtractor), nameof(InfoboxExtractor.ExtractInfoboxesAsync)))
-                return Conflict(new { error = "Infobox extraction already running" });
-            var jobId = BackgroundJob.Enqueue<InfoboxExtractor>(s => s.ExtractInfoboxesAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.DeleteTimelineCollections(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -278,9 +228,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateCategorizedTimelineEvents)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.CreateCategorizedTimelineEvents)
+                )
+            )
                 return Conflict(new { error = "Categorized timeline events job already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateCategorizedTimelineEvents(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.CreateCategorizedTimelineEvents(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -294,9 +251,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateVectorIndexesAsync)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.CreateVectorIndexesAsync)
+                )
+            )
                 return Conflict(new { error = "Vector index creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateVectorIndexesAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.CreateVectorIndexesAsync(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -310,9 +274,16 @@ public class AdminController : ControllerBase
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteVectorIndexesAsync)))
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.DeleteVectorIndexesAsync)
+                )
+            )
                 return Conflict(new { error = "Vector index deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteVectorIndexesAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.DeleteVectorIndexesAsync(CancellationToken.None)
+            );
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)

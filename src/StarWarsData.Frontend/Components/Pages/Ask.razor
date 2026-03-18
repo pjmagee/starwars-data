@@ -1,8 +1,7 @@
 @page "/"
 @page "/ask"
 @inject IHttpClientFactory HttpClientFactory
-@inject ContinuityService ContinuityService
-@using StarWarsData.Frontend.Models
+@inject GlobalFilterService GlobalFilterService
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
@@ -13,12 +12,31 @@
         Ask any question about the Star Wars universe and get charts, timelines, or family trees powered by AI.
     </MudText>
 
+    @* ── Visualization mode pills ── *@
+    <MudGrid Spacing="2" Class="mb-4">
+        @foreach (var mode in _modes)
+        {
+            var m = mode;
+            var selected = _selectedMode == m.Key;
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Outlined="true"
+                          Class="@($"pa-3 cursor-pointer mud-clickable d-flex flex-column align-center gap-1{(selected ? " mud-border-primary" : "")}")"
+                          Style="@(selected ? $"border-color: var(--mud-palette-{m.Color.ToString().ToLower()}); border-width: 2px;" : "")"
+                          @onclick="() => ToggleMode(m.Key)">
+                    <MudIcon Icon="@m.Icon" Color="@(selected ? m.Color : Color.Default)" />
+                    <MudText Typo="Typo.body2" Align="Align.Center" Style="font-weight:600">@m.Label</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center">@m.Description</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
     <EditForm Model="_model" OnValidSubmit="Load">
         <DataAnnotationsValidator />
         <MudGrid Spacing="2">
             <MudItem xs="12" sm="10">
                 <MudTextField @bind-Value="_model.Prompt"
-                              Label="Ask a question…"
+                              Label="@(_selectedMode is null ? "Ask anything about Star Wars…" : SelectedMode!.Placeholder)"
                               Variant="Variant.Outlined"
                               Required="true"
                               Immediate="true"
@@ -42,9 +60,11 @@
 
     @if (!_loading && !_hasResult && _turns.Count == 0)
     {
-        <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">Example questions</MudText>
+        <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">
+            @(_selectedMode is null ? "Try asking" : $"{SelectedMode!.Label} examples")
+        </MudText>
         <MudGrid Spacing="2">
-            @foreach (var example in _examples)
+            @foreach (var example in FilteredExamples)
             {
                 var prompt = example;
                 <MudItem xs="12" sm="6" md="4">
@@ -112,30 +132,31 @@
         <MudAlert Severity="Severity.Error" Class="mt-4">@_error</MudAlert>
     }
 
-    @if (!_loading && _chartFragment is not null)
+    @* ── AI-configured components ── *@
+
+    @if (!_loading && _chartDescriptor is not null)
     {
-        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-            @if (_chartTitle is not null)
-            {
-                <MudText Typo="Typo.h6" Class="mb-4">@_chartTitle</MudText>
-            }
-            @_chartFragment
-        </MudPaper>
+        <AskChartView Descriptor="_chartDescriptor" />
     }
 
-    @if (!_loading && _treeNodes is not null)
+    @if (!_loading && _graphDescriptor is not null)
     {
-        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-            @if (_chartTitle is not null)
-            {
-                <MudText Typo="Typo.h6" Class="mb-4">@_chartTitle</MudText>
-            }
-            <div style="width:100%;height:650px;">
-                <CascadingValue Value="_treeDiagram" IsFixed="true">
-                    <DiagramCanvas></DiagramCanvas>
-                </CascadingValue>
-            </div>
-        </MudPaper>
+        <AskGraphView Descriptor="_graphDescriptor" />
+    }
+
+    @if (!_loading && _tableDescriptor is not null)
+    {
+        <AskTableView Descriptor="_tableDescriptor" />
+    }
+
+    @if (!_loading && _dataTableDescriptor is not null)
+    {
+        <AskDataTableView Descriptor="_dataTableDescriptor" />
+    }
+
+    @if (!_loading && _timelineDescriptor is not null)
+    {
+        <AskTimelineView Descriptor="_timelineDescriptor" />
     }
 
 </MudContainer>
@@ -151,32 +172,106 @@
     }
 
     private AskModel _model = new();
-    private RenderFragment? _chartFragment;
     private bool _loading;
     private bool _hasResult;
     private string? _error;
-    private string? _chartTitle;
     private readonly List<Turn> _turns = [];
     private readonly Dictionary<string, string> _toolCallNames = [];
     private readonly Dictionary<string, Turn> _toolCallTurns = [];
     private Turn? _currentAssistantTurn;
 
-    // tree diagram state
-    private BlazorDiagram _treeDiagram = null!;
-    private Dictionary<int, FamilyNodeDto>? _treeNodes;
-    private readonly Dictionary<int, NodeModel> _treeNodeModels = new();
+    // descriptor results from AI
+    private TableDescriptor? _tableDescriptor;
+    private DataTableDescriptor? _dataTableDescriptor;
+    private ChartDescriptor? _chartDescriptor;
+    private GraphDescriptor? _graphDescriptor;
+    private TimelineDescriptor? _timelineDescriptor;
 
-    private readonly string[] _examples =
+    private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
+
+    private record VisualizationMode(
+        string Key, string Label, string Description, string Placeholder,
+        string Icon, Color Color, string[] Examples);
+
+    private static readonly VisualizationMode[] _modes =
     [
-        "How many wars happened between 0 ABY and 200 ABY?",
-        "How many characters had a lifespan between 200 and 300 years old?",
-        "How many light side Force powers are there vs dark side?",
-        "Show the family tree of Luke Skywalker",
-        "Show the family tree of Han Solo",
-        "How many battles occurred per era?",
-        "What species have the longest average lifespans?",
-        "How many characters were born in each century BBY?",
+        new("chart", "Chart", "Bar, line, pie, donut, radar — aggregate and compare data visually",
+            "e.g. How many battles per era?",
+            Icons.Material.Filled.BarChart, Color.Primary,
+            [
+                "How many light side Force powers are there vs dark side?",
+                "How many battles occurred per era?",
+                "What species have the longest average lifespans?",
+                "How many characters were born in each century BBY?",
+                "Compare the number of Canon vs Legends starship classes",
+                "What are the top 10 homeworlds by number of characters?",
+            ]),
+        new("graph", "Graph", "Family trees and relationship networks between entities",
+            "e.g. Show the family tree of Anakin Skywalker",
+            Icons.Material.Filled.AccountTree, Color.Secondary,
+            [
+                "Show the family tree of Luke Skywalker",
+                "Show the family tree of Padmé Amidala",
+                "Show the relationships of Darth Sidious",
+                "Show the family tree of Jango Fett",
+            ]),
+        new("table", "Table", "Browse and search paginated collections by type",
+            "e.g. Show me all planets in the Outer Rim",
+            Icons.Material.Filled.TableChart, Color.Tertiary,
+            [
+                "Show me all Sith Lords and their homeworlds",
+                "List all bounty hunters and their species",
+                "Show me all planets in the Outer Rim",
+                "List all starfighter models and their manufacturers",
+                "Show me all droids and their affiliations",
+            ]),
+        new("data_table", "Data Table", "Custom query results — the AI fetches and returns the actual rows",
+            "e.g. What food comes from Corellia?",
+            Icons.Material.Filled.GridOn, Color.Info,
+            [
+                "What food comes from Corellia?",
+                "Which characters died at the Battle of Yavin?",
+                "What weapons were used by Mandalorians?",
+                "Which planets have rings?",
+                "What creatures are native to Dagobah?",
+            ]),
+        new("timeline", "Timeline", "Temporal events scoped by era, date range, or entity lifetime",
+            "e.g. Timeline of battles during the Clone Wars",
+            Icons.Material.Filled.Timeline, Color.Warning,
+            [
+                "Show a timeline of major battles during the Clone Wars",
+                "What events happened between 20 BBY and 0 BBY?",
+                "Show a timeline of Anakin Skywalker's life",
+                "What campaigns took place during the Galactic Civil War?",
+                "Show a timeline of missions during the Age of the Empire",
+            ]),
     ];
+
+    private string? _selectedMode;
+    private VisualizationMode? SelectedMode => _selectedMode is null ? null : _modes.FirstOrDefault(m => m.Key == _selectedMode);
+
+    private string[] _randomExamples = PickRandomExamples();
+
+    private static string[] PickRandomExamples()
+    {
+        var all = _modes.SelectMany(m => m.Examples).ToArray();
+        return Random.Shared.GetItems(all, 6);
+    }
+
+    private void ToggleMode(string key)
+    {
+        _selectedMode = _selectedMode == key ? null : key;
+    }
+
+    private string[] FilteredExamples
+    {
+        get
+        {
+            if (SelectedMode is not null)
+                return SelectedMode.Examples;
+            return _randomExamples;
+        }
+    }
 
     public class AskModel
     {
@@ -185,19 +280,6 @@
     }
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
-
-    protected override void OnInitialized()
-    {
-        _treeDiagram = new BlazorDiagram(new BlazorDiagramOptions
-        {
-            AllowMultiSelection = false,
-            AllowPanning = true,
-            Zoom = { Enabled = true },
-        });
-        _treeDiagram.RegisterComponent<DiagramNode, TreeNodeWidget>();
-    }
-
-    protected override Task OnAfterRenderAsync(bool firstRender) => Task.CompletedTask;
 
     private void UseExample(string prompt)
     {
@@ -210,13 +292,11 @@
     private async Task SubmitAsync()
     {
         _loading = true;
-        _chartFragment = null;
-        _treeNodes      = null;
-        _lastTreeResult = null;
-        _treeDiagram.Nodes.Clear();
-        _treeDiagram.Links.Clear();
-        _treeNodeModels.Clear();
-        _chartTitle = null;
+        _chartDescriptor = null;
+        _tableDescriptor = null;
+        _dataTableDescriptor = null;
+        _graphDescriptor = null;
+        _timelineDescriptor = null;
         _error = null;
         _hasResult = false;
         _turns.Clear();
@@ -225,8 +305,9 @@
         _currentAssistantTurn = null;
         StateHasChanged();
 
-        var continuity = ContinuityService.GetContinuityQueryParam() ?? "Both";
-        var userMessage = $"[CONTINUITY: {continuity}] {_model.Prompt}";
+        var continuity = GlobalFilterService.GetContinuityQueryParam() ?? "Both";
+        var modeHint = _selectedMode is not null ? $" [PREFER: {_selectedMode}]" : "";
+        var userMessage = $"[CONTINUITY: {continuity}]{modeHint} {_model.Prompt}";
         _turns.Add(new Turn(TurnRole.User) { Content = _model.Prompt, IsComplete = true });
 
         var body = new { messages = new[] { new { role = "user", content = userMessage } } };
@@ -250,8 +331,6 @@
 
             await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
             using var reader = new System.IO.StreamReader(stream);
-
-            AskChart? chart = null;
 
             while (!reader.EndOfStream && !cts.Token.IsCancellationRequested)
             {
@@ -303,17 +382,36 @@
                         {
                             var callId   = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
                             var toolName = callId is not null && _toolCallNames.TryGetValue(callId, out var n) ? n : null;
-                            if (toolName == "render_chart" && root.TryGetProperty("content", out var contentEl))
+                            if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline"
+                                && root.TryGetProperty("content", out var contentEl))
                             {
-                                if (contentEl.ValueKind == JsonValueKind.Object)
-                                    chart = JsonSerializer.Deserialize<AskChart>(contentEl.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                                else if (contentEl.ValueKind == JsonValueKind.String)
+                                var contentJson = contentEl.ValueKind == JsonValueKind.String
+                                    ? contentEl.GetString()
+                                    : contentEl.GetRawText();
+
+                                if (contentJson?.StartsWith("\"") == true)
+                                    contentJson = JsonSerializer.Deserialize<string>(contentJson);
+
+                                if (contentJson is not null)
                                 {
-                                    var inner = contentEl.GetString();
-                                    if (inner?.StartsWith("\"") == true)
-                                        inner = JsonSerializer.Deserialize<string>(inner);
-                                    if (inner is not null)
-                                        chart = JsonSerializer.Deserialize<AskChart>(inner, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                                    switch (toolName)
+                                    {
+                                        case "render_table":
+                                            _tableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_data_table":
+                                            _dataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_chart":
+                                            _chartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_graph":
+                                            _graphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_timeline":
+                                            _timelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                    }
                                 }
                             }
                             break;
@@ -343,38 +441,16 @@
                 StateHasChanged();
             }
 
-            if (chart is not null)
-            {
-                _chartTitle = chart.Title;
-                _hasResult  = true;
+            // Mark result if any descriptor was produced
+            _hasResult = _chartDescriptor is not null
+                || _graphDescriptor is not null
+                || _tableDescriptor is not null
+                || _dataTableDescriptor is not null
+                || _timelineDescriptor is not null;
 
-                if (chart.AskChartType == AskChartType.FamilyTree)
-                {
-                    if (chart.FamilyTreeCharacterId is null)
-                        _error = $"\"{chart.FamilyTreeCharacterName ?? "Character"}\" was not found in the database.";
-                    else
-                    {
-                        var result = await Http.GetFromJsonAsync<FamilyTreeResult>($"characters/{chart.FamilyTreeCharacterId.Value}/tree?maxDepth=3");
-                        if (result?.Nodes is { Count: > 0 })
-                        {
-                            _treeNodes      = result.Nodes;
-                            _lastTreeResult = result;
-                            SetupTreeDiagram(result.RootId);
-                        }
-                        else
-                        {
-                            _error = $"No family data found for \"{chart.FamilyTreeCharacterName}\".";
-                        }
-                    }
-                }
-                else
-                {
-                    _chartFragment = RenderMudChart(chart);
-                }
-            }
-            else if (_error is null && !_hasResult && _turns.All(t => t.Role != TurnRole.Assistant))
+            if (!_hasResult && _error is null && _turns.All(t => t.Role != TurnRole.Assistant))
             {
-                _error = "The AI returned no chart data. Try rephrasing your question.";
+                _error = "The AI returned no results. Try rephrasing your question.";
             }
         }
         catch (OperationCanceledException)
@@ -392,146 +468,25 @@
         }
     }
 
-    // Trim date strings like "19 BBY, Polis Massa" → "19 BBY"
-    private static string TrimDate(string s)
-    {
-        var comma = s.IndexOf(',');
-        return comma >= 0 ? s[..comma].Trim() : s.Trim();
-    }
-
-    private static List<(string Key, string Value)> NodeAttributes(FamilyNodeDto d)
-    {
-        var attrs = new List<(string, string)>();
-        if (!string.IsNullOrWhiteSpace(d.Born)) attrs.Add(("Born", TrimDate(d.Born)));
-        if (!string.IsNullOrWhiteSpace(d.Died)) attrs.Add(("Died", TrimDate(d.Died)));
-        return attrs;
-    }
-
-    private FamilyTreeResult? _lastTreeResult;
-
-    /// <summary>
-    /// Lay out the multi-gen tree using Generation values assigned by the service BFS.
-    /// Generation 0 = root row, negative = ancestor rows above, positive = descendant rows below.
-    /// </summary>
-    private void SetupTreeDiagram(int rootId)
-    {
-        _treeDiagram.Nodes.Clear();
-        _treeDiagram.Links.Clear();
-        _treeNodeModels.Clear();
-
-        if (_treeNodes is null || _treeNodes.Count == 0) return;
-
-        _treeDiagram.SuspendSorting = true;
-
-        const double nodeW = 210;
-        const double nodeH = 85;
-        const double hGap  = 40;
-        const double vGap  = 60;
-
-        // Group nodes by generation
-        var byGen = _treeNodes.Values
-            .GroupBy(n => n.Generation)
-            .OrderBy(g => g.Key)
-            .ToList();
-
-        // Compute max row width so all rows can be centred on the same axis
-        int maxInRow = byGen.Max(g => g.Count());
-        double maxRowW = maxInRow * nodeW + (maxInRow - 1) * hGap;
-
-        foreach (var genGroup in byGen)
-        {
-            var row   = genGroup.OrderBy(n => n.Name).ToList();
-            double rowW  = row.Count * nodeW + (row.Count - 1) * hGap;
-            double startX = (maxRowW - rowW) / 2.0;
-            double y      = genGroup.Key * (nodeH + vGap);
-
-            for (int i = 0; i < row.Count; i++)
-            {
-                var n  = row[i];
-                double x = startX + i * (nodeW + hGap);
-                var dn = new DiagramNode(n.Name, NodeAttributes(n),
-                    new Blazor.Diagrams.Core.Geometry.Point(x, y));
-                _treeDiagram.Nodes.Add(dn);
-                _treeNodeModels[n.Id] = dn;
-            }
-        }
-
-        // Draw edges from the result
-        if (_lastTreeResult is not null)
-        {
-            foreach (var edge in _lastTreeResult.Edges)
-            {
-                if (_treeNodeModels.TryGetValue(edge.FromId, out var from) &&
-                    _treeNodeModels.TryGetValue(edge.ToId,   out var to))
-                {
-                    _treeDiagram.Links.Add(new LinkModel(from, to));
-                }
-            }
-        }
-
-        _treeDiagram.SuspendSorting = false;
-        _treeDiagram.Refresh();
-    }
-
     private static string FriendlyToolName(string? name) => name switch
     {
-        "render_chart"        => "Rendering chart",
-        "sample_label_values" => "Sampling field values",
-        "find"                => "Querying collection",
-        "aggregate"           => "Aggregating data",
-        "count"               => "Counting documents",
-        "list_collections"    => "Listing collections",
-        "collection_schema"   => "Reading schema",
-        _                     => name ?? "Using tool",
-    };
-
-    RenderFragment RenderMudChart(AskChart spec) => builder =>
-    {
-        var seq = 0;
-        switch (spec.AskChartType)
-        {
-            case AskChartType.Bar:
-            case AskChartType.Line:
-            case AskChartType.StackedBar:
-            {
-                var chartType = spec.AskChartType == AskChartType.Bar ? ChartType.Bar
-                    : spec.AskChartType == AskChartType.Line ? ChartType.Line
-                    : ChartType.StackedBar;
-                builder.OpenComponent<MudChart<double>>(seq++);
-                builder.AddAttribute(seq++, "ChartType", chartType);
-                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double> { Name = s.Name, Data = s.Data.ToArray() }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.XAxisLabels?.ToArray() ?? []);
-                builder.AddAttribute(seq++, "Width", "100%");
-                builder.AddAttribute(seq++, "Height", "400px");
-                builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
-                builder.CloseComponent();
-                break;
-            }
-            case AskChartType.Pie:
-            case AskChartType.Donut:
-            {
-                var chartType = spec.AskChartType == AskChartType.Pie ? ChartType.Pie : ChartType.Donut;
-                builder.OpenComponent<MudChart<double>>(seq++);
-                builder.AddAttribute(seq++, "ChartType", chartType);
-                builder.AddAttribute(seq++, "ChartSeries", spec.Series?.Select(s => new ChartSeries<double> { Name = s.Name, Data = s.Data.ToArray() }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.Labels?.ToArray() ?? []);
-                builder.AddAttribute(seq++, "Width", "100%");
-                builder.AddAttribute(seq++, "Height", "400px");
-                builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
-                builder.CloseComponent();
-                break;
-            }
-            case AskChartType.TimeSeries:
-            {
-                builder.OpenComponent<MudChart<double>>(seq++);
-                builder.AddAttribute(seq++, "ChartType", ChartType.Timeseries);
-                builder.AddAttribute(seq++, "ChartSeries", spec.TimeSeries?.Select(ts => new ChartSeries<double> { Name = ts.Name, Data = ts.Data.Select(dp => dp.Y).ToArray() }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.TimeSeries?.FirstOrDefault()?.Data.Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
-                builder.AddAttribute(seq++, "Width", "100%");
-                builder.AddAttribute(seq++, "Height", "400px");
-                builder.CloseComponent();
-                break;
-            }
-        }
+        "render_table"             => "Configuring table",
+        "render_data_table"        => "Building data table",
+        "render_chart"             => "Rendering chart",
+        "render_graph"             => "Configuring graph",
+        "render_timeline"          => "Configuring timeline",
+        "list_timeline_categories" => "Listing timeline categories",
+        "list_infobox_types"       => "Listing infobox types",
+        "search_pages_by_name"     => "Searching by name",
+        "search_pages_by_property" => "Searching by property",
+        "search_pages_by_date"     => "Searching by date",
+        "search_pages_by_link"     => "Searching by link",
+        "get_page_by_id"           => "Fetching page",
+        "get_page_property"        => "Reading property",
+        "sample_property_values"   => "Sampling values",
+        "find"                     => "Querying Pages",
+        "aggregate"                => "Aggregating data",
+        "count"                    => "Counting documents",
+        _                          => name ?? "Using tool",
     };
 }

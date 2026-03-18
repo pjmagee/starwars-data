@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using AngleSharp.Common;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -18,9 +17,7 @@ public class RecordService
     readonly InfoboxToEventsTransformer _recordToEventsTransformer;
     readonly SettingsOptions _settingsOptions;
     readonly IMongoClient _mongoClient;
-    readonly string _infoboxDb;
-    readonly string _pageInfoboxDb;
-    readonly string _structuredDbName;
+    readonly string _pagesDbName;
     readonly string _timelineEventsDbName;
     readonly YearHelper _yearHelper;
     readonly IEmbeddingGenerator<string, Embedding<float>> _textEmbeddingGenerationService;
@@ -37,36 +34,42 @@ public class RecordService
         _logger = logger;
         _settingsOptions = settingsOptions.Value;
         _mongoClient = mongoClient;
-        _infoboxDb = _settingsOptions.InfoboxDb;
-    _pageInfoboxDb = _settingsOptions.PageInfoboxDb;
-        _structuredDbName = _settingsOptions.StructuredDb;
+        _pagesDbName = _settingsOptions.PagesDb;
         _timelineEventsDbName = _settingsOptions.TimelineEventsDb;
         _yearHelper = yearHelper;
         _textEmbeddingGenerationService = textEmbeddingGenerationService;
         _recordToEventsTransformer = recordToEventsTransformer;
     }
 
+    IMongoCollection<Page> PagesCollection =>
+        _mongoClient.GetDatabase(_pagesDbName).GetCollection<Page>("Pages");
+
+    /// <summary>
+    /// Returns distinct sanitized template names from Pages that have infoboxes.
+    /// </summary>
     public async Task<List<string>> GetCollectionNames(CancellationToken cancellationToken)
     {
-        var db = _mongoClient.GetDatabase(_pageInfoboxDb);
-        var names = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
-        List<string> results = await names.ToListAsync(cancellationToken);
-        return results.OrderBy(x => x).ToList();
-    }
-
-    public async Task DeleteInfoboxCollections(CancellationToken cancellationToken)
-    {
-        var infoboxDb = _mongoClient.GetDatabase(_infoboxDb);
-        var collections = await GetCollectionNames(cancellationToken);
-        foreach (var collection in collections)
+        var pages = PagesCollection;
+        var pipeline = new[]
         {
-            await infoboxDb.DropCollectionAsync(collection, cancellationToken);
-        }
+            new BsonDocument("$match", new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
+        };
+        var cursor = await pages.Aggregate<BsonDocument>(pipeline).ToListAsync(cancellationToken);
+        var names = cursor
+            .Select(d => d["_id"].IsBsonNull ? null : d["_id"].AsString)
+            .Where(n => !string.IsNullOrWhiteSpace(n))
+            .Select(n => SanitizeTemplateName(n!))
+            .Where(n => n != "Unknown")
+            .Distinct()
+            .OrderBy(x => x)
+            .ToList();
+        return names;
     }
 
     public async Task DeletePagesCollections(CancellationToken cancellationToken)
     {
-        var pagesDb = _mongoClient.GetDatabase(_settingsOptions.PagesDb);
+        var pagesDb = _mongoClient.GetDatabase(_pagesDbName);
         var collections = await pagesDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         var collectionList = await collections.ToListAsync(cancellationToken);
         foreach (var collection in collectionList)
@@ -86,17 +89,6 @@ public class RecordService
         }
     }
 
-    public async Task DeletePageInfoboxCollections(CancellationToken cancellationToken)
-    {
-        var pageInfoboxDb = _mongoClient.GetDatabase(_settingsOptions.PageInfoboxDb);
-        var collectionsCursor = await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
-        var collectionList = await collectionsCursor.ToListAsync(cancellationToken);
-        foreach (var collection in collectionList)
-        {
-            await pageInfoboxDb.DropCollectionAsync(collection, cancellationToken);
-        }
-    }
-
     public async Task<PagedResult> GetSearchResult(
         string query,
         int page = 1,
@@ -104,42 +96,25 @@ public class RecordService
         CancellationToken token = default
     )
     {
-        var results = new ConcurrentBag<Infobox>();
-
-        var opts = new ParallelOptions { CancellationToken = token };
-
-        var infoboxDb = _mongoClient.GetDatabase(_infoboxDb);
-
-        var collectionNames = await (
-            await infoboxDb.ListCollectionNamesAsync(cancellationToken: token)
-        ).ToListAsync(token);
-
-        await Parallel.ForEachAsync(
-            collectionNames,
-            opts,
-            async (name, t) =>
-            {
-                var collection = infoboxDb.GetCollection<Infobox>(name);
-
-                var cursor = await collection.FindAsync(
-                    new FilterDefinitionBuilder<Infobox>().Text(query),
-                    cancellationToken: t
-                );
-                var collectionResults = await cursor.ToListAsync(t);
-
-                foreach (var result in collectionResults)
-                {
-                    results.Add(result);
-                }
-            }
+        var pages = PagesCollection;
+        var filter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Ne(p => p.Infobox, null),
+            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(query, "i"))
         );
+
+        var total = await pages.CountDocumentsAsync(filter, cancellationToken: token);
+        var data = await pages
+            .Find(filter)
+            .Skip((page - 1) * pageSize)
+            .Limit(pageSize)
+            .ToListAsync(token);
 
         return new PagedResult
         {
-            Total = results.Count,
+            Total = (int)total,
             Size = pageSize,
             Page = page,
-            Items = results.Skip((page - 1) * pageSize).Take(pageSize),
+            Items = data.Select(PageToInfobox).ToList(),
         };
     }
 
@@ -151,32 +126,20 @@ public class RecordService
         CancellationToken token = default
     )
     {
-        var db = _mongoClient.GetDatabase(_pageInfoboxDb);
-        return await GetPagerResultAsync(
-            page,
-            pageSize,
-            db.GetCollection<Infobox>(collectionName),
-            searchText,
-            token
-        );
-    }
+        var pages = PagesCollection;
 
-    static async Task<PagedResult> GetPagerResultAsync(
-        int page,
-        int pageSize,
-        IMongoCollection<Infobox> collection,
-        string? searchText,
-        CancellationToken token = default
-    )
-    {
-        var total = await collection.CountDocumentsAsync(record => true, cancellationToken: token);
+        // Match pages whose sanitized template matches the collection name
+        var templateFilter = BuildTemplateFilter(collectionName);
+        var filter = searchText is null
+            ? templateFilter
+            : Builders<Page>.Filter.And(
+                templateFilter,
+                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(searchText, "i"))
+            );
 
-        var data = await collection
-            .Find(
-                searchText is null
-                    ? FilterDefinition<Infobox>.Empty
-                    : new FilterDefinitionBuilder<Infobox>().Text(searchText)
-            )
+        var total = await pages.CountDocumentsAsync(filter, cancellationToken: token);
+        var data = await pages
+            .Find(filter)
             .Skip((page - 1) * pageSize)
             .Limit(pageSize)
             .ToListAsync(token);
@@ -186,182 +149,34 @@ public class RecordService
             Total = (int)total,
             Size = pageSize,
             Page = page,
-            Items = data,
+            Items = data.Select(PageToInfobox).ToList(),
         };
-    }
-
-    public async Task CreateTimelineEvents(CancellationToken token)
-    {
-    // NOTE: switched to use extracted page infobox database rather than raw infobox db
-    // so timeline events derive from unified extracted schema.
-        var structuredDb = _mongoClient.GetDatabase(_structuredDbName);
-        var timelineEventsCollection = structuredDb.GetCollection<TimelineEvent>("Timeline_events");
-        // Use TimelineEventDocument for the filter
-        await timelineEventsCollection.DeleteManyAsync(
-            FilterDefinition<TimelineEvent>.Empty,
-            token
-        );
-
-        // Create indexes using TimelineEventDocument
-        var indexKeysDefinition = Builders<TimelineEvent>
-            .IndexKeys.Ascending(x => x.Demarcation)
-            .Ascending(x => x.Year);
-
-        var indexModel = new CreateIndexModel<TimelineEvent>(indexKeysDefinition);
-        await timelineEventsCollection.Indexes.CreateOneAsync(indexModel, cancellationToken: token);
-
-        var templateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x =>
-            x.TemplateUri
-        );
-        var templateIndexModel = new CreateIndexModel<TimelineEvent>(templateIndexKeysDefinition);
-        await timelineEventsCollection.Indexes.CreateOneAsync(
-            templateIndexModel,
-            cancellationToken: token
-        );
-
-        // Index on CleanedTemplate
-        var cleanedTemplateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x =>
-            x.Template
-        );
-        var cleanedTemplateIndexModel = new CreateIndexModel<TimelineEvent>(
-            cleanedTemplateIndexKeysDefinition
-        );
-        await timelineEventsCollection.Indexes.CreateOneAsync(
-            cleanedTemplateIndexModel,
-            cancellationToken: token
-        );
-
-        _logger.LogInformation("Indexes created for Timeline_events collection");
-
-        const int batchSize = 1000;
-        // get extracted infobox template collections
-        var pageInfoboxDb = _mongoClient.GetDatabase(_pageInfoboxDb);
-        var collectionNames = await (
-            await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: token)
-        ).ToListAsync(token);
-        var parallelOptions = new ParallelOptions { CancellationToken = token };
-
-        collectionNames = collectionNames.Except(["Timeline_events"]).ToList();
-
-        // Process raw collections in parallel to generate timeline events
-        await Parallel.ForEachAsync(
-            collectionNames,
-            parallelOptions,
-            async (collectionName, ct) =>
-            {
-                _logger.LogInformation(
-                    "Creating timeline events for {CollectionName}",
-                    collectionName
-                );
-                var collection = pageInfoboxDb.GetCollection<Infobox>(collectionName);
-                // Each parallel task needs its own batch and counter
-                var batch = new List<TimelineEvent>(batchSize);
-                int totalAdded = 0;
-
-                using var cursor = await collection
-                    .Find(FilterDefinition<Infobox>.Empty)
-                    .ToCursorAsync(ct);
-
-                // Iterates through records in the current collection
-                while (await cursor.MoveNextAsync(ct))
-                {
-                    foreach (var record in cursor.Current)
-                    {
-                        // Transforms the record into potential TimelineEventDocument objects
-                        var events = _recordToEventsTransformer.Transform(record);
-                        batch.AddRange(events); // Adds the generated events to the batch
-
-                        // Inserts batch if full
-                        if (batch.Count >= batchSize)
-                        {
-                            // Insert TimelineEventDocument objects
-                            await timelineEventsCollection.InsertManyAsync(
-                                batch,
-                                cancellationToken: ct
-                            );
-                            totalAdded += batch.Count;
-                            _logger.LogInformation(
-                                "[{CollectionName}] Inserted batch of {BatchCount} events. Total added so far: {TotalAdded}",
-                                collectionName,
-                                batch.Count,
-                                totalAdded
-                            ); // Added logging with collection name
-
-                            batch.Clear();
-                        }
-                    }
-                }
-
-                // Inserts remaining events in the batch
-                if (batch.Count > 0)
-                {
-                    // Insert TimelineEventDocument objects
-                    await timelineEventsCollection.InsertManyAsync(batch, cancellationToken: ct);
-                    totalAdded += batch.Count;
-                    _logger.LogInformation(
-                        "[{CollectionName}] Inserted final batch of {BatchCount} events. Total added: {TotalAdded}",
-                        collectionName,
-                        batch.Count,
-                        totalAdded
-                    ); // Added logging with collection name
-
-                    batch.Clear();
-                }
-
-                // Log if no events were added for a collection
-                if (totalAdded == 0)
-                {
-                    _logger.LogWarning(
-                        "No timeline events were created for {CollectionName}",
-                        collectionName
-                    );
-                }
-                else
-                {
-                    _logger.LogInformation(
-                        "Finished creating and inserting {Count} timeline events for {CollectionName}",
-                        totalAdded,
-                        collectionName
-                    );
-                }
-            }
-        );
-
-        _logger.LogInformation("Timeline_events collection population complete");
     }
 
     public async Task CreateCategorizedTimelineEvents(CancellationToken token)
     {
-        // Create timeline-events database and collections per category
         var timelineEventsDb = _mongoClient.GetDatabase(_timelineEventsDbName);
-        // Get all collection names from EXTRACTED infobox database, not raw
-        var pageInfoboxDb = _mongoClient.GetDatabase(_pageInfoboxDb);
-        var collectionNames = await (
-            await pageInfoboxDb.ListCollectionNamesAsync(cancellationToken: token)
-        ).ToListAsync(token);
+        var pages = PagesCollection;
+
+        // Get all distinct templates
+        var templateNames = await GetCollectionNames(token);
 
         const int batchSize = 1000;
-    // We'll read records from extracted page infobox database
-
         var parallelOptions = new ParallelOptions { CancellationToken = token };
 
-        // Process each infobox collection separately
         await Parallel.ForEachAsync(
-            collectionNames,
+            templateNames,
             parallelOptions,
-            async (collectionName, ct) =>
+            async (templateName, ct) =>
             {
                 try
                 {
                     _logger.LogInformation(
-                        "Processing timeline events for collection: {CollectionName}",
-                        collectionName
+                        "Processing timeline events for template: {TemplateName}",
+                        templateName
                     );
 
-                    // Create corresponding collection in timeline-events database
-                    var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(
-                        collectionName
-                    );
+                    var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(templateName);
 
                     // Clear existing data
                     await timelineCollection.DeleteManyAsync(
@@ -373,47 +188,38 @@ public class RecordService
                     var indexKeysDefinition = Builders<TimelineEvent>
                         .IndexKeys.Ascending(x => x.Demarcation)
                         .Ascending(x => x.Year);
-                    var indexModel = new CreateIndexModel<TimelineEvent>(indexKeysDefinition);
                     await timelineCollection.Indexes.CreateOneAsync(
-                        indexModel,
+                        new CreateIndexModel<TimelineEvent>(indexKeysDefinition),
                         cancellationToken: ct
                     );
 
                     var templateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(
                         x => x.TemplateUri
                     );
-                    var templateIndexModel = new CreateIndexModel<TimelineEvent>(
-                        templateIndexKeysDefinition
-                    );
                     await timelineCollection.Indexes.CreateOneAsync(
-                        templateIndexModel,
+                        new CreateIndexModel<TimelineEvent>(templateIndexKeysDefinition),
                         cancellationToken: ct
                     );
 
                     var cleanedTemplateIndexKeysDefinition =
                         Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Template);
-                    var cleanedTemplateIndexModel = new CreateIndexModel<TimelineEvent>(
-                        cleanedTemplateIndexKeysDefinition
-                    );
                     await timelineCollection.Indexes.CreateOneAsync(
-                        cleanedTemplateIndexModel,
+                        new CreateIndexModel<TimelineEvent>(cleanedTemplateIndexKeysDefinition),
                         cancellationToken: ct
                     );
 
-                    // Process records from infobox collection
-                    var infoboxCollection = pageInfoboxDb.GetCollection<Infobox>(collectionName);
-                    var cursor = infoboxCollection
-                        .Find(FilterDefinition<Infobox>.Empty)
-                        .ToCursor(ct);
+                    // Query pages matching this template
+                    var templateFilter = BuildTemplateFilter(templateName);
+                    var cursor = pages.Find(templateFilter).ToCursor(ct);
 
                     var batch = new List<TimelineEvent>(batchSize);
                     var totalAdded = 0;
 
                     while (await cursor.MoveNextAsync(ct))
                     {
-                        foreach (var record in cursor.Current)
+                        foreach (var page in cursor.Current)
                         {
-                            var timelineEvents = _recordToEventsTransformer.Transform(record);
+                            var timelineEvents = _recordToEventsTransformer.Transform(page);
                             batch.AddRange(timelineEvents);
 
                             if (batch.Count >= batchSize)
@@ -431,7 +237,6 @@ public class RecordService
                         }
                     }
 
-                    // Insert remaining items
                     if (batch.Count > 0)
                     {
                         await timelineCollection.InsertManyAsync(batch, cancellationToken: ct);
@@ -441,16 +246,16 @@ public class RecordService
                     if (totalAdded == 0)
                     {
                         _logger.LogInformation(
-                            "No timeline events generated for collection: {CollectionName}",
-                            collectionName
+                            "No timeline events generated for template: {TemplateName}",
+                            templateName
                         );
                     }
                     else
                     {
                         _logger.LogInformation(
-                            "Added {Count} timeline events for collection: {CollectionName}",
+                            "Added {Count} timeline events for template: {TemplateName}",
                             totalAdded,
-                            collectionName
+                            templateName
                         );
                     }
                 }
@@ -458,8 +263,8 @@ public class RecordService
                 {
                     _logger.LogError(
                         ex,
-                        "Error processing timeline events for collection: {CollectionName}",
-                        collectionName
+                        "Error processing timeline events for template: {TemplateName}",
+                        templateName
                     );
                 }
             }
@@ -470,13 +275,7 @@ public class RecordService
 
     public async Task CreateVectorIndexesAsync(CancellationToken cancellationToken)
     {
-        var collectionNames = await GetCollectionNames(cancellationToken);
-
-        var rawDb = _mongoClient.GetDatabase(_infoboxDb);
-        foreach (var collectionName in collectionNames.Except("Timeline_events"))
-        {
-            await CreateCosineVectorIndexAsync(collectionName);
-        }
+        await CreateCosineVectorIndexAsync("Pages");
     }
 
     async Task CreateCosineVectorIndexAsync(
@@ -486,10 +285,8 @@ public class RecordService
         int dims = 3072
     )
     {
-        // 1. Build your index definition doc:
         var vectorDef = new BsonDocument
         {
-            // for a vector index, you specify a "fields" array of vector specs:
             {
                 "fields",
                 new BsonArray
@@ -505,16 +302,13 @@ public class RecordService
             },
         };
 
-        // 2. Create the CreateSearchIndexModel:
         var model = new CreateSearchIndexModel(
             name: indexName,
-            // type:  SearchIndexType.VectorSearch,
             definition: vectorDef
         );
 
-        // 3. Ask the driver to create it:
         var collection = _mongoClient
-            .GetDatabase(_infoboxDb)
+            .GetDatabase(_pagesDbName)
             .GetCollection<BsonDocument>(collectionName);
         await collection.SearchIndexes.CreateOneAsync(model);
 
@@ -525,126 +319,22 @@ public class RecordService
 
     public async Task DeleteVectorIndexesAsync(CancellationToken cancellationToken)
     {
-        async Task DeleteCosineVectorIndexAsync(string s)
-        {
-            var collection = _mongoClient.GetDatabase(_infoboxDb).GetCollection<BsonDocument>(s);
-            await collection.SearchIndexes.DropOneAsync("vs_idx", cancellationToken);
-        }
-
-        var collectionNames = await GetCollectionNames(cancellationToken);
-
-        var rawDb = _mongoClient.GetDatabase(_infoboxDb);
-        foreach (var collectionName in collectionNames.Except("Timeline_events"))
-        {
-            await DeleteCosineVectorIndexAsync(collectionName);
-        }
+        var collection = _mongoClient.GetDatabase(_pagesDbName).GetCollection<BsonDocument>("Pages");
+        await collection.SearchIndexes.DropOneAsync("vector_index", cancellationToken);
     }
 
     public async Task DeleteOpenAiEmbeddingsAsync(CancellationToken token)
     {
-        var collectionNames = await GetCollectionNames(token);
-
-        var rawDb = _mongoClient.GetDatabase(_infoboxDb);
-        foreach (var collectionName in collectionNames)
-        {
-            var collection = rawDb.GetCollection<Infobox>(collectionName);
-            var update = Builders<Infobox>.Update.Unset(
-                new StringFieldDefinition<Infobox>("embedding")
-            );
-            await collection.UpdateManyAsync(
-                FilterDefinition<Infobox>.Empty,
-                update,
-                cancellationToken: token
-            );
-            _logger.LogInformation("Embeddings removed from {CollectionName}", collectionName);
-        }
-    }
-
-    public async Task AddCharacterRelationshipsAsync()
-    {
-        var collection = _mongoClient
-            .GetDatabase(_infoboxDb)
-            .GetCollection<BsonDocument>("Character");
-        var filter = Builders<BsonDocument>.Filter.Empty;
-
-        var updatePipeline = new[]
-        {
-            new BsonDocument(
-                "$set",
-                new BsonDocument(
-                    "relations",
-                    new BsonDocument(
-                        "$reduce",
-                        new BsonDocument
-                        {
-                            {
-                                "input",
-                                new BsonDocument(
-                                    "$filter",
-                                    new BsonDocument
-                                    {
-                                        { "input", "$Data" },
-                                        { "as", "d" },
-                                        {
-                                            "cond",
-                                            new BsonDocument(
-                                                "$in",
-                                                new BsonArray
-                                                {
-                                                    "$$d.Label",
-                                                    new BsonArray
-                                                    {
-                                                        "Parent(s)",
-                                                        "Sibling(s)",
-                                                        "Children",
-                                                        "Partner(s)",
-                                                    },
-                                                }
-                                            )
-                                        },
-                                    }
-                                )
-                            },
-                            { "initialValue", new BsonArray() },
-                            {
-                                "in",
-                                new BsonDocument(
-                                    "$concatArrays",
-                                    new BsonArray
-                                    {
-                                        "$$value",
-                                        new BsonDocument(
-                                            "$map",
-                                            new BsonDocument
-                                            {
-                                                { "input", "$$this.Links" },
-                                                { "as", "l" },
-                                                { "in", "$$l.Href" },
-                                            }
-                                        ),
-                                    }
-                                )
-                            },
-                        }
-                    )
-                )
-            ),
-        };
-
-        var updateDefinition = Builders<BsonDocument>.Update.Pipeline(updatePipeline);
-
-        // 3) supply an UpdateOptions (can be null or new UpdateOptions())
-        var options = new UpdateOptions();
-
-        // 4) call the 3-param overload
-        var result = await collection.UpdateManyAsync(
-            filter,
-            updateDefinition,
-            options,
-            cancellationToken: CancellationToken.None
+        var collection = _mongoClient.GetDatabase(_pagesDbName).GetCollection<Page>("Pages");
+        var update = Builders<Page>.Update.Unset(
+            new StringFieldDefinition<Page>("embedding")
         );
-
-        Console.WriteLine($"✅ Matched: {result.MatchedCount}, Modified: {result.ModifiedCount}");
+        await collection.UpdateManyAsync(
+            FilterDefinition<Page>.Empty,
+            update,
+            cancellationToken: token
+        );
+        _logger.LogInformation("Embeddings removed from Pages collection");
     }
 
     public async Task<List<string>> GetTimelineCategories(
@@ -662,5 +352,61 @@ public class RecordService
     public Task ProcessEmbeddingsAsync(CancellationToken none)
     {
         throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Build a filter that matches Pages whose infobox.Template, when sanitized, equals the given name.
+    /// Uses regex to match the template URL pattern ending with the collection name.
+    /// </summary>
+    static FilterDefinition<Page> BuildTemplateFilter(string sanitizedName)
+    {
+        // Templates are stored as URLs like "https://starwars.fandom.com/wiki/Template:Character"
+        // We match the end of the template string after the last colon
+        return Builders<Page>.Filter.Regex(
+            "infobox.Template",
+            new BsonRegularExpression($":{sanitizedName.Replace(" ", "[_ ]")}$", "i")
+        );
+    }
+
+    /// <summary>
+    /// Extracts a clean template name from a template URL.
+    /// e.g. "https://starwars.fandom.com/wiki/Template:Character" → "Character"
+    /// </summary>
+    public static string SanitizeTemplateName(string? template)
+    {
+        if (string.IsNullOrWhiteSpace(template)) return "Unknown";
+
+        var working = template;
+        var wikiIdx = working.IndexOf("/wiki/", StringComparison.OrdinalIgnoreCase);
+        if (wikiIdx >= 0)
+        {
+            working = working[(wikiIdx + 6)..];
+        }
+
+        var lastColon = working.LastIndexOf(':');
+        if (lastColon >= 0 && lastColon < working.Length - 1)
+        {
+            working = working[(lastColon + 1)..];
+        }
+
+        working = working.Split('?', '#')[0];
+        return string.IsNullOrWhiteSpace(working) ? "Unknown" : working.Trim();
+    }
+
+    /// <summary>
+    /// Project a Page into an Infobox shape for backward compatibility with frontend APIs.
+    /// </summary>
+    static Infobox PageToInfobox(Page page)
+    {
+        return new Infobox
+        {
+            PageId = page.PageId,
+            WikiUrl = page.WikiUrl,
+            Template = page.Infobox?.Template ?? "Unknown",
+            ImageUrl = page.Infobox?.ImageUrl,
+            Data = page.Infobox?.Data ?? [],
+            Continuity = page.Continuity,
+            PageTitle = page.Title,
+        };
     }
 }

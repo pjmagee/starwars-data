@@ -2,22 +2,42 @@
 @using StarWarsData.Frontend.Services
 @implements IDisposable
 
-<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="mr-4">    
-      <MudSwitch 
-        T="bool" 
-        Value="_canonEnabled" 
+<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="mr-4">
+    <MudSwitch
+        T="bool"
+        Value="_canonEnabled"
         ValueChanged="OnCanonChanged"
-        Label="Canon" 
-        Color="Color.Primary" 
+        Label="Canon"
+        Color="Color.Primary"
         Size="Size.Small"
         Class="ma-0" />
-    
-    <MudSwitch 
-        T="bool" 
-        Value="_legendsEnabled" 
+
+    <MudSwitch
+        T="bool"
+        Value="_legendsEnabled"
         ValueChanged="OnLegendsChanged"
-        Label="Legends" 
-        Color="Color.Secondary" 
+        Label="Legends"
+        Color="Color.Secondary"
+        Size="Size.Small"
+        Class="ma-0" />
+
+    <MudDivider Vertical="true" FlexItem="true" />
+
+    <MudSwitch
+        T="bool"
+        Value="_inUniverseEnabled"
+        ValueChanged="OnInUniverseChanged"
+        Label="In-Universe"
+        Color="Color.Tertiary"
+        Size="Size.Small"
+        Class="ma-0" />
+
+    <MudSwitch
+        T="bool"
+        Value="_outOfUniverseEnabled"
+        ValueChanged="OnOutOfUniverseChanged"
+        Label="Out-of-Universe"
+        Color="Color.Warning"
         Size="Size.Small"
         Class="ma-0" />
 </MudStack>
@@ -25,28 +45,25 @@
 @code {
     private bool _canonEnabled = true;
     private bool _legendsEnabled = true;
+    private bool _inUniverseEnabled = true;
+    private bool _outOfUniverseEnabled = false;
 
-    [Inject] private ContinuityService ContinuityService { get; set; } = default!;
+    [Inject] private GlobalFilterService GlobalFilterService { get; set; } = default!;
 
     protected override void OnInitialized()
     {
-        // Initialize based on current continuity service state
         UpdateSwitchesFromService();
-        
-        // Subscribe to continuity changes
-        ContinuityService.OnChange += OnContinuityServiceChanged;
+        GlobalFilterService.OnChange += OnFilterServiceChanged;
     }
 
     public void Dispose()
     {
-        ContinuityService.OnChange -= OnContinuityServiceChanged;
-    }    
-    
+        GlobalFilterService.OnChange -= OnFilterServiceChanged;
+    }
+
     private void UpdateSwitchesFromService()
     {
-        var currentContinuity = ContinuityService.SelectedContinuity;
-        
-        switch (currentContinuity)
+        switch (GlobalFilterService.SelectedContinuity)
         {
             case Continuity.Canon:
                 _canonEnabled = true;
@@ -56,15 +73,30 @@
                 _canonEnabled = false;
                 _legendsEnabled = true;
                 break;
-            case null: // Both
             default:
                 _canonEnabled = true;
                 _legendsEnabled = true;
                 break;
         }
+
+        switch (GlobalFilterService.SelectedUniverse)
+        {
+            case Universe.InUniverse:
+                _inUniverseEnabled = true;
+                _outOfUniverseEnabled = false;
+                break;
+            case Universe.OutOfUniverse:
+                _inUniverseEnabled = false;
+                _outOfUniverseEnabled = true;
+                break;
+            default: // null = both
+                _inUniverseEnabled = true;
+                _outOfUniverseEnabled = true;
+                break;
+        }
     }
 
-    private async void OnContinuityServiceChanged()
+    private async void OnFilterServiceChanged()
     {
         UpdateSwitchesFromService();
         await InvokeAsync(StateHasChanged);
@@ -80,23 +112,53 @@
     {
         _legendsEnabled = value;
         UpdateContinuityService();
-    }    private void UpdateContinuityService()
+    }
+
+    private void OnInUniverseChanged(bool value)
+    {
+        _inUniverseEnabled = value;
+        UpdateUniverseService();
+    }
+
+    private void OnOutOfUniverseChanged(bool value)
+    {
+        _outOfUniverseEnabled = value;
+        UpdateUniverseService();
+    }
+
+    private void UpdateContinuityService()
     {
         if (!_canonEnabled && !_legendsEnabled)
         {
-            // When neither is selected, force both to be enabled
             _canonEnabled = true;
             _legendsEnabled = true;
         }
-        
+
         Continuity? newContinuity = (_canonEnabled, _legendsEnabled) switch
         {
-            (true, true) => null, // Both - no filtering
             (true, false) => Continuity.Canon,
             (false, true) => Continuity.Legends,
-            _ => null // Default to no filtering
+            _ => null
         };
-        
-        ContinuityService.SetContinuity(newContinuity);
+
+        GlobalFilterService.SetContinuity(newContinuity);
+    }
+
+    private void UpdateUniverseService()
+    {
+        if (!_inUniverseEnabled && !_outOfUniverseEnabled)
+        {
+            _inUniverseEnabled = true;
+            _outOfUniverseEnabled = false;
+        }
+
+        Universe? newUniverse = (_inUniverseEnabled, _outOfUniverseEnabled) switch
+        {
+            (true, false) => Universe.InUniverse,
+            (false, true) => Universe.OutOfUniverse,
+            _ => null
+        };
+
+        GlobalFilterService.SetUniverse(newUniverse);
     }
 }

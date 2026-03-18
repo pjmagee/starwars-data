@@ -15,4 +15,10 @@ public class TimelineQueryParams
     public int PageSize { get; set; } = 50;
     public string[] Categories { get; set; } = [];
     public Continuity? Continuity { get; set; } = null; // null means "both"
+    public Universe? Universe { get; set; } = null; // null means "both"
+    public float? YearFrom { get; set; }
+    public Demarcation? YearFromDemarcation { get; set; }
+    public float? YearTo { get; set; }
+    public Demarcation? YearToDemarcation { get; set; }
+    public string? Search { get; set; }
 }

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
@@ -10,8 +11,7 @@ namespace StarWarsData.Services;
 public class MapService
 {
     readonly ILogger<MapService> _logger;
-    readonly SettingsOptions _settingsOptions;
-    readonly IMongoDatabase _db;
+    readonly IMongoCollection<Page> _pages;
 
     public MapService(
         ILogger<MapService> logger,
@@ -20,109 +20,110 @@ public class MapService
     )
     {
         _logger = logger;
-        _settingsOptions = settingsOptions.Value;
-        _db = mongoClient.GetDatabase(_settingsOptions.PageInfoboxDb);
+        _pages = mongoClient.GetDatabase(settingsOptions.Value.PagesDb).GetCollection<Page>("Pages");
     }
+
+    static FilterDefinition<Page> TemplateFilter(string type) =>
+        Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression($":{type}$", "i"));
+
+    static FilterDefinition<Page> InfoboxDataFilter(string type, string label) =>
+        Builders<Page>.Filter.And(
+            TemplateFilter(type),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument("Label", label)
+            )
+        );
+
+    static FilterDefinition<Page> InfoboxDataValueFilter(string type, string label, string value) =>
+        Builders<Page>.Filter.And(
+            TemplateFilter(type),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument
+                {
+                    { "Label", label },
+                    { "Values", value },
+                }
+            )
+        );
+
+    static List<string> GetDataValues(Page page, string label) =>
+        page.Infobox?.Data.FirstOrDefault(d => d.Label == label)?.Values ?? [];
+
+    static string? GetFirstDataValue(Page page, string label) =>
+        page.Infobox?.Data.FirstOrDefault(d => d.Label == label)?.Values.FirstOrDefault();
 
     public async Task<IEnumerable<GalaxyMapItem>> GetPlanets()
     {
         var planets = new List<GalaxyMapItem>();
-        // Query only the CelestialBody collection for grid square info
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        // Only include grid-enabled bodies that are terrestrial planets
-        var gridFilter = Builders<Infobox>.Filter.ElemMatch(
-            r => r.Data,
-            d => d.Label == "Grid square"
-        );
-        var classFilter = Builders<Infobox>.Filter.ElemMatch(
-            r => r.Data,
-            d => d.Label == "Class" && d.Values.Contains("Terrestrial")
-        );
-        var filter = Builders<Infobox>.Filter.And(gridFilter, classFilter);
-        var recs = await col.Find(filter).ToListAsync();
+        var gridFilter = InfoboxDataFilter("CelestialBody", "Grid square");
+        var classFilter = InfoboxDataValueFilter("CelestialBody", "Class", "Terrestrial");
+        var filter = Builders<Page>.Filter.And(gridFilter, classFilter);
+        var recs = await _pages.Find(filter).ToListAsync();
         foreach (var rec in recs)
         {
-            var prop = rec.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (prop?.Values == null || prop.Values.Count == 0)
-                continue;
+            var prop = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
+            if (prop?.Values == null || prop.Values.Count == 0) continue;
             var loc = prop.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2)
-                continue;
+            if (parts.Length != 2) continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number))
-                continue;
-            planets.Add(
-                new GalaxyMapItem
-                {
-                    Id = rec.PageId,
-                    Letter = letter,
-                    Number = number,
-                    Name = rec.PageTitle,
-                }
-            );
+            if (!int.TryParse(parts[1], out var number)) continue;
+            planets.Add(new GalaxyMapItem
+            {
+                Id = rec.PageId,
+                Letter = letter,
+                Number = number,
+                Name = rec.Title,
+            });
         }
         return planets;
     }
 
     public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells(Continuity? continuity = null)
     {
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        // preload system, sector, and region name->Id maps
-        var sysCol = _db.GetCollection<Infobox>("System");
-        var sysRecs = await sysCol.Find(_ => true).ToListAsync();
-        var systemMap = sysRecs.ToDictionary(r => r.PageTitle, r => r.PageId);
-        var sectorCol = _db.GetCollection<Infobox>("Sector");
-        var sectorRecs = await sectorCol.Find(_ => true).ToListAsync();
-        var sectorMap = sectorRecs.ToDictionary(r => r.PageTitle, r => r.PageId);
-        var regionCol = _db.GetCollection<Infobox>("Region");
-        var regionRecs = await regionCol.Find(_ => true).ToListAsync();
-        var regionMap = regionRecs.ToDictionary(r => r.PageTitle, r => r.PageId);
-        var gridFilter = Builders<Infobox>.Filter.ElemMatch(
-            r => r.Data,
-            d => d.Label == "Grid square"
-        );
-        var classFilter = Builders<Infobox>.Filter.ElemMatch(
-            r => r.Data,
-            d => d.Label == "Class" && d.Values.Contains("Terrestrial")
-        );
-        var filter = Builders<Infobox>.Filter.And(gridFilter, classFilter);
-        if (continuity.HasValue)
-            filter = Builders<Infobox>.Filter.And(
-                filter,
-                Builders<Infobox>.Filter.Eq(r => r.Continuity, continuity.Value)
-            );
-        var recs = await col.Find(filter).ToListAsync();
+        // Preload system, sector, and region name→Id maps
+        var sysRecs = await _pages.Find(TemplateFilter("System")).ToListAsync();
+        var systemMap = sysRecs.ToDictionary(r => r.Title, r => r.PageId);
 
-        // Optionally, get sector info from Region/Sector fields
+        var sectorRecs = await _pages.Find(TemplateFilter("Sector")).ToListAsync();
+        var sectorMap = sectorRecs.ToDictionary(r => r.Title, r => r.PageId);
+
+        var regionRecs = await _pages.Find(TemplateFilter("Region")).ToListAsync();
+        var regionMap = regionRecs.ToDictionary(r => r.Title, r => r.PageId);
+
+        var gridFilter = InfoboxDataFilter("CelestialBody", "Grid square");
+        var classFilter = InfoboxDataValueFilter("CelestialBody", "Class", "Terrestrial");
+        var filter = Builders<Page>.Filter.And(gridFilter, classFilter);
+        if (continuity.HasValue)
+            filter = Builders<Page>.Filter.And(
+                filter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+        var recs = await _pages.Find(filter).ToListAsync();
+
         var grid = new Dictionary<string, GalaxyGridCell>();
         foreach (var rec in recs)
         {
-            var gridProp = rec.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (gridProp?.Values == null || gridProp.Values.Count == 0)
-                continue;
+            var gridProp = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
+            if (gridProp?.Values == null || gridProp.Values.Count == 0) continue;
             var loc = gridProp.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2)
-                continue;
+            if (parts.Length != 2) continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number))
-                continue;
+            if (!int.TryParse(parts[1], out var number)) continue;
             var key = $"{letter}-{number}";
 
-            var sectorName = rec
-                .Data.FirstOrDefault(d => d.Label == "Sector")
-                ?.Values.FirstOrDefault();
-            var regionName = rec
-                .Data.FirstOrDefault(d => d.Label == "Region")
-                ?.Values.FirstOrDefault();
-            var system = rec.Data.FirstOrDefault(d => d.Label == "System")?.Values.FirstOrDefault();
+            var sectorName = GetFirstDataValue(rec, "Sector");
+            var regionName = GetFirstDataValue(rec, "Region");
+            var system = GetFirstDataValue(rec, "System");
             var planet = new GalaxyMapItem
             {
                 Id = rec.PageId,
                 Letter = letter,
                 Number = number,
-                Name = rec.PageTitle,
+                Name = rec.Title,
             };
 
             if (!grid.TryGetValue(key, out var cell))
@@ -132,15 +133,9 @@ public class MapService
                     Letter = letter,
                     Number = number,
                     Sector = sectorName,
-                    SectorId =
-                        sectorName != null && sectorMap.TryGetValue(sectorName, out var sid)
-                            ? sid
-                            : null,
+                    SectorId = sectorName != null && sectorMap.TryGetValue(sectorName, out var sid) ? sid : null,
                     Region = regionName,
-                    RegionId =
-                        regionName != null && regionMap.TryGetValue(regionName, out var rid)
-                            ? rid
-                            : null,
+                    RegionId = regionName != null && regionMap.TryGetValue(regionName, out var rid) ? rid : null,
                 };
                 grid[key] = cell;
             }
@@ -150,7 +145,6 @@ public class MapService
                 var sys = cell.Systems.FirstOrDefault(s => s.Name == system);
                 if (sys == null)
                 {
-                    // map system name to ID
                     var sysId = systemMap.TryGetValue(system, out var sid) ? sid : 0;
                     sys = new SystemWithPlanets { Id = sysId, Name = system };
                     cell.Systems.Add(sys);
@@ -162,46 +156,37 @@ public class MapService
                 cell.PlanetsWithoutSystem.Add(planet);
             }
         }
-        // Overlay nebulas onto grid cells
-        var nebulaCol = _db.GetCollection<Infobox>("Nebula");
-        var nebulaGridFilter = Builders<Infobox>.Filter.ElemMatch(
-            r => r.Data,
-            d => d.Label == "Grid square"
-        );
-        var nebulaFilter = continuity.HasValue
-            ? Builders<Infobox>.Filter.And(
-                nebulaGridFilter,
-                Builders<Infobox>.Filter.Eq(r => r.Continuity, continuity.Value)
-            )
-            : nebulaGridFilter;
-        var nebulaRecs = await nebulaCol.Find(nebulaFilter).ToListAsync();
+
+        // Overlay nebulas
+        var nebulaFilter = InfoboxDataFilter("Nebula", "Grid square");
+        if (continuity.HasValue)
+            nebulaFilter = Builders<Page>.Filter.And(
+                nebulaFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+        var nebulaRecs = await _pages.Find(nebulaFilter).ToListAsync();
         foreach (var rec in nebulaRecs)
         {
-            var gridProp = rec.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (gridProp?.Values == null || gridProp.Values.Count == 0)
-                continue;
+            var gridProp = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
+            if (gridProp?.Values == null || gridProp.Values.Count == 0) continue;
             var loc = gridProp.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2)
-                continue;
+            if (parts.Length != 2) continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number))
-                continue;
+            if (!int.TryParse(parts[1], out var number)) continue;
             var key = $"{letter}-{number}";
             if (!grid.TryGetValue(key, out var cell))
             {
                 cell = new GalaxyGridCell { Letter = letter, Number = number };
                 grid[key] = cell;
             }
-            cell.Nebulas.Add(
-                new GalaxyMapItem
-                {
-                    Id = rec.PageId,
-                    Letter = letter,
-                    Number = number,
-                    Name = rec.PageTitle,
-                }
-            );
+            cell.Nebulas.Add(new GalaxyMapItem
+            {
+                Id = rec.PageId,
+                Letter = letter,
+                Number = number,
+                Name = rec.Title,
+            });
         }
 
         return grid.Values;
@@ -209,78 +194,67 @@ public class MapService
 
     public async Task<IEnumerable<SectorDto>> GetSectorsAsync()
     {
-        var col = _db.GetCollection<Infobox>("Sector");
-        var recs = await col.Find(_ => true).ToListAsync();
-        return recs.Select(r => new SectorDto { Id = r.PageId, Name = r.PageTitle });
+        var recs = await _pages.Find(TemplateFilter("Sector")).ToListAsync();
+        return recs.Select(r => new SectorDto { Id = r.PageId, Name = r.Title });
     }
 
     public async Task<SectorDto?> GetSectorAsync(int id)
     {
-        var col = _db.GetCollection<Infobox>("Sector");
-        var rec = await col.Find(r => r.PageId == id).FirstOrDefaultAsync();
-        if (rec == null)
-            return null;
-        return new SectorDto { Id = rec.PageId, Name = rec.PageTitle };
+        var filter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var rec = await _pages.Find(filter).FirstOrDefaultAsync();
+        if (rec == null) return null;
+        return new SectorDto { Id = rec.PageId, Name = rec.Title };
     }
 
     public async Task<IEnumerable<RegionDto>> GetRegionsAsync()
     {
-        var col = _db.GetCollection<Infobox>("Region");
-        var recs = await col.Find(_ => true).ToListAsync();
-        return recs.Select(r => new RegionDto { Id = r.PageId, Name = r.PageTitle });
+        var recs = await _pages.Find(TemplateFilter("Region")).ToListAsync();
+        return recs.Select(r => new RegionDto { Id = r.PageId, Name = r.Title });
     }
 
     public async Task<RegionDto?> GetRegionAsync(int id)
     {
-        var col = _db.GetCollection<Infobox>("Region");
-        var rec = await col.Find(r => r.PageId == id).FirstOrDefaultAsync();
-        if (rec == null)
-            return null;
-        return new RegionDto { Id = rec.PageId, Name = rec.PageTitle };
+        var filter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var rec = await _pages.Find(filter).FirstOrDefaultAsync();
+        if (rec == null) return null;
+        return new RegionDto { Id = rec.PageId, Name = rec.Title };
     }
 
     public async Task<SystemDetailsDto?> GetSystemDetailsAsync(int id)
     {
-        var col = _db.GetCollection<Infobox>("System");
-        var rec = await col.Find(r => r.PageId == id).FirstOrDefaultAsync();
-        if (rec == null)
-            return null;
-        var grid = rec.Data.FirstOrDefault(d => d.Label == "Grid square")?.Values.FirstOrDefault();
-        var planets = rec.Data.FirstOrDefault(d => d.Label == "Planets")?.Values ?? [];
-        var neighbors =
-            rec.Data.FirstOrDefault(d => d.Label == "Neighboring systems")?.Values ?? [];
+        var filter = Builders<Page>.Filter.And(TemplateFilter("System"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var rec = await _pages.Find(filter).FirstOrDefaultAsync();
+        if (rec == null) return null;
+        var grid = GetFirstDataValue(rec, "Grid square");
+        var planets = GetDataValues(rec, "Planets");
+        var neighbors = GetDataValues(rec, "Neighboring systems");
         return new SystemDetailsDto
         {
             Id = rec.PageId,
-            Name = rec.PageTitle,
+            Name = rec.Title,
             GridSquare = grid,
-            Planets = planets.ToList(),
-            Neighbors = neighbors.ToList(),
+            Planets = planets,
+            Neighbors = neighbors,
         };
     }
 
     public async Task<CelestialBodyDetailsDto?> GetCelestialBodyDetailsAsync(int id)
     {
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        var rec = await col.Find(r => r.PageId == id).FirstOrDefaultAsync();
-        if (rec == null)
-            return null;
-        var cls =
-            rec.Data.FirstOrDefault(d => d.Label == "Class")?.Values.FirstOrDefault()
-            ?? string.Empty;
-        var grid = rec.Data.FirstOrDefault(d => d.Label == "Grid square")?.Values.FirstOrDefault();
-        var sector = rec.Data.FirstOrDefault(d => d.Label == "Sector")?.Values.FirstOrDefault();
-        var region = rec.Data.FirstOrDefault(d => d.Label == "Region")?.Values.FirstOrDefault();
-        var additional = rec
-            .Data.Where(d =>
-                d.Label is not null
-                && !new[] { "Class", "Grid square", "Sector", "Region" }.Contains(d.Label)
-            )
+        var filter = Builders<Page>.Filter.And(TemplateFilter("CelestialBody"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var rec = await _pages.Find(filter).FirstOrDefaultAsync();
+        if (rec == null) return null;
+        var data = rec.Infobox?.Data ?? [];
+        var cls = data.FirstOrDefault(d => d.Label == "Class")?.Values.FirstOrDefault() ?? string.Empty;
+        var grid = GetFirstDataValue(rec, "Grid square");
+        var sector = GetFirstDataValue(rec, "Sector");
+        var region = GetFirstDataValue(rec, "Region");
+        var additional = data
+            .Where(d => d.Label is not null && !new[] { "Class", "Grid square", "Sector", "Region" }.Contains(d.Label))
             .ToDictionary(d => d.Label!, d => d.Values);
         return new CelestialBodyDetailsDto
         {
             Id = rec.PageId,
-            Name = rec.PageTitle,
+            Name = rec.Title,
             Class = cls,
             GridSquare = grid,
             Sector = sector,
@@ -289,85 +263,111 @@ public class MapService
         };
     }
 
-    // Get sectors by region
     public async Task<IEnumerable<SectorDto>> GetSectorsByRegionAsync(int regionId)
     {
-        var regionCol = _db.GetCollection<Infobox>("Region");
-        var region = await regionCol.Find(r => r.PageId == regionId).FirstOrDefaultAsync();
-        if (region == null)
-            return Enumerable.Empty<SectorDto>();
-        var regionName = region.PageTitle;
-        var col = _db.GetCollection<Infobox>("Sector");
-        var recs = await col.Find(r =>
-                r.Data.Any(d => d.Label == "Region(s)" && d.Values.Contains(regionName))
+        var regionFilter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, regionId));
+        var region = await _pages.Find(regionFilter).FirstOrDefaultAsync();
+        if (region == null) return Enumerable.Empty<SectorDto>();
+        var regionName = region.Title;
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("Sector"),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument { { "Label", "Region(s)" }, { "Values", regionName } }
             )
-            .ToListAsync();
-        return recs.Select(r => new SectorDto { Id = r.PageId, Name = r.PageTitle });
+        );
+        var recs = await _pages.Find(filter).ToListAsync();
+        return recs.Select(r => new SectorDto { Id = r.PageId, Name = r.Title });
     }
 
-    // Get systems by sector
     public async Task<IEnumerable<SystemDto>> GetSystemsBySectorAsync(int sectorId)
     {
-        var sectorCol = _db.GetCollection<Infobox>("Sector");
-        var sector = await sectorCol.Find(s => s.PageId == sectorId).FirstOrDefaultAsync();
-        if (sector == null)
-            return Enumerable.Empty<SystemDto>();
-        var sectorName = sector.PageTitle;
-        var col = _db.GetCollection<Infobox>("System");
-        var recs = await col.Find(r =>
-                r.Data.Any(d => d.Label == "Sector" && d.Values.Contains(sectorName))
+        var sectorFilter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, sectorId));
+        var sector = await _pages.Find(sectorFilter).FirstOrDefaultAsync();
+        if (sector == null) return Enumerable.Empty<SystemDto>();
+        var sectorName = sector.Title;
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("System"),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument { { "Label", "Sector" }, { "Values", sectorName } }
             )
-            .ToListAsync();
-        return recs.Select(r => new SystemDto { Id = r.PageId, Name = r.PageTitle });
+        );
+        var recs = await _pages.Find(filter).ToListAsync();
+        return recs.Select(r => new SystemDto { Id = r.PageId, Name = r.Title });
     }
 
-    // Get planets by system
     public async Task<IEnumerable<PlanetDto>> GetPlanetsBySystemAsync(int systemId)
     {
-        var sysCol = _db.GetCollection<Infobox>("System");
-        var system = await sysCol.Find(s => s.PageId == systemId).FirstOrDefaultAsync();
-        if (system == null)
-            return Enumerable.Empty<PlanetDto>();
-        var systemName = system.PageTitle;
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        var recs = await col.Find(r =>
-                r.Data.Any(d => d.Label == "System" && d.Values.Contains(systemName))
+        var sysFilter = Builders<Page>.Filter.And(TemplateFilter("System"), Builders<Page>.Filter.Eq(p => p.PageId, systemId));
+        var system = await _pages.Find(sysFilter).FirstOrDefaultAsync();
+        if (system == null) return Enumerable.Empty<PlanetDto>();
+        var systemName = system.Title;
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("CelestialBody"),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument { { "Label", "System" }, { "Values", systemName } }
             )
-            .ToListAsync();
-        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.PageTitle });
+        );
+        var recs = await _pages.Find(filter).ToListAsync();
+        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.Title });
     }
 
-    // Get orphan planets in region (not in any system)
     public async Task<IEnumerable<PlanetDto>> GetOrphanPlanetsInRegionAsync(int regionId)
     {
-        var regionCol = _db.GetCollection<Infobox>("Region");
-        var region = await regionCol.Find(r => r.PageId == regionId).FirstOrDefaultAsync();
-        if (region == null)
-            return Enumerable.Empty<PlanetDto>();
-        var regionName = region.PageTitle;
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        var recs = await col.Find(r =>
-                r.Data.Any(d => d.Label == "Region" && d.Values.Contains(regionName))
-                && r.Data.All(d => d.Label != "System" || d.Values.Count == 0)
+        var regionFilter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, regionId));
+        var region = await _pages.Find(regionFilter).FirstOrDefaultAsync();
+        if (region == null) return Enumerable.Empty<PlanetDto>();
+        var regionName = region.Title;
+        // CelestialBody with Region matching but no System
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("CelestialBody"),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument { { "Label", "Region" }, { "Values", regionName } }
+            ),
+            Builders<Page>.Filter.Not(
+                Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                    "infobox.Data",
+                    new BsonDocument
+                    {
+                        { "Label", "System" },
+                        { "Values", new BsonDocument("$exists", true) },
+                        { "Values.0", new BsonDocument("$exists", true) },
+                    }
+                )
             )
-            .ToListAsync();
-        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.PageTitle });
+        );
+        var recs = await _pages.Find(filter).ToListAsync();
+        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.Title });
     }
 
-    // Get orphan planets in sector (not in any system)
     public async Task<IEnumerable<PlanetDto>> GetOrphanPlanetsInSectorAsync(int sectorId)
     {
-        var sectorCol = _db.GetCollection<Infobox>("Sector");
-        var sector = await sectorCol.Find(s => s.PageId == sectorId).FirstOrDefaultAsync();
-        if (sector == null)
-            return Enumerable.Empty<PlanetDto>();
-        var sectorName = sector.PageTitle;
-        var col = _db.GetCollection<Infobox>("CelestialBody");
-        var recs = await col.Find(r =>
-                r.Data.Any(d => d.Label == "Sector" && d.Values.Contains(sectorName))
-                && r.Data.All(d => d.Label != "System" || d.Values.Count == 0)
+        var sectorFilter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, sectorId));
+        var sector = await _pages.Find(sectorFilter).FirstOrDefaultAsync();
+        if (sector == null) return Enumerable.Empty<PlanetDto>();
+        var sectorName = sector.Title;
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("CelestialBody"),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument { { "Label", "Sector" }, { "Values", sectorName } }
+            ),
+            Builders<Page>.Filter.Not(
+                Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                    "infobox.Data",
+                    new BsonDocument
+                    {
+                        { "Label", "System" },
+                        { "Values", new BsonDocument("$exists", true) },
+                        { "Values.0", new BsonDocument("$exists", true) },
+                    }
+                )
             )
-            .ToListAsync();
-        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.PageTitle });
+        );
+        var recs = await _pages.Find(filter).ToListAsync();
+        return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.Title });
     }
 }

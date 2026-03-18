@@ -15,9 +15,9 @@ public sealed class MongoFixture : IAsyncLifetime
 {
     private MongoDbContainer _container = null!;
 
-    public CharacterRelationsService Service { get; private set; } = null!;
+    public RelationshipGraphService Service { get; private set; } = null!;
 
-    private const string DbName = "test-infoboxes";
+    private const string DbName = "test-pages";
 
     public async Task InitializeAsync()
     {
@@ -28,11 +28,11 @@ public sealed class MongoFixture : IAsyncLifetime
         await _container.StartAsync();
 
         var client = new MongoClient(_container.GetConnectionString());
-        var coll   = client.GetDatabase(DbName).GetCollection<StarWarsData.Models.Entities.Infobox>("Character");
-        await coll.InsertManyAsync(CharacterRelationsServiceTests.BuildDataset());
+        var coll   = client.GetDatabase(DbName).GetCollection<StarWarsData.Models.Entities.Page>("Pages");
+        await coll.InsertManyAsync(RelationshipGraphServiceTests.BuildDataset());
 
-        var settings = Options.Create(new SettingsOptions { PageInfoboxDb = DbName });
-        Service = new CharacterRelationsService(NullLogger<CharacterRelationsService>.Instance, settings, client);
+        var settings = Options.Create(new SettingsOptions { PagesDb = DbName });
+        Service = new RelationshipGraphService(NullLogger<RelationshipGraphService>.Instance, settings, client);
     }
 
     public async Task DisposeAsync() => await _container.DisposeAsync();

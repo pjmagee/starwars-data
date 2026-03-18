@@ -1,0 +1,252 @@
+@using StarWarsData.Models.Queries
+@using StarWarsData.Frontend.Services
+@using System.Web
+@inject IHttpClientFactory HttpClientFactory
+@inject GlobalFilterService GlobalFilterService
+@implements IDisposable
+
+<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+    <MudText Typo="Typo.h6" Class="mb-2">@Descriptor.Title</MudText>
+    @if (Descriptor.YearFrom is not null || !string.IsNullOrEmpty(Descriptor.Search))
+    {
+        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-3">
+            @if (Descriptor.YearFrom is not null && Descriptor.YearTo is not null)
+            {
+                <span>Period: @Descriptor.YearFrom @Descriptor.YearFromDemarcation – @Descriptor.YearTo @Descriptor.YearToDemarcation</span>
+            }
+            @if (!string.IsNullOrEmpty(Descriptor.Search))
+            {
+                <span class="ml-2">Filter: "@Descriptor.Search"</span>
+            }
+        </MudText>
+    }
+
+    @if (_loading)
+    {
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
+            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading timeline events…</MudText>
+        </MudStack>
+    }
+    else if (_error is not null)
+    {
+        <MudAlert Severity="Severity.Error">@_error</MudAlert>
+    }
+    else if (_pagedResult is not null)
+    {
+        <MudStack Row="true" Spacing="2" Class="mb-3" AlignItems="AlignItems.Center">
+            @foreach (var cat in Descriptor.Categories)
+            {
+                <MudChip T="string" Color="Color.Primary" Variant="Variant.Outlined" Size="Size.Small">
+                    @cat.Replace("_infobox", "").Replace("_", " ")
+                </MudChip>
+            }
+        </MudStack>
+
+        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+
+        <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
+            @{
+                var isStart = true;
+            }
+
+            @foreach (var group in _pagedResult.Items)
+            {
+                var contentAlign = isStart ? Align.Left : Align.Right;
+                var yearAlign = isStart ? Align.Right : Align.Left;
+
+                <MudTimelineItem Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium">
+                    <ItemOpposite>
+                        <MudText Color="Color.Info" Typo="Typo.h5" Align="@yearAlign">@group.Year</MudText>
+                    </ItemOpposite>
+                    <ItemContent>
+                        <MudExpansionPanels Dense="true" MultiExpansion="true" Style="max-height: 600px; overflow: auto;">
+                            @foreach (var evt in group.Events)
+                            {
+                                var color = GetColor(evt);
+                                <MudExpansionPanel Text="@evt.DisplayTitle" Style="@($"color:{color}; text-align:{contentAlign};")">
+                                    <MudCard Outlined="true" Class="ma-2">
+                                        @if (evt.DisplayImageWithoutRevision is not null)
+                                        {
+                                            <MudImage Fluid="true" Src="@evt.DisplayImageWithoutRevision" Alt="" Class="rounded-lg ma-2" />
+                                        }
+                                        <MudCardContent>
+                                            @foreach (var item in evt.Properties)
+                                            {
+                                                @if (item.Links.Count > 0 || item.Values.Count > 0)
+                                                {
+                                                    <MudText Typo="Typo.body2">
+                                                        <b>@item.Label: </b>
+                                                        @foreach (var link in item.Links)
+                                                        {
+                                                            <MudLink Class="mr-1" Underline="Underline.Always" Href="@link.Href">@link.Content</MudLink>
+                                                        }
+                                                        @string.Join(", ", item.Values.Where(x => !item.Links.Any(l => l.Content.Equals(x, StringComparison.OrdinalIgnoreCase))))
+                                                    </MudText>
+                                                }
+                                            }
+                                        </MudCardContent>
+                                    </MudCard>
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </ItemContent>
+                </MudTimelineItem>
+
+                isStart = !isStart;
+            }
+        </MudTimeline>
+
+        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+    }
+    else
+    {
+        <MudText Typo="Typo.body2" Color="Color.Secondary">No timeline events found for the selected categories.</MudText>
+    }
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public TimelineDescriptor Descriptor { get; set; } = null!;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private GroupedTimelineResult? _pagedResult;
+    private bool _loading = true;
+    private string? _error;
+    private int _pages;
+
+    private int _currentPage = 1;
+    private int CurrentPage
+    {
+        get => _currentPage;
+        set
+        {
+            if (_currentPage != value)
+            {
+                _currentPage = value;
+                _ = InvokeAsync(LoadData);
+            }
+        }
+    }
+
+    private readonly Dictionary<string, string> _templateColorMap = new();
+
+    private readonly List<string> _colorPalette =
+    [
+        Colors.Red.Darken1, Colors.Blue.Darken1, Colors.Green.Darken1,
+        Colors.Purple.Darken1, Colors.Amber.Darken1, Colors.Brown.Default,
+        Colors.Cyan.Default, Colors.Orange.Darken1, Colors.Indigo.Darken1,
+        Colors.Teal.Darken1, Colors.DeepPurple.Darken1, Colors.LightGreen.Darken1,
+        Colors.Pink.Darken1, Colors.BlueGray.Darken1, Colors.DeepOrange.Darken1
+    ];
+
+    protected override async Task OnInitializedAsync()
+    {
+        GlobalFilterService.OnChange += OnFilterChanged;
+        await InitializeColorMapping();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _currentPage = 1;
+        _loading = true;
+        _error = null;
+        _pagedResult = null;
+        StateHasChanged();
+        await LoadData();
+    }
+
+    public void Dispose()
+    {
+        GlobalFilterService.OnChange -= OnFilterChanged;
+    }
+
+    private async void OnFilterChanged()
+    {
+        _currentPage = 1;
+        await LoadData();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task InitializeColorMapping()
+    {
+        try
+        {
+            var allCategories = await Http.GetFromJsonAsync<string[]>("Timeline/available-categories");
+            if (allCategories is not null)
+            {
+                var sorted = allCategories.OrderBy(x => x).ToList();
+                for (int i = 0; i < sorted.Count; i++)
+                {
+                    var cleaned = sorted[i].Replace("_infobox", "").ToLower();
+                    _templateColorMap[cleaned] = _colorPalette[i % _colorPalette.Count];
+                }
+            }
+        }
+        catch { /* fall back to default colors */ }
+    }
+
+    private async Task LoadData()
+    {
+        _loading = true;
+        _error = null;
+
+        try
+        {
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query.Add("Page", _currentPage.ToString());
+            query.Add("PageSize", Descriptor.PageSize.ToString());
+
+            foreach (var cat in Descriptor.Categories)
+                query.Add("Categories", cat);
+
+            var continuity = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuity))
+                query.Add("continuity", continuity);
+
+            var universe = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(universe))
+                query.Add("universe", universe);
+
+            if (Descriptor.YearFrom is not null)
+                query.Add("YearFrom", Descriptor.YearFrom.Value.ToString());
+            if (!string.IsNullOrEmpty(Descriptor.YearFromDemarcation))
+                query.Add("YearFromDemarcation", Descriptor.YearFromDemarcation);
+            if (Descriptor.YearTo is not null)
+                query.Add("YearTo", Descriptor.YearTo.Value.ToString());
+            if (!string.IsNullOrEmpty(Descriptor.YearToDemarcation))
+                query.Add("YearToDemarcation", Descriptor.YearToDemarcation);
+            if (!string.IsNullOrEmpty(Descriptor.Search))
+                query.Add("Search", Descriptor.Search);
+
+            _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
+
+            _pages = (_pagedResult is { Total: > 0, Size: > 0 })
+                ? (int)Math.Ceiling((double)_pagedResult.Total / _pagedResult.Size)
+                : 0;
+
+            if (_currentPage > _pages && _pages > 0)
+            {
+                _currentPage = 1;
+                await LoadData();
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = $"Failed to load timeline: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private string GetColor(TimelineEvent evt)
+    {
+        if (string.IsNullOrEmpty(evt.Template)) return Colors.Blue.Default;
+        var cleaned = evt.Template.Replace("_infobox", "").ToLower();
+        return _templateColorMap.TryGetValue(cleaned, out var color) ? color : Colors.Blue.Default;
+    }
+}

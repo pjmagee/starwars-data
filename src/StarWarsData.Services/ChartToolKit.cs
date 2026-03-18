@@ -4,46 +4,163 @@ using StarWarsData.Models.Queries;
 
 namespace StarWarsData.Services;
 
-public class ChartToolkit
+public class ComponentToolkit
 {
-    public AskChart? Result { get; private set; }
+    public TableDescriptor? TableResult { get; private set; }
+    public DataTableDescriptor? DataTableResult { get; private set; }
+    public ChartDescriptor? ChartResult { get; private set; }
+    public GraphDescriptor? GraphResult { get; private set; }
 
-    [Description("Render a chart or family tree. Call this exactly once as your final action.")]
-    public AskChart RenderChart(
-        [Description("Bar, Line, Pie, Donut, StackedBar, TimeSeries, or FamilyTree")]
-            string chartType,
-        [Description("Descriptive title for the chart")] string title,
-        [Description("For Bar/Line/StackedBar: category labels for the X-axis")]
-            List<string>? xAxisLabels = null,
-        [Description("For Pie/Donut: slice labels")] List<string>? labels = null,
-        [Description("For Bar/Line/StackedBar/Pie/Donut: array of { name, data: number[] }")]
-            List<AskChartSeries>? series = null,
+    [Description(
+        "Render a paginated table browsing pages of a given infobox type. "
+            + "The frontend fetches data from the API using the infoboxType to filter the 'Pages' collection by infobox.Template. "
+            + "You do NOT need to query or include actual row data — just configure which type and fields to show."
+    )]
+    public TableDescriptor RenderTable(
+        [Description("Descriptive title for the table")] string title,
         [Description(
-            "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"
+            "The infobox type name (e.g. Character, Battle, Planet, ForcePower, Species, War, Food, Droid). "
+                + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name."
         )]
-            List<AskTimeSeriesChartSeries>? timeSeries = null,
-        [Description("For FamilyTree: the integer _id (PageId) of the character from MongoDB")]
-            int? familyTreeCharacterId = null,
-        [Description("For FamilyTree: the PageTitle of the character from MongoDB")]
-            string? familyTreeCharacterName = null
+            string infoboxType,
+        [Description("Which infobox.Data label names to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Pick 3-6 relevant fields.")]
+            List<string> fields,
+        [Description("Optional text search to filter results by page title")] string? search = null,
+        [Description("Number of rows per page (default 25)")] int pageSize = 25
+    )
+    {
+        TableResult = new TableDescriptor
+        {
+            Title = title,
+            Collection = infoboxType,
+            Fields = fields,
+            Search = search,
+            PageSize = pageSize,
+        };
+        return TableResult;
+    }
+
+    [Description(
+        "Render an ad-hoc data table with inline row data you provide. "
+            + "Use when you have custom aggregation results, cross-type queries, or computed data that doesn't map to a single infobox type. "
+            + "You MUST query the data first and pass the actual rows."
+    )]
+    public DataTableDescriptor RenderDataTable(
+        [Description("Descriptive title for the table")] string title,
+        [Description("Column header names")] List<string> columns,
+        [Description("Row data — each row is a list of string values in the same order as columns")] List<List<string>> rows
+    )
+    {
+        DataTableResult = new DataTableDescriptor
+        {
+            Title = title,
+            Columns = columns,
+            Rows = rows,
+        };
+        return DataTableResult;
+    }
+
+    [Description(
+        "Render a chart with pre-computed aggregated data. "
+            + "Use for counts, comparisons, distributions, or trends. "
+            + "You MUST aggregate the data first using search/query tools, then pass the results here."
+    )]
+    public ChartDescriptor RenderChart(
+        [Description("Bar, Line, Pie, Donut, StackedBar, TimeSeries, or Radar")] string chartType,
+        [Description("Descriptive title for the chart")] string title,
+        [Description("For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)")] List<string>? xAxisLabels = null,
+        [Description("For Pie/Donut: slice labels")] List<string>? labels = null,
+        [Description("For Bar/Line/StackedBar/Pie/Donut/Radar: array of { name, data: number[] }")] List<ChartSeries>? series = null,
+        [Description("For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }")] List<TimeSeriesChartSeries>? timeSeries = null
     )
     {
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
             parsedType = AskChartType.Bar;
 
-        Result = new AskChart
+        ChartResult = new ChartDescriptor
         {
-            AskChartType = parsedType,
             Title = title,
+            ChartType = parsedType,
             XAxisLabels = xAxisLabels,
             Labels = labels,
             Series = series,
             TimeSeries = timeSeries,
-            FamilyTreeCharacterId = familyTreeCharacterId,
-            FamilyTreeCharacterName = familyTreeCharacterName,
         };
-        return Result;
+        return ChartResult;
     }
 
-    public AIFunction AsAIFunction() => AIFunctionFactory.Create(RenderChart, "render_chart");
+    [Description(
+        "Render a relationship graph (family tree, hierarchy). "
+            + "The frontend fetches graph data from the API. You only need to provide the root entity's PageId and name. "
+            + "Use search_pages_by_name first to find the entity's id."
+    )]
+    public GraphDescriptor RenderGraph(
+        [Description("The entity's integer PageId (_id) from the Pages collection")] int rootEntityId,
+        [Description("The entity's display name (title field from the Pages collection)")] string rootEntityName,
+        [Description("Descriptive title for the graph")] string title,
+        [Description(
+            "The infobox type name (e.g. Character). "
+                + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name. Default: Character"
+        )]
+            string infoboxType = "Character",
+        [Description("How many relationship levels to traverse (default 3)")] int maxDepth = 3
+    )
+    {
+        GraphResult = new GraphDescriptor
+        {
+            Title = title,
+            RootEntityId = rootEntityId,
+            RootEntityName = rootEntityName,
+            Collection = infoboxType,
+            MaxDepth = maxDepth,
+        };
+        return GraphResult;
+    }
+
+    public TimelineDescriptor? TimelineResult { get; private set; }
+
+    [Description(
+        "Render a timeline of events. Use for temporal queries like 'battles during the Clone Wars' or 'what happened between 20 BBY and 4 ABY'. "
+            + "The frontend fetches paginated timeline data from the 'starwars-timeline-events' database. "
+            + "You do NOT need to query timeline events yourself — just provide the category names. "
+            + "For entity-specific timelines (e.g. 'events during Anakin Skywalker's life'), look up the entity's date properties first and pass yearFrom/yearTo to scope the results. "
+            + "Use the search parameter to further filter by entity name in event titles."
+    )]
+    public TimelineDescriptor RenderTimeline(
+        [Description("Descriptive title for the timeline")] string title,
+        [Description(
+            "Timeline event category names from the 'starwars-timeline-events' database (e.g. [\"Battle\", \"War\", \"Character\"]). "
+                + "Call list_timeline_categories first to discover valid names."
+        )]
+            List<string> categories,
+        [Description("Number of year groups per page (default 15)")] int pageSize = 15,
+        [Description("Start of year range (e.g. 41 for 41 BBY). Use to scope timeline to a specific period.")] float? yearFrom = null,
+        [Description("Demarcation for yearFrom: 'BBY' or 'ABY'")] string? yearFromDemarcation = null,
+        [Description("End of year range (e.g. 4 for 4 ABY). Use to scope timeline to a specific period.")] float? yearTo = null,
+        [Description("Demarcation for yearTo: 'BBY' or 'ABY'")] string? yearToDemarcation = null,
+        [Description("Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')")] string? search = null
+    )
+    {
+        TimelineResult = new TimelineDescriptor
+        {
+            Title = title,
+            Categories = categories,
+            PageSize = pageSize,
+            YearFrom = yearFrom,
+            YearFromDemarcation = yearFromDemarcation,
+            YearTo = yearTo,
+            YearToDemarcation = yearToDemarcation,
+            Search = search,
+        };
+        return TimelineResult;
+    }
+
+    public List<AITool> AsAIFunctions() =>
+    [
+        AIFunctionFactory.Create(RenderTable, "render_table"),
+        AIFunctionFactory.Create(RenderDataTable, "render_data_table"),
+        AIFunctionFactory.Create(RenderChart, "render_chart"),
+        AIFunctionFactory.Create(RenderGraph, "render_graph"),
+        AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
+    ];
 }
