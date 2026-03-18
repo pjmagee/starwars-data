@@ -139,7 +139,7 @@
                         }
                     </MudPaper>
                 }
-                else if (group.Role == TurnRole.Assistant)
+                else if (group.Role == TurnRole.Assistant && !HasVisualization)
                 {
                     <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3">
                         <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
@@ -232,6 +232,11 @@
     private TimelineDescriptor? _timelineDescriptor;
     private InfoboxDescriptor? _infoboxDescriptor;
     private TextDescriptor? _textDescriptor;
+
+    private bool HasVisualization => _chartDescriptor is not null || _graphDescriptor is not null
+        || _tableDescriptor is not null || _dataTableDescriptor is not null
+        || _timelineDescriptor is not null || _infoboxDescriptor is not null
+        || _textDescriptor is not null;
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
@@ -516,14 +521,7 @@
                 StateHasChanged();
             }
 
-            // Mark result if any descriptor was produced
-            _hasResult = _chartDescriptor is not null
-                || _graphDescriptor is not null
-                || _tableDescriptor is not null
-                || _dataTableDescriptor is not null
-                || _timelineDescriptor is not null
-                || _infoboxDescriptor is not null
-                || _textDescriptor is not null;
+            _hasResult = HasVisualization;
 
             if (!_hasResult && _error is null && _turns.All(t => t.Role != TurnRole.Assistant))
             {
