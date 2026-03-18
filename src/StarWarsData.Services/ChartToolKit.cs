@@ -23,7 +23,9 @@ public class ComponentToolkit
                 + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name."
         )]
             string infoboxType,
-        [Description("Which infobox.Data label names to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Pick 3-6 relevant fields.")]
+        [Description(
+            "Which infobox.Data label names to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Pick 3-6 relevant fields."
+        )]
             List<string> fields,
         [Description("Optional text search to filter results by page title")] string? search = null,
         [Description("Number of rows per page (default 25)")] int pageSize = 25
@@ -48,7 +50,8 @@ public class ComponentToolkit
     public DataTableDescriptor RenderDataTable(
         [Description("Descriptive title for the table")] string title,
         [Description("Column header names")] List<string> columns,
-        [Description("Row data — each row is a list of string values in the same order as columns")] List<List<string>> rows
+        [Description("Row data — each row is a list of string values in the same order as columns")]
+            List<List<string>> rows
     )
     {
         DataTableResult = new DataTableDescriptor
@@ -68,10 +71,17 @@ public class ComponentToolkit
     public ChartDescriptor RenderChart(
         [Description("Bar, Line, Pie, Donut, StackedBar, TimeSeries, or Radar")] string chartType,
         [Description("Descriptive title for the chart")] string title,
-        [Description("For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)")] List<string>? xAxisLabels = null,
+        [Description(
+            "For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)"
+        )]
+            List<string>? xAxisLabels = null,
         [Description("For Pie/Donut: slice labels")] List<string>? labels = null,
-        [Description("For Bar/Line/StackedBar/Pie/Donut/Radar: array of { name, data: number[] }")] List<ChartSeries>? series = null,
-        [Description("For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }")] List<TimeSeriesChartSeries>? timeSeries = null
+        [Description("For Bar/Line/StackedBar/Pie/Donut/Radar: array of { name, data: number[] }")]
+            List<ChartSeries>? series = null,
+        [Description(
+            "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"
+        )]
+            List<TimeSeriesChartSeries>? timeSeries = null
     )
     {
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
@@ -95,15 +105,23 @@ public class ComponentToolkit
             + "Use search_pages_by_name first to find the entity's id."
     )]
     public GraphDescriptor RenderGraph(
-        [Description("The entity's integer PageId (_id) from the Pages collection")] int rootEntityId,
-        [Description("The entity's display name (title field from the Pages collection)")] string rootEntityName,
+        [Description("The entity's integer PageId (_id) from the Pages collection")]
+            int rootEntityId,
+        [Description("The entity's display name (title field from the Pages collection)")]
+            string rootEntityName,
         [Description("Descriptive title for the graph")] string title,
         [Description(
             "The infobox type name (e.g. Character). "
                 + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name. Default: Character"
         )]
             string infoboxType = "Character",
-        [Description("How many relationship levels to traverse (default 3)")] int maxDepth = 3
+        [Description("How many relationship levels to traverse from the root. Use 1 for direct relationships only (default). Use 2+ only for multi-generational queries like full family trees.")] int maxDepth = 1,
+        [Description("Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). Linked entities are placed one generation above.")]
+            List<string>? upLabels = null,
+        [Description("Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). Linked entities are placed one generation below.")]
+            List<string>? downLabels = null,
+        [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). Linked entities are placed on the same level.")]
+            List<string>? peerLabels = null
     )
     {
         GraphResult = new GraphDescriptor
@@ -113,10 +131,15 @@ public class ComponentToolkit
             RootEntityName = rootEntityName,
             Collection = infoboxType,
             MaxDepth = maxDepth,
+            UpLabels = upLabels ?? [],
+            DownLabels = downLabels ?? [],
+            PeerLabels = peerLabels ?? [],
         };
         return GraphResult;
     }
 
+    public InfoboxDescriptor? InfoboxResult { get; private set; }
+    public TextDescriptor? TextResult { get; private set; }
     public TimelineDescriptor? TimelineResult { get; private set; }
 
     [Description(
@@ -134,11 +157,21 @@ public class ComponentToolkit
         )]
             List<string> categories,
         [Description("Number of year groups per page (default 15)")] int pageSize = 15,
-        [Description("Start of year range (e.g. 41 for 41 BBY). Use to scope timeline to a specific period.")] float? yearFrom = null,
-        [Description("Demarcation for yearFrom: 'BBY' or 'ABY'")] string? yearFromDemarcation = null,
-        [Description("End of year range (e.g. 4 for 4 ABY). Use to scope timeline to a specific period.")] float? yearTo = null,
+        [Description(
+            "Start of year range (e.g. 41 for 41 BBY). Use to scope timeline to a specific period."
+        )]
+            float? yearFrom = null,
+        [Description("Demarcation for yearFrom: 'BBY' or 'ABY'")]
+            string? yearFromDemarcation = null,
+        [Description(
+            "End of year range (e.g. 4 for 4 ABY). Use to scope timeline to a specific period."
+        )]
+            float? yearTo = null,
         [Description("Demarcation for yearTo: 'BBY' or 'ABY'")] string? yearToDemarcation = null,
-        [Description("Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')")] string? search = null
+        [Description(
+            "Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')"
+        )]
+            string? search = null
     )
     {
         TimelineResult = new TimelineDescriptor
@@ -155,12 +188,51 @@ public class ComponentToolkit
         return TimelineResult;
     }
 
+    [Description(
+        "Render one or more wiki-style infobox cards for specific pages. "
+            + "Use when the user asks about a specific entity (e.g. 'tell me about Mace Windu', 'bring up Darth Vader'). "
+            + "You MUST search for the entity first using search_pages_by_name to get the PageId(s). "
+            + "Can render multiple cards side-by-side for comparisons."
+    )]
+    public InfoboxDescriptor RenderInfobox(
+        [Description("Descriptive title (e.g. 'Mace Windu' or 'Yoda vs Count Dooku')")]
+            string title,
+        [Description(
+            "One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these."
+        )]
+            List<int> pageIds
+    )
+    {
+        InfoboxResult = new InfoboxDescriptor { Title = title, PageIds = pageIds };
+        return InfoboxResult;
+    }
+
+    [Description(
+        "Render text content — article excerpts, summaries, or RAG results from wiki pages. "
+            + "Use when the user asks for information that is best presented as readable text rather than a chart or table. "
+            + "You MUST fetch the page data first using get_page_by_id or search tools, then extract the relevant sections. "
+            + "Can combine text from multiple pages for comparative answers."
+    )]
+    public TextDescriptor RenderText(
+        [Description("Descriptive title for the text section")] string title,
+        [Description(
+            "Text sections to display — each with heading, content, and optional source page info"
+        )]
+            List<TextSection> sections
+    )
+    {
+        TextResult = new TextDescriptor { Title = title, Sections = sections };
+        return TextResult;
+    }
+
     public List<AITool> AsAIFunctions() =>
-    [
-        AIFunctionFactory.Create(RenderTable, "render_table"),
-        AIFunctionFactory.Create(RenderDataTable, "render_data_table"),
-        AIFunctionFactory.Create(RenderChart, "render_chart"),
-        AIFunctionFactory.Create(RenderGraph, "render_graph"),
-        AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
-    ];
+        [
+            AIFunctionFactory.Create(RenderTable, "render_table"),
+            AIFunctionFactory.Create(RenderDataTable, "render_data_table"),
+            AIFunctionFactory.Create(RenderChart, "render_chart"),
+            AIFunctionFactory.Create(RenderGraph, "render_graph"),
+            AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
+            AIFunctionFactory.Create(RenderInfobox, "render_infobox"),
+            AIFunctionFactory.Create(RenderText, "render_text"),
+        ];
 }

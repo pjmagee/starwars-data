@@ -17,9 +17,13 @@
     }
     else if (_treeNodes is not null)
     {
-        <div style="width:100%;height:650px;">
+        <div style="width:100%; height:@(_canvasHeight)px;">
             <CascadingValue Value="_diagram" IsFixed="true">
-                <DiagramCanvas></DiagramCanvas>
+                <DiagramCanvas>
+                    <Widgets>
+                        <GridWidget Size="20" Mode="GridMode.Point" ZoomThreshold="0" BackgroundColor="#16162e" />
+                    </Widgets>
+                </DiagramCanvas>
             </CascadingValue>
         </div>
     }
@@ -35,6 +39,8 @@
     private readonly Dictionary<int, NodeModel> _nodeModels = new();
     private bool _loading = true;
     private string? _error;
+    private int _canvasHeight = 650;
+    private int _loadGeneration;
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -51,6 +57,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        var generation = ++_loadGeneration;
+
         _loading = true;
         _error = null;
         _treeNodes = null;
@@ -62,8 +70,13 @@
         try
         {
             var collection = Uri.EscapeDataString(Descriptor.Collection);
-            var result = await Http.GetFromJsonAsync<GraphResult>(
-                $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={Descriptor.MaxDepth}");
+            var query = $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={Descriptor.MaxDepth}";
+            foreach (var l in Descriptor.UpLabels)   query += $"&upLabels={Uri.EscapeDataString(l)}";
+            foreach (var l in Descriptor.DownLabels) query += $"&downLabels={Uri.EscapeDataString(l)}";
+            foreach (var l in Descriptor.PeerLabels) query += $"&peerLabels={Uri.EscapeDataString(l)}";
+            var result = await Http.GetFromJsonAsync<GraphResult>(query);
+
+            if (generation != _loadGeneration) return; // stale — a newer load started
 
             if (result?.Nodes is { Count: > 0 })
             {
@@ -78,11 +91,13 @@
         }
         catch (Exception ex)
         {
+            if (generation != _loadGeneration) return;
             _error = $"Failed to load graph: {ex.Message}";
         }
         finally
         {
-            _loading = false;
+            if (generation == _loadGeneration)
+                _loading = false;
         }
     }
 
@@ -92,45 +107,58 @@
 
         _diagram.SuspendSorting = true;
 
-        const double nodeW = 210;
-        const double nodeH = 85;
-        const double hGap  = 40;
-        const double vGap  = 60;
+        const double nodeW = 260;
+        const double nodeH = 100;
+        const double hGap = 50;
+        const double vGap = 90;
 
         var byGen = _treeNodes.Values
             .GroupBy(n => n.Generation)
             .OrderBy(g => g.Key)
             .ToList();
 
+        int minGen = byGen.Min(g => g.Key);
         int maxInRow = byGen.Max(g => g.Count());
         double maxRowW = maxInRow * nodeW + (maxInRow - 1) * hGap;
+
+        // Calculate canvas height based on generation count
+        _canvasHeight = Math.Max(650, byGen.Count * (int)(nodeH + vGap) + 100);
 
         foreach (var genGroup in byGen)
         {
             var row = genGroup.OrderBy(n => n.Name).ToList();
             double rowW = row.Count * nodeW + (row.Count - 1) * hGap;
             double startX = (maxRowW - rowW) / 2.0;
-            double y = genGroup.Key * (nodeH + vGap);
+            double y = (genGroup.Key - minGen) * (nodeH + vGap);
 
             for (int i = 0; i < row.Count; i++)
             {
                 var n = row[i];
                 double x = startX + i * (nodeW + hGap);
-                var dn = new DiagramNode(n.Name, NodeAttributes(n),
-                    new Blazor.Diagrams.Core.Geometry.Point(x, y));
+
+                var dn = new DiagramNode(
+                    label: n.Name,
+                    attributes: NodeAttributes(n),
+                    imageUrl: string.IsNullOrEmpty(n.ImageUrl) ? null : n.ImageUrl,
+                    isRoot: n.Id == rootId,
+                    position: new Blazor.Diagrams.Core.Geometry.Point(x, y));
+
                 _diagram.Nodes.Add(dn);
                 _nodeModels[n.Id] = dn;
             }
         }
 
+        // Create links with relationship labels
         if (_graphResult is not null)
         {
             foreach (var edge in _graphResult.Edges)
             {
                 if (_nodeModels.TryGetValue(edge.FromId, out var from) &&
-                    _nodeModels.TryGetValue(edge.ToId,   out var to))
+                    _nodeModels.TryGetValue(edge.ToId, out var to))
                 {
-                    _diagram.Links.Add(new LinkModel(from, to));
+                    var link = _diagram.Links.Add(new LinkModel(from, to));
+                    var labelText = FormatEdgeLabel(edge.Label);
+                    link.Labels.Add(new LinkLabelModel(link, labelText));
                 }
             }
         }
@@ -138,6 +166,9 @@
         _diagram.SuspendSorting = false;
         _diagram.Refresh();
     }
+
+    private static string FormatEdgeLabel(string label) =>
+        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(label);
 
     private static string TrimDate(string s)
     {

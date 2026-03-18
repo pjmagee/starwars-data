@@ -1,7 +1,5 @@
-using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Serializers;
 
 namespace StarWarsData.Models.Entities;
 
@@ -17,8 +15,8 @@ public class Page
     [BsonElement("infobox")]
     public PageInfobox? Infobox { get; set; }
 
-    [BsonElement("sections")]
-    public required List<ArticleSection> Sections { get; set; }
+    [BsonElement("content")]
+    public string Content { get; set; } = string.Empty;
 
     [BsonElement("categories")]
     public required List<string> Categories { get; set; }
@@ -42,26 +40,4 @@ public class Page
 
     [BsonElement("downloadedAt")]
     public DateTime DownloadedAt { get; set; }
-}
-
-public class ArticleSection
-{
-    [BsonElement("heading")]
-    public required string Heading { get; set; }
-
-    [BsonElement("content")]
-    [JsonPropertyName("content")]
-    public required string Content { get; set; }
-
-    [BsonElement("plainText")]
-    [JsonPropertyName("plainText")]
-    public required string PlainText { get; set; }
-
-    [BsonElement("level")]
-    [JsonPropertyName("level")]
-    public int Level { get; set; }
-
-    [BsonElement("links")]
-    [JsonPropertyName("links")]
-    public List<string> Links { get; set; } = [];
 }

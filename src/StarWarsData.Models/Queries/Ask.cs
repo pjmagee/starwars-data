@@ -118,7 +118,10 @@ public class ChartDescriptor
     public ChartOptions? Options { get; set; }
 }
 
-[Description("Relationship graph component configuration — the frontend fetches graph data from the API")]
+[Description("Relationship graph component configuration — the frontend fetches graph data from the API. " +
+    "The AI must sample the root entity's infobox labels and classify which ones represent relationships, " +
+    "then assign them to upLabels (ancestor/master direction), downLabels (descendant/apprentice direction), " +
+    "or peerLabels (same generation — partners, siblings). Only include labels that have links to other entities of the same collection type.")]
 public class GraphDescriptor
 {
     [JsonPropertyName("title")]
@@ -138,8 +141,23 @@ public class GraphDescriptor
     public string Collection { get; set; } = "Character";
 
     [JsonPropertyName("maxDepth")]
-    [Description("How many generations to traverse (default 3)")]
-    public int MaxDepth { get; set; } = 3;
+    [Description("How many generations to traverse (default 1). Use 1 for direct relationships, 2+ only for multi-generational family trees.")]
+    public int MaxDepth { get; set; } = 1;
+
+    [JsonPropertyName("upLabels")]
+    [Description("Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). " +
+        "Linked entities are placed one generation above the current node.")]
+    public List<string> UpLabels { get; set; } = [];
+
+    [JsonPropertyName("downLabels")]
+    [Description("Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). " +
+        "Linked entities are placed one generation below the current node.")]
+    public List<string> DownLabels { get; set; } = [];
+
+    [JsonPropertyName("peerLabels")]
+    [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). " +
+        "Linked entities are placed on the same generation level.")]
+    public List<string> PeerLabels { get; set; } = [];
 }
 
 [Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]
@@ -176,6 +194,49 @@ public class TimelineDescriptor
     [JsonPropertyName("search")]
     [Description("Optional text to filter timeline event titles")]
     public string? Search { get; set; }
+}
+
+[Description("Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID.")]
+public class InfoboxDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Descriptive title (e.g. 'Mace Windu' or 'Comparing Yoda and Dooku')")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("pageIds")]
+    [Description("One or more PageId integers to display as infobox cards")]
+    public List<int> PageIds { get; set; } = [];
+}
+
+[Description("Text content — renders article text, summaries, or RAG excerpts from wiki pages")]
+public class TextDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Descriptive title for the text section")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("sections")]
+    [Description("Text sections to display, each with a heading and content")]
+    public List<TextSection> Sections { get; set; } = [];
+}
+
+public class TextSection
+{
+    [JsonPropertyName("heading")]
+    [Description("Section heading (e.g. 'Biography', 'Powers and Abilities')")]
+    public string Heading { get; set; } = string.Empty;
+
+    [JsonPropertyName("content")]
+    [Description("The text content — plain text or markdown")]
+    public string Content { get; set; } = string.Empty;
+
+    [JsonPropertyName("sourcePageId")]
+    [Description("Optional PageId this text was sourced from")]
+    public int? SourcePageId { get; set; }
+
+    [JsonPropertyName("sourcePageTitle")]
+    [Description("Optional title of the source page")]
+    public string? SourcePageTitle { get; set; }
 }
 
 // ── Chart data types ───────────────────────────────────────────────────

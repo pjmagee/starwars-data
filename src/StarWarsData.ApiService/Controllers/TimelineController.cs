@@ -11,20 +11,17 @@ public class TimelineController : ControllerBase
 {
     readonly ILogger<TimelineController> _logger;
     readonly TimelineService _timelineService;
-    readonly CollectionFilters _collectionFilters;
-    readonly IHttpContextAccessor _contextAccessor;
+    readonly RecordService _recordService;
 
     public TimelineController(
         ILogger<TimelineController> logger,
         TimelineService timelineService,
-        CollectionFilters collectionFilters,
-        IHttpContextAccessor contextAccessor
+        RecordService recordService
     )
     {
         _logger = logger;
         _timelineService = timelineService;
-        _collectionFilters = collectionFilters;
-        _contextAccessor = contextAccessor;
+        _recordService = recordService;
     }
 
     [HttpGet("eras")]
@@ -35,7 +32,6 @@ public class TimelineController : ControllerBase
         [FromQuery] TimelineQueryParams queryParams
     )
     {
-        // Let the service handle an empty or null category list (treat as "all categories")
         var categories = queryParams.Categories;
         return await _timelineService.GetTimelineEvents(
             categories,
@@ -51,10 +47,17 @@ public class TimelineController : ControllerBase
         );
     }
 
+    /// <summary>
+    /// Returns distinct infobox template names from Pages, filtered by continuity and universe.
+    /// </summary>
     [HttpGet("categories")]
-    public async Task<IEnumerable<string>> GetTimelineCategories()
+    public async Task<List<string>> GetTimelineCategories(
+        [FromQuery] Continuity? continuity = null,
+        [FromQuery] Universe? universe = null,
+        CancellationToken cancellationToken = default
+    )
     {
-        return await _timelineService.GetDistinctTemplatesAsync();
+        return await _recordService.GetFilteredCollectionNames(continuity, universe, cancellationToken);
     }
 
     [HttpGet("categories/{category}/events")]

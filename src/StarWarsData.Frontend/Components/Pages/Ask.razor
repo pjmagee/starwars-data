@@ -79,40 +79,71 @@
     @if (_turns.Count > 0)
     {
         <MudStack Class="mt-6" Spacing="3">
-            @foreach (var turn in _turns)
+            @foreach (var group in GetDisplayGroups())
             {
-                @if (turn.Role == TurnRole.User)
+                @if (group.Role == TurnRole.User)
                 {
                     <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:var(--mud-palette-background-grey)">
                         <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
-                        <MudText Typo="Typo.body1">@turn.Content</MudText>
+                        <MudText Typo="Typo.body1">@group.Turn!.Content</MudText>
                     </MudPaper>
                 }
-                else if (turn.Role == TurnRole.ToolCall)
+                else if (group.Role == TurnRole.ToolCall)
                 {
-                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary)">
-                        @if (turn.IsComplete)
-                        {
-                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" Style="margin-top:2px" />
-                        }
-                        else
-                        {
-                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="margin-top:2px" />
-                        }
-                        <MudStack Spacing="0">
-                            <MudText Typo="Typo.body2" Style="font-weight:600">@FriendlyToolName(turn.ToolName)</MudText>
-                            @if (!string.IsNullOrEmpty(turn.Content))
+                    var calls = group.ToolCalls!;
+                    var completedCount = calls.Count(t => t.IsComplete);
+                    var allComplete = completedCount == calls.Count;
+                    var groupKey = group.GroupIndex;
+                    var isExpanded = !allComplete || _expandedToolGroups.Contains(groupKey);
+
+                    <MudPaper Elevation="0" Class="pa-2 px-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary);border-radius:0">
+                        <div class="d-flex align-center gap-2 cursor-pointer" @onclick="() => ToggleToolGroup(groupKey)" style="user-select:none">
+                            @if (allComplete)
                             {
-                                <MudText Typo="Typo.caption" Color="Color.Secondary">@turn.Content</MudText>
+                                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
                             }
-                        </MudStack>
+                            else
+                            {
+                                <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                            }
+                            <MudText Typo="Typo.body2" Style="font-weight:600;flex:1">
+                                @if (allComplete)
+                                {
+                                    @($"Analyzed in {calls.Count} step{(calls.Count != 1 ? "s" : "")}")
+                                }
+                                else
+                                {
+                                    @($"Analyzing… ({completedCount}/{calls.Count})")
+                                }
+                            </MudText>
+                            <MudIcon Icon="@(isExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)" Size="Size.Small" Color="Color.Secondary" />
+                        </div>
+                        @if (isExpanded)
+                        {
+                            <MudStack Spacing="1" Class="mt-2 ml-7">
+                                @foreach (var tc in calls)
+                                {
+                                    <div class="d-flex align-center gap-2">
+                                        @if (tc.IsComplete)
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Success" Style="font-size:14px" />
+                                        }
+                                        else
+                                        {
+                                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:14px;height:14px" />
+                                        }
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FriendlyToolName(tc.ToolName)</MudText>
+                                    </div>
+                                }
+                            </MudStack>
+                        }
                     </MudPaper>
                 }
-                else if (turn.Role == TurnRole.Assistant)
+                else if (group.Role == TurnRole.Assistant)
                 {
                     <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3">
                         <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
-                        <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@turn.Content</MudText>
+                        <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@group.Turn!.Content</MudText>
                     </MudPaper>
                 }
             }
@@ -159,6 +190,16 @@
         <AskTimelineView Descriptor="_timelineDescriptor" />
     }
 
+    @if (!_loading && _infoboxDescriptor is not null)
+    {
+        <AskInfoboxView Descriptor="_infoboxDescriptor" />
+    }
+
+    @if (!_loading && _textDescriptor is not null)
+    {
+        <AskTextView Descriptor="_textDescriptor" />
+    }
+
 </MudContainer>
 
 @code {
@@ -171,6 +212,8 @@
         public bool IsComplete { get; set; }
     }
 
+    record DisplayGroup(TurnRole Role, Turn? Turn = null, List<Turn>? ToolCalls = null, int GroupIndex = 0);
+
     private AskModel _model = new();
     private bool _loading;
     private bool _hasResult;
@@ -178,6 +221,7 @@
     private readonly List<Turn> _turns = [];
     private readonly Dictionary<string, string> _toolCallNames = [];
     private readonly Dictionary<string, Turn> _toolCallTurns = [];
+    private readonly HashSet<int> _expandedToolGroups = [];
     private Turn? _currentAssistantTurn;
 
     // descriptor results from AI
@@ -186,6 +230,8 @@
     private ChartDescriptor? _chartDescriptor;
     private GraphDescriptor? _graphDescriptor;
     private TimelineDescriptor? _timelineDescriptor;
+    private InfoboxDescriptor? _infoboxDescriptor;
+    private TextDescriptor? _textDescriptor;
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
@@ -245,6 +291,26 @@
                 "What campaigns took place during the Galactic Civil War?",
                 "Show a timeline of missions during the Age of the Empire",
             ]),
+        new("infobox", "Infobox", "Wiki-style info cards for specific characters, planets, ships, etc.",
+            "e.g. Bring up Mace Windu",
+            Icons.Material.Filled.Badge, Color.Success,
+            [
+                "Bring up Mace Windu",
+                "Show me Darth Vader's info",
+                "Compare Yoda and Count Dooku",
+                "Show the infobox for the Millennium Falcon",
+                "Look up Tatooine",
+            ]),
+        new("text", "Article", "Text excerpts, summaries, and lore from wiki articles",
+            "e.g. Tell me about the history of the Jedi Order",
+            Icons.Material.Filled.Article, Color.Dark,
+            [
+                "Tell me about the history of the Jedi Order",
+                "What is the Rule of Two?",
+                "Explain the significance of kyber crystals",
+                "What happened during Order 66?",
+                "Describe the Battle of Endor",
+            ]),
     ];
 
     private string? _selectedMode;
@@ -297,11 +363,14 @@
         _dataTableDescriptor = null;
         _graphDescriptor = null;
         _timelineDescriptor = null;
+        _infoboxDescriptor = null;
+        _textDescriptor = null;
         _error = null;
         _hasResult = false;
         _turns.Clear();
         _toolCallNames.Clear();
         _toolCallTurns.Clear();
+        _expandedToolGroups.Clear();
         _currentAssistantTurn = null;
         StateHasChanged();
 
@@ -382,7 +451,7 @@
                         {
                             var callId   = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
                             var toolName = callId is not null && _toolCallNames.TryGetValue(callId, out var n) ? n : null;
-                            if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline"
+                            if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_text"
                                 && root.TryGetProperty("content", out var contentEl))
                             {
                                 var contentJson = contentEl.ValueKind == JsonValueKind.String
@@ -410,6 +479,12 @@
                                             break;
                                         case "render_timeline":
                                             _timelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_infobox":
+                                            _infoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(contentJson, JsonOpts);
+                                            break;
+                                        case "render_text":
+                                            _textDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
                                             break;
                                     }
                                 }
@@ -446,7 +521,9 @@
                 || _graphDescriptor is not null
                 || _tableDescriptor is not null
                 || _dataTableDescriptor is not null
-                || _timelineDescriptor is not null;
+                || _timelineDescriptor is not null
+                || _infoboxDescriptor is not null
+                || _textDescriptor is not null;
 
             if (!_hasResult && _error is null && _turns.All(t => t.Role != TurnRole.Assistant))
             {
@@ -468,6 +545,38 @@
         }
     }
 
+    private List<DisplayGroup> GetDisplayGroups()
+    {
+        var groups = new List<DisplayGroup>();
+        var i = 0;
+        while (i < _turns.Count)
+        {
+            if (_turns[i].Role == TurnRole.ToolCall)
+            {
+                var startIndex = i;
+                var calls = new List<Turn>();
+                while (i < _turns.Count && _turns[i].Role == TurnRole.ToolCall)
+                {
+                    calls.Add(_turns[i]);
+                    i++;
+                }
+                groups.Add(new DisplayGroup(TurnRole.ToolCall, ToolCalls: calls, GroupIndex: startIndex));
+            }
+            else
+            {
+                groups.Add(new DisplayGroup(_turns[i].Role, Turn: _turns[i], GroupIndex: i));
+                i++;
+            }
+        }
+        return groups;
+    }
+
+    private void ToggleToolGroup(int key)
+    {
+        if (!_expandedToolGroups.Add(key))
+            _expandedToolGroups.Remove(key);
+    }
+
     private static string FriendlyToolName(string? name) => name switch
     {
         "render_table"             => "Configuring table",
@@ -484,6 +593,8 @@
         "get_page_by_id"           => "Fetching page",
         "get_page_property"        => "Reading property",
         "sample_property_values"   => "Sampling values",
+        "render_infobox"           => "Rendering infobox",
+        "render_text"              => "Rendering text",
         "find"                     => "Querying Pages",
         "aggregate"                => "Aggregating data",
         "count"                    => "Counting documents",

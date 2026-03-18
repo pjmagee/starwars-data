@@ -1,0 +1,147 @@
+@using StarWarsData.Models.Queries
+@using StarWarsData.Models.Entities
+@using WikiPage = StarWarsData.Models.Entities.Page
+@inject IHttpClientFactory HttpClientFactory
+
+@if (_loading)
+{
+    <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mt-4" />
+}
+
+@if (_pages.Count > 0)
+{
+    <MudText Typo="Typo.h5" Class="mt-6 mb-3">@Descriptor.Title</MudText>
+
+    <MudGrid Spacing="3">
+        @foreach (var wikiPage in _pages)
+        {
+            <MudItem xs="12" sm="@(_pages.Count == 1 ? 12 : 6)" md="@ColWidth">
+                <MudCard Outlined="true" Class="infobox-card">
+                    @* Header with image *@
+                    @if (wikiPage.Infobox?.ImageUrl is not null)
+                    {
+                        <MudCardMedia Image="@StripRevision(wikiPage.Infobox.ImageUrl)" Height="300" />
+                    }
+
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h6">@wikiPage.Title</MudText>
+                            @if (wikiPage.Infobox?.Template is not null)
+                            {
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                    @SanitizeTemplate(wikiPage.Infobox.Template)
+                                    @if (wikiPage.Continuity != Continuity.Unknown)
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                 Color="@(wikiPage.Continuity == Continuity.Canon ? Color.Primary : Color.Secondary)"
+                                                 Class="ml-2">
+                                            @wikiPage.Continuity
+                                        </MudChip>
+                                    }
+                                </MudText>
+                            }
+                        </CardHeaderContent>
+                    </MudCardHeader>
+
+                    <MudCardContent>
+                        @if (wikiPage.Infobox?.Data is not null)
+                        {
+                            <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
+                                <tbody>
+                                    @foreach (var prop in wikiPage.Infobox.Data.Where(p => HasContent(p)))
+                                    {
+                                        <tr>
+                                            <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
+                                                @prop.Label
+                                            </td>
+                                            <td style="padding:6px 12px;">
+                                                @foreach (var link in prop.Links)
+                                                {
+                                                    <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                }
+                                                @GetPlainValues(prop)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </MudSimpleTable>
+                        }
+                    </MudCardContent>
+
+                    <MudCardActions>
+                        <MudButton Href="@wikiPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                            View on Wookieepedia
+                        </MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public InfoboxDescriptor Descriptor { get; set; } = default!;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private List<WikiPage> _pages = [];
+    private bool _loading;
+
+    private int ColWidth => _pages.Count switch
+    {
+        1 => 8,
+        2 => 6,
+        _ => 4,
+    };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Descriptor?.PageIds is null || Descriptor.PageIds.Count == 0) return;
+
+        _loading = true;
+        StateHasChanged();
+
+        try
+        {
+            if (Descriptor.PageIds.Count == 1)
+            {
+                var page = await Http.GetFromJsonAsync<WikiPage>($"Pages/{Descriptor.PageIds[0]}");
+                _pages = page is not null ? [page] : [];
+            }
+            else
+            {
+                var result = await Http.PostAsJsonAsync("Pages/batch", Descriptor.PageIds.ToArray());
+                _pages = await result.Content.ReadFromJsonAsync<List<WikiPage>>() ?? [];
+            }
+        }
+        catch
+        {
+            _pages = [];
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private static bool HasContent(InfoboxProperty prop) =>
+        prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
+
+    private static string GetPlainValues(InfoboxProperty prop)
+    {
+        var linkTexts = prop.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var plain = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v));
+        return string.Join(", ", plain);
+    }
+
+    private static string StripRevision(string url) =>
+        url.Split("/revision")[0];
+
+    private static string SanitizeTemplate(string template)
+    {
+        var lastColon = template.LastIndexOf(':');
+        var name = lastColon >= 0 ? template[(lastColon + 1)..] : template;
+        return name.Replace("_infobox", "").Replace("_", " ").Trim();
+    }
+}

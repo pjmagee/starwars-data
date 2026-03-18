@@ -1,57 +1,108 @@
-.tree-node {
-    padding: 10px 14px;
-    background: #1a1a2e;
-    border: 1px solid #4a4a8a;
-    border-radius: 8px;
-    min-width: 170px;
-    max-width: 220px;
+.graph-node {
+    background: #1e1e38;
+    border: 2px solid #3a3a6a;
+    border-radius: 10px;
+    min-width: 220px;
+    max-width: 260px;
     font-size: 12px;
     color: #e0e0f0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     -webkit-user-select: none;
     user-select: none;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.tree-node.selected {
+.graph-node:hover {
+    border-color: #6a6aaa;
+    box-shadow: 0 4px 24px rgba(100, 100, 200, 0.3);
+}
+
+.graph-node.selected {
     border-color: #7b68ee;
-    box-shadow: 0 0 0 2px rgba(123, 104, 238, 0.4);
+    box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.35);
 }
 
-.tree-node-name {
+.graph-node.root {
+    border-color: #c8a832;
+    box-shadow: 0 0 16px rgba(200, 168, 50, 0.25);
+}
+
+.graph-node.root:hover {
+    border-color: #e0c040;
+    box-shadow: 0 0 20px rgba(200, 168, 50, 0.4);
+}
+
+/* Body: image + info side by side */
+.graph-node-body {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    align-items: flex-start;
+}
+
+.graph-node-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #3a3a6a;
+    background: #12122a;
+}
+
+.graph-node-img-placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    border: 1px solid #3a3a6a;
+    background: #12122a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph-node-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.graph-node-name {
     font-weight: 700;
     font-size: 13px;
-    color: #c8b8ff;
-    margin-bottom: 6px;
+    color: #e8e0ff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: 4px;
     border-bottom: 1px solid #333360;
-    padding-bottom: 5px;
+    margin-bottom: 2px;
 }
 
-.tree-node-attrs {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    margin-top: 2px;
+.root .graph-node-name {
+    color: #ffd866;
 }
 
-.tree-node-attr {
+.graph-node-attr {
     display: flex;
     justify-content: space-between;
     gap: 6px;
     font-size: 11px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
-.tree-node-attr-key {
-    color: #888aaa;
+.attr-key {
+    color: #7a7a9e;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
-.tree-node-attr-value {
-    color: #d0d0e8;
+.attr-val {
+    color: #c8c8e8;
     text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;

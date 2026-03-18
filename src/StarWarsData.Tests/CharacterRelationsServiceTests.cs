@@ -230,7 +230,7 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
             Title = name,
             WikiUrl = wikiUrl,
             Continuity = Continuity.Legends,
-            Sections = [],
+            Content = string.Empty,
             Categories = [],
             Images = [],
             Infobox = new PageInfobox

@@ -67,6 +67,62 @@ public class RecordService
         return names;
     }
 
+    public async Task<Page?> GetPageById(int pageId, CancellationToken cancellationToken)
+    {
+        return await PagesCollection
+            .Find(Builders<Page>.Filter.Eq(p => p.PageId, pageId))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public async Task<List<Page>> GetPagesByIds(IEnumerable<int> pageIds, CancellationToken cancellationToken)
+    {
+        var filter = Builders<Page>.Filter.In(p => p.PageId, pageIds);
+        return await PagesCollection.Find(filter).ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<string>> GetFilteredCollectionNames(
+        Continuity? continuity,
+        Universe? universe,
+        CancellationToken cancellationToken)
+    {
+        var matchConditions = new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value));
+
+        if (continuity != null && continuity != Continuity.Both)
+        {
+            // Include pages that match the specific continuity OR are marked as Both
+            matchConditions.Add("continuity", new BsonDocument("$in",
+                new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString() }));
+        }
+
+        if (universe == Universe.InUniverse)
+        {
+            // Exclude out-of-universe pages; include InUniverse and Unknown
+            matchConditions.Add("universe", new BsonDocument("$ne", Universe.OutOfUniverse.ToString()));
+        }
+        else if (universe == Universe.OutOfUniverse)
+        {
+            // Include out-of-universe and Unknown
+            matchConditions.Add("universe", new BsonDocument("$in",
+                new BsonArray { Universe.OutOfUniverse.ToString(), Universe.Unknown.ToString() }));
+        }
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", matchConditions),
+            new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
+        };
+
+        var cursor = await PagesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync(cancellationToken);
+        return cursor
+            .Select(d => d["_id"].IsBsonNull ? null : d["_id"].AsString)
+            .Where(n => !string.IsNullOrWhiteSpace(n))
+            .Select(n => SanitizeTemplateName(n!))
+            .Where(n => n != "Unknown")
+            .Distinct()
+            .OrderBy(x => x)
+            .ToList();
+    }
+
     public async Task DeletePagesCollections(CancellationToken cancellationToken)
     {
         var pagesDb = _mongoClient.GetDatabase(_pagesDbName);
@@ -271,6 +327,153 @@ public class RecordService
         );
 
         _logger.LogInformation("Categorized timeline events creation complete");
+    }
+
+    /// <summary>
+    /// Creates a MongoDB view per distinct infobox template type.
+    /// Each view is a lightweight pipeline on the Pages collection filtered by infobox.Template.
+    /// Drops any existing template views first.
+    /// </summary>
+    public async Task CreateTemplateViewsAsync(CancellationToken cancellationToken)
+    {
+        var database = _mongoClient.GetDatabase(_pagesDbName);
+
+        // Drop existing views (only views, not real collections like Pages/JobState)
+        var viewFilter = new BsonDocument("type", "view");
+        using var viewCursor = await database.ListCollectionsAsync(
+            new ListCollectionsOptions { Filter = viewFilter },
+            cancellationToken);
+        var existingViews = await viewCursor.ToListAsync(cancellationToken);
+
+        foreach (var view in existingViews)
+        {
+            var viewName = view["name"].AsString;
+            _logger.LogInformation("Dropping existing view: {ViewName}", viewName);
+            await database.DropCollectionAsync(viewName, cancellationToken);
+        }
+
+        // Get distinct template names
+        var templateNames = await GetCollectionNames(cancellationToken);
+
+        foreach (var templateName in templateNames)
+        {
+            var pattern = templateName.Replace(" ", "[_ ]");
+            var pipeline = new BsonArray
+            {
+                new BsonDocument("$match", new BsonDocument("infobox.Template",
+                    new BsonDocument("$regex", new BsonRegularExpression($":{pattern}$", "i"))))
+            };
+
+            var command = new BsonDocument
+            {
+                { "create", templateName },
+                { "viewOn", "Pages" },
+                { "pipeline", pipeline }
+            };
+
+            try
+            {
+                await database.RunCommandAsync<BsonDocument>(command, cancellationToken: cancellationToken);
+                _logger.LogInformation("Created view: {ViewName}", templateName);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to create view: {ViewName}", templateName);
+            }
+        }
+
+        _logger.LogInformation("Template views creation complete. Created {Count} views.", templateNames.Count);
+    }
+
+    /// <summary>
+    /// Creates indexes on the Pages collection and all timeline event collections
+    /// to support common query patterns.
+    /// </summary>
+    public async Task EnsureIndexesAsync(CancellationToken cancellationToken)
+    {
+        var pagesDb = _mongoClient.GetDatabase(_pagesDbName);
+        var pages = pagesDb.GetCollection<Page>("Pages");
+
+        _logger.LogInformation("Creating indexes on Pages collection");
+
+        // infobox.Template — template-based filtering (most common query pattern)
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending("infobox.Template"),
+                new CreateIndexOptions { Name = "idx_infobox_template", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // wikiUrl — relationship graph BFS lookups via $in
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending(p => p.WikiUrl),
+                new CreateIndexOptions { Name = "idx_wikiUrl", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // title — text search with regex
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending(p => p.Title),
+                new CreateIndexOptions { Name = "idx_title", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // continuity — global filtering
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending(p => p.Continuity),
+                new CreateIndexOptions { Name = "idx_continuity", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // infobox.Data.Label — AI toolkit label-based searches
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending("infobox.Data.Label"),
+                new CreateIndexOptions { Name = "idx_infobox_data_label", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // Compound: infobox.Template + continuity — filtered template queries
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys.Ascending("infobox.Template").Ascending(p => p.Continuity),
+                new CreateIndexOptions { Name = "idx_template_continuity", Background = true }),
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Pages indexes created");
+
+        // Timeline event collections — add Continuity and Universe indexes
+        var timelineDb = _mongoClient.GetDatabase(_timelineEventsDbName);
+        var collectionNames = await timelineDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var collections = await collectionNames.ToListAsync(cancellationToken);
+
+        foreach (var collName in collections)
+        {
+            var coll = timelineDb.GetCollection<TimelineEvent>(collName);
+
+            await coll.Indexes.CreateOneAsync(
+                new CreateIndexModel<TimelineEvent>(
+                    Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Continuity),
+                    new CreateIndexOptions { Name = "idx_continuity", Background = true }),
+                cancellationToken: cancellationToken);
+
+            await coll.Indexes.CreateOneAsync(
+                new CreateIndexModel<TimelineEvent>(
+                    Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Universe),
+                    new CreateIndexOptions { Name = "idx_universe", Background = true }),
+                cancellationToken: cancellationToken);
+
+            await coll.Indexes.CreateOneAsync(
+                new CreateIndexModel<TimelineEvent>(
+                    Builders<TimelineEvent>.IndexKeys
+                        .Ascending(x => x.Continuity)
+                        .Ascending(x => x.Demarcation)
+                        .Ascending(x => x.Year),
+                    new CreateIndexOptions { Name = "idx_continuity_demarcation_year", Background = true }),
+                cancellationToken: cancellationToken);
+
+            _logger.LogInformation("Created indexes for timeline collection: {Collection}", collName);
+        }
+
+        _logger.LogInformation("All indexes created successfully");
     }
 
     public async Task CreateVectorIndexesAsync(CancellationToken cancellationToken)

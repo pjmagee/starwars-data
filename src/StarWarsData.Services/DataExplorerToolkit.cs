@@ -26,7 +26,10 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     /// e.g. "Character" matches "https://starwars.fandom.com/wiki/Template:Character"
     /// </summary>
     static BsonDocument TemplateFilter(string infoboxType) =>
-        new("infobox.Template", new BsonDocument("$regex", new BsonRegularExpression($":{infoboxType}$", "i")));
+        new(
+            "infobox.Template",
+            new BsonDocument("$regex", new BsonRegularExpression($":{infoboxType}$", "i"))
+        );
 
     static BsonDocument WithTemplate(string infoboxType, BsonDocument extra)
     {
@@ -48,7 +51,9 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 + "Use list_infobox_types to discover valid values. Examples: Character, Battle, Species, CelestialBody, War, ForcePower, Food, Droid"
         )]
             string infoboxType,
-        [Description("The entity name to search for (case-insensitive regex), e.g. 'Luke Skywalker', 'Battle of Yavin'")]
+        [Description(
+            "The entity name to search for (case-insensitive regex), e.g. 'Luke Skywalker', 'Battle of Yavin'"
+        )]
             string name,
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null,
@@ -68,7 +73,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         if (continuity is not null)
             filter["continuity"] = continuity;
 
-        var docs = await Pages.Find(filter)
+        var docs = await Pages
+            .Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
@@ -159,7 +165,9 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
         )]
             string infoboxType,
-        [Description("The infobox.Data label to sample, e.g. Alignment, Area, Born, Died, Homeworld, Origin")]
+        [Description(
+            "The infobox.Data label to sample, e.g. Alignment, Area, Born, Died, Homeworld, Origin"
+        )]
             string label,
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null
@@ -223,21 +231,28 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var filter = WithTemplate(infoboxType, new BsonDocument(
-            "infobox.Data",
+        var filter = WithTemplate(
+            infoboxType,
             new BsonDocument(
-                "$elemMatch",
-                new BsonDocument
-                {
-                    { "Label", label },
-                    { "Values", new BsonDocument("$regex", new BsonRegularExpression(value, "i")) },
-                }
+                "infobox.Data",
+                new BsonDocument(
+                    "$elemMatch",
+                    new BsonDocument
+                    {
+                        { "Label", label },
+                        {
+                            "Values",
+                            new BsonDocument("$regex", new BsonRegularExpression(value, "i"))
+                        },
+                    }
+                )
             )
-        ));
+        );
         if (continuity is not null)
             filter["continuity"] = continuity;
 
-        var docs = await Pages.Find(filter)
+        var docs = await Pages
+            .Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
@@ -310,7 +325,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     )
     {
         var filter = WithTemplate(infoboxType, new BsonDocument("_id", id));
-        var doc = await Pages.Find(filter)
+        var doc = await Pages
+            .Find(filter)
             .Project(
                 new BsonDocument(
                     "Data",
@@ -354,28 +370,37 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             string infoboxType,
         [Description("The BBY/ABY date string to search for, e.g. '19 BBY', '4 ABY', '0 BBY'")]
             string date,
-        [Description("Which infobox.Data label to search: 'Born', 'Died', or 'Date'. Defaults to 'Date'")]
+        [Description(
+            "Which infobox.Data label to search: 'Born', 'Died', or 'Date'. Defaults to 'Date'"
+        )]
             string dateLabel = "Date",
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
             string? continuity = null,
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var filter = WithTemplate(infoboxType, new BsonDocument(
-            "infobox.Data",
+        var filter = WithTemplate(
+            infoboxType,
             new BsonDocument(
-                "$elemMatch",
-                new BsonDocument
-                {
-                    { "Label", dateLabel },
-                    { "Values", new BsonDocument("$regex", new BsonRegularExpression(date, "i")) },
-                }
+                "infobox.Data",
+                new BsonDocument(
+                    "$elemMatch",
+                    new BsonDocument
+                    {
+                        { "Label", dateLabel },
+                        {
+                            "Values",
+                            new BsonDocument("$regex", new BsonRegularExpression(date, "i"))
+                        },
+                    }
+                )
             )
-        ));
+        );
         if (continuity is not null)
             filter["continuity"] = continuity;
 
-        var docs = await Pages.Find(filter)
+        var docs = await Pages
+            .Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
@@ -449,35 +474,39 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         [Description("Max results to return, default 10")] int limit = 10
     )
     {
-        var filter = WithTemplate(infoboxType, new BsonDocument(
-            "infobox.Data",
+        var filter = WithTemplate(
+            infoboxType,
             new BsonDocument(
-                "$elemMatch",
-                new BsonDocument
-                {
+                "infobox.Data",
+                new BsonDocument(
+                    "$elemMatch",
+                    new BsonDocument
                     {
-                        "Links",
-                        new BsonDocument(
-                            "$elemMatch",
-                            new BsonDocument
-                            {
+                        {
+                            "Links",
+                            new BsonDocument(
+                                "$elemMatch",
+                                new BsonDocument
                                 {
-                                    "Href",
-                                    new BsonDocument(
-                                        "$regex",
-                                        new BsonRegularExpression(wikiUrl, "i")
-                                    )
-                                },
-                            }
-                        )
-                    },
-                }
+                                    {
+                                        "Href",
+                                        new BsonDocument(
+                                            "$regex",
+                                            new BsonRegularExpression(wikiUrl, "i")
+                                        )
+                                    },
+                                }
+                            )
+                        },
+                    }
+                )
             )
-        ));
+        );
         if (continuity is not null)
             filter["continuity"] = continuity;
 
-        var docs = await Pages.Find(filter)
+        var docs = await Pages
+            .Find(filter)
             .Limit(limit)
             .Project(
                 new BsonDocument
@@ -528,7 +557,10 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     {
         var pipeline = new[]
         {
-            new BsonDocument("$match", new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument(
+                "$match",
+                new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value))
+            ),
             new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
         };
         var cursor = await Pages.Aggregate<BsonDocument>(pipeline).ToListAsync();

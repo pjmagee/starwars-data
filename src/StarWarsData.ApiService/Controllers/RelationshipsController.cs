@@ -12,10 +12,20 @@ public class RelationshipsController(RelationshipGraphService graphService) : Co
     public async Task<ActionResult<GraphResult>> GetGraph(
         int id,
         [FromQuery] string collection = "Character",
-        [FromQuery] int maxDepth = 3
+        [FromQuery] int maxDepth = 3,
+        [FromQuery] string[]? upLabels = null,
+        [FromQuery] string[]? downLabels = null,
+        [FromQuery] string[]? peerLabels = null
     )
     {
-        var result = await graphService.GetRelationshipGraphAsync(id, collection, maxDepth);
+        var labelConfig = new RelationshipLabels
+        {
+            UpLabels = upLabels?.ToList() ?? [],
+            DownLabels = downLabels?.ToList() ?? [],
+            PeerLabels = peerLabels?.ToList() ?? [],
+        };
+
+        var result = await graphService.GetRelationshipGraphAsync(id, collection, maxDepth, labelConfig);
 
         if (result.Nodes.Count == 0)
             return NotFound();

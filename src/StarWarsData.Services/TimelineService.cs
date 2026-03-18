@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
@@ -42,54 +43,199 @@ public class TimelineService
         string? search = null
     )
     {
-        var allTimelineEvents = new List<TimelineEvent>();
-
         // Get all available collections from timeline-events db
         var availableCollections = await GetTimelineCategories();
 
         // If templates are specified, filter collections; otherwise use all
         var collectionsToQuery = templates.Any()
-            ? availableCollections
-                .Where(c => templates.Contains(c))
-                .ToList()
+            ? availableCollections.Where(c => templates.Contains(c)).ToList()
             : availableCollections;
 
-        // Build combined filter
-        var filters = new List<FilterDefinition<TimelineEvent>>
-        {
-            BuildContinuityFilter(continuity),
-            BuildUniverseFilter(universe),
-        };
+        if (!collectionsToQuery.Any())
+            return new GroupedTimelineResult
+            {
+                Total = 0,
+                Size = pageSize,
+                Page = page,
+                Items = [],
+            };
 
-        if (yearFrom.HasValue && yearFromDemarcation.HasValue && yearTo.HasValue && yearToDemarcation.HasValue)
+        // Build a BSON match filter
+        var matchConditions = new BsonArray();
+
+        // Continuity filter (stored as int in timeline events DB, no BsonRepresentation string override)
+        if (continuity != null && continuity != Continuity.Both)
         {
-            filters.Add(BuildYearRangeFilter(yearFrom.Value, yearFromDemarcation.Value, yearTo.Value, yearToDemarcation.Value));
+            matchConditions.Add(
+                new BsonDocument(
+                    "Continuity",
+                    new BsonDocument(
+                        "$in",
+                        new BsonArray
+                        {
+                            (int)continuity.Value,
+                            (int)Continuity.Both,
+                            (int)Continuity.Unknown,
+                        }
+                    )
+                )
+            );
         }
 
+        // Universe filter
+        if (universe != null)
+        {
+            matchConditions.Add(
+                new BsonDocument(
+                    "Universe",
+                    new BsonDocument(
+                        "$in",
+                        new BsonArray { (int)universe.Value, (int)Universe.Unknown }
+                    )
+                )
+            );
+        }
+
+        // Year range filter
+        if (
+            yearFrom.HasValue
+            && yearFromDemarcation.HasValue
+            && yearTo.HasValue
+            && yearToDemarcation.HasValue
+        )
+        {
+            var linearFrom = ToLinearYear(yearFrom.Value, yearFromDemarcation.Value);
+            var linearTo = ToLinearYear(yearTo.Value, yearToDemarcation.Value);
+            if (linearFrom > linearTo)
+                (linearFrom, linearTo) = (linearTo, linearFrom);
+
+            var linearYearExpr = new BsonDocument(
+                "$cond",
+                new BsonArray
+                {
+                    new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
+                    new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
+                    "$Year",
+                }
+            );
+
+            matchConditions.Add(
+                new BsonDocument(
+                    "$expr",
+                    new BsonDocument(
+                        "$and",
+                        new BsonArray
+                        {
+                            new BsonDocument("$ne", new BsonArray { "$Year", BsonNull.Value }),
+                            new BsonDocument("$gte", new BsonArray { linearYearExpr, linearFrom }),
+                            new BsonDocument("$lte", new BsonArray { linearYearExpr, linearTo }),
+                        }
+                    )
+                )
+            );
+        }
+
+        // Search filter
         if (!string.IsNullOrWhiteSpace(search))
         {
-            filters.Add(Builders<TimelineEvent>.Filter.Regex(
-                x => x.Title,
-                new BsonRegularExpression(search, "i")
-            ));
+            matchConditions.Add(
+                new BsonDocument(
+                    "Title",
+                    new BsonDocument("$regex", new BsonRegularExpression(search, "i"))
+                )
+            );
         }
 
-        var combinedFilter = Builders<TimelineEvent>.Filter.And(filters);
+        var matchStage = new BsonDocument(
+            "$match",
+            matchConditions.Count == 1
+                ? matchConditions[0].AsBsonDocument
+                : new BsonDocument("$and", matchConditions)
+        );
 
-        // Query each relevant collection and combine results
-        foreach (var collectionName in collectionsToQuery)
+        // Use the first collection as the base, $unionWith the rest
+        var baseCollectionName = collectionsToQuery[0];
+        var baseCollection = _timelineEventsDb.GetCollection<BsonDocument>(baseCollectionName);
+
+        var pipeline = new List<BsonDocument>();
+
+        // Union all other collections into the base
+        for (int i = 1; i < collectionsToQuery.Count; i++)
         {
-            var collection = _timelineEventsDb.GetCollection<TimelineEvent>(collectionName);
-            var events = await collection.Find(combinedFilter).ToListAsync();
-            allTimelineEvents.AddRange(events);
+            pipeline.Add(new BsonDocument("$unionWith", collectionsToQuery[i]));
         }
 
-        // Sort all events
-        allTimelineEvents.Sort();
+        // Match (filter)
+        pipeline.Add(matchStage);
 
-        // Apply pagination
-        var total = allTimelineEvents.Count;
-        var pagedEvents = allTimelineEvents.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        // Sort: Demarcation ascending (ABY before BBY alphabetically — but we need BBY first)
+        // Use linear year for correct chronological order
+        pipeline.Add(
+            new BsonDocument(
+                "$addFields",
+                new BsonDocument(
+                    "_linearYear",
+                    new BsonDocument(
+                        "$cond",
+                        new BsonArray
+                        {
+                            new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
+                            new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
+                            "$Year",
+                        }
+                    )
+                )
+            )
+        );
+
+        pipeline.Add(new BsonDocument("$sort", new BsonDocument("_linearYear", 1)));
+
+        // Count total with a $facet: one branch for total count, one for paginated data
+        pipeline.Add(
+            new BsonDocument(
+                "$facet",
+                new BsonDocument
+                {
+                    {
+                        "total",
+                        new BsonArray { new BsonDocument("$count", "count") }
+                    },
+                    {
+                        "data",
+                        new BsonArray
+                        {
+                            new BsonDocument("$skip", (page - 1) * pageSize),
+                            new BsonDocument("$limit", pageSize),
+                            new BsonDocument("$project", new BsonDocument("_linearYear", 0)),
+                        }
+                    },
+                }
+            )
+        );
+
+        var result = await baseCollection
+            .Aggregate<BsonDocument>(pipeline.ToArray())
+            .FirstOrDefaultAsync();
+
+        if (result == null)
+            return new GroupedTimelineResult
+            {
+                Total = 0,
+                Size = pageSize,
+                Page = page,
+                Items = [],
+            };
+
+        var totalCount =
+            result["total"].AsBsonArray.Count > 0
+                ? result["total"].AsBsonArray[0].AsBsonDocument["count"].AsInt32
+                : 0;
+
+        var pagedEvents = result["data"]
+            .AsBsonArray.Select(doc =>
+                BsonSerializer.Deserialize<TimelineEvent>(doc.AsBsonDocument)
+            )
+            .ToList();
 
         // Group by year
         var groupedByYear = pagedEvents
@@ -98,7 +244,7 @@ public class TimelineService
 
         return new GroupedTimelineResult
         {
-            Total = total,
+            Total = totalCount,
             Size = pageSize,
             Page = page,
             Items = groupedByYear,
@@ -223,8 +369,11 @@ public class TimelineService
     /// Uses the $expr operator to compute a linear year from Demarcation and Year fields.
     /// </summary>
     static FilterDefinition<TimelineEvent> BuildYearRangeFilter(
-        float fromYear, Demarcation fromDemarcation,
-        float toYear, Demarcation toDemarcation)
+        float fromYear,
+        Demarcation fromDemarcation,
+        float toYear,
+        Demarcation toDemarcation
+    )
     {
         var linearFrom = ToLinearYear(fromYear, fromDemarcation);
         var linearTo = ToLinearYear(toYear, toDemarcation);
@@ -236,19 +385,28 @@ public class TimelineService
         // Build an $expr that computes a linear year:
         // if Demarcation == "Bby" then -Year else Year
         // then checks linearFrom <= linearYear <= linearTo
-        var linearYearExpr = new BsonDocument("$cond", new BsonArray
-        {
-            new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
-            new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
-            "$Year"
-        });
+        var linearYearExpr = new BsonDocument(
+            "$cond",
+            new BsonArray
+            {
+                new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
+                new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
+                "$Year",
+            }
+        );
 
-        var expr = new BsonDocument("$expr", new BsonDocument("$and", new BsonArray
-        {
-            new BsonDocument("$ne", new BsonArray { "$Year", BsonNull.Value }),
-            new BsonDocument("$gte", new BsonArray { linearYearExpr, linearFrom }),
-            new BsonDocument("$lte", new BsonArray { linearYearExpr, linearTo }),
-        }));
+        var expr = new BsonDocument(
+            "$expr",
+            new BsonDocument(
+                "$and",
+                new BsonArray
+                {
+                    new BsonDocument("$ne", new BsonArray { "$Year", BsonNull.Value }),
+                    new BsonDocument("$gte", new BsonArray { linearYearExpr, linearFrom }),
+                    new BsonDocument("$lte", new BsonArray { linearYearExpr, linearTo }),
+                }
+            )
+        );
 
         return new BsonDocumentFilterDefinition<TimelineEvent>(expr);
     }

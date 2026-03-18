@@ -5,7 +5,11 @@
 
 <div style="width:100%; height:600px; border:1px solid red;">
     <CascadingValue Value="_diagram" IsFixed="true">
-        <DiagramCanvas></DiagramCanvas>
+        <DiagramCanvas>
+            <Widgets>
+                <GridWidget Size="20" Mode="GridMode.Point" ZoomThreshold="0" BackgroundColor="#16162e" />
+            </Widgets>
+        </DiagramCanvas>
     </CascadingValue>
 </div>
 
@@ -22,9 +26,9 @@
 
         _diagram.RegisterComponent<DiagramNode, TreeNodeWidget>();
 
-        var anakin = new DiagramNode("Anakin Skywalker", [("Born", "41 BBY"), ("Died", "4 ABY")],  new Blazor.Diagrams.Core.Geometry.Point(200, 0));
-        var luke   = new DiagramNode("Luke Skywalker",   [("Born", "19 BBY")],                    new Blazor.Diagrams.Core.Geometry.Point(100, 200));
-        var leia   = new DiagramNode("Leia Organa",      [("Born", "19 BBY")],                    new Blazor.Diagrams.Core.Geometry.Point(300, 200));
+        var anakin = new DiagramNode("Anakin Skywalker", [("Born", "41 BBY"), ("Died", "4 ABY")], isRoot: true, position: new Blazor.Diagrams.Core.Geometry.Point(200, 0));
+        var luke   = new DiagramNode("Luke Skywalker",   [("Born", "19 BBY")],                  position: new Blazor.Diagrams.Core.Geometry.Point(100, 200));
+        var leia   = new DiagramNode("Leia Organa",      [("Born", "19 BBY")],                  position: new Blazor.Diagrams.Core.Geometry.Point(300, 200));
 
         _diagram.Nodes.Add(anakin);
         _diagram.Nodes.Add(luke);

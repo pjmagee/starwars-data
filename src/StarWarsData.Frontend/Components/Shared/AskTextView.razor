@@ -1,0 +1,32 @@
+@using StarWarsData.Models.Queries
+
+@if (Descriptor?.Sections is not null && Descriptor.Sections.Count > 0)
+{
+    <MudText Typo="Typo.h5" Class="mt-6 mb-3">@Descriptor.Title</MudText>
+
+    <MudStack Spacing="3">
+        @foreach (var textSection in Descriptor.Sections)
+        {
+            <MudPaper Outlined="true" Class="pa-4">
+                @if (!string.IsNullOrWhiteSpace(textSection.Heading))
+                {
+                    <MudText Typo="Typo.h6" Class="mb-2">@textSection.Heading</MudText>
+                }
+
+                <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@textSection.Content</MudText>
+
+                @if (textSection.SourcePageTitle is not null)
+                {
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-2">
+                        Source: @textSection.SourcePageTitle
+                    </MudText>
+                }
+            </MudPaper>
+        }
+    </MudStack>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public TextDescriptor Descriptor { get; set; } = default!;
+}

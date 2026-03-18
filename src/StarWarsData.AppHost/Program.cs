@@ -19,10 +19,31 @@ var apiService = builder
             IconName = "ArrowDownload",
             IsHighlighted = false,
         })
-    // Phase 2 — Timeline events
+    .WithHttpCommand(
+        path: "/api/admin/download/pages/incremental",
+        displayName: "1b. Incremental Sync",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
+            IconName = "ArrowSync",
+            IsHighlighted = false,
+        })
+    // Phase 2 — Template views
+    .WithHttpCommand(
+        path: "/api/admin/mongo/create-template-views",
+        displayName: "2. Create Template Views",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
+            IconName = "TableMultiple",
+            IsHighlighted = false,
+        })
+    // Phase 3 — Timeline events
     .WithHttpCommand(
         path: "/api/admin/mongo/create-categorized-timeline-events",
-        displayName: "2. Build Timeline Events",
+        displayName: "3. Build Timeline Events",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
@@ -30,10 +51,21 @@ var apiService = builder
             IconName = "Timeline",
             IsHighlighted = false,
         })
-    // Phase 3 — Embeddings (optional)
+    // Phase 3b — Indexes
+    .WithHttpCommand(
+        path: "/api/admin/mongo/ensure-indexes",
+        displayName: "3b. Create Indexes",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Creates indexes on Pages and timeline event collections for query performance.",
+            IconName = "DatabaseSearch",
+            IsHighlighted = false,
+        })
+    // Phase 4 — Embeddings (optional)
     .WithHttpCommand(
         path: "/api/admin/mongo/create-embeddings",
-        displayName: "3a. Create Embeddings",
+        displayName: "4a. Create Embeddings",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
@@ -43,7 +75,7 @@ var apiService = builder
         })
     .WithHttpCommand(
         path: "/api/admin/mongo/create-index-embeddings",
-        displayName: "3b. Create Vector Indexes",
+        displayName: "4b. Create Vector Indexes",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,

@@ -67,7 +67,9 @@ builder
     .AddScoped<RelationshipGraphService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IChatClient>(sp =>
-        sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient()
+        new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient())
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build()
     )
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp =>
         sp.GetRequiredService<OpenAIClient>()
@@ -157,7 +159,17 @@ builder
         - render_table(title, infoboxType, fields, search?, pageSize?) — paginated table, frontend fetches data. Do NOT query data yourself.
         - render_data_table(title, columns, rows) — ad-hoc table with data YOU provide from queries/aggregations.
         - render_chart(chartType, title, xAxisLabels?, labels?, series?, timeSeries?) — chart with data YOU aggregated.
-        - render_graph(rootEntityId, rootEntityName, title, infoboxType?, maxDepth?) — relationship graph, frontend fetches.
+        - render_graph(rootEntityId, rootEntityName, title, infoboxType?, maxDepth?, upLabels?, downLabels?, peerLabels?) — relationship graph, frontend fetches.
+          CRITICAL: You MUST provide upLabels, downLabels, and peerLabels. Without them, no relationships are traversed.
+          Before calling render_graph, use get_page_by_id to see the entity's infobox labels. Then pick ONLY the labels relevant to the user's question.
+          - upLabels: labels where linked entities are above (e.g. Parent(s), Masters)
+          - downLabels: labels where linked entities are below (e.g. Children, Apprentices)
+          - peerLabels: labels where linked entities are same level (e.g. Partner(s), Sibling(s))
+          IMPORTANT: Use maxDepth=1 for direct relationships (apprentices, children, masters). Only use maxDepth=2+ for full family trees.
+          IMPORTANT: Include ONLY the ONE label category the user asked about. "apprentices" → downLabels=["Apprentices"] ONLY. Do NOT add Masters, Partners, Children, etc.
+          Example: "Darth Vader's apprentices" → maxDepth=1, downLabels=["Apprentices"], upLabels=[], peerLabels=[]
+          Example: "Skywalker family tree" → maxDepth=2, upLabels=["Parent(s)"], downLabels=["Children"], peerLabels=["Partner(s)","Sibling(s)"]
+          DO NOT include every relationship label — only the ones the user asked about. Fewer labels = cleaner graph.
         - render_timeline(title, categories, pageSize?, yearFrom?, yearFromDemarcation?, yearTo?, yearToDemarcation?, search?) — timeline from starwars-timeline-events DB. Call list_timeline_categories first. Use year range + search to scope to a specific entity or period.
 
         RULES:
@@ -167,7 +179,7 @@ builder
         - render_table fields MUST match actual infobox.Data label names exactly (e.g. "Homeworld", "Species", "Born", "Died").
           Before calling render_table, use get_page_by_id on one result to see valid labels for that infobox type.
           Data is stored in both Links (hyperlinks) and Values (plain text) — the frontend reads both.
-        - For "family tree" or "relationships" queries → use render_graph. Search the entity by name first to get the PageId.
+        - For "family tree" or "relationships" queries → use render_graph. Search by name to get PageId, then get_page_by_id to discover labels, then pick ONLY relevant labels for the query.
         - For entity-specific timelines (e.g. "timeline of Anakin Skywalker", "events during Anakin's life"):
           1. Look up the entity's date properties (Born, Died, Date, etc.) to get year range
           2. Pass yearFrom/yearFromDemarcation/yearTo/yearToDemarcation to render_timeline to scope events to that period
@@ -175,10 +187,11 @@ builder
         - Keep tool calls minimal — avoid unnecessary discovery calls.
         """;
 
-        return openAiClient
-            .GetChatClient(settings.OpenAiModel)
-            .AsIChatClient()
-            .AsAIAgent(instructions: instructions, tools: tools);
+        var chatClient = new ChatClientBuilder(openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient())
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build();
+
+        return chatClient.AsAIAgent(instructions: instructions, tools: tools);
     });
 
 builder.Services.AddHangfire(
@@ -240,6 +253,12 @@ app.UseHangfireDashboard(
         Authorization = new[] { new StarWarsData.ApiService.AllowAllAuthorizationFilter() },
     }
 );
+
+// Daily incremental sync of changed wiki pages at 03:00 UTC
+RecurringJob.AddOrUpdate<PageDownloader>(
+    "daily-incremental-sync",
+    s => s.IncrementalSyncAsync(CancellationToken.None),
+    Cron.Daily(3));
 
 app.UseHttpsRedirection();
 app.MapControllers();

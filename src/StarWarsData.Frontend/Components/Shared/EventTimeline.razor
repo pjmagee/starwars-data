@@ -32,7 +32,7 @@
                 <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="DeselectAllCategories">Deselect All</MudButton>
             </MudStack>
             <MudChipSet T="string" @bind-SelectedValues="_selectedCategories" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
-                @foreach (var category in _categories)
+                @foreach (var category in GetSortedCategories())
                 {
                     var color = GetChipColor(category);
                     <MudChip Value="@category" Style="@($"border-color:{color}; color:{color}")" Variant="Variant.Outlined" T="string">
@@ -207,12 +207,32 @@
 
     private async void OnContinuityChanged()
     {
-        _currentPage = 1;
-        if (!string.IsNullOrEmpty(Category) || _selectedCategories.Any())
+        await InvokeAsync(async () =>
         {
-            await LoadDataForCurrentPage();
-        }
-        await InvokeAsync(StateHasChanged);
+            _currentPage = 1;
+
+            // Reload categories from API with updated global filters
+            await LoadCategories();
+
+            // Remove any selected categories that are no longer in the filtered list
+            if (_categories is not null)
+            {
+                var visible = new HashSet<string>(_categories);
+                _selectedCategories = _selectedCategories.Where(c => visible.Contains(c)).ToList();
+            }
+
+            // Clear results if no categories remain selected
+            if (_selectedCategories.Any())
+            {
+                await LoadDataForCurrentPage();
+            }
+            else
+            {
+                _pagedResult = null;
+            }
+
+            StateHasChanged();
+        });
     }
 
     private async Task InitializeColorMapping()
@@ -244,7 +264,9 @@
 
     private async Task LoadCategories()
     {
-        _categories = await Http.GetFromJsonAsync<string[]>("Timeline/categories");
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        AddGlobalFilters(query);
+        _categories = await Http.GetFromJsonAsync<string[]>($"Timeline/categories?{query}");
     }
 
     private async Task ApplyFilters()
@@ -407,6 +429,14 @@
     {
         var cleaned = category.Replace("_infobox", "").ToLower();
         return _templateColorMap.TryGetValue(cleaned, out var c) ? c : Colors.Blue.Default;
+    }
+
+    private IEnumerable<string> GetSortedCategories()
+    {
+        if (_categories is null) return [];
+        return _categories
+            .OrderByDescending(c => _selectedCategories.Contains(c))
+            .ThenBy(c => c, StringComparer.OrdinalIgnoreCase);
     }
 
     private static string FormatCategoryName(string category) =>

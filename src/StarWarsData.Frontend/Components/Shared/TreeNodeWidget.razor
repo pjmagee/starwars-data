@@ -1,20 +1,35 @@
 @using Blazor.Diagrams.Components.Renderers
 @using StarWarsData.Frontend.Models
 
-<div class="tree-node @(Node?.Selected == true ? "selected" : "")">
-    <div class="tree-node-name">@Node?.Label</div>
-    @if (Node?.Attributes is { Count: > 0 })
-    {
-        <div class="tree-node-attrs">
-            @foreach (var (key, value) in Node.Attributes)
+<div class="graph-node @(Node?.IsRoot == true ? "root" : "") @(Node?.Selected == true ? "selected" : "")">
+    <div class="graph-node-body">
+        @if (!string.IsNullOrEmpty(Node?.ImageUrl))
+        {
+            <img src="@ThumbnailUrl(Node.ImageUrl)" class="graph-node-img" alt="" loading="lazy" />
+        }
+        else
+        {
+            <div class="graph-node-img-placeholder">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#555580">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+        }
+        <div class="graph-node-info">
+            <div class="graph-node-name" title="@Node?.Label">@Node?.Label</div>
+            @if (Node?.Attributes is { Count: > 0 })
             {
-                <div class="tree-node-attr">
-                    <span class="tree-node-attr-key">@key</span>
-                    <span class="tree-node-attr-value">@value</span>
-                </div>
+                @foreach (var (key, value) in Node.Attributes)
+                {
+                    <div class="graph-node-attr">
+                        <span class="attr-key">@key</span>
+                        <span class="attr-val">@value</span>
+                    </div>
+                }
             }
         </div>
-    }
+    </div>
+
     @foreach (var port in Node?.Ports ?? [])
     {
         <PortRenderer @key="port" Port="port" />
@@ -24,4 +39,7 @@
 @code {
     [Parameter]
     public DiagramNode? Node { get; set; }
+
+    private static string ThumbnailUrl(string url) =>
+        url.Split("/revision")[0] + "/revision/latest/scale-to-width-down/70";
 }

@@ -131,6 +131,52 @@ public class AdminController : ControllerBase
         }
     }
 
+    [HttpPost("download/pages/incremental")]
+    public ActionResult<string> IncrementalSyncPages()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(PageDownloader),
+                    nameof(PageDownloader.IncrementalSyncAsync)
+                )
+            )
+                return Conflict(new { error = "Incremental sync job already running" });
+            var jobId = BackgroundJob.Enqueue<PageDownloader>(s =>
+                s.IncrementalSyncAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/ensure-indexes")]
+    public ActionResult<string> EnqueueEnsureIndexes()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.EnsureIndexesAsync)
+                )
+            )
+                return Conflict(new { error = "Index creation already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.EnsureIndexesAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
     [HttpPost("mongo/create-embeddings")]
     public ActionResult<string> EnqueueCreateEmbeddings()
     {
@@ -214,6 +260,29 @@ public class AdminController : ControllerBase
                 return Conflict(new { error = "Timeline events deletion already running" });
             var jobId = BackgroundJob.Enqueue<RecordService>(s =>
                 s.DeleteTimelineCollections(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/create-template-views")]
+    public ActionResult<string> EnqueueCreateTemplateViews()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RecordService),
+                    nameof(RecordService.CreateTemplateViewsAsync)
+                )
+            )
+                return Conflict(new { error = "Template views creation already running" });
+            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
+                s.CreateTemplateViewsAsync(CancellationToken.None)
             );
             return Ok(new { jobId });
         }

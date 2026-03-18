@@ -21,4 +21,31 @@ public class GraphEdge
 {
     public int FromId { get; init; }
     public int ToId   { get; init; }
+    public string Label { get; init; } = "child";
+}
+
+/// <summary>
+/// Configures which infobox labels to use as relationship sources
+/// and how they affect generation layout.
+/// </summary>
+public class RelationshipLabels
+{
+    /// <summary>Labels where linked entities are one generation above (e.g. Parent(s), Masters).</summary>
+    public List<string> UpLabels { get; init; } = [];
+
+    /// <summary>Labels where linked entities are one generation below (e.g. Children, Apprentices).</summary>
+    public List<string> DownLabels { get; init; } = [];
+
+    /// <summary>Labels where linked entities are the same generation (e.g. Partner(s), Sibling(s)).</summary>
+    public List<string> PeerLabels { get; init; } = [];
+
+    public List<string> AllLabels => [.. UpLabels, .. DownLabels, .. PeerLabels];
+
+    /// <summary>Default family relationship labels for Character entities.</summary>
+    public static RelationshipLabels DefaultCharacter => new()
+    {
+        UpLabels = ["Parent(s)", "Masters"],
+        DownLabels = ["Children", "Apprentices"],
+        PeerLabels = ["Partner(s)", "Sibling(s)"],
+    };
 }
