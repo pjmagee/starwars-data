@@ -117,6 +117,23 @@ public class GalaxyMapController : ControllerBase
         }
     }
 
+    [HttpGet("nebula/{id:int}")]
+    public async Task<ActionResult<NebulaDetailsDto>> GetNebulaDetailsAsync(int id)
+    {
+        try
+        {
+            var nebula = await _mapService.GetNebulaDetailsAsync(id);
+            if (nebula == null)
+                return NotFound();
+            return Ok(nebula);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching nebula details for {NebulaId}", id);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpGet("planets")]
     public async Task<IEnumerable<GalaxyMapItem>> GetPlanetsAsync()
     {

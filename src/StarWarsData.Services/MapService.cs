@@ -263,6 +263,29 @@ public class MapService
         };
     }
 
+    public async Task<NebulaDetailsDto?> GetNebulaDetailsAsync(int id)
+    {
+        var filter = Builders<Page>.Filter.And(TemplateFilter("Nebula"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var rec = await _pages.Find(filter).FirstOrDefaultAsync();
+        if (rec == null) return null;
+        var data = rec.Infobox?.Data ?? [];
+        var grid = GetFirstDataValue(rec, "Grid square");
+        var sector = GetFirstDataValue(rec, "Sector");
+        var region = GetFirstDataValue(rec, "Region");
+        var additional = data
+            .Where(d => d.Label is not null && !new[] { "Grid square", "Sector", "Region" }.Contains(d.Label))
+            .ToDictionary(d => d.Label!, d => d.Values);
+        return new NebulaDetailsDto
+        {
+            Id = rec.PageId,
+            Name = rec.Title,
+            GridSquare = grid,
+            Sector = sector,
+            Region = region,
+            AdditionalData = additional,
+        };
+    }
+
     public async Task<IEnumerable<SectorDto>> GetSectorsByRegionAsync(int regionId)
     {
         var regionFilter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, regionId));

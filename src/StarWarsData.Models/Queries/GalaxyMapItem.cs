@@ -55,3 +55,13 @@ public class PlanetDto
     public int Id { get; set; }
     public string Name { get; set; } = null!;
 }
+
+public class NebulaDetailsDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
+    public string? GridSquare { get; set; }
+    public string? Sector { get; set; }
+    public string? Region { get; set; }
+    public Dictionary<string, List<string>> AdditionalData { get; set; } = [];
+}

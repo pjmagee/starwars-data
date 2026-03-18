@@ -64,7 +64,7 @@
                 <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
                     @foreach (var n in CellNebulas)
                     {
-                        <MudListItem T="GalaxyMapItem" Text="@n.Name" />
+                        <MudListItem T="GalaxyMapItem" Text="@n.Name" OnClick="() => LoadDetails(EntityType.Nebula, n.Id)" />
                     }
                 </MudList>
             }
@@ -161,7 +161,7 @@
                             <MudItem xs="6"><MudText Typo="Typo.subtitle2">Region:</MudText></MudItem>
                             <MudItem xs="6"><MudText Typo="Typo.body2">@bdto.Region</MudText></MudItem>
                         </MudGrid>
-                        
+
                         @if (bdto.AdditionalData.Any() == true)
                         {
                             <MudDivider Class="my-2" />
@@ -169,6 +169,41 @@
                             <!-- dynamic fields in two-column grid -->
                             <MudGrid Spacing="2">
                               @foreach (var kv in bdto.AdditionalData)
+                              {
+                                <MudItem xs="4">
+                                  <MudText Typo="Typo.subtitle2" Class="font-weight-bold">@kv.Key</MudText>
+                                </MudItem>
+                                <MudItem xs="8">
+                                  <MudText Typo="Typo.body2">@string.Join(", ", kv.Value)</MudText>
+                                </MudItem>
+                              }
+                            </MudGrid>
+                        }
+                    </MudCardContent>
+                </MudCard>
+            }
+            else if (SelectedDetails is NebulaDetailsDto ndto)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6">@ndto.Name</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudGrid Spacing="2">
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Grid:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@ndto.GridSquare</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Sector:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@ndto.Sector</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.subtitle2">Region:</MudText></MudItem>
+                            <MudItem xs="6"><MudText Typo="Typo.body2">@ndto.Region</MudText></MudItem>
+                        </MudGrid>
+
+                        @if (ndto.AdditionalData.Any())
+                        {
+                            <MudDivider Class="my-2" />
+                            <MudText Typo="Typo.subtitle1">Additional Data</MudText>
+                            <MudGrid Spacing="2">
+                              @foreach (var kv in ndto.AdditionalData)
                               {
                                 <MudItem xs="4">
                                   <MudText Typo="Typo.subtitle2" Class="font-weight-bold">@kv.Key</MudText>
@@ -303,6 +338,7 @@
             {
                 EntityType.System => await Http.GetFromJsonAsync<SystemDetailsDto>($"GalaxyMap/system/{id}"),
                 EntityType.CelestialBody => await Http.GetFromJsonAsync<CelestialBodyDetailsDto>($"GalaxyMap/celestialbody/{id}"),
+                EntityType.Nebula => await Http.GetFromJsonAsync<NebulaDetailsDto>($"GalaxyMap/nebula/{id}"),
                 EntityType.Sector => await Http.GetFromJsonAsync<SectorDto>($"GalaxyMap/sector/{id}"),
                 EntityType.Region => await Http.GetFromJsonAsync<RegionDto>($"GalaxyMap/regions/{id}"),
                 _ => null
@@ -324,22 +360,11 @@
         return "#ccc";
     }
 
-    enum EntityType { 
-        /// <summary>
-        /// Represents a star system.
-        /// </summary>
+    enum EntityType {
         System,
-        /// <summary>
-        /// Represents a celestial body, such as a planet or moon.
-        /// </summary>
         CelestialBody,
-        /// <summary>
-        /// Represents a sector of space.
-        /// </summary>
         Sector,
-        /// <summary>
-        /// Represents a region of space.
-        /// </summary>
-        Region
+        Region,
+        Nebula
     }
 }
