@@ -1,5 +1,6 @@
 @inject IHttpClientFactory HttpClientFactory
 @using StarWarsData.Frontend.Models
+@using StarWarsData.Models.Queries
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
     <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
@@ -27,6 +28,7 @@
             </CascadingValue>
         </div>
     }
+    <AskReferencesSection References="@Descriptor.References" />
 </MudPaper>
 
 @code {

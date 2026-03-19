@@ -19,7 +19,7 @@ internal static class LoginLogoutEndpointRouteBuilderExtensions
             )
             .AllowAnonymous();
 
-        group.MapPost(
+        group.MapGet(
             "/logout",
             () =>
                 TypedResults.SignOut(

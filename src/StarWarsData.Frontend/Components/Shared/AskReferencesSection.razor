@@ -1,0 +1,22 @@
+@using StarWarsData.Models.Queries
+
+@if (References is { Count: > 0 })
+{
+    <MudDivider Class="mt-4 mb-2" />
+    <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mb-1">Sources</MudText>
+    <MudStack Row="true" Spacing="2" Wrap="Wrap.Wrap">
+        @foreach (var reference in References.DistinctBy(r => r.Url))
+        {
+            <MudLink Href="@reference.Url" Target="_blank" Typo="Typo.caption" Color="Color.Info"
+                     Underline="Underline.Hover">
+                @reference.Title
+                <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="ml-1" Style="font-size:0.75rem; vertical-align:middle;" />
+            </MudLink>
+        }
+    </MudStack>
+}
+
+@code {
+    [Parameter]
+    public List<Reference>? References { get; set; }
+}

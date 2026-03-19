@@ -78,6 +78,8 @@
             </MudItem>
         }
     </MudGrid>
+
+    <AskReferencesSection References="@_allReferences" />
 }
 
 @code {
@@ -86,6 +88,7 @@
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     private List<WikiPage> _pages = [];
+    private List<Reference>? _allReferences;
     private bool _loading;
 
     private int ColWidth => _pages.Count switch
@@ -122,6 +125,7 @@
         finally
         {
             _loading = false;
+            _allReferences = BuildReferences();
         }
     }
 
@@ -143,5 +147,20 @@
         var lastColon = template.LastIndexOf(':');
         var name = lastColon >= 0 ? template[(lastColon + 1)..] : template;
         return name.Replace("_infobox", "").Replace("_", " ").Trim();
+    }
+
+    private List<Reference>? BuildReferences()
+    {
+        var refs = new List<Reference>();
+        if (Descriptor.References is { Count: > 0 })
+            refs.AddRange(Descriptor.References);
+
+        foreach (var page in _pages.Where(p => !string.IsNullOrEmpty(p.WikiUrl)))
+        {
+            if (!refs.Any(r => r.Url == page.WikiUrl))
+                refs.Add(new Reference { Title = page.Title, Url = page.WikiUrl! });
+        }
+
+        return refs.Count > 0 ? refs : null;
     }
 }

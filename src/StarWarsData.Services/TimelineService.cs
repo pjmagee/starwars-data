@@ -146,12 +146,13 @@ public class TimelineService
             );
         }
 
-        var matchStage = new BsonDocument(
-            "$match",
-            matchConditions.Count == 1
-                ? matchConditions[0].AsBsonDocument
-                : new BsonDocument("$and", matchConditions)
-        );
+        var matchFilter = matchConditions.Count switch
+        {
+            0 => new BsonDocument(),
+            1 => matchConditions[0].AsBsonDocument,
+            _ => new BsonDocument("$and", matchConditions),
+        };
+        var matchStage = new BsonDocument("$match", matchFilter);
 
         // Use the first collection as the base, $unionWith the rest
         var baseCollectionName = collectionsToQuery[0];

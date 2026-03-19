@@ -63,6 +63,10 @@ public class TableDescriptor
     [JsonPropertyName("pageSize")]
     [Description("Number of rows per page (default 25)")]
     public int PageSize { get; set; } = 25;
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results")]
@@ -79,6 +83,10 @@ public class DataTableDescriptor
     [JsonPropertyName("rows")]
     [Description("Row data — each row is a list of string values matching the columns order")]
     public List<List<string>> Rows { get; set; } = [];
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Chart component configuration — data is embedded since aggregations are unique per query")]
@@ -116,6 +124,10 @@ public class ChartDescriptor
 
     [JsonPropertyName("options")]
     public ChartOptions? Options { get; set; }
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Relationship graph component configuration — the frontend fetches graph data from the API. " +
@@ -158,6 +170,10 @@ public class GraphDescriptor
     [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). " +
         "Linked entities are placed on the same generation level.")]
     public List<string> PeerLabels { get; set; } = [];
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]
@@ -194,6 +210,10 @@ public class TimelineDescriptor
     [JsonPropertyName("search")]
     [Description("Optional text to filter timeline event titles")]
     public string? Search { get; set; }
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID.")]
@@ -206,6 +226,10 @@ public class InfoboxDescriptor
     [JsonPropertyName("pageIds")]
     [Description("One or more PageId integers to display as infobox cards")]
     public List<int> PageIds { get; set; } = [];
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 [Description("Text content — renders article text, summaries, or RAG excerpts from wiki pages")]
@@ -218,6 +242,10 @@ public class TextDescriptor
     [JsonPropertyName("sections")]
     [Description("Text sections to display, each with a heading and content")]
     public List<TextSection> Sections { get; set; } = [];
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result")]
+    public List<Reference>? References { get; set; }
 }
 
 public class TextSection
@@ -237,6 +265,20 @@ public class TextSection
     [JsonPropertyName("sourcePageTitle")]
     [Description("Optional title of the source page")]
     public string? SourcePageTitle { get; set; }
+}
+
+// ── References ────────────────────────────────────────────────────────
+
+[Description("A source reference link from a wiki page")]
+public class Reference
+{
+    [JsonPropertyName("title")]
+    [Description("Display title of the source page")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("url")]
+    [Description("The Wookieepedia URL for the source page")]
+    public string Url { get; set; } = string.Empty;
 }
 
 // ── Chart data types ───────────────────────────────────────────────────

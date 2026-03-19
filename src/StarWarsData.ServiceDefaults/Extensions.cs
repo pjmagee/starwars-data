@@ -68,7 +68,7 @@ public static class Extensions
                 tracing
                     .AddSource(builder.Environment.ApplicationName)
                     // GenAI semantic conventions — emitted by Microsoft.Extensions.AI IChatClient/IEmbeddingGenerator
-                    .AddSource("Microsoft.Extensions.AI")
+                    .AddSource("Experimental.Microsoft.Extensions.AI")
                     // Microsoft Agents SDK (ChatClientAgent, AgentSession turns)
                     .AddSource("Microsoft.Agents.AI")
                     // MCP client tool calls

@@ -2,12 +2,27 @@
 @page "/ask"
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
+@inject ILogger<Ask> Logger
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="pa-4">
 
-    <MudText Typo="Typo.h4" Class="mb-1">Ask the Star Wars Archive</MudText>
+    <div class="d-flex align-center gap-3 mb-1">
+        <MudText Typo="Typo.h4">Ask the Star Wars Archive</MudText>
+        <MudSpacer />
+        <AuthorizeView>
+            <Authorized>
+                @if (_currentSessionId is not null)
+                {
+                    <MudButton Variant="Variant.Outlined" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" OnClick="NewChat">New Chat</MudButton>
+                }
+                <MudBadge Content="@_sessions.Count" Visible="@(_sessions.Count > 0)" Color="Color.Primary" Overlap="true">
+                    <MudIconButton Icon="@Icons.Material.Filled.History" OnClick="ToggleHistory" aria-label="Chat History" />
+                </MudBadge>
+            </Authorized>
+        </AuthorizeView>
+    </div>
     <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
         Ask any question about the Star Wars universe and get charts, timelines, or family trees powered by AI.
     </MudText>
@@ -36,7 +51,7 @@
         <MudGrid Spacing="2">
             <MudItem xs="12" sm="10">
                 <MudTextField @bind-Value="_model.Prompt"
-                              Label="@(_selectedMode is null ? "Ask anything about Star Wars…" : SelectedMode!.Placeholder)"
+                              Label="@(SelectedMode is null ? "Ask anything about Star Wars…" : SelectedMode.Placeholder)"
                               Variant="Variant.Outlined"
                               Required="true"
                               Immediate="true"
@@ -61,7 +76,7 @@
     @if (!_loading && !_hasResult && _turns.Count == 0)
     {
         <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">
-            @(_selectedMode is null ? "Try asking" : $"{SelectedMode!.Label} examples")
+            @(SelectedMode is null ? "Try asking" : $"{SelectedMode.Label} examples")
         </MudText>
         <MudGrid Spacing="2">
             @foreach (var example in FilteredExamples)
@@ -202,7 +217,50 @@
 
 </MudContainer>
 
+@* ── Chat History Drawer ── *@
+<MudDrawer @bind-Open="_historyOpen" Anchor="Anchor.End" Elevation="1" Variant="DrawerVariant.Temporary" Width="320px">
+    <MudDrawerHeader>
+        <MudText Typo="Typo.h6">Chat History</MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.Close" OnClick="ToggleHistory" Size="Size.Small" />
+    </MudDrawerHeader>
+    @if (_sessionsLoading)
+    {
+        <div class="d-flex justify-center pa-4">
+            <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+        </div>
+    }
+    else if (_sessions.Count == 0)
+    {
+        <MudText Class="pa-4" Color="Color.Secondary" Typo="Typo.body2">No saved chats yet.</MudText>
+    }
+    else
+    {
+        <MudList T="ChatSessionSummary" Class="pa-0">
+            @foreach (var session in _sessions)
+            {
+                var s = session;
+                <MudListItem T="ChatSessionSummary"
+                             OnClick="() => LoadSession(s.Id)"
+                             Class="@(_currentSessionId == s.Id ? "mud-primary-text" : "")">
+                    <div class="d-flex align-center gap-2" style="width:100%">
+                        <div style="flex:1;min-width:0">
+                            <MudText Typo="Typo.body2" Style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@s.Title</MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">@s.UpdatedAt.ToLocalTime().ToString("MMM d, h:mm tt")</MudText>
+                        </div>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Color="Color.Error"
+                                       OnClick="() => DeleteSession(s.Id)" aria-label="Delete" />
+                    </div>
+                </MudListItem>
+            }
+        </MudList>
+    }
+</MudDrawer>
+
 @code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthState { get; set; }
 
     enum TurnRole { User, Assistant, ToolCall }
 
@@ -239,6 +297,14 @@
         || _textDescriptor is not null;
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
+
+    // ── Session history ──
+    private bool _historyOpen;
+    private bool _sessionsLoading;
+    private List<ChatSessionSummary> _sessions = [];
+    private Guid? _currentSessionId;
+    private string? _userId;
+    private bool _isAuthenticated;
 
     private record VisualizationMode(
         string Key, string Label, string Description, string Placeholder,
@@ -318,8 +384,8 @@
             ]),
     ];
 
-    private string? _selectedMode;
-    private VisualizationMode? SelectedMode => _selectedMode is null ? null : _modes.FirstOrDefault(m => m.Key == _selectedMode);
+    private string _selectedMode = "auto";
+    private VisualizationMode? SelectedMode => _selectedMode == "auto" ? null : _modes.FirstOrDefault(m => m.Key == _selectedMode);
 
     private string[] _randomExamples = PickRandomExamples();
 
@@ -331,7 +397,7 @@
 
     private void ToggleMode(string key)
     {
-        _selectedMode = _selectedMode == key ? null : key;
+        _selectedMode = _selectedMode == key ? "auto" : key;
     }
 
     private string[] FilteredExamples
@@ -351,6 +417,22 @@
     }
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthState is not null)
+        {
+            var state = await AuthState;
+            _isAuthenticated = state.User.Identity?.IsAuthenticated == true;
+            _userId = state.User.FindFirst("sub")?.Value
+                      ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+            if (_isAuthenticated && _userId is not null)
+            {
+                await LoadSessionsAsync();
+            }
+        }
+    }
 
     private void UseExample(string prompt)
     {
@@ -377,12 +459,14 @@
         _toolCallTurns.Clear();
         _expandedToolGroups.Clear();
         _currentAssistantTurn = null;
+        _currentSessionId = null;
         StateHasChanged();
 
+        var userPrompt = _model.Prompt;
         var continuity = GlobalFilterService.GetContinuityQueryParam() ?? "Both";
-        var modeHint = _selectedMode is not null ? $" [PREFER: {_selectedMode}]" : "";
-        var userMessage = $"[CONTINUITY: {continuity}]{modeHint} {_model.Prompt}";
-        _turns.Add(new Turn(TurnRole.User) { Content = _model.Prompt, IsComplete = true });
+        var modeHint = $" [PREFER: {_selectedMode}]";
+        var userMessage = $"[CONTINUITY: {continuity}]{modeHint} {userPrompt}";
+        _turns.Add(new Turn(TurnRole.User) { Content = userPrompt, IsComplete = true });
 
         var body = new { messages = new[] { new { role = "user", content = userMessage } } };
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
@@ -406,12 +490,22 @@
             await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
             using var reader = new System.IO.StreamReader(stream);
 
+            var linesRead = 0;
+            var dataLinesRead = 0;
+
             while (!reader.EndOfStream && !cts.Token.IsCancellationRequested)
             {
                 var line = await reader.ReadLineAsync(cts.Token);
                 if (string.IsNullOrEmpty(line)) continue;
-                if (!line.StartsWith("data:")) continue;
+                linesRead++;
 
+                if (!line.StartsWith("data:"))
+                {
+                    Logger.LogDebug("SSE non-data line: {Line}", line);
+                    continue;
+                }
+
+                dataLinesRead++;
                 var json = line["data:".Length..].Trim();
                 if (json == "[DONE]") break;
 
@@ -513,6 +607,10 @@
                             break;
                         case "RUN_ERROR":
                             _error = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
+                            Logger.LogError("RUN_ERROR from agent: {Error}", _error);
+                            break;
+                        default:
+                            Logger.LogDebug("Unhandled AGUI event type: {EventType}, json: {Json}", eventType, json);
                             break;
                     }
                 }
@@ -525,7 +623,16 @@
 
             if (!_hasResult && _error is null && _turns.All(t => t.Role != TurnRole.Assistant))
             {
+                Logger.LogWarning(
+                    "AI returned no results. Lines read: {Lines}, Data lines: {DataLines}, Turns: {Turns}",
+                    linesRead, dataLinesRead, _turns.Count);
                 _error = "The AI returned no results. Try rephrasing your question.";
+            }
+
+            // Auto-save session for authenticated users
+            if (_isAuthenticated && _userId is not null && _error is null && _turns.Count > 0)
+            {
+                await SaveCurrentSessionAsync(userPrompt);
             }
         }
         catch (OperationCanceledException)
@@ -539,6 +646,156 @@
         finally
         {
             _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    // ── Session management ──
+
+    private async Task LoadSessionsAsync()
+    {
+        _sessionsLoading = true;
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, "api/ChatSessions");
+            request.Headers.Add("X-User-Id", _userId);
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                _sessions = await response.Content.ReadFromJsonAsync<List<ChatSessionSummary>>(JsonOpts) ?? [];
+            }
+        }
+        catch { /* silently ignore session load failures */ }
+        finally
+        {
+            _sessionsLoading = false;
+        }
+    }
+
+    private async Task SaveCurrentSessionAsync(string userPrompt)
+    {
+        try
+        {
+            var title = userPrompt.Length > 80 ? userPrompt[..80] + "…" : userPrompt;
+            var messages = _turns
+                .Where(t => t.Role is TurnRole.User or TurnRole.Assistant)
+                .Select(t => new ChatSessionMessage
+                {
+                    Role = t.Role == TurnRole.User ? "user" : "assistant",
+                    Content = t.Content,
+                    Timestamp = DateTime.UtcNow,
+                })
+                .ToList();
+
+            var body = new SaveChatSessionRequest { Title = title, Messages = messages };
+
+            using var request = new HttpRequestMessage(HttpMethod.Post, "api/ChatSessions");
+            request.Headers.Add("X-User-Id", _userId);
+            request.Content = JsonContent.Create(body);
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var id = await response.Content.ReadFromJsonAsync<Guid>();
+                _currentSessionId = id;
+                await LoadSessionsAsync();
+            }
+        }
+        catch { /* silently ignore save failures */ }
+    }
+
+    private async Task LoadSession(Guid sessionId)
+    {
+        _historyOpen = false;
+        _loading = true;
+        _error = null;
+        _turns.Clear();
+        _chartDescriptor = null;
+        _tableDescriptor = null;
+        _dataTableDescriptor = null;
+        _graphDescriptor = null;
+        _timelineDescriptor = null;
+        _infoboxDescriptor = null;
+        _textDescriptor = null;
+        _hasResult = false;
+        StateHasChanged();
+
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"api/ChatSessions/{sessionId}");
+            request.Headers.Add("X-User-Id", _userId);
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var session = await response.Content.ReadFromJsonAsync<ChatSessionDetail>(JsonOpts);
+                if (session is not null)
+                {
+                    _currentSessionId = session.Id;
+                    _model.Prompt = session.Title;
+
+                    foreach (var msg in session.Messages)
+                    {
+                        var role = msg.Role == "user" ? TurnRole.User : TurnRole.Assistant;
+                        _turns.Add(new Turn(role) { Content = msg.Content, IsComplete = true });
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = $"Failed to load session: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task DeleteSession(Guid sessionId)
+    {
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Delete, $"api/ChatSessions/{sessionId}");
+            request.Headers.Add("X-User-Id", _userId);
+            await Http.SendAsync(request);
+
+            _sessions.RemoveAll(s => s.Id == sessionId);
+            if (_currentSessionId == sessionId)
+            {
+                _currentSessionId = null;
+                NewChat();
+            }
+            StateHasChanged();
+        }
+        catch { /* silently ignore delete failures */ }
+    }
+
+    private void NewChat()
+    {
+        _currentSessionId = null;
+        _model = new AskModel();
+        _turns.Clear();
+        _chartDescriptor = null;
+        _tableDescriptor = null;
+        _dataTableDescriptor = null;
+        _graphDescriptor = null;
+        _timelineDescriptor = null;
+        _infoboxDescriptor = null;
+        _textDescriptor = null;
+        _error = null;
+        _hasResult = false;
+        _randomExamples = PickRandomExamples();
+        StateHasChanged();
+    }
+
+    private async Task ToggleHistory()
+    {
+        _historyOpen = !_historyOpen;
+        if (_historyOpen && _isAuthenticated && _userId is not null)
+        {
+            await LoadSessionsAsync();
             StateHasChanged();
         }
     }

@@ -20,6 +20,11 @@ public class SettingsOptions
     public string TimelineEventsDb { get; set; } = null!;
 
     /// <summary>
+    /// The database for user chat sessions
+    /// </summary>
+    public string ChatSessionsDb { get; set; } = "starwars-chat-sessions";
+
+    /// <summary>
     /// The base URL for Wookieepedia API
     /// </summary>
     public string StarWarsBaseUrl { get; set; } = null!;

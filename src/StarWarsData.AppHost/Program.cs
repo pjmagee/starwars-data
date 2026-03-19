@@ -18,17 +18,20 @@ var apiService = builder
             Description = "Downloads raw wiki pages into starwars-raw-pages.",
             IconName = "ArrowDownload",
             IsHighlighted = false,
-        })
+        }
+    )
     .WithHttpCommand(
         path: "/api/admin/download/pages/incremental",
         displayName: "1b. Incremental Sync",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
+            Description =
+                "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
             IconName = "ArrowSync",
             IsHighlighted = false,
-        })
+        }
+    )
     // Phase 2 — Template views
     .WithHttpCommand(
         path: "/api/admin/mongo/create-template-views",
@@ -36,10 +39,12 @@ var apiService = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
+            Description =
+                "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
             IconName = "TableMultiple",
             IsHighlighted = false,
-        })
+        }
+    )
     // Phase 3 — Timeline events
     .WithHttpCommand(
         path: "/api/admin/mongo/create-categorized-timeline-events",
@@ -47,10 +52,12 @@ var apiService = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates categorized timeline events in starwars-timeline-events from Pages. Requires Phase 1.",
+            Description =
+                "Creates categorized timeline events in starwars-timeline-events from Pages. Requires Phase 1.",
             IconName = "Timeline",
             IsHighlighted = false,
-        })
+        }
+    )
     // Phase 3b — Indexes
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-indexes",
@@ -58,10 +65,12 @@ var apiService = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates indexes on Pages and timeline event collections for query performance.",
+            Description =
+                "Creates indexes on Pages and timeline event collections for query performance.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
-        })
+        }
+    )
     // Phase 4 — Embeddings (optional)
     .WithHttpCommand(
         path: "/api/admin/mongo/create-embeddings",
@@ -72,7 +81,8 @@ var apiService = builder
             Description = "Generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
             IconName = "Sparkle",
             IsHighlighted = false,
-        })
+        }
+    )
     .WithHttpCommand(
         path: "/api/admin/mongo/create-index-embeddings",
         displayName: "4b. Create Vector Indexes",
@@ -82,7 +92,8 @@ var apiService = builder
             Description = "Creates MongoDB vector indexes. Run after 3a.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
-        });
+        }
+    );
 
 if (builder.ExecutionContext.IsPublishMode)
 {
@@ -99,17 +110,22 @@ else
 
     var mongo = builder.AddConnectionString(
         "mongodb",
-        ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin")
+        ReferenceExpression.Create(
+            $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin"
+        )
     );
 
     apiService.WithReference(mongo).WaitFor(mongo);
 }
 
+var keycloak = builder.AddKeycloak("keycloak").WithRealmImport("./KeycloakConfiguration");
+
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
+    .WithReference(keycloak)
     .WithReference(apiService)
-    .WaitFor(apiService)
-;
+    .WaitFor(keycloak)
+    .WaitFor(apiService);
 
 builder.Build().Run();
 

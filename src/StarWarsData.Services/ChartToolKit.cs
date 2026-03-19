@@ -28,7 +28,9 @@ public class ComponentToolkit
         )]
             List<string> fields,
         [Description("Optional text search to filter results by page title")] string? search = null,
-        [Description("Number of rows per page (default 25)")] int pageSize = 25
+        [Description("Number of rows per page (default 25)")] int pageSize = 25,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
         TableResult = new TableDescriptor
@@ -38,6 +40,7 @@ public class ComponentToolkit
             Fields = fields,
             Search = search,
             PageSize = pageSize,
+            References = references,
         };
         return TableResult;
     }
@@ -51,7 +54,9 @@ public class ComponentToolkit
         [Description("Descriptive title for the table")] string title,
         [Description("Column header names")] List<string> columns,
         [Description("Row data — each row is a list of string values in the same order as columns")]
-            List<List<string>> rows
+            List<List<string>> rows,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
         DataTableResult = new DataTableDescriptor
@@ -59,6 +64,7 @@ public class ComponentToolkit
             Title = title,
             Columns = columns,
             Rows = rows,
+            References = references,
         };
         return DataTableResult;
     }
@@ -81,7 +87,9 @@ public class ComponentToolkit
         [Description(
             "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"
         )]
-            List<TimeSeriesChartSeries>? timeSeries = null
+            List<TimeSeriesChartSeries>? timeSeries = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
@@ -95,6 +103,7 @@ public class ComponentToolkit
             Labels = labels,
             Series = series,
             TimeSeries = timeSeries,
+            References = references,
         };
         return ChartResult;
     }
@@ -121,7 +130,9 @@ public class ComponentToolkit
         [Description("Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). Linked entities are placed one generation below.")]
             List<string>? downLabels = null,
         [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). Linked entities are placed on the same level.")]
-            List<string>? peerLabels = null
+            List<string>? peerLabels = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
         GraphResult = new GraphDescriptor
@@ -134,6 +145,7 @@ public class ComponentToolkit
             UpLabels = upLabels ?? [],
             DownLabels = downLabels ?? [],
             PeerLabels = peerLabels ?? [],
+            References = references,
         };
         return GraphResult;
     }
@@ -171,7 +183,9 @@ public class ComponentToolkit
         [Description(
             "Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')"
         )]
-            string? search = null
+            string? search = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
         TimelineResult = new TimelineDescriptor
@@ -184,6 +198,7 @@ public class ComponentToolkit
             YearTo = yearTo,
             YearToDemarcation = yearToDemarcation,
             Search = search,
+            References = references,
         };
         return TimelineResult;
     }
@@ -200,10 +215,12 @@ public class ComponentToolkit
         [Description(
             "One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these."
         )]
-            List<int> pageIds
+            List<int> pageIds,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
-        InfoboxResult = new InfoboxDescriptor { Title = title, PageIds = pageIds };
+        InfoboxResult = new InfoboxDescriptor { Title = title, PageIds = pageIds, References = references };
         return InfoboxResult;
     }
 
@@ -218,10 +235,12 @@ public class ComponentToolkit
         [Description(
             "Text sections to display — each with heading, content, and optional source page info"
         )]
-            List<TextSection> sections
+            List<TextSection> sections,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+            List<Reference>? references = null
     )
     {
-        TextResult = new TextDescriptor { Title = title, Sections = sections };
+        TextResult = new TextDescriptor { Title = title, Sections = sections, References = references };
         return TextResult;
     }
 
