@@ -3,6 +3,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ContainerRegistry>ghcr.io</ContainerRegistry>
+    <ContainerRepository>pjmagee/starwarsdata-apiservice</ContainerRepository>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.MongoDB.Driver.v3" Version="9.5.2" />

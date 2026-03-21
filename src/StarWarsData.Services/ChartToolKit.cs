@@ -29,7 +29,9 @@ public class ComponentToolkit
             List<string> fields,
         [Description("Optional text search to filter results by page title")] string? search = null,
         [Description("Number of rows per page (default 25)")] int pageSize = 25,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
@@ -55,7 +57,9 @@ public class ComponentToolkit
         [Description("Column header names")] List<string> columns,
         [Description("Row data — each row is a list of string values in the same order as columns")]
             List<List<string>> rows,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
@@ -88,7 +92,9 @@ public class ComponentToolkit
             "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"
         )]
             List<TimeSeriesChartSeries>? timeSeries = null,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
@@ -124,14 +130,25 @@ public class ComponentToolkit
                 + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name. Default: Character"
         )]
             string infoboxType = "Character",
-        [Description("How many relationship levels to traverse from the root. Use 1 for direct relationships only (default). Use 2+ only for multi-generational queries like full family trees.")] int maxDepth = 1,
-        [Description("Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). Linked entities are placed one generation above.")]
+        [Description(
+            "How many relationship levels to traverse from the root. Use 1 for direct relationships only (default). Use 2+ only for multi-generational queries like full family trees."
+        )]
+            int maxDepth = 1,
+        [Description(
+            "Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). Linked entities are placed one generation above."
+        )]
             List<string>? upLabels = null,
-        [Description("Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). Linked entities are placed one generation below.")]
+        [Description(
+            "Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). Linked entities are placed one generation below."
+        )]
             List<string>? downLabels = null,
-        [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). Linked entities are placed on the same level.")]
+        [Description(
+            "Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). Linked entities are placed on the same level."
+        )]
             List<string>? peerLabels = null,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
@@ -184,7 +201,9 @@ public class ComponentToolkit
             "Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')"
         )]
             string? search = null,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
@@ -216,11 +235,18 @@ public class ComponentToolkit
             "One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these."
         )]
             List<int> pageIds,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
-        InfoboxResult = new InfoboxDescriptor { Title = title, PageIds = pageIds, References = references };
+        InfoboxResult = new InfoboxDescriptor
+        {
+            Title = title,
+            PageIds = pageIds,
+            References = references,
+        };
         return InfoboxResult;
     }
 
@@ -236,11 +262,18 @@ public class ComponentToolkit
             "Text sections to display — each with heading, content, and optional source page info"
         )]
             List<TextSection> sections,
-        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")]
+        [Description(
+            "Optional source references (title + wikiUrl) from pages used to answer this query"
+        )]
             List<Reference>? references = null
     )
     {
-        TextResult = new TextDescriptor { Title = title, Sections = sections, References = references };
+        TextResult = new TextDescriptor
+        {
+            Title = title,
+            Sections = sections,
+            References = references,
+        };
         return TextResult;
     }
 

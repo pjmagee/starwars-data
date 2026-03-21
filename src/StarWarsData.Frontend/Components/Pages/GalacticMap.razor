@@ -1,18 +1,59 @@
 @page "/galactic-map"
+@using WikiPage = StarWarsData.Models.Entities.Page
 @inject IHttpClientFactory HttpClientFactory
 @inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
 @implements IDisposable
 
 <style>
-  /* make details pane scrollable */
   .scrollable-panel {
     overflow-y: auto;
     max-height: calc(100vh - 150px);
   }
+
+  @@keyframes galaxy-pulse {
+    0%   { box-shadow: 0 0 4px 2px rgba(255, 215, 0, 0.8); }
+    50%  { box-shadow: 0 0 12px 6px rgba(255, 215, 0, 0.4); }
+    100% { box-shadow: 0 0 4px 2px rgba(255, 215, 0, 0.8); }
+  }
+
+  .cell.search-hit {
+    animation: galaxy-pulse 1.5s ease-in-out infinite;
+    border: 2px solid gold !important;
+    z-index: 2;
+    position: relative;
+  }
 </style>
 
 <MudStack Row="false">
-    
+
+    <!-- Search bar -->
+    <MudPaper Elevation="10" Class="pa-2">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudTextField @bind-Value="_searchTerm"
+                          Label="Search the galaxy"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Immediate="false"
+                          DebounceInterval="600"
+                          OnDebounceIntervalElapsed="OnSearchChanged"
+                          Clearable="true"
+                          OnClearButtonClick="ClearSearch"
+                          Placeholder="Search for a person, place, event, war..."
+                          Style="flex:1;" />
+            @if (_searching)
+            {
+                <MudProgressCircular Size="Size.Small" Indeterminate="true" />
+            }
+            @if (_searchResults is not null)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                    @_searchResults.Count result(s) across @_highlightedKeys.Count cell(s)
+                </MudText>
+            }
+        </MudStack>
+    </MudPaper>
+
     <!-- Region filter legend -->
     <MudPaper Elevation="10" Class="pa-2">
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
@@ -26,56 +67,90 @@
             </MudChipSet>
         </MudStack>
     </MudPaper>
-    
+
     <MudStack Row="true" Spacing="2" Class="h-100">
-        <!-- Left column: Tabs lists -->
-        <MudPaper Class="pa-2 galaxy-left" Style="width:20%; height:100%; overflow-y:auto;">
-            <MudText Typo="Typo.h6">Regions</MudText>
-            <MudList Dense="true" T="RegionDto" Style="max-height:150px; overflow-y:auto;">
-                @foreach (var r in CellRegions)
-                {
-                    <MudListItem T="RegionDto" Text="@r.Name" OnClick="() => LoadDetails(EntityType.Region, r.Id)" />
-                }
-            </MudList>
-            <MudText Typo="Typo.h6">Sectors</MudText>
-            <MudList Dense="true" T="SectorDto" Style="max-height:150px; overflow-y:auto;">
-                @foreach (var s in CellSectors)
-                {
-                    <MudListItem T="SectorDto" Text="@s.Name" OnClick="() => LoadDetails(EntityType.Sector, s.Id)" />
-                }
-            </MudList>
-            <MudText Typo="Typo.h6">Systems</MudText>
-            <MudList Dense="true" T="SystemDto" Style="max-height:150px; overflow-y:auto;">
-                @foreach (var sys in CellSystems)
-                {
-                    <MudListItem T="SystemDto" Text="@sys.Name" OnClick="() => LoadDetails(EntityType.System, sys.Id)" />
-                }
-            </MudList>
-            <MudText Typo="Typo.h6">Planets</MudText>
-            <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
-                @foreach (var p in CellPlanets)
-                {
-                    <MudListItem T="GalaxyMapItem" Text="@p.Name" OnClick="() => LoadDetails(EntityType.CelestialBody, p.Id)" />
-                }
-            </MudList>
-            @if (CellNebulas.Any())
+        <!-- Left column: Search results or cell contents -->
+        <MudPaper Class="pa-2 galaxy-left scrollable-panel" Style="width:20%;">
+            @if (_searchResults is not null && _searchResults.Count > 0)
             {
-                <MudText Typo="Typo.h6">Nebulas</MudText>
-                <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
-                    @foreach (var n in CellNebulas)
+                <MudText Typo="Typo.h6" Class="mb-2">Search Results</MudText>
+                <MudList Dense="true" T="MapSearchResult" Style="max-height: calc(100vh - 280px); overflow-y:auto;">
+                    @foreach (var group in _searchResults.GroupBy(r => r.GridKey))
                     {
-                        <MudListItem T="GalaxyMapItem" Text="@n.Name" OnClick="() => LoadDetails(EntityType.Nebula, n.Id)" />
+                        <MudListSubheader>
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                <MudIcon Icon="@Icons.Material.Filled.GridOn" Size="Size.Small" />
+                                <MudText Typo="Typo.subtitle2">Grid @group.Key</MudText>
+                            </MudStack>
+                        </MudListSubheader>
+                        @foreach (var result in group)
+                        {
+                            var isActive = _selectedSearchResult == result;
+                            <MudListItem T="MapSearchResult" OnClick="() => SelectSearchResult(result)"
+                                         Class="@(isActive ? "mud-primary-text" : "")">
+                                <MudStack Row="false" Spacing="0">
+                                    <MudText Typo="Typo.body2" Class="font-weight-bold">@result.MatchedName</MudText>
+                                    @if (result.MatchType == "linked" && result.LinkedVia is not null)
+                                    {
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary">@result.LinkedVia</MudText>
+                                    }
+                                    else if (result.Template is not null)
+                                    {
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary">@result.Template</MudText>
+                                    }
+                                </MudStack>
+                            </MudListItem>
+                        }
                     }
                 </MudList>
             }
+            else
+            {
+                <MudText Typo="Typo.h6">Regions</MudText>
+                <MudList Dense="true" T="RegionDto" Style="max-height:150px; overflow-y:auto;">
+                    @foreach (var r in CellRegions)
+                    {
+                        <MudListItem T="RegionDto" Text="@r.Name" OnClick="() => LoadDetails(EntityType.Region, r.Id)" />
+                    }
+                </MudList>
+                <MudText Typo="Typo.h6">Sectors</MudText>
+                <MudList Dense="true" T="SectorDto" Style="max-height:150px; overflow-y:auto;">
+                    @foreach (var s in CellSectors)
+                    {
+                        <MudListItem T="SectorDto" Text="@s.Name" OnClick="() => LoadDetails(EntityType.Sector, s.Id)" />
+                    }
+                </MudList>
+                <MudText Typo="Typo.h6">Systems</MudText>
+                <MudList Dense="true" T="SystemDto" Style="max-height:150px; overflow-y:auto;">
+                    @foreach (var sys in CellSystems)
+                    {
+                        <MudListItem T="SystemDto" Text="@sys.Name" OnClick="() => LoadDetails(EntityType.System, sys.Id)" />
+                    }
+                </MudList>
+                <MudText Typo="Typo.h6">Planets</MudText>
+                <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
+                    @foreach (var p in CellPlanets)
+                    {
+                        <MudListItem T="GalaxyMapItem" Text="@p.Name" OnClick="() => LoadDetails(EntityType.CelestialBody, p.Id)" />
+                    }
+                </MudList>
+                @if (CellNebulas.Any())
+                {
+                    <MudText Typo="Typo.h6">Nebulas</MudText>
+                    <MudList Dense="true" T="GalaxyMapItem" Style="max-height:150px; overflow-y:auto;">
+                        @foreach (var n in CellNebulas)
+                        {
+                            <MudListItem T="GalaxyMapItem" Text="@n.Name" OnClick="() => LoadDetails(EntityType.Nebula, n.Id)" />
+                        }
+                    </MudList>
+                }
+            }
         </MudPaper>
-        
-        <!-- Center column: Galaxy map / Regions legend/chips -->
+
+        <!-- Center column: Galaxy map grid -->
         <MudStack Row="false">
-           
-            <!-- Galaxy map grid -->
             <MudPaper Elevation="10" Class="galactic-grid-with-headers galaxy-center h-100">
-                
+
                 <div class="header-cell empty-header"></div>
 
                 @for (int i = 0; i < Alphabet.Length; i++)
@@ -92,7 +167,11 @@
                         var cell = Grid.TryGetValue(key, out var c) ? c : null;
                         var hasNebula = cell?.Nebulas.Count > 0;
                         var nebulaStyle = hasNebula ? "background:rgba(138,43,226,0.15);" : "";
-                        <div class="@("cell" + (key == _selectedCellKey ? " selected" : ""))" style="@nebulaStyle">
+                        var isHighlighted = _highlightedKeys.Contains(key);
+                        var cellClass = "cell"
+                            + (key == _selectedCellKey ? " selected" : "")
+                            + (isHighlighted ? " search-hit" : "");
+                        <div class="@cellClass" style="@nebulaStyle">
                             @if (cell != null && cell.Region != null && _selectedRegions.Contains(cell.Region))
                             {
                                 <MudIconButton Icon="@Icons.Material.Filled.Info"
@@ -105,12 +184,69 @@
                 }
             </MudPaper>
         </MudStack>
-        
+
         <!-- Right column: Details pane -->
         <MudPaper Class="pa-4 galaxy-right h-100 scrollable-panel" Style="width:20%;">
             @if (_loadingDetails)
             {
                 <MudProgressCircular Indeterminate="true" />
+            }
+            else if (_detailPage is not null)
+            {
+                @* Full infobox view for search results and general page lookups *@
+                <MudCard Outlined="true">
+                    @if (_detailPage.Infobox?.ImageUrl is not null)
+                    {
+                        <MudCardMedia Image="@StripRevision(_detailPage.Infobox.ImageUrl)" Height="200" />
+                    }
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h6">@_detailPage.Title</MudText>
+                            @if (_detailPage.Infobox?.Template is not null)
+                            {
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                    @SanitizeTemplate(_detailPage.Infobox.Template)
+                                </MudText>
+                            }
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        @if (_selectedSearchResult?.MatchType == "linked" && _selectedSearchResult.LinkedVia is not null)
+                        {
+                            <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true" Class="mb-2">
+                                @_selectedSearchResult.LinkedVia
+                            </MudAlert>
+                        }
+                        @if (_detailPage.Infobox?.Data is not null)
+                        {
+                            <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
+                                <tbody>
+                                    @foreach (var prop in _detailPage.Infobox.Data.Where(HasInfoboxContent))
+                                    {
+                                        <tr>
+                                            <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
+                                                @prop.Label
+                                            </td>
+                                            <td style="padding:6px 12px;">
+                                                @foreach (var link in prop.Links)
+                                                {
+                                                    <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                }
+                                                @GetPlainValues(prop)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </MudSimpleTable>
+                        }
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Href="@_detailPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                            Wookieepedia
+                        </MudButton>
+                    </MudCardActions>
+                </MudCard>
             }
             else if (SelectedDetails is RegionDto rdto)
             {
@@ -166,7 +302,6 @@
                         {
                             <MudDivider Class="my-2" />
                             <MudText Typo="Typo.subtitle1">Additional Data</MudText>
-                            <!-- dynamic fields in two-column grid -->
                             <MudGrid Spacing="2">
                               @foreach (var kv in bdto.AdditionalData)
                               {
@@ -223,7 +358,7 @@
             }
         </MudPaper>
     </MudStack>
-    
+
 </MudStack>
 
 
@@ -245,7 +380,15 @@
     private List<GalaxyMapItem> CellPlanets = new();
     private List<GalaxyMapItem> CellNebulas = new();
     private IReadOnlyCollection<string> _selectedRegions = new List<string>();
-    
+
+    // Search state
+    private string? _searchTerm;
+    private bool _searching;
+    private List<MapSearchResult>? _searchResults;
+    private HashSet<string> _highlightedKeys = new();
+    private MapSearchResult? _selectedSearchResult;
+    private WikiPage? _detailPage;
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnInitializedAsync()
@@ -262,6 +405,8 @@
     private async void OnContinuityChanged()
     {
         await LoadGrid();
+        if (!string.IsNullOrWhiteSpace(_searchTerm))
+            await ExecuteSearch(_searchTerm);
         await InvokeAsync(StateHasChanged);
     }
 
@@ -328,12 +473,88 @@
         }
     }
 
+    private async Task OnSearchChanged(string term)
+    {
+        if (string.IsNullOrWhiteSpace(term))
+        {
+            ClearSearch();
+            return;
+        }
+        await ExecuteSearch(term);
+    }
+
+    private async Task ExecuteSearch(string term)
+    {
+        _searching = true;
+        StateHasChanged();
+
+        try
+        {
+            var continuity = GlobalFilterService.GetContinuityQueryParam();
+            var url = $"GalaxyMap/search?term={Uri.EscapeDataString(term)}";
+            if (!string.IsNullOrEmpty(continuity))
+                url += $"&continuity={continuity}";
+
+            _searchResults = await Http.GetFromJsonAsync<List<MapSearchResult>>(url);
+            _highlightedKeys = _searchResults?.Select(r => r.GridKey).ToHashSet() ?? new();
+        }
+        catch
+        {
+            _searchResults = null;
+            _highlightedKeys.Clear();
+        }
+        finally
+        {
+            _searching = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SelectSearchResult(MapSearchResult result)
+    {
+        _selectedSearchResult = result;
+        _selectedCellKey = result.GridKey;
+        _detailPage = null;
+        SelectedDetails = null;
+        _loadingDetails = true;
+        StateHasChanged();
+
+        try
+        {
+            // For linked results, load the source entity (e.g. Luke) — that's what the user searched for
+            // For direct results, load the matched location entity
+            var pageId = result.MatchType == "linked" && result.SourcePageId.HasValue
+                ? result.SourcePageId.Value
+                : result.PageId;
+
+            _detailPage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{pageId}");
+        }
+        catch { _detailPage = null; }
+        finally
+        {
+            _loadingDetails = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ClearSearch()
+    {
+        _searchTerm = null;
+        _searchResults = null;
+        _highlightedKeys.Clear();
+        _selectedSearchResult = null;
+        _detailPage = null;
+        StateHasChanged();
+    }
+
     private async Task LoadDetails(EntityType type, int id)
     {
         try
         {
             _loadingDetails = true;
             _selectedType = type;
+            _detailPage = null;
+            _selectedSearchResult = null;
             SelectedDetails = type switch
             {
                 EntityType.System => await Http.GetFromJsonAsync<SystemDetailsDto>($"GalaxyMap/system/{id}"),
@@ -358,6 +579,28 @@
         if (region != null && _regionColors.TryGetValue(region, out var color))
             return color;
         return "#ccc";
+    }
+
+    private static bool HasInfoboxContent(InfoboxProperty prop) =>
+        prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
+
+    private static string GetPlainValues(InfoboxProperty prop)
+    {
+        var linkTexts = prop.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var plain = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v));
+        return string.Join(", ", plain);
+    }
+
+    private static string StripRevision(string url)
+    {
+        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
+        return idx > 0 ? url[..idx] : url;
+    }
+
+    private static string SanitizeTemplate(string template)
+    {
+        var last = template.Split(':').LastOrDefault() ?? template;
+        return last.Replace("_", " ");
     }
 
     enum EntityType {

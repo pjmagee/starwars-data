@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using MudBlazor.Services;
@@ -25,6 +27,31 @@ builder
             options.RequireHttpsMetadata = false;
             options.GetClaimsFromUserInfoEndpoint = true;
             options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
+            options.Events = new OpenIdConnectEvents
+            {
+                OnTokenValidated = context =>
+                {
+                    if (context.Principal?.Identity is ClaimsIdentity identity)
+                    {
+                        var realmAccess = context.Principal.FindFirst("realm_access");
+                        if (realmAccess is not null)
+                        {
+                            using var doc = JsonDocument.Parse(realmAccess.Value);
+                            if (doc.RootElement.TryGetProperty("roles", out var roles))
+                            {
+                                foreach (var role in roles.EnumerateArray())
+                                {
+                                    var value = role.GetString();
+                                    if (value is not null)
+                                        identity.AddClaim(new Claim(ClaimTypes.Role, value));
+                                }
+                            }
+                        }
+                    }
+                    return Task.CompletedTask;
+                },
+            };
         }
     );
 

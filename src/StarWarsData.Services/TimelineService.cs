@@ -327,7 +327,7 @@ public class TimelineService
             // Show both Canon and Legends content
             return Builders<TimelineEvent>.Filter.In(
                 x => x.Continuity,
-                new[] { Continuity.Canon, Continuity.Legends, Continuity.Both }
+                [Continuity.Canon, Continuity.Legends, Continuity.Both]
             );
         }
 
@@ -347,7 +347,7 @@ public class TimelineService
         // since most timeline events don't have Universe explicitly set.
         return Builders<TimelineEvent>.Filter.In(
             x => x.Universe,
-            new[] { universe.Value, Universe.Unknown }
+            [universe.Value, Universe.Unknown]
         );
     }
 

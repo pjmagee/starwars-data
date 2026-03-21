@@ -5,11 +5,13 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);ASPIRECOMPUTE001;ASPIRECOMPUTE003</NoWarn>
     <UserSecretsId>59ee3b5d-5913-4ff8-8856-9fd5265fdca1</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="13.1.2" />
     <PackageReference Include="Aspire.Hosting.Keycloak" Version="13.1.3-preview.1.26166.8" />
+    <PackageReference Include="Aspire.Hosting.Docker" Version="13.1.3-preview.1.26166.8" />
     <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.1.2" />
   </ItemGroup>
   <ItemGroup>

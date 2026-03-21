@@ -1,8 +1,19 @@
+using Aspire.Hosting.Docker.Resources.ComposeNodes;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
 var openApiKey = Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY") ?? "default-key";
 var openApi = builder.AddParameter(name: "openapi", value: openApiKey, secret: true);
+
+// External self-hosted Mongo server: parameterize credentials & host for secret management
+var mongoUser = builder.AddParameter("mongo-user", value: "admin");
+var mongoPassword = builder.AddParameter("mongo-password", value: "password", secret: true);
+var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
+var mongoPort = builder.AddParameter("mongo-port", value: "27017");
+
+var keycloakUser = builder.AddParameter("keycloak-user", value: "admin");
+var keycloakPassword = builder.AddParameter("keycloak-password", value: "admin", secret: true);
+
 
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
@@ -95,30 +106,17 @@ var apiService = builder
         }
     );
 
-if (builder.ExecutionContext.IsPublishMode)
-{
-    var mongo = GetMongoAtlas();
-    apiService.WithReference(mongo).WaitFor(mongo);
-}
-else
-{
-    // External self-hosted Mongo server: parameterize credentials & host for secret management
-    var mongoUser = builder.AddParameter("mongo-user", value: "admin");
-    var mongoPassword = builder.AddParameter("mongo-password", value: "password", secret: true);
-    var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
-    var mongoPort = builder.AddParameter("mongo-port", value: "27017");
+var mongo = builder.AddConnectionString(
+    "mongodb",
+    ReferenceExpression.Create(
+        $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin"
+    )
+);
 
-    var mongo = builder.AddConnectionString(
-        "mongodb",
-        ReferenceExpression.Create(
-            $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin"
-        )
-    );
+apiService.WithReference(mongo).WaitFor(mongo);
 
-    apiService.WithReference(mongo).WaitFor(mongo);
-}
-
-var keycloak = builder.AddKeycloak("keycloak").WithRealmImport("./KeycloakConfiguration");
+var keycloak = builder.AddKeycloak("keycloak", adminUsername: keycloakUser, adminPassword: keycloakPassword)
+    .WithRealmImport("./KeycloakConfiguration");
 
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
@@ -127,13 +125,21 @@ var frontend = builder
     .WaitFor(keycloak)
     .WaitFor(apiService);
 
-builder.Build().Run();
+builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
 
-IResourceBuilder<ConnectionStringResource> GetMongoAtlas()
-{
-    var mongoConnectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING");
-    return builder.AddConnectionString(
-        name: "mongodb",
-        ReferenceExpression.Create($"{mongoConnectionString}")
-    );
-}
+builder.AddDockerComposeEnvironment("starwars")
+    .ConfigureComposeFile(compose =>
+    {
+        // Replace default network with external proxynet
+        compose.Networks.Clear();
+        compose.AddNetwork(new Network { Name = "proxynet", External = true });
+
+        // Configure all services with restart policy and proxynet
+        foreach (var service in compose.Services.Values)
+        {
+            service.Restart = "unless-stopped";
+            service.Networks = ["proxynet"];
+        }
+    });
+
+builder.Build().Run();

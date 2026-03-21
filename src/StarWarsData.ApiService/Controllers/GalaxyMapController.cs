@@ -213,6 +213,26 @@ public class GalaxyMapController : ControllerBase
         }
     }
 
+    [HttpGet("search")]
+    public async Task<ActionResult<List<MapSearchResult>>> SearchGrid(
+        [FromQuery] string term,
+        [FromQuery] Continuity? continuity = null)
+    {
+        if (string.IsNullOrWhiteSpace(term) || term.Length < 2)
+            return Ok(new List<MapSearchResult>());
+
+        try
+        {
+            var results = await _mapService.SearchGridAsync(term, continuity);
+            return Ok(results);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error searching galaxy map for term '{Term}'", term);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpGet("sectors/{sectorId:int}/planets")]
     public async Task<ActionResult<IEnumerable<PlanetDto>>> GetOrphanPlanetsInSector(int sectorId)
     {

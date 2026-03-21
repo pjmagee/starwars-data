@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -392,5 +393,141 @@ public class MapService
         );
         var recs = await _pages.Find(filter).ToListAsync();
         return recs.Select(r => new PlanetDto { Id = r.PageId, Name = r.Title });
+    }
+
+    // Labels on non-spatial entities that reference locations
+    static readonly string[] LocationLabels =
+    [
+        "Homeworld", "Location", "Planet", "Birthplace", "Capital",
+        "Headquarters", "Base of operations", "Place", "Theater",
+        "Born", "Died", "Destroyed", "System", "Sector", "Region",
+        "Base", "World", "Moon", "Located"
+    ];
+
+    public async Task<List<MapSearchResult>> SearchGridAsync(string term, Continuity? continuity = null)
+    {
+        var escaped = Regex.Escape(term);
+        var results = new List<MapSearchResult>();
+        var seen = new HashSet<string>(); // dedupe grid keys
+
+        // 1. Direct matches: entities WITH "Grid square" whose title matches
+        var directFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument("Label", "Grid square")
+            )
+        );
+        if (continuity.HasValue)
+            directFilter = Builders<Page>.Filter.And(
+                directFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+
+        var directMatches = await _pages.Find(directFilter).Limit(50).ToListAsync();
+        foreach (var page in directMatches)
+        {
+            var gridSquare = GetFirstDataValue(page, "Grid square");
+            if (gridSquare == null) continue;
+            var parts = gridSquare.Split('-', 2);
+            if (parts.Length != 2 || !int.TryParse(parts[1], out _)) continue;
+            var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
+
+            var template = page.Infobox?.Template?.Split(':').LastOrDefault();
+            results.Add(new MapSearchResult
+            {
+                GridKey = gridKey,
+                PageId = page.PageId,
+                MatchedName = page.Title,
+                Template = template,
+                MatchType = "direct",
+            });
+            seen.Add(gridKey);
+        }
+
+        // 2. Indirect matches: entities WITHOUT grid squares whose title matches
+        //    We look at their location-related infobox properties to find referenced places
+        var indirectFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+            Builders<Page>.Filter.Not(
+                Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                    "infobox.Data",
+                    new BsonDocument("Label", "Grid square")
+                )
+            ),
+            Builders<Page>.Filter.Ne("infobox", BsonNull.Value)
+        );
+        if (continuity.HasValue)
+            indirectFilter = Builders<Page>.Filter.And(
+                indirectFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+
+        var indirectMatches = await _pages.Find(indirectFilter).Limit(50).ToListAsync();
+
+        // Collect all referenced location names from infobox properties
+        var locationRefs = new Dictionary<string, List<(int sourcePageId, string entityName, string label)>>();
+        foreach (var page in indirectMatches)
+        {
+            if (page.Infobox?.Data == null) continue;
+            foreach (var prop in page.Infobox.Data)
+            {
+                if (prop.Label == null) continue;
+                if (!LocationLabels.Any(l => prop.Label.Contains(l, StringComparison.OrdinalIgnoreCase))) continue;
+
+                // Collect values and link contents as potential location names
+                var names = new List<string>();
+                names.AddRange(prop.Values.Where(v => !string.IsNullOrWhiteSpace(v)));
+                names.AddRange(prop.Links.Select(l => l.Content).Where(c => !string.IsNullOrWhiteSpace(c)));
+
+                foreach (var name in names.Distinct())
+                {
+                    if (!locationRefs.ContainsKey(name))
+                        locationRefs[name] = [];
+                    locationRefs[name].Add((page.PageId, page.Title, prop.Label));
+                }
+            }
+        }
+
+        if (locationRefs.Count > 0)
+        {
+            // Batch-lookup all referenced location names to find their grid squares
+            var nameFilter = Builders<Page>.Filter.And(
+                Builders<Page>.Filter.In("title", locationRefs.Keys),
+                Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                    "infobox.Data",
+                    new BsonDocument("Label", "Grid square")
+                )
+            );
+            var resolved = await _pages.Find(nameFilter).ToListAsync();
+
+            foreach (var page in resolved)
+            {
+                var gridSquare = GetFirstDataValue(page, "Grid square");
+                if (gridSquare == null) continue;
+                var parts = gridSquare.Split('-', 2);
+                if (parts.Length != 2 || !int.TryParse(parts[1], out _)) continue;
+                var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
+
+                if (!locationRefs.TryGetValue(page.Title, out var refs)) continue;
+                foreach (var (sourcePageId, entityName, label) in refs)
+                {
+                    results.Add(new MapSearchResult
+                    {
+                        GridKey = gridKey,
+                        PageId = page.PageId,
+                        MatchedName = page.Title,
+                        Template = page.Infobox?.Template?.Split(':').LastOrDefault(),
+                        MatchType = "linked",
+                        LinkedVia = $"{label} of {entityName}",
+                        SourcePageId = sourcePageId,
+                        SourceName = entityName,
+                    });
+                    seen.Add(gridKey);
+                }
+            }
+        }
+
+        return results;
     }
 }

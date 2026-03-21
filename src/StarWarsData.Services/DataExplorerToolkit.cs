@@ -21,6 +21,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     IMongoCollection<BsonDocument> Pages =>
         mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(Collection);
 
+    static string EscapeRegex(string input) => System.Text.RegularExpressions.Regex.Escape(input);
+
     /// <summary>
     /// Builds a regex filter on infobox.Template that matches the given type name at the end of the URL.
     /// e.g. "Character" matches "https://starwars.fandom.com/wiki/Template:Character"
@@ -65,7 +67,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             new BsonDocument
             {
                 { "Label", "Titles" },
-                { "Values", new BsonDocument("$regex", new BsonRegularExpression(name, "i")) },
+                { "Values", new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(name), "i")) },
             }
         );
 
@@ -242,7 +244,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                         { "Label", label },
                         {
                             "Values",
-                            new BsonDocument("$regex", new BsonRegularExpression(value, "i"))
+                            new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(value), "i"))
                         },
                     }
                 )
@@ -390,7 +392,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                         { "Label", dateLabel },
                         {
                             "Values",
-                            new BsonDocument("$regex", new BsonRegularExpression(date, "i"))
+                            new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(date), "i"))
                         },
                     }
                 )
@@ -492,7 +494,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                                         "Href",
                                         new BsonDocument(
                                             "$regex",
-                                            new BsonRegularExpression(wikiUrl, "i")
+                                            new BsonRegularExpression(EscapeRegex(wikiUrl), "i")
                                         )
                                     },
                                 }

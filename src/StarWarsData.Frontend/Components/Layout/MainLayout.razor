@@ -1,4 +1,5 @@
-﻿@using StarWarsData.Models.Entities
+﻿@using System.Reflection
+@using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
 
@@ -29,7 +30,19 @@
         </AuthorizeView>
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu/>
+        <div class="d-flex flex-column" style="height:100%">
+            <div style="flex:1">
+                <NavMenu/>
+            </div>
+            <MudDivider />
+            <div class="pa-3 d-flex align-center gap-2">
+                <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Color="Color.Secondary" Typo="Typo.caption">
+                    <MudIcon Icon="@Icons.Custom.Brands.GitHub" Size="Size.Small" Class="mr-1" /> GitHub
+                </MudLink>
+                <MudSpacer />
+                <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+            </div>
+        </div>
     </MudDrawer>
     <MudMainContent Class="pt-16 pa-4">
         @Body
@@ -46,6 +59,7 @@
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
+    private readonly string _version = Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "0.0.0";
 
     protected override void OnInitialized()
     {

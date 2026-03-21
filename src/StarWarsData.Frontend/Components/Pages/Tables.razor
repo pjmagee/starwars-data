@@ -1,8 +1,13 @@
-﻿@page "/tables"
+@page "/tables"
 @rendermode InteractiveAuto
 @inject IHttpClientFactory HttpClientFactory
 
-<PageTitle>Tables</PageTitle>
+<PageTitle>Data Tables — Star Wars Data</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-2">Data Tables</MudText>
+<MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
+    Browse Star Wars data by category. Select a category and use the search box to filter results.
+</MudText>
 
 @if (_categories == null)
 {
@@ -12,46 +17,58 @@ else
 {
     <MudSelect
         T="string"
-        ValueChanged="@ValueChanged"
-        Class="mb-8"
-        Placeholder="Select a Star wars Data category">
-        
+        Value="_category"
+        ValueChanged="@CategoryChanged"
+        Label="Category"
+        Variant="Variant.Outlined"
+        Class="mb-4"
+        Placeholder="Select a category">
+
         @foreach (var item in _categories)
         {
             <MudSelectItem Value="@item" T="string">
-                @item
+                @FormatCategoryName(item)
             </MudSelectItem>
         }
-        
+
     </MudSelect>
 }
 
 @if (_category is not null)
 {
-    <MudTable 
-        ServerData="ServerReload" 
+    <MudTextField @bind-Value="_searchText"
+                  Label="Search"
+                  Variant="Variant.Outlined"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Search"
+                  Immediate="false"
+                  DebounceInterval="500"
+                  OnDebounceIntervalElapsed="OnSearchChanged"
+                  Clearable="true"
+                  Class="mb-4"
+                  Placeholder="Filter by name or property..." />
+
+    <MudTable
+        ServerData="ServerReload"
         FixedHeader="true"
-        FixedFooter="true" 
-        Height="1000px" 
-        ReadOnly="true" 
-        Dense="true" 
-        @ref="_table" 
+        FixedFooter="true"
+        Height="1000px"
+        ReadOnly="true"
+        Dense="true"
+        @ref="_table"
         Bordered="true"
-        Striped="true" 
+        Striped="true"
         HorizontalScrollbar="true">
-        
+
         <HeaderContent>
-            <MudTh>Id</MudTh>
             <MudTh>Page</MudTh>
             <MudTh>Image</MudTh>
             @foreach (var item in DynamicHeaders)
             {
                 <MudTh>@item</MudTh>
             }
-            <MudTh>Relationships</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="Id">@context.PageId</MudTd>
             <MudTd DataLabel="Page">
                 <MudLink Href="@context.WikiUrl">@context.PageTitle</MudLink>
             </MudTd>
@@ -68,7 +85,7 @@ else
                 <MudTd DataLabel="@label">
                     @if (data is not null)
                     {
-                        <MudList T="string" Gutters="false" Padding="false" Dense="true" Class="mb-4">
+                        <MudList T="string" Gutters="false" Padding="false" Dense="true">
                             @foreach (var link in data.Links)
                             {
                                 <MudListItem Dense="true" Gutters="false" Ripple="false">
@@ -100,10 +117,11 @@ else
 
     private string[]? _categories;
     private string? _category;
+    private string? _searchText;
 
     private MudTable<Infobox>? _table;
     private PagedResult? _pagedResult;
-    
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     private IEnumerable<string> DynamicHeaders
@@ -131,19 +149,36 @@ else
         if (_category == null)
             return new TableData<Infobox>() { Items = Enumerable.Empty<Infobox>(), TotalItems = 0 };
 
-    var encoded = Uri.EscapeDataString(_category);
-    _pagedResult = await Http.GetFromJsonAsync<PagedResult>($"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}");
+        var encoded = Uri.EscapeDataString(_category);
+        var url = $"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}";
 
-        return new TableData<Infobox>() { TotalItems = _pagedResult.Total, Items = _pagedResult.Items };
+        if (!string.IsNullOrWhiteSpace(_searchText))
+            url += $"&Search={Uri.EscapeDataString(_searchText)}";
+
+        _pagedResult = await Http.GetFromJsonAsync<PagedResult>(url, ct);
+
+        return new TableData<Infobox>() { TotalItems = _pagedResult!.Total, Items = _pagedResult.Items };
     }
 
-    private Task ValueChanged(string arg)
+    private Task CategoryChanged(string arg)
     {
         _category = arg;
+        _searchText = null;
 
         if (_table is not null)
             return _table.ReloadServerData();
 
         return Task.CompletedTask;
     }
+
+    private Task OnSearchChanged(string _)
+    {
+        if (_table is not null)
+            return _table.ReloadServerData();
+
+        return Task.CompletedTask;
+    }
+
+    private static string FormatCategoryName(string category) =>
+        category.Replace("_infobox", "").Replace("_", " ");
 }

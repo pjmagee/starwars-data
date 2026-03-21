@@ -35,7 +35,7 @@
                 @foreach (var category in GetSortedCategories())
                 {
                     var color = GetChipColor(category);
-                    <MudChip Value="@category" Style="@($"border-color:{color}; color:{color}")" Variant="Variant.Outlined" T="string">
+                    <MudChip @key="category" Value="@category" Style="@($"border-color:{color}; color:{color}")" Variant="Variant.Outlined" T="string">
                         @FormatCategoryName(category)
                     </MudChip>
                 }

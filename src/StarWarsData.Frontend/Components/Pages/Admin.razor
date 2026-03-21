@@ -1,4 +1,5 @@
 @page "/admin"
+@attribute [Authorize(Roles = "admin")]
 @inject IHttpClientFactory HttpClientFactory
 @inject ISnackbar Snackbar
 @inject EndpointService EndpointService
