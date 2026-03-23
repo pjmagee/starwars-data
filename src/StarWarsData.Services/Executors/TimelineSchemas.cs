@@ -43,3 +43,26 @@ internal sealed record PageEventSchema(
     [property: JsonPropertyName("location")] string? Location,
     [property: JsonPropertyName("relatedCharacters")] List<string>? RelatedCharacters
 );
+
+/// <summary>
+/// Batch extraction schema — used by the batch extraction executor for multiple pages per LLM call.
+/// Each event includes sourcePageTitle so we know which page it came from.
+/// </summary>
+internal sealed record BatchExtractionSchema(
+    [property: JsonPropertyName("events")] List<BatchEventSchema>? Events
+);
+
+/// <summary>
+/// A single event extracted from a batch, with source page attribution.
+/// </summary>
+internal sealed record BatchEventSchema(
+    [property: JsonPropertyName("eventType")] string? EventType,
+    [property: JsonPropertyName("description")] string? Description,
+    [property: JsonPropertyName("year")] float? Year,
+    [property: JsonPropertyName("demarcation")] string? Demarcation,
+    [property: JsonPropertyName("dateDescription")] string? DateDescription,
+    [property: JsonPropertyName("location")] string? Location,
+    [property: JsonPropertyName("relatedCharacters")] List<string>? RelatedCharacters,
+    [property: JsonPropertyName("sourcePageTitle")] string? SourcePageTitle,
+    [property: JsonPropertyName("sourceWikiUrl")] string? SourceWikiUrl
+);

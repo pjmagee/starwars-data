@@ -157,7 +157,9 @@ public enum GenerationStage
 {
     Queued,
     Discovering,
+    Bundling,
     Extracting,
+    Consolidating,
     Reviewing,
     Saving,
     Complete,
@@ -176,4 +178,38 @@ public class GenerationStatus
     public int TotalSteps { get; set; }
     public string? CurrentItem { get; set; }
     public int EventsExtracted { get; set; }
+
+    /// <summary>
+    /// True if there are pending checkpoints from an interrupted generation.
+    /// The frontend can use this to offer a "Resume" option.
+    /// </summary>
+    public bool HasPendingCheckpoint { get; set; }
+
+    /// <summary>
+    /// Live activity log populated from custom workflow events.
+    /// </summary>
+    public List<ActivityLogEntry> ActivityLog { get; set; } = [];
+}
+
+/// <summary>
+/// A single entry in the generation activity log, surfacing workflow events to the frontend.
+/// </summary>
+public class ActivityLogEntry
+{
+    public DateTime Timestamp { get; set; }
+
+    /// <summary>Discovery, Extraction, Review, System</summary>
+    public string Category { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Discriminator: page_discovered, extraction_started, event_extracted,
+    /// extraction_empty, extraction_failed, review_complete, etc.
+    /// </summary>
+    public string EntryType { get; set; } = string.Empty;
+
+    /// <summary>Human-readable summary shown in the activity feed.</summary>
+    public string Summary { get; set; } = string.Empty;
+
+    /// <summary>Optional structured detail (serialized as JSON for the frontend).</summary>
+    public object? Detail { get; set; }
 }

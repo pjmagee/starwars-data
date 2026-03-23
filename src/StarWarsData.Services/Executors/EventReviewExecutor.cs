@@ -36,10 +36,16 @@ internal sealed class EventReviewExecutor : Executor<string, string>
     public override async ValueTask<string> HandleAsync(
         string message, IWorkflowContext context, CancellationToken ct = default)
     {
-        var events = await context.ReadStateAsync<List<ExtractedEvent>>("events", "Extraction", ct)
-            ?? throw new InvalidOperationException("No events found in Extraction state");
+        // Try Consolidation state first (5-executor workflow), fall back to Extraction (legacy 3-executor)
+        var events = await context.ReadStateAsync<List<ExtractedEvent>>("events", "Consolidation", ct)
+            ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "BatchExtraction", ct)
+            ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "Extraction", ct)
+            ?? throw new InvalidOperationException("No events found in workflow state");
 
         var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct)
+            ?? "Unknown";
+
+        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
             ?? "Unknown";
 
         _tracker?.UpdateProgress(_characterPageId, GenerationStage.Reviewing,
@@ -57,6 +63,7 @@ internal sealed class EventReviewExecutor : Executor<string, string>
 
         var prompt = $"""
             Review and consolidate these {events.Count} timeline events for "{characterTitle}".
+            This character belongs to the {characterContinuity} continuity of Star Wars.
 
             TASKS:
             1. Remove duplicate events (same event described from multiple source pages — keep the most detailed version)
@@ -65,6 +72,7 @@ internal sealed class EventReviewExecutor : Executor<string, string>
             4. Merge events that describe the same occurrence but from different sources
             5. Ensure every event has a sourcePageTitle and sourceWikiUrl from the original extraction
             6. Keep all unique events — do not discard events just to shorten the list
+            7. Remove any events that reference content exclusive to a different continuity (e.g. remove Legends-only events for a Canon character and vice versa)
 
             EVENTS:
             {eventsJson}
@@ -84,9 +92,31 @@ internal sealed class EventReviewExecutor : Executor<string, string>
 
         var text = response.Text?.Trim() ?? "";
 
+        // Try to parse to get output count for the review summary event
+        int outputCount = 0;
+        try
+        {
+            var parsed = JsonSerializer.Deserialize<TimelineResponseSchema>(
+                text.StartsWith("```") ? StripMarkdownFences(text) : text, JsonOptions);
+            outputCount = parsed?.Events?.Count ?? 0;
+        }
+        catch { /* best-effort count */ }
+
+        await context.AddEventAsync(new ReviewCompleteEvent(new ReviewCompleteData(
+            events.Count, outputCount, events.Count - outputCount)), ct);
+
         _logger.LogInformation("Review complete for {Title}: response length {Length}",
             characterTitle, text.Length);
 
+        return text;
+    }
+
+    private static string StripMarkdownFences(string text)
+    {
+        var firstNewline = text.IndexOf('\n');
+        var lastFence = text.LastIndexOf("```");
+        if (firstNewline > 0 && lastFence > firstNewline)
+            return text[(firstNewline + 1)..lastFence].Trim();
         return text;
     }
 }

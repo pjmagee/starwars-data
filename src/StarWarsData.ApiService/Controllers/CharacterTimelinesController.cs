@@ -26,6 +26,17 @@ public class CharacterTimelinesController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet("list")]
+    public async Task<CharacterTimelineListResult> List(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 12,
+        [FromQuery] string? search = null,
+        [FromQuery] Continuity? continuity = null,
+        CancellationToken ct = default)
+    {
+        return await _service.ListTimelinesAsync(page, pageSize, search, continuity, ct);
+    }
+
     [HttpGet("search")]
     public async Task<List<CharacterSearchResult>> Search(
         [FromQuery] string query,
@@ -57,12 +68,26 @@ public class CharacterTimelinesController : ControllerBase
     }
 
     [HttpGet("{pageId:int}/status")]
-    public ActionResult<GenerationStatus> GetStatus(int pageId)
+    public async Task<ActionResult<GenerationStatus>> GetStatus(int pageId, CancellationToken ct)
     {
         var status = _tracker.GetStatus(pageId);
-        if (status is null)
-            return NotFound();
-        return Ok(status);
+        if (status is not null)
+            return Ok(status);
+
+        // No in-memory status — check if there are pending checkpoints from an interrupted run
+        var hasPending = await _service.HasPendingCheckpointsAsync(pageId, ct);
+        if (hasPending)
+        {
+            return Ok(new GenerationStatus
+            {
+                Stage = GenerationStage.Failed,
+                Message = "Generation was interrupted. Click Retry to resume from where it left off.",
+                HasPendingCheckpoint = true,
+                StartedAt = DateTime.UtcNow,
+            });
+        }
+
+        return NotFound();
     }
 
     [HttpPost("{pageId:int}/generate")]

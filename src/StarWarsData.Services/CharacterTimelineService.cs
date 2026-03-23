@@ -82,6 +82,17 @@ public class CharacterTimelineTracker
 
     public void Clear(int pageId) => _statuses.TryRemove(pageId, out _);
 
+    public void AddActivityLog(int pageId, ActivityLogEntry entry)
+    {
+        _statuses.AddOrUpdate(pageId,
+            _ => new GenerationStatus { ActivityLog = [entry] },
+            (_, existing) =>
+            {
+                existing.ActivityLog.Add(entry);
+                return existing;
+            });
+    }
+
     public bool IsRunning(int pageId) =>
         _statuses.TryGetValue(pageId, out var s)
         && s.Stage is not (GenerationStage.Complete or GenerationStage.Failed);
@@ -89,10 +100,12 @@ public class CharacterTimelineTracker
 
 /// <summary>
 /// ETL service that uses a Microsoft Agent Framework sequential workflow to build
-/// rich character timelines. Three custom executors work in sequence:
+/// rich character timelines. Five executors work in sequence:
 ///   1. PageDiscoveryExecutor — pure C#, queries MongoDB for character + linked pages
-///   2. EventExtractionExecutor — per-page LLM calls to extract events (bounded context)
-///   3. EventReviewExecutor — single LLM call to deduplicate and validate all events
+///   2. PageBundlerExecutor — pure C#, groups pages into token-budget batches
+///   3. BatchExtractionExecutor — one LLM call per batch (~4 calls instead of ~38)
+///   4. EventConsolidatorExecutor — pure C#, lightweight deduplication
+///   5. EventReviewExecutor — single LLM call to validate and finalize events
 /// </summary>
 public class CharacterTimelineService
 {
@@ -253,8 +266,8 @@ public class CharacterTimelineService
     }
 
     /// <summary>
-    /// Generate a timeline for a single character using a 3-executor workflow:
-    /// Discovery (pure C#) → Extraction (per-page LLM) → Review (single LLM).
+    /// Generate a timeline for a single character using a 5-executor workflow:
+    /// Discovery → Bundler → BatchExtraction → Consolidation → Review.
     /// Each executor uses shared workflow state — no context window overflow.
     /// </summary>
     public async Task GenerateTimelineAsync(
@@ -265,15 +278,22 @@ public class CharacterTimelineService
         // ── Create fresh executor instances (state isolation per run) ────────
         var discoveryExecutor = new PageDiscoveryExecutor(
             _mongoClient, _settings, _logger, tracker);
-        var extractionExecutor = new EventExtractionExecutor(
-            _chatClient, _logger, tracker, characterPageId);
+        var bundlerExecutor = new PageBundlerExecutor(
+            _logger, tracker, characterPageId);
+        var extractionExecutor = new BatchExtractionExecutor(
+            _chatClient, _logger, tracker, characterPageId,
+            _mongoClient, _settings.CharacterTimelinesDb);
+        var consolidatorExecutor = new EventConsolidatorExecutor(
+            _logger, tracker, characterPageId);
         var reviewExecutor = new EventReviewExecutor(
             _chatClient, _logger, tracker, characterPageId);
 
-        // ── Build sequential workflow: Discovery → Extraction → Review ──────
+        // ── Build 5-step sequential workflow ────────────────────────────────
         var workflow = new WorkflowBuilder(discoveryExecutor)
-            .AddEdge(discoveryExecutor, extractionExecutor)
-            .AddEdge(extractionExecutor, reviewExecutor)
+            .AddEdge(discoveryExecutor, bundlerExecutor)
+            .AddEdge(bundlerExecutor, extractionExecutor)
+            .AddEdge(extractionExecutor, consolidatorExecutor)
+            .AddEdge(consolidatorExecutor, reviewExecutor)
             .WithOutputFrom(reviewExecutor)
             .WithName($"CharacterTimeline-{characterPageId}")
             .Build(validateOrphans: true);
@@ -281,12 +301,17 @@ public class CharacterTimelineService
         // ── Execute with persistent MongoDB checkpoints ────────────────────
         var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.CharacterTimelinesDb);
         var checkpointManager = CheckpointManager.CreateJson(checkpointStore);
-        var sessionId = $"character-timeline-{characterPageId}";
+        // Version the session ID so checkpoints from the old 3-executor workflow
+        // are automatically ignored (incompatible superstep layout).
+        var sessionId = $"character-timeline-v2-{characterPageId}";
+
+        // Clear any stale v1 checkpoints from the old workflow shape
+        await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}");
 
         // Check for existing checkpoints to resume from (survives app restarts)
         var existingCheckpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
 
-        Run run;
+        StreamingRun streamingRun;
         if (existingCheckpoints.Count > 0)
         {
             var lastCheckpoint = existingCheckpoints[^1];
@@ -297,7 +322,7 @@ public class CharacterTimelineService
             tracker?.Update(characterPageId, GenerationStage.Extracting,
                 "Resuming from last checkpoint...");
 
-            run = await InProcessExecution.ResumeAsync(
+            streamingRun = await InProcessExecution.ResumeStreamingAsync(
                 workflow,
                 lastCheckpoint,
                 checkpointManager,
@@ -305,7 +330,7 @@ public class CharacterTimelineService
         }
         else
         {
-            run = await InProcessExecution.RunAsync(
+            streamingRun = await InProcessExecution.RunStreamingAsync(
                 workflow,
                 characterPageId.ToString(),
                 checkpointManager,
@@ -313,14 +338,18 @@ public class CharacterTimelineService
                 ct);
         }
 
-        // ── Extract final output ────────────────────────────────────────────
+        // ── Consume streaming events and bridge to tracker ──────────────────
         string? responseText = null;
-        foreach (var evt in run.OutgoingEvents)
+        await foreach (var evt in streamingRun.WatchStreamAsync(ct))
         {
             if (evt is WorkflowOutputEvent outputEvent)
             {
                 responseText = outputEvent.As<string>();
             }
+
+            // Bridge custom workflow events to the tracker's activity log
+            if (tracker is not null)
+                BridgeEventToTracker(tracker, characterPageId, evt);
         }
 
         if (string.IsNullOrWhiteSpace(responseText))
@@ -331,7 +360,13 @@ public class CharacterTimelineService
         }
 
         // ── Parse and save ──────────────────────────────────────────────────
-        var character = discoveryExecutor.Character;
+        // On resume, the discovery executor's HandleAsync was skipped (superstep already completed),
+        // so its public properties (Character, DiscoveredSources) are empty.
+        // Fall back to loading from MongoDB directly.
+        var character = discoveryExecutor.Character
+            ?? await Pages.Find(Builders<Page>.Filter.Eq(p => p.PageId, characterPageId))
+                .FirstOrDefaultAsync(ct);
+
         if (character is null)
         {
             tracker?.Fail(characterPageId, "Character page not found");
@@ -351,6 +386,19 @@ public class CharacterTimelineService
 
         events.Sort();
 
+        // On resume, DiscoveredSources is empty — rebuild from the events' source attributions
+        var sources = discoveryExecutor.DiscoveredSources.Count > 0
+            ? discoveryExecutor.DiscoveredSources
+            : events
+                .Where(e => e.SourcePageTitle is not null)
+                .Select(e => new SourcePage
+                {
+                    Title = e.SourcePageTitle!,
+                    WikiUrl = e.SourceWikiUrl ?? "",
+                })
+                .DistinctBy(s => s.Title)
+                .ToList();
+
         var timeline = new CharacterTimeline
         {
             CharacterPageId = character.PageId,
@@ -359,7 +407,7 @@ public class CharacterTimelineService
             ImageUrl = character.Infobox?.ImageUrl,
             Continuity = character.Continuity,
             Events = events,
-            Sources = discoveryExecutor.DiscoveredSources,
+            Sources = sources,
             GeneratedAt = DateTime.UtcNow,
             ModelUsed = _settings.CharacterTimelineModel,
         };
@@ -374,11 +422,11 @@ public class CharacterTimelineService
         await checkpointStore.ClearSessionAsync(sessionId);
 
         tracker?.Complete(characterPageId,
-            $"Done! {events.Count} events from {discoveryExecutor.DiscoveredSources.Count} sources");
+            $"Done! {events.Count} events from {sources.Count} sources");
 
         _logger.LogInformation(
             "Stored timeline for {Title}: {EventCount} events from {SourceCount} source pages",
-            character.Title, events.Count, discoveryExecutor.DiscoveredSources.Count);
+            character.Title, events.Count, sources.Count);
     }
 
     /// <summary>
@@ -386,12 +434,19 @@ public class CharacterTimelineService
     /// </summary>
     public async Task RefreshTimelineAsync(int characterPageId, CancellationToken ct)
     {
-        // Clear old timeline and any stale checkpoints so we start fresh
+        // Clear old timeline, stale checkpoints, and extraction progress so we start fresh
         await Timelines.DeleteManyAsync(
             Builders<CharacterTimeline>.Filter.Eq(t => t.CharacterPageId, characterPageId), ct);
 
         var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.CharacterTimelinesDb);
-        await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}");
+        await checkpointStore.ClearSessionAsync($"character-timeline-v2-{characterPageId}");
+        await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}"); // clear legacy v1
+
+        var progressCollection = _mongoClient
+            .GetDatabase(_settings.CharacterTimelinesDb)
+            .GetCollection<BsonDocument>("ExtractionProgress");
+        await progressCollection.DeleteOneAsync(
+            Builders<BsonDocument>.Filter.Eq("_id", characterPageId), ct);
 
         await GenerateTimelineAsync(characterPageId, ct);
     }
@@ -456,6 +511,132 @@ public class CharacterTimelineService
             Page = page,
             PageSize = pageSize,
         };
+    }
+
+    // ── Event bridging ────────────────────────────────────────────────────
+
+    private static void BridgeEventToTracker(
+        CharacterTimelineTracker tracker, int pageId, WorkflowEvent evt)
+    {
+        var entry = evt switch
+        {
+            PageDiscoveredEvent e when e.Data is PageDiscoveredData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Discovery",
+                EntryType = "page_discovered",
+                Summary = d.Relationship == "self"
+                    ? $"Character page: {d.Title}"
+                    : $"Found {d.Relationship} link: {d.Title}",
+                Detail = new { d.PageId, d.Title, d.Template, d.Continuity, d.Relationship },
+            },
+            DiscoveryCompleteEvent e when e.Data is DiscoveryCompleteData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Discovery",
+                EntryType = "discovery_complete",
+                Summary = $"Discovery complete: {d.TotalPages} pages ({d.IncomingLinks} incoming, {d.OutgoingLinks} outgoing)",
+                Detail = d,
+            },
+            ExtractionPageStartedEvent e when e.Data is ExtractionPageStartedData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "extraction_started",
+                Summary = $"Extracting from \"{d.PageTitle}\" ({d.PageIndex}/{d.TotalPages})",
+            },
+            EventExtractedEvent e when e.Data is EventExtractedData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "event_extracted",
+                Summary = d.Year.HasValue
+                    ? $"[{d.EventType}] {TruncateDescription(d.Description, 80)} ({d.Year:0.##} {d.Demarcation})"
+                    : $"[{d.EventType}] {TruncateDescription(d.Description, 80)}",
+                Detail = new { d.EventType, d.Description, d.Year, d.Demarcation, d.SourcePageTitle },
+            },
+            BundlingCompleteEvent e when e.Data is BundlingCompleteData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Bundling",
+                EntryType = "bundling_complete",
+                Summary = $"Bundled {d.TotalPages} pages into {d.BatchCount} batches [{string.Join(", ", d.BatchSizes)}]",
+                Detail = d,
+            },
+            BatchExtractionStartedEvent e when e.Data is BatchExtractionStartedData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "batch_started",
+                Summary = $"Extracting batch {d.BatchIndex}/{d.TotalBatches} ({d.PageCount} pages: {string.Join(", ", d.PageTitles.Take(3))}{(d.PageTitles.Count > 3 ? "..." : "")})",
+            },
+            BatchExtractionEmptyEvent e when e.Data is BatchExtractionEmptyData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "batch_empty",
+                Summary = $"No events found in batch {d.BatchIndex} ({d.PageCount} pages)",
+            },
+            BatchExtractionFailedEvent e when e.Data is BatchExtractionFailedData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "batch_failed",
+                Summary = $"Batch {d.BatchIndex} failed ({d.PageCount} pages): {d.Error}",
+            },
+            ExtractionPageEmptyEvent e => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "extraction_empty",
+                Summary = $"No events found in \"{e.Data}\"",
+            },
+            ExtractionPageFailedEvent e when e.Data is ExtractionPageFailedData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Extraction",
+                EntryType = "extraction_failed",
+                Summary = $"Failed to extract from \"{d.PageTitle}\": {d.Error}",
+            },
+            ConsolidationCompleteEvent e when e.Data is ConsolidationCompleteData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Consolidation",
+                EntryType = "consolidation_complete",
+                Summary = d.DuplicatesRemoved > 0
+                    ? $"Consolidated {d.InputEventCount} → {d.OutputEventCount} events ({d.DuplicatesRemoved} duplicates removed)"
+                    : $"Consolidation complete: all {d.OutputEventCount} events unique",
+                Detail = d,
+            },
+            ReviewCompleteEvent e when e.Data is ReviewCompleteData d => new ActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Review",
+                EntryType = "review_complete",
+                Summary = d.EventsRemoved > 0
+                    ? $"Review complete: {d.OutputEventCount} events retained, {d.EventsRemoved} removed (duplicates/cross-continuity)"
+                    : $"Review complete: all {d.OutputEventCount} events retained",
+                Detail = d,
+            },
+            _ => null,
+        };
+
+        if (entry is not null)
+            tracker.AddActivityLog(pageId, entry);
+    }
+
+    private static string TruncateDescription(string text, int maxLen) =>
+        text.Length > maxLen ? text[..maxLen] + "…" : text;
+
+    /// <summary>
+    /// Check if a character has pending workflow checkpoints (interrupted generation).
+    /// </summary>
+    public async Task<bool> HasPendingCheckpointsAsync(int characterPageId, CancellationToken ct = default)
+    {
+        var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.CharacterTimelinesDb);
+        var sessionId = $"character-timeline-v2-{characterPageId}";
+        var checkpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
+        return checkpoints.Count > 0;
     }
 
     // ── Response parsing ────────────────────────────────────────────────────
