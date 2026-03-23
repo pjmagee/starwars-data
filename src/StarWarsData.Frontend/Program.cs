@@ -18,7 +18,7 @@ builder
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddKeycloakOpenIdConnect(
         "keycloak",
-        realm: "starwars",
+        realm: "starwars-data",
         options =>
         {
             options.ClientId = "starwars-frontend";
@@ -28,12 +28,32 @@ builder
             options.GetClaimsFromUserInfoEndpoint = true;
             options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
+            options.Scope.Add("openid");
+            options.Scope.Add("profile");
+            options.Scope.Add("email");
             options.Events = new OpenIdConnectEvents
             {
                 OnTokenValidated = context =>
                 {
                     if (context.Principal?.Identity is ClaimsIdentity identity)
                     {
+                        // Map preferred_username to Name claim if Name is missing
+                        if (string.IsNullOrEmpty(identity.FindFirst(ClaimTypes.Name)?.Value))
+                        {
+                            var preferred = identity.FindFirst("preferred_username")?.Value;
+                            if (preferred is not null)
+                                identity.AddClaim(new Claim(ClaimTypes.Name, preferred));
+                        }
+
+                        // Map email claim
+                        if (string.IsNullOrEmpty(identity.FindFirst(ClaimTypes.Email)?.Value))
+                        {
+                            var email = identity.FindFirst("email")?.Value;
+                            if (email is not null)
+                                identity.AddClaim(new Claim(ClaimTypes.Email, email));
+                        }
+
+                        // Map realm roles
                         var realmAccess = context.Principal.FindFirst("realm_access");
                         if (realmAccess is not null)
                         {

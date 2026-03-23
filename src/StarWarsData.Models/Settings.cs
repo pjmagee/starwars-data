@@ -41,6 +41,16 @@ public class SettingsOptions
 
     public string OpenAiModel { get; set; } = "gpt-5-mini";
 
+    /// <summary>
+    /// The model to use for character timeline generation (needs large context window)
+    /// </summary>
+    public string CharacterTimelineModel { get; set; } = "gpt-5";
+
+    /// <summary>
+    /// The database for AI-generated character timelines
+    /// </summary>
+    public string CharacterTimelinesDb { get; set; } = "starwars-character-timelines";
+
     public IEnumerable<string> TimelineCollections { get; set; } = [];
 
 }

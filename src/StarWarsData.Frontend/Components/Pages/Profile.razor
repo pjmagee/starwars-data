@@ -1,0 +1,194 @@
+@page "/profile"
+@attribute [Authorize]
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authorization
+@inject EndpointService EndpointService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Profile</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="my-16 px-8">
+    <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-6">Profile</MudText>
+
+    <AuthorizeView>
+        <Authorized>
+            @{
+                var user = context.User;
+                var name = user.FindFirst("name")?.Value
+                           ?? user.FindFirst(ClaimTypes.Name)?.Value;
+                var preferredUsername = user.FindFirst("preferred_username")?.Value;
+                var email = user.FindFirst("email")?.Value
+                            ?? user.FindFirst(ClaimTypes.Email)?.Value;
+                var emailVerified = user.FindFirst("email_verified")?.Value;
+                var sub = user.FindFirst("sub")?.Value
+                          ?? user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value).ToList();
+            }
+
+            <!-- User Info Card -->
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <div class="d-flex align-center mb-6">
+                    <MudAvatar Color="Color.Primary" Size="Size.Large" Class="mr-4">
+                        <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Large" />
+                    </MudAvatar>
+                    <div>
+                        <MudText Typo="Typo.h5">@(name ?? preferredUsername ?? "Unknown User")</MudText>
+                        @if (!string.IsNullOrEmpty(email))
+                        {
+                            <MudText Typo="Typo.body2" Color="Color.Secondary">@email</MudText>
+                        }
+                    </div>
+                </div>
+
+                <MudDivider Class="mb-4" />
+
+                <MudSimpleTable Dense="true" Hover="true" Bordered="false" Striped="false" Class="mb-4">
+                    <tbody>
+                        @if (!string.IsNullOrEmpty(preferredUsername))
+                        {
+                            <tr>
+                                <td><MudText Typo="Typo.body2" Color="Color.Secondary">Username</MudText></td>
+                                <td><MudText Typo="Typo.body1">@preferredUsername</MudText></td>
+                            </tr>
+                        }
+                        @if (!string.IsNullOrEmpty(name))
+                        {
+                            <tr>
+                                <td><MudText Typo="Typo.body2" Color="Color.Secondary">Name</MudText></td>
+                                <td><MudText Typo="Typo.body1">@name</MudText></td>
+                            </tr>
+                        }
+                        @if (!string.IsNullOrEmpty(email))
+                        {
+                            <tr>
+                                <td><MudText Typo="Typo.body2" Color="Color.Secondary">Email</MudText></td>
+                                <td>
+                                    <div class="d-flex align-center gap-2">
+                                        <MudText Typo="Typo.body1">@email</MudText>
+                                        @if (emailVerified == "true")
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.Verified" Color="Color.Success" Size="Size.Small" />
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        @if (roles.Any())
+                        {
+                            <tr>
+                                <td><MudText Typo="Typo.body2" Color="Color.Secondary">Roles</MudText></td>
+                                <td>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        @foreach (var role in roles)
+                                        {
+                                            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@role</MudChip>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+
+            <!-- Linked Accounts -->
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-2">Linked Accounts</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
+                    Manage your social login connections. Link or unlink accounts through the Keycloak Account Console.
+                </MudText>
+
+                <MudStack Spacing="2" Class="mb-4">
+                    <MudPaper Class="pa-3" Outlined="true">
+                        <div class="d-flex align-center justify-space-between">
+                            <div class="d-flex align-center gap-3">
+                                <MudIcon Icon="@Icons.Custom.Brands.Microsoft" />
+                                <MudText Typo="Typo.body1">Microsoft</MudText>
+                            </div>
+                            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">Available</MudChip>
+                        </div>
+                    </MudPaper>
+
+                    <MudPaper Class="pa-3" Outlined="true">
+                        <div class="d-flex align-center justify-space-between">
+                            <div class="d-flex align-center gap-3">
+                                <MudIcon Icon="@Icons.Custom.Brands.Facebook" />
+                                <MudText Typo="Typo.body1">Facebook</MudText>
+                            </div>
+                            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">Available</MudChip>
+                        </div>
+                    </MudPaper>
+
+                    <MudPaper Class="pa-3" Outlined="true">
+                        <div class="d-flex align-center justify-space-between">
+                            <div class="d-flex align-center gap-3">
+                                <MudIcon Icon="@Icons.Custom.Brands.Google" />
+                                <MudText Typo="Typo.body1">Google</MudText>
+                            </div>
+                            <MudChip T="string" Size="Size.Small" Color="Color.Default" Variant="Variant.Outlined">Not configured</MudChip>
+                        </div>
+                    </MudPaper>
+                </MudStack>
+
+                @if (_keycloakLinkedAccountsUrl is not null)
+                {
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.Link"
+                               Href="@_keycloakLinkedAccountsUrl" Target="_blank">
+                        Manage Linked Accounts
+                    </MudButton>
+                }
+            </MudPaper>
+
+            <!-- Account Management -->
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-2">Account Settings</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
+                    Update your username, password, and personal information through the Keycloak Account Console.
+                </MudText>
+
+                <MudStack Row="true" Spacing="2">
+                    @if (_keycloakAccountUrl is not null)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.ManageAccounts"
+                                   Href="@_keycloakAccountUrl" Target="_blank">
+                            Edit Profile
+                        </MudButton>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.Security"
+                                   Href="@_keycloakSecurityUrl" Target="_blank">
+                            Security Settings
+                        </MudButton>
+                    }
+                </MudStack>
+            </MudPaper>
+
+            <!-- Sign Out -->
+            <MudPaper Class="pa-6" Elevation="2">
+                <MudButton Variant="Variant.Filled" Color="Color.Error"
+                           StartIcon="@Icons.Material.Filled.Logout"
+                           Href="/authentication/logout" FullWidth="true" Size="Size.Large">
+                    Sign Out
+                </MudButton>
+            </MudPaper>
+        </Authorized>
+    </AuthorizeView>
+</MudContainer>
+
+@code {
+    private string? _keycloakAccountUrl;
+    private string? _keycloakLinkedAccountsUrl;
+    private string? _keycloakSecurityUrl;
+
+    protected override void OnInitialized()
+    {
+        var keycloakBaseUrl = EndpointService.GetKeycloakAccountUrl();
+        if (keycloakBaseUrl is not null)
+        {
+            _keycloakAccountUrl = keycloakBaseUrl;
+            _keycloakLinkedAccountsUrl = $"{keycloakBaseUrl}/#/security/linked-accounts";
+            _keycloakSecurityUrl = $"{keycloakBaseUrl}/#/security/signingin";
+        }
+    }
+}

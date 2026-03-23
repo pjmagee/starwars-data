@@ -11,6 +11,30 @@ public class EndpointService
         _logger = logger;
     }
 
+    public string? GetKeycloakAccountUrl()
+    {
+        try
+        {
+            var httpsEndpoint = _configuration["services:keycloak:https:0"];
+            if (!string.IsNullOrEmpty(httpsEndpoint))
+            {
+                return $"{httpsEndpoint.TrimEnd('/')}/realms/starwars-data/account";
+            }
+
+            var httpEndpoint = _configuration["services:keycloak:http:0"];
+            if (!string.IsNullOrEmpty(httpEndpoint))
+            {
+                return $"{httpEndpoint.TrimEnd('/')}/realms/starwars-data/account";
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to resolve Keycloak account URL");
+        }
+
+        return null;
+    }
+
     public string? GetHangfireDashboardUrl()
     {
         try

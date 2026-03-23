@@ -11,10 +11,6 @@ var mongoPassword = builder.AddParameter("mongo-password", value: "password", se
 var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
 var mongoPort = builder.AddParameter("mongo-port", value: "27017");
 
-var keycloakUser = builder.AddParameter("keycloak-user", value: "admin");
-var keycloakPassword = builder.AddParameter("keycloak-password", value: "admin", secret: true);
-
-
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
@@ -104,6 +100,19 @@ var apiService = builder
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
+    )
+    // Phase 5 — Character Timelines (AI-generated)
+    .WithHttpCommand(
+        path: "/api/admin/mongo/create-character-timelines",
+        displayName: "5. Build Character Timelines",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Uses AI to generate rich timeline events for each character by analyzing all linked pages. Requires Phase 1 and OpenAI key.",
+            IconName = "PersonTimeline",
+            IsHighlighted = false,
+        }
     );
 
 var mongo = builder.AddConnectionString(
@@ -115,14 +124,10 @@ var mongo = builder.AddConnectionString(
 
 apiService.WithReference(mongo).WaitFor(mongo);
 
-var keycloak = builder.AddKeycloak("keycloak", adminUsername: keycloakUser, adminPassword: keycloakPassword)
-    .WithRealmImport("./KeycloakConfiguration");
-
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
-    .WithReference(keycloak)
+    .WithEnvironment("services__keycloak__http__0", "https://auth.magaoidh.pro")
     .WithReference(apiService)
-    .WaitFor(keycloak)
     .WaitFor(apiService);
 
 builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");

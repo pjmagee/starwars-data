@@ -1,0 +1,770 @@
+@page "/character-timelines"
+@page "/character-timelines/{PageId:int}"
+@using StarWarsData.Models.Entities
+@using StarWarsData.Models.Queries
+@using StarWarsData.Frontend.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+@inject GlobalFilterService GlobalFilterService
+@implements IDisposable
+
+<PageTitle>@GetPageTitle()</PageTitle>
+
+@if (PageId is null)
+{
+    @* ── Search View ── *@
+    <MudText Typo="Typo.h3" Class="mb-2">Character Timelines</MudText>
+    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
+        Search for a character to view or generate their AI-powered timeline.
+    </MudText>
+
+    <MudTextField T="string" @bind-Value="_search" Label="Search characters" Variant="Variant.Outlined"
+                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                  Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
+                  Placeholder="e.g. Anakin Skywalker, Ahsoka Tano, Darth Revan..."
+                  Class="mb-4" />
+
+    @if (_searching)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+    }
+
+    @if (_searchResults is not null)
+    {
+        @if (_searchResults.Count == 0 && !string.IsNullOrWhiteSpace(_search))
+        {
+            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
+                No characters found matching "@_search".
+            </MudAlert>
+        }
+        else
+        {
+            <MudGrid>
+                @foreach (var character in _searchResults)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Outlined="true" Style="height:100%; cursor:pointer"
+                                 @onclick="() => NavigateToTimeline(character.PageId)">
+                            <MudStack Row="true" Class="pa-3" Spacing="3">
+                                @if (character.ImageUrl is not null)
+                                {
+                                    <MudImage Src="@character.ImageUrl" Alt="@character.Title"
+                                              Width="80" Height="80" ObjectFit="ObjectFit.Cover"
+                                              Class="rounded-lg flex-shrink-0" />
+                                }
+                                <MudStack Spacing="1" Style="min-width:0; flex:1">
+                                    <MudText Typo="Typo.h6" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
+                                        @character.Title
+                                    </MudText>
+                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                        <MudChip T="string" Size="Size.Small" Color="@GetContinuityColor(character.Continuity)"
+                                                 Variant="Variant.Filled">
+                                            @character.Continuity
+                                        </MudChip>
+                                        @if (character.HasTimeline)
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
+                                            <MudText Typo="Typo.caption" Color="Color.Success">Timeline available</MudText>
+                                        }
+                                        else if (character.GenerationStatus is not null
+                                            && character.GenerationStatus.Stage is not (GenerationStage.Complete or GenerationStage.Failed))
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.HourglassTop" Color="Color.Warning" Size="Size.Small" />
+                                            <MudText Typo="Typo.caption" Color="Color.Warning">Generating...</MudText>
+                                        }
+                                    </MudStack>
+                                </MudStack>
+                                <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Color="Color.Default" Class="align-self-center" />
+                            </MudStack>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        }
+    }
+}
+else
+{
+    @* ── Detail View ── *@
+    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ArrowBack"
+               OnClick='() => Navigation.NavigateTo("/character-timelines")' Class="mb-2">
+        Back to Search
+    </MudButton>
+
+    @if (_loading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+    }
+    else if (_characterInfo is not null)
+    {
+        @* ── Character Header (always visible) ── *@
+        <MudStack Row="true" Spacing="4" AlignItems="AlignItems.Start" Class="mb-4">
+            @if (_characterInfo.ImageUrl is not null)
+            {
+                <MudImage Src="@_characterInfo.ImageUrl" Alt="@_characterInfo.Title"
+                          Width="120" Height="120" ObjectFit="ObjectFit.Cover"
+                          Class="rounded-lg" Elevation="2" />
+            }
+            <MudStack Spacing="1">
+                <MudText Typo="Typo.h3">@_characterInfo.Title</MudText>
+                <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                    <MudChip T="string" Size="Size.Small" Color="@GetContinuityColor(_characterInfo.Continuity)" Variant="Variant.Filled">
+                        @_characterInfo.Continuity
+                    </MudChip>
+                    @if (_timeline is not null)
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                            @_timeline.Events.Count events from @_timeline.Sources.Count sources
+                        </MudText>
+                    }
+                </MudStack>
+                <MudLink Href="@_characterInfo.WikiUrl" Target="_blank" Underline="Underline.Always" Typo="Typo.caption">
+                    View on Wookieepedia
+                </MudLink>
+            </MudStack>
+        </MudStack>
+
+        @* ── Generation Progress ── *@
+        @if (_generationStatus is not null && _generationStatus.Stage is not GenerationStage.Complete)
+        {
+            <MudPaper Outlined="true" Class="pa-4 mb-4">
+                <MudText Typo="Typo.h6" Class="mb-3">
+                    <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Class="mr-1" />
+                    Generating Timeline
+                </MudText>
+
+                @* ── Step progress ── *@
+                <MudStack Spacing="2">
+                    @foreach (var step in _workflowSteps)
+                    {
+                        var state = GetStepState(step.Stage);
+                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                            @if (state == StepState.Complete)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
+                            }
+                            else if (state == StepState.Active)
+                            {
+                                <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary"
+                                                     Style="width:20px; height:20px" />
+                            }
+                            else if (state == StepState.Failed)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Error" Size="Size.Small" />
+                            }
+                            else
+                            {
+                                <MudIcon Icon="@Icons.Material.Outlined.Circle" Color="Color.Default" Size="Size.Small" />
+                            }
+                            <MudText Typo="Typo.body2"
+                                     Color="@(state == StepState.Active ? Color.Primary : state == StepState.Complete ? Color.Success : Color.Default)">
+                                @step.Label
+                            </MudText>
+                        </MudStack>
+                    }
+                </MudStack>
+
+                <MudProgressLinear Value="@GetStageProgress(_generationStatus)"
+                                   Color="@GetStageColor(_generationStatus)"
+                                   Striped="true" Size="Size.Medium" Class="mt-3 mb-1" />
+
+                @if (_generationStatus.TotalSteps > 0)
+                {
+                    <MudProgressLinear Value="@GetSubStepProgress(_generationStatus)"
+                                       Color="Color.Secondary" Size="Size.Small" Class="mb-2"
+                                       Rounded="true" />
+                }
+
+                @if (_generationStatus.CurrentItem is not null)
+                {
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="mb-1">
+                        <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" Color="Color.Secondary" />
+                        <MudText Typo="Typo.body2" Color="Color.Primary" Style="font-weight:500">
+                            @_generationStatus.CurrentItem
+                        </MudText>
+                        @if (_generationStatus.TotalSteps > 0)
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                (@(_generationStatus.CurrentStep + 1) / @_generationStatus.TotalSteps)
+                            </MudText>
+                        }
+                    </MudStack>
+                }
+
+                @if (_generationStatus.EventsExtracted > 0)
+                {
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="mb-1">
+                        <MudIcon Icon="@Icons.Material.Filled.EventNote" Size="Size.Small" Color="Color.Success" />
+                        <MudText Typo="Typo.caption" Color="Color.Success">
+                            @_generationStatus.EventsExtracted events extracted so far
+                        </MudText>
+                    </MudStack>
+                }
+
+                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                    @_generationStatus.Message
+                </MudText>
+
+                @if (_generationStatus.Stage == GenerationStage.Failed)
+                {
+                    <MudAlert Severity="Severity.Error" Dense="true" Class="mt-2">
+                        @(_generationStatus.Error ?? "Unknown error")
+                    </MudAlert>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Error" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Refresh"
+                               OnClick="StartGeneration" Class="mt-2">
+                        Retry
+                    </MudButton>
+                }
+            </MudPaper>
+        }
+        else if (_timeline is null && _generationStatus is null)
+        {
+            @* ── No timeline yet, offer to generate ── *@
+            <MudPaper Outlined="true" Class="pa-6 mb-4" Style="text-align:center">
+                <MudIcon Icon="@Icons.Material.Filled.Timeline" Style="font-size:48px" Color="Color.Secondary" />
+                <MudText Typo="Typo.h6" Class="mt-2 mb-1">No Timeline Generated Yet</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+                    Generate an AI-powered timeline of key events in this character's life.
+                    This uses a multi-agent workflow to research wiki pages and extract structured events.
+                </MudText>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large"
+                           StartIcon="@Icons.Material.Filled.AutoAwesome"
+                           OnClick="StartGeneration">
+                    Generate Timeline
+                </MudButton>
+            </MudPaper>
+        }
+
+        @* ── Rendered Timeline ── *@
+        @if (_timeline is not null)
+        {
+            @* ── Action buttons ── *@
+            <MudStack Row="true" Spacing="2" Class="mb-4">
+                <MudButton Variant="Variant.Outlined" Color="Color.Warning" Size="Size.Small"
+                           StartIcon="@Icons.Material.Filled.Refresh"
+                           Disabled="@(_generationStatus is not null && _generationStatus.Stage is not (GenerationStage.Complete or GenerationStage.Failed))"
+                           OnClick="StartGeneration">
+                    Regenerate
+                </MudButton>
+            </MudStack>
+
+            @* ── Event type filter chips ── *@
+            @if (_eventTypes.Count > 1)
+            {
+                <MudPaper Elevation="0" Class="pa-2 mb-4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+                        <MudText Typo="Typo.subtitle2">Filter by Event Type</MudText>
+                        <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="SelectAllEventTypes">All</MudButton>
+                        <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="DeselectAllEventTypes">None</MudButton>
+                    </MudStack>
+                    <MudChipSet T="string" @bind-SelectedValues="_selectedEventTypes" SelectionMode="SelectionMode.MultiSelection"
+                                CheckMark="true" Variant="Variant.Text">
+                        @foreach (var eventType in _eventTypes)
+                        {
+                            <MudChip Value="@eventType" Style="@($"border-color:{GetEventTypeColor(eventType)}; color:{GetEventTypeColor(eventType)}")"
+                                     Variant="Variant.Outlined" T="string">
+                                @eventType
+                            </MudChip>
+                        }
+                    </MudChipSet>
+                </MudPaper>
+            }
+
+            @* ── MudTimeline ── *@
+            <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default"
+                         TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
+                @{
+                    var isStart = true;
+                    var filteredEvents = GetFilteredEvents();
+                    CharacterEvent? previousEvent = null;
+                }
+
+                @foreach (var evt in filteredEvents)
+                {
+                    var contentAlign = isStart ? Align.Left : Align.Right;
+                    var yearAlign = isStart ? Align.Right : Align.Left;
+                    var showYearSeparator = previousEvent is null
+                        || evt.Year != previousEvent.Year
+                        || evt.Demarcation != previousEvent.Demarcation;
+
+                    <MudTimelineItem Variant="Variant.Outlined" Color="@GetTimelineItemColor(evt.EventType)" Size="Size.Medium">
+                        <ItemOpposite>
+                            @if (showYearSeparator)
+                            {
+                                <MudText Color="Color.Info" Typo="Typo.h5" Align="@yearAlign">
+                                    @FormatYear(evt)
+                                </MudText>
+                            }
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudCard Outlined="true" Class="ma-1">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                                     Style="@($"background-color:{GetEventTypeColor(evt.EventType)}; color:white")">
+                                                @evt.EventType
+                                            </MudChip>
+                                            @if (evt.Location is not null)
+                                            {
+                                                <MudText Typo="Typo.caption" Color="Color.Secondary">@evt.Location</MudText>
+                                            }
+                                        </MudStack>
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Typo="Typo.body2" Style="@($"text-align:{contentAlign}")">
+                                        @evt.Description
+                                    </MudText>
+
+                                    @if (evt.RelatedCharacters.Count > 0)
+                                    {
+                                        <MudStack Row="true" Spacing="1" Class="mt-2" Wrap="Wrap.Wrap">
+                                            @foreach (var character in evt.RelatedCharacters)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Secondary">
+                                                    @character
+                                                </MudChip>
+                                            }
+                                        </MudStack>
+                                    }
+
+                                    @if (evt.SourcePageTitle is not null)
+                                    {
+                                        <MudText Typo="Typo.caption" Color="Color.Tertiary" Class="mt-2">
+                                            Source:
+                                            @if (evt.SourceWikiUrl is not null)
+                                            {
+                                                <MudLink Href="@evt.SourceWikiUrl" Target="_blank" Underline="Underline.Always">
+                                                    @evt.SourcePageTitle
+                                                </MudLink>
+                                            }
+                                            else
+                                            {
+                                                @evt.SourcePageTitle
+                                            }
+                                        </MudText>
+                                    }
+                                </MudCardContent>
+                            </MudCard>
+                        </ItemContent>
+                    </MudTimelineItem>
+
+                    previousEvent = evt;
+                    isStart = !isStart;
+                }
+            </MudTimeline>
+
+            @* ── Sources ── *@
+            @if (_timeline.Sources.Count > 0)
+            {
+                <MudPaper Outlined="true" Class="pa-4 mt-4">
+                    <MudText Typo="Typo.h6" Class="mb-2">Source Pages (@_timeline.Sources.Count)</MudText>
+                    <MudSimpleTable Dense="true" Hover="true">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var source in _timeline.Sources)
+                            {
+                                <tr>
+                                    <td>@source.Title</td>
+                                    <td><MudLink Href="@source.WikiUrl" Target="_blank" Underline="Underline.Always">Wookieepedia</MudLink></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                </MudPaper>
+            }
+
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-4">
+                Generated @_timeline.GeneratedAt.ToString("yyyy-MM-dd HH:mm") UTC using @_timeline.ModelUsed
+            </MudText>
+        }
+    }
+    else
+    {
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined">
+            Character not found.
+        </MudAlert>
+    }
+}
+
+<MudScrollToTop>
+    <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" />
+</MudScrollToTop>
+
+@code {
+    [Parameter] public int? PageId { get; set; }
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    // ── Search state ──
+    private List<CharacterSearchResult>? _searchResults;
+    private string? _search;
+    private bool _searching;
+
+    // ── Detail state ──
+    private CharacterSearchResult? _characterInfo;
+    private CharacterTimeline? _timeline;
+    private GenerationStatus? _generationStatus;
+    private bool _loading;
+    private List<string> _eventTypes = [];
+    private IReadOnlyCollection<string> _selectedEventTypes = new List<string>();
+    private Timer? _pollTimer;
+
+    // ── Workflow steps (shown on detail page during generation) ──
+    private record WorkflowStep(GenerationStage Stage, string Label);
+
+    private static readonly WorkflowStep[] _workflowSteps =
+    [
+        new(GenerationStage.Queued, "Queued for processing"),
+        new(GenerationStage.Discovering, "Discovering related wiki pages"),
+        new(GenerationStage.Extracting, "Extracting events from each page"),
+        new(GenerationStage.Reviewing, "Reviewing and consolidating events"),
+        new(GenerationStage.Saving, "Saving timeline to database"),
+    ];
+
+    private enum StepState { Pending, Active, Complete, Failed }
+
+    // ── Event type colors ──
+    private static readonly Dictionary<string, string> EventTypeColors = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Birth"] = Colors.Green.Darken1,
+        ["Death"] = Colors.Gray.Darken2,
+        ["Battle"] = Colors.Red.Darken1,
+        ["Duel"] = Colors.Red.Darken3,
+        ["War"] = Colors.Red.Darken4,
+        ["Marriage"] = Colors.Pink.Darken1,
+        ["Apprenticeship"] = Colors.Purple.Darken1,
+        ["Training"] = Colors.Purple.Lighten1,
+        ["Promotion"] = Colors.Blue.Darken1,
+        ["Exile"] = Colors.Brown.Default,
+        ["Capture"] = Colors.Orange.Darken2,
+        ["Rescue"] = Colors.Teal.Darken1,
+        ["Discovery"] = Colors.Cyan.Default,
+        ["Betrayal"] = Colors.DeepOrange.Darken2,
+        ["Alliance"] = Colors.Indigo.Darken1,
+        ["Mission"] = Colors.BlueGray.Darken1,
+        ["Transformation"] = Colors.DeepPurple.Darken1,
+        ["Founding"] = Colors.Amber.Darken1,
+        ["Destruction"] = Colors.Gray.Darken4,
+    };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (PageId is not null)
+        {
+            await LoadDetailPage();
+        }
+        else
+        {
+            _characterInfo = null;
+            _timeline = null;
+            _generationStatus = null;
+            StopPolling();
+        }
+    }
+
+    public void Dispose()
+    {
+        _pollTimer?.Dispose();
+    }
+
+    // ── Page title ──
+
+    private string GetPageTitle()
+    {
+        if (_characterInfo is not null) return $"{_characterInfo.Title} — Character Timeline";
+        if (_timeline is not null) return $"{_timeline.CharacterTitle} — Character Timeline";
+        return "Character Timelines";
+    }
+
+    // ── Search ──
+
+    private async Task OnSearchChanged(string value)
+    {
+        _search = value;
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            _searchResults = null;
+            return;
+        }
+        await DoSearch();
+    }
+
+    private async Task DoSearch()
+    {
+        _searching = true;
+        StateHasChanged();
+
+        try
+        {
+            var query = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            query.Add("query", _search);
+
+            var continuity = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuity))
+                query.Add("continuity", continuity);
+
+            _searchResults = await Http.GetFromJsonAsync<List<CharacterSearchResult>>($"CharacterTimelines/search?{query}");
+        }
+        finally
+        {
+            _searching = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    // ── Detail page loading ──
+
+    private async Task LoadDetailPage()
+    {
+        _loading = true;
+        _timeline = null;
+        _generationStatus = null;
+        StateHasChanged();
+
+        try
+        {
+            // Load character info (always available from Pages collection)
+            try
+            {
+                _characterInfo = await Http.GetFromJsonAsync<CharacterSearchResult>($"CharacterTimelines/{PageId}/character");
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                _characterInfo = null;
+            }
+
+            // Try to load existing timeline
+            try
+            {
+                _timeline = await Http.GetFromJsonAsync<CharacterTimeline>($"CharacterTimelines/{PageId}");
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                _timeline = null;
+            }
+
+            // Check generation status
+            try
+            {
+                _generationStatus = await Http.GetFromJsonAsync<GenerationStatus>($"CharacterTimelines/{PageId}/status");
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                _generationStatus = null;
+            }
+
+            if (_timeline is not null)
+            {
+                _eventTypes = _timeline.Events
+                    .Select(e => e.EventType)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .OrderBy(e => e)
+                    .ToList();
+                _selectedEventTypes = _eventTypes.ToList();
+            }
+
+            // If generation is in progress, start polling
+            if (_generationStatus is not null
+                && _generationStatus.Stage is not (GenerationStage.Complete or GenerationStage.Failed))
+            {
+                StartPolling();
+            }
+        }
+        finally
+        {
+            _loading = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    // ── Generate ──
+
+    private async Task StartGeneration()
+    {
+        if (PageId is null) return;
+
+        try
+        {
+            var response = await Http.PostAsync($"CharacterTimelines/{PageId}/generate", null);
+            if (response.IsSuccessStatusCode)
+            {
+                _generationStatus = new GenerationStatus
+                {
+                    Stage = GenerationStage.Queued,
+                    Message = "Queued for generation...",
+                    StartedAt = DateTime.UtcNow,
+                };
+                StateHasChanged();
+                StartPolling();
+            }
+        }
+        catch (Exception)
+        {
+            // Conflict = already running, refresh status
+            await PollStatus();
+        }
+    }
+
+    // ── Polling ──
+
+    private void StartPolling()
+    {
+        if (_pollTimer is not null) return;
+
+        _pollTimer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+            {
+                await PollStatus();
+                StateHasChanged();
+            });
+        }, null, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
+    }
+
+    private void StopPolling()
+    {
+        _pollTimer?.Dispose();
+        _pollTimer = null;
+    }
+
+    private async Task PollStatus()
+    {
+        if (PageId is null) return;
+
+        try
+        {
+            _generationStatus = await Http.GetFromJsonAsync<GenerationStatus>($"CharacterTimelines/{PageId}/status");
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            _generationStatus = null;
+        }
+
+        if (_generationStatus?.Stage == GenerationStage.Complete)
+        {
+            StopPolling();
+
+            // Reload the timeline
+            try
+            {
+                _timeline = await Http.GetFromJsonAsync<CharacterTimeline>($"CharacterTimelines/{PageId}");
+                if (_timeline is not null)
+                {
+                    _eventTypes = _timeline.Events
+                        .Select(e => e.EventType)
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .OrderBy(e => e)
+                        .ToList();
+                    _selectedEventTypes = _eventTypes.ToList();
+
+                    if (_characterInfo is not null)
+                        _characterInfo.HasTimeline = true;
+                }
+            }
+            catch { /* timeline will load on next page visit */ }
+        }
+        else if (_generationStatus?.Stage == GenerationStage.Failed)
+        {
+            StopPolling();
+        }
+    }
+
+    private void NavigateToTimeline(int pageId) =>
+        Navigation.NavigateTo($"/character-timelines/{pageId}");
+
+    // ── Step state ──
+
+    private StepState GetStepState(GenerationStage stepStage)
+    {
+        if (_generationStatus is null) return StepState.Pending;
+
+        if (_generationStatus.Stage == GenerationStage.Failed)
+        {
+            // All steps up to current are complete, current is failed
+            return stepStage < _generationStatus.Stage ? StepState.Complete
+                 : stepStage == _generationStatus.Stage ? StepState.Failed
+                 : StepState.Pending;
+        }
+
+        return stepStage < _generationStatus.Stage ? StepState.Complete
+             : stepStage == _generationStatus.Stage ? StepState.Active
+             : StepState.Pending;
+    }
+
+    // ── Event filtering ──
+
+    private List<CharacterEvent> GetFilteredEvents()
+    {
+        if (_timeline is null) return [];
+        if (!_selectedEventTypes.Any()) return _timeline.Events;
+        var selected = new HashSet<string>(_selectedEventTypes, StringComparer.OrdinalIgnoreCase);
+        return _timeline.Events.Where(e => selected.Contains(e.EventType)).ToList();
+    }
+
+    private void SelectAllEventTypes() => _selectedEventTypes = _eventTypes.ToList();
+    private void DeselectAllEventTypes() => _selectedEventTypes = new List<string>();
+
+    // ── Formatting ──
+
+    private static string FormatYear(CharacterEvent evt)
+    {
+        if (!evt.Year.HasValue)
+            return evt.DateDescription ?? "Unknown";
+
+        var yearStr = $"{evt.Year.Value:0.##} {evt.Demarcation.ToString().ToUpper()}";
+        return evt.DateDescription is not null ? $"{yearStr} ({evt.DateDescription})" : yearStr;
+    }
+
+    private static string GetEventTypeColor(string eventType) =>
+        EventTypeColors.TryGetValue(eventType, out var color) ? color : Colors.Blue.Default;
+
+    private static Color GetTimelineItemColor(string eventType) => eventType.ToLowerInvariant() switch
+    {
+        "birth" => Color.Success,
+        "death" => Color.Dark,
+        "battle" or "duel" or "war" => Color.Error,
+        "marriage" => Color.Secondary,
+        "promotion" or "alliance" => Color.Info,
+        _ => Color.Primary,
+    };
+
+    private static Color GetContinuityColor(Continuity continuity) => continuity switch
+    {
+        Continuity.Canon => Color.Info,
+        Continuity.Legends => Color.Warning,
+        _ => Color.Default,
+    };
+
+    private static int GetSubStepProgress(GenerationStatus? status)
+    {
+        if (status is null || status.TotalSteps <= 0) return 0;
+        return (int)((double)status.CurrentStep / status.TotalSteps * 100);
+    }
+
+    private static int GetStageProgress(GenerationStatus? status) => status?.Stage switch
+    {
+        GenerationStage.Queued => 5,
+        GenerationStage.Discovering => 20,
+        GenerationStage.Extracting => 50,
+        GenerationStage.Reviewing => 75,
+        GenerationStage.Saving => 90,
+        GenerationStage.Complete => 100,
+        GenerationStage.Failed => 100,
+        _ => 0,
+    };
+
+    private static Color GetStageColor(GenerationStatus? status) => status?.Stage switch
+    {
+        GenerationStage.Complete => Color.Success,
+        GenerationStage.Failed => Color.Error,
+        _ => Color.Primary,
+    };
+}

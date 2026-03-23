@@ -60,11 +60,6 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
     {
         _logger?.LogInformation("Wiki search: {Query}", query);
 
-        var filter = Builders<BsonDocument>.Filter.Regex(
-            "title",
-            new BsonRegularExpression(Regex.Escape(query), "i")
-        );
-
         var projection = Builders<BsonDocument>
             .Projection.Include("title")
             .Include("wikiUrl")
@@ -72,7 +67,27 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
             .Include("infobox.Template")
             .Include("infobox.Data");
 
-        var docs = await _pages.Find(filter).Project(projection).Limit(5).ToListAsync(ct);
+        // Use $text search (searches title + content via text index, ranked by relevance)
+        var textFilter = Builders<BsonDocument>.Filter.Text(query);
+        var textProjection = projection.MetaTextScore("score");
+        var docs = await _pages
+            .Find(textFilter)
+            .Project(textProjection)
+            .Sort(Builders<BsonDocument>.Sort.MetaTextScore("score"))
+            .Limit(5)
+            .ToListAsync(ct);
+
+        // Fallback to regex on title if text search returns nothing
+        // (handles exact phrase matches the text index may tokenize differently)
+        if (docs.Count == 0)
+        {
+            _logger?.LogInformation("Text search returned no results, falling back to regex for: {Query}", query);
+            var regexFilter = Builders<BsonDocument>.Filter.Regex(
+                "title",
+                new BsonRegularExpression(Regex.Escape(query), "i")
+            );
+            docs = await _pages.Find(regexFilter).Project(projection).Limit(5).ToListAsync(ct);
+        }
 
         if (docs.Count == 0)
         {

@@ -11,16 +11,19 @@ public class AdminController : ControllerBase
     readonly ILogger<AdminController> _logger;
     readonly PageDownloader _pageDownloader;
     readonly RecordService _recordService;
+    readonly CharacterTimelineService _characterTimelineService;
 
     public AdminController(
         ILogger<AdminController> logger,
         PageDownloader pageDownloader,
-        RecordService recordService
+        RecordService recordService,
+        CharacterTimelineService characterTimelineService
     )
     {
         _logger = logger;
         _pageDownloader = pageDownloader;
         _recordService = recordService;
+        _characterTimelineService = characterTimelineService;
     }
 
     bool IsJobAlreadyActive(Type type, string methodName)
@@ -352,6 +355,54 @@ public class AdminController : ControllerBase
                 return Conflict(new { error = "Vector index deletion already running" });
             var jobId = BackgroundJob.Enqueue<RecordService>(s =>
                 s.DeleteVectorIndexesAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/create-character-timelines")]
+    public ActionResult<string> EnqueueCreateCharacterTimelines()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(CharacterTimelineService),
+                    nameof(CharacterTimelineService.GenerateAllTimelinesAsync)
+                )
+            )
+                return Conflict(new { error = "Character timeline generation already running" });
+            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s =>
+                s.GenerateAllTimelinesAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/refresh-character-timeline")]
+    public ActionResult<string> EnqueueRefreshCharacterTimeline([FromQuery] int pageId)
+    {
+        if (pageId <= 0)
+            return BadRequest(new { error = "pageId query parameter is required" });
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(CharacterTimelineService),
+                    nameof(CharacterTimelineService.RefreshTimelineAsync)
+                )
+            )
+                return Conflict(new { error = "Character timeline refresh already running" });
+            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s =>
+                s.RefreshTimelineAsync(pageId, CancellationToken.None)
             );
             return Ok(new { jobId });
         }

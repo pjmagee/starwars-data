@@ -153,17 +153,35 @@ public class RecordService
     )
     {
         var pages = PagesCollection;
-        var filter = Builders<Page>.Filter.And(
+
+        // Use $text search on title + content, filtered to pages with infoboxes
+        var textFilter = Builders<Page>.Filter.And(
             Builders<Page>.Filter.Ne(p => p.Infobox, null),
-            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(query, "i"))
+            Builders<Page>.Filter.Text(query)
         );
 
-        var total = await pages.CountDocumentsAsync(filter, cancellationToken: token);
+        var total = await pages.CountDocumentsAsync(textFilter, cancellationToken: token);
         var data = await pages
-            .Find(filter)
+            .Find(textFilter)
+            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
             .Skip((page - 1) * pageSize)
             .Limit(pageSize)
             .ToListAsync(token);
+
+        // Fallback to regex if text search returns nothing
+        if (total == 0)
+        {
+            var regexFilter = Builders<Page>.Filter.And(
+                Builders<Page>.Filter.Ne(p => p.Infobox, null),
+                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(query, "i"))
+            );
+            total = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
+            data = await pages
+                .Find(regexFilter)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
+                .ToListAsync(token);
+        }
 
         return new PagedResult
         {
@@ -186,26 +204,60 @@ public class RecordService
 
         // Match pages whose sanitized template matches the collection name
         var templateFilter = BuildTemplateFilter(collectionName);
-        var filter = searchText is null
-            ? templateFilter
-            : Builders<Page>.Filter.And(
-                templateFilter,
-                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(searchText, "i"))
-            );
 
-        var total = await pages.CountDocumentsAsync(filter, cancellationToken: token);
-        var data = await pages
-            .Find(filter)
+        if (searchText is null)
+        {
+            var total = await pages.CountDocumentsAsync(templateFilter, cancellationToken: token);
+            var data = await pages
+                .Find(templateFilter)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
+                .ToListAsync(token);
+
+            return new PagedResult
+            {
+                Total = (int)total,
+                Size = pageSize,
+                Page = page,
+                Items = data.Select(PageToInfobox).ToList(),
+            };
+        }
+
+        // Use $text search combined with template filter
+        var textFilter = Builders<Page>.Filter.And(
+            templateFilter,
+            Builders<Page>.Filter.Text(searchText)
+        );
+
+        var textTotal = await pages.CountDocumentsAsync(textFilter, cancellationToken: token);
+        var textData = await pages
+            .Find(textFilter)
+            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
             .Skip((page - 1) * pageSize)
             .Limit(pageSize)
             .ToListAsync(token);
 
+        // Fallback to regex if text search returns nothing
+        if (textTotal == 0)
+        {
+            var regexFilter = Builders<Page>.Filter.And(
+                templateFilter,
+                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(searchText, "i"))
+            );
+            textTotal = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
+            textData = await pages
+                .Find(regexFilter)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
+                .ToListAsync(token);
+        }
+
         return new PagedResult
         {
-            Total = (int)total,
+            Total = (int)textTotal,
             Size = pageSize,
             Page = page,
-            Items = data.Select(PageToInfobox).ToList(),
+            Items = textData.Select(PageToInfobox).ToList(),
         };
     }
 
@@ -410,11 +462,29 @@ public class RecordService
                 new CreateIndexOptions { Name = "idx_wikiUrl", Background = true }),
             cancellationToken: cancellationToken);
 
-        // title — text search with regex
+        // title — ascending index for exact/prefix lookups
         await pages.Indexes.CreateOneAsync(
             new CreateIndexModel<Page>(
                 Builders<Page>.IndexKeys.Ascending(p => p.Title),
                 new CreateIndexOptions { Name = "idx_title", Background = true }),
+            cancellationToken: cancellationToken);
+
+        // Full-text index on title (boosted) + content for $text queries
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(
+                Builders<Page>.IndexKeys
+                    .Text(p => p.Title)
+                    .Text(p => p.Content),
+                new CreateIndexOptions
+                {
+                    Name = "idx_text_search",
+                    Background = true,
+                    Weights = new BsonDocument
+                    {
+                        { "title", 10 },
+                        { "content", 1 }
+                    }
+                }),
             cancellationToken: cancellationToken);
 
         // continuity — global filtering
@@ -471,6 +541,36 @@ public class RecordService
                 cancellationToken: cancellationToken);
 
             _logger.LogInformation("Created indexes for timeline collection: {Collection}", collName);
+        }
+
+        // Character timelines collection indexes
+        var charTimelineDb = _mongoClient.GetDatabase(_settingsOptions.CharacterTimelinesDb);
+        var timelinesCollNames = await charTimelineDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var timelineColls = await timelinesCollNames.ToListAsync(cancellationToken);
+
+        if (timelineColls.Contains("Timelines"))
+        {
+            var timelines = charTimelineDb.GetCollection<CharacterTimeline>("Timelines");
+
+            await timelines.Indexes.CreateOneAsync(
+                new CreateIndexModel<CharacterTimeline>(
+                    Builders<CharacterTimeline>.IndexKeys.Ascending(t => t.CharacterPageId),
+                    new CreateIndexOptions { Name = "idx_characterPageId", Background = true, Unique = true }),
+                cancellationToken: cancellationToken);
+
+            await timelines.Indexes.CreateOneAsync(
+                new CreateIndexModel<CharacterTimeline>(
+                    Builders<CharacterTimeline>.IndexKeys.Ascending(t => t.CharacterTitle),
+                    new CreateIndexOptions { Name = "idx_characterTitle", Background = true }),
+                cancellationToken: cancellationToken);
+
+            await timelines.Indexes.CreateOneAsync(
+                new CreateIndexModel<CharacterTimeline>(
+                    Builders<CharacterTimeline>.IndexKeys.Ascending(t => t.Continuity),
+                    new CreateIndexOptions { Name = "idx_continuity", Background = true }),
+                cancellationToken: cancellationToken);
+
+            _logger.LogInformation("Created indexes for character timelines collection");
         }
 
         _logger.LogInformation("All indexes created successfully");

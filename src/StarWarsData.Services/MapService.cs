@@ -410,21 +410,44 @@ public class MapService
         var results = new List<MapSearchResult>();
         var seen = new HashSet<string>(); // dedupe grid keys
 
-        // 1. Direct matches: entities WITH "Grid square" whose title matches
-        var directFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+        // 1. Direct matches: entities WITH "Grid square" whose title or content matches
+        //    Use $text search for relevance-ranked results across title + content
+        var directTextFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Text(term),
             Builders<Page>.Filter.ElemMatch<BsonDocument>(
                 "infobox.Data",
                 new BsonDocument("Label", "Grid square")
             )
         );
         if (continuity.HasValue)
-            directFilter = Builders<Page>.Filter.And(
-                directFilter,
+            directTextFilter = Builders<Page>.Filter.And(
+                directTextFilter,
                 Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
             );
 
-        var directMatches = await _pages.Find(directFilter).Limit(50).ToListAsync();
+        var directMatches = await _pages
+            .Find(directTextFilter)
+            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
+            .Limit(50)
+            .ToListAsync();
+
+        // Fallback to regex on title if text search returns nothing
+        if (directMatches.Count == 0)
+        {
+            var directRegexFilter = Builders<Page>.Filter.And(
+                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+                Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                    "infobox.Data",
+                    new BsonDocument("Label", "Grid square")
+                )
+            );
+            if (continuity.HasValue)
+                directRegexFilter = Builders<Page>.Filter.And(
+                    directRegexFilter,
+                    Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+                );
+            directMatches = await _pages.Find(directRegexFilter).Limit(50).ToListAsync();
+        }
         foreach (var page in directMatches)
         {
             var gridSquare = GetFirstDataValue(page, "Grid square");
@@ -445,10 +468,10 @@ public class MapService
             seen.Add(gridKey);
         }
 
-        // 2. Indirect matches: entities WITHOUT grid squares whose title matches
+        // 2. Indirect matches: entities WITHOUT grid squares whose title or content matches
         //    We look at their location-related infobox properties to find referenced places
-        var indirectFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+        var indirectTextFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Text(term),
             Builders<Page>.Filter.Not(
                 Builders<Page>.Filter.ElemMatch<BsonDocument>(
                     "infobox.Data",
@@ -458,12 +481,37 @@ public class MapService
             Builders<Page>.Filter.Ne("infobox", BsonNull.Value)
         );
         if (continuity.HasValue)
-            indirectFilter = Builders<Page>.Filter.And(
-                indirectFilter,
+            indirectTextFilter = Builders<Page>.Filter.And(
+                indirectTextFilter,
                 Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
             );
 
-        var indirectMatches = await _pages.Find(indirectFilter).Limit(50).ToListAsync();
+        var indirectMatches = await _pages
+            .Find(indirectTextFilter)
+            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
+            .Limit(50)
+            .ToListAsync();
+
+        // Fallback to regex on title
+        if (indirectMatches.Count == 0)
+        {
+            var indirectRegexFilter = Builders<Page>.Filter.And(
+                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(escaped, "i")),
+                Builders<Page>.Filter.Not(
+                    Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                        "infobox.Data",
+                        new BsonDocument("Label", "Grid square")
+                    )
+                ),
+                Builders<Page>.Filter.Ne("infobox", BsonNull.Value)
+            );
+            if (continuity.HasValue)
+                indirectRegexFilter = Builders<Page>.Filter.And(
+                    indirectRegexFilter,
+                    Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+                );
+            indirectMatches = await _pages.Find(indirectRegexFilter).Limit(50).ToListAsync();
+        }
 
         // Collect all referenced location names from infobox properties
         var locationRefs = new Dictionary<string, List<(int sourcePageId, string entityName, string label)>>();

@@ -66,6 +66,18 @@ builder
     .AddSingleton<CollectionFilters>()
     .AddScoped<RelationshipGraphService>()
     .AddScoped<ChatSessionService>()
+    .AddSingleton<CharacterTimelineChatClient>(sp =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var openAiClient = sp.GetRequiredService<OpenAIClient>();
+        var inner = new ChatClientBuilder(
+                openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient())
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build();
+        return new CharacterTimelineChatClient(inner);
+    })
+    .AddScoped<CharacterTimelineService>()
+    .AddSingleton<CharacterTimelineTracker>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(
