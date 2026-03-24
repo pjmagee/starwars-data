@@ -150,3 +150,7 @@ The Aspire dashboard will show all resources. The Hangfire dashboard is availabl
 | Relationships | `/relationships/graph/{id}` | Relationship graphs |
 | ChatSessions | `/api/ChatSessions` | User chat history |
 | AI (AGUI) | `/kernel/stream` | AI agent SSE streaming |
+
+## Links
+
+[![Hypercommit](https://img.shields.io/badge/Hypercommit-DB2475)](https://hypercommit.com/starwars-data)
