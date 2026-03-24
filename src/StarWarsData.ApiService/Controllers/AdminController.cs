@@ -6,25 +6,19 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AdminController : ControllerBase
+public class AdminController(
+    ILogger<AdminController> logger,
+    PageDownloader pageDownloader,
+    RecordService recordService,
+    CharacterTimelineService characterTimelineService,
+    RelationshipGraphBuilderService graphBuilder
+) : ControllerBase
 {
-    readonly ILogger<AdminController> _logger;
-    readonly PageDownloader _pageDownloader;
-    readonly RecordService _recordService;
-    readonly CharacterTimelineService _characterTimelineService;
-
-    public AdminController(
-        ILogger<AdminController> logger,
-        PageDownloader pageDownloader,
-        RecordService recordService,
-        CharacterTimelineService characterTimelineService
-    )
-    {
-        _logger = logger;
-        _pageDownloader = pageDownloader;
-        _recordService = recordService;
-        _characterTimelineService = characterTimelineService;
-    }
+    readonly ILogger<AdminController> _logger = logger;
+    readonly PageDownloader _pageDownloader = pageDownloader;
+    readonly RecordService _recordService = recordService;
+    readonly CharacterTimelineService _characterTimelineService = characterTimelineService;
+    readonly RelationshipGraphBuilderService _graphBuilder = graphBuilder;
 
     bool IsJobAlreadyActive(Type type, string methodName)
     {
@@ -403,6 +397,52 @@ public class AdminController : ControllerBase
                 return Conflict(new { error = "Character timeline refresh already running" });
             var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s =>
                 s.RefreshTimelineAsync(pageId, CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/build-relationship-graph")]
+    public ActionResult<string> EnqueueBuildRelationshipGraph()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RelationshipGraphBuilderService),
+                    nameof(RelationshipGraphBuilderService.ProcessBatchAsync)
+                )
+            )
+                return Conflict(new { error = "Relationship graph builder already running" });
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
+                s.ProcessBatchAsync(100, CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/ensure-graph-indexes")]
+    public ActionResult<string> EnqueueEnsureGraphIndexes()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RelationshipGraphBuilderService),
+                    nameof(RelationshipGraphBuilderService.EnsureIndexesAsync)
+                )
+            )
+                return Conflict(new { error = "Graph index creation already running" });
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
+                s.EnsureIndexesAsync(CancellationToken.None)
             );
             return Ok(new { jobId });
         }

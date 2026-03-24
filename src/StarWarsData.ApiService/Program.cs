@@ -78,6 +78,23 @@ builder
     })
     .AddScoped<CharacterTimelineService>()
     .AddSingleton<CharacterTimelineTracker>()
+    .AddSingleton<RelationshipAnalystToolkit>(sp =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var mongoClient = sp.GetRequiredService<IMongoClient>();
+        return new RelationshipAnalystToolkit(mongoClient, settings.PagesDb, settings.RelationshipGraphDb);
+    })
+    .AddKeyedSingleton<IChatClient>("relationship-analyst", (sp, _) =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var openAiClient = sp.GetRequiredService<OpenAIClient>();
+        return new ChatClientBuilder(
+                openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient())
+            .UseFunctionInvocation()
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build();
+    })
+    .AddScoped<RelationshipGraphBuilderService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(
@@ -184,7 +201,7 @@ builder
         - "Tell me about X" / "Bring up X" → search_pages_by_name("Character", "X") → render_infobox with the PageIds. If not a character, try other types.
         - "What happened during X?" / lore questions → search_wiki("X") → render_text with the results.
         - "Show all X" / list queries → render_table with infoboxType and optional search filter.
-        - "Family tree of X" → search_pages_by_name → get_page_by_id → render_graph with relevant labels.
+        - "Family tree of X" → search_pages_by_name → sample_link_labels (to discover which labels have links) → render_graph with the discovered labels classified as up/down/peer.
         - Stats/counts → aggregate or count → render_chart or render_data_table.
 
         CHOOSING OUTPUT (call exactly one render_ tool as final action, no commentary after):
@@ -199,7 +216,7 @@ builder
         - Call exactly ONE render_ tool. Never call multiple render_ tools.
         - render_table/render_graph/render_timeline/render_infobox: the frontend fetches data — do NOT query rows yourself.
         - render_data_table/render_chart/render_text: YOU must query and provide the data.
-        - render_graph: upLabels = ancestors (Parent(s), Masters), downLabels = descendants (Children, Apprentices), peerLabels = same level (Partner(s), Sibling(s)). Only include labels relevant to the question.
+        - render_graph: ALWAYS call sample_link_labels first (with the entity's pageId or infobox type) to discover which labels have links. Then classify the relevant labels as upLabels (ancestor/superior relationships), downLabels (descendant/subordinate relationships), or peerLabels (same-level/lateral relationships) based on their semantic meaning and the user's question. Do NOT guess or hardcode label names.
 
         REFERENCES: Every render_ tool accepts an optional "references" parameter. When you use data from wiki pages, include references with each page's title and wikiUrl. The search_wiki tool returns "Source:" lines with URLs — extract those into references. For search_pages_by_name / get_page_by_id results, use the page title and wikiUrl fields.
         """;
@@ -289,6 +306,13 @@ RecurringJob.AddOrUpdate<PageDownloader>(
     "daily-incremental-sync",
     s => s.IncrementalSyncAsync(CancellationToken.None),
     Cron.Daily(3)
+);
+
+// Daily relationship graph builder at 04:00 UTC (after page sync completes)
+RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+    "daily-relationship-graph-builder",
+    s => s.ProcessBatchAsync(100, CancellationToken.None),
+    Cron.Daily(4)
 );
 
 app.UseHttpsRedirection();

@@ -40,6 +40,25 @@
             </MudButton>
         </MudStack>
 
+        <!-- Relationship Graph Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Info">Relationship Graph Operations</MudText>
+        <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Hub"
+                OnClick="@(() => StartJobHandler(BuildRelationshipGraphEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Build Relationship Graph (process next batch)
+            </MudButton>
+
+            <MudButton Variant="Variant.Outlined" Color="Color.Info" StartIcon="@Icons.Material.Filled.Storage"
+                OnClick="@(() => StartJobHandler(EnsureGraphIndexesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Ensure Graph Indexes
+            </MudButton>
+
+            <MudButton Variant="Variant.Text" Color="Color.Info" StartIcon="@Icons.Material.Filled.Dashboard"
+                Href="/admin/graph-builder" Size="Size.Medium">
+                View Graph Builder Dashboard
+            </MudButton>
+        </MudStack>
+
         <MudDivider Class="my-4" />
 
         <!-- Advanced Operations -->
@@ -85,6 +104,9 @@
     private const string CreateTimelineEventsEndpoint = "admin/mongo/create-categorized-timeline-events";
     private const string DeleteTimelineEventsEndpoint = "admin/mongo/delete-timeline-events";
     
+    private const string BuildRelationshipGraphEndpoint = "admin/mongo/build-relationship-graph";
+    private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
+
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
     private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";
     private const string CreateVectorIndexEndpoint = "admin/mongo/create-index-embeddings";

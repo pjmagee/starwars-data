@@ -8,6 +8,7 @@
     <MudNavLink Href="/character-timelines" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Character Timelines</MudNavLink>
     <MudNavLink Href="/galactic-map" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Map">Galaxy</MudNavLink>
     <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">Data Tables</MudNavLink>
+    <MudNavLink Href="/graph-explorer" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Hub">Graph Explorer</MudNavLink>
     <AuthorizeView>
         <Authorized>
             <MudDivider Class="my-2" />
@@ -19,7 +20,8 @@
         <Authorized>
             <MudDivider Class="my-2" />
             <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">System</MudText>
-            <MudNavLink Href="/admin" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin</MudNavLink>
+            <MudNavLink Href="/admin" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin</MudNavLink>
+            <MudNavLink Href="/admin/graph-builder" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Hub">Graph Builder</MudNavLink>
         </Authorized>
     </AuthorizeView>
 </MudNavMenu>

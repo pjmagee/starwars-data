@@ -1,7 +1,10 @@
 using System.Security.Claims;
 using System.Text.Json;
+using Keycloak.AuthServices.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MudBlazor.Services;
 using StarWarsData.Frontend;
 using StarWarsData.Frontend.Components;
@@ -12,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+// builder.Services.AddTransient<IClaimsTransformation, KeycloakRolesClaimsTransformation>();
 
 builder
     .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -22,60 +26,62 @@ builder
         options =>
         {
             options.ClientId = "starwars-frontend";
-            options.ResponseType = "code";
+            options.ResponseType = OpenIdConnectResponseType.Code;
             options.SaveTokens = true;
             options.RequireHttpsMetadata = false;
             options.GetClaimsFromUserInfoEndpoint = true;
+            options.UsePkce = true;
+            options.MapInboundClaims = false;
             options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
-            options.Scope.Add("openid");
-            options.Scope.Add("profile");
-            options.Scope.Add("email");
+            options.TokenValidationParameters.NameClaimType = "preferred_username";
+            options.TokenValidationParameters.RoleClaimType = "roles";
             options.Events = new OpenIdConnectEvents
             {
                 OnTokenValidated = context =>
                 {
-                    if (context.Principal?.Identity is ClaimsIdentity identity)
+                    if (context.Principal?.Identity is not ClaimsIdentity identity)
+                        return Task.CompletedTask;
+
+                    // Avoid duplicates
+                    if (identity.Claims.Any(c => c.Type == "roles"))
+                        return Task.CompletedTask;
+
+                    var realmAccess = identity.FindFirst("realm_access")?.Value;
+                    if (!string.IsNullOrWhiteSpace(realmAccess))
                     {
-                        // Map preferred_username to Name claim if Name is missing
-                        if (string.IsNullOrEmpty(identity.FindFirst(ClaimTypes.Name)?.Value))
-                        {
-                            var preferred = identity.FindFirst("preferred_username")?.Value;
-                            if (preferred is not null)
-                                identity.AddClaim(new Claim(ClaimTypes.Name, preferred));
-                        }
+                        using var doc = JsonDocument.Parse(realmAccess);
 
-                        // Map email claim
-                        if (string.IsNullOrEmpty(identity.FindFirst(ClaimTypes.Email)?.Value))
+                        if (
+                            doc.RootElement.TryGetProperty("roles", out var rolesElement)
+                            && rolesElement.ValueKind == JsonValueKind.Array
+                        )
                         {
-                            var email = identity.FindFirst("email")?.Value;
-                            if (email is not null)
-                                identity.AddClaim(new Claim(ClaimTypes.Email, email));
-                        }
-
-                        // Map realm roles
-                        var realmAccess = context.Principal.FindFirst("realm_access");
-                        if (realmAccess is not null)
-                        {
-                            using var doc = JsonDocument.Parse(realmAccess.Value);
-                            if (doc.RootElement.TryGetProperty("roles", out var roles))
+                            foreach (var role in rolesElement.EnumerateArray())
                             {
-                                foreach (var role in roles.EnumerateArray())
+                                var value = role.GetString();
+                                if (!string.IsNullOrWhiteSpace(value))
                                 {
-                                    var value = role.GetString();
-                                    if (value is not null)
-                                        identity.AddClaim(new Claim(ClaimTypes.Role, value));
+                                    identity.AddClaim(new Claim("roles", value));
                                 }
                             }
                         }
                     }
+
                     return Task.CompletedTask;
                 },
             };
         }
     );
 
-builder.Services.AddAuthorization();
+builder
+    .Services.AddKeycloakAuthorization(options =>
+    {
+        options.RoleClaimType = ClaimTypes.Role;
+        options.RolesResource = "starwars-frontend";
+        options.EnableRolesMapping = RolesClaimTransformationSource.All;
+    })
+    .AddAuthorizationBuilder();
+
 builder.Services.AddCascadingAuthenticationState();
 
 builder
@@ -101,6 +107,22 @@ builder
 #pragma warning restore EXTEXP0001
 
 var app = builder.Build();
+
+app.MapGet(
+        "/debug/claims",
+        (ClaimsPrincipal user) =>
+        {
+            return Results.Json(
+                user.Claims.Select(c => new
+                {
+                    c.Type,
+                    c.Value,
+                    c.ValueType,
+                })
+            );
+        }
+    )
+    .RequireAuthorization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

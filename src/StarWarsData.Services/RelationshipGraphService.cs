@@ -405,7 +405,7 @@ namespace StarWarsData.Services
                 var infoboxData = doc.Infobox?.Data ?? [];
 
                 // Extract hrefs per label, grouped by direction
-                var hrefsByLabel = allLabels.ToDictionary(
+                var hrefsByLabel = allLabels.Distinct(StringComparer.OrdinalIgnoreCase).ToDictionary(
                     l => l,
                     l => HrefsForLabel(infoboxData, l),
                     StringComparer.OrdinalIgnoreCase);
