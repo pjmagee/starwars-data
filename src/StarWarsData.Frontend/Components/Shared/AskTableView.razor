@@ -35,19 +35,27 @@
 
     private async Task<TableData<Infobox>> ServerReload(TableState state, CancellationToken ct)
     {
-        var encoded = Uri.EscapeDataString(Descriptor.Collection);
-        var url = $"Categories/{encoded}?Page={state.Page + 1}&PageSize={state.PageSize}";
-
-        if (!string.IsNullOrWhiteSpace(Descriptor.Search))
-            url += $"&Search={Uri.EscapeDataString(Descriptor.Search)}";
-
-        var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);
-
-        return new TableData<Infobox>
+        try
         {
-            TotalItems = result?.Total ?? 0,
-            Items = result?.Items ?? [],
-        };
+            var encoded = Uri.EscapeDataString(Descriptor.Collection);
+            var url = $"Categories/{encoded}?Page={state.Page + 1}&PageSize={state.PageSize}";
+
+            if (!string.IsNullOrWhiteSpace(Descriptor.Search))
+                url += $"&Search={Uri.EscapeDataString(Descriptor.Search)}";
+
+            var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);
+
+            return new TableData<Infobox>
+            {
+                TotalItems = result?.Total ?? 0,
+                Items = result?.Items ?? [],
+            };
+        }
+        catch (OperationCanceledException)
+        {
+            // MudTable cancels the previous request when a new page/sort is triggered
+            return new TableData<Infobox> { TotalItems = 0, Items = [] };
+        }
     }
 
     private static string GetFieldValue(Infobox infobox, string label)

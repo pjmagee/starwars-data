@@ -1,8 +1,29 @@
 @using StarWarsData.Models.Queries
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
-    @_fragment
+    <div class="d-flex align-center gap-3 mb-4">
+        <MudText Typo="Typo.h6" Style="flex:1">@Descriptor.Title</MudText>
+        <MudMenu Icon="@_menuIcons[_chartType]" EndIcon="@Icons.Material.Filled.ArrowDropDown"
+                 Variant="Variant.Outlined" Size="Size.Small" AnchorOrigin="Origin.BottomRight">
+            @foreach (var (type, icon) in _menuIcons)
+            {
+                var t = type;
+                <MudMenuItem Icon="@icon"
+                             OnClick="() => _chartType = t"
+                             Disabled="@(_chartType == t)">
+                    @t
+                </MudMenuItem>
+            }
+        </MudMenu>
+    </div>
+
+    <MudChart ChartType="@_chartType"
+              ChartSeries="@_series"
+              ChartLabels="@_labels"
+              ChartPalette="@_palette"
+              Width="100%" Height="400px"
+              CanHideSeries MatchBoundsToSize />
+
     <AskReferencesSection References="@Descriptor.References" />
 </MudPaper>
 
@@ -10,12 +31,22 @@
     [Parameter, EditorRequired]
     public ChartDescriptor Descriptor { get; set; } = null!;
 
-    private RenderFragment? _fragment;
+    private ChartType _chartType;
+    private List<ChartSeries<double>> _series = [];
+    private string[] _labels = [];
+    private string[]? _palette;
 
-    protected override void OnParametersSet()
+    private static readonly Dictionary<ChartType, string> _menuIcons = new()
     {
-        _fragment = BuildChart(Descriptor);
-    }
+        [ChartType.Bar] = Icons.Material.Filled.BarChart,
+        [ChartType.StackedBar] = Icons.Material.Filled.StackedBarChart,
+        [ChartType.Line] = Icons.Material.Filled.ShowChart,
+        [ChartType.Pie] = Icons.Material.Filled.PieChart,
+        [ChartType.Donut] = Icons.Material.Filled.DonutLarge,
+        [ChartType.Rose] = Icons.Material.Filled.DonutSmall,
+        [ChartType.Radar] = Icons.Material.Filled.Hub,
+        [ChartType.Timeseries] = Icons.Material.Filled.Timeline,
+    };
 
     private static readonly Dictionary<AskChartType, ChartType> ChartTypeMap = new()
     {
@@ -24,62 +55,47 @@
         [AskChartType.StackedBar] = ChartType.StackedBar,
         [AskChartType.Pie] = ChartType.Pie,
         [AskChartType.Donut] = ChartType.Donut,
+        [AskChartType.Rose] = ChartType.Rose,
         [AskChartType.TimeSeries] = ChartType.Timeseries,
         [AskChartType.Radar] = ChartType.Radar,
     };
 
-    private static RenderFragment BuildChart(ChartDescriptor spec) => builder =>
+    protected override void OnParametersSet()
     {
-        var seq = 0;
-        var mudChartType = ChartTypeMap.GetValueOrDefault(spec.ChartType, ChartType.Bar);
+        _chartType = ChartTypeMap.GetValueOrDefault(Descriptor.ChartType, ChartType.Bar);
+        _palette = Descriptor.Options?.ChartPalette is { Count: > 0 } p ? p.ToArray() : null;
 
-        builder.OpenComponent<MudChart<double>>(seq++);
-        builder.AddAttribute(seq++, "ChartType", mudChartType);
-        builder.AddAttribute(seq++, "Width", "100%");
-        builder.AddAttribute(seq++, "Height", "400px");
-        builder.AddAttribute(seq++, "LegendPosition", Position.Bottom);
-
-        switch (spec.ChartType)
+        switch (Descriptor.ChartType)
         {
             case AskChartType.TimeSeries:
-                builder.AddAttribute(seq++, "ChartSeries",
-                    spec.TimeSeries?.Select(ts => new ChartSeries<double>
-                    {
-                        Name = ts.Name,
-                        Data = ts.Data.Select(dp => dp.Y).ToArray()
-                    }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels",
-                    spec.TimeSeries?.FirstOrDefault()?.Data
-                        .Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? []);
+                _series = Descriptor.TimeSeries?.Select(ts => new ChartSeries<double>
+                {
+                    Name = ts.Name,
+                    Data = ts.Data.Select(dp => dp.Y).ToArray()
+                }).ToList() ?? [];
+                _labels = Descriptor.TimeSeries?.FirstOrDefault()?.Data
+                    .Select(dp => dp.X.ToString("yyyy-MM-dd")).ToArray() ?? [];
                 break;
 
             case AskChartType.Pie:
             case AskChartType.Donut:
-                builder.AddAttribute(seq++, "ChartSeries",
-                    spec.Series?.Select(s => new ChartSeries<double>
-                    {
-                        Name = s.Name,
-                        Data = s.Data.ToArray()
-                    }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.Labels?.ToArray() ?? []);
+            case AskChartType.Rose:
+                _series = Descriptor.Series?.Select(s => new ChartSeries<double>
+                {
+                    Name = s.Name,
+                    Data = s.Data.ToArray()
+                }).ToList() ?? [];
+                _labels = Descriptor.Labels?.ToArray() ?? [];
                 break;
 
-            default: // Bar, Line, StackedBar, Radar
-                builder.AddAttribute(seq++, "ChartSeries",
-                    spec.Series?.Select(s => new ChartSeries<double>
-                    {
-                        Name = s.Name,
-                        Data = s.Data.ToArray()
-                    }).ToList());
-                builder.AddAttribute(seq++, "ChartLabels", spec.XAxisLabels?.ToArray() ?? []);
+            default:
+                _series = Descriptor.Series?.Select(s => new ChartSeries<double>
+                {
+                    Name = s.Name,
+                    Data = s.Data.ToArray()
+                }).ToList() ?? [];
+                _labels = Descriptor.XAxisLabels?.ToArray() ?? [];
                 break;
         }
-
-        if (spec.Options?.ChartPalette is { Count: > 0 })
-        {
-            builder.AddAttribute(seq++, "ChartPalette", spec.Options.ChartPalette.ToArray());
-        }
-
-        builder.CloseComponent();
-    };
+    }
 }

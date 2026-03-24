@@ -46,13 +46,15 @@ public class RelationshipsController(RelationshipGraphService graphService) : Co
     [HttpGet("search")]
     public async Task<ActionResult<List<EntitySearchDto>>> Search(
         [FromQuery] string q,
-        [FromQuery] string collection = "Character"
+        [FromQuery] string collection = "Character",
+        [FromQuery] string? continuity = null
     )
     {
         if (string.IsNullOrWhiteSpace(q))
             return BadRequest("Query parameter 'q' is required.");
 
-        var results = await graphService.FindEntitiesAsync(q, collection);
+        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c) ? c : (Models.Entities.Continuity?)null;
+        var results = await graphService.FindEntitiesAsync(q, collection, cont);
         return results;
     }
 }

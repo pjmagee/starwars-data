@@ -30,6 +30,9 @@ public enum AskChartType
 
     [Description("Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series.")]
     Radar,
+
+    [Description("Rose chart — proportions of a whole displayed as a polar area chart. Requires labels and series where each series.data has one value per label.")]
+    Rose,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]

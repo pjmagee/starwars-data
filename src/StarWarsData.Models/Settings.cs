@@ -53,4 +53,19 @@ public class SettingsOptions
 
     public IEnumerable<string> TimelineCollections { get; set; } = [];
 
+    /// <summary>
+    /// The database for the persistent relationship graph (edges, crawl state, label registry)
+    /// </summary>
+    public string RelationshipGraphDb { get; set; } = "starwars-relationship-graph";
+
+    /// <summary>
+    /// The model to use for relationship extraction (high-volume, low-cost)
+    /// </summary>
+    public string RelationshipAnalystModel { get; set; } = "gpt-5-mini";
+
+    /// <summary>
+    /// Max pages to process per graph builder batch run
+    /// </summary>
+    public int GraphBuilderBatchSize { get; set; } = 100;
+
 }

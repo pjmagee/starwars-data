@@ -1,6 +1,6 @@
 @inject IHttpClientFactory HttpClientFactory
-@using StarWarsData.Frontend.Models
-@using StarWarsData.Models.Queries
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
     <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
@@ -9,23 +9,17 @@
     {
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
             <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
-            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading relationship graph…</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading relationship graph...</MudText>
         </MudStack>
     }
     else if (_error is not null)
     {
         <MudAlert Severity="Severity.Error">@_error</MudAlert>
     }
-    else if (_treeNodes is not null)
+    else if (_hasData)
     {
-        <div style="width:100%; height:@(_canvasHeight)px;">
-            <CascadingValue Value="_diagram" IsFixed="true">
-                <DiagramCanvas>
-                    <Widgets>
-                        <GridWidget Size="20" Mode="GridMode.Point" ZoomThreshold="0" BackgroundColor="#16162e" />
-                    </Widgets>
-                </DiagramCanvas>
-            </CascadingValue>
+        <div id="@_containerId"
+             style="width:100%; height:650px; background:#16162e; border-radius:8px; overflow:hidden;">
         </div>
     }
     <AskReferencesSection References="@Descriptor.References" />
@@ -35,27 +29,14 @@
     [Parameter, EditorRequired]
     public GraphDescriptor Descriptor { get; set; } = null!;
 
-    private BlazorDiagram _diagram = null!;
-    private Dictionary<int, GraphNodeDto>? _treeNodes;
-    private GraphResult? _graphResult;
-    private readonly Dictionary<int, NodeModel> _nodeModels = new();
     private bool _loading = true;
+    private bool _hasData;
     private string? _error;
-    private int _canvasHeight = 650;
     private int _loadGeneration;
+    private IJSObjectReference? _jsModule;
+    private readonly string _containerId = $"d3-graph-{Guid.NewGuid():N}";
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
-
-    protected override void OnInitialized()
-    {
-        _diagram = new BlazorDiagram(new BlazorDiagramOptions
-        {
-            AllowMultiSelection = false,
-            AllowPanning = true,
-            Zoom = { Enabled = true },
-        });
-        _diagram.RegisterComponent<DiagramNode, TreeNodeWidget>();
-    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -63,11 +44,7 @@
 
         _loading = true;
         _error = null;
-        _treeNodes = null;
-        _graphResult = null;
-        _diagram.Nodes.Clear();
-        _diagram.Links.Clear();
-        _nodeModels.Clear();
+        _hasData = false;
 
         try
         {
@@ -78,13 +55,18 @@
             foreach (var l in Descriptor.PeerLabels) query += $"&peerLabels={Uri.EscapeDataString(l)}";
             var result = await Http.GetFromJsonAsync<GraphResult>(query);
 
-            if (generation != _loadGeneration) return; // stale — a newer load started
+            if (generation != _loadGeneration) return;
 
             if (result?.Nodes is { Count: > 0 })
             {
-                _treeNodes = result.Nodes;
-                _graphResult = result;
-                LayoutDiagram(result.RootId);
+                _hasData = true;
+                _loading = false;
+                StateHasChanged();
+
+                // Wait for the DOM to render the container div
+                await Task.Delay(50);
+
+                await RenderD3Graph(result);
             }
             else
             {
@@ -103,86 +85,44 @@
         }
     }
 
-    private void LayoutDiagram(int rootId)
+    private async Task RenderD3Graph(GraphResult result)
     {
-        if (_treeNodes is null || _treeNodes.Count == 0) return;
+        _jsModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/d3-graph.js");
 
-        _diagram.SuspendSorting = true;
-
-        const double nodeW = 260;
-        const double nodeH = 100;
-        const double hGap = 50;
-        const double vGap = 90;
-
-        var byGen = _treeNodes.Values
-            .GroupBy(n => n.Generation)
-            .OrderBy(g => g.Key)
-            .ToList();
-
-        int minGen = byGen.Min(g => g.Key);
-        int maxInRow = byGen.Max(g => g.Count());
-        double maxRowW = maxInRow * nodeW + (maxInRow - 1) * hGap;
-
-        // Calculate canvas height based on generation count
-        _canvasHeight = Math.Max(650, byGen.Count * (int)(nodeH + vGap) + 100);
-
-        foreach (var genGroup in byGen)
+        // Transform GraphResult into the format D3 expects
+        var nodes = result.Nodes.Values.Select(n => new
         {
-            var row = genGroup.OrderBy(n => n.Name).ToList();
-            double rowW = row.Count * nodeW + (row.Count - 1) * hGap;
-            double startX = (maxRowW - rowW) / 2.0;
-            double y = (genGroup.Key - minGen) * (nodeH + vGap);
+            id = n.Id,
+            name = n.Name,
+            type = "Character", // Old GraphResult doesn't carry type — default
+            imageUrl = n.ImageUrl ?? "",
+            born = n.Born ?? "",
+            died = n.Died ?? "",
+        }).ToArray();
 
-            for (int i = 0; i < row.Count; i++)
-            {
-                var n = row[i];
-                double x = startX + i * (nodeW + hGap);
-
-                var dn = new DiagramNode(
-                    label: n.Name,
-                    attributes: NodeAttributes(n),
-                    imageUrl: string.IsNullOrEmpty(n.ImageUrl) ? null : n.ImageUrl,
-                    isRoot: n.Id == rootId,
-                    position: new Blazor.Diagrams.Core.Geometry.Point(x, y));
-
-                _diagram.Nodes.Add(dn);
-                _nodeModels[n.Id] = dn;
-            }
-        }
-
-        // Create links with relationship labels
-        if (_graphResult is not null)
+        var edges = result.Edges.Select(e => new
         {
-            foreach (var edge in _graphResult.Edges)
-            {
-                if (_nodeModels.TryGetValue(edge.FromId, out var from) &&
-                    _nodeModels.TryGetValue(edge.ToId, out var to))
-                {
-                    var link = _diagram.Links.Add(new LinkModel(from, to));
-                    var labelText = FormatEdgeLabel(edge.Label);
-                    link.Labels.Add(new LinkLabelModel(link, labelText));
-                }
-            }
-        }
+            fromId = e.FromId,
+            toId = e.ToId,
+            label = e.Label,
+            weight = 0.7,
+        }).ToArray();
 
-        _diagram.SuspendSorting = false;
-        _diagram.Refresh();
+        var data = new { nodes, edges, rootId = result.RootId };
+
+        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data);
     }
 
-    private static string FormatEdgeLabel(string label) =>
-        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(label);
-
-    private static string TrimDate(string s)
+    public async ValueTask DisposeAsync()
     {
-        var comma = s.IndexOf(',');
-        return comma >= 0 ? s[..comma].Trim() : s.Trim();
-    }
-
-    private static List<(string Key, string Value)> NodeAttributes(GraphNodeDto d)
-    {
-        var attrs = new List<(string, string)>();
-        if (!string.IsNullOrWhiteSpace(d.Born)) attrs.Add(("Born", TrimDate(d.Born)));
-        if (!string.IsNullOrWhiteSpace(d.Died)) attrs.Add(("Died", TrimDate(d.Died)));
-        return attrs;
+        if (_jsModule is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("destroyGraph", _containerId);
+                await _jsModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+        }
     }
 }

@@ -40,12 +40,4 @@ public class RelationshipLabels
     public List<string> PeerLabels { get; init; } = [];
 
     public List<string> AllLabels => [.. UpLabels, .. DownLabels, .. PeerLabels];
-
-    /// <summary>Default family relationship labels for Character entities.</summary>
-    public static RelationshipLabels DefaultCharacter => new()
-    {
-        UpLabels = ["Parent(s)", "Masters"],
-        DownLabels = ["Children", "Apprentices"],
-        PeerLabels = ["Partner(s)", "Sibling(s)"],
-    };
 }

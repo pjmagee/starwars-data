@@ -147,7 +147,7 @@ namespace StarWarsData.Services
         /// <summary>
         /// Search entities by title within a type, returning id + name DTOs.
         /// </summary>
-        public async Task<List<EntitySearchDto>> FindEntitiesAsync(string search, string collection = "Character")
+        public async Task<List<EntitySearchDto>> FindEntitiesAsync(string search, string collection = "Character", Continuity? continuity = null)
         {
             search = search.Trim();
             var templateFilter = TemplateFilter(collection);
@@ -163,10 +163,16 @@ namespace StarWarsData.Services
             );
             var pageTitleFilter = Builders<Page>.Filter.Regex(p => p.Title, new BsonRegularExpression(search, "i"));
 
-            var filter = Builders<Page>.Filter.And(
+            var filters = new List<FilterDefinition<Page>>
+            {
                 templateFilter,
-                Builders<Page>.Filter.Or(infoboxTitleFilter, pageTitleFilter)
-            );
+                Builders<Page>.Filter.Or(infoboxTitleFilter, pageTitleFilter),
+            };
+
+            if (continuity.HasValue)
+                filters.Add(Builders<Page>.Filter.Eq(p => p.Continuity, continuity.Value));
+
+            var filter = Builders<Page>.Filter.And(filters);
 
             var pages = await _pages.Find(filter).Limit(50).ToListAsync();
 
@@ -405,7 +411,7 @@ namespace StarWarsData.Services
                 var infoboxData = doc.Infobox?.Data ?? [];
 
                 // Extract hrefs per label, grouped by direction
-                var hrefsByLabel = allLabels.ToDictionary(
+                var hrefsByLabel = allLabels.Distinct(StringComparer.OrdinalIgnoreCase).ToDictionary(
                     l => l,
                     l => HrefsForLabel(infoboxData, l),
                     StringComparer.OrdinalIgnoreCase);

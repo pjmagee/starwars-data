@@ -36,71 +36,68 @@ else
 
 @if (_category is not null)
 {
-    <MudTextField @bind-Value="_searchText"
-                  Label="Search"
-                  Variant="Variant.Outlined"
-                  Adornment="Adornment.Start"
-                  AdornmentIcon="@Icons.Material.Filled.Search"
-                  Immediate="false"
-                  DebounceInterval="500"
-                  OnDebounceIntervalElapsed="OnSearchChanged"
-                  Clearable="true"
-                  Class="mb-4"
-                  Placeholder="Filter by name or property..." />
-
-    <MudTable
-        ServerData="ServerReload"
-        FixedHeader="true"
-        FixedFooter="true"
-        Height="1000px"
-        ReadOnly="true"
-        Dense="true"
-        @ref="_table"
-        Bordered="true"
-        Striped="true"
-        HorizontalScrollbar="true">
-
-        <HeaderContent>
-            <MudTh>Page</MudTh>
-            <MudTh>Image</MudTh>
-            @foreach (var item in DynamicHeaders)
-            {
-                <MudTh>@item</MudTh>
-            }
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Page">
-                <MudLink Href="@context.WikiUrl">@context.PageTitle</MudLink>
-            </MudTd>
-            <MudTd DataLabel="Image">
-                @if (!string.IsNullOrEmpty(context.ImageUrl))
-                {
-                    <img src="@context.ImageUrl.Split("/revision", StringSplitOptions.RemoveEmptyEntries)[0]" style="max-height:150px;width:auto;display:block;" />
-                }
-            </MudTd>
-            @foreach (var label in DynamicHeaders)
-            {
-                var data = context.Data.FirstOrDefault(d => d.Label == label);
-
-                <MudTd DataLabel="@label">
-                    @if (data is not null)
+    <MudDataGrid T="Infobox"
+                 ServerData="ServerReload"
+                 @ref="_grid"
+                 FixedHeader="true"
+                 FixedFooter="true"
+                 Height="1000px"
+                 Dense="true"
+                 Bordered="true"
+                 Striped="true"
+                 Hideable="true"
+                 ColumnResizeMode="ResizeMode.Column">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">@FormatCategoryName(_category)</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchText"
+                          Placeholder="Search all data..."
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Immediate="false"
+                          DebounceInterval="500"
+                          OnDebounceIntervalElapsed="OnSearchChanged"
+                          Clearable="true"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          Style="max-width:300px" />
+        </ToolBarContent>
+        <Columns>
+            <TemplateColumn T="Infobox" Title="Page" Sortable="true" SortBy="@(x => x.PageTitle)">
+                <CellTemplate>
+                    <MudLink Href="@context.Item.WikiUrl">@context.Item.PageTitle</MudLink>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn T="Infobox" Title="Image" Sortable="false" Filterable="false">
+                <CellTemplate>
+                    @if (!string.IsNullOrEmpty(context.Item.ImageUrl))
                     {
-                        <MudList T="string" Gutters="false" Padding="false" Dense="true">
+                        <img src="@context.Item.ImageUrl.Split("/revision", StringSplitOptions.RemoveEmptyEntries)[0]" style="max-height:150px;width:auto;display:block;" />
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            @foreach (var header in _dynamicHeaders)
+            {
+                var label = header;
+                <TemplateColumn T="Infobox" Title="@label" Sortable="true"
+                                SortBy="@(x => x.Data.FirstOrDefault(d => d.Label == label)?.Values.FirstOrDefault() ?? "")">
+                    <CellTemplate>
+                        @{ var data = context.Item.Data.FirstOrDefault(d => d.Label == label); }
+                        @if (data is not null)
+                        {
                             @foreach (var link in data.Links)
                             {
-                                <MudListItem Dense="true" Gutters="false" Ripple="false">
-                                    <MudLink Class="ma-1" Href="@link.Href">@link.Content</MudLink>
-                                </MudListItem>
+                                <MudLink Class="ma-1" Href="@link.Href">@link.Content</MudLink>
                             }
                             @foreach (var value in data.Values.Where(v => !data.Links.Any(l => l.Content.Equals(v, StringComparison.OrdinalIgnoreCase))))
                             {
-                                <MudListItem Dense="true" Gutters="false" Ripple="false">@value</MudListItem>
+                                <MudText Typo="Typo.body2">@value</MudText>
                             }
-                        </MudList>
-                    }
-                </MudTd>
+                        }
+                    </CellTemplate>
+                </TemplateColumn>
             }
-        </RowTemplate>
+        </Columns>
         <NoRecordsContent>
             <MudText>No matching records found</MudText>
         </NoRecordsContent>
@@ -108,9 +105,9 @@ else
             <MudText>Loading...</MudText>
         </LoadingContent>
         <PagerContent>
-            <MudTablePager/>
+            <MudDataGridPager T="Infobox" />
         </PagerContent>
-    </MudTable>
+    </MudDataGrid>
 }
 
 @code {
@@ -119,24 +116,10 @@ else
     private string? _category;
     private string? _searchText;
 
-    private MudTable<Infobox>? _table;
-    private PagedResult? _pagedResult;
+    private MudDataGrid<Infobox>? _grid;
+    private string[] _dynamicHeaders = [];
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
-
-    private IEnumerable<string> DynamicHeaders
-    {
-        get
-        {
-            if (_pagedResult is not null)
-            {
-                foreach (var item in _pagedResult.Items.SelectMany(record => record.Data.Select(property => property.Label).OrderBy(v => v)).Distinct())
-                {
-                    yield return item;
-                }
-            }
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,39 +127,51 @@ else
         _categories = categories.OrderBy(x => x).ToArray();
     }
 
-    private async Task<TableData<Infobox>> ServerReload(TableState state, CancellationToken ct)
+    private async Task<GridData<Infobox>> ServerReload(GridState<Infobox> state, CancellationToken ct)
     {
         if (_category == null)
-            return new TableData<Infobox>() { Items = Enumerable.Empty<Infobox>(), TotalItems = 0 };
+            return new GridData<Infobox> { Items = [], TotalItems = 0 };
 
-        var encoded = Uri.EscapeDataString(_category);
-        var url = $"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}";
+        try
+        {
+            var encoded = Uri.EscapeDataString(_category);
+            var url = $"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}";
 
-        if (!string.IsNullOrWhiteSpace(_searchText))
-            url += $"&Search={Uri.EscapeDataString(_searchText)}";
+            if (!string.IsNullOrWhiteSpace(_searchText))
+                url += $"&Search={Uri.EscapeDataString(_searchText)}";
 
-        _pagedResult = await Http.GetFromJsonAsync<PagedResult>(url, ct);
+            var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);
 
-        return new TableData<Infobox>() { TotalItems = _pagedResult!.Total, Items = _pagedResult.Items };
+            _dynamicHeaders = result!.Items
+                .SelectMany(r => r.Data.Select(p => p.Label))
+                .Where(l => l is not null)
+                .Cast<string>()
+                .Distinct()
+                .OrderBy(l => l)
+                .ToArray();
+
+            return new GridData<Infobox> { TotalItems = result.Total, Items = result.Items };
+        }
+        catch (OperationCanceledException)
+        {
+            return new GridData<Infobox> { Items = [], TotalItems = 0 };
+        }
     }
 
-    private Task CategoryChanged(string arg)
+    private async Task CategoryChanged(string arg)
     {
         _category = arg;
         _searchText = null;
+        _dynamicHeaders = [];
 
-        if (_table is not null)
-            return _table.ReloadServerData();
-
-        return Task.CompletedTask;
+        if (_grid is not null)
+            await _grid.ReloadServerData();
     }
 
-    private Task OnSearchChanged(string _)
+    private async Task OnSearchChanged(string _)
     {
-        if (_table is not null)
-            return _table.ReloadServerData();
-
-        return Task.CompletedTask;
+        if (_grid is not null)
+            await _grid.ReloadServerData();
     }
 
     private static string FormatCategoryName(string category) =>

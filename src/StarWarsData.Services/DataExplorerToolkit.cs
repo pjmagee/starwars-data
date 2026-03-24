@@ -551,6 +551,89 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
+        "Discover which infobox labels contain links (relationships to other pages) for a given entity type. "
+            + "Returns label names ranked by how many pages have links under that label. "
+            + "Use this BEFORE render_graph to discover which relationship labels are available, "
+            + "instead of guessing label names. The LLM should then decide which labels map to "
+            + "upLabels (ancestors), downLabels (descendants), or peerLabels (same-level). "
+            + "If pageId is provided, returns only labels with links for that specific entity."
+    )]
+    public async Task<string> SampleLinkLabels(
+        [Description(
+            "The infobox type name (e.g. Character, Battle, Organization, Species). "
+                + "Filters Pages by infobox.Template regex — not a MongoDB collection name."
+        )]
+            string infoboxType,
+        [Description(
+            "Optional: specific page _id to inspect. If provided, returns only labels with links on that page."
+        )]
+            int? pageId = null,
+        [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]
+            string? continuity = null
+    )
+    {
+        if (pageId.HasValue)
+        {
+            // Single-entity mode: return labels with links for this specific page
+            var filter = WithTemplate(infoboxType, new BsonDocument("_id", pageId.Value));
+            var doc = await Pages.Find(filter).FirstOrDefaultAsync();
+            if (doc == null)
+                return "[]";
+
+            var infobox = doc["infobox"].AsBsonDocument;
+            var labels = infobox["Data"]
+                .AsBsonArray.OfType<BsonDocument>()
+                .Where(d => d.Contains("Links") && d["Links"].AsBsonArray.Count > 0)
+                .Select(d => new
+                {
+                    label = d["Label"].AsString,
+                    linkCount = d["Links"].AsBsonArray.Count,
+                    sampleLinks = d["Links"].AsBsonArray.OfType<BsonDocument>()
+                        .Take(3)
+                        .Select(l => l.Contains("Text") ? l["Text"].AsString : "")
+                        .Where(t => !string.IsNullOrWhiteSpace(t))
+                        .ToList(),
+                })
+                .OrderByDescending(x => x.linkCount)
+                .ToList();
+
+            return JsonSerializer.Serialize(labels);
+        }
+
+        // Type-level aggregation: find labels with links across all pages of this type
+        var matchDoc = TemplateFilter(infoboxType);
+        if (continuity is not null)
+            matchDoc["continuity"] = continuity;
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", matchDoc),
+            new BsonDocument("$unwind", "$infobox.Data"),
+            new BsonDocument("$match", new BsonDocument("infobox.Data.Links",
+                new BsonDocument("$exists", true))),
+            new BsonDocument("$match", new BsonDocument("infobox.Data.Links",
+                new BsonDocument("$not", new BsonDocument("$size", 0)))),
+            new BsonDocument("$group", new BsonDocument
+            {
+                { "_id", "$infobox.Data.Label" },
+                { "pageCount", new BsonDocument("$sum", 1) },
+            }),
+            new BsonDocument("$sort", new BsonDocument("pageCount", -1)),
+            new BsonDocument("$limit", 50),
+        };
+
+        var results = await Pages.Aggregate<BsonDocument>(pipeline).ToListAsync();
+
+        var values = results.Select(d => new
+        {
+            label = d["_id"].IsBsonNull ? "(null)" : d["_id"].AsString,
+            pageCount = d["pageCount"].AsInt32,
+        });
+
+        return JsonSerializer.Serialize(values);
+    }
+
+    [Description(
         "List all distinct infobox type names from the Pages collection. "
             + "Aggregates distinct infobox.Template values from the 'starwars-raw-pages.Pages' collection and returns sanitized names. "
             + "Use this to discover what infoboxType values are valid for other tools (e.g. Character, Battle, Species, Food, Droid)."
@@ -599,6 +682,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             AIFunctionFactory.Create(SearchByDate, "search_pages_by_date"),
             AIFunctionFactory.Create(SearchByLink, "search_pages_by_link"),
             AIFunctionFactory.Create(SampleLabelValues, "sample_property_values"),
+            AIFunctionFactory.Create(SampleLinkLabels, "sample_link_labels"),
             AIFunctionFactory.Create(ListInfoboxTypes, "list_infobox_types"),
             AIFunctionFactory.Create(ListTimelineCategories, "list_timeline_categories"),
         ];

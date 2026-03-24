@@ -3,50 +3,101 @@
 @using System.Web
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
-@implements IDisposable
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
-<MudStack Row="false" Spacing="4">
+<div class="@(_maximized ? "timeline-maximized" : "")">
 
-    @* ── Era filter chips ── *@
-    @if (_eras is not null)
-    {
-        <MudPaper Elevation="0" Class="pa-2">
-            <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
-            <MudChipSet T="string" @bind-SelectedValues="_selectedEraNames" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
-                @foreach (var era in _eras)
+    @* ── Toolbar: collapse filters + maximize toggle ── *@
+    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+        @if (ShowCategoryFilter)
+        {
+            <MudButton Variant="Variant.Text"
+                       Size="Size.Small"
+                       StartIcon="@(_filtersCollapsed ? Icons.Material.Filled.FilterList : Icons.Material.Filled.FilterListOff)"
+                       OnClick="@(() => _filtersCollapsed = !_filtersCollapsed)">
+                @(_filtersCollapsed ? "Show Filters" : "Hide Filters")
+            </MudButton>
+        }
+        <MudSpacer />
+        @if (_allItems.Count > 0)
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mr-2">
+                @_totalEvents.ToString("N0") events
+                @if (_allItems.Count > 0)
                 {
-                    var label = $"{era.Name} ({FormatYear(era.StartYear, era.StartDemarcation)}–{FormatYear(era.EndYear, era.EndDemarcation)})";
-                    <MudChip Value="@era.Name" Color="Color.Primary" T="string">@label</MudChip>
+                    <text> — showing @_allItems.Sum(g => g.Events.Count)</text>
                 }
-            </MudChipSet>
-        </MudPaper>
+            </MudText>
+        }
+        @if (_pagedResult is not null)
+        {
+            <MudTooltip Text="@(_maximized ? "Exit fullscreen" : "Fullscreen")">
+                <MudIconButton Icon="@(_maximized ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                               Size="Size.Small"
+                               Variant="Variant.Outlined"
+                               OnClick="@(() => _maximized = !_maximized)" />
+            </MudTooltip>
+        }
+    </MudStack>
+
+    @* ── Collapsible filters ── *@
+    @if (!_filtersCollapsed)
+    {
+        @if (_eras is not null)
+        {
+            <MudPaper Elevation="0" Class="pa-2">
+                <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
+                <MudChipSet T="string" @bind-SelectedValues="_selectedEraNames" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
+                    @foreach (var era in _eras)
+                    {
+                        var label = $"{era.Name} ({FormatYear(era.StartYear, era.StartDemarcation)}–{FormatYear(era.EndYear, era.EndDemarcation)})";
+                        <MudChip Value="@era.Name" Color="Color.Primary" T="string">@label</MudChip>
+                    }
+                </MudChipSet>
+            </MudPaper>
+        }
+
+        @if (ShowCategoryFilter && _categories is not null)
+        {
+            <MudPaper Elevation="0" Class="pa-2">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+                    <MudText Typo="Typo.subtitle2">Event Categories</MudText>
+                    <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="SelectAllCategories">Select All</MudButton>
+                    <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="DeselectAllCategories">Deselect All</MudButton>
+                </MudStack>
+                <MudChipSet T="string" @bind-SelectedValues="_selectedCategories" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
+                    @foreach (var category in GetSortedCategories())
+                    {
+                        var color = GetChipColor(category);
+                        <MudChip @key="category" Value="@category" Style="@($"border-color:{color}; color:{color}")" Variant="Variant.Outlined" T="string">
+                            @FormatCategoryName(category)
+                        </MudChip>
+                    }
+                </MudChipSet>
+            </MudPaper>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ApplyFilters"
+                       Disabled="@(!_selectedCategories.Any())"
+                       StartIcon="@Icons.Material.Filled.Search">
+                Load Timeline
+            </MudButton>
+        }
     }
-
-    @* ── Category filter ── *@
-    @if (ShowCategoryFilter && _categories is not null)
+    else if (ShowCategoryFilter && _selectedCategories.Any())
     {
-        <MudPaper Elevation="0" Class="pa-2">
-            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
-                <MudText Typo="Typo.subtitle2">Event Categories</MudText>
-                <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="SelectAllCategories">Select All</MudButton>
-                <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="DeselectAllCategories">Deselect All</MudButton>
-            </MudStack>
-            <MudChipSet T="string" @bind-SelectedValues="_selectedCategories" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
-                @foreach (var category in GetSortedCategories())
+        @* Collapsed summary *@
+        <MudPaper Elevation="0" Class="pa-2 d-flex align-center gap-2 flex-wrap">
+            <MudIcon Icon="@Icons.Material.Filled.FilterList" Size="Size.Small" Color="Color.Secondary" />
+            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                @_selectedCategories.Count categories selected
+                @if (_selectedEraNames.Any())
                 {
-                    var color = GetChipColor(category);
-                    <MudChip @key="category" Value="@category" Style="@($"border-color:{color}; color:{color}")" Variant="Variant.Outlined" T="string">
-                        @FormatCategoryName(category)
-                    </MudChip>
+                    <text> · @_selectedEraNames.Count eras</text>
                 }
-            </MudChipSet>
+            </MudText>
+            <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="@(() => _filtersCollapsed = false)">Edit</MudButton>
         </MudPaper>
-
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ApplyFilters"
-                   Disabled="@(!_selectedCategories.Any())"
-                   StartIcon="@Icons.Material.Filled.Search">
-            Load Timeline
-        </MudButton>
     }
 
     @* ── Loading indicator ── *@
@@ -66,7 +117,7 @@
     @* ── Timeline results ── *@
     @if (!_loading && _pagedResult is not null)
     {
-        @if (_pagedResult.Total == 0)
+        @if (_totalEvents == 0)
         {
             <MudAlert Severity="Severity.Normal" Variant="Variant.Outlined">
                 No timeline events found for the selected filters.
@@ -74,16 +125,12 @@
         }
         else
         {
-            <MudText Typo="Typo.caption" Color="Color.Secondary">@_pagedResult.Total.ToString("N0") events found</MudText>
-
-            <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
-
             <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
                 @{
                     var isStart = true;
                 }
 
-                @foreach (var timelineEvents in _pagedResult.Items)
+                @foreach (var timelineEvents in _allItems)
                 {
                     var contentAlign = isStart ? Align.Left : Align.Right;
                     var yearAlign = isStart ? Align.Right : Align.Left;
@@ -131,15 +178,42 @@
                 }
             </MudTimeline>
 
-            <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+            @* ── Infinite scroll sentinel ── *@
+            @if (_hasMore)
+            {
+                <div @ref="_sentinel" class="d-flex justify-center pa-4">
+                    @if (_loadingMore)
+                    {
+                        <MudProgressCircular Size="Size.Small" Color="Color.Primary" Indeterminate="true" />
+                        <MudText Typo="Typo.caption" Class="ml-2">Loading more events...</MudText>
+                    }
+                </div>
+            }
+            else if (_allItems.Count > 0)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="pa-4">
+                    All @_totalEvents.ToString("N0") events loaded
+                </MudText>
+            }
         }
     }
 
-</MudStack>
+</div>
 
 <MudScrollToTop>
     <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" />
 </MudScrollToTop>
+
+<style>
+    .timeline-maximized {
+        position: fixed;
+        inset: 0;
+        z-index: 1300;
+        background: var(--mud-palette-background);
+        overflow-y: auto;
+        padding: 24px;
+    }
+</style>
 
 @code {
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
@@ -154,20 +228,20 @@
 
     private int _pages = 1;
     private int _pageSize = 15;
-
     private int _currentPage = 1;
-    private int CurrentPage
-    {
-        get => _currentPage;
-        set
-        {
-            if (_currentPage != value)
-            {
-                _currentPage = value;
-                _ = InvokeAsync(LoadDataForCurrentPage);
-            }
-        }
-    }
+    private int _totalEvents;
+
+    // Infinite scroll state
+    private List<GroupedTimelines> _allItems = new();
+    private bool _hasMore;
+    private bool _loadingMore;
+    private ElementReference _sentinel;
+    private IJSObjectReference? _jsModule;
+    private DotNetObjectReference<EventTimeline>? _dotNetRef;
+
+    // UX state
+    private bool _filtersCollapsed;
+    private bool _maximized;
 
     [Parameter] public string? Category { get; set; }
     [Parameter] public bool ShowCategoryFilter { get; set; } = true;
@@ -193,42 +267,96 @@
             _eras = await Http.GetFromJsonAsync<Era[]>("Timeline/eras");
         }
 
-        // Only auto-load if a specific Category parameter is set (not the multi-select page)
         if (!string.IsNullOrEmpty(Category))
         {
-            await LoadDataForCurrentPage();
+            await LoadInitialData();
         }
     }
 
-    public void Dispose()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JS.InvokeAsync<IJSObjectReference>("import", "./js/infinite-scroll.js");
+            _dotNetRef = DotNetObjectReference.Create(this);
+        }
+
+        if (_hasMore && !_loadingMore && _jsModule is not null && _dotNetRef is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("observe", _sentinel, _dotNetRef);
+            }
+            catch (JSException) { }
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnSentinelVisible()
+    {
+        if (_loadingMore || !_hasMore) return;
+
+        _loadingMore = true;
+        await InvokeAsync(StateHasChanged);
+
+        try
+        {
+            _currentPage++;
+            var result = await FetchPage(_currentPage);
+
+            if (result?.Items.Any() == true)
+            {
+                MergeItems(result.Items);
+                _hasMore = _currentPage < _pages;
+            }
+            else
+            {
+                _hasMore = false;
+            }
+        }
+        finally
+        {
+            _loadingMore = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
     {
         GlobalFilterService.OnChange -= OnContinuityChanged;
+
+        if (_jsModule is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("dispose", _sentinel);
+                await _jsModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+        }
+
+        _dotNetRef?.Dispose();
     }
 
     private async void OnContinuityChanged()
     {
         await InvokeAsync(async () =>
         {
-            _currentPage = 1;
-
-            // Reload categories from API with updated global filters
             await LoadCategories();
 
-            // Remove any selected categories that are no longer in the filtered list
             if (_categories is not null)
             {
                 var visible = new HashSet<string>(_categories);
                 _selectedCategories = _selectedCategories.Where(c => visible.Contains(c)).ToList();
             }
 
-            // Clear results if no categories remain selected
             if (_selectedCategories.Any())
             {
-                await LoadDataForCurrentPage();
+                await LoadInitialData();
             }
             else
             {
-                _pagedResult = null;
+                ResetResults();
             }
 
             StateHasChanged();
@@ -259,7 +387,7 @@
             await InitializeColorMapping();
 
         if (!string.IsNullOrEmpty(Category))
-            await LoadDataForCurrentPage();
+            await LoadInitialData();
     }
 
     private async Task LoadCategories()
@@ -271,8 +399,8 @@
 
     private async Task ApplyFilters()
     {
-        _currentPage = 1;
-        await LoadDataForCurrentPage();
+        _filtersCollapsed = true;
+        await LoadInitialData();
     }
 
     private void SelectAllCategories()
@@ -283,13 +411,106 @@
     private void DeselectAllCategories()
     {
         _selectedCategories = new List<string>();
+        ResetResults();
+    }
+
+    private void ResetResults()
+    {
         _pagedResult = null;
+        _allItems.Clear();
+        _currentPage = 1;
+        _hasMore = false;
+        _totalEvents = 0;
+    }
+
+    private async Task LoadInitialData()
+    {
+        _loading = true;
+        _currentPage = 1;
+        _allItems.Clear();
+        StateHasChanged();
+
+        try
+        {
+            var result = await FetchPage(1);
+            _pagedResult = result;
+
+            if (result is not null)
+            {
+                _totalEvents = result.Total;
+                _pages = result.Total > 0 && result.Size > 0
+                    ? (int)Math.Ceiling((double)result.Total / result.Size)
+                    : 0;
+                _allItems = result.Items.ToList();
+                _hasMore = _currentPage < _pages;
+            }
+            else
+            {
+                ResetResults();
+            }
+        }
+        finally
+        {
+            _loading = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task<GroupedTimelineResult?> FetchPage(int page)
+    {
+        if (!string.IsNullOrEmpty(Category))
+        {
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query.Add("Page", page.ToString());
+            query.Add("PageSize", _pageSize.ToString());
+            AddGlobalFilters(query);
+            return await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/categories/{Category}/events?{query}");
+        }
+
+        if (!_selectedCategories.Any())
+            return null;
+
+        var q = HttpUtility.ParseQueryString(string.Empty);
+        q.Add("Page", page.ToString());
+        q.Add("PageSize", _pageSize.ToString());
+
+        foreach (var c in _selectedCategories)
+            q.Add("Categories", c);
+
+        AddGlobalFilters(q);
+
+        var (yearFrom, fromDem, yearTo, toDem) = GetEraYearRange();
+        if (yearFrom.HasValue && fromDem.HasValue && yearTo.HasValue && toDem.HasValue)
+        {
+            q.Add("YearFrom", yearFrom.Value.ToString());
+            q.Add("YearFromDemarcation", fromDem.Value.ToString());
+            q.Add("YearTo", yearTo.Value.ToString());
+            q.Add("YearToDemarcation", toDem.Value.ToString());
+        }
+
+        return await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{q}");
     }
 
     /// <summary>
-    /// Compute the merged year range from all selected eras.
-    /// Returns the earliest start and latest end across all selected eras.
+    /// Merges new page items into the accumulated list.
+    /// If the last existing year matches the first new year, their events are combined.
     /// </summary>
+    private void MergeItems(IEnumerable<GroupedTimelines> newItems)
+    {
+        foreach (var group in newItems)
+        {
+            var existing = _allItems.LastOrDefault();
+            if (existing is not null && existing.Year == group.Year)
+            {
+                existing.Events.AddRange(group.Events);
+            }
+            else
+            {
+                _allItems.Add(group);
+            }
+        }
+    }
+
     private (float? yearFrom, Demarcation? fromDem, float? yearTo, Demarcation? toDem) GetEraYearRange()
     {
         if (_eras is null || !_selectedEraNames.Any())
@@ -299,82 +520,13 @@
         if (selected.Count == 0)
             return (null, null, null, null);
 
-        // Find the era with the earliest start (most negative linear year)
         var earliest = selected.MinBy(e => ToLinear(e.StartYear, e.StartDemarcation))!;
-        // Find the era with the latest end (most positive linear year)
         var latest = selected.MaxBy(e => ToLinear(e.EndYear, e.EndDemarcation))!;
 
         return (earliest.StartYear, earliest.StartDemarcation, latest.EndYear, latest.EndDemarcation);
     }
 
     static double ToLinear(float year, Demarcation dem) => dem == Demarcation.Bby ? -year : year;
-
-    private async Task LoadDataForCurrentPage()
-    {
-        _loading = true;
-        StateHasChanged();
-
-        try
-        {
-            if (!string.IsNullOrEmpty(Category))
-            {
-                var query = HttpUtility.ParseQueryString(string.Empty);
-                query.Add("Page", CurrentPage.ToString());
-                query.Add("PageSize", _pageSize.ToString());
-                AddGlobalFilters(query);
-                _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/categories/{Category}/events?{query}");
-            }
-            else
-            {
-                if (!_selectedCategories.Any())
-                {
-                    _pagedResult = null;
-                    return;
-                }
-
-                var query = HttpUtility.ParseQueryString(string.Empty);
-                query.Add("Page", CurrentPage.ToString());
-                query.Add("PageSize", _pageSize.ToString());
-
-                foreach (var c in _selectedCategories)
-                    query.Add("Categories", c);
-
-                AddGlobalFilters(query);
-
-                // Add era year range filter
-                var (yearFrom, fromDem, yearTo, toDem) = GetEraYearRange();
-                if (yearFrom.HasValue && fromDem.HasValue && yearTo.HasValue && toDem.HasValue)
-                {
-                    query.Add("YearFrom", yearFrom.Value.ToString());
-                    query.Add("YearFromDemarcation", fromDem.Value.ToString());
-                    query.Add("YearTo", yearTo.Value.ToString());
-                    query.Add("YearToDemarcation", toDem.Value.ToString());
-                }
-
-                _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
-            }
-
-            _pages = (_pagedResult is not null && _pagedResult.Total > 0 && _pagedResult.Size > 0)
-                ? (int)Math.Ceiling((double)_pagedResult.Total / _pagedResult.Size)
-                : 0;
-
-            if (CurrentPage > _pages && _pages > 0)
-            {
-                _currentPage = 1;
-                await LoadDataForCurrentPage();
-                return;
-            }
-            else if (_pages == 0)
-            {
-                _currentPage = 1;
-            }
-        }
-        finally
-        {
-            _loading = false;
-            await InvokeAsync(StateHasChanged);
-        }
-    }
 
     private void AddGlobalFilters(System.Collections.Specialized.NameValueCollection query)
     {

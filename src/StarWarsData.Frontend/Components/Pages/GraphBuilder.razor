@@ -1,0 +1,283 @@
+@page "/admin/graph-builder"
+@attribute [Authorize(Roles = "admin")]
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+@inject EndpointService EndpointService
+@implements IDisposable
+
+<PageTitle>Relationship Graph Builder</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
+    <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-2">Relationship Graph Builder</MudText>
+    <MudText Typo="Typo.subtitle1" Class="mb-8">
+        LLM-powered entity relationship extraction across all wiki articles
+    </MudText>
+
+    @if (_loading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="mb-4" />
+    }
+
+    @if (_progress != null)
+    {
+        <!-- Overall Progress -->
+        <MudPaper Class="pa-6 mb-6" Elevation="2">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-4">
+                <MudText Typo="Typo.h5">Overall Progress</MudText>
+                <MudStack Row="true" Spacing="2">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.PlayArrow"
+                               OnClick="StartBatch" Disabled="_jobRunning">
+                        Run Batch Now
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                               StartIcon="@Icons.Material.Filled.Storage"
+                               OnClick="EnsureIndexes" Disabled="_jobRunning">
+                        Ensure Indexes
+                    </MudButton>
+                </MudStack>
+            </MudStack>
+
+            @{
+                var totalHandled = _progress.ProcessedPages + _progress.SkippedPages + _progress.FailedPages;
+                var pct = _progress.TotalPages > 0 ? (double)totalHandled / _progress.TotalPages * 100 : 0;
+            }
+
+            <MudProgressLinear Value="@pct" Color="Color.Primary" Rounded="true" Size="Size.Large" Class="mb-3">
+                <MudText Typo="Typo.body2">@($"{pct:F1}%")</MudText>
+            </MudProgressLinear>
+
+            <MudGrid>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">@_progress.TotalPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Total Pages</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Success">@_progress.ProcessedPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Processed</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Warning">@_progress.SkippedPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Skipped</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Error">@_progress.FailedPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Failed</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Info">@_progress.TotalEdges.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Relationships</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Secondary">@_progress.TotalLabels.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Label Types</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <!-- Progress by Type -->
+        @if (_progress.ByType.Count > 0)
+        {
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-4">Progress by Entity Type</MudText>
+                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Processed</th>
+                            <th>Skipped</th>
+                            <th>Failed</th>
+                            <th>Total</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in _progress.ByType)
+                        {
+                            var typePct = t.Total > 0 ? (double)(t.Processed + t.Skipped + t.Failed) / t.Total * 100 : 0;
+                            <tr>
+                                <td><MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@t.Type</MudChip></td>
+                                <td>@t.Processed.ToString("N0")</td>
+                                <td>@t.Skipped.ToString("N0")</td>
+                                <td>@t.Failed.ToString("N0")</td>
+                                <td>@t.Total.ToString("N0")</td>
+                                <td style="min-width: 150px;">
+                                    <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+        }
+
+        <!-- Recent Labels -->
+        @if (_progress.RecentLabels.Count > 0)
+        {
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-4">Recent Relationship Labels</MudText>
+                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Reverse</th>
+                            <th>Description</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var l in _progress.RecentLabels)
+                        {
+                            <tr>
+                                <td><MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">@l.Label</MudChip></td>
+                                <td><MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Text">@l.Reverse</MudChip></td>
+                                <td><MudText Typo="Typo.body2">@l.Description</MudText></td>
+                                <td>@l.UsageCount.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+        }
+    }
+    else if (!_loading)
+    {
+        <MudAlert Severity="Severity.Info">No progress data available. Run a batch to get started.</MudAlert>
+    }
+</MudContainer>
+
+@code {
+    private GraphBuilderProgress? _progress;
+    private bool _loading = true;
+    private bool _jobRunning;
+    private Timer? _pollTimer;
+
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProgress();
+        _pollTimer = new Timer(async _ =>
+        {
+            await LoadProgress();
+            await InvokeAsync(StateHasChanged);
+        }, null, TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30));
+    }
+
+    private async Task LoadProgress()
+    {
+        try
+        {
+            _progress = await Api.GetFromJsonAsync<GraphBuilderProgress>("api/RelationshipGraph/progress");
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load progress: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task StartBatch()
+    {
+        try
+        {
+            _jobRunning = true;
+            var response = await Api.PostAsync("api/admin/mongo/build-relationship-graph", null);
+            if (response.IsSuccessStatusCode)
+            {
+                Snackbar.Add("Graph builder batch started! Check Hangfire dashboard for status.", Severity.Success);
+            }
+            else if ((int)response.StatusCode == 409)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Job not started: {error}", Severity.Warning);
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Failed to start job: {error}", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _jobRunning = false;
+        }
+    }
+
+    private async Task EnsureIndexes()
+    {
+        try
+        {
+            _jobRunning = true;
+            var response = await Api.PostAsync("api/admin/mongo/ensure-graph-indexes", null);
+            if (response.IsSuccessStatusCode)
+                Snackbar.Add("Index creation job started!", Severity.Success);
+            else
+                Snackbar.Add("Failed to start index job", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _jobRunning = false;
+        }
+    }
+
+    public void Dispose()
+    {
+        _pollTimer?.Dispose();
+    }
+
+    // DTO matching the API response
+    private class GraphBuilderProgress
+    {
+        public int TotalPages { get; set; }
+        public int ProcessedPages { get; set; }
+        public int SkippedPages { get; set; }
+        public int FailedPages { get; set; }
+        public int PendingPages { get; set; }
+        public long TotalEdges { get; set; }
+        public int TotalLabels { get; set; }
+        public List<TypeProgress> ByType { get; set; } = [];
+        public List<RecentLabel> RecentLabels { get; set; } = [];
+    }
+
+    private class TypeProgress
+    {
+        public string Type { get; set; } = "";
+        public int Total { get; set; }
+        public int Processed { get; set; }
+        public int Skipped { get; set; }
+        public int Failed { get; set; }
+    }
+
+    private class RecentLabel
+    {
+        public string Label { get; set; } = "";
+        public string Reverse { get; set; } = "";
+        public string Description { get; set; } = "";
+        public int UsageCount { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+}
