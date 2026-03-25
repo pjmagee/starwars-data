@@ -1,4 +1,5 @@
 using System.Text.Json;
+using StarWarsData.Services;
 
 namespace StarWarsData.Tests;
 
@@ -161,25 +162,25 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
     [Fact]
     public async Task StoreEdges_ValidEdge_InsertsAndRetrievable()
     {
-        var edgesJson = JsonSerializer.Serialize(new[]
+        var edges = new List<EdgeDto>
         {
-            new
+            new()
             {
-                fromId = 1,
-                fromName = "Luke Skywalker",
-                fromType = "Character",
-                toId = 2,
-                toName = "Anakin Skywalker",
-                toType = "Character",
-                label = "child_of",
-                reverseLabel = "parent_of",
-                weight = 0.9,
-                evidence = "Luke is the son of Anakin",
-                continuity = "Legends",
+                FromId = 1,
+                FromName = "Luke Skywalker",
+                FromType = "Character",
+                ToId = 2,
+                ToName = "Anakin Skywalker",
+                ToType = "Character",
+                Label = "child_of",
+                ReverseLabel = "parent_of",
+                Weight = 0.9,
+                Evidence = "Luke is the son of Anakin",
+                Continuity = "Legends",
             },
-        });
+        };
 
-        var storeResult = await Toolkit.StoreEdges(1, edgesJson);
+        var storeResult = await Toolkit.StoreEdges(1, edges);
         using var storeDoc = JsonDocument.Parse(storeResult);
         Assert.True(storeDoc.RootElement.GetProperty("inserted").GetInt32() >= 0);
 
@@ -192,29 +193,29 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
     [Fact]
     public async Task StoreEdges_DuplicateEdge_IsSkipped()
     {
-        var edgesJson = JsonSerializer.Serialize(new[]
+        var edges = new List<EdgeDto>
         {
-            new
+            new()
             {
-                fromId = 10001,
-                fromName = "Test A",
-                fromType = "Character",
-                toId = 10002,
-                toName = "Test B",
-                toType = "Character",
-                label = "test_relation",
-                reverseLabel = "test_reverse",
-                weight = 0.5,
-                evidence = "Test evidence",
-                continuity = "Canon",
+                FromId = 10001,
+                FromName = "Test A",
+                FromType = "Character",
+                ToId = 10002,
+                ToName = "Test B",
+                ToType = "Character",
+                Label = "test_relation",
+                ReverseLabel = "test_reverse",
+                Weight = 0.5,
+                Evidence = "Test evidence",
+                Continuity = "Canon",
             },
-        });
+        };
 
         // Insert first time
-        await Toolkit.StoreEdges(10001, edgesJson);
+        await Toolkit.StoreEdges(10001, edges);
 
         // Insert same edge again
-        var result = await Toolkit.StoreEdges(10001, edgesJson);
+        var result = await Toolkit.StoreEdges(10001, edges);
         using var doc = JsonDocument.Parse(result);
         Assert.Equal(0, doc.RootElement.GetProperty("inserted").GetInt32());
     }
@@ -222,25 +223,25 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
     [Fact]
     public async Task StoreEdges_SelfReference_IsSkipped()
     {
-        var edgesJson = JsonSerializer.Serialize(new[]
+        var edges = new List<EdgeDto>
         {
-            new
+            new()
             {
-                fromId = 1,
-                fromName = "Luke Skywalker",
-                fromType = "Character",
-                toId = 1, // self-reference
-                toName = "Luke Skywalker",
-                toType = "Character",
-                label = "self",
-                reverseLabel = "self",
-                weight = 1.0,
-                evidence = "Self reference",
-                continuity = "Canon",
+                FromId = 1,
+                FromName = "Luke Skywalker",
+                FromType = "Character",
+                ToId = 1, // self-reference
+                ToName = "Luke Skywalker",
+                ToType = "Character",
+                Label = "self",
+                ReverseLabel = "self",
+                Weight = 1.0,
+                Evidence = "Self reference",
+                Continuity = "Canon",
             },
-        });
+        };
 
-        var result = await Toolkit.StoreEdges(1, edgesJson);
+        var result = await Toolkit.StoreEdges(1, edges);
         using var doc = JsonDocument.Parse(result);
         Assert.Equal(0, doc.RootElement.GetProperty("inserted").GetInt32());
     }

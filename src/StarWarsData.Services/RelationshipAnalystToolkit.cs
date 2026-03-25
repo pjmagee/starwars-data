@@ -266,19 +266,14 @@ public class RelationshipAnalystToolkit
     public async Task<string> StoreEdges(
         [Description("The PageId this extraction is sourced from")]
         int sourcePageId,
-        [Description("JSON array of edge objects. Each must have: " +
-            "fromId (int), fromName (string), fromType (string), " +
-            "toId (int), toName (string), toType (string), " +
-            "label (string), reverseLabel (string), " +
-            "weight (number 0-1), evidence (string), continuity (string)")]
-        string edgesJson
+        [Description("Array of edge objects to store")]
+        List<EdgeDto> edges
     )
     {
-        var edgeDtos = JsonSerializer.Deserialize<List<EdgeDto>>(edgesJson,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-        if (edgeDtos == null || edgeDtos.Count == 0)
+        if (edges.Count == 0)
             return JsonSerializer.Serialize(new { inserted = 0 });
+
+        var edgeDtos = edges;
 
         int inserted = 0;
 
@@ -471,7 +466,7 @@ public class RelationshipAnalystToolkit
     ];
 }
 
-internal class EdgeDto
+public class EdgeDto
 {
     public int FromId { get; set; }
     public string FromName { get; set; } = "";

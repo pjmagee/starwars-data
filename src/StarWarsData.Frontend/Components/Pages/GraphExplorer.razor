@@ -1,5 +1,7 @@
 @page "/graph-explorer"
 @page "/graph-explorer/{PageId:int}"
+@using WikiPage = StarWarsData.Models.Entities.Page
+@using StarWarsData.Models.Entities
 @inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
@@ -26,17 +28,10 @@
         <MudItem xs="12" sm="4" md="3">
             <MudSelect T="string" @bind-Value="_selectedType" Label="Entity Type" Variant="Variant.Outlined"
                        @bind-Value:after="OnTypeFilterChanged">
-                <MudSelectItem T="string" Value="@("Character")">Character</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Organization")">Organization</MudSelectItem>
-                <MudSelectItem T="string" Value="@("CelestialBody")">Planet / Body</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Species")">Species</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Starship")">Starship</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Vehicle")">Vehicle</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Battle")">Battle</MudSelectItem>
-                <MudSelectItem T="string" Value="@("War")">War</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Weapon")">Weapon</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Droid")">Droid</MudSelectItem>
-                <MudSelectItem T="string" Value="@("Event")">Event</MudSelectItem>
+                @foreach (var type in _entityTypes)
+                {
+                    <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
+                }
             </MudSelect>
         </MudItem>
     </MudGrid>
@@ -46,7 +41,7 @@
         <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
     }
 
-    <!-- Search Results -->
+    <!-- Search Results (when user has typed a search query) -->
     @if (_searchResults is { Count: > 0 })
     {
         <MudPaper Class="pa-3 mb-4" Outlined="true">
@@ -67,8 +62,41 @@
     else if (_searchResults is { Count: 0 } && !string.IsNullOrWhiteSpace(_search) && !_searching)
     {
         <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-4">
-            No entities found matching "@_search" in @_selectedType.
+            No entities found matching "@_search" in @FormatTypeName(_selectedType).
         </MudAlert>
+    }
+
+    <!-- Browse Table (when no search query — lets users discover entities) -->
+    @if (string.IsNullOrWhiteSpace(_search))
+    {
+        <MudTable T="EntitySearchDto" ServerData="LoadBrowseData" @ref="_browseTable" Dense="true"
+                  Hover="true" Bordered="false" Striped="true" Elevation="0"
+                  RowClass="cursor-pointer" OnRowClick="OnBrowseRowClick"
+                  RowClassFunc="@((item, _) => item.Id == _selectedEntityId ? "mud-theme-primary" : "")"
+                  Loading="_browseLoading" LoadingProgressColor="Color.Primary" Class="mb-4">
+            <ToolBarContent>
+                <MudText Typo="Typo.subtitle1" Color="Color.Secondary">
+                    Browse @FormatTypeName(_selectedType) entities with graph data
+                </MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh Style="width:80px">Page ID</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Page ID">@context.Id</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new[] { 10, 20, 50 }" />
+            </PagerContent>
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true">
+                    No processed entities found for @FormatTypeName(_selectedType). Run a batch from the
+                    <MudLink Href="/graph-builder">Graph Builder</MudLink> to start processing.
+                </MudAlert>
+            </NoRecordsContent>
+        </MudTable>
     }
 
     <!-- Selected Entity: Labels & Controls -->
@@ -122,7 +150,7 @@
             {
                 <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Dense="true">
                     No relationship labels found for this entity. The graph crawler may not have processed this page yet.
-                    Try running a batch from the <MudLink Href="/admin">Admin panel</MudLink>.
+                    Try running a batch from the <MudLink Href="/graph-builder">Graph Builder</MudLink>.
                 </MudAlert>
             }
         </MudPaper>
@@ -143,23 +171,111 @@
 
     @if (_hasGraph)
     {
-        <MudPaper Outlined="true" Class="mb-4" Style="overflow:hidden; border-radius:8px;">
-            <div id="@_containerId"
-                 style="width:100%; height:700px; background:#16162e;">
-            </div>
-        </MudPaper>
+        <MudGrid Spacing="2" Class="mb-4">
+            <MudItem xs="12" md="@(_selectedNodePage is not null ? 9 : 12)">
+                <MudPaper Outlined="true" Style="overflow:hidden; border-radius:8px;">
+                    <div id="@_containerId"
+                         style="width:100%; height:700px; background:#16162e;">
+                    </div>
+                </MudPaper>
 
-        @if (_graphStats is not null)
-        {
-            <MudStack Row="true" Spacing="4" Class="mb-4">
-                <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">
-                    @_graphStats.Value.nodeCount nodes
-                </MudChip>
-                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Text">
-                    @_graphStats.Value.edgeCount edges
-                </MudChip>
-            </MudStack>
-        }
+                @if (_graphStats is not null)
+                {
+                    <MudStack Row="true" Spacing="4" Class="mt-2">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">
+                            @_graphStats.Value.nodeCount nodes
+                        </MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Text">
+                            @_graphStats.Value.edgeCount edges
+                        </MudChip>
+                        @if (_selectedNodeName is not null)
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="align-self-center">
+                                Click a node to view its details
+                            </MudText>
+                        }
+                    </MudStack>
+                }
+            </MudItem>
+
+            @if (_loadingNodeDetails)
+            {
+                <MudItem xs="12" md="3">
+                    <MudPaper Class="pa-4" Style="height:700px; overflow-y:auto;">
+                        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
+                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+                            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading details...</MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+            }
+            else if (_selectedNodePage is not null)
+            {
+                <MudItem xs="12" md="3">
+                    <MudPaper Class="pa-0" Style="height:700px; overflow-y:auto; border-radius:8px;">
+                        <MudCard Elevation="0">
+                            @if (_selectedNodePage.Infobox?.ImageUrl is not null)
+                            {
+                                <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="200" />
+                            }
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
+                                    @if (_selectedNodePage.Infobox?.Template is not null)
+                                    {
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                            @SanitizeTemplate(_selectedNodePage.Infobox.Template)
+                                        </MudText>
+                                    }
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                                   OnClick="CloseNodePanel" />
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                @if (_selectedNodePage.Infobox?.Data is not null)
+                                {
+                                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
+                                        <tbody>
+                                            @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
+                                            {
+                                                <tr>
+                                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
+                                                        @prop.Label
+                                                    </td>
+                                                    <td style="padding:6px 12px;">
+                                                        @foreach (var link in prop.Links)
+                                                        {
+                                                            <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                        }
+                                                        @GetPlainValues(prop)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </MudSimpleTable>
+                                }
+                            </MudCardContent>
+                            <MudCardActions>
+                                @if (_selectedNodePage.WikiUrl is not null)
+                                {
+                                    <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                                        Wookieepedia
+                                    </MudButton>
+                                }
+                                <MudButton Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
+                                           StartIcon="@Icons.Material.Filled.Hub"
+                                           OnClick="@(() => SelectEntity(_selectedNodeId, _selectedNodeName!))">
+                                    Explore Graph
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
     }
 </MudContainer>
 
@@ -171,6 +287,11 @@
     private string _selectedType = "Character";
     private bool _searching;
     private List<EntitySearchDto>? _searchResults;
+    private List<string> _entityTypes = ["Character"];
+
+    // Browse state
+    private MudTable<EntitySearchDto>? _browseTable;
+    private bool _browseLoading;
 
     // Selected entity state
     private int _selectedEntityId;
@@ -187,6 +308,13 @@
     private (int nodeCount, int edgeCount)? _graphStats;
     private IJSObjectReference? _jsModule;
     private readonly string _containerId = $"d3-explorer-{Guid.NewGuid():N}";
+
+    // Node info panel state
+    private DotNetObjectReference<GraphExplorer>? _dotnetRef;
+    private int _selectedNodeId;
+    private string? _selectedNodeName;
+    private WikiPage? _selectedNodePage;
+    private bool _loadingNodeDetails;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -206,9 +334,28 @@
         return query.ToString()!;
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
+        await LoadEntityTypes();
+    }
+
+    private async Task LoadEntityTypes()
+    {
+        try
+        {
+            var types = await Api.GetFromJsonAsync<List<string>>("api/RelationshipGraph/entity-types");
+            if (types is { Count: > 0 })
+            {
+                _entityTypes = types;
+                if (!_entityTypes.Contains(_selectedType))
+                    _selectedType = _entityTypes[0];
+            }
+        }
+        catch
+        {
+            // Fallback to default if API is unavailable
+        }
     }
 
     protected override async Task OnParametersSetAsync()
@@ -225,11 +372,11 @@
     {
         await InvokeAsync(async () =>
         {
-            // Re-run search with new filter
             if (!string.IsNullOrWhiteSpace(_search))
                 await OnSearchChanged(_search);
+            else
+                _browseTable?.ReloadServerData();
 
-            // Reload labels and clear graph for selected entity
             if (_selectedEntityId > 0)
             {
                 _hasGraph = false;
@@ -240,6 +387,47 @@
             StateHasChanged();
         });
     }
+
+    // --- Server-side pagination for browse table ---
+
+    private async Task<TableData<EntitySearchDto>> LoadBrowseData(TableState state, CancellationToken ct)
+    {
+        _browseLoading = true;
+        try
+        {
+            var page = state.Page + 1; // MudTable is 0-based, API is 1-based
+            var qs = BuildQueryString(
+                ("type", _selectedType),
+                ("page", page.ToString()),
+                ("pageSize", state.PageSize.ToString()));
+
+            var result = await Api.GetFromJsonAsync<BrowseEntitiesResult>(
+                $"api/RelationshipGraph/browse?{qs}", ct);
+
+            return new TableData<EntitySearchDto>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = (int)(result?.Total ?? 0),
+            };
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load entities: {ex.Message}", Severity.Error);
+            return new TableData<EntitySearchDto> { Items = [], TotalItems = 0 };
+        }
+        finally
+        {
+            _browseLoading = false;
+        }
+    }
+
+    private async Task OnBrowseRowClick(TableRowClickEventArgs<EntitySearchDto> args)
+    {
+        if (args.Item is not null)
+            await SelectEntity(args.Item.Id, args.Item.Name);
+    }
+
+    // --- Search ---
 
     private async Task OnSearchChanged(string value)
     {
@@ -273,6 +461,8 @@
     {
         if (!string.IsNullOrWhiteSpace(_search))
             await OnSearchChanged(_search);
+        else
+            _browseTable?.ReloadServerData();
     }
 
     private async Task SelectEntity(int id, string name)
@@ -283,7 +473,6 @@
         _graphError = null;
         _selectedLabels.Clear();
 
-        // Update URL without full navigation
         Navigation.NavigateTo($"/graph-explorer/{id}", replace: true);
 
         await LoadLabels();
@@ -303,7 +492,6 @@
                 labelsUrl += $"?{labelsQs}";
             _availableLabels = await Api.GetFromJsonAsync<List<string>>(labelsUrl);
 
-            // Auto-select all labels
             if (_availableLabels is { Count: > 0 })
                 _selectedLabels = new HashSet<string>(_availableLabels);
         }
@@ -362,7 +550,6 @@
             _graphLoading = false;
             StateHasChanged();
 
-            // Wait for DOM
             await Task.Delay(50);
             await RenderD3Graph(result);
         }
@@ -400,16 +587,79 @@
 
         var data = new { nodes, edges, rootId = result.RootId };
 
-        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data);
+        _dotnetRef?.Dispose();
+        _dotnetRef = DotNetObjectReference.Create(this);
+
+        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
+    }
+
+    [JSInvokable]
+    public async Task OnNodeClicked(int id, string name, string type)
+    {
+        _selectedNodeId = id;
+        _selectedNodeName = name;
+        _selectedNodePage = null;
+        _loadingNodeDetails = true;
+        StateHasChanged();
+
+        try
+        {
+            _selectedNodePage = await Api.GetFromJsonAsync<WikiPage>($"Pages/{id}");
+        }
+        catch
+        {
+            _selectedNodePage = null;
+        }
+        finally
+        {
+            _loadingNodeDetails = false;
+            StateHasChanged();
+        }
+    }
+
+    private void CloseNodePanel()
+    {
+        _selectedNodePage = null;
+        _selectedNodeName = null;
+        _selectedNodeId = 0;
+        _loadingNodeDetails = false;
     }
 
     private static string FormatLabel(string label) =>
         System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
             label.Replace("_", " "));
 
+    private static string FormatTypeName(string type) => type switch
+    {
+        "CelestialBody" => "Planet / Body",
+        _ => System.Text.RegularExpressions.Regex.Replace(type, "(?<!^)([A-Z])", " $1"),
+    };
+
+    private static string StripRevision(string url)
+    {
+        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
+        return idx > 0 ? url[..idx] : url;
+    }
+
+    private static string SanitizeTemplate(string template)
+    {
+        var last = template.Split(':').LastOrDefault() ?? template;
+        return last.Replace("_", " ");
+    }
+
+    private static bool HasInfoboxContent(InfoboxProperty prop) =>
+        prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
+
+    private static string GetPlainValues(InfoboxProperty prop)
+    {
+        var linkTexts = prop.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return string.Join(", ", prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v)));
+    }
+
     public async ValueTask DisposeAsync()
     {
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+        _dotnetRef?.Dispose();
 
         if (_jsModule is not null)
         {

@@ -37,12 +37,17 @@
                 <NavMenu/>
             </div>
             <MudDivider />
-            <div class="pa-3 d-flex align-center gap-2">
-                <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Color="Color.Secondary" Typo="Typo.caption">
-                    <MudIcon Icon="@Icons.Custom.Brands.GitHub" Size="Size.Small" Class="mr-1" /> GitHub
+            <div class="pa-3">
+                <div class="d-flex align-center gap-2 mb-2">
+                    <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Color="Color.Secondary" Typo="Typo.caption">
+                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Size="Size.Small" Class="mr-1" /> GitHub
+                    </MudLink>
+                    <MudSpacer />
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+                </div>
+                <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Style="display:inline-block;">
+                    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:32px;" />
                 </MudLink>
-                <MudSpacer />
-                <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
             </div>
         </div>
     </MudDrawer>

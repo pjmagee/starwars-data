@@ -60,3 +60,35 @@ public class RelationshipGraphEdge
     public string Label { get; init; } = string.Empty;
     public double Weight { get; init; }
 }
+
+/// <summary>
+/// Paginated browse result for processed entities in the relationship graph.
+/// </summary>
+public class BrowseEntitiesResult
+{
+    public List<EntitySearchDto> Items { get; init; } = [];
+    public long Total { get; init; }
+    public int Page { get; init; }
+    public int PageSize { get; init; }
+}
+
+/// <summary>
+/// Progress summary for the article chunking dashboard.
+/// </summary>
+public class ChunkingProgress
+{
+    public int TotalEligiblePages { get; init; }
+    public int ChunkedPages { get; init; }
+    public int PendingPages { get; init; }
+    public long TotalChunks { get; init; }
+    public double AvgChunksPerPage { get; init; }
+    public List<ChunkingTypeProgress> ByType { get; init; } = [];
+}
+
+public class ChunkingTypeProgress
+{
+    public string Type { get; init; } = string.Empty;
+    public int Pages { get; init; }
+    public long Chunks { get; init; }
+    public double AvgChunksPerPage { get; init; }
+}

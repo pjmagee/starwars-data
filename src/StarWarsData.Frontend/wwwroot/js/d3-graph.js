@@ -34,8 +34,9 @@ const WIKI_THUMB = (url) => {
  * @param {object} data - { nodes: [...], edges: [...], rootId: number }
  *   nodes: [{ id, name, type, imageUrl, born, died }]
  *   edges: [{ fromId, toId, label, weight? }]
+ * @param {object} [dotnetRef] - optional DotNetObjectReference for click callbacks
  */
-export function renderForceGraph(containerId, data) {
+export function renderForceGraph(containerId, data, dotnetRef) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -145,6 +146,22 @@ export function renderForceGraph(containerId, data) {
             .on('drag', dragged)
             .on('end', dragended));
 
+    // Click handler: invoke Blazor callback when a node is clicked (not dragged)
+    let dragMoved = false;
+    node.on('click', (event, d) => {
+        if (dragMoved) return; // Ignore drag-end clicks
+        event.stopPropagation();
+
+        // Highlight selected node
+        node.select('circle')
+            .attr('stroke', n => n.id === d.id ? '#ffffff' : (n.isRoot ? '#c8a832' : getTypeColor(n.type)))
+            .attr('stroke-width', n => n.id === d.id ? 4 : (n.isRoot ? 3 : 2));
+
+        if (dotnetRef) {
+            dotnetRef.invokeMethodAsync('OnNodeClicked', d.id, d.name, d.type);
+        }
+    });
+
     // Node circle (outer ring with type color)
     node.append('circle')
         .attr('r', d => d.isRoot ? 28 : 24)
@@ -243,6 +260,7 @@ export function renderForceGraph(containerId, data) {
 
     // Drag handlers
     function dragstarted(event, d) {
+        dragMoved = false;
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
@@ -250,6 +268,7 @@ export function renderForceGraph(containerId, data) {
     }
 
     function dragged(event, d) {
+        dragMoved = true;
         d.fx = event.x;
         d.fy = event.y;
     }

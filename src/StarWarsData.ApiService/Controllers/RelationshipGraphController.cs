@@ -47,4 +47,29 @@ public class RelationshipGraphController(
         var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c) ? c : (Models.Entities.Continuity?)null;
         return await graphBuilder.GetEntityLabelsAsync(pageId, cont, ct);
     }
+
+    /// <summary>
+    /// Get distinct entity types that have been processed by the graph builder.
+    /// </summary>
+    [HttpGet("entity-types")]
+    public async Task<List<string>> GetEntityTypes(CancellationToken ct)
+    {
+        return await graphBuilder.GetProcessedEntityTypesAsync(ct);
+    }
+
+    /// <summary>
+    /// Browse processed entities by type with pagination.
+    /// </summary>
+    [HttpGet("browse")]
+    public async Task<ActionResult<BrowseEntitiesResult>> Browse(
+        [FromQuery] string type = "Character",
+        [FromQuery] string? q = null,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        CancellationToken ct = default)
+    {
+        if (pageSize > 100) pageSize = 100;
+        var (items, total) = await graphBuilder.BrowseEntitiesAsync(type, q, page, pageSize, ct);
+        return new BrowseEntitiesResult { Items = items, Total = total, Page = page, PageSize = pageSize };
+    }
 }

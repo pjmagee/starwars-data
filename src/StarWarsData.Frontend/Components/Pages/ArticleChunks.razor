@@ -1,0 +1,240 @@
+@page "/admin/article-chunks"
+@attribute [Authorize(Roles = "admin")]
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+@inject EndpointService EndpointService
+@implements IDisposable
+
+<PageTitle>Article Chunks &amp; Embeddings</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
+    <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-2">Article Chunks &amp; Embeddings</MudText>
+    <MudText Typo="Typo.subtitle1" Class="mb-8">
+        Semantic chunking of wiki articles with vector embeddings for AI search
+    </MudText>
+
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-6" Dense="true" NoIcon="false">
+        <strong>Eligible pages</strong> are those with non-empty article content, an infobox, and a known template type.
+        Pages without content, or without an infobox classification, are excluded since they lack either text to chunk or a type to categorize by.
+        This typically excludes redirect pages, disambiguation pages, and stub articles.
+    </MudAlert>
+
+    @if (_loading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="mb-4" />
+    }
+
+    @if (_progress != null)
+    {
+        <!-- Overall Progress -->
+        <MudPaper Class="pa-6 mb-6" Elevation="2">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-4">
+                <MudText Typo="Typo.h5">Overall Progress</MudText>
+                <MudStack Row="true" Spacing="2">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.PlayArrow"
+                               OnClick="StartChunking" Disabled="_jobRunning">
+                        Run Chunking Batch
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                               StartIcon="@Icons.Material.Filled.Storage"
+                               OnClick="EnsureIndexes" Disabled="_jobRunning">
+                        Ensure Indexes
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Info"
+                               StartIcon="@Icons.Material.Filled.TravelExplore"
+                               OnClick="CreateVectorIndex" Disabled="_jobRunning">
+                        Create Vector Index
+                    </MudButton>
+                </MudStack>
+            </MudStack>
+
+            @{
+                var pct = _progress.TotalEligiblePages > 0
+                    ? (double)_progress.ChunkedPages / _progress.TotalEligiblePages * 100
+                    : 0;
+            }
+
+            <MudProgressLinear Value="@pct" Color="Color.Primary" Rounded="true" Size="Size.Large" Class="mb-3">
+                <MudText Typo="Typo.body2">@($"{pct:F1}%")</MudText>
+            </MudProgressLinear>
+
+            <MudGrid>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">@_progress.TotalEligiblePages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Eligible Pages</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Success">@_progress.ChunkedPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Chunked</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Warning">@_progress.PendingPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Pending</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Info">@_progress.TotalChunks.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Total Chunks</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="Color.Secondary">@_progress.AvgChunksPerPage.ToString("F1")</MudText>
+                        <MudText Typo="Typo.caption">Avg Chunks/Page</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <!-- Progress by Type -->
+        @if (_progress.ByType.Count > 0)
+        {
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-4">Chunks by Entity Type</MudText>
+                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Pages</th>
+                            <th>Chunks</th>
+                            <th>Avg Chunks/Page</th>
+                            <th>Coverage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in _progress.ByType)
+                        {
+                            var typePct = _progress.ChunkedPages > 0
+                                ? (double)t.Pages / _progress.ChunkedPages * 100
+                                : 0;
+                            <tr>
+                                <td><MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@t.Type</MudChip></td>
+                                <td>@t.Pages.ToString("N0")</td>
+                                <td>@t.Chunks.ToString("N0")</td>
+                                <td>@t.AvgChunksPerPage.ToString("F1")</td>
+                                <td style="min-width: 150px;">
+                                    <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+        }
+    }
+    else if (!_loading)
+    {
+        <MudAlert Severity="Severity.Info">No progress data available. Run a chunking batch to get started.</MudAlert>
+    }
+</MudContainer>
+
+@code {
+    private ChunkingProgress? _progress;
+    private bool _loading = true;
+    private bool _jobRunning;
+    private Timer? _pollTimer;
+
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProgress();
+        _pollTimer = new Timer(async _ =>
+        {
+            await LoadProgress();
+            await InvokeAsync(StateHasChanged);
+        }, null, TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30));
+    }
+
+    private async Task LoadProgress()
+    {
+        try
+        {
+            _progress = await Api.GetFromJsonAsync<ChunkingProgress>("api/ArticleChunks/progress");
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load progress: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task StartChunking()
+    {
+        await RunJob("api/admin/mongo/create-embeddings", "Article chunking batch started!");
+    }
+
+    private async Task EnsureIndexes()
+    {
+        await RunJob("api/admin/mongo/ensure-chunk-indexes", "Chunk index creation started!");
+    }
+
+    private async Task CreateVectorIndex()
+    {
+        await RunJob("api/admin/mongo/create-index-embeddings", "Vector index creation started!");
+    }
+
+    private async Task RunJob(string endpoint, string successMessage)
+    {
+        try
+        {
+            _jobRunning = true;
+            var response = await Api.PostAsync(endpoint, null);
+            if (response.IsSuccessStatusCode)
+            {
+                Snackbar.Add(successMessage, Severity.Success);
+            }
+            else if ((int)response.StatusCode == 409)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Job not started: {error}", Severity.Warning);
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Failed to start job: {error}", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _jobRunning = false;
+        }
+    }
+
+    public void Dispose()
+    {
+        _pollTimer?.Dispose();
+    }
+
+    private class ChunkingProgress
+    {
+        public int TotalEligiblePages { get; set; }
+        public int ChunkedPages { get; set; }
+        public int PendingPages { get; set; }
+        public long TotalChunks { get; set; }
+        public double AvgChunksPerPage { get; set; }
+        public List<ChunkingTypeProgress> ByType { get; set; } = [];
+    }
+
+    private class ChunkingTypeProgress
+    {
+        public string Type { get; set; } = "";
+        public int Pages { get; set; }
+        public long Chunks { get; set; }
+        public double AvgChunksPerPage { get; set; }
+    }
+}

@@ -150,3 +150,14 @@ The Aspire dashboard will show all resources. The Hangfire dashboard is availabl
 | Relationships | `/relationships/graph/{id}` | Relationship graphs |
 | ChatSessions | `/api/ChatSessions` | User chat history |
 | AI (AGUI) | `/kernel/stream` | AI agent SSE streaming |
+
+## Support
+
+This project is built and maintained as a solo effort. Significant time and cost go into running AI models during development and for the live application:
+
+- **Claude** (Anthropic) — used extensively for development via Claude Code, including architecture, code generation, debugging, and test authoring
+- **OpenAI** (GPT-4o, GPT-4o-mini, GPT-5-mini) — powers the in-app AI assistant, relationship graph extraction agent, and embedding generation
+
+If you find this project useful or interesting, consider buying me a coffee to help offset the API costs:
+
+<a href="https://www.buymeacoffee.com/pjmagee"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>

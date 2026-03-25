@@ -126,7 +126,7 @@ apiService.WithReference(mongo).WaitFor(mongo);
 
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
-    .WithEnvironment("services__keycloak__http__0", "https://auth.magaoidh.pro")
+    .WithEnvironment("services__keycloak__https__0", "https://auth.magaoidh.pro")
     .WithReference(apiService)
     .WaitFor(apiService);
 

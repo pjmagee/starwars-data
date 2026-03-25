@@ -11,7 +11,8 @@ public class AdminController(
     PageDownloader pageDownloader,
     RecordService recordService,
     CharacterTimelineService characterTimelineService,
-    RelationshipGraphBuilderService graphBuilder
+    RelationshipGraphBuilderService graphBuilder,
+    ArticleChunkingService articleChunkingService
 ) : ControllerBase
 {
     readonly ILogger<AdminController> _logger = logger;
@@ -19,6 +20,7 @@ public class AdminController(
     readonly RecordService _recordService = recordService;
     readonly CharacterTimelineService _characterTimelineService = characterTimelineService;
     readonly RelationshipGraphBuilderService _graphBuilder = graphBuilder;
+    readonly ArticleChunkingService _articleChunkingService = articleChunkingService;
 
     bool IsJobAlreadyActive(Type type, string methodName)
     {
@@ -181,13 +183,13 @@ public class AdminController(
         {
             if (
                 IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.ProcessEmbeddingsAsync)
+                    typeof(ArticleChunkingService),
+                    nameof(ArticleChunkingService.ProcessAllAsync)
                 )
             )
-                return Conflict(new { error = "Embeddings creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.ProcessEmbeddingsAsync(CancellationToken.None)
+                return Conflict(new { error = "Article chunking already running" });
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
+                s.ProcessAllAsync(CancellationToken.None)
             );
             return Ok(new { jobId });
         }
@@ -319,13 +321,36 @@ public class AdminController(
         {
             if (
                 IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.CreateVectorIndexesAsync)
+                    typeof(ArticleChunkingService),
+                    nameof(ArticleChunkingService.CreateVectorIndexAsync)
                 )
             )
                 return Conflict(new { error = "Vector index creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.CreateVectorIndexesAsync(CancellationToken.None)
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
+                s.CreateVectorIndexAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/ensure-chunk-indexes")]
+    public ActionResult<string> EnqueueEnsureChunkIndexes()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(ArticleChunkingService),
+                    nameof(ArticleChunkingService.EnsureIndexesAsync)
+                )
+            )
+                return Conflict(new { error = "Chunk index creation already running" });
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
+                s.EnsureIndexesAsync(CancellationToken.None)
             );
             return Ok(new { jobId });
         }

@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -46,38 +48,27 @@ public class RelationshipGraphBuilderService
         _chatClient = chatClient;
     }
 
-    const string AnalystSystemPrompt = """
-        You are a relationship analyst for a Star Wars knowledge graph stored in MongoDB.
-
-        For each page you are given, your job is to extract ALL meaningful relationships between
-        the subject entity and other entities mentioned in the article.
-
-        PROCESS:
-        1. Call get_existing_labels() to see the current label vocabulary
-        2. Call get_page_content(pageId) to read the article
-        3. Call get_linked_pages(pageId) to see what entities are referenced
-        4. Call get_entity_edges(pageId) to see what's already stored (avoid duplicates)
-        5. Extract relationships using ONLY existing labels where possible
-        6. If a genuinely new relationship type is needed, call find_similar_label() first —
-           if a close match exists, use that instead of creating a new one
-        7. Call store_edges() with all extracted relationships
-        8. Call mark_processed() when done, or skip_page() if the page has no meaningful relationships
+    const string ExtractionSystemPrompt = """
+        You are a relationship extraction engine for a Star Wars knowledge graph.
+        You will be given a wiki page's content, its linked entities, and the existing label vocabulary.
+        Your job is to extract ALL meaningful relationships and return them as structured JSON.
 
         RULES:
         - ALWAYS prefer existing labels over inventing new ones
-        - If unsure whether a label exists, call find_similar_label() before creating
-        - Only create a new label when nothing in the registry fits
-        - Skip pages with no meaningful relationships (redirects, stubs, disambiguation, list pages)
-        - Skip pages with no infobox (they cannot be graph nodes)
+        - Only create a new label when nothing in the existing vocabulary fits
+        - Set shouldSkip=true for pages with no meaningful relationships (redirects, stubs, disambiguation, list pages)
         - Weight reflects confidence: explicit textual statements get 0.9+, inferred from context 0.6-0.8,
           inferred from infobox links alone 0.5
         - Evidence must be a brief quote or paraphrase from the article supporting the relationship
         - Extract relationships of ALL kinds: familial, political, military, economic, geographic,
           organizational, adversarial, master/apprentice, species/homeworld, etc.
-        - Each entity in a relationship must have a valid PageId from get_linked_pages results.
-          Do NOT invent PageIds. If an entity isn't in the linked pages results, skip that relationship.
+        - Each entity in a relationship MUST have a valid PageId from the LINKED ENTITIES list.
+          Do NOT invent PageIds. If an entity isn't in the linked entities, skip that relationship.
         - Use the entity's infobox type (Character, Organization, CelestialBody, etc.) for fromType/toType
+        - Do NOT duplicate edges that already exist (listed under EXISTING EDGES)
         """;
+
+    static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
     /// <summary>
     /// Process a batch of unprocessed pages. Called by the Hangfire recurring job.
@@ -87,6 +78,19 @@ public class RelationshipGraphBuilderService
         _logger.LogInformation("Relationship graph builder: starting batch of {BatchSize}", batchSize);
 
         await EnsureIndexesAsync(ct);
+
+        // Reset pages stuck in "Processing" for more than 10 minutes (orphaned from previous runs)
+        var staleThreshold = DateTime.UtcNow.AddMinutes(-10);
+        var staleFilter = Builders<RelationshipCrawlState>.Filter.And(
+            Builders<RelationshipCrawlState>.Filter.Eq(s => s.Status, CrawlStatus.Processing),
+            Builders<RelationshipCrawlState>.Filter.Or(
+                Builders<RelationshipCrawlState>.Filter.Eq(s => s.ProcessedAt, null),
+                Builders<RelationshipCrawlState>.Filter.Lt(s => s.ProcessedAt, staleThreshold)
+            )
+        );
+        var staleReset = await _crawlState.DeleteManyAsync(staleFilter, ct);
+        if (staleReset.DeletedCount > 0)
+            _logger.LogWarning("Reset {Count} stale 'Processing' pages from previous run", staleReset.DeletedCount);
 
         // Find pages that haven't been processed yet
         var processedIds = await _crawlState
@@ -133,6 +137,9 @@ public class RelationshipGraphBuilderService
 
         _logger.LogInformation("Relationship graph builder: {Count} pages to process", batch.Count);
 
+        // Pre-fetch existing labels once for the whole batch
+        var existingLabels = await _toolkit.GetExistingLabels();
+
         int processed = 0;
         int failed = 0;
 
@@ -142,40 +149,111 @@ public class RelationshipGraphBuilderService
 
             var pageId = doc["_id"].AsInt32;
             var title = doc.Contains("title") ? doc["title"].AsString : $"Page {pageId}";
+            var template = doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
+                ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
+                : "Unknown";
 
             try
             {
                 _logger.LogInformation("Processing page {PageId}: {Title}", pageId, title);
 
-                // Mark as processing
+                // Mark as processing with timestamp for stale detection
                 await _crawlState.ReplaceOneAsync(
                     Builders<RelationshipCrawlState>.Filter.Eq(s => s.PageId, pageId),
                     new RelationshipCrawlState
                     {
                         PageId = pageId,
                         Name = title,
+                        Type = template,
                         Status = CrawlStatus.Processing,
+                        ProcessedAt = DateTime.UtcNow,
                     },
                     new ReplaceOptions { IsUpsert = true },
                     ct);
 
-                var messages = new List<ChatMessage>
+                // Pre-fetch all context programmatically (no LLM round-trips)
+                var pageContent = await _toolkit.GetPageContent(pageId);
+                var linkedPages = await _toolkit.GetLinkedPages(pageId, limit: 200);
+                var existingEdges = await _toolkit.GetEntityEdges(pageId, limit: 100);
+
+                // Build single prompt with all context
+                var prompt = new StringBuilder();
+                prompt.AppendLine("## EXISTING LABEL VOCABULARY (reuse these)");
+                prompt.AppendLine(existingLabels);
+                prompt.AppendLine();
+                prompt.AppendLine("## PAGE CONTENT");
+                prompt.AppendLine(pageContent);
+                prompt.AppendLine();
+                prompt.AppendLine("## LINKED ENTITIES (only use PageIds from this list)");
+                prompt.AppendLine(linkedPages);
+                prompt.AppendLine();
+                prompt.AppendLine("## EXISTING EDGES (do not duplicate these)");
+                prompt.AppendLine(existingEdges);
+                prompt.AppendLine();
+                prompt.AppendLine("Extract ALL meaningful relationships from this page.");
+
+                var chatOptions = new ChatOptions
                 {
-                    new(ChatRole.System, AnalystSystemPrompt),
-                    new(ChatRole.User, $"Process page with PageId={pageId}. Extract all relationships you can find."),
+                    ResponseFormat = ChatResponseFormat.ForJsonSchema<RelationshipExtractionResponse>(
+                        schemaName: "relationship_extraction",
+                        schemaDescription: "Extracted relationships from a Star Wars wiki page"),
                 };
 
-                var options = new ChatOptions
-                {
-                    Tools = [.. _toolkit.AsAIFunctions()],
-                    MaxOutputTokens = 4096,
-                    ToolMode = ChatToolMode.Auto,
-                };
+                // Single LLM call — no tool-calling round-trips
+                var response = await _chatClient.GetResponseAsync(
+                    [new ChatMessage(ChatRole.System, ExtractionSystemPrompt),
+                     new ChatMessage(ChatRole.User, prompt.ToString())],
+                    chatOptions, ct);
 
-                // The chat client is built with UseFunctionInvocation(), so it handles
-                // the tool call loop automatically — a single GetResponseAsync call runs
-                // the full agent conversation until the LLM stops calling tools.
-                await _chatClient.GetResponseAsync(messages, options, ct);
+                var text = response.Text?.Trim();
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    await _toolkit.SkipPage(pageId, "Empty LLM response", title, template);
+                    processed++;
+                    continue;
+                }
+
+                // Strip markdown fences if present
+                if (text.StartsWith("```"))
+                {
+                    var firstNewline = text.IndexOf('\n');
+                    var lastFence = text.LastIndexOf("```");
+                    if (firstNewline > 0 && lastFence > firstNewline)
+                        text = text[(firstNewline + 1)..lastFence].Trim();
+                }
+
+                var result = JsonSerializer.Deserialize<RelationshipExtractionResponse>(text, JsonOpts);
+
+                if (result is null || result.ShouldSkip)
+                {
+                    await _toolkit.SkipPage(pageId, result?.SkipReason ?? "No relationships", title, template);
+                }
+                else if (result.Edges is { Count: > 0 })
+                {
+                    var edgeDtos = result.Edges.Select(e => new EdgeDto
+                    {
+                        FromId = e.FromId,
+                        FromName = e.FromName,
+                        FromType = e.FromType,
+                        ToId = e.ToId,
+                        ToName = e.ToName,
+                        ToType = e.ToType,
+                        Label = e.Label,
+                        ReverseLabel = e.ReverseLabel,
+                        Weight = e.Weight,
+                        Evidence = e.Evidence,
+                        Continuity = e.Continuity,
+                    }).ToList();
+
+                    var storeResult = await _toolkit.StoreEdges(pageId, edgeDtos);
+                    _logger.LogInformation("Page {PageId}: stored edges. Result: {Result}", pageId, storeResult);
+
+                    await _toolkit.MarkProcessed(pageId, edgeDtos.Count, title, template);
+                }
+                else
+                {
+                    await _toolkit.SkipPage(pageId, "No edges extracted", title, template);
+                }
 
                 processed++;
             }
@@ -190,6 +268,7 @@ public class RelationshipGraphBuilderService
                     {
                         PageId = pageId,
                         Name = title,
+                        Type = template,
                         Status = CrawlStatus.Failed,
                         Error = ex.Message[..Math.Min(ex.Message.Length, 500)],
                         ProcessedAt = DateTime.UtcNow,
@@ -268,11 +347,12 @@ public class RelationshipGraphBuilderService
         var totalLabels = (int)await _labels.CountDocumentsAsync(
             Builders<RelationshipLabel>.Filter.Empty, cancellationToken: ct);
 
-        // Recent labels
-        var recentLabels = await _labels
-            .Find(Builders<RelationshipLabel>.Filter.Empty)
-            .SortByDescending(l => l.CreatedAt)
-            .Limit(10)
+        // All labels sorted by usage (filter out empty labels)
+        var allLabels = await _labels
+            .Find(Builders<RelationshipLabel>.Filter.And(
+                Builders<RelationshipLabel>.Filter.Ne(l => l.Label, ""),
+                Builders<RelationshipLabel>.Filter.Ne(l => l.Label, null)))
+            .SortByDescending(l => l.UsageCount)
             .ToListAsync(ct);
 
         return new GraphBuilderProgress
@@ -292,7 +372,7 @@ public class RelationshipGraphBuilderService
                 Skipped = kv.Value.skipped,
                 Failed = kv.Value.failed,
             }).OrderByDescending(t => t.Total).ToList(),
-            RecentLabels = recentLabels.Select(l => new RecentLabel
+            RecentLabels = allLabels.Select(l => new RecentLabel
             {
                 Label = l.Label,
                 Reverse = l.Reverse,
@@ -466,6 +546,57 @@ public class RelationshipGraphBuilderService
             .ToListAsync(ct);
 
         return results.Select(d => d["_id"].AsString).ToList();
+    }
+
+    /// <summary>
+    /// Get distinct entity types that have been processed (Completed/Skipped/Failed) in the crawl state.
+    /// Used by the Graph Explorer to populate the entity type filter dynamically.
+    /// </summary>
+    public async Task<List<string>> GetProcessedEntityTypesAsync(CancellationToken ct = default)
+    {
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", new BsonDocument("type", new BsonDocument("$nin",
+                new BsonArray { BsonNull.Value, "" }))),
+            new BsonDocument("$group", new BsonDocument("_id", "$type")),
+            new BsonDocument("$sort", new BsonDocument("_id", 1)),
+        };
+
+        var results = await _crawlState
+            .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
+            .ToListAsync(ct);
+
+        return results.Select(d => d["_id"].AsString).ToList();
+    }
+
+    /// <summary>
+    /// Browse processed entities by type with pagination. Only returns entities with status Completed
+    /// (i.e. entities that actually have graph data to explore).
+    /// </summary>
+    public async Task<(List<EntitySearchDto> items, long total)> BrowseEntitiesAsync(
+        string type, string? search = null, int page = 1, int pageSize = 20, CancellationToken ct = default)
+    {
+        var filters = new List<FilterDefinition<RelationshipCrawlState>>
+        {
+            Builders<RelationshipCrawlState>.Filter.Eq(s => s.Status, CrawlStatus.Completed),
+            Builders<RelationshipCrawlState>.Filter.Eq(s => s.Type, type),
+        };
+
+        if (!string.IsNullOrWhiteSpace(search))
+            filters.Add(Builders<RelationshipCrawlState>.Filter.Regex(s => s.Name, new BsonRegularExpression(search, "i")));
+
+        var filter = Builders<RelationshipCrawlState>.Filter.And(filters);
+
+        var total = await _crawlState.CountDocumentsAsync(filter, cancellationToken: ct);
+
+        var items = await _crawlState
+            .Find(filter)
+            .SortBy(s => s.Name)
+            .Skip((page - 1) * pageSize)
+            .Limit(pageSize)
+            .ToListAsync(ct);
+
+        return (items.Select(s => new EntitySearchDto { Id = s.PageId, Name = s.Name }).ToList(), total);
     }
 
     /// <summary>

@@ -61,17 +61,22 @@
 
         <MudDivider Class="my-4" />
 
-        <!-- Advanced Operations -->
-        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Warning">Advanced Operations</MudText>
+        <!-- Article Chunks & Embeddings -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Warning">Article Chunks &amp; Embeddings</MudText>
         <MudStack Spacing="2">
             <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Psychology"
                 OnClick="@(() => StartJobHandler(CreateEmbeddingsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Create Embeddings
+                Run Chunking Batch
             </MudButton>
 
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+            <MudButton Variant="Variant.Outlined" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Storage"
+                OnClick="@(() => StartJobHandler(EnsureChunkIndexesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Ensure Chunk Indexes
+            </MudButton>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.TravelExplore"
                 OnClick="@(() => StartJobHandler(CreateVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Create Vector Indexes
+                Create Vector Index
             </MudButton>
 
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteSweep"
@@ -79,9 +84,9 @@
                 Delete Embeddings
             </MudButton>
 
-            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove"
-                OnClick="@(() => StartJobHandler(DeleteVectorIndexEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Delete Vector Indexes
+            <MudButton Variant="Variant.Text" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Dashboard"
+                Href="/admin/article-chunks" Size="Size.Medium">
+                View Chunks Dashboard
             </MudButton>
         </MudStack>
     </MudPaper><!-- Hangfire Dashboard -->
@@ -108,9 +113,9 @@
     private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
 
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
-    private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";
+    private const string EnsureChunkIndexesEndpoint = "admin/mongo/ensure-chunk-indexes";
     private const string CreateVectorIndexEndpoint = "admin/mongo/create-index-embeddings";
-    private const string DeleteVectorIndexEndpoint = "admin/mongo/delete-index-embeddings";private bool _isLoading = false;
+    private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";private bool _isLoading = false;
     private string? _hangfireDashboardUrl;
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");

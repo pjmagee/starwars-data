@@ -84,13 +84,20 @@ builder
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         return new RelationshipAnalystToolkit(mongoClient, settings.PagesDb, settings.RelationshipGraphDb);
     })
+    .AddSingleton<GraphRAGToolkit>(sp =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var mongoClient = sp.GetRequiredService<IMongoClient>();
+        var embedder = sp.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
+        return new GraphRAGToolkit(mongoClient, settings.RelationshipGraphDb, embedder);
+    })
+    .AddScoped<ArticleChunkingService>()
     .AddKeyedSingleton<IChatClient>("relationship-analyst", (sp, _) =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
         return new ChatClientBuilder(
                 openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient())
-            .UseFunctionInvocation()
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
     })
@@ -165,9 +172,12 @@ builder
             sp.GetRequiredService<ILoggerFactory>()
         );
 
+        var graphRAG = sp.GetRequiredService<GraphRAGToolkit>();
+
         var tools = new List<AITool>();
         tools.AddRange(componentToolkit.AsAIFunctions());
         tools.AddRange(dataExplorer.AsAIFunctions());
+        tools.AddRange(graphRAG.AsAIFunctions());
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
@@ -199,10 +209,30 @@ builder
 
         FAST PATHS (follow these patterns):
         - "Tell me about X" / "Bring up X" → search_pages_by_name("Character", "X") → render_infobox with the PageIds. If not a character, try other types.
-        - "What happened during X?" / lore questions → search_wiki("X") → render_text with the results.
+        - "What happened during X?" / lore questions → search_chunks("X") (or search_wiki("X") as fallback) → render_text with the results.
         - "Show all X" / list queries → render_table with infoboxType and optional search filter.
         - "Family tree of X" → search_pages_by_name → sample_link_labels (to discover which labels have links) → render_graph with the discovered labels classified as up/down/peer.
         - Stats/counts → aggregate or count → render_chart or render_data_table.
+        - "How is X related to Y?" / "What connects X and Y?" → search_graph_entities for both → find_connections → render_text or render_data_table with the path.
+        - "Who trained X?" / "X's allies" / relationship queries → search_graph_entities → get_entity_relationships (with optional label filter) → render_text or render_data_table.
+        - "Show me X's network" / broad relationship exploration → search_graph_entities → traverse_graph → render_text or render_data_table.
+        - Deep lore / "explain X" / "history of X" → search_chunks for semantic article matches → combine with graph tools if relationships involved → render_text.
+
+        RELATIONSHIP GRAPH (persistent knowledge graph with labeled relationships and evidence):
+        - search_graph_entities: resolve entity names to PageIds in the graph. If not found, the entity may not be processed yet — fall back to search_pages_by_name.
+        - get_graph_labels: discover what relationship types exist for an entity before filtering.
+        - get_entity_relationships: get direct relationships grouped by label with evidence snippets.
+        - traverse_graph: multi-hop traversal for broader exploration (max depth 3).
+        - find_connections: find the shortest path between two entities (bidirectional BFS).
+        - Graph tools return evidence snippets from source articles — include these in your response for grounding.
+        - Use graph tools when the question is about relationships, connections, networks, or influence — they provide richer answers than infobox data alone.
+
+        VECTOR SEARCH (semantic search over article content chunks):
+        - search_chunks: find relevant article passages by meaning using vector similarity search. Prefer over search_wiki for detailed lore, history, and explanations.
+        - search_chunks supports optional type and continuity filters to narrow results.
+        - Results include the article title, section heading, relevance score, and passage text — use these to ground your answers.
+        - For comprehensive answers, combine search_chunks (article context) with graph tools (relationship context) — this is GraphRAG.
+        - If search_chunks returns no results, the chunking job may not have run yet — fall back to search_wiki.
 
         CHOOSING OUTPUT (call exactly one render_ tool as final action, no commentary after):
         - Lore/history/explanations/"what/why/how" → render_text (use search_wiki first)
@@ -210,6 +240,7 @@ builder
         - List/browse entities → render_table
         - Aggregated stats → render_chart or render_data_table
         - Relationships/family trees → render_graph
+        - Relationship questions answered by graph tools → render_text or render_data_table with the retrieved context
         - Event timelines → render_timeline
 
         RENDER RULES:
@@ -313,6 +344,13 @@ RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
     "daily-relationship-graph-builder",
     s => s.ProcessBatchAsync(100, CancellationToken.None),
     Cron.Daily(4)
+);
+
+// Daily article chunking at 05:00 UTC (after graph builder completes)
+RecurringJob.AddOrUpdate<ArticleChunkingService>(
+    "daily-article-chunking",
+    s => s.ProcessAllAsync(CancellationToken.None),
+    Cron.Daily(5)
 );
 
 app.UseHttpsRedirection();
