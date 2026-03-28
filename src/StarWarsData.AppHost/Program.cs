@@ -9,7 +9,7 @@ var openApi = builder.AddParameter(name: "openapi", value: openApiKey, secret: t
 var mongoUser = builder.AddParameter("mongo-user", value: "admin");
 var mongoPassword = builder.AddParameter("mongo-password", value: "password", secret: true);
 var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
-var mongoPort = builder.AddParameter("mongo-port", value: "27017");
+var mongoPort = builder.AddParameter("mongo-port", value: "27018");
 
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
@@ -113,12 +113,62 @@ var apiService = builder
             IconName = "PersonTimeline",
             IsHighlighted = false,
         }
-    );
+    )
+    // Phase 6 — Relationship Graph (OpenAI Batch API)
+    .WithHttpCommand(
+        path: "/api/admin/mongo/submit-graph-batch",
+        displayName: "6a. Submit Graph Batch",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Submits one batch of unprocessed pages to the OpenAI Batch API for relationship extraction. Drip-feeds to respect token quota.",
+            IconName = "CloudUpload",
+            IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/check-graph-batches",
+        displayName: "6b. Check Graph Batches",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Checks status of in-flight OpenAI batches and processes completed results. Runs automatically every 5 minutes.",
+            IconName = "ArrowSync",
+            IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/cleanup-graph-batches",
+        displayName: "6c. Cleanup Failed Batches",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Releases orphaned pages from failed/stale batches so they can be resubmitted. Run this if batches are stuck.",
+            IconName = "BroomAll",
+            IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/ensure-graph-indexes",
+        displayName: "6d. Ensure Graph Indexes",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Creates MongoDB indexes on the relationship graph collections for query performance.",
+            IconName = "DatabaseSearch",
+            IsHighlighted = false,
+        }
+    )
+;
 
 var mongo = builder.AddConnectionString(
     "mongodb",
     ReferenceExpression.Create(
-        $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin"
+        $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"
     )
 );
 
@@ -132,7 +182,8 @@ var frontend = builder
 
 builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
 
-builder.AddDockerComposeEnvironment("starwars")
+builder
+    .AddDockerComposeEnvironment("starwars")
     .ConfigureComposeFile(compose =>
     {
         // Replace default network with external proxynet

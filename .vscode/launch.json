@@ -6,13 +6,34 @@
     "configurations": [
         
         {
-            "name": "AppHost",
+            "name": "AppHost (Debug)",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}\\src\\StarWarsData.AppHost\\StarWarsData.AppHost.csproj",
             "serverReadyAction":{
                 "action": "openExternally",
                 "killOnServerStop": false
+            }
+        },
+        {
+            "name": "AppHost (Hot Reload)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/StarWarsData.AppHost/StarWarsData.AppHost.csproj"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DOTNET_ENVIRONMENT": "Development"
+            },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "Now listening on:\\s+(https?://\\S+)"
             }
         }
     ]

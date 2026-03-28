@@ -20,16 +20,23 @@ namespace StarWarsData.Services
         )
         {
             _logger = logger;
-            _pages = mongoClient.GetDatabase(settingsOptions.Value.PagesDb).GetCollection<Page>("Pages");
+            _pages = mongoClient
+                .GetDatabase(settingsOptions.Value.PagesDb)
+                .GetCollection<Page>("Pages");
         }
 
         const string WikiPrefix = "https://starwars.fandom.com/wiki/";
 
         static FilterDefinition<Page> TemplateFilter(string collection) =>
-            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression($":{collection}$", "i"));
+            Builders<Page>.Filter.Regex(
+                "infobox.Template",
+                new BsonRegularExpression($":{collection}$", "i")
+            );
 
-        static FilterDefinition<Page> WithTemplate(string collection, FilterDefinition<Page> extra) =>
-            Builders<Page>.Filter.And(TemplateFilter(collection), extra);
+        static FilterDefinition<Page> WithTemplate(
+            string collection,
+            FilterDefinition<Page> extra
+        ) => Builders<Page>.Filter.And(TemplateFilter(collection), extra);
 
         /// <summary>
         /// Generates URL variants to handle encoding mismatches between stored WikiUrl
@@ -44,19 +51,23 @@ namespace StarWarsData.Services
             {
                 var path = href[WikiPrefix.Length..];
                 var reEncoded = WikiPrefix + Uri.EscapeDataString(Uri.UnescapeDataString(path));
-                if (reEncoded != href) yield return reEncoded;
+                if (reEncoded != href)
+                    yield return reEncoded;
             }
 
             // Legends/Canon slash encoding variants
-            if (href.Contains("/Legends")) yield return href.Replace("/Legends", "%2FLegends");
-            if (href.Contains("/Canon")) yield return href.Replace("/Canon", "%2FCanon");
-            if (href.Contains("%2FLegends")) yield return href.Replace("%2FLegends", "/Legends");
-            if (href.Contains("%2FCanon")) yield return href.Replace("%2FCanon", "/Canon");
+            if (href.Contains("/Legends"))
+                yield return href.Replace("/Legends", "%2FLegends");
+            if (href.Contains("/Canon"))
+                yield return href.Replace("/Canon", "%2FCanon");
+            if (href.Contains("%2FLegends"))
+                yield return href.Replace("%2FLegends", "/Legends");
+            if (href.Contains("%2FCanon"))
+                yield return href.Replace("%2FCanon", "/Canon");
         }
 
         static List<string> HrefsForLabel(List<InfoboxProperty> data, string label) =>
-            data
-                .Where(p => p.Label?.Equals(label, StringComparison.OrdinalIgnoreCase) == true)
+            data.Where(p => p.Label?.Equals(label, StringComparison.OrdinalIgnoreCase) == true)
                 .SelectMany(p => p.Links ?? [])
                 .Select(l => Uri.UnescapeDataString(l.Href ?? ""))
                 .Where(h => !string.IsNullOrWhiteSpace(h))
@@ -66,7 +77,10 @@ namespace StarWarsData.Services
         /// <summary>
         /// Fetch detailed relations for an entity by its ID within a given type.
         /// </summary>
-        public async Task<EntityRelationsDto?> GetRelationsByIdAsync(int id, string collection = "Character")
+        public async Task<EntityRelationsDto?> GetRelationsByIdAsync(
+            int id,
+            string collection = "Character"
+        )
         {
             try
             {
@@ -74,7 +88,11 @@ namespace StarWarsData.Services
                 var page = await _pages.Find(filter).FirstOrDefaultAsync();
                 if (page == null)
                 {
-                    _logger.LogWarning("Entity with ID {Id} not found in {Collection}.", id, collection);
+                    _logger.LogWarning(
+                        "Entity with ID {Id} not found in {Collection}.",
+                        id,
+                        collection
+                    );
                     return null;
                 }
 
@@ -103,7 +121,12 @@ namespace StarWarsData.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching relations by ID {Id} in {Collection}", id, collection);
+                _logger.LogError(
+                    ex,
+                    "Error fetching relations by ID {Id} in {Collection}",
+                    id,
+                    collection
+                );
                 return null;
             }
         }
@@ -116,7 +139,11 @@ namespace StarWarsData.Services
             return property?.Values ?? [];
         }
 
-        async Task<List<int>> ResolveRelatedIdsAsync(Page page, string label, string collection = "Character")
+        async Task<List<int>> ResolveRelatedIdsAsync(
+            Page page,
+            string label,
+            string collection = "Character"
+        )
         {
             var prop = page.Infobox?.Data.FirstOrDefault(ib =>
                 ib.Label != null && ib.Label.Equals(label, StringComparison.OrdinalIgnoreCase)
@@ -124,12 +151,13 @@ namespace StarWarsData.Services
             if (prop?.Links == null)
                 return [];
 
-            var hrefs = prop.Links
-                .Where(l => !string.IsNullOrWhiteSpace(l.Href))
+            var hrefs = prop
+                .Links.Where(l => !string.IsNullOrWhiteSpace(l.Href))
                 .Select(l => l.Href)
                 .ToList();
 
-            if (hrefs.Count == 0) return [];
+            if (hrefs.Count == 0)
+                return [];
 
             var variants = hrefs.SelectMany(WikiUrlVariants).Distinct().ToList();
 
@@ -137,9 +165,7 @@ namespace StarWarsData.Services
             var urlFilter = Builders<Page>.Filter.In(p => p.WikiUrl, variants);
             var combined = Builders<Page>.Filter.And(templateFilter, urlFilter);
 
-            var matches = await _pages.Find(combined)
-                .Project(p => p.PageId)
-                .ToListAsync();
+            var matches = await _pages.Find(combined).Project(p => p.PageId).ToListAsync();
 
             return matches.Distinct().Where(i => i != 0).ToList();
         }
@@ -147,7 +173,11 @@ namespace StarWarsData.Services
         /// <summary>
         /// Search entities by title within a type, returning id + name DTOs.
         /// </summary>
-        public async Task<List<EntitySearchDto>> FindEntitiesAsync(string search, string collection = "Character", Continuity? continuity = null)
+        public async Task<List<EntitySearchDto>> FindEntitiesAsync(
+            string search,
+            string collection = "Character",
+            Continuity? continuity = null
+        )
         {
             search = search.Trim();
             var templateFilter = TemplateFilter(collection);
@@ -158,10 +188,16 @@ namespace StarWarsData.Services
                 new BsonDocument
                 {
                     { "Label", "Titles" },
-                    { "Values", new BsonDocument("$regex", new BsonRegularExpression(search, "i")) },
+                    {
+                        "Values",
+                        new BsonDocument("$regex", new BsonRegularExpression(search, "i"))
+                    },
                 }
             );
-            var pageTitleFilter = Builders<Page>.Filter.Regex(p => p.Title, new BsonRegularExpression(search, "i"));
+            var pageTitleFilter = Builders<Page>.Filter.Regex(
+                p => p.Title,
+                new BsonRegularExpression(search, "i")
+            );
 
             var filters = new List<FilterDefinition<Page>>
             {
@@ -181,7 +217,9 @@ namespace StarWarsData.Services
                 .Select(p => new EntitySearchDto
                 {
                     Id = p.PageId,
-                    Name = p.Infobox!.Data.FirstOrDefault(ip => ip.Label == "Titles")?.Values.FirstOrDefault() ?? p.Title,
+                    Name =
+                        p.Infobox!.Data.FirstOrDefault(ip => ip.Label == "Titles")
+                            ?.Values.FirstOrDefault() ?? p.Title,
                 })
                 .ToList();
         }
@@ -197,11 +235,14 @@ namespace StarWarsData.Services
 
             var pipeline = new[]
             {
-                new BsonDocument("$match", new BsonDocument
-                {
-                    { "_id", rootId },
-                    { "infobox.Template", new BsonDocument("$regex", templateRegex) },
-                }),
+                new BsonDocument(
+                    "$match",
+                    new BsonDocument
+                    {
+                        { "_id", rootId },
+                        { "infobox.Template", new BsonDocument("$regex", templateRegex) },
+                    }
+                ),
                 new BsonDocument(
                     "$graphLookup",
                     new BsonDocument
@@ -221,7 +262,15 @@ namespace StarWarsData.Services
                                     "infobox.Data.Label",
                                     new BsonDocument(
                                         "$in",
-                                        new BsonArray { "Parent(s)", "Partner(s)", "Sibling(s)", "Children", "Masters", "Apprentices" }
+                                        new BsonArray
+                                        {
+                                            "Parent(s)",
+                                            "Partner(s)",
+                                            "Sibling(s)",
+                                            "Children",
+                                            "Masters",
+                                            "Apprentices",
+                                        }
                                     )
                                 },
                             }
@@ -238,8 +287,7 @@ namespace StarWarsData.Services
                 agg["FamilyMembers"].AsBsonArray.OfType<BsonDocument>()
             );
 
-            var urlToId = docs
-                .Where(d => d.Contains("wikiUrl"))
+            var urlToId = docs.Where(d => d.Contains("wikiUrl"))
                 .ToDictionary(d => d["wikiUrl"].AsString, d => d["_id"].AsInt32);
 
             var nodes = new List<GraphNodeDto>();
@@ -275,8 +323,12 @@ namespace StarWarsData.Services
                         arr.FirstOrDefault(p => p["Label"].AsString == "Died")
                             ?["Values"].AsBsonArray.FirstOrDefault()
                             ?.AsString ?? string.Empty,
-                    ImageUrl = infobox != null && infobox.Contains("ImageUrl") && !infobox["ImageUrl"].IsBsonNull
-                        ? infobox["ImageUrl"].AsString : string.Empty,
+                    ImageUrl =
+                        infobox != null
+                        && infobox.Contains("ImageUrl")
+                        && !infobox["ImageUrl"].IsBsonNull
+                            ? infobox["ImageUrl"].AsString
+                            : string.Empty,
                     Parents = MapLinks("Parent(s)"),
                     Partners = MapLinks("Partner(s)"),
                     Siblings = MapLinks("Sibling(s)"),
@@ -292,13 +344,20 @@ namespace StarWarsData.Services
         /// <summary>
         /// Fetch only immediate relations using batched WikiUrl $in queries.
         /// </summary>
-        public async Task<ImmediateRelationsDto> GetImmediateRelationsAsync(int rootId, string collection = "Character")
+        public async Task<ImmediateRelationsDto> GetImmediateRelationsAsync(
+            int rootId,
+            string collection = "Character"
+        )
         {
             var filter = WithTemplate(collection, Builders<Page>.Filter.Eq(p => p.PageId, rootId));
             var root = await _pages.Find(filter).FirstOrDefaultAsync();
             if (root == null)
             {
-                _logger.LogWarning("Entity {Id} not found in {Collection} for ImmediateRelations", rootId, collection);
+                _logger.LogWarning(
+                    "Entity {Id} not found in {Collection} for ImmediateRelations",
+                    rootId,
+                    collection
+                );
                 return new ImmediateRelationsDto();
             }
 
@@ -311,23 +370,31 @@ namespace StarWarsData.Services
                     .Distinct()
                     .ToList();
 
-            var parentHrefs   = HrefsForLabel("Parent(s)");
-            var siblingHrefs  = HrefsForLabel("Sibling(s)");
+            var parentHrefs = HrefsForLabel("Parent(s)");
+            var siblingHrefs = HrefsForLabel("Sibling(s)");
             var childrenHrefs = HrefsForLabel("Children");
-            var partnerHrefs  = HrefsForLabel("Partner(s)");
+            var partnerHrefs = HrefsForLabel("Partner(s)");
 
-            var allHrefs = parentHrefs.Concat(siblingHrefs).Concat(childrenHrefs).Concat(partnerHrefs).Distinct().ToList();
+            var allHrefs = parentHrefs
+                .Concat(siblingHrefs)
+                .Concat(childrenHrefs)
+                .Concat(partnerHrefs)
+                .Distinct()
+                .ToList();
             var allHrefsVariants = allHrefs.SelectMany(WikiUrlVariants).Distinct().ToList();
 
             var templateFilter = TemplateFilter(collection);
-            var related = allHrefs.Count == 0
-                ? []
-                : await _pages.Find(
-                    Builders<Page>.Filter.And(
-                        templateFilter,
-                        Builders<Page>.Filter.In(p => p.WikiUrl, allHrefsVariants)
-                    )
-                ).ToListAsync();
+            var related =
+                allHrefs.Count == 0
+                    ? []
+                    : await _pages
+                        .Find(
+                            Builders<Page>.Filter.And(
+                                templateFilter,
+                                Builders<Page>.Filter.In(p => p.WikiUrl, allHrefsVariants)
+                            )
+                        )
+                        .ToListAsync();
 
             var byUrl = related
                 .Where(r => r.WikiUrl != null)
@@ -344,8 +411,8 @@ namespace StarWarsData.Services
 
             return new ImmediateRelationsDto
             {
-                Root     = MapToGraphNode(root),
-                Parents  = Resolve(parentHrefs),
+                Root = MapToGraphNode(root),
+                Parents = Resolve(parentHrefs),
                 Siblings = Resolve(siblingHrefs),
                 Children = Resolve(childrenHrefs),
                 Partners = Resolve(partnerHrefs),
@@ -359,80 +426,120 @@ namespace StarWarsData.Services
             int rootId,
             string collection = "Character",
             int maxDepth = 3,
-            RelationshipLabels? labels = null)
+            RelationshipLabels? labels = null
+        )
         {
             labels ??= new RelationshipLabels();
 
-            var upSet   = labels.UpLabels.ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var upSet = labels.UpLabels.ToHashSet(StringComparer.OrdinalIgnoreCase);
             var downSet = labels.DownLabels.ToHashSet(StringComparer.OrdinalIgnoreCase);
             var peerSet = labels.PeerLabels.ToHashSet(StringComparer.OrdinalIgnoreCase);
             var allLabels = labels.AllLabels;
 
             var templateFilter = TemplateFilter(collection);
-            var visited     = new Dictionary<int, GraphNodeDto>();
+            var visited = new Dictionary<int, GraphNodeDto>();
             var visitedUrls = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            var edgeSet     = new HashSet<(int from, int to, string label)>();
-            var bfsDepths   = new Dictionary<int, int> { [rootId] = 0 };
+            var edgeSet = new HashSet<(int from, int to, string label)>();
+            var bfsDepths = new Dictionary<int, int> { [rootId] = 0 };
             var generations = new Dictionary<int, int> { [rootId] = 0 };
-            var queue       = new Queue<int>();
+            var queue = new Queue<int>();
             queue.Enqueue(rootId);
 
-            _logger.LogInformation("BFS start: rootId={RootId}, collection={Collection}, maxDepth={MaxDepth}, labels=[{Labels}]",
-                rootId, collection, maxDepth, string.Join(", ", allLabels));
+            _logger.LogInformation(
+                "BFS start: rootId={RootId}, collection={Collection}, maxDepth={MaxDepth}, labels=[{Labels}]",
+                rootId,
+                collection,
+                maxDepth,
+                string.Join(", ", allLabels)
+            );
 
             while (queue.Count > 0)
             {
                 var currentId = queue.Dequeue();
-                if (visited.ContainsKey(currentId)) continue;
+                if (visited.ContainsKey(currentId))
+                    continue;
 
                 var doc = await _pages
-                    .Find(Builders<Page>.Filter.And(templateFilter, Builders<Page>.Filter.Eq(p => p.PageId, currentId)))
+                    .Find(
+                        Builders<Page>.Filter.And(
+                            templateFilter,
+                            Builders<Page>.Filter.Eq(p => p.PageId, currentId)
+                        )
+                    )
                     .FirstOrDefaultAsync();
                 if (doc == null)
                 {
-                    _logger.LogWarning("BFS: page {Id} not found with template filter for {Collection}", currentId, collection);
+                    _logger.LogWarning(
+                        "BFS: page {Id} not found with template filter for {Collection}",
+                        currentId,
+                        collection
+                    );
                     continue;
                 }
 
                 var node = MapToGraphNode(doc);
                 node.Generation = generations.TryGetValue(currentId, out var gen) ? gen : 0;
                 visited[currentId] = node;
-                if (doc.WikiUrl != null) visitedUrls.Add(NormalizeWikiUrl(doc.WikiUrl));
+                if (doc.WikiUrl != null)
+                    visitedUrls.Add(NormalizeWikiUrl(doc.WikiUrl));
 
-                _logger.LogInformation("BFS: visited {Id} ({Name}), generation={Gen}", currentId, node.Name, node.Generation);
+                _logger.LogInformation(
+                    "BFS: visited {Id} ({Name}), generation={Gen}",
+                    currentId,
+                    node.Name,
+                    node.Generation
+                );
 
                 int depth = bfsDepths[currentId];
                 if (depth >= maxDepth)
                 {
-                    _logger.LogInformation("BFS: {Id} at depth {Depth} >= maxDepth {MaxDepth}, skipping expansion", currentId, depth, maxDepth);
+                    _logger.LogInformation(
+                        "BFS: {Id} at depth {Depth} >= maxDepth {MaxDepth}, skipping expansion",
+                        currentId,
+                        depth,
+                        maxDepth
+                    );
                     continue;
                 }
 
                 var infoboxData = doc.Infobox?.Data ?? [];
 
                 // Extract hrefs per label, grouped by direction
-                var hrefsByLabel = allLabels.Distinct(StringComparer.OrdinalIgnoreCase).ToDictionary(
-                    l => l,
-                    l => HrefsForLabel(infoboxData, l),
-                    StringComparer.OrdinalIgnoreCase);
+                var hrefsByLabel = allLabels
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToDictionary(
+                        l => l,
+                        l => HrefsForLabel(infoboxData, l),
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
                 var allHrefs = hrefsByLabel.Values.SelectMany(h => h).Distinct().ToList();
-                _logger.LogInformation("BFS: {Id} has {Count} hrefs from labels [{Labels}]",
-                    currentId, allHrefs.Count, string.Join(", ", hrefsByLabel.Select(kv => $"{kv.Key}:{kv.Value.Count}")));
-                if (allHrefs.Count == 0) continue;
+                _logger.LogInformation(
+                    "BFS: {Id} has {Count} hrefs from labels [{Labels}]",
+                    currentId,
+                    allHrefs.Count,
+                    string.Join(", ", hrefsByLabel.Select(kv => $"{kv.Key}:{kv.Value.Count}"))
+                );
+                if (allHrefs.Count == 0)
+                    continue;
 
                 var variants = allHrefs.SelectMany(WikiUrlVariants).Distinct().ToList();
 
                 var neighbours = await _pages
-                    .Find(Builders<Page>.Filter.And(
-                        templateFilter,
-                        Builders<Page>.Filter.In(p => p.WikiUrl, variants)
-                    ))
+                    .Find(
+                        Builders<Page>.Filter.And(
+                            templateFilter,
+                            Builders<Page>.Filter.In(p => p.WikiUrl, variants)
+                        )
+                    )
                     .Project(p => new { p.PageId, p.WikiUrl })
                     .ToListAsync();
 
-                _logger.LogInformation("BFS: {Id} found {Count} neighbours matching template",
-                    currentId, neighbours.Count);
+                _logger.LogInformation(
+                    "BFS: {Id} found {Count} neighbours matching template",
+                    currentId,
+                    neighbours.Count
+                );
                 foreach (var nb in neighbours)
                     _logger.LogInformation("BFS:   neighbour {Id} -> {Url}", nb.PageId, nb.WikiUrl);
 
@@ -449,33 +556,50 @@ namespace StarWarsData.Services
                     foreach (var href in hrefs)
                     {
                         var id = ResolveId(href);
-                        if (id == 0 || id == currentId) continue;
+                        if (id == 0 || id == currentId)
+                            continue;
 
                         var edgeLabel = label.TrimEnd('(', ')', 's').TrimEnd().ToLowerInvariant();
 
                         if (downSet.Contains(label))
-                            edgeSet.Add((currentId, id, edgeLabel));           // current→child directed
+                            edgeSet.Add((currentId, id, edgeLabel)); // current→child directed
                         else if (upSet.Contains(label))
-                            edgeSet.Add((id, currentId, edgeLabel));           // ancestor→current directed
+                            edgeSet.Add((id, currentId, edgeLabel)); // ancestor→current directed
                         else // peer
                             edgeSet.Add((Math.Min(currentId, id), Math.Max(currentId, id), edgeLabel));
 
-                        _logger.LogInformation("BFS: edge {From}->{To} ({Label})", currentId, id, edgeLabel);
+                        _logger.LogInformation(
+                            "BFS: edge {From}->{To} ({Label})",
+                            currentId,
+                            id,
+                            edgeLabel
+                        );
                     }
                 }
 
                 // Build up/down href sets for generation assignment
-                var upHrefSet   = hrefsByLabel.Where(kv => upSet.Contains(kv.Key)).SelectMany(kv => kv.Value).ToHashSet();
-                var downHrefSet = hrefsByLabel.Where(kv => downSet.Contains(kv.Key)).SelectMany(kv => kv.Value).ToHashSet();
+                var upHrefSet = hrefsByLabel
+                    .Where(kv => upSet.Contains(kv.Key))
+                    .SelectMany(kv => kv.Value)
+                    .ToHashSet();
+                var downHrefSet = hrefsByLabel
+                    .Where(kv => downSet.Contains(kv.Key))
+                    .SelectMany(kv => kv.Value)
+                    .ToHashSet();
                 int currentGen = generations.TryGetValue(currentId, out var cg) ? cg : 0;
 
-                foreach (var n in neighbours.Where(n => n.PageId != 0 && !visited.ContainsKey(n.PageId)))
+                foreach (
+                    var n in neighbours.Where(n => n.PageId != 0 && !visited.ContainsKey(n.PageId))
+                )
                 {
                     // Skip Canon/Legends duplicates of already-visited entities
                     var normalizedUrl = n.WikiUrl != null ? NormalizeWikiUrl(n.WikiUrl) : "";
                     if (!string.IsNullOrEmpty(normalizedUrl) && visitedUrls.Contains(normalizedUrl))
                     {
-                        _logger.LogInformation("BFS: skipping {Id} (URL duplicate of visited entity)", n.PageId);
+                        _logger.LogInformation(
+                            "BFS: skipping {Id} (URL duplicate of visited entity)",
+                            n.PageId
+                        );
                         continue;
                     }
 
@@ -493,24 +617,40 @@ namespace StarWarsData.Services
                     if (!generations.ContainsKey(n.PageId))
                         generations[n.PageId] = neighbourGen;
                     queue.Enqueue(n.PageId);
-                    _logger.LogInformation("BFS: enqueued {Id} at depth {Depth}, generation {Gen}", n.PageId, depth + 1, neighbourGen);
+                    _logger.LogInformation(
+                        "BFS: enqueued {Id} at depth {Depth}, generation {Gen}",
+                        n.PageId,
+                        depth + 1,
+                        neighbourGen
+                    );
                 }
             }
 
-            _logger.LogInformation("BFS complete: {NodeCount} nodes, {EdgeCount} edges",
-                visited.Count, edgeSet.Count);
+            _logger.LogInformation(
+                "BFS complete: {NodeCount} nodes, {EdgeCount} edges",
+                visited.Count,
+                edgeSet.Count
+            );
 
             var edges = edgeSet
-                .Select(e => new GraphEdge { FromId = e.from, ToId = e.to, Label = e.label })
+                .Select(e => new GraphEdge
+                {
+                    FromId = e.from,
+                    ToId = e.to,
+                    Label = e.label,
+                })
                 .ToList();
 
-            return new GraphResult { RootId = rootId, Nodes = visited, Edges = edges };
+            return new GraphResult
+            {
+                RootId = rootId,
+                Nodes = visited,
+                Edges = edges,
+            };
         }
 
         static string NormalizeWikiUrl(string url) =>
-            Uri.UnescapeDataString(url)
-                .Replace("/Legends", "")
-                .Replace("/Canon", "");
+            Uri.UnescapeDataString(url).Replace("/Legends", "").Replace("/Canon", "");
 
         static GraphNodeDto MapToGraphNode(Page page)
         {

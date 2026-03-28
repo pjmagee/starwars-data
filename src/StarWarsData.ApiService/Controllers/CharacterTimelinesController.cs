@@ -18,7 +18,8 @@ public class CharacterTimelinesController : ControllerBase
         CharacterTimelineService service,
         CharacterTimelineTracker tracker,
         IServiceScopeFactory scopeFactory,
-        ILogger<CharacterTimelinesController> logger)
+        ILogger<CharacterTimelinesController> logger
+    )
     {
         _service = service;
         _tracker = tracker;
@@ -32,7 +33,8 @@ public class CharacterTimelinesController : ControllerBase
         [FromQuery] int pageSize = 12,
         [FromQuery] string? search = null,
         [FromQuery] Continuity? continuity = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default
+    )
     {
         return await _service.ListTimelinesAsync(page, pageSize, search, continuity, ct);
     }
@@ -41,7 +43,8 @@ public class CharacterTimelinesController : ControllerBase
     public async Task<List<CharacterSearchResult>> Search(
         [FromQuery] string query,
         [FromQuery] Continuity? continuity = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default
+    )
     {
         if (string.IsNullOrWhiteSpace(query))
             return [];
@@ -59,7 +62,10 @@ public class CharacterTimelinesController : ControllerBase
     }
 
     [HttpGet("{pageId:int}/character")]
-    public async Task<ActionResult<CharacterSearchResult>> GetCharacterInfo(int pageId, CancellationToken ct)
+    public async Task<ActionResult<CharacterSearchResult>> GetCharacterInfo(
+        int pageId,
+        CancellationToken ct
+    )
     {
         var info = await _service.GetCharacterInfoAsync(pageId, _tracker, ct);
         if (info is null)
@@ -78,13 +84,16 @@ public class CharacterTimelinesController : ControllerBase
         var hasPending = await _service.HasPendingCheckpointsAsync(pageId, ct);
         if (hasPending)
         {
-            return Ok(new GenerationStatus
-            {
-                Stage = GenerationStage.Failed,
-                Message = "Generation was interrupted. Click Retry to resume from where it left off.",
-                HasPendingCheckpoint = true,
-                StartedAt = DateTime.UtcNow,
-            });
+            return Ok(
+                new GenerationStatus
+                {
+                    Stage = GenerationStage.Failed,
+                    Message =
+                        "Generation was interrupted. Click Retry to resume from where it left off.",
+                    HasPendingCheckpoint = true,
+                    StartedAt = DateTime.UtcNow,
+                }
+            );
         }
 
         return NotFound();
@@ -110,7 +119,11 @@ public class CharacterTimelinesController : ControllerBase
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Background timeline generation failed for PageId={PageId}", pageId);
+                _logger.LogError(
+                    ex,
+                    "Background timeline generation failed for PageId={PageId}",
+                    pageId
+                );
                 _tracker.Fail(pageId, ex.Message);
             }
         });

@@ -20,7 +20,7 @@ public class GraphResult
 public class GraphEdge
 {
     public int FromId { get; init; }
-    public int ToId   { get; init; }
+    public int ToId { get; init; }
     public string Label { get; init; } = "child";
 }
 

@@ -1,0 +1,65 @@
+@using StarWarsData.Frontend.Models
+@inject IHttpClientFactory HttpClientFactory
+@implements IDisposable
+
+@if (_report != null && _report.Status != HealthStatus.Healthy
+                      && _report.Status != HealthStatus.Unknown)
+{
+    <MudAlert Severity="@GetSeverity()" Variant="Variant.Filled" Dense="true" Class="mb-2"
+              CloseIconClicked="() => _dismissed = true" ShowCloseIcon="true"
+              Style="@(_dismissed ? "display:none;" : "")">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudText Typo="Typo.body2" Style="font-weight: 600;">
+                OpenAI: @_report.Status
+            </MudText>
+            @if (_report.ErrorsLastHour > 0)
+            {
+                <MudText Typo="Typo.caption">(@_report.ErrorsLastHour errors in last hour)</MudText>
+            }
+            <MudSpacer />
+            <MudButton Variant="Variant.Text" Size="Size.Small" Href="/admin/openai-status"
+                       Style="color: inherit; text-decoration: underline;">
+                View Details
+            </MudButton>
+        </MudStack>
+    </MudAlert>
+}
+
+@code {
+    OpenAiHealthReport? _report;
+    bool _dismissed;
+    System.Timers.Timer? _timer;
+    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStatus();
+        _timer = new System.Timers.Timer(30_000);
+        _timer.Elapsed += async (_, _) => await InvokeAsync(LoadStatus);
+        _timer.Start();
+    }
+
+    async Task LoadStatus()
+    {
+        try
+        {
+            _report = await Http.GetFromJsonAsync<OpenAiHealthReport>("api/admin/openai/status");
+            StateHasChanged();
+        }
+        catch { }
+    }
+
+    MudBlazor.Severity GetSeverity() => _report?.Status switch
+    {
+        HealthStatus.QuotaExceeded => MudBlazor.Severity.Error,
+        HealthStatus.RateLimited => MudBlazor.Severity.Warning,
+        HealthStatus.Degraded => MudBlazor.Severity.Warning,
+        _ => MudBlazor.Severity.Info
+    };
+
+    public void Dispose()
+    {
+        _timer?.Stop();
+        _timer?.Dispose();
+    }
+}

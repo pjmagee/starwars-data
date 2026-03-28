@@ -67,7 +67,10 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
             new BsonDocument
             {
                 { "Label", "Titles" },
-                { "Values", new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(name), "i")) },
+                {
+                    "Values",
+                    new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(name), "i"))
+                },
             }
         );
 
@@ -244,7 +247,10 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                         { "Label", label },
                         {
                             "Values",
-                            new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(value), "i"))
+                            new BsonDocument(
+                                "$regex",
+                                new BsonRegularExpression(EscapeRegex(value), "i")
+                            )
                         },
                     }
                 )
@@ -392,7 +398,10 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                         { "Label", dateLabel },
                         {
                             "Values",
-                            new BsonDocument("$regex", new BsonRegularExpression(EscapeRegex(date), "i"))
+                            new BsonDocument(
+                                "$regex",
+                                new BsonRegularExpression(EscapeRegex(date), "i")
+                            )
                         },
                     }
                 )
@@ -588,7 +597,8 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
                 {
                     label = d["Label"].AsString,
                     linkCount = d["Links"].AsBsonArray.Count,
-                    sampleLinks = d["Links"].AsBsonArray.OfType<BsonDocument>()
+                    sampleLinks = d["Links"]
+                        .AsBsonArray.OfType<BsonDocument>()
                         .Take(3)
                         .Select(l => l.Contains("Text") ? l["Text"].AsString : "")
                         .Where(t => !string.IsNullOrWhiteSpace(t))
@@ -609,15 +619,25 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
         {
             new BsonDocument("$match", matchDoc),
             new BsonDocument("$unwind", "$infobox.Data"),
-            new BsonDocument("$match", new BsonDocument("infobox.Data.Links",
-                new BsonDocument("$exists", true))),
-            new BsonDocument("$match", new BsonDocument("infobox.Data.Links",
-                new BsonDocument("$not", new BsonDocument("$size", 0)))),
-            new BsonDocument("$group", new BsonDocument
-            {
-                { "_id", "$infobox.Data.Label" },
-                { "pageCount", new BsonDocument("$sum", 1) },
-            }),
+            new BsonDocument(
+                "$match",
+                new BsonDocument("infobox.Data.Links", new BsonDocument("$exists", true))
+            ),
+            new BsonDocument(
+                "$match",
+                new BsonDocument(
+                    "infobox.Data.Links",
+                    new BsonDocument("$not", new BsonDocument("$size", 0))
+                )
+            ),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { "_id", "$infobox.Data.Label" },
+                    { "pageCount", new BsonDocument("$sum", 1) },
+                }
+            ),
             new BsonDocument("$sort", new BsonDocument("pageCount", -1)),
             new BsonDocument("$limit", 50),
         };

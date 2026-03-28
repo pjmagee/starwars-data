@@ -11,11 +11,7 @@
 
 <PageTitle>Graph Explorer</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-8 px-4">
-    <MudText Typo="Typo.h3" Class="mb-2">Graph Explorer</MudText>
-    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
-        Explore the persistent relationship graph built by the LLM analyst agent.
-    </MudText>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
     <!-- Search Bar -->
     <MudGrid Class="mb-4">
@@ -112,7 +108,7 @@
                     <MudText Typo="Typo.body2">@_maxDepth</MudText>
                     <MudButton Variant="Variant.Filled" Color="Color.Primary"
                                StartIcon="@Icons.Material.Filled.Hub"
-                               OnClick="LoadGraph" Disabled="_graphLoading"
+                               OnClick="LoadGraph" Disabled="@(_graphLoading || _selectedLabels.Count == 0)"
                                Size="Size.Medium">
                         Show Graph
                     </MudButton>
@@ -141,9 +137,15 @@
                         </MudChip>
                     }
                 </MudStack>
-                <MudStack Row="true" Spacing="2" Class="mt-2">
+                <MudStack Row="true" Spacing="2" Class="mt-2" AlignItems="AlignItems.Center">
                     <MudButton Variant="Variant.Text" Size="Size.Small" OnClick="SelectAllLabels">Select All</MudButton>
                     <MudButton Variant="Variant.Text" Size="Size.Small" OnClick="ClearLabels">Clear</MudButton>
+                    @if (_selectedLabels.Count == 0)
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Warning">
+                            Select at least one label to explore the graph
+                        </MudText>
+                    }
                 </MudStack>
             }
             else if (!_loadingLabels)
@@ -491,9 +493,7 @@
             if (!string.IsNullOrEmpty(labelsQs))
                 labelsUrl += $"?{labelsQs}";
             _availableLabels = await Api.GetFromJsonAsync<List<string>>(labelsUrl);
-
-            if (_availableLabels is { Count: > 0 })
-                _selectedLabels = new HashSet<string>(_availableLabels);
+            _selectedLabels.Clear();
         }
         catch (Exception ex)
         {

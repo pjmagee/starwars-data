@@ -359,6 +359,59 @@ public class TimelineService
     }
 
     /// <summary>
+    /// Load eras from the Era collection in the timeline events database.
+    /// Groups documents by title to build start/end year ranges.
+    /// </summary>
+    public async Task<List<Era>> GetErasAsync(CancellationToken ct = default)
+    {
+        var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(cancellationToken: ct);
+        if (!collectionNames.ToList().Contains("Era"))
+            return [];
+
+        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>("Era");
+        var docs = await eraCollection
+            .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
+            .ToListAsync(ct);
+
+        var grouped = docs
+            .GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
+            .Where(g => !string.IsNullOrWhiteSpace(g.Key));
+
+        var eras = new List<Era>();
+        foreach (var group in grouped)
+        {
+            var entries = group
+                .Select(e => (year: e.Year!.Value, dem: e.Demarcation))
+                .OrderBy(e => e.dem == Demarcation.Bby ? -e.year : e.year)
+                .ToList();
+
+            var start = entries.First();
+            var end = entries.Last();
+
+            eras.Add(new Era
+            {
+                Name = group.Key,
+                StartYear = start.year,
+                StartDemarcation = start.dem,
+                EndYear = end.year,
+                EndDemarcation = end.dem
+            });
+        }
+
+        // Sort chronologically
+        eras.Sort((a, b) =>
+            ToLinearYear(a.StartYear, a.StartDemarcation)
+                .CompareTo(ToLinearYear(b.StartYear, b.StartDemarcation)));
+
+        return eras;
+    }
+
+    static string StripLegendsSuffix(string title) =>
+        title.EndsWith("/Legends", StringComparison.OrdinalIgnoreCase)
+            ? title[..^"/Legends".Length]
+            : title;
+
+    /// <summary>
     /// Converts a year + demarcation into a linear value where BBY is negative and ABY is positive.
     /// e.g. 19 BBY = -19, 4 ABY = 4, 0 BBY = 0
     /// </summary>

@@ -6,9 +6,18 @@
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AutoAwesome">Ask AI</MudNavLink>
     <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline">Timeline</MudNavLink>
     <MudNavLink Href="/character-timelines" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Character Timelines</MudNavLink>
-    <MudNavLink Href="/galactic-map" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Map">Galaxy</MudNavLink>
     <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">Data Tables</MudNavLink>
     <MudNavLink Href="/graph-explorer" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Hub">Graph Explorer</MudNavLink>
+
+    <MudDivider Class="my-2" />
+    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">Galaxy</MudText>
+    <MudNavLink Href="/galactic-map" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Map">Grid Map</MudNavLink>
+    <MudNavLink Href="/galactic-map-v2" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Explore">Interactive Map</MudNavLink>
+    <MudNavLink Href="/galaxy-events" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Whatshot">Events Heatmap</MudNavLink>
+
+    <MudDivider Class="my-2" />
+    <MudNavLink Href="/about" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info">About</MudNavLink>
+
     <AuthorizeView>
         <Authorized>
             <MudDivider Class="my-2" />
@@ -23,6 +32,7 @@
             <MudNavLink Href="/admin" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin</MudNavLink>
             <MudNavLink Href="/admin/graph-builder" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Hub">Graph Builder</MudNavLink>
             <MudNavLink Href="/admin/article-chunks" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Psychology">Article Chunks</MudNavLink>
+            <MudNavLink Href="/admin/openai-status" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.MonitorHeart">OpenAI Status</MudNavLink>
         </Authorized>
     </AuthorizeView>
 </MudNavMenu>

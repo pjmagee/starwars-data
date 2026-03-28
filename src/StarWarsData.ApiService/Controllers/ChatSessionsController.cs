@@ -18,7 +18,8 @@ public class ChatSessionsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<ChatSessionSummary>>> GetSessions(
         [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -30,13 +31,15 @@ public class ChatSessionsController : ControllerBase
     public async Task<ActionResult<ChatSessionDetail>> GetSession(
         Guid sessionId,
         [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
         var session = await _chatSessionService.GetSessionAsync(userId, sessionId, ct);
-        if (session is null) return NotFound();
+        if (session is null)
+            return NotFound();
         return session;
     }
 
@@ -44,7 +47,8 @@ public class ChatSessionsController : ControllerBase
     public async Task<ActionResult<Guid>> SaveSession(
         [FromHeader(Name = "X-User-Id")] string? userId,
         [FromBody] SaveChatSessionRequest request,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -58,7 +62,8 @@ public class ChatSessionsController : ControllerBase
         Guid sessionId,
         [FromHeader(Name = "X-User-Id")] string? userId,
         [FromBody] SaveChatSessionRequest request,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -71,7 +76,8 @@ public class ChatSessionsController : ControllerBase
     public async Task<IActionResult> DeleteSession(
         Guid sessionId,
         [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();

@@ -22,12 +22,18 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
             .GetCollection<BsonDocument>("WorkflowCheckpoints");
 
         // Ensure index on sessionId for fast lookups
-        _collection.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(
-            Builders<BsonDocument>.IndexKeys.Ascending("sessionId")));
+        _collection.Indexes.CreateOne(
+            new CreateIndexModel<BsonDocument>(
+                Builders<BsonDocument>.IndexKeys.Ascending("sessionId")
+            )
+        );
     }
 
     public async ValueTask<CheckpointInfo> CreateCheckpointAsync(
-        string sessionId, JsonElement value, CheckpointInfo? parent)
+        string sessionId,
+        JsonElement value,
+        CheckpointInfo? parent
+    )
     {
         var checkpointId = Guid.NewGuid().ToString("N");
         var info = new CheckpointInfo(sessionId, checkpointId);
@@ -37,7 +43,9 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
             ["_id"] = $"{sessionId}|{checkpointId}",
             ["sessionId"] = sessionId,
             ["checkpointId"] = checkpointId,
-            ["parentCheckpointId"] = parent?.CheckpointId is string pid ? (BsonValue)pid : BsonNull.Value,
+            ["parentCheckpointId"] = parent?.CheckpointId is string pid
+                ? (BsonValue)pid
+                : BsonNull.Value,
             ["value"] = BsonDocument.Parse(value.GetRawText()),
             ["createdAt"] = DateTime.UtcNow,
         };
@@ -47,7 +55,9 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
     }
 
     public async ValueTask<JsonElement> RetrieveCheckpointAsync(
-        string sessionId, CheckpointInfo key)
+        string sessionId,
+        CheckpointInfo key
+    )
     {
         var docId = $"{sessionId}|{key.CheckpointId}";
         var doc = await _collection
@@ -62,22 +72,24 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
     }
 
     public async ValueTask<IEnumerable<CheckpointInfo>> RetrieveIndexAsync(
-        string sessionId, CheckpointInfo? withParent = null)
+        string sessionId,
+        CheckpointInfo? withParent = null
+    )
     {
         var filter = Builders<BsonDocument>.Filter.Eq("sessionId", sessionId);
 
         if (withParent is not null)
-            filter &= Builders<BsonDocument>.Filter.Eq("parentCheckpointId", withParent.CheckpointId);
+            filter &= Builders<BsonDocument>.Filter.Eq(
+                "parentCheckpointId",
+                withParent.CheckpointId
+            );
 
-        var docs = await _collection
-            .Find(filter)
-            .SortBy(d => d["createdAt"])
-            .ToListAsync();
+        var docs = await _collection.Find(filter).SortBy(d => d["createdAt"]).ToListAsync();
 
-        return docs
-            .Select(d => new CheckpointInfo(
+        return docs.Select(d => new CheckpointInfo(
                 d["sessionId"].AsString,
-                d["checkpointId"].AsString))
+                d["checkpointId"].AsString
+            ))
             .ToList();
     }
 
@@ -86,7 +98,6 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
     /// </summary>
     public async Task ClearSessionAsync(string sessionId)
     {
-        await _collection.DeleteManyAsync(
-            Builders<BsonDocument>.Filter.Eq("sessionId", sessionId));
+        await _collection.DeleteManyAsync(Builders<BsonDocument>.Filter.Eq("sessionId", sessionId));
     }
 }

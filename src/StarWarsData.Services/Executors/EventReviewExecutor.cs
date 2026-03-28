@@ -18,13 +18,17 @@ internal sealed class EventReviewExecutor : Executor<string, string>
     private readonly CharacterTimelineTracker? _tracker;
     private readonly int _characterPageId;
 
-    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
 
     public EventReviewExecutor(
         IChatClient chatClient,
         ILogger logger,
         CharacterTimelineTracker? tracker,
-        int characterPageId)
+        int characterPageId
+    )
         : base("EventReview")
     {
         _chatClient = chatClient;
@@ -34,26 +38,40 @@ internal sealed class EventReviewExecutor : Executor<string, string>
     }
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
         // Try Consolidation state first (5-executor workflow), fall back to Extraction (legacy 3-executor)
-        var events = await context.ReadStateAsync<List<ExtractedEvent>>("events", "Consolidation", ct)
+        var events =
+            await context.ReadStateAsync<List<ExtractedEvent>>("events", "Consolidation", ct)
             ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "BatchExtraction", ct)
             ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "Extraction", ct)
             ?? throw new InvalidOperationException("No events found in workflow state");
 
-        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct)
+        var characterTitle =
+            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
+
+        var characterContinuity =
+            await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
             ?? "Unknown";
 
-        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
-            ?? "Unknown";
-
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Reviewing,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Reviewing,
             $"AI is reviewing and deduplicating {events.Count} events...",
-            currentStep: 0, totalSteps: 1,
-            currentItem: characterTitle, eventsExtracted: events.Count);
+            currentStep: 0,
+            totalSteps: 1,
+            currentItem: characterTitle,
+            eventsExtracted: events.Count
+        );
 
-        _logger.LogInformation("Reviewing {EventCount} events for {Title}", events.Count, characterTitle);
+        _logger.LogInformation(
+            "Reviewing {EventCount} events for {Title}",
+            events.Count,
+            characterTitle
+        );
 
         if (events.Count == 0)
             return "{}";
@@ -82,13 +100,15 @@ internal sealed class EventReviewExecutor : Executor<string, string>
         {
             ResponseFormat = ChatResponseFormat.ForJsonSchema<TimelineResponseSchema>(
                 schemaName: "character_timeline",
-                schemaDescription: "Reviewed and consolidated timeline events for a Star Wars character"),
+                schemaDescription: "Reviewed and consolidated timeline events for a Star Wars character"
+            ),
         };
 
         var response = await _chatClient.GetResponseAsync(
             [new ChatMessage(ChatRole.User, prompt)],
             chatOptions,
-            ct);
+            ct
+        );
 
         var text = response.Text?.Trim() ?? "";
 
@@ -97,16 +117,27 @@ internal sealed class EventReviewExecutor : Executor<string, string>
         try
         {
             var parsed = JsonSerializer.Deserialize<TimelineResponseSchema>(
-                text.StartsWith("```") ? StripMarkdownFences(text) : text, JsonOptions);
+                text.StartsWith("```") ? StripMarkdownFences(text) : text,
+                JsonOptions
+            );
             outputCount = parsed?.Events?.Count ?? 0;
         }
-        catch { /* best-effort count */ }
+        catch
+        { /* best-effort count */
+        }
 
-        await context.AddEventAsync(new ReviewCompleteEvent(new ReviewCompleteData(
-            events.Count, outputCount, events.Count - outputCount)), ct);
+        await context.AddEventAsync(
+            new ReviewCompleteEvent(
+                new ReviewCompleteData(events.Count, outputCount, events.Count - outputCount)
+            ),
+            ct
+        );
 
-        _logger.LogInformation("Review complete for {Title}: response length {Length}",
-            characterTitle, text.Length);
+        _logger.LogInformation(
+            "Review complete for {Title}: response length {Length}",
+            characterTitle,
+            text.Length
+        );
 
         return text;
     }

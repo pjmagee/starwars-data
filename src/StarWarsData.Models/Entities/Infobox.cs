@@ -12,12 +12,12 @@ namespace StarWarsData.Models.Entities;
 public class Infobox
 {
     [BsonId]
-    [BsonElement]    
+    [BsonElement]
     public int PageId { get; set; }
 
     [BsonElement]
-    public string? WikiUrl { get; set; }    
-    
+    public string? WikiUrl { get; set; }
+
     [BsonElement]
     public string Template { get; set; } = null!;
 

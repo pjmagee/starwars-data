@@ -25,7 +25,8 @@ public class TimelineController : ControllerBase
     }
 
     [HttpGet("eras")]
-    public Era[] GetEras() => Era.CanonEras;
+    public async Task<List<Era>> GetEras(CancellationToken ct) =>
+        await _timelineService.GetErasAsync(ct);
 
     [HttpGet("events")]
     public async Task<GroupedTimelineResult?> GetTimelineEvents(
@@ -57,7 +58,11 @@ public class TimelineController : ControllerBase
         CancellationToken cancellationToken = default
     )
     {
-        return await _recordService.GetFilteredCollectionNames(continuity, universe, cancellationToken);
+        return await _recordService.GetFilteredCollectionNames(
+            continuity,
+            universe,
+            cancellationToken
+        );
     }
 
     [HttpGet("categories/{category}/events")]

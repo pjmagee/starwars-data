@@ -25,7 +25,10 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
     private readonly int _characterPageId;
     private readonly IMongoCollection<ExtractionProgressDoc> _progressCollection;
 
-    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
 
     // In-memory state, seeded from MongoDB on HandleAsync entry
     private HashSet<int> _processedPageIds = [];
@@ -37,7 +40,8 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         CharacterTimelineTracker? tracker,
         int characterPageId,
         IMongoClient mongoClient,
-        string databaseName)
+        string databaseName
+    )
         : base("EventExtraction")
     {
         _chatClient = chatClient;
@@ -50,20 +54,30 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
     }
 
     protected override ValueTask OnCheckpointingAsync(
-        IWorkflowContext context, CancellationToken cancellationToken)
+        IWorkflowContext context,
+        CancellationToken cancellationToken
+    )
     {
         // Still save to workflow state at superstep boundaries for framework consistency
-        return context.QueueStateUpdateAsync("checkpoint",
+        return context.QueueStateUpdateAsync(
+            "checkpoint",
             new ExtractionCheckpoint(_processedPageIds.ToList(), _accumulatedEvents),
-            "Extraction", cancellationToken);
+            "Extraction",
+            cancellationToken
+        );
     }
 
     protected override async ValueTask OnCheckpointRestoredAsync(
-        IWorkflowContext context, CancellationToken cancellationToken)
+        IWorkflowContext context,
+        CancellationToken cancellationToken
+    )
     {
         // Framework checkpoint restore — but our MongoDB progress is the real source of truth
         var checkpoint = await context.ReadStateAsync<ExtractionCheckpoint>(
-            "checkpoint", "Extraction", cancellationToken);
+            "checkpoint",
+            "Extraction",
+            cancellationToken
+        );
 
         if (checkpoint is not null)
         {
@@ -71,20 +85,27 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
             _accumulatedEvents = [.. checkpoint.Events];
             _logger.LogInformation(
                 "Restored extraction checkpoint from workflow state: {ProcessedCount} pages, {EventCount} events",
-                _processedPageIds.Count, _accumulatedEvents.Count);
+                _processedPageIds.Count,
+                _accumulatedEvents.Count
+            );
         }
     }
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
-        var pages = await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct)
+        var pages =
+            await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct)
             ?? throw new InvalidOperationException("No pages found in Discovery state");
 
-        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct)
-            ?? "Unknown";
+        var characterTitle =
+            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
 
-        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
+        var characterContinuity =
+            await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
             ?? "Unknown";
 
         // ── Restore from MongoDB per-page progress (survives mid-extraction crashes) ──
@@ -96,17 +117,28 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         {
             _logger.LogInformation(
                 "Resuming extraction for {Title}: {Remaining}/{Total} pages remaining ({EventCount} events already accumulated)",
-                characterTitle, remaining.Count, pages.Count, _accumulatedEvents.Count);
+                characterTitle,
+                remaining.Count,
+                pages.Count,
+                _accumulatedEvents.Count
+            );
         }
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Extracting,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Extracting,
             $"Extracting from {remaining.Count} pages ({_processedPageIds.Count} already done)...",
-            currentStep: _processedPageIds.Count, totalSteps: pages.Count,
+            currentStep: _processedPageIds.Count,
+            totalSteps: pages.Count,
             currentItem: remaining.FirstOrDefault()?.Title,
-            eventsExtracted: _accumulatedEvents.Count);
+            eventsExtracted: _accumulatedEvents.Count
+        );
 
-        _logger.LogInformation("Starting per-page extraction for {Title}: {Count} pages remaining",
-            characterTitle, remaining.Count);
+        _logger.LogInformation(
+            "Starting per-page extraction for {Title}: {Count} pages remaining",
+            characterTitle,
+            remaining.Count
+        );
 
         var processed = _processedPageIds.Count;
 
@@ -114,18 +146,31 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         {
             ct.ThrowIfCancellationRequested();
 
-            _tracker?.UpdateProgress(_characterPageId, GenerationStage.Extracting,
+            _tracker?.UpdateProgress(
+                _characterPageId,
+                GenerationStage.Extracting,
                 $"Extracting events from \"{page.Title}\" ({processed + 1}/{pages.Count})...",
-                currentStep: processed, totalSteps: pages.Count,
+                currentStep: processed,
+                totalSteps: pages.Count,
                 currentItem: page.Title,
-                eventsExtracted: _accumulatedEvents.Count);
+                eventsExtracted: _accumulatedEvents.Count
+            );
 
-            await context.AddEventAsync(new ExtractionPageStartedEvent(
-                new ExtractionPageStartedData(page.Title, processed + 1, pages.Count)), ct);
+            await context.AddEventAsync(
+                new ExtractionPageStartedEvent(
+                    new ExtractionPageStartedData(page.Title, processed + 1, pages.Count)
+                ),
+                ct
+            );
 
             try
             {
-                var events = await ExtractEventsFromPage(page, characterTitle, characterContinuity, ct);
+                var events = await ExtractEventsFromPage(
+                    page,
+                    characterTitle,
+                    characterContinuity,
+                    ct
+                );
                 _accumulatedEvents.AddRange(events);
                 _processedPageIds.Add(page.PageId);
                 processed++;
@@ -141,24 +186,45 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
                 {
                     foreach (var evt in events)
                     {
-                        await context.AddEventAsync(new EventExtractedEvent(new EventExtractedData(
-                            evt.EventType, evt.Description, evt.Year,
-                            evt.Demarcation, page.Title)), ct);
+                        await context.AddEventAsync(
+                            new EventExtractedEvent(
+                                new EventExtractedData(
+                                    evt.EventType,
+                                    evt.Description,
+                                    evt.Year,
+                                    evt.Demarcation,
+                                    page.Title
+                                )
+                            ),
+                            ct
+                        );
                     }
                 }
 
                 _logger.LogInformation(
                     "Extracted {EventCount} events from {PageTitle} ({Processed}/{Total})",
-                    events.Count, page.Title, processed, pages.Count);
+                    events.Count,
+                    page.Title,
+                    processed,
+                    pages.Count
+                );
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Failed to extract events from {PageTitle}, skipping", page.Title);
+                _logger.LogWarning(
+                    ex,
+                    "Failed to extract events from {PageTitle}, skipping",
+                    page.Title
+                );
                 _processedPageIds.Add(page.PageId);
                 await SaveMongoProgressAsync(ct);
 
-                await context.AddEventAsync(new ExtractionPageFailedEvent(
-                    new ExtractionPageFailedData(page.Title, ex.Message)), ct);
+                await context.AddEventAsync(
+                    new ExtractionPageFailedEvent(
+                        new ExtractionPageFailedData(page.Title, ex.Message)
+                    ),
+                    ct
+                );
             }
         }
 
@@ -168,8 +234,12 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         // Clean up per-page progress — extraction is complete
         await ClearMongoProgressAsync(ct);
 
-        _logger.LogInformation("Extraction complete for {Title}: {EventCount} events from {PageCount} pages",
-            characterTitle, _accumulatedEvents.Count, processed);
+        _logger.LogInformation(
+            "Extraction complete for {Title}: {EventCount} events from {PageCount} pages",
+            characterTitle,
+            _accumulatedEvents.Count,
+            processed
+        );
 
         return $"Extracted {_accumulatedEvents.Count} events from {processed} pages for {characterTitle}";
     }
@@ -191,7 +261,9 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
                 _accumulatedEvents = [.. doc.Events];
                 _logger.LogInformation(
                     "Restored extraction progress from MongoDB: {ProcessedCount} pages, {EventCount} events",
-                    _processedPageIds.Count, _accumulatedEvents.Count);
+                    _processedPageIds.Count,
+                    _accumulatedEvents.Count
+                );
             }
         }
     }
@@ -210,20 +282,26 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
             Builders<ExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
             doc,
             new ReplaceOptions { IsUpsert = true },
-            ct);
+            ct
+        );
     }
 
     private async Task ClearMongoProgressAsync(CancellationToken ct)
     {
         await _progressCollection.DeleteOneAsync(
             Builders<ExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
-            ct);
+            ct
+        );
     }
 
     // ── LLM extraction ──────────────────────────────────────────────────────
 
     private async Task<List<ExtractedEvent>> ExtractEventsFromPage(
-        PageContent page, string characterTitle, string continuity, CancellationToken ct)
+        PageContent page,
+        string characterTitle,
+        string continuity,
+        CancellationToken ct
+    )
     {
         var prompt = $"""
             Extract timeline events for the character "{characterTitle}" from this wiki page.
@@ -255,13 +333,15 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         {
             ResponseFormat = ChatResponseFormat.ForJsonSchema<PageExtractionSchema>(
                 schemaName: "page_events",
-                schemaDescription: "Events extracted from a single wiki page"),
+                schemaDescription: "Events extracted from a single wiki page"
+            ),
         };
 
         var response = await _chatClient.GetResponseAsync(
             [new ChatMessage(ChatRole.User, prompt)],
             chatOptions,
-            ct);
+            ct
+        );
 
         var text = response.Text?.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -280,17 +360,19 @@ internal sealed class EventExtractionExecutor : Executor<string, string>
         if (schema?.Events is null || schema.Events.Count == 0)
             return [];
 
-        return schema.Events.Select(e => new ExtractedEvent(
-            e.EventType ?? "Other",
-            e.Description ?? "",
-            e.Year,
-            e.Demarcation,
-            e.DateDescription,
-            e.Location,
-            e.RelatedCharacters ?? [],
-            page.Title,
-            page.WikiUrl
-        )).ToList();
+        return schema
+            .Events.Select(e => new ExtractedEvent(
+                e.EventType ?? "Other",
+                e.Description ?? "",
+                e.Year,
+                e.Demarcation,
+                e.DateDescription,
+                e.Location,
+                e.RelatedCharacters ?? [],
+                page.Title,
+                page.WikiUrl
+            ))
+            .ToList();
     }
 }
 
@@ -321,11 +403,13 @@ internal sealed record ExtractedEvent(
     string? Location,
     List<string> RelatedCharacters,
     string SourcePageTitle,
-    string SourceWikiUrl);
+    string SourceWikiUrl
+);
 
 /// <summary>
 /// Checkpoint state for framework superstep boundaries.
 /// </summary>
 internal sealed record ExtractionCheckpoint(
     List<int> ProcessedPageIds,
-    List<ExtractedEvent> Events);
+    List<ExtractedEvent> Events
+);

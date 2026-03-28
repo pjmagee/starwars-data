@@ -634,7 +634,10 @@ public class PageDownloader
         }
         else
         {
-            _logger.LogInformation("Incremental sync: {Count} pages to update", changedTitles.Count);
+            _logger.LogInformation(
+                "Incremental sync: {Count} pages to update",
+                changedTitles.Count
+            );
 
             // Process in batches matching the normal download batch size
             var batchSize = _config.PageLimit;
@@ -643,32 +646,38 @@ public class PageDownloader
 
             foreach (var batch in changedTitles.Chunk(batchSize))
             {
-                var (synced, failed) = await ProcessPageBatchAsync(batch.ToList(), cancellationToken);
+                var (synced, failed) = await ProcessPageBatchAsync(
+                    batch.ToList(),
+                    cancellationToken
+                );
                 totalSynced += synced;
                 totalFailed += failed;
 
                 _logger.LogInformation(
                     "Incremental sync progress: {Synced}/{Total} synced, {Failed} failed",
-                    totalSynced, changedTitles.Count, totalFailed);
+                    totalSynced,
+                    changedTitles.Count,
+                    totalFailed
+                );
 
-                if (cancellationToken.IsCancellationRequested) break;
+                if (cancellationToken.IsCancellationRequested)
+                    break;
             }
 
             _logger.LogInformation(
                 "Incremental sync complete. Updated: {Synced}, Failed: {Failed}",
-                totalSynced, totalFailed);
+                totalSynced,
+                totalFailed
+            );
         }
 
         // Persist the sync timestamp so next run picks up from here
         await _jobStateCollection.ReplaceOneAsync(
             s => s.JobName == IncrementalSyncJobName,
-            new JobState
-            {
-                JobName = IncrementalSyncJobName,
-                UpdatedAt = syncStartedAt,
-            },
+            new JobState { JobName = IncrementalSyncJobName, UpdatedAt = syncStartedAt },
             new ReplaceOptions { IsUpsert = true },
-            cancellationToken);
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -677,7 +686,8 @@ public class PageDownloader
     /// </summary>
     async Task<List<string>> GetChangedPageTitlesAsync(
         DateTime since,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var titles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         string? arContinue = null;
@@ -704,8 +714,10 @@ public class PageDownloader
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
 
-            if (doc.RootElement.TryGetProperty("query", out var query)
-                && query.TryGetProperty("allrevisions", out var revisions))
+            if (
+                doc.RootElement.TryGetProperty("query", out var query)
+                && query.TryGetProperty("allrevisions", out var revisions)
+            )
             {
                 foreach (var page in revisions.EnumerateArray())
                 {
@@ -719,15 +731,20 @@ public class PageDownloader
             }
 
             arContinue = null;
-            if (doc.RootElement.TryGetProperty("continue", out var cont)
-                && cont.TryGetProperty("arvcontinue", out var contToken))
+            if (
+                doc.RootElement.TryGetProperty("continue", out var cont)
+                && cont.TryGetProperty("arvcontinue", out var contToken)
+            )
             {
                 arContinue = contToken.GetString();
             }
-
         } while (arContinue != null && !cancellationToken.IsCancellationRequested);
 
-        _logger.LogInformation("Found {Count} distinct changed pages since {Since:u}", titles.Count, since);
+        _logger.LogInformation(
+            "Found {Count} distinct changed pages since {Since:u}",
+            titles.Count,
+            since
+        );
         return titles.ToList();
     }
 

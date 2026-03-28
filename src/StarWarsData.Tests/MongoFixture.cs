@@ -21,18 +21,22 @@ public sealed class MongoFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        _container = new MongoDbBuilder()
-            .WithImage("mongo:8")
-            .Build();
+        _container = new MongoDbBuilder("mongo:8").Build();
 
         await _container.StartAsync();
 
         var client = new MongoClient(_container.GetConnectionString());
-        var coll   = client.GetDatabase(DbName).GetCollection<StarWarsData.Models.Entities.Page>("Pages");
+        var coll = client
+            .GetDatabase(DbName)
+            .GetCollection<StarWarsData.Models.Entities.Page>("Pages");
         await coll.InsertManyAsync(RelationshipGraphServiceTests.BuildDataset());
 
         var settings = Options.Create(new SettingsOptions { PagesDb = DbName });
-        Service = new RelationshipGraphService(NullLogger<RelationshipGraphService>.Instance, settings, client);
+        Service = new RelationshipGraphService(
+            NullLogger<RelationshipGraphService>.Instance,
+            settings,
+            client
+        );
     }
 
     public async Task DisposeAsync() => await _container.DisposeAsync();

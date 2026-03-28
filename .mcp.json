@@ -7,15 +7,17 @@
         "start"
       ]
     },
-    "mudblazor": {
+     "openaiDeveloperDocs": {
       "type": "http",
-      "url": "http://localhost:5180/mcp"
+      "url": "https://developers.openai.com/mcp"
     },
     "playwright": {
       "command": "npx",
       "args": [
         "-y",
-        "@playwright/mcp@latest"
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium"
       ]
     },
     "mediawiki-mcp-server": {

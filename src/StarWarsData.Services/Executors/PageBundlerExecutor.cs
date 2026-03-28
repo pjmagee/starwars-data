@@ -27,7 +27,8 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
     public PageBundlerExecutor(
         ILogger logger,
         CharacterTimelineTracker? tracker,
-        int characterPageId)
+        int characterPageId
+    )
         : base("PageBundler")
     {
         _logger = logger;
@@ -36,14 +37,22 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
     }
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
-        var pages = await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct)
+        var pages =
+            await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct)
             ?? throw new InvalidOperationException("No pages found in Discovery state");
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Bundling,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Bundling,
             $"Bundling {pages.Count} pages into extraction batches...",
-            currentStep: 0, totalSteps: pages.Count);
+            currentStep: 0,
+            totalSteps: pages.Count
+        );
 
         var batches = new List<PageBatch>();
         var currentBatchPages = new List<PageContent>();
@@ -73,18 +82,31 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
 
         await context.QueueStateUpdateAsync("batches", batches, "Bundler", ct);
 
-        await context.AddEventAsync(new BundlingCompleteEvent(new BundlingCompleteData(
-            pages.Count, batches.Count,
-            batches.Select(b => b.Pages.Count).ToList())), ct);
+        await context.AddEventAsync(
+            new BundlingCompleteEvent(
+                new BundlingCompleteData(
+                    pages.Count,
+                    batches.Count,
+                    batches.Select(b => b.Pages.Count).ToList()
+                )
+            ),
+            ct
+        );
 
         _logger.LogInformation(
             "Bundled {PageCount} pages into {BatchCount} batches: [{BatchSizes}]",
-            pages.Count, batches.Count,
-            string.Join(", ", batches.Select(b => b.Pages.Count)));
+            pages.Count,
+            batches.Count,
+            string.Join(", ", batches.Select(b => b.Pages.Count))
+        );
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Bundling,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Bundling,
             $"Bundled {pages.Count} pages into {batches.Count} batches",
-            currentStep: pages.Count, totalSteps: pages.Count);
+            currentStep: pages.Count,
+            totalSteps: pages.Count
+        );
 
         return $"Bundled {pages.Count} pages into {batches.Count} batches";
     }
@@ -92,15 +114,13 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
     private static int EstimatePageChars(PageContent page)
     {
         return (page.InfoboxText?.Length ?? 0)
-             + (page.ContentSnippet?.Length ?? 0)
-             + (page.Title?.Length ?? 0) * 2  // title appears in headers
-             + 200; // JSON framing overhead per page
+            + (page.ContentSnippet?.Length ?? 0)
+            + (page.Title?.Length ?? 0) * 2 // title appears in headers
+            + 200; // JSON framing overhead per page
     }
 }
 
 /// <summary>
 /// A batch of pages to be processed in a single LLM call.
 /// </summary>
-internal sealed record PageBatch(
-    int BatchIndex,
-    List<PageContent> Pages);
+internal sealed record PageBatch(int BatchIndex, List<PageContent> Pages);

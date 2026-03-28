@@ -81,7 +81,10 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         // (handles exact phrase matches the text index may tokenize differently)
         if (docs.Count == 0)
         {
-            _logger?.LogInformation("Text search returned no results, falling back to regex for: {Query}", query);
+            _logger?.LogInformation(
+                "Text search returned no results, falling back to regex for: {Query}",
+                query
+            );
             var regexFilter = Builders<BsonDocument>.Filter.Regex(
                 "title",
                 new BsonRegularExpression(Regex.Escape(query), "i")

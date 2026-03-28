@@ -26,7 +26,10 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
     private readonly int _characterPageId;
     private readonly IMongoCollection<BatchExtractionProgressDoc> _progressCollection;
 
-    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
 
     // In-memory state, seeded from MongoDB on HandleAsync entry
     private HashSet<int> _processedBatchIndices = [];
@@ -38,7 +41,8 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         CharacterTimelineTracker? tracker,
         int characterPageId,
         IMongoClient mongoClient,
-        string databaseName)
+        string databaseName
+    )
         : base("BatchExtraction")
     {
         _chatClient = chatClient;
@@ -51,18 +55,28 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
     }
 
     protected override ValueTask OnCheckpointingAsync(
-        IWorkflowContext context, CancellationToken cancellationToken)
+        IWorkflowContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return context.QueueStateUpdateAsync("checkpoint",
+        return context.QueueStateUpdateAsync(
+            "checkpoint",
             new BatchExtractionCheckpoint(_processedBatchIndices.ToList(), _accumulatedEvents),
-            "BatchExtraction", cancellationToken);
+            "BatchExtraction",
+            cancellationToken
+        );
     }
 
     protected override async ValueTask OnCheckpointRestoredAsync(
-        IWorkflowContext context, CancellationToken cancellationToken)
+        IWorkflowContext context,
+        CancellationToken cancellationToken
+    )
     {
         var checkpoint = await context.ReadStateAsync<BatchExtractionCheckpoint>(
-            "checkpoint", "BatchExtraction", cancellationToken);
+            "checkpoint",
+            "BatchExtraction",
+            cancellationToken
+        );
 
         if (checkpoint is not null)
         {
@@ -70,20 +84,27 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             _accumulatedEvents = [.. checkpoint.Events];
             _logger.LogInformation(
                 "Restored batch extraction checkpoint: {ProcessedCount} batches, {EventCount} events",
-                _processedBatchIndices.Count, _accumulatedEvents.Count);
+                _processedBatchIndices.Count,
+                _accumulatedEvents.Count
+            );
         }
     }
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
-        var batches = await context.ReadStateAsync<List<PageBatch>>("batches", "Bundler", ct)
+        var batches =
+            await context.ReadStateAsync<List<PageBatch>>("batches", "Bundler", ct)
             ?? throw new InvalidOperationException("No batches found in Bundler state");
 
-        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct)
-            ?? "Unknown";
+        var characterTitle =
+            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
 
-        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
+        var characterContinuity =
+            await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
             ?? "Unknown";
 
         // Restore from MongoDB per-batch progress (survives mid-extraction crashes)
@@ -95,18 +116,29 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         {
             _logger.LogInformation(
                 "Resuming batch extraction for {Title}: {Remaining}/{Total} batches remaining ({EventCount} events accumulated)",
-                characterTitle, remaining.Count, batches.Count, _accumulatedEvents.Count);
+                characterTitle,
+                remaining.Count,
+                batches.Count,
+                _accumulatedEvents.Count
+            );
         }
 
         var totalPages = batches.Sum(b => b.Pages.Count);
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Extracting,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Extracting,
             $"Extracting events from {remaining.Count} batches ({_processedBatchIndices.Count} already done)...",
-            currentStep: _processedBatchIndices.Count, totalSteps: batches.Count,
-            eventsExtracted: _accumulatedEvents.Count);
+            currentStep: _processedBatchIndices.Count,
+            totalSteps: batches.Count,
+            eventsExtracted: _accumulatedEvents.Count
+        );
 
-        _logger.LogInformation("Starting batch extraction for {Title}: {Count} batches remaining",
-            characterTitle, remaining.Count);
+        _logger.LogInformation(
+            "Starting batch extraction for {Title}: {Count} batches remaining",
+            characterTitle,
+            remaining.Count
+        );
 
         var processed = _processedBatchIndices.Count;
 
@@ -116,20 +148,36 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
 
             var batchPageTitles = string.Join(", ", batch.Pages.Select(p => p.Title));
 
-            _tracker?.UpdateProgress(_characterPageId, GenerationStage.Extracting,
+            _tracker?.UpdateProgress(
+                _characterPageId,
+                GenerationStage.Extracting,
                 $"Extracting batch {processed + 1}/{batches.Count} ({batch.Pages.Count} pages)...",
-                currentStep: processed, totalSteps: batches.Count,
+                currentStep: processed,
+                totalSteps: batches.Count,
                 currentItem: $"Batch {batch.BatchIndex + 1}: {batch.Pages.Count} pages",
-                eventsExtracted: _accumulatedEvents.Count);
+                eventsExtracted: _accumulatedEvents.Count
+            );
 
-            await context.AddEventAsync(new BatchExtractionStartedEvent(
-                new BatchExtractionStartedData(
-                    batch.BatchIndex + 1, batches.Count, batch.Pages.Count,
-                    batch.Pages.Select(p => p.Title).ToList())), ct);
+            await context.AddEventAsync(
+                new BatchExtractionStartedEvent(
+                    new BatchExtractionStartedData(
+                        batch.BatchIndex + 1,
+                        batches.Count,
+                        batch.Pages.Count,
+                        batch.Pages.Select(p => p.Title).ToList()
+                    )
+                ),
+                ct
+            );
 
             try
             {
-                var events = await ExtractEventsFromBatch(batch, characterTitle, characterContinuity, ct);
+                var events = await ExtractEventsFromBatch(
+                    batch,
+                    characterTitle,
+                    characterContinuity,
+                    ct
+                );
                 _accumulatedEvents.AddRange(events);
                 _processedBatchIndices.Add(batch.BatchIndex);
                 processed++;
@@ -139,31 +187,61 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
 
                 if (events.Count == 0)
                 {
-                    await context.AddEventAsync(new BatchExtractionEmptyEvent(
-                        new BatchExtractionEmptyData(batch.BatchIndex + 1, batch.Pages.Count)), ct);
+                    await context.AddEventAsync(
+                        new BatchExtractionEmptyEvent(
+                            new BatchExtractionEmptyData(batch.BatchIndex + 1, batch.Pages.Count)
+                        ),
+                        ct
+                    );
                 }
                 else
                 {
                     foreach (var evt in events)
                     {
-                        await context.AddEventAsync(new EventExtractedEvent(new EventExtractedData(
-                            evt.EventType, evt.Description, evt.Year,
-                            evt.Demarcation, evt.SourcePageTitle)), ct);
+                        await context.AddEventAsync(
+                            new EventExtractedEvent(
+                                new EventExtractedData(
+                                    evt.EventType,
+                                    evt.Description,
+                                    evt.Year,
+                                    evt.Demarcation,
+                                    evt.SourcePageTitle
+                                )
+                            ),
+                            ct
+                        );
                     }
                 }
 
                 _logger.LogInformation(
                     "Extracted {EventCount} events from batch {BatchIndex} ({PageCount} pages, {Processed}/{Total})",
-                    events.Count, batch.BatchIndex + 1, batch.Pages.Count, processed, batches.Count);
+                    events.Count,
+                    batch.BatchIndex + 1,
+                    batch.Pages.Count,
+                    processed,
+                    batches.Count
+                );
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Failed to extract from batch {BatchIndex}, skipping", batch.BatchIndex + 1);
+                _logger.LogWarning(
+                    ex,
+                    "Failed to extract from batch {BatchIndex}, skipping",
+                    batch.BatchIndex + 1
+                );
                 _processedBatchIndices.Add(batch.BatchIndex);
                 await SaveMongoProgressAsync(ct);
 
-                await context.AddEventAsync(new BatchExtractionFailedEvent(
-                    new BatchExtractionFailedData(batch.BatchIndex + 1, batch.Pages.Count, ex.Message)), ct);
+                await context.AddEventAsync(
+                    new BatchExtractionFailedEvent(
+                        new BatchExtractionFailedData(
+                            batch.BatchIndex + 1,
+                            batch.Pages.Count,
+                            ex.Message
+                        )
+                    ),
+                    ct
+                );
             }
         }
 
@@ -173,8 +251,13 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         // Clean up per-batch progress — extraction is complete
         await ClearMongoProgressAsync(ct);
 
-        _logger.LogInformation("Batch extraction complete for {Title}: {EventCount} events from {BatchCount} batches ({PageCount} pages)",
-            characterTitle, _accumulatedEvents.Count, processed, totalPages);
+        _logger.LogInformation(
+            "Batch extraction complete for {Title}: {EventCount} events from {BatchCount} batches ({PageCount} pages)",
+            characterTitle,
+            _accumulatedEvents.Count,
+            processed,
+            totalPages
+        );
 
         return $"Extracted {_accumulatedEvents.Count} events from {processed} batches ({totalPages} pages) for {characterTitle}";
     }
@@ -195,7 +278,9 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
                 _accumulatedEvents = [.. doc.Events];
                 _logger.LogInformation(
                     "Restored batch extraction progress from MongoDB: {ProcessedCount} batches, {EventCount} events",
-                    _processedBatchIndices.Count, _accumulatedEvents.Count);
+                    _processedBatchIndices.Count,
+                    _accumulatedEvents.Count
+                );
             }
         }
     }
@@ -214,23 +299,30 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
             doc,
             new ReplaceOptions { IsUpsert = true },
-            ct);
+            ct
+        );
     }
 
     private async Task ClearMongoProgressAsync(CancellationToken ct)
     {
         await _progressCollection.DeleteOneAsync(
             Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
-            ct);
+            ct
+        );
     }
 
     // ── LLM batch extraction ────────────────────────────────────────────────
 
     private async Task<List<ExtractedEvent>> ExtractEventsFromBatch(
-        PageBatch batch, string characterTitle, string continuity, CancellationToken ct)
+        PageBatch batch,
+        string characterTitle,
+        string continuity,
+        CancellationToken ct
+    )
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"""
+        sb.AppendLine(
+            $"""
             Extract timeline events for the character "{characterTitle}" from the following wiki pages.
             Only extract events that directly involve or significantly affect {characterTitle}.
             For pages with no relevant events, simply skip them.
@@ -245,7 +337,8 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             Exile, Capture, Rescue, Discovery, Betrayal, Alliance, Training, Mission,
             Transformation, Founding, Destruction, Other.
 
-            """);
+            """
+        );
 
         foreach (var page in batch.Pages)
         {
@@ -266,23 +359,27 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             sb.AppendLine();
         }
 
-        sb.AppendLine("""
+        sb.AppendLine(
+            """
             Return structured events with: eventType, description, year (float), demarcation (BBY/ABY),
             dateDescription, location, relatedCharacters (excluding the main character),
             sourcePageTitle (the exact page title this event came from), sourceWikiUrl.
-            """);
+            """
+        );
 
         var chatOptions = new ChatOptions
         {
             ResponseFormat = ChatResponseFormat.ForJsonSchema<BatchExtractionSchema>(
                 schemaName: "batch_events",
-                schemaDescription: "Events extracted from a batch of wiki pages"),
+                schemaDescription: "Events extracted from a batch of wiki pages"
+            ),
         };
 
         var response = await _chatClient.GetResponseAsync(
             [new ChatMessage(ChatRole.User, sb.ToString())],
             chatOptions,
-            ct);
+            ct
+        );
 
         var text = response.Text?.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -301,17 +398,19 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         if (schema?.Events is null || schema.Events.Count == 0)
             return [];
 
-        return schema.Events.Select(e => new ExtractedEvent(
-            e.EventType ?? "Other",
-            e.Description ?? "",
-            e.Year,
-            e.Demarcation,
-            e.DateDescription,
-            e.Location,
-            e.RelatedCharacters ?? [],
-            e.SourcePageTitle ?? "Unknown",
-            e.SourceWikiUrl ?? ""
-        )).ToList();
+        return schema
+            .Events.Select(e => new ExtractedEvent(
+                e.EventType ?? "Other",
+                e.Description ?? "",
+                e.Year,
+                e.Demarcation,
+                e.DateDescription,
+                e.Location,
+                e.RelatedCharacters ?? [],
+                e.SourcePageTitle ?? "Unknown",
+                e.SourceWikiUrl ?? ""
+            ))
+            .ToList();
     }
 }
 
@@ -334,4 +433,5 @@ internal sealed class BatchExtractionProgressDoc
 /// </summary>
 internal sealed record BatchExtractionCheckpoint(
     List<int> ProcessedBatchIndices,
-    List<ExtractedEvent> Events);
+    List<ExtractedEvent> Events
+);

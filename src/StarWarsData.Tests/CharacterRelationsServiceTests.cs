@@ -22,28 +22,28 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
     private RelationshipGraphService Svc => fixture.Service;
 
     // ── PageId constants ──────────────────────────────────────────────────────
-    public const int ShmiId   = 1;
+    public const int ShmiId = 1;
     public const int AnakinId = 2;
-    public const int LukeId   = 3;
-    public const int LeiaId   = 4;
-    public const int BenId    = 5;
-    public const int MaraId   = 6;
+    public const int LukeId = 3;
+    public const int LeiaId = 4;
+    public const int BenId = 5;
+    public const int MaraId = 6;
 
     // ── WikiUrl constants (how they are stored in the DB) ─────────────────────
-    private const string ShmiUrl   = "https://starwars.fandom.com/wiki/Shmi_Skywalker%2FLegends";   // encoded
-    private const string AnakinUrl = "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends";   // decoded
-    private const string LukeUrl   = "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends";
-    private const string LeiaUrl   = "https://starwars.fandom.com/wiki/Leia_Organa_Solo%2FLegends"; // encoded
-    private const string BenUrl    = "https://starwars.fandom.com/wiki/Ben_Skywalker";
-    private const string MaraUrl   = "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker";
+    private const string ShmiUrl = "https://starwars.fandom.com/wiki/Shmi_Skywalker%2FLegends"; // encoded
+    private const string AnakinUrl = "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"; // decoded
+    private const string LukeUrl = "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends";
+    private const string LeiaUrl = "https://starwars.fandom.com/wiki/Leia_Organa_Solo%2FLegends"; // encoded
+    private const string BenUrl = "https://starwars.fandom.com/wiki/Ben_Skywalker";
+    private const string MaraUrl = "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker";
 
     // ── Link Href constants (decoded, as they appear in infobox Data.Links) ───
-    private const string ShmiHref   = "https://starwars.fandom.com/wiki/Shmi_Skywalker/Legends";
+    private const string ShmiHref = "https://starwars.fandom.com/wiki/Shmi_Skywalker/Legends";
     private const string AnakinHref = "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends";
-    private const string LukeHref   = "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends";
-    private const string LeiaHref   = "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends";
-    private const string BenHref    = "https://starwars.fandom.com/wiki/Ben_Skywalker";
-    private const string MaraHref   = "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker";
+    private const string LukeHref = "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends";
+    private const string LeiaHref = "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends";
+    private const string BenHref = "https://starwars.fandom.com/wiki/Ben_Skywalker";
+    private const string MaraHref = "https://starwars.fandom.com/wiki/Mara_Jade_Skywalker";
 
     // ── GetImmediateRelationsAsync ───────────────────────────────────────────────
 
@@ -56,7 +56,7 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
         Assert.Equal(LukeId, result.Root.Id);
         Assert.Equal("Luke Skywalker", result.Root.Name);
 
-        Assert.Contains(result.Parents,  p => p.Id == AnakinId);
+        Assert.Contains(result.Parents, p => p.Id == AnakinId);
         Assert.Contains(result.Siblings, s => s.Id == LeiaId);
         Assert.Contains(result.Children, c => c.Id == BenId);
         Assert.Contains(result.Partners, p => p.Id == MaraId);
@@ -109,7 +109,7 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
         var result = await Svc.GetImmediateRelationsAsync(LukeId);
 
         Assert.Equal("19 BBY", result.Root.Born);
-        Assert.Equal("",       result.Root.Died);
+        Assert.Equal("", result.Root.Died);
     }
 
     // ── GetRelationshipGraphAsync ────────────────────────────────────────────────────
@@ -123,12 +123,12 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
         var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 3);
 
         Assert.Equal(LukeId, result.RootId);
-        Assert.Contains(LukeId,   result.Nodes.Keys);
+        Assert.Contains(LukeId, result.Nodes.Keys);
         Assert.Contains(AnakinId, result.Nodes.Keys);
-        Assert.Contains(LeiaId,   result.Nodes.Keys);
-        Assert.Contains(BenId,    result.Nodes.Keys);
-        Assert.Contains(MaraId,   result.Nodes.Keys);
-        Assert.Contains(ShmiId,   result.Nodes.Keys);
+        Assert.Contains(LeiaId, result.Nodes.Keys);
+        Assert.Contains(BenId, result.Nodes.Keys);
+        Assert.Contains(MaraId, result.Nodes.Keys);
+        Assert.Contains(ShmiId, result.Nodes.Keys);
     }
 
     [Fact]
@@ -136,11 +136,11 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
     {
         var result = await Svc.GetRelationshipGraphAsync(LukeId, maxDepth: 1);
 
-        Assert.Contains(LukeId,   result.Nodes.Keys);
+        Assert.Contains(LukeId, result.Nodes.Keys);
         Assert.Contains(AnakinId, result.Nodes.Keys);
-        Assert.Contains(LeiaId,   result.Nodes.Keys);
-        Assert.Contains(BenId,    result.Nodes.Keys);
-        Assert.Contains(MaraId,   result.Nodes.Keys);
+        Assert.Contains(LeiaId, result.Nodes.Keys);
+        Assert.Contains(BenId, result.Nodes.Keys);
+        Assert.Contains(MaraId, result.Nodes.Keys);
 
         // Shmi is 2 hops away — must NOT appear
         Assert.DoesNotContain(ShmiId, result.Nodes.Keys);
@@ -170,56 +170,92 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
 
         var luke = result.Nodes[LukeId];
         Assert.Equal("Luke Skywalker", luke.Name);
-        Assert.Equal("19 BBY",         luke.Born);
+        Assert.Equal("19 BBY", luke.Born);
     }
 
     // ── Dataset builder (public so MongoFixture can access it) ───────────────
 
     public static List<Page> BuildDataset() =>
-    [
-        MakeCharacterPage(ShmiId,   ShmiUrl,   "Shmi Skywalker",       "72 BBY", "22 BBY",
-            parents:  [],
-            siblings: [],
-            children: [(AnakinHref, "Anakin Skywalker")],
-            partners: []),
-
-        MakeCharacterPage(AnakinId, AnakinUrl, "Anakin Skywalker",     "41 BBY", "4 ABY",
-            parents:  [(ShmiHref, "Shmi Skywalker")],
-            siblings: [],
-            children: [(LukeHref, "Luke Skywalker"), (LeiaHref, "Leia Organa Solo")],
-            partners: []),
-
-        MakeCharacterPage(LukeId,   LukeUrl,   "Luke Skywalker",       "19 BBY", "",
-            parents:  [(AnakinHref, "Anakin Skywalker")],
-            siblings: [(LeiaHref,   "Leia Organa Solo")],
-            children: [(BenHref,    "Ben Skywalker")],
-            partners: [(MaraHref,   "Mara Jade Skywalker")]),
-
-        MakeCharacterPage(LeiaId,   LeiaUrl,   "Leia Organa Solo",     "19 BBY", "",
-            parents:  [(AnakinHref, "Anakin Skywalker")],
-            siblings: [(LukeHref,   "Luke Skywalker")],
-            children: [],
-            partners: []),
-
-        MakeCharacterPage(BenId,    BenUrl,    "Ben Skywalker",        "26 ABY", "",
-            parents:  [(LukeHref, "Luke Skywalker")],
-            siblings: [],
-            children: [],
-            partners: []),
-
-        MakeCharacterPage(MaraId,   MaraUrl,   "Mara Jade Skywalker",  "17 BBY", "40 ABY",
-            parents:  [],
-            siblings: [],
-            children: [(BenHref, "Ben Skywalker")],
-            partners: [(LukeHref, "Luke Skywalker")]),
-    ];
+        [
+            MakeCharacterPage(
+                ShmiId,
+                ShmiUrl,
+                "Shmi Skywalker",
+                "72 BBY",
+                "22 BBY",
+                parents: [],
+                siblings: [],
+                children: [(AnakinHref, "Anakin Skywalker")],
+                partners: []
+            ),
+            MakeCharacterPage(
+                AnakinId,
+                AnakinUrl,
+                "Anakin Skywalker",
+                "41 BBY",
+                "4 ABY",
+                parents: [(ShmiHref, "Shmi Skywalker")],
+                siblings: [],
+                children: [(LukeHref, "Luke Skywalker"), (LeiaHref, "Leia Organa Solo")],
+                partners: []
+            ),
+            MakeCharacterPage(
+                LukeId,
+                LukeUrl,
+                "Luke Skywalker",
+                "19 BBY",
+                "",
+                parents: [(AnakinHref, "Anakin Skywalker")],
+                siblings: [(LeiaHref, "Leia Organa Solo")],
+                children: [(BenHref, "Ben Skywalker")],
+                partners: [(MaraHref, "Mara Jade Skywalker")]
+            ),
+            MakeCharacterPage(
+                LeiaId,
+                LeiaUrl,
+                "Leia Organa Solo",
+                "19 BBY",
+                "",
+                parents: [(AnakinHref, "Anakin Skywalker")],
+                siblings: [(LukeHref, "Luke Skywalker")],
+                children: [],
+                partners: []
+            ),
+            MakeCharacterPage(
+                BenId,
+                BenUrl,
+                "Ben Skywalker",
+                "26 ABY",
+                "",
+                parents: [(LukeHref, "Luke Skywalker")],
+                siblings: [],
+                children: [],
+                partners: []
+            ),
+            MakeCharacterPage(
+                MaraId,
+                MaraUrl,
+                "Mara Jade Skywalker",
+                "17 BBY",
+                "40 ABY",
+                parents: [],
+                siblings: [],
+                children: [(BenHref, "Ben Skywalker")],
+                partners: [(LukeHref, "Luke Skywalker")]
+            ),
+        ];
 
     private static Page MakeCharacterPage(
-        int id, string wikiUrl, string name, string born, string died,
+        int id,
+        string wikiUrl,
+        string name,
+        string born,
+        string died,
         (string href, string content)[] parents,
         (string href, string content)[] siblings,
         (string href, string content)[] children,
-        (string href, string content)[] partners)
+        (string href, string content)[] partners
+    )
     {
         static List<HyperLink> ToLinks((string href, string content)[] items) =>
             items.Select(x => new HyperLink { Href = x.href, Content = x.content }).ToList();
@@ -238,13 +274,48 @@ public class RelationshipGraphServiceTests(MongoFixture fixture)
                 Template = "https://starwars.fandom.com/wiki/Template:Character",
                 Data =
                 [
-                    new() { Label = "Titles",    Values = [name],                               Links = [] },
-                    new() { Label = "Born",      Values = [born],                               Links = [] },
-                    new() { Label = "Died",      Values = [died],                               Links = [] },
-                    new() { Label = "Parent(s)", Values = parents.Select(x => x.content).ToList(),  Links = ToLinks(parents) },
-                    new() { Label = "Sibling(s)",Values = siblings.Select(x => x.content).ToList(), Links = ToLinks(siblings) },
-                    new() { Label = "Children",  Values = children.Select(x => x.content).ToList(), Links = ToLinks(children) },
-                    new() { Label = "Partner(s)",Values = partners.Select(x => x.content).ToList(), Links = ToLinks(partners) },
+                    new()
+                    {
+                        Label = "Titles",
+                        Values = [name],
+                        Links = [],
+                    },
+                    new()
+                    {
+                        Label = "Born",
+                        Values = [born],
+                        Links = [],
+                    },
+                    new()
+                    {
+                        Label = "Died",
+                        Values = [died],
+                        Links = [],
+                    },
+                    new()
+                    {
+                        Label = "Parent(s)",
+                        Values = parents.Select(x => x.content).ToList(),
+                        Links = ToLinks(parents),
+                    },
+                    new()
+                    {
+                        Label = "Sibling(s)",
+                        Values = siblings.Select(x => x.content).ToList(),
+                        Links = ToLinks(siblings),
+                    },
+                    new()
+                    {
+                        Label = "Children",
+                        Values = children.Select(x => x.content).ToList(),
+                        Links = ToLinks(children),
+                    },
+                    new()
+                    {
+                        Label = "Partner(s)",
+                        Values = partners.Select(x => x.content).ToList(),
+                        Links = ToLinks(partners),
+                    },
                 ],
             },
         };

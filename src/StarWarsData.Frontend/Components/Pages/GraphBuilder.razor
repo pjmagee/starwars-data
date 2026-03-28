@@ -7,11 +7,18 @@
 
 <PageTitle>Relationship Graph Builder</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
-    <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-2">Relationship Graph Builder</MudText>
-    <MudText Typo="Typo.subtitle1" Class="mb-8">
-        LLM-powered entity relationship extraction across all wiki articles
-    </MudText>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-8">
+    <OpenAiStatusBanner />
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-6" Dense="true" NoIcon="false">
+        <strong>Total Pages</strong> counts pages that have an infobox (typed entity). This excludes redirect pages, disambiguation pages,
+        and unclassified articles — so it will be less than the total page count in the database.
+        <br /><br />
+        <strong>Processed</strong> = the LLM found relationships and edges were stored.
+        <strong>Skipped</strong> = the LLM determined the page has no meaningful entity relationships (e.g. abstract concepts, locations with no connections).
+        <strong>Failed</strong> = the OpenAI API returned an error for that page.
+        <br /><br />
+        <strong>Cleanup Failed</strong> releases orphaned pages from failed batches back into the pending pool and removes the failed batch records.
+    </MudAlert>
 
     @if (_loading)
     {
@@ -26,11 +33,21 @@
                 <MudText Typo="Typo.h5">Overall Progress</MudText>
                 <MudStack Row="true" Spacing="2">
                     <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                               StartIcon="@Icons.Material.Filled.PlayArrow"
-                               OnClick="StartBatch" Disabled="_jobRunning">
-                        Run Batch Now
+                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                               OnClick="SubmitBatch" Disabled="_jobRunning">
+                        Submit Batch
                     </MudButton>
-                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                    <MudButton Variant="Variant.Outlined" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.Refresh"
+                               OnClick="CheckBatches" Disabled="_jobRunning">
+                        Check Batches
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Warning"
+                               StartIcon="@Icons.Material.Filled.CleaningServices"
+                               OnClick="CleanupFailedBatches" Disabled="_jobRunning">
+                        Cleanup Failed
+                    </MudButton>
+                    <MudButton Variant="Variant.Text" Color="Color.Default"
                                StartIcon="@Icons.Material.Filled.Storage"
                                OnClick="EnsureIndexes" Disabled="_jobRunning">
                         Ensure Indexes
@@ -85,70 +102,227 @@
                     </MudStack>
                 </MudItem>
             </MudGrid>
+
+            @if (_progress.PagesPerHour > 0)
+            {
+                <MudDivider Class="my-4" />
+                <MudStack Row="true" Spacing="6" AlignItems="AlignItems.Center">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h5" Color="Color.Tertiary">@_progress.PagesPerHour.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Pages / Hour</MudText>
+                    </MudStack>
+                    @if (_progress.EstimatedHoursRemaining.HasValue)
+                    {
+                        <MudStack AlignItems="AlignItems.Center">
+                            @{
+                                var hrs = _progress.EstimatedHoursRemaining.Value;
+                                var etaText = hrs >= 24 ? $"{hrs / 24:F1} days" : $"{hrs:F1} hours";
+                            }
+                            <MudText Typo="Typo.h5" Color="Color.Tertiary">@etaText</MudText>
+                            <MudText Typo="Typo.caption">Estimated Remaining</MudText>
+                        </MudStack>
+                    }
+                </MudStack>
+            }
+        </MudPaper>
+
+        <!-- Batch Jobs -->
+        <MudPaper Class="pa-6 mb-6" Elevation="2">
+            <MudDataGrid T="GraphBatchSummary" Items="_batches" Dense="true" Hover="true"
+                         Filterable="true" SortMode="SortMode.Single"
+                         FixedHeader="true" Height="500px"
+                         QuickFilter="@_batchQuickFilter">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h5">OpenAI Batch Jobs</MudText>
+                    @if (_batches.Count > 0)
+                    {
+                        var pending = _batches.Count(b => b.Status is "Submitted" or "InProgress" or "Preparing" or "Processing");
+                        var completed = _batches.Count(b => b.Status == "Processed");
+                        var failed = _batches.Count(b => b.Status == "Failed");
+                        <MudStack Row="true" Spacing="2" Class="ml-4">
+                            <MudTooltip Text="Batches submitted to OpenAI that are queued or being processed">
+                                <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled">@pending Pending</MudChip>
+                            </MudTooltip>
+                            <MudTooltip Text="Batches fully processed — results downloaded and edges stored in the database">
+                                <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Filled">@completed Done</MudChip>
+                            </MudTooltip>
+                            @if (failed > 0)
+                            {
+                                <MudTooltip Text="Batches that failed at OpenAI or during local processing — use Cleanup Failed to release their pages">
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Error" Variant="Variant.Filled">@failed Failed</MudChip>
+                                </MudTooltip>
+                            }
+                        </MudStack>
+                    }
+                    <MudSpacer />
+                    <MudTextField @bind-Value="_batchSearchString" Placeholder="Search batches"
+                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                  IconSize="Size.Medium" Class="mt-0" Immediate="true" />
+                </ToolBarContent>
+                <Columns>
+                    <TemplateColumn T="GraphBatchSummary" Title="Status" Sortable="true" Filterable="true"
+                                    SortBy="@(x => x.Status)">
+                        <CellTemplate>
+                            @{
+                                var statusColor = context.Item.Status switch
+                                {
+                                    "Processed" => Color.Success,
+                                    "Completed" or "Processing" => Color.Info,
+                                    "Submitted" or "InProgress" or "Preparing" => Color.Warning,
+                                    "Failed" => Color.Error,
+                                    _ => Color.Default,
+                                };
+                            }
+                            <MudChip T="string" Size="Size.Small" Color="statusColor" Variant="Variant.Filled">@context.Item.Status</MudChip>
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <TemplateColumn T="GraphBatchSummary" Title="OpenAI Batch ID" Sortable="false">
+                        <CellTemplate>
+                            @if (!string.IsNullOrEmpty(context.Item.OpenAiBatchId))
+                            {
+                                <MudText Typo="Typo.body2" Style="font-family: monospace; font-size: 0.75rem;">@context.Item.OpenAiBatchId</MudText>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.body2" Color="Color.Default">-</MudText>
+                            }
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn T="GraphBatchSummary" TProperty="string" Property="x => x.Model" Title="Model" />
+                    <TemplateColumn T="GraphBatchSummary" Title="Progress" Sortable="true"
+                                    SortBy="@(x => x.CompletedRequests)">
+                        <CellTemplate>
+                            @{
+                                var b = context.Item;
+                                var handled = b.CompletedRequests + b.SkippedRequests + b.FailedRequests;
+                                var progressPct = b.TotalRequests > 0 ? (double)handled / b.TotalRequests * 100 : 0;
+                                var progressColor = b.Status switch
+                                {
+                                    "Processed" => Color.Success,
+                                    "Failed" => Color.Error,
+                                    _ => Color.Info,
+                                };
+                            }
+                            <MudStack Spacing="0">
+                                <MudProgressLinear Value="@progressPct" Color="@progressColor" Rounded="true" Size="Size.Small" />
+                                <MudText Typo="Typo.caption">
+                                    @b.CompletedRequests.ToString("N0") done,
+                                    @b.SkippedRequests.ToString("N0") skipped,
+                                    @b.FailedRequests.ToString("N0") failed
+                                    / @b.TotalRequests.ToString("N0")
+                                </MudText>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn T="GraphBatchSummary" TProperty="int" Property="x => x.TotalEdgesStored" Title="Edges" />
+                    <PropertyColumn T="GraphBatchSummary" TProperty="DateTime" Property="x => x.CreatedAt" Title="Created" Format="g" />
+                    <TemplateColumn T="GraphBatchSummary" Title="Duration" Sortable="true"
+                                    SortBy="@(x => (x.ProcessedAt ?? x.CompletedAt ?? DateTime.UtcNow) - x.CreatedAt)">
+                        <CellTemplate>
+                            @{
+                                var duration = (context.Item.ProcessedAt ?? context.Item.CompletedAt ?? DateTime.UtcNow) - context.Item.CreatedAt;
+                                var durationText = duration.TotalHours >= 1 ? $"{duration.TotalHours:F1}h" : $"{duration.TotalMinutes:F0}m";
+                            }
+                            @durationText
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <TemplateColumn T="GraphBatchSummary" Title="" Sortable="false" Filterable="false">
+                        <CellTemplate>
+                            @if (!string.IsNullOrEmpty(context.Item.Error))
+                            {
+                                <MudTooltip Text="@context.Item.Error">
+                                    <MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Error" Size="Size.Small" />
+                                </MudTooltip>
+                            }
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+                <NoRecordsContent>
+                    <MudAlert Severity="Severity.Info" Dense="true">No batch jobs yet. Click "Submit Batch" to start processing pages via the OpenAI Batch API.</MudAlert>
+                </NoRecordsContent>
+                <PagerContent>
+                    <MudDataGridPager T="GraphBatchSummary" />
+                </PagerContent>
+            </MudDataGrid>
         </MudPaper>
 
         <!-- Progress by Type -->
         @if (_progress.ByType.Count > 0)
         {
             <MudPaper Class="pa-6 mb-6" Elevation="2">
-                <MudText Typo="Typo.h5" Class="mb-4">Progress by Entity Type</MudText>
-                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Processed</th>
-                            <th>Skipped</th>
-                            <th>Failed</th>
-                            <th>Total</th>
-                            <th>Progress</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var t in _progress.ByType)
-                        {
-                            var typePct = t.Total > 0 ? (double)(t.Processed + t.Skipped + t.Failed) / t.Total * 100 : 0;
-                            <tr>
-                                <td><MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@t.Type</MudChip></td>
-                                <td>@t.Processed.ToString("N0")</td>
-                                <td>@t.Skipped.ToString("N0")</td>
-                                <td>@t.Failed.ToString("N0")</td>
-                                <td>@t.Total.ToString("N0")</td>
-                                <td style="min-width: 150px;">
-                                    <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" />
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </MudSimpleTable>
+                <MudDataGrid T="TypeProgress" Items="_progress.ByType" Dense="true" Hover="true"
+                             Filterable="true" SortMode="SortMode.Single"
+                             FixedHeader="true" Height="400px"
+                             QuickFilter="@_typeQuickFilter">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h5">Progress by Entity Type</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_typeSearchString" Placeholder="Search types"
+                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                      IconSize="Size.Medium" Class="mt-0" Immediate="true" />
+                    </ToolBarContent>
+                    <Columns>
+                        <TemplateColumn T="TypeProgress" Title="Type" Sortable="true" SortBy="@(x => x.Type)">
+                            <CellTemplate>
+                                <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@context.Item.Type</MudChip>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn T="TypeProgress" TProperty="int" Property="x => x.Processed" Title="Processed" />
+                        <PropertyColumn T="TypeProgress" TProperty="int" Property="x => x.Skipped" Title="Skipped" />
+                        <PropertyColumn T="TypeProgress" TProperty="int" Property="x => x.Failed" Title="Failed" />
+                        <PropertyColumn T="TypeProgress" TProperty="int" Property="x => x.Total" Title="Total" />
+                        <TemplateColumn T="TypeProgress" Title="Progress" Sortable="true"
+                                        SortBy="@(x => x.Total > 0 ? (double)(x.Processed + x.Skipped + x.Failed) / x.Total : 0)">
+                            <CellTemplate>
+                                @{
+                                    var typePct = context.Item.Total > 0
+                                        ? (double)(context.Item.Processed + context.Item.Skipped + context.Item.Failed) / context.Item.Total * 100
+                                        : 0;
+                                }
+                                <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" Style="min-width: 120px;" />
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                    <PagerContent>
+                        <MudDataGridPager T="TypeProgress" />
+                    </PagerContent>
+                </MudDataGrid>
             </MudPaper>
         }
 
-        <!-- Recent Labels -->
+        <!-- Relationship Labels -->
         @if (_progress.RecentLabels.Count > 0)
         {
             <MudPaper Class="pa-6 mb-6" Elevation="2">
-                <MudText Typo="Typo.h5" Class="mb-4">Relationship Labels</MudText>
-                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
-                    <thead>
-                        <tr>
-                            <th>Label</th>
-                            <th>Reverse</th>
-                            <th>Description</th>
-                            <th>Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var l in _progress.RecentLabels)
-                        {
-                            <tr>
-                                <td><MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">@l.Label</MudChip></td>
-                                <td><MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Text">@l.Reverse</MudChip></td>
-                                <td><MudText Typo="Typo.body2">@l.Description</MudText></td>
-                                <td>@l.UsageCount.ToString("N0")</td>
-                            </tr>
-                        }
-                    </tbody>
-                </MudSimpleTable>
+                <MudDataGrid T="RecentLabel" Items="_progress.RecentLabels" Dense="true" Hover="true"
+                             Filterable="true" SortMode="SortMode.Single"
+                             FixedHeader="true" Height="500px"
+                             QuickFilter="@_labelQuickFilter">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h5">Relationship Labels</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_labelSearchString" Placeholder="Search labels"
+                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                      IconSize="Size.Medium" Class="mt-0" Immediate="true" />
+                    </ToolBarContent>
+                    <Columns>
+                        <TemplateColumn T="RecentLabel" Title="Label" Sortable="true" SortBy="@(x => x.Label)">
+                            <CellTemplate>
+                                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">@context.Item.Label</MudChip>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <TemplateColumn T="RecentLabel" Title="Reverse" Sortable="true" SortBy="@(x => x.Reverse)">
+                            <CellTemplate>
+                                <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Text">@context.Item.Reverse</MudChip>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn T="RecentLabel" TProperty="string" Property="x => x.Description" Title="Description" />
+                        <PropertyColumn T="RecentLabel" TProperty="int" Property="x => x.UsageCount" Title="Usage" />
+                    </Columns>
+                    <PagerContent>
+                        <MudDataGridPager T="RecentLabel" />
+                    </PagerContent>
+                </MudDataGrid>
             </MudPaper>
         }
     }
@@ -160,31 +334,56 @@
 
 @code {
     private GraphBuilderProgress? _progress;
+    private List<GraphBatchSummary> _batches = [];
     private bool _loading = true;
     private bool _jobRunning;
     private Timer? _pollTimer;
 
+    private string _batchSearchString = "";
+    private string _typeSearchString = "";
+    private string _labelSearchString = "";
+
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    private Func<GraphBatchSummary, bool> _batchQuickFilter => b =>
+        string.IsNullOrWhiteSpace(_batchSearchString)
+        || (b.Status?.Contains(_batchSearchString, StringComparison.OrdinalIgnoreCase) ?? false)
+        || (b.OpenAiBatchId?.Contains(_batchSearchString, StringComparison.OrdinalIgnoreCase) ?? false)
+        || (b.Model?.Contains(_batchSearchString, StringComparison.OrdinalIgnoreCase) ?? false);
+
+    private Func<TypeProgress, bool> _typeQuickFilter => t =>
+        string.IsNullOrWhiteSpace(_typeSearchString)
+        || t.Type.Contains(_typeSearchString, StringComparison.OrdinalIgnoreCase);
+
+    private Func<RecentLabel, bool> _labelQuickFilter => l =>
+        string.IsNullOrWhiteSpace(_labelSearchString)
+        || l.Label.Contains(_labelSearchString, StringComparison.OrdinalIgnoreCase)
+        || l.Reverse.Contains(_labelSearchString, StringComparison.OrdinalIgnoreCase)
+        || l.Description.Contains(_labelSearchString, StringComparison.OrdinalIgnoreCase);
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadProgress();
+        await LoadData();
         _pollTimer = new Timer(async _ =>
         {
-            await LoadProgress();
+            await LoadData();
             await InvokeAsync(StateHasChanged);
         }, null, TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30));
     }
 
-    private async Task LoadProgress()
+    private async Task LoadData()
     {
         try
         {
-            _progress = await Api.GetFromJsonAsync<GraphBuilderProgress>("api/RelationshipGraph/progress");
+            var progressTask = Api.GetFromJsonAsync<GraphBuilderProgress>("api/RelationshipGraph/progress");
+            var batchesTask = Api.GetFromJsonAsync<List<GraphBatchSummary>>("api/RelationshipGraph/batches");
+            await Task.WhenAll(progressTask, batchesTask);
+            _progress = progressTask.Result;
+            _batches = batchesTask.Result ?? [];
         }
         catch (Exception ex)
         {
-            Snackbar.Add($"Failed to load progress: {ex.Message}", Severity.Error);
+            Snackbar.Add($"Failed to load data: {ex.Message}", Severity.Error);
         }
         finally
         {
@@ -192,47 +391,23 @@
         }
     }
 
-    private async Task StartBatch()
-    {
-        try
-        {
-            _jobRunning = true;
-            var response = await Api.PostAsync("api/admin/mongo/build-relationship-graph", null);
-            if (response.IsSuccessStatusCode)
-            {
-                Snackbar.Add("Graph builder batch started! Check Hangfire dashboard for status.", Severity.Success);
-            }
-            else if ((int)response.StatusCode == 409)
-            {
-                var error = await response.Content.ReadAsStringAsync();
-                Snackbar.Add($"Job not started: {error}", Severity.Warning);
-            }
-            else
-            {
-                var error = await response.Content.ReadAsStringAsync();
-                Snackbar.Add($"Failed to start job: {error}", Severity.Error);
-            }
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
-        }
-        finally
-        {
-            _jobRunning = false;
-        }
-    }
+    private async Task SubmitBatch() => await RunJob("api/admin/mongo/submit-graph-batch", "Batch submission job started!");
+    private async Task CheckBatches() => await RunJob("api/admin/mongo/check-graph-batches", "Batch check job started!");
+    private async Task CleanupFailedBatches() => await RunJob("api/admin/mongo/cleanup-graph-batches", "Cleanup job started! Orphaned pages will be released.");
+    private async Task EnsureIndexes() => await RunJob("api/admin/mongo/ensure-graph-indexes", "Index creation job started!");
 
-    private async Task EnsureIndexes()
+    private async Task RunJob(string endpoint, string successMessage)
     {
         try
         {
             _jobRunning = true;
-            var response = await Api.PostAsync("api/admin/mongo/ensure-graph-indexes", null);
+            var response = await Api.PostAsync(endpoint, null);
             if (response.IsSuccessStatusCode)
-                Snackbar.Add("Index creation job started!", Severity.Success);
+                Snackbar.Add(successMessage, Severity.Success);
+            else if ((int)response.StatusCode == 409)
+                Snackbar.Add("Job already running.", Severity.Warning);
             else
-                Snackbar.Add("Failed to start index job", Severity.Error);
+                Snackbar.Add("Failed to start job.", Severity.Error);
         }
         catch (Exception ex)
         {
@@ -249,7 +424,7 @@
         _pollTimer?.Dispose();
     }
 
-    // DTO matching the API response
+    // DTOs matching the API response
     private class GraphBuilderProgress
     {
         public int TotalPages { get; set; }
@@ -259,6 +434,8 @@
         public int PendingPages { get; set; }
         public long TotalEdges { get; set; }
         public int TotalLabels { get; set; }
+        public double PagesPerHour { get; set; }
+        public double? EstimatedHoursRemaining { get; set; }
         public List<TypeProgress> ByType { get; set; } = [];
         public List<RecentLabel> RecentLabels { get; set; } = [];
     }
@@ -279,5 +456,22 @@
         public string Description { get; set; } = "";
         public int UsageCount { get; set; }
         public DateTime CreatedAt { get; set; }
+    }
+
+    private class GraphBatchSummary
+    {
+        public string Id { get; set; } = "";
+        public string OpenAiBatchId { get; set; } = "";
+        public string Status { get; set; } = "";
+        public string Model { get; set; } = "";
+        public int TotalRequests { get; set; }
+        public int CompletedRequests { get; set; }
+        public int FailedRequests { get; set; }
+        public int SkippedRequests { get; set; }
+        public int TotalEdgesStored { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
+        public DateTime? ProcessedAt { get; set; }
+        public string? Error { get; set; }
     }
 }

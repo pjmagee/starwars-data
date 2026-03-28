@@ -68,8 +68,8 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
     {
         // Insert a page with very long content for this test
         var longContent = new string('X', 10000);
-        var coll = fixture.MongoClient
-            .GetDatabase(ApiFixture.PagesDb)
+        var coll = fixture
+            .MongoClient.GetDatabase(ApiFixture.PagesDb)
             .GetCollection<Models.Entities.Page>("Pages");
 
         var page = new Models.Entities.Page
@@ -84,7 +84,15 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
             Infobox = new Models.Entities.PageInfobox
             {
                 Template = "https://starwars.fandom.com/wiki/Template:Character",
-                Data = [new() { Label = "Titles", Values = ["Long Content Page"], Links = [] }],
+                Data =
+                [
+                    new()
+                    {
+                        Label = "Titles",
+                        Values = ["Long Content Page"],
+                        Links = [],
+                    },
+                ],
             },
         };
 
@@ -92,7 +100,8 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
         await coll.ReplaceOneAsync(
             MongoDB.Driver.Builders<Models.Entities.Page>.Filter.Eq(p => p.PageId, 9001),
             page,
-            new MongoDB.Driver.ReplaceOptions { IsUpsert = true });
+            new MongoDB.Driver.ReplaceOptions { IsUpsert = true }
+        );
 
         var json = await Toolkit.GetPageContent(9001);
         using var doc = JsonDocument.Parse(json);
@@ -113,9 +122,7 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
 
         Assert.Equal(JsonValueKind.Array, arr.ValueKind);
         // Should find at least Anakin (parent link) and Leia (sibling link)
-        var names = arr.EnumerateArray()
-            .Select(e => e.GetProperty("name").GetString())
-            .ToList();
+        var names = arr.EnumerateArray().Select(e => e.GetProperty("name").GetString()).ToList();
 
         Assert.True(arr.GetArrayLength() > 0, "Should resolve at least one linked page");
     }

@@ -1,0 +1,682 @@
+@page "/galaxy-events"
+@rendermode InteractiveServer
+@using StarWarsData.Models.Queries
+@using StarWarsData.Frontend.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JSRuntime
+@inject GlobalFilterService GlobalFilterService
+@implements IAsyncDisposable
+
+<PageTitle>Galaxy Events</PageTitle>
+
+<style>
+    .galaxy-events-outer {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 80px);
+    }
+    .galaxy-events-container {
+        position: relative;
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        background: #0a0a1a;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+    .galaxy-events-container svg {
+        display: block;
+    }
+    .galaxy-events-controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 340px;
+    }
+    .galaxy-events-detail {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 340px;
+        max-height: calc(100% - 24px);
+        overflow-y: auto;
+        z-index: 100;
+    }
+    .lens-card {
+        cursor: pointer;
+        transition: all 0.15s ease;
+        border: 2px solid transparent;
+    }
+    .lens-card:hover {
+        border-color: rgba(255,255,255,0.2);
+    }
+    .lens-card.active {
+        border-color: var(--lens-color, #fff);
+        box-shadow: 0 0 12px var(--lens-color, rgba(255,255,255,0.2));
+    }
+    .density-bar {
+        display: flex;
+        align-items: flex-end;
+        height: 36px;
+        gap: 0;
+        background: rgba(255,255,255,0.03);
+        border-radius: 4px;
+        overflow: hidden;
+        padding: 2px 0;
+    }
+    .density-bar .bar {
+        flex: 1;
+        min-width: 2px;
+        cursor: pointer;
+        transition: height 0.2s ease, opacity 0.15s ease;
+        border-radius: 1px 1px 0 0;
+    }
+    .density-bar .bar:hover {
+        opacity: 1 !important;
+        filter: brightness(1.4);
+    }
+    .timeline-scrubber {
+        background: rgba(10, 10, 26, 0.95);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 8px 16px 12px;
+    }
+    .timeline-year-display {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: 'Segoe UI', monospace;
+        letter-spacing: 1px;
+    }
+</style>
+
+<div class="galaxy-events-outer">
+    @* Lens selector cards *@
+    @if (_overview != null)
+    {
+        <div style="display: flex; gap: 6px; padding: 8px 4px; overflow-x: auto; flex-shrink: 0;">
+            @foreach (var summary in _overview.LensSummaries)
+            {
+                var color = GetLensColor(summary.Lens);
+                var isActive = _selectedLens == summary.Lens;
+                <MudPaper Class="@($"pa-2 lens-card{(isActive ? " active" : "")}")"
+                          Style="@($"background: rgba(10,10,26,0.9); --lens-color: {color}; min-width: 90px; text-align: center;")"
+                          @onclick="() => OnLensChanged(summary.Lens)">
+                    <MudText Typo="Typo.caption" Style="@($"color: {color}; font-weight: 600;")">
+                        @summary.Lens
+                    </MudText>
+                    <MudText Typo="Typo.h6" Style="@($"color: {(isActive ? color : "rgba(255,255,255,0.7)")}; line-height: 1.2;")">
+                        @summary.TotalCount.ToString("N0")
+                    </MudText>
+                    <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.35);">
+                        @summary.WithLocationCount mapped
+                    </MudText>
+                </MudPaper>
+            }
+            @{
+                var allLens = "All";
+                var allActive = _selectedLens == allLens;
+                var allColor = GetLensColor(allLens);
+                var allTotal = _overview.LensSummaries.Sum(s => s.TotalCount);
+                var allMapped = _overview.LensSummaries.Sum(s => s.WithLocationCount);
+            }
+            <MudPaper Class="@($"pa-2 lens-card{(allActive ? " active" : "")}")"
+                      Style="@($"background: rgba(10,10,26,0.9); --lens-color: {allColor}; min-width: 90px; text-align: center;")"
+                      @onclick="() => OnLensChanged(allLens)">
+                <MudText Typo="Typo.caption" Style="@($"color: {allColor}; font-weight: 600;")">All</MudText>
+                <MudText Typo="Typo.h6" Style="@($"color: {(allActive ? allColor : "rgba(255,255,255,0.7)")}; line-height: 1.2;")">
+                    @allTotal.ToString("N0")
+                </MudText>
+                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.35);">
+                    @allMapped mapped
+                </MudText>
+            </MudPaper>
+        </div>
+    }
+
+    @* Galaxy Map *@
+    <div class="galaxy-events-container" id="galaxy-events-canvas">
+        <div class="galaxy-events-controls">
+            @if (_layer != null)
+            {
+                <MudPaper Class="pa-2" Style="background: rgba(10,10,26,0.9); backdrop-filter: blur(8px);">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">
+                        @_layer.MappedEvents / @_layer.TotalEvents events mapped to @_layer.Cells.Count cells
+                    </MudText>
+                    @if (_isLoading)
+                    {
+                        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Size="Size.Small" Class="mt-1" />
+                    }
+                </MudPaper>
+            }
+
+            <MudButton Variant="Variant.Filled" Size="Size.Small"
+                       StartIcon="@Icons.Material.Filled.ViewList"
+                       Color="Color.Primary"
+                       OnClick="() => _drawerOpen = !_drawerOpen"
+                       Style="background: rgba(10,10,26,0.9); backdrop-filter: blur(8px);">
+                Browse Events (@(_eventList?.Total ?? 0))
+            </MudButton>
+        </div>
+
+        @if (_selectedCell != null)
+        {
+            <div class="galaxy-events-detail">
+                <MudPaper Class="pa-3" Style="background: rgba(10,10,26,0.95); backdrop-filter: blur(8px);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <MudText Typo="Typo.subtitle1" Color="Color.Primary">
+                            @(_selectedCell.Region ?? "Unknown Region")
+                        </MudText>
+                        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                       OnClick="() => _selectedCell = null" Color="Color.Secondary" />
+                    </div>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                        Grid @(((char)(65 + _selectedCell.Col)).ToString())-@(_selectedCell.Row + 1)
+                        &bull; @_selectedCell.Count event@(_selectedCell.Count != 1 ? "s" : "")
+                    </MudText>
+                    <MudDivider Class="mb-2" />
+                    @foreach (var evt in _selectedCell.Events)
+                    {
+                        <MudPaper Class="pa-2 mb-2" Elevation="0" Style="@($"background: rgba(255,255,255,0.03); border-left: 3px solid {GetLensColor(evt.Collection)};")">
+                            <div style="display: flex; gap: 8px;">
+                                @if (!string.IsNullOrEmpty(evt.ImageUrl))
+                                {
+                                    <MudImage Src="@StripRevision(evt.ImageUrl)" Width="48" Height="48"
+                                              ObjectFit="ObjectFit.Cover" Class="rounded"
+                                              Style="flex-shrink: 0;" />
+                                }
+                                <div style="flex: 1; min-width: 0;">
+                                    <MudLink Href="@GetWookieepediaUrl(evt.Title)" Target="_blank"
+                                             Underline="Underline.Hover" Style="font-size: 13px; font-weight: 600; color: #e0e0f0;">
+                                        @evt.Title
+                                    </MudLink>
+                                    <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px;">
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                 Style="@($"border-color: {GetLensColor(evt.Collection)}; color: {GetLensColor(evt.Collection)}; height: 20px; font-size: 10px;")">
+                                            @evt.Collection
+                                        </MudChip>
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Text"
+                                                 Style="color: rgba(255,255,255,0.5); height: 20px; font-size: 10px;"
+                                                 OnClick="() => JumpToYear(evt.Year, evt.Demarcation)">
+                                            @evt.Year @evt.Demarcation
+                                        </MudChip>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(evt.Place))
+                                    {
+                                        <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.4); margin-top: 2px;">
+                                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Size="Size.Small"
+                                                     Style="font-size: 12px; vertical-align: middle; margin-right: 2px;" />
+                                            @evt.Place
+                                        </MudText>
+                                    }
+                                    @if (!string.IsNullOrEmpty(evt.Outcome))
+                                    {
+                                        <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.4); margin-top: 2px;">
+                                            @evt.Outcome
+                                        </MudText>
+                                    }
+                                </div>
+                            </div>
+                        </MudPaper>
+                    }
+                    @if (_selectedCell.Count > _selectedCell.Events.Count)
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1">
+                            +@(_selectedCell.Count - _selectedCell.Events.Count) more events in this cell
+                        </MudText>
+                    }
+                </MudPaper>
+            </div>
+        }
+    </div>
+
+    @* Timeline Scrubber *@
+    <div class="timeline-scrubber">
+        @if (_overview != null)
+        {
+            @* Era quick-jump chips (data-driven from Era collection) *@
+            @if (_overview.Eras.Count > 0)
+            {
+                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
+                    @foreach (var era in _overview.Eras)
+                    {
+                        var isCurrentEra = _timelinePosition >= era.Start && _timelinePosition <= era.End;
+                        <MudChip T="string" Size="Size.Small"
+                                 Style="@(isCurrentEra ? $"background: {GetLensColor(_selectedLens)}; color: #fff;" : "")"
+                                 Variant="@(isCurrentEra ? Variant.Filled : Variant.Outlined)"
+                                 OnClick="() => JumpToEra(era)">
+                            @era.Name
+                        </MudChip>
+                    }
+                </div>
+            }
+
+            @* Density bar *@
+            @if (_densityBuckets.Count > 0)
+            {
+                <div class="density-bar" title="Event density across timeline">
+                    @foreach (var bucket in _densityBuckets)
+                    {
+                        var height = Math.Max(4, (int)(bucket.Intensity * 32));
+                        var isInWindow = bucket.SortKey >= (_timelinePosition - _windowSize / 2)
+                                      && bucket.SortKey <= (_timelinePosition + _windowSize / 2);
+                        var barColor = isInWindow ? GetLensColor(_selectedLens) : "rgba(255,255,255,0.2)";
+                        <div class="bar"
+                             style="@($"height: {height}px; background: {barColor};")"
+                             title="@($"{FormatSortKey(bucket.SortKey)}: {bucket.Count} events")"
+                             @onclick="() => JumpToSortKey(bucket.SortKey)">
+                        </div>
+                    }
+                </div>
+            }
+
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+                <MudIconButton Icon="@Icons.Material.Filled.SkipPrevious" Size="Size.Small"
+                               Color="Color.Primary" OnClick="JumpToPreviousEvent"
+                               Title="Jump to previous event" />
+
+                <div style="flex: 0 0 auto;">
+                    <span class="timeline-year-display" style="color: @GetLensColor(_selectedLens);">
+                        @FormatYearRange()
+                    </span>
+                </div>
+
+                <MudIconButton Icon="@Icons.Material.Filled.SkipNext" Size="Size.Small"
+                               Color="Color.Primary" OnClick="JumpToNextEvent"
+                               Title="Jump to next event" />
+
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
+                    <MudSlider T="int" Value="@_timelinePosition"
+                               Min="@_overview.TimelineRange.MinYear"
+                               Max="@_overview.TimelineRange.MaxYear"
+                               Step="1"
+                               Color="Color.Primary"
+                               Style="margin: 0;"
+                               ValueChanged="OnTimelinePositionChanged" />
+                    <div style="display: flex; justify-content: space-between;">
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                            @FormatSortKey(_overview.TimelineRange.MinYear)
+                        </MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">0</MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                            @FormatSortKey(_overview.TimelineRange.MaxYear)
+                        </MudText>
+                    </div>
+                </div>
+
+                <div style="flex: 0 0 auto; display: flex; align-items: center; gap: 4px;">
+                    <MudSelect T="int" Value="@_windowSize" ValueChanged="OnWindowSizeChanged"
+                               Dense="true" Variant="Variant.Outlined"
+                               Label="Window"
+                               Style="width: 110px; color: white;" Margin="Margin.Dense">
+                        <MudSelectItem Value="1">1 yr</MudSelectItem>
+                        <MudSelectItem Value="5">5 yr</MudSelectItem>
+                        <MudSelectItem Value="10">10 yr</MudSelectItem>
+                        <MudSelectItem Value="25">25 yr</MudSelectItem>
+                        <MudSelectItem Value="50">50 yr</MudSelectItem>
+                        <MudSelectItem Value="100">100 yr</MudSelectItem>
+                    </MudSelect>
+                </div>
+            </div>
+        }
+        else
+        {
+            <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+        }
+    </div>
+</div>
+
+@* Event browser drawer *@
+<MudDrawer @bind-Open="_drawerOpen" Anchor="Anchor.Start" Elevation="2" Variant="DrawerVariant.Temporary"
+           Width="480px" Style="background: #0d0d20;">
+    <MudDrawerHeader>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <MudText Typo="Typo.h6" Color="Color.Primary">
+                @_selectedLens Events
+            </MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.Close" OnClick="() => _drawerOpen = false"
+                           Color="Color.Secondary" Size="Size.Small" />
+        </div>
+    </MudDrawerHeader>
+    <div class="pa-3">
+        <MudTextField @bind-Value="_eventSearch"
+                      Placeholder="Search events..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Immediate="false"
+                      DebounceInterval="400"
+                      OnDebounceIntervalElapsed="OnEventSearchChanged"
+                      Clearable="true"
+                      Variant="Variant.Outlined"
+                      Margin="Margin.Dense"
+                      Class="mb-3" />
+
+        @if (_eventList != null)
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                @_eventList.Total events found
+            </MudText>
+
+            <MudTable T="GalaxyEventListItem" Items="_eventList.Items" Dense="true"
+                      Hover="true" Striped="true" FixedHeader="true" Height="calc(100vh - 280px)"
+                      RowStyle="cursor: pointer;"
+                      OnRowClick="OnEventRowClick">
+                <HeaderContent>
+                    <MudTh Style="width: 60px;">Year</MudTh>
+                    <MudTh>Event</MudTh>
+                    <MudTh Style="width: 40px;"></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <MudText Typo="Typo.caption" Style="white-space: nowrap;">
+                            @context.Year @context.Demarcation
+                        </MudText>
+                    </MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.body2">@context.Title</MudText>
+                        @if (!string.IsNullOrEmpty(context.Place))
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">@context.Place</MudText>
+                        }
+                    </MudTd>
+                    <MudTd>
+                        @if (context.HasLocation)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Size="Size.Small"
+                                     Color="Color.Success" Title="Has map location" />
+                        }
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+
+            @if (_eventList.Total > _eventListPageSize)
+            {
+                <div style="display: flex; justify-content: center; margin-top: 8px;">
+                    <MudPagination Count="@((int)Math.Ceiling((double)_eventList.Total / _eventListPageSize))"
+                                   Selected="@_eventListPage"
+                                   SelectedChanged="OnEventPageChanged"
+                                   Color="Color.Primary" Size="Size.Small" />
+                </div>
+            }
+        }
+        else
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Small" />
+        }
+    </div>
+</MudDrawer>
+
+@code {
+    IJSObjectReference? _module;
+    DotNetObjectReference<GalaxyEvents>? _dotNetRef;
+    GalaxyEventsOverview? _overview;
+    GalaxyEventLayer? _layer;
+    GalaxyEventCell? _selectedCell;
+    GalaxyEventList? _eventList;
+    List<DensityBucket> _densityBuckets = [];
+
+    string _selectedLens = "Battle";
+    int _timelinePosition = -19;
+    int _windowSize = 10;
+    bool _isLoading;
+    bool _drawerOpen;
+    string? _eventSearch;
+    int _eventListPage = 1;
+    int _eventListPageSize = 50;
+    System.Timers.Timer? _debounceTimer;
+
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    string GlobalFilterParams
+    {
+        get
+        {
+            var parts = new List<string>();
+            var c = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(c)) parts.Add($"continuity={c}");
+            var u = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(u)) parts.Add($"universe={u}");
+            return parts.Count > 0 ? "&" + string.Join("&", parts) : "";
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        GlobalFilterService.OnChange += OnGlobalFilterChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        _dotNetRef = DotNetObjectReference.Create(this);
+        _module = await JSRuntime.InvokeAsync<IJSObjectReference>(
+            "import", "/js/galaxy-events.js");
+
+        await LoadFullPage();
+    }
+
+    async Task LoadFullPage()
+    {
+        _overview = await Api.GetFromJsonAsync<GalaxyEventsOverview>(
+            $"api/galaxyevents/overview?_=1{GlobalFilterParams}");
+        if (_overview == null) return;
+
+        if (_overview.AvailableLenses.Count > 0 && !_overview.AvailableLenses.Contains(_selectedLens))
+            _selectedLens = _overview.AvailableLenses[0];
+
+        StateHasChanged();
+
+        if (_module != null)
+        {
+            await _module.InvokeVoidAsync("clearEventLayer");
+            await _module.InvokeVoidAsync("initialize", "galaxy-events-canvas", _overview, _dotNetRef);
+        }
+
+        await Task.WhenAll(LoadDensity(), LoadEventLayer(), LoadEventList());
+    }
+
+    async Task LoadEventLayer()
+    {
+        if (_module == null || _isLoading) return;
+        _isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            var yearStart = _timelinePosition - _windowSize / 2;
+            var yearEnd = _timelinePosition + _windowSize / 2;
+
+            _layer = await Api.GetFromJsonAsync<GalaxyEventLayer>(
+                $"api/galaxyevents/layer?lens={Uri.EscapeDataString(_selectedLens)}&yearStart={yearStart}&yearEnd={yearEnd}{GlobalFilterParams}");
+
+            if (_layer != null)
+                await _module.InvokeVoidAsync("renderEventLayer", _layer);
+        }
+        finally
+        {
+            _isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    async Task LoadDensity()
+    {
+        var density = await Api.GetFromJsonAsync<LensDensity>(
+            $"api/galaxyevents/density?lens={Uri.EscapeDataString(_selectedLens)}{GlobalFilterParams}");
+        _densityBuckets = density?.Buckets ?? [];
+        StateHasChanged();
+    }
+
+    async Task LoadEventList()
+    {
+        var searchParam = string.IsNullOrWhiteSpace(_eventSearch) ? "" : $"&search={Uri.EscapeDataString(_eventSearch)}";
+        _eventList = await Api.GetFromJsonAsync<GalaxyEventList>(
+            $"api/galaxyevents/events?lens={Uri.EscapeDataString(_selectedLens)}&page={_eventListPage}&pageSize={_eventListPageSize}{searchParam}{GlobalFilterParams}");
+        StateHasChanged();
+    }
+
+    async Task OnLensChanged(string lens)
+    {
+        _selectedLens = lens;
+        _selectedCell = null;
+        _eventListPage = 1;
+        _eventSearch = null;
+        await Task.WhenAll(LoadDensity(), LoadEventLayer(), LoadEventList());
+    }
+
+    void OnTimelinePositionChanged(int position)
+    {
+        _timelinePosition = position;
+        DebouncedLoadLayer();
+    }
+
+    async Task OnWindowSizeChanged(int size)
+    {
+        _windowSize = size;
+        await LoadEventLayer();
+    }
+
+    void DebouncedLoadLayer()
+    {
+        _debounceTimer?.Stop();
+        _debounceTimer?.Dispose();
+        _debounceTimer = new System.Timers.Timer(300);
+        _debounceTimer.Elapsed += async (_, _) =>
+        {
+            _debounceTimer?.Stop();
+            await InvokeAsync(LoadEventLayer);
+        };
+        _debounceTimer.AutoReset = false;
+        _debounceTimer.Start();
+    }
+
+    async Task OnEventSearchChanged(string? _)
+    {
+        _eventListPage = 1;
+        await LoadEventList();
+    }
+
+    async Task OnEventPageChanged(int page)
+    {
+        _eventListPage = page;
+        await LoadEventList();
+    }
+
+    void OnEventRowClick(TableRowClickEventArgs<GalaxyEventListItem> args)
+    {
+        if (args.Item == null) return;
+        JumpToYear(args.Item.Year, args.Item.Demarcation);
+        _drawerOpen = false;
+    }
+
+    void JumpToYear(int year, string demarcation)
+    {
+        var isBby = demarcation.Equals("BBY", StringComparison.OrdinalIgnoreCase);
+        _timelinePosition = isBby ? -year : year;
+        DebouncedLoadLayer();
+        StateHasChanged();
+    }
+
+    void JumpToSortKey(int sortKey)
+    {
+        _timelinePosition = sortKey;
+        DebouncedLoadLayer();
+        StateHasChanged();
+    }
+
+    void JumpToEra(EraRange era)
+    {
+        _timelinePosition = (era.Start + era.End) / 2;
+        _windowSize = Math.Max(5, Math.Min(100, era.End - era.Start));
+        DebouncedLoadLayer();
+        StateHasChanged();
+    }
+
+    void JumpToPreviousEvent()
+    {
+        if (_densityBuckets.Count == 0) return;
+        var prev = _densityBuckets
+            .Where(b => b.SortKey < _timelinePosition)
+            .OrderByDescending(b => b.SortKey)
+            .FirstOrDefault();
+        if (prev != null) JumpToSortKey(prev.SortKey);
+    }
+
+    void JumpToNextEvent()
+    {
+        if (_densityBuckets.Count == 0) return;
+        var next = _densityBuckets
+            .Where(b => b.SortKey > _timelinePosition)
+            .OrderBy(b => b.SortKey)
+            .FirstOrDefault();
+        if (next != null) JumpToSortKey(next.SortKey);
+    }
+
+    [JSInvokable]
+    public void OnEventCellSelected(int col, int row, string region, int count)
+    {
+        InvokeAsync(() =>
+        {
+            _selectedCell = _layer?.Cells.FirstOrDefault(c => c.Col == col && c.Row == row);
+            StateHasChanged();
+        });
+    }
+
+    string FormatYearRange()
+    {
+        var start = _timelinePosition - _windowSize / 2;
+        var end = _timelinePosition + _windowSize / 2;
+        return $"{FormatSortKey(start)} \u2014 {FormatSortKey(end)}";
+    }
+
+    static string FormatSortKey(int sortKey)
+    {
+        if (sortKey < 0) return $"{Math.Abs(sortKey)} BBY";
+        if (sortKey == 0) return "0 BBY/ABY";
+        return $"{sortKey} ABY";
+    }
+
+    static string GetLensColor(string lens)
+    {
+        var hash = 0;
+        foreach (var c in lens)
+            hash = hash * 31 + c;
+        var hue = ((hash % 360) + 360) % 360;
+        return $"hsl({hue}, 75%, 55%)";
+    }
+
+    static string GetWookieepediaUrl(string title) =>
+        $"https://starwars.fandom.com/wiki/{Uri.EscapeDataString(title.Replace(' ', '_'))}";
+
+    static string StripRevision(string url)
+    {
+        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
+        return idx > 0 ? url[..idx] : url;
+    }
+
+    async void OnGlobalFilterChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            _selectedCell = null;
+            _eventListPage = 1;
+            await LoadFullPage();
+        });
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+        _debounceTimer?.Stop();
+        _debounceTimer?.Dispose();
+        if (_module != null)
+        {
+            try { await _module.InvokeVoidAsync("dispose"); } catch { }
+            await _module.DisposeAsync();
+        }
+        _dotNetRef?.Dispose();
+    }
+}

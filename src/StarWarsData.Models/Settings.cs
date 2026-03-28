@@ -61,11 +61,10 @@ public class SettingsOptions
     /// <summary>
     /// The model to use for relationship extraction (high-volume, low-cost)
     /// </summary>
-    public string RelationshipAnalystModel { get; set; } = "gpt-5-mini";
+    public string RelationshipAnalystModel { get; set; } = "gpt-5.4-mini";
 
     /// <summary>
     /// Max pages to process per graph builder batch run
     /// </summary>
     public int GraphBuilderBatchSize { get; set; } = 100;
-
 }

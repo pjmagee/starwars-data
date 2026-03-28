@@ -7,16 +7,16 @@
 
 <PageTitle>Article Chunks &amp; Embeddings</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="my-16 px-8">
-    <MudText Typo="Typo.h3" GutterBottom="true" Class="mb-2">Article Chunks &amp; Embeddings</MudText>
-    <MudText Typo="Typo.subtitle1" Class="mb-8">
-        Semantic chunking of wiki articles with vector embeddings for AI search
-    </MudText>
-
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-8">
+    <OpenAiStatusBanner />
     <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-6" Dense="true" NoIcon="false">
-        <strong>Eligible pages</strong> are those with non-empty article content, an infobox, and a known template type.
+        <strong>Eligible Pages</strong> are those with non-empty article content, an infobox, and a known template type.
         Pages without content, or without an infobox classification, are excluded since they lack either text to chunk or a type to categorize by.
         This typically excludes redirect pages, disambiguation pages, and stub articles.
+        <br /><br />
+        <strong>Chunked</strong> = pages that have been semantically split into overlapping text chunks with vector embeddings generated.
+        <strong>Pending</strong> = eligible pages that have not yet been chunked.
+        <strong>Coverage</strong> in the table below shows each entity type's share of total chunked pages.
     </MudAlert>
 
     @if (_loading)
@@ -91,41 +91,70 @@
                     </MudStack>
                 </MudItem>
             </MudGrid>
+
+            @if (_progress.PagesPerHour > 0)
+            {
+                <MudDivider Class="my-4" />
+                <MudStack Row="true" Spacing="6" AlignItems="AlignItems.Center">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h5" Color="Color.Tertiary">@_progress.PagesPerHour.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Pages / Hour</MudText>
+                    </MudStack>
+                    @if (_progress.EstimatedHoursRemaining.HasValue)
+                    {
+                        <MudStack AlignItems="AlignItems.Center">
+                            @{
+                                var hrs = _progress.EstimatedHoursRemaining.Value;
+                                var etaText = hrs >= 24 ? $"{hrs / 24:F1} days" : $"{hrs:F1} hours";
+                            }
+                            <MudText Typo="Typo.h5" Color="Color.Tertiary">@etaText</MudText>
+                            <MudText Typo="Typo.caption">Estimated Remaining</MudText>
+                        </MudStack>
+                    }
+                </MudStack>
+            }
         </MudPaper>
 
         <!-- Progress by Type -->
         @if (_progress.ByType.Count > 0)
         {
             <MudPaper Class="pa-6 mb-6" Elevation="2">
-                <MudText Typo="Typo.h5" Class="mb-4">Chunks by Entity Type</MudText>
-                <MudSimpleTable Dense="true" Hover="true" Bordered="true">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Pages</th>
-                            <th>Chunks</th>
-                            <th>Avg Chunks/Page</th>
-                            <th>Coverage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var t in _progress.ByType)
-                        {
-                            var typePct = _progress.ChunkedPages > 0
-                                ? (double)t.Pages / _progress.ChunkedPages * 100
-                                : 0;
-                            <tr>
-                                <td><MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@t.Type</MudChip></td>
-                                <td>@t.Pages.ToString("N0")</td>
-                                <td>@t.Chunks.ToString("N0")</td>
-                                <td>@t.AvgChunksPerPage.ToString("F1")</td>
-                                <td style="min-width: 150px;">
-                                    <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" />
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </MudSimpleTable>
+                <MudDataGrid T="ChunkingTypeProgress" Items="_progress.ByType" Dense="true" Hover="true"
+                             Filterable="true" SortMode="SortMode.Single"
+                             FixedHeader="true" Height="400px"
+                             QuickFilter="@_typeQuickFilter">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h5">Chunks by Entity Type</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_typeSearchString" Placeholder="Search types"
+                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                      IconSize="Size.Medium" Class="mt-0" Immediate="true" />
+                    </ToolBarContent>
+                    <Columns>
+                        <TemplateColumn T="ChunkingTypeProgress" Title="Type" Sortable="true" SortBy="@(x => x.Type)">
+                            <CellTemplate>
+                                <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@context.Item.Type</MudChip>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn T="ChunkingTypeProgress" TProperty="int" Property="x => x.Pages" Title="Pages" />
+                        <PropertyColumn T="ChunkingTypeProgress" TProperty="long" Property="x => x.Chunks" Title="Chunks" />
+                        <PropertyColumn T="ChunkingTypeProgress" TProperty="double" Property="x => x.AvgChunksPerPage" Title="Avg Chunks/Page" Format="F1" />
+                        <TemplateColumn T="ChunkingTypeProgress" Title="Coverage" Sortable="true"
+                                        SortBy="@(x => _progress!.ChunkedPages > 0 ? (double)x.Pages / _progress.ChunkedPages : 0)">
+                            <CellTemplate>
+                                @{
+                                    var typePct = _progress!.ChunkedPages > 0
+                                        ? (double)context.Item.Pages / _progress.ChunkedPages * 100
+                                        : 0;
+                                }
+                                <MudProgressLinear Value="@typePct" Color="Color.Primary" Rounded="true" Size="Size.Small" Style="min-width: 120px;" />
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                    <PagerContent>
+                        <MudDataGridPager T="ChunkingTypeProgress" />
+                    </PagerContent>
+                </MudDataGrid>
             </MudPaper>
         }
     }
@@ -140,8 +169,13 @@
     private bool _loading = true;
     private bool _jobRunning;
     private Timer? _pollTimer;
+    private string _typeSearchString = "";
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    private Func<ChunkingTypeProgress, bool> _typeQuickFilter => t =>
+        string.IsNullOrWhiteSpace(_typeSearchString)
+        || t.Type.Contains(_typeSearchString, StringComparison.OrdinalIgnoreCase);
 
     protected override async Task OnInitializedAsync()
     {
@@ -227,6 +261,8 @@
         public int PendingPages { get; set; }
         public long TotalChunks { get; set; }
         public double AvgChunksPerPage { get; set; }
+        public double PagesPerHour { get; set; }
+        public double? EstimatedHoursRemaining { get; set; }
         public List<ChunkingTypeProgress> ByType { get; set; } = [];
     }
 

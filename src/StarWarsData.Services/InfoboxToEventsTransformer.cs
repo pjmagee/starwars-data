@@ -24,7 +24,8 @@ public class InfoboxToEventsTransformer
 
     public IEnumerable<TimelineEvent> Transform(Page page)
     {
-        if (page.Infobox == null) yield break;
+        if (page.Infobox == null)
+            yield break;
 
         var template = page.Infobox.Template ?? "Unknown";
         var title = page.Title;

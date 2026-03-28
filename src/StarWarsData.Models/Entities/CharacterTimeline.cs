@@ -78,10 +78,14 @@ public class CharacterEvent : IComparable<CharacterEvent>
 
     public int CompareTo(CharacterEvent? other)
     {
-        if (other is null) return 1;
-        if (!Year.HasValue && !other.Year.HasValue) return 0;
-        if (!Year.HasValue) return 1;
-        if (!other.Year.HasValue) return -1;
+        if (other is null)
+            return 1;
+        if (!Year.HasValue && !other.Year.HasValue)
+            return 0;
+        if (!Year.HasValue)
+            return 1;
+        if (!other.Year.HasValue)
+            return -1;
 
         switch (Demarcation)
         {
@@ -93,8 +97,9 @@ public class CharacterEvent : IComparable<CharacterEvent>
 
         return Demarcation switch
         {
-            Demarcation.Bby when other.Demarcation == Demarcation.Bby =>
-                other.Year.Value.CompareTo(Year.Value),
+            Demarcation.Bby when other.Demarcation == Demarcation.Bby => other.Year.Value.CompareTo(
+                Year.Value
+            ),
             _ => Year.Value.CompareTo(other.Year.Value),
         };
     }
@@ -163,7 +168,7 @@ public enum GenerationStage
     Reviewing,
     Saving,
     Complete,
-    Failed
+    Failed,
 }
 
 public class GenerationStatus

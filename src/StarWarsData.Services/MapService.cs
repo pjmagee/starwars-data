@@ -21,11 +21,16 @@ public class MapService
     )
     {
         _logger = logger;
-        _pages = mongoClient.GetDatabase(settingsOptions.Value.PagesDb).GetCollection<Page>("Pages");
+        _pages = mongoClient
+            .GetDatabase(settingsOptions.Value.PagesDb)
+            .GetCollection<Page>("Pages");
     }
 
     static FilterDefinition<Page> TemplateFilter(string type) =>
-        Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression($":{type}$", "i"));
+        Builders<Page>.Filter.Regex(
+            "infobox.Template",
+            new BsonRegularExpression($":{type}$", "i")
+        );
 
     static FilterDefinition<Page> InfoboxDataFilter(string type, string label) =>
         Builders<Page>.Filter.And(
@@ -41,11 +46,7 @@ public class MapService
             TemplateFilter(type),
             Builders<Page>.Filter.ElemMatch<BsonDocument>(
                 "infobox.Data",
-                new BsonDocument
-                {
-                    { "Label", label },
-                    { "Values", value },
-                }
+                new BsonDocument { { "Label", label }, { "Values", value } }
             )
         );
 
@@ -54,6 +55,37 @@ public class MapService
 
     static string? GetFirstDataValue(Page page, string label) =>
         page.Infobox?.Data.FirstOrDefault(d => d.Label == label)?.Values.FirstOrDefault();
+
+    /// <summary>
+    /// Normalize region names to merge duplicates in the wiki data.
+    /// E.g. "Mid Rim" and "Mid Rim Territories" are the same region,
+    /// as are "Inner Rim" / "Inner Rim Territories", case variants, and compound entries.
+    /// </summary>
+    internal static string NormalizeRegionName(string region)
+    {
+        // Strip compound suffixes like "; Inner Zuma Region", ", Greater Javin"
+        var sepIdx = region.IndexOfAny([';', ',']);
+        if (sepIdx > 0)
+            region = region[..sepIdx].Trim();
+
+        // Normalize case
+        region = region.Trim();
+
+        // Merge "X" / "X Territories" variants
+        if (region.EndsWith(" Territories", StringComparison.OrdinalIgnoreCase))
+            region = region[..^" Territories".Length];
+
+        // Canonical names
+        return region.ToLowerInvariant() switch
+        {
+            "outer rim" => "Outer Rim Territories",
+            "mid rim" => "Mid Rim",
+            "inner rim" => "Inner Rim",
+            "the slice" => "The Slice",
+            "the interior" => "The Interior",
+            _ => region
+        };
+    }
 
     public async Task<IEnumerable<GalaxyMapItem>> GetPlanets()
     {
@@ -65,19 +97,24 @@ public class MapService
         foreach (var rec in recs)
         {
             var prop = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (prop?.Values == null || prop.Values.Count == 0) continue;
+            if (prop?.Values == null || prop.Values.Count == 0)
+                continue;
             var loc = prop.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2) continue;
+            if (parts.Length != 2)
+                continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number)) continue;
-            planets.Add(new GalaxyMapItem
-            {
-                Id = rec.PageId,
-                Letter = letter,
-                Number = number,
-                Name = rec.Title,
-            });
+            if (!int.TryParse(parts[1], out var number))
+                continue;
+            planets.Add(
+                new GalaxyMapItem
+                {
+                    Id = rec.PageId,
+                    Letter = letter,
+                    Number = number,
+                    Name = rec.Title,
+                }
+            );
         }
         return planets;
     }
@@ -108,12 +145,15 @@ public class MapService
         foreach (var rec in recs)
         {
             var gridProp = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (gridProp?.Values == null || gridProp.Values.Count == 0) continue;
+            if (gridProp?.Values == null || gridProp.Values.Count == 0)
+                continue;
             var loc = gridProp.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2) continue;
+            if (parts.Length != 2)
+                continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number)) continue;
+            if (!int.TryParse(parts[1], out var number))
+                continue;
             var key = $"{letter}-{number}";
 
             var sectorName = GetFirstDataValue(rec, "Sector");
@@ -134,9 +174,15 @@ public class MapService
                     Letter = letter,
                     Number = number,
                     Sector = sectorName,
-                    SectorId = sectorName != null && sectorMap.TryGetValue(sectorName, out var sid) ? sid : null,
+                    SectorId =
+                        sectorName != null && sectorMap.TryGetValue(sectorName, out var sid)
+                            ? sid
+                            : null,
                     Region = regionName,
-                    RegionId = regionName != null && regionMap.TryGetValue(regionName, out var rid) ? rid : null,
+                    RegionId =
+                        regionName != null && regionMap.TryGetValue(regionName, out var rid)
+                            ? rid
+                            : null,
                 };
                 grid[key] = cell;
             }
@@ -169,25 +215,30 @@ public class MapService
         foreach (var rec in nebulaRecs)
         {
             var gridProp = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square");
-            if (gridProp?.Values == null || gridProp.Values.Count == 0) continue;
+            if (gridProp?.Values == null || gridProp.Values.Count == 0)
+                continue;
             var loc = gridProp.Values.First();
             var parts = loc.Split('-', 2);
-            if (parts.Length != 2) continue;
+            if (parts.Length != 2)
+                continue;
             var letter = parts[0].Trim();
-            if (!int.TryParse(parts[1], out var number)) continue;
+            if (!int.TryParse(parts[1], out var number))
+                continue;
             var key = $"{letter}-{number}";
             if (!grid.TryGetValue(key, out var cell))
             {
                 cell = new GalaxyGridCell { Letter = letter, Number = number };
                 grid[key] = cell;
             }
-            cell.Nebulas.Add(new GalaxyMapItem
-            {
-                Id = rec.PageId,
-                Letter = letter,
-                Number = number,
-                Name = rec.Title,
-            });
+            cell.Nebulas.Add(
+                new GalaxyMapItem
+                {
+                    Id = rec.PageId,
+                    Letter = letter,
+                    Number = number,
+                    Name = rec.Title,
+                }
+            );
         }
 
         return grid.Values;
@@ -201,9 +252,13 @@ public class MapService
 
     public async Task<SectorDto?> GetSectorAsync(int id)
     {
-        var filter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("Sector"),
+            Builders<Page>.Filter.Eq(p => p.PageId, id)
+        );
         var rec = await _pages.Find(filter).FirstOrDefaultAsync();
-        if (rec == null) return null;
+        if (rec == null)
+            return null;
         return new SectorDto { Id = rec.PageId, Name = rec.Title };
     }
 
@@ -215,17 +270,25 @@ public class MapService
 
     public async Task<RegionDto?> GetRegionAsync(int id)
     {
-        var filter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("Region"),
+            Builders<Page>.Filter.Eq(p => p.PageId, id)
+        );
         var rec = await _pages.Find(filter).FirstOrDefaultAsync();
-        if (rec == null) return null;
+        if (rec == null)
+            return null;
         return new RegionDto { Id = rec.PageId, Name = rec.Title };
     }
 
     public async Task<SystemDetailsDto?> GetSystemDetailsAsync(int id)
     {
-        var filter = Builders<Page>.Filter.And(TemplateFilter("System"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("System"),
+            Builders<Page>.Filter.Eq(p => p.PageId, id)
+        );
         var rec = await _pages.Find(filter).FirstOrDefaultAsync();
-        if (rec == null) return null;
+        if (rec == null)
+            return null;
         var grid = GetFirstDataValue(rec, "Grid square");
         var planets = GetDataValues(rec, "Planets");
         var neighbors = GetDataValues(rec, "Neighboring systems");
@@ -241,16 +304,23 @@ public class MapService
 
     public async Task<CelestialBodyDetailsDto?> GetCelestialBodyDetailsAsync(int id)
     {
-        var filter = Builders<Page>.Filter.And(TemplateFilter("CelestialBody"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("CelestialBody"),
+            Builders<Page>.Filter.Eq(p => p.PageId, id)
+        );
         var rec = await _pages.Find(filter).FirstOrDefaultAsync();
-        if (rec == null) return null;
+        if (rec == null)
+            return null;
         var data = rec.Infobox?.Data ?? [];
-        var cls = data.FirstOrDefault(d => d.Label == "Class")?.Values.FirstOrDefault() ?? string.Empty;
+        var cls =
+            data.FirstOrDefault(d => d.Label == "Class")?.Values.FirstOrDefault() ?? string.Empty;
         var grid = GetFirstDataValue(rec, "Grid square");
         var sector = GetFirstDataValue(rec, "Sector");
         var region = GetFirstDataValue(rec, "Region");
-        var additional = data
-            .Where(d => d.Label is not null && !new[] { "Class", "Grid square", "Sector", "Region" }.Contains(d.Label))
+        var additional = data.Where(d =>
+                d.Label is not null
+                && !new[] { "Class", "Grid square", "Sector", "Region" }.Contains(d.Label)
+            )
             .ToDictionary(d => d.Label!, d => d.Values);
         return new CelestialBodyDetailsDto
         {
@@ -266,15 +336,21 @@ public class MapService
 
     public async Task<NebulaDetailsDto?> GetNebulaDetailsAsync(int id)
     {
-        var filter = Builders<Page>.Filter.And(TemplateFilter("Nebula"), Builders<Page>.Filter.Eq(p => p.PageId, id));
+        var filter = Builders<Page>.Filter.And(
+            TemplateFilter("Nebula"),
+            Builders<Page>.Filter.Eq(p => p.PageId, id)
+        );
         var rec = await _pages.Find(filter).FirstOrDefaultAsync();
-        if (rec == null) return null;
+        if (rec == null)
+            return null;
         var data = rec.Infobox?.Data ?? [];
         var grid = GetFirstDataValue(rec, "Grid square");
         var sector = GetFirstDataValue(rec, "Sector");
         var region = GetFirstDataValue(rec, "Region");
-        var additional = data
-            .Where(d => d.Label is not null && !new[] { "Grid square", "Sector", "Region" }.Contains(d.Label))
+        var additional = data.Where(d =>
+                d.Label is not null
+                && !new[] { "Grid square", "Sector", "Region" }.Contains(d.Label)
+            )
             .ToDictionary(d => d.Label!, d => d.Values);
         return new NebulaDetailsDto
         {
@@ -289,9 +365,13 @@ public class MapService
 
     public async Task<IEnumerable<SectorDto>> GetSectorsByRegionAsync(int regionId)
     {
-        var regionFilter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, regionId));
+        var regionFilter = Builders<Page>.Filter.And(
+            TemplateFilter("Region"),
+            Builders<Page>.Filter.Eq(p => p.PageId, regionId)
+        );
         var region = await _pages.Find(regionFilter).FirstOrDefaultAsync();
-        if (region == null) return Enumerable.Empty<SectorDto>();
+        if (region == null)
+            return Enumerable.Empty<SectorDto>();
         var regionName = region.Title;
         var filter = Builders<Page>.Filter.And(
             TemplateFilter("Sector"),
@@ -306,9 +386,13 @@ public class MapService
 
     public async Task<IEnumerable<SystemDto>> GetSystemsBySectorAsync(int sectorId)
     {
-        var sectorFilter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, sectorId));
+        var sectorFilter = Builders<Page>.Filter.And(
+            TemplateFilter("Sector"),
+            Builders<Page>.Filter.Eq(p => p.PageId, sectorId)
+        );
         var sector = await _pages.Find(sectorFilter).FirstOrDefaultAsync();
-        if (sector == null) return Enumerable.Empty<SystemDto>();
+        if (sector == null)
+            return Enumerable.Empty<SystemDto>();
         var sectorName = sector.Title;
         var filter = Builders<Page>.Filter.And(
             TemplateFilter("System"),
@@ -323,9 +407,13 @@ public class MapService
 
     public async Task<IEnumerable<PlanetDto>> GetPlanetsBySystemAsync(int systemId)
     {
-        var sysFilter = Builders<Page>.Filter.And(TemplateFilter("System"), Builders<Page>.Filter.Eq(p => p.PageId, systemId));
+        var sysFilter = Builders<Page>.Filter.And(
+            TemplateFilter("System"),
+            Builders<Page>.Filter.Eq(p => p.PageId, systemId)
+        );
         var system = await _pages.Find(sysFilter).FirstOrDefaultAsync();
-        if (system == null) return Enumerable.Empty<PlanetDto>();
+        if (system == null)
+            return Enumerable.Empty<PlanetDto>();
         var systemName = system.Title;
         var filter = Builders<Page>.Filter.And(
             TemplateFilter("CelestialBody"),
@@ -340,9 +428,13 @@ public class MapService
 
     public async Task<IEnumerable<PlanetDto>> GetOrphanPlanetsInRegionAsync(int regionId)
     {
-        var regionFilter = Builders<Page>.Filter.And(TemplateFilter("Region"), Builders<Page>.Filter.Eq(p => p.PageId, regionId));
+        var regionFilter = Builders<Page>.Filter.And(
+            TemplateFilter("Region"),
+            Builders<Page>.Filter.Eq(p => p.PageId, regionId)
+        );
         var region = await _pages.Find(regionFilter).FirstOrDefaultAsync();
-        if (region == null) return Enumerable.Empty<PlanetDto>();
+        if (region == null)
+            return Enumerable.Empty<PlanetDto>();
         var regionName = region.Title;
         // CelestialBody with Region matching but no System
         var filter = Builders<Page>.Filter.And(
@@ -369,9 +461,13 @@ public class MapService
 
     public async Task<IEnumerable<PlanetDto>> GetOrphanPlanetsInSectorAsync(int sectorId)
     {
-        var sectorFilter = Builders<Page>.Filter.And(TemplateFilter("Sector"), Builders<Page>.Filter.Eq(p => p.PageId, sectorId));
+        var sectorFilter = Builders<Page>.Filter.And(
+            TemplateFilter("Sector"),
+            Builders<Page>.Filter.Eq(p => p.PageId, sectorId)
+        );
         var sector = await _pages.Find(sectorFilter).FirstOrDefaultAsync();
-        if (sector == null) return Enumerable.Empty<PlanetDto>();
+        if (sector == null)
+            return Enumerable.Empty<PlanetDto>();
         var sectorName = sector.Title;
         var filter = Builders<Page>.Filter.And(
             TemplateFilter("CelestialBody"),
@@ -398,13 +494,31 @@ public class MapService
     // Labels on non-spatial entities that reference locations
     static readonly string[] LocationLabels =
     [
-        "Homeworld", "Location", "Planet", "Birthplace", "Capital",
-        "Headquarters", "Base of operations", "Place", "Theater",
-        "Born", "Died", "Destroyed", "System", "Sector", "Region",
-        "Base", "World", "Moon", "Located"
+        "Homeworld",
+        "Location",
+        "Planet",
+        "Birthplace",
+        "Capital",
+        "Headquarters",
+        "Base of operations",
+        "Place",
+        "Theater",
+        "Born",
+        "Died",
+        "Destroyed",
+        "System",
+        "Sector",
+        "Region",
+        "Base",
+        "World",
+        "Moon",
+        "Located",
     ];
 
-    public async Task<List<MapSearchResult>> SearchGridAsync(string term, Continuity? continuity = null)
+    public async Task<List<MapSearchResult>> SearchGridAsync(
+        string term,
+        Continuity? continuity = null
+    )
     {
         var escaped = Regex.Escape(term);
         var results = new List<MapSearchResult>();
@@ -451,20 +565,24 @@ public class MapService
         foreach (var page in directMatches)
         {
             var gridSquare = GetFirstDataValue(page, "Grid square");
-            if (gridSquare == null) continue;
+            if (gridSquare == null)
+                continue;
             var parts = gridSquare.Split('-', 2);
-            if (parts.Length != 2 || !int.TryParse(parts[1], out _)) continue;
+            if (parts.Length != 2 || !int.TryParse(parts[1], out _))
+                continue;
             var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
 
             var template = page.Infobox?.Template?.Split(':').LastOrDefault();
-            results.Add(new MapSearchResult
-            {
-                GridKey = gridKey,
-                PageId = page.PageId,
-                MatchedName = page.Title,
-                Template = template,
-                MatchType = "direct",
-            });
+            results.Add(
+                new MapSearchResult
+                {
+                    GridKey = gridKey,
+                    PageId = page.PageId,
+                    MatchedName = page.Title,
+                    Template = template,
+                    MatchType = "direct",
+                }
+            );
             seen.Add(gridKey);
         }
 
@@ -514,19 +632,29 @@ public class MapService
         }
 
         // Collect all referenced location names from infobox properties
-        var locationRefs = new Dictionary<string, List<(int sourcePageId, string entityName, string label)>>();
+        var locationRefs =
+            new Dictionary<string, List<(int sourcePageId, string entityName, string label)>>();
         foreach (var page in indirectMatches)
         {
-            if (page.Infobox?.Data == null) continue;
+            if (page.Infobox?.Data == null)
+                continue;
             foreach (var prop in page.Infobox.Data)
             {
-                if (prop.Label == null) continue;
-                if (!LocationLabels.Any(l => prop.Label.Contains(l, StringComparison.OrdinalIgnoreCase))) continue;
+                if (prop.Label == null)
+                    continue;
+                if (
+                    !LocationLabels.Any(l =>
+                        prop.Label.Contains(l, StringComparison.OrdinalIgnoreCase)
+                    )
+                )
+                    continue;
 
                 // Collect values and link contents as potential location names
                 var names = new List<string>();
                 names.AddRange(prop.Values.Where(v => !string.IsNullOrWhiteSpace(v)));
-                names.AddRange(prop.Links.Select(l => l.Content).Where(c => !string.IsNullOrWhiteSpace(c)));
+                names.AddRange(
+                    prop.Links.Select(l => l.Content).Where(c => !string.IsNullOrWhiteSpace(c))
+                );
 
                 foreach (var name in names.Distinct())
                 {
@@ -552,30 +680,301 @@ public class MapService
             foreach (var page in resolved)
             {
                 var gridSquare = GetFirstDataValue(page, "Grid square");
-                if (gridSquare == null) continue;
+                if (gridSquare == null)
+                    continue;
                 var parts = gridSquare.Split('-', 2);
-                if (parts.Length != 2 || !int.TryParse(parts[1], out _)) continue;
+                if (parts.Length != 2 || !int.TryParse(parts[1], out _))
+                    continue;
                 var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
 
-                if (!locationRefs.TryGetValue(page.Title, out var refs)) continue;
+                if (!locationRefs.TryGetValue(page.Title, out var refs))
+                    continue;
                 foreach (var (sourcePageId, entityName, label) in refs)
                 {
-                    results.Add(new MapSearchResult
-                    {
-                        GridKey = gridKey,
-                        PageId = page.PageId,
-                        MatchedName = page.Title,
-                        Template = page.Infobox?.Template?.Split(':').LastOrDefault(),
-                        MatchType = "linked",
-                        LinkedVia = $"{label} of {entityName}",
-                        SourcePageId = sourcePageId,
-                        SourceName = entityName,
-                    });
+                    results.Add(
+                        new MapSearchResult
+                        {
+                            GridKey = gridKey,
+                            PageId = page.PageId,
+                            MatchedName = page.Title,
+                            Template = page.Infobox?.Template?.Split(':').LastOrDefault(),
+                            MatchType = "linked",
+                            LinkedVia = $"{label} of {entityName}",
+                            SourcePageId = sourcePageId,
+                            SourceName = entityName,
+                        }
+                    );
                     seen.Add(gridKey);
                 }
             }
         }
 
         return results;
+    }
+
+    static bool TryParseGridSquare(string? gridSquare, out int col, out int row)
+    {
+        col = 0;
+        row = 0;
+        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        var parts = gridSquare.Split('-', 2);
+        if (parts.Length != 2) return false;
+        var letter = parts[0].Trim().ToUpperInvariant();
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        col = letter[0] - 'A';
+        row = num - 1;
+        return true;
+    }
+
+    /// <summary>
+    /// Lightweight overview: regions, trade routes, nebulas. No systems.
+    /// Called once on page load (~300 elements).
+    /// </summary>
+    public async Task<GalaxyMapV2Overview> GetGalaxyMapV2OverviewAsync(Continuity? continuity = null)
+    {
+        var result = new GalaxyMapV2Overview();
+
+        // Load all systems server-side to compute region boundaries and resolve trade route waypoints.
+        // We do NOT return them to the client — only the derived data.
+        var sysFilter = InfoboxDataFilter("System", "Grid square");
+        if (continuity.HasValue)
+            sysFilter = Builders<Page>.Filter.And(
+                sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+        var sysRecs = await _pages.Find(sysFilter)
+            .Project<Page>(Builders<Page>.Projection
+                .Include(p => p.Title)
+                .Include(p => p.PageId)
+                .Include("infobox.Data"))
+            .ToListAsync();
+
+        var nameToGrid = new Dictionary<string, (int col, int row)>(StringComparer.OrdinalIgnoreCase);
+        var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(StringComparer.OrdinalIgnoreCase);
+        // Track per-cell system count and dominant region
+        var cellCounts = new Dictionary<(int col, int row), int>();
+        var cellRegion = new Dictionary<(int col, int row), Dictionary<string, int>>();
+
+        foreach (var rec in sysRecs)
+        {
+            var gridSquare = GetFirstDataValue(rec, "Grid square");
+            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
+            nameToGrid.TryAdd(rec.Title, (col, row));
+
+            var key = (col, row);
+            cellCounts[key] = cellCounts.GetValueOrDefault(key) + 1;
+
+            var regionRaw = GetFirstDataValue(rec, "Region");
+            if (!string.IsNullOrEmpty(regionRaw))
+            {
+                var region = NormalizeRegionName(regionRaw);
+                if (!regionCells.TryGetValue(region, out var cells))
+                {
+                    cells = [];
+                    regionCells[region] = cells;
+                }
+                cells.Add((col, row));
+
+                if (!cellRegion.TryGetValue(key, out var regionCount))
+                {
+                    regionCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                    cellRegion[key] = regionCount;
+                }
+                regionCount[region] = regionCount.GetValueOrDefault(region) + 1;
+            }
+        }
+
+        // Also index celestial bodies for trade route resolution
+        var cbFilter = InfoboxDataFilter("CelestialBody", "Grid square");
+        if (continuity.HasValue)
+            cbFilter = Builders<Page>.Filter.And(
+                cbFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+        var cbRecs = await _pages.Find(cbFilter)
+            .Project<Page>(Builders<Page>.Projection
+                .Include(p => p.Title)
+                .Include("infobox.Data"))
+            .ToListAsync();
+
+        foreach (var rec in cbRecs)
+        {
+            var gridSquare = GetFirstDataValue(rec, "Grid square");
+            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
+            nameToGrid.TryAdd(rec.Title, (col, row));
+
+            var regionRaw = GetFirstDataValue(rec, "Region");
+            if (!string.IsNullOrEmpty(regionRaw))
+            {
+                var region = NormalizeRegionName(regionRaw);
+                if (!regionCells.TryGetValue(region, out var cells))
+                {
+                    cells = [];
+                    regionCells[region] = cells;
+                }
+                cells.Add((col, row));
+            }
+        }
+
+        // Build regions
+        foreach (var (name, cells) in regionCells)
+        {
+            result.Regions.Add(new MapV2Region
+            {
+                Name = name,
+                Cells = cells.Select(c => new[] { c.col, c.row }).ToList()
+            });
+        }
+
+        // Build cell summaries
+        foreach (var (key, count) in cellCounts)
+        {
+            string? dominantRegion = null;
+            if (cellRegion.TryGetValue(key, out var regionCount))
+                dominantRegion = regionCount.MaxBy(kv => kv.Value).Key;
+            result.Cells.Add(new MapV2CellSummary
+            {
+                Col = key.col, Row = key.row,
+                SystemCount = count,
+                Region = dominantRegion
+            });
+        }
+
+        // Nebulas — parse multi-grid values like "S-5 and S-6", "T-9/T-10", "E-9, F-9"
+        var nebFilter = InfoboxDataFilter("Nebula", "Grid square");
+        if (continuity.HasValue)
+            nebFilter = Builders<Page>.Filter.And(
+                nebFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+        var nebRecs = await _pages.Find(nebFilter).ToListAsync();
+        foreach (var rec in nebRecs)
+        {
+            var gridValues = GetDataValues(rec, "Grid square");
+            var cells = new List<(int col, int row)>();
+            foreach (var raw in gridValues)
+            {
+                // Split on common separators: "/", " and ", "&", ","
+                var parts = Regex.Split(raw, @"[/,&]|\band\b", RegexOptions.IgnoreCase);
+                foreach (var part in parts)
+                {
+                    if (TryParseGridSquare(part.Trim(), out var c, out var r))
+                        cells.Add((c, r));
+                }
+            }
+            if (cells.Count == 0) continue;
+            result.Nebulas.Add(new MapV2Nebula
+            {
+                Id = rec.PageId, Name = rec.Title,
+                Col = cells[0].col, Row = cells[0].row,
+                Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
+                Region = GetFirstDataValue(rec, "Region") is { } rn ? NormalizeRegionName(rn) : null
+            });
+        }
+
+        // Trade routes — resolve waypoints via the name→grid lookup
+        var trFilter = TemplateFilter("TradeRoute");
+        if (continuity.HasValue)
+            trFilter = Builders<Page>.Filter.And(
+                trFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+        var trRecs = await _pages.Find(trFilter).ToListAsync();
+        foreach (var rec in trRecs)
+        {
+            var endpoints = GetDataValues(rec, "End points");
+            var otherObjects = GetDataValues(rec, "Other objects");
+
+            var waypointNames = new List<string>();
+            foreach (var obj in otherObjects)
+            {
+                var parts = obj.Split([" - ", " – "], StringSplitOptions.RemoveEmptyEntries);
+                waypointNames.AddRange(parts.Select(p => p.Trim()));
+            }
+            if (waypointNames.Count == 0)
+                waypointNames.AddRange(endpoints);
+
+            var resolved = new List<MapV2Waypoint>();
+            foreach (var name in waypointNames)
+            {
+                if (nameToGrid.TryGetValue(name, out var grid))
+                {
+                    if (resolved.Count > 0 && resolved[^1].Col == grid.col && resolved[^1].Row == grid.row)
+                        continue;
+                    resolved.Add(new MapV2Waypoint { Name = name, Col = grid.col, Row = grid.row });
+                }
+            }
+            if (resolved.Count >= 2)
+                result.TradeRoutes.Add(new MapV2TradeRoute { Id = rec.PageId, Name = rec.Title, Waypoints = resolved });
+        }
+
+        _logger.LogInformation(
+            "GalaxyMap V2 overview: {Regions} regions, {Routes} trade routes, {Nebulas} nebulas",
+            result.Regions.Count, result.TradeRoutes.Count, result.Nebulas.Count);
+
+        return result;
+    }
+
+    /// <summary>
+    /// Returns systems (with planets) within a grid range. Called on-demand as user zooms in.
+    /// </summary>
+    public async Task<GalaxyMapV2Systems> GetSystemsInRangeAsync(
+        int minCol, int maxCol, int minRow, int maxRow, Continuity? continuity = null)
+    {
+        var sysFilter = InfoboxDataFilter("System", "Grid square");
+        if (continuity.HasValue)
+            sysFilter = Builders<Page>.Filter.And(
+                sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+        var sysRecs = await _pages.Find(sysFilter).ToListAsync();
+
+        // Build a name→(id, class) lookup for all celestial bodies to resolve planet IDs
+        var cbLookup = new Dictionary<string, (int id, string? cls)>(StringComparer.OrdinalIgnoreCase);
+        var cbRecs = await _pages.Find(TemplateFilter("CelestialBody"))
+            .Project<Page>(Builders<Page>.Projection
+                .Include(p => p.PageId).Include(p => p.Title).Include("infobox.Data"))
+            .ToListAsync();
+        foreach (var cb in cbRecs)
+        {
+            var cls = GetFirstDataValue(cb, "Class");
+            cbLookup.TryAdd(cb.Title, (cb.PageId, cls));
+        }
+
+        var systems = new List<MapV2System>();
+        foreach (var rec in sysRecs)
+        {
+            var gridSquare = GetFirstDataValue(rec, "Grid square");
+            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
+            if (col < minCol || col > maxCol || row < minRow || row > maxRow) continue;
+
+            // Collect all orbital body names from all relevant properties
+            var bodyNames = new List<string>();
+            bodyNames.AddRange(GetDataValues(rec, "Orbiting bodies"));
+            bodyNames.AddRange(GetDataValues(rec, "Planets"));
+            bodyNames.AddRange(GetDataValues(rec, "Moons"));
+            bodyNames.AddRange(GetDataValues(rec, "Asteroids"));
+            bodyNames.AddRange(GetDataValues(rec, "Other objects"));
+            var distinctNames = bodyNames.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+
+            var planetDtos = distinctNames.Select(n =>
+            {
+                cbLookup.TryGetValue(n, out var info);
+                return new MapV2Planet { Id = info.id, Name = n, Class = info.cls };
+            }).ToList();
+
+            systems.Add(new MapV2System
+            {
+                Id = rec.PageId,
+                Name = rec.Title,
+                Col = col,
+                Row = row,
+                Region = GetFirstDataValue(rec, "Region") is { } rn ? NormalizeRegionName(rn) : null,
+                Sector = GetFirstDataValue(rec, "Sector"),
+                Planets = planetDtos
+            });
+        }
+
+        _logger.LogInformation(
+            "GalaxyMap V2 systems [{MinCol},{MinRow}]-[{MaxCol},{MaxRow}]: {Count} systems",
+            minCol, minRow, maxCol, maxRow, systems.Count);
+
+        return new GalaxyMapV2Systems
+        {
+            MinCol = minCol, MaxCol = maxCol,
+            MinRow = minRow, MaxRow = maxRow,
+            Systems = systems
+        };
     }
 }

@@ -148,7 +148,9 @@ public class GalaxyMapController : ControllerBase
     }
 
     [HttpGet("grid")]
-    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells([FromQuery] Continuity? continuity = null)
+    public async Task<IEnumerable<GalaxyGridCell>> GetGalaxyGridCells(
+        [FromQuery] Continuity? continuity = null
+    )
     {
         return await _mapService.GetGalaxyGridCells(continuity);
     }
@@ -216,7 +218,8 @@ public class GalaxyMapController : ControllerBase
     [HttpGet("search")]
     public async Task<ActionResult<List<MapSearchResult>>> SearchGrid(
         [FromQuery] string term,
-        [FromQuery] Continuity? continuity = null)
+        [FromQuery] Continuity? continuity = null
+    )
     {
         if (string.IsNullOrWhiteSpace(term) || term.Length < 2)
             return Ok(new List<MapSearchResult>());
@@ -244,6 +247,42 @@ public class GalaxyMapController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching orphan planets for sector {SectorId}", sectorId);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpGet("v2/overview")]
+    [ResponseCache(Duration = 300)]
+    public async Task<ActionResult<GalaxyMapV2Overview>> GetV2Overview(
+        [FromQuery] Continuity? continuity = null)
+    {
+        try
+        {
+            var data = await _mapService.GetGalaxyMapV2OverviewAsync(continuity);
+            return Ok(data);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching V2 galaxy map overview");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpGet("v2/systems")]
+    [ResponseCache(Duration = 120)]
+    public async Task<ActionResult<GalaxyMapV2Systems>> GetV2Systems(
+        [FromQuery] int minCol, [FromQuery] int maxCol,
+        [FromQuery] int minRow, [FromQuery] int maxRow,
+        [FromQuery] Continuity? continuity = null)
+    {
+        try
+        {
+            var data = await _mapService.GetSystemsInRangeAsync(minCol, maxCol, minRow, maxRow, continuity);
+            return Ok(data);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching V2 systems in range");
             return StatusCode(500, "Internal server error");
         }
     }

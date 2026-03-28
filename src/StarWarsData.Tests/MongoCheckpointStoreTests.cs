@@ -15,9 +15,7 @@ public sealed class CheckpointStoreFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        _container = new MongoDbBuilder()
-            .WithImage("mongo:8")
-            .Build();
+        _container = new MongoDbBuilder("mongo:8").Build();
 
         await _container.StartAsync();
         Client = new MongoClient(_container.GetConnectionString());
@@ -40,7 +38,9 @@ public class MongoCheckpointStoreTests(CheckpointStoreFixture fixture)
     {
         var store = CreateStore();
         var sessionId = $"test-{Guid.NewGuid():N}";
-        var payload = JsonDocument.Parse("""{"events": [1, 2, 3], "processed": true}""").RootElement;
+        var payload = JsonDocument
+            .Parse("""{"events": [1, 2, 3], "processed": true}""")
+            .RootElement;
 
         var info = await store.CreateCheckpointAsync(sessionId, payload, parent: null);
 
@@ -93,8 +93,9 @@ public class MongoCheckpointStoreTests(CheckpointStoreFixture fixture)
         var store = CreateStore();
         var bogus = new CheckpointInfo("no-session", "no-checkpoint");
 
-        await Assert.ThrowsAsync<KeyNotFoundException>(
-            () => store.RetrieveCheckpointAsync("no-session", bogus).AsTask());
+        await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+            store.RetrieveCheckpointAsync("no-session", bogus).AsTask()
+        );
     }
 
     [Fact]
@@ -150,19 +151,23 @@ public class MongoCheckpointStoreTests(CheckpointStoreFixture fixture)
     {
         var store = CreateStore();
         var sessionId = $"test-{Guid.NewGuid():N}";
-        var payload = JsonDocument.Parse("""
-        {
-            "processedPageIds": [100, 200, 300],
-            "events": [
+        var payload = JsonDocument
+            .Parse(
+                """
                 {
-                    "eventType": "Battle",
-                    "description": "Battle of Yavin",
-                    "year": 0.0,
-                    "demarcation": "ABY"
+                    "processedPageIds": [100, 200, 300],
+                    "events": [
+                        {
+                            "eventType": "Battle",
+                            "description": "Battle of Yavin",
+                            "year": 0.0,
+                            "demarcation": "ABY"
+                        }
+                    ]
                 }
-            ]
-        }
-        """).RootElement;
+                """
+            )
+            .RootElement;
 
         var info = await store.CreateCheckpointAsync(sessionId, payload, parent: null);
         var retrieved = await store.RetrieveCheckpointAsync(sessionId, info);

@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "watch-apphost",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/StarWarsData.AppHost/StarWarsData.AppHost.csproj",
+                "--",
+                "--no-build"
+            ],
+            "options": {
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "DOTNET_ENVIRONMENT": "Development"
+                }
+            },
+            "problemMatcher": "$msCompile",
+            "isBackground": true,
+            "group": "build"
+        }
+    ]
+}

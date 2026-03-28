@@ -79,14 +79,17 @@ public class ComponentToolkit
             + "You MUST aggregate the data first using search/query tools, then pass the results here."
     )]
     public ChartDescriptor RenderChart(
-        [Description("Bar, Line, Pie, Donut, Rose, StackedBar, TimeSeries, or Radar")] string chartType,
+        [Description("Bar, Line, Pie, Donut, Rose, StackedBar, TimeSeries, or Radar")]
+            string chartType,
         [Description("Descriptive title for the chart")] string title,
         [Description(
             "For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)"
         )]
             List<string>? xAxisLabels = null,
         [Description("For Pie/Donut/Rose: slice labels")] List<string>? labels = null,
-        [Description("For Bar/Line/StackedBar/Pie/Donut/Rose/Radar: array of { name, data: number[] }")]
+        [Description(
+            "For Bar/Line/StackedBar/Pie/Donut/Rose/Radar: array of { name, data: number[] }"
+        )]
             List<ChartSeries>? series = null,
         [Description(
             "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"

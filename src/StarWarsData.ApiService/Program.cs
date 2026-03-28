@@ -46,6 +46,7 @@ builder
     .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
     .AddLogging()
     .AddHttpContextAccessor()
+    .AddSingleton<OpenAiStatusService>()
     .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
     .AddSingleton<YearComparer>()
@@ -55,6 +56,7 @@ builder
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
     .AddScoped<MapService>()
+    .AddScoped<GalaxyEventsService>()
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
@@ -71,7 +73,8 @@ builder
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
         var inner = new ChatClientBuilder(
-                openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient())
+            openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient()
+        )
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
         return new CharacterTimelineChatClient(inner);
@@ -82,7 +85,11 @@ builder
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        return new RelationshipAnalystToolkit(mongoClient, settings.PagesDb, settings.RelationshipGraphDb);
+        return new RelationshipAnalystToolkit(
+            mongoClient,
+            settings.PagesDb,
+            settings.RelationshipGraphDb
+        );
     })
     .AddSingleton<GraphRAGToolkit>(sp =>
     {
@@ -92,15 +99,19 @@ builder
         return new GraphRAGToolkit(mongoClient, settings.RelationshipGraphDb, embedder);
     })
     .AddScoped<ArticleChunkingService>()
-    .AddKeyedSingleton<IChatClient>("relationship-analyst", (sp, _) =>
-    {
-        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        return new ChatClientBuilder(
-                openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient())
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build();
-    })
+    .AddKeyedSingleton<IChatClient>(
+        "relationship-analyst",
+        (sp, _) =>
+        {
+            var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+            var openAiClient = sp.GetRequiredService<OpenAIClient>();
+            return new ChatClientBuilder(
+                openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient()
+            )
+                .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+                .Build();
+        }
+    )
     .AddScoped<RelationshipGraphBuilderService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IChatClient>(sp =>
@@ -235,7 +246,7 @@ builder
         - If search_chunks returns no results, the chunking job may not have run yet — fall back to search_wiki.
 
         CHOOSING OUTPUT (call exactly one render_ tool as final action, no commentary after):
-        - Lore/history/explanations/"what/why/how" → render_text (use search_wiki first)
+        - Lore/history/explanations/"what/why/how" → render_text (use search_chunks first, fall back to search_wiki)
         - Specific entity lookup ("bring up X", "tell me about X") → render_infobox
         - List/browse entities → render_table
         - Aggregated stats → render_chart or render_data_table
@@ -342,8 +353,22 @@ RecurringJob.AddOrUpdate<PageDownloader>(
 // Daily relationship graph builder at 04:00 UTC (after page sync completes)
 RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
     "daily-relationship-graph-builder",
-    s => s.ProcessBatchAsync(100, CancellationToken.None),
+    s => s.ProcessAllAsync(100, CancellationToken.None),
     Cron.Daily(4)
+);
+
+// Submit one batch every 30 minutes — drip-feeds batches as OpenAI quota frees up
+RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+    "submit-graph-batch",
+    s => s.SubmitBatchAsync(CancellationToken.None),
+    "*/30 * * * *"
+);
+
+// Check OpenAI batch status every 5 minutes
+RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+    "check-graph-batches",
+    s => s.CheckBatchesAsync(CancellationToken.None),
+    "*/5 * * * *"
 );
 
 // Daily article chunking at 05:00 UTC (after graph builder completes)

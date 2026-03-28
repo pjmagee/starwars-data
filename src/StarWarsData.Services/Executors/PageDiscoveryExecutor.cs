@@ -35,7 +35,8 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
         IMongoClient mongoClient,
         SettingsOptions settings,
         ILogger logger,
-        CharacterTimelineTracker? tracker)
+        CharacterTimelineTracker? tracker
+    )
         : base("PageDiscovery")
     {
         _mongoClient = mongoClient;
@@ -48,7 +49,10 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
         _mongoClient.GetDatabase(_settings.PagesDb).GetCollection<Page>("Pages");
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
         var pageId = int.Parse(message);
 
@@ -62,36 +66,67 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
 
         Character = character;
 
-        _tracker?.UpdateProgress(pageId, GenerationStage.Discovering,
+        _tracker?.UpdateProgress(
+            pageId,
+            GenerationStage.Discovering,
             $"Querying pages that link to {character.Title}...",
-            currentStep: 1, totalSteps: 3, currentItem: character.Title);
+            currentStep: 1,
+            totalSteps: 3,
+            currentItem: character.Title
+        );
 
-        _logger.LogInformation("Discovering pages for {Title} (PageId={PageId})", character.Title, pageId);
+        _logger.LogInformation(
+            "Discovering pages for {Title} (PageId={PageId})",
+            character.Title,
+            pageId
+        );
 
         var discoveredPages = new Dictionary<int, Page> { [character.PageId] = character };
 
         // Emit event for the character's own page
-        await context.AddEventAsync(new PageDiscoveredEvent(new PageDiscoveredData(
-            character.PageId, character.Title, character.WikiUrl,
-            character.Infobox?.Template, character.Continuity.ToString(), "self")), ct);
+        await context.AddEventAsync(
+            new PageDiscoveredEvent(
+                new PageDiscoveredData(
+                    character.PageId,
+                    character.Title,
+                    character.WikiUrl,
+                    character.Infobox?.Template,
+                    character.Continuity.ToString(),
+                    "self"
+                )
+            ),
+            ct
+        );
 
         // Build a continuity filter so we only discover pages matching the character's continuity.
         // Include pages marked as Both or Unknown alongside the character's specific continuity.
         var continuityFilter = BuildContinuityFilter(character.Continuity);
 
         // 1. Find pages that link TO this character (battles, events, etc.)
-        var incomingLinkFilter = new BsonDocument("infobox.Data",
-            new BsonDocument("$elemMatch",
-                new BsonDocument("Links",
-                    new BsonDocument("$elemMatch",
-                        new BsonDocument("Href",
-                            new BsonDocument("$regex",
-                                new BsonRegularExpression(
-                                    Regex.Escape(character.WikiUrl), "i")))))));
+        var incomingLinkFilter = new BsonDocument(
+            "infobox.Data",
+            new BsonDocument(
+                "$elemMatch",
+                new BsonDocument(
+                    "Links",
+                    new BsonDocument(
+                        "$elemMatch",
+                        new BsonDocument(
+                            "Href",
+                            new BsonDocument(
+                                "$regex",
+                                new BsonRegularExpression(Regex.Escape(character.WikiUrl), "i")
+                            )
+                        )
+                    )
+                )
+            )
+        );
 
         var incomingFilter = Builders<Page>.Filter.And(
             new BsonDocumentFilterDefinition<Page>(incomingLinkFilter),
-            continuityFilter);
+            continuityFilter
+        );
 
         var incomingPages = await Pages
             .Find(incomingFilter)
@@ -102,23 +137,42 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
         {
             if (discoveredPages.TryAdd(p.PageId, p))
             {
-                await context.AddEventAsync(new PageDiscoveredEvent(new PageDiscoveredData(
-                    p.PageId, p.Title, p.WikiUrl, p.Infobox?.Template,
-                    p.Continuity.ToString(), "incoming")), ct);
+                await context.AddEventAsync(
+                    new PageDiscoveredEvent(
+                        new PageDiscoveredData(
+                            p.PageId,
+                            p.Title,
+                            p.WikiUrl,
+                            p.Infobox?.Template,
+                            p.Continuity.ToString(),
+                            "incoming"
+                        )
+                    ),
+                    ct
+                );
             }
         }
 
-        _logger.LogInformation("Found {Count} pages linking to {Title}", incomingPages.Count, character.Title);
+        _logger.LogInformation(
+            "Found {Count} pages linking to {Title}",
+            incomingPages.Count,
+            character.Title
+        );
 
-        _tracker?.UpdateProgress(pageId, GenerationStage.Discovering,
+        _tracker?.UpdateProgress(
+            pageId,
+            GenerationStage.Discovering,
             $"Found {incomingPages.Count} incoming links. Querying outgoing links...",
-            currentStep: 2, totalSteps: 3, currentItem: character.Title);
+            currentStep: 2,
+            totalSteps: 3,
+            currentItem: character.Title
+        );
 
         // 2. Find pages the character's infobox links to (outgoing links)
         if (character.Infobox?.Data is not null)
         {
-            var urls = character.Infobox.Data
-                .SelectMany(d => d.Links)
+            var urls = character
+                .Infobox.Data.SelectMany(d => d.Links)
                 .Select(l => l.Href)
                 .Where(h => !string.IsNullOrEmpty(h))
                 .Distinct()
@@ -127,9 +181,12 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
             if (urls.Count > 0)
             {
                 var outgoingPages = await Pages
-                    .Find(Builders<Page>.Filter.And(
-                        Builders<Page>.Filter.In(p => p.WikiUrl, urls),
-                        continuityFilter))
+                    .Find(
+                        Builders<Page>.Filter.And(
+                            Builders<Page>.Filter.In(p => p.WikiUrl, urls),
+                            continuityFilter
+                        )
+                    )
                     .Limit(MaxLinkedResults)
                     .ToListAsync(ct);
 
@@ -137,14 +194,27 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
                 {
                     if (discoveredPages.TryAdd(p.PageId, p))
                     {
-                        await context.AddEventAsync(new PageDiscoveredEvent(new PageDiscoveredData(
-                            p.PageId, p.Title, p.WikiUrl, p.Infobox?.Template,
-                            p.Continuity.ToString(), "outgoing")), ct);
+                        await context.AddEventAsync(
+                            new PageDiscoveredEvent(
+                                new PageDiscoveredData(
+                                    p.PageId,
+                                    p.Title,
+                                    p.WikiUrl,
+                                    p.Infobox?.Template,
+                                    p.Continuity.ToString(),
+                                    "outgoing"
+                                )
+                            ),
+                            ct
+                        );
                     }
                 }
 
-                _logger.LogInformation("Found {Count} outgoing-linked pages for {Title}",
-                    outgoingPages.Count, character.Title);
+                _logger.LogInformation(
+                    "Found {Count} outgoing-linked pages for {Title}",
+                    outgoingPages.Count,
+                    character.Title
+                );
             }
         }
 
@@ -152,55 +222,81 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
         var pageContents = new List<PageContent>();
         foreach (var page in discoveredPages.Values)
         {
-            pageContents.Add(new PageContent(
-                page.PageId,
-                page.Title,
-                page.WikiUrl,
-                page.Infobox?.Template,
-                FormatInfobox(page),
-                Truncate(page.Content ?? "", MaxContentChars)));
+            pageContents.Add(
+                new PageContent(
+                    page.PageId,
+                    page.Title,
+                    page.WikiUrl,
+                    page.Infobox?.Template,
+                    FormatInfobox(page),
+                    Truncate(page.Content ?? "", MaxContentChars)
+                )
+            );
 
-            DiscoveredSources.Add(new SourcePage
-            {
-                PageId = page.PageId,
-                Title = page.Title,
-                WikiUrl = page.WikiUrl,
-            });
+            DiscoveredSources.Add(
+                new SourcePage
+                {
+                    PageId = page.PageId,
+                    Title = page.Title,
+                    WikiUrl = page.WikiUrl,
+                }
+            );
         }
 
         // Store in shared state as a single list
         await context.QueueStateUpdateAsync("pages", pageContents, "Discovery", ct);
         await context.QueueStateUpdateAsync("characterTitle", character.Title, "Discovery", ct);
-        await context.QueueStateUpdateAsync("characterContinuity", character.Continuity.ToString(), "Discovery", ct);
+        await context.QueueStateUpdateAsync(
+            "characterContinuity",
+            character.Continuity.ToString(),
+            "Discovery",
+            ct
+        );
 
-        await context.AddEventAsync(new DiscoveryCompleteEvent(new DiscoveryCompleteData(
-            pageContents.Count, incomingPages.Count,
-            discoveredPages.Count - 1 - incomingPages.Count)), ct);
+        await context.AddEventAsync(
+            new DiscoveryCompleteEvent(
+                new DiscoveryCompleteData(
+                    pageContents.Count,
+                    incomingPages.Count,
+                    discoveredPages.Count - 1 - incomingPages.Count
+                )
+            ),
+            ct
+        );
 
-        _logger.LogInformation("Stored {Count} pages in workflow state for {Title}",
-            pageContents.Count, character.Title);
+        _logger.LogInformation(
+            "Stored {Count} pages in workflow state for {Title}",
+            pageContents.Count,
+            character.Title
+        );
 
-        _tracker?.UpdateProgress(pageId, GenerationStage.Discovering,
+        _tracker?.UpdateProgress(
+            pageId,
+            GenerationStage.Discovering,
             $"Discovered {pageContents.Count} pages for {character.Title}",
-            currentStep: 3, totalSteps: 3, currentItem: character.Title);
+            currentStep: 3,
+            totalSteps: 3,
+            currentItem: character.Title
+        );
 
         return $"Discovered {pageContents.Count} pages for {character.Title}";
     }
 
     private static string FormatInfobox(Page page)
     {
-        if (page.Infobox?.Data is null) return "";
+        if (page.Infobox?.Data is null)
+            return "";
 
         var sb = new StringBuilder();
         foreach (var prop in page.Infobox.Data)
         {
-            var values = prop.Values.Count > 0
-                ? string.Join(", ", prop.Values)
-                : "";
-            var links = prop.Links.Count > 0
-                ? string.Join(", ", prop.Links.Select(l => $"{l.Content} [{l.Href}]"))
-                : "";
-            var display = !string.IsNullOrEmpty(values) ? values
+            var values = prop.Values.Count > 0 ? string.Join(", ", prop.Values) : "";
+            var links =
+                prop.Links.Count > 0
+                    ? string.Join(", ", prop.Links.Select(l => $"{l.Content} [{l.Href}]"))
+                    : "";
+            var display =
+                !string.IsNullOrEmpty(values) ? values
                 : !string.IsNullOrEmpty(links) ? links
                 : null;
             if (display is not null)
@@ -243,4 +339,5 @@ internal sealed record PageContent(
     string WikiUrl,
     string? Template,
     string InfoboxText,
-    string ContentSnippet);
+    string ContentSnippet
+);

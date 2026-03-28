@@ -20,7 +20,8 @@ internal sealed class EventConsolidatorExecutor : Executor<string, string>
     public EventConsolidatorExecutor(
         ILogger logger,
         CharacterTimelineTracker? tracker,
-        int characterPageId)
+        int characterPageId
+    )
         : base("EventConsolidation")
     {
         _logger = logger;
@@ -29,27 +30,38 @@ internal sealed class EventConsolidatorExecutor : Executor<string, string>
     }
 
     public override async ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken ct = default)
+        string message,
+        IWorkflowContext context,
+        CancellationToken ct = default
+    )
     {
-        var events = await context.ReadStateAsync<List<ExtractedEvent>>("events", "BatchExtraction", ct)
+        var events =
+            await context.ReadStateAsync<List<ExtractedEvent>>("events", "BatchExtraction", ct)
             ?? throw new InvalidOperationException("No events found in BatchExtraction state");
 
-        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct)
-            ?? "Unknown";
+        var characterTitle =
+            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Consolidating,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Consolidating,
             $"Consolidating {events.Count} extracted events...",
-            currentStep: 0, totalSteps: 1,
-            currentItem: characterTitle, eventsExtracted: events.Count);
+            currentStep: 0,
+            totalSteps: 1,
+            currentItem: characterTitle,
+            eventsExtracted: events.Count
+        );
 
-        _logger.LogInformation("Consolidating {EventCount} events for {Title}", events.Count, characterTitle);
+        _logger.LogInformation(
+            "Consolidating {EventCount} events for {Title}",
+            events.Count,
+            characterTitle
+        );
 
         // Lightweight deduplication: remove exact description duplicates, keeping the one with more data
         var deduplicated = events
             .GroupBy(e => e.Description.Trim().ToLowerInvariant())
-            .Select(g => g
-                .OrderByDescending(e => ScoreCompleteness(e))
-                .First())
+            .Select(g => g.OrderByDescending(e => ScoreCompleteness(e)).First())
             .ToList();
 
         var removed = events.Count - deduplicated.Count;
@@ -57,17 +69,30 @@ internal sealed class EventConsolidatorExecutor : Executor<string, string>
         // Store consolidated events for the review executor
         await context.QueueStateUpdateAsync("events", deduplicated, "Consolidation", ct);
 
-        await context.AddEventAsync(new ConsolidationCompleteEvent(new ConsolidationCompleteData(
-            events.Count, deduplicated.Count, removed)), ct);
+        await context.AddEventAsync(
+            new ConsolidationCompleteEvent(
+                new ConsolidationCompleteData(events.Count, deduplicated.Count, removed)
+            ),
+            ct
+        );
 
         _logger.LogInformation(
             "Consolidation complete for {Title}: {InputCount} → {OutputCount} events ({Removed} exact duplicates removed)",
-            characterTitle, events.Count, deduplicated.Count, removed);
+            characterTitle,
+            events.Count,
+            deduplicated.Count,
+            removed
+        );
 
-        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Consolidating,
+        _tracker?.UpdateProgress(
+            _characterPageId,
+            GenerationStage.Consolidating,
             $"Consolidated {events.Count} → {deduplicated.Count} events ({removed} duplicates removed)",
-            currentStep: 1, totalSteps: 1,
-            currentItem: characterTitle, eventsExtracted: deduplicated.Count);
+            currentStep: 1,
+            totalSteps: 1,
+            currentItem: characterTitle,
+            eventsExtracted: deduplicated.Count
+        );
 
         return $"Consolidated {events.Count} → {deduplicated.Count} events for {characterTitle}";
     }
@@ -78,13 +103,20 @@ internal sealed class EventConsolidatorExecutor : Executor<string, string>
     private static int ScoreCompleteness(ExtractedEvent e)
     {
         var score = 0;
-        if (e.Year.HasValue) score += 2;
-        if (!string.IsNullOrWhiteSpace(e.Demarcation)) score++;
-        if (!string.IsNullOrWhiteSpace(e.DateDescription)) score++;
-        if (!string.IsNullOrWhiteSpace(e.Location)) score++;
-        if (e.RelatedCharacters.Count > 0) score++;
-        if (!string.IsNullOrWhiteSpace(e.SourcePageTitle)) score++;
-        if (e.Description.Length > 50) score++; // prefer more detailed descriptions
+        if (e.Year.HasValue)
+            score += 2;
+        if (!string.IsNullOrWhiteSpace(e.Demarcation))
+            score++;
+        if (!string.IsNullOrWhiteSpace(e.DateDescription))
+            score++;
+        if (!string.IsNullOrWhiteSpace(e.Location))
+            score++;
+        if (e.RelatedCharacters.Count > 0)
+            score++;
+        if (!string.IsNullOrWhiteSpace(e.SourcePageTitle))
+            score++;
+        if (e.Description.Length > 50)
+            score++; // prefer more detailed descriptions
         return score;
     }
 }

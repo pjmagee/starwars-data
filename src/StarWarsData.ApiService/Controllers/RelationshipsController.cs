@@ -25,7 +25,12 @@ public class RelationshipsController(RelationshipGraphService graphService) : Co
             PeerLabels = peerLabels?.ToList() ?? [],
         };
 
-        var result = await graphService.GetRelationshipGraphAsync(id, collection, maxDepth, labelConfig);
+        var result = await graphService.GetRelationshipGraphAsync(
+            id,
+            collection,
+            maxDepth,
+            labelConfig
+        );
 
         if (result.Nodes.Count == 0)
             return NotFound();
@@ -53,7 +58,9 @@ public class RelationshipsController(RelationshipGraphService graphService) : Co
         if (string.IsNullOrWhiteSpace(q))
             return BadRequest("Query parameter 'q' is required.");
 
-        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c) ? c : (Models.Entities.Continuity?)null;
+        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c)
+            ? c
+            : (Models.Entities.Continuity?)null;
         var results = await graphService.FindEntitiesAsync(q, collection, cont);
         return results;
     }

@@ -10,28 +10,40 @@ public sealed record UserPrompt(string Question, string? Continuity = null);
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AskChartType
 {
-    [Description("Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series.")]
+    [Description(
+        "Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series."
+    )]
     Bar,
 
-    [Description("Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
+    [Description(
+        "Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label."
+    )]
     Donut,
 
     [Description("Line chart — trends over an ordinal axis. Requires xAxisLabels and series.")]
     Line,
 
-    [Description("Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
+    [Description(
+        "Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label."
+    )]
     Pie,
 
-    [Description("Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series.")]
+    [Description(
+        "Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series."
+    )]
     StackedBar,
 
     [Description("Time series chart — data points with real ISO dates. Requires timeSeries.")]
     TimeSeries,
 
-    [Description("Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series.")]
+    [Description(
+        "Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series."
+    )]
     Radar,
 
-    [Description("Rose chart — proportions of a whole displayed as a polar area chart. Requires labels and series where each series.data has one value per label.")]
+    [Description(
+        "Rose chart — proportions of a whole displayed as a polar area chart. Requires labels and series where each series.data has one value per label."
+    )]
     Rose,
 }
 
@@ -56,7 +68,9 @@ public class TableDescriptor
     public string Collection { get; set; } = string.Empty;
 
     [JsonPropertyName("fields")]
-    [Description("Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields.")]
+    [Description(
+        "Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields."
+    )]
     public List<string> Fields { get; set; } = [];
 
     [JsonPropertyName("search")]
@@ -72,7 +86,9 @@ public class TableDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description("Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results")]
+[Description(
+    "Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results"
+)]
 public class DataTableDescriptor
 {
     [JsonPropertyName("title")]
@@ -92,7 +108,9 @@ public class DataTableDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description("Chart component configuration — data is embedded since aggregations are unique per query")]
+[Description(
+    "Chart component configuration — data is embedded since aggregations are unique per query"
+)]
 public class ChartDescriptor
 {
     [JsonPropertyName("title")]
@@ -118,7 +136,9 @@ public class ChartDescriptor
     public List<string>? Labels { get; set; }
 
     [JsonPropertyName("series")]
-    [Description("Numeric series. For Bar/Line/StackedBar: one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry.")]
+    [Description(
+        "Numeric series. For Bar/Line/StackedBar: one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry."
+    )]
     public List<ChartSeries>? Series { get; set; }
 
     [JsonPropertyName("timeSeries")]
@@ -133,10 +153,12 @@ public class ChartDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description("Relationship graph component configuration — the frontend fetches graph data from the API. " +
-    "The AI must sample the root entity's infobox labels and classify which ones represent relationships, " +
-    "then assign them to upLabels (ancestor/master direction), downLabels (descendant/apprentice direction), " +
-    "or peerLabels (same generation — partners, siblings). Only include labels that have links to other entities of the same collection type.")]
+[Description(
+    "Relationship graph component configuration — the frontend fetches graph data from the API. "
+        + "The AI must sample the root entity's infobox labels and classify which ones represent relationships, "
+        + "then assign them to upLabels (ancestor/master direction), downLabels (descendant/apprentice direction), "
+        + "or peerLabels (same generation — partners, siblings). Only include labels that have links to other entities of the same collection type."
+)]
 public class GraphDescriptor
 {
     [JsonPropertyName("title")]
@@ -156,22 +178,30 @@ public class GraphDescriptor
     public string Collection { get; set; } = "Character";
 
     [JsonPropertyName("maxDepth")]
-    [Description("How many generations to traverse (default 1). Use 1 for direct relationships, 2+ only for multi-generational family trees.")]
+    [Description(
+        "How many generations to traverse (default 1). Use 1 for direct relationships, 2+ only for multi-generational family trees."
+    )]
     public int MaxDepth { get; set; } = 1;
 
     [JsonPropertyName("upLabels")]
-    [Description("Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). " +
-        "Linked entities are placed one generation above the current node.")]
+    [Description(
+        "Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). "
+            + "Linked entities are placed one generation above the current node."
+    )]
     public List<string> UpLabels { get; set; } = [];
 
     [JsonPropertyName("downLabels")]
-    [Description("Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). " +
-        "Linked entities are placed one generation below the current node.")]
+    [Description(
+        "Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). "
+            + "Linked entities are placed one generation below the current node."
+    )]
     public List<string> DownLabels { get; set; } = [];
 
     [JsonPropertyName("peerLabels")]
-    [Description("Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). " +
-        "Linked entities are placed on the same generation level.")]
+    [Description(
+        "Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). "
+            + "Linked entities are placed on the same generation level."
+    )]
     public List<string> PeerLabels { get; set; } = [];
 
     [JsonPropertyName("references")]
@@ -179,7 +209,9 @@ public class GraphDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]
+[Description(
+    "Timeline component configuration — the frontend fetches paginated timeline events from the API"
+)]
 public class TimelineDescriptor
 {
     [JsonPropertyName("title")]
@@ -187,7 +219,9 @@ public class TimelineDescriptor
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("categories")]
-    [Description("Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"]). Use available-categories to discover valid names.")]
+    [Description(
+        "Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"]). Use available-categories to discover valid names."
+    )]
     public List<string> Categories { get; set; } = [];
 
     [JsonPropertyName("pageSize")]
@@ -219,7 +253,9 @@ public class TimelineDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description("Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID.")]
+[Description(
+    "Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID."
+)]
 public class InfoboxDescriptor
 {
     [JsonPropertyName("title")]

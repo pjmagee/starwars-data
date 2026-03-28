@@ -48,5 +48,5 @@ public enum CrawlStatus
     Processing,
     Completed,
     Skipped,
-    Failed
+    Failed,
 }

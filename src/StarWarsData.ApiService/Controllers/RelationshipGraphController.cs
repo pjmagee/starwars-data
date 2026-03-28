@@ -6,9 +6,8 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RelationshipGraphController(
-    RelationshipGraphBuilderService graphBuilder
-) : ControllerBase
+public class RelationshipGraphController(RelationshipGraphBuilderService graphBuilder)
+    : ControllerBase
 {
     /// <summary>
     /// Get the graph builder crawl progress for the dashboard.
@@ -28,13 +27,19 @@ public class RelationshipGraphController(
         [FromQuery] string? labels = null,
         [FromQuery] int maxDepth = 2,
         [FromQuery] string? continuity = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default
+    )
     {
         var labelList = string.IsNullOrWhiteSpace(labels)
             ? Array.Empty<string>()
-            : labels.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            : labels.Split(
+                ',',
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+            );
 
-        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c) ? c : (Models.Entities.Continuity?)null;
+        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c)
+            ? c
+            : (Models.Entities.Continuity?)null;
         return await graphBuilder.QueryGraphAsync(pageId, labelList, maxDepth, cont, ct);
     }
 
@@ -42,10 +47,25 @@ public class RelationshipGraphController(
     /// Get available relationship labels for an entity (for query-time LLM to pick).
     /// </summary>
     [HttpGet("labels/{pageId:int}")]
-    public async Task<List<string>> GetEntityLabels(int pageId, [FromQuery] string? continuity = null, CancellationToken ct = default)
+    public async Task<List<string>> GetEntityLabels(
+        int pageId,
+        [FromQuery] string? continuity = null,
+        CancellationToken ct = default
+    )
     {
-        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c) ? c : (Models.Entities.Continuity?)null;
+        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c)
+            ? c
+            : (Models.Entities.Continuity?)null;
         return await graphBuilder.GetEntityLabelsAsync(pageId, cont, ct);
+    }
+
+    /// <summary>
+    /// Get recent batch jobs for the dashboard.
+    /// </summary>
+    [HttpGet("batches")]
+    public async Task<List<GraphBatchSummary>> GetBatches(CancellationToken ct)
+    {
+        return await graphBuilder.GetBatchJobsAsync(ct);
     }
 
     /// <summary>
@@ -66,10 +86,22 @@ public class RelationshipGraphController(
         [FromQuery] string? q = null,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20,
-        CancellationToken ct = default)
+        [FromQuery] string? continuity = null,
+        CancellationToken ct = default
+    )
     {
-        if (pageSize > 100) pageSize = 100;
-        var (items, total) = await graphBuilder.BrowseEntitiesAsync(type, q, page, pageSize, ct);
-        return new BrowseEntitiesResult { Items = items, Total = total, Page = page, PageSize = pageSize };
+        if (pageSize > 100)
+            pageSize = 100;
+        var cont = Enum.TryParse<Models.Entities.Continuity>(continuity, true, out var c)
+            ? c
+            : (Models.Entities.Continuity?)null;
+        var (items, total) = await graphBuilder.BrowseEntitiesAsync(type, q, page, pageSize, cont, ct);
+        return new BrowseEntitiesResult
+        {
+            Items = items,
+            Total = total,
+            Page = page,
+            PageSize = pageSize,
+        };
     }
 }

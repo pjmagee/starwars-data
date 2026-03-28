@@ -20,8 +20,11 @@ public partial class ArticleChunkingService
     readonly IMongoCollection<BsonDocument> _pages;
     readonly IMongoCollection<ArticleChunk> _chunks;
     readonly IEmbeddingGenerator<string, Embedding<float>> _embedder;
+    readonly OpenAiStatusService _aiStatus;
 
-    /// <summary>Max tokens per chunk (~4 chars per token, 1500 token target).</summary>
+    /// <summary>Target max chars per chunk. Aims for ~1500 tokens of content — a good balance
+    /// between semantic richness and staying within model limits. Token-dense content (tables,
+    /// URLs) is handled by retry-with-truncation at embedding time.</summary>
     const int MaxChunkChars = 6000;
 
     /// <summary>Minimum chunk size to avoid tiny low-context fragments.</summary>
@@ -30,19 +33,23 @@ public partial class ArticleChunkingService
     /// <summary>Overlap when sub-splitting large sections by paragraph.</summary>
     const int OverlapChars = 300;
 
-    /// <summary>Batch size for embedding API calls (kept small to stay within model token limits).</summary>
-    const int EmbeddingBatchSize = 4;
-
     public ArticleChunkingService(
         ILogger<ArticleChunkingService> logger,
         IOptions<SettingsOptions> settings,
         IMongoClient mongoClient,
-        IEmbeddingGenerator<string, Embedding<float>> embedder)
+        IEmbeddingGenerator<string, Embedding<float>> embedder,
+        OpenAiStatusService aiStatus
+    )
     {
         _logger = logger;
-        _pages = mongoClient.GetDatabase(settings.Value.PagesDb).GetCollection<BsonDocument>("Pages");
-        _chunks = mongoClient.GetDatabase(settings.Value.RelationshipGraphDb).GetCollection<ArticleChunk>("chunks");
+        _pages = mongoClient
+            .GetDatabase(settings.Value.PagesDb)
+            .GetCollection<BsonDocument>("Pages");
+        _chunks = mongoClient
+            .GetDatabase(settings.Value.RelationshipGraphDb)
+            .GetCollection<ArticleChunk>("chunks");
         _embedder = embedder;
+        _aiStatus = aiStatus;
     }
 
     /// <summary>
@@ -61,35 +68,39 @@ public partial class ArticleChunkingService
 
         // Get all eligible pages that haven't been chunked
         var candidates = await _pages
-            .Find(new BsonDocument
-            {
-                { "content", new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
-                { "infobox", new BsonDocument("$ne", BsonNull.Value) },
-                { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
-            })
-            .Project(new BsonDocument
-            {
-                { "_id", 1 },
-                { "title", 1 },
-                { "content", 1 },
-                { "continuity", 1 },
-                { "infobox.Template", 1 },
-            })
+            .Find(
+                new BsonDocument
+                {
+                    { "content", new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
+                    { "infobox", new BsonDocument("$ne", BsonNull.Value) },
+                    { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
+                }
+            )
+            .Project(
+                new BsonDocument
+                {
+                    { "_id", 1 },
+                    { "title", 1 },
+                    { "content", 1 },
+                    { "continuity", 1 },
+                    { "infobox.Template", 1 },
+                }
+            )
             .ToListAsync(ct);
 
-        var batch = candidates
-            .Where(d => !existingSet.Contains(d["_id"].AsInt32))
-            .ToList();
+        var batch = candidates.Where(d => !existingSet.Contains(d["_id"].AsInt32)).ToList();
 
         _logger.LogInformation("Article chunking: {Count} pages to process", batch.Count);
 
         int totalChunks = 0;
         int processed = 0;
         int failed = 0;
+        int consecutiveApiErrors = 0;
 
         foreach (var doc in batch)
         {
-            if (ct.IsCancellationRequested) break;
+            if (ct.IsCancellationRequested)
+                break;
 
             var pageId = doc["_id"].AsInt32;
             var title = doc.Contains("title") ? doc["title"].AsString : $"Page {pageId}";
@@ -103,13 +114,17 @@ public partial class ArticleChunkingService
                     continue;
                 }
 
-                var template = doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
-                    ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
-                    : "Unknown";
+                var template =
+                    doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
+                        ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
+                        : "Unknown";
 
-                var continuity = doc.Contains("continuity") && !doc["continuity"].IsBsonNull
-                    ? Enum.TryParse<Continuity>(doc["continuity"].AsString, true, out var c) ? c : Continuity.Unknown
-                    : Continuity.Unknown;
+                var continuity =
+                    doc.Contains("continuity") && !doc["continuity"].IsBsonNull
+                        ? Enum.TryParse<Continuity>(doc["continuity"].AsString, true, out var c)
+                            ? c
+                            : Continuity.Unknown
+                        : Continuity.Unknown;
 
                 // Split content into chunks
                 var sections = SplitByMarkdownHeadings(content);
@@ -141,57 +156,148 @@ public partial class ArticleChunkingService
                     continue;
                 }
 
-                // Prepare texts for embedding (prepend title + heading for context)
-                var embeddingTexts = chunks
-                    .Select(ch => string.IsNullOrWhiteSpace(ch.heading)
-                        ? $"{title}: {ch.text}"
-                        : $"{title} — {ch.heading}: {ch.text}")
-                    .ToList();
-
-                // Embed in batches
-                var allEmbeddings = new List<Embedding<float>>();
-                for (int i = 0; i < embeddingTexts.Count; i += EmbeddingBatchSize)
+                // Hard-truncate any oversized chunks before embedding
+                for (int ci = 0; ci < chunks.Count; ci++)
                 {
-                    var batchTexts = embeddingTexts.Skip(i).Take(EmbeddingBatchSize).ToList();
-                    var result = await _embedder.GenerateAsync(batchTexts, cancellationToken: ct);
-                    allEmbeddings.AddRange(result);
+                    var (h, t) = chunks[ci];
+                    if (t.Length > MaxChunkChars)
+                        chunks[ci] = (h, t[..MaxChunkChars]);
                 }
 
-                // Build chunk documents
+                // Prepare texts for embedding (prepend title + heading for context)
+                var embeddingTexts = chunks
+                    .Select(ch =>
+                        string.IsNullOrWhiteSpace(ch.heading)
+                            ? $"{title}: {ch.text}"
+                            : $"{title} — {ch.heading}: {ch.text}"
+                    )
+                    .ToList();
+
+                // Embed one at a time — retry with progressive truncation on token limit errors
+                var allEmbeddings = new List<Embedding<float>>();
+                for (int i = 0; i < embeddingTexts.Count; i++)
+                {
+                    var text = embeddingTexts[i];
+                    Embedding<float>? embedding = null;
+
+                    for (int attempt = 0; attempt < 3 && embedding is null; attempt++)
+                    {
+                        try
+                        {
+                            var result = await _embedder.GenerateAsync(
+                                [text],
+                                cancellationToken: ct
+                            );
+                            embedding = result[0];
+                            _aiStatus.RecordSuccess("Embeddings");
+                        }
+                        catch (Exception ex)
+                            when (ex.Message.Contains("maximum context length")
+                                || ex.Message.Contains("maximum input length")
+                            )
+                        {
+                            // Truncate by 40% each retry to get under the token limit
+                            text = text[..(int)(text.Length * 0.6)];
+                            _logger.LogWarning(
+                                "Chunk {Index} for page {PageId} exceeded token limit, truncating to {Len} chars (attempt {Attempt})",
+                                i,
+                                pageId,
+                                text.Length,
+                                attempt + 1
+                            );
+                        }
+                    }
+
+                    if (embedding is null)
+                    {
+                        _logger.LogWarning(
+                            "Skipping chunk {Index} for page {PageId} — could not embed after truncation",
+                            i,
+                            pageId
+                        );
+                        // Use zero vector as placeholder so chunk indexes stay aligned
+                        allEmbeddings.Add(new Embedding<float>(new float[1536]));
+                    }
+                    else
+                    {
+                        allEmbeddings.Add(embedding);
+                    }
+                }
+
+                // Build chunk documents, skipping any that failed to embed
                 var chunkDocs = new List<ArticleChunk>();
                 for (int i = 0; i < chunks.Count; i++)
                 {
-                    chunkDocs.Add(new ArticleChunk
-                    {
-                        PageId = pageId,
-                        Title = title,
-                        Heading = chunks[i].heading,
-                        ChunkIndex = i,
-                        Text = chunks[i].text,
-                        Type = template,
-                        Continuity = continuity,
-                        Embedding = allEmbeddings[i].Vector.ToArray(),
-                    });
+                    var vec = allEmbeddings[i].Vector.ToArray();
+                    // Skip zero-vector placeholders (failed embeddings)
+                    if (vec.All(v => v == 0f))
+                        continue;
+
+                    chunkDocs.Add(
+                        new ArticleChunk
+                        {
+                            PageId = pageId,
+                            Title = title,
+                            Heading = chunks[i].heading,
+                            ChunkIndex = i,
+                            Text = chunks[i].text,
+                            Type = template,
+                            Continuity = continuity,
+                            Embedding = vec,
+                        }
+                    );
                 }
 
                 await _chunks.InsertManyAsync(chunkDocs, cancellationToken: ct);
                 totalChunks += chunkDocs.Count;
                 processed++;
+                consecutiveApiErrors = 0; // Reset on success
 
                 if (processed % 50 == 0)
-                    _logger.LogInformation("Article chunking progress: {Processed}/{Total} pages, {Chunks} chunks created",
-                        processed, batch.Count, totalChunks);
+                    _logger.LogInformation(
+                        "Article chunking progress: {Processed}/{Total} pages, {Chunks} chunks created",
+                        processed,
+                        batch.Count,
+                        totalChunks
+                    );
+            }
+            catch (Exception ex) when (IsQuotaOrRateLimit(ex))
+            {
+                consecutiveApiErrors++;
+                _aiStatus.RecordError("Embeddings", ex);
+                _logger.LogWarning(
+                    ex,
+                    "API quota/rate limit hit on page {PageId} ({ConsecutiveErrors} consecutive). Stopping run to avoid wasting requests.",
+                    pageId, consecutiveApiErrors);
+                break;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to chunk page {PageId}: {Title}", pageId, title);
                 failed++;
+                if (IsApiError(ex))
+                {
+                    consecutiveApiErrors++;
+                    if (consecutiveApiErrors >= 5)
+                    {
+                        _logger.LogWarning(
+                            "Stopping chunking run after {Count} consecutive API errors", consecutiveApiErrors);
+                        break;
+                    }
+                }
+                else
+                {
+                    consecutiveApiErrors = 0;
+                }
             }
         }
 
         _logger.LogInformation(
             "Article chunking complete: {Processed} pages processed, {Failed} failed, {Chunks} chunks created",
-            processed, failed, totalChunks);
+            processed,
+            failed,
+            totalChunks
+        );
     }
 
     /// <summary>
@@ -206,11 +312,14 @@ public partial class ArticleChunkingService
             { "infobox", new BsonDocument("$ne", BsonNull.Value) },
             { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
         };
-        var totalEligible = (int)await _pages.CountDocumentsAsync(eligibleFilter, cancellationToken: ct);
+        var totalEligible = (int)
+            await _pages.CountDocumentsAsync(eligibleFilter, cancellationToken: ct);
 
         // Total chunks
         var totalChunks = await _chunks.CountDocumentsAsync(
-            FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct);
+            FilterDefinition<ArticleChunk>.Empty,
+            cancellationToken: ct
+        );
 
         // Distinct chunked pages
         var chunkedPageIds = await _chunks
@@ -221,17 +330,26 @@ public partial class ArticleChunkingService
         // Breakdown by type
         var typePipeline = new[]
         {
-            new BsonDocument("$group", new BsonDocument
-            {
-                { "_id", new BsonDocument { { "type", "$type" }, { "pageId", "$pageId" } } },
-                { "chunks", new BsonDocument("$sum", 1) },
-            }),
-            new BsonDocument("$group", new BsonDocument
-            {
-                { "_id", "$_id.type" },
-                { "pages", new BsonDocument("$sum", 1) },
-                { "chunks", new BsonDocument("$sum", "$chunks") },
-            }),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    {
+                        "_id",
+                        new BsonDocument { { "type", "$type" }, { "pageId", "$pageId" } }
+                    },
+                    { "chunks", new BsonDocument("$sum", 1) },
+                }
+            ),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { "_id", "$_id.type" },
+                    { "pages", new BsonDocument("$sum", 1) },
+                    { "chunks", new BsonDocument("$sum", "$chunks") },
+                }
+            ),
             new BsonDocument("$sort", new BsonDocument("pages", -1)),
         };
 
@@ -240,26 +358,45 @@ public partial class ArticleChunkingService
             .Aggregate<BsonDocument>(typePipeline, cancellationToken: ct)
             .ToListAsync(ct);
 
-        var byType = typeResults.Select(d =>
-        {
-            var pages = d["pages"].AsInt32;
-            var chunks = d["chunks"].ToInt64();
-            return new ChunkingTypeProgress
+        var byType = typeResults
+            .Select(d =>
             {
-                Type = d["_id"].AsString,
-                Pages = pages,
-                Chunks = chunks,
-                AvgChunksPerPage = pages > 0 ? Math.Round((double)chunks / pages, 1) : 0,
-            };
-        }).ToList();
+                var pages = d["pages"].AsInt32;
+                var chunks = d["chunks"].ToInt64();
+                return new ChunkingTypeProgress
+                {
+                    Type = d["_id"].AsString,
+                    Pages = pages,
+                    Chunks = chunks,
+                    AvgChunksPerPage = pages > 0 ? Math.Round((double)chunks / pages, 1) : 0,
+                };
+            })
+            .ToList();
+
+        // Throughput: count distinct pages chunked in the last hour
+        var oneHourAgo = DateTime.UtcNow.AddHours(-1);
+        var recentChunkedPages = await _chunks
+            .Distinct(
+                c => c.PageId,
+                Builders<ArticleChunk>.Filter.Gte(c => c.CreatedAt, oneHourAgo),
+                cancellationToken: ct
+            )
+            .ToListAsync(ct);
+        var pagesPerHour = (double)recentChunkedPages.Count;
+        var pendingPages = totalEligible - chunkedPages;
+        double? estimatedHoursRemaining =
+            pagesPerHour > 0 ? Math.Round(pendingPages / pagesPerHour, 1) : null;
 
         return new ChunkingProgress
         {
             TotalEligiblePages = totalEligible,
             ChunkedPages = chunkedPages,
-            PendingPages = totalEligible - chunkedPages,
+            PendingPages = pendingPages,
             TotalChunks = totalChunks,
-            AvgChunksPerPage = chunkedPages > 0 ? Math.Round((double)totalChunks / chunkedPages, 1) : 0,
+            AvgChunksPerPage =
+                chunkedPages > 0 ? Math.Round((double)totalChunks / chunkedPages, 1) : 0,
+            PagesPerHour = pagesPerHour,
+            EstimatedHoursRemaining = estimatedHoursRemaining,
             ByType = byType,
         };
     }
@@ -268,7 +405,7 @@ public partial class ArticleChunkingService
     /// Split markdown content by heading boundaries (##, ###, ####).
     /// Returns (heading, sectionText) tuples.
     /// </summary>
-    static List<(string heading, string text)> SplitByMarkdownHeadings(string content)
+    internal static List<(string heading, string text)> SplitByMarkdownHeadings(string content)
     {
         var sections = new List<(string heading, string text)>();
 
@@ -294,12 +431,13 @@ public partial class ArticleChunkingService
 
             // Find the content between this heading and the next (or end)
             var headingLine = content.IndexOf('\n', start);
-            if (headingLine == -1) headingLine = start;
-            else headingLine++;
+            if (headingLine == -1)
+                headingLine = start;
+            else
+                headingLine++;
 
-            var end = i + 1 < headingPositions.Count
-                ? headingPositions[i + 1].index
-                : content.Length;
+            var end =
+                i + 1 < headingPositions.Count ? headingPositions[i + 1].index : content.Length;
 
             var sectionText = content[headingLine..end].Trim();
             if (!string.IsNullOrWhiteSpace(sectionText))
@@ -316,7 +454,7 @@ public partial class ArticleChunkingService
     /// <summary>
     /// Sub-split a large section by paragraph boundaries with overlap.
     /// </summary>
-    static List<string> SplitByParagraph(string text)
+    internal static List<string> SplitByParagraph(string text)
     {
         var chunks = new List<string>();
         // Split on double newlines (paragraph boundaries)
@@ -326,15 +464,20 @@ public partial class ArticleChunkingService
         foreach (var para in paragraphs)
         {
             var trimmed = para.Trim();
-            if (string.IsNullOrWhiteSpace(trimmed)) continue;
+            if (string.IsNullOrWhiteSpace(trimmed))
+                continue;
 
-            if (current.Length + trimmed.Length + 2 > MaxChunkChars && current.Length > MinChunkChars)
+            if (
+                current.Length + trimmed.Length + 2 > MaxChunkChars
+                && current.Length > MinChunkChars
+            )
             {
                 chunks.Add(current.Trim());
                 // Keep overlap from end of previous chunk
-                current = current.Length > OverlapChars
-                    ? current[^OverlapChars..] + "\n\n" + trimmed
-                    : trimmed;
+                current =
+                    current.Length > OverlapChars
+                        ? current[^OverlapChars..] + "\n\n" + trimmed
+                        : trimmed;
             }
             else
             {
@@ -351,7 +494,7 @@ public partial class ArticleChunkingService
     /// <summary>
     /// Strip wiki boilerplate: base64 images, badge links, table markup at the start of content.
     /// </summary>
-    static string StripBoilerplate(string text)
+    internal static string StripBoilerplate(string text)
     {
         // Remove markdown image links with base64 data URIs
         text = Base64ImageRegex().Replace(text, "");
@@ -367,16 +510,21 @@ public partial class ArticleChunkingService
     /// </summary>
     public async Task EnsureIndexesAsync(CancellationToken ct = default)
     {
-        await _chunks.Indexes.CreateManyAsync([
-            new CreateIndexModel<ArticleChunk>(
-                Builders<ArticleChunk>.IndexKeys.Ascending(c => c.PageId),
-                new CreateIndexOptions { Name = "ix_pageId" }),
-            new CreateIndexModel<ArticleChunk>(
-                Builders<ArticleChunk>.IndexKeys
-                    .Ascending(c => c.Type)
-                    .Ascending(c => c.Continuity),
-                new CreateIndexOptions { Name = "ix_type_continuity" }),
-        ], ct);
+        await _chunks.Indexes.CreateManyAsync(
+            [
+                new CreateIndexModel<ArticleChunk>(
+                    Builders<ArticleChunk>.IndexKeys.Ascending(c => c.PageId),
+                    new CreateIndexOptions { Name = "ix_pageId" }
+                ),
+                new CreateIndexModel<ArticleChunk>(
+                    Builders<ArticleChunk>
+                        .IndexKeys.Ascending(c => c.Type)
+                        .Ascending(c => c.Continuity),
+                    new CreateIndexOptions { Name = "ix_type_continuity" }
+                ),
+            ],
+            ct
+        );
 
         _logger.LogInformation("Article chunk indexes ensured");
     }
@@ -389,7 +537,8 @@ public partial class ArticleChunkingService
         var vectorDef = new BsonDocument
         {
             {
-                "fields", new BsonArray
+                "fields",
+                new BsonArray
                 {
                     new BsonDocument
                     {
@@ -398,28 +547,32 @@ public partial class ArticleChunkingService
                         { "numDimensions", 1536 },
                         { "similarity", "cosine" },
                     },
-                    new BsonDocument
-                    {
-                        { "type", "filter" },
-                        { "path", "type" },
-                    },
-                    new BsonDocument
-                    {
-                        { "type", "filter" },
-                        { "path", "continuity" },
-                    },
+                    new BsonDocument { { "type", "filter" }, { "path", "type" } },
+                    new BsonDocument { { "type", "filter" }, { "path", "continuity" } },
                 }
             },
         };
 
         var model = new CreateSearchIndexModel(
             name: "chunks_vector_index",
+            type: SearchIndexType.VectorSearch,
             definition: vectorDef
         );
 
         await _chunks.SearchIndexes.CreateOneAsync(model, ct);
         _logger.LogInformation("Vector search index created on chunks collection");
     }
+
+    static bool IsQuotaOrRateLimit(Exception ex) =>
+        ex.Message.Contains("429", StringComparison.Ordinal)
+        || ex.Message.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase)
+        || ex.Message.Contains("rate_limit", StringComparison.OrdinalIgnoreCase)
+        || (ex.InnerException != null && IsQuotaOrRateLimit(ex.InnerException));
+
+    static bool IsApiError(Exception ex) =>
+        ex.GetType().Name.Contains("ClientResult", StringComparison.OrdinalIgnoreCase)
+        || ex.Message.Contains("HTTP", StringComparison.OrdinalIgnoreCase)
+        || (ex.InnerException != null && IsApiError(ex.InnerException));
 
     [GeneratedRegex(@"^#{2,4}\s+", RegexOptions.Multiline)]
     private static partial Regex HeadingSplitRegex();

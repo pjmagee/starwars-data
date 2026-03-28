@@ -19,12 +19,16 @@ public class PagesController : ControllerBase
     public async Task<ActionResult<Page>> GetById(int id, CancellationToken cancellationToken)
     {
         var page = await _recordService.GetPageById(id, cancellationToken);
-        if (page is null) return NotFound();
+        if (page is null)
+            return NotFound();
         return page;
     }
 
     [HttpPost("batch")]
-    public async Task<List<Page>> GetByIds([FromBody] int[] ids, CancellationToken cancellationToken)
+    public async Task<List<Page>> GetByIds(
+        [FromBody] int[] ids,
+        CancellationToken cancellationToken
+    )
     {
         return await _recordService.GetPagesByIds(ids, cancellationToken);
     }

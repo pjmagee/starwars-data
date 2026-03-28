@@ -6,9 +6,7 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ArticleChunksController(
-    ArticleChunkingService chunkingService
-) : ControllerBase
+public class ArticleChunksController(ArticleChunkingService chunkingService) : ControllerBase
 {
     /// <summary>
     /// Get article chunking progress for the dashboard.

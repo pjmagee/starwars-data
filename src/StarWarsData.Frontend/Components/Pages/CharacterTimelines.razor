@@ -13,11 +13,6 @@
 @if (PageId is null)
 {
     @* ── Search View ── *@
-    <MudText Typo="Typo.h3" Class="mb-2">Character Timelines</MudText>
-    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
-        Search for a character to view or generate their AI-powered timeline.
-    </MudText>
-
     <MudTextField T="string" @bind-Value="_search" Label="Search characters" Variant="Variant.Outlined"
                   Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
                   Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"

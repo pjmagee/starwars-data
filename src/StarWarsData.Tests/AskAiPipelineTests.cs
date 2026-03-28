@@ -71,8 +71,7 @@ public class AskAiPipelineTests(ITestOutputHelper output)
 
         return new OpenAIClient(
             new ApiKeyCredential(apiKey),
-            new OpenAIClientOptions {
-                NetworkTimeout = TimeSpan.FromMinutes(5) }
+            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
         );
     }
 
@@ -190,22 +189,35 @@ public class AskAiPipelineTests(ITestOutputHelper output)
         );
 
         AgentSession session = await agent.CreateSessionAsync(cts.Token);
-        AgentResponse response = await agent.RunAsync(question, session, cancellationToken: cts.Token);
+        AgentResponse response = await agent.RunAsync(
+            question,
+            session,
+            cancellationToken: cts.Token
+        );
 
-        output.WriteLine($"Response.Text: {response.Text?[..Math.Min(500, response.Text?.Length ?? 0)]}");
+        output.WriteLine(
+            $"Response.Text: {response.Text?[..Math.Min(500, response.Text?.Length ?? 0)]}"
+        );
 
-        var hasResult = componentToolkit.TableResult is not null
+        var hasResult =
+            componentToolkit.TableResult is not null
             || componentToolkit.ChartResult is not null
             || componentToolkit.GraphResult is not null;
 
         Assert.True(hasResult, "Expected at least one render tool to be called");
 
         if (componentToolkit.ChartResult is not null)
-            output.WriteLine($"render_chart called with chartType: {componentToolkit.ChartResult.ChartType}");
+            output.WriteLine(
+                $"render_chart called with chartType: {componentToolkit.ChartResult.ChartType}"
+            );
         if (componentToolkit.GraphResult is not null)
-            output.WriteLine($"render_graph called for: {componentToolkit.GraphResult.RootEntityName}");
+            output.WriteLine(
+                $"render_graph called for: {componentToolkit.GraphResult.RootEntityName}"
+            );
         if (componentToolkit.TableResult is not null)
-            output.WriteLine($"render_table called for collection: {componentToolkit.TableResult.Collection}");
+            output.WriteLine(
+                $"render_table called for collection: {componentToolkit.TableResult.Collection}"
+            );
 
         return componentToolkit;
     }

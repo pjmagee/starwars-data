@@ -12,7 +12,8 @@ public class AdminController(
     RecordService recordService,
     CharacterTimelineService characterTimelineService,
     RelationshipGraphBuilderService graphBuilder,
-    ArticleChunkingService articleChunkingService
+    ArticleChunkingService articleChunkingService,
+    OpenAiStatusService aiStatus
 ) : ControllerBase
 {
     readonly ILogger<AdminController> _logger = logger;
@@ -21,6 +22,7 @@ public class AdminController(
     readonly CharacterTimelineService _characterTimelineService = characterTimelineService;
     readonly RelationshipGraphBuilderService _graphBuilder = graphBuilder;
     readonly ArticleChunkingService _articleChunkingService = articleChunkingService;
+    readonly OpenAiStatusService _aiStatus = aiStatus;
 
     bool IsJobAlreadyActive(Type type, string methodName)
     {
@@ -158,12 +160,7 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.EnsureIndexesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.EnsureIndexesAsync)))
                 return Conflict(new { error = "Index creation already running" });
             var jobId = BackgroundJob.Enqueue<RecordService>(s =>
                 s.EnsureIndexesAsync(CancellationToken.None)
@@ -439,12 +436,74 @@ public class AdminController(
             if (
                 IsJobAlreadyActive(
                     typeof(RelationshipGraphBuilderService),
-                    nameof(RelationshipGraphBuilderService.ProcessBatchAsync)
+                    nameof(RelationshipGraphBuilderService.ProcessAllAsync)
                 )
             )
                 return Conflict(new { error = "Relationship graph builder already running" });
             var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.ProcessBatchAsync(100, CancellationToken.None)
+                s.ProcessAllAsync(100, CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/submit-graph-batch")]
+    public ActionResult<string> EnqueueSubmitGraphBatch()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RelationshipGraphBuilderService),
+                    nameof(RelationshipGraphBuilderService.SubmitBatchAsync)
+                )
+            )
+                return Conflict(new { error = "Batch submission already running" });
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
+                s.SubmitBatchAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/check-graph-batches")]
+    public ActionResult<string> EnqueueCheckGraphBatches()
+    {
+        try
+        {
+            if (
+                IsJobAlreadyActive(
+                    typeof(RelationshipGraphBuilderService),
+                    nameof(RelationshipGraphBuilderService.CheckBatchesAsync)
+                )
+            )
+                return Conflict(new { error = "Batch check already running" });
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
+                s.CheckBatchesAsync(CancellationToken.None)
+            );
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/cleanup-graph-batches")]
+    public ActionResult<string> EnqueueCleanupGraphBatches()
+    {
+        try
+        {
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
+                s.CleanupFailedBatchesAsync(CancellationToken.None)
             );
             return Ok(new { jobId });
         }
@@ -476,4 +535,9 @@ public class AdminController(
             return Conflict(new { error = ex.Message });
         }
     }
+
+    // === OpenAI Status ===
+
+    [HttpGet("openai/status")]
+    public OpenAiHealthReport GetOpenAiStatus() => _aiStatus.GetHealthReport();
 }

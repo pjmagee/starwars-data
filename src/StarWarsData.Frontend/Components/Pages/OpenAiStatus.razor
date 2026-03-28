@@ -1,0 +1,203 @@
+@page "/admin/openai-status"
+@rendermode InteractiveServer
+@using StarWarsData.Frontend.Models
+@inject IHttpClientFactory HttpClientFactory
+@implements IDisposable
+
+<PageTitle>OpenAI Status</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-4">OpenAI API Status</MudText>
+
+@if (_report == null)
+{
+    <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+}
+else
+{
+    @* Overall status card *@
+    <MudPaper Class="pa-4 mb-4" Elevation="2">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3">
+            <MudIcon Icon="@GetStatusIcon()" Size="Size.Large" Color="@GetStatusColor()" />
+            <div>
+                <MudText Typo="Typo.h6" Color="@GetStatusColor()">@_report.Status</MudText>
+                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                    @_report.ErrorsLastHour error@(_report.ErrorsLastHour != 1 ? "s" : "") in the last hour
+                </MudText>
+            </div>
+            <MudSpacer />
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="LoadStatus"
+                       StartIcon="@Icons.Material.Filled.Refresh" Size="Size.Small">
+                Refresh
+            </MudButton>
+        </MudStack>
+    </MudPaper>
+
+    @* Per-caller status cards *@
+    @if (_report.Callers.Count > 0)
+    {
+        <MudText Typo="Typo.h6" Class="mb-2">Service Status</MudText>
+        <MudGrid Spacing="3" Class="mb-4">
+            @foreach (var caller in _report.Callers)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Class="pa-3" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="1">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@(caller.IsQuotaBlocked ? Icons.Material.Filled.Block
+                                                : caller.IsRateLimited ? Icons.Material.Filled.Speed
+                                                : caller.ConsecutiveErrors > 0 ? Icons.Material.Filled.Warning
+                                                : Icons.Material.Filled.CheckCircle)"
+                                         Color="@(caller.IsQuotaBlocked ? Color.Error
+                                                 : caller.IsRateLimited ? Color.Warning
+                                                 : caller.ConsecutiveErrors > 0 ? Color.Warning
+                                                 : Color.Success)"
+                                         Size="Size.Small" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">@caller.Caller</MudText>
+                            </MudStack>
+
+                            @if (caller.IsQuotaBlocked)
+                            {
+                                <MudAlert Severity="Severity.Error" Dense="true" Variant="Variant.Text" Class="mt-1">
+                                    Quota exceeded since @FormatTime(caller.QuotaBlockedSince)
+                                </MudAlert>
+                            }
+                            else if (caller.IsRateLimited)
+                            {
+                                <MudAlert Severity="Severity.Warning" Dense="true" Variant="Variant.Text" Class="mt-1">
+                                    Rate limited since @FormatTime(caller.RateLimitedSince)
+                                </MudAlert>
+                            }
+
+                            <MudSimpleTable Dense="true" Bordered="false" Style="background: transparent;">
+                                <tbody>
+                                    <tr>
+                                        <td style="color: rgba(255,255,255,0.5); padding: 2px 8px;">Successes</td>
+                                        <td style="padding: 2px 8px;">@caller.TotalSuccesses.ToString("N0")</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: rgba(255,255,255,0.5); padding: 2px 8px;">Errors</td>
+                                        <td style="padding: 2px 8px;">@caller.TotalErrors.ToString("N0")</td>
+                                    </tr>
+                                    @if (caller.ConsecutiveErrors > 0)
+                                    {
+                                        <tr>
+                                            <td style="color: rgba(255,255,255,0.5); padding: 2px 8px;">Consecutive</td>
+                                            <td style="color: #ff6b6b; padding: 2px 8px;">@caller.ConsecutiveErrors</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td style="color: rgba(255,255,255,0.5); padding: 2px 8px;">Last success</td>
+                                        <td style="padding: 2px 8px;">@FormatTime(caller.LastSuccess)</td>
+                                    </tr>
+                                    @if (caller.LastErrorTime != null)
+                                    {
+                                        <tr>
+                                            <td style="color: rgba(255,255,255,0.5); padding: 2px 8px;">Last error</td>
+                                            <td style="padding: 2px 8px;">@FormatTime(caller.LastErrorTime)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </MudSimpleTable>
+
+                            @if (!string.IsNullOrEmpty(caller.LastError))
+                            {
+                                <MudText Typo="Typo.caption" Style="color: #ff6b6b; word-break: break-all; margin-top: 4px;">
+                                    @TruncateMessage(caller.LastError)
+                                </MudText>
+                            }
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+    else
+    {
+        <MudAlert Severity="Severity.Info" Variant="Variant.Text" Class="mb-4">
+            No OpenAI API calls recorded yet. Status will populate as services make API calls.
+        </MudAlert>
+    }
+
+    @* Recent errors log *@
+    @if (_report.RecentErrors.Count > 0)
+    {
+        <MudText Typo="Typo.h6" Class="mb-2">Recent Errors (Last Hour)</MudText>
+        <MudTable T="RecentError" Items="_report.RecentErrors" Dense="true" Hover="true"
+                  Striped="true" FixedHeader="true" Height="400px">
+            <HeaderContent>
+                <MudTh Style="width: 140px;">Time</MudTh>
+                <MudTh Style="width: 120px;">Service</MudTh>
+                <MudTh>Error</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>
+                    <MudText Typo="Typo.caption" Style="white-space: nowrap;">
+                        @context.Time.ToString("HH:mm:ss") UTC
+                    </MudText>
+                </MudTd>
+                <MudTd>
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Error">
+                        @context.Caller
+                    </MudChip>
+                </MudTd>
+                <MudTd>
+                    <MudText Typo="Typo.caption" Style="word-break: break-all;">@context.Message</MudText>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+}
+
+@code {
+    OpenAiHealthReport? _report;
+    System.Timers.Timer? _timer;
+    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStatus();
+        _timer = new System.Timers.Timer(15_000);
+        _timer.Elapsed += async (_, _) => await InvokeAsync(LoadStatus);
+        _timer.Start();
+    }
+
+    async Task LoadStatus()
+    {
+        try
+        {
+            _report = await Http.GetFromJsonAsync<OpenAiHealthReport>("api/admin/openai/status");
+            StateHasChanged();
+        }
+        catch { }
+    }
+
+    string GetStatusIcon() => _report?.Status switch
+    {
+        HealthStatus.QuotaExceeded => Icons.Material.Filled.Block,
+        HealthStatus.RateLimited => Icons.Material.Filled.Speed,
+        HealthStatus.Degraded => Icons.Material.Filled.Warning,
+        HealthStatus.Healthy => Icons.Material.Filled.CheckCircle,
+        _ => Icons.Material.Filled.HelpOutline
+    };
+
+    Color GetStatusColor() => _report?.Status switch
+    {
+        HealthStatus.QuotaExceeded => Color.Error,
+        HealthStatus.RateLimited => Color.Warning,
+        HealthStatus.Degraded => Color.Warning,
+        HealthStatus.Healthy => Color.Success,
+        _ => Color.Default
+    };
+
+    static string FormatTime(DateTime? time) =>
+        time == null ? "Never" : $"{time.Value:HH:mm:ss} UTC ({(DateTime.UtcNow - time.Value).TotalMinutes:F0}m ago)";
+
+    static string TruncateMessage(string msg) =>
+        msg.Length > 150 ? msg[..150] + "..." : msg;
+
+    public void Dispose()
+    {
+        _timer?.Stop();
+        _timer?.Dispose();
+    }
+}

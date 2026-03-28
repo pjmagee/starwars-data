@@ -21,6 +21,4 @@ public class MongoDefinitions
     public FilterDefinition<BsonDocument> DataLinksContentYear { get; }
 
     public FilterDefinition<BsonDocument> DataLinksHrefYear { get; }
-
-
 }

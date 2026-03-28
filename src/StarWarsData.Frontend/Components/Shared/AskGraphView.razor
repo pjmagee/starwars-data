@@ -122,7 +122,7 @@
                 await _jsModule.InvokeVoidAsync("destroyGraph", _containerId);
                 await _jsModule.DisposeAsync();
             }
-            catch (JSDisconnectedException) { }
+            catch (Exception) { }
         }
     }
 }
