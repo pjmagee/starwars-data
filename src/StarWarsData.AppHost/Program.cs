@@ -15,6 +15,8 @@ var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING",
+        ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
     // Phase 1 — Download raw data
     .WithHttpCommand(
         path: "/api/admin/download/pages",
