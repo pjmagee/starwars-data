@@ -1,3 +1,4 @@
+@using WikiPage = StarWarsData.Models.Entities.Page
 @inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime JS
 @implements IAsyncDisposable
@@ -18,9 +19,90 @@
     }
     else if (_hasData)
     {
-        <div id="@_containerId"
-             style="width:100%; height:650px; background:#16162e; border-radius:8px; overflow:hidden;">
-        </div>
+        <MudGrid Spacing="2">
+            <MudItem xs="12" md="@(_selectedNodePage is not null || _loadingNodeDetails ? 9 : 12)">
+                <div id="@_containerId"
+                     style="width:100%; height:650px; background:#16162e; border-radius:8px; overflow:hidden;">
+                </div>
+            </MudItem>
+
+            @if (_loadingNodeDetails)
+            {
+                <MudItem xs="12" md="3">
+                    <MudPaper Class="pa-4" Style="height:650px; overflow-y:auto;">
+                        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
+                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+                            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading details...</MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+            }
+            else if (_selectedNodePage is not null)
+            {
+                <MudItem xs="12" md="3">
+                    <MudPaper Class="pa-0" Style="height:650px; overflow-y:auto; border-radius:8px;">
+                        <MudCard Elevation="0">
+                            @if (_selectedNodePage.Infobox?.ImageUrl is not null)
+                            {
+                                <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="200" />
+                            }
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
+                                    @if (_selectedNodePage.Infobox?.Template is not null)
+                                    {
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                            @SanitizeTemplate(_selectedNodePage.Infobox.Template)
+                                        </MudText>
+                                    }
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                                   OnClick="CloseNodePanel" />
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                @if (_selectedNodePage.Infobox?.Data is not null)
+                                {
+                                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
+                                        <tbody>
+                                            @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
+                                            {
+                                                <tr>
+                                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
+                                                        @prop.Label
+                                                    </td>
+                                                    <td style="padding:6px 12px;">
+                                                        @foreach (var link in prop.Links)
+                                                        {
+                                                            <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                        }
+                                                        @GetPlainValues(prop)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </MudSimpleTable>
+                                }
+                            </MudCardContent>
+                            <MudCardActions>
+                                @if (_selectedNodePage.WikiUrl is not null)
+                                {
+                                    <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                                        Wookieepedia
+                                    </MudButton>
+                                }
+                                <MudButton Href="@($"/graph/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
+                                           StartIcon="@Icons.Material.Filled.Hub">
+                                    Explore Graph
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
     }
     <AskReferencesSection References="@Descriptor.References" />
 </MudPaper>
@@ -34,7 +116,13 @@
     private string? _error;
     private int _loadGeneration;
     private IJSObjectReference? _jsModule;
+    private DotNetObjectReference<AskGraphView>? _dotnetRef;
     private readonly string _containerId = $"d3-graph-{Guid.NewGuid():N}";
+
+    // Node detail panel state
+    private WikiPage? _selectedNodePage;
+    private int _selectedNodeId;
+    private bool _loadingNodeDetails;
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -45,6 +133,7 @@
         _loading = true;
         _error = null;
         _hasData = false;
+        CloseNodePanel();
 
         try
         {
@@ -63,9 +152,7 @@
                 _loading = false;
                 StateHasChanged();
 
-                // Wait for the DOM to render the container div
                 await Task.Delay(50);
-
                 await RenderD3Graph(result);
             }
             else
@@ -89,12 +176,11 @@
     {
         _jsModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/d3-graph.js");
 
-        // Transform GraphResult into the format D3 expects
         var nodes = result.Nodes.Values.Select(n => new
         {
             id = n.Id,
             name = n.Name,
-            type = "Character", // Old GraphResult doesn't carry type — default
+            type = "Character",
             imageUrl = n.ImageUrl ?? "",
             born = n.Born ?? "",
             died = n.Died ?? "",
@@ -110,11 +196,67 @@
 
         var data = new { nodes, edges, rootId = result.RootId };
 
-        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data);
+        _dotnetRef?.Dispose();
+        _dotnetRef = DotNetObjectReference.Create(this);
+
+        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
+    }
+
+    [JSInvokable]
+    public async Task OnNodeClicked(int id, string name, string type)
+    {
+        _selectedNodeId = id;
+        _selectedNodePage = null;
+        _loadingNodeDetails = true;
+        StateHasChanged();
+
+        try
+        {
+            _selectedNodePage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{id}");
+        }
+        catch
+        {
+            _selectedNodePage = null;
+        }
+        finally
+        {
+            _loadingNodeDetails = false;
+            StateHasChanged();
+        }
+    }
+
+    private void CloseNodePanel()
+    {
+        _selectedNodePage = null;
+        _selectedNodeId = 0;
+        _loadingNodeDetails = false;
+    }
+
+    private static string StripRevision(string url)
+    {
+        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
+        return idx > 0 ? url[..idx] : url;
+    }
+
+    private static string SanitizeTemplate(string template)
+    {
+        var last = template.Split(':').LastOrDefault() ?? template;
+        return last.Replace("_", " ");
+    }
+
+    private static bool HasInfoboxContent(InfoboxProperty prop) =>
+        prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
+
+    private static string GetPlainValues(InfoboxProperty prop)
+    {
+        var linkTexts = prop.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return string.Join(", ", prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v)));
     }
 
     public async ValueTask DisposeAsync()
     {
+        _dotnetRef?.Dispose();
+
         if (_jsModule is not null)
         {
             try
