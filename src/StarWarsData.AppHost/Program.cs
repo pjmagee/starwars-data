@@ -179,7 +179,9 @@ var frontend = builder
     .WithReference(apiService)
     .WaitFor(apiService);
 
-builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
+var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
+apiService.WithContainerRegistry(registry);
+frontend.WithContainerRegistry(registry);
 
 builder
     .AddDockerComposeEnvironment("starwars")
