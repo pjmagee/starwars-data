@@ -490,12 +490,23 @@
     {
         InvokeAsync(() =>
         {
-            // If ActiveSessionId was cleared (New Chat clicked), reset the page
-            if (ChatHistory.ActiveSessionId is null && _currentSessionId is not null)
+            // New Chat was clicked — reset if there's any state to clear
+            if (ChatHistory.ActiveSessionId is null
+                && (_currentSessionId is not null || _conversation.Count > 0))
             {
-                NewChat();
+                ResetChat();
             }
         });
+    }
+
+    private void ResetChat()
+    {
+        _currentSessionId = null;
+        _model = new AskModel();
+        _conversation.Clear();
+        _aguiMessages.Clear();
+        _randomExamples = PickRandomExamples();
+        StateHasChanged();
     }
 
     public void Dispose()
@@ -1114,14 +1125,9 @@
 
     private void NewChat()
     {
-        _currentSessionId = null;
         ChatHistory.ActiveSessionId = null;
-        _model = new AskModel();
-        _conversation.Clear();
-        _aguiMessages.Clear();
-        _randomExamples = PickRandomExamples();
+        ResetChat();
         ChatHistory.NotifyChanged();
-        StateHasChanged();
     }
 
     private static string FriendlyToolName(string? name) => name switch

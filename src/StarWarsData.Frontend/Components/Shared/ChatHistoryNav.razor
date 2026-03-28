@@ -3,8 +3,8 @@
 @inject NavigationManager Navigation
 @implements IDisposable
 
-<MudNavLink Href="/ask" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add"
-            Style="font-weight:600" OnClick="StartNewChat">
+<MudNavLink Icon="@Icons.Material.Filled.Add" Style="font-weight:600"
+            OnClick="StartNewChat">
     New Chat
 </MudNavLink>
 
@@ -92,8 +92,20 @@
     private void StartNewChat()
     {
         ChatHistory.ActiveSessionId = null;
-        ChatHistory.NotifyChanged();
-        Navigation.NavigateTo("/ask");
+
+        var currentUri = Navigation.ToBaseRelativePath(Navigation.Uri).TrimEnd('/');
+        var isOnAsk = currentUri is "" or "ask" || currentUri.StartsWith("ask/");
+
+        if (isOnAsk)
+        {
+            // Already on the Ask page — signal reset via event (navigation won't trigger OnParametersSetAsync)
+            ChatHistory.NotifyChanged();
+        }
+        else
+        {
+            // Navigate to /ask — OnParametersSetAsync will handle the reset
+            Navigation.NavigateTo("/ask");
+        }
     }
 
     private async Task DeleteSession(Guid sessionId)
