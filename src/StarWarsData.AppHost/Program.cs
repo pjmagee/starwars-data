@@ -193,9 +193,11 @@ var frontend = builder
     .WithReference(apiService)
     .WaitFor(apiService);
 
+#pragma warning disable ASPIREPIPELINES003
 var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
-apiService.WithContainerRegistry(registry);
-frontend.WithContainerRegistry(registry);
+apiService.WithContainerRegistry(registry).WithRemoteImageTag("latest");
+frontend.WithContainerRegistry(registry).WithRemoteImageTag("latest");
+#pragma warning restore ASPIREPIPELINES003
 
 builder
     .AddDockerComposeEnvironment("starwars")

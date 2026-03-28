@@ -41,17 +41,6 @@ jobs:
       - name: Build and push container images
         run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
 
-      - name: Tag and push latest
-        run: |
-          # Find the aspire-deploy-* tagged images and also tag as latest
-          for repo in apiservice frontend; do
-            TAG=$(docker images "ghcr.io/pjmagee/${repo}" --format '{{.Tag}}' | grep aspire-deploy | head -1)
-            if [ -n "$TAG" ]; then
-              docker tag "ghcr.io/pjmagee/${repo}:${TAG}" "ghcr.io/pjmagee/${repo}:latest"
-              docker push "ghcr.io/pjmagee/${repo}:latest"
-            fi
-          done
-
       - name: Publish Docker Compose artifacts
         run: |
           aspire publish \
