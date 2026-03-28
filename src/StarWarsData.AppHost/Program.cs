@@ -162,8 +162,7 @@ var apiService = builder
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
-    )
-;
+    );
 
 var mongo = builder.AddConnectionString(
     "mongodb",

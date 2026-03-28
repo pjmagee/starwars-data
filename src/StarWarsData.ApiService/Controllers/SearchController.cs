@@ -27,7 +27,7 @@ public class SearchController : ControllerBase
     public async Task<PagedResult> Get([FromQuery] QueryParams queryParams)
     {
         return await _recordService.GetSearchResult(
-            queryParams.Search,
+            queryParams.Search ?? string.Empty,
             queryParams.Page,
             queryParams.PageSize,
             _contextAccessor.HttpContext!.RequestAborted

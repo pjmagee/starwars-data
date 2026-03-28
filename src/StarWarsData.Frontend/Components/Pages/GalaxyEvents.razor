@@ -275,7 +275,7 @@
             <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
                 <MudIconButton Icon="@Icons.Material.Filled.SkipPrevious" Size="Size.Small"
                                Color="Color.Primary" OnClick="JumpToPreviousEvent"
-                               Title="Jump to previous event" />
+                               title="Jump to previous event" />
 
                 <div style="flex: 0 0 auto;">
                     <span class="timeline-year-display" style="color: @GetLensColor(_selectedLens);">
@@ -285,7 +285,7 @@
 
                 <MudIconButton Icon="@Icons.Material.Filled.SkipNext" Size="Size.Small"
                                Color="Color.Primary" OnClick="JumpToNextEvent"
-                               Title="Jump to next event" />
+                               title="Jump to next event" />
 
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
                     <MudSlider T="int" Value="@_timelinePosition"
@@ -385,7 +385,7 @@
                         @if (context.HasLocation)
                         {
                             <MudIcon Icon="@Icons.Material.Filled.LocationOn" Size="Size.Small"
-                                     Color="Color.Success" Title="Has map location" />
+                                     Color="Color.Success" title="Has map location" />
                         }
                     </MudTd>
                 </RowTemplate>

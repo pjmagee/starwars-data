@@ -243,7 +243,8 @@ public sealed class ArticleChunkingIntegrationTests : IAsyncLifetime
             NullLogger<ArticleChunkingService>.Instance,
             settings,
             _mongoClient,
-            _embedder
+            _embedder,
+            new OpenAiStatusService(NullLogger<OpenAiStatusService>.Instance)
         );
     }
 

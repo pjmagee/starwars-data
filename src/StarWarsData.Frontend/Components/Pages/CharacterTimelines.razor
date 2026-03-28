@@ -290,7 +290,7 @@ else
                 {
                     <MudExpansionPanels Class="mt-3" Elevation="0">
                         <MudExpansionPanel Text="@($"Activity Log ({_generationStatus.ActivityLog.Count} events)")"
-                                           IsInitiallyExpanded="false" Dense="true">
+                                           Expanded="false">
                             <div style="max-height:300px; overflow-y:auto">
                                 <MudStack Spacing="0">
                                     @foreach (var entry in _generationStatus.ActivityLog.AsEnumerable().Reverse().Take(100))

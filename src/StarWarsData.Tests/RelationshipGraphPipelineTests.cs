@@ -48,6 +48,7 @@ public class RelationshipGraphPipelineTests(ApiFixture fixture)
             fixture.MongoClient,
             fixture.RelationshipAnalystToolkit,
             openAiClient,
+            new OpenAiStatusService(NullLogger<OpenAiStatusService>.Instance),
             chatClient
         );
     }

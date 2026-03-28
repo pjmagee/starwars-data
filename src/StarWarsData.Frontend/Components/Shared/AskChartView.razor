@@ -20,7 +20,6 @@
     <MudChart ChartType="@_chartType"
               ChartSeries="@_series"
               ChartLabels="@_labels"
-              ChartPalette="@_palette"
               Width="100%" Height="400px"
               CanHideSeries MatchBoundsToSize />
 
@@ -34,7 +33,6 @@
     private ChartType _chartType;
     private List<ChartSeries<double>> _series = [];
     private string[] _labels = [];
-    private string[]? _palette;
 
     private static readonly Dictionary<ChartType, string> _menuIcons = new()
     {
@@ -63,8 +61,6 @@
     protected override void OnParametersSet()
     {
         _chartType = ChartTypeMap.GetValueOrDefault(Descriptor.ChartType, ChartType.Bar);
-        _palette = Descriptor.Options?.ChartPalette is { Count: > 0 } p ? p.ToArray() : null;
-
         switch (Descriptor.ChartType)
         {
             case AskChartType.TimeSeries:

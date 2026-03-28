@@ -37,6 +37,7 @@ public class BatchApiFormatTests(ApiFixture fixture)
             fixture.MongoClient,
             fixture.RelationshipAnalystToolkit,
             new OpenAIClient("sk-test-dummy"),
+            new OpenAiStatusService(NullLogger<OpenAiStatusService>.Instance),
             fakeChatClient
         );
     }
