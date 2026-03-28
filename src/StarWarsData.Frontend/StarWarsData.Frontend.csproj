@@ -4,8 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
-    <ContainerRegistry>ghcr.io</ContainerRegistry>
-    <ContainerRepository>pjmagee/starwarsdata-frontend</ContainerRepository>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.2.0-preview.1.26170.3" />

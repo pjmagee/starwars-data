@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push container images
-        run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj --log-level debug
+        run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
 
       - name: Publish Docker Compose artifacts
         run: |
