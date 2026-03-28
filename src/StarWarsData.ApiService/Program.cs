@@ -139,7 +139,7 @@ builder
                     "-y",
                     "@mongodb-js/mongodb-mcp-server",
                     "--connectionString",
-                    Environment.GetEnvironmentVariable("MDB_MCP_CONNECTION_STRING")!,
+                    sp.GetRequiredService<IConfiguration>().GetConnectionString("mongodb")!,
                     "--readOnly",
                 ],
             }
