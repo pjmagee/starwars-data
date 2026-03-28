@@ -175,15 +175,17 @@ apiService.WithReference(mongo).WaitFor(mongo);
 // MongoDB MCP server as a sidecar container (HTTP transport)
 var mongoMcp = builder
     .AddContainer("mongodb-mcp", "mongodb/mongodb-mcp-server", "latest")
-    .WithEnvironment("MDB_MCP_CONNECTION_STRING",
-        ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
+    .WithEnvironment(
+        "MDB_MCP_CONNECTION_STRING",
+        ReferenceExpression.Create(
+            $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"
+        )
+    )
     .WithEnvironment("MDB_MCP_READ_ONLY", "true")
     .WithArgs("--transport", "http", "--httpHost", "0.0.0.0", "--httpPort", "3000")
     .WithHttpEndpoint(targetPort: 3000, name: "mcp");
 
-apiService
-    .WithEnvironment("MCP_MONGODB_URL", mongoMcp.GetEndpoint("mcp"))
-    .WaitFor(mongoMcp);
+apiService.WithEnvironment("MCP_MONGODB_URL", mongoMcp.GetEndpoint("mcp")).WaitFor(mongoMcp);
 
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
@@ -199,19 +201,6 @@ builder
     .AddDockerComposeEnvironment("starwars")
     .ConfigureComposeFile(compose =>
     {
-        // Keycloak runs externally at auth.magaoidh.pro — remove from compose
-        compose.Services.Remove("keycloak");
-
-        // Update frontend to use external Keycloak instead of compose service
-        if (compose.Services.TryGetValue("frontend", out var frontend))
-        {
-            frontend.DependsOn?.Remove("keycloak");
-            frontend.Environment["KEYCLOAK_HTTP"] = "https://auth.magaoidh.pro";
-            frontend.Environment["services__keycloak__http__0"] = "https://auth.magaoidh.pro";
-            frontend.Environment.Remove("KEYCLOAK_MANAGEMENT");
-            frontend.Environment.Remove("services__keycloak__management__0");
-        }
-
         // Configure all services with restart policy and Unraid labels
         foreach (var (name, service) in compose.Services)
         {

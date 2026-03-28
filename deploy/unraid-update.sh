@@ -54,7 +54,8 @@ unzip -qo "$WORK_DIR/release.zip" -d "$WORK_DIR/release"
 mkdir -p "$DEPLOY_DIR"
 
 # Copy compose file (always overwrite — it's generated)
-cp "$WORK_DIR/release/docker-compose.yaml" "$DEPLOY_DIR/docker-compose.yaml"
+# compose.manager uses .yml
+cp "$WORK_DIR/release/docker-compose.yaml" "$DEPLOY_DIR/docker-compose.yml"
 log "Updated docker-compose.yaml"
 
 # Initialize .env from template if it doesn't exist yet
