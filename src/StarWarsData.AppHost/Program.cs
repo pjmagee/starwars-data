@@ -189,6 +189,7 @@ apiService.WithEnvironment("MCP_MONGODB_URL", mongoMcp.GetEndpoint("mcp")).WaitF
 
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
+    .WithExternalHttpEndpoints()
     .WithEnvironment("services__keycloak__https__0", "https://auth.magaoidh.pro")
     .WithReference(apiService)
     .WaitFor(apiService);
