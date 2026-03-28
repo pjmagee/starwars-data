@@ -45,10 +45,10 @@ public class MapV2System
     public int Row { get; set; }   // 0-19 (grid 1=row 0, grid 20=row 19)
     public string? Region { get; set; }
     public string? Sector { get; set; }
-    public List<MapV2Planet> Planets { get; set; } = [];
+    public List<MapV2CelestialBody> CelestialBodies { get; set; } = [];
 }
 
-public class MapV2Planet
+public class MapV2CelestialBody
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";

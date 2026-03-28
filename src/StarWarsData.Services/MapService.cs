@@ -948,10 +948,10 @@ public class MapService
             bodyNames.AddRange(GetDataValues(rec, "Other objects"));
             var distinctNames = bodyNames.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 
-            var planetDtos = distinctNames.Select(n =>
+            var celestialBodies = distinctNames.Select(n =>
             {
                 cbLookup.TryGetValue(n, out var info);
-                return new MapV2Planet { Id = info.id, Name = n, Class = info.cls };
+                return new MapV2CelestialBody { Id = info.id, Name = n, Class = info.cls };
             }).ToList();
 
             systems.Add(new MapV2System
@@ -962,7 +962,7 @@ public class MapService
                 Row = row,
                 Region = GetFirstDataValue(rec, "Region") is { } rn ? NormalizeRegionName(rn) : null,
                 Sector = GetFirstDataValue(rec, "Sector"),
-                Planets = planetDtos
+                CelestialBodies = celestialBodies
             });
         }
 

@@ -102,10 +102,10 @@
                                   OnClearButtonClick="ClearSearch"
                                   Margin="Margin.Dense"
                                   Style="color: #e0e0f0;" />
-                    <MudSwitch Value="_onlyWithPlanets" Color="Color.Success" Size="Size.Small"
+                    <MudSwitch Value="_onlyWithBodies" Color="Color.Success" Size="Size.Small"
                                Label="Only systems with celestial bodies"
                                Style="color: rgba(255,255,255,0.5); margin: 0;"
-                               ValueChanged="OnPlanetFilterChanged" T="bool" />
+                               ValueChanged="OnCelestialBodyFilterChanged" T="bool" />
                     @* Region filter *@
                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                         <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.4);">Regions</MudText>
@@ -336,19 +336,19 @@
                             <MudText Typo="Typo.body2" Style="color: #aaa;">
                                 Grid: <span style="color: #e0e0f0;">@((char)('A' + _selectedSystem.Col))-@(_selectedSystem.Row + 1)</span>
                             </MudText>
-                            @if (_selectedSystem.Planets.Count > 0)
+                            @if (_selectedSystem.CelestialBodies.Count > 0)
                             {
                                 <MudDivider Style="border-color: rgba(255,255,255,0.1);" Class="my-2" />
                                 <MudText Typo="Typo.subtitle2" Style="color: #aaa;">
-                                    Planets (@_selectedSystem.Planets.Count)
+                                    Celestial Bodies (@_selectedSystem.CelestialBodies.Count)
                                 </MudText>
                                 <MudStack Row="true" Class="flex-wrap gap-1 mt-1">
-                                    @foreach (var planet in _selectedSystem.Planets)
+                                    @foreach (var body in _selectedSystem.CelestialBodies)
                                     {
                                         <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
                                                  Style="background: rgba(107, 203, 119, 0.2); color: #6bcb77;"
-                                                 OnClick="() => LoadPageDetail(planet.Id)">
-                                            @planet.Name
+                                                 OnClick="() => LoadPageDetail(body.Id)">
+                                            @body.Name
                                         </MudChip>
                                     }
                                 </MudStack>
@@ -378,7 +378,7 @@
     private List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("Galaxy", null, disabled: false, icon: Icons.Material.Filled.Public)];
 
     // Filter state
-    private bool _onlyWithPlanets;
+    private bool _onlyWithBodies;
     private readonly HashSet<string> _hiddenRegions = new();
 
     // Region hover state
@@ -441,9 +441,9 @@
 
     // === Filters ===
 
-    private async Task OnPlanetFilterChanged(bool value)
+    private async Task OnCelestialBodyFilterChanged(bool value)
     {
-        _onlyWithPlanets = value;
+        _onlyWithBodies = value;
         if (_module is not null)
             await _module.InvokeVoidAsync("setSystemFilter", value);
     }
@@ -605,9 +605,9 @@
     }
 
     [JSInvokable]
-    public void OnPlanetSelected(int planetId, string planetName)
+    public void OnCelestialBodySelected(int bodyId, string bodyName)
     {
-        InvokeAsync(() => LoadPageDetail(planetId));
+        InvokeAsync(() => LoadPageDetail(bodyId));
     }
 
     [JSInvokable]

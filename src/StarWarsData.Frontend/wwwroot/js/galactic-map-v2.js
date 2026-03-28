@@ -2,7 +2,7 @@
 // Level 1: Galaxy overview (regions, trade routes, clickable grid cells)
 // Level 1b: Region focus (zoom to region bounding box, show systems)
 // Level 2: Grid cell (systems within that cell)
-// Level 3: System (orbiting planets)
+// Level 3: System (orbiting celestial bodies)
 
 const REGION_PALETTE = [
     '#4ecdc4', '#ff6f91', '#7e6fff', '#ffd93d', '#6bcb77',
@@ -62,7 +62,7 @@ export function initialize(containerId, overview, dotNetRef) {
     const cellLayer = g.append('g');     // transparent grid click targets (below routes/nebulas)
     const routeLayer = g.append('g');
     const nebulaLayer = g.append('g');
-    const contentLayer = g.append('g');  // drill-down content (systems / planets)
+    const contentLayer = g.append('g');  // drill-down content (systems / celestial bodies)
 
     // Tooltip
     const tooltip = d3.select(container).append('div')
@@ -225,7 +225,7 @@ export function initialize(containerId, overview, dotNetRef) {
         })
         .on('click', (event) => {
             event.stopPropagation();
-            dotNetRef.invokeMethodAsync('OnPlanetSelected', route.id, route.name);
+            dotNetRef.invokeMethodAsync('OnCelestialBodySelected', route.id, route.name);
         });
     });
 
@@ -311,7 +311,7 @@ export function initialize(containerId, overview, dotNetRef) {
         })
         .on('click', (event) => {
             event.stopPropagation();
-            dotNetRef.invokeMethodAsync('OnPlanetSelected', n.id, n.name);
+            dotNetRef.invokeMethodAsync('OnCelestialBodySelected', n.id, n.name);
         });
     });
 
@@ -412,7 +412,7 @@ export function initialize(containerId, overview, dotNetRef) {
     let currentCell = null;
     let currentRegion = null;
     let currentSystemData = null;
-    let onlyWithPlanets = false;
+    let onlyWithBodies = false;
     let lastCellSystems = null;
     let lastRegionSystems = null;
     let hiddenRegions = new Set();
@@ -493,8 +493,8 @@ export function initialize(containerId, overview, dotNetRef) {
     function renderRegionSystems(systems, region) {
         contentLayer.selectAll('*').remove();
 
-        const filtered = onlyWithPlanets
-            ? systems.filter(s => s.planets && s.planets.length > 0)
+        const filtered = onlyWithBodies
+            ? systems.filter(s => s.celestialBodies && s.celestialBodies.length > 0)
             : systems;
 
         if (filtered.length === 0) {
@@ -505,7 +505,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
                 .attr('font-size', '14px')
-                .text(onlyWithPlanets ? 'No systems with planets in this region' : 'No systems in this region');
+                .text(onlyWithBodies ? 'No systems with celestial bodies in this region' : 'No systems in this region');
             return;
         }
 
@@ -553,12 +553,12 @@ export function initialize(containerId, overview, dotNetRef) {
             .text(d => d.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
 
         sysG.each(function (d) {
-            if (d.planets && d.planets.length > 0) {
+            if (d.celestialBodies && d.celestialBodies.length > 0) {
                 d3.select(this).append('text')
                     .attr('dy', cellW * 0.03).attr('text-anchor', 'middle')
                     .attr('fill', 'rgba(255,255,255,0.4)').attr('font-size', `${cellW * 0.009}px`)
                     .style('pointer-events', 'none')
-                    .text(`${d.planets.length} planet${d.planets.length > 1 ? 's' : ''}`);
+                    .text(`${d.celestialBodies.length} bod${d.celestialBodies.length > 1 ? 'ies' : 'y'}`);
             }
         });
 
@@ -567,8 +567,8 @@ export function initialize(containerId, overview, dotNetRef) {
             let html = `<strong>${d.name}</strong>`;
             if (d.region) html += `<br><span style="color:#aaa">Region:</span> ${d.region}`;
             if (d.sector) html += `<br><span style="color:#aaa">Sector:</span> ${d.sector}`;
-            if (d.planets && d.planets.length > 0) {
-                html += `<br><span style="color:#aaa">Planets:</span> ${d.planets.length}`;
+            if (d.celestialBodies && d.celestialBodies.length > 0) {
+                html += `<br><span style="color:#aaa">Bodies:</span> ${d.celestialBodies.length}`;
                 html += `<br><span style="color:#888">Click to view system</span>`;
             }
             tooltip.html(html).style('visibility', 'visible');
@@ -625,8 +625,8 @@ export function initialize(containerId, overview, dotNetRef) {
     function renderCellSystems(systems, col, row) {
         contentLayer.selectAll('*').remove();
 
-        const filtered = onlyWithPlanets
-            ? systems.filter(s => s.planets && s.planets.length > 0)
+        const filtered = onlyWithBodies
+            ? systems.filter(s => s.celestialBodies && s.celestialBodies.length > 0)
             : systems;
 
         const cx = col * cellW + cellW / 2;
@@ -637,7 +637,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
                 .attr('font-size', '14px')
-                .text('No systems with planets in this cell');
+                .text('No systems with celestial bodies in this cell');
             return;
         }
 
@@ -713,12 +713,12 @@ export function initialize(containerId, overview, dotNetRef) {
 
         // Planet count badge
         sysG.each(function (d) {
-            if (d.planets && d.planets.length > 0) {
+            if (d.celestialBodies && d.celestialBodies.length > 0) {
                 d3.select(this).append('text')
                     .attr('dy', cellW * 0.035).attr('text-anchor', 'middle')
                     .attr('fill', 'rgba(255,255,255,0.4)').attr('font-size', `${cellW * 0.01}px`)
                     .style('pointer-events', 'none')
-                    .text(`${d.planets.length} planet${d.planets.length > 1 ? 's' : ''}`);
+                    .text(`${d.celestialBodies.length} bod${d.celestialBodies.length > 1 ? 'ies' : 'y'}`);
             }
         });
 
@@ -727,8 +727,8 @@ export function initialize(containerId, overview, dotNetRef) {
             let html = `<strong>${d.name}</strong>`;
             if (d.region) html += `<br><span style="color:#aaa">Region:</span> ${d.region}`;
             if (d.sector) html += `<br><span style="color:#aaa">Sector:</span> ${d.sector}`;
-            if (d.planets && d.planets.length > 0) {
-                html += `<br><span style="color:#aaa">Planets:</span> ${d.planets.length}`;
+            if (d.celestialBodies && d.celestialBodies.length > 0) {
+                html += `<br><span style="color:#aaa">Bodies:</span> ${d.celestialBodies.length}`;
                 html += `<br><span style="color:#888">Click to view system</span>`;
             }
             tooltip.html(html).style('visibility', 'visible');
@@ -772,7 +772,7 @@ export function initialize(containerId, overview, dotNetRef) {
 
     function renderSystemDetail(sys) {
         const cx = sys.x, cy = sys.y;
-        const planets = sys.planets || [];
+        const bodies = sys.celestialBodies || [];
         const color = sys.region ? getRegionColor(sys.region, overview.regions) : '#ffffff';
         const unit = cellW * 0.006; // base unit for sizing
 
@@ -789,22 +789,22 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('font-size', `${unit * 5}px`).attr('font-weight', '600')
             .text(sys.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
 
-        if (planets.length === 0) {
+        if (bodies.length === 0) {
             contentLayer.append('text')
                 .attr('x', cx).attr('y', cy + unit * 15)
                 .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
                 .attr('font-size', `${unit * 3}px`)
-                .text('No known planets');
+                .text('No known celestial bodies');
             return;
         }
 
-        // Orbit rings and planets
-        planets.forEach((planet, i) => {
+        // Orbit rings and celestial bodies
+        bodies.forEach((body, i) => {
             const orbitR = unit * (18 + i * 10);
-            const angle = (i / planets.length) * Math.PI * 2 + Math.random() * 0.5;
+            const angle = (i / bodies.length) * Math.PI * 2 + Math.random() * 0.5;
             const px = cx + Math.cos(angle) * orbitR;
             const py = cy + Math.sin(angle) * orbitR;
-            const pColor = getPlanetColor(planet.class);
+            const pColor = getPlanetColor(body.class);
 
             // Orbit ring
             contentLayer.append('circle')
@@ -813,7 +813,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('stroke', 'rgba(255,255,255,0.06)').attr('stroke-width', 0.3)
                 .attr('stroke-dasharray', '2,2');
 
-            // Planet
+            // Celestial body
             const pg = contentLayer.append('g')
                 .attr('transform', `translate(${px},${py})`)
                 .style('cursor', 'pointer')
@@ -830,18 +830,18 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('dy', unit * -6).attr('text-anchor', 'middle')
                 .attr('fill', '#e0e0f0').attr('font-size', `${unit * 3}px`)
                 .style('pointer-events', 'none')
-                .text(planet.name);
+                .text(body.name);
 
-            if (planet.class) {
+            if (body.class) {
                 pg.append('text')
                     .attr('dy', unit * 7).attr('text-anchor', 'middle')
                     .attr('fill', 'rgba(255,255,255,0.3)').attr('font-size', `${unit * 2}px`)
                     .style('pointer-events', 'none')
-                    .text(planet.class);
+                    .text(body.class);
             }
 
             pg.on('mouseover', function () {
-                tooltip.html(`<strong>${planet.name}</strong>${planet.class ? '<br>Class: ' + planet.class : ''}<br><span style="color:#888">Click for details</span>`)
+                tooltip.html(`<strong>${body.name}</strong>${body.class ? '<br>Class: ' + body.class : ''}<br><span style="color:#888">Click for details</span>`)
                     .style('visibility', 'visible');
                 d3.select(this).select('circle').transition().duration(150).attr('r', unit * 6);
             })
@@ -854,7 +854,7 @@ export function initialize(containerId, overview, dotNetRef) {
             })
             .on('click', (event) => {
                 event.stopPropagation();
-                dotNetRef.invokeMethodAsync('OnPlanetSelected', planet.id, planet.name);
+                dotNetRef.invokeMethodAsync('OnCelestialBodySelected', body.id, body.name);
             });
         });
     }
@@ -1003,7 +1003,7 @@ export function initialize(containerId, overview, dotNetRef) {
     }
 
     function setSystemFilter(value) {
-        onlyWithPlanets = value;
+        onlyWithBodies = value;
         if (currentLevel === 'cell' && currentCell && lastCellSystems) {
             renderCellSystems(lastCellSystems, currentCell.col, currentCell.row);
         } else if (currentLevel === 'region' && currentRegion && lastRegionSystems) {
