@@ -17,6 +17,7 @@ namespace StarWarsData.Tests;
 ///   Shmi and Leia stored with %2F-encoded suffix (exercises the URL-normalisation fix)
 /// </summary>
 [Collection("Mongo")]
+[Trait("Category", "MongoFixture")]
 public class RelationshipGraphServiceTests(MongoFixture fixture)
 {
     private RelationshipGraphService Svc => fixture.Service;

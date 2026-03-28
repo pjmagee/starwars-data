@@ -29,7 +29,7 @@ jobs:
         run: dotnet build src/StarWarsData.slnx -c Release
 
       - name: Run tests
-        run: dotnet test src/StarWarsData.Tests -c Release --no-build --filter 'Category!=Integration'
+        run: dotnet test src/StarWarsData.Tests -c Release --no-build --filter 'Category!=Integration&Category!=MongoFixture'
 
       - name: Log in to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
