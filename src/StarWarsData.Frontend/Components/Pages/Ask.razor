@@ -7,6 +7,7 @@
 @inject ChatHistoryService ChatHistory
 @inject IJSRuntime JS
 @inject ILogger<Ask> Logger
+@implements IDisposable
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
@@ -471,6 +472,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        ChatHistory.OnChange += OnChatHistoryChanged;
+
         if (AuthState is not null)
         {
             var state = await AuthState;
@@ -481,6 +484,23 @@
             if (_isAuthenticated && _userId is not null)
                 await ChatHistory.EnsureLoadedAsync(_userId);
         }
+    }
+
+    private void OnChatHistoryChanged()
+    {
+        InvokeAsync(() =>
+        {
+            // If ActiveSessionId was cleared (New Chat clicked), reset the page
+            if (ChatHistory.ActiveSessionId is null && _currentSessionId is not null)
+            {
+                NewChat();
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        ChatHistory.OnChange -= OnChatHistoryChanged;
     }
 
     protected override async Task OnParametersSetAsync()

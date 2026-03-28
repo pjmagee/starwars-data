@@ -4,7 +4,7 @@
 @implements IDisposable
 
 <MudNavLink Href="/ask" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add"
-            Style="font-weight:600">
+            Style="font-weight:600" OnClick="StartNewChat">
     New Chat
 </MudNavLink>
 
@@ -87,6 +87,13 @@
             _sessions = ChatHistory.Sessions;
             StateHasChanged();
         });
+    }
+
+    private void StartNewChat()
+    {
+        ChatHistory.ActiveSessionId = null;
+        ChatHistory.NotifyChanged();
+        Navigation.NavigateTo("/ask");
     }
 
     private async Task DeleteSession(Guid sessionId)
