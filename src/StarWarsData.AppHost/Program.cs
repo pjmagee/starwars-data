@@ -216,18 +216,19 @@ builder
             switch (name)
             {
                 case "apiservice":
-                    service.Ports = ["${APISERVICE_HOST_PORT:-8080}:${APISERVICE_PORT}"];
+                    service.Ports = ["${APISERVICE_HOST_PORT:-9080}:${APISERVICE_PORT}"];
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
-                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8080]/swagger";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${APISERVICE_PORT}]/swagger";
                     break;
                 case "frontend":
-                    service.Ports = ["${FRONTEND_HOST_PORT:-8081}:${FRONTEND_PORT}"];
+                    service.Ports = ["${FRONTEND_HOST_PORT:-9081}:${FRONTEND_PORT}"];
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
-                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8081]";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${FRONTEND_PORT}]";
                     break;
                 case "starwars-dashboard":
+                    service.Ports = ["${DASHBOARD_HOST_PORT:-18888}:18888"];
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:18888]";
