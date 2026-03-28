@@ -1,0 +1,106 @@
+@using StarWarsData.Frontend.Services
+@inject ChatHistoryService ChatHistory
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<MudNavLink Href="/ask" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add"
+            Style="font-weight:600">
+    New Chat
+</MudNavLink>
+
+@if (_sessions.Count > 0)
+{
+    <div style="max-height: 280px; overflow-y: auto; overflow-x: hidden;">
+        @foreach (var session in _sessions)
+        {
+            var s = session;
+            var isActive = ChatHistory.ActiveSessionId == s.Id;
+            <div class="chat-nav-item">
+                <MudNavLink Href="@($"/ask/{s.Id}")"
+                            Match="NavLinkMatch.All"
+                            Icon="@Icons.Material.Filled.ChatBubbleOutline"
+                            IconColor="@(isActive ? Color.Primary : Color.Default)"
+                            Style="@(isActive ? "font-weight:600" : "")">
+                    @s.Title
+                </MudNavLink>
+                <MudIconButton Icon="@Icons.Material.Outlined.DeleteOutline"
+                               Size="Size.Small" Color="Color.Error"
+                               Class="chat-nav-delete"
+                               OnClick="@(async () => await DeleteSession(s.Id))"
+                               aria-label="Delete chat" />
+            </div>
+        }
+    </div>
+}
+
+<style>
+    .chat-nav-item {
+        position: relative;
+    }
+    .chat-nav-delete {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity 0.15s;
+        padding: 2px !important;
+        min-width: 0 !important;
+    }
+    .chat-nav-item:hover .chat-nav-delete {
+        opacity: 1;
+    }
+</style>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthState { get; set; }
+
+    private string? _userId;
+    private IReadOnlyList<ChatSessionSummary> _sessions = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChatHistory.OnChange += OnHistoryChanged;
+
+        if (AuthState is not null)
+        {
+            var state = await AuthState;
+            if (state.User.Identity?.IsAuthenticated == true)
+            {
+                _userId = state.User.FindFirst("sub")?.Value
+                          ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+                if (_userId is not null)
+                {
+                    await ChatHistory.EnsureLoadedAsync(_userId);
+                    _sessions = ChatHistory.Sessions;
+                }
+            }
+        }
+    }
+
+    private void OnHistoryChanged()
+    {
+        InvokeAsync(() =>
+        {
+            _sessions = ChatHistory.Sessions;
+            StateHasChanged();
+        });
+    }
+
+    private async Task DeleteSession(Guid sessionId)
+    {
+        if (_userId is not null)
+        {
+            await ChatHistory.DeleteAsync(_userId, sessionId);
+            if (ChatHistory.ActiveSessionId == null)
+                Navigation.NavigateTo("/ask");
+        }
+    }
+
+    public void Dispose()
+    {
+        ChatHistory.OnChange -= OnHistoryChanged;
+    }
+}

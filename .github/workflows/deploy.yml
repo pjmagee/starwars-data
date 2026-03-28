@@ -1,0 +1,74 @@
+name: Build & Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  API_IMAGE: ghcr.io/pjmagee/starwarsdata-apiservice
+  FRONTEND_IMAGE: ghcr.io/pjmagee/starwarsdata-frontend
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+          dotnet-quality: "preview"
+
+      - name: Build solution
+        run: dotnet build src/StarWarsData.slnx -c Release
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish API container image
+        run: |
+          dotnet publish src/StarWarsData.ApiService -c Release \
+            /t:PublishContainer \
+            -p:ContainerImageTag=${{ github.sha }} \
+            -p:ContainerImageTag_1=latest
+
+      - name: Publish Frontend container image
+        run: |
+          dotnet publish src/StarWarsData.Frontend -c Release \
+            /t:PublishContainer \
+            -p:ContainerImageTag=${{ github.sha }} \
+            -p:ContainerImageTag_1=latest
+
+      - name: Prepare release artifact
+        run: |
+          mkdir -p release
+
+          # Copy the Aspire-generated compose file
+          cp src/StarWarsData.AppHost/aspire-output/docker-compose.yaml release/docker-compose.yaml
+
+          # Write image versions for this build
+          cat > release/.env.versions <<EOF
+          APISERVICE_IMAGE=${{ env.API_IMAGE }}:${{ github.sha }}
+          FRONTEND_IMAGE=${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          EOF
+
+          # Write the env template for first-time setup
+          cp .env.template release/.env.template
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release/
+          retention-days: 30

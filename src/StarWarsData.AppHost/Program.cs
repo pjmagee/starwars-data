@@ -190,11 +190,46 @@ builder
         compose.Networks.Clear();
         compose.AddNetwork(new Network { Name = "proxynet", External = true });
 
-        // Configure all services with restart policy and proxynet
-        foreach (var service in compose.Services.Values)
+        // Keycloak runs externally at auth.magaoidh.pro — remove from compose
+        compose.Services.Remove("keycloak");
+
+        // Update frontend to use external Keycloak instead of compose service
+        if (compose.Services.TryGetValue("frontend", out var frontend))
+        {
+            frontend.DependsOn?.Remove("keycloak");
+            frontend.Environment["KEYCLOAK_HTTP"] = "https://auth.magaoidh.pro";
+            frontend.Environment["services__keycloak__http__0"] = "https://auth.magaoidh.pro";
+            frontend.Environment.Remove("KEYCLOAK_MANAGEMENT");
+            frontend.Environment.Remove("services__keycloak__management__0");
+        }
+
+        // Configure all services with restart policy, proxynet, and Unraid labels
+        foreach (var (name, service) in compose.Services)
         {
             service.Restart = "unless-stopped";
             service.Networks = ["proxynet"];
+            service.Labels ??= [];
+
+            service.Labels["net.unraid.docker.managed"] = "composeman";
+
+            switch (name)
+            {
+                case "apiservice":
+                    service.Labels["net.unraid.docker.icon"] =
+                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8080]/swagger";
+                    break;
+                case "frontend":
+                    service.Labels["net.unraid.docker.icon"] =
+                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8080]";
+                    break;
+                case "starwars-dashboard":
+                    service.Labels["net.unraid.docker.icon"] =
+                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:18888]";
+                    break;
+            }
         }
     });
 

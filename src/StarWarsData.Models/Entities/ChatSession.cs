@@ -40,6 +40,22 @@ public class ChatSessionMessage
     [JsonPropertyName("toolName")]
     public string? ToolName { get; set; }
 
+    [BsonElement("toolCallId")]
+    [JsonPropertyName("toolCallId")]
+    public string? ToolCallId { get; set; }
+
+    [BsonElement("toolCallArgs")]
+    [JsonPropertyName("toolCallArgs")]
+    public string? ToolCallArgs { get; set; }
+
+    [BsonElement("visualizationType")]
+    [JsonPropertyName("visualizationType")]
+    public string? VisualizationType { get; set; }
+
+    [BsonElement("visualizationData")]
+    [JsonPropertyName("visualizationData")]
+    public string? VisualizationData { get; set; }
+
     [BsonElement("timestamp")]
     [JsonPropertyName("timestamp")]
     public DateTime Timestamp { get; set; }

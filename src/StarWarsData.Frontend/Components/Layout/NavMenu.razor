@@ -2,8 +2,18 @@
 @inject NavigationService NavigationService
 
 <MudNavMenu>
-    <MudText Typo="Typo.caption" Class="px-4 pt-3 pb-1" Color="Color.Secondary">Explore</MudText>
-    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AutoAwesome">Ask AI</MudNavLink>
+    <MudText Typo="Typo.caption" Class="px-4 pt-3 pb-1" Color="Color.Secondary">Chat</MudText>
+    <AuthorizeView>
+        <Authorized>
+            <ChatHistoryNav />
+        </Authorized>
+        <NotAuthorized>
+            <MudNavLink Href="/ask" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AutoAwesome">Ask AI</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+
+    <MudDivider Class="my-2" />
+    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">Explore</MudText>
     <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline">Timeline</MudNavLink>
     <MudNavLink Href="/character-timelines" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Character Timelines</MudNavLink>
     <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">Data Tables</MudNavLink>

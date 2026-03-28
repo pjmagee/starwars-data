@@ -1,302 +1,361 @@
 @page "/"
 @page "/ask"
+@page "/ask/{SessionId:guid}"
+@using System.Text.Json.Serialization
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
+@inject ChatHistoryService ChatHistory
+@inject IJSRuntime JS
 @inject ILogger<Ask> Logger
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pa-4">
+<div class="ask-chat-container">
 
-    <div class="d-flex align-center gap-3 mb-1">
-        <MudSpacer />
-        <AuthorizeView>
-            <Authorized>
-                @if (_currentSessionId is not null)
-                {
-                    <MudButton Variant="Variant.Outlined" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" OnClick="NewChat">New Chat</MudButton>
-                }
-                <MudBadge Content="@_sessions.Count" Visible="@(_sessions.Count > 0)" Color="Color.Primary" Overlap="true">
-                    <MudIconButton Icon="@Icons.Material.Filled.History" OnClick="ToggleHistory" aria-label="Chat History" />
-                </MudBadge>
-            </Authorized>
-        </AuthorizeView>
-    </div>
+    @* ── Scrollable conversation area ── *@
+    <div class="ask-chat-messages" @ref="_messagesContainer">
 
-    @* ── Visualization mode pills ── *@
-    <div class="d-flex flex-wrap gap-2 mb-4">
-        @foreach (var mode in _modes)
+        @if (_conversation.Count == 0 && !_loading)
         {
-            var m = mode;
-            var selected = _selectedMode == m.Key;
-            <MudPaper Outlined="true"
-                      Class="@($"pa-3 cursor-pointer mud-clickable d-flex flex-column align-center gap-1{(selected ? " mud-border-primary" : "")}")"
-                      Style="@($"width: 160px;{(selected ? $" border-color: var(--mud-palette-{m.Color.ToString().ToLower()}); border-width: 2px;" : "")}")"
-                      @onclick="() => ToggleMode(m.Key)">
-                <MudIcon Icon="@m.Icon" Color="@(selected ? m.Color : Color.Default)" />
-                <MudText Typo="Typo.body2" Align="Align.Center" Style="font-weight:600">@m.Label</MudText>
-                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center">@m.Description</MudText>
-            </MudPaper>
+            @* ── Empty state: mode cards + examples ── *@
+            <MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+                <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Color="Color.Secondary">
+                    What would you like to explore?
+                </MudText>
+                <div class="d-flex flex-wrap gap-2 justify-center mb-6">
+                    @foreach (var mode in _modes)
+                    {
+                        var m = mode;
+                        var selected = _selectedMode == m.Key;
+                        <MudPaper Outlined="true"
+                                  Class="@($"pa-3 cursor-pointer mud-clickable d-flex flex-column align-center gap-1{(selected ? " mud-border-primary" : "")}")"
+                                  Style="@($"width: 140px;{(selected ? $" border-color: var(--mud-palette-{m.Color.ToString().ToLower()}); border-width: 2px;" : "")}")"
+                                  @onclick="() => ToggleMode(m.Key)">
+                            <MudIcon Icon="@m.Icon" Color="@(selected ? m.Color : Color.Default)" Size="Size.Small" />
+                            <MudText Typo="Typo.caption" Align="Align.Center" Style="font-weight:600">@m.Label</MudText>
+                        </MudPaper>
+                    }
+                </div>
+
+                <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-3">
+                    @(SelectedMode is null ? "Try asking" : $"{SelectedMode.Label} examples")
+                </MudText>
+                <MudGrid Spacing="2" Justify="Justify.Center">
+                    @foreach (var example in FilteredExamples)
+                    {
+                        var prompt = example;
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
+                                <MudText Typo="Typo.body2">@prompt</MudText>
+                            </MudPaper>
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudContainer>
         }
-    </div>
-
-    <EditForm Model="_model" OnValidSubmit="Load">
-        <DataAnnotationsValidator />
-        <div class="d-flex gap-2 align-end">
-            <MudTextField @bind-Value="_model.Prompt"
-                          Label="@(SelectedMode is null ? "Ask anything about Star Wars…" : SelectedMode.Placeholder)"
-                          Variant="Variant.Outlined"
-                          Required="true"
-                          Immediate="true"
-                          FullWidth="true"
-                          Disabled="_loading"
-                          Adornment="Adornment.Start"
-                          AdornmentIcon="@Icons.Material.Filled.Search"
-                          Class="flex-grow-1" />
-            <MudButton ButtonType="ButtonType.Submit"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Disabled="_loading"
-                       StartIcon="@Icons.Material.Filled.AutoAwesome"
-                       Style="height: 56px;">
-                @(_loading ? "Thinking…" : "Ask")
-            </MudButton>
-        </div>
-    </EditForm>
-
-    @if (!_loading && !_hasResult && _turns.Count == 0)
-    {
-        <MudText Typo="Typo.subtitle1" Class="mt-6 mb-2">
-            @(SelectedMode is null ? "Try asking" : $"{SelectedMode.Label} examples")
-        </MudText>
-        <MudGrid Spacing="2">
-            @foreach (var example in FilteredExamples)
-            {
-                var prompt = example;
-                <MudItem xs="12" sm="6" md="4">
-                    <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
-                        <MudText Typo="Typo.body2">@prompt</MudText>
-                    </MudPaper>
-                </MudItem>
-            }
-        </MudGrid>
-    }
-
-    @if (_turns.Count > 0)
-    {
-        <MudStack Class="mt-6" Spacing="3">
-            @foreach (var group in GetDisplayGroups())
-            {
-                @if (group.Role == TurnRole.User)
+        else
+        {
+            @* ── Conversation messages ── *@
+            <MudContainer MaxWidth="MaxWidth.Large" Class="py-4">
+                @foreach (var msg in _conversation)
                 {
-                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:var(--mud-palette-background-grey)">
-                        <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
-                        <MudText Typo="Typo.body1">@group.Turn!.Content</MudText>
-                    </MudPaper>
-                }
-                else if (group.Role == TurnRole.ToolCall)
-                {
-                    var calls = group.ToolCalls!;
-                    var completedCount = calls.Count(t => t.IsComplete);
-                    var allComplete = completedCount == calls.Count;
-                    var groupKey = group.GroupIndex;
-                    var isExpanded = !allComplete || _expandedToolGroups.Contains(groupKey);
-
-                    <MudPaper Elevation="0" Class="pa-2 px-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary);border-radius:0">
-                        <div class="d-flex align-center gap-2 cursor-pointer" @onclick="() => ToggleToolGroup(groupKey)" style="user-select:none">
-                            @if (allComplete)
-                            {
-                                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
-                            }
-                            else
-                            {
-                                <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
-                            }
-                            <MudText Typo="Typo.body2" Style="font-weight:600;flex:1">
-                                @if (allComplete)
-                                {
-                                    @($"Analyzed in {calls.Count} step{(calls.Count != 1 ? "s" : "")}")
-                                }
-                                else
-                                {
-                                    @($"Analyzing… ({completedCount}/{calls.Count})")
-                                }
-                            </MudText>
-                            <MudIcon Icon="@(isExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)" Size="Size.Small" Color="Color.Secondary" />
+                    @if (msg.Role == ConversationRole.User)
+                    {
+                        <div class="ask-msg ask-msg-user mb-3">
+                            <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:var(--mud-palette-background-grey); border-radius:12px;">
+                                <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
+                                <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@msg.Text</MudText>
+                            </MudPaper>
                         </div>
-                        @if (isExpanded)
-                        {
-                            <MudStack Spacing="1" Class="mt-2 ml-7">
-                                @foreach (var tc in calls)
-                                {
-                                    <div class="d-flex align-center gap-2">
-                                        @if (tc.IsComplete)
+                    }
+                    else if (msg.Role == ConversationRole.ToolGroup)
+                    {
+                        <div class="ask-msg ask-msg-tools mb-2 ml-2">
+                            <MudPaper Elevation="0" Class="pa-2 px-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary);border-radius:0">
+                                <div class="d-flex align-center gap-2 cursor-pointer" @onclick="() => msg.IsExpanded = !msg.IsExpanded" style="user-select:none">
+                                    @if (msg.ToolCalls!.All(t => t.IsComplete))
+                                    {
+                                        <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
+                                    }
+                                    else
+                                    {
+                                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                                    }
+                                    <MudText Typo="Typo.body2" Style="font-weight:600;flex:1">
+                                        @{
+                                            var done = msg.ToolCalls!.Count(t => t.IsComplete);
+                                            var total = msg.ToolCalls!.Count;
+                                        }
+                                        @if (done == total)
                                         {
-                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Success" Style="font-size:14px" />
+                                            @($"Used {total} tool{(total != 1 ? "s" : "")}")
                                         }
                                         else
                                         {
-                                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:14px;height:14px" />
+                                            @($"Working\u2026 ({done}/{total} tool{(total != 1 ? "s" : "")})")
                                         }
-                                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FriendlyToolName(tc.ToolName)</MudText>
-                                    </div>
+                                    </MudText>
+                                    <MudIcon Icon="@(msg.IsExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)" Size="Size.Small" Color="Color.Secondary" />
+                                </div>
+                                @if (msg.IsExpanded)
+                                {
+                                    <MudStack Spacing="1" Class="mt-2 ml-7">
+                                        @foreach (var tc in msg.ToolCalls!)
+                                        {
+                                            <div class="d-flex align-center gap-2">
+                                                @if (tc.IsComplete)
+                                                {
+                                                    <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Success" Style="font-size:14px" />
+                                                }
+                                                else
+                                                {
+                                                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:14px;height:14px" />
+                                                }
+                                                <MudText Typo="Typo.caption" Color="Color.Secondary">@FriendlyToolName(tc.ToolName)</MudText>
+                                            </div>
+                                        }
+                                    </MudStack>
                                 }
-                            </MudStack>
-                        }
-                    </MudPaper>
-                }
-                else if (group.Role == TurnRole.Assistant && !HasVisualization)
-                {
-                    <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3">
-                        <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
-                        <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@group.Turn!.Content</MudText>
-                    </MudPaper>
-                }
-            }
-
-            @if (_loading)
-            {
-                <MudPaper Elevation="0" Class="pa-3 d-flex align-center gap-2" Style="background:transparent">
-                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">Working…</MudText>
-                </MudPaper>
-            }
-        </MudStack>
-    }
-
-    @if (!_loading && _error is not null)
-    {
-        <MudAlert Severity="Severity.Error" Class="mt-4">@_error</MudAlert>
-    }
-
-    @* ── AI-configured components ── *@
-
-    @if (!_loading && _chartDescriptor is not null)
-    {
-        <AskChartView Descriptor="_chartDescriptor" />
-    }
-
-    @if (!_loading && _graphDescriptor is not null)
-    {
-        <AskGraphView Descriptor="_graphDescriptor" />
-    }
-
-    @if (!_loading && _tableDescriptor is not null)
-    {
-        <AskTableView Descriptor="_tableDescriptor" />
-    }
-
-    @if (!_loading && _dataTableDescriptor is not null)
-    {
-        <AskDataTableView Descriptor="_dataTableDescriptor" />
-    }
-
-    @if (!_loading && _timelineDescriptor is not null)
-    {
-        <AskTimelineView Descriptor="_timelineDescriptor" />
-    }
-
-    @if (!_loading && _infoboxDescriptor is not null)
-    {
-        <AskInfoboxView Descriptor="_infoboxDescriptor" />
-    }
-
-    @if (!_loading && _textDescriptor is not null)
-    {
-        <AskTextView Descriptor="_textDescriptor" />
-    }
-
-</MudContainer>
-
-@* ── Chat History Drawer ── *@
-<MudDrawer @bind-Open="_historyOpen" Anchor="Anchor.End" Elevation="1" Variant="DrawerVariant.Temporary" Width="320px">
-    <MudDrawerHeader>
-        <MudText Typo="Typo.h6">Chat History</MudText>
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.Close" OnClick="ToggleHistory" Size="Size.Small" />
-    </MudDrawerHeader>
-    @if (_sessionsLoading)
-    {
-        <div class="d-flex justify-center pa-4">
-            <MudProgressCircular Indeterminate="true" Size="Size.Small" />
-        </div>
-    }
-    else if (_sessions.Count == 0)
-    {
-        <MudText Class="pa-4" Color="Color.Secondary" Typo="Typo.body2">No saved chats yet.</MudText>
-    }
-    else
-    {
-        <MudList T="ChatSessionSummary" Class="pa-0">
-            @foreach (var session in _sessions)
-            {
-                var s = session;
-                <MudListItem T="ChatSessionSummary"
-                             OnClick="() => LoadSession(s.Id)"
-                             Class="@(_currentSessionId == s.Id ? "mud-primary-text" : "")">
-                    <div class="d-flex align-center gap-2" style="width:100%">
-                        <div style="flex:1;min-width:0">
-                            <MudText Typo="Typo.body2" Style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@s.Title</MudText>
-                            <MudText Typo="Typo.caption" Color="Color.Secondary">@s.UpdatedAt.ToLocalTime().ToString("MMM d, h:mm tt")</MudText>
+                            </MudPaper>
                         </div>
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Color="Color.Error"
-                                       OnClick="() => DeleteSession(s.Id)" aria-label="Delete" />
+                    }
+                    else if (msg.Role == ConversationRole.Visualization)
+                    {
+                        <div class="ask-msg ask-msg-viz mb-3 ml-2">
+                            @switch (msg.VisualizationType)
+                            {
+                                case "chart" when msg.ChartDescriptor is not null:
+                                    <AskChartView Descriptor="msg.ChartDescriptor" />
+                                    break;
+                                case "graph" when msg.GraphDescriptor is not null:
+                                    <AskGraphView Descriptor="msg.GraphDescriptor" />
+                                    break;
+                                case "table" when msg.TableDescriptor is not null:
+                                    <AskTableView Descriptor="msg.TableDescriptor" />
+                                    break;
+                                case "data_table" when msg.DataTableDescriptor is not null:
+                                    <AskDataTableView Descriptor="msg.DataTableDescriptor" />
+                                    break;
+                                case "timeline" when msg.TimelineDescriptor is not null:
+                                    <AskTimelineView Descriptor="msg.TimelineDescriptor" />
+                                    break;
+                                case "infobox" when msg.InfoboxDescriptor is not null:
+                                    <AskInfoboxView Descriptor="msg.InfoboxDescriptor" />
+                                    break;
+                                case "text" when msg.TextDescriptor is not null:
+                                    <AskTextView Descriptor="msg.TextDescriptor" />
+                                    break;
+                            }
+                        </div>
+                    }
+                    else if (msg.Role == ConversationRole.Assistant)
+                    {
+                        <div class="ask-msg ask-msg-assistant mb-3 ml-2">
+                            <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="border-radius:12px;">
+                                <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
+                                <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@msg.Text</MudText>
+                            </MudPaper>
+                        </div>
+                    }
+                    else if (msg.Role == ConversationRole.Error)
+                    {
+                        <div class="ask-msg mb-3 ml-2">
+                            <MudAlert Severity="Severity.Error">@msg.Text</MudAlert>
+                        </div>
+                    }
+                }
+
+                @if (_loading)
+                {
+                    <div class="ask-msg mb-3 ml-2">
+                        <MudPaper Elevation="0" Class="pa-3 d-flex align-center gap-2" Style="background:transparent">
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">Working…</MudText>
+                        </MudPaper>
                     </div>
-                </MudListItem>
-            }
-        </MudList>
+                }
+            </MudContainer>
+        }
+    </div>
+
+    @* ── Sticky input area at bottom ── *@
+    <div class="ask-chat-input">
+        <MudContainer MaxWidth="MaxWidth.Large" Class="py-2">
+
+            @* Compact mode chips *@
+            <div class="d-flex flex-wrap gap-1 mb-2 justify-center">
+                <MudChip T="string"
+                         Color="@(_selectedMode == "auto" ? Color.Primary : Color.Default)"
+                         Variant="@(_selectedMode == "auto" ? Variant.Filled : Variant.Outlined)"
+                         OnClick="@(() => _selectedMode = "auto")" Size="Size.Small">
+                    Auto
+                </MudChip>
+                @foreach (var mode in _modes)
+                {
+                    var m = mode;
+                    var sel = _selectedMode == m.Key;
+                    <MudChip T="string"
+                             Color="@(sel ? m.Color : Color.Default)"
+                             Variant="@(sel ? Variant.Filled : Variant.Outlined)"
+                             OnClick="@(() => ToggleMode(m.Key))" Size="Size.Small"
+                             Icon="@m.Icon">
+                        @m.Label
+                    </MudChip>
+                }
+            </div>
+
+            @* Input row *@
+            <EditForm Model="_model" OnValidSubmit="SubmitAsync">
+                <DataAnnotationsValidator />
+                <div class="d-flex gap-2 align-end">
+                    <MudTextField @bind-Value="_model.Prompt"
+                                  Label="@(SelectedMode is null ? "Ask anything about Star Wars\u2026" : SelectedMode.Placeholder)"
+                                  Variant="Variant.Outlined"
+                                  Required="true"
+                                  Immediate="true"
+                                  FullWidth="true"
+                                  Disabled="_loading"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  OnKeyDown="OnInputKeyDown"
+                                  Lines="1"
+                                  Class="flex-grow-1" />
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Disabled="_loading"
+                               StartIcon="@Icons.Material.Filled.Send"
+                               Style="height: 56px;">
+                        @(_loading ? "Thinking\u2026" : "Send")
+                    </MudButton>
+                </div>
+            </EditForm>
+
+        </MudContainer>
+    </div>
+</div>
+
+<style>
+    .ask-chat-container {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 64px); /* subtract top nav bar */
     }
-</MudDrawer>
+    .ask-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+    }
+    .ask-chat-input {
+        border-top: 1px solid var(--mud-palette-lines-default);
+        background: var(--mud-palette-surface);
+    }
+</style>
 
 @code {
+
+    [Parameter] public Guid? SessionId { get; set; }
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthState { get; set; }
 
-    enum TurnRole { User, Assistant, ToolCall }
+    // ── Conversation model ──
 
-    record Turn(TurnRole Role, string? ToolName = null)
+    enum ConversationRole { User, Assistant, ToolGroup, Visualization, Error }
+
+    class ToolCallInfo
     {
-        public string Content { get; set; } = string.Empty;
+        public string CallId { get; set; } = "";
+        public string ToolName { get; set; } = "";
+        public string Arguments { get; set; } = "";
+        public string? Result { get; set; }
         public bool IsComplete { get; set; }
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
     }
 
-    record DisplayGroup(TurnRole Role, Turn? Turn = null, List<Turn>? ToolCalls = null, int GroupIndex = 0);
+    class ConversationMessage
+    {
+        public ConversationRole Role { get; set; }
+        public string? Text { get; set; }
+        public List<ToolCallInfo>? ToolCalls { get; set; }
+        public bool IsExpanded { get; set; }
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+
+        // Visualization data (for Role == Visualization)
+        public string? VisualizationType { get; set; }
+        public ChartDescriptor? ChartDescriptor { get; set; }
+        public GraphDescriptor? GraphDescriptor { get; set; }
+        public TableDescriptor? TableDescriptor { get; set; }
+        public DataTableDescriptor? DataTableDescriptor { get; set; }
+        public TimelineDescriptor? TimelineDescriptor { get; set; }
+        public InfoboxDescriptor? InfoboxDescriptor { get; set; }
+        public TextDescriptor? TextDescriptor { get; set; }
+    }
+
+    // ── AGUI message replay (sent to /kernel/stream each turn) ──
+
+    class AguiMessage
+    {
+        [JsonPropertyName("role")]
+        public string Role { get; set; } = "";
+
+        [JsonPropertyName("content")]
+        public string? Content { get; set; }
+
+        [JsonPropertyName("toolCalls")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<AguiToolCall>? ToolCalls { get; set; }
+
+        [JsonPropertyName("toolCallId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ToolCallId { get; set; }
+    }
+
+    class AguiToolCall
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = "";
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; } = "function";
+
+        [JsonPropertyName("function")]
+        public AguiFunction Function { get; set; } = new();
+    }
+
+    class AguiFunction
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = "";
+
+        [JsonPropertyName("arguments")]
+        public string Arguments { get; set; } = "";
+    }
+
+    // ── State ──
+
+    private readonly List<ConversationMessage> _conversation = [];
+    private readonly List<AguiMessage> _aguiMessages = [];
+
+    // SSE streaming state for current turn
+    private readonly Dictionary<string, string> _sseToolCallNames = [];
+    private readonly Dictionary<string, ToolCallInfo> _sseToolCallInfos = [];
+    private ConversationMessage? _currentToolGroup;
+    private bool _toolGroupInterrupted;
+    private ConversationMessage? _currentAssistantMsg;
+    private List<AguiToolCall> _pendingAguiToolCalls = [];
 
     private AskModel _model = new();
     private bool _loading;
-    private bool _hasResult;
-    private string? _error;
-    private readonly List<Turn> _turns = [];
-    private readonly Dictionary<string, string> _toolCallNames = [];
-    private readonly Dictionary<string, Turn> _toolCallTurns = [];
-    private readonly HashSet<int> _expandedToolGroups = [];
-    private Turn? _currentAssistantTurn;
-
-    // descriptor results from AI
-    private TableDescriptor? _tableDescriptor;
-    private DataTableDescriptor? _dataTableDescriptor;
-    private ChartDescriptor? _chartDescriptor;
-    private GraphDescriptor? _graphDescriptor;
-    private TimelineDescriptor? _timelineDescriptor;
-    private InfoboxDescriptor? _infoboxDescriptor;
-    private TextDescriptor? _textDescriptor;
-
-    private bool HasVisualization => _chartDescriptor is not null || _graphDescriptor is not null
-        || _tableDescriptor is not null || _dataTableDescriptor is not null
-        || _timelineDescriptor is not null || _infoboxDescriptor is not null
-        || _textDescriptor is not null;
+    private ElementReference _messagesContainer;
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
-    // ── Session history ──
-    private bool _historyOpen;
-    private bool _sessionsLoading;
-    private List<ChatSessionSummary> _sessions = [];
+    // ── Session state ──
     private Guid? _currentSessionId;
     private string? _userId;
     private bool _isAuthenticated;
+
+    // ── Mode selection ──
 
     private record VisualizationMode(
         string Key, string Label, string Description, string Placeholder,
@@ -420,9 +479,20 @@
                       ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
             if (_isAuthenticated && _userId is not null)
-            {
-                await LoadSessionsAsync();
-            }
+                await ChatHistory.EnsureLoadedAsync(_userId);
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SessionId.HasValue && SessionId != _currentSessionId)
+        {
+            await LoadSession(SessionId.Value);
+        }
+        else if (!SessionId.HasValue && _currentSessionId.HasValue)
+        {
+            // Navigated to /ask without a session ID — start fresh
+            NewChat();
         }
     }
 
@@ -432,35 +502,43 @@
         _ = InvokeAsync(SubmitAsync);
     }
 
-    private async Task Load() => await SubmitAsync();
+    private async Task OnInputKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey && !_loading && !string.IsNullOrWhiteSpace(_model.Prompt))
+            await SubmitAsync();
+    }
+
+    // ── Core submit: multi-turn conversation ──
 
     private async Task SubmitAsync()
     {
+        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading) return;
+
+        var userPrompt = _model.Prompt.Trim();
+        _model.Prompt = "";
         _loading = true;
-        _chartDescriptor = null;
-        _tableDescriptor = null;
-        _dataTableDescriptor = null;
-        _graphDescriptor = null;
-        _timelineDescriptor = null;
-        _infoboxDescriptor = null;
-        _textDescriptor = null;
-        _error = null;
-        _hasResult = false;
-        _turns.Clear();
-        _toolCallNames.Clear();
-        _toolCallTurns.Clear();
-        _expandedToolGroups.Clear();
-        _currentAssistantTurn = null;
-        _currentSessionId = null;
         StateHasChanged();
 
-        var userPrompt = _model.Prompt;
+        // Add user message to conversation display
+        _conversation.Add(new ConversationMessage { Role = ConversationRole.User, Text = userPrompt });
+
+        // Build AGUI user message with metadata
         var continuity = GlobalFilterService.GetContinuityQueryParam() ?? "Both";
         var modeHint = $" [PREFER: {_selectedMode}]";
-        var userMessage = $"[CONTINUITY: {continuity}]{modeHint} {userPrompt}";
-        _turns.Add(new Turn(TurnRole.User) { Content = userPrompt, IsComplete = true });
+        var aguiContent = $"[CONTINUITY: {continuity}]{modeHint} {userPrompt}";
+        _aguiMessages.Add(new AguiMessage { Role = "user", Content = aguiContent });
 
-        var body = new { messages = new[] { new { role = "user", content = userMessage } } };
+        // Reset per-turn SSE tracking
+        _sseToolCallNames.Clear();
+        _sseToolCallInfos.Clear();
+        _currentToolGroup = null;
+        _toolGroupInterrupted = false;
+        _currentAssistantMsg = null;
+        _pendingAguiToolCalls = [];
+
+        await ScrollToBottom();
+
+        var body = new { messages = _aguiMessages };
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
 
         try
@@ -475,29 +553,20 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                _error = $"Request failed ({(int)response.StatusCode}). Please try again.";
+                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Request failed ({(int)response.StatusCode}). Please try again." });
+                FinalizeAguiTurn();
                 return;
             }
 
             await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
             using var reader = new System.IO.StreamReader(stream);
 
-            var linesRead = 0;
-            var dataLinesRead = 0;
-
             while (!reader.EndOfStream && !cts.Token.IsCancellationRequested)
             {
                 var line = await reader.ReadLineAsync(cts.Token);
                 if (string.IsNullOrEmpty(line)) continue;
-                linesRead++;
+                if (!line.StartsWith("data:")) continue;
 
-                if (!line.StartsWith("data:"))
-                {
-                    Logger.LogDebug("SSE non-data line: {Line}", line);
-                    continue;
-                }
-
-                dataLinesRead++;
                 var json = line["data:".Length..].Trim();
                 if (json == "[DONE]") break;
 
@@ -510,212 +579,376 @@
                     switch (eventType)
                     {
                         case "TOOL_CALL_START":
-                        {
-                            var callId   = root.TryGetProperty("toolCallId",   out var ci) ? ci.GetString() : null;
-                            var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
-                            if (callId is not null && toolName is not null)
-                                _toolCallNames[callId] = toolName;
-                            var turn = new Turn(TurnRole.ToolCall, toolName);
-                            _turns.Add(turn);
-                            if (callId is not null)
-                                _toolCallTurns[callId] = turn;
+                            HandleToolCallStart(root);
                             break;
-                        }
                         case "TOOL_CALL_ARGS":
-                        {
-                            var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-                            if (callId is not null && _toolCallTurns.TryGetValue(callId, out var turn))
-                            {
-                                var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-                                if (delta is not null) turn.Content += delta;
-                            }
+                            HandleToolCallArgs(root);
                             break;
-                        }
                         case "TOOL_CALL_END":
-                        {
-                            var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-                            if (callId is not null && _toolCallTurns.TryGetValue(callId, out var turn))
-                                turn.IsComplete = true;
+                            HandleToolCallEnd(root);
                             break;
-                        }
                         case "TOOL_CALL_RESULT":
-                        {
-                            var callId   = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-                            var toolName = callId is not null && _toolCallNames.TryGetValue(callId, out var n) ? n : null;
-                            if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_text"
-                                && root.TryGetProperty("content", out var contentEl))
-                            {
-                                var contentJson = contentEl.ValueKind == JsonValueKind.String
-                                    ? contentEl.GetString()
-                                    : contentEl.GetRawText();
-
-                                if (contentJson?.StartsWith("\"") == true)
-                                    contentJson = JsonSerializer.Deserialize<string>(contentJson);
-
-                                if (contentJson is not null)
-                                {
-                                    switch (toolName)
-                                    {
-                                        case "render_table":
-                                            _tableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_data_table":
-                                            _dataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_chart":
-                                            _chartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_graph":
-                                            _graphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_timeline":
-                                            _timelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_infobox":
-                                            _infoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                        case "render_text":
-                                            _textDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
-                                            break;
-                                    }
-                                }
-                            }
+                            HandleToolCallResult(root);
                             break;
-                        }
                         case "TEXT_MESSAGE_START":
-                            _currentAssistantTurn = new Turn(TurnRole.Assistant);
-                            _turns.Add(_currentAssistantTurn);
+                            _currentAssistantMsg = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
+                            _conversation.Add(_currentAssistantMsg);
+                            _toolGroupInterrupted = true;
                             break;
                         case "TEXT_MESSAGE_CONTENT":
                         {
                             var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-                            if (delta is not null && _currentAssistantTurn is not null)
-                                _currentAssistantTurn.Content += delta;
+                            if (delta is not null && _currentAssistantMsg is not null)
+                                _currentAssistantMsg.Text += delta;
                             break;
                         }
                         case "TEXT_MESSAGE_END":
-                            if (_currentAssistantTurn is not null) _currentAssistantTurn.IsComplete = true;
-                            _currentAssistantTurn = null;
+                            _currentAssistantMsg = null;
                             break;
                         case "RUN_ERROR":
-                            _error = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
-                            Logger.LogError("RUN_ERROR from agent: {Error}", _error);
+                        {
+                            var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
+                            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = errorMsg });
+                            Logger.LogError("RUN_ERROR from agent: {Error}", errorMsg);
                             break;
-                        default:
-                            Logger.LogDebug("Unhandled AGUI event type: {EventType}, json: {Json}", eventType, json);
-                            break;
+                        }
                     }
                 }
                 catch (JsonException) { }
 
                 StateHasChanged();
+                await ScrollToBottom();
             }
 
-            _hasResult = HasVisualization;
-
-            if (!_hasResult && _error is null && _turns.All(t => t.Role != TurnRole.Assistant))
-            {
-                Logger.LogWarning(
-                    "AI returned no results. Lines read: {Lines}, Data lines: {DataLines}, Turns: {Turns}",
-                    linesRead, dataLinesRead, _turns.Count);
-                _error = "The AI returned no results. Try rephrasing your question.";
-            }
+            // Finalize: build AGUI replay messages for this turn
+            FinalizeAguiTurn();
 
             // Auto-save session for authenticated users
-            if (_isAuthenticated && _userId is not null && _error is null && _turns.Count > 0)
-            {
+            if (_isAuthenticated && _userId is not null)
                 await SaveCurrentSessionAsync(userPrompt);
-            }
         }
         catch (OperationCanceledException)
         {
-            _error = "Request timed out. The query took too long — try a simpler question.";
+            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "Request timed out. Try a simpler question." });
         }
         catch (Exception ex)
         {
-            _error = $"Unexpected error: {ex.Message}";
+            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Unexpected error: {ex.Message}" });
         }
         finally
         {
             _loading = false;
             StateHasChanged();
+            await ScrollToBottom();
         }
+    }
+
+    // ── SSE event handlers ──
+
+    private void HandleToolCallStart(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
+
+        if (callId is not null && toolName is not null)
+            _sseToolCallNames[callId] = toolName;
+
+        var info = new ToolCallInfo { CallId = callId ?? "", ToolName = toolName ?? "tool" };
+        if (callId is not null)
+            _sseToolCallInfos[callId] = info;
+
+        // Group consecutive tool calls together — only start a new group
+        // when there's no current group or a non-tool message interrupted the sequence
+        if (_currentToolGroup is null || _toolGroupInterrupted)
+        {
+            _currentToolGroup = new ConversationMessage
+            {
+                Role = ConversationRole.ToolGroup,
+                ToolCalls = [info],
+                IsExpanded = true,
+            };
+            _conversation.Add(_currentToolGroup);
+            _toolGroupInterrupted = false;
+        }
+        else
+        {
+            _currentToolGroup.ToolCalls!.Add(info);
+        }
+    }
+
+    private void HandleToolCallArgs(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
+        {
+            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
+            if (delta is not null) info.Arguments += delta;
+        }
+    }
+
+    private void HandleToolCallEnd(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
+        {
+            info.IsComplete = true;
+
+            // Track for AGUI replay
+            _pendingAguiToolCalls.Add(new AguiToolCall
+            {
+                Id = callId,
+                Function = new AguiFunction { Name = info.ToolName, Arguments = info.Arguments },
+            });
+        }
+    }
+
+    private void HandleToolCallResult(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        var toolName = callId is not null && _sseToolCallNames.TryGetValue(callId, out var n) ? n : null;
+
+        string? contentJson = null;
+        if (root.TryGetProperty("content", out var contentEl))
+        {
+            contentJson = contentEl.ValueKind == JsonValueKind.String
+                ? contentEl.GetString()
+                : contentEl.GetRawText();
+            if (contentJson?.StartsWith("\"") == true)
+                contentJson = JsonSerializer.Deserialize<string>(contentJson);
+        }
+
+        // Store result for AGUI replay
+        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
+            info.Result = contentJson;
+
+        // Check if this is a render_* tool and create inline visualization
+        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_text"
+            && contentJson is not null)
+        {
+            var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization };
+            try
+            {
+                switch (toolName)
+                {
+                    case "render_table":
+                        vizMsg.VisualizationType = "table";
+                        vizMsg.TableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_data_table":
+                        vizMsg.VisualizationType = "data_table";
+                        vizMsg.DataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_chart":
+                        vizMsg.VisualizationType = "chart";
+                        vizMsg.ChartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_graph":
+                        vizMsg.VisualizationType = "graph";
+                        vizMsg.GraphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_timeline":
+                        vizMsg.VisualizationType = "timeline";
+                        vizMsg.TimelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_infobox":
+                        vizMsg.VisualizationType = "infobox";
+                        vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_text":
+                        vizMsg.VisualizationType = "text";
+                        vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
+                        break;
+                }
+                _conversation.Add(vizMsg);
+                _toolGroupInterrupted = true;
+            }
+            catch (JsonException ex)
+            {
+                Logger.LogWarning(ex, "Failed to deserialize {ToolName} result", toolName);
+            }
+        }
+    }
+
+    /// <summary>
+    /// After a full AI turn completes, build the AGUI replay messages so the next
+    /// user message includes the full conversation history.
+    /// </summary>
+    private void FinalizeAguiTurn()
+    {
+        // Collapse all tool groups now that the turn is complete
+        foreach (var msg in _conversation)
+        {
+            if (msg.Role == ConversationRole.ToolGroup)
+                msg.IsExpanded = false;
+        }
+
+        // Emit an assistant message with any pending tool calls
+        if (_pendingAguiToolCalls.Count > 0)
+        {
+            _aguiMessages.Add(new AguiMessage
+            {
+                Role = "assistant",
+                Content = "",
+                ToolCalls = [.. _pendingAguiToolCalls],
+            });
+
+            // Emit tool result messages
+            foreach (var tc in _pendingAguiToolCalls)
+            {
+                var result = _sseToolCallInfos.TryGetValue(tc.Id, out var info) ? info.Result : null;
+                _aguiMessages.Add(new AguiMessage
+                {
+                    Role = "tool",
+                    ToolCallId = tc.Id,
+                    Content = result ?? "",
+                });
+            }
+
+            _pendingAguiToolCalls = [];
+        }
+
+        // Capture the last assistant text message if any
+        var lastAssistantText = _conversation
+            .LastOrDefault(m => m.Role == ConversationRole.Assistant)?.Text;
+        if (!string.IsNullOrWhiteSpace(lastAssistantText))
+        {
+            // Only add if we haven't already captured it as part of tool calls
+            var lastAgui = _aguiMessages.LastOrDefault();
+            if (lastAgui?.Role != "assistant" || lastAgui.ToolCalls is not null)
+            {
+                _aguiMessages.Add(new AguiMessage
+                {
+                    Role = "assistant",
+                    Content = lastAssistantText,
+                });
+            }
+        }
+    }
+
+    // ── Scroll ──
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await Task.Delay(50);
+            await JS.InvokeVoidAsync("eval", "document.querySelector('.ask-chat-messages')?.scrollTo({top: 999999, behavior: 'smooth'})");
+        }
+        catch { }
     }
 
     // ── Session management ──
-
-    private async Task LoadSessionsAsync()
-    {
-        _sessionsLoading = true;
-        try
-        {
-            using var request = new HttpRequestMessage(HttpMethod.Get, "api/ChatSessions");
-            request.Headers.Add("X-User-Id", _userId);
-            var response = await Http.SendAsync(request);
-            if (response.IsSuccessStatusCode)
-            {
-                _sessions = await response.Content.ReadFromJsonAsync<List<ChatSessionSummary>>(JsonOpts) ?? [];
-            }
-        }
-        catch { /* silently ignore session load failures */ }
-        finally
-        {
-            _sessionsLoading = false;
-        }
-    }
 
     private async Task SaveCurrentSessionAsync(string userPrompt)
     {
         try
         {
-            var title = userPrompt.Length > 80 ? userPrompt[..80] + "…" : userPrompt;
-            var messages = _turns
-                .Select(t => new ChatSessionMessage
+            // Generate an AI-summarized 3-4 word title only for new sessions
+            var title = _currentSessionId is null
+                ? await ChatHistory.SummarizeTitleAsync(userPrompt)
+                : "";
+
+            // Build session messages from conversation + AGUI data for replay
+            var messages = new List<ChatSessionMessage>();
+
+            foreach (var msg in _conversation)
+            {
+                switch (msg.Role)
                 {
-                    Role = t.Role switch
-                    {
-                        TurnRole.User => "user",
-                        TurnRole.Assistant => "assistant",
-                        TurnRole.ToolCall => "tool",
-                        _ => "unknown",
-                    },
-                    Content = t.Content,
-                    ToolName = t.ToolName,
-                    Timestamp = t.Timestamp,
-                })
-                .ToList();
+                    case ConversationRole.User:
+                        messages.Add(new ChatSessionMessage
+                        {
+                            Role = "user",
+                            Content = msg.Text ?? "",
+                            Timestamp = msg.Timestamp,
+                        });
+                        break;
+                    case ConversationRole.Assistant:
+                        messages.Add(new ChatSessionMessage
+                        {
+                            Role = "assistant",
+                            Content = msg.Text ?? "",
+                            Timestamp = msg.Timestamp,
+                        });
+                        break;
+                    case ConversationRole.ToolGroup:
+                        foreach (var tc in msg.ToolCalls ?? [])
+                        {
+                            messages.Add(new ChatSessionMessage
+                            {
+                                Role = "tool",
+                                ToolName = tc.ToolName,
+                                ToolCallId = tc.CallId,
+                                ToolCallArgs = tc.Arguments,
+                                Content = tc.Result ?? "",
+                                Timestamp = msg.Timestamp,
+                            });
+                        }
+                        break;
+                    case ConversationRole.Visualization:
+                        messages.Add(new ChatSessionMessage
+                        {
+                            Role = "visualization",
+                            VisualizationType = msg.VisualizationType,
+                            VisualizationData = msg.VisualizationType switch
+                            {
+                                "chart" => JsonSerializer.Serialize(msg.ChartDescriptor, JsonOpts),
+                                "graph" => JsonSerializer.Serialize(msg.GraphDescriptor, JsonOpts),
+                                "table" => JsonSerializer.Serialize(msg.TableDescriptor, JsonOpts),
+                                "data_table" => JsonSerializer.Serialize(msg.DataTableDescriptor, JsonOpts),
+                                "timeline" => JsonSerializer.Serialize(msg.TimelineDescriptor, JsonOpts),
+                                "infobox" => JsonSerializer.Serialize(msg.InfoboxDescriptor, JsonOpts),
+                                "text" => JsonSerializer.Serialize(msg.TextDescriptor, JsonOpts),
+                                _ => null,
+                            },
+                            Timestamp = msg.Timestamp,
+                        });
+                        break;
+                    case ConversationRole.Error:
+                        messages.Add(new ChatSessionMessage
+                        {
+                            Role = "error",
+                            Content = msg.Text ?? "",
+                            Timestamp = msg.Timestamp,
+                        });
+                        break;
+                }
+            }
 
             var body = new SaveChatSessionRequest { Title = title, Messages = messages };
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, "api/ChatSessions");
-            request.Headers.Add("X-User-Id", _userId);
-            request.Content = JsonContent.Create(body);
-            var response = await Http.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
+            if (_currentSessionId is not null)
             {
-                var id = await response.Content.ReadFromJsonAsync<Guid>();
-                _currentSessionId = id;
-                await LoadSessionsAsync();
+                // Update existing session
+                using var updateReq = new HttpRequestMessage(HttpMethod.Put, $"api/ChatSessions/{_currentSessionId}");
+                updateReq.Headers.Add("X-User-Id", _userId);
+                updateReq.Content = JsonContent.Create(body);
+                await Http.SendAsync(updateReq);
+                if (_userId is not null) await ChatHistory.LoadAsync(_userId);
+            }
+            else
+            {
+                // Create new session
+                using var createReq = new HttpRequestMessage(HttpMethod.Post, "api/ChatSessions");
+                createReq.Headers.Add("X-User-Id", _userId);
+                createReq.Content = JsonContent.Create(body);
+                var response = await Http.SendAsync(createReq);
+                if (response.IsSuccessStatusCode)
+                {
+                    _currentSessionId = await response.Content.ReadFromJsonAsync<Guid>();
+                    ChatHistory.ActiveSessionId = _currentSessionId;
+                    if (_userId is not null) await ChatHistory.LoadAsync(_userId);
+                }
             }
         }
-        catch { /* silently ignore save failures */ }
+        catch { }
     }
 
     private async Task LoadSession(Guid sessionId)
     {
-        _historyOpen = false;
         _loading = true;
-        _error = null;
-        _turns.Clear();
-        _chartDescriptor = null;
-        _tableDescriptor = null;
-        _dataTableDescriptor = null;
-        _graphDescriptor = null;
-        _timelineDescriptor = null;
-        _infoboxDescriptor = null;
-        _textDescriptor = null;
-        _hasResult = false;
+        _conversation.Clear();
+        _aguiMessages.Clear();
         StateHasChanged();
 
         try
@@ -730,24 +963,127 @@
                 if (session is not null)
                 {
                     _currentSessionId = session.Id;
-                    _model.Prompt = session.Title;
+                    ChatHistory.ActiveSessionId = session.Id;
+                    _model.Prompt = "";
 
+                    // Rebuild conversation display and AGUI replay from saved messages
                     foreach (var msg in session.Messages)
                     {
-                        var role = msg.Role switch
+                        switch (msg.Role)
                         {
-                            "user" => TurnRole.User,
-                            "tool" => TurnRole.ToolCall,
-                            _ => TurnRole.Assistant,
-                        };
-                        _turns.Add(new Turn(role, msg.ToolName) { Content = msg.Content, IsComplete = true, Timestamp = msg.Timestamp });
+                            case "user":
+                                _conversation.Add(new ConversationMessage { Role = ConversationRole.User, Text = msg.Content, Timestamp = msg.Timestamp });
+                                // Rebuild AGUI replay
+                                _aguiMessages.Add(new AguiMessage { Role = "user", Content = msg.Content });
+                                break;
+                            case "assistant":
+                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Assistant, Text = msg.Content, Timestamp = msg.Timestamp });
+                                _aguiMessages.Add(new AguiMessage { Role = "assistant", Content = msg.Content });
+                                break;
+                            case "tool":
+                            {
+                                // Add to AGUI replay as assistant tool call + tool result
+                                var aguiTc = new AguiToolCall
+                                {
+                                    Id = msg.ToolCallId ?? Guid.NewGuid().ToString(),
+                                    Function = new AguiFunction
+                                    {
+                                        Name = msg.ToolName ?? "tool",
+                                        Arguments = msg.ToolCallArgs ?? "",
+                                    },
+                                };
+                                // Check if last AGUI message is an assistant with tool calls we can append to
+                                var lastAgui = _aguiMessages.LastOrDefault();
+                                if (lastAgui?.Role == "assistant" && lastAgui.ToolCalls is not null)
+                                {
+                                    lastAgui.ToolCalls.Add(aguiTc);
+                                }
+                                else
+                                {
+                                    _aguiMessages.Add(new AguiMessage
+                                    {
+                                        Role = "assistant",
+                                        Content = "",
+                                        ToolCalls = [aguiTc],
+                                    });
+                                }
+                                _aguiMessages.Add(new AguiMessage
+                                {
+                                    Role = "tool",
+                                    ToolCallId = aguiTc.Id,
+                                    Content = msg.Content,
+                                });
+
+                                // Add to conversation display as tool group
+                                var lastConv = _conversation.LastOrDefault();
+                                if (lastConv?.Role == ConversationRole.ToolGroup)
+                                {
+                                    lastConv.ToolCalls!.Add(new ToolCallInfo
+                                    {
+                                        CallId = msg.ToolCallId ?? "",
+                                        ToolName = msg.ToolName ?? "tool",
+                                        Arguments = msg.ToolCallArgs ?? "",
+                                        Result = msg.Content,
+                                        IsComplete = true,
+                                    });
+                                }
+                                else
+                                {
+                                    _conversation.Add(new ConversationMessage
+                                    {
+                                        Role = ConversationRole.ToolGroup,
+                                        ToolCalls =
+                                        [
+                                            new ToolCallInfo
+                                            {
+                                                CallId = msg.ToolCallId ?? "",
+                                                ToolName = msg.ToolName ?? "tool",
+                                                Arguments = msg.ToolCallArgs ?? "",
+                                                Result = msg.Content,
+                                                IsComplete = true,
+                                            }
+                                        ],
+                                        IsExpanded = false,
+                                        Timestamp = msg.Timestamp,
+                                    });
+                                }
+                                break;
+                            }
+                            case "visualization":
+                            {
+                                var vizMsg = new ConversationMessage
+                                {
+                                    Role = ConversationRole.Visualization,
+                                    VisualizationType = msg.VisualizationType,
+                                    Timestamp = msg.Timestamp,
+                                };
+                                if (msg.VisualizationData is not null)
+                                {
+                                    switch (msg.VisualizationType)
+                                    {
+                                        case "chart": vizMsg.ChartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "graph": vizMsg.GraphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "table": vizMsg.TableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "data_table": vizMsg.DataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "timeline": vizMsg.TimelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "infobox": vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "text": vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                    }
+                                }
+                                _conversation.Add(vizMsg);
+                                break;
+                            }
+                            case "error":
+                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = msg.Content, Timestamp = msg.Timestamp });
+                                break;
+                        }
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            _error = $"Failed to load session: {ex.Message}";
+            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Failed to load session: {ex.Message}" });
         }
         finally
         {
@@ -756,83 +1092,16 @@
         }
     }
 
-    private async Task DeleteSession(Guid sessionId)
-    {
-        try
-        {
-            using var request = new HttpRequestMessage(HttpMethod.Delete, $"api/ChatSessions/{sessionId}");
-            request.Headers.Add("X-User-Id", _userId);
-            await Http.SendAsync(request);
-
-            _sessions.RemoveAll(s => s.Id == sessionId);
-            if (_currentSessionId == sessionId)
-            {
-                _currentSessionId = null;
-                NewChat();
-            }
-            StateHasChanged();
-        }
-        catch { /* silently ignore delete failures */ }
-    }
-
     private void NewChat()
     {
         _currentSessionId = null;
+        ChatHistory.ActiveSessionId = null;
         _model = new AskModel();
-        _turns.Clear();
-        _chartDescriptor = null;
-        _tableDescriptor = null;
-        _dataTableDescriptor = null;
-        _graphDescriptor = null;
-        _timelineDescriptor = null;
-        _infoboxDescriptor = null;
-        _textDescriptor = null;
-        _error = null;
-        _hasResult = false;
+        _conversation.Clear();
+        _aguiMessages.Clear();
         _randomExamples = PickRandomExamples();
+        ChatHistory.NotifyChanged();
         StateHasChanged();
-    }
-
-    private async Task ToggleHistory()
-    {
-        _historyOpen = !_historyOpen;
-        if (_historyOpen && _isAuthenticated && _userId is not null)
-        {
-            await LoadSessionsAsync();
-            StateHasChanged();
-        }
-    }
-
-    private List<DisplayGroup> GetDisplayGroups()
-    {
-        var groups = new List<DisplayGroup>();
-        var i = 0;
-        while (i < _turns.Count)
-        {
-            if (_turns[i].Role == TurnRole.ToolCall)
-            {
-                var startIndex = i;
-                var calls = new List<Turn>();
-                while (i < _turns.Count && _turns[i].Role == TurnRole.ToolCall)
-                {
-                    calls.Add(_turns[i]);
-                    i++;
-                }
-                groups.Add(new DisplayGroup(TurnRole.ToolCall, ToolCalls: calls, GroupIndex: startIndex));
-            }
-            else
-            {
-                groups.Add(new DisplayGroup(_turns[i].Role, Turn: _turns[i], GroupIndex: i));
-                i++;
-            }
-        }
-        return groups;
-    }
-
-    private void ToggleToolGroup(int key)
-    {
-        if (!_expandedToolGroups.Add(key))
-            _expandedToolGroups.Remove(key);
     }
 
     private static string FriendlyToolName(string? name) => name switch

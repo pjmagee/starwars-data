@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.AI;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services;
 
@@ -6,14 +7,9 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ChatSessionsController : ControllerBase
+public class ChatSessionsController(ChatSessionService chatSessionService, IChatClient chatClient)
+    : ControllerBase
 {
-    private readonly ChatSessionService _chatSessionService;
-
-    public ChatSessionsController(ChatSessionService chatSessionService)
-    {
-        _chatSessionService = chatSessionService;
-    }
 
     [HttpGet]
     public async Task<ActionResult<List<ChatSessionSummary>>> GetSessions(
@@ -24,7 +20,7 @@ public class ChatSessionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
-        return await _chatSessionService.GetSessionsAsync(userId, ct);
+        return await chatSessionService.GetSessionsAsync(userId, ct);
     }
 
     [HttpGet("{sessionId:guid}")]
@@ -37,7 +33,7 @@ public class ChatSessionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
-        var session = await _chatSessionService.GetSessionAsync(userId, sessionId, ct);
+        var session = await chatSessionService.GetSessionAsync(userId, sessionId, ct);
         if (session is null)
             return NotFound();
         return session;
@@ -53,7 +49,7 @@ public class ChatSessionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
-        var id = await _chatSessionService.SaveSessionAsync(userId, request, ct);
+        var id = await chatSessionService.SaveSessionAsync(userId, request, ct);
         return CreatedAtAction(nameof(GetSession), new { sessionId = id }, id);
     }
 
@@ -68,7 +64,7 @@ public class ChatSessionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
-        var updated = await _chatSessionService.UpdateSessionAsync(userId, sessionId, request, ct);
+        var updated = await chatSessionService.UpdateSessionAsync(userId, sessionId, request, ct);
         return updated ? NoContent() : NotFound();
     }
 
@@ -82,7 +78,40 @@ public class ChatSessionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
-        var deleted = await _chatSessionService.DeleteSessionAsync(userId, sessionId, ct);
+        var deleted = await chatSessionService.DeleteSessionAsync(userId, sessionId, ct);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPost("summarize")]
+    public async Task<ActionResult<string>> SummarizeTitle(
+        [FromBody] SummarizeRequest request,
+        CancellationToken ct
+    )
+    {
+        if (string.IsNullOrWhiteSpace(request.Prompt))
+            return BadRequest();
+
+        try
+        {
+            var result = await chatClient.GetResponseAsync(
+                [
+                    new(ChatRole.System,
+                        "Summarize the user's message into exactly 3-4 words as a short chat title. "
+                        + "No quotes, no punctuation, just the topic. Examples: "
+                        + "'Skywalker Family Tree', 'Clone Wars Battles', 'Sith Apprentice Lineage', 'Yoda Species Info'"),
+                    new(ChatRole.User, request.Prompt),
+                ],
+                cancellationToken: ct
+            );
+            var title = result.Text?.Trim().Trim('"', '.') ?? request.Prompt;
+            return Ok(title);
+        }
+        catch
+        {
+            // Fallback to first few words if LLM call fails
+            return Ok(ChatSessionService.FallbackTitle(request.Prompt));
+        }
+    }
 }
+
+public record SummarizeRequest(string Prompt);

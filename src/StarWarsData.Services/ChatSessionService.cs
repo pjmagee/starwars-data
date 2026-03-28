@@ -86,10 +86,14 @@ public class ChatSessionService
         CancellationToken ct = default
     )
     {
-        var update = Builders<ChatSession>
-            .Update.Set(s => s.Title, request.Title)
-            .Set(s => s.Messages, request.Messages)
+        var updateDef = Builders<ChatSession>
+            .Update.Set(s => s.Messages, request.Messages)
             .Set(s => s.UpdatedAt, DateTime.UtcNow);
+
+        if (!string.IsNullOrWhiteSpace(request.Title))
+            updateDef = updateDef.Set(s => s.Title, request.Title);
+
+        var update = updateDef;
 
         var result = await _sessions.UpdateOneAsync(
             s => s.Id == sessionId && s.UserId == userId,
@@ -112,5 +116,16 @@ public class ChatSessionService
         );
 
         return result.DeletedCount > 0;
+    }
+
+    /// <summary>
+    /// Simple fallback title: first 4 words of the prompt.
+    /// </summary>
+    public static string FallbackTitle(string prompt)
+    {
+        var words = prompt.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length <= 4)
+            return prompt.Trim();
+        return string.Join(' ', words[..4]) + "\u2026";
     }
 }

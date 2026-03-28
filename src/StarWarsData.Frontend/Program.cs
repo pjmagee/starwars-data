@@ -90,7 +90,8 @@ builder
     .AddHttpContextAccessor()
     .AddScoped<EndpointService>()
     .AddScoped<NavigationService>()
-    .AddSingleton<GlobalFilterService>();
+    .AddSingleton<GlobalFilterService>()
+    .AddScoped<ChatHistoryService>();
 
 // Register a named HttpClient for the API service
 // RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
