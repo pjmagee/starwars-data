@@ -39,14 +39,20 @@ jobs:
           dotnet publish src/StarWarsData.ApiService -c Release \
             /t:PublishContainer \
             -p:ContainerImageTag=${{ github.sha }} \
-            -p:ContainerImageTag_1=latest
+            -p:ContainerImageTag_1=latest \
+            -p:ContainerPushToRegistry=false
+          docker push ${{ env.API_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.API_IMAGE }}:latest
 
       - name: Publish Frontend container image
         run: |
           dotnet publish src/StarWarsData.Frontend -c Release \
             /t:PublishContainer \
             -p:ContainerImageTag=${{ github.sha }} \
-            -p:ContainerImageTag_1=latest
+            -p:ContainerImageTag_1=latest \
+            -p:ContainerPushToRegistry=false
+          docker push ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.FRONTEND_IMAGE }}:latest
 
       - name: Prepare release artifact
         run: |
