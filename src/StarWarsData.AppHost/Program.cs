@@ -173,6 +173,19 @@ var mongo = builder.AddConnectionString(
 
 apiService.WithReference(mongo).WaitFor(mongo);
 
+// MongoDB MCP server as a sidecar container (HTTP transport)
+var mongoMcp = builder
+    .AddContainer("mongodb-mcp", "mongodb/mongodb-mcp-server", "latest")
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING",
+        ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
+    .WithEnvironment("MDB_MCP_READ_ONLY", "true")
+    .WithArgs("--transport", "http", "--httpHost", "0.0.0.0", "--httpPort", "3000")
+    .WithHttpEndpoint(targetPort: 3000, name: "mcp");
+
+apiService
+    .WithEnvironment("MCP_MONGODB_URL", mongoMcp.GetEndpoint("mcp"))
+    .WaitFor(mongoMcp);
+
 var frontend = builder
     .AddProject<StarWarsData_Frontend>("frontend")
     .WithEnvironment("services__keycloak__https__0", "https://auth.magaoidh.pro")

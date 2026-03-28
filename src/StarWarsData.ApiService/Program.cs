@@ -129,32 +129,22 @@ builder
     .AddSingleton<McpClient?>(sp =>
     {
         var logger = sp.GetRequiredService<ILogger<Program>>();
-        var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("mongodb");
+        var mcpUrl = sp.GetRequiredService<IConfiguration>()["MCP_MONGODB_URL"];
 
-        if (string.IsNullOrEmpty(connectionString))
+        if (string.IsNullOrEmpty(mcpUrl))
         {
-            logger.LogWarning("MongoDB connection string not configured — MCP client disabled.");
+            logger.LogWarning("MCP_MONGODB_URL not configured — MCP client disabled.");
             return null;
         }
 
         try
         {
-            var transport = new StdioClientTransport(
-                new StdioClientTransportOptions
-                {
-                    Name = "MongoDB",
-                    Command = "npx",
-                    Arguments =
-                    [
-                        "-y",
-                        "@mongodb-js/mongodb-mcp-server",
-                        "--connectionString",
-                        connectionString,
-                        "--readOnly",
-                    ],
-                }
-            );
-            logger.LogInformation("Initializing MongoDB MCP client...");
+            var endpoint = new Uri(new Uri(mcpUrl.TrimEnd('/')), "/mcp");
+            var transport = new HttpClientTransport(new HttpClientTransportOptions
+            {
+                Endpoint = endpoint,
+            });
+            logger.LogInformation("Initializing MongoDB MCP client at {Endpoint}...", endpoint);
             var client = McpClient
                 .CreateAsync(
                     transport,
@@ -167,7 +157,7 @@ builder
         }
         catch (Exception ex)
         {
-            logger.LogWarning(ex, "Failed to initialize MongoDB MCP client (npx not available?) — MCP tools disabled.");
+            logger.LogWarning(ex, "Failed to initialize MongoDB MCP client — MCP tools disabled.");
             return null;
         }
     })
