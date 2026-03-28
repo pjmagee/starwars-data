@@ -12,6 +12,7 @@ namespace StarWarsData.Models.Entities;
 public class CharacterTimeline
 {
     [BsonId]
+    [BsonIgnoreIfDefault]
     public ObjectId Id { get; set; }
 
     [BsonElement("characterPageId")]
