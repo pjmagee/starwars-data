@@ -126,49 +126,56 @@ builder
             .GetEmbeddingClient("text-embedding-3-small")
             .AsIEmbeddingGenerator()
     )
-    .AddSingleton<McpClient>(sp =>
+    .AddSingleton<McpClient?>(sp =>
     {
         var logger = sp.GetRequiredService<ILogger<Program>>();
-        var transport = new StdioClientTransport(
-            new StdioClientTransportOptions
-            {
-                Name = "MongoDB",
-                Command = "npx",
-                Arguments =
-                [
-                    "-y",
-                    "@mongodb-js/mongodb-mcp-server",
-                    "--connectionString",
-                    sp.GetRequiredService<IConfiguration>().GetConnectionString("mongodb")!,
-                    "--readOnly",
-                ],
-            }
-        );
-        logger.LogInformation("Initializing MongoDB MCP client...");
-        var client = McpClient
-            .CreateAsync(
-                transport,
-                new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
-            )
-            .GetAwaiter()
-            .GetResult();
-        logger.LogInformation("MongoDB MCP client initialized.");
-        return client;
+        var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("mongodb");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            logger.LogWarning("MongoDB connection string not configured — MCP client disabled.");
+            return null;
+        }
+
+        try
+        {
+            var transport = new StdioClientTransport(
+                new StdioClientTransportOptions
+                {
+                    Name = "MongoDB",
+                    Command = "npx",
+                    Arguments =
+                    [
+                        "-y",
+                        "@mongodb-js/mongodb-mcp-server",
+                        "--connectionString",
+                        connectionString,
+                        "--readOnly",
+                    ],
+                }
+            );
+            logger.LogInformation("Initializing MongoDB MCP client...");
+            var client = McpClient
+                .CreateAsync(
+                    transport,
+                    new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
+                )
+                .GetAwaiter()
+                .GetResult();
+            logger.LogInformation("MongoDB MCP client initialized.");
+            return client;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Failed to initialize MongoDB MCP client (npx not available?) — MCP tools disabled.");
+            return null;
+        }
     })
     .AddSingleton<AIAgent>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var mcpClient = sp.GetRequiredService<McpClient>();
-
-        var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "find",
-            "aggregate",
-            "count",
-        };
-
-        var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
+        var mcpClient = sp.GetService<McpClient>();
         var componentToolkit = new ComponentToolkit();
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         var dataExplorer = new DataExplorerToolkit(mongoClient);
@@ -197,12 +204,22 @@ builder
                     + "Use when the user asks about history, events, explanations, or lore that goes beyond structured infobox data."
             )
         );
-        tools.AddRange(
-            mcpTools
-                .Select(t => t.WithName(t.Name.Replace('-', '_')))
-                .Where(t => allowedMcpTools.Contains(t.Name))
-                .Cast<AITool>()
-        );
+        if (mcpClient is not null)
+        {
+            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "find",
+                "aggregate",
+                "count",
+            };
+            var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
+            tools.AddRange(
+                mcpTools
+                    .Select(t => t.WithName(t.Name.Replace('-', '_')))
+                    .Where(t => allowedMcpTools.Contains(t.Name))
+                    .Cast<AITool>()
+            );
+        }
 
         const string instructions = """
         You are a Star Wars data assistant. Never ask for clarification. User messages come from a Star Wars Data Website, their questions are always in context of Star Wars.
