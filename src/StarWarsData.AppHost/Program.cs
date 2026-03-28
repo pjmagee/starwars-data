@@ -215,16 +215,16 @@ builder
             switch (name)
             {
                 case "apiservice":
-                    service.Ports = ["${APISERVICE_PORT}:${APISERVICE_PORT}"];
+                    service.Ports = ["${APISERVICE_HOST_PORT:-8080}:${APISERVICE_PORT}"];
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8080]/swagger";
                     break;
                 case "frontend":
-                    service.Ports = ["${FRONTEND_PORT}:${FRONTEND_PORT}"];
+                    service.Ports = ["${FRONTEND_HOST_PORT:-8081}:${FRONTEND_PORT}"];
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
-                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8080]";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:8081]";
                     break;
                 case "starwars-dashboard":
                     service.Labels["net.unraid.docker.icon"] =
