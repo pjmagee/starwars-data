@@ -41,6 +41,7 @@ builder
 
 builder.AddMongoDBClient(connectionName: "mongodb");
 
+#pragma warning disable CS8634 // McpClient registration is intentionally nullable
 builder
     .Services.AddOptions()
     .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
@@ -126,7 +127,7 @@ builder
             .GetEmbeddingClient("text-embedding-3-small")
             .AsIEmbeddingGenerator()
     )
-    .AddSingleton<McpClient?>(sp =>
+    .AddKeyedSingleton<McpClient?>("mongodb-mcp", (sp, _) =>
     {
         var logger = sp.GetRequiredService<ILogger<Program>>();
         var mcpUrl = sp.GetRequiredService<IConfiguration>()["MCP_MONGODB_URL"];
@@ -165,7 +166,7 @@ builder
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var mcpClient = sp.GetService<McpClient>();
+        var mcpClient = sp.GetKeyedService<McpClient>("mongodb-mcp");
         var componentToolkit = new ComponentToolkit();
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         var dataExplorer = new DataExplorerToolkit(mongoClient);
