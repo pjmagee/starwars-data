@@ -4,7 +4,36 @@
 @implements IAsyncDisposable
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+    <MudText Typo="Typo.h6" Class="mb-2">@Descriptor.Title</MudText>
+
+    @* Graph controls toolbar *@
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2 flex-wrap">
+        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5)">Depth</MudText>
+        <MudSlider T="int" Value="_maxDepth" ValueChanged="OnDepthChanged"
+                   Min="1" Max="4" Step="1" Style="max-width:120px"
+                   Color="Color.Primary" />
+        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">
+            @_maxDepth
+        </MudChip>
+
+        <MudDivider Vertical="true" FlexItem="true" Style="height:24px" />
+
+        @foreach (var label in _allLabels)
+        {
+            var l = label;
+            var enabled = _enabledLabels.Contains(l);
+            var color = _upLabels.Contains(l) ? Color.Info
+                      : _downLabels.Contains(l) ? Color.Success
+                      : Color.Warning;
+            <MudChip T="string" Size="Size.Small"
+                     Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
+                     Color="@color"
+                     Style="@(enabled ? "" : "opacity:0.4")"
+                     OnClick="() => ToggleLabel(l)">
+                @l
+            </MudChip>
+        }
+    </MudStack>
 
     @if (_loading)
     {
@@ -124,9 +153,30 @@
     private int _selectedNodeId;
     private bool _loadingNodeDetails;
 
+    // Graph controls — initialized from Descriptor, user can tweak
+    private int _maxDepth;
+    private HashSet<string> _enabledLabels = [];
+    private HashSet<string> _upLabels = [];
+    private HashSet<string> _downLabels = [];
+    private HashSet<string> _peerLabels = [];
+    private List<string> _allLabels = [];
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnParametersSetAsync()
+    {
+        // Initialize controls from AI-configured descriptor
+        _maxDepth = Descriptor.MaxDepth;
+        _upLabels = [..Descriptor.UpLabels];
+        _downLabels = [..Descriptor.DownLabels];
+        _peerLabels = [..Descriptor.PeerLabels];
+        _allLabels = [..Descriptor.UpLabels, ..Descriptor.DownLabels, ..Descriptor.PeerLabels];
+        _enabledLabels = [.._allLabels];
+
+        await LoadGraph();
+    }
+
+    private async Task LoadGraph()
     {
         var generation = ++_loadGeneration;
 
@@ -134,14 +184,19 @@
         _error = null;
         _hasData = false;
         CloseNodePanel();
+        StateHasChanged();
 
         try
         {
+            var activeUp = _upLabels.Where(_enabledLabels.Contains).ToList();
+            var activeDown = _downLabels.Where(_enabledLabels.Contains).ToList();
+            var activePeer = _peerLabels.Where(_enabledLabels.Contains).ToList();
+
             var collection = Uri.EscapeDataString(Descriptor.Collection);
-            var query = $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={Descriptor.MaxDepth}";
-            foreach (var l in Descriptor.UpLabels)   query += $"&upLabels={Uri.EscapeDataString(l)}";
-            foreach (var l in Descriptor.DownLabels) query += $"&downLabels={Uri.EscapeDataString(l)}";
-            foreach (var l in Descriptor.PeerLabels) query += $"&peerLabels={Uri.EscapeDataString(l)}";
+            var query = $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={_maxDepth}";
+            foreach (var l in activeUp)   query += $"&upLabels={Uri.EscapeDataString(l)}";
+            foreach (var l in activeDown) query += $"&downLabels={Uri.EscapeDataString(l)}";
+            foreach (var l in activePeer) query += $"&peerLabels={Uri.EscapeDataString(l)}";
             var result = await Http.GetFromJsonAsync<GraphResult>(query);
 
             if (generation != _loadGeneration) return;
@@ -170,6 +225,19 @@
             if (generation == _loadGeneration)
                 _loading = false;
         }
+    }
+
+    private async Task OnDepthChanged(int value)
+    {
+        _maxDepth = value;
+        await LoadGraph();
+    }
+
+    private async Task ToggleLabel(string label)
+    {
+        if (!_enabledLabels.Remove(label))
+            _enabledLabels.Add(label);
+        await LoadGraph();
     }
 
     private async Task RenderD3Graph(GraphResult result)
