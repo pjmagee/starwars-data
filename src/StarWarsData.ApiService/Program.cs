@@ -291,6 +291,8 @@ builder
             .Build();
     });
 
+var hangfireEnabled = builder.Configuration.GetSection("Settings").GetValue<bool>("HangfireEnabled", true);
+
 builder.Services.AddHangfire(
     (provider, config) =>
     {
@@ -318,7 +320,10 @@ builder.Services.AddHangfire(
     }
 );
 
-builder.Services.AddHangfireServer();
+if (hangfireEnabled)
+{
+    builder.Services.AddHangfireServer();
+}
 
 builder.Services.AddHttpClient<PageDownloader>(
     (serviceProvider, client) =>
@@ -343,48 +348,53 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(); // Allow CORS for all origins
 
+// Hangfire dashboard is always available (read-only monitoring in dev)
 app.UseHangfireDashboard(
     "/hangfire",
     new DashboardOptions
     {
         Authorization = new[] { new StarWarsData.ApiService.AllowAllAuthorizationFilter() },
+        IsReadOnlyFunc = _ => !hangfireEnabled,
     }
 );
 
-// Daily incremental sync of changed wiki pages at 03:00 UTC
-RecurringJob.AddOrUpdate<PageDownloader>(
-    "daily-incremental-sync",
-    s => s.IncrementalSyncAsync(CancellationToken.None),
-    Cron.Daily(3)
-);
+if (hangfireEnabled)
+{
+    // Daily incremental sync of changed wiki pages at 03:00 UTC
+    RecurringJob.AddOrUpdate<PageDownloader>(
+        "daily-incremental-sync",
+        s => s.IncrementalSyncAsync(CancellationToken.None),
+        Cron.Daily(3)
+    );
 
-// Daily relationship graph builder at 04:00 UTC (after page sync completes)
-RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
-    "daily-relationship-graph-builder",
-    s => s.ProcessAllAsync(100, CancellationToken.None),
-    Cron.Daily(4)
-);
+    // Daily relationship graph builder at 04:00 UTC (after page sync completes)
+    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+        "daily-relationship-graph-builder",
+        s => s.ProcessAllAsync(100, CancellationToken.None),
+        Cron.Daily(4)
+    );
 
-// Submit one batch every 30 minutes — drip-feeds batches as OpenAI quota frees up
-RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
-    "submit-graph-batch",
-    s => s.SubmitBatchAsync(CancellationToken.None),
-    "*/30 * * * *"
-);
+    // Submit one batch every 30 minutes — drip-feeds batches as OpenAI quota frees up
+    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+        "submit-graph-batch",
+        s => s.SubmitBatchAsync(CancellationToken.None),
+        "*/30 * * * *"
+    );
 
-// Check OpenAI batch status every 5 minutes
-RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
-    "check-graph-batches",
-    s => s.CheckBatchesAsync(CancellationToken.None),
-    "*/5 * * * *"
-);
+    // Check OpenAI batch status every 5 minutes
+    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
+        "check-graph-batches",
+        s => s.CheckBatchesAsync(CancellationToken.None),
+        "*/5 * * * *"
+    );
 
-// Daily article chunking at 05:00 UTC (after graph builder completes)
-RecurringJob.AddOrUpdate<ArticleChunkingService>(
-    "daily-article-chunking",
-    s => s.ProcessAllAsync(CancellationToken.None),
-    Cron.Daily(5)
-);
+    // Daily article chunking at 05:00 UTC (after graph builder completes)
+    RecurringJob.AddOrUpdate<ArticleChunkingService>(
+        "daily-article-chunking",
+        s => s.ProcessAllAsync(CancellationToken.None),
+        Cron.Daily(5)
+    );
+}
 
 app.UseHttpsRedirection();
 app.MapControllers();

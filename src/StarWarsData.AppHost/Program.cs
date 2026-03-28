@@ -14,6 +14,7 @@ var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
+    .WithEnvironment("Settings__HangfireEnabled", "true")
     // Phase 1 — Download raw data
     .WithHttpCommand(
         path: "/api/admin/download/pages",

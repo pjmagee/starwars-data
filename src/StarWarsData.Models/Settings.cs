@@ -5,6 +5,12 @@ public class SettingsOptions
     public const string Settings = "Settings";
 
     /// <summary>
+    /// Whether Hangfire recurring jobs and background server are enabled.
+    /// Disable in dev to avoid duplicate jobs when sharing a database with production.
+    /// </summary>
+    public bool HangfireEnabled { get; set; } = true;
+
+    /// <summary>
     /// The database for Hangfire jobs
     /// </summary>
     public string HangfireDb { get; set; } = null!;
