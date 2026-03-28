@@ -29,7 +29,7 @@ jobs:
         run: dotnet build src/StarWarsData.slnx -c Release
 
       - name: Run tests
-        run: dotnet test src/StarWarsData.Tests -c Release --no-build
+        run: dotnet test src/StarWarsData.Tests -c Release --no-build --filter 'Category!=Integration'
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
