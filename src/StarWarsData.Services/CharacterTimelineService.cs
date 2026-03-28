@@ -388,55 +388,26 @@ public class CharacterTimelineService
             .WithName($"CharacterTimeline-{characterPageId}")
             .Build(validateOrphans: true);
 
-        // ── Execute with persistent MongoDB checkpoints ────────────────────
+        // ── Execute workflow (always fresh — checkpoint resume was unreliable) ─
         var checkpointStore = new MongoCheckpointStore(
             _mongoClient,
             _settings.CharacterTimelinesDb
         );
-        var checkpointManager = CheckpointManager.CreateJson(checkpointStore);
-        // Version the session ID so checkpoints from the old 3-executor workflow
-        // are automatically ignored (incompatible superstep layout).
         var sessionId = $"character-timeline-v2-{characterPageId}";
 
-        // Clear any stale v1 checkpoints from the old workflow shape
+        // Clear any stale checkpoints from previous runs
+        await checkpointStore.ClearSessionAsync(sessionId);
         await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}");
 
-        // Check for existing checkpoints to resume from (survives app restarts)
-        var existingCheckpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
+        var checkpointManager = CheckpointManager.CreateJson(checkpointStore);
 
-        StreamingRun streamingRun;
-        if (existingCheckpoints.Count > 0)
-        {
-            var lastCheckpoint = existingCheckpoints[^1];
-            _logger.LogInformation(
-                "Resuming workflow from checkpoint {CheckpointId} for PageId={PageId}",
-                lastCheckpoint.CheckpointId,
-                characterPageId
-            );
-
-            tracker?.Update(
-                characterPageId,
-                GenerationStage.Extracting,
-                "Resuming from last checkpoint..."
-            );
-
-            streamingRun = await InProcessExecution.ResumeStreamingAsync(
-                workflow,
-                lastCheckpoint,
-                checkpointManager,
-                ct
-            );
-        }
-        else
-        {
-            streamingRun = await InProcessExecution.RunStreamingAsync(
-                workflow,
-                characterPageId.ToString(),
-                checkpointManager,
-                sessionId,
-                ct
-            );
-        }
+        var streamingRun = await InProcessExecution.RunStreamingAsync(
+            workflow,
+            characterPageId.ToString(),
+            checkpointManager,
+            sessionId,
+            ct
+        );
 
         // ── Consume streaming events and bridge to tracker ──────────────────
         string? responseText = null;
