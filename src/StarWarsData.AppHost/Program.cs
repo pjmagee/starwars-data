@@ -1,4 +1,3 @@
-using Aspire.Hosting.Docker.Resources.ComposeNodes;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
@@ -200,10 +199,6 @@ builder
     .AddDockerComposeEnvironment("starwars")
     .ConfigureComposeFile(compose =>
     {
-        // Replace default network with external proxynet
-        compose.Networks.Clear();
-        compose.AddNetwork(new Network { Name = "proxynet", External = true });
-
         // Keycloak runs externally at auth.magaoidh.pro — remove from compose
         compose.Services.Remove("keycloak");
 
@@ -217,11 +212,10 @@ builder
             frontend.Environment.Remove("services__keycloak__management__0");
         }
 
-        // Configure all services with restart policy, proxynet, and Unraid labels
+        // Configure all services with restart policy and Unraid labels
         foreach (var (name, service) in compose.Services)
         {
             service.Restart = "unless-stopped";
-            service.Networks = ["proxynet"];
             service.Labels ??= [];
 
             service.Labels["net.unraid.docker.managed"] = "composeman";
