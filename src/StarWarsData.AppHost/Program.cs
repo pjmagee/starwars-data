@@ -203,6 +203,12 @@ frontend.WithContainerRegistry(registry).WithRemoteImageTag("latest");
 
 builder
     .AddDockerComposeEnvironment("starwars")
+    .ConfigureEnvFile(env =>
+    {
+        env["FRONTEND_HOST_PORT"] = new() { Name = "FRONTEND_HOST_PORT", DefaultValue = "9081" };
+        env["APISERVICE_HOST_PORT"] = new() { Name = "APISERVICE_HOST_PORT", DefaultValue = "9080" };
+        env["DASHBOARD_HOST_PORT"] = new() { Name = "DASHBOARD_HOST_PORT", DefaultValue = "18888" };
+    })
     .ConfigureComposeFile(compose =>
     {
         // Configure all services with restart policy and Unraid labels
