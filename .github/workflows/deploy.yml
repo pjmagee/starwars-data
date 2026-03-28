@@ -31,10 +31,10 @@ jobs:
       - name: Run tests
         run: dotnet test src/StarWarsData.Tests -c Release --no-build --filter 'Category!=Integration'
 
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Publish API container image
-        env:
-          SDK_CONTAINER_REGISTRY_UNAME: ${{ github.actor }}
-          SDK_CONTAINER_REGISTRY_PWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet publish src/StarWarsData.ApiService -c Release \
             /t:PublishContainer \
@@ -42,9 +42,6 @@ jobs:
             -p:ContainerImageTag_1=latest
 
       - name: Publish Frontend container image
-        env:
-          SDK_CONTAINER_REGISTRY_UNAME: ${{ github.actor }}
-          SDK_CONTAINER_REGISTRY_PWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet publish src/StarWarsData.Frontend -c Release \
             /t:PublishContainer \
