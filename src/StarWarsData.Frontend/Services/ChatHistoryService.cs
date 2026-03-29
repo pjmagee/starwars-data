@@ -7,13 +7,13 @@ namespace StarWarsData.Frontend.Services;
 /// </summary>
 public class ChatHistoryService
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiClient _apiClient;
     private List<ChatSessionSummary> _sessions = [];
     private bool _loaded;
 
-    public ChatHistoryService(IHttpClientFactory httpClientFactory)
+    public ChatHistoryService(ApiClient apiClient)
     {
-        _httpClientFactory = httpClientFactory;
+        _apiClient = apiClient;
     }
 
     public IReadOnlyList<ChatSessionSummary> Sessions => _sessions;
@@ -26,7 +26,7 @@ public class ChatHistoryService
     {
         try
         {
-            var http = _httpClientFactory.CreateClient("StarWarsData");
+            var http = _apiClient.Http;
             var response = await http.GetAsync("api/ChatSessions");
             if (response.IsSuccessStatusCode)
             {
@@ -49,7 +49,7 @@ public class ChatHistoryService
     {
         try
         {
-            var http = _httpClientFactory.CreateClient("StarWarsData");
+            var http = _apiClient.Http;
             await http.DeleteAsync($"api/ChatSessions/{sessionId}");
             _sessions.RemoveAll(s => s.Id == sessionId);
             if (ActiveSessionId == sessionId) ActiveSessionId = null;
@@ -66,7 +66,7 @@ public class ChatHistoryService
     {
         try
         {
-            var http = _httpClientFactory.CreateClient("StarWarsData");
+            var http = _apiClient.Http;
             var response = await http.PostAsJsonAsync("api/ChatSessions/summarize", new { prompt });
             if (response.IsSuccessStatusCode)
             {

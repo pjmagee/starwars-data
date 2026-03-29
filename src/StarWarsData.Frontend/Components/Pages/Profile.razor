@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject EndpointService EndpointService
 @inject NavigationManager NavigationManager
-@inject IHttpClientFactory HttpClientFactory
+@inject ApiClient ApiClient
 @inject IJSRuntime JS
 
 <PageTitle>Profile</PageTitle>
@@ -329,7 +329,7 @@
     private string _apiKeyInput = string.Empty;
     private string? _byokError;
 
-    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private HttpClient Http => ApiClient.Http;
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthState { get; set; }

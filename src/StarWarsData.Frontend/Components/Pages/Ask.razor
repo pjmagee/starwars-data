@@ -2,12 +2,11 @@
 @page "/ask"
 @page "/ask/{SessionId:guid}"
 @using System.Text.Json.Serialization
-@inject IHttpClientFactory HttpClientFactory
+@inject ApiClient ApiClient
 @inject GlobalFilterService GlobalFilterService
 @inject ChatHistoryService ChatHistory
 @inject IJSRuntime JS
 @inject ILogger<Ask> Logger
-@inject IHttpContextAccessor HttpContextAccessor
 @implements IDisposable
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
@@ -509,15 +508,11 @@
     }
 
     private bool _aiUnavailable;
-    private string? _clientIp;
 
-    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private HttpClient Http => ApiClient.Http;
 
     protected override async Task OnInitializedAsync()
     {
-        // Capture client IP during initial HTTP request (not available later over SignalR)
-        _clientIp = HttpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
-
         ChatHistory.OnChange += OnChatHistoryChanged;
 
         if (AuthState is not null)
