@@ -143,6 +143,22 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Capture the access token into the scoped CircuitTokenProvider during SSR.
+// This runs before any Blazor component renders, so the token is available
+// when components make API calls in OnInitializedAsync.
+app.Use(async (context, next) =>
+{
+    if (context.User.Identity?.IsAuthenticated == true)
+    {
+        var tokenProvider = context.RequestServices.GetRequiredService<CircuitTokenProvider>();
+        if (string.IsNullOrEmpty(tokenProvider.AccessToken))
+        {
+            tokenProvider.AccessToken = await context.GetTokenAsync("access_token");
+        }
+    }
+    await next();
+});
+
 app.MapStaticAssets();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 app.MapLoginAndLogout();

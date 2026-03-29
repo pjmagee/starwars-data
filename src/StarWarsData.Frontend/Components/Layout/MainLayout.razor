@@ -1,11 +1,8 @@
 ﻿@using System.Reflection
 @using System.Security.Claims
-@using Microsoft.AspNetCore.Authentication
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
-@inject CircuitTokenProvider TokenProvider
-@inject IHttpContextAccessor HttpContextAccessor
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
 <MudPopoverProvider/>
@@ -85,18 +82,9 @@
         ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
         ?? "0.0.0";
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await base.OnInitializedAsync();
-
-        // Capture the access token during the initial HTTP request (SSR).
-        // HttpContext is null during subsequent SignalR interactions,
-        // so CircuitTokenProvider preserves it for the circuit lifetime.
-        var httpContext = HttpContextAccessor.HttpContext;
-        if (httpContext is not null && string.IsNullOrEmpty(TokenProvider.AccessToken))
-        {
-            TokenProvider.AccessToken = await httpContext.GetTokenAsync("access_token");
-        }
+        base.OnInitialized();
 
         _theme = new()
         {
