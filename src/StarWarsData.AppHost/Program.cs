@@ -154,13 +154,25 @@ var apiService = builder
     // Phase 7 — Territory Control
     .WithHttpCommand(
         path: "/api/admin/mongo/load-territory-data",
-        displayName: "7. Load Territory Control Data",
+        displayName: "7a. Load Territory Seed Data",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
             Description =
                 "Loads curated faction territory control seed data into MongoDB. Safe to re-run (replaces existing data).",
             IconName = "Globe",
+            IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/infer-territory-control",
+        displayName: "7b. Infer Territory from Battles",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Infers territory control from battle outcomes, government lifecycles, and location data. Replaces existing territory data. Requires Phase 1 + 3.",
+            IconName = "GlobeSearch",
             IsHighlighted = false,
         }
     )

@@ -14,7 +14,8 @@ public class AdminController(
     RelationshipGraphBuilderService graphBuilder,
     ArticleChunkingService articleChunkingService,
     OpenAiStatusService aiStatus,
-    TerritoryControlService territoryControlService
+    TerritoryControlService territoryControlService,
+    TerritoryInferenceService territoryInferenceService
 ) : ControllerBase
 {
     readonly ILogger<AdminController> _logger = logger;
@@ -25,6 +26,7 @@ public class AdminController(
     readonly ArticleChunkingService _articleChunkingService = articleChunkingService;
     readonly OpenAiStatusService _aiStatus = aiStatus;
     readonly TerritoryControlService _territoryControlService = territoryControlService;
+    readonly TerritoryInferenceService _territoryInferenceService = territoryInferenceService;
 
     bool IsJobAlreadyActive(Type type, string methodName)
     {
@@ -551,6 +553,21 @@ public class AdminController(
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to load territory control data");
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("mongo/infer-territory-control")]
+    public async Task<ActionResult<string>> InferTerritoryControl(CancellationToken ct)
+    {
+        try
+        {
+            await _territoryInferenceService.InferTerritoryAsync(ct);
+            return Ok(new { message = "Territory control inferred from battle outcomes and government events." });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to infer territory control");
             return StatusCode(500, new { error = ex.Message });
         }
     }

@@ -67,7 +67,7 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 4. Create indexes + embeddings + vector indexes
 5. AI-generated character timelines
 6. Relationship graph via OpenAI Batch API (submit/check/cleanup cycle)
-7. Load territory control seed data (curated faction/region/year mappings)
+7. Territory control: (a) load curated seed data, or (b) infer from battle outcomes + government lifecycles
 
 **Hangfire recurring jobs**: Daily incremental wiki sync (03:00 UTC), daily relationship graph builder (04:00 UTC), batch submissions every 30 min, batch status checks every 5 min, daily article chunking (05:00 UTC).
 

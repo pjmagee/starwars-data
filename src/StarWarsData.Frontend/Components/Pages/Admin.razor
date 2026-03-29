@@ -66,7 +66,12 @@
         <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Public"
                 OnClick="@(() => StartJobHandler(LoadTerritoryDataEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Load Territory Control Data
+                Load Territory Seed Data
+            </MudButton>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                OnClick="@(() => StartJobHandler(InferTerritoryEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Infer Territory from Battles
             </MudButton>
         </MudStack>
 
@@ -124,6 +129,7 @@
     private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
 
     private const string LoadTerritoryDataEndpoint = "admin/mongo/load-territory-data";
+    private const string InferTerritoryEndpoint = "admin/mongo/infer-territory-control";
 
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
     private const string EnsureChunkIndexesEndpoint = "admin/mongo/ensure-chunk-indexes";
