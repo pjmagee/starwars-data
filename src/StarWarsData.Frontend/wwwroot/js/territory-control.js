@@ -35,6 +35,7 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
     const regionLayer = g.append('g').attr('class', 'region-layer');
     const gridLayer = g.append('g').attr('class', 'grid-layer');
     const territoryLayer = g.append('g').attr('class', 'territory-layer');
+    const regionLabelLayer = g.append('g').attr('class', 'region-label-layer');
     const labelLayer = g.append('g').attr('class', 'label-layer');
 
     const tooltip = d3.select(container).append('div')
@@ -70,13 +71,14 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
             // Region name at centroid
             const cx = region.cells.reduce((s, c) => s + c[0], 0) / region.cells.length * cellW + cellW / 2;
             const cy = region.cells.reduce((s, c) => s + c[1], 0) / region.cells.length * cellH + cellH / 2;
-            regionLayer.append('text')
+            regionLabelLayer.append('text')
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', '#fff').attr('fill-opacity', 0.2)
+                .attr('fill', '#fff').attr('fill-opacity', 0.4)
                 .attr('font-size', '16px').attr('font-weight', '700')
-                .attr('paint-order', 'stroke').attr('stroke', 'rgba(0,0,0,0.5)')
+                .attr('paint-order', 'stroke').attr('stroke', 'rgba(0,0,0,0.7)')
                 .attr('stroke-width', '3px')
+                .style('pointer-events', 'none')
                 .text(region.name);
         }
     }
@@ -195,19 +197,7 @@ export function renderTerritoryLayer(yearData) {
         const cx = cells.reduce((s, c) => s + c[0], 0) / cells.length * cellW + cellW / 2;
         const cy = cells.reduce((s, c) => s + c[1], 0) / cells.length * cellH + cellH / 2;
 
-        if (dominant.control >= 0.3) {
-            const iconSvg = factionIcons[dominant.faction];
-            const iconSize = cells.length > 20 ? 48 : cells.length > 8 ? 36 : 24;
-
-            if (iconSvg) {
-                const iconGroup = labelLayer.append('g')
-                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2}) scale(${iconSize/24})`)
-                    .attr('opacity', 0.5);
-                iconGroup.html(iconSvg);
-                iconGroup.selectAll('*').attr('fill', color).attr('stroke', color);
-                iconGroup.attr('filter', 'drop-shadow(0 0 6px rgba(0,0,0,0.9))');
-            }
-        }
+        // No icons or labels on canvas — info panel handles context
     }
 }
 

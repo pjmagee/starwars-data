@@ -109,6 +109,7 @@ public class TerritoryControlService
             Name = e.Name,
             StartYear = e.StartYear,
             EndYear = e.EndYear,
+            Description = e.Description,
         }).ToList() ?? [];
 
         return new TerritoryOverview
@@ -143,11 +144,27 @@ public class TerritoryControlService
             .OrderBy(r => r.Region)
             .ToList();
 
+        // Load era + key events from seed data
+        var seedData = await LoadSeedFileAsync(ct);
+        var era = seedData?.Eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
+        var keyEvents = seedData?.KeyEvents
+            .Where(e => e.Year == year)
+            .Select(e => new TerritoryKeyEvent
+            {
+                Year = e.Year,
+                Title = e.Title,
+                Description = e.Description,
+                WikiUrl = e.WikiUrl,
+            }).ToList() ?? [];
+
         return new TerritoryYearResponse
         {
             Year = year,
             YearDisplay = year <= 0 ? $"{Math.Abs(year)} BBY" : $"{year} ABY",
+            Era = era?.Name,
+            EraDescription = era?.Description,
             Regions = regionGroups,
+            KeyEvents = keyEvents,
         };
     }
 
@@ -177,6 +194,7 @@ public class TerritoryControlService
     {
         public Dictionary<string, FactionInfo> Factions { get; init; } = new();
         public List<SeedEra> Eras { get; init; } = [];
+        public List<SeedKeyEvent> KeyEvents { get; init; } = [];
         public List<SeedEntry> Entries { get; init; } = [];
     }
 
@@ -185,6 +203,15 @@ public class TerritoryControlService
         public string Name { get; init; } = string.Empty;
         public int StartYear { get; init; }
         public int EndYear { get; init; }
+        public string? Description { get; init; }
+    }
+
+    record SeedKeyEvent
+    {
+        public int Year { get; init; }
+        public string Title { get; init; } = string.Empty;
+        public string? Description { get; init; }
+        public string? WikiUrl { get; init; }
     }
 
     public record FactionInfo

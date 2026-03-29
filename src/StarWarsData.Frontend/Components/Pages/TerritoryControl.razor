@@ -13,8 +13,8 @@
     }
     else
     {
-        @* Era quick-jump chips *@
-        <div style="display: flex; gap: 4px; padding: 8px 4px; flex-wrap: wrap; flex-shrink: 0;">
+        @* Era chips *@
+        <div style="display: flex; gap: 4px; padding: 8px 12px; flex-wrap: wrap; flex-shrink: 0;">
             @foreach (var era in _overview.Eras)
             {
                 var isActive = _year >= era.StartYear && _year <= era.EndYear;
@@ -26,41 +26,117 @@
             }
         </div>
 
-        @* Map canvas *@
-        <div class="territory-canvas-wrap">
-            <div id="territory-canvas" class="territory-canvas" @ref="_canvasRef"></div>
+        @* Main content: map + info panel *@
+        <div class="territory-content">
+            @* Map canvas *@
+            <div class="territory-canvas-wrap">
+                <div id="territory-canvas" class="territory-canvas"></div>
 
-            @* Faction legend *@
-            <div class="territory-legend">
-                @foreach (var (name, info) in _factionInfo)
-                {
-                    <div class="d-flex align-center gap-2" style="margin-bottom: 4px;">
-                        <FactionIcon Faction="@name" Color="@info.Color" Size="16" />
-                        @if (info.WikiUrl is not null)
-                        {
-                            <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
-                                     Style="@($"color:{info.Color};")">@name</MudLink>
-                        }
-                        else
-                        {
-                            <MudText Typo="Typo.caption" Style="@($"color:{info.Color};")">@name</MudText>
-                        }
-                    </div>
-                }
+                @* Faction legend (bottom-left) *@
+                <div class="territory-legend">
+                    @foreach (var (name, info) in _factionInfo)
+                    {
+                        <div class="d-flex align-center gap-2" style="margin-bottom: 3px;">
+                            <FactionIcon Faction="@name" Color="@info.Color" Size="14" />
+                            @if (info.WikiUrl is not null)
+                            {
+                                <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
+                                         Style="@($"color:{info.Color};")">@name</MudLink>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.caption" Style="@($"color:{info.Color};")">@name</MudText>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
 
-            @* Selected region detail *@
-            @if (_selectedRegion is not null)
-            {
-                <div class="territory-detail">
-                    <MudText Typo="Typo.subtitle1" Style="font-weight:600; color:#fff;">@_selectedRegion</MudText>
+            @* Right info panel *@
+            <div class="territory-info-panel">
+                <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-1" Style="font-weight:700;">
+                    @YearDisplay
+                </MudText>
+
+                @if (_yearData?.Era is not null)
+                {
+                    <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined" Class="mb-2">
+                        @_yearData.Era
+                    </MudChip>
+                    @if (_yearData.EraDescription is not null)
+                    {
+                        <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+                            @_yearData.EraDescription
+                        </MudText>
+                    }
+                }
+
+                @* Key events for this year *@
+                @if (_yearData?.KeyEvents.Count > 0)
+                {
+                    <MudText Typo="Typo.subtitle2" Class="mb-2" Style="font-weight:600;">Key Events</MudText>
+                    @foreach (var evt in _yearData.KeyEvents)
+                    {
+                        <MudPaper Class="pa-3 mb-2" Elevation="0"
+                                  Style="background: rgba(255,255,255,0.04); border-left: 3px solid var(--mud-palette-primary);">
+                            @if (evt.WikiUrl is not null)
+                            {
+                                <MudLink Href="@evt.WikiUrl" Target="_blank" Typo="Typo.body2"
+                                         Style="font-weight:600;" Underline="Underline.Hover">@evt.Title</MudLink>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.body2" Style="font-weight:600;">@evt.Title</MudText>
+                            }
+                            @if (evt.Description is not null)
+                            {
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">@evt.Description</MudText>
+                            }
+                        </MudPaper>
+                    }
+                }
+
+                <MudDivider Class="my-3" />
+
+                @* Territory breakdown *@
+                <MudText Typo="Typo.subtitle2" Class="mb-2" Style="font-weight:600;">Territory Control</MudText>
+                @if (_yearData?.Regions is not null)
+                {
+                    @foreach (var region in _yearData.Regions)
+                    {
+                        <div class="mb-2">
+                            <MudText Typo="Typo.caption" Style="font-weight:600; opacity:0.7;">@region.Region</MudText>
+                            @foreach (var f in region.Factions)
+                            {
+                                var fi = _factionInfo.GetValueOrDefault(f.Faction);
+                                <div class="d-flex align-center gap-2 ml-2">
+                                    <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="12" />
+                                    <MudText Typo="Typo.caption" Style="@($"color:{f.Color};")">
+                                        @f.Faction — @(Math.Round(f.Control * 100))%
+                                        @if (f.Contested) { <em style="opacity:0.5;"> contested</em> }
+                                    </MudText>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+
+                @* Selected region detail (from clicking map) *@
+                @if (_selectedRegion is not null)
+                {
+                    <MudDivider Class="my-3" />
+                    <div class="d-flex justify-space-between align-center">
+                        <MudText Typo="Typo.subtitle2" Style="font-weight:600;">@_selectedRegion</MudText>
+                        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                       OnClick="() => { _selectedRegion = null; _selectedFactions = null; }" />
+                    </div>
                     @if (_selectedFactions is not null)
                     {
                         @foreach (var f in _selectedFactions)
                         {
                             var fi = _factionInfo.GetValueOrDefault(f.Faction);
-                            <div class="d-flex align-center gap-2 mt-2">
-                                    <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="20" />
+                            <div class="d-flex align-center gap-2 mt-1">
+                                <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="16" />
                                 <div>
                                     @if (fi?.WikiUrl is not null)
                                     {
@@ -71,7 +147,7 @@
                                     {
                                         <MudText Typo="Typo.body2" Style="@($"color:{f.Color}; font-weight:600;")">@f.Faction</MudText>
                                     }
-                                    <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.6);">
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">
                                         @(Math.Round(f.Control * 100))% control
                                         @if (f.Contested) { <em>(contested)</em> }
                                     </MudText>
@@ -79,15 +155,12 @@
                             </div>
                             @if (f.Note is not null)
                             {
-                                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.4); margin-left: 32px;">@f.Note</MudText>
+                                <MudText Typo="Typo.caption" Style="opacity:0.5; margin-left:28px;">@f.Note</MudText>
                             }
                         }
                     }
-                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
-                                   Style="position:absolute;top:4px;right:4px;color:rgba(255,255,255,0.5);"
-                                   OnClick="() => { _selectedRegion = null; _selectedFactions = null; }" />
-                </div>
-            }
+                }
+            </div>
         </div>
 
         @* Timeline scrubber *@
@@ -127,6 +200,11 @@
         flex-direction: column;
         height: calc(100vh - 64px);
     }
+    .territory-content {
+        flex: 1;
+        display: flex;
+        min-height: 0;
+    }
     .territory-canvas-wrap {
         flex: 1;
         position: relative;
@@ -138,7 +216,7 @@
     }
     .territory-legend {
         position: absolute;
-        top: 12px;
+        bottom: 12px;
         left: 12px;
         background: rgba(10,10,26,0.85);
         border: 1px solid rgba(255,255,255,0.1);
@@ -146,16 +224,13 @@
         padding: 10px 14px;
         z-index: 10;
     }
-    .territory-detail {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: rgba(10,10,26,0.9);
-        border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 8px;
-        padding: 12px 16px;
-        min-width: 240px;
-        z-index: 10;
+    .territory-info-panel {
+        width: 320px;
+        flex-shrink: 0;
+        overflow-y: auto;
+        padding: 16px;
+        border-left: 1px solid var(--mud-palette-lines-default);
+        background: var(--mud-palette-surface);
     }
     .territory-scrubber {
         flex-shrink: 0;
@@ -168,13 +243,13 @@
 @code {
     private IJSObjectReference? _module;
     private DotNetObjectReference<TerritoryControl>? _dotNetRef;
-    private ElementReference _canvasRef;
 
     private TerritoryOverviewDto? _overview;
+    private TerritoryYearDto? _yearData;
     private Dictionary<string, FactionInfoDto> _factionInfo = new();
     private List<RegionCellsDto>? _regionCells;
 
-    private int _year = -19; // Default: start of Imperial era
+    private int _year = -19;
     private bool _autoplay;
     private bool _musicEnabled;
     private System.Threading.Timer? _autoplayTimer;
@@ -199,7 +274,6 @@
 
     private async Task LoadData()
     {
-        // Fetch territory overview, faction info, and region cells (from galaxy events)
         var overviewTask = Http.GetFromJsonAsync<TerritoryOverviewDto>("api/TerritoryControl/overview");
         var factionsTask = Http.GetFromJsonAsync<Dictionary<string, FactionInfoDto>>("api/TerritoryControl/factions");
         var regionsTask = Http.GetFromJsonAsync<GalaxyEventsOverviewDto>("api/galaxyevents/overview");
@@ -212,13 +286,11 @@
 
         if (_overview is not null && _overview.MinYear != 0)
         {
-            _year = Math.Max(_year, _overview.MinYear);
-            _year = Math.Min(_year, _overview.MaxYear);
+            _year = Math.Clamp(_year, _overview.MinYear, _overview.MaxYear);
         }
 
         StateHasChanged();
 
-        // Initialize D3
         if (_module is not null && _overview is not null)
         {
             var jsOverview = new { gridColumns = 26, gridRows = 20 };
@@ -239,11 +311,12 @@
     {
         try
         {
-            var yearData = await Http.GetFromJsonAsync<TerritoryYearDto>($"api/TerritoryControl/year/{_year}");
-            if (_module is not null && yearData is not null)
+            _yearData = await Http.GetFromJsonAsync<TerritoryYearDto>($"api/TerritoryControl/year/{_year}");
+            if (_module is not null && _yearData is not null)
             {
-                await _module.InvokeVoidAsync("renderTerritoryLayer", yearData);
+                await _module.InvokeVoidAsync("renderTerritoryLayer", _yearData);
             }
+            StateHasChanged();
         }
         catch { }
     }
@@ -316,7 +389,7 @@
         _dotNetRef?.Dispose();
     }
 
-    // DTOs for JSON deserialization
+    // DTOs
     record TerritoryOverviewDto
     {
         public int MinYear { get; init; }
@@ -337,7 +410,10 @@
     {
         public int Year { get; init; }
         public string YearDisplay { get; init; } = "";
+        public string? Era { get; init; }
+        public string? EraDescription { get; init; }
         public List<TerritoryRegionDto> Regions { get; init; } = [];
+        public List<KeyEventDto> KeyEvents { get; init; } = [];
     }
 
     record TerritoryRegionDto
@@ -353,6 +429,14 @@
         public bool Contested { get; init; }
         public string Color { get; init; } = "";
         public string? Note { get; init; }
+    }
+
+    record KeyEventDto
+    {
+        public int Year { get; init; }
+        public string Title { get; init; } = "";
+        public string? Description { get; init; }
+        public string? WikiUrl { get; init; }
     }
 
     record FactionInfoDto

@@ -49,7 +49,10 @@ public class TerritoryYearResponse
 {
     public int Year { get; set; }
     public string YearDisplay { get; set; } = string.Empty;
+    public string? Era { get; set; }
+    public string? EraDescription { get; set; }
     public List<TerritoryRegionControl> Regions { get; set; } = [];
+    public List<TerritoryKeyEvent> KeyEvents { get; set; } = [];
 }
 
 public class TerritoryRegionControl
@@ -84,4 +87,13 @@ public class TerritoryEra
     public string Name { get; set; } = string.Empty;
     public int StartYear { get; set; }
     public int EndYear { get; set; }
+    public string? Description { get; set; }
+}
+
+public class TerritoryKeyEvent
+{
+    public int Year { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string? Description { get; set; }
+    public string? WikiUrl { get; set; }
 }

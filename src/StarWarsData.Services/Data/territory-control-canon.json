@@ -13,13 +13,29 @@
     "Chiss Ascendancy": { "color": "#1e3a5f", "wikiUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy", "iconUrl": null }
   },
   "eras": [
-    { "name": "Late Republic", "startYear": -100, "endYear": -23 },
-    { "name": "Clone Wars", "startYear": -22, "endYear": -19 },
-    { "name": "Imperial Era", "startYear": -19, "endYear": -1 },
-    { "name": "Galactic Civil War", "startYear": 0, "endYear": 5 },
-    { "name": "New Republic Era", "startYear": 5, "endYear": 28 },
-    { "name": "Cold War", "startYear": 28, "endYear": 34 },
-    { "name": "First Order War", "startYear": 34, "endYear": 35 }
+    { "name": "Late Republic", "startYear": -100, "endYear": -23, "description": "The Galactic Republic governs most of the known galaxy from Coruscant. The Jedi Order serves as peacekeepers." },
+    { "name": "Clone Wars", "startYear": -22, "endYear": -19, "description": "Galaxy-wide civil war between the Republic and the Separatist Confederacy. The Clone Army fights the Droid Army across thousands of systems." },
+    { "name": "Imperial Era", "startYear": -19, "endYear": -1, "description": "Emperor Palpatine dissolves the Republic and establishes the Galactic Empire. The Jedi are hunted to near extinction." },
+    { "name": "Galactic Civil War", "startYear": 0, "endYear": 5, "description": "The Rebel Alliance wages war against the Empire. Key battles at Yavin, Hoth, and Endor reshape the galaxy." },
+    { "name": "New Republic Era", "startYear": 5, "endYear": 28, "description": "The New Republic restores democracy. The Empire signs the Galactic Concordance and retreats. A period of peace and rebuilding." },
+    { "name": "Cold War", "startYear": 28, "endYear": 34, "description": "The First Order secretly builds military power in the Unknown Regions while the New Republic demilitarises." },
+    { "name": "First Order War", "startYear": 34, "endYear": 35, "description": "The First Order destroys the Hosnian system and seizes galactic control. The Resistance fights back." }
+  ],
+  "keyEvents": [
+    { "year": -22, "title": "Battle of Geonosis", "description": "First battle of the Clone Wars. The Republic deploys the Clone Army.", "wikiUrl": "https://starwars.fandom.com/wiki/First_Battle_of_Geonosis" },
+    { "year": -19, "title": "Proclamation of the New Order", "description": "Palpatine declares himself Emperor, transforming the Republic into the Galactic Empire.", "wikiUrl": "https://starwars.fandom.com/wiki/Declaration_of_a_New_Order" },
+    { "year": -19, "title": "Great Jedi Purge", "description": "Order 66 is executed. The Jedi Order is destroyed.", "wikiUrl": "https://starwars.fandom.com/wiki/Great_Jedi_Purge" },
+    { "year": -2, "title": "Alliance to Restore the Republic formed", "description": "Mon Mothma formally organises the Rebel Alliance.", "wikiUrl": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic" },
+    { "year": 0, "title": "Battle of Yavin", "description": "The Rebel Alliance destroys the first Death Star.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Yavin" },
+    { "year": 3, "title": "Battle of Hoth", "description": "The Empire discovers and attacks the Rebel base on Hoth.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Hoth" },
+    { "year": 4, "title": "Battle of Endor", "description": "The second Death Star is destroyed. Emperor Palpatine is killed. The Empire begins to fragment.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Endor" },
+    { "year": 4, "title": "New Republic established", "description": "The Alliance to Restore the Republic reorganises as the New Republic.", "wikiUrl": "https://starwars.fandom.com/wiki/New_Republic" },
+    { "year": 5, "title": "Battle of Jakku", "description": "Final major battle of the Galactic Civil War. The Empire is decisively defeated.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Jakku" },
+    { "year": 5, "title": "Galactic Concordance", "description": "Peace treaty between the New Republic and the Imperial Remnant.", "wikiUrl": "https://starwars.fandom.com/wiki/Galactic_Concordance" },
+    { "year": 28, "title": "Resistance founded", "description": "Leia Organa forms the Resistance to oppose the growing First Order threat.", "wikiUrl": "https://starwars.fandom.com/wiki/Resistance" },
+    { "year": 34, "title": "Hosnian Cataclysm", "description": "Starkiller Base destroys the Hosnian system, seat of the New Republic government.", "wikiUrl": "https://starwars.fandom.com/wiki/Hosnian_Cataclysm" },
+    { "year": 34, "title": "Battle of Starkiller Base", "description": "The Resistance destroys Starkiller Base.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Starkiller_Base" },
+    { "year": 35, "title": "Battle of Exegol", "description": "The Resistance and a citizens' fleet destroy the Sith Eternal fleet. Palpatine is destroyed for good.", "wikiUrl": "https://starwars.fandom.com/wiki/Battle_of_Exegol" }
   ],
   "entries": [
     {
