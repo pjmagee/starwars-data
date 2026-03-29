@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Logging;
 
 namespace StarWarsData.Services;
 
@@ -14,6 +15,8 @@ namespace StarWarsData.Services;
 public sealed class StarWarsTopicGuardrail
 {
     private readonly IChatClient _classifierClient;
+    private readonly OpenAiStatusService? _aiStatus;
+    private readonly ILogger? _logger;
 
     private const string ClassifierSystemPrompt = """
         You are a strict topic classifier. Determine if the user's question is related to Star Wars.
@@ -59,9 +62,11 @@ public sealed class StarWarsTopicGuardrail
         ),
     };
 
-    public StarWarsTopicGuardrail(IChatClient classifierClient)
+    public StarWarsTopicGuardrail(IChatClient classifierClient, OpenAiStatusService? aiStatus = null, ILogger? logger = null)
     {
         _classifierClient = classifierClient;
+        _aiStatus = aiStatus;
+        _logger = logger;
     }
 
     /// <summary>
@@ -128,30 +133,37 @@ public sealed class StarWarsTopicGuardrail
         if (string.IsNullOrWhiteSpace(cleanedText))
             return false;
 
-        var classificationMessages = new ChatMessage[]
-        {
-            new(ChatRole.System, ClassifierSystemPrompt),
-            new(ChatRole.User, cleanedText),
-        };
-
-        var response = await _classifierClient.GetResponseAsync(
-            classificationMessages,
-            ClassifierOptions,
-            cancellationToken
-        );
-
-        var json = response.Messages.LastOrDefault()?.Text;
-        if (string.IsNullOrWhiteSpace(json))
-            return false;
-
         try
         {
+            var classificationMessages = new ChatMessage[]
+            {
+                new(ChatRole.System, ClassifierSystemPrompt),
+                new(ChatRole.User, cleanedText),
+            };
+
+            var response = await _classifierClient.GetResponseAsync(
+                classificationMessages,
+                ClassifierOptions,
+                cancellationToken
+            );
+
+            var json = response.Messages.LastOrDefault()?.Text;
+            if (string.IsNullOrWhiteSpace(json))
+                return false;
+
             var result = JsonSerializer.Deserialize<TopicClassification>(json);
+            _aiStatus?.RecordSuccess("guardrail");
             return result is { IsStarWarsRelated: false };
         }
         catch (JsonException)
         {
             return false; // fail-open: allow request through if classification fails
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Topic guardrail classification failed, allowing request through");
+            _aiStatus?.RecordError("guardrail", ex);
+            return false; // fail-open: allow request through if OpenAI call fails
         }
     }
 
@@ -193,10 +205,12 @@ public static class StarWarsGuardrailExtensions
     /// </summary>
     public static AIAgentBuilder UseStarWarsTopicGuardrail(
         this AIAgentBuilder builder,
-        IChatClient classifierClient
+        IChatClient classifierClient,
+        OpenAiStatusService? aiStatus = null,
+        ILogger? logger = null
     )
     {
-        var guardrail = new StarWarsTopicGuardrail(classifierClient);
+        var guardrail = new StarWarsTopicGuardrail(classifierClient, aiStatus, logger);
         return builder.Use(
             runFunc: guardrail.RunAsync,
             runStreamingFunc: guardrail.RunStreamingAsync

@@ -7,11 +7,19 @@
 @inject ChatHistoryService ChatHistory
 @inject IJSRuntime JS
 @inject ILogger<Ask> Logger
+@inject IHttpContextAccessor HttpContextAccessor
 @implements IDisposable
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
 
 <div class="ask-chat-container">
+
+    @if (_aiUnavailable)
+    {
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Dense="true" Class="rounded-0" NoIcon="false">
+            AI features are temporarily unavailable due to API quota limits. Other features such as Timeline, Data Tables, Graph Explorer, and Galaxy Maps remain fully operational.
+        </MudAlert>
+    }
 
     @* ── Scrollable conversation area ── *@
     <div class="ask-chat-messages" @ref="_messagesContainer">
@@ -247,10 +255,10 @@
                     <MudButton ButtonType="ButtonType.Submit"
                                Variant="Variant.Filled"
                                Color="Color.Primary"
-                               Disabled="_loading"
+                               Disabled="@(_loading || _aiUnavailable)"
                                StartIcon="@Icons.Material.Filled.Send"
                                Style="height: 56px;">
-                        @(_loading ? "Thinking\u2026" : "Send")
+                        @(_loading ? "Thinking\u2026" : _aiUnavailable ? "Unavailable" : "Send")
                     </MudButton>
                 </div>
             </EditForm>
@@ -492,10 +500,16 @@
         public string Prompt { get; set; } = string.Empty;
     }
 
+    private bool _aiUnavailable;
+    private string? _clientIp;
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnInitializedAsync()
     {
+        // Capture client IP during initial HTTP request (not available later over SignalR)
+        _clientIp = HttpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
+
         ChatHistory.OnChange += OnChatHistoryChanged;
 
         if (AuthState is not null)
@@ -508,7 +522,24 @@
             if (_isAuthenticated && _userId is not null)
                 await ChatHistory.EnsureLoadedAsync(_userId);
         }
+
+        await CheckAiStatusAsync();
     }
+
+    private async Task CheckAiStatusAsync()
+    {
+        try
+        {
+            var response = await Http.GetFromJsonAsync<AiStatusResponse>("api/ai/status");
+            _aiUnavailable = response?.Status is "QuotaExceeded" or "RateLimited";
+        }
+        catch
+        {
+            // If the status endpoint itself fails, don't block the page
+        }
+    }
+
+    private record AiStatusResponse(string Status, int ErrorsLastHour);
 
     private void OnChatHistoryChanged()
     {
@@ -537,6 +568,7 @@
     {
         ChatHistory.OnChange -= OnChatHistoryChanged;
     }
+
 
     protected override async Task OnParametersSetAsync()
     {
@@ -603,8 +635,26 @@
                 Content = JsonContent.Create(body),
             };
             request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
+            if (_userId is not null)
+                request.Headers.Add("X-User-Id", _userId);
+            if (_clientIp is not null)
+                request.Headers.Add("X-Forwarded-For", _clientIp);
 
             using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+            {
+                var retryAfter = response.Headers.RetryAfter?.Delta?.TotalMinutes ?? 30;
+                _conversation.Add(new ConversationMessage
+                {
+                    Role = ConversationRole.Error,
+                    Text = _isAuthenticated
+                        ? $"You've reached the rate limit (6 requests per 30 minutes). Try again in {retryAfter:0} minutes, or add your own OpenAI API key in your Profile to remove limits."
+                        : $"Anonymous users are limited to 1 request per 30 minutes. Sign in for more requests, or add your own OpenAI API key for unlimited access."
+                });
+                FinalizeAguiTurn();
+                return;
+            }
 
             if (!response.IsSuccessStatusCode)
             {
@@ -663,7 +713,17 @@
                         case "RUN_ERROR":
                         {
                             var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
-                            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = errorMsg });
+                            if (errorMsg?.Contains("429", StringComparison.Ordinal) == true
+                                || errorMsg?.Contains("quota", StringComparison.OrdinalIgnoreCase) == true
+                                || errorMsg?.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase) == true)
+                            {
+                                _aiUnavailable = true;
+                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "AI features are temporarily unavailable due to API quota limits. Other features such as Timeline, Data Tables, Graph Explorer, and Galaxy Maps remain fully operational." });
+                            }
+                            else
+                            {
+                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = errorMsg });
+                            }
                             Logger.LogError("RUN_ERROR from agent: {Error}", errorMsg);
                             break;
                         }

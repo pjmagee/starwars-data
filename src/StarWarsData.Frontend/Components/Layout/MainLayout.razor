@@ -51,9 +51,15 @@
             </div>
         </div>
     </MudDrawer>
-    <MudMainContent Class="pt-16 pa-4">
+    <MudMainContent Class="pt-16 pa-4" Style="min-height: calc(100vh - var(--mud-appbar-height) - 48px);">
         @Body
     </MudMainContent>
+    <footer class="d-flex justify-center align-center pa-3">
+        <MudText Typo="Typo.caption" Color="Color.Secondary">
+            Made with ❤️ by
+            <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
+        </MudText>
+    </footer>
 </MudLayout>
 
 <div id="blazor-error-ui" data-nosnippet>

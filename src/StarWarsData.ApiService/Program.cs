@@ -5,6 +5,7 @@ using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Hosting.AGUI.AspNetCore;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -47,7 +48,27 @@ builder
     .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
     .AddLogging()
     .AddHttpContextAccessor()
+    .AddDataProtection()
+    .Services
     .AddSingleton<OpenAiStatusService>()
+    .AddSingleton<AskRateLimiter>()
+    .AddSingleton<UserSettingsService>()
+    .AddSingleton<ByokChatClient>(sp =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var openAiClient = sp.GetRequiredService<OpenAIClient>();
+        var httpContextAccessor = sp.GetRequiredService<IHttpContextAccessor>();
+        var userSettingsService = sp.GetRequiredService<UserSettingsService>();
+        var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("ByokChatClient");
+
+        return new ByokChatClient(
+            openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient(),
+            httpContextAccessor,
+            userSettingsService,
+            apiKey => new OpenAIClient(apiKey).GetChatClient(settings.OpenAiModel).AsIChatClient(),
+            logger
+        );
+    })
     .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
     .AddSingleton<YearComparer>()
@@ -271,23 +292,27 @@ builder
         REFERENCES: Every render_ tool accepts an optional "references" parameter. When you use data from wiki pages, include references with each page's title and wikiUrl. The search_wiki tool returns "Source:" lines with URLs — extract those into references. For search_pages_by_name / get_page_by_id results, use the page title and wikiUrl fields.
         """;
 
-        var chatClient = new ChatClientBuilder(
-            openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient()
-        )
+        // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
+        var byokClient = sp.GetRequiredService<ByokChatClient>();
+
+        var chatClient = new ChatClientBuilder(byokClient)
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
 
-        // Lightweight classifier client for topic guardrail
+        // Lightweight classifier client for topic guardrail (always uses server key)
         var classifierClient = new ChatClientBuilder(
             openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()
         )
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
 
+        var aiStatus = sp.GetRequiredService<OpenAiStatusService>();
+        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("StarWarsTopicGuardrail");
+
         return chatClient
             .AsAIAgent(instructions: instructions, tools: tools)
             .AsBuilder()
-            .UseStarWarsTopicGuardrail(classifierClient)
+            .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
             .Build();
     });
 
@@ -398,5 +423,55 @@ if (hangfireEnabled)
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.MapGet("/api/ai/status", (OpenAiStatusService status) =>
+{
+    var report = status.GetHealthReport();
+    return Results.Ok(new { status = report.Status.ToString(), report.ErrorsLastHour });
+});
+
+// Rate limiting + BYOK detection middleware for /kernel/stream
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/kernel/stream") && context.Request.Method == "POST")
+    {
+        var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
+        var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
+        var userId = context.Request.Headers["X-User-Id"].FirstOrDefault();
+        var isAuthenticated = !string.IsNullOrEmpty(userId);
+        var hasByok = false;
+
+        if (isAuthenticated)
+        {
+            hasByok = await userSettings.HasOpenAiKeyAsync(userId!);
+            context.Items["HasByok"] = hasByok;
+        }
+
+        // BYOK users skip rate limiting entirely
+        if (!hasByok)
+        {
+            var clientIp = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',')[0].Trim()
+                           ?? context.Connection.RemoteIpAddress?.ToString()
+                           ?? "unknown";
+            var clientId = userId ?? $"anon:{clientIp}";
+            var result = rateLimiter.TryAcquire(clientId, isAuthenticated);
+
+            if (!result.Allowed)
+            {
+                context.Response.StatusCode = 429;
+                context.Response.Headers["Retry-After"] = ((int)(result.RetryAfter?.TotalSeconds ?? 1800)).ToString();
+                await context.Response.WriteAsJsonAsync(new
+                {
+                    error = "Rate limit exceeded",
+                    limit = result.Limit,
+                    retryAfterSeconds = (int)(result.RetryAfter?.TotalSeconds ?? 1800),
+                });
+                return;
+            }
+        }
+    }
+
+    await next();
+});
+
 app.MapAGUI("/kernel/stream", app.Services.GetRequiredService<AIAgent>());
 app.Run();

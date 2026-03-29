@@ -36,6 +36,7 @@
                 Wookieepedia
             </MudLink>
             (starwars.fandom.com), the comprehensive Star Wars wiki maintained by the fan community.
+            This includes both <strong>Canon</strong> and <strong>Legends</strong> continuity material.
             Structured infobox data, article content, and category metadata are downloaded via the
             MediaWiki API and stored in MongoDB for processing.
         </MudText>
@@ -114,35 +115,37 @@
 
         <MudText Typo="Typo.h5" GutterBottom="true">Features</MudText>
 
+        <MudText Typo="Typo.h6" GutterBottom="true">AI-Powered</MudText>
+
         <MudList Dense="true" T="string">
-            <MudListItem Icon="@Icons.Material.Filled.AutoAwesome" IconColor="Color.Primary">
+            <MudListItem Icon="@Icons.Material.Filled.AutoAwesome" IconColor="Color.Warning">
                 <MudText Typo="Typo.body2">
                     <strong>Ask AI</strong> &mdash; Conversational agent with tool access to the knowledge graph,
-                    data tables, and wiki search. Renders dynamic charts, tables, and graphs inline.
+                    data tables, and wiki search. The agent creates chart and graph <em>configurations</em>
+                    that query the real underlying data &mdash; no data points are fabricated. The exception
+                    is the table component, which the agent populates with ad-hoc data to present textual
+                    information in a structured format when no direct query can produce the result.
                 </MudText>
             </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Timeline" IconColor="Color.Primary">
-                <MudText Typo="Typo.body2">
-                    <strong>Timeline</strong> &mdash; Browse thousands of events across all eras with
-                    category filtering. Events are extracted from Wookieepedia infoboxes.
-                </MudText>
-            </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Person" IconColor="Color.Primary">
+            <MudListItem Icon="@Icons.Material.Filled.Person" IconColor="Color.Warning">
                 <MudText Typo="Typo.body2">
                     <strong>Character Timelines</strong> &mdash; AI-generated biographical timelines for characters,
                     synthesised from their full wiki articles.
                 </MudText>
             </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Explore" IconColor="Color.Primary">
+        </MudList>
+
+        <MudText Typo="Typo.h6" GutterBottom="true" Class="mt-4">Data Exploration</MudText>
+        <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-2">
+            The following features do not use AI at runtime. They are built on structured data
+            extracted from Wookieepedia through the ETL pipeline.
+        </MudText>
+
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.Timeline" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Galaxy Maps</strong> &mdash; Interactive galactic maps with drill-down from regions
-                    to systems to planets. Includes trade routes, nebulae, and an event heatmap overlay.
-                </MudText>
-            </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Hub" IconColor="Color.Primary">
-                <MudText Typo="Typo.body2">
-                    <strong>Graph Explorer</strong> &mdash; Browse the AI-extracted relationship graph.
-                    See how characters, factions, and events connect.
+                    <strong>Timeline</strong> &mdash; Browse thousands of events across all eras with
+                    category filtering. Events are extracted from Wookieepedia infoboxes.
                 </MudText>
             </MudListItem>
             <MudListItem Icon="@Icons.Material.Filled.TableView" IconColor="Color.Primary">
@@ -151,11 +154,53 @@
                     category: characters, ships, weapons, species, planets, and more.
                 </MudText>
             </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Hub" IconColor="Color.Primary">
+                <MudText Typo="Typo.body2">
+                    <strong>Graph Explorer</strong> &mdash; Browse the relationship graph connecting characters,
+                    factions, and events. The graph itself was built using AI (via the OpenAI Batch API),
+                    but exploring it does not involve AI.
+                </MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.GridOn" IconColor="Color.Primary">
+                <MudText Typo="Typo.body2">
+                    <strong>Grid Map</strong> &mdash; A galactic grid map with drill-down from regions
+                    to systems to planets.
+                </MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Explore" IconColor="Color.Primary">
+                <MudText Typo="Typo.body2">
+                    <strong>Interactive Map</strong> &mdash; Interactive galactic map with trade routes,
+                    nebulae, and location markers.
+                </MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Whatshot" IconColor="Color.Primary">
+                <MudText Typo="Typo.body2">
+                    <strong>Events Heatmap</strong> &mdash; A heatmap overlay showing the density of events
+                    across the galaxy.
+                </MudText>
+            </MudListItem>
         </MudList>
 
         <MudDivider />
 
-        <MudText Typo="Typo.h5" GutterBottom="true">Technology</MudText>
+        <MudText Typo="Typo.h5" GutterBottom="true">Built With</MudText>
+        <MudText Typo="Typo.body1" Class="mb-2">
+            This project was built with assistance from AI coding tools, including
+            <MudLink Href="https://github.com/features/copilot" Target="_blank" Underline="Underline.Always">
+                GitHub Copilot
+            </MudLink>
+            and
+            <MudLink Href="https://claude.ai/code" Target="_blank" Underline="Underline.Always">
+                Claude Code</MudLink>.
+            AI-assisted development is rapidly becoming a standard part of the software engineering
+            workflow. The industry is increasingly competitive, and developers who can leverage these
+            tools effectively are better positioned to remain hireable and desirable. Using AI in this
+            context is no different from using any other productivity tool &mdash; the architecture,
+            design decisions, and quality standards remain the developer's own. The AI accelerates the
+            work; it does not replace the vision behind it.
+        </MudText>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">Technology</MudText>
         <MudGrid Spacing="2">
             <MudItem xs="6" sm="4">
                 <MudChip T="string" Variant="Variant.Outlined" Color="Color.Primary">.NET Aspire</MudChip>
@@ -197,12 +242,74 @@
 
         <MudDivider />
 
+        <MudText Typo="Typo.h5" GutterBottom="true">Content Licensing</MudText>
+
+        <MudText Typo="Typo.body1">
+            Wookieepedia's user-contributed text is published under the
+            <MudLink Href="https://creativecommons.org/licenses/by-sa/3.0/" Target="_blank" Underline="Underline.Always">
+                Creative Commons Attribution-ShareAlike 3.0 (CC-BY-SA 3.0)
+            </MudLink>
+            licence. This licence explicitly permits copying, redistributing, adapting, and building upon the
+            material &mdash; including for commercial purposes &mdash; provided that attribution is given and
+            derivative works are shared under the same or a compatible licence.
+        </MudText>
+
+        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mt-4" GutterBottom="true">
+            What we believe is within terms
+        </MudText>
+        <MudText Typo="Typo.body2">
+            Extracting structured data from infoboxes, building timelines, and displaying transformed or
+            derived content are all forms of adaptation that CC-BY-SA 3.0 expressly permits.
+            We attribute Wookieepedia as the source throughout the site, and derived textual content
+            is made available under the same licence. No copyrighted images or media owned by
+            Lucasfilm/Disney are stored or displayed &mdash; only text-based data.
+        </MudText>
+
+        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mt-4" GutterBottom="true">
+            Where there is a grey area
+        </MudText>
+        <MudText Typo="Typo.body2">
+            <MudLink Href="https://www.fandom.com/terms-of-use" Target="_blank" Underline="Underline.Always">
+                Fandom's Terms of Use
+            </MudLink>
+            prohibit automated access to their services without express written permission, including via
+            robots, spiders, or scrapers. This project retrieves content through the MediaWiki API,
+            which is a standard, publicly available interface provided by the platform.
+            The Terms of Use themselves include an exception for content that is &ldquo;submitted to particular
+            Fandom communities as permitted as set forth at our licensing page&rdquo; &mdash; acknowledging
+            that CC-BY-SA text carries broader reuse rights than the general restrictions would suggest.
+            However, the boundary of this exception is ambiguous, and the tension between the content
+            licence (which permits reuse) and the platform terms (which restrict automated access) is
+            not clearly resolved.
+        </MudText>
+        <MudText Typo="Typo.body2" Class="mt-2">
+            Additionally, Fandom's 2025 Terms of Use update prohibits using content &ldquo;for the development
+            of any software program, including, but not limited to, training a machine learning or
+            artificial intelligence (AI) system&rdquo; without prior written consent. This project generates
+            vector embeddings for semantic search and uses AI to extract relationships and summarise articles.
+            Whether retrieval-focused embeddings and structured extraction constitute &ldquo;training&rdquo;
+            in the sense intended by this clause is an open question &mdash; these are not used to train
+            foundation models, but the wording is broad.
+        </MudText>
+
+        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mt-4" GutterBottom="true">
+            Our position
+        </MudText>
+        <MudText Typo="Typo.body2">
+            This is a non-commercial fan project for educational and analytical purposes.
+            We respect the Wookieepedia community and the work of its contributors. API requests are
+            rate-limited with a descriptive User-Agent header. No copyrighted media is used.
+            We attribute all content to Wookieepedia and its editors. If the Wookieepedia community
+            or Fandom have concerns about this project, we are open to discussion and will act in good faith.
+        </MudText>
+
+        <MudDivider />
+
         <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true">
-            This is a fan project for educational and analytical purposes.
             Star Wars and all associated content are property of Lucasfilm Ltd.
             Wookieepedia content is maintained by its community contributors under
             <MudLink Href="https://starwars.fandom.com/wiki/Wookieepedia:Copyrights" Target="_blank" Underline="Underline.Always">
-                their licensing terms</MudLink>.
+                CC-BY-SA 3.0</MudLink>.
         </MudAlert>
 
     </MudStack>
