@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -14,6 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for GitVersion
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3
+        with:
+          versionSpec: "6.x"
+
+      - name: Calculate version
+        id: version
+        uses: gittools/actions/gitversion/execute@v3
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -26,7 +37,12 @@ jobs:
           echo "$HOME/.aspire/bin" >> $GITHUB_PATH
 
       - name: Build solution
-        run: dotnet build src/StarWarsData.slnx -c Release
+        run: |
+          dotnet build src/StarWarsData.slnx -c Release \
+            /p:Version=${{ steps.version.outputs.semVer }} \
+            /p:AssemblyVersion=${{ steps.version.outputs.assemblySemVer }} \
+            /p:FileVersion=${{ steps.version.outputs.assemblySemFileVer }} \
+            /p:InformationalVersion=${{ steps.version.outputs.informationalVersion }}
 
       - name: Run tests
         run: dotnet test src/StarWarsData.Tests -c Release --no-build --filter 'Category!=Integration&Category!=MongoFixture'
@@ -40,6 +56,8 @@ jobs:
 
       - name: Build and push container images
         run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+        env:
+          CONTAINER_IMAGE_TAG: ${{ steps.version.outputs.semVer }}
 
       - name: Publish Docker Compose artifacts
         run: |
@@ -54,3 +72,8 @@ jobs:
           path: ./aspire-output/
           retention-days: 30
           include-hidden-files: true
+
+      - name: Tag release
+        run: |
+          git tag "v${{ steps.version.outputs.semVer }}"
+          git push origin "v${{ steps.version.outputs.semVer }}"

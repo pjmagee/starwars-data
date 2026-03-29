@@ -198,8 +198,9 @@ var frontend = builder
 
 #pragma warning disable ASPIREPIPELINES003
 var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
-apiService.WithContainerRegistry(registry).WithRemoteImageTag("latest");
-frontend.WithContainerRegistry(registry).WithRemoteImageTag("latest");
+var imageTag = Environment.GetEnvironmentVariable("CONTAINER_IMAGE_TAG") ?? "latest";
+apiService.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
+frontend.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 #pragma warning restore ASPIREPIPELINES003
 
 builder

@@ -1,0 +1,16 @@
+mode: Mainline
+branches:
+  main:
+    regex: ^main$
+    increment: Patch
+    is-mainline: true
+  feature:
+    regex: ^(feature|feat)[/-]
+    increment: Minor
+  fix:
+    regex: ^(fix|hotfix|bugfix)[/-]
+    increment: Patch
+
+major-version-bump-message: "^(breaking|major)"
+minor-version-bump-message: "^(feat|feature)"
+patch-version-bump-message: "^(fix|patch|chore|refactor|docs|style|test|ci|build|perf)"
