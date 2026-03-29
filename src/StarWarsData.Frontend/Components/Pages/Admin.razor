@@ -61,6 +61,17 @@
 
         <MudDivider Class="my-4" />
 
+        <!-- Territory Control -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Tertiary">Territory Control</MudText>
+        <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Public"
+                OnClick="@(() => StartJobHandler(LoadTerritoryDataEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Load Territory Control Data
+            </MudButton>
+        </MudStack>
+
+        <MudDivider Class="my-4" />
+
         <!-- Article Chunks & Embeddings -->
         <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Warning">Article Chunks &amp; Embeddings</MudText>
         <MudStack Spacing="2">
@@ -111,6 +122,8 @@
     
     private const string BuildRelationshipGraphEndpoint = "admin/mongo/build-relationship-graph";
     private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
+
+    private const string LoadTerritoryDataEndpoint = "admin/mongo/load-territory-data";
 
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
     private const string EnsureChunkIndexesEndpoint = "admin/mongo/ensure-chunk-indexes";

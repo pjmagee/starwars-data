@@ -57,7 +57,7 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 
 **AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
 
-**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Six databases configured via `SettingsOptions`: `starwars-raw-pages`, `starwars-timeline-events`, `starwars-hangfire-jobs`, `starwars-character-timelines`, `starwars-relationship-graph`, `starwars-chat-sessions`.
+**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Seven databases configured via `SettingsOptions`: `starwars-raw-pages`, `starwars-timeline-events`, `starwars-hangfire-jobs`, `starwars-character-timelines`, `starwars-relationship-graph`, `starwars-chat-sessions`, `starwars-territory-control`.
 
 **ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
 
@@ -67,8 +67,15 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 4. Create indexes + embeddings + vector indexes
 5. AI-generated character timelines
 6. Relationship graph via OpenAI Batch API (submit/check/cleanup cycle)
+7. Load territory control seed data (curated faction/region/year mappings)
 
 **Hangfire recurring jobs**: Daily incremental wiki sync (03:00 UTC), daily relationship graph builder (04:00 UTC), batch submissions every 30 min, batch status checks every 5 min, daily article chunking (05:00 UTC).
+
+**Authentication**: Keycloak OIDC on the Frontend (users sign in at `auth.magaoidh.pro`). The API is internal-only (not exposed to the internet) — user identity is forwarded via `X-User-Id` header set by a `DelegatingHandler` from the authenticated `ClaimsPrincipal`. See `eng/adr/001-internal-api-auth.md` for the full rationale (JWT Bearer was attempted but is incompatible with Blazor Interactive Server mode).
+
+**Admin section**: Frontend pages under `/admin` are protected with `[Authorize(Roles = "admin")]`. The admin role is assigned in Keycloak. Admin pages provide buttons to trigger ETL pipeline phases, view graph builder/article chunks dashboards, and open the Hangfire dashboard. The API's admin endpoints are not separately authenticated — they rely on the Frontend's role check and network isolation.
+
+**GDPR compliance**: Cookie consent banner (blocks GA until accepted), Privacy Policy (`/privacy`), Terms of Use (`/terms`), "Delete All My Data" and "Export My Data" in Profile.
 
 **Environment variables**: `STARWARS_OPENAI_KEY` for OpenAI API key, `MDB_MCP_CONNECTION_STRING` for the MongoDB MCP server connection.
 
