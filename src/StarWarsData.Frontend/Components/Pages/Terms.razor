@@ -1,0 +1,113 @@
+@page "/terms"
+
+<PageTitle>Terms of Use</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="py-8">
+    <MudStack Spacing="4">
+
+        <MudText Typo="Typo.h4" GutterBottom="true">Terms of Use</MudText>
+        <MudText Typo="Typo.caption" Color="Color.Secondary">Last updated: 29 March 2026</MudText>
+
+        <MudText Typo="Typo.h6">1. What this site is</MudText>
+        <MudText Typo="Typo.body1">
+            Star Wars Data Explorer (<MudLink Href="https://swdata.ai" Underline="Underline.Always">swdata.ai</MudLink>)
+            is a non-commercial, fan-made project built and operated by a single individual (Patrick Magee).
+            There is no company, organisation, or legal entity behind it. The site provides interactive
+            tools for exploring Star Wars universe data sourced from
+            <MudLink Href="https://starwars.fandom.com" Target="_blank" Underline="Underline.Always">Wookieepedia</MudLink>,
+            a community wiki licensed under
+            <MudLink Href="https://creativecommons.org/licenses/by-sa/3.0/" Target="_blank" Underline="Underline.Always">CC-BY-SA 3.0</MudLink>.
+        </MudText>
+
+        <MudText Typo="Typo.h6">2. No warranties</MudText>
+        <MudText Typo="Typo.body1">
+            The site is provided &ldquo;as is&rdquo; without warranty of any kind. Data accuracy depends on
+            the underlying Wookieepedia content. AI-powered features (Ask AI, character timelines,
+            relationship graph) may produce inaccurate, incomplete, or fabricated results. Do not rely
+            on this site for factual accuracy.
+        </MudText>
+
+        <MudText Typo="Typo.h6">3. Acceptable use</MudText>
+        <MudText Typo="Typo.body1">
+            You may use the site for personal, non-commercial purposes. You agree not to:
+        </MudText>
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.Block">
+                <MudText Typo="Typo.body2">Attempt to access other users' data or accounts.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Block">
+                <MudText Typo="Typo.body2">Use automated tools to scrape or overload the site.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Block">
+                <MudText Typo="Typo.body2">Attempt to bypass rate limits or authentication mechanisms.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Block">
+                <MudText Typo="Typo.body2">Use the AI features for purposes unrelated to Star Wars content.</MudText>
+            </MudListItem>
+        </MudList>
+
+        <MudText Typo="Typo.h6">4. Accounts and authentication</MudText>
+        <MudText Typo="Typo.body1">
+            Authentication is provided through Keycloak at
+            <MudLink Href="https://auth.magaoidh.pro" Target="_blank" Underline="Underline.Always">auth.magaoidh.pro</MudLink>.
+            You may sign in using social login providers (Microsoft, Facebook) or a local account.
+            Creating an account is optional &mdash; the site is usable without signing in, with reduced
+            functionality (no chat history, lower rate limits).
+        </MudText>
+
+        <MudText Typo="Typo.h6">5. Bring Your Own Key (BYOK)</MudText>
+        <MudText Typo="Typo.body1">
+            Signed-in users may provide their own OpenAI API key for the Ask AI feature. By doing so,
+            you acknowledge that your queries are sent directly to OpenAI using your key and are subject
+            to <MudLink Href="https://openai.com/policies/terms-of-use" Target="_blank" Underline="Underline.Always">OpenAI's terms of use</MudLink>.
+            Your key is encrypted at rest using ASP.NET Core Data Protection and is only decrypted
+            at the moment of an API call. The site operator cannot view your key in plaintext.
+        </MudText>
+
+        <MudText Typo="Typo.h6">6. AI-generated content</MudText>
+        <MudText Typo="Typo.body1">
+            The Ask AI feature, character timelines, and relationship graph are produced with the
+            assistance of OpenAI models. This content may contain errors, hallucinations, or
+            inconsistencies with established Star Wars canon or legends. AI-generated content
+            should not be cited as authoritative.
+        </MudText>
+
+        <MudText Typo="Typo.h6">7. Intellectual property</MudText>
+        <MudText Typo="Typo.body1">
+            Star Wars and all associated names, characters, and content are the property of
+            Lucasfilm Ltd. / Disney. Wookieepedia content is used under CC-BY-SA 3.0 and is
+            attributed throughout the site. This project does not claim ownership of any
+            Star Wars intellectual property. See the <MudLink Href="/about" Underline="Underline.Always">About</MudLink>
+            page for a full licensing discussion.
+        </MudText>
+
+        <MudText Typo="Typo.h6">8. Availability</MudText>
+        <MudText Typo="Typo.body1">
+            The site is a personal project and may be taken offline, modified, or discontinued
+            at any time without notice. AI features depend on OpenAI API availability and quota;
+            they may be temporarily unavailable.
+        </MudText>
+
+        <MudText Typo="Typo.h6">9. Limitation of liability</MudText>
+        <MudText Typo="Typo.body1">
+            To the fullest extent permitted by law, the site operator is not liable for any
+            damages arising from your use of the site, including but not limited to: loss of data,
+            inaccurate AI outputs, or charges incurred through your own OpenAI API key (BYOK).
+        </MudText>
+
+        <MudText Typo="Typo.h6">10. Changes to these terms</MudText>
+        <MudText Typo="Typo.body1">
+            These terms may be updated at any time. Continued use of the site after changes
+            constitutes acceptance of the revised terms.
+        </MudText>
+
+        <MudText Typo="Typo.h6">11. Contact</MudText>
+        <MudText Typo="Typo.body1">
+            For questions or concerns, contact the site operator via
+            <MudLink Href="https://magaoidh.pro" Target="_blank" Underline="Underline.Always">magaoidh.pro</MudLink>
+            or through the
+            <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Underline="Underline.Always">GitHub repository</MudLink>.
+        </MudText>
+
+    </MudStack>
+</MudContainer>

@@ -54,11 +54,14 @@
     <MudMainContent Class="pt-16 pa-4" Style="min-height: calc(100vh - var(--mud-appbar-height) - 48px);">
         @Body
     </MudMainContent>
-    <footer class="d-flex justify-center align-center pa-3">
+    <footer class="d-flex justify-center align-center gap-3 pa-3 flex-wrap">
         <MudText Typo="Typo.caption" Color="Color.Secondary">
             Made with ❤️ by
             <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
         </MudText>
+        <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+        <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
+        <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
     </footer>
 </MudLayout>
 

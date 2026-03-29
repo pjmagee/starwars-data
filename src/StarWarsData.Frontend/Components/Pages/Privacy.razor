@@ -1,0 +1,246 @@
+@page "/privacy"
+
+<PageTitle>Privacy Policy</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="py-8">
+    <MudStack Spacing="4">
+
+        <MudText Typo="Typo.h4" GutterBottom="true">Privacy Policy</MudText>
+        <MudText Typo="Typo.caption" Color="Color.Secondary">Last updated: 29 March 2026</MudText>
+
+        <MudText Typo="Typo.body1">
+            Star Wars Data Explorer (<MudLink Href="https://swdata.ai" Underline="Underline.Always">swdata.ai</MudLink>)
+            is operated by Patrick Magee as a personal, non-commercial fan project. This policy explains
+            what data is collected, how it is used, and your rights under the UK General Data Protection
+            Regulation (UK GDPR) and the EU General Data Protection Regulation (EU GDPR).
+        </MudText>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">1. Data controller</MudText>
+        <MudText Typo="Typo.body1">
+            The data controller is Patrick Magee, an individual based in the United Kingdom.
+            Contact: <MudLink Href="https://magaoidh.pro" Target="_blank" Underline="Underline.Always">magaoidh.pro</MudLink>
+            or via the <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Underline="Underline.Always">GitHub repository</MudLink>.
+        </MudText>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">2. What data is collected</MudText>
+
+        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Anonymous visitors (not signed in)</MudText>
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>IP address</strong> &mdash; used for rate limiting only, held in server memory, not persisted to any database.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>Google Analytics</strong> &mdash; only if you click &ldquo;Accept All&rdquo; on the cookie banner. See section 5.</MudText>
+            </MudListItem>
+        </MudList>
+
+        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Signed-in users</MudText>
+        <MudText Typo="Typo.body2" Class="mb-2">
+            In addition to the above, the following is collected when you create an account and use authenticated features:
+        </MudText>
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>User ID</strong> &mdash; a unique identifier (UUID) from Keycloak, used to associate your data. Your name and email are stored in Keycloak, not in this site's database.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>Chat history</strong> &mdash; your Ask AI conversations (questions, AI responses, tool calls, visualisations) are stored in MongoDB so you can resume them.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>OpenAI API key (BYOK)</strong> &mdash; if you choose to provide one, it is encrypted at rest using ASP.NET Core Data Protection and only decrypted at the moment of an API call.</MudText>
+            </MudListItem>
+        </MudList>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">3. Legal basis for processing</MudText>
+        <MudSimpleTable Dense="true" Hover="true" Bordered="false" Class="mb-2">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Legal basis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Authentication cookies</td>
+                    <td>Legitimate interest &mdash; necessary to provide the service</td>
+                </tr>
+                <tr>
+                    <td>Chat history &amp; settings</td>
+                    <td>Consent &mdash; you choose to sign in and use these features</td>
+                </tr>
+                <tr>
+                    <td>BYOK API key</td>
+                    <td>Consent &mdash; you explicitly provide it</td>
+                </tr>
+                <tr>
+                    <td>IP address (rate limiting)</td>
+                    <td>Legitimate interest &mdash; preventing abuse</td>
+                </tr>
+                <tr>
+                    <td>Google Analytics</td>
+                    <td>Consent &mdash; only loaded after you accept the cookie banner</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">4. Third-party services</MudText>
+        <MudText Typo="Typo.body1">
+            Your data may be processed by the following third parties when you use certain features:
+        </MudText>
+        <MudSimpleTable Dense="true" Hover="true" Bordered="false" Class="mb-2">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Data shared</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <MudLink Href="https://openai.com/policies/privacy-policy" Target="_blank" Underline="Underline.Always">OpenAI</MudLink>
+                    </td>
+                    <td>Your Ask AI messages</td>
+                    <td>AI-powered question answering</td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudLink Href="https://www.keycloak.org/" Target="_blank" Underline="Underline.Always">Keycloak</MudLink>
+                        (self-hosted)
+                    </td>
+                    <td>Email, username, social login profile</td>
+                    <td>Authentication</td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudLink Href="https://policies.google.com/privacy" Target="_blank" Underline="Underline.Always">Google Analytics</MudLink>
+                    </td>
+                    <td>Page views, device info, approximate location</td>
+                    <td>Usage analytics (consent required)</td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudLink Href="https://fonts.google.com/" Target="_blank" Underline="Underline.Always">Google Fonts</MudLink>
+                    </td>
+                    <td>IP address (font request)</td>
+                    <td>Typography</td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudLink Href="https://www.cloudflare.com/privacypolicy/" Target="_blank" Underline="Underline.Always">Cloudflare</MudLink>
+                    </td>
+                    <td>Traffic metadata</td>
+                    <td>CDN / tunnel proxy</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">5. Cookies and local storage</MudText>
+        <MudSimpleTable Dense="true" Hover="true" Bordered="false" Class="mb-2">
+            <thead>
+                <tr>
+                    <th>Name / type</th>
+                    <th>Category</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ASP.NET auth cookie</td>
+                    <td>Essential</td>
+                    <td>Maintains your login session</td>
+                </tr>
+                <tr>
+                    <td>Antiforgery cookie</td>
+                    <td>Essential</td>
+                    <td>CSRF protection</td>
+                </tr>
+                <tr>
+                    <td><code>sw_cookie_consent</code> (localStorage)</td>
+                    <td>Essential</td>
+                    <td>Remembers your cookie preference</td>
+                </tr>
+                <tr>
+                    <td><code>_ga</code>, <code>_ga_*</code></td>
+                    <td>Analytics (consent required)</td>
+                    <td>Google Analytics tracking</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">6. Data retention</MudText>
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>Chat sessions</strong> &mdash; retained until you delete them individually or use &ldquo;Delete All My Data&rdquo; in your Profile.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>BYOK API key</strong> &mdash; retained until you remove it or delete all data.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>Rate-limit data</strong> &mdash; held in server memory for 30 minutes, then automatically discarded.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2"><strong>Keycloak account</strong> &mdash; managed separately at <MudLink Href="https://auth.magaoidh.pro" Target="_blank" Underline="Underline.Always">auth.magaoidh.pro</MudLink>.</MudText>
+            </MudListItem>
+        </MudList>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">7. Your rights</MudText>
+        <MudText Typo="Typo.body1">
+            Under UK GDPR and EU GDPR, you have the right to:
+        </MudText>
+        <MudList Dense="true" T="string">
+            <MudListItem Icon="@Icons.Material.Filled.CheckCircle" IconColor="Color.Success">
+                <MudText Typo="Typo.body2"><strong>Access</strong> &mdash; view your chat history and settings in your Profile.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.CheckCircle" IconColor="Color.Success">
+                <MudText Typo="Typo.body2"><strong>Erasure</strong> &mdash; use &ldquo;Delete All My Data&rdquo; on your <MudLink Href="/profile" Underline="Underline.Always">Profile</MudLink> page to permanently delete all stored data.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.CheckCircle" IconColor="Color.Success">
+                <MudText Typo="Typo.body2"><strong>Withdraw consent</strong> &mdash; change your cookie preference at any time by clearing localStorage or using your browser settings.</MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.CheckCircle" IconColor="Color.Success">
+                <MudText Typo="Typo.body2"><strong>Complain</strong> &mdash; you may lodge a complaint with the <MudLink Href="https://ico.org.uk/" Target="_blank" Underline="Underline.Always">UK Information Commissioner's Office (ICO)</MudLink>.</MudText>
+            </MudListItem>
+        </MudList>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">8. Data security</MudText>
+        <MudText Typo="Typo.body1">
+            The site is served over HTTPS via Cloudflare. API keys are encrypted at rest.
+            Authentication uses OpenID Connect with PKCE. The API service validates JWT tokens
+            server-side. However, as a personal project, no formal security audit has been conducted
+            and absolute security cannot be guaranteed.
+        </MudText>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">9. Children</MudText>
+        <MudText Typo="Typo.body1">
+            This site is not directed at children under 13. If you are under 13, please do not create
+            an account or provide personal data.
+        </MudText>
+
+        <MudDivider />
+
+        <MudText Typo="Typo.h6">10. Changes to this policy</MudText>
+        <MudText Typo="Typo.body1">
+            This policy may be updated at any time. The &ldquo;last updated&rdquo; date at the top will
+            be revised accordingly.
+        </MudText>
+
+    </MudStack>
+</MudContainer>
