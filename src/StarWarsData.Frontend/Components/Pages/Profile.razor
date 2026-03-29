@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject EndpointService EndpointService
 @inject NavigationManager NavigationManager
-@inject ApiClient ApiClient
+@inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime JS
 
 <PageTitle>Profile</PageTitle>
@@ -316,6 +316,8 @@
 </MudContainer>
 
 @code {
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
     private string? _keycloakAccountUrl;
     private string? _keycloakLinkedAccountsUrl;
     private string? _keycloakSecurityUrl;
@@ -357,7 +359,7 @@
     {
         try
         {
-            var response = await ApiClient.GetAsync("api/user/settings");
+            var response = await Http.GetAsync("api/user/settings");
             if (response.IsSuccessStatusCode)
             {
                 var settings = await response.Content.ReadFromJsonAsync<UserSettingsResponse>();
@@ -381,7 +383,7 @@
 
         try
         {
-            var response = await ApiClient.PutAsJsonAsync("api/user/settings/openai-key", new { apiKey = _apiKeyInput });
+            var response = await Http.PutAsJsonAsync("api/user/settings/openai-key", new { apiKey = _apiKeyInput });
 
             if (response.IsSuccessStatusCode)
             {
@@ -413,7 +415,7 @@
 
         try
         {
-            var response = await ApiClient.DeleteAsync("api/user/settings/openai-key");
+            var response = await Http.DeleteAsync("api/user/settings/openai-key");
 
             if (response.IsSuccessStatusCode)
             {
@@ -453,7 +455,7 @@
 
         try
         {
-            var response = await ApiClient.DeleteAsync("api/user/settings/all-data");
+            var response = await Http.DeleteAsync("api/user/settings/all-data");
             if (response.IsSuccessStatusCode)
             {
                 _deleteSuccess = true;
@@ -483,7 +485,7 @@
 
         try
         {
-            var response = await ApiClient.GetAsync("api/user/settings/export");
+            var response = await Http.GetAsync("api/user/settings/export");
             if (response.IsSuccessStatusCode)
             {
                 var bytes = await response.Content.ReadAsByteArrayAsync();

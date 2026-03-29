@@ -2,7 +2,7 @@
 @page "/ask"
 @page "/ask/{SessionId:guid}"
 @using System.Text.Json.Serialization
-@inject ApiClient ApiClient
+@inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject ChatHistoryService ChatHistory
 @inject IJSRuntime JS
@@ -509,8 +509,7 @@
 
     private bool _aiUnavailable;
 
-    // ApiClient is injected and used directly for typed methods.
-    // For SSE streaming we use SendAsync with manual request construction.
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnInitializedAsync()
     {
@@ -534,7 +533,7 @@
     {
         try
         {
-            var response = await ApiClient.GetFromJsonAsync<AiStatusResponse>("api/ai/status");
+            var response = await Http.GetFromJsonAsync<AiStatusResponse>("api/ai/status");
             _aiUnavailable = response?.Status is "QuotaExceeded" or "RateLimited";
         }
         catch
@@ -641,7 +640,7 @@
             request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
             // Auth token is forwarded automatically by AuthTokenDelegatingHandler
 
-            using var response = await ApiClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+            using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
 
             if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
             {
@@ -1055,13 +1054,13 @@
             if (_currentSessionId is not null)
             {
                 // Update existing session
-                await ApiClient.PutAsJsonAsync($"api/ChatSessions/{_currentSessionId}", body);
+                await Http.PutAsJsonAsync($"api/ChatSessions/{_currentSessionId}", body);
                 await ChatHistory.LoadAsync();
             }
             else
             {
                 // Create new session
-                var response = await ApiClient.PostAsJsonAsync("api/ChatSessions", body);
+                var response = await Http.PostAsJsonAsync("api/ChatSessions", body);
                 if (response.IsSuccessStatusCode)
                 {
                     _currentSessionId = await response.Content.ReadFromJsonAsync<Guid>();
@@ -1082,7 +1081,7 @@
 
         try
         {
-            var response = await ApiClient.GetAsync($"api/ChatSessions/{sessionId}");
+            var response = await Http.GetAsync($"api/ChatSessions/{sessionId}");
 
             if (response.IsSuccessStatusCode)
             {

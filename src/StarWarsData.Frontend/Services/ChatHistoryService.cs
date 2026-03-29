@@ -4,8 +4,9 @@ namespace StarWarsData.Frontend.Services;
 
 /// <summary>
 /// Scoped service that keeps the chat session list in sync between the nav sidebar and the Ask page.
+/// Auth token is attached automatically by AuthTokenDelegatingHandler on the named HttpClient.
 /// </summary>
-public class ChatHistoryService(ApiClient apiClient)
+public class ChatHistoryService(IHttpClientFactory httpClientFactory)
 {
     private List<ChatSessionSummary> _sessions = [];
     private bool _loaded;
@@ -16,11 +17,13 @@ public class ChatHistoryService(ApiClient apiClient)
 
     public event Action? OnChange;
 
+    private HttpClient Http => httpClientFactory.CreateClient("StarWarsData");
+
     public async Task LoadAsync()
     {
         try
         {
-            var response = await apiClient.GetAsync("api/ChatSessions");
+            var response = await Http.GetAsync("api/ChatSessions");
             if (response.IsSuccessStatusCode)
             {
                 _sessions = await response.Content.ReadFromJsonAsync<List<ChatSessionSummary>>() ?? [];
@@ -42,7 +45,7 @@ public class ChatHistoryService(ApiClient apiClient)
     {
         try
         {
-            await apiClient.DeleteAsync($"api/ChatSessions/{sessionId}");
+            await Http.DeleteAsync($"api/ChatSessions/{sessionId}");
             _sessions.RemoveAll(s => s.Id == sessionId);
             if (ActiveSessionId == sessionId) ActiveSessionId = null;
             OnChange?.Invoke();
@@ -54,7 +57,7 @@ public class ChatHistoryService(ApiClient apiClient)
     {
         try
         {
-            var response = await apiClient.PostAsJsonAsync("api/ChatSessions/summarize", new { prompt });
+            var response = await Http.PostAsJsonAsync("api/ChatSessions/summarize", new { prompt });
             if (response.IsSuccessStatusCode)
             {
                 var title = await response.Content.ReadAsStringAsync();
