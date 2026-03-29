@@ -70,7 +70,7 @@ public sealed class ByokChatClient : IChatClient
 
     async Task<IChatClient> ResolveClientAsync(CancellationToken ct)
     {
-        var userId = _httpContextAccessor.HttpContext?.Request.Headers["X-User-Id"].FirstOrDefault();
+        var userId = _httpContextAccessor.HttpContext?.User.FindFirst("sub")?.Value;
         if (string.IsNullOrEmpty(userId))
             return _serverClient;
 

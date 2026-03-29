@@ -15,6 +15,7 @@ var apiService = builder
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__HangfireEnabled", "true")
+    .WithEnvironment("Keycloak__Authority", "https://auth.magaoidh.pro/realms/starwars-data")
     // Phase 1 — Download raw data
     .WithHttpCommand(
         path: "/api/admin/download/pages",

@@ -12,13 +12,32 @@
         <ImportMap/>
         <link rel="icon" type="image/ico" href="favicon.ico"/>
         <HeadOutlet />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1JWZZ8THNS"></script>
+        <!-- Google Analytics — loaded only after cookie consent -->
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-1JWZZ8THNS');
+
+            function swLoadAnalytics() {
+                if (document.querySelector('script[src*="googletagmanager"]')) return;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1JWZZ8THNS';
+                document.head.appendChild(s);
+                gtag('js', new Date());
+                gtag('config', 'G-1JWZZ8THNS');
+            }
+
+            function swGetCookieConsent() {
+                return localStorage.getItem('sw_cookie_consent');
+            }
+
+            function swSetCookieConsent(value) {
+                localStorage.setItem('sw_cookie_consent', value);
+                if (value === 'accepted') swLoadAnalytics();
+            }
+
+            // Auto-load if previously accepted
+            if (swGetCookieConsent() === 'accepted') swLoadAnalytics();
         </script>
     </head>
     <body>

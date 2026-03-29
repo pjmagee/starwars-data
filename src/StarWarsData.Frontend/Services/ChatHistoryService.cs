@@ -22,14 +22,12 @@ public class ChatHistoryService
 
     public event Action? OnChange;
 
-    public async Task LoadAsync(string userId)
+    public async Task LoadAsync()
     {
         try
         {
             var http = _httpClientFactory.CreateClient("StarWarsData");
-            using var request = new HttpRequestMessage(HttpMethod.Get, "api/ChatSessions");
-            request.Headers.Add("X-User-Id", userId);
-            var response = await http.SendAsync(request);
+            var response = await http.GetAsync("api/ChatSessions");
             if (response.IsSuccessStatusCode)
             {
                 _sessions = await response.Content.ReadFromJsonAsync<List<ChatSessionSummary>>() ?? [];
@@ -40,21 +38,19 @@ public class ChatHistoryService
         OnChange?.Invoke();
     }
 
-    public async Task EnsureLoadedAsync(string userId)
+    public async Task EnsureLoadedAsync()
     {
-        if (!_loaded) await LoadAsync(userId);
+        if (!_loaded) await LoadAsync();
     }
 
     public void NotifyChanged() => OnChange?.Invoke();
 
-    public async Task DeleteAsync(string userId, Guid sessionId)
+    public async Task DeleteAsync(Guid sessionId)
     {
         try
         {
             var http = _httpClientFactory.CreateClient("StarWarsData");
-            using var request = new HttpRequestMessage(HttpMethod.Delete, $"api/ChatSessions/{sessionId}");
-            request.Headers.Add("X-User-Id", userId);
-            await http.SendAsync(request);
+            await http.DeleteAsync($"api/ChatSessions/{sessionId}");
             _sessions.RemoveAll(s => s.Id == sessionId);
             if (ActiveSessionId == sessionId) ActiveSessionId = null;
             OnChange?.Invoke();

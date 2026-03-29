@@ -118,6 +118,12 @@ public class ChatSessionService
         return result.DeletedCount > 0;
     }
 
+    public async Task<long> DeleteAllUserDataAsync(string userId, CancellationToken ct = default)
+    {
+        var result = await _sessions.DeleteManyAsync(s => s.UserId == userId, ct);
+        return result.DeletedCount;
+    }
+
     /// <summary>
     /// Simple fallback title: first 4 words of the prompt.
     /// </summary>

@@ -241,6 +241,54 @@
                 </MudStack>
             </MudPaper>
 
+            <!-- Data & Privacy -->
+            <MudPaper Class="pa-6 mb-6" Elevation="2">
+                <MudText Typo="Typo.h5" Class="mb-2">Data &amp; Privacy</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
+                    Under UK GDPR, you have the right to request deletion of all your personal data.
+                    This will permanently remove your chat history, stored API keys, and all settings.
+                    This action cannot be undone.
+                </MudText>
+
+                @if (_deleteSuccess)
+                {
+                    <MudAlert Severity="Severity.Success" Dense="true">All your data has been deleted.</MudAlert>
+                }
+                else if (!_confirmDelete)
+                {
+                    <MudButton Variant="Variant.Outlined" Color="Color.Error"
+                               StartIcon="@Icons.Material.Filled.DeleteForever"
+                               OnClick="() => _confirmDelete = true"
+                               Disabled="_deleteInProgress">
+                        Delete All My Data
+                    </MudButton>
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Warning" Dense="true" Class="mb-3">
+                        Are you sure? This will permanently delete all your chat sessions, API keys, and settings.
+                    </MudAlert>
+                    <MudStack Row="true" Spacing="2">
+                        <MudButton Variant="Variant.Filled" Color="Color.Error"
+                                   StartIcon="@Icons.Material.Filled.DeleteForever"
+                                   OnClick="DeleteAllDataAsync"
+                                   Disabled="_deleteInProgress">
+                            @(_deleteInProgress ? "Deleting..." : "Yes, Delete Everything")
+                        </MudButton>
+                        <MudButton Variant="Variant.Text"
+                                   OnClick="() => _confirmDelete = false"
+                                   Disabled="_deleteInProgress">
+                            Cancel
+                        </MudButton>
+                    </MudStack>
+                }
+
+                @if (_deleteError is not null)
+                {
+                    <MudAlert Severity="Severity.Error" Dense="true" Class="mt-3">@_deleteError</MudAlert>
+                }
+            </MudPaper>
+
             <!-- Sign Out -->
             <MudPaper Class="pa-6" Elevation="2">
                 <MudButton Variant="Variant.Filled" Color="Color.Error"
@@ -294,14 +342,9 @@
 
     private async Task LoadSettingsAsync()
     {
-        if (_userId is null) { _byokLoading = false; return; }
-
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Get, "api/user/settings");
-            request.Headers.Add("X-User-Id", _userId);
-            var response = await Http.SendAsync(request);
-
+            var response = await Http.GetAsync("api/user/settings");
             if (response.IsSuccessStatusCode)
             {
                 var settings = await response.Content.ReadFromJsonAsync<UserSettingsResponse>();
@@ -317,7 +360,7 @@
 
     private async Task SaveKeyAsync()
     {
-        if (_userId is null || string.IsNullOrWhiteSpace(_apiKeyInput)) return;
+        if (string.IsNullOrWhiteSpace(_apiKeyInput)) return;
 
         _byokSaving = true;
         _byokError = null;
@@ -325,12 +368,7 @@
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Put, "api/user/settings/openai-key")
-            {
-                Content = JsonContent.Create(new { apiKey = _apiKeyInput }),
-            };
-            request.Headers.Add("X-User-Id", _userId);
-            var response = await Http.SendAsync(request);
+            var response = await Http.PutAsJsonAsync("api/user/settings/openai-key", new { apiKey = _apiKeyInput });
 
             if (response.IsSuccessStatusCode)
             {
@@ -356,17 +394,13 @@
 
     private async Task RemoveKeyAsync()
     {
-        if (_userId is null) return;
-
         _byokSaving = true;
         _byokError = null;
         StateHasChanged();
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Delete, "api/user/settings/openai-key");
-            request.Headers.Add("X-User-Id", _userId);
-            var response = await Http.SendAsync(request);
+            var response = await Http.DeleteAsync("api/user/settings/openai-key");
 
             if (response.IsSuccessStatusCode)
             {
@@ -385,6 +419,42 @@
         finally
         {
             _byokSaving = false;
+        }
+    }
+
+    // Delete all data state
+    private bool _confirmDelete;
+    private bool _deleteInProgress;
+    private bool _deleteSuccess;
+    private string? _deleteError;
+
+    private async Task DeleteAllDataAsync()
+    {
+        _deleteInProgress = true;
+        _deleteError = null;
+        StateHasChanged();
+
+        try
+        {
+            var response = await Http.DeleteAsync("api/user/settings/all-data");
+            if (response.IsSuccessStatusCode)
+            {
+                _deleteSuccess = true;
+                _confirmDelete = false;
+                _hasOpenAiKey = false;
+            }
+            else
+            {
+                _deleteError = "Failed to delete data. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _deleteError = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            _deleteInProgress = false;
         }
     }
 

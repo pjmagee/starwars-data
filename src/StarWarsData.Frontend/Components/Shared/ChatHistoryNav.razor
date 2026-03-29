@@ -71,11 +71,8 @@
                 _userId = state.User.FindFirst("sub")?.Value
                           ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
-                if (_userId is not null)
-                {
-                    await ChatHistory.EnsureLoadedAsync(_userId);
-                    _sessions = ChatHistory.Sessions;
-                }
+                await ChatHistory.EnsureLoadedAsync();
+                _sessions = ChatHistory.Sessions;
             }
         }
     }
@@ -110,12 +107,9 @@
 
     private async Task DeleteSession(Guid sessionId)
     {
-        if (_userId is not null)
-        {
-            await ChatHistory.DeleteAsync(_userId, sessionId);
-            if (ChatHistory.ActiveSessionId == null)
-                Navigation.NavigateTo("/ask");
-        }
+        await ChatHistory.DeleteAsync(sessionId);
+        if (ChatHistory.ActiveSessionId == null)
+            Navigation.NavigateTo("/ask");
     }
 
     public void Dispose()

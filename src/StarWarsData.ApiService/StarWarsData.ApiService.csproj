@@ -10,6 +10,7 @@
       Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore"
       Version="1.0.0-preview.260311.1"
     />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.0.0-rc4" />
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.3.0" />

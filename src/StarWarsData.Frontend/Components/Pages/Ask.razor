@@ -527,8 +527,8 @@
             _userId = state.User.FindFirst("sub")?.Value
                       ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
-            if (_isAuthenticated && _userId is not null)
-                await ChatHistory.EnsureLoadedAsync(_userId);
+            if (_isAuthenticated)
+                await ChatHistory.EnsureLoadedAsync();
         }
 
         await CheckAiStatusAsync();
@@ -643,10 +643,7 @@
                 Content = JsonContent.Create(body),
             };
             request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
-            if (_userId is not null)
-                request.Headers.Add("X-User-Id", _userId);
-            if (_clientIp is not null)
-                request.Headers.Add("X-Forwarded-For", _clientIp);
+            // Auth token is forwarded automatically by AuthTokenDelegatingHandler
 
             using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
 
@@ -1062,24 +1059,18 @@
             if (_currentSessionId is not null)
             {
                 // Update existing session
-                using var updateReq = new HttpRequestMessage(HttpMethod.Put, $"api/ChatSessions/{_currentSessionId}");
-                updateReq.Headers.Add("X-User-Id", _userId);
-                updateReq.Content = JsonContent.Create(body);
-                await Http.SendAsync(updateReq);
-                if (_userId is not null) await ChatHistory.LoadAsync(_userId);
+                await Http.PutAsJsonAsync($"api/ChatSessions/{_currentSessionId}", body);
+                await ChatHistory.LoadAsync();
             }
             else
             {
                 // Create new session
-                using var createReq = new HttpRequestMessage(HttpMethod.Post, "api/ChatSessions");
-                createReq.Headers.Add("X-User-Id", _userId);
-                createReq.Content = JsonContent.Create(body);
-                var response = await Http.SendAsync(createReq);
+                var response = await Http.PostAsJsonAsync("api/ChatSessions", body);
                 if (response.IsSuccessStatusCode)
                 {
                     _currentSessionId = await response.Content.ReadFromJsonAsync<Guid>();
                     ChatHistory.ActiveSessionId = _currentSessionId;
-                    if (_userId is not null) await ChatHistory.LoadAsync(_userId);
+                    await ChatHistory.LoadAsync();
                 }
             }
         }
@@ -1095,9 +1086,7 @@
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"api/ChatSessions/{sessionId}");
-            request.Headers.Add("X-User-Id", _userId);
-            var response = await Http.SendAsync(request);
+            var response = await Http.GetAsync($"api/ChatSessions/{sessionId}");
 
             if (response.IsSuccessStatusCode)
             {

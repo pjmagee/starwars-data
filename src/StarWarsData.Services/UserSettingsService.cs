@@ -85,6 +85,11 @@ public class UserSettingsService
         );
     }
 
+    public async Task DeleteAllUserDataAsync(string userId, CancellationToken ct = default)
+    {
+        await _collection.DeleteOneAsync(s => s.UserId == userId, ct);
+    }
+
     public async Task<UserSettings?> GetAsync(string userId, CancellationToken ct = default)
     {
         return await _collection

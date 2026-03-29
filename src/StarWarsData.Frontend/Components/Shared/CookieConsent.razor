@@ -1,0 +1,62 @@
+@inject IJSRuntime JS
+
+@if (_visible)
+{
+    <MudPaper Elevation="8" Class="cookie-consent-banner pa-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="flex-wrap">
+            <MudText Typo="Typo.body2" Style="flex: 1; min-width: 250px;">
+                This site uses cookies for authentication (required) and analytics (optional).
+                Analytics cookies help us understand how the site is used.
+                See our <MudLink Href="/about#content-licensing" Underline="Underline.Always">About</MudLink> page for details.
+            </MudText>
+            <MudStack Row="true" Spacing="2">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                           OnClick="Accept">
+                    Accept All
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" Size="Size.Small"
+                           OnClick="RejectOptional">
+                    Essential Only
+                </MudButton>
+            </MudStack>
+        </MudStack>
+    </MudPaper>
+}
+
+<style>
+    .cookie-consent-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: var(--mud-palette-surface);
+        border-top: 2px solid var(--mud-palette-primary);
+    }
+</style>
+
+@code {
+    private bool _visible;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var consent = await JS.InvokeAsync<string?>("swGetCookieConsent");
+            _visible = consent is null;
+            StateHasChanged();
+        }
+    }
+
+    private async Task Accept()
+    {
+        await JS.InvokeVoidAsync("swSetCookieConsent", "accepted");
+        _visible = false;
+    }
+
+    private async Task RejectOptional()
+    {
+        await JS.InvokeVoidAsync("swSetCookieConsent", "rejected");
+        _visible = false;
+    }
+}
