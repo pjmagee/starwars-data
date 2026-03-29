@@ -263,6 +263,14 @@
                 </div>
             </EditForm>
 
+            @if (!_isAuthenticated)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="mt-2">
+                    <MudLink Href="/authentication/login" Underline="Underline.Always" Color="Color.Secondary">Sign in</MudLink>
+                    to save chat history, get more requests, and bring your own OpenAI key.
+                </MudText>
+            }
+
         </MudContainer>
     </div>
 </div>
