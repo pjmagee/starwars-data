@@ -34,9 +34,6 @@
     <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.25306.1" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\territory-control-canon.json" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\StarWarsData.Models\StarWarsData.Models.csproj" />
   </ItemGroup>
 </Project>

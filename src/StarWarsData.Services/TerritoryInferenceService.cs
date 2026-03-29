@@ -62,6 +62,18 @@ public partial class TerritoryInferenceService
         ["New Republic/Resistance"] = "New Republic",
     };
 
+    // Faction → Wookieepedia page title for looking up wiki URL and insignia image
+    static readonly Dictionary<string, string> FactionPageTitles = new()
+    {
+        ["Galactic Republic"] = "Galactic Republic",
+        ["Confederacy of Independent Systems"] = "Confederacy of Independent Systems",
+        ["Galactic Empire"] = "Galactic Empire",
+        ["Alliance to Restore the Republic"] = "Alliance to Restore the Republic",
+        ["New Republic"] = "New Republic",
+        ["First Order"] = "First Order",
+        ["Resistance"] = "Resistance",
+    };
+
     // Default control: which faction controls each region before any battles
     static readonly Dictionary<string, string> DefaultControl = new()
     {

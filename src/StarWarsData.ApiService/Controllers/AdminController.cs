@@ -14,7 +14,6 @@ public class AdminController(
     RelationshipGraphBuilderService graphBuilder,
     ArticleChunkingService articleChunkingService,
     OpenAiStatusService aiStatus,
-    TerritoryControlService territoryControlService,
     TerritoryInferenceService territoryInferenceService
 ) : ControllerBase
 {
@@ -25,7 +24,6 @@ public class AdminController(
     readonly RelationshipGraphBuilderService _graphBuilder = graphBuilder;
     readonly ArticleChunkingService _articleChunkingService = articleChunkingService;
     readonly OpenAiStatusService _aiStatus = aiStatus;
-    readonly TerritoryControlService _territoryControlService = territoryControlService;
     readonly TerritoryInferenceService _territoryInferenceService = territoryInferenceService;
 
     bool IsJobAlreadyActive(Type type, string methodName)
@@ -541,21 +539,6 @@ public class AdminController(
     }
 
     // === Territory Control ===
-
-    [HttpPost("mongo/load-territory-data")]
-    public async Task<ActionResult<string>> LoadTerritoryData(CancellationToken ct)
-    {
-        try
-        {
-            await _territoryControlService.LoadSeedDataAsync(ct);
-            return Ok(new { message = "Territory control data loaded." });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to load territory control data");
-            return StatusCode(500, new { error = ex.Message });
-        }
-    }
 
     [HttpPost("mongo/infer-territory-control")]
     public async Task<ActionResult<string>> InferTerritoryControl(CancellationToken ct)

@@ -64,14 +64,9 @@
         <!-- Territory Control -->
         <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Tertiary">Territory Control</MudText>
         <MudStack Spacing="2" Class="mb-4">
-            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Public"
-                OnClick="@(() => StartJobHandler(LoadTerritoryDataEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Load Territory Seed Data
-            </MudButton>
-
             <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.AutoFixHigh"
                 OnClick="@(() => StartJobHandler(InferTerritoryEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Infer Territory from Battles
+                Infer Territory Control
             </MudButton>
         </MudStack>
 
@@ -128,7 +123,6 @@
     private const string BuildRelationshipGraphEndpoint = "admin/mongo/build-relationship-graph";
     private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
 
-    private const string LoadTerritoryDataEndpoint = "admin/mongo/load-territory-data";
     private const string InferTerritoryEndpoint = "admin/mongo/infer-territory-control";
 
     private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
