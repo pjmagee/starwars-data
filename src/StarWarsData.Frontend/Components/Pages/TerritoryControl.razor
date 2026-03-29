@@ -35,14 +35,7 @@
                 @foreach (var (name, info) in _factionInfo)
                 {
                     <div class="d-flex align-center gap-2" style="margin-bottom: 4px;">
-                        @if (info.IconUrl is not null)
-                        {
-                            <img src="@info.IconUrl" alt="@name" style="width:16px;height:16px;filter:brightness(0) invert(1) opacity(0.8);" />
-                        }
-                        else
-                        {
-                            <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:@info.Color;border:1px solid rgba(255,255,255,0.3);"></span>
-                        }
+                        <FactionIcon Faction="@name" Color="@info.Color" Size="16" />
                         @if (info.WikiUrl is not null)
                         {
                             <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
@@ -67,14 +60,7 @@
                         {
                             var fi = _factionInfo.GetValueOrDefault(f.Faction);
                             <div class="d-flex align-center gap-2 mt-2">
-                                @if (fi?.IconUrl is not null)
-                                {
-                                    <img src="@fi.IconUrl" alt="@f.Faction" style="width:18px;height:18px;filter:brightness(0) invert(1) opacity(0.8);" />
-                                }
-                                else
-                                {
-                                    <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:@f.Color;border:1px solid rgba(255,255,255,0.3);"></span>
-                                }
+                                    <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="20" />
                                 <div>
                                     @if (fi?.WikiUrl is not null)
                                     {
