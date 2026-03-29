@@ -14,6 +14,9 @@ public class AuthTokenDelegatingHandler(
     {
         var httpContext = httpContextAccessor.HttpContext;
 
+        logger.LogWarning("AuthTokenHandler invoked for {Url}. HttpContext={HasCtx}",
+            request.RequestUri, httpContext is not null);
+
         if (httpContext is null)
         {
             logger.LogWarning("HttpContext is null — cannot attach token to {Url}", request.RequestUri);
@@ -21,7 +24,7 @@ public class AuthTokenDelegatingHandler(
         else
         {
             var isAuthenticated = httpContext.User.Identity?.IsAuthenticated == true;
-            logger.LogDebug("HttpContext available. Authenticated: {IsAuth}, User: {User}",
+            logger.LogWarning("HttpContext available. Authenticated: {IsAuth}, User: {User}",
                 isAuthenticated, httpContext.User.Identity?.Name);
 
             if (isAuthenticated)
@@ -31,12 +34,11 @@ public class AuthTokenDelegatingHandler(
                 {
                     request.Headers.Authorization =
                         new AuthenticationHeaderValue("Bearer", accessToken);
-                    logger.LogDebug("Attached Bearer token ({Length} chars) to {Url}",
+                    logger.LogWarning("Attached Bearer token ({Length} chars) to {Url}",
                         accessToken.Length, request.RequestUri);
                 }
                 else
                 {
-                    // Check what tokens ARE available
                     var idToken = await httpContext.GetTokenAsync("id_token");
                     var refreshToken = await httpContext.GetTokenAsync("refresh_token");
                     logger.LogWarning(

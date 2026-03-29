@@ -95,7 +95,7 @@ builder
 
 // Register a named HttpClient for the API service
 // RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
-builder.Services.AddScoped<AuthTokenDelegatingHandler>();
+builder.Services.AddTransient<AuthTokenDelegatingHandler>();
 #pragma warning disable EXTEXP0001
 builder
     .Services.AddHttpClient(
