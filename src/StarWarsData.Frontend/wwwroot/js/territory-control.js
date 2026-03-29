@@ -30,10 +30,6 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
         .attr('width', width).attr('height', height)
         .style('background', '#0a0a1a');
 
-    const defs = svg.append('defs');
-    defs.append('filter').attr('id', 'territory-glow')
-        .append('feGaussianBlur').attr('stdDeviation', '4').attr('result', 'blur');
-
     const g = svg.append('g');
     const bgLayer = g.append('g').attr('class', 'bg-layer');
     const regionLayer = g.append('g').attr('class', 'region-layer');
@@ -59,7 +55,7 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
         .attr('preserveAspectRatio', 'xMidYMid slice')
         .attr('opacity', 0.3);
 
-    // Region background cells
+    // Region background — subtle outlines only
     if (regionCells) {
         for (const region of regionCells) {
             const color = getRegionColor(region.name, regionCells);
@@ -67,8 +63,8 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
                 regionLayer.append('rect')
                     .attr('x', col * cellW).attr('y', row * cellH)
                     .attr('width', cellW).attr('height', cellH)
-                    .attr('fill', color).attr('fill-opacity', 0.03)
-                    .attr('stroke', color).attr('stroke-opacity', 0.08)
+                    .attr('fill', 'none')
+                    .attr('stroke', color).attr('stroke-opacity', 0.06)
                     .attr('stroke-width', 0.5);
             }
             // Region name at centroid
@@ -77,40 +73,27 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
             regionLayer.append('text')
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', '#fff').attr('fill-opacity', 0.35)
+                .attr('fill', '#fff').attr('fill-opacity', 0.2)
                 .attr('font-size', '16px').attr('font-weight', '700')
-                .attr('paint-order', 'stroke').attr('stroke', 'rgba(0,0,0,0.6)')
+                .attr('paint-order', 'stroke').attr('stroke', 'rgba(0,0,0,0.5)')
                 .attr('stroke-width', '3px')
                 .text(region.name);
         }
     }
 
-    // Grid lines and labels
+    // Grid lines only (no column/row labels for cleaner look)
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     for (let c = 0; c <= cols; c++) {
         gridLayer.append('line')
             .attr('x1', c * cellW).attr('y1', 0)
             .attr('x2', c * cellW).attr('y2', worldH)
-            .attr('stroke', 'rgba(255,255,255,0.05)').attr('stroke-width', 0.5);
-        if (c < cols) {
-            gridLayer.append('text')
-                .attr('x', c * cellW + cellW / 2).attr('y', -8)
-                .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.25)')
-                .attr('font-size', '10px').text(alphabet[c]);
-        }
+            .attr('stroke', 'rgba(255,255,255,0.03)').attr('stroke-width', 0.5);
     }
     for (let r = 0; r <= rows; r++) {
         gridLayer.append('line')
             .attr('x1', 0).attr('y1', r * cellH)
             .attr('x2', worldW).attr('y2', r * cellH)
-            .attr('stroke', 'rgba(255,255,255,0.05)').attr('stroke-width', 0.5);
-        if (r < rows) {
-            gridLayer.append('text')
-                .attr('x', -12).attr('y', r * cellH + cellH / 2)
-                .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', 'rgba(255,255,255,0.25)')
-                .attr('font-size', '10px').text(r + 1);
-        }
+            .attr('stroke', 'rgba(255,255,255,0.03)').attr('stroke-width', 0.5);
     }
 
     // Zoom/pan
@@ -133,14 +116,15 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
 
 export function renderTerritoryLayer(yearData) {
     if (!_state) return;
-    const { territoryLayer, labelLayer, tooltip, cellW, cellH, factionColors, factionWikiUrls, factionIcons, dotNetRef } = _state;
+    const { territoryLayer, labelLayer, tooltip, cellW, cellH,
+            factionColors, factionWikiUrls, factionIcons, dotNetRef } = _state;
 
     territoryLayer.selectAll('*').remove();
     labelLayer.selectAll('*').remove();
 
     if (!yearData || !yearData.regions) return;
 
-    // Build a map of region name -> cells from the overview data
+    // Build region -> cells lookup
     const regionCellMap = {};
     if (_state.regionCells) {
         for (const region of _state.regionCells) {
@@ -152,54 +136,29 @@ export function renderTerritoryLayer(yearData) {
         const cells = regionCellMap[regionControl.region];
         if (!cells || cells.length === 0) continue;
 
-        // Use the dominant faction (first in list, sorted by control desc)
         const factions = regionControl.factions;
         if (!factions || factions.length === 0) continue;
 
         const dominant = factions[0];
-        const color = dominant.color || factionColors[dominant.faction] || '#888888';
-        const opacity = 0.08 + dominant.control * 0.35;
-        const strokeOpacity = 0.15 + dominant.control * 0.4;
-        const isContested = dominant.contested || factions.length > 1;
+        const color = dominant.color || factionColors[dominant.faction] || '#888';
+        const opacity = 0.1 + dominant.control * 0.3;
 
+        // Fill all cells with dominant faction color
         for (const [col, row] of cells) {
-            const x = col * cellW, y = row * cellH;
-
-            if (isContested && factions.length > 1) {
-                // Split cell diagonally for contested regions
-                const f1 = factions[0], f2 = factions[1];
-                const c1 = f1.color || factionColors[f1.faction] || '#888';
-                const c2 = f2.color || factionColors[f2.faction] || '#888';
-
-                // Top-left triangle (dominant faction)
-                territoryLayer.append('polygon')
-                    .attr('points', `${x},${y} ${x + cellW},${y} ${x},${y + cellH}`)
-                    .attr('fill', c1).attr('fill-opacity', 0.08 + f1.control * 0.35)
-                    .attr('stroke', c1).attr('stroke-opacity', 0.15 + f1.control * 0.4)
-                    .attr('stroke-width', 0.5);
-
-                // Bottom-right triangle (secondary faction)
-                territoryLayer.append('polygon')
-                    .attr('points', `${x + cellW},${y} ${x + cellW},${y + cellH} ${x},${y + cellH}`)
-                    .attr('fill', c2).attr('fill-opacity', 0.08 + f2.control * 0.35)
-                    .attr('stroke', c2).attr('stroke-opacity', 0.15 + f2.control * 0.4)
-                    .attr('stroke-width', 0.5);
-            } else {
-                // Single faction fill
-                territoryLayer.append('rect')
-                    .attr('x', x).attr('y', y)
-                    .attr('width', cellW).attr('height', cellH)
-                    .attr('fill', color).attr('fill-opacity', opacity)
-                    .attr('stroke', color).attr('stroke-opacity', strokeOpacity)
-                    .attr('stroke-width', 0.8);
-            }
-
-            // Invisible click target
             territoryLayer.append('rect')
-                .attr('x', x).attr('y', y)
+                .attr('x', col * cellW).attr('y', row * cellH)
                 .attr('width', cellW).attr('height', cellH)
-                .attr('fill', 'transparent')
-                .attr('cursor', 'pointer')
+                .attr('fill', color).attr('fill-opacity', opacity)
+                .attr('stroke', color).attr('stroke-opacity', opacity + 0.1)
+                .attr('stroke-width', 0.5);
+        }
+
+        // Invisible click/hover targets (one per cell)
+        for (const [col, row] of cells) {
+            territoryLayer.append('rect')
+                .attr('x', col * cellW).attr('y', row * cellH)
+                .attr('width', cellW).attr('height', cellH)
+                .attr('fill', 'transparent').attr('cursor', 'pointer')
                 .on('mouseover', (event) => {
                     let html = `<strong>${regionControl.region}</strong><br/>`;
                     for (const f of factions) {
@@ -232,36 +191,32 @@ export function renderTerritoryLayer(yearData) {
                 });
         }
 
-        // Region faction icon + label at centroid
+        // Centroid for icon + label (one per region, not per cell)
         const cx = cells.reduce((s, c) => s + c[0], 0) / cells.length * cellW + cellW / 2;
         const cy = cells.reduce((s, c) => s + c[1], 0) / cells.length * cellH + cellH / 2;
 
         if (dominant.control >= 0.3) {
             const iconSvg = factionIcons[dominant.faction];
-            const iconSize = 32;
+            const iconSize = cells.length > 20 ? 48 : cells.length > 8 ? 36 : 24;
 
             if (iconSvg) {
-                // Render faction insignia at centroid
                 const iconGroup = labelLayer.append('g')
-                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2 - 8}) scale(${iconSize/24})`);
+                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2 - 10}) scale(${iconSize/24})`)
+                    .attr('opacity', 0.6);
                 iconGroup.html(iconSvg);
-                iconGroup.selectAll('*')
-                    .attr('fill', color)
-                    .attr('stroke', color)
-                    .attr('fill-opacity', 0.7)
-                    .attr('stroke-opacity', 0.7);
-                // Drop shadow for readability
-                iconGroup.attr('filter', 'drop-shadow(0 0 4px rgba(0,0,0,0.8))');
+                iconGroup.selectAll('*').attr('fill', color).attr('stroke', color);
+                iconGroup.attr('filter', 'drop-shadow(0 0 6px rgba(0,0,0,0.9))');
             }
 
             // Faction name below icon
             labelLayer.append('text')
-                .attr('x', cx).attr('y', cy + (iconSvg ? 18 : 0))
-                .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', color).attr('fill-opacity', 0.8)
-                .attr('font-size', '11px').attr('font-weight', '600')
+                .attr('x', cx).attr('y', cy + (iconSvg ? iconSize/2 + 6 : 0))
+                .attr('text-anchor', 'middle').attr('dominant-baseline', 'hanging')
+                .attr('fill', color).attr('fill-opacity', 0.85)
+                .attr('font-size', cells.length > 20 ? '14px' : '11px')
+                .attr('font-weight', '700')
                 .attr('paint-order', 'stroke')
-                .attr('stroke', 'rgba(0,0,0,0.7)').attr('stroke-width', '2px')
+                .attr('stroke', 'rgba(0,0,0,0.8)').attr('stroke-width', '3px')
                 .text(dominant.faction);
         }
     }
