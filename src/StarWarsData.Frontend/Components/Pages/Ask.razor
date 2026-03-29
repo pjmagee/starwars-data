@@ -703,8 +703,15 @@
                         case "TEXT_MESSAGE_CONTENT":
                         {
                             var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-                            if (delta is not null && _currentAssistantMsg is not null)
+                            if (delta is not null)
+                            {
+                                if (_currentAssistantMsg is null)
+                                {
+                                    _currentAssistantMsg = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
+                                    _conversation.Add(_currentAssistantMsg);
+                                }
                                 _currentAssistantMsg.Text += delta;
+                            }
                             break;
                         }
                         case "TEXT_MESSAGE_END":
@@ -733,6 +740,18 @@
 
                 StateHasChanged();
                 await ScrollToBottom();
+            }
+
+            // If the stream completed but no assistant message was rendered,
+            // the guardrail or agent returned an empty/unrecognised response
+            var lastNonUser = _conversation.LastOrDefault(m => m.Role != ConversationRole.User);
+            if (lastNonUser is null || lastNonUser.Timestamp < _conversation.Last(m => m.Role == ConversationRole.User).Timestamp)
+            {
+                _conversation.Add(new ConversationMessage
+                {
+                    Role = ConversationRole.Error,
+                    Text = "No response was received. The request may have been blocked or the AI service may be unavailable. Please try again."
+                });
             }
 
             // Finalize: build AGUI replay messages for this turn
