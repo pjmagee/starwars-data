@@ -91,11 +91,12 @@ builder
     .AddScoped<EndpointService>()
     .AddScoped<NavigationService>()
     .AddSingleton<GlobalFilterService>()
-    .AddScoped<ChatHistoryService>();
+    .AddScoped<ChatHistoryService>()
+    .AddScoped<CircuitTokenProvider>();
 
 // Register a named HttpClient for the API service
 // RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
-builder.Services.AddTransient<AuthTokenDelegatingHandler>();
+builder.Services.AddScoped<AuthTokenDelegatingHandler>();
 #pragma warning disable EXTEXP0001
 builder
     .Services.AddHttpClient(
