@@ -12,15 +12,7 @@
     "Mandalorians": { "color": "#06b6d4", "wikiUrl": "https://starwars.fandom.com/wiki/Mandalorians", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/Mando%27ade.svg" },
     "Chiss Ascendancy": { "color": "#1e3a5f", "wikiUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy", "iconUrl": null }
   },
-  "eras": [
-    { "name": "Late Republic", "startYear": -100, "endYear": -23, "description": "The Galactic Republic governs most of the known galaxy from Coruscant. The Jedi Order serves as peacekeepers." },
-    { "name": "Clone Wars", "startYear": -22, "endYear": -19, "description": "Galaxy-wide civil war between the Republic and the Separatist Confederacy. The Clone Army fights the Droid Army across thousands of systems." },
-    { "name": "Imperial Era", "startYear": -19, "endYear": -1, "description": "Emperor Palpatine dissolves the Republic and establishes the Galactic Empire. The Jedi are hunted to near extinction." },
-    { "name": "Galactic Civil War", "startYear": 0, "endYear": 5, "description": "The Rebel Alliance wages war against the Empire. Key battles at Yavin, Hoth, and Endor reshape the galaxy." },
-    { "name": "New Republic Era", "startYear": 5, "endYear": 28, "description": "The New Republic restores democracy. The Empire signs the Galactic Concordance and retreats. A period of peace and rebuilding." },
-    { "name": "Cold War", "startYear": 28, "endYear": 34, "description": "The First Order secretly builds military power in the Unknown Regions while the New Republic demilitarises." },
-    { "name": "First Order War", "startYear": 34, "endYear": 35, "description": "The First Order destroys the Hosnian system and seizes galactic control. The Resistance fights back." }
-  ],
+  "_note_eras": "Eras are now loaded dynamically from the starwars-timeline-events.Era MongoDB collection (Canon only).",
   "entries": [
     {
       "faction": "Galactic Republic",

@@ -108,15 +108,8 @@ public class TerritoryControlService
         var regionList = await regions.ToListAsync(ct);
         var yearList = await years.ToListAsync(ct);
 
-        // Load eras from seed data
-        var seedFile = await LoadSeedFileAsync(ct);
-        var eras = seedFile?.Eras.Select(e => new TerritoryEra
-        {
-            Name = e.Name,
-            StartYear = e.StartYear,
-            EndYear = e.EndYear,
-            Description = e.Description,
-        }).ToList() ?? [];
+        // Load eras from the timeline-events Era collection (Canon only)
+        var eras = await GetCanonErasAsync(ct);
 
         return new TerritoryOverview
         {
@@ -150,9 +143,9 @@ public class TerritoryControlService
             .OrderBy(r => r.Region)
             .ToList();
 
-        // Load era from seed data
-        var seedData = await LoadSeedFileAsync(ct);
-        var era = seedData?.Eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
+        // Find the current era from the timeline-events Era collection
+        var eras = await GetCanonErasAsync(ct);
+        var era = eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
 
         // Query real events from the timeline database
         var keyEvents = await GetTimelineEventsForYearAsync(year, ct);
@@ -163,6 +156,8 @@ public class TerritoryControlService
             YearDisplay = year <= 0 ? $"{Math.Abs(year)} BBY" : $"{year} ABY",
             Era = era?.Name,
             EraDescription = era?.Description,
+            EraConflicts = era?.Conflicts ?? [],
+            EraImportantEvents = era?.ImportantEvents ?? [],
             Regions = regionGroups,
             KeyEvents = keyEvents,
         };
@@ -172,6 +167,56 @@ public class TerritoryControlService
     {
         var seedData = await LoadSeedFileAsync(ct);
         return seedData?.Factions ?? new();
+    }
+
+    /// <summary>
+    /// Load canonical eras from the timeline-events Era collection.
+    /// Each era appears twice (start/end year), so we deduplicate by title.
+    /// </summary>
+    async Task<List<TerritoryEra>> GetCanonErasAsync(CancellationToken ct)
+    {
+        var eraCollection = _timelineDb.GetCollection<TimelineEvent>("Era");
+        var filter = Builders<TimelineEvent>.Filter.Eq(e => e.Continuity, Continuity.Canon);
+        var eraDocs = await eraCollection.Find(filter).ToListAsync(ct);
+
+        // Deduplicate by title — each era may have two docs (start + end year)
+        var grouped = eraDocs.GroupBy(e => e.Title ?? "");
+
+        var eras = new List<TerritoryEra>();
+        foreach (var group in grouped)
+        {
+            if (string.IsNullOrEmpty(group.Key)) continue;
+
+            var docs = group.ToList();
+            var sortKeys = docs.Select(d =>
+            {
+                var y = (int)(d.Year ?? 0);
+                return d.Demarcation == Demarcation.Bby ? -y : y;
+            }).OrderBy(k => k).ToList();
+
+            var yearsValue = docs.First().Properties
+                .FirstOrDefault(p => p.Label == "Years")?.Values.FirstOrDefault();
+            var conflicts = docs.First().Properties
+                .FirstOrDefault(p => p.Label == "Conflicts")?.Values ?? [];
+            var importantEvents = docs.First().Properties
+                .FirstOrDefault(p => p.Label == "Important events")?.Values ?? [];
+
+            eras.Add(new TerritoryEra
+            {
+                Name = group.Key,
+                StartYear = sortKeys.First(),
+                EndYear = sortKeys.Last(),
+                Description = yearsValue,
+                Conflicts = conflicts,
+                ImportantEvents = importantEvents,
+            });
+        }
+
+        // Filter to eras in our territory range and sort
+        return eras
+            .Where(e => e.EndYear >= -100 && e.StartYear <= 35)
+            .OrderBy(e => e.StartYear)
+            .ToList();
     }
 
     /// <summary>
@@ -258,25 +303,7 @@ public class TerritoryControlService
     record SeedData
     {
         public Dictionary<string, FactionInfo> Factions { get; init; } = new();
-        public List<SeedEra> Eras { get; init; } = [];
-        public List<SeedKeyEvent> KeyEvents { get; init; } = [];
         public List<SeedEntry> Entries { get; init; } = [];
-    }
-
-    record SeedEra
-    {
-        public string Name { get; init; } = string.Empty;
-        public int StartYear { get; init; }
-        public int EndYear { get; init; }
-        public string? Description { get; init; }
-    }
-
-    record SeedKeyEvent
-    {
-        public int Year { get; init; }
-        public string Title { get; init; } = string.Empty;
-        public string? Description { get; init; }
-        public string? WikiUrl { get; init; }
     }
 
     public record FactionInfo

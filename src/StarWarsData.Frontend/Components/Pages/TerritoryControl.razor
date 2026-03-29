@@ -65,10 +65,33 @@
                     </MudChip>
                     @if (_yearData.EraDescription is not null)
                     {
-                        <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
                             @_yearData.EraDescription
                         </MudText>
                     }
+                    @if (_yearData.EraConflicts.Count > 0)
+                    {
+                        <MudText Typo="Typo.caption" Style="font-weight:600; opacity:0.6;" Class="mb-1">Conflicts</MudText>
+                        <div class="d-flex flex-wrap gap-1 mb-2">
+                            @foreach (var conflict in _yearData.EraConflicts)
+                            {
+                                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Error"
+                                         Style="font-size:10px; height:20px;">@conflict</MudChip>
+                            }
+                        </div>
+                    }
+                    @if (_yearData.EraImportantEvents.Count > 0)
+                    {
+                        <MudText Typo="Typo.caption" Style="font-weight:600; opacity:0.6;" Class="mb-1">Era Milestones</MudText>
+                        <div class="d-flex flex-wrap gap-1 mb-2">
+                            @foreach (var evt in _yearData.EraImportantEvents)
+                            {
+                                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Info"
+                                         Style="font-size:10px; height:20px;">@evt</MudChip>
+                            }
+                        </div>
+                    }
+                    <MudDivider Class="my-2" />
                 }
 
                 @* Events for this year (from Wookieepedia timeline data) *@
@@ -435,6 +458,9 @@
         public string Name { get; init; } = "";
         public int StartYear { get; init; }
         public int EndYear { get; init; }
+        public string? Description { get; init; }
+        public List<string> Conflicts { get; init; } = [];
+        public List<string> ImportantEvents { get; init; } = [];
     }
 
     record TerritoryYearDto
@@ -443,6 +469,8 @@
         public string YearDisplay { get; init; } = "";
         public string? Era { get; init; }
         public string? EraDescription { get; init; }
+        public List<string> EraConflicts { get; init; } = [];
+        public List<string> EraImportantEvents { get; init; } = [];
         public List<TerritoryRegionDto> Regions { get; init; } = [];
         public List<KeyEventDto> KeyEvents { get; init; } = [];
     }
