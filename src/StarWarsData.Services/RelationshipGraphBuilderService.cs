@@ -534,6 +534,50 @@ public class RelationshipGraphBuilderService
     const int PrepConcurrency = 20;
 
     /// <summary>
+    /// Priority infobox template types — these are processed first in batch submissions.
+    /// Set via <see cref="SetPriorityCategories"/> from the admin UI.
+    /// </summary>
+    static volatile string[] _priorityCategories = [];
+
+    /// <summary>
+    /// Set which infobox categories should be prioritised in batch submissions.
+    /// Pages matching these template types are processed before others.
+    /// </summary>
+    public static void SetPriorityCategories(IEnumerable<string> categories) =>
+        _priorityCategories = categories.ToArray();
+
+    /// <summary>
+    /// Get the current priority categories.
+    /// </summary>
+    public static string[] GetPriorityCategories() => _priorityCategories;
+
+    /// <summary>
+    /// Returns a sort priority for a page document. Higher = processed first.
+    /// Pages whose infobox template matches a priority category get boosted.
+    /// </summary>
+    static int GetTemplatePriority(BsonDocument doc)
+    {
+        var categories = _priorityCategories;
+        if (categories.Length == 0) return 0;
+
+        var template = doc.GetValue("infobox", BsonNull.Value)
+            .AsBsonDocument?.GetValue("Template", BsonNull.Value).AsString;
+        if (template is null) return 0;
+
+        // Template URLs look like "https://starwars.fandom.com/wiki/Template:Government"
+        // Extract the type name after "Template:"
+        var idx = template.LastIndexOf(':');
+        var typeName = idx >= 0 ? template[(idx + 1)..] : template;
+
+        for (var i = 0; i < categories.Length; i++)
+        {
+            if (typeName.Equals(categories[i], StringComparison.OrdinalIgnoreCase))
+                return categories.Length - i; // Higher priority = higher number
+        }
+        return 0;
+    }
+
+    /// <summary>
     /// Submit unprocessed pages to the OpenAI Batch API.
     /// Submits ONE batch at a time to avoid hitting the enqueued token quota.
     /// Call repeatedly (via Hangfire) to drip-feed batches as quota frees up.
@@ -603,6 +647,7 @@ public class RelationshipGraphBuilderService
                 var id = d["_id"].AsInt32;
                 return !processedSet.Contains(id) && !batchedPageIds.Contains(id);
             })
+            .OrderByDescending(d => GetTemplatePriority(d))
             .Take(MaxPagesPerBatch) // Only take one batch worth
             .ToList();
 
@@ -1453,6 +1498,46 @@ public class RelationshipGraphBuilderService
                         current.failed
                     );
                     break;
+            }
+        }
+
+        // True total pages per infobox type (from Pages collection, not crawl_state)
+        var typeTotalPipeline = new[]
+        {
+            new BsonDocument("$match", new BsonDocument("infobox.Template", new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument("$project", new BsonDocument("type",
+                new BsonDocument("$arrayElemAt", new BsonArray
+                {
+                    new BsonDocument("$split", new BsonArray { "$infobox.Template", ":" }),
+                    -1
+                }))),
+            new BsonDocument("$group", new BsonDocument
+            {
+                { "_id", "$type" },
+                { "count", new BsonDocument("$sum", 1) },
+            }),
+        };
+
+        var typeTotals = await _pages
+            .Aggregate<BsonDocument>(typeTotalPipeline, cancellationToken: ct)
+            .ToListAsync(ct);
+
+        var trueTotalByType = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var doc in typeTotals)
+        {
+            var type = doc["_id"].AsString;
+            trueTotalByType[type] = doc["count"].AsInt32;
+        }
+
+        // Merge true totals into byType — add entries for types not yet in crawl_state
+        foreach (var (type, total) in trueTotalByType)
+        {
+            if (!byType.ContainsKey(type))
+                byType[type] = (total, 0, 0, 0);
+            else
+            {
+                var current = byType[type];
+                byType[type] = (total, current.processed, current.skipped, current.failed);
             }
         }
 

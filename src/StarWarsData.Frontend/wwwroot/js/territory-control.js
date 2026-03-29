@@ -114,6 +114,55 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
         factionIcons: factionIcons || {},
         dotNetRef, zoom
     };
+
+    // Client-side hover listeners for info panel items (no SignalR round-trip)
+    setupPanelHoverListeners();
+}
+
+function setupPanelHoverListeners() {
+    const panel = document.querySelector('.territory-info-panel');
+    if (!panel) return;
+
+    let leaveTimeout = null;
+    let currentEl = null;
+
+    // mouseover/mouseout bubble correctly (unlike mouseenter/mouseleave)
+    panel.addEventListener('mouseover', (e) => {
+        const el = e.target.closest('[data-highlight-region], [data-highlight-col]');
+        if (!el || el === currentEl) return;
+
+        clearTimeout(leaveTimeout);
+        currentEl = el;
+
+        // Clear previous highlight before applying new one
+        clearHighlight();
+
+        const col = el.dataset.highlightCol;
+        const row = el.dataset.highlightRow;
+        const region = el.dataset.highlightRegion;
+        const color = el.dataset.highlightColor;
+
+        if (col && row) {
+            highlightCell(parseInt(col), parseInt(row), color || '#fff');
+        } else if (region) {
+            highlightRegion(region);
+        }
+    });
+
+    panel.addEventListener('mouseout', (e) => {
+        const el = e.target.closest('[data-highlight-region], [data-highlight-col]');
+        if (!el) return;
+
+        // Check if we're moving to another highlight target
+        const related = e.relatedTarget?.closest?.('[data-highlight-region], [data-highlight-col]');
+        if (related) return; // Moving to another item — mouseover will handle it
+
+        currentEl = null;
+        leaveTimeout = setTimeout(() => {
+            clearHighlight();
+            resetZoom();
+        }, 200);
+    });
 }
 
 export function renderTerritoryLayer(yearData) {
@@ -205,6 +254,111 @@ export function clearTerritoryLayer() {
     if (!_state) return;
     _state.territoryLayer.selectAll('*').remove();
     _state.labelLayer.selectAll('*').remove();
+}
+
+export function highlightRegion(regionName) {
+    if (!_state || !_state.regionCells) return;
+    clearHighlight();
+
+    const region = _state.regionCells.find(r => r.name === regionName);
+    if (!region) return;
+
+    const { cellW, cellH } = _state;
+    const hlLayer = _state.g.append('g').attr('class', 'highlight-layer');
+
+    for (const [col, row] of region.cells) {
+        hlLayer.append('rect')
+            .attr('x', col * cellW).attr('y', row * cellH)
+            .attr('width', cellW).attr('height', cellH)
+            .attr('fill', '#fff').attr('fill-opacity', 0)
+            .attr('stroke', '#fff').attr('stroke-opacity', 0.8)
+            .attr('stroke-width', 2)
+            .attr('rx', 2);
+    }
+
+    // Pulse animation
+    (function pulse() {
+        hlLayer.selectAll('rect')
+            .transition().duration(800)
+            .attr('fill-opacity', 0.15).attr('stroke-opacity', 1)
+            .transition().duration(800)
+            .attr('fill-opacity', 0).attr('stroke-opacity', 0.5)
+            .on('end', pulse);
+    })();
+
+    // Zoom to region
+    const xs = region.cells.map(c => c[0] * cellW);
+    const ys = region.cells.map(c => c[1] * cellH);
+    const x0 = Math.min(...xs), x1 = Math.max(...xs) + cellW;
+    const y0 = Math.min(...ys), y1 = Math.max(...ys) + cellH;
+    const pad = cellW;
+    const { svg, zoom } = _state;
+    const w = svg.attr('width'), h = svg.attr('height');
+    const scale = Math.min(w / (x1 - x0 + pad * 2), h / (y1 - y0 + pad * 2), 3);
+    const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    svg.transition().duration(600)
+        .call(zoom.transform, d3.zoomIdentity
+            .translate(w / 2, h / 2)
+            .scale(scale)
+            .translate(-cx, -cy));
+}
+
+export function clearHighlight() {
+    if (!_state) return;
+    _state.g.selectAll('.highlight-layer').remove();
+}
+
+export function highlightCell(col, row, color) {
+    if (!_state) return;
+    clearHighlight();
+
+    const { cellW, cellH, svg, zoom } = _state;
+    const hlLayer = _state.g.append('g').attr('class', 'highlight-layer');
+    const c = color || '#fff';
+
+    // Marker ring at cell center
+    const cx = col * cellW + cellW / 2;
+    const cy = row * cellH + cellH / 2;
+    const r = Math.min(cellW, cellH) * 0.4;
+
+    hlLayer.append('circle')
+        .attr('cx', cx).attr('cy', cy).attr('r', r)
+        .attr('fill', 'none').attr('stroke', c).attr('stroke-width', 3)
+        .attr('stroke-opacity', 0);
+
+    hlLayer.append('circle')
+        .attr('cx', cx).attr('cy', cy).attr('r', r * 0.3)
+        .attr('fill', c).attr('fill-opacity', 0);
+
+    // Pulse
+    (function pulse() {
+        hlLayer.selectAll('circle')
+            .transition().duration(600)
+            .attr('stroke-opacity', 1).attr('fill-opacity', 0.6)
+            .transition().duration(600)
+            .attr('stroke-opacity', 0.3).attr('fill-opacity', 0.2)
+            .on('end', pulse);
+    })();
+
+    // Zoom to cell
+    const w = svg.attr('width'), h = svg.attr('height');
+    const scale = Math.min(w / (cellW * 5), h / (cellH * 5), 4);
+    svg.transition().duration(600)
+        .call(zoom.transform, d3.zoomIdentity
+            .translate(w / 2, h / 2)
+            .scale(scale)
+            .translate(-cx, -cy));
+}
+
+export function resetZoom() {
+    if (!_state) return;
+    const { svg, zoom, worldW, worldH } = _state;
+    const w = svg.attr('width'), h = svg.attr('height');
+    const scale = Math.min(w / worldW, h / worldH) * 0.9;
+    const tx = (w - worldW * scale) / 2;
+    const ty = (h - worldH * scale) / 2;
+    svg.transition().duration(600)
+        .call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
 }
 
 function getRegionColor(name, regions) {

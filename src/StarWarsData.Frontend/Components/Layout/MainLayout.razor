@@ -14,7 +14,11 @@
         <MudText Typo="Typo.h5" Class="ml-3">Star Wars Data</MudText>
         <MudSpacer/>
         <ContinuityFilter />
+        <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
+            <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
+        </MudLink>
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" Title="GitHub" />
         <AuthorizeView>
             <Authorized>
                 <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
@@ -32,37 +36,23 @@
         </AuthorizeView>
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Width="280px">
-        <div class="d-flex flex-column" style="height:100%">
-            <div style="flex:1">
-                <NavMenu/>
-            </div>
-            <MudDivider />
-            <div class="pa-3">
-                <div class="d-flex align-center gap-2 mb-2">
-                    <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Color="Color.Secondary" Typo="Typo.caption">
-                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Size="Size.Small" Class="mr-1" /> GitHub
-                    </MudLink>
-                    <MudSpacer />
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
-                </div>
-                <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Style="display:inline-block;">
-                    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:32px;" />
-                </MudLink>
-            </div>
-        </div>
+        <NavMenu/>
     </MudDrawer>
-    <MudMainContent Class="pt-16 pa-4" Style="min-height: calc(100vh - var(--mud-appbar-height) - 48px);">
+    <MudMainContent Class="pt-16 pa-4">
         @Body
+        <footer class="d-flex justify-center align-center gap-3 pa-3 flex-wrap mt-4">
+            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                Made with ❤️ by
+                <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
+                &copy; @DateTime.UtcNow.Year
+            </MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+            <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
+            <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+        </footer>
     </MudMainContent>
-    <footer class="d-flex justify-center align-center gap-3 pa-3 flex-wrap">
-        <MudText Typo="Typo.caption" Color="Color.Secondary">
-            Made with ❤️ by
-            <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
-        </MudText>
-        <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
-        <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
-        <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
-    </footer>
 </MudLayout>
 
 <CookieConsent />

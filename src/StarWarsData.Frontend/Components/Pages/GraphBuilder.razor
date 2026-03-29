@@ -257,11 +257,27 @@
                     <ToolBarContent>
                         <MudText Typo="Typo.h5">Progress by Entity Type</MudText>
                         <MudSpacer />
+                        @if (_priorityDirty)
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small"
+                                       StartIcon="@Icons.Material.Filled.Save"
+                                       OnClick="SavePriorityCategories" Class="mr-3">
+                                Save Priority
+                            </MudButton>
+                        }
                         <MudTextField @bind-Value="_typeSearchString" Placeholder="Search types"
                                       Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
                                       IconSize="Size.Medium" Class="mt-0" Immediate="true" />
                     </ToolBarContent>
                     <Columns>
+                        <TemplateColumn T="TypeProgress" Title="Priority" Sortable="true"
+                                        SortBy="@(x => _priorityCategories.Contains(x.Type) ? 0 : 1)">
+                            <CellTemplate>
+                                <MudCheckBox T="bool" Value="@(_priorityCategories.Contains(context.Item.Type))"
+                                             ValueChanged="@(v => TogglePriority(context.Item.Type, v))"
+                                             Color="Color.Warning" Dense="true" />
+                            </CellTemplate>
+                        </TemplateColumn>
                         <TemplateColumn T="TypeProgress" Title="Type" Sortable="true" SortBy="@(x => x.Type)">
                             <CellTemplate>
                                 <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">@context.Item.Type</MudChip>
@@ -342,6 +358,8 @@
     private string _batchSearchString = "";
     private string _typeSearchString = "";
     private string _labelSearchString = "";
+    private List<string> _priorityCategories = [];
+    private bool _priorityDirty;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -363,6 +381,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadPriorities();
         await LoadData();
         _pollTimer = new Timer(async _ =>
         {
@@ -388,6 +407,40 @@
         finally
         {
             _loading = false;
+        }
+    }
+
+    private async Task LoadPriorities()
+    {
+        try
+        {
+            var cats = await Api.GetFromJsonAsync<string[]>("api/admin/graph/priority-categories");
+            _priorityCategories = cats?.ToList() ?? [];
+            _priorityDirty = false;
+        }
+        catch { }
+    }
+
+    private void TogglePriority(string type, bool enabled)
+    {
+        if (enabled && !_priorityCategories.Contains(type))
+            _priorityCategories.Add(type);
+        else if (!enabled)
+            _priorityCategories.Remove(type);
+        _priorityDirty = true;
+    }
+
+    private async Task SavePriorityCategories()
+    {
+        try
+        {
+            await Api.PostAsJsonAsync("api/admin/graph/priority-categories", _priorityCategories.ToArray());
+            _priorityDirty = false;
+            Snackbar.Add($"Priority set: {string.Join(", ", _priorityCategories)}", Severity.Success);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to save priorities: {ex.Message}", Severity.Error);
         }
     }
 

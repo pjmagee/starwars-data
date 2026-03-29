@@ -82,6 +82,8 @@ public class TerritoryOverview
     public List<string> Factions { get; set; } = [];
     public List<string> Regions { get; set; } = [];
     public List<TerritoryEra> Eras { get; set; } = [];
+    /// <summary>Sorted list of years that have territory snapshot data (sparse).</summary>
+    public List<int> AvailableYears { get; set; } = [];
 }
 
 public class TerritoryEra
@@ -101,4 +103,8 @@ public class TerritoryKeyEvent
     public string? Description { get; set; }
     public string? WikiUrl { get; set; }
     public string? Category { get; set; }
+    public string? Place { get; set; }
+    public string? Region { get; set; }
+    public int? Col { get; set; }
+    public int? Row { get; set; }
 }

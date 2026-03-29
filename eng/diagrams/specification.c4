@@ -1,0 +1,65 @@
+specification {
+  // Element kinds
+  element actor {
+    notation "Person"
+    style { shape person }
+  }
+  element system {
+    notation "System"
+    style { shape rectangle }
+  }
+  element server {
+    notation "Server"
+    style { shape rectangle; color slate }
+  }
+  element container {
+    notation "Container"
+    style { shape component }
+  }
+  element webapp {
+    notation "Web Application"
+    style { shape browser }
+  }
+  element api {
+    notation "API Service"
+    style { shape component; color indigo }
+  }
+  element database {
+    notation "Database"
+    style { shape cylinder }
+  }
+  element queue {
+    notation "Background Jobs"
+    style { shape queue; color secondary }
+  }
+  element external {
+    notation "External Service"
+    style { color muted; border dashed }
+  }
+  element pipeline {
+    notation "ETL Phase"
+    style { shape component; color amber }
+  }
+  element agent {
+    notation "AI Agent"
+    style { shape component; color green }
+  }
+  element toolkit {
+    notation "AI Toolkit"
+    style { shape component; color sky }
+  }
+
+  // Tags
+  tag ai
+  tag etl
+
+  // Relationship kinds
+  relationship async {
+    color amber
+    line dotted
+  }
+  relationship auth {
+    color green
+    line dashed
+  }
+}

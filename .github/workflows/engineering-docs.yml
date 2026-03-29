@@ -1,0 +1,158 @@
+name: Engineering Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "eng/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build LikeC4 diagrams
+        run: npx likec4@latest build -o ./site/diagrams eng/diagrams
+
+      - name: Build ADR pages
+        run: |
+          mkdir -p ./site/adr
+
+          # Generate ADR index
+          cat > ./site/adr/index.html <<'HEADER'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Architecture Decision Records</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+              h1 { border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+              a { color: #2563eb; text-decoration: none; }
+              a:hover { text-decoration: underline; }
+              ul { list-style: none; padding: 0; }
+              li { padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; }
+              .nav { margin-bottom: 2rem; }
+              .nav a { margin-right: 1.5rem; font-weight: 500; }
+            </style>
+          </head>
+          <body>
+            <nav class="nav"><a href="../">Home</a><a href="../diagrams/">Diagrams</a><a href="./">ADRs</a></nav>
+            <h1>Architecture Decision Records</h1>
+            <ul>
+          HEADER
+
+          for f in eng/adr/*.md; do
+            filename=$(basename "$f" .md)
+            title=$(head -1 "$f" | sed 's/^#\s*//')
+            echo "    <li><a href=\"${filename}.html\">${title}</a></li>" >> ./site/adr/index.html
+          done
+
+          cat >> ./site/adr/index.html <<'FOOTER'
+            </ul>
+          </body>
+          </html>
+          FOOTER
+
+          # Convert each ADR markdown to HTML
+          for f in eng/adr/*.md; do
+            filename=$(basename "$f" .md)
+            title=$(head -1 "$f" | sed 's/^#\s*//')
+            npx marked@latest "$f" | cat > ./site/adr/_body.html
+            cat > "./site/adr/${filename}.html" <<ADRTOP
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>${title}</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; line-height: 1.6; }
+              h1, h2, h3 { margin-top: 1.5em; }
+              h1 { border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+              a { color: #2563eb; text-decoration: none; }
+              a:hover { text-decoration: underline; }
+              code { background: #f3f4f6; padding: 0.15em 0.3em; border-radius: 3px; font-size: 0.9em; }
+              pre { background: #f3f4f6; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+              pre code { background: none; padding: 0; }
+              ul, ol { padding-left: 1.5rem; }
+              .nav { margin-bottom: 2rem; }
+              .nav a { margin-right: 1.5rem; font-weight: 500; }
+            </style>
+          </head>
+          <body>
+            <nav class="nav"><a href="../">Home</a><a href="../diagrams/">Diagrams</a><a href="./">ADRs</a></nav>
+          ADRTOP
+            cat ./site/adr/_body.html >> "./site/adr/${filename}.html"
+            echo "</body></html>" >> "./site/adr/${filename}.html"
+          done
+          rm -f ./site/adr/_body.html
+
+      - name: Build landing page
+        run: |
+          cat > ./site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Star Wars Data Explorer - Engineering</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+              h1 { border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+              a { color: #2563eb; text-decoration: none; font-weight: 500; }
+              a:hover { text-decoration: underline; }
+              .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+              .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; }
+              .card h2 { margin-top: 0; font-size: 1.25rem; }
+              .card p { color: #4b5563; margin-bottom: 1rem; }
+            </style>
+          </head>
+          <body>
+            <h1>Star Wars Data Explorer - Engineering</h1>
+            <p>Architecture documentation for <a href="https://swdata.ai">swdata.ai</a></p>
+            <div class="cards">
+              <div class="card">
+                <h2>Architecture Diagrams</h2>
+                <p>Interactive system architecture diagrams built with LikeC4. System landscape, API service, ETL pipeline, AI agent flows, and more.</p>
+                <a href="diagrams/">View Diagrams &rarr;</a>
+              </div>
+              <div class="card">
+                <h2>Architecture Decision Records</h2>
+                <p>Key architectural decisions, their context, and rationale. Documenting the "why" behind technical choices.</p>
+                <a href="adr/">View ADRs &rarr;</a>
+              </div>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

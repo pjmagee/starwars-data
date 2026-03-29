@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
@@ -17,6 +18,10 @@ public class TerritoryControlService
     readonly IMongoCollection<Page> _pages;
     readonly IMongoDatabase _timelineDb;
     readonly ILogger<TerritoryControlService> _logger;
+
+    // Cache location lookup to avoid re-querying ~19k locations on every year change
+    static Dictionary<string, (int col, int row, string? region)>? _locationLookupCache;
+    static readonly SemaphoreSlim _lookupLock = new(1, 1);
 
     static readonly string[] EventCollections = ["Battle", "War", "Campaign", "Treaty", "Event", "Duel", "Mission", "Government"];
 
@@ -47,13 +52,16 @@ public class TerritoryControlService
 
         var eras = await GetCanonErasAsync(ct);
 
+        var sortedYears = yearList.OrderBy(y => y).ToList();
+
         return new TerritoryOverview
         {
-            MinYear = yearList.Count > 0 ? yearList.Min() : 0,
-            MaxYear = yearList.Count > 0 ? yearList.Max() : 0,
+            MinYear = sortedYears.Count > 0 ? sortedYears[0] : 0,
+            MaxYear = sortedYears.Count > 0 ? sortedYears[^1] : 0,
             Factions = factionList.OrderBy(f => f).ToList(),
             Regions = regionList.OrderBy(r => r).ToList(),
             Eras = eras,
+            AvailableYears = sortedYears,
         };
     }
 
@@ -82,7 +90,8 @@ public class TerritoryControlService
         var eras = await GetCanonErasAsync(ct);
         var era = eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
 
-        var keyEvents = await GetTimelineEventsForYearAsync(year, ct);
+        var locationLookup = await GetOrBuildLocationLookupAsync(ct);
+        var keyEvents = await GetTimelineEventsForYearAsync(year, locationLookup, ct);
 
         return new TerritoryYearResponse
         {
@@ -128,8 +137,12 @@ public class TerritoryControlService
 
         foreach (var doc in colorDocs)
         {
-            var faction = doc["Faction"]?.AsString ?? doc["faction"]?.AsString;
-            var color = doc["Color"]?.AsString ?? doc["color"]?.AsString;
+            string? faction = doc.TryGetElement("Faction", out var fEl) ? fEl.Value.AsString
+                            : doc.TryGetElement("faction", out var fEl2) ? fEl2.Value.AsString
+                            : null;
+            string? color = doc.TryGetElement("Color", out var cEl) ? cEl.Value.AsString
+                          : doc.TryGetElement("color", out var cEl2) ? cEl2.Value.AsString
+                          : null;
             if (faction is not null && color is not null)
                 colorLookup.TryAdd(faction, color);
         }
@@ -199,7 +212,10 @@ public class TerritoryControlService
 
     // ── Timeline events for a year ──
 
-    async Task<List<TerritoryKeyEvent>> GetTimelineEventsForYearAsync(int year, CancellationToken ct)
+    async Task<List<TerritoryKeyEvent>> GetTimelineEventsForYearAsync(
+        int year,
+        Dictionary<string, (int col, int row, string? region)> locationLookup,
+        CancellationToken ct)
     {
         var absYear = Math.Abs(year);
         var demarcation = year <= 0 ? Demarcation.Bby : Demarcation.Aby;
@@ -233,8 +249,34 @@ public class TerritoryControlService
                 var wikiUrl = $"https://starwars.fandom.com/wiki/{Uri.EscapeDataString(title.Replace(' ', '_'))}";
 
                 var descParts = new List<string>();
-                if (!string.IsNullOrEmpty(place)) descParts.Add(place);
                 if (!string.IsNullOrEmpty(outcome)) descParts.Add(outcome);
+
+                // Resolve place to grid coordinates via location lookup
+                int? col = null, row = null;
+                string? region = null;
+                if (!string.IsNullOrEmpty(place))
+                {
+                    if (locationLookup.TryGetValue(place, out var loc))
+                    {
+                        col = loc.col;
+                        row = loc.row;
+                        region = loc.region;
+                    }
+                    else
+                    {
+                        // Try comma-separated parts (e.g. "Echo Base, Hoth" → try "Hoth")
+                        foreach (var part in place.Split(',', StringSplitOptions.TrimEntries))
+                        {
+                            if (locationLookup.TryGetValue(part, out var partLoc))
+                            {
+                                col = partLoc.col;
+                                row = partLoc.row;
+                                region = partLoc.region;
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 events.Add(new TerritoryKeyEvent
                 {
@@ -243,6 +285,10 @@ public class TerritoryControlService
                     Description = descParts.Count > 0 ? string.Join(". ", descParts) : null,
                     WikiUrl = wikiUrl,
                     Category = collectionName,
+                    Place = place,
+                    Region = region,
+                    Col = col,
+                    Row = row,
                 });
             }
         }
@@ -252,6 +298,81 @@ public class TerritoryControlService
             .ThenBy(e => e.Title)
             .Take(30)
             .ToList();
+    }
+
+    // ── Location lookup (same pattern as GalaxyEventsService, cached) ──
+
+    async Task<Dictionary<string, (int col, int row, string? region)>> GetOrBuildLocationLookupAsync(CancellationToken ct)
+    {
+        if (_locationLookupCache is not null) return _locationLookupCache;
+        await _lookupLock.WaitAsync(ct);
+        try
+        {
+            if (_locationLookupCache is not null) return _locationLookupCache;
+            _locationLookupCache = await BuildLocationLookupAsync(ct);
+            _logger.LogInformation("Territory: built location lookup with {Count} entries", _locationLookupCache.Count);
+            return _locationLookupCache;
+        }
+        finally { _lookupLock.Release(); }
+    }
+
+    async Task<Dictionary<string, (int col, int row, string? region)>> BuildLocationLookupAsync(CancellationToken ct)
+    {
+        var lookup = new Dictionary<string, (int col, int row, string? region)>(StringComparer.OrdinalIgnoreCase);
+
+        var sysFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression(":System$", "i")),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data", new BsonDocument("Label", "Grid square")));
+
+        var sysRecs = await _pages.Find(sysFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
+            .ToListAsync(ct);
+
+        foreach (var rec in sysRecs)
+        {
+            var grid = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square")?.Values.FirstOrDefault();
+            if (TryParseGridSquare(grid, out var col, out var row))
+            {
+                var region = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Region")?.Values.FirstOrDefault();
+                lookup.TryAdd(rec.Title, (col, row, region is not null ? MapService.NormalizeRegionName(region) : null));
+            }
+        }
+
+        var cbFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression(":CelestialBody$", "i")),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data", new BsonDocument("Label", "Grid square")));
+
+        var cbRecs = await _pages.Find(cbFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
+            .ToListAsync(ct);
+
+        foreach (var rec in cbRecs)
+        {
+            var grid = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Grid square")?.Values.FirstOrDefault();
+            if (TryParseGridSquare(grid, out var col, out var row))
+            {
+                var region = rec.Infobox?.Data.FirstOrDefault(d => d.Label == "Region")?.Values.FirstOrDefault();
+                lookup.TryAdd(rec.Title, (col, row, region is not null ? MapService.NormalizeRegionName(region) : null));
+            }
+        }
+
+        return lookup;
+    }
+
+    static bool TryParseGridSquare(string? gridSquare, out int col, out int row)
+    {
+        col = 0; row = 0;
+        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        var parts = gridSquare.Split('-', 2);
+        if (parts.Length != 2) return false;
+        var letter = parts[0].Trim().ToUpperInvariant();
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        col = letter[0] - 'A';
+        row = num - 1;
+        return true;
     }
 
     /// <summary>API response: enriched faction info with wiki URL and insignia from MongoDB.</summary>

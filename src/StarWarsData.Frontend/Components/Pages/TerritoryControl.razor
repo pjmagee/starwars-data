@@ -13,14 +13,16 @@
     }
     else
     {
-        @* Era chips *@
+        @* Era chips — only show eras that overlap with the data range *@
         <div style="display: flex; gap: 4px; padding: 8px 12px; flex-wrap: wrap; flex-shrink: 0;">
-            @foreach (var era in _overview.Eras)
+            @foreach (var era in _overview.Eras.Where(e => e.EndYear >= _overview.MinYear && e.StartYear <= _overview.MaxYear))
             {
-                var isActive = _year >= era.StartYear && _year <= era.EndYear;
+                var eraRef = era;
+                var isActive = _activeEra == era.Name;
+                var jumpYear = Math.Clamp(era.StartYear, _overview.MinYear, _overview.MaxYear);
                 <MudChip T="string" Size="Size.Small" Variant="@(isActive ? Variant.Filled : Variant.Outlined)"
                          Color="@(isActive ? Color.Primary : Color.Default)"
-                         OnClick="() => JumpToYear(era.StartYear)">
+                         OnClick="() => JumpToYear(jumpYear)">
                     @era.Name
                 </MudChip>
             }
@@ -32,20 +34,38 @@
             <div class="territory-canvas-wrap">
                 <div id="territory-canvas" class="territory-canvas"></div>
 
-                @* Faction legend (bottom-left) *@
-                <div class="territory-legend">
-                    @foreach (var (name, info) in _factionInfo)
+                @* Year display (top-left overlay) *@
+                <div class="territory-year-overlay">
+                    <span class="territory-year-text">@YearDisplay</span>
+                    @if (_yearData?.Era is not null)
                     {
-                        <div class="d-flex align-center gap-2" style="margin-bottom: 3px;">
-                            <FactionIcon Faction="@name" Color="@info.Color" Size="14" />
-                            @if (info.WikiUrl is not null)
+                        <span class="territory-era-text">@_yearData.Era</span>
+                    }
+                </div>
+
+                @* Faction legend (bottom-left) — only factions with territory this year *@
+                <div class="territory-legend">
+                    @foreach (var name in ActiveFactions)
+                    {
+                        var info = _factionInfo.GetValueOrDefault(name);
+                        var color = info?.Color ?? "#888";
+                        <div class="d-flex align-center gap-2" style="margin-bottom: 5px;">
+                            @if (info?.IconUrl is not null)
                             {
-                                <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
-                                         Style="@($"color:{info.Color};")">@name</MudLink>
+                                <img src="@info.IconUrl" alt="@name" style="width:24px; height:24px; object-fit:contain; flex-shrink:0;" />
                             }
                             else
                             {
-                                <MudText Typo="Typo.caption" Style="@($"color:{info.Color};")">@name</MudText>
+                                <FactionIcon Faction="@name" Color="@color" Size="22" />
+                            }
+                            @if (info?.WikiUrl is not null)
+                            {
+                                <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
+                                         Style="@($"color:{color};")">@name</MudLink>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.caption" Style="@($"color:{color};")">@name</MudText>
                             }
                         </div>
                     }
@@ -103,7 +123,8 @@
                     <div style="max-height: 300px; overflow-y: auto;">
                         @foreach (var evt in _yearData.KeyEvents)
                         {
-                            var borderColor = evt.Category switch
+                            var e = evt;
+                            var borderColor = e.Category switch
                             {
                                 "Battle" => "var(--mud-palette-error)",
                                 "War" => "#ff4444",
@@ -112,29 +133,44 @@
                                 "Government" => "var(--mud-palette-info)",
                                 _ => "var(--mud-palette-primary)",
                             };
+                            var hasLocation = e.Col is not null && e.Row is not null;
                             <MudPaper Class="pa-2 mb-2" Elevation="0"
-                                      Style="@($"background: rgba(255,255,255,0.04); border-left: 3px solid {borderColor};")">
+                                      Style="@($"background: rgba(255,255,255,0.04); border-left: 3px solid {borderColor}; {(hasLocation ? "cursor:pointer;" : "")}")"
+                                      data-highlight-region="@(e.Region)"
+                                      data-highlight-col="@(e.Col)"
+                                      data-highlight-row="@(e.Row)"
+                                      data-highlight-color="@(borderColor)"
+                                      >
                                 <div class="d-flex align-center gap-2">
-                                    @if (evt.Category is not null)
+                                    @if (e.Category is not null)
                                     {
                                         <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
-                                                 Style="@($"font-size:10px; height:18px; border-color:{borderColor}; color:{borderColor};")">
-                                            @evt.Category
+                                                 Style="@($"font-size:12px; height:22px; border-color:{borderColor}; color:{borderColor};")">
+                                            @e.Category
                                         </MudChip>
                                     }
-                                    @if (evt.WikiUrl is not null)
+                                    @if (e.WikiUrl is not null)
                                     {
-                                        <MudLink Href="@evt.WikiUrl" Target="_blank" Typo="Typo.caption"
-                                                 Style="font-weight:600;" Underline="Underline.Hover">@evt.Title</MudLink>
+                                        <MudLink Href="@e.WikiUrl" Target="_blank" Typo="Typo.body2"
+                                                 Style="font-weight:600;" Underline="Underline.Hover">@e.Title</MudLink>
                                     }
                                     else
                                     {
-                                        <MudText Typo="Typo.caption" Style="font-weight:600;">@evt.Title</MudText>
+                                        <MudText Typo="Typo.body2" Style="font-weight:600;">@e.Title</MudText>
+                                    }
+                                    @if (hasLocation)
+                                    {
+                                        <MudIcon Icon="@Icons.Material.Filled.MyLocation" Size="Size.Small"
+                                                 Style="opacity:0.4; font-size:16px;" Title="@($"{e.Place} — {e.Region}")" />
                                     }
                                 </div>
-                                @if (!string.IsNullOrEmpty(evt.Description))
+                                @if (!string.IsNullOrEmpty(e.Place))
                                 {
-                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-size:11px;">@evt.Description</MudText>
+                                    <MudText Typo="Typo.caption" Style="font-size:13px; opacity:0.6;">@e.Place @(e.Region is not null ? $"({e.Region})" : "")</MudText>
+                                }
+                                @if (!string.IsNullOrEmpty(e.Description))
+                                {
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-size:13px;">@e.Description</MudText>
                                 }
                             </MudPaper>
                         }
@@ -155,14 +191,23 @@
                 {
                     @foreach (var region in _yearData.Regions)
                     {
-                        <div class="mb-2">
-                            <MudText Typo="Typo.caption" Style="font-weight:600; opacity:0.7;">@region.Region</MudText>
+                        <div class="mb-2 territory-region-item"
+                             style="cursor:pointer; padding:4px 6px; border-radius:4px;"
+                             data-highlight-region="@region.Region">
+                            <MudText Typo="Typo.body2" Style="font-weight:600; opacity:0.7;">@region.Region</MudText>
                             @foreach (var f in region.Factions)
                             {
                                 var fi = _factionInfo.GetValueOrDefault(f.Faction);
                                 <div class="d-flex align-center gap-2 ml-2">
-                                    <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="12" />
-                                    <MudText Typo="Typo.caption" Style="@($"color:{f.Color};")">
+                                    @if (fi?.IconUrl is not null)
+                                    {
+                                        <img src="@fi.IconUrl" alt="@f.Faction" style="width:20px; height:20px; object-fit:contain; flex-shrink:0;" />
+                                    }
+                                    else
+                                    {
+                                        <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="18" />
+                                    }
+                                    <MudText Typo="Typo.body2" Style="@($"color:{f.Color};")">
                                         @f.Faction — @(Math.Round(f.Control * 100))%
                                         @if (f.Contested) { <em style="opacity:0.5;"> contested</em> }
                                     </MudText>
@@ -187,7 +232,14 @@
                         {
                             var fi = _factionInfo.GetValueOrDefault(f.Faction);
                             <div class="d-flex align-center gap-2 mt-1">
-                                <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="16" />
+                                @if (fi?.IconUrl is not null)
+                                {
+                                    <img src="@fi.IconUrl" alt="@f.Faction" style="width:28px; height:28px; object-fit:contain; flex-shrink:0;" />
+                                }
+                                else
+                                {
+                                    <FactionIcon Faction="@f.Faction" Color="@f.Color" Size="22" />
+                                }
                                 <div>
                                     @if (fi?.WikiUrl is not null)
                                     {
@@ -216,57 +268,115 @@
 
         @* Timeline scrubber *@
         <div class="territory-scrubber">
-            <div class="d-flex align-center gap-3" style="padding: 0 12px;">
+            @if (_autoplay)
+            {
+                <div class="territory-progress-bar" style="--duration: @(_frameTimeMs)ms;"></div>
+            }
+            @* Density bar — shows where data clusters across the timeline *@
+            @if (_overview.AvailableYears.Count > 1)
+            {
+                <div class="territory-density-bar">
+                    @for (var i = 0; i < _overview.AvailableYears.Count; i++)
+                    {
+                        var idx = i;
+                        var yr = _overview.AvailableYears[i];
+                        var isActive = yr == _year;
+                        <div class="density-tick @(isActive ? "active" : "")"
+                             title="@(yr <= 0 ? $"{Math.Abs(yr)} BBY" : $"{yr} ABY")"
+                             @onclick="() => JumpToIndex(idx)"></div>
+                    }
+                </div>
+            }
+            <div class="d-flex align-center gap-2" style="padding: 8px 16px;">
                 <MudIconButton Icon="@(_autoplay ? Icons.Material.Filled.Pause : Icons.Material.Filled.PlayArrow)"
-                               Color="Color.Primary" Size="Size.Small"
+                               Color="Color.Primary" Size="Size.Medium"
                                OnClick="ToggleAutoplay" />
-                <MudText Typo="Typo.subtitle2" Style="min-width: 80px; font-weight: 700; color: var(--mud-palette-primary);">
+                <MudIconButton Icon="@Icons.Material.Filled.SkipPrevious"
+                               Color="Color.Secondary" Size="Size.Small"
+                               OnClick="StepPrev" Disabled="_yearIndex <= 0" />
+                <MudText Typo="Typo.h6" Style="min-width: 120px; text-align:center; font-weight: 700; color: var(--mud-palette-primary);">
                     @YearDisplay
                 </MudText>
+                <MudIconButton Icon="@Icons.Material.Filled.SkipNext"
+                               Color="Color.Secondary" Size="Size.Small"
+                               OnClick="StepNext" Disabled="_yearIndex >= _overview.AvailableYears.Count - 1" />
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="min-width:60px;">
+                    @(_yearIndex + 1) / @_overview.AvailableYears.Count
+                </MudText>
                 <div style="flex: 1;">
-                    <MudSlider T="int" Value="@_year" ValueChanged="OnYearChanged"
-                               Min="_overview.MinYear" Max="_overview.MaxYear" Step="1"
-                               Style="margin: 0;" />
+                    <MudSlider T="int" Value="@_yearIndex" ValueChanged="OnYearIndexChanged"
+                               Min="0" Max="_overview.AvailableYears.Count - 1" Step="1"
+                               Style="margin: 0;" Size="Size.Medium" />
                 </div>
-                <MudToggleIconButton Icon="@Icons.Material.Filled.MusicNote"
-                                    ToggledIcon="@Icons.Material.Filled.MusicOff"
-                                    Toggled="_musicEnabled" ToggledChanged="ToggleMusic"
-                                    Size="Size.Small" Color="Color.Warning"
-                                    Title="Duel of the Fates" />
+                <MudMenu Icon="@Icons.Material.Filled.Speed" Size="Size.Medium" Color="Color.Secondary"
+                         AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.BottomCenter"
+                         Title="Frame speed" Style="flex-shrink: 0;">
+                    @foreach (var (label, ms) in FrameSpeeds)
+                    {
+                        var speed = ms;
+                        <MudMenuItem OnClick="() => SetFrameSpeed(speed)"
+                                     Style="@(_frameTimeMs == speed ? "font-weight:700; color:var(--mud-palette-primary);" : "")">
+                            @label per frame
+                        </MudMenuItem>
+                    }
+                </MudMenu>
+                <MudIconButton Icon="@Icons.Material.Filled.MusicNote"
+                               Size="Size.Medium" Color="Color.Warning"
+                               Href="https://www.youtube.com/watch?v=xlYCxbBZUCY&autoplay=1"
+                               Target="_blank"
+                               Title="Duel of the Fates" Style="flex-shrink: 0;" />
             </div>
         </div>
     }
 </div>
-
-@if (_musicEnabled)
-{
-    <div style="position:fixed;bottom:56px;right:12px;z-index:100;border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
-        <iframe width="280" height="60" allow="autoplay"
-                src="https://www.youtube.com/embed/xlYCxbBZUCY?autoplay=1&loop=1&playlist=xlYCxbBZUCY"
-                style="border:none;">
-        </iframe>
-    </div>
-}
 
 <style>
     .territory-outer {
         display: flex;
         flex-direction: column;
         height: calc(100vh - 64px);
+        margin: 0 -16px -16px -16px;
+        overflow: hidden;
     }
     .territory-content {
         flex: 1;
         display: flex;
         min-height: 0;
+        overflow: hidden;
     }
     .territory-canvas-wrap {
         flex: 1;
         position: relative;
         min-height: 0;
+        overflow: hidden;
     }
     .territory-canvas {
         width: 100%;
         height: 100%;
+    }
+    .territory-year-overlay {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        z-index: 10;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .territory-year-text {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: rgba(255,255,255,0.85);
+        line-height: 1;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 0 40px rgba(126,111,255,0.3);
+        letter-spacing: 1px;
+    }
+    .territory-era-text {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.5);
+        margin-top: 4px;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.8);
     }
     .territory-legend {
         position: absolute;
@@ -275,11 +385,12 @@
         background: rgba(10,10,26,0.85);
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 8px;
-        padding: 10px 14px;
+        padding: 12px 18px;
         z-index: 10;
+        font-size: 1rem;
     }
     .territory-info-panel {
-        width: 320px;
+        width: 400px;
         flex-shrink: 0;
         overflow-y: auto;
         padding: 16px;
@@ -290,7 +401,45 @@
         flex-shrink: 0;
         border-top: 1px solid var(--mud-palette-lines-default);
         background: var(--mud-palette-surface);
-        padding: 8px 0;
+        padding: 4px 0;
+    }
+    .territory-progress-bar {
+        height: 3px;
+        background: var(--mud-palette-primary);
+        animation: progress-fill var(--duration) linear infinite;
+        transform-origin: left;
+    }
+    @@keyframes progress-fill {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+    }
+    .territory-region-item:hover {
+        background: rgba(255,255,255,0.06);
+    }
+    .territory-density-bar {
+        display: flex;
+        align-items: flex-end;
+        height: 20px;
+        padding: 0 16px;
+        gap: 1px;
+        overflow: hidden;
+    }
+    .density-tick {
+        flex: 1;
+        min-width: 1px;
+        height: 6px;
+        background: rgba(126,111,255,0.25);
+        border-radius: 1px;
+        cursor: pointer;
+        transition: background 0.15s, height 0.15s;
+    }
+    .density-tick:hover {
+        background: rgba(126,111,255,0.7);
+        height: 14px;
+    }
+    .density-tick.active {
+        background: var(--mud-palette-primary);
+        height: 14px;
     }
 </style>
 
@@ -303,16 +452,26 @@
     private Dictionary<string, FactionInfoDto> _factionInfo = new();
     private List<RegionCellsDto>? _regionCells;
 
-    private int _year = -19;
+    private int _year = 0;
+    private int _yearIndex = 0;
     private bool _autoplay;
-    private bool _musicEnabled;
     private System.Threading.Timer? _autoplayTimer;
     private CancellationTokenSource? _debounceCts;
+    private int _frameTimeMs = 5000;
+    private static readonly (string Label, int Ms)[] FrameSpeeds =
+    [
+        ("1s", 1000), ("2s", 2000), ("5s", 5000), ("10s", 10000), ("30s", 30000)
+    ];
 
     private string? _selectedRegion;
     private List<FactionControlDto>? _selectedFactions;
 
     private string YearDisplay => _year <= 0 ? $"{Math.Abs(_year)} BBY" : $"{_year} ABY";
+    private string? _activeEra => _yearData?.Era;
+
+    private IEnumerable<string> ActiveFactions =>
+        _yearData?.Regions.SelectMany(r => r.Factions).Select(f => f.Faction).Distinct().OrderBy(f => f)
+        ?? Enumerable.Empty<string>();
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -338,9 +497,10 @@
         _factionInfo = factionsTask.Result ?? new();
         _regionCells = regionsTask.Result?.Regions;
 
-        if (_overview is not null && _overview.MinYear != 0)
+        if (_overview is not null && _overview.AvailableYears.Count > 0)
         {
-            _year = Math.Clamp(_year, _overview.MinYear, _overview.MaxYear);
+            _yearIndex = 0;
+            _year = _overview.AvailableYears[0];
         }
 
         StateHasChanged();
@@ -375,9 +535,12 @@
         catch { }
     }
 
-    private async Task OnYearChanged(int newYear)
+    private async Task OnYearIndexChanged(int newIndex)
     {
-        _year = newYear;
+        if (_overview is null || _overview.AvailableYears.Count == 0) return;
+        _yearIndex = Math.Clamp(newIndex, 0, _overview.AvailableYears.Count - 1);
+        _year = _overview.AvailableYears[_yearIndex];
+
         _debounceCts?.Cancel();
         _debounceCts = new CancellationTokenSource();
         var token = _debounceCts.Token;
@@ -393,8 +556,40 @@
 
     private void JumpToYear(int year)
     {
-        _year = year;
+        if (_overview is null || _overview.AvailableYears.Count == 0) return;
+        // Find nearest available year
+        var idx = _overview.AvailableYears.BinarySearch(year);
+        if (idx < 0) idx = Math.Clamp(~idx, 0, _overview.AvailableYears.Count - 1);
+        JumpToIndex(idx);
+    }
+
+    private void JumpToIndex(int idx)
+    {
+        if (_overview is null || _overview.AvailableYears.Count == 0) return;
+        _yearIndex = Math.Clamp(idx, 0, _overview.AvailableYears.Count - 1);
+        _year = _overview.AvailableYears[_yearIndex];
         _ = LoadYear();
+    }
+
+    private void StepPrev()
+    {
+        if (_yearIndex > 0) JumpToIndex(_yearIndex - 1);
+    }
+
+    private void StepNext()
+    {
+        if (_overview is not null && _yearIndex < _overview.AvailableYears.Count - 1)
+            JumpToIndex(_yearIndex + 1);
+    }
+
+    private void SetFrameSpeed(int ms)
+    {
+        _frameTimeMs = ms;
+        if (_autoplay)
+        {
+            _autoplayTimer?.Dispose();
+            _autoplayTimer = new System.Threading.Timer(AutoplayTick, null, _frameTimeMs, _frameTimeMs);
+        }
     }
 
     private void ToggleAutoplay()
@@ -402,29 +597,31 @@
         _autoplay = !_autoplay;
         if (_autoplay)
         {
-            _autoplayTimer = new System.Threading.Timer(async _ =>
-            {
-                await InvokeAsync(async () =>
-                {
-                    if (_overview is null) return;
-                    _year++;
-                    if (_year > _overview.MaxYear) _year = _overview.MinYear;
-                    StateHasChanged();
-                    await LoadYear();
-                });
-            }, null, 0, 800);
+            _ = InvokeAsync(LoadYear);
+            _autoplayTimer = new System.Threading.Timer(AutoplayTick, null, _frameTimeMs, _frameTimeMs);
         }
         else
         {
             _autoplayTimer?.Dispose();
             _autoplayTimer = null;
         }
+        StateHasChanged();
     }
 
-    private void ToggleMusic(bool enabled)
+    private async void AutoplayTick(object? _)
     {
-        _musicEnabled = enabled;
+        await InvokeAsync(async () =>
+        {
+            if (_overview is null || _overview.AvailableYears.Count == 0) return;
+            _yearIndex++;
+            if (_yearIndex >= _overview.AvailableYears.Count) _yearIndex = 0;
+            _year = _overview.AvailableYears[_yearIndex];
+            await LoadYear();
+            StateHasChanged();
+        });
     }
+
+
 
     [JSInvokable]
     public void OnTerritoryCellSelected(string region, List<FactionControlDto> factions)
@@ -451,6 +648,7 @@
         public List<string> Factions { get; init; } = [];
         public List<string> Regions { get; init; } = [];
         public List<TerritoryEraDto> Eras { get; init; } = [];
+        public List<int> AvailableYears { get; init; } = [];
     }
 
     record TerritoryEraDto
@@ -497,6 +695,10 @@
         public string? Description { get; init; }
         public string? WikiUrl { get; init; }
         public string? Category { get; init; }
+        public string? Place { get; init; }
+        public string? Region { get; init; }
+        public int? Col { get; init; }
+        public int? Row { get; init; }
     }
 
     record FactionInfoDto

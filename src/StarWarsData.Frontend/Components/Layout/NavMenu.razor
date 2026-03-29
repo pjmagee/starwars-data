@@ -1,5 +1,6 @@
 @using StarWarsData.Frontend.Services
 @inject NavigationService NavigationService
+@inject IWebHostEnvironment Environment
 
 <MudNavMenu>
     <MudText Typo="Typo.caption" Class="px-4 pt-3 pb-1" Color="Color.Secondary">Chat</MudText>
@@ -24,12 +25,13 @@
     <MudNavLink Href="/galactic-map" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Map">Grid Map</MudNavLink>
     <MudNavLink Href="/galactic-map-v2" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Explore">Interactive Map</MudNavLink>
     <MudNavLink Href="/galaxy-events" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Whatshot">Events Heatmap</MudNavLink>
-    <MudNavLink Href="/territory-control" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Flag">Territory Control</MudNavLink>
+    @if (Environment.IsDevelopment())
+    {
+        <MudNavLink Href="/territory-control" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Flag">Territory Control</MudNavLink>
+    }
 
     <MudDivider Class="my-2" />
     <MudNavLink Href="/about" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info">About</MudNavLink>
-    <MudNavLink Href="/privacy" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PrivacyTip">Privacy</MudNavLink>
-    <MudNavLink Href="/terms" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Gavel">Terms</MudNavLink>
 
     <AuthorizeView>
         <Authorized>

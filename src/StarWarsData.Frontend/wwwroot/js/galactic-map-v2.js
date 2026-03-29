@@ -82,7 +82,7 @@ export function initialize(containerId, overview, dotNetRef) {
     // Background
     bgLayer.append('image')
         .attr('href', BG_URL)
-        .attr('x', -80).attr('y', 40)
+        .attr('x', 0).attr('y', 0)
         .attr('width', worldW).attr('height', worldH)
         .attr('preserveAspectRatio', 'xMidYMid slice')
         .attr('opacity', 0.5);

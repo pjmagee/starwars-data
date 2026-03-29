@@ -5,7 +5,7 @@
     grid-auto-rows: 1fr;
     gap: 2px;
     background-size: cover;
-    background-position: -80px 40px;
+    background-position: center;
     background-image: url('/galaxy.png');
     width: 100%;
     max-width: 1200px;
@@ -47,7 +47,7 @@
     max-width: 1240px;
     margin: auto;
     background-size: cover;
-    background-position: -80px 40px;
+    background-position: center;
     background-image: url('/galaxy.png');
     gap: 2px;
 }
@@ -91,7 +91,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: calc(100vh - 64px); /* adjust for app bar height */
+    height: calc(100vh - 80px);
     box-sizing: border-box;
 }
 

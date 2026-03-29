@@ -1,0 +1,231 @@
+model {
+  // ── Actors ──
+  user = actor "User" {
+    description "Star Wars fan browsing the site"
+  }
+  admin = actor "Admin" {
+    description "Site operator (Patrick Magee)"
+  }
+
+  // ── External Services ──
+  wookieepedia = external "Wookieepedia" {
+    description "Star Wars wiki (starwars.fandom.com)"
+    technology "MediaWiki API"
+  }
+  openai = external "OpenAI API" {
+    description "GPT models, embeddings, Batch API"
+    technology "OpenAI"
+  }
+  cloudflare = external "Cloudflare Tunnel" {
+    description "Proxies swdata.ai and auth.magaoidh.pro"
+    technology "Cloudflare"
+  }
+
+  // ── Unraid Docker Server ──
+  unraid = server "Unraid Docker Server" {
+    description "Self-hosted home server running all services as Docker containers"
+
+    // ── Keycloak ──
+    keycloak = container "Keycloak" {
+      description "OIDC authentication at auth.magaoidh.pro"
+      technology "Keycloak"
+    }
+
+    // ── Star Wars Data System ──
+    swdata = system "Star Wars Data Explorer" {
+      description "Interactive data platform for exploring the Star Wars universe"
+
+      // ── Frontend ──
+      frontend = webapp "Frontend" {
+        description "Blazor Interactive Server with MudBlazor UI"
+        technology "Blazor Server / .NET 10"
+
+        askPage = container "Ask AI" {
+          #ai
+          description "Conversational AI agent with tool access"
+        }
+        explorerPages = container "Data Explorer Pages" {
+          description "Timeline, Data Tables, Character Timelines, Graph Explorer"
+        }
+        galaxyPages = container "Galaxy Pages" {
+          description "Grid Map, Interactive Map, Events Heatmap, Territory Control"
+        }
+        profilePage = container "Profile" {
+          description "BYOK key management, data export, delete all data"
+        }
+        adminPages = container "Admin Dashboard" {
+          description "ETL triggers, job monitoring, OpenAI status"
+        }
+      }
+
+      // ── API Service ──
+      apiservice = api "API Service" {
+        description "ASP.NET Core API with controllers, Hangfire, AI agent"
+        technology "ASP.NET Core / .NET 10"
+
+        controllers = container "Controllers" {
+          description "REST endpoints for all frontend features"
+        }
+        aiAgent = agent "AI Agent" {
+          #ai
+          description "Topic guardrail -> AI agent with tools -> AGUI streaming"
+          technology "Microsoft.Agents.AI + OpenAI"
+        }
+
+        // AI Agent Toolkits
+        componentToolkit = toolkit "Component Toolkit" {
+          #ai
+          description "Renders tables, charts, graphs, timelines, infoboxes in the UI"
+        }
+        dataExplorer = toolkit "Data Explorer Toolkit" {
+          #ai
+          description "Search and inspect pages, infobox data, properties, dates, links"
+        }
+        graphRag = toolkit "GraphRAG Toolkit" {
+          #ai
+          description "Entity resolution, graph traversal, shortest paths, vector search"
+        }
+        wikiSearch = toolkit "Wiki Search" {
+          #ai
+          description "Full-text regex search across wiki article content"
+        }
+
+        hangfire = queue "Hangfire Jobs" {
+          description "Background job scheduler and worker"
+          technology "Hangfire + MongoDB"
+        }
+
+        // ETL Pipeline Phases
+        phase1 = pipeline "Phase 1: Download Pages" {
+          #etl
+          description "Download pages from Wookieepedia MediaWiki API"
+        }
+        phase2 = pipeline "Phase 2: Template Views" {
+          #etl
+          description "Create MongoDB views per infobox template type"
+        }
+        phase3 = pipeline "Phase 3: Timeline Events" {
+          #etl
+          description "Build categorized timeline events from infoboxes"
+        }
+        phase4 = pipeline "Phase 4: Embeddings" {
+          #etl #ai
+          description "Create indexes, OpenAI embeddings, vector indexes"
+        }
+        phase5 = pipeline "Phase 5: Character Timelines" {
+          #etl #ai
+          description "AI-generated biographical timelines per character"
+        }
+        phase6 = pipeline "Phase 6: Relationship Graph" {
+          #etl #ai
+          description "OpenAI Batch API extracts entity relationships"
+        }
+        phase7 = pipeline "Phase 7: Territory Control" {
+          #etl
+          description "Infer faction territory from battle outcomes"
+        }
+      }
+
+      // ── MongoDB MCP Server ──
+      mongoMcp = container "MongoDB MCP Server" {
+        #ai
+        description "Sidecar container providing MongoDB tools to AI agent"
+        technology "Docker / HTTP transport"
+      }
+
+      // ── MongoDB Databases ──
+      mongodb = database "MongoDB" {
+        description "Self-hosted MongoDB server"
+        technology "MongoDB"
+
+        rawPages = database "starwars-raw-pages" {
+          description "Downloaded Wookieepedia pages + template views"
+        }
+        timelineEvents = database "starwars-timeline-events" {
+          description "Categorized timeline events per infobox type"
+        }
+        characterTimelines = database "starwars-character-timelines" {
+          description "AI-generated character biographical timelines"
+        }
+        relationshipGraph = database "starwars-relationship-graph" {
+          description "Knowledge graph: edges, labels, crawl state"
+        }
+        territoryControl = database "starwars-territory-control" {
+          description "Faction territory control snapshots by year"
+        }
+        chatSessions = database "starwars-chat-sessions" {
+          description "User chat history, settings, BYOK keys"
+        }
+        hangfireDb = database "starwars-hangfire-jobs" {
+          description "Hangfire job state and scheduling"
+        }
+      }
+    }
+  }
+
+  // ── Relationships: User flows ──
+  user -> cloudflare "Browses swdata.ai"
+  user -[auth]-> cloudflare "Signs in at auth.magaoidh.pro"
+  cloudflare -> unraid.swdata.frontend "Proxies swdata.ai"
+  cloudflare -[auth]-> unraid.keycloak "Proxies auth.magaoidh.pro"
+  unraid.swdata.frontend -[auth]-> unraid.keycloak "OIDC authentication"
+  unraid.swdata.frontend -> unraid.swdata.apiservice "API calls with X-User-Id header"
+
+  // ── Relationships: Frontend to API ──
+  unraid.swdata.frontend.askPage -> unraid.swdata.apiservice.aiAgent "SSE streaming via /kernel/stream"
+  unraid.swdata.frontend.explorerPages -> unraid.swdata.apiservice.controllers "REST API calls"
+  unraid.swdata.frontend.galaxyPages -> unraid.swdata.apiservice.controllers "REST API calls"
+  unraid.swdata.frontend.profilePage -> unraid.swdata.apiservice.controllers "User settings, export, delete"
+  unraid.swdata.frontend.adminPages -> unraid.swdata.apiservice.controllers "ETL triggers"
+
+  // ── Relationships: AI Agent to toolkits and external ──
+  unraid.swdata.apiservice.aiAgent -> openai "Chat completions"
+  unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.componentToolkit "Renders UI components"
+  unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.dataExplorer "Searches pages and infobox data"
+  unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.graphRag "Traverses knowledge graph"
+  unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.wikiSearch "Searches wiki articles"
+  unraid.swdata.apiservice.aiAgent -> unraid.swdata.mongoMcp "MongoDB query tools via MCP"
+
+  // ── Relationships: Toolkits to MongoDB ──
+  unraid.swdata.apiservice.dataExplorer -> unraid.swdata.mongodb.rawPages "Queries pages and infoboxes"
+  unraid.swdata.apiservice.dataExplorer -> unraid.swdata.mongodb.timelineEvents "Lists timeline categories"
+  unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.relationshipGraph "Traverses edges and labels"
+  unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.rawPages "Vector search on article chunks"
+  unraid.swdata.apiservice.wikiSearch -> unraid.swdata.mongodb.rawPages "Full-text search on pages"
+  unraid.swdata.mongoMcp -> unraid.swdata.mongodb "Read-only MongoDB access"
+
+  // ── Relationships: ETL pipeline data flow ──
+  unraid.swdata.apiservice.phase1 -> wookieepedia "Downloads pages via MediaWiki API"
+  unraid.swdata.apiservice.phase1 -> unraid.swdata.mongodb.rawPages "Writes raw pages"
+  unraid.swdata.apiservice.phase2 -> unraid.swdata.mongodb.rawPages "Creates template views"
+  unraid.swdata.apiservice.phase3 -> unraid.swdata.mongodb.rawPages "Reads infobox data"
+  unraid.swdata.apiservice.phase3 -> unraid.swdata.mongodb.timelineEvents "Writes timeline events"
+  unraid.swdata.apiservice.phase4 -> unraid.swdata.mongodb.rawPages "Reads article content"
+  unraid.swdata.apiservice.phase4 -[async]-> openai "Generates embeddings"
+  unraid.swdata.apiservice.phase5 -> unraid.swdata.mongodb.rawPages "Reads character pages"
+  unraid.swdata.apiservice.phase5 -[async]-> openai "AI timeline generation"
+  unraid.swdata.apiservice.phase5 -> unraid.swdata.mongodb.characterTimelines "Writes timelines"
+  unraid.swdata.apiservice.phase6 -> unraid.swdata.mongodb.rawPages "Reads article content"
+  unraid.swdata.apiservice.phase6 -[async]-> openai "Batch API relationship extraction"
+  unraid.swdata.apiservice.phase6 -> unraid.swdata.mongodb.relationshipGraph "Writes edges + labels"
+  unraid.swdata.apiservice.phase7 -> unraid.swdata.mongodb.timelineEvents "Reads battle outcomes"
+  unraid.swdata.apiservice.phase7 -> unraid.swdata.mongodb.rawPages "Reads locations for grid mapping"
+  unraid.swdata.apiservice.phase7 -> unraid.swdata.mongodb.territoryControl "Writes territory snapshots"
+
+  // ── Relationships: Hangfire ──
+  unraid.swdata.apiservice.hangfire -> unraid.swdata.mongodb.hangfireDb "Job state"
+  unraid.swdata.apiservice.hangfire -[async]-> unraid.swdata.apiservice.phase1 "Daily incremental sync (03:00 UTC)"
+  unraid.swdata.apiservice.hangfire -[async]-> unraid.swdata.apiservice.phase6 "Daily graph builder (04:00 UTC)"
+  unraid.swdata.apiservice.hangfire -[async]-> unraid.swdata.apiservice.phase4 "Daily article chunking (05:00 UTC)"
+
+  // ── Relationships: Query paths ──
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.rawPages "Reads pages, categories, search"
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.timelineEvents "Reads timeline events"
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.characterTimelines "Reads character timelines"
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.relationshipGraph "Reads graph data"
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.territoryControl "Reads territory snapshots"
+  unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.chatSessions "Reads/writes user sessions"
+
+  // ── Admin flow ──
+  admin -> unraid.swdata.frontend.adminPages "Triggers ETL phases"
+}

@@ -538,6 +538,18 @@ public class AdminController(
         }
     }
 
+    [HttpGet("graph/priority-categories")]
+    public ActionResult<string[]> GetPriorityCategories()
+        => Ok(RelationshipGraphBuilderService.GetPriorityCategories());
+
+    [HttpPost("graph/priority-categories")]
+    public ActionResult SetPriorityCategories([FromBody] string[] categories)
+    {
+        RelationshipGraphBuilderService.SetPriorityCategories(categories);
+        logger.LogInformation("Graph builder priority categories set: {Categories}", string.Join(", ", categories));
+        return Ok(new { message = $"Priority set: {string.Join(", ", categories)}" });
+    }
+
     // === Territory Control ===
 
     [HttpPost("mongo/infer-territory-control")]

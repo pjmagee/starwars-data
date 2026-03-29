@@ -1,10 +1,7 @@
 {
-  "permissions": {
-    "allow": [
-      "mcp__MongoDB__list-databases",
-      "Bash(powershell -Command \"[System.Environment]::GetEnvironmentVariable\\(''MDB_MCP_CONNECTION_STRING'', ''User''\\)\")",
-      "mcp__MongoDB__connect",
-      "mcp__MongoDB__list-collections"
-    ]
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   }
 }
