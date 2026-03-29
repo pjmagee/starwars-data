@@ -79,6 +79,7 @@ builder
     .AddScoped<TimelineService>()
     .AddScoped<MapService>()
     .AddScoped<GalaxyEventsService>()
+    .AddScoped<TerritoryControlService>()
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();

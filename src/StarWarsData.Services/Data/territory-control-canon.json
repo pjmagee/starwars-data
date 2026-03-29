@@ -1,0 +1,279 @@
+{
+  "description": "Canon galactic territory control by faction, region, and year range. Control values: 1.0 = full control, 0.5-0.9 = partial/contested.",
+  "factions": {
+    "Galactic Republic": "#3b82f6",
+    "Confederacy of Independent Systems": "#ef4444",
+    "Galactic Empire": "#6b7280",
+    "Alliance to Restore the Republic": "#f97316",
+    "New Republic": "#22c55e",
+    "First Order": "#991b1b",
+    "Resistance": "#f59e0b",
+    "Hutt Space": "#a855f7",
+    "Mandalorians": "#06b6d4",
+    "Chiss Ascendancy": "#1e3a5f"
+  },
+  "eras": [
+    { "name": "Late Republic", "startYear": -100, "endYear": -23 },
+    { "name": "Clone Wars", "startYear": -22, "endYear": -19 },
+    { "name": "Imperial Era", "startYear": -19, "endYear": -1 },
+    { "name": "Galactic Civil War", "startYear": 0, "endYear": 5 },
+    { "name": "New Republic Era", "startYear": 5, "endYear": 28 },
+    { "name": "Cold War", "startYear": 28, "endYear": 34 },
+    { "name": "First Order War", "startYear": 34, "endYear": 35 }
+  ],
+  "entries": [
+    {
+      "faction": "Galactic Republic",
+      "yearStart": -100,
+      "yearEnd": -22,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 1.0,
+        "Colonies": 1.0,
+        "Inner Rim": 1.0,
+        "Expansion Region": 1.0,
+        "Mid Rim": 1.0,
+        "Outer Rim Territories": 0.7
+      },
+      "note": "Republic dominance across known galaxy"
+    },
+    {
+      "faction": "Galactic Republic",
+      "yearStart": -22,
+      "yearEnd": -19,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 1.0,
+        "Colonies": 0.9,
+        "Inner Rim": 0.8,
+        "Expansion Region": 0.7,
+        "Mid Rim": 0.6,
+        "Outer Rim Territories": 0.4
+      },
+      "contested": true,
+      "note": "Clone Wars — contested with Separatists"
+    },
+    {
+      "faction": "Confederacy of Independent Systems",
+      "yearStart": -22,
+      "yearEnd": -19,
+      "regions": {
+        "Outer Rim Territories": 0.5,
+        "Mid Rim": 0.3,
+        "Expansion Region": 0.2,
+        "Inner Rim": 0.1,
+        "Colonies": 0.1
+      },
+      "contested": true,
+      "note": "Separatist-held territories during Clone Wars"
+    },
+    {
+      "faction": "Galactic Empire",
+      "yearStart": -19,
+      "yearEnd": -4,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 1.0,
+        "Colonies": 1.0,
+        "Inner Rim": 1.0,
+        "Expansion Region": 1.0,
+        "Mid Rim": 1.0,
+        "Outer Rim Territories": 0.9,
+        "Wild Space": 0.3
+      },
+      "note": "Imperial consolidation — near-total galactic control"
+    },
+    {
+      "faction": "Galactic Empire",
+      "yearStart": -4,
+      "yearEnd": 0,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 1.0,
+        "Colonies": 1.0,
+        "Inner Rim": 1.0,
+        "Expansion Region": 1.0,
+        "Mid Rim": 0.95,
+        "Outer Rim Territories": 0.85,
+        "Wild Space": 0.3
+      },
+      "contested": true,
+      "note": "Growing Rebellion — Empire still dominant"
+    },
+    {
+      "faction": "Alliance to Restore the Republic",
+      "yearStart": -4,
+      "yearEnd": 0,
+      "regions": {
+        "Outer Rim Territories": 0.1,
+        "Mid Rim": 0.05
+      },
+      "contested": true,
+      "note": "Rebel cells and hidden bases in Outer Rim"
+    },
+    {
+      "faction": "Galactic Empire",
+      "yearStart": 0,
+      "yearEnd": 4,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 1.0,
+        "Colonies": 0.95,
+        "Inner Rim": 0.9,
+        "Expansion Region": 0.9,
+        "Mid Rim": 0.85,
+        "Outer Rim Territories": 0.7,
+        "Wild Space": 0.2
+      },
+      "contested": true,
+      "note": "Post-Yavin — Empire weakening but still dominant"
+    },
+    {
+      "faction": "Alliance to Restore the Republic",
+      "yearStart": 0,
+      "yearEnd": 4,
+      "regions": {
+        "Outer Rim Territories": 0.2,
+        "Mid Rim": 0.1,
+        "Expansion Region": 0.05
+      },
+      "contested": true,
+      "note": "Rebellion growing — mobile fleet operations"
+    },
+    {
+      "faction": "Galactic Empire",
+      "yearStart": 4,
+      "yearEnd": 5,
+      "regions": {
+        "Deep Core": 1.0,
+        "Core Worlds": 0.8,
+        "Colonies": 0.7,
+        "Inner Rim": 0.6,
+        "Expansion Region": 0.5,
+        "Mid Rim": 0.4,
+        "Outer Rim Territories": 0.3
+      },
+      "contested": true,
+      "note": "Post-Endor Imperial fragmentation"
+    },
+    {
+      "faction": "New Republic",
+      "yearStart": 4,
+      "yearEnd": 5,
+      "regions": {
+        "Outer Rim Territories": 0.5,
+        "Mid Rim": 0.4,
+        "Expansion Region": 0.3,
+        "Inner Rim": 0.2,
+        "Colonies": 0.2,
+        "Core Worlds": 0.1
+      },
+      "contested": true,
+      "note": "New Republic rapidly expanding after Endor"
+    },
+    {
+      "faction": "New Republic",
+      "yearStart": 5,
+      "yearEnd": 28,
+      "regions": {
+        "Deep Core": 0.8,
+        "Core Worlds": 1.0,
+        "Colonies": 1.0,
+        "Inner Rim": 1.0,
+        "Expansion Region": 1.0,
+        "Mid Rim": 0.9,
+        "Outer Rim Territories": 0.7
+      },
+      "note": "New Republic era — Galactic Concordance signed, demilitarization"
+    },
+    {
+      "faction": "Galactic Empire",
+      "yearStart": 5,
+      "yearEnd": 21,
+      "regions": {
+        "Deep Core": 0.2,
+        "Core Worlds": 0.05
+      },
+      "note": "Imperial Remnant — confined to inner systems per Concordance"
+    },
+    {
+      "faction": "First Order",
+      "yearStart": 29,
+      "yearEnd": 34,
+      "regions": {
+        "Unknown Regions": 0.8
+      },
+      "note": "First Order building strength in Unknown Regions"
+    },
+    {
+      "faction": "New Republic",
+      "yearStart": 28,
+      "yearEnd": 34,
+      "regions": {
+        "Deep Core": 0.8,
+        "Core Worlds": 1.0,
+        "Colonies": 1.0,
+        "Inner Rim": 1.0,
+        "Expansion Region": 1.0,
+        "Mid Rim": 0.9,
+        "Outer Rim Territories": 0.7
+      },
+      "note": "New Republic complacent — unaware of First Order threat"
+    },
+    {
+      "faction": "First Order",
+      "yearStart": 34,
+      "yearEnd": 35,
+      "regions": {
+        "Deep Core": 0.8,
+        "Core Worlds": 0.9,
+        "Colonies": 0.9,
+        "Inner Rim": 0.8,
+        "Expansion Region": 0.8,
+        "Mid Rim": 0.7,
+        "Outer Rim Territories": 0.6,
+        "Unknown Regions": 1.0
+      },
+      "contested": true,
+      "note": "Post-Hosnian Cataclysm — First Order seizes control"
+    },
+    {
+      "faction": "Resistance",
+      "yearStart": 34,
+      "yearEnd": 35,
+      "regions": {
+        "Outer Rim Territories": 0.1,
+        "Mid Rim": 0.05
+      },
+      "contested": true,
+      "note": "Resistance fighting from hidden bases"
+    },
+    {
+      "faction": "Hutt Space",
+      "yearStart": -100,
+      "yearEnd": 35,
+      "regions": {
+        "Hutt Space": 0.9
+      },
+      "note": "Hutt Cartel maintains autonomous control throughout all eras"
+    },
+    {
+      "faction": "Chiss Ascendancy",
+      "yearStart": -100,
+      "yearEnd": 35,
+      "regions": {
+        "Unknown Regions": 0.3
+      },
+      "note": "Chiss Ascendancy controls portion of Unknown Regions"
+    },
+    {
+      "faction": "Mandalorians",
+      "yearStart": -100,
+      "yearEnd": -19,
+      "regions": {
+        "Outer Rim Territories": 0.05
+      },
+      "note": "Mandalore and surrounding system — neutral/Republic-aligned"
+    }
+  ]
+}

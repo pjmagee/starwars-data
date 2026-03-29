@@ -73,4 +73,9 @@ public class SettingsOptions
     /// Max pages to process per graph builder batch run
     /// </summary>
     public int GraphBuilderBatchSize { get; set; } = 100;
+
+    /// <summary>
+    /// The database for faction territory control snapshots
+    /// </summary>
+    public string TerritoryControlDb { get; set; } = "starwars-territory-control";
 }

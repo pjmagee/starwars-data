@@ -151,6 +151,19 @@ var apiService = builder
             IsHighlighted = false,
         }
     )
+    // Phase 7 — Territory Control
+    .WithHttpCommand(
+        path: "/api/admin/mongo/load-territory-data",
+        displayName: "7. Load Territory Control Data",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Loads curated faction territory control seed data into MongoDB. Safe to re-run (replaces existing data).",
+            IconName = "Globe",
+            IsHighlighted = false,
+        }
+    )
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-graph-indexes",
         displayName: "6d. Ensure Graph Indexes",
