@@ -1,0 +1,346 @@
+@page "/territory-control"
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<PageTitle>Territory Control — Star Wars Data</PageTitle>
+
+<div class="territory-outer">
+
+    @if (_overview is null)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+    }
+    else
+    {
+        @* Era quick-jump chips *@
+        <div style="display: flex; gap: 4px; padding: 8px 4px; flex-wrap: wrap; flex-shrink: 0;">
+            @foreach (var era in _overview.Eras)
+            {
+                var isActive = _year >= era.StartYear && _year <= era.EndYear;
+                <MudChip T="string" Size="Size.Small" Variant="@(isActive ? Variant.Filled : Variant.Outlined)"
+                         Color="@(isActive ? Color.Primary : Color.Default)"
+                         OnClick="() => JumpToYear(era.StartYear)">
+                    @era.Name
+                </MudChip>
+            }
+        </div>
+
+        @* Map canvas *@
+        <div class="territory-canvas-wrap">
+            <div id="territory-canvas" class="territory-canvas" @ref="_canvasRef"></div>
+
+            @* Faction legend *@
+            <div class="territory-legend">
+                @foreach (var kv in _factionColors)
+                {
+                    <div class="d-flex align-center gap-1" style="margin-bottom: 2px;">
+                        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:@kv.Value;"></span>
+                        <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.7);">@kv.Key</MudText>
+                    </div>
+                }
+            </div>
+
+            @* Selected region detail *@
+            @if (_selectedRegion is not null)
+            {
+                <div class="territory-detail">
+                    <MudText Typo="Typo.subtitle1" Style="font-weight:600; color:#fff;">@_selectedRegion</MudText>
+                    @if (_selectedFactions is not null)
+                    {
+                        @foreach (var f in _selectedFactions)
+                        {
+                            <div class="d-flex align-center gap-2 mt-1">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:@f.Color;"></span>
+                                <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.85);">
+                                    @f.Faction — @(Math.Round(f.Control * 100))%
+                                    @if (f.Contested) { <em style="opacity:0.6;"> (contested)</em> }
+                                </MudText>
+                            </div>
+                            @if (f.Note is not null)
+                            {
+                                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5); margin-left: 18px;">@f.Note</MudText>
+                            }
+                        }
+                    }
+                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                   Style="position:absolute;top:4px;right:4px;color:rgba(255,255,255,0.5);"
+                                   OnClick="() => { _selectedRegion = null; _selectedFactions = null; }" />
+                </div>
+            }
+        </div>
+
+        @* Timeline scrubber *@
+        <div class="territory-scrubber">
+            <div class="d-flex align-center gap-3" style="padding: 0 12px;">
+                <MudIconButton Icon="@(_autoplay ? Icons.Material.Filled.Pause : Icons.Material.Filled.PlayArrow)"
+                               Color="Color.Primary" Size="Size.Small"
+                               OnClick="ToggleAutoplay" />
+                <MudText Typo="Typo.subtitle2" Style="min-width: 80px; font-weight: 700; color: var(--mud-palette-primary);">
+                    @YearDisplay
+                </MudText>
+                <div style="flex: 1;">
+                    <MudSlider T="int" Value="@_year" ValueChanged="OnYearChanged"
+                               Min="_overview.MinYear" Max="_overview.MaxYear" Step="1"
+                               Style="margin: 0;" />
+                </div>
+                <MudToggleIconButton Icon="@Icons.Material.Filled.MusicNote"
+                                    ToggledIcon="@Icons.Material.Filled.MusicOff"
+                                    Toggled="_musicEnabled" ToggledChanged="ToggleMusic"
+                                    Size="Size.Small" Color="Color.Warning"
+                                    Title="Duel of the Fates" />
+            </div>
+        </div>
+    }
+</div>
+
+<audio @ref="_audioRef" loop preload="none">
+    <source src="/audio/duel-of-the-fates.mp3" type="audio/mpeg" />
+</audio>
+
+<style>
+    .territory-outer {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 64px);
+    }
+    .territory-canvas-wrap {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+    }
+    .territory-canvas {
+        width: 100%;
+        height: 100%;
+    }
+    .territory-legend {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(10,10,26,0.85);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 10px 14px;
+        z-index: 10;
+    }
+    .territory-detail {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(10,10,26,0.9);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 8px;
+        padding: 12px 16px;
+        min-width: 240px;
+        z-index: 10;
+    }
+    .territory-scrubber {
+        flex-shrink: 0;
+        border-top: 1px solid var(--mud-palette-lines-default);
+        background: var(--mud-palette-surface);
+        padding: 8px 0;
+    }
+</style>
+
+@code {
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<TerritoryControl>? _dotNetRef;
+    private ElementReference _canvasRef;
+    private ElementReference _audioRef;
+
+    private TerritoryOverviewDto? _overview;
+    private Dictionary<string, string> _factionColors = new();
+    private List<RegionCellsDto>? _regionCells;
+
+    private int _year = -19; // Default: start of Imperial era
+    private bool _autoplay;
+    private bool _musicEnabled;
+    private System.Threading.Timer? _autoplayTimer;
+    private CancellationTokenSource? _debounceCts;
+
+    private string? _selectedRegion;
+    private List<FactionControlDto>? _selectedFactions;
+
+    private string YearDisplay => _year <= 0 ? $"{Math.Abs(_year)} BBY" : $"{_year} ABY";
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/territory-control.js");
+            await LoadData();
+        }
+    }
+
+    private async Task LoadData()
+    {
+        // Fetch territory overview, faction colors, and region cells (from galaxy events)
+        var overviewTask = Http.GetFromJsonAsync<TerritoryOverviewDto>("api/TerritoryControl/overview");
+        var colorsTask = Http.GetFromJsonAsync<Dictionary<string, string>>("api/TerritoryControl/colors");
+        var regionsTask = Http.GetFromJsonAsync<GalaxyEventsOverviewDto>("api/galaxyevents/overview");
+
+        await Task.WhenAll(overviewTask, colorsTask, regionsTask);
+
+        _overview = overviewTask.Result;
+        _factionColors = colorsTask.Result ?? new();
+        _regionCells = regionsTask.Result?.Regions;
+
+        if (_overview is not null && _overview.MinYear != 0)
+        {
+            _year = Math.Max(_year, _overview.MinYear);
+            _year = Math.Min(_year, _overview.MaxYear);
+        }
+
+        StateHasChanged();
+
+        // Initialize D3
+        if (_module is not null && _overview is not null)
+        {
+            var jsOverview = new { gridColumns = 26, gridRows = 20 };
+            await _module.InvokeVoidAsync("initialize", "territory-canvas", jsOverview, _regionCells, _factionColors, _dotNetRef);
+            await LoadYear();
+        }
+    }
+
+    private async Task LoadYear()
+    {
+        try
+        {
+            var yearData = await Http.GetFromJsonAsync<TerritoryYearDto>($"api/TerritoryControl/year/{_year}");
+            if (_module is not null && yearData is not null)
+            {
+                await _module.InvokeVoidAsync("renderTerritoryLayer", yearData);
+            }
+        }
+        catch { }
+    }
+
+    private async Task OnYearChanged(int newYear)
+    {
+        _year = newYear;
+        _debounceCts?.Cancel();
+        _debounceCts = new CancellationTokenSource();
+        var token = _debounceCts.Token;
+
+        try
+        {
+            await Task.Delay(150, token);
+            if (!token.IsCancellationRequested)
+                await LoadYear();
+        }
+        catch (TaskCanceledException) { }
+    }
+
+    private void JumpToYear(int year)
+    {
+        _year = year;
+        _ = LoadYear();
+    }
+
+    private void ToggleAutoplay()
+    {
+        _autoplay = !_autoplay;
+        if (_autoplay)
+        {
+            _autoplayTimer = new System.Threading.Timer(async _ =>
+            {
+                await InvokeAsync(async () =>
+                {
+                    if (_overview is null) return;
+                    _year++;
+                    if (_year > _overview.MaxYear) _year = _overview.MinYear;
+                    StateHasChanged();
+                    await LoadYear();
+                });
+            }, null, 0, 800);
+        }
+        else
+        {
+            _autoplayTimer?.Dispose();
+            _autoplayTimer = null;
+        }
+    }
+
+    private async Task ToggleMusic(bool enabled)
+    {
+        _musicEnabled = enabled;
+        try
+        {
+            if (enabled)
+                await JS.InvokeVoidAsync("eval", "document.querySelector('audio')?.play()");
+            else
+                await JS.InvokeVoidAsync("eval", "document.querySelector('audio')?.pause()");
+        }
+        catch { }
+    }
+
+    [JSInvokable]
+    public void OnTerritoryCellSelected(string region, List<FactionControlDto> factions)
+    {
+        _selectedRegion = region;
+        _selectedFactions = factions;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        _autoplayTimer?.Dispose();
+        _debounceCts?.Cancel();
+        _debounceCts?.Dispose();
+        if (_module is not null) await _module.DisposeAsync();
+        _dotNetRef?.Dispose();
+    }
+
+    // DTOs for JSON deserialization
+    record TerritoryOverviewDto
+    {
+        public int MinYear { get; init; }
+        public int MaxYear { get; init; }
+        public List<string> Factions { get; init; } = [];
+        public List<string> Regions { get; init; } = [];
+        public List<TerritoryEraDto> Eras { get; init; } = [];
+    }
+
+    record TerritoryEraDto
+    {
+        public string Name { get; init; } = "";
+        public int StartYear { get; init; }
+        public int EndYear { get; init; }
+    }
+
+    record TerritoryYearDto
+    {
+        public int Year { get; init; }
+        public string YearDisplay { get; init; } = "";
+        public List<TerritoryRegionDto> Regions { get; init; } = [];
+    }
+
+    record TerritoryRegionDto
+    {
+        public string Region { get; init; } = "";
+        public List<FactionControlDto> Factions { get; init; } = [];
+    }
+
+    public record FactionControlDto
+    {
+        public string Faction { get; init; } = "";
+        public double Control { get; init; }
+        public bool Contested { get; init; }
+        public string Color { get; init; } = "";
+        public string? Note { get; init; }
+    }
+
+    record GalaxyEventsOverviewDto
+    {
+        public List<RegionCellsDto>? Regions { get; init; }
+    }
+
+    record RegionCellsDto
+    {
+        public string Name { get; init; } = "";
+        public List<int[]> Cells { get; init; } = [];
+    }
+}
