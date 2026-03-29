@@ -54,10 +54,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push container images
+      - name: Build and push container images (versioned)
         run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
         env:
           CONTAINER_IMAGE_TAG: ${{ steps.version.outputs.semVer }}
+
+      - name: Build and push container images (latest)
+        run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+        env:
+          CONTAINER_IMAGE_TAG: latest
 
       - name: Publish Docker Compose artifacts
         run: |
