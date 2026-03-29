@@ -16,7 +16,7 @@ public class TerritoryControlController(TerritoryControlService territoryService
     public async Task<TerritoryYearResponse> GetYear(int year, CancellationToken ct)
         => await territoryService.GetYearAsync(year, ct);
 
-    [HttpGet("colors")]
-    public async Task<Dictionary<string, string>> GetFactionColors(CancellationToken ct)
-        => await territoryService.GetFactionColorsAsync(ct);
+    [HttpGet("factions")]
+    public async Task<Dictionary<string, TerritoryControlService.FactionInfo>> GetFactions(CancellationToken ct)
+        => await territoryService.GetFactionInfoAsync(ct);
 }

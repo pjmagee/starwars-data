@@ -12,7 +12,7 @@ const REGION_PALETTE = [
 let _state = null;
 const regionColorMap = {};
 
-export function initialize(containerId, overview, regionCells, factionColors, dotNetRef) {
+export function initialize(containerId, overview, regionCells, factionColors, factionWikiUrls, dotNetRef) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -77,8 +77,10 @@ export function initialize(containerId, overview, regionCells, factionColors, do
             regionLayer.append('text')
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', color).attr('fill-opacity', 0.15)
-                .attr('font-size', '14px').attr('font-weight', '600')
+                .attr('fill', '#fff').attr('fill-opacity', 0.35)
+                .attr('font-size', '16px').attr('font-weight', '700')
+                .attr('paint-order', 'stroke').attr('stroke', 'rgba(0,0,0,0.6)')
+                .attr('stroke-width', '3px')
                 .text(region.name);
         }
     }
@@ -123,13 +125,14 @@ export function initialize(containerId, overview, regionCells, factionColors, do
         container, svg, g, territoryLayer, labelLayer, tooltip,
         worldW, worldH, cellW, cellH, cols, rows,
         regionCells, factionColors: factionColors || {},
+        factionWikiUrls: factionWikiUrls || {},
         dotNetRef, zoom
     };
 }
 
 export function renderTerritoryLayer(yearData) {
     if (!_state) return;
-    const { territoryLayer, labelLayer, tooltip, cellW, cellH, factionColors, dotNetRef } = _state;
+    const { territoryLayer, labelLayer, tooltip, cellW, cellH, factionColors, factionWikiUrls, dotNetRef } = _state;
 
     territoryLayer.selectAll('*').remove();
     labelLayer.selectAll('*').remove();
@@ -200,19 +203,24 @@ export function renderTerritoryLayer(yearData) {
                     let html = `<strong>${regionControl.region}</strong><br/>`;
                     for (const f of factions) {
                         const pct = Math.round(f.control * 100);
-                        const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${f.color || factionColors[f.faction] || '#888'};margin-right:4px;"></span>`;
-                        html += `${dot}${f.faction}: ${pct}%`;
-                        if (f.contested) html += ' <em>(contested)</em>';
+                        const fc = f.color || factionColors[f.faction] || '#888';
+                        const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${fc};margin-right:4px;"></span>`;
+                        const wikiUrl = factionWikiUrls[f.faction];
+                        const name = wikiUrl
+                            ? `<a href="${wikiUrl}" target="_blank" style="color:${fc};text-decoration:underline;">${f.faction}</a>`
+                            : `<span style="color:${fc}">${f.faction}</span>`;
+                        html += `${dot}${name}: ${pct}%`;
+                        if (f.contested) html += ' <em style="opacity:0.6">(contested)</em>';
                         html += '<br/>';
                     }
-                    if (factions[0]?.note) html += `<br/><em style="opacity:0.7">${factions[0].note}</em>`;
-                    tooltip.html(html).style('display', 'block');
+                    if (factions[0]?.note) html += `<br/><em style="opacity:0.6;font-size:11px;">${factions[0].note}</em>`;
+                    tooltip.html(html).style('display', 'block').style('pointer-events', 'auto');
                 })
                 .on('mousemove', (event) => {
                     tooltip.style('left', (event.offsetX + 15) + 'px')
                            .style('top', (event.offsetY - 10) + 'px');
                 })
-                .on('mouseout', () => tooltip.style('display', 'none'))
+                .on('mouseout', () => { tooltip.style('display', 'none').style('pointer-events', 'none'); })
                 .on('click', () => {
                     if (dotNetRef) {
                         dotNetRef.invokeMethodAsync('OnTerritoryCellSelected',

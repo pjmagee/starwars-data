@@ -32,11 +32,26 @@
 
             @* Faction legend *@
             <div class="territory-legend">
-                @foreach (var kv in _factionColors)
+                @foreach (var (name, info) in _factionInfo)
                 {
-                    <div class="d-flex align-center gap-1" style="margin-bottom: 2px;">
-                        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:@kv.Value;"></span>
-                        <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.7);">@kv.Key</MudText>
+                    <div class="d-flex align-center gap-2" style="margin-bottom: 4px;">
+                        @if (info.IconUrl is not null)
+                        {
+                            <img src="@info.IconUrl" alt="@name" style="width:16px;height:16px;filter:brightness(0) invert(1) opacity(0.8);" />
+                        }
+                        else
+                        {
+                            <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:@info.Color;border:1px solid rgba(255,255,255,0.3);"></span>
+                        }
+                        @if (info.WikiUrl is not null)
+                        {
+                            <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
+                                     Style="@($"color:{info.Color};")">@name</MudLink>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Style="@($"color:{info.Color};")">@name</MudText>
+                        }
                     </div>
                 }
             </div>
@@ -50,16 +65,35 @@
                     {
                         @foreach (var f in _selectedFactions)
                         {
-                            <div class="d-flex align-center gap-2 mt-1">
-                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:@f.Color;"></span>
-                                <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.85);">
-                                    @f.Faction — @(Math.Round(f.Control * 100))%
-                                    @if (f.Contested) { <em style="opacity:0.6;"> (contested)</em> }
-                                </MudText>
+                            var fi = _factionInfo.GetValueOrDefault(f.Faction);
+                            <div class="d-flex align-center gap-2 mt-2">
+                                @if (fi?.IconUrl is not null)
+                                {
+                                    <img src="@fi.IconUrl" alt="@f.Faction" style="width:18px;height:18px;filter:brightness(0) invert(1) opacity(0.8);" />
+                                }
+                                else
+                                {
+                                    <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:@f.Color;border:1px solid rgba(255,255,255,0.3);"></span>
+                                }
+                                <div>
+                                    @if (fi?.WikiUrl is not null)
+                                    {
+                                        <MudLink Href="@fi.WikiUrl" Target="_blank" Typo="Typo.body2"
+                                                 Style="@($"color:{f.Color}; font-weight:600;")">@f.Faction</MudLink>
+                                    }
+                                    else
+                                    {
+                                        <MudText Typo="Typo.body2" Style="@($"color:{f.Color}; font-weight:600;")">@f.Faction</MudText>
+                                    }
+                                    <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.6);">
+                                        @(Math.Round(f.Control * 100))% control
+                                        @if (f.Contested) { <em>(contested)</em> }
+                                    </MudText>
+                                </div>
                             </div>
                             @if (f.Note is not null)
                             {
-                                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5); margin-left: 18px;">@f.Note</MudText>
+                                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.4); margin-left: 32px;">@f.Note</MudText>
                             }
                         }
                     }
@@ -94,9 +128,12 @@
     }
 </div>
 
-<audio @ref="_audioRef" loop preload="none">
-    <source src="/audio/duel-of-the-fates.mp3" type="audio/mpeg" />
-</audio>
+@if (_musicEnabled)
+{
+    <iframe id="duel-of-fates-player" style="display:none;" allow="autoplay"
+            src="https://www.youtube.com/embed/xlYCxbBZUCY?autoplay=1&loop=1&playlist=xlYCxbBZUCY">
+    </iframe>
+}
 
 <style>
     .territory-outer {
@@ -146,10 +183,9 @@
     private IJSObjectReference? _module;
     private DotNetObjectReference<TerritoryControl>? _dotNetRef;
     private ElementReference _canvasRef;
-    private ElementReference _audioRef;
 
     private TerritoryOverviewDto? _overview;
-    private Dictionary<string, string> _factionColors = new();
+    private Dictionary<string, FactionInfoDto> _factionInfo = new();
     private List<RegionCellsDto>? _regionCells;
 
     private int _year = -19; // Default: start of Imperial era
@@ -177,15 +213,15 @@
 
     private async Task LoadData()
     {
-        // Fetch territory overview, faction colors, and region cells (from galaxy events)
+        // Fetch territory overview, faction info, and region cells (from galaxy events)
         var overviewTask = Http.GetFromJsonAsync<TerritoryOverviewDto>("api/TerritoryControl/overview");
-        var colorsTask = Http.GetFromJsonAsync<Dictionary<string, string>>("api/TerritoryControl/colors");
+        var factionsTask = Http.GetFromJsonAsync<Dictionary<string, FactionInfoDto>>("api/TerritoryControl/factions");
         var regionsTask = Http.GetFromJsonAsync<GalaxyEventsOverviewDto>("api/galaxyevents/overview");
 
-        await Task.WhenAll(overviewTask, colorsTask, regionsTask);
+        await Task.WhenAll(overviewTask, factionsTask, regionsTask);
 
         _overview = overviewTask.Result;
-        _factionColors = colorsTask.Result ?? new();
+        _factionInfo = factionsTask.Result ?? new();
         _regionCells = regionsTask.Result?.Regions;
 
         if (_overview is not null && _overview.MinYear != 0)
@@ -200,7 +236,11 @@
         if (_module is not null && _overview is not null)
         {
             var jsOverview = new { gridColumns = 26, gridRows = 20 };
-            await _module.InvokeVoidAsync("initialize", "territory-canvas", jsOverview, _regionCells, _factionColors, _dotNetRef);
+            var factionColors = _factionInfo.ToDictionary(kv => kv.Key, kv => kv.Value.Color);
+            var factionWikiUrls = _factionInfo
+                .Where(kv => kv.Value.WikiUrl is not null)
+                .ToDictionary(kv => kv.Key, kv => kv.Value.WikiUrl!);
+            await _module.InvokeVoidAsync("initialize", "territory-canvas", jsOverview, _regionCells, factionColors, factionWikiUrls, _dotNetRef);
             await LoadYear();
         }
     }
@@ -264,17 +304,9 @@
         }
     }
 
-    private async Task ToggleMusic(bool enabled)
+    private void ToggleMusic(bool enabled)
     {
         _musicEnabled = enabled;
-        try
-        {
-            if (enabled)
-                await JS.InvokeVoidAsync("eval", "document.querySelector('audio')?.play()");
-            else
-                await JS.InvokeVoidAsync("eval", "document.querySelector('audio')?.pause()");
-        }
-        catch { }
     }
 
     [JSInvokable]
@@ -331,6 +363,13 @@
         public bool Contested { get; init; }
         public string Color { get; init; } = "";
         public string? Note { get; init; }
+    }
+
+    record FactionInfoDto
+    {
+        public string Color { get; init; } = "";
+        public string? WikiUrl { get; init; }
+        public string? IconUrl { get; init; }
     }
 
     record GalaxyEventsOverviewDto

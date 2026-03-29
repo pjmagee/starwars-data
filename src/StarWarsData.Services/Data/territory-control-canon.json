@@ -1,16 +1,16 @@
 {
   "description": "Canon galactic territory control by faction, region, and year range. Control values: 1.0 = full control, 0.5-0.9 = partial/contested.",
   "factions": {
-    "Galactic Republic": "#3b82f6",
-    "Confederacy of Independent Systems": "#ef4444",
-    "Galactic Empire": "#6b7280",
-    "Alliance to Restore the Republic": "#f97316",
-    "New Republic": "#22c55e",
-    "First Order": "#991b1b",
-    "Resistance": "#f59e0b",
-    "Hutt Space": "#a855f7",
-    "Mandalorians": "#06b6d4",
-    "Chiss Ascendancy": "#1e3a5f"
+    "Galactic Republic": { "color": "#3b82f6", "wikiUrl": "https://starwars.fandom.com/wiki/Galactic_Republic", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/0/07/RepublicEmblem-Traced.svg" },
+    "Confederacy of Independent Systems": { "color": "#ef4444", "wikiUrl": "https://starwars.fandom.com/wiki/Confederacy_of_Independent_Systems", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/1/12/ConfederacyEmblem.svg" },
+    "Galactic Empire": { "color": "#6b7280", "wikiUrl": "https://starwars.fandom.com/wiki/Galactic_Empire", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/0/09/ImperialEmblem.svg" },
+    "Alliance to Restore the Republic": { "color": "#f97316", "wikiUrl": "https://starwars.fandom.com/wiki/Alliance_to_Restore_the_Republic", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/0/02/Alliance_Starbird.svg" },
+    "New Republic": { "color": "#22c55e", "wikiUrl": "https://starwars.fandom.com/wiki/New_Republic", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/2/2e/NewRepublicEmblem.svg" },
+    "First Order": { "color": "#991b1b", "wikiUrl": "https://starwars.fandom.com/wiki/First_Order", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/1/15/FirstOrderEmblem.svg" },
+    "Resistance": { "color": "#f59e0b", "wikiUrl": "https://starwars.fandom.com/wiki/Resistance", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/d/d3/ResistanceEmblem.svg" },
+    "Hutt Space": { "color": "#a855f7", "wikiUrl": "https://starwars.fandom.com/wiki/Hutt_Space", "iconUrl": null },
+    "Mandalorians": { "color": "#06b6d4", "wikiUrl": "https://starwars.fandom.com/wiki/Mandalorians", "iconUrl": "https://static.wikia.nocookie.net/starwars/images/d/d8/Mando%27ade.svg" },
+    "Chiss Ascendancy": { "color": "#1e3a5f", "wikiUrl": "https://starwars.fandom.com/wiki/Chiss_Ascendancy", "iconUrl": null }
   },
   "eras": [
     { "name": "Late Republic", "startYear": -100, "endYear": -23 },

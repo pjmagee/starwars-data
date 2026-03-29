@@ -48,7 +48,8 @@ public class TerritoryControlService
 
         foreach (var entry in seedData.Entries)
         {
-            var color = seedData.Factions.GetValueOrDefault(entry.Faction, "#888888");
+            var factionInfo = seedData.Factions.GetValueOrDefault(entry.Faction);
+            var color = factionInfo?.Color ?? "#888888";
 
             foreach (var (region, control) in entry.Regions)
             {
@@ -102,25 +103,13 @@ public class TerritoryControlService
         var yearList = await years.ToListAsync(ct);
 
         // Load eras from seed data
-        var assembly = Assembly.GetExecutingAssembly();
-        var resourceName = assembly.GetManifestResourceNames()
-            .FirstOrDefault(n => n.EndsWith("territory-control-canon.json"));
-
-        var eras = new List<TerritoryEra>();
-        if (resourceName is not null)
+        var seedFile = await LoadSeedFileAsync(ct);
+        var eras = seedFile?.Eras.Select(e => new TerritoryEra
         {
-            using var stream = assembly.GetManifestResourceStream(resourceName)!;
-            var seedData = await JsonSerializer.DeserializeAsync<SeedData>(stream, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            }, ct);
-            eras = seedData?.Eras.Select(e => new TerritoryEra
-            {
-                Name = e.Name,
-                StartYear = e.StartYear,
-                EndYear = e.EndYear,
-            }).ToList() ?? [];
-        }
+            Name = e.Name,
+            StartYear = e.StartYear,
+            EndYear = e.EndYear,
+        }).ToList() ?? [];
 
         return new TerritoryOverview
         {
@@ -162,28 +151,31 @@ public class TerritoryControlService
         };
     }
 
-    public async Task<Dictionary<string, string>> GetFactionColorsAsync(CancellationToken ct = default)
+    public async Task<Dictionary<string, FactionInfo>> GetFactionInfoAsync(CancellationToken ct = default)
+    {
+        var seedData = await LoadSeedFileAsync(ct);
+        return seedData?.Factions ?? new();
+    }
+
+    private async Task<SeedData?> LoadSeedFileAsync(CancellationToken ct)
     {
         var assembly = Assembly.GetExecutingAssembly();
         var resourceName = assembly.GetManifestResourceNames()
             .FirstOrDefault(n => n.EndsWith("territory-control-canon.json"));
-
-        if (resourceName is null) return new();
+        if (resourceName is null) return null;
 
         using var stream = assembly.GetManifestResourceStream(resourceName)!;
-        var seedData = await JsonSerializer.DeserializeAsync<SeedData>(stream, new JsonSerializerOptions
+        return await JsonSerializer.DeserializeAsync<SeedData>(stream, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
         }, ct);
-
-        return seedData?.Factions ?? new();
     }
 
     // ── Seed data model ──
 
     record SeedData
     {
-        public Dictionary<string, string> Factions { get; init; } = new();
+        public Dictionary<string, FactionInfo> Factions { get; init; } = new();
         public List<SeedEra> Eras { get; init; } = [];
         public List<SeedEntry> Entries { get; init; } = [];
     }
@@ -193,6 +185,13 @@ public class TerritoryControlService
         public string Name { get; init; } = string.Empty;
         public int StartYear { get; init; }
         public int EndYear { get; init; }
+    }
+
+    public record FactionInfo
+    {
+        public string Color { get; init; } = "#888888";
+        public string? WikiUrl { get; init; }
+        public string? IconUrl { get; init; }
     }
 
     record SeedEntry
