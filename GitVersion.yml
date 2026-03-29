@@ -1,15 +1,25 @@
-mode: Mainline
+workflow: GitFlow/v1
+strategies:
+  - Mainline
+  - TaggedCommit
+  - ConfiguredNextVersion
+
 branches:
   main:
     regex: ^main$
     increment: Patch
-    is-mainline: true
+    is-main-branch: true
+    label: ""
+    prevent-increment:
+      when-current-commit-tagged: false
   feature:
     regex: ^(feature|feat)[/-]
     increment: Minor
+    label: "{BranchName}"
   fix:
     regex: ^(fix|hotfix|bugfix)[/-]
     increment: Patch
+    label: "{BranchName}"
 
 major-version-bump-message: "^(breaking|major)"
 minor-version-bump-message: "^(feat|feature)"
