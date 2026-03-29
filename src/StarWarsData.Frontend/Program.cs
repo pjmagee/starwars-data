@@ -106,8 +106,8 @@ builder
             client.Timeout = TimeSpan.FromMinutes(5);
         }
     )
-    .AddHttpMessageHandler<AuthTokenDelegatingHandler>()
-    .RemoveAllResilienceHandlers();
+    .RemoveAllResilienceHandlers()
+    .AddHttpMessageHandler<AuthTokenDelegatingHandler>();
 #pragma warning restore EXTEXP0001
 
 var app = builder.Build();
