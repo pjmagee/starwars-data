@@ -3,27 +3,46 @@ using System.Net.Http.Headers;
 
 namespace StarWarsData.Frontend.Services;
 
-/// <summary>
-/// DelegatingHandler that forwards the OIDC access token as a Bearer header.
-/// Uses IHttpContextAccessor which works across DI scopes via AsyncLocal.
-/// With prerendering enabled, the HttpContext from the initial request remains
-/// accessible throughout the Blazor circuit lifetime.
-/// </summary>
-public class AuthTokenDelegatingHandler(IHttpContextAccessor httpContextAccessor)
-    : DelegatingHandler
+public class AuthTokenDelegatingHandler(
+    IHttpContextAccessor httpContextAccessor,
+    ILogger<AuthTokenDelegatingHandler> logger
+) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
         var httpContext = httpContextAccessor.HttpContext;
-        if (httpContext is not null)
+
+        if (httpContext is null)
         {
-            var accessToken = await httpContext.GetTokenAsync("access_token");
-            if (!string.IsNullOrEmpty(accessToken))
+            logger.LogWarning("HttpContext is null — cannot attach token to {Url}", request.RequestUri);
+        }
+        else
+        {
+            var isAuthenticated = httpContext.User.Identity?.IsAuthenticated == true;
+            logger.LogDebug("HttpContext available. Authenticated: {IsAuth}, User: {User}",
+                isAuthenticated, httpContext.User.Identity?.Name);
+
+            if (isAuthenticated)
             {
-                request.Headers.Authorization =
-                    new AuthenticationHeaderValue("Bearer", accessToken);
+                var accessToken = await httpContext.GetTokenAsync("access_token");
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.Authorization =
+                        new AuthenticationHeaderValue("Bearer", accessToken);
+                    logger.LogDebug("Attached Bearer token ({Length} chars) to {Url}",
+                        accessToken.Length, request.RequestUri);
+                }
+                else
+                {
+                    // Check what tokens ARE available
+                    var idToken = await httpContext.GetTokenAsync("id_token");
+                    var refreshToken = await httpContext.GetTokenAsync("refresh_token");
+                    logger.LogWarning(
+                        "No access_token found. id_token={HasId}, refresh_token={HasRefresh}. Request: {Url}",
+                        idToken is not null, refreshToken is not null, request.RequestUri);
+                }
             }
         }
 
