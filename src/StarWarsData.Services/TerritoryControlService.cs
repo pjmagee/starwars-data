@@ -12,6 +12,7 @@ namespace StarWarsData.Services;
 public class TerritoryControlService
 {
     readonly IMongoCollection<TerritorySnapshot> _snapshots;
+    readonly IMongoCollection<Page> _pages;
     readonly IMongoDatabase _timelineDb;
     readonly ILogger<TerritoryControlService> _logger;
 
@@ -26,6 +27,7 @@ public class TerritoryControlService
     {
         var db = mongoClient.GetDatabase(settings.Value.TerritoryControlDb);
         _snapshots = db.GetCollection<TerritorySnapshot>("territory_snapshots");
+        _pages = mongoClient.GetDatabase(settings.Value.PagesDb).GetCollection<Page>("Pages");
         _timelineDb = mongoClient.GetDatabase(settings.Value.TimelineEventsDb);
         _logger = logger;
     }
@@ -166,7 +168,43 @@ public class TerritoryControlService
     public async Task<Dictionary<string, FactionInfo>> GetFactionInfoAsync(CancellationToken ct = default)
     {
         var seedData = await LoadSeedFileAsync(ct);
-        return seedData?.Factions ?? new();
+        if (seedData is null) return new();
+
+        var result = new Dictionary<string, FactionInfo>();
+
+        // Look up each faction's wiki URL and image from MongoDB Pages collection
+        var pageTitles = seedData.Factions.Values
+            .Where(f => f.PageTitle is not null)
+            .Select(f => f.PageTitle!)
+            .ToList();
+
+        var filter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.In(p => p.Title, pageTitles),
+            Builders<Page>.Filter.Eq(p => p.Continuity, Continuity.Canon)
+        );
+
+        var matchedPages = await _pages.Find(filter).ToListAsync(ct);
+
+        var pageLookup = new Dictionary<string, (string? wikiUrl, string? imageUrl)>();
+        foreach (var page in matchedPages)
+        {
+            pageLookup[page.Title] = (page.WikiUrl, page.Infobox?.ImageUrl);
+        }
+
+        foreach (var (factionName, seedInfo) in seedData.Factions)
+        {
+            var pageTitle = seedInfo.PageTitle ?? factionName;
+            pageLookup.TryGetValue(pageTitle, out var pageInfo);
+
+            result[factionName] = new FactionInfo
+            {
+                Color = seedInfo.Color,
+                WikiUrl = pageInfo.wikiUrl,
+                IconUrl = pageInfo.imageUrl,
+            };
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -302,10 +340,18 @@ public class TerritoryControlService
 
     record SeedData
     {
-        public Dictionary<string, FactionInfo> Factions { get; init; } = new();
+        public Dictionary<string, SeedFactionInfo> Factions { get; init; } = new();
         public List<SeedEntry> Entries { get; init; } = [];
     }
 
+    /// <summary>Seed data: only color + page title for MongoDB lookup.</summary>
+    record SeedFactionInfo
+    {
+        public string Color { get; init; } = "#888888";
+        public string? PageTitle { get; init; }
+    }
+
+    /// <summary>API response: enriched with wikiUrl and iconUrl from MongoDB.</summary>
     public record FactionInfo
     {
         public string Color { get; init; } = "#888888";
