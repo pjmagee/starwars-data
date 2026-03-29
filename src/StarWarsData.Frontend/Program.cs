@@ -92,6 +92,7 @@ builder
     .AddScoped<NavigationService>()
     .AddSingleton<GlobalFilterService>()
     .AddScoped<ChatHistoryService>()
+    .AddSingleton<TokenStore>()
     .AddScoped<CircuitTokenProvider>();
 
 // Register a named HttpClient for the API service
@@ -143,17 +144,19 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Capture the access token into the scoped CircuitTokenProvider during SSR.
-// This runs before any Blazor component renders, so the token is available
-// when components make API calls in OnInitializedAsync.
+// Capture the access token into the singleton TokenStore during SSR, keyed by connection ID.
+// Blazor components will read it via CircuitTokenProvider in OnInitializedAsync.
 app.Use(async (context, next) =>
 {
     if (context.User.Identity?.IsAuthenticated == true)
     {
-        var tokenProvider = context.RequestServices.GetRequiredService<CircuitTokenProvider>();
-        if (string.IsNullOrEmpty(tokenProvider.AccessToken))
+        var accessToken = await context.GetTokenAsync("access_token");
+        if (!string.IsNullOrEmpty(accessToken))
         {
-            tokenProvider.AccessToken = await context.GetTokenAsync("access_token");
+            var tokenStore = context.RequestServices.GetRequiredService<TokenStore>();
+            tokenStore.Set(context.Connection.Id, accessToken);
+            // Store connection ID in HttpContext.Items so components can read it during SSR
+            context.Items["__ConnectionId"] = context.Connection.Id;
         }
     }
     await next();
