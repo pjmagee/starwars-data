@@ -3,9 +3,6 @@
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
-@inject CircuitTokenProvider TokenProvider
-@inject TokenStore TokenStore
-@inject IHttpContextAccessor HttpContextAccessor
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
 <MudPopoverProvider/>
@@ -88,24 +85,6 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
-        // Transfer token from singleton TokenStore (populated by middleware)
-        // to the scoped CircuitTokenProvider (read by ApiClient).
-        // This bridges the request-scope / circuit-scope gap.
-        if (string.IsNullOrEmpty(TokenProvider.AccessToken))
-        {
-            var connectionId = HttpContextAccessor.HttpContext?.Items["__ConnectionId"] as string
-                               ?? HttpContextAccessor.HttpContext?.Connection.Id;
-            if (connectionId is not null)
-            {
-                var token = TokenStore.Get(connectionId);
-                if (token is not null)
-                {
-                    TokenProvider.AccessToken = token;
-                    TokenStore.Remove(connectionId); // Clean up — token is now in the circuit
-                }
-            }
-        }
 
         _theme = new()
         {
