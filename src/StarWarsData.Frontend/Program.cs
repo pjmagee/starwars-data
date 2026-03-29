@@ -95,7 +95,7 @@ builder
 
 // Register a named HttpClient for the API service
 // RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
-builder.Services.AddTransient<AuthTokenDelegatingHandler>();
+builder.Services.AddScoped<AuthTokenDelegatingHandler>();
 builder
     .Services.AddHttpClient(
         "StarWarsData",
@@ -105,17 +105,7 @@ builder
             client.Timeout = TimeSpan.FromMinutes(5);
         }
     )
-    .AddHttpMessageHandler<AuthTokenDelegatingHandler>()
-    .ConfigureAdditionalHttpMessageHandlers((handlers, _) =>
-    {
-        // Remove Polly/resilience handlers that Aspire adds globally — they interfere with SSE streaming
-        for (int i = handlers.Count - 1; i >= 0; i--)
-        {
-            var name = handlers[i].GetType().FullName ?? "";
-            if (name.Contains("Resilience") || name.Contains("Polly"))
-                handlers.RemoveAt(i);
-        }
-    });
+    .AddHttpMessageHandler<AuthTokenDelegatingHandler>();
 
 var app = builder.Build();
 
