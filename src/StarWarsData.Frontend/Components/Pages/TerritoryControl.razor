@@ -226,7 +226,11 @@
             var factionWikiUrls = _factionInfo
                 .Where(kv => kv.Value.WikiUrl is not null)
                 .ToDictionary(kv => kv.Key, kv => kv.Value.WikiUrl!);
-            await _module.InvokeVoidAsync("initialize", "territory-canvas", jsOverview, _regionCells, factionColors, factionWikiUrls, _dotNetRef);
+            var factionIcons = _factionInfo.Keys
+                .Select(name => new { name, svg = FactionIcon.GetPath(name) })
+                .Where(x => x.svg is not null)
+                .ToDictionary(x => x.name, x => x.svg!);
+            await _module.InvokeVoidAsync("initialize", "territory-canvas", jsOverview, _regionCells, factionColors, factionWikiUrls, factionIcons, _dotNetRef);
             await LoadYear();
         }
     }

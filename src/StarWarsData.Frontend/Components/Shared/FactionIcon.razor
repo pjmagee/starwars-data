@@ -19,7 +19,10 @@ else
     [Parameter] public int Size { get; set; } = 16;
     [Parameter] public string? Style { get; set; }
 
-    static string? GetPath(string faction) => faction switch
+    /// <summary>
+    /// Returns the SVG inner markup for a faction icon. Also used by the D3 territory map.
+    /// </summary>
+    public static string? GetPath(string faction) => faction switch
     {
         // Imperial cog — 6-spoke gear wheel
         "Galactic Empire" =>

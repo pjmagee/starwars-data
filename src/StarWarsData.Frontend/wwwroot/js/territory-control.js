@@ -12,7 +12,7 @@ const REGION_PALETTE = [
 let _state = null;
 const regionColorMap = {};
 
-export function initialize(containerId, overview, regionCells, factionColors, factionWikiUrls, dotNetRef) {
+export function initialize(containerId, overview, regionCells, factionColors, factionWikiUrls, factionIcons, dotNetRef) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -126,13 +126,14 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
         worldW, worldH, cellW, cellH, cols, rows,
         regionCells, factionColors: factionColors || {},
         factionWikiUrls: factionWikiUrls || {},
+        factionIcons: factionIcons || {},
         dotNetRef, zoom
     };
 }
 
 export function renderTerritoryLayer(yearData) {
     if (!_state) return;
-    const { territoryLayer, labelLayer, tooltip, cellW, cellH, factionColors, factionWikiUrls, dotNetRef } = _state;
+    const { territoryLayer, labelLayer, tooltip, cellW, cellH, factionColors, factionWikiUrls, factionIcons, dotNetRef } = _state;
 
     territoryLayer.selectAll('*').remove();
     labelLayer.selectAll('*').remove();
@@ -231,16 +232,36 @@ export function renderTerritoryLayer(yearData) {
                 });
         }
 
-        // Region faction label at centroid
+        // Region faction icon + label at centroid
         const cx = cells.reduce((s, c) => s + c[0], 0) / cells.length * cellW + cellW / 2;
         const cy = cells.reduce((s, c) => s + c[1], 0) / cells.length * cellH + cellH / 2;
 
         if (dominant.control >= 0.3) {
+            const iconSvg = factionIcons[dominant.faction];
+            const iconSize = 32;
+
+            if (iconSvg) {
+                // Render faction insignia at centroid
+                const iconGroup = labelLayer.append('g')
+                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2 - 8}) scale(${iconSize/24})`);
+                iconGroup.html(iconSvg);
+                iconGroup.selectAll('*')
+                    .attr('fill', color)
+                    .attr('stroke', color)
+                    .attr('fill-opacity', 0.7)
+                    .attr('stroke-opacity', 0.7);
+                // Drop shadow for readability
+                iconGroup.attr('filter', 'drop-shadow(0 0 4px rgba(0,0,0,0.8))');
+            }
+
+            // Faction name below icon
             labelLayer.append('text')
-                .attr('x', cx).attr('y', cy + 16)
+                .attr('x', cx).attr('y', cy + (iconSvg ? 18 : 0))
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('fill', color).attr('fill-opacity', 0.6)
-                .attr('font-size', '11px').attr('font-weight', '500')
+                .attr('fill', color).attr('fill-opacity', 0.8)
+                .attr('font-size', '11px').attr('font-weight', '600')
+                .attr('paint-order', 'stroke')
+                .attr('stroke', 'rgba(0,0,0,0.7)').attr('stroke-width', '2px')
                 .text(dominant.faction);
         }
     }
