@@ -5,13 +5,18 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
+using StarWarsData.Models.Queries;
 
 namespace StarWarsData.Services;
 
 public class TerritoryControlService
 {
     readonly IMongoCollection<TerritorySnapshot> _snapshots;
+    readonly IMongoDatabase _timelineDb;
     readonly ILogger<TerritoryControlService> _logger;
+
+    // Collections with events relevant to territory control
+    static readonly string[] EventCollections = ["Battle", "War", "Campaign", "Treaty", "Event", "Duel", "Mission", "Government"];
 
     public TerritoryControlService(
         IMongoClient mongoClient,
@@ -21,6 +26,7 @@ public class TerritoryControlService
     {
         var db = mongoClient.GetDatabase(settings.Value.TerritoryControlDb);
         _snapshots = db.GetCollection<TerritorySnapshot>("territory_snapshots");
+        _timelineDb = mongoClient.GetDatabase(settings.Value.TimelineEventsDb);
         _logger = logger;
     }
 
@@ -144,18 +150,12 @@ public class TerritoryControlService
             .OrderBy(r => r.Region)
             .ToList();
 
-        // Load era + key events from seed data
+        // Load era from seed data
         var seedData = await LoadSeedFileAsync(ct);
         var era = seedData?.Eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
-        var keyEvents = seedData?.KeyEvents
-            .Where(e => e.Year == year)
-            .Select(e => new TerritoryKeyEvent
-            {
-                Year = e.Year,
-                Title = e.Title,
-                Description = e.Description,
-                WikiUrl = e.WikiUrl,
-            }).ToList() ?? [];
+
+        // Query real events from the timeline database
+        var keyEvents = await GetTimelineEventsForYearAsync(year, ct);
 
         return new TerritoryYearResponse
         {
@@ -172,6 +172,71 @@ public class TerritoryControlService
     {
         var seedData = await LoadSeedFileAsync(ct);
         return seedData?.Factions ?? new();
+    }
+
+    /// <summary>
+    /// Query real timeline events from the starwars-timeline-events database for a specific year.
+    /// Returns Battle, War, Campaign, Treaty, Event, Duel, Mission, and Government events.
+    /// </summary>
+    async Task<List<TerritoryKeyEvent>> GetTimelineEventsForYearAsync(int year, CancellationToken ct)
+    {
+        var absYear = Math.Abs(year);
+        var demarcation = year <= 0 ? Demarcation.Bby : Demarcation.Aby;
+
+        var existingCollections = (await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)).ToList();
+        var events = new List<TerritoryKeyEvent>();
+
+        foreach (var collectionName in EventCollections)
+        {
+            if (!existingCollections.Contains(collectionName))
+                continue;
+
+            var collection = _timelineDb.GetCollection<TimelineEvent>(collectionName);
+
+            var filter = Builders<TimelineEvent>.Filter.And(
+                Builders<TimelineEvent>.Filter.Eq(e => e.Year, absYear),
+                Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, demarcation),
+                Builders<TimelineEvent>.Filter.Eq(e => e.Continuity, Continuity.Canon)
+            );
+
+            var docs = await collection.Find(filter)
+                .Limit(20)
+                .ToListAsync(ct);
+
+            foreach (var doc in docs)
+            {
+                var place = doc.Properties
+                    .FirstOrDefault(p => p.Label is "Place" or "Location" or "System" or "Headquarters")
+                    ?.Values.FirstOrDefault();
+
+                var outcome = doc.Properties
+                    .FirstOrDefault(p => p.Label is "Outcome" or "Result")
+                    ?.Values.FirstOrDefault();
+
+                var title = doc.Title ?? "Unknown";
+                var wikiUrl = $"https://starwars.fandom.com/wiki/{Uri.EscapeDataString(title.Replace(' ', '_'))}";
+
+                var descParts = new List<string>();
+                if (!string.IsNullOrEmpty(place)) descParts.Add(place);
+                if (!string.IsNullOrEmpty(outcome)) descParts.Add(outcome);
+
+                events.Add(new TerritoryKeyEvent
+                {
+                    Year = year,
+                    Title = title,
+                    Description = descParts.Count > 0 ? string.Join(". ", descParts) : null,
+                    WikiUrl = wikiUrl,
+                    Category = collectionName,
+                });
+            }
+        }
+
+        // Sort: Battles and Wars first, then by title
+        return events
+            .OrderByDescending(e => e.Category is "Battle" or "War" or "Campaign")
+            .ThenBy(e => e.Title)
+            .Take(30)
+            .ToList();
     }
 
     private async Task<SeedData?> LoadSeedFileAsync(CancellationToken ct)

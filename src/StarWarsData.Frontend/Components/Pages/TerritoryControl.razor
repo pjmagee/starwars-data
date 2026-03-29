@@ -71,29 +71,57 @@
                     }
                 }
 
-                @* Key events for this year *@
+                @* Events for this year (from Wookieepedia timeline data) *@
                 @if (_yearData?.KeyEvents.Count > 0)
                 {
-                    <MudText Typo="Typo.subtitle2" Class="mb-2" Style="font-weight:600;">Key Events</MudText>
-                    @foreach (var evt in _yearData.KeyEvents)
-                    {
-                        <MudPaper Class="pa-3 mb-2" Elevation="0"
-                                  Style="background: rgba(255,255,255,0.04); border-left: 3px solid var(--mud-palette-primary);">
-                            @if (evt.WikiUrl is not null)
+                    <MudText Typo="Typo.subtitle2" Class="mb-2" Style="font-weight:600;">
+                        Events (@_yearData.KeyEvents.Count)
+                    </MudText>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        @foreach (var evt in _yearData.KeyEvents)
+                        {
+                            var borderColor = evt.Category switch
                             {
-                                <MudLink Href="@evt.WikiUrl" Target="_blank" Typo="Typo.body2"
-                                         Style="font-weight:600;" Underline="Underline.Hover">@evt.Title</MudLink>
-                            }
-                            else
-                            {
-                                <MudText Typo="Typo.body2" Style="font-weight:600;">@evt.Title</MudText>
-                            }
-                            @if (evt.Description is not null)
-                            {
-                                <MudText Typo="Typo.caption" Color="Color.Secondary">@evt.Description</MudText>
-                            }
-                        </MudPaper>
-                    }
+                                "Battle" => "var(--mud-palette-error)",
+                                "War" => "#ff4444",
+                                "Campaign" => "#ff8844",
+                                "Treaty" => "var(--mud-palette-success)",
+                                "Government" => "var(--mud-palette-info)",
+                                _ => "var(--mud-palette-primary)",
+                            };
+                            <MudPaper Class="pa-2 mb-2" Elevation="0"
+                                      Style="@($"background: rgba(255,255,255,0.04); border-left: 3px solid {borderColor};")">
+                                <div class="d-flex align-center gap-2">
+                                    @if (evt.Category is not null)
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                 Style="@($"font-size:10px; height:18px; border-color:{borderColor}; color:{borderColor};")">
+                                            @evt.Category
+                                        </MudChip>
+                                    }
+                                    @if (evt.WikiUrl is not null)
+                                    {
+                                        <MudLink Href="@evt.WikiUrl" Target="_blank" Typo="Typo.caption"
+                                                 Style="font-weight:600;" Underline="Underline.Hover">@evt.Title</MudLink>
+                                    }
+                                    else
+                                    {
+                                        <MudText Typo="Typo.caption" Style="font-weight:600;">@evt.Title</MudText>
+                                    }
+                                </div>
+                                @if (!string.IsNullOrEmpty(evt.Description))
+                                {
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-size:11px;">@evt.Description</MudText>
+                                }
+                            </MudPaper>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                        No notable events recorded for this year.
+                    </MudText>
                 }
 
                 <MudDivider Class="my-3" />
@@ -189,9 +217,12 @@
 
 @if (_musicEnabled)
 {
-    <iframe id="duel-of-fates-player" style="display:none;" allow="autoplay"
-            src="https://www.youtube.com/embed/xlYCxbBZUCY?autoplay=1&loop=1&playlist=xlYCxbBZUCY">
-    </iframe>
+    <div style="position:fixed;bottom:56px;right:12px;z-index:100;border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+        <iframe width="280" height="60" allow="autoplay"
+                src="https://www.youtube.com/embed/xlYCxbBZUCY?autoplay=1&loop=1&playlist=xlYCxbBZUCY"
+                style="border:none;">
+        </iframe>
+    </div>
 }
 
 <style>
@@ -437,6 +468,7 @@
         public string Title { get; init; } = "";
         public string? Description { get; init; }
         public string? WikiUrl { get; init; }
+        public string? Category { get; init; }
     }
 
     record FactionInfoDto
