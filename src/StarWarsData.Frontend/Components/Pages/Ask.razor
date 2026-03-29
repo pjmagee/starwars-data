@@ -103,17 +103,40 @@
                                     <MudStack Spacing="1" Class="mt-2 ml-7">
                                         @foreach (var tc in msg.ToolCalls!)
                                         {
-                                            <div class="d-flex align-center gap-2">
-                                                @if (tc.IsComplete)
+                                            var tool = tc;
+                                            <MudPaper Elevation="0" Class="pa-2" Style="background: rgba(255,255,255,0.02); border-radius:6px;">
+                                                <div class="d-flex align-center gap-2" style="cursor:pointer" @onclick="() => tool.IsDetailExpanded = !tool.IsDetailExpanded">
+                                                    @if (tool.IsComplete)
+                                                    {
+                                                        <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Success" Style="font-size:14px" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:14px;height:14px" />
+                                                    }
+                                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="flex:1">@FriendlyToolName(tool.ToolName)</MudText>
+                                                    @if (tool.IsComplete)
+                                                    {
+                                                        <MudIcon Icon="@(tool.IsDetailExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                                                                 Size="Size.Small" Color="Color.Secondary" Style="font-size:14px" />
+                                                    }
+                                                </div>
+                                                @if (tool.IsDetailExpanded && tool.IsComplete)
                                                 {
-                                                    <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Success" Style="font-size:14px" />
+                                                    <div class="mt-2" style="font-size:12px;">
+                                                        @if (!string.IsNullOrWhiteSpace(tool.Arguments))
+                                                        {
+                                                            <MudText Typo="Typo.overline" Color="Color.Secondary" Class="mb-1">Input</MudText>
+                                                            <pre style="background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; overflow-x:auto; white-space:pre-wrap; word-break:break-word; color:#a0c4ff; font-size:11px; max-height:200px; overflow-y:auto;">@FormatJson(tool.Arguments)</pre>
+                                                        }
+                                                        @if (!string.IsNullOrWhiteSpace(tool.Result))
+                                                        {
+                                                            <MudText Typo="Typo.overline" Color="Color.Secondary" Class="mb-1 mt-2">Output</MudText>
+                                                            <pre style="background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; overflow-x:auto; white-space:pre-wrap; word-break:break-word; color:#a0ffa0; font-size:11px; max-height:300px; overflow-y:auto;">@FormatJson(tool.Result)</pre>
+                                                        }
+                                                    </div>
                                                 }
-                                                else
-                                                {
-                                                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:14px;height:14px" />
-                                                }
-                                                <MudText Typo="Typo.caption" Color="Color.Secondary">@FriendlyToolName(tc.ToolName)</MudText>
-                                            </div>
+                                            </MudPaper>
                                         }
                                     </MudStack>
                                 }
@@ -271,6 +294,7 @@
         public string Arguments { get; set; } = "";
         public string? Result { get; set; }
         public bool IsComplete { get; set; }
+        public bool IsDetailExpanded { get; set; }
     }
 
     class ConversationMessage
@@ -1160,4 +1184,18 @@
         "search_wiki"              => "Searching wiki articles",
         _                          => name ?? "Using tool",
     };
+
+    private static string FormatJson(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json)) return "";
+        try
+        {
+            var doc = System.Text.Json.JsonDocument.Parse(json);
+            return System.Text.Json.JsonSerializer.Serialize(doc, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+        }
+        catch
+        {
+            return json;
+        }
+    }
 }
