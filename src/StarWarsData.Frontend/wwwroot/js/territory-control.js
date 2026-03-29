@@ -201,23 +201,12 @@ export function renderTerritoryLayer(yearData) {
 
             if (iconSvg) {
                 const iconGroup = labelLayer.append('g')
-                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2 - 10}) scale(${iconSize/24})`)
-                    .attr('opacity', 0.6);
+                    .attr('transform', `translate(${cx - iconSize/2}, ${cy - iconSize/2}) scale(${iconSize/24})`)
+                    .attr('opacity', 0.5);
                 iconGroup.html(iconSvg);
                 iconGroup.selectAll('*').attr('fill', color).attr('stroke', color);
                 iconGroup.attr('filter', 'drop-shadow(0 0 6px rgba(0,0,0,0.9))');
             }
-
-            // Faction name below icon
-            labelLayer.append('text')
-                .attr('x', cx).attr('y', cy + (iconSvg ? iconSize/2 + 6 : 0))
-                .attr('text-anchor', 'middle').attr('dominant-baseline', 'hanging')
-                .attr('fill', color).attr('fill-opacity', 0.85)
-                .attr('font-size', cells.length > 20 ? '14px' : '11px')
-                .attr('font-weight', '700')
-                .attr('paint-order', 'stroke')
-                .attr('stroke', 'rgba(0,0,0,0.8)').attr('stroke-width', '3px')
-                .text(dominant.faction);
         }
     }
 }
