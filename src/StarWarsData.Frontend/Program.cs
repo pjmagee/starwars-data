@@ -95,7 +95,7 @@ builder
 
 // Register a named HttpClient for the API service
 // RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
-builder.Services.AddScoped<AuthTokenDelegatingHandler>();
+builder.Services.AddScoped<UserIdDelegatingHandler>();
 builder
     .Services.AddHttpClient(
         "StarWarsData",
@@ -105,7 +105,7 @@ builder
             client.Timeout = TimeSpan.FromMinutes(5);
         }
     )
-    .AddHttpMessageHandler<AuthTokenDelegatingHandler>();
+    .AddHttpMessageHandler<UserIdDelegatingHandler>();
 
 var app = builder.Build();
 

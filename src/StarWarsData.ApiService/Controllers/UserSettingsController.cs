@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
 
@@ -7,7 +6,6 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/user/settings")]
-[Authorize]
 public class UserSettingsController(
     UserSettingsService userSettingsService,
     ChatSessionService chatSessionService,
@@ -15,10 +13,13 @@ public class UserSettingsController(
 ) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult> GetSettings(CancellationToken ct)
+    public async Task<ActionResult> GetSettings(
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var settings = await userSettingsService.GetAsync(userId, ct);
         return Ok(new
@@ -30,12 +31,13 @@ public class UserSettingsController(
 
     [HttpPut("openai-key")]
     public async Task<ActionResult> SetOpenAiKey(
+        [FromHeader(Name = "X-User-Id")] string? userId,
         [FromBody] SetKeyRequest request,
         CancellationToken ct
     )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         if (string.IsNullOrWhiteSpace(request.ApiKey) || !request.ApiKey.StartsWith("sk-"))
             return BadRequest(new { error = "Invalid OpenAI API key format. Keys should start with 'sk-'." });
@@ -47,10 +49,13 @@ public class UserSettingsController(
     }
 
     [HttpDelete("openai-key")]
-    public async Task<ActionResult> RemoveOpenAiKey(CancellationToken ct)
+    public async Task<ActionResult> RemoveOpenAiKey(
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         await userSettingsService.RemoveOpenAiKeyAsync(userId, ct);
         byokChatClient.InvalidateClient(userId);
@@ -62,10 +67,13 @@ public class UserSettingsController(
     /// GDPR right to erasure — deletes all user data (settings, BYOK key, chat sessions).
     /// </summary>
     [HttpDelete("all-data")]
-    public async Task<ActionResult> DeleteAllUserData(CancellationToken ct)
+    public async Task<ActionResult> DeleteAllUserData(
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         byokChatClient.InvalidateClient(userId);
         await userSettingsService.DeleteAllUserDataAsync(userId, ct);
@@ -78,10 +86,13 @@ public class UserSettingsController(
     /// GDPR right of access — exports all user data as a JSON file.
     /// </summary>
     [HttpGet("export")]
-    public async Task<ActionResult> ExportUserData(CancellationToken ct)
+    public async Task<ActionResult> ExportUserData(
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var settings = await userSettingsService.GetAsync(userId, ct);
         var sessions = await chatSessionService.GetAllSessionsAsync(userId, ct);
@@ -90,7 +101,6 @@ public class UserSettingsController(
         {
             exportedAt = DateTime.UtcNow,
             userId,
-            preferredUsername = User.FindFirst("preferred_username")?.Value,
             settings = settings is null ? null : new
             {
                 hasOpenAiKey = settings.OpenAiKeySet,

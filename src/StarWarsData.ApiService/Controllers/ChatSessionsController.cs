@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.AI;
 using StarWarsData.Models.Queries;
@@ -8,38 +7,47 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class ChatSessionsController(ChatSessionService chatSessionService, IChatClient chatClient)
     : ControllerBase
 {
 
     [HttpGet]
-    public async Task<ActionResult<List<ChatSessionSummary>>> GetSessions(CancellationToken ct)
+    public async Task<ActionResult<List<ChatSessionSummary>>> GetSessions(
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
+
         return await chatSessionService.GetSessionsAsync(userId, ct);
     }
 
     [HttpGet("{sessionId:guid}")]
-    public async Task<ActionResult<ChatSessionDetail>> GetSession(Guid sessionId, CancellationToken ct)
+    public async Task<ActionResult<ChatSessionDetail>> GetSession(
+        Guid sessionId,
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var session = await chatSessionService.GetSessionAsync(userId, sessionId, ct);
-        if (session is null) return NotFound();
+        if (session is null)
+            return NotFound();
         return session;
     }
 
     [HttpPost]
     public async Task<ActionResult<Guid>> SaveSession(
+        [FromHeader(Name = "X-User-Id")] string? userId,
         [FromBody] SaveChatSessionRequest request,
         CancellationToken ct
     )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var id = await chatSessionService.SaveSessionAsync(userId, request, ct);
         return CreatedAtAction(nameof(GetSession), new { sessionId = id }, id);
@@ -48,29 +56,33 @@ public class ChatSessionsController(ChatSessionService chatSessionService, IChat
     [HttpPut("{sessionId:guid}")]
     public async Task<IActionResult> UpdateSession(
         Guid sessionId,
+        [FromHeader(Name = "X-User-Id")] string? userId,
         [FromBody] SaveChatSessionRequest request,
         CancellationToken ct
     )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var updated = await chatSessionService.UpdateSessionAsync(userId, sessionId, request, ct);
         return updated ? NoContent() : NotFound();
     }
 
     [HttpDelete("{sessionId:guid}")]
-    public async Task<IActionResult> DeleteSession(Guid sessionId, CancellationToken ct)
+    public async Task<IActionResult> DeleteSession(
+        Guid sessionId,
+        [FromHeader(Name = "X-User-Id")] string? userId,
+        CancellationToken ct
+    )
     {
-        var userId = User.GetUserId();
-        if (userId is null) return Unauthorized();
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
 
         var deleted = await chatSessionService.DeleteSessionAsync(userId, sessionId, ct);
         return deleted ? NoContent() : NotFound();
     }
 
     [HttpPost("summarize")]
-    [AllowAnonymous]
     public async Task<ActionResult<string>> SummarizeTitle(
         [FromBody] SummarizeRequest request,
         CancellationToken ct

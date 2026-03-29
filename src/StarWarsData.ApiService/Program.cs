@@ -5,12 +5,10 @@ using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Hosting.AGUI.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using ModelContextProtocol.Client;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -20,7 +18,6 @@ using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
-using StarWarsData.ApiService;
 using StarWarsData.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,34 +29,6 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddAGUI();
-
-// JWT Bearer authentication — validate Keycloak-issued access tokens
-var keycloakAuthority = builder.Configuration["Keycloak__Authority"]
-    ?? "https://auth.magaoidh.pro/realms/starwars-data";
-
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = keycloakAuthority;
-        options.Audience = "starwars-frontend";
-        options.RequireHttpsMetadata = false; // Keycloak may be HTTP in dev
-        options.MapInboundClaims = false;
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            NameClaimType = "preferred_username",
-            RoleClaimType = "roles",
-            // Keycloak puts audience in 'azp' (authorized party) for public clients
-            AudienceValidator = (audiences, _, _) =>
-                audiences.Contains("starwars-frontend")
-                || audiences.Contains("account"),
-        };
-    });
-
-builder.Services.AddAuthorization();
 
 builder
     .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -392,15 +361,9 @@ builder.Services.AddHttpClient<PageDownloader>(
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy => policy
-        .WithOrigins(
-            "https://swdata.ai",
-            "https://localhost:7274",
-            "http://localhost:5266"
-        )
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials());
+    // API is internal-only (not exposed to the internet). Only the Blazor Server
+    // frontend can reach it. See eng/adr/001-internal-api-auth.md for rationale.
+    options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 var app = builder.Build();
@@ -411,8 +374,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
-app.UseAuthentication();
-app.UseAuthorization();
 
 // Hangfire dashboard is always available (read-only monitoring in dev)
 app.UseHangfireDashboard(
@@ -477,8 +438,8 @@ app.Use(async (context, next) =>
     {
         var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
         var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
-        var userId = context.User.GetUserId();
-        var isAuthenticated = context.User.Identity?.IsAuthenticated == true && userId is not null;
+        var userId = context.Request.Headers["X-User-Id"].FirstOrDefault();
+        var isAuthenticated = !string.IsNullOrEmpty(userId);
         var hasByok = false;
 
         if (isAuthenticated)

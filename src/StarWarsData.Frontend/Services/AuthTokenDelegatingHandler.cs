@@ -1,53 +1,35 @@
-using Microsoft.AspNetCore.Authentication;
-using System.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace StarWarsData.Frontend.Services;
 
-public class AuthTokenDelegatingHandler(
-    IHttpContextAccessor httpContextAccessor,
-    ILogger<AuthTokenDelegatingHandler> logger
-) : DelegatingHandler
+/// <summary>
+/// DelegatingHandler that injects the X-User-Id header from the authenticated
+/// user's claims into outgoing API requests. The API is internal-only (not exposed
+/// to the internet) so identity is trusted from the Blazor Server frontend.
+///
+/// Uses IHttpContextAccessor which works via AsyncLocal — the HttpContext from the
+/// initial prerender request remains accessible throughout the Blazor circuit.
+/// </summary>
+public class UserIdDelegatingHandler(IHttpContextAccessor httpContextAccessor)
+    : DelegatingHandler
 {
-    protected override async Task<HttpResponseMessage> SendAsync(
+    protected override Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
         var httpContext = httpContextAccessor.HttpContext;
-
-        logger.LogWarning("AuthTokenHandler invoked for {Url}. HttpContext={HasCtx}",
-            request.RequestUri, httpContext is not null);
-
-        if (httpContext is null)
+        if (httpContext?.User.Identity?.IsAuthenticated == true)
         {
-            logger.LogWarning("HttpContext is null — cannot attach token to {Url}", request.RequestUri);
-        }
-        else
-        {
-            var isAuthenticated = httpContext.User.Identity?.IsAuthenticated == true;
-            logger.LogWarning("HttpContext available. Authenticated: {IsAuth}, User: {User}",
-                isAuthenticated, httpContext.User.Identity?.Name);
+            var userId = httpContext.User.FindFirst("sub")?.Value
+                         ?? httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (isAuthenticated)
+            if (!string.IsNullOrEmpty(userId))
             {
-                var accessToken = await httpContext.GetTokenAsync("access_token");
-                if (!string.IsNullOrEmpty(accessToken))
-                {
-                    request.Headers.Authorization =
-                        new AuthenticationHeaderValue("Bearer", accessToken);
-                    logger.LogWarning("Attached Bearer token ({Length} chars) to {Url}",
-                        accessToken.Length, request.RequestUri);
-                }
-                else
-                {
-                    var idToken = await httpContext.GetTokenAsync("id_token");
-                    var refreshToken = await httpContext.GetTokenAsync("refresh_token");
-                    logger.LogWarning(
-                        "No access_token found. id_token={HasId}, refresh_token={HasRefresh}. Request: {Url}",
-                        idToken is not null, refreshToken is not null, request.RequestUri);
-                }
+                request.Headers.Remove("X-User-Id");
+                request.Headers.Add("X-User-Id", userId);
             }
         }
 
-        return await base.SendAsync(request, cancellationToken);
+        return base.SendAsync(request, cancellationToken);
     }
 }
