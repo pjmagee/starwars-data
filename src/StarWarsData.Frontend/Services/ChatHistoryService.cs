@@ -5,16 +5,10 @@ namespace StarWarsData.Frontend.Services;
 /// <summary>
 /// Scoped service that keeps the chat session list in sync between the nav sidebar and the Ask page.
 /// </summary>
-public class ChatHistoryService
+public class ChatHistoryService(ApiClient apiClient)
 {
-    private readonly ApiClient _apiClient;
     private List<ChatSessionSummary> _sessions = [];
     private bool _loaded;
-
-    public ChatHistoryService(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
 
     public IReadOnlyList<ChatSessionSummary> Sessions => _sessions;
 
@@ -26,8 +20,7 @@ public class ChatHistoryService
     {
         try
         {
-            var http = _apiClient.Http;
-            var response = await http.GetAsync("api/ChatSessions");
+            var response = await apiClient.GetAsync("api/ChatSessions");
             if (response.IsSuccessStatusCode)
             {
                 _sessions = await response.Content.ReadFromJsonAsync<List<ChatSessionSummary>>() ?? [];
@@ -49,8 +42,7 @@ public class ChatHistoryService
     {
         try
         {
-            var http = _apiClient.Http;
-            await http.DeleteAsync($"api/ChatSessions/{sessionId}");
+            await apiClient.DeleteAsync($"api/ChatSessions/{sessionId}");
             _sessions.RemoveAll(s => s.Id == sessionId);
             if (ActiveSessionId == sessionId) ActiveSessionId = null;
             OnChange?.Invoke();
@@ -58,16 +50,11 @@ public class ChatHistoryService
         catch { }
     }
 
-    /// <summary>
-    /// Call the API to generate a 3-4 word AI summary for a chat title.
-    /// Falls back to first few words if the call fails.
-    /// </summary>
     public async Task<string> SummarizeTitleAsync(string prompt)
     {
         try
         {
-            var http = _apiClient.Http;
-            var response = await http.PostAsJsonAsync("api/ChatSessions/summarize", new { prompt });
+            var response = await apiClient.PostAsJsonAsync("api/ChatSessions/summarize", new { prompt });
             if (response.IsSuccessStatusCode)
             {
                 var title = await response.Content.ReadAsStringAsync();
@@ -81,9 +68,6 @@ public class ChatHistoryService
         return FallbackTitle(prompt);
     }
 
-    /// <summary>
-    /// Simple fallback: first 4 words of the prompt.
-    /// </summary>
     public static string FallbackTitle(string prompt)
     {
         var words = prompt.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);

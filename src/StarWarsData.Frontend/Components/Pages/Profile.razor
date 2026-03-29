@@ -329,7 +329,6 @@
     private string _apiKeyInput = string.Empty;
     private string? _byokError;
 
-    private HttpClient Http => ApiClient.Http;
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthState { get; set; }
@@ -358,7 +357,7 @@
     {
         try
         {
-            var response = await Http.GetAsync("api/user/settings");
+            var response = await ApiClient.GetAsync("api/user/settings");
             if (response.IsSuccessStatusCode)
             {
                 var settings = await response.Content.ReadFromJsonAsync<UserSettingsResponse>();
@@ -382,7 +381,7 @@
 
         try
         {
-            var response = await Http.PutAsJsonAsync("api/user/settings/openai-key", new { apiKey = _apiKeyInput });
+            var response = await ApiClient.PutAsJsonAsync("api/user/settings/openai-key", new { apiKey = _apiKeyInput });
 
             if (response.IsSuccessStatusCode)
             {
@@ -414,7 +413,7 @@
 
         try
         {
-            var response = await Http.DeleteAsync("api/user/settings/openai-key");
+            var response = await ApiClient.DeleteAsync("api/user/settings/openai-key");
 
             if (response.IsSuccessStatusCode)
             {
@@ -454,7 +453,7 @@
 
         try
         {
-            var response = await Http.DeleteAsync("api/user/settings/all-data");
+            var response = await ApiClient.DeleteAsync("api/user/settings/all-data");
             if (response.IsSuccessStatusCode)
             {
                 _deleteSuccess = true;
@@ -484,7 +483,7 @@
 
         try
         {
-            var response = await Http.GetAsync("api/user/settings/export");
+            var response = await ApiClient.GetAsync("api/user/settings/export");
             if (response.IsSuccessStatusCode)
             {
                 var bytes = await response.Content.ReadAsByteArrayAsync();

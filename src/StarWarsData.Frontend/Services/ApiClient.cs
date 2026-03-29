@@ -1,38 +1,48 @@
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 namespace StarWarsData.Frontend.Services;
 
 /// <summary>
-/// Scoped wrapper around the named HttpClient that attaches the user's access token
-/// to every request. In Blazor Server, DelegatingHandlers can't reliably access
-/// scoped services (they're created in a different DI scope by IHttpClientFactory),
-/// so we set the Authorization header directly before each call.
+/// Scoped wrapper that creates HttpRequestMessages with the Bearer token attached.
+/// In Blazor Server, DelegatingHandlers can't access scoped services, so we attach
+/// the token per-request from the CircuitTokenProvider.
 /// </summary>
-public class ApiClient
+public class ApiClient(IHttpClientFactory httpClientFactory, CircuitTokenProvider tokenProvider)
 {
-    private readonly HttpClient _http;
-    private readonly CircuitTokenProvider _tokenProvider;
-
-    public ApiClient(IHttpClientFactory httpClientFactory, CircuitTokenProvider tokenProvider)
+    private HttpClient CreateClient()
     {
-        _http = httpClientFactory.CreateClient("StarWarsData");
-        _tokenProvider = tokenProvider;
+        var client = httpClientFactory.CreateClient("StarWarsData");
+        if (!string.IsNullOrEmpty(tokenProvider.AccessToken))
+        {
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", tokenProvider.AccessToken);
+        }
+        return client;
     }
 
-    public HttpClient Http
+    public async Task<HttpResponseMessage> GetAsync(string requestUri)
+        => await CreateClient().GetAsync(requestUri);
+
+    public async Task<T?> GetFromJsonAsync<T>(string requestUri)
+        => await CreateClient().GetFromJsonAsync<T>(requestUri);
+
+    public async Task<HttpResponseMessage> PostAsJsonAsync<T>(string requestUri, T value)
+        => await CreateClient().PostAsJsonAsync(requestUri, value);
+
+    public async Task<HttpResponseMessage> PutAsJsonAsync<T>(string requestUri, T value)
+        => await CreateClient().PutAsJsonAsync(requestUri, value);
+
+    public async Task<HttpResponseMessage> DeleteAsync(string requestUri)
+        => await CreateClient().DeleteAsync(requestUri);
+
+    public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken ct)
     {
-        get
+        if (!string.IsNullOrEmpty(tokenProvider.AccessToken))
         {
-            if (!string.IsNullOrEmpty(_tokenProvider.AccessToken))
-            {
-                _http.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", _tokenProvider.AccessToken);
-            }
-            else
-            {
-                _http.DefaultRequestHeaders.Authorization = null;
-            }
-            return _http;
+            request.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", tokenProvider.AccessToken);
         }
+        return await httpClientFactory.CreateClient("StarWarsData").SendAsync(request, completionOption, ct);
     }
 }
