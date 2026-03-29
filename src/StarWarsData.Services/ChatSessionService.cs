@@ -118,6 +118,14 @@ public class ChatSessionService
         return result.DeletedCount > 0;
     }
 
+    public async Task<List<ChatSession>> GetAllSessionsAsync(string userId, CancellationToken ct = default)
+    {
+        return await _sessions
+            .Find(s => s.UserId == userId)
+            .SortByDescending(s => s.UpdatedAt)
+            .ToListAsync(ct);
+    }
+
     public async Task<long> DeleteAllUserDataAsync(string userId, CancellationToken ct = default)
     {
         var result = await _sessions.DeleteManyAsync(s => s.UserId == userId, ct);

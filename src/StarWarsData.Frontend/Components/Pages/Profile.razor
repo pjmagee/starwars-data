@@ -5,6 +5,7 @@
 @inject EndpointService EndpointService
 @inject NavigationManager NavigationManager
 @inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
 
 <PageTitle>Profile</PageTitle>
 
@@ -245,10 +246,23 @@
             <MudPaper Class="pa-6 mb-6" Elevation="2">
                 <MudText Typo="Typo.h5" Class="mb-2">Data &amp; Privacy</MudText>
                 <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
-                    Under UK GDPR, you have the right to request deletion of all your personal data.
-                    This will permanently remove your chat history, stored API keys, and all settings.
-                    This action cannot be undone.
+                    Under UK GDPR, you have the right to access and delete your personal data.
+                    You can export all your data as a JSON file, or permanently delete everything.
                 </MudText>
+
+                <MudStack Row="true" Spacing="2" Class="mb-4">
+                    <MudButton Variant="Variant.Outlined" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.Download"
+                               OnClick="ExportDataAsync"
+                               Disabled="_exportInProgress">
+                        @(_exportInProgress ? "Exporting..." : "Export My Data")
+                    </MudButton>
+                </MudStack>
+
+                @if (_exportError is not null)
+                {
+                    <MudAlert Severity="Severity.Error" Dense="true" Class="mb-3">@_exportError</MudAlert>
+                }
 
                 @if (_deleteSuccess)
                 {
@@ -422,6 +436,10 @@
         }
     }
 
+    // Export data state
+    private bool _exportInProgress;
+    private string? _exportError;
+
     // Delete all data state
     private bool _confirmDelete;
     private bool _deleteInProgress;
@@ -455,6 +473,38 @@
         finally
         {
             _deleteInProgress = false;
+        }
+    }
+
+    private async Task ExportDataAsync()
+    {
+        _exportInProgress = true;
+        _exportError = null;
+        StateHasChanged();
+
+        try
+        {
+            var response = await Http.GetAsync("api/user/settings/export");
+            if (response.IsSuccessStatusCode)
+            {
+                var bytes = await response.Content.ReadAsByteArrayAsync();
+                var fileName = $"swdata-export-{DateTime.UtcNow:yyyy-MM-dd}.json";
+                var base64 = Convert.ToBase64String(bytes);
+                await JS.InvokeVoidAsync("eval",
+                    $"(function(){{var a=document.createElement('a');a.href='data:application/json;base64,{base64}';a.download='{fileName}';document.body.appendChild(a);a.click();a.remove();}})()");
+            }
+            else
+            {
+                _exportError = "Failed to export data. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _exportError = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            _exportInProgress = false;
         }
     }
 

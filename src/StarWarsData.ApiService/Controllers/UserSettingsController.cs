@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
@@ -71,6 +72,56 @@ public class UserSettingsController(
         var sessionsDeleted = await chatSessionService.DeleteAllUserDataAsync(userId, ct);
 
         return Ok(new { deleted = true, sessionsDeleted });
+    }
+
+    /// <summary>
+    /// GDPR right of access — exports all user data as a JSON file.
+    /// </summary>
+    [HttpGet("export")]
+    public async Task<ActionResult> ExportUserData(CancellationToken ct)
+    {
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
+        var settings = await userSettingsService.GetAsync(userId, ct);
+        var sessions = await chatSessionService.GetAllSessionsAsync(userId, ct);
+
+        var export = new
+        {
+            exportedAt = DateTime.UtcNow,
+            userId,
+            preferredUsername = User.FindFirst("preferred_username")?.Value,
+            settings = settings is null ? null : new
+            {
+                hasOpenAiKey = settings.OpenAiKeySet,
+                encryptedOpenAiKey = settings.EncryptedOpenAiKey,
+                createdAt = settings.CreatedAt,
+                updatedAt = settings.UpdatedAt,
+            },
+            chatSessions = sessions.Select(s => new
+            {
+                s.Id,
+                s.Title,
+                s.CreatedAt,
+                s.UpdatedAt,
+                messages = s.Messages.Select(m => new
+                {
+                    m.Role,
+                    m.Content,
+                    m.Timestamp,
+                    m.ToolName,
+                    m.VisualizationType,
+                }),
+            }),
+        };
+
+        var json = JsonSerializer.SerializeToUtf8Bytes(export, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        });
+
+        return File(json, "application/json", $"swdata-export-{DateTime.UtcNow:yyyy-MM-dd}.json");
     }
 
     public record SetKeyRequest(string ApiKey);
