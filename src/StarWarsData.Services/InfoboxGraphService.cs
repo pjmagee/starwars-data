@@ -22,7 +22,7 @@ public class InfoboxGraphService(
     readonly IMongoCollection<GraphNode> _nodes = mongoClient
         .GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdgesInfobox);
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
 
     // ── Field classification ──
     // Fields are classified per infobox type. A field is a PROPERTY if it holds scalar

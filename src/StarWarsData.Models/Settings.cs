@@ -84,8 +84,6 @@ public static class Collections
     public const string KgLabels = "kg.labels";
     public const string SearchChunks = "search.chunks";
 
-    // Infobox-derived edges (deterministic, no LLM)
-    public const string KgEdgesInfobox = "kg.edges_infobox";
 
     // ── AI-generated content ──
     public const string GenaiCharacterTimelines = "genai.character_timelines";
