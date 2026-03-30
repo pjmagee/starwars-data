@@ -11,26 +11,6 @@ public class SettingsOptions
     public bool HangfireEnabled { get; set; } = true;
 
     /// <summary>
-    /// The database for Hangfire jobs
-    /// </summary>
-    public string HangfireDb { get; set; } = null!;
-
-    /// <summary>
-    /// The database for wookiepedia downloaded pages
-    /// </summary>
-    public string PagesDb { get; set; } = null!;
-
-    /// <summary>
-    /// The database for timeline events
-    /// </summary>
-    public string TimelineEventsDb { get; set; } = null!;
-
-    /// <summary>
-    /// The database for user chat sessions
-    /// </summary>
-    public string ChatSessionsDb { get; set; } = "starwars-chat-sessions";
-
-    /// <summary>
     /// The base URL for Wookieepedia API
     /// </summary>
     public string StarWarsBaseUrl { get; set; } = null!;
@@ -52,17 +32,7 @@ public class SettingsOptions
     /// </summary>
     public string CharacterTimelineModel { get; set; } = "gpt-5";
 
-    /// <summary>
-    /// The database for AI-generated character timelines
-    /// </summary>
-    public string CharacterTimelinesDb { get; set; } = "starwars-character-timelines";
-
     public IEnumerable<string> TimelineCollections { get; set; } = [];
-
-    /// <summary>
-    /// The database for the persistent relationship graph (edges, crawl state, label registry)
-    /// </summary>
-    public string RelationshipGraphDb { get; set; } = "starwars-relationship-graph";
 
     /// <summary>
     /// The model to use for relationship extraction (high-volume, low-cost)
@@ -74,8 +44,57 @@ public class SettingsOptions
     /// </summary>
     public int GraphBuilderBatchSize { get; set; } = 100;
 
-    /// <summary>
-    /// The database for faction territory control snapshots
-    /// </summary>
-    public string TerritoryControlDb { get; set; } = "starwars-territory-control";
+    // ── Databases ──
+    // All app data lives in one database; Hangfire gets its own (it manages its schema)
+
+    /// <summary>Single unified database for all application collections.</summary>
+    public string DatabaseName { get; set; } = "starwars";
+
+    /// <summary>Separate database for Hangfire (it creates its own collections).</summary>
+    public string HangfireDb { get; set; } = "starwars-hangfire";
+
+    // ── Legacy DB names (kept for backward compat during migration) ──
+    [Obsolete("Use DatabaseName")] public string PagesDb { get => DatabaseName; set { } }
+    [Obsolete("Use DatabaseName")] public string TimelineEventsDb { get => DatabaseName; set { } }
+    [Obsolete("Use DatabaseName")] public string ChatSessionsDb { get => DatabaseName; set { } }
+    [Obsolete("Use DatabaseName")] public string CharacterTimelinesDb { get => DatabaseName; set { } }
+    [Obsolete("Use DatabaseName")] public string RelationshipGraphDb { get => DatabaseName; set { } }
+    [Obsolete("Use DatabaseName")] public string TerritoryControlDb { get => DatabaseName; set { } }
+}
+
+/// <summary>
+/// Central registry of all MongoDB collection names.
+/// One place to see the full namespace layout.
+/// </summary>
+public static class Collections
+{
+    // ── Raw pages ──
+    public const string Pages = "raw.pages";
+    public const string JobState = "raw.job_state";
+
+    // ── Timeline events (one collection per infobox type) ──
+    // Accessed via: db.GetCollection<TimelineEvent>($"timeline.{typeName}")
+    public const string TimelinePrefix = "timeline.";
+
+    // ── Knowledge graph ──
+    public const string KgNodes = "kg.nodes";
+    public const string KgEdges = "kg.edges";
+    public const string KgCrawlState = "kg.crawl_state";
+    public const string KgBatchJobs = "kg.batch_jobs";
+    public const string KgLabels = "kg.labels";
+    public const string KgChunks = "kg.chunks";
+
+    // Old LLM-extracted edges (kept for comparison, will be dropped later)
+    public const string KgEdgesLegacy = "kg.edges_legacy";
+
+    // ── AI-generated content ──
+    public const string GenaiCharacterTimelines = "genai.character_timelines";
+    public const string GenaiCharacterCheckpoints = "genai.character_checkpoints";
+    public const string GenaiCharacterProgress = "genai.character_progress";
+
+    // ── Chat ──
+    public const string ChatSessions = "chat.sessions";
+
+    // ── Territory control ──
+    public const string TerritorySnapshots = "territory.snapshots";
 }
