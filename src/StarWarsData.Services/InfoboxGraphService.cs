@@ -51,10 +51,10 @@ public class InfoboxGraphService(
         "Organization type", "Model", "Shape", "Purpose",
 
         // Measurements / specs
-        "Length", "Width", "Height/depth", "Diameter", "Cost", "Weight",
+        "Length", "Width", "Height/depth", "Diameter", "Weight",
         "Hyperdrive rating", "Maximum atmospheric speed", "Megalight per hour",
         "Maximum altitude", "Maximum speed", "Maximum depth",
-        "Crew", "Passengers", "Population", "Consumables", "Cargo capacity",
+        "Passengers", "Population", "Consumables", "Cargo capacity",
         "Orbital position", "Orbital period", "Rotation period", "Surface water",
 
         // Publication / media metadata
@@ -164,6 +164,8 @@ public class InfoboxGraphService(
         ["Major product(s)"] = "produces",
 
         // ── Ship / Vehicle ──
+        ["Crew"] = "has_crew_role",
+        ["Cost"] = "priced_in",
         ["Manufacturer"] = "manufactured_by",
         ["Type"] = "type_of",
         ["Line"] = "product_line",
