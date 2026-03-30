@@ -215,30 +215,26 @@ public class TerritoryInferenceService(
         var snapshots = new List<TerritorySnapshot>();
         var yearDocs = new List<TerritoryYearDocument>();
 
-        // Location edge lookup — for resolving ANY entity to a grid position
-        // Try multiple relationship types: took_place_at, has_capital, headquartered_at, located_at, homeworld
-        var locationLabels = new[] { "took_place_at", "has_capital", "headquartered_at", "located_at", "homeworld", "on_celestial_body" };
-        var locationEdges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.In(e => e.Label, locationLabels),
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
+        // Build an adjacency list from ALL Canon edges for graph traversal
+        var allCanonEdges = await _edges
+            .Find(Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon))
+            .Project(Builders<RelationshipEdge>.Projection
+                .Include(e => e.FromId).Include(e => e.ToId).Include(e => e.ToName).Include(e => e.Label))
             .ToListAsync(ct);
-        var entityLocationLookup = locationEdges
-            .GroupBy(e => e.FromId)
-            .ToDictionary(g => g.Key, g => g.ToList());
 
-        logger.LogInformation("Territory inference: {Count} location edges across {Labels} label types",
-            locationEdges.Count, locationLabels.Length);
+        var adjacency = new Dictionary<int, List<(int toId, string toName, string label)>>();
+        foreach (var edge in allCanonEdges)
+        {
+            var fromId = edge["fromId"].AsInt32;
+            var toId = edge["toId"].AsInt32;
+            var toName = edge["toName"].AsString;
+            var label = edge["label"].AsString;
+            if (!adjacency.TryGetValue(fromId, out var list))
+                adjacency[fromId] = list = [];
+            list.Add((toId, toName, label));
+        }
 
-        // Took_place_at edge lookup — group ALL edges per event so we can try multiple targets
-        var tookPlaceEdges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "took_place_at"),
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
-            .ToListAsync(ct);
-        var eventPlaceLookup = tookPlaceEdges
-            .GroupBy(e => e.FromId)
-            .ToDictionary(g => g.Key, g => g.ToList());
+        logger.LogInformation("Territory inference: built adjacency list from {Count} Canon edges", allCanonEdges.Count);
 
         foreach (var year in eventYears)
         {
@@ -303,48 +299,10 @@ public class TerritoryInferenceService(
             {
                 foreach (var evt in yearEvents.Take(30))
                 {
-                    string? place = null, region = null;
-                    int? col = null, row = null;
-
-                    if (eventPlaceLookup.TryGetValue(evt.PageId, out var placeEdges))
-                    {
-                        // Try each took_place_at target until we find one with grid coordinates
-                        foreach (var pe in placeEdges)
-                        {
-                            place ??= pe.ToName;
-                            if (pe.ToId > 0)
-                            {
-                                if (region is null && planetToRegion.TryGetValue(pe.ToId, out var pr))
-                                    region = pr;
-                                if (col is null && planetToGrid.TryGetValue(pe.ToId, out var grid))
-                                {
-                                    col = grid.col;
-                                    row = grid.row;
-                                    place = pe.ToName; // prefer the name of the one with coordinates
-                                }
-                            }
-                        }
-                    }
-
-                    // Fallback: try all location edges (capital, headquarters, located_at, etc.)
-                    if (col is null && entityLocationLookup.TryGetValue(evt.PageId, out var locEdges))
-                    {
-                        foreach (var le in locEdges)
-                        {
-                            if (le.ToId > 0)
-                            {
-                                if (region is null && planetToRegion.TryGetValue(le.ToId, out var lr))
-                                    region = lr;
-                                if (planetToGrid.TryGetValue(le.ToId, out var lg))
-                                {
-                                    col = lg.col;
-                                    row = lg.row;
-                                    place ??= le.ToName;
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    // Graph traversal: BFS from the event node up to 3 hops
+                    // looking for any connected node with grid coordinates
+                    var (place, region, col, row) = ResolveLocationByTraversal(
+                        evt.PageId, adjacency, planetToRegion, planetToGrid, maxDepth: 3);
 
                     var outcome = evt.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
 
@@ -446,6 +404,62 @@ public class TerritoryInferenceService(
     {
         if (FactionColors.TryGetValue(faction, out var color)) return color;
         return ColorPalette[Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase)) % ColorPalette.Length];
+    }
+
+    /// <summary>
+    /// BFS from an entity node through the knowledge graph, looking for the nearest
+    /// connected node that has grid coordinates. Traverses any edge type.
+    /// </summary>
+    static (string? place, string? region, int? col, int? row) ResolveLocationByTraversal(
+        int entityId,
+        Dictionary<int, List<(int toId, string toName, string label)>> adjacency,
+        Dictionary<int, string> planetToRegion,
+        Dictionary<int, (int col, int row)> planetToGrid,
+        int maxDepth = 3)
+    {
+        string? place = null, region = null;
+        int? col = null, row = null;
+
+        var visited = new HashSet<int> { entityId };
+        var frontier = new List<int> { entityId };
+
+        for (var depth = 0; depth < maxDepth && frontier.Count > 0; depth++)
+        {
+            var nextFrontier = new List<int>();
+
+            foreach (var nodeId in frontier)
+            {
+                if (!adjacency.TryGetValue(nodeId, out var neighbors)) continue;
+
+                foreach (var (toId, toName, label) in neighbors)
+                {
+                    if (toId <= 0 || !visited.Add(toId)) continue;
+
+                    // Check if this neighbor has grid coordinates
+                    if (planetToGrid.TryGetValue(toId, out var grid))
+                    {
+                        col = grid.col;
+                        row = grid.row;
+                        place = toName;
+                        if (planetToRegion.TryGetValue(toId, out var r)) region = r;
+                        return (place, region, col, row);
+                    }
+
+                    // Check region even without grid
+                    if (region is null && planetToRegion.TryGetValue(toId, out var rg))
+                    {
+                        region = rg;
+                        place ??= toName;
+                    }
+
+                    nextFrontier.Add(toId);
+                }
+            }
+
+            frontier = nextFrontier;
+        }
+
+        return (place, region, col, row);
     }
 
     static bool TryParseGridSquare(string gridSquare, out int col, out int row)
