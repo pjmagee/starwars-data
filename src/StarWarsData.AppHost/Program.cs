@@ -22,7 +22,7 @@ var apiService = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Downloads raw wiki pages into starwars-raw-pages.",
+            Description = "Downloads raw wiki pages into raw.pages collection.",
             IconName = "ArrowDownload",
             IsHighlighted = false,
         }
@@ -60,7 +60,7 @@ var apiService = builder
         {
             Method = HttpMethod.Post,
             Description =
-                "Creates categorized timeline events in starwars-timeline-events from Pages. Requires Phase 1.",
+                "Creates categorized timeline events in timeline.* collections from raw.pages. Requires Phase 1.",
             IconName = "Timeline",
             IsHighlighted = false,
         }
