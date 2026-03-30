@@ -38,40 +38,55 @@ public class InfoboxGraphService(
     /// </summary>
     static readonly HashSet<string> AlwaysProperties = new(StringComparer.OrdinalIgnoreCase)
     {
-        // Identity
-        "Titles", "Pronouns", "Gender",
+        // Identity / titles
+        "Titles", "Pronouns",
 
-        // Physical attributes
+        // Physical attributes (links go to color/unit pages, not entities)
         "Height", "Mass", "Eye color", "Hair color", "Skin color", "Feather color",
+        "Plating color", "Sensor color", "Color",
         "Average height", "Average length", "Average mass", "Average lifespan", "Average wingspan",
 
-        // Descriptions
+        // Descriptions / classifications
         "Class", "Designation", "Classification", "Distinctions", "Demonym",
-        "Organization type", "Model",
+        "Organization type", "Model", "Shape", "Purpose",
 
         // Measurements / specs
-        "Length", "Width", "Height/depth", "Diameter", "Cost",
+        "Length", "Width", "Height/depth", "Diameter", "Cost", "Weight",
         "Hyperdrive rating", "Maximum atmospheric speed", "Megalight per hour",
-        "Crew", "Passengers", "Population", "Consumables",
+        "Maximum altitude", "Maximum speed", "Maximum depth",
+        "Crew", "Passengers", "Population", "Consumables", "Cargo capacity",
         "Orbital position", "Orbital period", "Rotation period", "Surface water",
         "Suns", "Moons",
 
-        // Dates as text (the date VALUE is a property; linked year/era entities are handled separately)
+        // Publication / media metadata
+        "Pages", "Media type", "Issue number", "Issue #", "Issues", "Format",
+        "Run time", "Number of players", "Ages of players", "Playing time",
+        "Number of books", "Number of audiobooks", "Collected issues",
+        "Skills required",
+
+        // Dates as text (stored as property, temporal edges derived separately)
         "Date", "Date established", "Date dissolved", "Date reorganized",
         "Date restored", "Date fragmented", "Date founded", "Beginning", "End",
+        "Constructed", "Destroyed",
 
         // Outcomes / descriptions
-        "Outcome", "Diet", "Habitat", "Atmosphere", "Terrain", "Climate",
-        "Grid square",
+        "Outcome", "Result", "Diet", "Habitat", "Atmosphere", "Terrain", "Climate",
+        "Grid square", "Grid coordinates",
+
+        // Misc scalar
+        "Symptoms", "Transmission type", "Incubation period",
+        "Number infected", "Number killed",
+        "Other markings", "Other systems",
+        "Major exports", "Major imports",
     };
 
     /// <summary>
     /// Fields that are ALWAYS relationships — their linked targets are meaningful entities.
     /// Maps field name → edge label for the relationship.
     /// </summary>
-    static readonly Dictionary<string, string> AlwaysRelationships = new(StringComparer.OrdinalIgnoreCase)
+    static readonly Dictionary<string, string> RelationshipLabels = new(StringComparer.OrdinalIgnoreCase)
     {
-        // Character relationships
+        // ── Character ──
         ["Species"] = "species",
         ["Homeworld"] = "homeworld",
         ["Affiliation(s)"] = "affiliated_with",
@@ -85,30 +100,45 @@ public class InfoboxGraphService(
         ["Apprentices"] = "master_of",
         ["Genetic donor(s)"] = "cloned_from",
         ["Owner(s)"] = "owned_by",
+        ["Owners"] = "owned_by",
         ["Born"] = "born_at",
         ["Died"] = "died_at",
         ["Cybernetics"] = "has_cybernetics",
+        ["Gender"] = "gender",
+        ["Songs"] = "performs_song",
+        ["Collaborations"] = "collaborates_with",
 
-        // Location relationships
+        // ── Location (CelestialBody, System, Sector, Region, City) ──
         ["Region"] = "in_region",
+        ["Region(s)"] = "in_region",
         ["System"] = "in_system",
         ["Sector"] = "in_sector",
         ["Orbited body"] = "orbits",
         ["Orbiting bodies"] = "orbited_by",
         ["Points of interest"] = "has_point_of_interest",
         ["Major cities"] = "has_city",
-        ["Native species"] = "native_species",
+        ["Native species"] = "has_native_species",
         ["Other species"] = "has_species",
         ["Flora"] = "has_flora",
         ["Fauna"] = "has_fauna",
         ["Trade routes"] = "on_trade_route",
         ["Government"] = "governed_by",
         ["Primary language(s)"] = "speaks_language",
-
-        // Organization / Government relationships
-        ["Capital"] = "capital",
-        ["Headquarters"] = "headquartered_at",
+        ["Celestial body"] = "on_celestial_body",
+        ["Location"] = "located_at",
         ["Location(s)"] = "located_at",
+        ["Locations"] = "located_at",
+        ["Continent"] = "on_continent",
+        ["Space stations"] = "has_space_station",
+        ["Asteroids"] = "has_asteroid",
+        ["Nebulae"] = "has_nebula",
+        ["Comets"] = "has_comet",
+        ["Other objects"] = "has_object",
+        ["Builder"] = "built_by",
+
+        // ── Organization / Government ──
+        ["Capital"] = "has_capital",
+        ["Headquarters"] = "headquartered_at",
         ["Leader(s)"] = "led_by",
         ["Founder(s)"] = "founded_by",
         ["Head of state"] = "head_of_state",
@@ -125,11 +155,17 @@ public class InfoboxGraphService(
         ["Official language"] = "official_language",
         ["Constitution"] = "has_constitution",
         ["Founding document"] = "has_founding_document",
+        ["Official holiday"] = "has_holiday",
+        ["Anthem"] = "has_anthem",
+        ["Associations"] = "associated_with",
+        ["Parent company"] = "subsidiary_of",
+        ["Subsidiaries"] = "has_subsidiary",
+        ["Major product(s)"] = "produces",
 
-        // Ship / vehicle relationships
+        // ── Ship / Vehicle ──
         ["Manufacturer"] = "manufactured_by",
-        ["Type"] = "ship_type",
-        ["Line"] = "ship_line",
+        ["Type"] = "type_of",
+        ["Line"] = "product_line",
         ["Armament"] = "armed_with",
         ["Engine unit(s)"] = "has_engine",
         ["Hyperdrive system"] = "has_hyperdrive",
@@ -137,23 +173,113 @@ public class InfoboxGraphService(
         ["Sensor systems"] = "has_sensors",
         ["Navigation system"] = "has_navigation",
         ["Complement"] = "carries_complement",
+        ["Equipment"] = "has_equipment",
+        ["Degree"] = "droid_degree",
+        ["Product line"] = "product_line",
+        ["Material(s)"] = "made_of",
 
-        // Battle / conflict relationships
+        // ── Battle / Conflict ──
         ["Place"] = "took_place_at",
         ["Conflict"] = "part_of_conflict",
         ["Major battles"] = "includes_battle",
+        ["Battles"] = "includes_battle",
+        ["Date"] = "occurred_at",
+        ["Begin"] = "began_at",
 
-        // Species relationships
+        // ── Species ──
         ["Point of origin"] = "originates_from",
+        ["Origin"] = "originates_from",
         ["Language"] = "speaks_language",
+        ["Language(s)"] = "speaks_language",
         ["Subspecies"] = "has_subspecies",
         ["Races"] = "has_race",
 
-        // Weapon / device relationships
-        ["Celestial body"] = "on_celestial_body",
+        // ── Publication / Media ──
+        ["Publisher"] = "published_by",
+        ["Author(s)"] = "authored_by",
+        ["Writer"] = "written_by",
+        ["Writer(s)"] = "written_by",
+        ["Penciller"] = "illustrated_by",
+        ["Penciller(s)"] = "illustrated_by",
+        ["Colorist"] = "colored_by",
+        ["Colorist(s)"] = "colored_by",
+        ["Letterer"] = "lettered_by",
+        ["Letterer(s)"] = "lettered_by",
+        ["Cover artist"] = "cover_by",
+        ["Cover artist(s)"] = "cover_by",
+        ["Illustrator"] = "illustrated_by",
+        ["Illustrator(s)"] = "illustrated_by",
+        ["Narrator(s)"] = "narrated_by",
+        ["Director(s)"] = "directed_by",
+        ["Series"] = "part_of_series",
+        ["Published in"] = "published_in",
+        ["Part of"] = "part_of",
+        ["Timeline"] = "in_timeline",
+        ["Release date"] = "released_on",
+        ["Publication date"] = "published_on",
+        ["Start date"] = "started_on",
+        ["End date"] = "ended_on",
+        ["First published"] = "first_published_on",
+        ["Last published"] = "last_published_on",
+        ["First book published"] = "first_published_on",
+        ["Last book published"] = "last_published_on",
+        ["Followed by"] = "followed_by",
+        ["Preceded by"] = "preceded_by",
+        ["Next"] = "followed_by",
+        ["Previous"] = "preceded_by",
+        ["Subsequent"] = "followed_by",
+        ["Game"] = "for_game",
+        ["Campaign"] = "part_of_campaign",
 
-        // Role-based
-        ["Role(s)"] = "has_role",
+        // ── Era / Year ──
+        ["Years"] = "spans_years",
+        ["Important events"] = "has_important_event",
+        ["Conflicts"] = "has_conflict",
+
+        // ── Religion / Deity ──
+        ["Associated religion"] = "associated_religion",
+        ["Area of influence"] = "influences",
+        ["Places of worship"] = "worshipped_at",
+        ["Pantheon"] = "in_pantheon",
+        ["Artifacts"] = "has_artifact",
+
+        // ── Disease ──
+        ["Susceptible species"] = "affects_species",
+        ["Treatments"] = "treated_by",
+        ["Created by"] = "created_by",
+        ["Creators"] = "created_by",
+
+        // ── Cultural / Social ──
+        ["Culture"] = "associated_culture",
+        ["Socio-cultural group(s)"] = "associated_culture",
+        ["Type of group"] = "group_type",
+
+        // ── Election ──
+        ["Candidates"] = "has_candidate",
+        ["Electorate"] = "has_electorate",
+
+        // ── Family ──
+        ["Members"] = "has_member",
+        ["Homeworld(s)"] = "homeworld",
+
+        // ── Fleet / Military ──
+        ["Flagship(s)"] = "has_flagship",
+        ["Commander(s)"] = "commanded_by",
+        ["Notable members"] = "has_notable_member",
+        ["Notable units"] = "has_notable_unit",
+
+        // ── Sports / Competition ──
+        ["Competitors"] = "has_competitor",
+        ["League"] = "in_league",
+        ["Organizer(s)"] = "organized_by",
+        ["Host(s)"] = "hosted_by",
+
+        // ── Misc ──
+        ["Mayor"] = "led_by",
+        ["Date created"] = "created_on",
+        ["Date destroyed"] = "destroyed_on",
+        ["Date engineered"] = "engineered_on",
+        ["Founding"] = "founded_on",
     };
 
     /// <summary>
@@ -243,7 +369,7 @@ public class InfoboxGraphService(
                         if (values.Count > 0)
                             properties[label] = values;
                     }
-                    else if (AlwaysRelationships.TryGetValue(label, out var edgeLabel))
+                    else if (RelationshipLabels.TryGetValue(label, out var edgeLabel))
                     {
                         // Create edges for each link target
                         foreach (var link in links)
