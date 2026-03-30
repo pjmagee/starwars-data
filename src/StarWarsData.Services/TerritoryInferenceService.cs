@@ -215,7 +215,7 @@ public class TerritoryInferenceService(
         var snapshots = new List<TerritorySnapshot>();
         var yearDocs = new List<TerritoryYearDocument>();
 
-        // Took_place_at edge lookup for event location resolution
+        // Took_place_at edge lookup — group ALL edges per event so we can try multiple targets
         var tookPlaceEdges = await _edges
             .Find(Builders<RelationshipEdge>.Filter.And(
                 Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "took_place_at"),
@@ -223,7 +223,7 @@ public class TerritoryInferenceService(
             .ToListAsync(ct);
         var eventPlaceLookup = tookPlaceEdges
             .GroupBy(e => e.FromId)
-            .ToDictionary(g => g.Key, g => g.First());
+            .ToDictionary(g => g.Key, g => g.ToList());
 
         foreach (var year in eventYears)
         {
@@ -291,17 +291,22 @@ public class TerritoryInferenceService(
                     string? place = null, region = null;
                     int? col = null, row = null;
 
-                    if (eventPlaceLookup.TryGetValue(evt.PageId, out var placeEdge))
+                    if (eventPlaceLookup.TryGetValue(evt.PageId, out var placeEdges))
                     {
-                        place = placeEdge.ToName;
-                        if (placeEdge.ToId > 0)
+                        // Try each took_place_at target until we find one with grid coordinates
+                        foreach (var pe in placeEdges)
                         {
-                            if (planetToRegion.TryGetValue(placeEdge.ToId, out var pr))
-                                region = pr;
-                            if (planetToGrid.TryGetValue(placeEdge.ToId, out var grid))
+                            place ??= pe.ToName;
+                            if (pe.ToId > 0)
                             {
-                                col = grid.col;
-                                row = grid.row;
+                                if (region is null && planetToRegion.TryGetValue(pe.ToId, out var pr))
+                                    region = pr;
+                                if (col is null && planetToGrid.TryGetValue(pe.ToId, out var grid))
+                                {
+                                    col = grid.col;
+                                    row = grid.row;
+                                    place = pe.ToName; // prefer the name of the one with coordinates
+                                }
                             }
                         }
                     }
