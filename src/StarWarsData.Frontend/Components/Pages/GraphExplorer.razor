@@ -173,11 +173,50 @@
 
     @if (_hasGraph)
     {
+        @* Navigation breadcrumbs *@
+        @if (_history.Count > 0)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1" Class="mb-2">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
+                               Color="Color.Secondary" OnClick="NavigateBack" title="Back (Backspace)" />
+                @foreach (var crumb in _history)
+                {
+                    var c = crumb;
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary"
+                             OnClick="@(() => SelectEntity(c.Id, c.Name))">@c.Name</MudChip>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">›</MudText>
+                }
+                <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary">@_selectedEntityName</MudChip>
+            </MudStack>
+        }
+
         <MudGrid Spacing="2" Class="mb-4">
             <MudItem xs="12" md="@(_selectedNodePage is not null ? 9 : 12)">
-                <MudPaper Outlined="true" Style="overflow:hidden; border-radius:8px;">
+                <MudPaper Outlined="true" Style="@($"overflow:hidden; border-radius:8px; position:relative; {(_fullscreen ? "position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; border-radius:0;" : "")}")">
+                    @* Controls overlay *@
+                    <div style="position:absolute; top:8px; right:8px; z-index:10; display:flex; gap:4px;">
+                        <MudIconButton Icon="@Icons.Material.Filled.ZoomIn" Size="Size.Small"
+                                       Color="Color.Default" OnClick="ZoomIn"
+                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@Icons.Material.Filled.ZoomOut" Size="Size.Small"
+                                       Color="Color.Default" OnClick="ZoomOut"
+                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@Icons.Material.Filled.FitScreen" Size="Size.Small"
+                                       Color="Color.Default" OnClick="FitToScreen"
+                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@(_fullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                                       Size="Size.Small" Color="Color.Default" OnClick="ToggleFullscreen"
+                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                    </div>
+                    @* Keyboard hints *@
+                    <div style="position:absolute; bottom:8px; left:8px; z-index:10;">
+                        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.3); font-size:10px;">
+                            Double-click: expand node &bull; Backspace: go back &bull; F: fullscreen &bull; Scroll: zoom
+                        </MudText>
+                    </div>
                     <div id="@_containerId"
-                         style="width:100%; height:700px; background:#16162e;">
+                         style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : "height:700px;")}")"
+                         @onkeydown="OnKeyDown" tabindex="0">
                     </div>
                 </MudPaper>
 
@@ -269,7 +308,7 @@
                                 }
                                 <MudButton Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
                                            StartIcon="@Icons.Material.Filled.Hub"
-                                           OnClick="@(() => SelectEntity(_selectedNodeId, _selectedNodeName!))">
+                                           OnClick="@(() => SelectEntityWithHistory(_selectedNodeId, _selectedNodeName!))">
                                     Explore Graph
                                 </MudButton>
                             </MudCardActions>
@@ -317,6 +356,10 @@
     private string? _selectedNodeName;
     private WikiPage? _selectedNodePage;
     private bool _loadingNodeDetails;
+
+    // Navigation & fullscreen
+    private List<(int Id, string Name)> _history = [];
+    private bool _fullscreen;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -621,12 +664,122 @@
         }
     }
 
+    [JSInvokable]
+    public async Task OnNodeExpand(int id, string name)
+    {
+        // Load this node's graph data and expand in-place (no page refresh)
+        if (_jsModule is null) return;
+
+        try
+        {
+            var url = $"api/RelationshipGraph/query/{id}?maxDepth=1";
+            var result = await Api.GetFromJsonAsync<RelationshipGraphResult>(url);
+            if (result is null || result.Nodes.Count == 0) return;
+
+            var data = new
+            {
+                nodes = result.Nodes.Select(n => new
+                {
+                    id = n.Id, name = n.Name, type = n.Type,
+                    imageUrl = n.ImageUrl ?? "",
+                }).ToArray(),
+                edges = result.Edges.Select(e => new
+                {
+                    fromId = e.FromId, toId = e.ToId,
+                    label = e.Label, weight = e.Weight > 0 ? e.Weight : 0.5,
+                }).ToArray(),
+                rootId = id,
+            };
+
+            await _jsModule.InvokeVoidAsync("expandNode", data);
+
+            // Update stats
+            var stats = await _jsModule.InvokeAsync<GraphStatsDto>("getStats");
+            _graphStats = (stats.Nodes, stats.Edges);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to expand node: {ex.Message}", Severity.Error);
+        }
+    }
+
+    record GraphStatsDto(int Nodes, int Edges);
+
     private void CloseNodePanel()
     {
         _selectedNodePage = null;
         _selectedNodeName = null;
         _selectedNodeId = 0;
         _loadingNodeDetails = false;
+    }
+
+    // ── Navigation history ──
+
+    private void NavigateBack()
+    {
+        if (_history.Count == 0) return;
+        var prev = _history[^1];
+        _history.RemoveAt(_history.Count - 1);
+        _selectedEntityId = prev.Id;
+        _selectedEntityName = prev.Name;
+        _ = LoadLabels();
+    }
+
+    // Override SelectEntity to push history
+    private async Task SelectEntityWithHistory(int id, string name)
+    {
+        if (_selectedEntityId > 0 && _selectedEntityId != id)
+            _history.Add((_selectedEntityId, _selectedEntityName));
+
+        await SelectEntity(id, name);
+    }
+
+    // ── Fullscreen & controls ──
+
+    private void ToggleFullscreen()
+    {
+        _fullscreen = !_fullscreen;
+    }
+
+    private async Task ZoomIn()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("zoomIn");
+    }
+
+    private async Task ZoomOut()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("zoomOut");
+    }
+
+    private async Task FitToScreen()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("fitToScreen");
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "Backspace":
+                NavigateBack();
+                break;
+            case "f" or "F":
+                ToggleFullscreen();
+                break;
+            case "+" or "=":
+                await ZoomIn();
+                break;
+            case "-":
+                await ZoomOut();
+                break;
+            case "0":
+                await FitToScreen();
+                break;
+        }
     }
 
     private static string FormatLabel(string label) =>
