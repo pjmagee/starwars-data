@@ -215,17 +215,20 @@ public class TerritoryInferenceService(
         var snapshots = new List<TerritorySnapshot>();
         var yearDocs = new List<TerritoryYearDocument>();
 
-        // has_capital edge lookup — for Government events, resolve capital → grid
-        var capitalEdges = await _edges
+        // Location edge lookup — for resolving ANY entity to a grid position
+        // Try multiple relationship types: took_place_at, has_capital, headquartered_at, located_at, homeworld
+        var locationLabels = new[] { "took_place_at", "has_capital", "headquartered_at", "located_at", "homeworld", "on_celestial_body" };
+        var locationEdges = await _edges
             .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "has_capital"),
+                Builders<RelationshipEdge>.Filter.In(e => e.Label, locationLabels),
                 Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
             .ToListAsync(ct);
-        var capitalLookup = capitalEdges
+        var entityLocationLookup = locationEdges
             .GroupBy(e => e.FromId)
             .ToDictionary(g => g.Key, g => g.ToList());
 
-        logger.LogInformation("Territory inference: {Count} has_capital edges for government location", capitalEdges.Count);
+        logger.LogInformation("Territory inference: {Count} location edges across {Labels} label types",
+            locationEdges.Count, locationLabels.Length);
 
         // Took_place_at edge lookup — group ALL edges per event so we can try multiple targets
         var tookPlaceEdges = await _edges
@@ -323,20 +326,20 @@ public class TerritoryInferenceService(
                         }
                     }
 
-                    // Fallback for Government events: use capital location
-                    if (col is null && evt.Type == "Government" && capitalLookup.TryGetValue(evt.PageId, out var capitals))
+                    // Fallback: try all location edges (capital, headquarters, located_at, etc.)
+                    if (col is null && entityLocationLookup.TryGetValue(evt.PageId, out var locEdges))
                     {
-                        foreach (var cap in capitals)
+                        foreach (var le in locEdges)
                         {
-                            if (cap.ToId > 0)
+                            if (le.ToId > 0)
                             {
-                                if (region is null && planetToRegion.TryGetValue(cap.ToId, out var cr))
-                                    region = cr;
-                                if (planetToGrid.TryGetValue(cap.ToId, out var cg))
+                                if (region is null && planetToRegion.TryGetValue(le.ToId, out var lr))
+                                    region = lr;
+                                if (planetToGrid.TryGetValue(le.ToId, out var lg))
                                 {
-                                    col = cg.col;
-                                    row = cg.row;
-                                    place ??= cap.ToName;
+                                    col = lg.col;
+                                    row = lg.row;
+                                    place ??= le.ToName;
                                     break;
                                 }
                             }
