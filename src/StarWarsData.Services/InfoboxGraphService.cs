@@ -418,7 +418,7 @@ public class InfoboxGraphService(
                             if (href is null || content is null) continue;
 
                             // Resolve the link target to a PageId
-                            var targetPageId = wikiUrlToPageId.GetValueOrDefault(href);
+                            var targetPageId = ResolveLinkTarget(href, content, wikiUrlToPageId);
 
                             edges.Add(new RelationshipEdge
                             {
@@ -453,7 +453,7 @@ public class InfoboxGraphService(
                                 var content = link.Contains("Content") ? link["Content"].AsString : null;
                                 if (href is null || content is null) continue;
 
-                                var targetPageId = wikiUrlToPageId.GetValueOrDefault(href);
+                                var targetPageId = ResolveLinkTarget(href, content, wikiUrlToPageId);
                                 edges.Add(new RelationshipEdge
                                 {
                                     FromId = pageId,
@@ -541,7 +541,9 @@ public class InfoboxGraphService(
     }
 
     /// <summary>
-    /// Build a lookup from wiki URL → PageId so we can resolve link targets to graph nodes.
+    /// Build a lookup from wiki URL AND title → PageId so we can resolve link targets.
+    /// Infobox links may use URLs that don't exactly match the page's stored wikiUrl
+    /// (redirects, disambiguation, URL encoding differences), so we also match by title.
     /// </summary>
     async Task<Dictionary<string, int>> BuildWikiUrlLookupAsync(CancellationToken ct)
     {
@@ -550,6 +552,7 @@ public class InfoboxGraphService(
         var cursor = await _pages.Find(FilterDefinition<Page>.Empty)
             .Project(Builders<Page>.Projection
                 .Include(p => p.PageId)
+                .Include(p => p.Title)
                 .Include(p => p.WikiUrl))
             .ToCursorAsync(ct);
 
@@ -559,12 +562,44 @@ public class InfoboxGraphService(
             {
                 var pageId = doc["_id"].AsInt32;
                 var wikiUrl = doc.Contains("wikiUrl") ? doc["wikiUrl"].AsString : null;
+                var title = doc.Contains("title") ? doc["title"].AsString : null;
+
+                // Primary: exact URL match
                 if (wikiUrl is not null)
                     lookup.TryAdd(wikiUrl, pageId);
+
+                // Secondary: match by title (handles redirects and disambiguation)
+                if (title is not null)
+                    lookup.TryAdd(title, pageId);
             }
         }
 
         return lookup;
+    }
+
+    /// <summary>
+    /// Resolve a link target to a PageId. Tries URL first, then link content text as title.
+    /// </summary>
+    int ResolveLinkTarget(string? href, string? content, Dictionary<string, int> lookup)
+    {
+        // Try exact URL match
+        if (href is not null && lookup.TryGetValue(href, out var byUrl))
+            return byUrl;
+
+        // Try link display text as title
+        if (content is not null && lookup.TryGetValue(content, out var byContent))
+            return byContent;
+
+        // Try extracting title from URL (decode /wiki/Title_Name)
+        if (href is not null && href.Contains("/wiki/"))
+        {
+            var titleFromUrl = Uri.UnescapeDataString(href[(href.LastIndexOf("/wiki/") + 6)..])
+                .Replace('_', ' ');
+            if (lookup.TryGetValue(titleFromUrl, out var byExtracted))
+                return byExtracted;
+        }
+
+        return 0; // unresolved
     }
 
     /// <summary>
