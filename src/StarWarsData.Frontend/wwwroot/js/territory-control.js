@@ -123,46 +123,50 @@ function setupPanelHoverListeners() {
     const panel = document.querySelector('.territory-info-panel');
     if (!panel) return;
 
-    let leaveTimeout = null;
-    let currentEl = null;
+    let currentRegion = null;
 
-    // mouseover/mouseout bubble correctly (unlike mouseenter/mouseleave)
     panel.addEventListener('mouseover', (e) => {
-        const el = e.target.closest('[data-highlight-region], [data-highlight-col]');
-        if (!el || el === currentEl) return;
-
-        clearTimeout(leaveTimeout);
-        currentEl = el;
-
-        // Clear previous highlight before applying new one
-        clearHighlight();
-
-        const col = el.dataset.highlightCol;
-        const row = el.dataset.highlightRow;
+        const el = e.target.closest('[data-highlight-region]');
+        if (!el) return;
         const region = el.dataset.highlightRegion;
-        const color = el.dataset.highlightColor;
-
-        if (col && row) {
-            highlightCell(parseInt(col), parseInt(row), color || '#fff');
-        } else if (region) {
-            highlightRegion(region);
-        }
+        if (region === currentRegion) return;
+        currentRegion = region;
+        softHighlightRegion(region);
     });
 
     panel.addEventListener('mouseout', (e) => {
-        const el = e.target.closest('[data-highlight-region], [data-highlight-col]');
+        const el = e.target.closest('[data-highlight-region]');
         if (!el) return;
-
-        // Check if we're moving to another highlight target
-        const related = e.relatedTarget?.closest?.('[data-highlight-region], [data-highlight-col]');
-        if (related) return; // Moving to another item — mouseover will handle it
-
-        currentEl = null;
-        leaveTimeout = setTimeout(() => {
-            clearHighlight();
-            resetZoom();
-        }, 200);
+        const related = e.relatedTarget?.closest?.('[data-highlight-region]');
+        if (related) return;
+        currentRegion = null;
+        clearSoftHighlight();
     });
+}
+
+// Lightweight highlight — just boost opacity on existing region cells, no new elements
+function softHighlightRegion(regionName) {
+    if (!_state || !_state.regionCells) return;
+    const region = _state.regionCells.find(r => r.name === regionName);
+    if (!region) return;
+
+    const { cellW, cellH, regionLayer } = _state;
+    const cellSet = new Set(region.cells.map(([c, r]) => `${c},${r}`));
+
+    // Boost region outline opacity
+    regionLayer.selectAll('rect')
+        .attr('stroke-opacity', function() {
+            const x = +this.getAttribute('x');
+            const y = +this.getAttribute('y');
+            const col = Math.round(x / cellW);
+            const row = Math.round(y / cellH);
+            return cellSet.has(`${col},${row}`) ? 0.5 : 0.06;
+        });
+}
+
+function clearSoftHighlight() {
+    if (!_state) return;
+    _state.regionLayer.selectAll('rect').attr('stroke-opacity', 0.06);
 }
 
 export function renderTerritoryLayer(yearData) {
