@@ -9,24 +9,13 @@ namespace StarWarsData.Admin.Controllers;
 public class AdminController(
     ILogger<AdminController> logger,
     PageDownloader pageDownloader,
-    RecordService recordService,
-    CharacterTimelineService characterTimelineService,
-    RelationshipGraphBuilderService graphBuilder,
-    ArticleChunkingService articleChunkingService,
     OpenAiStatusService aiStatus,
     TerritoryInferenceService territoryInferenceService,
     InfoboxGraphService infoboxGraphService,
     JobToggleService jobToggleService
 ) : ControllerBase
 {
-    readonly ILogger<AdminController> _logger = logger;
-    readonly PageDownloader _pageDownloader = pageDownloader;
-    readonly RecordService _recordService = recordService;
-    readonly CharacterTimelineService _characterTimelineService = characterTimelineService;
-    readonly RelationshipGraphBuilderService _graphBuilder = graphBuilder;
-    readonly ArticleChunkingService _articleChunkingService = articleChunkingService;
-    readonly OpenAiStatusService _aiStatus = aiStatus;
-    readonly TerritoryInferenceService _territoryInferenceService = territoryInferenceService;
+    // Primary constructor params used directly — no field aliases needed
 
     bool IsJobAlreadyActive(Type type, string methodName)
     {
@@ -62,7 +51,7 @@ public class AdminController(
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "Failed to inspect existing jobs; proceeding with enqueue");
+            logger.LogWarning(ex, "Failed to inspect existing jobs; proceeding with enqueue");
         }
         return false;
     }
@@ -103,12 +92,12 @@ public class AdminController(
             return BadRequest(new { error = "title query parameter is required" });
         try
         {
-            await _pageDownloader.DownloadAndSavePageAsync(title, cancellationToken);
+            await pageDownloader.DownloadAndSavePageAsync(title, cancellationToken);
             return Ok(new { message = $"Page '{title}' downloaded." });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to download page {Title}", title);
+            logger.LogError(ex, "Failed to download page {Title}", title);
             return StatusCode(500, new { error = ex.Message });
         }
     }
@@ -576,12 +565,12 @@ public class AdminController(
     {
         try
         {
-            await _territoryInferenceService.InferTerritoryAsync(ct);
+            await territoryInferenceService.InferTerritoryAsync(ct);
             return Ok(new { message = "Territory control inferred from battle outcomes and government events." });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to infer territory control");
+            logger.LogError(ex, "Failed to infer territory control");
             return StatusCode(500, new { error = ex.Message });
         }
     }
@@ -589,7 +578,7 @@ public class AdminController(
     // === OpenAI Status ===
 
     [HttpGet("openai/status")]
-    public OpenAiHealthReport GetOpenAiStatus() => _aiStatus.GetHealthReport();
+    public OpenAiHealthReport GetOpenAiStatus() => aiStatus.GetHealthReport();
 
     // === Job Toggles ===
 

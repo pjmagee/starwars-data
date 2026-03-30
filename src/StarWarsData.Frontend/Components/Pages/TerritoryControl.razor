@@ -161,7 +161,7 @@
                                     @if (hasLocation)
                                     {
                                         <MudIcon Icon="@Icons.Material.Filled.MyLocation" Size="Size.Small"
-                                                 Style="opacity:0.4; font-size:16px;" Title="@($"{e.Place} — {e.Region}")" />
+                                                 Style="opacity:0.4; font-size:16px;" title="@($"{e.Place} — {e.Region}")" />
                                     }
                                 </div>
                                 @if (!string.IsNullOrEmpty(e.Place))
@@ -310,7 +310,7 @@
                 </div>
                 <MudMenu Icon="@Icons.Material.Filled.Speed" Size="Size.Medium" Color="Color.Secondary"
                          AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.BottomCenter"
-                         Title="Frame speed" Style="flex-shrink: 0;">
+                         title="Frame speed" Style="flex-shrink: 0;">
                     @foreach (var (label, ms) in FrameSpeeds)
                     {
                         var speed = ms;
@@ -324,7 +324,7 @@
                                Size="Size.Medium" Color="Color.Warning"
                                Href="https://www.youtube.com/watch?v=xlYCxbBZUCY&autoplay=1"
                                Target="_blank"
-                               Title="Duel of the Fates" Style="flex-shrink: 0;" />
+                               title="Duel of the Fates" Style="flex-shrink: 0;" />
             </div>
         </div>
     }
