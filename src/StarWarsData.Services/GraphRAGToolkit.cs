@@ -85,6 +85,84 @@ public class GraphRAGToolkit
     }
 
     [Description(
+        "Query the temporal knowledge graph to find entities that existed at a specific year or period. "
+            + "Use for questions like 'What governments existed during 19 BBY?', 'Who was alive during the Clone Wars?', "
+            + "'What organizations were active in 5 ABY?'. Years use sort-key format: negative = BBY, positive = ABY "
+            + "(e.g. -19 = 19 BBY, 4 = 4 ABY)."
+    )]
+    public async Task<string> QueryEntitiesByYear(
+        [Description("The year to query (sort-key: -19 = 19 BBY, 4 = 4 ABY)")] int year,
+        [Description("Entity type filter (e.g. Character, Government, Organization, Battle, War)")] string type,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
+            string? continuity = null,
+        [Description("Max results (default 20)")] int limit = 20
+    )
+    {
+        var filters = new List<FilterDefinition<GraphNode>>
+        {
+            Builders<GraphNode>.Filter.Eq(n => n.Type, type),
+            Builders<GraphNode>.Filter.Lte(n => n.StartYear, year),
+            Builders<GraphNode>.Filter.Or(
+                Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null),
+                Builders<GraphNode>.Filter.Gte(n => n.EndYear, year)
+            ),
+        };
+
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
+
+        var results = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(filters))
+            .SortBy(n => n.Name)
+            .Limit(Math.Min(limit, 50))
+            .ToListAsync();
+
+        return JsonSerializer.Serialize(
+            results.Select(n => new
+            {
+                pageId = n.PageId,
+                name = n.Name,
+                type = n.Type,
+                continuity = n.Continuity.ToString(),
+                startYear = n.StartYear,
+                endYear = n.EndYear,
+                startDateText = n.StartDateText,
+                endDateText = n.EndDateText,
+                imageUrl = n.ImageUrl,
+                wikiUrl = n.WikiUrl,
+            })
+        );
+    }
+
+    [Description(
+        "Get properties (attributes) of a knowledge graph entity — height, eye color, classification, etc. "
+            + "Use for factual questions about an entity's characteristics. Call search_graph_entities first to get the PageId."
+    )]
+    public async Task<string> GetEntityProperties(
+        [Description("The PageId of the entity (from search_graph_entities)")] int entityId
+    )
+    {
+        var node = await _nodes.Find(n => n.PageId == entityId).FirstOrDefaultAsync();
+        if (node is null)
+            return JsonSerializer.Serialize(new { error = "Entity not found in knowledge graph." });
+
+        return JsonSerializer.Serialize(new
+        {
+            pageId = node.PageId,
+            name = node.Name,
+            type = node.Type,
+            continuity = node.Continuity.ToString(),
+            properties = node.Properties,
+            startYear = node.StartYear,
+            endYear = node.EndYear,
+            startDateText = node.StartDateText,
+            endDateText = node.EndDateText,
+            imageUrl = node.ImageUrl,
+            wikiUrl = node.WikiUrl,
+        });
+    }
+
+    [Description(
         "Get all direct relationships for an entity, grouped by relationship label. "
             + "Returns relationship types with their connected entities and supporting evidence. "
             + "Use this to answer questions like 'Who trained X?', 'What are X's relationships?', "
