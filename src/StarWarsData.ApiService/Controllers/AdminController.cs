@@ -14,7 +14,8 @@ public class AdminController(
     RelationshipGraphBuilderService graphBuilder,
     ArticleChunkingService articleChunkingService,
     OpenAiStatusService aiStatus,
-    TerritoryInferenceService territoryInferenceService
+    TerritoryInferenceService territoryInferenceService,
+    InfoboxGraphService infoboxGraphService
 ) : ControllerBase
 {
     readonly ILogger<AdminController> _logger = logger;
@@ -548,6 +549,23 @@ public class AdminController(
         RelationshipGraphBuilderService.SetPriorityCategories(categories);
         logger.LogInformation("Graph builder priority categories set: {Categories}", string.Join(", ", categories));
         return Ok(new { message = $"Priority set: {string.Join(", ", categories)}" });
+    }
+
+    // === Infobox Knowledge Graph ===
+
+    [HttpPost("mongo/build-infobox-graph")]
+    public async Task<ActionResult<string>> BuildInfoboxGraph(CancellationToken ct)
+    {
+        try
+        {
+            await infoboxGraphService.BuildGraphAsync(ct);
+            return Ok(new { message = "Infobox knowledge graph built successfully." });
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to build infobox graph");
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
     // === Territory Control ===

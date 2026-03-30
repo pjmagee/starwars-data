@@ -81,6 +81,7 @@ builder
     .AddScoped<GalaxyEventsService>()
     .AddScoped<TerritoryControlService>()
     .AddScoped<TerritoryInferenceService>()
+    .AddScoped<InfoboxGraphService>()
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
