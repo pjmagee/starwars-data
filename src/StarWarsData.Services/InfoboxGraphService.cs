@@ -39,7 +39,7 @@ public class InfoboxGraphService(
     static readonly HashSet<string> AlwaysProperties = new(StringComparer.OrdinalIgnoreCase)
     {
         // Identity / titles
-        "Titles", "Pronouns",
+        "Titles", "Pronouns", "Gender",
 
         // Physical attributes (links go to color/unit pages, not entities)
         "Height", "Mass", "Eye color", "Hair color", "Skin color", "Feather color",
@@ -103,7 +103,6 @@ public class InfoboxGraphService(
         ["Born"] = "born_at",
         ["Died"] = "died_at",
         ["Cybernetics"] = "has_cybernetics",
-        ["Gender"] = "gender",
         ["Songs"] = "performs_song",
         ["Collaborations"] = "collaborates_with",
 
