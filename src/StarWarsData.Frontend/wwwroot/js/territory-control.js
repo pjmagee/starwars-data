@@ -282,37 +282,40 @@ export function renderTerritoryLayer(yearData) {
             const primary = events[0];
             const markerColor = CATEGORY_COLORS[primary.category] || '#7e6fff';
 
-            // Pulsing ring
+            // Marker background circle
             labelLayer.append('circle')
-                .attr('cx', cx).attr('cy', cy).attr('r', 8)
-                .attr('fill', 'none')
-                .attr('stroke', markerColor).attr('stroke-width', 2)
-                .attr('stroke-opacity', 0.8);
+                .attr('cx', cx).attr('cy', cy).attr('r', 18)
+                .attr('fill', 'rgba(10,10,26,0.7)')
+                .attr('stroke', markerColor).attr('stroke-width', 2.5)
+                .attr('stroke-opacity', 0.9);
 
             // Icon
             labelLayer.append('text')
-                .attr('x', cx).attr('y', cy + 1)
+                .attr('x', cx).attr('y', cy + 2)
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-                .attr('font-size', '10px')
+                .attr('font-size', '18px')
                 .attr('fill', '#fff')
                 .style('pointer-events', 'none')
                 .text(CATEGORY_ICONS[primary.category] || '\u2B50');
 
             // Count badge if multiple events at same cell
             if (events.length > 1) {
+                labelLayer.append('circle')
+                    .attr('cx', cx + 16).attr('cy', cy - 14).attr('r', 8)
+                    .attr('fill', markerColor).attr('stroke', '#0a0a1a').attr('stroke-width', 1.5);
                 labelLayer.append('text')
-                    .attr('x', cx + 10).attr('y', cy - 8)
-                    .attr('text-anchor', 'middle')
-                    .attr('font-size', '8px').attr('font-weight', '700')
-                    .attr('fill', markerColor)
+                    .attr('x', cx + 16).attr('y', cy - 13)
+                    .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+                    .attr('font-size', '10px').attr('font-weight', '700')
+                    .attr('fill', '#fff')
                     .style('pointer-events', 'none')
                     .text(events.length);
             }
 
             // Hover tooltip for the marker
             labelLayer.append('rect')
-                .attr('x', cx - 12).attr('y', cy - 12)
-                .attr('width', 24).attr('height', 24)
+                .attr('x', cx - 20).attr('y', cy - 20)
+                .attr('width', 40).attr('height', 40)
                 .attr('fill', 'transparent').attr('cursor', 'pointer')
                 .on('mouseover', (event) => {
                     let html = '';

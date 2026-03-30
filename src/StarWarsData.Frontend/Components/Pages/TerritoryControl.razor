@@ -457,10 +457,11 @@
     private bool _autoplay;
     private System.Threading.Timer? _autoplayTimer;
     private CancellationTokenSource? _debounceCts;
-    private int _frameTimeMs = 5000;
+    private int _frameTimeMs = 30000;
     private static readonly (string Label, int Ms)[] FrameSpeeds =
     [
-        ("1s", 1000), ("2s", 2000), ("5s", 5000), ("10s", 10000), ("30s", 30000)
+        ("5s", 5000), ("10s", 10000), ("15s", 15000), ("30s", 30000),
+        ("1m", 60000), ("2m", 120000), ("5m", 300000)
     ];
 
     private string? _selectedRegion;
