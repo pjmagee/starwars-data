@@ -662,6 +662,12 @@
     [JSInvokable]
     public async Task OnNodeExpand(int id, string name)
     {
+        // Push current entity to history before expanding
+        if (_selectedEntityId > 0 && _selectedEntityId != id)
+            _history.Add((_selectedEntityId, _selectedEntityName));
+        _selectedEntityId = id;
+        _selectedEntityName = name;
+
         // Load this node's graph data and expand in-place (no page refresh)
         if (_jsModule is null) return;
 
@@ -711,14 +717,44 @@
 
     // ── Navigation history ──
 
-    private void NavigateBack()
+    private async Task NavigateBack()
     {
-        if (_history.Count == 0) return;
+        if (_history.Count == 0 || _jsModule is null) return;
+
         var prev = _history[^1];
         _history.RemoveAt(_history.Count - 1);
-        _selectedEntityId = prev.Id;
+
+        // Re-focus the previous node in the existing graph (don't reload)
+        try
+        {
+            var url = $"api/RelationshipGraph/query/{prev.Id}?maxDepth=1";
+            var result = await Api.GetFromJsonAsync<RelationshipGraphResult>(url);
+            if (result is not null)
+            {
+                var data = new
+                {
+                    nodes = result.Nodes.Select(n => new
+                    {
+                        id = n.Id, name = n.Name, type = n.Type,
+                        imageUrl = n.ImageUrl ?? "",
+                    }).ToArray(),
+                    edges = result.Edges.Select(e => new
+                    {
+                        fromId = e.FromId, toId = e.ToId,
+                        label = e.Label, weight = e.Weight > 0 ? e.Weight : 0.5,
+                    }).ToArray(),
+                    rootId = prev.Id,
+                };
+                await _jsModule.InvokeVoidAsync("expandNode", data);
+
+                var stats = await _jsModule.InvokeAsync<GraphStatsDto>("getStats");
+                _graphStats = (stats.Nodes, stats.Edges);
+            }
+        }
+        catch { }
+
         _selectedEntityName = prev.Name;
-        _ = LoadLabels();
+        CloseNodePanel();
     }
 
     // Override SelectEntity to push history
@@ -758,12 +794,12 @@
     [JSInvokable]
     public void OnKeyAction(string action)
     {
-        InvokeAsync(() =>
+        InvokeAsync(async () =>
         {
             switch (action)
             {
                 case "back":
-                    NavigateBack();
+                    await NavigateBack();
                     break;
                 case "fullscreen":
                     ToggleFullscreen();
