@@ -40,6 +40,14 @@ public class RelationshipCrawlState
 
     [BsonElement("error")]
     public string? Error { get; set; }
+
+    /// <summary>
+    /// Content hash of the Page at the time it was processed.
+    /// When the Page's ContentHash changes, this entry should be reset
+    /// so the graph builder re-processes the page.
+    /// </summary>
+    [BsonElement("contentHash")]
+    public string? ContentHash { get; set; }
 }
 
 public enum CrawlStatus

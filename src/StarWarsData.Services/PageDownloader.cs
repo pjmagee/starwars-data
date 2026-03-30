@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Web;
 using AngleSharp;
@@ -80,7 +82,7 @@ public class PageDownloader
 
         var (pageId, infobox, categories, lastModified) = metadataTask.Result;
 
-        return new Page
+        var page = new Page
         {
             PageId = pageId,
             Title = title,
@@ -94,6 +96,9 @@ public class PageDownloader
             Universe = DetermineUniverse(categories),
             DownloadedAt = DateTime.UtcNow,
         };
+
+        page.ContentHash = ComputeContentHash(page);
+        return page;
     }
 
     /// <summary>
@@ -754,6 +759,7 @@ public class PageDownloader
     )
     {
         using var semaphore = new SemaphoreSlim(8, 8);
+        var changedPageIds = new System.Collections.Concurrent.ConcurrentBag<int>();
 
         var tasks = pageTitles.Select(async title =>
         {
@@ -762,12 +768,24 @@ public class PageDownloader
             {
                 var pageDoc = await FetchPageAsync(title, cancellationToken);
 
+                // Check if content actually changed by comparing hashes
+                var existingHash = await _pagesCollection
+                    .Find(Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId))
+                    .Project(p => p.ContentHash)
+                    .FirstOrDefaultAsync(cancellationToken);
+
+                var contentChanged = existingHash is null || existingHash != pageDoc.ContentHash;
+
                 await _pagesCollection.ReplaceOneAsync(
                     Builders<Page>.Filter.Eq(p => p.PageId, pageDoc.PageId),
                     pageDoc,
                     new ReplaceOptions { IsUpsert = true },
                     cancellationToken
                 );
+
+                if (contentChanged && existingHash is not null)
+                    changedPageIds.Add(pageDoc.PageId);
+
                 return 1;
             }
             catch (Exception ex)
@@ -782,6 +800,13 @@ public class PageDownloader
         });
 
         var results = await Task.WhenAll(tasks);
+
+        // Invalidate downstream pipelines for pages whose content actually changed
+        if (!changedPageIds.IsEmpty)
+        {
+            await InvalidateDownstreamAsync(changedPageIds.ToList(), cancellationToken);
+        }
+
         return (results.Sum(r => r), results.Length - results.Sum(r => r));
     }
 
@@ -873,5 +898,74 @@ public class PageDownloader
         }
 
         return Universe.InUniverse;
+    }
+
+    /// <summary>
+    /// SHA-256 of Content + serialised Infobox data. Stable across re-fetches
+    /// when the actual wiki content hasn't changed.
+    /// </summary>
+    static string ComputeContentHash(Page page)
+    {
+        var sb = new StringBuilder();
+        sb.Append(page.Content);
+        if (page.Infobox is not null)
+        {
+            sb.Append(page.Infobox.Template);
+            sb.Append(page.Infobox.ImageUrl);
+            foreach (var prop in page.Infobox.Data)
+            {
+                sb.Append(prop.Label);
+                foreach (var v in prop.Values)
+                    sb.Append(v);
+                foreach (var l in prop.Links)
+                {
+                    sb.Append(l.Content);
+                    sb.Append(l.Href);
+                }
+            }
+        }
+        var hash = SHA256.HashData(Encoding.UTF8.GetBytes(sb.ToString()));
+        return Convert.ToHexStringLower(hash);
+    }
+
+    /// <summary>
+    /// When page content changes, reset downstream pipeline state so those pages
+    /// get re-processed in the next scheduled batch run.
+    /// </summary>
+    async Task InvalidateDownstreamAsync(List<int> changedPageIds, CancellationToken ct)
+    {
+        _logger.LogInformation(
+            "Content changed for {Count} pages — invalidating downstream pipelines",
+            changedPageIds.Count);
+
+        // Reset relationship graph crawl state → pages will be re-processed by the graph builder
+        var graphDb = _mongoDatabase.Client.GetDatabase(_config.RelationshipGraphDb);
+        var crawlState = graphDb.GetCollection<RelationshipCrawlState>("crawl_state");
+
+        var deleteResult = await crawlState.DeleteManyAsync(
+            Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, changedPageIds),
+            ct);
+
+        if (deleteResult.DeletedCount > 0)
+        {
+            _logger.LogInformation(
+                "Reset {Count} crawl_state entries for re-processing by graph builder",
+                deleteResult.DeletedCount);
+        }
+
+        // Delete article chunks for changed pages → will be re-chunked
+        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>("chunks");
+        var chunkDeleteResult = await chunksCollection.DeleteManyAsync(
+            new MongoDB.Bson.BsonDocument("pageId",
+                new MongoDB.Bson.BsonDocument("$in",
+                    new MongoDB.Bson.BsonArray(changedPageIds))),
+            ct);
+
+        if (chunkDeleteResult.DeletedCount > 0)
+        {
+            _logger.LogInformation(
+                "Deleted {Count} article chunks for re-processing",
+                chunkDeleteResult.DeletedCount);
+        }
     }
 }

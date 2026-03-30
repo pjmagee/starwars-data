@@ -40,4 +40,11 @@ public class Page
 
     [BsonElement("downloadedAt")]
     public DateTime DownloadedAt { get; set; }
+
+    /// <summary>
+    /// SHA-256 hash of Content + serialised Infobox. Used to detect meaningful
+    /// content changes during incremental sync and trigger downstream re-processing.
+    /// </summary>
+    [BsonElement("contentHash")]
+    public string? ContentHash { get; set; }
 }
