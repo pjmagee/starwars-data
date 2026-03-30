@@ -21,21 +21,20 @@ public class RelationshipGraphPipelineTests(ApiFixture fixture)
 {
     private IMongoCollection<RelationshipCrawlState> CrawlState =>
         fixture
-            .MongoClient.GetDatabase(ApiFixture.RelationshipGraphDb)
-            .GetCollection<RelationshipCrawlState>("crawl_state");
+            .MongoClient.GetDatabase(ApiFixture.DatabaseName)
+            .GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
 
     private IMongoCollection<RelationshipEdge> Edges =>
         fixture
-            .MongoClient.GetDatabase(ApiFixture.RelationshipGraphDb)
-            .GetCollection<RelationshipEdge>("edges");
+            .MongoClient.GetDatabase(ApiFixture.DatabaseName)
+            .GetCollection<RelationshipEdge>(Collections.KgEdges);
 
     private RelationshipGraphBuilderService CreateService(IChatClient chatClient)
     {
         var settings = Options.Create(
             new SettingsOptions
             {
-                PagesDb = ApiFixture.PagesDb,
-                RelationshipGraphDb = ApiFixture.RelationshipGraphDb,
+                DatabaseName = ApiFixture.DatabaseName,
             }
         );
 

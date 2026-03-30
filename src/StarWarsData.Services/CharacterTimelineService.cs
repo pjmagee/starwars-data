@@ -154,8 +154,6 @@ public class CharacterTimelineService
     private readonly ILogger<CharacterTimelineService> _logger;
     private readonly IChatClient _chatClient;
 
-    private const string PagesCollection = "Pages";
-    private const string TimelinesCollection = "Timelines";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -176,12 +174,12 @@ public class CharacterTimelineService
     }
 
     private IMongoCollection<Page> Pages =>
-        _mongoClient.GetDatabase(_settings.PagesDb).GetCollection<Page>(PagesCollection);
+        _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<Page>(Collections.Pages);
 
     private IMongoCollection<CharacterTimeline> Timelines =>
         _mongoClient
-            .GetDatabase(_settings.CharacterTimelinesDb)
-            .GetCollection<CharacterTimeline>(TimelinesCollection);
+            .GetDatabase(_settings.DatabaseName)
+            .GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines);
 
     /// <summary>
     /// Get basic character info from Pages by pageId, annotated with timeline/generation status.
@@ -368,7 +366,7 @@ public class CharacterTimelineService
             tracker,
             characterPageId,
             _mongoClient,
-            _settings.CharacterTimelinesDb
+            _settings.DatabaseName
         );
         var consolidatorExecutor = new EventConsolidatorExecutor(_logger, tracker, characterPageId);
         var reviewExecutor = new EventReviewExecutor(
@@ -391,7 +389,7 @@ public class CharacterTimelineService
         // ── Execute workflow (always fresh — checkpoint resume was unreliable) ─
         var checkpointStore = new MongoCheckpointStore(
             _mongoClient,
-            _settings.CharacterTimelinesDb
+            _settings.DatabaseName
         );
         var sessionId = $"character-timeline-v2-{characterPageId}";
 
@@ -528,14 +526,14 @@ public class CharacterTimelineService
 
         var checkpointStore = new MongoCheckpointStore(
             _mongoClient,
-            _settings.CharacterTimelinesDb
+            _settings.DatabaseName
         );
         await checkpointStore.ClearSessionAsync($"character-timeline-v2-{characterPageId}");
         await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}"); // clear legacy v1
 
         var progressCollection = _mongoClient
-            .GetDatabase(_settings.CharacterTimelinesDb)
-            .GetCollection<BsonDocument>("ExtractionProgress");
+            .GetDatabase(_settings.DatabaseName)
+            .GetCollection<BsonDocument>(Collections.GenaiCharacterProgress);
         await progressCollection.DeleteOneAsync(
             Builders<BsonDocument>.Filter.Eq("_id", characterPageId),
             ct
@@ -775,7 +773,7 @@ public class CharacterTimelineService
     {
         var checkpointStore = new MongoCheckpointStore(
             _mongoClient,
-            _settings.CharacterTimelinesDb
+            _settings.DatabaseName
         );
         var sessionId = $"character-timeline-v2-{characterPageId}";
         var checkpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();

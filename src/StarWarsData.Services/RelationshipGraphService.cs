@@ -21,8 +21,8 @@ namespace StarWarsData.Services
         {
             _logger = logger;
             _pages = mongoClient
-                .GetDatabase(settingsOptions.Value.PagesDb)
-                .GetCollection<Page>("Pages");
+                .GetDatabase(settingsOptions.Value.DatabaseName)
+                .GetCollection<Page>(Collections.Pages);
         }
 
         const string WikiPrefix = "https://starwars.fandom.com/wiki/";
@@ -230,7 +230,7 @@ namespace StarWarsData.Services
         public async Task<GraphDto> GetGraphAsync(int rootId, string collection = "Character")
         {
             // For $graphLookup we need to use BsonDocument collection on Pages
-            var documents = _pages.Database.GetCollection<BsonDocument>("Pages");
+            var documents = _pages.Database.GetCollection<BsonDocument>(Collections.Pages);
             var templateRegex = new BsonRegularExpression($":{collection}$", "i");
 
             var pipeline = new[]
@@ -247,7 +247,7 @@ namespace StarWarsData.Services
                     "$graphLookup",
                     new BsonDocument
                     {
-                        { "from", "Pages" },
+                        { "from", Collections.Pages },
                         { "startWith", "$infobox.Data.Links.Href" },
                         { "connectFromField", "infobox.Data.Links.Href" },
                         { "connectToField", "wikiUrl" },

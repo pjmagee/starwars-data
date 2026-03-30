@@ -28,10 +28,10 @@ public sealed class MongoFixture : IAsyncLifetime
         var client = new MongoClient(_container.GetConnectionString());
         var coll = client
             .GetDatabase(DbName)
-            .GetCollection<StarWarsData.Models.Entities.Page>("Pages");
+            .GetCollection<StarWarsData.Models.Entities.Page>(Collections.Pages);
         await coll.InsertManyAsync(RelationshipGraphServiceTests.BuildDataset());
 
-        var settings = Options.Create(new SettingsOptions { PagesDb = DbName });
+        var settings = Options.Create(new SettingsOptions { DatabaseName = DbName });
         Service = new RelationshipGraphService(
             NullLogger<RelationshipGraphService>.Instance,
             settings,

@@ -223,8 +223,7 @@ public sealed class ArticleChunkingIntegrationTests : IAsyncLifetime
     private ArticleChunkingService _service = null!;
     private FakeEmbeddingGenerator _embedder = null!;
 
-    private const string PagesDb = "test-pages";
-    private const string GraphDb = "test-graph";
+    private const string TestDatabaseName = "test-starwars";
 
     public async Task InitializeAsync()
     {
@@ -236,7 +235,7 @@ public sealed class ArticleChunkingIntegrationTests : IAsyncLifetime
         _embedder = new FakeEmbeddingGenerator();
 
         var settings = Options.Create(
-            new SettingsOptions { PagesDb = PagesDb, RelationshipGraphDb = GraphDb }
+            new SettingsOptions { DatabaseName = TestDatabaseName }
         );
 
         _service = new ArticleChunkingService(
@@ -251,10 +250,10 @@ public sealed class ArticleChunkingIntegrationTests : IAsyncLifetime
     public async Task DisposeAsync() => await _container.DisposeAsync();
 
     private IMongoCollection<BsonDocument> Pages =>
-        _mongoClient.GetDatabase(PagesDb).GetCollection<BsonDocument>("Pages");
+        _mongoClient.GetDatabase(TestDatabaseName).GetCollection<BsonDocument>(Collections.Pages);
 
     private IMongoCollection<ArticleChunk> Chunks =>
-        _mongoClient.GetDatabase(GraphDb).GetCollection<ArticleChunk>("chunks");
+        _mongoClient.GetDatabase(TestDatabaseName).GetCollection<ArticleChunk>(Collections.KgChunks);
 
     private async Task SeedPage(
         int id,

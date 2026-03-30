@@ -17,8 +17,6 @@ public class RecordService
     readonly InfoboxToEventsTransformer _recordToEventsTransformer;
     readonly SettingsOptions _settingsOptions;
     readonly IMongoClient _mongoClient;
-    readonly string _pagesDbName;
-    readonly string _timelineEventsDbName;
     readonly YearHelper _yearHelper;
     readonly IEmbeddingGenerator<string, Embedding<float>> _textEmbeddingGenerationService;
 
@@ -34,15 +32,13 @@ public class RecordService
         _logger = logger;
         _settingsOptions = settingsOptions.Value;
         _mongoClient = mongoClient;
-        _pagesDbName = _settingsOptions.PagesDb;
-        _timelineEventsDbName = _settingsOptions.TimelineEventsDb;
         _yearHelper = yearHelper;
         _textEmbeddingGenerationService = textEmbeddingGenerationService;
         _recordToEventsTransformer = recordToEventsTransformer;
     }
 
     IMongoCollection<Page> PagesCollection =>
-        _mongoClient.GetDatabase(_pagesDbName).GetCollection<Page>("Pages");
+        _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
 
     /// <summary>
     /// Returns distinct sanitized template names from Pages that have infoboxes.
@@ -147,7 +143,7 @@ public class RecordService
 
     public async Task DeletePagesCollections(CancellationToken cancellationToken)
     {
-        var pagesDb = _mongoClient.GetDatabase(_pagesDbName);
+        var pagesDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var collections = await pagesDb.ListCollectionNamesAsync(
             cancellationToken: cancellationToken
         );
@@ -160,14 +156,16 @@ public class RecordService
 
     public async Task DeleteTimelineCollections(CancellationToken cancellationToken)
     {
-        var timelineDb = _mongoClient.GetDatabase(_timelineEventsDbName);
-        var collections = await timelineDb.ListCollectionNamesAsync(
+        var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
+        var collections = await db.ListCollectionNamesAsync(
             cancellationToken: cancellationToken
         );
-        var collectionList = await collections.ToListAsync(cancellationToken);
+        var collectionList = (await collections.ToListAsync(cancellationToken))
+            .Where(n => n.StartsWith(Collections.TimelinePrefix))
+            .ToList();
         foreach (var collection in collectionList)
         {
-            await timelineDb.DropCollectionAsync(collection, cancellationToken);
+            await db.DropCollectionAsync(collection, cancellationToken);
         }
     }
 
@@ -289,7 +287,7 @@ public class RecordService
 
     public async Task CreateCategorizedTimelineEvents(CancellationToken token)
     {
-        var timelineEventsDb = _mongoClient.GetDatabase(_timelineEventsDbName);
+        var timelineEventsDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var pages = PagesCollection;
 
         // Get all distinct templates
@@ -311,7 +309,7 @@ public class RecordService
                     );
 
                     var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(
-                        templateName
+                        Collections.TimelinePrefix + templateName
                     );
 
                     // Clear existing data
@@ -416,7 +414,7 @@ public class RecordService
     /// </summary>
     public async Task CreateTemplateViewsAsync(CancellationToken cancellationToken)
     {
-        var database = _mongoClient.GetDatabase(_pagesDbName);
+        var database = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
 
         // Drop existing views (only views, not real collections like Pages/JobState)
         var viewFilter = new BsonDocument("type", "view");
@@ -453,7 +451,7 @@ public class RecordService
             var command = new BsonDocument
             {
                 { "create", templateName },
-                { "viewOn", "Pages" },
+                { "viewOn", Collections.Pages },
                 { "pipeline", pipeline },
             };
 
@@ -483,8 +481,8 @@ public class RecordService
     /// </summary>
     public async Task EnsureIndexesAsync(CancellationToken cancellationToken)
     {
-        var pagesDb = _mongoClient.GetDatabase(_pagesDbName);
-        var pages = pagesDb.GetCollection<Page>("Pages");
+        var pagesDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
+        var pages = pagesDb.GetCollection<Page>(Collections.Pages);
 
         _logger.LogInformation("Creating indexes on Pages collection");
 
@@ -559,11 +557,13 @@ public class RecordService
         _logger.LogInformation("Pages indexes created");
 
         // Timeline event collections — add Continuity and Universe indexes
-        var timelineDb = _mongoClient.GetDatabase(_timelineEventsDbName);
+        var timelineDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var collectionNames = await timelineDb.ListCollectionNamesAsync(
             cancellationToken: cancellationToken
         );
-        var collections = await collectionNames.ToListAsync(cancellationToken);
+        var collections = (await collectionNames.ToListAsync(cancellationToken))
+            .Where(n => n.StartsWith(Collections.TimelinePrefix))
+            .ToList();
 
         foreach (var collName in collections)
         {
@@ -607,15 +607,8 @@ public class RecordService
         }
 
         // Character timelines collection indexes
-        var charTimelineDb = _mongoClient.GetDatabase(_settingsOptions.CharacterTimelinesDb);
-        var timelinesCollNames = await charTimelineDb.ListCollectionNamesAsync(
-            cancellationToken: cancellationToken
-        );
-        var timelineColls = await timelinesCollNames.ToListAsync(cancellationToken);
-
-        if (timelineColls.Contains("Timelines"))
         {
-            var timelines = charTimelineDb.GetCollection<CharacterTimeline>("Timelines");
+            var timelines = timelineDb.GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines);
 
             await timelines.Indexes.CreateOneAsync(
                 new CreateIndexModel<CharacterTimeline>(
@@ -654,7 +647,7 @@ public class RecordService
 
     public async Task CreateVectorIndexesAsync(CancellationToken cancellationToken)
     {
-        await CreateCosineVectorIndexAsync("Pages");
+        await CreateCosineVectorIndexAsync(Collections.Pages);
     }
 
     async Task CreateCosineVectorIndexAsync(
@@ -684,7 +677,7 @@ public class RecordService
         var model = new CreateSearchIndexModel(name: indexName, definition: vectorDef);
 
         var collection = _mongoClient
-            .GetDatabase(_pagesDbName)
+            .GetDatabase(_settingsOptions.DatabaseName)
             .GetCollection<BsonDocument>(collectionName);
         await collection.SearchIndexes.CreateOneAsync(model);
 
@@ -696,14 +689,14 @@ public class RecordService
     public async Task DeleteVectorIndexesAsync(CancellationToken cancellationToken)
     {
         var collection = _mongoClient
-            .GetDatabase(_pagesDbName)
-            .GetCollection<BsonDocument>("Pages");
+            .GetDatabase(_settingsOptions.DatabaseName)
+            .GetCollection<BsonDocument>(Collections.Pages);
         await collection.SearchIndexes.DropOneAsync("vector_index", cancellationToken);
     }
 
     public async Task DeleteOpenAiEmbeddingsAsync(CancellationToken token)
     {
-        var collection = _mongoClient.GetDatabase(_pagesDbName).GetCollection<Page>("Pages");
+        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
         var update = Builders<Page>.Update.Unset(new StringFieldDefinition<Page>("embedding"));
         await collection.UpdateManyAsync(
             FilterDefinition<Page>.Empty,
@@ -717,12 +710,16 @@ public class RecordService
         CancellationToken cancellationToken = default
     )
     {
-        var timelineEventsDb = _mongoClient.GetDatabase(_timelineEventsDbName);
-        var names = await timelineEventsDb.ListCollectionNamesAsync(
+        var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
+        var names = await db.ListCollectionNamesAsync(
             cancellationToken: cancellationToken
         );
-        List<string> results = await names.ToListAsync(cancellationToken);
-        return results.OrderBy(x => x).ToList();
+        List<string> results = (await names.ToListAsync(cancellationToken))
+            .Where(n => n.StartsWith(Collections.TimelinePrefix))
+            .Select(n => n[Collections.TimelinePrefix.Length..])
+            .OrderBy(x => x)
+            .ToList();
+        return results;
     }
 
     public Task ProcessEmbeddingsAsync(CancellationToken none)

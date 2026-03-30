@@ -1,4 +1,5 @@
 using System.Text.Json;
+using StarWarsData.Models;
 using StarWarsData.Services;
 
 namespace StarWarsData.Tests;
@@ -69,8 +70,8 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
         // Insert a page with very long content for this test
         var longContent = new string('X', 10000);
         var coll = fixture
-            .MongoClient.GetDatabase(ApiFixture.PagesDb)
-            .GetCollection<Models.Entities.Page>("Pages");
+            .MongoClient.GetDatabase(ApiFixture.DatabaseName)
+            .GetCollection<Models.Entities.Page>(Collections.Pages);
 
         var page = new Models.Entities.Page
         {

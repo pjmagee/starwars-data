@@ -22,8 +22,8 @@ public class MapService
     {
         _logger = logger;
         _pages = mongoClient
-            .GetDatabase(settingsOptions.Value.PagesDb)
-            .GetCollection<Page>("Pages");
+            .GetDatabase(settingsOptions.Value.DatabaseName)
+            .GetCollection<Page>(Collections.Pages);
     }
 
     static FilterDefinition<Page> TemplateFilter(string type) =>

@@ -38,10 +38,9 @@ public class GalaxyEventsService
         IMongoClient mongoClient)
     {
         _logger = logger;
-        _timelineDb = mongoClient.GetDatabase(settingsOptions.Value.TimelineEventsDb);
-        _pages = mongoClient
-            .GetDatabase(settingsOptions.Value.PagesDb)
-            .GetCollection<Page>("Pages");
+        var db = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName);
+        _timelineDb = db;
+        _pages = db.GetCollection<Page>(Collections.Pages);
     }
 
     /// <summary>
@@ -81,7 +80,7 @@ public class GalaxyEventsService
     {
         var allNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
         var collectionNames = allNames.ToList()
-            .Where(n => !SkipCollections.Contains(n))
+            .Where(n => n.StartsWith(Collections.TimelinePrefix) && !SkipCollections.Contains(n))
             .OrderBy(n => n)
             .ToList();
 
@@ -89,6 +88,7 @@ public class GalaxyEventsService
 
         foreach (var name in collectionNames)
         {
+            var shortName = name[Collections.TimelinePrefix.Length..];
             var collection = _timelineDb.GetCollection<BsonDocument>(name);
 
             // Check if collection has Year data
@@ -111,7 +111,7 @@ public class GalaxyEventsService
 
             results.Add(new LensSummary
             {
-                Lens = name,
+                Lens = shortName,
                 TotalCount = (int)withYear,
                 WithLocationCount = (int)withLocation
             });
@@ -126,11 +126,12 @@ public class GalaxyEventsService
     /// </summary>
     async Task<List<EraRange>> LoadErasAsync(CancellationToken ct)
     {
+        var eraCollName = Collections.TimelinePrefix + "Era";
         var collectionNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
-        if (!collectionNames.ToList().Contains("Era"))
+        if (!collectionNames.ToList().Contains(eraCollName))
             return [];
 
-        var eraCollection = _timelineDb.GetCollection<TimelineEvent>("Era");
+        var eraCollection = _timelineDb.GetCollection<TimelineEvent>(eraCollName);
         var eras = await eraCollection
             .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
             .ToListAsync(ct);
@@ -281,7 +282,7 @@ public class GalaxyEventsService
 
         foreach (var lens in overview.AvailableLenses)
         {
-            var collection = _timelineDb.GetCollection<BsonDocument>(lens);
+            var collection = _timelineDb.GetCollection<BsonDocument>(Collections.TimelinePrefix + lens);
 
             var pipeline = new[]
             {
@@ -373,14 +374,15 @@ public class GalaxyEventsService
         }
         else
         {
-            lensCollections = collectionNames.Contains(lens) ? [lens] : [];
+            var fullName = Collections.TimelinePrefix + lens;
+            lensCollections = collectionNames.Contains(fullName) ? [lens] : [];
         }
 
         var allEvents = new List<(TimelineEvent evt, string collection)>();
 
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<TimelineEvent>(collName);
+            var collection = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + collName);
 
             var filters = new List<FilterDefinition<TimelineEvent>>
             {
@@ -492,13 +494,14 @@ public class GalaxyEventsService
         }
         else
         {
-            lensCollections = collectionNames.Contains(lens) ? [lens] : [];
+            var fullName = Collections.TimelinePrefix + lens;
+            lensCollections = collectionNames.Contains(fullName) ? [lens] : [];
         }
 
         var yearCounts = new Dictionary<int, int>();
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<BsonDocument>(collName);
+            var collection = _timelineDb.GetCollection<BsonDocument>(Collections.TimelinePrefix + collName);
 
             var pipeline = new[]
             {
@@ -562,7 +565,8 @@ public class GalaxyEventsService
         }
         else
         {
-            lensCollections = collectionNames.Contains(lens) ? [lens] : [];
+            var fullName = Collections.TimelinePrefix + lens;
+            lensCollections = collectionNames.Contains(fullName) ? [lens] : [];
         }
 
         var locationLookup = await BuildLocationLookupAsync(ct);
@@ -570,7 +574,7 @@ public class GalaxyEventsService
 
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<TimelineEvent>(collName);
+            var collection = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + collName);
 
             var filter = Builders<TimelineEvent>.Filter.And(
                 Builders<TimelineEvent>.Filter.Ne(e => e.Year, null),

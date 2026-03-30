@@ -59,11 +59,11 @@ public partial class TerritoryInferenceService
         IOptions<SettingsOptions> settings,
         ILogger<TerritoryInferenceService> logger)
     {
-        var graphDb = mongoClient.GetDatabase(settings.Value.RelationshipGraphDb);
-        _edges = graphDb.GetCollection<RelationshipEdge>("edges");
-        _timelineDb = mongoClient.GetDatabase(settings.Value.TimelineEventsDb);
-        _snapshots = mongoClient.GetDatabase(settings.Value.TerritoryControlDb)
-            .GetCollection<TerritorySnapshot>("territory_snapshots");
+        var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
+        _timelineDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _snapshots = mongoClient.GetDatabase(settings.Value.DatabaseName)
+            .GetCollection<TerritorySnapshot>(Collections.TerritorySnapshots);
         _logger = logger;
     }
 
@@ -445,7 +445,7 @@ public partial class TerritoryInferenceService
 
         // Also add years from the Government timeline collection
         // to capture events not in graph edges
-        var govYears = _timelineDb.GetCollection<TimelineEvent>("Government")
+        var govYears = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + "Government")
             .Find(Builders<TimelineEvent>.Filter.Eq(e => e.Continuity, Continuity.Canon))
             .ToList()
             .Where(e => e.Year.HasValue)
@@ -457,7 +457,7 @@ public partial class TerritoryInferenceService
         // Add battle years from the timeline collections
         foreach (var coll in new[] { "Battle", "War", "Campaign" })
         {
-            var battleYears = _timelineDb.GetCollection<TimelineEvent>(coll)
+            var battleYears = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + coll)
                 .Find(Builders<TimelineEvent>.Filter.Eq(e => e.Continuity, Continuity.Canon))
                 .ToList()
                 .Where(e => e.Year.HasValue)

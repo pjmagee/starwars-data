@@ -12,8 +12,8 @@ public class ChatSessionService
 
     public ChatSessionService(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
     {
-        var db = mongoClient.GetDatabase(settings.Value.ChatSessionsDb);
-        _sessions = db.GetCollection<ChatSession>("sessions");
+        var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _sessions = db.GetCollection<ChatSession>(Collections.ChatSessions);
     }
 
     public async Task<List<ChatSessionSummary>> GetSessionsAsync(

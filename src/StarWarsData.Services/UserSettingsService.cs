@@ -21,8 +21,8 @@ public class UserSettingsService
     )
     {
         _collection = mongoClient
-            .GetDatabase(settings.Value.ChatSessionsDb)
-            .GetCollection<UserSettings>("user_settings");
+            .GetDatabase(settings.Value.DatabaseName)
+            .GetCollection<UserSettings>(Collections.UserSettings);
         _protector = dataProtection.CreateProtector("UserSettings.OpenAiKey");
         _logger = logger;
     }

@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.Extensions.AI;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services;
@@ -19,13 +20,13 @@ public class RelationshipAnalystToolkit
     readonly IMongoCollection<RelationshipCrawlState> _crawlState;
     readonly IMongoCollection<RelationshipLabel> _labels;
 
-    public RelationshipAnalystToolkit(IMongoClient mongoClient, string pagesDb, string graphDb)
+    public RelationshipAnalystToolkit(IMongoClient mongoClient, string databaseName)
     {
-        _pages = mongoClient.GetDatabase(pagesDb).GetCollection<BsonDocument>("Pages");
-        var graphDatabase = mongoClient.GetDatabase(graphDb);
-        _edges = graphDatabase.GetCollection<RelationshipEdge>("edges");
-        _crawlState = graphDatabase.GetCollection<RelationshipCrawlState>("crawl_state");
-        _labels = graphDatabase.GetCollection<RelationshipLabel>("labels");
+        var db = mongoClient.GetDatabase(databaseName);
+        _pages = db.GetCollection<BsonDocument>(Collections.Pages);
+        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
+        _crawlState = db.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
+        _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
     }
 
     [Description(

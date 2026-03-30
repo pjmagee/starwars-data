@@ -3,6 +3,7 @@ using Microsoft.Agents.AI.Workflows;
 using Microsoft.Agents.AI.Workflows.Checkpointing;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StarWarsData.Models;
 
 namespace StarWarsData.Services;
 
@@ -19,7 +20,7 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
     {
         _collection = mongoClient
             .GetDatabase(databaseName)
-            .GetCollection<BsonDocument>("WorkflowCheckpoints");
+            .GetCollection<BsonDocument>(Collections.GenaiCharacterCheckpoints);
 
         // Ensure index on sessionId for fast lookups
         _collection.Indexes.CreateOne(

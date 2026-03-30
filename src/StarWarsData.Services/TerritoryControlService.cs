@@ -31,10 +31,10 @@ public class TerritoryControlService
         ILogger<TerritoryControlService> logger
     )
     {
-        var db = mongoClient.GetDatabase(settings.Value.TerritoryControlDb);
-        _snapshots = db.GetCollection<TerritorySnapshot>("territory_snapshots");
-        _pages = mongoClient.GetDatabase(settings.Value.PagesDb).GetCollection<Page>("Pages");
-        _timelineDb = mongoClient.GetDatabase(settings.Value.TimelineEventsDb);
+        var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _snapshots = db.GetCollection<TerritorySnapshot>(Collections.TerritorySnapshots);
+        _pages = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
+        _timelineDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
         _logger = logger;
     }
 
@@ -168,7 +168,7 @@ public class TerritoryControlService
 
     async Task<List<TerritoryEra>> GetCanonErasAsync(CancellationToken ct)
     {
-        var eraCollection = _timelineDb.GetCollection<TimelineEvent>("Era");
+        var eraCollection = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + "Era");
         var filter = Builders<TimelineEvent>.Filter.Eq(e => e.Continuity, Continuity.Canon);
         var eraDocs = await eraCollection.Find(filter).ToListAsync(ct);
 
@@ -225,9 +225,10 @@ public class TerritoryControlService
 
         foreach (var collectionName in EventCollections)
         {
-            if (!existingCollections.Contains(collectionName)) continue;
+            var prefixedName = Collections.TimelinePrefix + collectionName;
+            if (!existingCollections.Contains(prefixedName)) continue;
 
-            var collection = _timelineDb.GetCollection<TimelineEvent>(collectionName);
+            var collection = _timelineDb.GetCollection<TimelineEvent>(prefixedName);
             var filter = Builders<TimelineEvent>.Filter.And(
                 Builders<TimelineEvent>.Filter.Eq(e => e.Year, absYear),
                 Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, demarcation),

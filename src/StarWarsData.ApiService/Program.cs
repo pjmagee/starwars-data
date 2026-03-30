@@ -110,18 +110,14 @@ builder
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        return new RelationshipAnalystToolkit(
-            mongoClient,
-            settings.PagesDb,
-            settings.RelationshipGraphDb
-        );
+        return new RelationshipAnalystToolkit(mongoClient, settings.DatabaseName);
     })
     .AddSingleton<GraphRAGToolkit>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         var embedder = sp.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
-        return new GraphRAGToolkit(mongoClient, settings.RelationshipGraphDb, embedder);
+        return new GraphRAGToolkit(mongoClient, settings.DatabaseName, embedder);
     })
     .AddScoped<ArticleChunkingService>()
     .AddKeyedSingleton<IChatClient>(
@@ -193,13 +189,13 @@ builder
         var mcpClient = sp.GetKeyedService<McpClient>("mongodb-mcp");
         var componentToolkit = new ComponentToolkit();
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        var dataExplorer = new DataExplorerToolkit(mongoClient);
+        var dataExplorer = new DataExplorerToolkit(mongoClient, sp.GetRequiredService<IOptions<SettingsOptions>>());
 
         // Wiki text search — registered directly as a tool so the model sees it
         // (UseAIContextProviders does not reliably surface tools via AGUI streaming)
         var pagesCollection = mongoClient
-            .GetDatabase("starwars-raw-pages")
-            .GetCollection<BsonDocument>("Pages");
+            .GetDatabase(settings.DatabaseName)
+            .GetCollection<BsonDocument>(Collections.Pages);
         var wikiSearchProvider = new StarWarsWikiSearchProvider(
             pagesCollection,
             sp.GetRequiredService<ILoggerFactory>()
@@ -246,7 +242,7 @@ builder
         - [PREFER: auto] = you decide the best output type based on the question.
         - Any other [PREFER] value = the user explicitly chose that output type. Use it.
 
-        DATA MODEL: Database "starwars-raw-pages", collection "Pages". The infoboxType parameter on exploration tools is matched via regex against the infobox.Template field — it is NOT a MongoDB collection name.
+        DATA MODEL: The Pages collection holds all wiki pages. The infoboxType parameter on exploration tools is matched via regex against the infobox.Template field — it is NOT a MongoDB collection name.
 
         EFFICIENCY: Be direct. Most questions need 1-3 tool calls total — one to find data, one to render. Do NOT call list_infobox_types unless you genuinely don't know the type. Common types: Character, Planet, Species, Starship, Vehicle, Weapon, Battle, Event, Organization, Holocron, Food, Droid.
 

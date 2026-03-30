@@ -27,7 +27,7 @@ public class TimelineService
         _logger = logger;
         _templateHelper = templateHelper;
         _mongoClient = mongoClient;
-        _timelineEventsDb = mongoClient.GetDatabase(settingsOptions.Value.TimelineEventsDb);
+        _timelineEventsDb = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName);
     }
 
     public async Task<GroupedTimelineResult> GetTimelineEvents(
@@ -271,7 +271,7 @@ public class TimelineService
         int pageSize = 20
     )
     {
-        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(category);
+        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + category);
 
         // Build combined filter
         var continuityFilter = BuildContinuityFilter(continuity);
@@ -365,10 +365,10 @@ public class TimelineService
     public async Task<List<Era>> GetErasAsync(CancellationToken ct = default)
     {
         var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(cancellationToken: ct);
-        if (!collectionNames.ToList().Contains("Era"))
+        if (!collectionNames.ToList().Contains(Collections.TimelinePrefix + "Era"))
             return [];
 
-        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>("Era");
+        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + "Era");
         var docs = await eraCollection
             .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
             .ToListAsync(ct);

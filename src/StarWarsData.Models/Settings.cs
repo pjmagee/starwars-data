@@ -84,8 +84,8 @@ public static class Collections
     public const string KgLabels = "kg.labels";
     public const string KgChunks = "kg.chunks";
 
-    // Old LLM-extracted edges (kept for comparison, will be dropped later)
-    public const string KgEdgesLegacy = "kg.edges_legacy";
+    // Infobox-derived edges (deterministic, no LLM)
+    public const string KgEdgesInfobox = "kg.edges_infobox";
 
     // ── AI-generated content ──
     public const string GenaiCharacterTimelines = "genai.character_timelines";
@@ -94,6 +94,7 @@ public static class Collections
 
     // ── Chat ──
     public const string ChatSessions = "chat.sessions";
+    public const string UserSettings = "chat.user_settings";
 
     // ── Territory control ──
     public const string TerritorySnapshots = "territory.snapshots";

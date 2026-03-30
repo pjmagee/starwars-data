@@ -46,7 +46,7 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
     }
 
     private IMongoCollection<Page> Pages =>
-        _mongoClient.GetDatabase(_settings.PagesDb).GetCollection<Page>("Pages");
+        _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<Page>(Collections.Pages);
 
     public override async ValueTask<string> HandleAsync(
         string message,

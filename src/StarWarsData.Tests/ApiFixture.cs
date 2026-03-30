@@ -24,9 +24,7 @@ public sealed class ApiFixture : IAsyncLifetime
     public RelationshipGraphService RelationshipGraphService { get; private set; } = null!;
     public RelationshipAnalystToolkit RelationshipAnalystToolkit { get; private set; } = null!;
 
-    public const string PagesDb = "test-pages";
-    public const string TimelineEventsDb = "test-timeline-events";
-    public const string RelationshipGraphDb = "test-relationship-graph";
+    public const string DatabaseName = "test-starwars";
 
     public async Task InitializeAsync()
     {
@@ -36,7 +34,7 @@ public sealed class ApiFixture : IAsyncLifetime
 
         MongoClient = new MongoClient(_container.GetConnectionString());
 
-        var pagesCollection = MongoClient.GetDatabase(PagesDb).GetCollection<Page>("Pages");
+        var pagesCollection = MongoClient.GetDatabase(DatabaseName).GetCollection<Page>(Collections.Pages);
         await pagesCollection.InsertManyAsync(BuildSeedData());
 
         // Create text index on title + content — required by RecordService.GetSearchResult
@@ -46,9 +44,7 @@ public sealed class ApiFixture : IAsyncLifetime
         var settings = Options.Create(
             new SettingsOptions
             {
-                PagesDb = PagesDb,
-                TimelineEventsDb = TimelineEventsDb,
-                RelationshipGraphDb = RelationshipGraphDb,
+                DatabaseName = DatabaseName,
                 HangfireDb = "test-hangfire",
                 StarWarsBaseUrl = "https://starwars.fandom.com",
                 OpenAiKey = "test-key",
@@ -83,8 +79,7 @@ public sealed class ApiFixture : IAsyncLifetime
 
         RelationshipAnalystToolkit = new RelationshipAnalystToolkit(
             MongoClient,
-            PagesDb,
-            RelationshipGraphDb
+            DatabaseName
         );
     }
 

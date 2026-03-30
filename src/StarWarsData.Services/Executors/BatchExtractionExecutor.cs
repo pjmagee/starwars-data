@@ -5,6 +5,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services.Executors;
@@ -51,7 +52,7 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         _characterPageId = characterPageId;
         _progressCollection = mongoClient
             .GetDatabase(databaseName)
-            .GetCollection<BatchExtractionProgressDoc>("ExtractionProgress");
+            .GetCollection<BatchExtractionProgressDoc>(Collections.GenaiCharacterProgress);
     }
 
     protected override ValueTask OnCheckpointingAsync(

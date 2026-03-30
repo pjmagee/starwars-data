@@ -36,7 +36,6 @@ public class RelationshipGraphBuilderService
     readonly RelationshipAnalystToolkit _toolkit;
     readonly OpenAIClient _openAiClient;
     readonly OpenAiStatusService _aiStatus;
-    readonly string _graphDb;
     readonly string _model;
 
     public RelationshipGraphBuilderService(
@@ -51,16 +50,13 @@ public class RelationshipGraphBuilderService
     {
         _logger = logger;
         _aiStatus = aiStatus;
-        _graphDb = settings.Value.RelationshipGraphDb;
         _model = settings.Value.RelationshipAnalystModel;
-        _pages = mongoClient
-            .GetDatabase(settings.Value.PagesDb)
-            .GetCollection<BsonDocument>("Pages");
-        var graphDatabase = mongoClient.GetDatabase(_graphDb);
-        _edges = graphDatabase.GetCollection<RelationshipEdge>("edges");
-        _crawlState = graphDatabase.GetCollection<RelationshipCrawlState>("crawl_state");
-        _labels = graphDatabase.GetCollection<RelationshipLabel>("labels");
-        _batchJobs = graphDatabase.GetCollection<GraphBatchJob>("batch_jobs");
+        var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _pages = db.GetCollection<BsonDocument>(Collections.Pages);
+        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
+        _crawlState = db.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
+        _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
+        _batchJobs = db.GetCollection<GraphBatchJob>(Collections.KgBatchJobs);
         _toolkit = toolkit;
         _openAiClient = openAiClient;
         _chatClient = chatClient;
@@ -1638,7 +1634,7 @@ public class RelationshipGraphBuilderService
         CancellationToken ct = default
     )
     {
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>("edges");
+        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
         // Get root entity info
         var rootPage = await _pages.Find(new BsonDocument("_id", rootId)).FirstOrDefaultAsync(ct);
@@ -1694,7 +1690,7 @@ public class RelationshipGraphBuilderService
                     "$graphLookup",
                     new BsonDocument
                     {
-                        { "from", "edges" },
+                        { "from", Collections.KgEdges },
                         { "startWith", "$toId" },
                         { "connectFromField", "toId" },
                         { "connectToField", "fromId" },
@@ -1810,7 +1806,7 @@ public class RelationshipGraphBuilderService
         CancellationToken ct = default
     )
     {
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>("edges");
+        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
         var matchFilter = new BsonDocument("fromId", pageId);
         if (continuity.HasValue)
             matchFilter["continuity"] = continuity.Value.ToString();

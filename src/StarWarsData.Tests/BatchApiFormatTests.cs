@@ -23,8 +23,7 @@ public class BatchApiFormatTests(ApiFixture fixture)
         var settings = Options.Create(
             new SettingsOptions
             {
-                PagesDb = ApiFixture.PagesDb,
-                RelationshipGraphDb = ApiFixture.RelationshipGraphDb,
+                DatabaseName = ApiFixture.DatabaseName,
                 RelationshipAnalystModel = "gpt-5.4-mini",
             }
         );

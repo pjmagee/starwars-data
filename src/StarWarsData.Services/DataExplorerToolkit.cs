@@ -1,25 +1,23 @@
 using System.ComponentModel;
 using System.Text.Json;
 using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StarWarsData.Models;
 
 namespace StarWarsData.Services;
 
 /// <summary>
-/// AI tools for querying the starwars-raw-pages.Pages collection.
+/// AI tools for querying the Pages collection.
 /// All data lives in a single "Pages" collection. Each page may have an embedded "infobox" object.
 /// The infobox type (Character, Battle, Species, etc.) is determined by the infobox.Template field.
 /// These tools filter Pages by infobox type automatically using a regex on infobox.Template.
 /// </summary>
-public class DataExplorerToolkit(IMongoClient mongoClient)
+public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
 {
-    const string Database = "starwars-raw-pages";
-    const string Collection = "Pages";
-    const string TimelineDatabase = "starwars-timeline-events";
-
     IMongoCollection<BsonDocument> Pages =>
-        mongoClient.GetDatabase(Database).GetCollection<BsonDocument>(Collection);
+        mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
 
     static string EscapeRegex(string input) => System.Text.RegularExpressions.Regex.Escape(input);
 
@@ -43,7 +41,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
 
     [Description(
         "Search the Pages collection for entities by name. "
-            + "Queries the single 'Pages' collection in the 'starwars-raw-pages' database, "
+            + "Queries the Pages collection, "
             + "filtering by infobox type (via infobox.Template regex) and matching the 'Titles' label in infobox.Data. "
             + "Returns id, name, continuity, and wikiUrl for each match."
     )]
@@ -655,7 +653,7 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
 
     [Description(
         "List all distinct infobox type names from the Pages collection. "
-            + "Aggregates distinct infobox.Template values from the 'starwars-raw-pages.Pages' collection and returns sanitized names. "
+            + "Aggregates distinct infobox.Template values from the Pages collection and returns sanitized names. "
             + "Use this to discover what infoboxType values are valid for other tools (e.g. Character, Battle, Species, Food, Droid)."
     )]
     public async Task<string> ListInfoboxTypes()
@@ -681,16 +679,22 @@ public class DataExplorerToolkit(IMongoClient mongoClient)
     }
 
     [Description(
-        "List all timeline event category names from the 'starwars-timeline-events' database. "
-            + "Each category is a MongoDB collection name in that database (e.g. 'Battle', 'Character', 'War'). "
+        "List all timeline event category names. "
+            + "Each category corresponds to a timeline collection (e.g. 'Battle', 'Character', 'War'). "
             + "Use this before render_timeline to discover valid category names."
     )]
     public async Task<string> ListTimelineCategories()
     {
-        var db = mongoClient.GetDatabase(TimelineDatabase);
+        var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        // Timeline collections use a prefix; list all that match
         var cursor = await db.ListCollectionNamesAsync();
-        var names = await cursor.ToListAsync();
-        return JsonSerializer.Serialize(names.OrderBy(x => x));
+        var allNames = await cursor.ToListAsync();
+        var timelineNames = allNames
+            .Where(n => n.StartsWith(Collections.TimelinePrefix))
+            .Select(n => n[Collections.TimelinePrefix.Length..])
+            .OrderBy(x => x)
+            .ToList();
+        return JsonSerializer.Serialize(timelineNames);
     }
 
     public IReadOnlyList<AITool> AsAIFunctions() =>

@@ -18,11 +18,11 @@ public class InfoboxGraphService(
     ILogger<InfoboxGraphService> logger)
 {
     readonly IMongoCollection<Page> _pages = mongoClient
-        .GetDatabase(settings.Value.PagesDb).GetCollection<Page>("Pages");
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
     readonly IMongoCollection<GraphNode> _nodes = mongoClient
-        .GetDatabase(settings.Value.RelationshipGraphDb).GetCollection<GraphNode>("nodes");
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient
-        .GetDatabase(settings.Value.RelationshipGraphDb).GetCollection<RelationshipEdge>("edges_v2");
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdgesInfobox);
 
     // ── Field classification ──
     // Fields are classified per infobox type. A field is a PROPERTY if it holds scalar

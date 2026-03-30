@@ -39,9 +39,9 @@ public class PageDownloader
         _http = httpClient;
         _logger = logger;
         _config = settings.Value;
-        _mongoDatabase = mongoClient.GetDatabase(settings.Value.PagesDb);
-        _pagesCollection = _mongoDatabase.GetCollection<Page>("Pages");
-        _jobStateCollection = _mongoDatabase.GetCollection<JobState>("JobState");
+        _mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
+        _pagesCollection = _mongoDatabase.GetCollection<Page>(Collections.Pages);
+        _jobStateCollection = _mongoDatabase.GetCollection<JobState>(Collections.JobState);
         _markdownConverter = new ReverseMarkdown.Converter(
             new ReverseMarkdown.Config
             {
@@ -939,8 +939,8 @@ public class PageDownloader
             changedPageIds.Count);
 
         // Reset relationship graph crawl state → pages will be re-processed by the graph builder
-        var graphDb = _mongoDatabase.Client.GetDatabase(_config.RelationshipGraphDb);
-        var crawlState = graphDb.GetCollection<RelationshipCrawlState>("crawl_state");
+        var graphDb = _mongoDatabase.Client.GetDatabase(_config.DatabaseName);
+        var crawlState = graphDb.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
 
         var deleteResult = await crawlState.DeleteManyAsync(
             Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, changedPageIds),
@@ -954,7 +954,7 @@ public class PageDownloader
         }
 
         // Delete article chunks for changed pages → will be re-chunked
-        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>("chunks");
+        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>(Collections.KgChunks);
         var chunkDeleteResult = await chunksCollection.DeleteManyAsync(
             new MongoDB.Bson.BsonDocument("pageId",
                 new MongoDB.Bson.BsonDocument("$in",

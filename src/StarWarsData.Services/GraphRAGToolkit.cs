@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.Extensions.AI;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services;
@@ -24,15 +25,15 @@ public class GraphRAGToolkit
 
     public GraphRAGToolkit(
         IMongoClient mongoClient,
-        string graphDb,
+        string databaseName,
         IEmbeddingGenerator<string, Embedding<float>> embedder
     )
     {
-        var db = mongoClient.GetDatabase(graphDb);
-        _edges = db.GetCollection<RelationshipEdge>("edges");
-        _crawlState = db.GetCollection<RelationshipCrawlState>("crawl_state");
-        _labels = db.GetCollection<RelationshipLabel>("labels");
-        _chunksRaw = db.GetCollection<BsonDocument>("chunks");
+        var db = mongoClient.GetDatabase(databaseName);
+        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
+        _crawlState = db.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
+        _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
+        _chunksRaw = db.GetCollection<BsonDocument>(Collections.KgChunks);
         _embedder = embedder;
     }
 
@@ -192,7 +193,7 @@ public class GraphRAGToolkit
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>("edges");
+        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
         var results = await edgesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync();
 
         // Enrich with label descriptions from the registry
@@ -238,7 +239,7 @@ public class GraphRAGToolkit
     {
         maxDepth = Math.Clamp(maxDepth, 1, 3);
 
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>("edges");
+        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
         var matchFilter = new BsonDocument("fromId", entityId);
         var restrictMatch = new BsonDocument();
@@ -273,7 +274,7 @@ public class GraphRAGToolkit
                     "$graphLookup",
                     new BsonDocument
                     {
-                        { "from", "edges" },
+                        { "from", Collections.KgEdges },
                         { "startWith", "$toId" },
                         { "connectFromField", "toId" },
                         { "connectToField", "fromId" },
