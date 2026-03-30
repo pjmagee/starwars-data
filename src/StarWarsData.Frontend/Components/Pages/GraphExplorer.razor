@@ -210,13 +210,13 @@
                     </div>
                     @* Keyboard hints *@
                     <div style="position:absolute; bottom:8px; left:8px; z-index:10;">
-                        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.3); font-size:10px;">
-                            Double-click: expand node &bull; Backspace: go back &bull; F: fullscreen &bull; Scroll: zoom
+                        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4); font-size:13px;">
+                            Double-click: expand node &bull; Backspace: go back &bull; F: fullscreen &bull; Esc: close/exit &bull; Scroll: zoom
                         </MudText>
                     </div>
                     <div id="@_containerId"
                          style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : "height:700px;")}")"
-                         @onkeydown="OnKeyDown" tabindex="0">
+                         >
                     </div>
 
                     @* Stats overlay (bottom-right) *@
@@ -632,6 +632,7 @@
         _dotnetRef = DotNetObjectReference.Create(this);
 
         await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
+        await _jsModule.InvokeVoidAsync("registerKeyboardShortcuts", _dotnetRef);
     }
 
     [JSInvokable]
@@ -754,26 +755,26 @@
             await _jsModule.InvokeVoidAsync("fitToScreen");
     }
 
-    private async Task OnKeyDown(KeyboardEventArgs e)
+    [JSInvokable]
+    public void OnKeyAction(string action)
     {
-        switch (e.Key)
+        InvokeAsync(() =>
         {
-            case "Backspace":
-                NavigateBack();
-                break;
-            case "f" or "F":
-                ToggleFullscreen();
-                break;
-            case "+" or "=":
-                await ZoomIn();
-                break;
-            case "-":
-                await ZoomOut();
-                break;
-            case "0":
-                await FitToScreen();
-                break;
-        }
+            switch (action)
+            {
+                case "back":
+                    NavigateBack();
+                    break;
+                case "fullscreen":
+                    ToggleFullscreen();
+                    break;
+                case "escape":
+                    if (_fullscreen) ToggleFullscreen();
+                    else CloseNodePanel();
+                    break;
+            }
+            StateHasChanged();
+        });
     }
 
     private static string FormatLabel(string label) =>

@@ -69,7 +69,7 @@ export function renderForceGraph(containerId, data, dotnetRef) {
     defs.append('marker')
         .attr('id', 'arrowhead')
         .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 32).attr('refY', 0)
+        .attr('refX', 36).attr('refY', 0)
         .attr('markerWidth', 8).attr('markerHeight', 8)
         .attr('orient', 'auto')
         .append('path')
@@ -161,7 +161,7 @@ function updateVisuals() {
     edgeLabel.exit().remove();
     edgeLabel.enter().append('text')
         .text(d => formatLabel(d.label))
-        .attr('font-size', '9px')
+        .attr('font-size', '11px')
         .attr('fill', '#8a8ab0')
         .attr('text-anchor', 'middle')
         .attr('dy', -6)
@@ -229,7 +229,7 @@ function updateVisuals() {
 
     // Circle
     enter.append('circle')
-        .attr('r', d => d.isRoot ? 28 : 22)
+        .attr('r', d => d.isRoot ? 32 : 26)
         .attr('fill', '#1e1e38')
         .attr('stroke', d => d.isRoot ? '#c8a832' : getTypeColor(d.type))
         .attr('stroke-width', d => d.isRoot ? 3 : 2);
@@ -237,7 +237,7 @@ function updateVisuals() {
     // Image or fallback
     enter.each(function (d) {
         const g = d3.select(this);
-        const r = d.isRoot ? 22 : 16;
+        const r = d.isRoot ? 26 : 20;
         const thumbUrl = WIKI_THUMB(d.imageUrl);
         if (thumbUrl) {
             const clipId = `clip-${d.id}`;
@@ -252,30 +252,30 @@ function updateVisuals() {
                 .on('error', function () {
                     d3.select(this).remove();
                     g.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em')
-                        .attr('fill', '#555580').attr('font-size', '18px').text(getTypeIcon(d.type));
+                        .attr('fill', '#555580').attr('font-size', '22px').text(getTypeIcon(d.type));
                 });
         } else {
             g.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em')
-                .attr('fill', '#555580').attr('font-size', '16px').text(getTypeIcon(d.type));
+                .attr('fill', '#555580').attr('font-size', '20px').text(getTypeIcon(d.type));
         }
     });
 
     // Name label
     enter.append('text')
-        .attr('dy', d => (d.isRoot ? 28 : 22) + 14)
+        .attr('dy', d => (d.isRoot ? 32 : 26) + 16)
         .attr('text-anchor', 'middle')
         .attr('fill', d => d.isRoot ? '#ffd866' : '#e0e0f0')
-        .attr('font-size', '11px')
+        .attr('font-size', '13px')
         .attr('font-weight', d => d.isRoot ? '700' : '500')
         .style('pointer-events', 'none').style('user-select', 'none')
-        .text(d => truncate(d.name, 22));
+        .text(d => truncate(d.name, 24));
 
     // Type badge
     enter.append('text')
-        .attr('dy', d => (d.isRoot ? 28 : 22) + 25)
+        .attr('dy', d => (d.isRoot ? 32 : 26) + 29)
         .attr('text-anchor', 'middle')
         .attr('fill', d => getTypeColor(d.type))
-        .attr('font-size', '8px')
+        .attr('font-size', '10px')
         .style('pointer-events', 'none').style('user-select', 'none')
         .text(d => d.type || '');
 
@@ -283,8 +283,8 @@ function updateVisuals() {
     enter.filter(d => !d.expanded && !d.isRoot)
         .append('text')
         .attr('class', 'expand-hint')
-        .attr('x', 16).attr('y', -12)
-        .attr('fill', '#ffd866').attr('font-size', '14px').attr('font-weight', '700')
+        .attr('x', 18).attr('y', -14)
+        .attr('fill', '#ffd866').attr('font-size', '16px').attr('font-weight', '700')
         .style('pointer-events', 'none')
         .text('+');
 
@@ -411,7 +411,7 @@ function highlightNode(id) {
     if (!_state) return;
     _state.nodeGroup.selectAll('g.node circle')
         .attr('stroke', d => d.id === id ? '#ffffff' : (d.isRoot ? '#c8a832' : getTypeColor(d.type)))
-        .attr('stroke-width', d => d.id === id ? 4 : (d.isRoot ? 3 : 2));
+        .attr('stroke-width', d => d.id === id ? 5 : (d.isRoot ? 3 : 2));
 }
 
 export function fitToScreen() {
@@ -445,7 +445,50 @@ export function getStats() {
     return { nodes: _state.nodesData.length, edges: _state.linksData.length };
 }
 
+let _keyHandler = null;
+
+export function registerKeyboardShortcuts(dotnetRef) {
+    if (_keyHandler) document.removeEventListener('keydown', _keyHandler);
+    _keyHandler = (e) => {
+        // Don't capture when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+
+        switch (e.key) {
+            case 'Backspace':
+                e.preventDefault();
+                dotnetRef.invokeMethodAsync('OnKeyAction', 'back');
+                break;
+            case 'f': case 'F':
+                if (!e.ctrlKey && !e.metaKey) {
+                    dotnetRef.invokeMethodAsync('OnKeyAction', 'fullscreen');
+                }
+                break;
+            case '+': case '=':
+                zoomIn();
+                break;
+            case '-':
+                zoomOut();
+                break;
+            case '0':
+                fitToScreen();
+                break;
+            case 'Escape':
+                dotnetRef.invokeMethodAsync('OnKeyAction', 'escape');
+                break;
+        }
+    };
+    document.addEventListener('keydown', _keyHandler);
+}
+
+export function unregisterKeyboardShortcuts() {
+    if (_keyHandler) {
+        document.removeEventListener('keydown', _keyHandler);
+        _keyHandler = null;
+    }
+}
+
 export function destroyGraph(containerId) {
+    unregisterKeyboardShortcuts();
     const container = document.getElementById(containerId);
     if (container) {
         while (container.firstChild) container.removeChild(container.firstChild);
