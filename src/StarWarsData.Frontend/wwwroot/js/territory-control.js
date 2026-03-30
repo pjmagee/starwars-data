@@ -66,7 +66,8 @@ export function initialize(containerId, overview, regionCells, factionColors, fa
                     .attr('width', cellW).attr('height', cellH)
                     .attr('fill', 'none')
                     .attr('stroke', color).attr('stroke-opacity', 0.06)
-                    .attr('stroke-width', 0.5);
+                    .attr('stroke-width', 0.5)
+                    .attr('data-region', region.name);
             }
             // Region name at centroid
             const cx = region.cells.reduce((s, c) => s + c[0], 0) / region.cells.length * cellW + cellW / 2;
@@ -144,29 +145,23 @@ function setupPanelHoverListeners() {
     });
 }
 
-// Lightweight highlight — just boost opacity on existing region cells, no new elements
+// Lightweight highlight — boost opacity on matching region cells via data attribute
 function softHighlightRegion(regionName) {
-    if (!_state || !_state.regionCells) return;
-    const region = _state.regionCells.find(r => r.name === regionName);
-    if (!region) return;
-
-    const { cellW, cellH, regionLayer } = _state;
-    const cellSet = new Set(region.cells.map(([c, r]) => `${c},${r}`));
-
-    // Boost region outline opacity
-    regionLayer.selectAll('rect')
+    if (!_state) return;
+    _state.regionLayer.selectAll('rect')
         .attr('stroke-opacity', function() {
-            const x = +this.getAttribute('x');
-            const y = +this.getAttribute('y');
-            const col = Math.round(x / cellW);
-            const row = Math.round(y / cellH);
-            return cellSet.has(`${col},${row}`) ? 0.5 : 0.06;
+            return this.getAttribute('data-region') === regionName ? 0.6 : 0.03;
+        })
+        .attr('stroke-width', function() {
+            return this.getAttribute('data-region') === regionName ? 2 : 0.5;
         });
 }
 
 function clearSoftHighlight() {
     if (!_state) return;
-    _state.regionLayer.selectAll('rect').attr('stroke-opacity', 0.06);
+    _state.regionLayer.selectAll('rect')
+        .attr('stroke-opacity', 0.06)
+        .attr('stroke-width', 0.5);
 }
 
 export function renderTerritoryLayer(yearData) {
