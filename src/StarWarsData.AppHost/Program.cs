@@ -42,6 +42,7 @@ apiService.WithEnvironment("MCP_MONGODB_URL", mongoMcp.GetEndpoint("mcp")).WaitF
 
 var admin = builder
     .AddProject<StarWarsData_Admin>("admin")
+    .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__HangfireEnabled", "true")
     .WithReference(mongo)
