@@ -1,17 +1,15 @@
-@page "/admin"
-@attribute [Authorize(Roles = "admin")]
-@inject IHttpClientFactory HttpClientFactory
+@page "/"
 @inject ISnackbar Snackbar
-@inject EndpointService EndpointService
+@inject NavigationManager Navigation
 
-<PageTitle>Admin</PageTitle>
+<PageTitle>Admin Dashboard</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-8">
     <OpenAiStatusBanner />
     <!-- Job Actions -->
     <MudPaper Class="pa-6 mb-6" Elevation="2">
         <MudText Typo="Typo.h5" Class="mb-4">Data Management Jobs</MudText>
-        
+
         <!-- Pages Operations -->
         <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Secondary">Pages Operations</MudText>
         <MudStack Spacing="2" Class="mb-4">
@@ -19,7 +17,7 @@
                 OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Download Pages (to starwars-raw database)
             </MudButton>
-            
+
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
                 OnClick="@(() => StartJobHandler(DeletePagesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Delete Pages Database (starwars-raw)
@@ -33,7 +31,7 @@
                 OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Create Timeline Events (from Pages to timeline DB)
             </MudButton>
-            
+
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
                 OnClick="@(() => StartJobHandler(DeleteTimelineEventsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
                 Delete Timeline Events Collections
@@ -54,7 +52,7 @@
             </MudButton>
 
             <MudButton Variant="Variant.Text" Color="Color.Info" StartIcon="@Icons.Material.Filled.Dashboard"
-                Href="/admin/graph-builder" Size="Size.Medium">
+                Href="/graph-builder" Size="Size.Medium">
                 View Graph Builder Dashboard
             </MudButton>
         </MudStack>
@@ -96,54 +94,64 @@
             </MudButton>
 
             <MudButton Variant="Variant.Text" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Dashboard"
-                Href="/admin/article-chunks" Size="Size.Medium">
+                Href="/article-chunks" Size="Size.Medium">
                 View Chunks Dashboard
             </MudButton>
         </MudStack>
-    </MudPaper><!-- Hangfire Dashboard -->
+    </MudPaper>
+
+    <!-- Hangfire Dashboard -->
     <MudPaper Class="pa-6" Elevation="2">
         <MudText Typo="Typo.h5" Class="mb-4">Job Monitoring</MudText>
         <MudText Typo="Typo.body1" Class="mb-4">
             Monitor job progress, view logs, and manage running jobs in the Hangfire Dashboard.
-        </MudText>        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Dashboard"
-            Href="@_hangfireDashboardUrl" Target="_blank" Size="Size.Large" Disabled="@(_hangfireDashboardUrl == null)">
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Dashboard"
+            Href="/hangfire" Target="_blank" Size="Size.Large">
             Open Hangfire Dashboard
         </MudButton>
     </MudPaper>
 </MudContainer>
 
-@code {    
-    // API endpoints for job creation
-    private const string SyncWookieepediaEndpoint = "admin/download/pages";
-    private const string DeletePagesEndpoint = "admin/mongo/delete-pages";
-    
-    private const string CreateTimelineEventsEndpoint = "admin/mongo/create-categorized-timeline-events";
-    private const string DeleteTimelineEventsEndpoint = "admin/mongo/delete-timeline-events";
-    
-    private const string BuildRelationshipGraphEndpoint = "admin/mongo/build-relationship-graph";
-    private const string EnsureGraphIndexesEndpoint = "admin/mongo/ensure-graph-indexes";
+@code {
+    // API endpoints for job creation (admin app hosts these controllers directly)
+    private const string SyncWookieepediaEndpoint = "api/admin/download/pages";
+    private const string DeletePagesEndpoint = "api/admin/mongo/delete-pages";
 
-    private const string InferTerritoryEndpoint = "admin/mongo/infer-territory-control";
+    private const string CreateTimelineEventsEndpoint = "api/admin/mongo/create-categorized-timeline-events";
+    private const string DeleteTimelineEventsEndpoint = "api/admin/mongo/delete-timeline-events";
 
-    private const string CreateEmbeddingsEndpoint = "admin/mongo/create-embeddings";
-    private const string EnsureChunkIndexesEndpoint = "admin/mongo/ensure-chunk-indexes";
-    private const string CreateVectorIndexEndpoint = "admin/mongo/create-index-embeddings";
-    private const string DeleteEmbeddingsEndpoint = "admin/mongo/delete-embeddings";private bool _isLoading = false;
-    private string? _hangfireDashboardUrl;
-    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
-    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+    private const string BuildRelationshipGraphEndpoint = "api/admin/mongo/build-relationship-graph";
+    private const string EnsureGraphIndexesEndpoint = "api/admin/mongo/ensure-graph-indexes";
 
-    protected override void OnInitialized()
+    private const string InferTerritoryEndpoint = "api/admin/mongo/infer-territory-control";
+
+    private const string CreateEmbeddingsEndpoint = "api/admin/mongo/create-embeddings";
+    private const string EnsureChunkIndexesEndpoint = "api/admin/mongo/ensure-chunk-indexes";
+    private const string CreateVectorIndexEndpoint = "api/admin/mongo/create-index-embeddings";
+    private const string DeleteEmbeddingsEndpoint = "api/admin/mongo/delete-embeddings";
+
+    private bool _isLoading = false;
+    private HttpClient? _http;
+
+    private HttpClient Http
     {
-        _hangfireDashboardUrl = EndpointService.GetHangfireDashboardUrl();
+        get
+        {
+            if (_http == null)
+            {
+                _http = new HttpClient { BaseAddress = new Uri(Navigation.BaseUri) };
+            }
+            return _http;
+        }
     }
-    
+
     private async Task StartJobHandler(string endpoint)
     {
         try
         {
             _isLoading = true;
-            var response = await Http.PostAsync($"api/{endpoint}", null);
+            var response = await Http.PostAsync(endpoint, null);
             if (response.IsSuccessStatusCode)
             {
                 Snackbar.Add("Job started successfully! Check Hangfire dashboard for status.", Severity.Success);

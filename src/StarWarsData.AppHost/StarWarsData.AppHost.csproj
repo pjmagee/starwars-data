@@ -15,6 +15,7 @@
     <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StarWarsData.Admin\StarWarsData.Admin.csproj" />
     <ProjectReference Include="..\StarWarsData.ApiService\StarWarsData.ApiService.csproj" />
     <ProjectReference Include="..\StarWarsData.Frontend\StarWarsData.Frontend.csproj" />
   </ItemGroup>

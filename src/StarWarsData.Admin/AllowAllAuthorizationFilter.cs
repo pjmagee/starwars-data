@@ -1,12 +1,12 @@
 using Hangfire.Dashboard;
 
-namespace StarWarsData.ApiService;
+namespace StarWarsData.Admin;
 
 public class AllowAllAuthorizationFilter : IDashboardAuthorizationFilter
 {
     public bool Authorize(DashboardContext context)
     {
-        // Allow all requests for development
+        // Admin app is internal-only, network-isolated — no auth needed
         return true;
     }
 }

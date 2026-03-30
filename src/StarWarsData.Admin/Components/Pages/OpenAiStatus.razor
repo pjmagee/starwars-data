@@ -1,7 +1,6 @@
-@page "/admin/openai-status"
+@page "/openai-status"
 @rendermode InteractiveServer
-@using StarWarsData.Frontend.Models
-@inject IHttpClientFactory HttpClientFactory
+@inject OpenAiStatusService StatusService
 @implements IDisposable
 
 <PageTitle>OpenAI Status</PageTitle>
@@ -151,22 +150,20 @@ else
 @code {
     OpenAiHealthReport? _report;
     System.Timers.Timer? _timer;
-    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await LoadStatus();
+        LoadStatus();
         _timer = new System.Timers.Timer(15_000);
-        _timer.Elapsed += async (_, _) => await InvokeAsync(LoadStatus);
+        _timer.Elapsed += (_, _) => InvokeAsync(() => { LoadStatus(); StateHasChanged(); });
         _timer.Start();
     }
 
-    async Task LoadStatus()
+    void LoadStatus()
     {
         try
         {
-            _report = await Http.GetFromJsonAsync<OpenAiHealthReport>("api/admin/openai/status");
-            StateHasChanged();
+            _report = StatusService.GetHealthReport();
         }
         catch { }
     }

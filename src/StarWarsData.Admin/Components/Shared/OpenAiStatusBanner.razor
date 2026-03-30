@@ -1,5 +1,4 @@
-@using StarWarsData.Frontend.Models
-@inject IHttpClientFactory HttpClientFactory
+@inject OpenAiStatusService StatusService
 @implements IDisposable
 
 @if (_report != null && _report.Status != HealthStatus.Healthy
@@ -17,7 +16,7 @@
                 <MudText Typo="Typo.caption">(@_report.ErrorsLastHour errors in last hour)</MudText>
             }
             <MudSpacer />
-            <MudButton Variant="Variant.Text" Size="Size.Small" Href="/admin/openai-status"
+            <MudButton Variant="Variant.Text" Size="Size.Small" Href="/openai-status"
                        Style="color: inherit; text-decoration: underline;">
                 View Details
             </MudButton>
@@ -29,22 +28,20 @@
     OpenAiHealthReport? _report;
     bool _dismissed;
     System.Timers.Timer? _timer;
-    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await LoadStatus();
+        LoadStatus();
         _timer = new System.Timers.Timer(30_000);
-        _timer.Elapsed += async (_, _) => await InvokeAsync(LoadStatus);
+        _timer.Elapsed += (_, _) => InvokeAsync(() => { LoadStatus(); StateHasChanged(); });
         _timer.Start();
     }
 
-    async Task LoadStatus()
+    void LoadStatus()
     {
         try
         {
-            _report = await Http.GetFromJsonAsync<OpenAiHealthReport>("api/admin/openai/status");
-            StateHasChanged();
+            _report = StatusService.GetHealthReport();
         }
         catch { }
     }

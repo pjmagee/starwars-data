@@ -40,14 +40,4 @@
             <MudNavLink Href="/profile" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Profile</MudNavLink>
         </Authorized>
     </AuthorizeView>
-    <AuthorizeView Roles="admin">
-        <Authorized>
-            <MudDivider Class="my-2" />
-            <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">System</MudText>
-            <MudNavLink Href="/admin" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin</MudNavLink>
-            <MudNavLink Href="/admin/graph-builder" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Hub">Graph Builder</MudNavLink>
-            <MudNavLink Href="/admin/article-chunks" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Psychology">Article Chunks</MudNavLink>
-            <MudNavLink Href="/admin/openai-status" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.MonitorHeart">OpenAI Status</MudNavLink>
-        </Authorized>
-    </AuthorizeView>
 </MudNavMenu>

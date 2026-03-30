@@ -2,7 +2,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
 
-namespace StarWarsData.ApiService.Controllers;
+namespace StarWarsData.Admin.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

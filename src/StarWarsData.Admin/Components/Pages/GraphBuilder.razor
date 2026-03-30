@@ -1,8 +1,6 @@
-@page "/admin/graph-builder"
-@attribute [Authorize(Roles = "admin")]
-@inject IHttpClientFactory HttpClientFactory
+@page "/graph-builder"
 @inject ISnackbar Snackbar
-@inject EndpointService EndpointService
+@inject NavigationManager Navigation
 @implements IDisposable
 
 <PageTitle>Relationship Graph Builder</PageTitle>
@@ -361,7 +359,18 @@
     private List<string> _priorityCategories = [];
     private bool _priorityDirty;
 
-    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+    private HttpClient? _http;
+    private HttpClient Api
+    {
+        get
+        {
+            if (_http == null)
+            {
+                _http = new HttpClient { BaseAddress = new Uri(Navigation.BaseUri) };
+            }
+            return _http;
+        }
+    }
 
     private Func<GraphBatchSummary, bool> _batchQuickFilter => b =>
         string.IsNullOrWhiteSpace(_batchSearchString)
