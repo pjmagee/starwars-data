@@ -493,7 +493,7 @@
             if (!string.IsNullOrEmpty(labelsQs))
                 labelsUrl += $"?{labelsQs}";
             _availableLabels = await Api.GetFromJsonAsync<List<string>>(labelsUrl);
-            _selectedLabels.Clear();
+            _selectedLabels = new HashSet<string>(_availableLabels ?? []);
         }
         catch (Exception ex)
         {
@@ -503,6 +503,10 @@
         {
             _loadingLabels = false;
         }
+
+        // Auto-load graph with all labels selected
+        if (_selectedLabels.Count > 0)
+            await LoadGraph();
     }
 
     private void ToggleLabel(string label)
