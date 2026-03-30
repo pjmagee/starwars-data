@@ -295,12 +295,14 @@ function updateVisuals() {
 }
 
 /**
- * Expand a node in-place: merge new nodes/edges into the existing graph.
+ * Expand a node in-place: replace the current view with this node's relationships.
+ * Hides nodes not directly connected to the expanded node for a clean view.
  */
 export function expandNode(data) {
     if (!_state) return;
     const { nodeMap, edgeSet, nodesData, linksData, nodeGroup } = _state;
 
+    // Add new data
     for (const n of data.nodes) {
         if (!nodeMap.has(n.id)) {
             const node = { ...n, isRoot: false, expanded: false };
@@ -323,12 +325,86 @@ export function expandNode(data) {
     const expandedNode = nodeMap.get(data.rootId);
     if (expandedNode) {
         expandedNode.expanded = true;
+        expandedNode.isRoot = true;
         nodeGroup.selectAll('g.node')
             .filter(d => d.id === data.rootId)
             .selectAll('.expand-hint').remove();
     }
 
+    // Focus: determine which nodes are relevant to the expanded node
+    const focusId = data.rootId;
+    const visibleIds = new Set([focusId]);
+
+    // Include all nodes directly connected to the focus node
+    for (const link of linksData) {
+        const srcId = link.source.id ?? link.source;
+        const tgtId = link.target.id ?? link.target;
+        if (srcId === focusId) visibleIds.add(tgtId);
+        if (tgtId === focusId) visibleIds.add(srcId);
+    }
+
+    // Unmark old root
+    for (const n of nodesData) {
+        if (n.id !== focusId) n.isRoot = false;
+    }
+
+    // Hide/show nodes and links
+    _state.focusSet = visibleIds;
+    applyFocus();
     updateVisuals();
+
+    // Center on the focus node after a short delay
+    setTimeout(() => {
+        const focusNode = nodeMap.get(focusId);
+        if (focusNode && focusNode.x != null) {
+            const { svg, zoomBehavior, width, height } = _state;
+            svg.transition().duration(500)
+                .call(zoomBehavior.transform, d3.zoomIdentity
+                    .translate(width / 2, height / 2)
+                    .scale(1.2)
+                    .translate(-(focusNode.x || 0), -(focusNode.y || 0)));
+        }
+    }, 300);
+}
+
+/**
+ * Show all nodes (remove focus filter).
+ */
+export function showAll() {
+    if (!_state) return;
+    _state.focusSet = null;
+    applyFocus();
+}
+
+function applyFocus() {
+    if (!_state) return;
+    const { nodeGroup, linkGroup, focusSet } = _state;
+
+    if (!focusSet) {
+        // Show everything
+        nodeGroup.selectAll('g.node').style('display', null).style('opacity', 1);
+        linkGroup.selectAll('line').style('display', null).style('opacity', 0.6);
+        linkGroup.selectAll('text').style('display', null);
+        return;
+    }
+
+    nodeGroup.selectAll('g.node')
+        .style('display', d => focusSet.has(d.id) ? null : 'none')
+        .style('opacity', d => focusSet.has(d.id) ? 1 : 0);
+
+    linkGroup.selectAll('line')
+        .style('display', d => {
+            const srcId = d.source.id ?? d.source;
+            const tgtId = d.target.id ?? d.target;
+            return focusSet.has(srcId) && focusSet.has(tgtId) ? null : 'none';
+        });
+
+    linkGroup.selectAll('text')
+        .style('display', d => {
+            const srcId = d.source.id ?? d.source;
+            const tgtId = d.target.id ?? d.target;
+            return focusSet.has(srcId) && focusSet.has(tgtId) ? null : 'none';
+        });
 }
 
 function highlightNode(id) {
