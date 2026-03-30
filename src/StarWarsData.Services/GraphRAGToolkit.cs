@@ -18,8 +18,7 @@ namespace StarWarsData.Services;
 public class GraphRAGToolkit
 {
     readonly IMongoCollection<RelationshipEdge> _edges;
-    readonly IMongoCollection<RelationshipCrawlState> _crawlState;
-    readonly IMongoCollection<RelationshipLabel> _labels;
+    readonly IMongoCollection<GraphNode> _nodes;
     readonly IMongoCollection<BsonDocument> _chunksRaw;
     readonly IEmbeddingGenerator<string, Embedding<float>> _embedder;
 
@@ -31,56 +30,56 @@ public class GraphRAGToolkit
     {
         var db = mongoClient.GetDatabase(databaseName);
         _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
-        _crawlState = db.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
-        _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
+        _nodes = db.GetCollection<GraphNode>(Collections.KgNodes);
         _chunksRaw = db.GetCollection<BsonDocument>(Collections.SearchChunks);
         _embedder = embedder;
     }
 
     [Description(
-        "Search the knowledge graph for entities by name. Returns entities that have been processed "
-            + "and have relationship data. Use this to resolve entity names to PageIds before calling "
-            + "other graph tools. If an entity is not found here, it may not have been processed yet — "
-            + "fall back to search_pages_by_name."
+        "Search the knowledge graph for entities by name. Returns entities with their type, "
+            + "properties, and temporal lifecycle. Use this to resolve entity names to PageIds before "
+            + "calling other graph tools."
     )]
     public async Task<string> SearchGraphEntities(
         [Description("Entity name to search for (case-insensitive partial match)")] string query,
-        [Description("Optional entity type filter (e.g. Character, Organization, Planet)")]
+        [Description("Optional entity type filter (e.g. Character, Organization, CelestialBody)")]
             string? type = null,
         [Description("Optional continuity filter: Canon, Legends, or omit for all")]
             string? continuity = null,
         [Description("Max results to return (default 10)")] int limit = 10
     )
     {
-        var filters = new List<FilterDefinition<RelationshipCrawlState>>
+        var filters = new List<FilterDefinition<GraphNode>>
         {
-            Builders<RelationshipCrawlState>.Filter.Eq(s => s.Status, CrawlStatus.Completed),
-            Builders<RelationshipCrawlState>.Filter.Regex(
-                s => s.Name,
+            Builders<GraphNode>.Filter.Regex(
+                n => n.Name,
                 new BsonRegularExpression(query, "i")
             ),
         };
 
         if (!string.IsNullOrWhiteSpace(type))
-            filters.Add(Builders<RelationshipCrawlState>.Filter.Eq(s => s.Type, type));
+            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
 
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            filters.Add(Builders<RelationshipCrawlState>.Filter.Eq(s => s.Continuity, cont));
+            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
-        var results = await _crawlState
-            .Find(Builders<RelationshipCrawlState>.Filter.And(filters))
-            .SortBy(s => s.Name)
+        var results = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(filters))
+            .SortBy(n => n.Name)
             .Limit(Math.Min(limit, 20))
             .ToListAsync();
 
         return JsonSerializer.Serialize(
-            results.Select(s => new
+            results.Select(n => new
             {
-                pageId = s.PageId,
-                name = s.Name,
-                type = s.Type,
-                continuity = s.Continuity.ToString(),
-                edgeCount = s.EdgesExtracted,
+                pageId = n.PageId,
+                name = n.Name,
+                type = n.Type,
+                continuity = n.Continuity.ToString(),
+                imageUrl = n.ImageUrl,
+                wikiUrl = n.WikiUrl,
+                startYear = n.StartYear,
+                endYear = n.EndYear,
             })
         );
     }
@@ -196,24 +195,12 @@ public class GraphRAGToolkit
         var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
         var results = await edgesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync();
 
-        // Enrich with label descriptions from the registry
-        var labelNames = results.Select(d => d["_id"].AsString).ToList();
-        var labelDocs = await _labels
-            .Find(Builders<RelationshipLabel>.Filter.In(l => l.Label, labelNames))
-            .ToListAsync();
-        var labelDescriptions = labelDocs.ToDictionary(l => l.Label, l => l.Description);
-
         return JsonSerializer.Serialize(
-            results.Select(d =>
+            results.Select(d => new
             {
-                var label = d["_id"].AsString;
-                return new
-                {
-                    label,
-                    count = d["count"].AsInt32,
-                    avgWeight = Math.Round(d["avgWeight"].AsDouble, 2),
-                    description = labelDescriptions.GetValueOrDefault(label, ""),
-                };
+                label = d["_id"].AsString,
+                count = d["count"].AsInt32,
+                avgWeight = Math.Round(d["avgWeight"].AsDouble, 2),
             })
         );
     }
