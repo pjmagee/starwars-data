@@ -7,10 +7,9 @@ using StarWarsData.Models.Entities;
 namespace StarWarsData.Services;
 
 /// <summary>
-/// ETL Phase 8: Infers galactic territory control from the temporal knowledge graph.
-/// Uses kg.nodes (Government lifecycles) + kg.edges (affiliated_with, in_region)
-/// to determine which faction controls which galactic region at each point in time.
-/// No OpenAI calls — pure graph aggregation.
+/// ETL Phase 8: Pre-computes complete territory year documents from the temporal knowledge graph.
+/// Each year document contains everything the frontend needs — zero dynamic queries at request time.
+/// Uses kg.nodes (Government lifecycles, Battle events) + kg.edges (affiliated_with, in_region).
 /// </summary>
 public class TerritoryInferenceService(
     IMongoClient mongoClient,
@@ -23,9 +22,12 @@ public class TerritoryInferenceService(
         .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
     readonly IMongoCollection<TerritorySnapshot> _snapshots = mongoClient
         .GetDatabase(settings.Value.DatabaseName).GetCollection<TerritorySnapshot>(Collections.TerritorySnapshots);
+    readonly IMongoCollection<TerritoryYearDocument> _yearDocs = mongoClient
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<TerritoryYearDocument>(Collections.TerritoryYears);
+    readonly IMongoCollection<Page> _pages = mongoClient
+        .GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
     readonly IMongoDatabase _db = mongoClient.GetDatabase(settings.Value.DatabaseName);
 
-    // Display colors for well-known factions
     static readonly Dictionary<string, string> FactionColors = new(StringComparer.OrdinalIgnoreCase)
     {
         ["Galactic Republic"] = "#3b82f6",
@@ -54,22 +56,22 @@ public class TerritoryInferenceService(
         "Hutt Space", "Unknown Regions", "Wild Space",
     ];
 
+    static readonly string[] EventTypes = ["Battle", "War", "Campaign", "Government", "Treaty", "Event"];
+
     public async Task InferTerritoryAsync(CancellationToken ct = default)
     {
-        logger.LogInformation("Territory inference: starting (knowledge graph)...");
+        logger.LogInformation("Territory inference: starting...");
 
-        // Step 1: Load Canon government nodes with temporal data
+        // ── Step 1: Load data from knowledge graph ──
+
         var governments = await _nodes
             .Find(Builders<GraphNode>.Filter.And(
                 Builders<GraphNode>.Filter.Eq(n => n.Type, "Government"),
                 Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon)))
             .ToListAsync(ct);
-
         var govWithDates = governments.Where(g => g.StartYear.HasValue).ToList();
-        logger.LogInformation("Territory inference: {Total} Canon governments, {WithDates} with temporal data",
-            governments.Count, govWithDates.Count);
 
-        // Step 2: Build planet → region lookup from in_region edges
+        // Planet → region from in_region edges
         var planetToRegion = new Dictionary<int, string>();
         var regionEdges = await _edges
             .Find(Builders<RelationshipEdge>.Filter.And(
@@ -77,87 +79,129 @@ public class TerritoryInferenceService(
                 Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
             .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
             .ToListAsync(ct);
-
         foreach (var edge in regionEdges)
         {
-            var fromId = edge["fromId"].AsInt32;
             var region = NormaliseRegion(edge["toName"].AsString);
-            if (region is not null)
-                planetToRegion.TryAdd(fromId, region);
+            if (region is not null) planetToRegion.TryAdd(edge["fromId"].AsInt32, region);
         }
-        logger.LogInformation("Territory inference: {Count} planets mapped to regions", planetToRegion.Count);
 
-        // Step 3: Build faction → planets per region from affiliated_with edges
+        // Faction → planets per region from affiliated_with edges
         var factionRegionPlanets = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase);
         var affiliationEdges = await _edges
             .Find(Builders<RelationshipEdge>.Filter.And(
                 Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "affiliated_with"),
                 Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
             .ToListAsync(ct);
-
         foreach (var edge in affiliationEdges)
         {
-            var planetId = edge.FromId;
-            var faction = edge.ToName;
-            if (!planetToRegion.TryGetValue(planetId, out var region)) continue;
-
-            if (!factionRegionPlanets.TryGetValue(faction, out var regionCounts))
-            {
-                regionCounts = new Dictionary<string, int>();
-                factionRegionPlanets[faction] = regionCounts;
-            }
+            if (!planetToRegion.TryGetValue(edge.FromId, out var region)) continue;
+            if (!factionRegionPlanets.TryGetValue(edge.ToName, out var regionCounts))
+                factionRegionPlanets[edge.ToName] = regionCounts = new();
             regionCounts[region] = regionCounts.GetValueOrDefault(region) + 1;
         }
 
-        logger.LogInformation("Territory inference: {Count} factions with region-mapped affiliations",
-            factionRegionPlanets.Count);
+        logger.LogInformation("Territory inference: {Govs} govs, {Planets} planet-regions, {Factions} factions",
+            govWithDates.Count, planetToRegion.Count, factionRegionPlanets.Count);
 
-        // Step 4: Determine time periods from government lifecycles + battle dates
+        // ── Step 2: Load ALL event nodes (for key events per year) ──
+
+        var eventNodes = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(
+                Builders<GraphNode>.Filter.In(n => n.Type, EventTypes),
+                Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon),
+                Builders<GraphNode>.Filter.Ne(n => n.StartYear, null)))
+            .ToListAsync(ct);
+
+        // Group events by year for fast lookup
+        var eventsByYear = eventNodes
+            .GroupBy(n => n.StartYear!.Value)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        logger.LogInformation("Territory inference: {Count} Canon event nodes with dates", eventNodes.Count);
+
+        // ── Step 3: Load eras from Era nodes ──
+
+        var eraNodes = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(
+                Builders<GraphNode>.Filter.Eq(n => n.Type, "Era"),
+                Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon),
+                Builders<GraphNode>.Filter.Ne(n => n.StartYear, null)))
+            .ToListAsync(ct);
+
+        var eras = eraNodes
+            .Where(e => e.StartYear.HasValue)
+            .Select(e => new TerritoryEra
+            {
+                Name = e.Name,
+                StartYear = e.StartYear!.Value,
+                EndYear = e.EndYear ?? e.StartYear!.Value,
+            })
+            .OrderBy(e => e.StartYear)
+            .ToList();
+
+        // ── Step 4: Collect event years ──
+
         var eventYears = new SortedSet<int>();
         foreach (var gov in govWithDates)
         {
             if (gov.StartYear.HasValue) eventYears.Add(gov.StartYear.Value);
             if (gov.EndYear.HasValue) eventYears.Add(gov.EndYear.Value);
         }
+        foreach (var yr in eventsByYear.Keys) eventYears.Add(yr);
 
-        // Also add battle years for more granularity
-        var battleNodes = await _nodes
-            .Find(Builders<GraphNode>.Filter.And(
-                Builders<GraphNode>.Filter.Eq(n => n.Type, "Battle"),
-                Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon),
-                Builders<GraphNode>.Filter.Ne(n => n.StartYear, null)))
-            .Project(Builders<GraphNode>.Projection.Include(n => n.StartYear))
+        if (eventYears.Count == 0) { logger.LogWarning("No event years"); return; }
+        logger.LogInformation("Territory inference: {Count} event years", eventYears.Count);
+
+        // ── Step 5: Build faction metadata (with wiki URLs and icons from Pages) ──
+
+        var allFactionNames = factionRegionPlanets.Keys.ToList();
+        var factionPages = await _pages
+            .Find(Builders<Page>.Filter.And(
+                Builders<Page>.Filter.In(p => p.Title, allFactionNames),
+                Builders<Page>.Filter.Eq(p => p.Continuity, Continuity.Canon)))
             .ToListAsync(ct);
+        var factionPageMap = factionPages.ToDictionary(p => p.Title, p => p, StringComparer.OrdinalIgnoreCase);
 
-        foreach (var b in battleNodes)
-        {
-            var yr = b.Contains("startYear") && !b["startYear"].IsBsonNull ? b["startYear"].AsInt32 : (int?)null;
-            if (yr.HasValue) eventYears.Add(yr.Value);
-        }
+        var factionInfoList = allFactionNames
+            .Where(f => factionRegionPlanets[f].Values.Sum() >= 3) // at least 3 affiliated planets
+            .Select(f =>
+            {
+                factionPageMap.TryGetValue(f, out var page);
+                return new TerritoryFactionInfo
+                {
+                    Name = f,
+                    Color = GetColor(f),
+                    WikiUrl = page?.WikiUrl,
+                    IconUrl = page?.Infobox?.ImageUrl,
+                };
+            })
+            .OrderByDescending(f => factionRegionPlanets.GetValueOrDefault(f.Name)?.Values.Sum() ?? 0)
+            .ToList();
 
-        logger.LogInformation("Territory inference: {Count} distinct event years", eventYears.Count);
+        // ── Step 6: Build year documents ──
 
-        if (eventYears.Count == 0)
-        {
-            logger.LogWarning("Territory inference: no event years found");
-            return;
-        }
-
-        // Step 5: Build snapshots for each event year
         var snapshots = new List<TerritorySnapshot>();
+        var yearDocs = new List<TerritoryYearDocument>();
 
-        // Build a lookup of government node PageIds for cross-referencing
-        var govByName = govWithDates.ToDictionary(g => g.Name, g => g, StringComparer.OrdinalIgnoreCase);
+        // Took_place_at edge lookup for event location resolution
+        var tookPlaceEdges = await _edges
+            .Find(Builders<RelationshipEdge>.Filter.And(
+                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "took_place_at"),
+                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
+            .ToListAsync(ct);
+        var eventPlaceLookup = tookPlaceEdges
+            .GroupBy(e => e.FromId)
+            .ToDictionary(g => g.Key, g => g.First());
 
         foreach (var year in eventYears)
         {
-            // Find active governments at this year
             var activeGovs = govWithDates
                 .Where(g => g.StartYear <= year && (!g.EndYear.HasValue || g.EndYear >= year))
                 .Select(g => g.Name)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            // For each region, find the dominant active faction by affiliation count
+            // Region control
+            var regionControls = new List<TerritoryRegionControl>();
             foreach (var region in GalacticRegions)
             {
                 var regionFactions = factionRegionPlanets
@@ -169,71 +213,124 @@ public class TerritoryInferenceService(
 
                 if (regionFactions.Count == 0)
                 {
-                    // No affiliation data — use default government for this era
-                    var defaultFaction = GetDefaultFaction(year);
-                    if (defaultFaction is not null && activeGovs.Contains(defaultFaction))
+                    var def = GetDefaultFaction(year);
+                    if (def is not null && activeGovs.Contains(def))
                     {
-                        snapshots.Add(new TerritorySnapshot
+                        regionControls.Add(new TerritoryRegionControl
                         {
-                            Year = year, Region = region,
-                            Faction = defaultFaction, Control = 1.0,
-                            Color = GetColor(defaultFaction),
+                            Region = region,
+                            Factions = [new() { Faction = def, Control = 1.0, Color = GetColor(def) }]
                         });
+                        snapshots.Add(new() { Year = year, Region = region, Faction = def, Control = 1.0, Color = GetColor(def) });
                     }
                     continue;
                 }
 
+                var total = regionFactions.Sum(x => x.Count);
                 var dominant = regionFactions[0];
-                var totalCount = regionFactions.Sum(x => x.Count);
-                var control = (double)dominant.Count / totalCount;
+                var control = (double)dominant.Count / total;
                 var contested = regionFactions.Count > 1 && control < 0.7;
 
-                snapshots.Add(new TerritorySnapshot
+                var factions = new List<TerritoryFactionControl>
                 {
-                    Year = year, Region = region,
-                    Faction = dominant.Faction,
-                    Control = Math.Max(0.3, control),
-                    Contested = contested,
-                    Color = GetColor(dominant.Faction),
-                });
+                    new() { Faction = dominant.Faction, Control = Math.Max(0.3, control), Contested = contested, Color = GetColor(dominant.Faction) }
+                };
+                snapshots.Add(new() { Year = year, Region = region, Faction = dominant.Faction, Control = Math.Max(0.3, control), Contested = contested, Color = GetColor(dominant.Faction) });
 
-                // Secondary factions for contested regions
                 if (contested)
                 {
-                    foreach (var (faction, count) in regionFactions.Skip(1))
+                    foreach (var (f, c) in regionFactions.Skip(1))
                     {
-                        snapshots.Add(new TerritorySnapshot
-                        {
-                            Year = year, Region = region,
-                            Faction = faction,
-                            Control = Math.Max(0.1, (double)count / totalCount),
-                            Contested = true,
-                            Color = GetColor(faction),
-                        });
+                        var oc = Math.Max(0.1, (double)c / total);
+                        factions.Add(new() { Faction = f, Control = oc, Contested = true, Color = GetColor(f) });
+                        snapshots.Add(new() { Year = year, Region = region, Faction = f, Control = oc, Contested = true, Color = GetColor(f) });
                     }
                 }
+
+                regionControls.Add(new() { Region = region, Factions = factions });
             }
+
+            // Key events from kg.nodes at this year
+            var keyEvents = new List<TerritoryKeyEvent>();
+            if (eventsByYear.TryGetValue(year, out var yearEvents))
+            {
+                foreach (var evt in yearEvents.Take(30))
+                {
+                    string? place = null, region = null;
+                    if (eventPlaceLookup.TryGetValue(evt.PageId, out var placeEdge))
+                    {
+                        place = placeEdge.ToName;
+                        if (placeEdge.ToId > 0 && planetToRegion.TryGetValue(placeEdge.ToId, out var pr))
+                            region = pr;
+                    }
+
+                    var outcome = evt.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
+
+                    keyEvents.Add(new TerritoryKeyEvent
+                    {
+                        Year = year,
+                        Title = evt.Name,
+                        Category = evt.Type,
+                        WikiUrl = evt.WikiUrl,
+                        Place = place,
+                        Region = region,
+                        Description = outcome,
+                    });
+                }
+            }
+
+            // Era for this year
+            var era = eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
+
+            yearDocs.Add(new TerritoryYearDocument
+            {
+                Year = year,
+                YearDisplay = year <= 0 ? $"{Math.Abs(year)} BBY" : $"{year} ABY",
+                Era = era?.Name,
+                EraDescription = era?.Description,
+                Regions = regionControls,
+                KeyEvents = keyEvents,
+            });
         }
 
-        // Step 6: Write to MongoDB
+        // ── Step 7: Build overview document ──
+
+        var overview = new TerritoryOverviewDocument
+        {
+            MinYear = eventYears.Min,
+            MaxYear = eventYears.Max,
+            AvailableYears = eventYears.ToList(),
+            Factions = factionInfoList,
+            Eras = eras,
+            Regions = GalacticRegions.ToList(),
+        };
+
+        // ── Step 8: Write to MongoDB ──
+
         await _snapshots.DeleteManyAsync(FilterDefinition<TerritorySnapshot>.Empty, ct);
+        await _yearDocs.DeleteManyAsync(FilterDefinition<TerritoryYearDocument>.Empty, ct);
+
         if (snapshots.Count > 0)
             await _snapshots.InsertManyAsync(snapshots, cancellationToken: ct);
+        if (yearDocs.Count > 0)
+            await _yearDocs.InsertManyAsync(yearDocs, cancellationToken: ct);
 
-        await _snapshots.Indexes.CreateManyAsync([
-            new CreateIndexModel<TerritorySnapshot>(
-                Builders<TerritorySnapshot>.IndexKeys.Ascending(s => s.Year)),
-            new CreateIndexModel<TerritorySnapshot>(
-                Builders<TerritorySnapshot>.IndexKeys.Ascending(s => s.Year).Ascending(s => s.Region)),
-        ], ct);
+        // Store overview as a special document in the years collection
+        var overviewColl = _db.GetCollection<TerritoryOverviewDocument>(Collections.TerritoryYears);
+        await overviewColl.ReplaceOneAsync(
+            Builders<TerritoryOverviewDocument>.Filter.Eq(o => o.Id, "overview"),
+            overview, new ReplaceOptions { IsUpsert = true }, ct);
+
+        await _yearDocs.Indexes.CreateOneAsync(
+            new CreateIndexModel<TerritoryYearDocument>(
+                Builders<TerritoryYearDocument>.IndexKeys.Ascending(d => d.Year)),
+            cancellationToken: ct);
 
         logger.LogInformation(
-            "Territory inference: generated {Count} snapshots for {Years} event years across {Factions} factions",
-            snapshots.Count, eventYears.Count,
-            snapshots.Select(s => s.Faction).Distinct().Count());
+            "Territory inference: {Snapshots} snapshots, {Years} year docs, {Factions} factions, overview stored",
+            snapshots.Count, yearDocs.Count, factionInfoList.Count);
     }
 
-    /// <summary>Default galactic government for eras without affiliation data.</summary>
     static string? GetDefaultFaction(int year) => year switch
     {
         <= -19 => "Galactic Republic",
@@ -253,7 +350,7 @@ public class TerritoryInferenceService(
         if (lower.Contains("inner rim")) return "Inner Rim";
         if (lower.Contains("core world")) return "Core Worlds";
         if (lower.Contains("deep core")) return "Deep Core";
-        if (lower.Contains("colonies") || lower == "the interior") return "Colonies";
+        if (lower.Contains("colonies")) return "Colonies";
         if (lower.Contains("expansion")) return "Expansion Region";
         if (lower.Contains("hutt space")) return "Hutt Space";
         if (lower.Contains("unknown region")) return "Unknown Regions";
@@ -264,7 +361,6 @@ public class TerritoryInferenceService(
     static string GetColor(string faction)
     {
         if (FactionColors.TryGetValue(faction, out var color)) return color;
-        var hash = Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase));
-        return ColorPalette[hash % ColorPalette.Length];
+        return ColorPalette[Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase)) % ColorPalette.Length];
     }
 }

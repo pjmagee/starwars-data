@@ -96,6 +96,7 @@ public static class Collections
 
     // ── Territory control ──
     public const string TerritorySnapshots = "territory.snapshots";
+    public const string TerritoryYears = "territory.years";
 
     // ── Admin ──
     public const string JobToggles = "admin.job_toggles";
