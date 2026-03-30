@@ -116,19 +116,19 @@ export function initialize(containerId, overview, dotNetRef) {
     // Column labels
     for (let c = 0; c < cols; c++) {
         gridLayer.append('text')
-            .attr('x', c * cellW + cellW / 2).attr('y', -6)
+            .attr('x', c * cellW + cellW / 2).attr('y', -8)
             .attr('text-anchor', 'middle')
-            .attr('fill', 'rgba(255,255,255,0.25)')
-            .attr('font-size', '10px')
+            .attr('fill', 'rgba(255,255,255,0.35)')
+            .attr('font-size', '13px').attr('font-weight', '600')
             .text(String.fromCharCode(65 + c));
     }
     // Row labels
     for (let r = 0; r < rows; r++) {
         gridLayer.append('text')
-            .attr('x', -8).attr('y', r * cellH + cellH / 2 + 4)
+            .attr('x', -12).attr('y', r * cellH + cellH / 2 + 4)
             .attr('text-anchor', 'end')
-            .attr('fill', 'rgba(255,255,255,0.25)')
-            .attr('font-size', '10px')
+            .attr('fill', 'rgba(255,255,255,0.35)')
+            .attr('font-size', '13px').attr('font-weight', '600')
             .text(r + 1);
     }
 

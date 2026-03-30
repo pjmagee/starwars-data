@@ -104,15 +104,15 @@ export function initialize(containerId, overview, dotNetRef) {
     }
     for (let c = 0; c < cols; c++) {
         gridLayer.append('text')
-            .attr('x', c * cellW + cellW / 2).attr('y', -6)
-            .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.25)')
-            .attr('font-size', '9px').text(String.fromCharCode(65 + c));
+            .attr('x', c * cellW + cellW / 2).attr('y', -8)
+            .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.35)')
+            .attr('font-size', '13px').attr('font-weight', '600').text(String.fromCharCode(65 + c));
     }
     for (let r = 0; r < rows; r++) {
         gridLayer.append('text')
-            .attr('x', -10).attr('y', r * cellH + cellH / 2 + 3)
-            .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.25)')
-            .attr('font-size', '9px').text(r + 1);
+            .attr('x', -14).attr('y', r * cellH + cellH / 2 + 4)
+            .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.35)')
+            .attr('font-size', '13px').attr('font-weight', '600').text(r + 1);
     }
 
     // === REGIONS (cell-based, no overlap) ===
