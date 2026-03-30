@@ -39,12 +39,17 @@
             </MudButton>
         </MudStack>
 
-        <!-- Relationship Graph Operations -->
-        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Info">Relationship Graph Operations</MudText>
+        <!-- Knowledge Graph Operations -->
+        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Info">Knowledge Graph Operations</MudText>
         <MudStack Spacing="2" Class="mb-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.AccountTree"
+                OnClick="@(() => StartJobHandler(BuildInfoboxGraphEndpoint))" Disabled="_isLoading" Size="Size.Medium">
+                Build Infobox Graph (deterministic, no LLM)
+            </MudButton>
+
             <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Hub"
                 OnClick="@(() => StartJobHandler(BuildRelationshipGraphEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Build Relationship Graph (process next batch)
+                Submit LLM Graph Batch (OpenAI Batch API)
             </MudButton>
 
             <MudButton Variant="Variant.Outlined" Color="Color.Info" StartIcon="@Icons.Material.Filled.Storage"
@@ -166,7 +171,8 @@
     private const string CreateTimelineEventsEndpoint = "api/admin/mongo/create-categorized-timeline-events";
     private const string DeleteTimelineEventsEndpoint = "api/admin/mongo/delete-timeline-events";
 
-    private const string BuildRelationshipGraphEndpoint = "api/admin/mongo/build-relationship-graph";
+    private const string BuildInfoboxGraphEndpoint = "api/admin/mongo/build-infobox-graph";
+    private const string BuildRelationshipGraphEndpoint = "api/admin/mongo/submit-graph-batch";
     private const string EnsureGraphIndexesEndpoint = "api/admin/mongo/ensure-graph-indexes";
 
     private const string InferTerritoryEndpoint = "api/admin/mongo/infer-territory-control";
