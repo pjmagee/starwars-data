@@ -35,6 +35,28 @@ public class GraphNode
     [BsonElement("wikiUrl")]
     public string? WikiUrl { get; set; }
 
+    // ── Temporal lifecycle (optional) ──
+
+    /// <summary>Sort-key year when this entity came into existence (negative = BBY, positive = ABY).</summary>
+    [BsonElement("startYear")]
+    [BsonIgnoreIfNull]
+    public int? StartYear { get; set; }
+
+    /// <summary>Sort-key year when this entity ceased to exist.</summary>
+    [BsonElement("endYear")]
+    [BsonIgnoreIfNull]
+    public int? EndYear { get; set; }
+
+    /// <summary>Original date text from the infobox (e.g. "22 BBY", "c. 5 BBY (unofficially)").</summary>
+    [BsonElement("startDateText")]
+    [BsonIgnoreIfNull]
+    public string? StartDateText { get; set; }
+
+    /// <summary>Original date text for end/dissolution.</summary>
+    [BsonElement("endDateText")]
+    [BsonIgnoreIfNull]
+    public string? EndDateText { get; set; }
+
     /// <summary>Content hash from the Page at time of processing.</summary>
     [BsonElement("contentHash")]
     public string? ContentHash { get; set; }

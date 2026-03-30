@@ -66,4 +66,22 @@ public class RelationshipEdge
 
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    // ── Temporal bounds (optional) ──
+
+    /// <summary>
+    /// Sort-key year when this relationship began (negative = BBY, positive = ABY).
+    /// Null if unknown or the relationship has no temporal scope.
+    /// </summary>
+    [BsonElement("fromYear")]
+    [BsonIgnoreIfNull]
+    public int? FromYear { get; set; }
+
+    /// <summary>
+    /// Sort-key year when this relationship ended.
+    /// Null if still active or unknown.
+    /// </summary>
+    [BsonElement("toYear")]
+    [BsonIgnoreIfNull]
+    public int? ToYear { get; set; }
 }

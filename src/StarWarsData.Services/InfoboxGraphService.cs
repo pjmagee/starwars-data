@@ -286,6 +286,32 @@ public class InfoboxGraphService(
     };
 
     /// <summary>
+    /// Maps infobox field labels to node temporal lifecycle (startYear / endYear).
+    /// These dates are stored as node attributes, NOT as edges.
+    /// </summary>
+    static readonly Dictionary<string, string> StartDateFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Date established"] = "start",
+        ["Date founded"] = "start",
+        ["Date"] = "start",         // Battle/Duel/Mission/Event date
+        ["Beginning"] = "start",     // War start
+        ["Begin"] = "start",         // Campaign start
+        ["Born"] = "start",          // Character birth
+        ["Constructed"] = "start",   // Structure/ship built date
+        ["Founding"] = "start",
+    };
+
+    static readonly Dictionary<string, string> EndDateFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Date dissolved"] = "end",
+        ["Date fragmented"] = "end",
+        ["End"] = "end",             // War/campaign end
+        ["Died"] = "end",            // Character death
+        ["Destroyed"] = "end",
+        ["Date destroyed"] = "end",
+    };
+
+    /// <summary>
     /// Build the knowledge graph from all pages with infoboxes.
     /// Creates GraphNode documents (with properties) and RelationshipEdge documents (for links).
     /// </summary>
@@ -348,6 +374,10 @@ public class InfoboxGraphService(
                     ? infoboxDoc["Data"].AsBsonArray : new BsonArray();
 
                 var properties = new Dictionary<string, List<string>>();
+                int? startYear = null;
+                int? endYear = null;
+                string? startDateText = null;
+                string? endDateText = null;
 
                 foreach (var item in dataItems)
                 {
@@ -364,6 +394,18 @@ public class InfoboxGraphService(
                             .Select(l => l.AsBsonDocument)
                             .ToList()
                         : [];
+
+                    // Extract temporal lifecycle dates from known fields
+                    if (StartDateFields.ContainsKey(label) && values.Count > 0 && startYear is null)
+                    {
+                        startDateText = values[0];
+                        startYear = ParseSortKeyYear(values[0]);
+                    }
+                    if (EndDateFields.ContainsKey(label) && values.Count > 0 && endYear is null)
+                    {
+                        endDateText = values[0];
+                        endYear = ParseSortKeyYear(values[0]);
+                    }
 
                     // Classify: property or relationship?
                     if (AlwaysProperties.Contains(label))
@@ -450,6 +492,10 @@ public class InfoboxGraphService(
                     Properties = properties,
                     ImageUrl = imageUrl,
                     WikiUrl = wikiUrl,
+                    StartYear = startYear,
+                    EndYear = endYear,
+                    StartDateText = startDateText,
+                    EndDateText = endDateText,
                     ContentHash = contentHash,
                     ProcessedAt = DateTime.UtcNow,
                 });
@@ -525,6 +571,20 @@ public class InfoboxGraphService(
         }
 
         return lookup;
+    }
+
+    /// <summary>
+    /// Parse a date text like "22 BBY", "c. 5100 BBY", "19 BBY, Felucia" into a sort-key year.
+    /// Returns negative for BBY, positive for ABY, null if unparseable.
+    /// </summary>
+    static int? ParseSortKeyYear(string text)
+    {
+        // Match patterns like "22 BBY", "c. 5100 BBY", "19 BBY, Felucia", "5 ABY (unofficially)"
+        var match = System.Text.RegularExpressions.Regex.Match(
+            text, @"(\d[\d,]*)\s*(BBY|ABY)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        if (!match.Success) return null;
+        if (!int.TryParse(match.Groups[1].Value.Replace(",", ""), out var num)) return null;
+        return match.Groups[2].Value.Equals("BBY", StringComparison.OrdinalIgnoreCase) ? -num : num;
     }
 
     /// <summary>
