@@ -64,9 +64,10 @@ public class InfoboxGraphService(
         "Skills required",
 
         // Dates as text (stored as property, temporal edges derived separately)
+        "Born", "Died",
         "Date", "Date established", "Date dissolved", "Date reorganized",
         "Date restored", "Date fragmented", "Date founded", "Beginning", "End",
-        "Constructed", "Destroyed",
+        "Constructed", "Destroyed", "Date created", "Date destroyed", "Date engineered",
 
         // Outcomes / descriptions
         "Outcome", "Result", "Diet", "Habitat", "Atmosphere", "Terrain", "Climate",
@@ -100,8 +101,6 @@ public class InfoboxGraphService(
         ["Genetic donor(s)"] = "cloned_from",
         ["Owner(s)"] = "owned_by",
         ["Owners"] = "owned_by",
-        ["Born"] = "born_at",
-        ["Died"] = "died_at",
         ["Cybernetics"] = "has_cybernetics",
         ["Songs"] = "performs_song",
         ["Collaborations"] = "collaborates_with",
@@ -278,10 +277,6 @@ public class InfoboxGraphService(
 
         // ── Misc ──
         ["Mayor"] = "led_by",
-        ["Date created"] = "created_on",
-        ["Date destroyed"] = "destroyed_on",
-        ["Date engineered"] = "engineered_on",
-        ["Founding"] = "founded_on",
     };
 
     /// <summary>
