@@ -445,9 +445,9 @@
 
         try
         {
-            var qs = BuildQueryString(("q", value), ("collection", _selectedType));
+            var qs = BuildQueryString(("q", value));
             _searchResults = await Api.GetFromJsonAsync<List<EntitySearchDto>>(
-                $"relationships/search?{qs}");
+                $"api/RelationshipGraph/search?{qs}");
         }
         catch (Exception ex)
         {
