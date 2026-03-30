@@ -155,7 +155,8 @@ public class TimelineService
         var matchStage = new BsonDocument("$match", matchFilter);
 
         // Use the first collection as the base, $unionWith the rest
-        var baseCollectionName = collectionsToQuery[0];
+        // collectionsToQuery has bare names (e.g. "Battle"); add prefix for actual MongoDB collection
+        var baseCollectionName = Collections.TimelinePrefix + collectionsToQuery[0];
         var baseCollection = _timelineEventsDb.GetCollection<BsonDocument>(baseCollectionName);
 
         var pipeline = new List<BsonDocument>();
@@ -163,7 +164,7 @@ public class TimelineService
         // Union all other collections into the base
         for (int i = 1; i < collectionsToQuery.Count; i++)
         {
-            pipeline.Add(new BsonDocument("$unionWith", collectionsToQuery[i]));
+            pipeline.Add(new BsonDocument("$unionWith", Collections.TimelinePrefix + collectionsToQuery[i]));
         }
 
         // Match (filter)
@@ -354,8 +355,12 @@ public class TimelineService
     public async Task<List<string>> GetTimelineCategories()
     {
         var names = await _timelineEventsDb.ListCollectionNamesAsync();
-        List<string> results = await names.ToListAsync();
-        return results.OrderBy(x => x).ToList();
+        var allNames = await names.ToListAsync();
+        return allNames
+            .Where(n => n.StartsWith(Collections.TimelinePrefix))
+            .Select(n => n[Collections.TimelinePrefix.Length..])
+            .OrderBy(x => x)
+            .ToList();
     }
 
     /// <summary>
