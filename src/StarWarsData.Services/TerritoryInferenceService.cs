@@ -215,6 +215,18 @@ public class TerritoryInferenceService(
         var snapshots = new List<TerritorySnapshot>();
         var yearDocs = new List<TerritoryYearDocument>();
 
+        // has_capital edge lookup — for Government events, resolve capital → grid
+        var capitalEdges = await _edges
+            .Find(Builders<RelationshipEdge>.Filter.And(
+                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "has_capital"),
+                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
+            .ToListAsync(ct);
+        var capitalLookup = capitalEdges
+            .GroupBy(e => e.FromId)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        logger.LogInformation("Territory inference: {Count} has_capital edges for government location", capitalEdges.Count);
+
         // Took_place_at edge lookup — group ALL edges per event so we can try multiple targets
         var tookPlaceEdges = await _edges
             .Find(Builders<RelationshipEdge>.Filter.And(
@@ -306,6 +318,26 @@ public class TerritoryInferenceService(
                                     col = grid.col;
                                     row = grid.row;
                                     place = pe.ToName; // prefer the name of the one with coordinates
+                                }
+                            }
+                        }
+                    }
+
+                    // Fallback for Government events: use capital location
+                    if (col is null && evt.Type == "Government" && capitalLookup.TryGetValue(evt.PageId, out var capitals))
+                    {
+                        foreach (var cap in capitals)
+                        {
+                            if (cap.ToId > 0)
+                            {
+                                if (region is null && planetToRegion.TryGetValue(cap.ToId, out var cr))
+                                    region = cr;
+                                if (planetToGrid.TryGetValue(cap.ToId, out var cg))
+                                {
+                                    col = cg.col;
+                                    row = cg.row;
+                                    place ??= cap.ToName;
+                                    break;
                                 }
                             }
                         }
