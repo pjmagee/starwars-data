@@ -76,6 +76,19 @@ builder
     .AddScoped<MapService>()
     .AddScoped<GalaxyEventsService>()
     .AddScoped<TerritoryControlService>()
+    // CharacterTimelineService is needed for read endpoints (list/get/search)
+    // The ChatClient is only used by GenerateTimelineAsync (called from Admin app)
+    .AddSingleton<CharacterTimelineChatClient>(sp =>
+    {
+        var settingsOptions = sp.GetRequiredService<IOptions<SettingsOptions>>();
+        var openAiClient = sp.GetRequiredService<OpenAIClient>();
+        var inner = new ChatClientBuilder(
+            openAiClient.GetChatClient(settingsOptions.Value.CharacterTimelineModel).AsIChatClient()
+        ).Build();
+        return new CharacterTimelineChatClient(inner);
+    })
+    .AddScoped<CharacterTimelineService>()
+    .AddSingleton<CharacterTimelineTracker>()
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
