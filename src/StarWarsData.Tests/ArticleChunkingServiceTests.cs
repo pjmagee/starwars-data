@@ -253,7 +253,7 @@ public sealed class ArticleChunkingIntegrationTests : IAsyncLifetime
         _mongoClient.GetDatabase(TestDatabaseName).GetCollection<BsonDocument>(Collections.Pages);
 
     private IMongoCollection<ArticleChunk> Chunks =>
-        _mongoClient.GetDatabase(TestDatabaseName).GetCollection<ArticleChunk>(Collections.KgChunks);
+        _mongoClient.GetDatabase(TestDatabaseName).GetCollection<ArticleChunk>(Collections.SearchChunks);
 
     private async Task SeedPage(
         int id,

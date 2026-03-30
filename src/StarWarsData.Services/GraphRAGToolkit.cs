@@ -33,7 +33,7 @@ public class GraphRAGToolkit
         _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
         _crawlState = db.GetCollection<RelationshipCrawlState>(Collections.KgCrawlState);
         _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
-        _chunksRaw = db.GetCollection<BsonDocument>(Collections.KgChunks);
+        _chunksRaw = db.GetCollection<BsonDocument>(Collections.SearchChunks);
         _embedder = embedder;
     }
 

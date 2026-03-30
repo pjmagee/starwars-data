@@ -82,7 +82,7 @@ public static class Collections
     public const string KgCrawlState = "kg.crawl_state";
     public const string KgBatchJobs = "kg.batch_jobs";
     public const string KgLabels = "kg.labels";
-    public const string KgChunks = "kg.chunks";
+    public const string SearchChunks = "search.chunks";
 
     // Infobox-derived edges (deterministic, no LLM)
     public const string KgEdgesInfobox = "kg.edges_infobox";

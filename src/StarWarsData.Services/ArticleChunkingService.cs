@@ -44,7 +44,7 @@ public partial class ArticleChunkingService
         _logger = logger;
         var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
         _pages = db.GetCollection<BsonDocument>(Collections.Pages);
-        _chunks = db.GetCollection<ArticleChunk>(Collections.KgChunks);
+        _chunks = db.GetCollection<ArticleChunk>(Collections.SearchChunks);
         _embedder = embedder;
         _aiStatus = aiStatus;
     }
@@ -350,7 +350,7 @@ public partial class ArticleChunkingService
             new BsonDocument("$sort", new BsonDocument("pages", -1)),
         };
 
-        var chunksRaw = _chunks.Database.GetCollection<BsonDocument>(Collections.KgChunks);
+        var chunksRaw = _chunks.Database.GetCollection<BsonDocument>(Collections.SearchChunks);
         var typeResults = await chunksRaw
             .Aggregate<BsonDocument>(typePipeline, cancellationToken: ct)
             .ToListAsync(ct);

@@ -954,7 +954,7 @@ public class PageDownloader
         }
 
         // Delete article chunks for changed pages → will be re-chunked
-        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>(Collections.KgChunks);
+        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>(Collections.SearchChunks);
         var chunkDeleteResult = await chunksCollection.DeleteManyAsync(
             new MongoDB.Bson.BsonDocument("pageId",
                 new MongoDB.Bson.BsonDocument("$in",
