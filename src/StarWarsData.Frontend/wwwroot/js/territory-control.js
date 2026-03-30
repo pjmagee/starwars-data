@@ -245,7 +245,97 @@ export function renderTerritoryLayer(yearData) {
         const cx = cells.reduce((s, c) => s + c[0], 0) / cells.length * cellW + cellW / 2;
         const cy = cells.reduce((s, c) => s + c[1], 0) / cells.length * cellH + cellH / 2;
 
-        // No icons or labels on canvas — info panel handles context
+    }
+
+    // Render event markers at grid positions
+    if (yearData.keyEvents) {
+        const CATEGORY_ICONS = {
+            Battle: '\u2694',      // ⚔
+            War: '\u{1F6E1}',      // 🛡
+            Campaign: '\u{1F3AF}', // 🎯
+            Government: '\u{1F3DB}', // 🏛
+            Treaty: '\u{1F91D}',   // 🤝
+            Event: '\u2B50',       // ⭐
+        };
+        const CATEGORY_COLORS = {
+            Battle: '#ff3f5f',
+            War: '#ff4444',
+            Campaign: '#ff8844',
+            Government: '#4a86ff',
+            Treaty: '#3dcb6c',
+            Event: '#7e6fff',
+        };
+
+        // Group events by grid cell to avoid overlapping markers
+        const cellEvents = {};
+        for (const evt of yearData.keyEvents) {
+            if (evt.col == null || evt.row == null) continue;
+            const key = `${evt.col},${evt.row}`;
+            if (!cellEvents[key]) cellEvents[key] = [];
+            cellEvents[key].push(evt);
+        }
+
+        for (const [key, events] of Object.entries(cellEvents)) {
+            const [col, row] = key.split(',').map(Number);
+            const cx = col * cellW + cellW / 2;
+            const cy = row * cellH + cellH / 2;
+            const primary = events[0];
+            const markerColor = CATEGORY_COLORS[primary.category] || '#7e6fff';
+
+            // Pulsing ring
+            labelLayer.append('circle')
+                .attr('cx', cx).attr('cy', cy).attr('r', 8)
+                .attr('fill', 'none')
+                .attr('stroke', markerColor).attr('stroke-width', 2)
+                .attr('stroke-opacity', 0.8);
+
+            // Icon
+            labelLayer.append('text')
+                .attr('x', cx).attr('y', cy + 1)
+                .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+                .attr('font-size', '10px')
+                .attr('fill', '#fff')
+                .style('pointer-events', 'none')
+                .text(CATEGORY_ICONS[primary.category] || '\u2B50');
+
+            // Count badge if multiple events at same cell
+            if (events.length > 1) {
+                labelLayer.append('text')
+                    .attr('x', cx + 10).attr('y', cy - 8)
+                    .attr('text-anchor', 'middle')
+                    .attr('font-size', '8px').attr('font-weight', '700')
+                    .attr('fill', markerColor)
+                    .style('pointer-events', 'none')
+                    .text(events.length);
+            }
+
+            // Hover tooltip for the marker
+            labelLayer.append('rect')
+                .attr('x', cx - 12).attr('y', cy - 12)
+                .attr('width', 24).attr('height', 24)
+                .attr('fill', 'transparent').attr('cursor', 'pointer')
+                .on('mouseover', (event) => {
+                    let html = '';
+                    for (const e of events) {
+                        const catColor = CATEGORY_COLORS[e.category] || '#7e6fff';
+                        const titleHtml = e.wikiUrl
+                            ? `<a href="${e.wikiUrl}" target="_blank" style="color:${catColor};text-decoration:underline;">${e.title}</a>`
+                            : `<span style="color:${catColor}">${e.title}</span>`;
+                        html += `<div style="margin-bottom:4px;"><strong>${e.category}</strong> ${titleHtml}`;
+                        if (e.place) html += `<br/><span style="opacity:0.6;font-size:11px;">${e.place}</span>`;
+                        if (e.description) html += `<br/><span style="opacity:0.5;font-size:11px;">${e.description}</span>`;
+                        html += '</div>';
+                    }
+                    tooltip.html(html).style('display', 'block').style('pointer-events', 'auto');
+                })
+                .on('mousemove', (event) => {
+                    tooltip.style('left', (event.offsetX + 15) + 'px')
+                           .style('top', (event.offsetY - 10) + 'px');
+                })
+                .on('mouseout', () => {
+                    tooltip.style('display', 'none').style('pointer-events', 'none');
+                });
+        }
     }
 }
 

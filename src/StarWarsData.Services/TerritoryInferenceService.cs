@@ -178,6 +178,38 @@ public class TerritoryInferenceService(
             .OrderByDescending(f => factionRegionPlanets.GetValueOrDefault(f.Name)?.Values.Sum() ?? 0)
             .ToList();
 
+        // ── Step 5b: Build planet → grid coordinate lookup from Pages infobox ──
+
+        var planetToGrid = new Dictionary<int, (int col, int row)>();
+        var gridFilter = MongoDB.Bson.BsonDocument.Parse(
+            "{ 'infobox.Data': { $elemMatch: { Label: 'Grid square' } } }");
+        var gridPages = await _pages.Find(gridFilter)
+            .Project(Builders<Page>.Projection.Include(p => p.PageId).Include("infobox.Data"))
+            .ToListAsync(ct);
+
+        foreach (var doc in gridPages)
+        {
+            var pageId = doc["_id"].AsInt32;
+            var data = doc.Contains("infobox") && doc["infobox"].IsBsonDocument
+                ? doc["infobox"].AsBsonDocument : null;
+            if (data is null) continue;
+            var dataArr = data.Contains("Data") && data["Data"].IsBsonArray ? data["Data"].AsBsonArray : null;
+            if (dataArr is null) continue;
+
+            foreach (var item in dataArr.OfType<MongoDB.Bson.BsonDocument>())
+            {
+                if (item.GetValue("Label", "").AsString != "Grid square") continue;
+                var vals = item.Contains("Values") && item["Values"].IsBsonArray
+                    ? item["Values"].AsBsonArray : null;
+                var gridStr = vals?.FirstOrDefault()?.AsString;
+                if (gridStr is not null && TryParseGridSquare(gridStr, out var col, out var row))
+                    planetToGrid.TryAdd(pageId, (col, row));
+                break;
+            }
+        }
+
+        logger.LogInformation("Territory inference: {Count} planets with grid coordinates", planetToGrid.Count);
+
         // ── Step 6: Build year documents ──
 
         var snapshots = new List<TerritorySnapshot>();
@@ -257,11 +289,21 @@ public class TerritoryInferenceService(
                 foreach (var evt in yearEvents.Take(30))
                 {
                     string? place = null, region = null;
+                    int? col = null, row = null;
+
                     if (eventPlaceLookup.TryGetValue(evt.PageId, out var placeEdge))
                     {
                         place = placeEdge.ToName;
-                        if (placeEdge.ToId > 0 && planetToRegion.TryGetValue(placeEdge.ToId, out var pr))
-                            region = pr;
+                        if (placeEdge.ToId > 0)
+                        {
+                            if (planetToRegion.TryGetValue(placeEdge.ToId, out var pr))
+                                region = pr;
+                            if (planetToGrid.TryGetValue(placeEdge.ToId, out var grid))
+                            {
+                                col = grid.col;
+                                row = grid.row;
+                            }
+                        }
                     }
 
                     var outcome = evt.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
@@ -274,6 +316,8 @@ public class TerritoryInferenceService(
                         WikiUrl = evt.WikiUrl,
                         Place = place,
                         Region = region,
+                        Col = col,
+                        Row = row,
                         Description = outcome,
                     });
                 }
@@ -362,5 +406,19 @@ public class TerritoryInferenceService(
     {
         if (FactionColors.TryGetValue(faction, out var color)) return color;
         return ColorPalette[Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase)) % ColorPalette.Length];
+    }
+
+    static bool TryParseGridSquare(string gridSquare, out int col, out int row)
+    {
+        col = 0; row = 0;
+        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        var parts = gridSquare.Split('-', 2);
+        if (parts.Length != 2) return false;
+        var letter = parts[0].Trim().ToUpperInvariant();
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        col = letter[0] - 'A';
+        row = num - 1;
+        return true;
     }
 }
