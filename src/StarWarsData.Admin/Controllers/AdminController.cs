@@ -15,7 +15,8 @@ public class AdminController(
     ArticleChunkingService articleChunkingService,
     OpenAiStatusService aiStatus,
     TerritoryInferenceService territoryInferenceService,
-    InfoboxGraphService infoboxGraphService
+    InfoboxGraphService infoboxGraphService,
+    JobToggleService jobToggleService
 ) : ControllerBase
 {
     readonly ILogger<AdminController> _logger = logger;
@@ -589,4 +590,18 @@ public class AdminController(
 
     [HttpGet("openai/status")]
     public OpenAiHealthReport GetOpenAiStatus() => _aiStatus.GetHealthReport();
+
+    // === Job Toggles ===
+
+    [HttpGet("jobs")]
+    public async Task<List<StarWarsData.Models.Entities.JobToggle>> GetJobToggles(CancellationToken ct)
+        => await jobToggleService.GetAllAsync(ct);
+
+    [HttpPost("jobs/{jobId}/toggle")]
+    public async Task<ActionResult> ToggleJob(string jobId, [FromQuery] bool enabled, CancellationToken ct)
+    {
+        await jobToggleService.SetEnabledAsync(jobId, enabled, ct);
+        logger.LogInformation("Job {JobId} {State}", jobId, enabled ? "enabled" : "disabled");
+        return Ok(new { jobId, enabled });
+    }
 }

@@ -220,6 +220,7 @@ var frontend = builder
 var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
 var imageTag = Environment.GetEnvironmentVariable("CONTAINER_IMAGE_TAG") ?? "latest";
 apiService.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
+admin.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 frontend.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 #pragma warning restore ASPIREPIPELINES003
 
@@ -229,6 +230,7 @@ builder
     {
         env["FRONTEND_HOST_PORT"] = new() { Name = "FRONTEND_HOST_PORT", DefaultValue = "9081" };
         env["APISERVICE_HOST_PORT"] = new() { Name = "APISERVICE_HOST_PORT", DefaultValue = "9080" };
+        env["ADMIN_HOST_PORT"] = new() { Name = "ADMIN_HOST_PORT", DefaultValue = "9082" };
         env["DASHBOARD_HOST_PORT"] = new() { Name = "DASHBOARD_HOST_PORT", DefaultValue = "18888" };
     })
     .ConfigureComposeFile(compose =>
@@ -254,6 +256,12 @@ builder
                     service.Labels["net.unraid.docker.icon"] =
                         "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${FRONTEND_PORT}]";
+                    break;
+                case "admin":
+                    service.Ports = ["${ADMIN_HOST_PORT:-9082}:${ADMIN_PORT}"];
+                    service.Labels["net.unraid.docker.icon"] =
+                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${ADMIN_PORT}]";
                     break;
                 case "starwars-dashboard":
                     service.Ports = ["${DASHBOARD_HOST_PORT:-18888}:18888"];

@@ -98,4 +98,7 @@ public static class Collections
 
     // ── Territory control ──
     public const string TerritorySnapshots = "territory.snapshots";
+
+    // ── Admin ──
+    public const string JobToggles = "admin.job_toggles";
 }
