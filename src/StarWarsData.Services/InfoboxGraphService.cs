@@ -56,7 +56,6 @@ public class InfoboxGraphService(
         "Maximum altitude", "Maximum speed", "Maximum depth",
         "Crew", "Passengers", "Population", "Consumables", "Cargo capacity",
         "Orbital position", "Orbital period", "Rotation period", "Surface water",
-        "Suns", "Moons",
 
         // Publication / media metadata
         "Pages", "Media type", "Issue number", "Issue #", "Issues", "Format",
@@ -129,6 +128,8 @@ public class InfoboxGraphService(
         ["Location(s)"] = "located_at",
         ["Locations"] = "located_at",
         ["Continent"] = "on_continent",
+        ["Suns"] = "orbits_star",
+        ["Moons"] = "has_moon",
         ["Space stations"] = "has_space_station",
         ["Asteroids"] = "has_asteroid",
         ["Nebulae"] = "has_nebula",
