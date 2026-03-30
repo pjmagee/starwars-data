@@ -173,25 +173,40 @@ function updateVisuals() {
     node.exit().remove();
 
     let dragMoved = false;
+    let dragStartX = 0, dragStartY = 0;
+    const DRAG_THRESHOLD = 5; // pixels — must move this far before it counts as a drag
 
     const enter = node.enter().append('g')
         .attr('class', 'node')
-        .attr('cursor', 'grab')
+        .attr('cursor', 'pointer')
         .call(d3.drag()
             .on('start', (event, d) => {
                 dragMoved = false;
-                if (!event.active) simulation.alphaTarget(0.3).restart();
+                dragStartX = event.x;
+                dragStartY = event.y;
+                if (!event.active) simulation.alphaTarget(0.1).restart();
                 d.fx = d.x; d.fy = d.y;
-                d3.select(event.currentTarget).attr('cursor', 'grabbing');
             })
             .on('drag', (event, d) => {
-                dragMoved = true;
-                d.fx = event.x; d.fy = event.y;
+                const dx = event.x - dragStartX;
+                const dy = event.y - dragStartY;
+                if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
+                    dragMoved = true;
+                    d3.select(event.currentTarget).attr('cursor', 'grabbing');
+                }
+                if (dragMoved) {
+                    d.fx = event.x; d.fy = event.y;
+                }
             })
             .on('end', (event, d) => {
                 if (!event.active) simulation.alphaTarget(0);
-                d.fx = null; d.fy = null;
-                d3.select(event.currentTarget).attr('cursor', 'grab');
+                if (!dragMoved) {
+                    // Didn't actually drag — keep node where it was
+                    d.fx = null; d.fy = null;
+                } else {
+                    d.fx = null; d.fy = null;
+                }
+                d3.select(event.currentTarget).attr('cursor', 'pointer');
             }));
 
     // Single click: info panel

@@ -218,104 +218,98 @@
                          style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : "height:700px;")}")"
                          @onkeydown="OnKeyDown" tabindex="0">
                     </div>
-                </MudPaper>
 
-                @if (_graphStats is not null)
-                {
-                    <MudStack Row="true" Spacing="4" Class="mt-2">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">
-                            @_graphStats.Value.nodeCount nodes
-                        </MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Text">
-                            @_graphStats.Value.edgeCount edges
-                        </MudChip>
-                        @if (_selectedNodeName is not null)
-                        {
-                            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="align-self-center">
-                                Click a node to view its details
-                            </MudText>
-                        }
-                    </MudStack>
-                }
-            </MudItem>
+                    @* Stats overlay (bottom-right) *@
+                    @if (_graphStats is not null)
+                    {
+                        <div style="position:absolute; bottom:8px; right:8px; z-index:10; display:flex; gap:8px;">
+                            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text"
+                                     Style="background:rgba(30,30,56,0.8);">
+                                @_graphStats.Value.nodeCount nodes
+                            </MudChip>
+                            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Text"
+                                     Style="background:rgba(30,30,56,0.8);">
+                                @_graphStats.Value.edgeCount edges
+                            </MudChip>
+                        </div>
+                    }
 
-            @if (_loadingNodeDetails)
-            {
-                <MudItem xs="12" md="3">
-                    <MudPaper Class="pa-4" Style="height:700px; overflow-y:auto;">
-                        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
-                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
-                            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading details...</MudText>
-                        </MudStack>
-                    </MudPaper>
-                </MudItem>
-            }
-            else if (_selectedNodePage is not null)
-            {
-                <MudItem xs="12" md="3">
-                    <MudPaper Class="pa-0" Style="height:700px; overflow-y:auto; border-radius:8px;">
-                        <MudCard Elevation="0">
-                            @if (_selectedNodePage.Infobox?.ImageUrl is not null)
-                            {
-                                <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="200" />
-                            }
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
-                                    @if (_selectedNodePage.Infobox?.Template is not null)
+                    @* Info panel overlay (right side, inside the graph container) *@
+                    @if (_loadingNodeDetails)
+                    {
+                        <div style="position:absolute; top:0; right:0; width:320px; height:100%; z-index:20; background:var(--mud-palette-surface); border-left:1px solid var(--mud-palette-lines-default); overflow-y:auto;">
+                            <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
+                                <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+                                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading details...</MudText>
+                            </MudStack>
+                        </div>
+                    }
+                    else if (_selectedNodePage is not null)
+                    {
+                        <div style="position:absolute; top:0; right:0; width:320px; height:100%; z-index:20; background:var(--mud-palette-surface); border-left:1px solid var(--mud-palette-lines-default); overflow-y:auto;">
+                            <MudCard Elevation="0">
+                                @if (_selectedNodePage.Infobox?.ImageUrl is not null)
+                                {
+                                    <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="180" />
+                                }
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
+                                        @if (_selectedNodePage.Infobox?.Template is not null)
+                                        {
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                                @SanitizeTemplate(_selectedNodePage.Infobox.Template)
+                                            </MudText>
+                                        }
+                                    </CardHeaderContent>
+                                    <CardHeaderActions>
+                                        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
+                                                       OnClick="CloseNodePanel" />
+                                    </CardHeaderActions>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    @if (_selectedNodePage.Infobox?.Data is not null)
                                     {
-                                        <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                            @SanitizeTemplate(_selectedNodePage.Infobox.Template)
-                                        </MudText>
+                                        <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto; font-size:12px;">
+                                            <tbody>
+                                                @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
+                                                {
+                                                    <tr>
+                                                        <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top;">
+                                                            @prop.Label
+                                                        </td>
+                                                        <td style="padding:4px 8px;">
+                                                            @foreach (var link in prop.Links)
+                                                            {
+                                                                <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                            }
+                                                            @GetPlainValues(prop)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </MudSimpleTable>
                                     }
-                                </CardHeaderContent>
-                                <CardHeaderActions>
-                                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
-                                                   OnClick="CloseNodePanel" />
-                                </CardHeaderActions>
-                            </MudCardHeader>
-                            <MudCardContent>
-                                @if (_selectedNodePage.Infobox?.Data is not null)
-                                {
-                                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
-                                        <tbody>
-                                            @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
-                                            {
-                                                <tr>
-                                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
-                                                        @prop.Label
-                                                    </td>
-                                                    <td style="padding:6px 12px;">
-                                                        @foreach (var link in prop.Links)
-                                                        {
-                                                            <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
-                                                        }
-                                                        @GetPlainValues(prop)
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </MudSimpleTable>
-                                }
-                            </MudCardContent>
-                            <MudCardActions>
-                                @if (_selectedNodePage.WikiUrl is not null)
-                                {
-                                    <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
-                                               StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
-                                        Wookieepedia
+                                </MudCardContent>
+                                <MudCardActions>
+                                    @if (_selectedNodePage.WikiUrl is not null)
+                                    {
+                                        <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                                   StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                                            Wookieepedia
+                                        </MudButton>
+                                    }
+                                    <MudButton Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
+                                               StartIcon="@Icons.Material.Filled.Hub"
+                                               OnClick="@(() => SelectEntityWithHistory(_selectedNodeId, _selectedNodeName!))">
+                                        Explore Graph
                                     </MudButton>
-                                }
-                                <MudButton Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
-                                           StartIcon="@Icons.Material.Filled.Hub"
-                                           OnClick="@(() => SelectEntityWithHistory(_selectedNodeId, _selectedNodeName!))">
-                                    Explore Graph
-                                </MudButton>
-                            </MudCardActions>
-                        </MudCard>
-                    </MudPaper>
-                </MudItem>
-            }
+                                </MudCardActions>
+                            </MudCard>
+                        </div>
+                    }
+                </MudPaper>
+            </MudItem>
         </MudGrid>
     }
 </MudContainer>
