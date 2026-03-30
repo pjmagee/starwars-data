@@ -56,18 +56,6 @@ public class AdminController(
         return false;
     }
 
-    [HttpGet("jobs")]
-    public ActionResult GetAllJobs()
-    {
-        return Redirect("/hangfire");
-    }
-
-    [HttpGet("jobs/{id:guid}")]
-    public ActionResult GetJob(Guid id)
-    {
-        return Redirect($"/hangfire/jobs/details/{id}");
-    }
-
     [HttpDelete("jobs/{id:guid}")]
     public IActionResult CancelJob(Guid id)
     {

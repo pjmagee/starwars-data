@@ -16,12 +16,12 @@
         <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.CloudSync"
                 OnClick="@(() => StartJobHandler(SyncWookieepediaEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Download Pages (to starwars-raw database)
+                Download Pages (to raw.pages)
             </MudButton>
 
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
                 OnClick="@(() => StartJobHandler(DeletePagesEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Delete Pages Database (starwars-raw)
+                Delete Pages (raw.pages)
             </MudButton>
         </MudStack>
 
@@ -30,7 +30,7 @@
         <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Timeline"
                 OnClick="@(() => StartJobHandler(CreateTimelineEventsEndpoint))" Disabled="_isLoading" Size="Size.Medium">
-                Create Timeline Events (from Pages to timeline DB)
+                Create Timeline Events (from raw.pages to timeline.*)
             </MudButton>
 
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
