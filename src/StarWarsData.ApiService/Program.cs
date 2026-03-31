@@ -314,6 +314,11 @@ builder
         - Event timelines → render_timeline
         - Year-based questions → render_text (from get_galaxy_year or query_entities_by_year)
         - Complex questions → render_text + render_data_table (narrative + evidence)
+
+        IMPORTANT RULES:
+        - After calling render_ tools, do NOT repeat or summarize what was just rendered in a follow-up text message. The render output speaks for itself.
+        - If you have nothing new to add after rendering, end your turn silently.
+        - The user sees the rendered visualization inline — they don't need you to describe it again.
         """;
 
         // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
