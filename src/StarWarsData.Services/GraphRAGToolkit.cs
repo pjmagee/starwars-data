@@ -860,6 +860,65 @@ public class GraphRAGToolkit
         });
     }
 
+    [Description(
+        "List all entity types available in the knowledge graph with counts. Use this to discover valid type values "
+        + "for query_entities_by_year and search_graph_entities. Returns types sorted by count descending."
+    )]
+    public async Task<string> ListKgTypes(
+        [Description("Only include types that have temporal data (startYear). Default true.")] bool temporalOnly = true
+    )
+    {
+        var matchStage = temporalOnly
+            ? new BsonDocument("$match", new BsonDocument("startYear", new BsonDocument("$ne", BsonNull.Value)))
+            : new BsonDocument("$match", new BsonDocument());
+
+        var pipeline = new[]
+        {
+            matchStage,
+            new BsonDocument("$group", new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+        };
+
+        var results = await _nodes.Database
+            .GetCollection<BsonDocument>(Collections.KgNodes)
+            .AggregateAsync<BsonDocument>(pipeline);
+        var docs = await results.ToListAsync();
+
+        return JsonSerializer.Serialize(docs.Select(d => new
+        {
+            type = d["_id"].AsString,
+            count = d["count"].AsInt32,
+        }));
+    }
+
+    [Description(
+        "List all relationship labels in the knowledge graph with usage counts. Use this to discover what kinds of "
+        + "relationships exist (e.g., 'took_place_at', 'affiliated_with', 'homeworld'). Helps choose label filters "
+        + "for get_entity_relationships and traverse_graph."
+    )]
+    public async Task<string> ListKgRelationshipLabels(
+        [Description("Max results (default 50)")] int limit = 50
+    )
+    {
+        var pipeline = new[]
+        {
+            new BsonDocument("$group", new BsonDocument { { "_id", "$label" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _edges.Database
+            .GetCollection<BsonDocument>(Collections.KgEdges)
+            .AggregateAsync<BsonDocument>(pipeline);
+        var docs = await results.ToListAsync();
+
+        return JsonSerializer.Serialize(docs.Select(d => new
+        {
+            label = d["_id"].AsString,
+            count = d["count"].AsInt32,
+        }));
+    }
+
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
             AIFunctionFactory.Create(SearchGraphEntities, "search_graph_entities"),
@@ -871,6 +930,8 @@ public class GraphRAGToolkit
             AIFunctionFactory.Create(TraverseGraph, "traverse_graph"),
             AIFunctionFactory.Create(FindConnections, "find_connections"),
             AIFunctionFactory.Create(GetGalaxyYear, "get_galaxy_year"),
+            AIFunctionFactory.Create(ListKgTypes, "list_kg_types"),
+            AIFunctionFactory.Create(ListKgRelationshipLabels, "list_kg_relationship_labels"),
             AIFunctionFactory.Create(SearchChunks, "search_chunks"),
         ];
 }
