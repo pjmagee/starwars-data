@@ -248,11 +248,12 @@ builder
         - Use graph tools when the question is about relationships, connections, networks, or influence — they provide richer answers than infobox data alone.
 
         TEMPORAL KNOWLEDGE GRAPH (year-based queries, entity lifecycles, territory control):
-        - query_entities_by_year: find entities (governments, battles, characters) that existed at a specific year. Use sort-key format: -19 = 19 BBY, 4 = 4 ABY.
+        - query_entities_by_year: find entities that existed at a specific year. Use sort-key format: -19 = 19 BBY, 4 = 4 ABY.
+          Valid type values: Battle, War, Campaign, Mission, Duel, Event, Treaty, Government, Organization, Character, Company, Military_unit, Structure, Location, City, Fleet, TitleOrPosition, SpaceStation, Religion, Law, Election, Holiday, Competition.
         - get_entity_timeline: get when an entity was born/founded/destroyed with original date text and duration. Call search_graph_entities first to get PageId.
         - get_entity_properties: get all properties/attributes of an entity (height, eye color, classification, etc.).
         - get_galaxy_year: get a complete galaxy snapshot at a year — territory control (which factions controlled which regions), events with locations, era context. Pre-computed, instant response.
-        - For questions about wars, battles, campaigns in a time period: use query_entities_by_year with type="War" or "Battle" or "Campaign".
+        - For questions about wars, battles, campaigns in a time period: use query_entities_by_year with the appropriate type.
         - For "what was happening in year X": use get_galaxy_year(X) which returns both territory AND events.
         - PREFER these over search_chunks for year-specific or temporal questions — they query the structured knowledge graph, not unstructured text.
 
