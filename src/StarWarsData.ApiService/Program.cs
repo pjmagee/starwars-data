@@ -21,8 +21,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
-ConventionRegistry.Register("EnumAsString",
-    new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
+ConventionRegistry.Register(
+    "EnumAsString",
+    new ConventionPack { new EnumRepresentationConvention(BsonType.String) },
+    _ => true
+);
 
 builder.AddServiceDefaults();
 builder.Services.AddControllers();
@@ -48,8 +51,7 @@ builder
     .AddLogging()
     .AddHttpContextAccessor()
     .AddDataProtection()
-    .Services
-    .AddSingleton<OpenAiStatusService>()
+    .Services.AddSingleton<OpenAiStatusService>()
     .AddSingleton<AskRateLimiter>()
     .AddSingleton<UserSettingsService>()
     .AddSingleton<ByokChatClient>(sp =>
@@ -123,41 +125,46 @@ builder
             .GetEmbeddingClient("text-embedding-3-small")
             .AsIEmbeddingGenerator()
     )
-    .AddKeyedSingleton<McpClient?>("mongodb-mcp", (sp, _) =>
-    {
-        var logger = sp.GetRequiredService<ILogger<Program>>();
-        var mcpUrl = sp.GetRequiredService<IConfiguration>()["MCP_MONGODB_URL"];
-
-        if (string.IsNullOrEmpty(mcpUrl))
+    .AddKeyedSingleton<McpClient?>(
+        "mongodb-mcp",
+        (sp, _) =>
         {
-            logger.LogWarning("MCP_MONGODB_URL not configured — MCP client disabled.");
-            return null;
-        }
+            var logger = sp.GetRequiredService<ILogger<Program>>();
+            var mcpUrl = sp.GetRequiredService<IConfiguration>()["MCP_MONGODB_URL"];
 
-        try
-        {
-            var endpoint = new Uri(new Uri(mcpUrl.TrimEnd('/')), "/mcp");
-            var transport = new HttpClientTransport(new HttpClientTransportOptions
+            if (string.IsNullOrEmpty(mcpUrl))
             {
-                Endpoint = endpoint,
-            });
-            logger.LogInformation("Initializing MongoDB MCP client at {Endpoint}...", endpoint);
-            var client = McpClient
-                .CreateAsync(
-                    transport,
-                    new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
-                )
-                .GetAwaiter()
-                .GetResult();
-            logger.LogInformation("MongoDB MCP client initialized.");
-            return client;
+                logger.LogWarning("MCP_MONGODB_URL not configured — MCP client disabled.");
+                return null;
+            }
+
+            try
+            {
+                var endpoint = new Uri(new Uri(mcpUrl.TrimEnd('/')), "/mcp");
+                var transport = new HttpClientTransport(
+                    new HttpClientTransportOptions { Endpoint = endpoint }
+                );
+                logger.LogInformation("Initializing MongoDB MCP client at {Endpoint}...", endpoint);
+                var client = McpClient
+                    .CreateAsync(
+                        transport,
+                        new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
+                    )
+                    .GetAwaiter()
+                    .GetResult();
+                logger.LogInformation("MongoDB MCP client initialized.");
+                return client;
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(
+                    ex,
+                    "Failed to initialize MongoDB MCP client — MCP tools disabled."
+                );
+                return null;
+            }
         }
-        catch (Exception ex)
-        {
-            logger.LogWarning(ex, "Failed to initialize MongoDB MCP client — MCP tools disabled.");
-            return null;
-        }
-    })
+    )
     .AddSingleton<AIAgent>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
@@ -165,7 +172,10 @@ builder
         var mcpClient = sp.GetKeyedService<McpClient>("mongodb-mcp");
         var componentToolkit = new ComponentToolkit();
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        var dataExplorer = new DataExplorerToolkit(mongoClient, sp.GetRequiredService<IOptions<SettingsOptions>>());
+        var dataExplorer = new DataExplorerToolkit(
+            mongoClient,
+            sp.GetRequiredService<IOptions<SettingsOptions>>()
+        );
 
         // Wiki text search — registered directly as a tool so the model sees it
         // (UseAIContextProviders does not reliably surface tools via AGUI streaming)
@@ -269,22 +279,39 @@ builder
         - "What planets have X?" → search_pages_by_property("CelestialBody", label, value) → render_table or render_data_table
         - Deep lore / "explain X" → search_chunks → combine with graph tools if needed → render_text
 
-        RENDER RULES — call exactly ONE render_ tool as your final action:
+        RENDER RULES:
         - render_table / render_graph / render_timeline / render_infobox: frontend fetches data. Do NOT query rows.
         - render_data_table / render_chart / render_text: YOU must query and provide the data.
+        - render_infobox: accepts multiple PageIds — renders one card per entity. Use for "tell me about X and Y".
         - render_graph: ALWAYS call sample_link_labels first to discover labels. Classify as upLabels/downLabels/peerLabels. Never hardcode label names.
         - render_timeline: pass category names from list_timeline_categories. Frontend fetches events.
         - Every render_ tool accepts "references" — include page title + wikiUrl from your tool results.
 
+        MULTIPLE RENDERS: You CAN call multiple render_ tools when the answer benefits from it. Each creates a separate inline visualization. Examples:
+        - render_text (explanation) + render_data_table (structured findings) for complex research
+        - render_infobox (entity cards) + render_graph (relationship map) for "tell me about X and their connections"
+        - render_text (lore context) + render_chart (stats) for "explain the Clone Wars and show battle statistics"
+        Use multiple renders when a single output type can't fully answer the question.
+
+        DEEP RESEARCH: For complex questions, do thorough multi-step research before rendering:
+        1. Start with search_graph_entities or search_chunks to find relevant entities
+        2. Follow up with get_entity_relationships, traverse_graph, or get_entity_properties to explore connections
+        3. Cross-reference findings from different entities — look for patterns, non-obvious connections
+        4. Present findings with render_text (narrative) + render_data_table (structured evidence)
+        Example: "How did the fall of the Republic affect the Outer Rim?" →
+          search_chunks("fall of the Republic") + get_galaxy_year(-19) + query_entities_by_year(-19, "Government") +
+          get_entity_relationships(Republic, label="governed_by") → render_text + render_data_table
+
         CHOOSING OUTPUT:
         - Specific entity → render_infobox (with PageIds)
-        - Entity attributes/comparison → render_text or render_data_table
+        - Entity attributes/comparison → render_data_table (side by side)
         - Lore/history/explanation → render_text (from search_chunks or KG tools)
         - List/browse → render_table
         - Aggregated stats → render_chart or render_data_table
         - Relationships/family trees → render_graph
         - Event timelines → render_timeline
         - Year-based questions → render_text (from get_galaxy_year or query_entities_by_year)
+        - Complex questions → render_text + render_data_table (narrative + evidence)
         """;
 
         // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
@@ -302,7 +329,8 @@ builder
             .Build();
 
         var aiStatus = sp.GetRequiredService<OpenAiStatusService>();
-        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("StarWarsTopicGuardrail");
+        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("StarWarsTopicGuardrail");
 
         return chatClient
             .AsAIAgent(instructions: instructions, tools: tools)
@@ -329,55 +357,72 @@ app.UseCors();
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.MapGet("/api/ai/status", (OpenAiStatusService status) =>
-{
-    var report = status.GetHealthReport();
-    return Results.Ok(new { status = report.Status.ToString(), report.ErrorsLastHour });
-});
+app.MapGet(
+    "/api/ai/status",
+    (OpenAiStatusService status) =>
+    {
+        var report = status.GetHealthReport();
+        return Results.Ok(new { status = report.Status.ToString(), report.ErrorsLastHour });
+    }
+);
 
 // Rate limiting + BYOK detection middleware for /kernel/stream
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.StartsWithSegments("/kernel/stream") && context.Request.Method == "POST")
+app.Use(
+    async (context, next) =>
     {
-        var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
-        var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
-        var userId = context.Request.Headers["X-User-Id"].FirstOrDefault();
-        var isAuthenticated = !string.IsNullOrEmpty(userId);
-        var hasByok = false;
-
-        if (isAuthenticated)
+        if (
+            context.Request.Path.StartsWithSegments("/kernel/stream")
+            && context.Request.Method == "POST"
+        )
         {
-            hasByok = await userSettings.HasOpenAiKeyAsync(userId!);
-            context.Items["HasByok"] = hasByok;
-        }
+            var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
+            var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
+            var userId = context.Request.Headers["X-User-Id"].FirstOrDefault();
+            var isAuthenticated = !string.IsNullOrEmpty(userId);
+            var hasByok = false;
 
-        // BYOK users skip rate limiting entirely
-        if (!hasByok)
-        {
-            var clientIp = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',')[0].Trim()
-                           ?? context.Connection.RemoteIpAddress?.ToString()
-                           ?? "unknown";
-            var clientId = userId ?? $"anon:{clientIp}";
-            var result = rateLimiter.TryAcquire(clientId, isAuthenticated);
-
-            if (!result.Allowed)
+            if (isAuthenticated)
             {
-                context.Response.StatusCode = 429;
-                context.Response.Headers["Retry-After"] = ((int)(result.RetryAfter?.TotalSeconds ?? 1800)).ToString();
-                await context.Response.WriteAsJsonAsync(new
+                hasByok = await userSettings.HasOpenAiKeyAsync(userId!);
+                context.Items["HasByok"] = hasByok;
+            }
+
+            // BYOK users skip rate limiting entirely
+            if (!hasByok)
+            {
+                var clientIp =
+                    context
+                        .Request.Headers["X-Forwarded-For"]
+                        .FirstOrDefault()
+                        ?.Split(',')[0]
+                        .Trim()
+                    ?? context.Connection.RemoteIpAddress?.ToString()
+                    ?? "unknown";
+                var clientId = userId ?? $"anon:{clientIp}";
+                var result = rateLimiter.TryAcquire(clientId, isAuthenticated);
+
+                if (!result.Allowed)
                 {
-                    error = "Rate limit exceeded",
-                    limit = result.Limit,
-                    retryAfterSeconds = (int)(result.RetryAfter?.TotalSeconds ?? 1800),
-                });
-                return;
+                    context.Response.StatusCode = 429;
+                    context.Response.Headers["Retry-After"] = (
+                        (int)(result.RetryAfter?.TotalSeconds ?? 1800)
+                    ).ToString();
+                    await context.Response.WriteAsJsonAsync(
+                        new
+                        {
+                            error = "Rate limit exceeded",
+                            limit = result.Limit,
+                            retryAfterSeconds = (int)(result.RetryAfter?.TotalSeconds ?? 1800),
+                        }
+                    );
+                    return;
+                }
             }
         }
-    }
 
-    await next();
-});
+        await next();
+    }
+);
 
 app.MapAGUI("/kernel/stream", app.Services.GetRequiredService<AIAgent>());
 app.Run();
