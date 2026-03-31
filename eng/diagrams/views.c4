@@ -24,7 +24,7 @@ views {
 
   // ── Frontend Detail ──
   view frontendDetail of unraid.swdata.frontend {
-    title "Frontend - Blazor Server Pages"
+    title "Frontend (swdata.ai) - Blazor Server Pages"
     include *
     include -> unraid.swdata.frontend ->
     autoLayout TopBottom
@@ -34,21 +34,32 @@ views {
     style element.tag = #ai { color green }
   }
 
+  // ── Admin Detail ──
+  view adminDetail of unraid.swdata.adminApp {
+    title "Admin (admin.swdata.ai) - ETL Pipeline & Jobs"
+    include *
+    include -> unraid.swdata.adminApp ->
+    autoLayout TopBottom
+
+    style unraid.swdata.adminApp { color amber }
+    style element.tag = #etl { color amber }
+    style element.tag = #ai { color green }
+  }
+
   // ── API Service Detail ──
   view apiDetail of unraid.swdata.apiservice {
-    title "API Service - Controllers, Agent, ETL Pipeline"
+    title "API Service (internal) - Controllers, Agent, Toolkits"
     include *
     include -> unraid.swdata.apiservice ->
     autoLayout TopBottom
 
     style unraid.swdata.apiservice { color indigo }
-    style element.tag = #etl { color amber }
     style element.tag = #ai { color green }
   }
 
   // ── AI Agent Detail ──
   view aiAgentDetail {
-    title "AI Agent - Toolkits and Data Sources"
+    title "AI Agent - 33 Tools across 4 Toolkits"
     include
       unraid.swdata.apiservice.aiAgent,
       unraid.swdata.apiservice.componentToolkit,
@@ -69,7 +80,7 @@ views {
 
   // ── MongoDB Detail ──
   view mongoDetail of unraid.swdata.mongodb {
-    title "MongoDB - Database Collections"
+    title "MongoDB - Unified 'starwars' Database Collections"
     include *
     include -> unraid.swdata.mongodb ->
     autoLayout LeftRight
@@ -80,16 +91,17 @@ views {
 
   // ── ETL Pipeline ──
   view etlPipeline {
-    title "ETL Pipeline Data Flow"
+    title "ETL Pipeline - 8 Phases"
     include
-      unraid.swdata.apiservice.phase1,
-      unraid.swdata.apiservice.phase2,
-      unraid.swdata.apiservice.phase3,
-      unraid.swdata.apiservice.phase4,
-      unraid.swdata.apiservice.phase5,
-      unraid.swdata.apiservice.phase6,
-      unraid.swdata.apiservice.phase7,
-      unraid.swdata.apiservice.hangfire,
+      unraid.swdata.adminApp.phase1,
+      unraid.swdata.adminApp.phase2,
+      unraid.swdata.adminApp.phase3,
+      unraid.swdata.adminApp.phase4,
+      unraid.swdata.adminApp.phase5,
+      unraid.swdata.adminApp.phase6,
+      unraid.swdata.adminApp.phase7,
+      unraid.swdata.adminApp.phase8,
+      unraid.swdata.adminApp.hangfire,
       unraid.swdata.mongodb.*,
       wookieepedia,
       openai
@@ -99,7 +111,27 @@ views {
     style element.tag = #etl { color amber }
     style unraid.swdata.mongodb.* { color sky }
     style wookieepedia, openai { color muted }
-    style unraid.swdata.apiservice.hangfire { color secondary }
+    style unraid.swdata.adminApp.hangfire { color secondary }
+  }
+
+  // ── Knowledge Graph Detail ──
+  view kgDetail {
+    title "Knowledge Graph - Nodes, Edges, Galaxy Map"
+    include
+      unraid.swdata.adminApp.phase5,
+      unraid.swdata.adminApp.phase8,
+      unraid.swdata.apiservice.graphRag,
+      unraid.swdata.mongodb.kgNodes,
+      unraid.swdata.mongodb.kgEdges,
+      unraid.swdata.mongodb.galaxyYears,
+      unraid.swdata.mongodb.rawPages,
+      unraid.swdata.mongodb.searchChunks
+
+    autoLayout TopBottom
+
+    style element.tag = #etl { color amber }
+    style element.tag = #ai { color green }
+    style unraid.swdata.mongodb.* { color sky }
   }
 
   // ── Dynamic: User Browse Flow ──
@@ -111,7 +143,6 @@ views {
     unraid.swdata.frontend -[auth]-> unraid.keycloak "authenticates via OIDC"
     unraid.swdata.frontend -> unraid.swdata.apiservice "calls API with X-User-Id"
     unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb "queries data"
-    unraid.swdata.apiservice.controllers <- unraid.swdata.frontend "returns response"
 
     autoLayout TopBottom
     style user { color green }
@@ -120,31 +151,48 @@ views {
 
   // ── Dynamic: AI Agent Ask Flow ──
   dynamic view askFlow {
-    title "AI Agent Ask Flow"
+    title "AI Agent Ask Flow - GraphRAG with 33 Tools"
 
     user -> unraid.swdata.frontend.askPage "asks a question"
-    unraid.swdata.frontend.askPage -> unraid.swdata.apiservice.aiAgent "SSE stream via /kernel/stream"
+    unraid.swdata.frontend.askPage -> unraid.swdata.apiservice.aiAgent "SSE stream via /kernel/stream (AGUI)"
     unraid.swdata.apiservice.aiAgent -> openai "chat completion with tool calls"
 
     parallel {
       unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.dataExplorer "searches pages and infoboxes"
-      unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.graphRag "traverses knowledge graph"
-      unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.wikiSearch "searches wiki articles"
-      unraid.swdata.apiservice.aiAgent -> unraid.swdata.mongoMcp "queries MongoDB via MCP"
+      unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.graphRag "KG traversal, temporal queries, vector search"
+      unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.wikiSearch "full-text wiki search"
+      unraid.swdata.apiservice.aiAgent -> unraid.swdata.mongoMcp "raw MongoDB queries via MCP"
     }
 
     unraid.swdata.apiservice.dataExplorer -> unraid.swdata.mongodb.rawPages "queries pages"
-    unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.relationshipGraph "traverses edges"
-    unraid.swdata.apiservice.wikiSearch -> unraid.swdata.mongodb.rawPages "text search"
-    unraid.swdata.mongoMcp -> unraid.swdata.mongodb "raw queries"
+    unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.kgNodes "entity search, temporal queries"
+    unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.kgEdges "graph traversal, connections"
+    unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.galaxyYears "galaxy year snapshots"
+    unraid.swdata.apiservice.graphRag -> unraid.swdata.mongodb.searchChunks "vector similarity search"
 
     unraid.swdata.apiservice.aiAgent -> openai "sends tool results for final answer"
-    unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.componentToolkit "renders charts, tables, graphs"
-    unraid.swdata.apiservice.aiAgent <- unraid.swdata.frontend.askPage "streams response with UI components"
+    unraid.swdata.apiservice.aiAgent -> unraid.swdata.apiservice.componentToolkit "renders charts, tables, graphs, text"
 
     autoLayout TopBottom
     style element.tag = #ai { color green }
     style openai { color muted }
     style unraid.swdata.mongodb.* { color slate }
+  }
+
+  // ── Dynamic: Galaxy Map Timeline Flow ──
+  dynamic view galaxyMapFlow {
+    title "Galaxy Map Timeline Mode - Pre-computed Data"
+
+    user -> unraid.swdata.frontend.galaxyMap "opens Galaxy Map, switches to Timeline mode"
+    unraid.swdata.frontend.galaxyMap -> unraid.swdata.apiservice.controllers "GET /api/galaxy-map/overview"
+    unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.galaxyYears "reads pre-computed overview"
+    unraid.swdata.frontend.galaxyMap -> unraid.swdata.apiservice.controllers "GET /api/galaxy-map/year/{year}"
+    unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.galaxyYears "reads year doc (territory + events)"
+    unraid.swdata.frontend.galaxyMap -> unraid.swdata.apiservice.controllers "GET /api/galaxy-map/geography"
+    unraid.swdata.apiservice.controllers -> unraid.swdata.mongodb.rawPages "reads systems, regions, trade routes"
+
+    autoLayout TopBottom
+    style user { color green }
+    style unraid.swdata.mongodb.* { color sky }
   }
 }

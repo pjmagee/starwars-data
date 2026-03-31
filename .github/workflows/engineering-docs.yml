@@ -27,7 +27,7 @@ jobs:
           node-version: "22"
 
       - name: Build LikeC4 diagrams
-        run: npx likec4@latest build -o ./site/diagrams eng/diagrams
+        run: npx likec4@latest build --base /starwars-data/diagrams/ -o ./site/diagrams eng/diagrams
 
       - name: Build ADR pages
         run: |
