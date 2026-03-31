@@ -880,6 +880,7 @@ public class PageDownloader
     static readonly string[] OutOfUniverseMarkers =
     [
         "Real-world articles",
+        "Real-world media",
         "Out-of-universe articles",
         "Canceled projects",
         "Hoax articles",

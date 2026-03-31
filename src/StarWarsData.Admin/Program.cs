@@ -7,6 +7,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -21,6 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
+
+// Ensure all enums are serialized as strings (not integers) across all documents
+ConventionRegistry.Register("EnumAsString",
+    new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 
@@ -53,8 +58,7 @@ builder
     .AddScoped<InfoboxToEventsTransformer>()
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
-    .AddScoped<TerritoryControlService>()
-    .AddScoped<TerritoryInferenceService>()
+    .AddScoped<GalaxyMapETLService>()
     .AddScoped<InfoboxGraphService>()
     .AddSingleton<OpenAIClient>(sp =>
     {

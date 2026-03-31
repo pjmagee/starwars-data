@@ -51,6 +51,12 @@ public class TimelineEvent : IComparable<TimelineEvent>
     [BsonElement("Universe")]
     public Universe Universe { get; set; } = Universe.Unknown;
 
+    [BsonElement("PageId")]
+    public int? PageId { get; set; }
+
+    [BsonElement("WikiUrl")]
+    public string? WikiUrl { get; set; }
+
     public int CompareTo(TimelineEvent? other)
     {
         if (other is null)

@@ -59,6 +59,8 @@ public class InfoboxToEventsTransformer
                     Properties = data,
                     Continuity = page.Continuity,
                     Universe = page.Universe,
+                    PageId = page.PageId,
+                    WikiUrl = page.WikiUrl,
                 };
             }
         }

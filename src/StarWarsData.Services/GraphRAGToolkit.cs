@@ -20,6 +20,8 @@ public class GraphRAGToolkit
     readonly IMongoCollection<RelationshipEdge> _edges;
     readonly IMongoCollection<GraphNode> _nodes;
     readonly IMongoCollection<BsonDocument> _chunksRaw;
+    readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
+    readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
     readonly IEmbeddingGenerator<string, Embedding<float>> _embedder;
 
     public GraphRAGToolkit(
@@ -32,6 +34,8 @@ public class GraphRAGToolkit
         _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
         _nodes = db.GetCollection<GraphNode>(Collections.KgNodes);
         _chunksRaw = db.GetCollection<BsonDocument>(Collections.SearchChunks);
+        _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
+        _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
         _embedder = embedder;
     }
 
@@ -762,13 +766,111 @@ public class GraphRAGToolkit
         : s.Length > max ? s[..(max - 1)] + "\u2026"
         : s;
 
+    [Description(
+        "Get a complete snapshot of the galaxy at a specific year: territory control (which factions controlled which regions), "
+        + "events that occurred (battles, wars, treaties, etc. with locations), and era context. Pre-computed data — instant response. "
+        + "Use for questions like 'What was happening in 19 BBY?', 'Who controlled the Outer Rim in 4 ABY?', "
+        + "'What battles occurred in 3996 BBY?'. Years use sort-key: negative = BBY, positive = ABY."
+    )]
+    public async Task<string> GetGalaxyYear(
+        [Description("Year in sort-key format (-19 = 19 BBY, 4 = 4 ABY)")] int year
+    )
+    {
+        var doc = await _galaxyYears.Find(d => d.Year == year).FirstOrDefaultAsync();
+        if (doc is null)
+        {
+            // Find nearest available year
+            var nearest = await _galaxyYearsRaw
+                .Find(Builders<BsonDocument>.Filter.Ne("_id", "overview"))
+                .SortBy(d => d["_id"])
+                .ToListAsync();
+            var available = nearest.Select(d => d["_id"].AsInt32).OrderBy(y => Math.Abs(y - year)).Take(5);
+            return JsonSerializer.Serialize(new { error = $"No data for year {year}.", nearestYears = available });
+        }
+
+        return JsonSerializer.Serialize(new
+        {
+            year = doc.Year,
+            yearDisplay = doc.YearDisplay,
+            era = doc.Era,
+            eraDescription = doc.EraDescription,
+            territoryControl = doc.Regions.Select(r => new
+            {
+                region = r.Region,
+                factions = r.Factions.Select(f => new { f.Faction, control = $"{f.Control * 100:0}%", f.Contested })
+            }),
+            eventsOnMap = doc.EventCells.SelectMany(c => c.Events).Select(e => new
+            {
+                e.Title, e.Lens, e.Place, e.Outcome, e.WikiUrl,
+                continuity = e.Continuity.ToString(),
+            }).Take(30),
+            unresolvedEvents = (doc.UnresolvedEvents ?? []).Select(e => new
+            {
+                e.Title, e.Lens, e.WikiUrl,
+                continuity = e.Continuity.ToString(),
+            }).Take(20),
+            totalEvents = doc.EventCells.Sum(c => c.Count) + (doc.UnresolvedEvents?.Count ?? 0),
+        });
+    }
+
+    [Description(
+        "Get the temporal lifecycle of an entity — when it was founded/born, when it ended/died, "
+        + "and the original date text from Wookieepedia. Use for questions like 'When was the Galactic Empire founded?', "
+        + "'How long did the Clone Wars last?', 'When did Yoda die?'. Call search_graph_entities first to get the PageId."
+    )]
+    public async Task<string> GetEntityTimeline(
+        [Description("The PageId of the entity")] int entityId
+    )
+    {
+        var node = await _nodes.Find(n => n.PageId == entityId).FirstOrDefaultAsync();
+        if (node is null)
+            return JsonSerializer.Serialize(new { error = "Entity not found." });
+
+        // Get temporal edges (relationships with date context)
+        var edges = await _edges
+            .Find(Builders<RelationshipEdge>.Filter.And(
+                Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, entityId),
+                Builders<RelationshipEdge>.Filter.Ne(e => e.FromYear, null)))
+            .Limit(30)
+            .ToListAsync();
+
+        return JsonSerializer.Serialize(new
+        {
+            pageId = node.PageId,
+            name = node.Name,
+            type = node.Type,
+            continuity = node.Continuity.ToString(),
+            universe = node.Universe.ToString(),
+            startYear = node.StartYear,
+            endYear = node.EndYear,
+            startDateText = node.StartDateText,
+            endDateText = node.EndDateText,
+            duration = node.StartYear.HasValue && node.EndYear.HasValue
+                ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years"
+                : null,
+            wikiUrl = node.WikiUrl,
+            temporalRelationships = edges.Select(e => new
+            {
+                label = e.Label,
+                target = e.ToName,
+                fromYear = e.FromYear,
+                toYear = e.ToYear,
+                evidence = e.Evidence,
+            }),
+        });
+    }
+
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
             AIFunctionFactory.Create(SearchGraphEntities, "search_graph_entities"),
+            AIFunctionFactory.Create(QueryEntitiesByYear, "query_entities_by_year"),
+            AIFunctionFactory.Create(GetEntityProperties, "get_entity_properties"),
+            AIFunctionFactory.Create(GetEntityTimeline, "get_entity_timeline"),
             AIFunctionFactory.Create(GetEntityRelationships, "get_entity_relationships"),
             AIFunctionFactory.Create(GetGraphLabelsForEntity, "get_graph_labels"),
             AIFunctionFactory.Create(TraverseGraph, "traverse_graph"),
             AIFunctionFactory.Create(FindConnections, "find_connections"),
+            AIFunctionFactory.Create(GetGalaxyYear, "get_galaxy_year"),
             AIFunctionFactory.Create(SearchChunks, "search_chunks"),
         ];
 }

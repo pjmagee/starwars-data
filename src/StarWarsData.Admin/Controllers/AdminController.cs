@@ -10,7 +10,7 @@ public class AdminController(
     ILogger<AdminController> logger,
     PageDownloader pageDownloader,
     OpenAiStatusService aiStatus,
-    TerritoryInferenceService territoryInferenceService,
+    GalaxyMapETLService galaxyMapETLService,
     InfoboxGraphService infoboxGraphService,
     JobToggleService jobToggleService
 ) : ControllerBase
@@ -409,29 +409,6 @@ public class AdminController(
         }
     }
 
-    [HttpPost("mongo/build-relationship-graph")]
-    public ActionResult<string> EnqueueBuildRelationshipGraph()
-    {
-        try
-        {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RelationshipGraphBuilderService),
-                    nameof(RelationshipGraphBuilderService.ProcessAllAsync)
-                )
-            )
-                return Conflict(new { error = "Relationship graph builder already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.ProcessAllAsync(100, CancellationToken.None)
-            );
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
     [HttpPost("mongo/submit-graph-batch")]
     public ActionResult<string> EnqueueSubmitGraphBatch()
     {
@@ -548,17 +525,17 @@ public class AdminController(
 
     // === Territory Control ===
 
-    [HttpPost("mongo/infer-territory-control")]
-    public async Task<ActionResult<string>> InferTerritoryControl(CancellationToken ct)
+    [HttpPost("mongo/build-galaxy-map")]
+    public async Task<ActionResult<string>> BuildGalaxyMap(CancellationToken ct)
     {
         try
         {
-            await territoryInferenceService.InferTerritoryAsync(ct);
-            return Ok(new { message = "Territory control inferred from battle outcomes and government events." });
+            await galaxyMapETLService.BuildGalaxyMapAsync(ct);
+            return Ok(new { message = "Unified galaxy map built (territory + events)." });
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to infer territory control");
+            logger.LogError(ex, "Failed to build galaxy map");
             return StatusCode(500, new { error = ex.Message });
         }
     }

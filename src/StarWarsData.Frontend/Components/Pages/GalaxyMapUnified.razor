@@ -1,0 +1,1018 @@
+@page "/galaxy-map"
+@rendermode InteractiveServer
+@using Microsoft.JSInterop
+@using WikiPage = StarWarsData.Models.Entities.Page
+@using StarWarsData.Models.Entities
+@using StarWarsData.Models.Queries
+@inject IHttpClientFactory HttpClientFactory
+@inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<PageTitle>Galaxy Map — Star Wars Data</PageTitle>
+
+<style>
+    .galaxy-map-container {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 64px);
+        background: #0a0a1a;
+        overflow: hidden;
+    }
+    .galaxy-nav-panel {
+        position: absolute; top: 12px; left: 12px; z-index: 110;
+        width: 360px; max-height: calc(100% - 24px);
+        display: flex; flex-direction: column;
+    }
+    .galaxy-detail-panel {
+        position: absolute; top: 12px; right: 12px; width: 420px;
+        max-height: calc(100% - 24px); overflow-y: auto; z-index: 100;
+    }
+    .galaxy-detail-panel::-webkit-scrollbar, .search-results-list::-webkit-scrollbar {
+        width: 6px;
+    }
+    .galaxy-detail-panel::-webkit-scrollbar-thumb, .search-results-list::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.15); border-radius: 3px;
+    }
+    .search-results-list { overflow-y: auto; max-height: 40vh; }
+    .galaxy-timeline-bar {
+        position: absolute; bottom: 0; left: 0; right: 0; z-index: 110;
+        display: flex; flex-direction: column; gap: 4px; padding: 6px 16px 8px;
+        background: rgba(15,15,35,0.95); border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .timeline-eras { display: flex; gap: 4px; flex-wrap: wrap; }
+    .timeline-controls {
+        display: flex; align-items: center; gap: 8px; width: 100%;
+    }
+    .timeline-controls .density-bar { flex: 1; }
+    .timeline-controls .mud-select { flex-grow: 0 !important; }
+    .timeline-progress {
+        height: 3px; background: var(--mud-palette-primary);
+        animation: timeline-fill var(--duration) linear infinite;
+        transform-origin: left;
+    }
+    @@keyframes timeline-fill {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+    }
+    .lens-chip {
+        display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px;
+        border-radius: 14px; font-size: 11px; cursor: pointer;
+        border: 1px solid rgba(255,255,255,0.15); transition: all 0.15s;
+    }
+    .lens-chip:hover { border-color: rgba(255,255,255,0.4); }
+    .lens-chip.active { border-width: 2px; }
+    .era-chip {
+        padding: 4px 10px; border-radius: 12px; font-size: 12px; cursor: pointer;
+        background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+        border: none; transition: background 0.15s; white-space: nowrap;
+    }
+    .era-chip:hover { background: rgba(255,255,255,0.15); }
+    .density-viewport {
+        flex: 1; overflow-x: auto; overflow-y: hidden;
+        height: 44px; min-height: 44px;
+        scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .density-viewport::-webkit-scrollbar { height: 4px; }
+    .density-viewport::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 2px; }
+    .density-bar {
+        display: flex; align-items: flex-end; height: 40px; gap: 0;
+    }
+    .density-tick {
+        flex-shrink: 0; background: rgba(255,255,255,0.4);
+        cursor: pointer; border-radius: 1px 1px 0 0; transition: background 0.15s;
+    }
+    .density-tick:hover { background: rgba(255,255,255,0.85); }
+    .density-tick.active { background: #ff6b6b; box-shadow: 0 0 8px rgba(255,107,107,0.6); }
+    .timeline-zoom { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .timeline-zoom input[type=range] {
+        width: 80px; accent-color: var(--mud-palette-primary); cursor: pointer;
+    }
+    .event-card {
+        padding: 8px; margin-bottom: 6px; border-radius: 6px;
+        background: rgba(255,255,255,0.04); border-left: 3px solid;
+    }
+    .event-card:hover { background: rgba(255,255,255,0.08); }
+</style>
+
+<div class="galaxy-map-container" id="galaxy-map-root">
+    @if (_loading)
+    {
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+        </div>
+    }
+
+    @* ══════════ LEFT NAV PANEL ══════════ *@
+    @if (_geography is not null)
+    {
+        <div class="galaxy-nav-panel">
+            <MudPaper Elevation="8" Class="pa-2" Style="background:rgba(15,15,35,0.9);backdrop-filter:blur(8px);">
+                <MudStack Row="false" Spacing="1">
+                    <!-- Mode toggle -->
+                    <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small"
+                                    Style="align-self:flex-end;">
+                        <MudToggleItem Value="@("explore")" Text="Explore" />
+                        <MudToggleItem Value="@("timeline")" Text="Timeline" />
+                    </MudToggleGroup>
+
+                    <!-- Breadcrumbs -->
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                        @if (_currentLevel != "overview")
+                        {
+                            <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
+                                           Color="Color.Primary" OnClick="GoBack" />
+                        }
+                        <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
+                                        Style="padding:0;color:rgba(255,255,255,0.7);" />
+                    </MudStack>
+
+                    @if (_mode == "explore")
+                    {
+                        <!-- Search -->
+                        <MudTextField @bind-Value="_searchTerm" Placeholder="Search planets, systems, people..."
+                                      Variant="Variant.Outlined" Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true"
+                                      DebounceInterval="600" OnDebounceIntervalElapsed="OnSearchChanged"
+                                      Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
+                                      Style="color:#e0e0f0;" />
+
+                        <!-- System filter -->
+                        <MudSwitch Value="_onlyWithBodies" Color="Color.Success" Size="Size.Small"
+                                   Label="Only systems with celestial bodies"
+                                   Style="color:rgba(255,255,255,0.5);margin:0;"
+                                   ValueChanged="OnCelestialBodyFilterChanged" T="bool" />
+                    }
+
+                    <!-- Region filter -->
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">Regions</MudText>
+                        <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="ShowAllRegions"
+                                   Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">All</MudButton>
+                        <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="HideAllRegions"
+                                   Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">None</MudButton>
+                    </MudStack>
+                    <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:140px;overflow-y:auto;">
+                        @foreach (var region in _geography.Regions)
+                        {
+                            var isVisible = !_hiddenRegions.Contains(region.Name);
+                            <MudChip T="string" Size="Size.Small"
+                                     Variant="@(isVisible ? Variant.Filled : Variant.Outlined)"
+                                     OnClick="() => ToggleRegion(region.Name)"
+                                     Style="@GetRegionChipStyle(region.Name, isVisible)">
+                                @region.Name
+                            </MudChip>
+                        }
+                    </MudStack>
+
+                    @if (_mode == "timeline" && _overview?.Lenses is not null)
+                    {
+                        <MudDivider Style="border-color:rgba(255,255,255,0.1);" />
+                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">Events</MudText>
+                            <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="@(() => OnLensChanged("All"))"
+                                       Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">All</MudButton>
+                            <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="@(() => OnLensChanged("None"))"
+                                       Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">None</MudButton>
+                        </MudStack>
+                        <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:140px;overflow-y:auto;">
+                            @foreach (var lens in FilteredLenses)
+                            {
+                                var l = lens;
+                                var color = GetLensColorCss(l.Lens);
+                                var isActive = _selectedLens == "All" || _selectedLens == l.Lens;
+                                var chipStyle = isActive
+                                    ? $"background-color:{color};color:#fff;"
+                                    : $"border-color:{color};color:{color};opacity:0.5;";
+                                <MudChip T="string" Size="Size.Small"
+                                         Variant="@(isActive ? Variant.Filled : Variant.Outlined)"
+                                         OnClick="() => OnLensChanged(l.Lens)"
+                                         Style="@chipStyle">
+                                    @l.Lens @l.TotalCount
+                                </MudChip>
+                            }
+                        </MudStack>
+                    }
+
+                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Secondary">
+                            @_geography.Regions.Count Regions</MudChip>
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning">
+                            @_geography.TradeRoutes.Count Routes</MudChip>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+
+            @* Search results *@
+            @if (_mode == "explore" && _searchResults is { Count: > 0 })
+            {
+                <MudPaper Elevation="8" Class="pa-0 mt-1" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(8px);">
+                    <div class="search-results-list">
+                        <MudList Dense="true" T="MapSearchResult" Style="color:#e0e0f0;">
+                            @foreach (var group in _searchResults.GroupBy(r => r.GridKey))
+                            {
+                                <MudListSubheader Style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);">
+                                    <MudIcon Icon="@Icons.Material.Filled.GridOn" Size="Size.Small" />
+                                    <MudText Typo="Typo.subtitle2" Style="display:inline;margin-left:4px;">Grid @group.Key</MudText>
+                                </MudListSubheader>
+                                @foreach (var result in group)
+                                {
+                                    <MudListItem T="MapSearchResult" OnClick="() => SelectSearchResult(result)">
+                                        <MudText Typo="Typo.body2">@result.MatchedName</MudText>
+                                        @if (result.MatchType == "linked" && result.LinkedVia is not null)
+                                        {
+                                            <MudText Typo="Typo.caption" Style="color:rgba(255,215,0,0.6);">@result.LinkedVia</MudText>
+                                        }
+                                    </MudListItem>
+                                }
+                            }
+                        </MudList>
+                    </div>
+                </MudPaper>
+            }
+        </div>
+    }
+
+    @* ══════════ RIGHT DETAIL PANEL ══════════ *@
+    @if (_mode == "explore")
+    {
+        @* Region hover *@
+        @if (_hoveredRegionName is not null && _detailPage is null && _selectedSystem is null)
+        {
+            <div class="galaxy-detail-panel">
+                <MudPaper Elevation="12" Class="pa-3" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                        <div style="width:12px;height:12px;border-radius:50%;background:@_hoveredRegionColor;"></div>
+                        <MudText Typo="Typo.h6" Style="color:#e0e0f0;">@_hoveredRegionName</MudText>
+                    </MudStack>
+                    <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.5);">
+                        @_hoveredRegionCellCount grid cell@(_hoveredRegionCellCount != 1 ? "s" : "")
+                    </MudText>
+                    <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.3);">Click to explore this region</MudText>
+                </MudPaper>
+            </div>
+        }
+
+        @* Entity detail (system, route, body) *@
+        @if (_detailPage is not null || _selectedSystem is not null)
+        {
+            <div class="galaxy-detail-panel">
+                <MudPaper Elevation="12" Class="pa-0" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
+                    <div style="display:flex;justify-content:flex-end;padding:4px 4px 0 0;">
+                        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="ClearDetailPanel" />
+                    </div>
+                    @if (_loadingDetails)
+                    {
+                        <div style="display:flex;justify-content:center;padding:24px;">
+                            <MudProgressCircular Size="Size.Medium" Indeterminate="true" Color="Color.Primary" />
+                        </div>
+                    }
+                    else if (_detailPage is not null)
+                    {
+                        @if (_detailPage.Infobox?.ImageUrl is not null)
+                        {
+                            <MudCardMedia Image="@StripRevision(_detailPage.Infobox.ImageUrl)" Height="180" Style="border-radius:0;" />
+                        }
+                        <div class="pa-3">
+                            <MudText Typo="Typo.h6" Style="color:#e0e0f0;">@_detailPage.Title</MudText>
+                            @if (_detailPage.Infobox?.Template is not null)
+                            {
+                                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">@SanitizeTemplate(_detailPage.Infobox.Template)</MudText>
+                            }
+                            @if (_detailPage.Infobox?.Data is not null)
+                            {
+                                <MudSimpleTable Dense="true" Bordered="true" Striped="true" Class="mt-2"
+                                                Style="overflow-x:auto;background:transparent;">
+                                    <tbody>
+                                        @foreach (var prop in _detailPage.Infobox.Data.Where(HasInfoboxContent))
+                                        {
+                                            <tr>
+                                                <td style="font-weight:600;white-space:nowrap;padding:4px 8px;vertical-align:top;color:rgba(255,255,255,0.6);font-size:12px;">@prop.Label</td>
+                                                <td style="padding:4px 8px;color:#e0e0f0;font-size:12px;">
+                                                    @foreach (var link in prop.Links)
+                                                    {
+                                                        <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank" Style="font-size:12px;">@link.Content</MudLink>
+                                                    }
+                                                    @GetPlainValues(prop)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </MudSimpleTable>
+                            }
+                            <MudButton Href="@_detailPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="mt-2">Wookieepedia</MudButton>
+                        </div>
+                    }
+                    else if (_selectedSystem is not null)
+                    {
+                        <div class="pa-3">
+                            <MudText Typo="Typo.h6" Style="color:#e0e0f0;">@_selectedSystem.Name</MudText>
+                            @if (_selectedSystem.Region is not null)
+                            {
+                                <MudText Typo="Typo.body2" Style="color:#aaa;">Region: <span style="color:#e0e0f0;">@_selectedSystem.Region</span></MudText>
+                            }
+                            <MudText Typo="Typo.body2" Style="color:#aaa;">Grid: <span style="color:#e0e0f0;">@((char)('A' + _selectedSystem.Col))-@(_selectedSystem.Row + 1)</span></MudText>
+                            @if (_selectedSystem.CelestialBodies.Count > 0)
+                            {
+                                <MudDivider Style="border-color:rgba(255,255,255,0.1);" Class="my-2" />
+                                <MudText Typo="Typo.subtitle2" Style="color:#aaa;">Celestial Bodies (@_selectedSystem.CelestialBodies.Count)</MudText>
+                                <MudStack Row="true" Class="flex-wrap gap-1 mt-1">
+                                    @foreach (var body in _selectedSystem.CelestialBodies)
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                                 Style="background:rgba(107,203,119,0.2);color:#6bcb77;"
+                                                 OnClick="() => LoadPageDetail(body.Id)">@body.Name</MudChip>
+                                    }
+                                </MudStack>
+                            }
+                        </div>
+                    }
+                </MudPaper>
+            </div>
+        }
+    }
+    else if (_mode == "timeline" && _yearData is not null)
+    {
+        @* Timeline info panel (right) *@
+        <div class="galaxy-detail-panel" id="galaxy-map-panel">
+            <MudPaper Elevation="12" Class="pa-3" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
+                <MudText Typo="Typo.h5" Style="color:rgba(255,255,255,0.9);">@_yearData.YearDisplay</MudText>
+                @if (_yearData.Era is not null)
+                {
+                    <MudText Typo="Typo.subtitle2" Style="color:rgba(255,255,255,0.5);margin-bottom:12px;">@_yearData.Era</MudText>
+                }
+
+                @if (_yearData.Regions.Count > 0)
+                {
+                    <MudText Typo="Typo.subtitle1" Style="margin-top:8px;">Territory Control</MudText>
+                    @foreach (var region in _yearData.Regions)
+                    {
+                        <div style="margin:4px 0;" data-highlight-region="@region.Region">
+                            <MudText Typo="Typo.body2" Style="font-weight:600;">@region.Region</MudText>
+                            @foreach (var faction in region.Factions)
+                            {
+                                <div style="display:flex;align-items:center;gap:6px;margin:2px 0 2px 12px;">
+                                    <div style="width:10px;height:10px;border-radius:50%;background:@faction.Color;"></div>
+                                    <span style="font-size:12px;">@faction.Faction</span>
+                                    <span style="font-size:11px;opacity:0.5;">@((faction.Control * 100).ToString("0"))%</span>
+                                    @if (faction.Contested)
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Outlined"
+                                                 Style="font-size:9px;height:18px;">Contested</MudChip>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+
+                @{
+                    var mappedEvents = FilteredEventCells.SelectMany(c => c.Events.Select(e => (evt: e, region: c.Region))).ToList();
+                    var unresolvedFiltered = (_yearData.UnresolvedEvents ?? [])
+                        .Where(e => _selectedLens == "All" || e.Lens == _selectedLens).ToList();
+                    var totalAll = mappedEvents.Count + unresolvedFiltered.Count;
+                }
+
+                @if (totalAll > 0)
+                {
+                    <MudDivider Style="margin:12px 0;" />
+
+                    @if (mappedEvents.Count > 0)
+                    {
+                        <MudText Typo="Typo.subtitle1">
+                            <MudIcon Icon="@Icons.Material.Filled.Place" Size="Size.Small" Style="vertical-align:middle;margin-right:4px;" />
+                            On Map (@mappedEvents.Count)
+                        </MudText>
+                        @foreach (var (evt, region) in mappedEvents.Take(25))
+                        {
+                            @RenderEventCard(evt, region)
+                        }
+                    }
+
+                    @if (unresolvedFiltered.Count > 0)
+                    {
+                        <MudText Typo="Typo.subtitle1" Style="margin-top:12px;color:rgba(255,255,255,0.6);">
+                            <MudIcon Icon="@Icons.Material.Filled.LocationOff" Size="Size.Small" Style="vertical-align:middle;margin-right:4px;" />
+                            No Location (@unresolvedFiltered.Count)
+                        </MudText>
+                        @foreach (var evt in unresolvedFiltered.Take(20))
+                        {
+                            @RenderEventCard(evt, null)
+                        }
+                    }
+                }
+            </MudPaper>
+        </div>
+    }
+
+    @* ══════════ FACTION LEGEND (bottom-left overlay) ══════════ *@
+    @if (_mode == "timeline" && _yearData is not null)
+    {
+        <div style="position:absolute;bottom:80px;left:12px;z-index:100;">
+            <MudPaper Elevation="8" Class="pa-2" Style="background:rgba(15,15,35,0.9);backdrop-filter:blur(8px);">
+                @foreach (var name in ActiveFactions)
+                {
+                    var info = _factionInfo.GetValueOrDefault(name);
+                    var color = info?.Color ?? "#888";
+                    <div class="d-flex align-center gap-2" style="margin-bottom:4px;">
+                        @if (info?.IconUrl is not null)
+                        {
+                            <img src="@info.IconUrl" alt="@name" style="width:22px;height:22px;object-fit:contain;flex-shrink:0;" />
+                        }
+                        else
+                        {
+                            <div style="width:14px;height:14px;border-radius:50%;background:@color;flex-shrink:0;"></div>
+                        }
+                        @if (info?.WikiUrl is not null)
+                        {
+                            <MudLink Href="@info.WikiUrl" Target="_blank" Typo="Typo.caption"
+                                     Style="@($"color:{color};")">@name</MudLink>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Style="@($"color:{color};")">@name</MudText>
+                        }
+                    </div>
+                }
+            </MudPaper>
+        </div>
+    }
+
+    @* ══════════ TIMELINE SCRUBBER (bottom bar) ══════════ *@
+    @if (_mode == "timeline" && _overview is not null)
+    {
+        <div class="galaxy-timeline-bar">
+            @if (_autoplay)
+            {
+                <div class="timeline-progress" style="--duration: @(_frameTimeMs)ms;"></div>
+            }
+            <div class="timeline-eras">
+                @foreach (var era in _overview.Eras.Take(8))
+                {
+                    <button class="era-chip" @onclick="() => JumpToYear(era.StartYear)"
+                            title="@FormatYear(era.StartYear)">@era.Name</button>
+                }
+            </div>
+            <div class="timeline-controls">
+                <!-- Playback controls (left) -->
+                <MudIconButton Icon="@(_autoplay ? Icons.Material.Filled.Pause : Icons.Material.Filled.PlayArrow)"
+                               Size="Size.Medium" OnClick="ToggleAutoplay" Color="Color.Primary"
+                               title="@(_autoplay ? "Pause" : "Play")" Style="flex-shrink:0;" />
+                <MudSelect T="int" @bind-Value="_frameTimeMs" Dense="true" Variant="Variant.Outlined"
+                           Style="min-width:80px;max-width:80px;font-size:13px;flex:0 0 80px;" title="Frame speed">
+                    <MudSelectItem Value="5000">5s</MudSelectItem>
+                    <MudSelectItem Value="10000">10s</MudSelectItem>
+                    <MudSelectItem Value="30000">30s</MudSelectItem>
+                    <MudSelectItem Value="60000">1m</MudSelectItem>
+                </MudSelect>
+
+                <!-- Year navigation -->
+                <MudIconButton Icon="@Icons.Material.Filled.SkipPrevious" Size="Size.Medium" OnClick="StepPrevious"
+                               title="Previous year" Style="flex-shrink:0;" />
+                <MudText Typo="Typo.h6" Style="min-width:110px;text-align:center;font-weight:700;color:rgba(255,255,255,0.9);white-space:nowrap;flex-shrink:0;">
+                    @(_yearData?.YearDisplay ?? "—")
+                </MudText>
+                <MudIconButton Icon="@Icons.Material.Filled.SkipNext" Size="Size.Medium" OnClick="StepNext"
+                               title="Next year" Style="flex-shrink:0;" />
+
+                <!-- Scrollable density bar -->
+                <div class="density-viewport" id="density-viewport">
+                    <div class="density-bar" style="width:@(FilteredDensity.Count * _tickWidth)px;">
+                        @if (FilteredDensity.Count > 0)
+                        {
+                            var maxLog = Math.Log(Math.Max(2, FilteredDensity.Max(d => d.Count)));
+                            @foreach (var d in FilteredDensity)
+                            {
+                                var h = d.Count > 0 ? Math.Max(4, (int)(38.0 * Math.Log(d.Count) / maxLog)) : 2;
+                                var isActive = d.Year == _year;
+                                var w = Math.Max(2, _tickWidth - 1);
+                                <div class="density-tick @(isActive ? "active" : "")"
+                                     style="@($"height:{h}px;width:{w}px")"
+                                     @onclick="() => JumpToYear(d.Year)"
+                                     title="@($"{FormatYear(d.Year)}: {d.Count} events")"></div>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <!-- Zoom slider -->
+                <div class="timeline-zoom" title="Zoom timeline">
+                    <MudIcon Icon="@Icons.Material.Filled.ZoomIn" Size="Size.Small" Style="color:rgba(255,255,255,0.4);" />
+                    <input type="range" min="3" max="20" step="1" value="@_tickWidth"
+                           @oninput="OnTickZoomChanged" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    IJSObjectReference? _module;
+    DotNetObjectReference<GalaxyMapUnified>? _dotNetRef;
+
+    // Data
+    GalaxyOverviewDocument? _overview;
+    GalaxyMapV2Overview? _geography;
+    GalaxyYearDocument? _yearData;
+    bool _loading = true;
+    bool _d3Initialized;
+
+    // Mode
+    string _mode = "explore";
+    string _selectedLens = "All";
+
+    // Explore state (from GalacticMapV2)
+    MapV2System? _selectedSystem;
+    MapV2Region? _selectedRegion;
+    string _currentLevel = "overview";
+    string _currentLabel = "";
+    string _cellLabel = "";
+    string _regionLabel = "";
+    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("Galaxy", null, disabled: false, icon: Icons.Material.Filled.Public)];
+    bool _onlyWithBodies;
+    readonly HashSet<string> _hiddenRegions = new();
+    string? _hoveredRegionName;
+    int _hoveredRegionCellCount;
+    string? _hoveredRegionColor;
+    string? _searchTerm;
+    List<MapSearchResult>? _searchResults;
+    WikiPage? _detailPage;
+    bool _loadingDetails;
+    readonly Dictionary<int, MapV2System> _systemCache = new();
+    Dictionary<string, TerritoryFactionInfo> _factionInfo = new(StringComparer.OrdinalIgnoreCase);
+
+    // Timeline state
+    int _year;
+    int _yearIndex;
+    bool _autoplay;
+    int _frameTimeMs = 30000;
+    int _tickWidth = 6;
+    System.Threading.Timer? _autoplayTimer;
+
+    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    string ContinuityQuery => GlobalFilterService.GetContinuityQueryParam() is { } c ? $"continuity={c}" : "";
+
+    IEnumerable<GalaxyYearEventCell> FilteredEventCells =>
+        _yearData?.EventCells
+            .Select(c => new GalaxyYearEventCell
+            {
+                Col = c.Col, Row = c.Row, Region = c.Region,
+                Events = _selectedLens == "All" ? c.Events : c.Events.Where(e => e.Lens == _selectedLens).ToList(),
+                Count = _selectedLens == "All" ? c.Count : c.Events.Count(e => e.Lens == _selectedLens),
+            })
+            .Where(c => c.Events.Count > 0) ?? [];
+
+    int FilteredEventCount => FilteredEventCells.Sum(c => c.Events.Count);
+
+    List<int> FilteredYears => FilteredDensity.Select(d => d.Year).ToList();
+
+    List<GalaxyYearDensity> FilteredDensity
+    {
+        get
+        {
+            if (_overview?.YearDensity is null) return [];
+            var cont = GlobalFilterService.SelectedContinuity;
+            return _overview.YearDensity
+                .Select(d =>
+                {
+                    var count = cont switch
+                    {
+                        Continuity.Canon => d.CanonCount,
+                        Continuity.Legends => d.LegendsCount,
+                        _ => d.Count // Both or null = all
+                    };
+                    return new GalaxyYearDensity { Year = d.Year, Count = count, CanonCount = d.CanonCount, LegendsCount = d.LegendsCount, PerLens = d.PerLens };
+                })
+                .Where(d => d.Count > 0)
+                .ToList();
+        }
+    }
+
+    IEnumerable<string> ActiveFactions =>
+        _yearData?.Regions.SelectMany(r => r.Factions).Select(f => f.Faction).Distinct().OrderBy(f => f)
+        ?? Enumerable.Empty<string>();
+
+    IEnumerable<GalaxyLensSummary> FilteredLenses =>
+        _overview?.Lenses.Where(l =>
+            GlobalFilterService.SelectedUniverse != Universe.InUniverse || !l.OutOfUniverse)
+        ?? [];
+
+    // ══════════ LIFECYCLE ══════════
+
+    protected override async Task OnInitializedAsync()
+    {
+        GlobalFilterService.OnChange += OnFilterChanged;
+        await LoadData();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!_d3Initialized && _geography is not null)
+        {
+            _d3Initialized = true;
+            _dotNetRef?.Dispose();
+            _dotNetRef = DotNetObjectReference.Create(this);
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
+            await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
+            await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
+        }
+    }
+
+    async Task LoadData()
+    {
+        _loading = true;
+        try
+        {
+            var cq = ContinuityQuery;
+            var geoUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map/geography" : $"api/galaxy-map/geography?{cq}";
+            var geoTask = Http.GetFromJsonAsync<GalaxyMapV2Overview>(geoUrl);
+            var overviewTask = Http.GetFromJsonAsync<GalaxyOverviewDocument>("api/galaxy-map/overview");
+            _geography = await geoTask;
+            try { _overview = await overviewTask; } catch { }
+
+            if (_overview is not null)
+            {
+                try { _factionInfo = await Http.GetFromJsonAsync<Dictionary<string, TerritoryFactionInfo>>("api/galaxy-map/factions") ?? _factionInfo; }
+                catch { }
+            }
+
+            if (_overview?.AvailableYears.Count > 0)
+            {
+                _year = FilteredYears[0];
+                _yearIndex = 0;
+            }
+        }
+        catch { }
+        finally { _loading = false; }
+    }
+
+    // ══════════ MODE SWITCHING ══════════
+
+    async Task OnModeChanged(string mode)
+    {
+        _mode = mode;
+        if (mode == "timeline")
+        {
+            _hoveredRegionName = null;
+            ClearDetailPanel();
+            await LoadYear();
+        }
+        else
+        {
+            if (_autoplay) { _autoplay = false; _autoplayTimer?.Dispose(); _autoplayTimer = null; }
+            if (_module is not null)
+                await _module.InvokeVoidAsync("clearTemporalLayers");
+        }
+        StateHasChanged();
+    }
+
+    // ══════════ EXPLORE: JSInvokable callbacks ══════════
+
+    [JSInvokable]
+    public async Task<GalaxyMapV2Systems?> FetchSystemsInRange(int minCol, int maxCol, int minRow, int maxRow)
+    {
+        try
+        {
+            var cq = ContinuityQuery;
+            var url = $"api/galaxy-map/systems?minCol={minCol}&maxCol={maxCol}&minRow={minRow}&maxRow={maxRow}";
+            if (!string.IsNullOrEmpty(cq)) url += $"&{cq}";
+            var result = await Http.GetFromJsonAsync<GalaxyMapV2Systems>(url);
+            if (result?.Systems is not null)
+                foreach (var sys in result.Systems) _systemCache.TryAdd(sys.Id, sys);
+            return result;
+        }
+        catch { return null; }
+    }
+
+    [JSInvokable]
+    public void OnLevelChanged(string level, string label)
+    {
+        _currentLevel = level;
+        _currentLabel = label;
+        switch (level)
+        {
+            case "overview": _cellLabel = ""; _regionLabel = ""; _selectedRegion = null; break;
+            case "region":
+                _regionLabel = label; _cellLabel = "";
+                _selectedRegion = _geography?.Regions.FirstOrDefault(r => r.Name == label);
+                break;
+            case "cell": _cellLabel = label; _regionLabel = ""; _selectedRegion = null; break;
+        }
+        _hoveredRegionName = null;
+        UpdateBreadcrumbs();
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnRegionHovered(string name, int cellCount, string color)
+    {
+        _hoveredRegionName = name; _hoveredRegionCellCount = cellCount; _hoveredRegionColor = color;
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnRegionUnhovered() { _hoveredRegionName = null; InvokeAsync(StateHasChanged); }
+
+    [JSInvokable]
+    public void OnSystemSelected(int systemId, string systemName)
+    {
+        _systemCache.TryGetValue(systemId, out _selectedSystem);
+        if (_detailPage is null && _selectedSystem is not null) _ = LoadPageDetail(systemId);
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnCelestialBodySelected(int bodyId, string bodyName) => InvokeAsync(() => LoadPageDetail(bodyId));
+
+    [JSInvokable]
+    public void OnSystemDeselected()
+    {
+        _selectedSystem = null; _detailPage = null;
+        InvokeAsync(StateHasChanged);
+    }
+
+    // ══════════ EXPLORE: Navigation ══════════
+
+    async Task GoBack() { if (_module is not null) await _module.InvokeVoidAsync("goBack"); }
+
+    void UpdateBreadcrumbs()
+    {
+        _breadcrumbs = [new("Galaxy", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Public)];
+        if (!string.IsNullOrEmpty(_regionLabel))
+            _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel != "system", icon: Icons.Material.Filled.Map));
+        if (!string.IsNullOrEmpty(_cellLabel))
+            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: _currentLevel != "system", icon: Icons.Material.Filled.GridOn));
+        if (_currentLevel == "system")
+            _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
+    }
+
+    // ══════════ EXPLORE: Search ══════════
+
+    async Task OnSearchChanged()
+    {
+        if (string.IsNullOrWhiteSpace(_searchTerm) || _searchTerm.Length < 2) { _searchResults = null; return; }
+        try {
+            var url = $"api/galaxy-map/search?term={Uri.EscapeDataString(_searchTerm)}";
+            var cq = ContinuityQuery;
+            if (!string.IsNullOrEmpty(cq)) url += $"&{cq}";
+            _searchResults = await Http.GetFromJsonAsync<List<MapSearchResult>>(url);
+        }
+        catch { _searchResults = null; }
+        StateHasChanged();
+    }
+
+    void ClearSearch() { _searchTerm = null; _searchResults = null; }
+
+    async Task SelectSearchResult(MapSearchResult result)
+    {
+        if (TryParseGridKey(result.GridKey, out int col, out int row) && _module is not null)
+            await _module.InvokeVoidAsync("navigateToCell", col, row);
+        await LoadPageDetail(result.PageId);
+    }
+
+    // ══════════ EXPLORE: Filters ══════════
+
+    async Task OnCelestialBodyFilterChanged(bool value)
+    {
+        _onlyWithBodies = value;
+        if (_module is not null) await _module.InvokeVoidAsync("setSystemFilter", value);
+    }
+
+    async Task ToggleRegion(string name)
+    {
+        if (!_hiddenRegions.Remove(name)) _hiddenRegions.Add(name);
+        if (_module is not null) await _module.InvokeVoidAsync("setRegionVisibility", (object)_hiddenRegions.ToArray());
+    }
+
+    async Task ShowAllRegions()
+    {
+        _hiddenRegions.Clear();
+        if (_module is not null) await _module.InvokeVoidAsync("setRegionVisibility", (object)Array.Empty<string>());
+    }
+
+    async Task HideAllRegions()
+    {
+        if (_geography is not null) foreach (var r in _geography.Regions) _hiddenRegions.Add(r.Name);
+        if (_module is not null) await _module.InvokeVoidAsync("setRegionVisibility", (object)_hiddenRegions.ToArray());
+    }
+
+    // ══════════ EXPLORE: Detail panel ══════════
+
+    async Task LoadPageDetail(int pageId)
+    {
+        _loadingDetails = true; StateHasChanged();
+        try { _detailPage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{pageId}"); }
+        catch { _detailPage = null; }
+        finally { _loadingDetails = false; StateHasChanged(); }
+    }
+
+    void ClearDetailPanel() { _detailPage = null; _selectedSystem = null; }
+
+    // ══════════ TIMELINE ══════════
+
+    async Task LoadYear()
+    {
+        if (_overview is null || _module is null) return;
+        try { _yearData = await Http.GetFromJsonAsync<GalaxyYearDocument>($"api/galaxy-map/year/{_year}"); } catch { _yearData = null; }
+        if (_yearData is not null)
+        {
+            var layers = new[] { "regions", "territory", "events" };
+            await _module.InvokeVoidAsync("renderTemporalLayer", _yearData, layers, _selectedLens);
+        }
+        StateHasChanged();
+        _ = ScrollDensityToActive();
+    }
+
+    async Task OnLensChanged(string lens)
+    {
+        // Toggle: clicking the active lens deselects it back to All
+        if (lens != "All" && lens != "None" && _selectedLens == lens)
+            _selectedLens = "All";
+        else
+            _selectedLens = lens;
+
+        if (_module is not null) await _module.InvokeVoidAsync("setLensFilter", _selectedLens);
+        StateHasChanged();
+    }
+
+    async Task JumpToYear(int year)
+    {
+        if (_overview is null) return;
+        _year = FilteredYears.OrderBy(y => Math.Abs(y - year)).FirstOrDefault();
+        _yearIndex = FilteredYears.IndexOf(_year);
+        await LoadYear();
+    }
+
+    async Task StepPrevious()
+    {
+        if (_overview is null || _yearIndex <= 0) return;
+        _year = FilteredYears[--_yearIndex];
+        await LoadYear();
+    }
+
+    async Task StepNext()
+    {
+        if (_overview is null || _yearIndex >= FilteredYears.Count - 1) return;
+        _year = FilteredYears[++_yearIndex];
+        await LoadYear();
+    }
+
+    void ToggleAutoplay()
+    {
+        _autoplay = !_autoplay;
+        if (_autoplay)
+        {
+            _autoplayTimer = new System.Threading.Timer(async _ =>
+                await InvokeAsync(async () => { if (!_autoplay || _overview is null) return;
+                    _yearIndex = (_yearIndex + 1) % FilteredYears.Count;
+                    _year = FilteredYears[_yearIndex]; await LoadYear(); }),
+                null, _frameTimeMs, _frameTimeMs);
+        }
+        else { _autoplayTimer?.Dispose(); _autoplayTimer = null; }
+    }
+
+    void OnTickZoomChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var w) && w >= 3 && w <= 20)
+        {
+            _tickWidth = w;
+            StateHasChanged();
+            _ = ScrollDensityToActive();
+        }
+    }
+
+    async Task ScrollDensityToActive()
+    {
+        if (_overview?.YearDensity is null) return;
+        await Task.Delay(50); // allow render
+        try
+        {
+            await JS.InvokeVoidAsync("eval", $@"
+                (function() {{
+                    var vp = document.getElementById('density-viewport');
+                    if (!vp) return;
+                    var active = vp.querySelector('.density-tick.active');
+                    if (active) active.scrollIntoView({{ inline: 'center', behavior: 'smooth' }});
+                }})();");
+        }
+        catch { }
+    }
+
+    // ══════════ HELPERS ══════════
+
+    static bool TryParseGridKey(string gridKey, out int col, out int row)
+    {
+        col = 0; row = 0;
+        if (string.IsNullOrEmpty(gridKey)) return false;
+        var parts = gridKey.Split('-');
+        if (parts.Length != 2 || parts[0].Length != 1 || !char.IsLetter(parts[0][0])) return false;
+        col = char.ToUpper(parts[0][0]) - 'A';
+        return int.TryParse(parts[1], out var num) && (row = num - 1) >= 0;
+    }
+
+    static readonly string[] RegionPalette =
+        ["#4ecdc4","#ff6f91","#7e6fff","#ffd93d","#6bcb77","#ff6b6b","#a29bfe","#fd79a8","#fdcb6e","#00cec9",
+         "#e17055","#0984e3","#6c5ce7","#00b894","#e84393","#fab1a0","#74b9ff","#55efc4","#ff7675","#dfe6e9"];
+
+    string GetRegionColor(string name)
+    {
+        if (_geography?.Regions is not { Count: > 0 }) return "#ffffff";
+        var idx = _geography.Regions.FindIndex(r => r.Name == name);
+        return RegionPalette[(idx >= 0 ? idx : 0) % RegionPalette.Length];
+    }
+
+    string GetRegionChipStyle(string name, bool visible)
+    {
+        var c = GetRegionColor(name);
+        return visible ? $"background-color:{c};color:#fff;" : $"border-color:{c};color:{c};opacity:0.5;";
+    }
+
+    static string GetLensColorCss(string lens)
+    {
+        int hash = 0; foreach (var c in lens) hash = (hash * 31 + c) | 0;
+        var hue = ((hash % 360) + 360) % 360;
+        return $"hsl({hue}, 75%, 55%)";
+    }
+
+    static string FormatYear(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
+
+    RenderFragment RenderEventCard(GalaxyYearEvent evt, string? region) => __builder =>
+    {
+        var catColor = GetLensColorCss(evt.Lens);
+        <div class="event-card" style="@($"border-left-color:{catColor}")" data-highlight-region="@region">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                @if (evt.WikiUrl is not null)
+                {
+                    <MudLink Href="@evt.WikiUrl" Target="_blank" Typo="Typo.body2"
+                             Style="font-weight:500;color:#e0e0f0;">@evt.Title</MudLink>
+                }
+                else
+                {
+                    <span style="font-size:13px;font-weight:500;">@evt.Title</span>
+                }
+                <div style="display:flex;gap:3px;flex-shrink:0;margin-left:4px;">
+                    @{
+                        var contChipColor = evt.Continuity == Continuity.Canon ? Color.Primary
+                            : evt.Continuity == Continuity.Legends ? Color.Secondary : Color.Default;
+                        var contLabel = evt.Continuity == Continuity.Canon ? "C"
+                            : evt.Continuity == Continuity.Legends ? "L" : "?";
+                    }
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="contChipColor"
+                             Style="font-size:8px;height:16px;min-width:16px;padding:0 3px;"
+                             title="@evt.Continuity.ToString()">@contLabel</MudChip>
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                             Style="@($"border-color:{catColor};color:{catColor};font-size:9px;height:18px;")">
+                        @evt.Lens
+                    </MudChip>
+                </div>
+            </div>
+            @if (evt.Place is not null)
+            {
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Place" Size="Size.Small"
+                             Style="font-size:12px;vertical-align:middle;margin-right:2px;" />@evt.Place
+                    @if (region is not null)
+                    {
+                        <span style="opacity:0.6;"> · @region</span>
+                    }
+                </div>
+            }
+            @if (evt.Outcome is not null)
+            {
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;font-style:italic;">@evt.Outcome</div>
+            }
+        </div>
+    };
+
+    static bool HasInfoboxContent(InfoboxProperty p) => p.Links.Count > 0 || p.Values.Any(v => !string.IsNullOrWhiteSpace(v));
+    static string GetPlainValues(InfoboxProperty p)
+    {
+        var linkTexts = p.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return string.Join(", ", p.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v)));
+    }
+    static string StripRevision(string url) { var i = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase); return i > 0 ? url[..i] : url; }
+    static string SanitizeTemplate(string t) => t.Split(':').LastOrDefault()?.Replace("_", " ") ?? t;
+
+    async void OnFilterChanged() => await InvokeAsync(async () =>
+    {
+        _systemCache.Clear(); _selectedSystem = null; _selectedRegion = null;
+        _detailPage = null; _searchResults = null; _currentLevel = "overview";
+        _cellLabel = ""; _regionLabel = ""; _hoveredRegionName = null; _hiddenRegions.Clear();
+        UpdateBreadcrumbs(); _d3Initialized = false;
+        if (_module is not null) { try { await _module.InvokeVoidAsync("dispose"); } catch { } }
+        await LoadData(); StateHasChanged();
+    });
+
+    public async ValueTask DisposeAsync()
+    {
+        GlobalFilterService.OnChange -= OnFilterChanged;
+        _autoplayTimer?.Dispose();
+        if (_module is not null)
+        {
+            try { await _module.InvokeVoidAsync("dispose"); await _module.DisposeAsync(); }
+            catch (JSDisconnectedException) { } catch (ObjectDisposedException) { }
+        }
+        _dotNetRef?.Dispose();
+    }
+}

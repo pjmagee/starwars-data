@@ -39,7 +39,7 @@ public class RelationshipGraphController : ControllerBase
     /// <summary>Browse entities by type with pagination.</summary>
     [HttpGet("browse")]
     public async Task<BrowseEntitiesResult> Browse(
-        [FromQuery] string type = "Character",
+        [FromQuery] string? type = null,
         [FromQuery] string? q = null,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20,
@@ -48,10 +48,10 @@ public class RelationshipGraphController : ControllerBase
     {
         if (pageSize > 100) pageSize = 100;
 
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Eq(n => n.Type, type)
-        };
+        var filters = new List<FilterDefinition<GraphNode>>();
+
+        if (!string.IsNullOrWhiteSpace(type))
+            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
 
         if (!string.IsNullOrWhiteSpace(q))
             filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
@@ -59,14 +59,14 @@ public class RelationshipGraphController : ControllerBase
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
-        var filter = Builders<GraphNode>.Filter.And(filters);
+        var filter = filters.Count > 0 ? Builders<GraphNode>.Filter.And(filters) : FilterDefinition<GraphNode>.Empty;
         var total = await _nodes.CountDocumentsAsync(filter, cancellationToken: ct);
 
         var items = await _nodes.Find(filter)
             .SortBy(n => n.Name)
             .Skip((page - 1) * pageSize)
             .Limit(pageSize)
-            .Project(n => new EntitySearchDto { Id = n.PageId, Name = n.Name })
+            .Project(n => new EntitySearchDto { Id = n.PageId, Name = n.Name, Type = n.Type, Continuity = n.Continuity.ToString() })
             .ToListAsync(ct);
 
         return new BrowseEntitiesResult { Items = items, Total = total, Page = page, PageSize = pageSize };
@@ -76,6 +76,7 @@ public class RelationshipGraphController : ControllerBase
     [HttpGet("search")]
     public async Task<List<EntitySearchDto>> Search(
         [FromQuery] string q,
+        [FromQuery] string? type = null,
         [FromQuery] string? continuity = null,
         CancellationToken ct = default)
     {
@@ -84,13 +85,16 @@ public class RelationshipGraphController : ControllerBase
             Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i"))
         };
 
+        if (!string.IsNullOrWhiteSpace(type))
+            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
+
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
         return await _nodes.Find(Builders<GraphNode>.Filter.And(filters))
             .SortBy(n => n.Name)
-            .Limit(20)
-            .Project(n => new EntitySearchDto { Id = n.PageId, Name = n.Name })
+            .Limit(30)
+            .Project(n => new EntitySearchDto { Id = n.PageId, Name = n.Name, Type = n.Type, Continuity = n.Continuity.ToString() })
             .ToListAsync(ct);
     }
 

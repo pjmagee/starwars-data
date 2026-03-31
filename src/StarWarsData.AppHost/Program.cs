@@ -48,10 +48,10 @@ var admin = builder
     .WithReference(mongo)
     .WaitFor(mongo)
     .WithReference(apiService)
-    // Phase 1 — Download raw data
+    // ── Phase 1: Download raw data ──
     .WithHttpCommand(
         path: "/api/admin/download/pages",
-        displayName: "1. Download Pages",
+        displayName: "1a. Download Pages",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
@@ -66,146 +66,158 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
+            Description = "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
             IconName = "ArrowSync",
             IsHighlighted = false,
         }
     )
-    // Phase 2 — Template views
+    // ── Phase 2: Template views ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-template-views",
         displayName: "2. Create Template Views",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
+            Description = "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
             IconName = "TableMultiple",
             IsHighlighted = false,
         }
     )
-    // Phase 3 — Timeline events
+    // ── Phase 3: Timeline events + indexes ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-categorized-timeline-events",
-        displayName: "3. Build Timeline Events",
+        displayName: "3a. Build Timeline Events",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates categorized timeline events in timeline.* collections from raw.pages. Requires Phase 1.",
+            Description = "Creates categorized timeline events in timeline.* collections from raw.pages. Requires Phase 1.",
             IconName = "Timeline",
             IsHighlighted = false,
         }
     )
-    // Phase 3b — Indexes
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-indexes",
         displayName: "3b. Create Indexes",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates indexes on Pages and timeline event collections for query performance.",
+            Description = "Creates indexes on Pages and timeline event collections for query performance.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
     )
-    // Phase 4 — Embeddings (optional)
+    // ── Phase 4: Article chunks + embeddings ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-embeddings",
-        displayName: "4a. Create Embeddings",
+        displayName: "4a. Run Article Chunking",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
+            Description = "Chunks articles and generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
             IconName = "Sparkle",
             IsHighlighted = false,
         }
     )
     .WithHttpCommand(
-        path: "/api/admin/mongo/create-index-embeddings",
-        displayName: "4b. Create Vector Indexes",
+        path: "/api/admin/mongo/ensure-chunk-indexes",
+        displayName: "4b. Ensure Chunk Indexes",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Creates MongoDB vector indexes. Run after 3a.",
+            Description = "Creates indexes on article chunk collections.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
     )
-    // Phase 5 — Character Timelines (AI-generated)
     .WithHttpCommand(
-        path: "/api/admin/mongo/create-character-timelines",
-        displayName: "5. Build Character Timelines",
+        path: "/api/admin/mongo/create-index-embeddings",
+        displayName: "4c. Create Vector Indexes",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Uses AI to generate rich timeline events for each character by analyzing all linked pages. Requires Phase 1 and OpenAI key.",
+            Description = "Creates MongoDB Atlas vector search indexes on embeddings. Run after 4a.",
+            IconName = "DatabaseSearch",
+            IsHighlighted = false,
+        }
+    )
+    // ── Phase 5: Knowledge Graph (deterministic) ──
+    .WithHttpCommand(
+        path: "/api/admin/mongo/build-infobox-graph",
+        displayName: "5a. Build Infobox Graph",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.",
+            IconName = "AccountTree",
+            IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/ensure-graph-indexes",
+        displayName: "5b. Ensure Graph Indexes",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Creates MongoDB indexes on kg.nodes and kg.edges for query performance.",
+            IconName = "DatabaseSearch",
+            IsHighlighted = false,
+        }
+    )
+    // ── Phase 6: AI Character Timelines ──
+    .WithHttpCommand(
+        path: "/api/admin/mongo/create-character-timelines",
+        displayName: "6. Build Character Timelines",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.",
             IconName = "PersonTimeline",
             IsHighlighted = false,
         }
     )
-    // Phase 6 — Relationship Graph (OpenAI Batch API)
+    // ── Phase 7: LLM Relationship Graph (OpenAI Batch API, optional) ──
     .WithHttpCommand(
         path: "/api/admin/mongo/submit-graph-batch",
-        displayName: "6a. Submit Graph Batch",
+        displayName: "7a. Submit LLM Graph Batch",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Submits one batch of unprocessed pages to the OpenAI Batch API for relationship extraction. Drip-feeds to respect token quota.",
+            Description = "Submits a batch to OpenAI Batch API for LLM relationship extraction. Drip-feeds to respect token quota.",
             IconName = "CloudUpload",
             IsHighlighted = false,
         }
     )
     .WithHttpCommand(
         path: "/api/admin/mongo/check-graph-batches",
-        displayName: "6b. Check Graph Batches",
+        displayName: "7b. Check Graph Batches",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Checks status of in-flight OpenAI batches and processes completed results. Runs automatically every 5 minutes.",
+            Description = "Checks status of in-flight OpenAI batches and processes completed results. Runs every 5 minutes.",
             IconName = "ArrowSync",
             IsHighlighted = false,
         }
     )
     .WithHttpCommand(
         path: "/api/admin/mongo/cleanup-graph-batches",
-        displayName: "6c. Cleanup Failed Batches",
+        displayName: "7c. Cleanup Failed Batches",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Releases orphaned pages from failed/stale batches so they can be resubmitted. Run this if batches are stuck.",
+            Description = "Releases orphaned pages from failed/stale batches so they can be resubmitted.",
             IconName = "BroomAll",
             IsHighlighted = false,
         }
     )
-    // Phase 7 — Territory Control
+    // ── Phase 8: Unified Galaxy Map ──
     .WithHttpCommand(
-        path: "/api/admin/mongo/infer-territory-control",
-        displayName: "7. Infer Territory Control",
+        path: "/api/admin/mongo/build-galaxy-map",
+        displayName: "8. Build Galaxy Map",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Infers territory control from battle outcomes, government lifecycles, and location data. Replaces existing territory data. Requires Phase 1 + 3.",
+            Description = "Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.",
             IconName = "GlobeSearch",
-            IsHighlighted = false,
-        }
-    )
-    .WithHttpCommand(
-        path: "/api/admin/mongo/ensure-graph-indexes",
-        displayName: "6d. Ensure Graph Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description =
-                "Creates MongoDB indexes on the relationship graph collections for query performance.",
-            IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
     );

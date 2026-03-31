@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using ModelContextProtocol.Client;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -20,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
+ConventionRegistry.Register("EnumAsString",
+    new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 builder.Services.AddControllers();
@@ -76,6 +79,7 @@ builder
     .AddScoped<MapService>()
     .AddScoped<GalaxyEventsService>()
     .AddScoped<TerritoryControlService>()
+    .AddScoped<GalaxyMapReadService>()
     // CharacterTimelineService is needed for read endpoints (list/get/search)
     // The ChatClient is only used by GenerateTimelineAsync (called from Admin app)
     .AddSingleton<CharacterTimelineChatClient>(sp =>

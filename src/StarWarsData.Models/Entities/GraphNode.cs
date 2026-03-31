@@ -25,6 +25,10 @@ public class GraphNode
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
+    [BsonElement("universe")]
+    [BsonRepresentation(BsonType.String)]
+    public Universe Universe { get; set; } = Universe.Unknown;
+
     /// <summary>Scalar properties (key → values). E.g. { "height": ["1.72 m"], "eye_color": ["Blue"] }</summary>
     [BsonElement("properties")]
     public Dictionary<string, List<string>> Properties { get; set; } = new();

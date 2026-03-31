@@ -13,87 +13,59 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
-    <!-- Search Bar -->
-    <MudGrid Class="mb-4">
-        <MudItem xs="12" sm="8" md="9">
-            <MudTextField T="string" @bind-Value="_search" Label="Search entities" Variant="Variant.Outlined"
+    <!-- Single table with search + type filter in toolbar -->
+    <MudTable T="EntitySearchDto" ServerData="LoadBrowseData" @ref="_browseTable" Dense="true"
+              Hover="true" Bordered="false" Striped="true" Elevation="1"
+              RowClass="cursor-pointer" OnRowClick="OnBrowseRowClick"
+              RowClassFunc="@((item, _) => item.Id == _selectedEntityId ? "mud-theme-primary" : "")"
+              Loading="_browseLoading" LoadingProgressColor="Color.Primary" Class="mb-4">
+        <ToolBarContent>
+            <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
                           Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
                           Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
-                          Placeholder="e.g. Jabba, Luke Skywalker, Coruscant, Rebel Alliance..." />
-        </MudItem>
-        <MudItem xs="12" sm="4" md="3">
-            <MudSelect T="string" @bind-Value="_selectedType" Label="Entity Type" Variant="Variant.Outlined"
-                       @bind-Value:after="OnTypeFilterChanged">
+                          Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
+                          Style="max-width:350px;" Class="mr-4" />
+            <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                       @bind-Value:after="OnTypeFilterChanged" Style="max-width:200px;" Clearable="true"
+                       Placeholder="All Types">
                 @foreach (var type in _entityTypes)
                 {
                     <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
                 }
             </MudSelect>
-        </MudItem>
-    </MudGrid>
-
-    @if (_searching)
-    {
-        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
-    }
-
-    <!-- Search Results (when user has typed a search query) -->
-    @if (_searchResults is { Count: > 0 })
-    {
-        <MudPaper Class="pa-3 mb-4" Outlined="true">
-            <MudText Typo="Typo.subtitle2" Class="mb-2" Color="Color.Secondary">Select an entity:</MudText>
-            <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2">
-                @foreach (var entity in _searchResults)
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Type</MudTh>
+            <MudTh>Continuity</MudTh>
+            <MudTh Style="width:80px">ID</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Type">
+                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">@context.Type</MudChip>
+            </MudTd>
+            <MudTd DataLabel="Continuity">
+                @if (context.Continuity == "Canon")
                 {
-                    <MudChip T="string" Color="@(entity.Id == _selectedEntityId ? Color.Primary : Color.Default)"
-                             Variant="@(entity.Id == _selectedEntityId ? Variant.Filled : Variant.Outlined)"
-                             OnClick="@(() => SelectEntity(entity.Id, entity.Name))"
-                             Size="Size.Medium">
-                        @entity.Name
-                    </MudChip>
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary" Style="font-size:10px;">Canon</MudChip>
                 }
-            </MudStack>
-        </MudPaper>
-    }
-    else if (_searchResults is { Count: 0 } && !string.IsNullOrWhiteSpace(_search) && !_searching)
-    {
-        <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-4">
-            No entities found matching "@_search" in @FormatTypeName(_selectedType).
-        </MudAlert>
-    }
-
-    <!-- Browse Table (when no search query — lets users discover entities) -->
-    @if (string.IsNullOrWhiteSpace(_search))
-    {
-        <MudTable T="EntitySearchDto" ServerData="LoadBrowseData" @ref="_browseTable" Dense="true"
-                  Hover="true" Bordered="false" Striped="true" Elevation="0"
-                  RowClass="cursor-pointer" OnRowClick="OnBrowseRowClick"
-                  RowClassFunc="@((item, _) => item.Id == _selectedEntityId ? "mud-theme-primary" : "")"
-                  Loading="_browseLoading" LoadingProgressColor="Color.Primary" Class="mb-4">
-            <ToolBarContent>
-                <MudText Typo="Typo.subtitle1" Color="Color.Secondary">
-                    Browse @FormatTypeName(_selectedType) entities with graph data
-                </MudText>
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh Style="width:80px">Page ID</MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Page ID">@context.Id</MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager PageSizeOptions="new[] { 10, 20, 50 }" />
-            </PagerContent>
-            <NoRecordsContent>
-                <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true">
-                    No processed entities found for @FormatTypeName(_selectedType). Run a batch from the
-                    <MudLink Href="/graph-builder">Graph Builder</MudLink> to start processing.
-                </MudAlert>
-            </NoRecordsContent>
-        </MudTable>
-    }
+                else if (context.Continuity == "Legends")
+                {
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Style="font-size:10px;">Legends</MudChip>
+                }
+            </MudTd>
+            <MudTd DataLabel="ID">@context.Id</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new[] { 10, 20, 50 }" />
+        </PagerContent>
+        <NoRecordsContent>
+            <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true">
+                No entities found.
+            </MudAlert>
+        </NoRecordsContent>
+    </MudTable>
 
     <!-- Selected Entity: Labels & Controls -->
     @if (_selectedEntityId > 0)
@@ -319,10 +291,9 @@
 
     // Search state
     private string _search = "";
-    private string _selectedType = "Character";
+    private string _selectedType = "";
     private bool _searching;
-    private List<EntitySearchDto>? _searchResults;
-    private List<string> _entityTypes = ["Character"];
+    private List<string> _entityTypes = [];
 
     // Browse state
     private MudTable<EntitySearchDto>? _browseTable;
@@ -427,19 +398,25 @@
         });
     }
 
-    // --- Server-side pagination for browse table ---
+    // --- Server-side pagination for browse/search table ---
 
     private async Task<TableData<EntitySearchDto>> LoadBrowseData(TableState state, CancellationToken ct)
     {
         _browseLoading = true;
         try
         {
-            var page = state.Page + 1; // MudTable is 0-based, API is 1-based
-            var qs = BuildQueryString(
-                ("type", _selectedType),
+            var page = state.Page + 1;
+            var parameters = new List<(string, string)>
+            {
                 ("page", page.ToString()),
-                ("pageSize", state.PageSize.ToString()));
+                ("pageSize", state.PageSize.ToString()),
+            };
+            if (!string.IsNullOrWhiteSpace(_selectedType))
+                parameters.Add(("type", _selectedType));
+            if (!string.IsNullOrWhiteSpace(_search))
+                parameters.Add(("q", _search));
 
+            var qs = BuildQueryString([.. parameters]);
             var result = await Api.GetFromJsonAsync<BrowseEntitiesResult>(
                 $"api/RelationshipGraph/browse?{qs}", ct);
 
@@ -471,37 +448,13 @@
     private async Task OnSearchChanged(string value)
     {
         _search = value;
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            _searchResults = null;
-            return;
-        }
-
-        _searching = true;
-        StateHasChanged();
-
-        try
-        {
-            var qs = BuildQueryString(("q", value));
-            _searchResults = await Api.GetFromJsonAsync<List<EntitySearchDto>>(
-                $"api/RelationshipGraph/search?{qs}");
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add($"Search failed: {ex.Message}", Severity.Error);
-        }
-        finally
-        {
-            _searching = false;
-        }
+        _browseTable?.ReloadServerData();
     }
 
-    private async Task OnTypeFilterChanged()
+    private Task OnTypeFilterChanged()
     {
-        if (!string.IsNullOrWhiteSpace(_search))
-            await OnSearchChanged(_search);
-        else
-            _browseTable?.ReloadServerData();
+        _browseTable?.ReloadServerData();
+        return Task.CompletedTask;
     }
 
     private async Task SelectEntity(int id, string name)

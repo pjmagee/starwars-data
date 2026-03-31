@@ -329,6 +329,7 @@ public class InfoboxGraphService(
                 .Include(p => p.Infobox)
                 .Include(p => p.WikiUrl)
                 .Include(p => p.Continuity)
+                .Include(p => p.Universe)
                 .Include(p => p.ContentHash))
             .ToCursorAsync(ct);
 
@@ -345,6 +346,9 @@ public class InfoboxGraphService(
                 var continuity = doc.Contains("continuity")
                     ? Enum.TryParse<Continuity>(doc["continuity"].AsString, out var c) ? c : Continuity.Unknown
                     : Continuity.Unknown;
+                var universe = doc.Contains("universe")
+                    ? Enum.TryParse<Universe>(doc["universe"].AsString, out var u) ? u : Universe.Unknown
+                    : Universe.Unknown;
                 var contentHash = doc.Contains("contentHash") && !doc["contentHash"].IsBsonNull
                     ? doc["contentHash"].AsString : null;
                 var wikiUrl = doc.Contains("wikiUrl") ? doc["wikiUrl"].AsString : null;
@@ -483,6 +487,7 @@ public class InfoboxGraphService(
                     Name = title,
                     Type = type,
                     Continuity = continuity,
+                    Universe = universe,
                     Properties = properties,
                     ImageUrl = imageUrl,
                     WikiUrl = wikiUrl,

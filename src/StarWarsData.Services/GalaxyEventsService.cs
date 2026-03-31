@@ -76,7 +76,7 @@ public class GalaxyEventsService
     /// Discover which timeline collections have both Year data AND location-relevant properties.
     /// Returns the collection names and their counts.
     /// </summary>
-    async Task<List<LensSummary>> DiscoverLensesAsync(CancellationToken ct)
+    async Task<List<LensSummary>> DiscoverLensesAsync(Continuity? continuity = null, CancellationToken ct = default)
     {
         var allNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
         var collectionNames = allNames.ToList()
@@ -86,26 +86,36 @@ public class GalaxyEventsService
 
         var results = new List<LensSummary>();
 
+        // Build a raw BsonDocument continuity filter (Continuity stored as int)
+        BsonDocument? continuityFilter = null;
+        if (continuity is not null && continuity != Continuity.Both)
+        {
+            continuityFilter = new BsonDocument("Continuity",
+                new BsonDocument("$in", new BsonArray { (int)continuity.Value, (int)Continuity.Both, (int)Continuity.Unknown }));
+        }
+
         foreach (var name in collectionNames)
         {
             var shortName = name[Collections.TimelinePrefix.Length..];
             var collection = _timelineDb.GetCollection<BsonDocument>(name);
 
-            // Check if collection has Year data
-            var withYear = await collection.CountDocumentsAsync(
-                new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value)),
-                cancellationToken: ct);
+            // Check if collection has Year data (respecting continuity)
+            var yearFilter = new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value));
+            var baseFilter = continuityFilter is not null
+                ? new BsonDocument("$and", new BsonArray { continuityFilter, yearFilter })
+                : yearFilter;
+
+            var withYear = await collection.CountDocumentsAsync(baseFilter, cancellationToken: ct);
 
             if (withYear == 0) continue;
 
             // Check if collection has any location-relevant properties
             var locationFilter = new BsonDocument("Properties.Label",
                 new BsonDocument("$in", new BsonArray(LocationLabels)));
-            var withLocation = await collection.CountDocumentsAsync(
-                Builders<BsonDocument>.Filter.And(
-                    new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value)),
-                    locationFilter),
-                cancellationToken: ct);
+            var withLocationFilter = continuityFilter is not null
+                ? new BsonDocument("$and", new BsonArray { continuityFilter, yearFilter, locationFilter })
+                : new BsonDocument("$and", new BsonArray { yearFilter, locationFilter });
+            var withLocation = await collection.CountDocumentsAsync(withLocationFilter, cancellationToken: ct);
 
             if (withLocation == 0) continue;
 
@@ -124,7 +134,7 @@ public class GalaxyEventsService
     /// <summary>
     /// Load eras from the Era timeline collection, grouping start/end year pairs.
     /// </summary>
-    async Task<List<EraRange>> LoadErasAsync(CancellationToken ct)
+    async Task<List<EraRange>> LoadErasAsync(Continuity? continuity = null, CancellationToken ct = default)
     {
         var eraCollName = Collections.TimelinePrefix + "Era";
         var collectionNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
@@ -132,8 +142,10 @@ public class GalaxyEventsService
             return [];
 
         var eraCollection = _timelineDb.GetCollection<TimelineEvent>(eraCollName);
+        var filter = BuildGlobalFilter(continuity, null)
+            & Builders<TimelineEvent>.Filter.Ne(e => e.Year, null);
         var eras = await eraCollection
-            .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
+            .Find(filter)
             .ToListAsync(ct);
 
         // Group by title → take min/max year as range
@@ -271,14 +283,22 @@ public class GalaxyEventsService
         }
 
         // Discover lenses dynamically
-        overview.LensSummaries = await DiscoverLensesAsync(ct);
+        overview.LensSummaries = await DiscoverLensesAsync(continuity, ct);
         overview.AvailableLenses = overview.LensSummaries.Select(s => s.Lens).ToList();
 
         // Load eras from Era collection
-        overview.Eras = await LoadErasAsync(ct);
+        overview.Eras = await LoadErasAsync(continuity, ct);
 
         // Timeline range — aggregate min/max years across all event collections
         var allYears = new List<TimelineYearEntry>();
+
+        // Build continuity match for the aggregation pipeline
+        var yearMatchDoc = new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value));
+        if (continuity is not null && continuity != Continuity.Both)
+        {
+            yearMatchDoc["Continuity"] = new BsonDocument("$in",
+                new BsonArray { (int)continuity.Value, (int)Continuity.Both, (int)Continuity.Unknown });
+        }
 
         foreach (var lens in overview.AvailableLenses)
         {
@@ -286,7 +306,7 @@ public class GalaxyEventsService
 
             var pipeline = new[]
             {
-                new BsonDocument("$match", new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value))),
+                new BsonDocument("$match", yearMatchDoc),
                 new BsonDocument("$group", new BsonDocument
                 {
                     { "_id", new BsonDocument { { "Year", new BsonDocument("$toInt", "$Year") }, { "Demarcation", "$Demarcation" } } },
@@ -369,7 +389,7 @@ public class GalaxyEventsService
         List<string> lensCollections;
         if (lens == "All")
         {
-            var summaries = await DiscoverLensesAsync(ct);
+            var summaries = await DiscoverLensesAsync(continuity, ct);
             lensCollections = summaries.Select(s => s.Lens).ToList();
         }
         else
@@ -489,7 +509,7 @@ public class GalaxyEventsService
         List<string> lensCollections;
         if (lens == "All")
         {
-            var summaries = await DiscoverLensesAsync(ct);
+            var summaries = await DiscoverLensesAsync(continuity, ct);
             lensCollections = summaries.Select(s => s.Lens).ToList();
         }
         else
@@ -560,7 +580,7 @@ public class GalaxyEventsService
         List<string> lensCollections;
         if (lens == "All")
         {
-            var summaries = await DiscoverLensesAsync(ct);
+            var summaries = await DiscoverLensesAsync(continuity, ct);
             lensCollections = summaries.Select(s => s.Lens).ToList();
         }
         else

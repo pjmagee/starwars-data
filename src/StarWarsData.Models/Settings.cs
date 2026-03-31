@@ -98,6 +98,9 @@ public static class Collections
     public const string TerritorySnapshots = "territory.snapshots";
     public const string TerritoryYears = "territory.years";
 
+    // ── Unified galaxy map ──
+    public const string GalaxyYears = "galaxy.years";
+
     // ── Admin ──
     public const string JobToggles = "admin.job_toggles";
 }
