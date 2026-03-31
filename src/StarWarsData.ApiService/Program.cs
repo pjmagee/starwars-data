@@ -224,13 +224,18 @@ builder
 
         FAST PATHS (follow these patterns):
         - "Tell me about X" / "Bring up X" → search_pages_by_name("Character", "X") → render_infobox with the PageIds. If not a character, try other types.
-        - "What happened during X?" / lore questions → search_chunks("X") (or search_wiki("X") as fallback) → render_text with the results.
+        - "What happened during X?" / lore questions with a specific year → get_galaxy_year(year) → render_text with territory + events.
+        - "What happened during X?" / lore questions without a year → search_chunks("X") → render_text.
         - "Show all X" / list queries → render_table with infoboxType and optional search filter.
         - "Family tree of X" → search_pages_by_name → sample_link_labels (to discover which labels have links) → render_graph with the discovered labels classified as up/down/peer.
         - Stats/counts → aggregate or count → render_chart or render_data_table.
         - "How is X related to Y?" / "What connects X and Y?" → search_graph_entities for both → find_connections → render_text or render_data_table with the path.
         - "Who trained X?" / "X's allies" / relationship queries → search_graph_entities → get_entity_relationships (with optional label filter) → render_text or render_data_table.
         - "Show me X's network" / broad relationship exploration → search_graph_entities → traverse_graph → render_text or render_data_table.
+        - "When was X founded/born?" / lifecycle questions → search_graph_entities → get_entity_timeline → render_text.
+        - "What wars/battles/events in year range?" → query_entities_by_year for each relevant type → render_text or render_data_table.
+        - "Who controlled X region in Y year?" / territory questions → get_galaxy_year(year) → render_text.
+        - "What was happening in 19 BBY?" / year snapshot → get_galaxy_year(-19) → render_text with territory + events.
         - Deep lore / "explain X" / "history of X" → search_chunks for semantic article matches → combine with graph tools if relationships involved → render_text.
 
         RELATIONSHIP GRAPH (persistent knowledge graph with labeled relationships and evidence):
@@ -241,6 +246,15 @@ builder
         - find_connections: find the shortest path between two entities (bidirectional BFS).
         - Graph tools return evidence snippets from source articles — include these in your response for grounding.
         - Use graph tools when the question is about relationships, connections, networks, or influence — they provide richer answers than infobox data alone.
+
+        TEMPORAL KNOWLEDGE GRAPH (year-based queries, entity lifecycles, territory control):
+        - query_entities_by_year: find entities (governments, battles, characters) that existed at a specific year. Use sort-key format: -19 = 19 BBY, 4 = 4 ABY.
+        - get_entity_timeline: get when an entity was born/founded/destroyed with original date text and duration. Call search_graph_entities first to get PageId.
+        - get_entity_properties: get all properties/attributes of an entity (height, eye color, classification, etc.).
+        - get_galaxy_year: get a complete galaxy snapshot at a year — territory control (which factions controlled which regions), events with locations, era context. Pre-computed, instant response.
+        - For questions about wars, battles, campaigns in a time period: use query_entities_by_year with type="War" or "Battle" or "Campaign".
+        - For "what was happening in year X": use get_galaxy_year(X) which returns both territory AND events.
+        - PREFER these over search_chunks for year-specific or temporal questions — they query the structured knowledge graph, not unstructured text.
 
         VECTOR SEARCH (semantic search over article content chunks):
         - search_chunks: find relevant article passages by meaning using vector similarity search. Prefer over search_wiki for detailed lore, history, and explanations.
