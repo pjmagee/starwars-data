@@ -238,7 +238,7 @@ builder
         FRONTEND-FETCHED — these render tools fetch their own data. The agent provides config only (IDs, types, fields). Minimal research needed — just find the right identifiers:
         - render_infobox(pageIds): wiki-style profile cards. Accepts multiple PageIds for side-by-side comparison. Frontend fetches all infobox data.
         - render_table(infoboxType, fields): paginated browsable table. Frontend fetches and paginates. Agent provides type + 3-6 field names.
-        - render_graph(rootEntityId, upLabels, downLabels, peerLabels): relationship network. MUST call sample_link_labels first to discover label names. Frontend fetches and renders the graph.
+        - render_graph(rootEntityId, upLabels, downLabels, peerLabels, layoutMode): relationship network. MUST call sample_link_labels first to discover label names. Frontend fetches and renders the graph. Use layoutMode="tree" for family trees and lineages (hierarchical top-down layout), layoutMode="force" (default) for general relationship exploration.
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
@@ -295,7 +295,7 @@ builder
         - "List all wars with dates and outcomes" → render_table("War", ["Date", "Outcome", ...])
 
         RELATIONSHIPS & NETWORKS (mixed):
-        - "Family tree of X" → search_pages_by_name → sample_link_labels → render_graph
+        - "Family tree of X" → search_pages_by_name → sample_link_labels → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels only])
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_text or render_data_table
         - "How is X related to Y?" → search_entities for both → find_connections → render_text
         - "X's connections" → search_entities → traverse_graph → render_text or render_graph

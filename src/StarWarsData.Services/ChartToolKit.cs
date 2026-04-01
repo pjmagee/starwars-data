@@ -156,6 +156,11 @@ public class ComponentToolkit
         )]
             List<string>? enabledLabels = null,
         [Description(
+            "Layout mode: 'force' for physics-based network graph, 'tree' for hierarchical family tree. "
+                + "Use 'tree' for family trees, lineages, and generational hierarchies."
+        )]
+            string layoutMode = "force",
+        [Description(
             "Optional source references (title + wikiUrl) from pages used to answer this query"
         )]
             List<Reference>? references = null
@@ -172,6 +177,7 @@ public class ComponentToolkit
             DownLabels = downLabels ?? [],
             PeerLabels = peerLabels ?? [],
             EnabledLabels = enabledLabels,
+            LayoutMode = layoutMode is "tree" or "force" ? layoutMode : "force",
             References = references,
         };
         return GraphResult;

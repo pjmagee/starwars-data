@@ -242,9 +242,23 @@
         await LoadGraph();
     }
 
+    private string _currentModulePath = "";
+
     private async Task RenderD3Graph(GraphResult result)
     {
-        _jsModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/d3-graph.js");
+        var isTree = Descriptor.LayoutMode == "tree";
+        var modulePath = isTree ? "./js/d3-family-tree.js" : "./js/d3-graph.js";
+
+        // Re-import if layout mode changed
+        if (_currentModulePath != modulePath)
+        {
+            if (_jsModule is not null)
+            {
+                try { await _jsModule.DisposeAsync(); } catch { }
+            }
+            _jsModule = await JS.InvokeAsync<IJSObjectReference>("import", modulePath);
+            _currentModulePath = modulePath;
+        }
 
         var nodes = result.Nodes.Values.Select(n => new
         {
@@ -254,6 +268,11 @@
             imageUrl = n.ImageUrl ?? "",
             born = n.Born ?? "",
             died = n.Died ?? "",
+            generation = n.Generation,
+            parents = n.Parents,
+            partners = n.Partners,
+            siblings = n.Siblings,
+            children = n.Children,
         }).ToArray();
 
         var edges = result.Edges.Select(e => new
@@ -269,7 +288,8 @@
         _dotnetRef?.Dispose();
         _dotnetRef = DotNetObjectReference.Create(this);
 
-        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
+        var entryPoint = isTree ? "renderFamilyTree" : "renderForceGraph";
+        await _jsModule.InvokeVoidAsync(entryPoint, _containerId, data, _dotnetRef);
     }
 
     [JSInvokable]

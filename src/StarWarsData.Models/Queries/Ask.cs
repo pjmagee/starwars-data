@@ -212,6 +212,13 @@ public class GraphDescriptor
     )]
     public List<string>? EnabledLabels { get; set; }
 
+    [JsonPropertyName("layoutMode")]
+    [Description(
+        "Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical family tree. "
+            + "Use 'tree' for family trees, lineages, or master-apprentice hierarchies where generational layout matters."
+    )]
+    public string LayoutMode { get; set; } = "force";
+
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
     public List<Reference>? References { get; set; }
