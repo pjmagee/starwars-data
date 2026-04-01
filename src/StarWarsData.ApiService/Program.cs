@@ -295,8 +295,9 @@ builder
         - "List all wars with dates and outcomes" → render_table("War", ["Date", "Outcome", ...])
 
         RELATIONSHIPS & NETWORKS (use KG tools, not page tools):
-        - "Family tree of X" → search_entities → get_entity_relationships(label="parent_of,child_of,sibling_of") → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels only])
-        - "Master-apprentice lineage of X" → search_entities → get_entity_relationships(label="apprentice_of") → render_graph(layoutMode="tree", maxDepth=3)
+        - "Family tree of X" → search_entities to find a CHARACTER (not a Family entity) as root → search_pages_by_name("Character", name) to get PageId → sample_link_labels("Character", pageId) to discover labels → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels: Parent(s), Children, Partner(s), Sibling(s)])
+          IMPORTANT: The root entity MUST be a Character, not a Family. "Skywalker family tree" → root on "Anakin Skywalker" (Character), NOT "Skywalker family" (Family).
+        - "Master-apprentice lineage of X" → same pattern but enabledLabels=[Masters, Apprentices]
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_text or render_data_table
         - "How is X related to Y?" → search_entities for both → find_connections → render_text
         - "X's connections" → search_entities → traverse_graph → render_text or render_graph(layoutMode="force")
