@@ -1239,43 +1239,17 @@
         ChatHistory.NotifyChanged();
     }
 
-    private static string FriendlyToolName(string? name) => name switch
+    private static string FriendlyToolName(string? name)
     {
-        "render_table"             => "Configuring table",
-        "render_data_table"        => "Building data table",
-        "render_chart"             => "Rendering chart",
-        "render_graph"             => "Configuring graph",
-        "render_timeline"          => "Configuring timeline",
-        "render_infobox"           => "Rendering infobox",
-        "render_text"              => "Rendering text",
-        "search_entities"          => "Searching knowledge graph",
-        "find_entities_by_year"    => "Finding entities by year",
-        "get_entity_properties"    => "Reading entity properties",
-        "get_entity_relationships" => "Reading relationships",
-        "get_entity_timeline"      => "Reading entity timeline",
-        "get_relationship_types"   => "Discovering relationship types",
-        "traverse_graph"           => "Traversing relationship graph",
-        "find_connections"         => "Finding connections",
-        "get_galaxy_year"          => "Reading galaxy snapshot",
-        "list_entity_types"        => "Listing entity types",
-        "list_relationship_labels" => "Listing relationship labels",
-        "search_article_content"   => "Searching article content",
-        "search_pages_by_name"     => "Searching by name",
-        "search_pages_by_property" => "Searching by property",
-        "search_pages_by_date"     => "Searching by date",
-        "search_pages_by_link"     => "Searching by link",
-        "get_page_by_id"           => "Fetching page",
-        "get_page_property"        => "Reading property",
-        "sample_property_values"   => "Sampling values",
-        "sample_link_labels"       => "Discovering link labels",
-        "list_timeline_categories" => "Listing timeline categories",
-        "list_infobox_types"       => "Listing infobox types",
-        "find"                     => "Querying pages",
-        "aggregate"                => "Aggregating data",
-        "count"                    => "Counting documents",
-        "search_wiki"              => "Searching wiki articles",
-        _                          => name ?? "Using tool",
-    };
+        if (string.IsNullOrEmpty(name)) return "Using tool";
+
+        // Convert snake_case tool name to "Title case sentence"
+        // e.g. "search_article_content" → "Search article content"
+        // e.g. "render_chart" → "Render chart"
+        var words = name.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        words[0] = char.ToUpper(words[0][0]) + words[0][1..];
+        return string.Join(' ', words);
+    }
 
     private static string FormatJson(string? json)
     {
