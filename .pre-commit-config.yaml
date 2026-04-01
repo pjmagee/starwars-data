@@ -1,6 +1,11 @@
 repos:
   - repo: local
     hooks:
+      - id: csharpier
+        name: csharpier
+        entry: dotnet csharpier
+        language: system
+        types: [c#]
       - id: dotnet-build
         name: dotnet build
         entry: dotnet build src/StarWarsData.slnx --no-restore -c Release
