@@ -88,11 +88,12 @@ Keycloak provides OpenID Connect authentication with optional social login provi
 
 ## MongoDB Databases
 
+All application data lives in a single unified database with namespaced collections:
+
 | Database | Purpose |
 | -------- | ------- |
-| `starwars-raw-pages` | Raw wiki pages with infoboxes (Pages collection) |
-| `starwars-timeline-events` | Processed timeline events grouped by template type |
-| `starwars-hangfire-jobs` | Hangfire job storage |
+| `starwars` | All application data — raw pages (`raw.*`), timeline events (`timeline.*`), knowledge graph (`kg.*`), article chunks (`search.*`), AI-generated content (`genai.*`), chat sessions (`chat.*`), territory control (`territory.*`), galaxy map (`galaxy.*`), admin settings (`admin.*`) |
+| `starwars-hangfire` | Hangfire job/queue storage |
 
 ## Getting Started
 
@@ -111,11 +112,10 @@ Set the following in `appsettings.json` or environment variables:
 {
   "Settings": {
     "OpenAiKey": "<your-openai-api-key>",
-    "OpenAiModel": "gpt-4o-mini",
+    "OpenAiModel": "gpt-5-mini",
     "StarWarsBaseUrl": "https://starwars.fandom.com/api.php",
-    "PagesDb": "starwars-raw-pages",
-    "TimelineEventsDb": "starwars-timeline-events",
-    "HangfireDb": "starwars-hangfire-jobs"
+    "DatabaseName": "starwars",
+    "HangfireDb": "starwars-hangfire"
   }
 }
 ```

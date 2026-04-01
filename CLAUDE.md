@@ -57,7 +57,7 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 
 **AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
 
-**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Seven databases configured via `SettingsOptions`: `starwars-raw-pages`, `starwars-timeline-events`, `starwars-hangfire-jobs`, `starwars-character-timelines`, `starwars-relationship-graph`, `starwars-chat-sessions`, `starwars-territory-control`.
+**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Two databases configured via `SettingsOptions`: `starwars` (unified database with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`) and `starwars-hangfire` (Hangfire job storage). Collection names are defined in the `Collections` static class in `Settings.cs`.
 
 **ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
 

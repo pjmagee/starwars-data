@@ -176,7 +176,7 @@ public class ComponentToolkit
 
     [Description(
         "Render a timeline of events. Use for temporal queries like 'battles during the Clone Wars' or 'what happened between 20 BBY and 4 ABY'. "
-            + "The frontend fetches paginated timeline data from the 'starwars-timeline-events' database. "
+            + "The frontend fetches paginated timeline data from the timeline.* collections. "
             + "You do NOT need to query timeline events yourself — just provide the category names. "
             + "For entity-specific timelines (e.g. 'events during Anakin Skywalker's life'), look up the entity's date properties first and pass yearFrom/yearTo to scope the results. "
             + "Use the search parameter to further filter by entity name in event titles."
@@ -184,7 +184,7 @@ public class ComponentToolkit
     public TimelineDescriptor RenderTimeline(
         [Description("Descriptive title for the timeline")] string title,
         [Description(
-            "Timeline event category names from the 'starwars-timeline-events' database (e.g. [\"Battle\", \"War\", \"Character\"]). "
+            "Timeline event category names from timeline.* collections (e.g. [\"Battle\", \"War\", \"Character\"]). "
                 + "Call list_timeline_categories first to discover valid names."
         )]
             List<string> categories,

@@ -184,7 +184,9 @@
                         <div class="ask-msg ask-msg-assistant mb-3 ml-2">
                             <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="border-radius:12px;">
                                 <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
-                                <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@msg.Text</MudText>
+                                <div style="flex:1; min-width:0;">
+                                    <MudMarkdown Value="@msg.Text" />
+                                </div>
                             </MudPaper>
                         </div>
                     }
@@ -300,6 +302,12 @@
 
     // ── Conversation model ──
 
+    record RateLimitResponse(
+        [property: JsonPropertyName("limit")] int? Limit,
+        [property: JsonPropertyName("isAuthenticated")] bool? IsAuthenticated,
+        [property: JsonPropertyName("retryAfterSeconds")] int? RetryAfterSeconds
+    );
+
     enum ConversationRole { User, Assistant, ToolGroup, Visualization, Error }
 
     class ToolCallInfo
@@ -404,74 +412,75 @@
     private static readonly VisualizationMode[] _modes =
     [
         new("chart", "Chart", "Aggregate, compare, and visualize data across the entire Star Wars universe",
-            "e.g. Which starship manufacturers produced the most models?",
+            "e.g. Which planets have the most species diversity?",
             Icons.Material.Filled.BarChart, Color.Primary,
             [
-                "Which starship manufacturers produced the most distinct ship classes?",
-                "Pie chart of Force power alignments: light side, dark side, and neutral",
-                "What are the top 10 species by number of known individual characters?",
-                "How does the number of Canon vs Legends entries compare across characters, planets, and species?",
-                "What are the most common weapon types by manufacturer count?",
-                "Chart the most common lightsaber blade colors across all known lightsabers",
+                "Which planets are home to the most distinct native species?",
+                "Chart the top 15 organizations by number of affiliated characters",
+                "What are the most heavily armed starship classes by weapon count?",
+                "Compare the number of battles fought at each major planet during the Clone Wars",
+                "Pie chart of droid series by how many individual droid models each produced",
+                "Which trade routes connect the most star systems?",
             ]),
         new("graph", "Graph", "Explore master-apprentice lineages, family trees, and relationship networks",
-            "e.g. Show the apprentice chain descending from Darth Bane",
+            "e.g. Map the full Darth Bane lineage through the Rule of Two",
             Icons.Material.Filled.AccountTree, Color.Secondary,
             [
-                "Show the Sith master-apprentice chain descending from Darth Plagueis",
-                "Map the family and political connections of Padmé Amidala",
-                "Show the Jedi training lineage of Qui-Gon Jinn — who trained him and who did he train?",
-                "Show the Skywalker family tree starting from Anakin Skywalker",
+                "Trace the Rule of Two: show every Sith master-apprentice link from Darth Bane to Darth Sidious",
+                "Map the Skywalker-Solo-Palpatine family tree across all generations",
+                "Show how Dooku connects to both the Jedi Order and the Separatists through his relationships",
+                "Who manufactured the ships in the Imperial Navy? Show the corporate supply chain",
+                "Show the political hierarchy of the Galactic Empire — who governed what and who reported to whom",
             ]),
         new("table", "Table", "Browse and filter paginated collections with custom column selection",
-            "e.g. Show all battles of the Clone Wars with location, date, and outcome",
+            "e.g. Browse all wars with their dates, belligerents, and outcome",
             Icons.Material.Filled.TableChart, Color.Tertiary,
             [
-                "Show all battles of the Clone Wars with their date, place, conflict, and outcome",
-                "Browse all lightsabers with their blade color, crystal, type, and culture",
-                "Browse all species with point of origin, classification, and average lifespan",
-                "Show me all military units with their affiliation, commanding officers, and notable battles",
-                "List all starship classes with their manufacturer, type, and armament",
+                "Browse all wars with their date, belligerents, location, and outcome",
+                "Show all fleets with their affiliation, commanding officer, and notable engagements",
+                "List all treaties with their signatories, date, and the conflict they ended",
+                "Browse all campaigns with their conflict, commanding officers, and result",
+                "Show all elections with their candidates, office, and outcome",
             ]),
         new("data_table", "Data Table", "Cross-reference and join data the AI assembles from multiple queries",
-            "e.g. Which Jedi survived Order 66 and where did they hide?",
+            "e.g. Which Sith Lords outlived their masters, and by how long?",
             Icons.Material.Filled.GridOn, Color.Info,
             [
-                "Which Jedi survived Order 66 and where did they go into hiding?",
-                "List every known master-apprentice pair in the Sith Order with their era",
-                "Compare the technical specifications of the Venator, Imperial, and Executor class Star Destroyers",
-                "What are all the wars fought by the Mandalorians, with their dates and outcomes?",
-                "What foods and beverages originate from Coruscant, Naboo, and Corellia?",
+                "List every Sith master-apprentice pair, how each master died, and whether the apprentice was responsible",
+                "Which planets served as homeworld to characters on both sides of the Galactic Civil War?",
+                "Compare the founding date, capital world, and lifespan of every major galactic government",
+                "What lightsabers changed owners, and trace each one's chain of custody",
+                "Which military units switched allegiance during the fall of the Republic, and to whom?",
             ]),
         new("timeline", "Timeline", "Temporal events scoped by era, date range, or entity lifetime",
             "e.g. Timeline of the fall of the Republic from the Naboo Crisis to Order 66",
             Icons.Material.Filled.Timeline, Color.Warning,
             [
-                "Timeline of battles and missions during the fall of the Republic from 32 BBY to 19 BBY",
-                "Show Ahsoka Tano's life events from birth through the fall of the Empire",
-                "What major wars and campaigns shaped the galaxy between 4000 BBY and 1000 BBY?",
-                "Timeline of the Galactic Civil War from the Battle of Scarif to the Battle of Jakku",
-                "Show all character deaths and battles between 22 BBY and 19 BBY",
+                "Timeline of duels between Force users during the Clone Wars from 22 BBY to 19 BBY",
+                "Show the rise and fall of every galactic government from the Old Republic to the First Order",
+                "What treaties, laws, and elections shaped galactic politics between 1000 BBY and 0 BBY?",
+                "Timeline of all missions and campaigns during the Galactic Civil War",
+                "Show the lifecycle of the Mandalorian people — wars, governments, and key deaths from 7000 BBY onward",
             ]),
         new("infobox", "Infobox", "Detailed wiki-style profiles and side-by-side entity comparisons",
             "e.g. Compare the Death Star and Starkiller Base side by side",
             Icons.Material.Filled.Badge, Color.Success,
             [
-                "Compare the Death Star, Starkiller Base, and the Star Forge side by side",
-                "Show me the full profile of General Grievous",
-                "Compare Darth Revan and Darth Malak",
-                "Put the Millennium Falcon and the Ebon Hawk next to each other",
-                "Show me Mandalore the Ultimate",
+                "Compare the three Death Stars, Starkiller Base, and the Star Forge — all superweapons side by side",
+                "Show full profiles of all seven lightsaber combat forms",
+                "Put the Venator, Imperial, and Executor class Star Destroyers next to each other",
+                "Compare Darth Revan, Darth Nihilus, and Darth Traya",
+                "Show the profile of the Chiss Ascendancy",
             ]),
-        new("text", "Article", "Semantic search across 479K article passages for lore, analysis, and deep context",
-            "e.g. What was the philosophical divide between the Jedi and the Sith?",
+        new("text", "Article", "Semantic search across 800K+ article passages for lore, analysis, and deep context",
+            "e.g. How did the Ruusan Reformation reshape the Jedi Order?",
             Icons.Material.Filled.Article, Color.Dark,
             [
-                "What was the philosophical divide between the Jedi and the Sith regarding the nature of the Force?",
-                "How did the Clone Wars fundamentally reshape the political structure of the galaxy?",
-                "What role did espionage and intelligence networks play in the Galactic Civil War?",
-                "Explain the ecological diversity of Kashyyyk and how it shaped Wookiee culture",
-                "What were the long-term consequences of the Mandalorian Wars on the Jedi Order?",
+                "How did the Ruusan Reformation reshape the relationship between the Jedi Order and the Republic?",
+                "What was the Great Schism and how did it lead to the creation of the Sith?",
+                "Explain how hyperspace trade routes like the Perlemian and Corellian Run shaped galactic colonization",
+                "What religious traditions exist in the galaxy beyond the Jedi and Sith?",
+                "How did the Yuuzhan Vong War change the New Republic's military doctrine and galactic alliances?",
             ]),
     ];
 
@@ -644,13 +653,18 @@
 
             if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
             {
-                var retryAfter = response.Headers.RetryAfter?.Delta?.TotalMinutes ?? 30;
+                var rateLimitBody = await response.Content.ReadFromJsonAsync<RateLimitResponse>(cts.Token);
+                var retryMinutes = Math.Ceiling((rateLimitBody?.RetryAfterSeconds ?? 1800) / 60.0);
+                var limit = rateLimitBody?.Limit ?? (_isAuthenticated ? 6 : 1);
+
+                var message = _isAuthenticated
+                    ? $"You have used all {limit} of your requests. Your next request will be available in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
+                    : $"As an anonymous user you are limited to {limit} request per window. Your next request will be available in {retryMinutes:0} minutes. Sign in for more requests, or add your own OpenAI API key for unlimited access.";
+
                 _conversation.Add(new ConversationMessage
                 {
                     Role = ConversationRole.Error,
-                    Text = _isAuthenticated
-                        ? $"You've reached the rate limit (6 requests per 30 minutes). Try again in {retryAfter:0} minutes, or add your own OpenAI API key in your Profile to remove limits."
-                        : $"Anonymous users are limited to 1 request per 30 minutes. Sign in for more requests, or add your own OpenAI API key for unlimited access."
+                    Text = message
                 });
                 FinalizeAguiTurn();
                 return;
@@ -1232,8 +1246,20 @@
         "render_chart"             => "Rendering chart",
         "render_graph"             => "Configuring graph",
         "render_timeline"          => "Configuring timeline",
-        "list_timeline_categories" => "Listing timeline categories",
-        "list_infobox_types"       => "Listing infobox types",
+        "render_infobox"           => "Rendering infobox",
+        "render_text"              => "Rendering text",
+        "search_entities"          => "Searching knowledge graph",
+        "find_entities_by_year"    => "Finding entities by year",
+        "get_entity_properties"    => "Reading entity properties",
+        "get_entity_relationships" => "Reading relationships",
+        "get_entity_timeline"      => "Reading entity timeline",
+        "get_relationship_types"   => "Discovering relationship types",
+        "traverse_graph"           => "Traversing relationship graph",
+        "find_connections"         => "Finding connections",
+        "get_galaxy_year"          => "Reading galaxy snapshot",
+        "list_entity_types"        => "Listing entity types",
+        "list_relationship_labels" => "Listing relationship labels",
+        "search_article_content"   => "Searching article content",
         "search_pages_by_name"     => "Searching by name",
         "search_pages_by_property" => "Searching by property",
         "search_pages_by_date"     => "Searching by date",
@@ -1241,15 +1267,10 @@
         "get_page_by_id"           => "Fetching page",
         "get_page_property"        => "Reading property",
         "sample_property_values"   => "Sampling values",
-        "render_infobox"           => "Rendering infobox",
-        "render_text"              => "Rendering text",
-        "search_graph_entities"    => "Searching knowledge graph",
-        "get_entity_relationships" => "Reading relationships",
-        "get_graph_labels"         => "Discovering relationship types",
-        "traverse_graph"           => "Traversing relationship graph",
-        "find_connections"         => "Finding connections",
-        "search_chunks"            => "Searching article content",
-        "find"                     => "Querying Pages",
+        "sample_link_labels"       => "Discovering link labels",
+        "list_timeline_categories" => "Listing timeline categories",
+        "list_infobox_types"       => "Listing infobox types",
+        "find"                     => "Querying pages",
         "aggregate"                => "Aggregating data",
         "count"                    => "Counting documents",
         "search_wiki"              => "Searching wiki articles",

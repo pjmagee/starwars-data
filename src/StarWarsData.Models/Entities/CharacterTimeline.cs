@@ -7,7 +7,7 @@ namespace StarWarsData.Models.Entities;
 /// <summary>
 /// AI-generated timeline for a single character, produced by feeding
 /// the character's page and all linked pages into an LLM.
-/// Stored in the starwars-character-timelines database.
+/// Stored in the genai.character_timelines collection.
 /// </summary>
 public class CharacterTimeline
 {
