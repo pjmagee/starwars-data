@@ -194,11 +194,11 @@ public class RelationshipGraphController : ControllerBase
             else
             {
                 // Edge target not in nodes collection (stub)
-                var edge = allEdges.FirstOrDefault(e => e.to == id);
+                var edge = allEdges.First(e => e.to == id);
                 resultNodes.Add(new RelationshipGraphNode
                 {
                     Id = id,
-                    Name = edge.toName ?? $"#{id}",
+                    Name = edge.toName,
                     Type = "",
                 });
             }
