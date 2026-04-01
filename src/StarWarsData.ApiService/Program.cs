@@ -294,11 +294,12 @@ builder
         - "Show all battles / Browse species" → render_table(infoboxType, fields)
         - "List all wars with dates and outcomes" → render_table("War", ["Date", "Outcome", ...])
 
-        RELATIONSHIPS & NETWORKS (mixed):
-        - "Family tree of X" → search_pages_by_name → sample_link_labels → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels only])
+        RELATIONSHIPS & NETWORKS (use KG tools, not page tools):
+        - "Family tree of X" → search_entities → get_entity_relationships(label="parent_of,child_of,sibling_of") → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels only])
+        - "Master-apprentice lineage of X" → search_entities → get_entity_relationships(label="apprentice_of") → render_graph(layoutMode="tree", maxDepth=3)
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_text or render_data_table
         - "How is X related to Y?" → search_entities for both → find_connections → render_text
-        - "X's connections" → search_entities → traverse_graph → render_text or render_graph
+        - "X's connections" → search_entities → traverse_graph → render_text or render_graph(layoutMode="force")
 
         TEMPORAL & GALAXY (agent-provided):
         - "What happened in 19 BBY?" → get_galaxy_year(-19) → render_text
@@ -325,7 +326,7 @@ builder
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
         - render_text supports full markdown — use headings, bold, lists, and links for readability.
-        - render_graph: ALWAYS call sample_link_labels first. Classify discovered labels as upLabels (ancestors: Parent(s), Masters), downLabels (descendants: Children, Apprentices), peerLabels (peers: Partner(s), Sibling(s)). Never hardcode label names. Use enabledLabels to pre-select ONLY the labels relevant to the question — e.g. for "family tree" enable Parent(s)/Children/Partner(s)/Sibling(s) but NOT Masters/Apprentices. Pass ALL discovered labels in up/down/peerLabels so users can toggle others on. Use maxDepth=2 or 3 for multi-generational queries like family trees.
+        - render_graph: Call sample_link_labels first to discover available infobox labels. Classify as upLabels (Parent(s), Masters), downLabels (Children, Apprentices), peerLabels (Partner(s), Sibling(s)). Use enabledLabels to pre-select ONLY labels relevant to the question. Use layoutMode="tree" for family trees/lineages (hierarchical top-down), "force" for general networks. Use maxDepth=2-3 for multi-generational trees.
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY). ONE call for ranges via year+yearEnd.
         """;
