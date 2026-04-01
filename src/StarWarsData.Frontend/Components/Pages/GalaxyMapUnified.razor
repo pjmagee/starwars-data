@@ -7,6 +7,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
 @inject IJSRuntime JS
+@inject LayoutService Layout
 @implements IAsyncDisposable
 
 <PageTitle>Galaxy Map — Star Wars Data</PageTitle>
@@ -18,6 +19,9 @@
         height: calc(100vh - 64px);
         background: #0a0a1a;
         overflow: hidden;
+    }
+    .galaxy-map-container.fullscreen {
+        height: 100vh;
     }
     .galaxy-nav-panel {
         position: absolute; top: 12px; left: 12px; z-index: 110;
@@ -91,11 +95,23 @@
     .event-card {
         padding: 8px; margin-bottom: 6px; border-radius: 6px;
         background: rgba(255,255,255,0.04); border-left: 3px solid;
+        cursor: pointer;
     }
     .event-card:hover { background: rgba(255,255,255,0.08); }
+    .event-popover {
+        max-height: 70vh; overflow-y: auto;
+        scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .event-detail-panel {
+        scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .event-detail-panel .drag-handle {
+        cursor: move; user-select: none;
+    }
 </style>
 
-<div class="galaxy-map-container" id="galaxy-map-root">
+<div class="galaxy-map-container @(Layout.IsFullscreen ? "fullscreen" : "")" id="galaxy-map-root"
+     @onclick="CloseEventPopover">
     @if (_loading)
     {
         <div style="display:flex;align-items:center;justify-content:center;height:100%;">
@@ -109,12 +125,16 @@
         <div class="galaxy-nav-panel">
             <MudPaper Elevation="8" Class="pa-2" Style="background:rgba(15,15,35,0.9);backdrop-filter:blur(8px);">
                 <MudStack Row="false" Spacing="1">
-                    <!-- Mode toggle -->
-                    <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small"
-                                    Style="align-self:flex-end;">
+                    <!-- Mode toggle + fullscreen -->
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                    <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
                         <MudToggleItem Value="@("explore")" Text="Explore" />
                         <MudToggleItem Value="@("timeline")" Text="Timeline" />
                     </MudToggleGroup>
+                    <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                                   Size="Size.Small" Color="Color.Inherit" OnClick="ToggleFullscreen"
+                                   Title="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")" />
+                    </MudStack>
 
                     <!-- Breadcrumbs -->
                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
@@ -345,7 +365,8 @@
 
                 @if (_yearData.Regions.Count > 0)
                 {
-                    <MudText Typo="Typo.subtitle1" Style="margin-top:8px;">Territory Control</MudText>
+                    <MudText Typo="Typo.subtitle1" Style="margin-top:8px;">Territory Control (@_yearData.Regions.Count)</MudText>
+                    <div style="max-height:30vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;">
                     @foreach (var region in _yearData.Regions)
                     {
                         <div style="margin:4px 0;" data-highlight-region="@region.Region">
@@ -365,6 +386,7 @@
                             }
                         </div>
                     }
+                    </div>
                 }
 
                 @{
@@ -384,10 +406,12 @@
                             <MudIcon Icon="@Icons.Material.Filled.Place" Size="Size.Small" Style="vertical-align:middle;margin-right:4px;" />
                             On Map (@mappedEvents.Count)
                         </MudText>
+                        <div style="max-height:30vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;">
                         @foreach (var (evt, region) in mappedEvents.Take(25))
                         {
                             @RenderEventCard(evt, region)
                         }
+                        </div>
                     }
 
                     @if (unresolvedFiltered.Count > 0)
@@ -396,12 +420,111 @@
                             <MudIcon Icon="@Icons.Material.Filled.LocationOff" Size="Size.Small" Style="vertical-align:middle;margin-right:4px;" />
                             No Location (@unresolvedFiltered.Count)
                         </MudText>
+                        <div style="max-height:25vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;">
                         @foreach (var evt in unresolvedFiltered.Take(20))
                         {
                             @RenderEventCard(evt, null)
                         }
+                        </div>
                     }
                 }
+            </MudPaper>
+        </div>
+    }
+
+    @* ══════════ EVENT CELL HOVER POPOVER ══════════ *@
+    @if (_hoveredCell is not null)
+    {
+        <div class="event-popover" style="position:fixed;left:@(_hoveredCell.ScreenX + 20)px;top:@(_hoveredCell.ScreenY - 10)px;z-index:300;"
+             @onclick:stopPropagation="true">
+            <MudPaper Elevation="16" Class="pa-3" Style="background:rgba(20,20,40,0.98);backdrop-filter:blur(12px);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <MudText Typo="Typo.subtitle2" Style="color:rgba(255,255,255,0.5);">
+                        @_hoveredCell.Region &bull; @_hoveredCell.Events.Count event@(_hoveredCell.Events.Count != 1 ? "s" : "")
+                    </MudText>
+                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="CloseEventPopover" Style="margin:-8px -8px 0 0;" />
+                </div>
+                @foreach (var evt in _hoveredCell.Events)
+                {
+                    var lensColor = GetLensColorCss(evt.Lens);
+                    var isSelected = _hoveredEvent == evt;
+                    <div class="event-card" style="border-left-color:@lensColor;padding:6px;@(isSelected ? "background:rgba(255,255,255,0.12);" : "")"
+                         @onclick="() => OnEventItemHovered(evt)" @onclick:stopPropagation="true">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <span style="font-size:12px;font-weight:500;">@evt.Title</span>
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                     Style="@($"border-color:{lensColor};color:{lensColor};font-size:9px;height:16px;")">@evt.Lens</MudChip>
+                        </div>
+                    </div>
+                }
+            </MudPaper>
+        </div>
+    }
+
+    @* ══════════ EVENT ARTICLE DETAIL POPOVER ══════════ *@
+    @if (_hoveredEvent is not null)
+    {
+        <div class="event-detail-panel" id="event-detail-panel"
+             style="position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:310;width:420px;resize:both;overflow:auto;min-width:300px;min-height:200px;max-width:80vw;max-height:80vh;"
+             @onclick:stopPropagation="true">
+            <MudPaper Elevation="20" Style="background:rgba(20,20,40,0.98);backdrop-filter:blur(12px);height:100%;display:flex;flex-direction:column;overflow:hidden;">
+                <div class="drag-handle" style="display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 16px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;"
+                     onmousedown="(function(e){
+                        var el=document.getElementById('event-detail-panel');if(!el)return;
+                        var rect=el.getBoundingClientRect();
+                        el.style.left=rect.left+'px';el.style.top=rect.top+'px';
+                        el.style.right='auto';el.style.transform='none';
+                        var sx=e.clientX-rect.left,sy=e.clientY-rect.top;
+                        function mv(e2){el.style.left=(e2.clientX-sx)+'px';el.style.top=(e2.clientY-sy)+'px';}
+                        function up(){document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);}
+                        document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+                     })(event)">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                        <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Size="Size.Small" Style="color:rgba(255,255,255,0.3);" />
+                        <MudText Typo="Typo.h6" Style="color:rgba(255,255,255,0.95);">@_hoveredEvent.Title</MudText>
+                    </MudStack>
+                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="CloseEventPopover" />
+                </div>
+                <div style="padding:12px 16px;display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;">
+                <MudStack Row="true" Spacing="1" Class="mb-2">
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                             Style="@($"border-color:{GetLensColorCss(_hoveredEvent.Lens)};color:{GetLensColorCss(_hoveredEvent.Lens)};")">@_hoveredEvent.Lens</MudChip>
+                    @if (_hoveredEvent.Place is not null)
+                    {
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default"
+                                 Icon="@Icons.Material.Filled.Place">@_hoveredEvent.Place</MudChip>
+                    }
+                </MudStack>
+                @if (_hoveredEvent.Outcome is not null)
+                {
+                    <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.4);font-style:italic;margin-bottom:8px;">@_hoveredEvent.Outcome</MudText>
+                }
+
+                @if (_loadingArticle)
+                {
+                    <div class="d-flex justify-center pa-3">
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Small" />
+                    </div>
+                }
+                else if (_hoveredArticle is not null)
+                {
+                    <MudDivider Class="my-2" />
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="text-transform:uppercase;letter-spacing:0.5px;">@_hoveredArticle.Heading</MudText>
+                    <div style="flex:1;overflow-y:auto;margin-top:4px;font-size:12px;line-height:1.6;color:rgba(255,255,255,0.75);min-height:0;">
+                        <MudMarkdown Value="@_hoveredArticle.Text" />
+                    </div>
+                }
+
+                @if (_hoveredEvent.WikiUrl is not null)
+                {
+                    <div class="d-flex justify-end mt-2">
+                        <MudButton Href="@_hoveredEvent.WikiUrl" Target="_blank" Variant="Variant.Text"
+                                   Color="Color.Primary" Size="Size.Small" EndIcon="@Icons.Material.Filled.OpenInNew">
+                            Wookieepedia
+                        </MudButton>
+                    </div>
+                }
+                </div>
             </MudPaper>
         </div>
     }
@@ -459,12 +582,12 @@
                 <MudIconButton Icon="@(_autoplay ? Icons.Material.Filled.Pause : Icons.Material.Filled.PlayArrow)"
                                Size="Size.Medium" OnClick="ToggleAutoplay" Color="Color.Primary"
                                title="@(_autoplay ? "Pause" : "Play")" Style="flex-shrink:0;" />
-                <MudSelect T="int" @bind-Value="_frameTimeMs" Dense="true" Variant="Variant.Outlined"
+                <MudSelect T="int" Value="_frameTimeMs" ValueChanged="OnFrameTimeChanged" Dense="true" Variant="Variant.Outlined"
                            Style="min-width:80px;max-width:80px;font-size:13px;flex:0 0 80px;" title="Frame speed">
+                    <MudSelectItem Value="2000">2s</MudSelectItem>
                     <MudSelectItem Value="5000">5s</MudSelectItem>
                     <MudSelectItem Value="10000">10s</MudSelectItem>
                     <MudSelectItem Value="30000">30s</MudSelectItem>
-                    <MudSelectItem Value="60000">1m</MudSelectItem>
                 </MudSelect>
 
                 <!-- Year navigation -->
@@ -514,6 +637,8 @@
     // Data
     GalaxyOverviewDocument? _overview;
     GalaxyMapV2Overview? _geography;
+    record ArticleIntroDto(string Heading, string Text, string WikiUrl, string Type);
+
     GalaxyYearDocument? _yearData;
     bool _loading = true;
     bool _d3Initialized;
@@ -541,6 +666,14 @@
     bool _loadingDetails;
     readonly Dictionary<int, MapV2System> _systemCache = new();
     Dictionary<string, TerritoryFactionInfo> _factionInfo = new(StringComparer.OrdinalIgnoreCase);
+
+    // Event hover popover state
+    public record HoveredCell(string Region, int Col, int Row, double ScreenX, double ScreenY, List<EventPopoverItem> Events);
+    public record EventPopoverItem(string Title, string Lens, string? Category, string? Place, string? Outcome, string? WikiUrl, int? PageId, string Continuity);
+    HoveredCell? _hoveredCell;
+    EventPopoverItem? _hoveredEvent;
+    ArticleIntroDto? _hoveredArticle;
+    bool _loadingArticle;
 
     // Timeline state
     int _year;
@@ -660,7 +793,7 @@
         }
         else
         {
-            if (_autoplay) { _autoplay = false; _autoplayTimer?.Dispose(); _autoplayTimer = null; }
+            if (_autoplay) { _autoplay = false; StopAutoplayTimer(); }
             if (_module is not null)
                 await _module.InvokeVoidAsync("clearTemporalLayers");
         }
@@ -862,14 +995,34 @@
     {
         _autoplay = !_autoplay;
         if (_autoplay)
+            StartAutoplayTimer();
+        else
+            StopAutoplayTimer();
+    }
+
+    void OnFrameTimeChanged(int value)
+    {
+        _frameTimeMs = value;
+        if (_autoplay)
         {
-            _autoplayTimer = new System.Threading.Timer(async _ =>
-                await InvokeAsync(async () => { if (!_autoplay || _overview is null) return;
-                    _yearIndex = (_yearIndex + 1) % FilteredYears.Count;
-                    _year = FilteredYears[_yearIndex]; await LoadYear(); }),
-                null, _frameTimeMs, _frameTimeMs);
+            StopAutoplayTimer();
+            StartAutoplayTimer();
         }
-        else { _autoplayTimer?.Dispose(); _autoplayTimer = null; }
+    }
+
+    void StartAutoplayTimer()
+    {
+        _autoplayTimer = new System.Threading.Timer(async _ =>
+            await InvokeAsync(async () => { if (!_autoplay || _overview is null) return;
+                _yearIndex = (_yearIndex + 1) % FilteredYears.Count;
+                _year = FilteredYears[_yearIndex]; await LoadYear(); }),
+            null, _frameTimeMs, _frameTimeMs);
+    }
+
+    void StopAutoplayTimer()
+    {
+        _autoplayTimer?.Dispose();
+        _autoplayTimer = null;
     }
 
     void OnTickZoomChanged(ChangeEventArgs e)
@@ -940,7 +1093,8 @@
     RenderFragment RenderEventCard(GalaxyYearEvent evt, string? region) => __builder =>
     {
         var catColor = GetLensColorCss(evt.Lens);
-        <div class="event-card" style="@($"border-left-color:{catColor}")" data-highlight-region="@region">
+        <div class="event-card" style="@($"border-left-color:{catColor}")" data-highlight-region="@region"
+             @onclick="() => OnNoLocationEventClicked(evt)" @onclick:stopPropagation="true">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;">
                 @if (evt.WikiUrl is not null)
                 {
@@ -1004,8 +1158,66 @@
         await LoadData(); StateHasChanged();
     });
 
+    [JSInvokable]
+    public void OnEventCellHovered(string region, int col, int row, double screenX, double screenY, List<EventPopoverItem> events)
+    {
+        _hoveredCell = new(region, col, row, screenX, screenY, events);
+        _hoveredEvent = null;
+        _hoveredArticle = null;
+        StateHasChanged();
+    }
+
+    void CloseEventPopover()
+    {
+        _hoveredCell = null;
+        _hoveredEvent = null;
+        _hoveredArticle = null;
+    }
+
+    async Task OnEventItemHovered(EventPopoverItem evt)
+    {
+        _hoveredEvent = evt;
+        _hoveredArticle = null;
+        _loadingArticle = evt.PageId.HasValue;
+        StateHasChanged();
+
+        if (evt.PageId is { } pageId)
+        {
+            try
+            {
+                _hoveredArticle = await Http.GetFromJsonAsync<ArticleIntroDto>($"api/ArticleChunks/{pageId}/intro");
+            }
+            catch { /* chunk may not exist */ }
+            _loadingArticle = false;
+            StateHasChanged();
+        }
+    }
+
+    async Task OnNoLocationEventClicked(GalaxyYearEvent evt)
+    {
+        _hoveredCell = null;
+        _hoveredEvent = new(evt.Title, evt.Lens, evt.Category, evt.Place, evt.Outcome, evt.WikiUrl, evt.PageId, evt.Continuity.ToString());
+        _hoveredArticle = null;
+        _loadingArticle = evt.PageId.HasValue;
+        StateHasChanged();
+
+        if (evt.PageId is { } pageId)
+        {
+            try
+            {
+                _hoveredArticle = await Http.GetFromJsonAsync<ArticleIntroDto>($"api/ArticleChunks/{pageId}/intro");
+            }
+            catch { /* chunk may not exist */ }
+            _loadingArticle = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ToggleFullscreen() => Layout.SetFullscreen(!Layout.IsFullscreen);
+
     public async ValueTask DisposeAsync()
     {
+        Layout.SetFullscreen(false);
         GlobalFilterService.OnChange -= OnFilterChanged;
         _autoplayTimer?.Dispose();
         if (_module is not null)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using MudBlazor;
 using MudBlazor.Services;
 using StarWarsData.Frontend;
 using StarWarsData.Frontend.Components;
@@ -87,14 +88,16 @@ builder.Services.AddCascadingAuthenticationState();
 
 builder
     .Services.AddMudServices()
+    .AddMudMarkdownServices()
     .AddHttpContextAccessor()
     .AddScoped<EndpointService>()
     .AddScoped<NavigationService>()
     .AddSingleton<GlobalFilterService>()
-    .AddScoped<ChatHistoryService>();
+    .AddScoped<ChatHistoryService>()
+    .AddScoped<LayoutService>();
 
 // Register a named HttpClient for the API service
-// RemoveAllResilienceHandlers: SSE streaming is long-lived; Polly retries/timeouts don't apply
+// SSE streaming is long-lived; the default 30s total timeout from StandardResilienceHandler kills it
 builder.Services.AddScoped<UserIdDelegatingHandler>();
 builder
     .Services.AddHttpClient(
@@ -105,6 +108,7 @@ builder
             client.Timeout = TimeSpan.FromMinutes(5);
         }
     )
+    .RemoveAllResilienceHandlers()
     .AddHttpMessageHandler<UserIdDelegatingHandler>();
 
 var app = builder.Build();

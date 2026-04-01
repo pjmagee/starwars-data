@@ -344,6 +344,7 @@ public class GalaxyMapETLService(
                             var outcome = node.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
                             unresolvedEvents.Add(new GalaxyYearEvent
                             {
+                                PageId = node.PageId,
                                 Title = node.Name,
                                 Lens = lens,
                                 Category = MapEventCategory(lens),
@@ -378,6 +379,7 @@ public class GalaxyMapETLService(
 
                         cell.Events.Add(new GalaxyYearEvent
                         {
+                            PageId = node.PageId,
                             Title = node.Name,
                             Lens = lens,
                             Category = MapEventCategory(lens),

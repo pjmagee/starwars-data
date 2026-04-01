@@ -1,14 +1,18 @@
-﻿@using System.Reflection
+@using System.Reflection
 @using System.Security.Claims
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
+@inject LayoutService Layout
+@implements IDisposable
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
-<MudLayout>    
+<MudLayout>
+    @if (!Layout.IsFullscreen)
+    {
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudText Typo="Typo.h5" Class="ml-3">Star Wars Data</MudText>
@@ -38,8 +42,11 @@
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Width="280px">
         <NavMenu/>
     </MudDrawer>
-    <MudMainContent Class="pt-16 pa-4">
+    }
+    <MudMainContent Class="@(Layout.IsFullscreen ? "" : "pt-16 pa-4")" Style="@(Layout.IsFullscreen ? "padding-top:0!important;" : "")">
         @Body
+        @if (!Layout.IsFullscreen)
+        {
         <footer class="d-flex justify-center align-center gap-3 pa-3 flex-wrap mt-4">
             <MudText Typo="Typo.caption" Color="Color.Secondary">
                 Made with ❤️ by
@@ -52,6 +59,7 @@
             <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
             <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
         </footer>
+        }
     </MudMainContent>
 </MudLayout>
 
@@ -75,6 +83,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        Layout.OnChange += StateHasChanged;
 
         _theme = new()
         {
@@ -83,6 +92,8 @@
             LayoutProperties = new LayoutProperties()
         };
     }
+
+    public void Dispose() => Layout.OnChange -= StateHasChanged;
 
     private void DrawerToggle()
     {

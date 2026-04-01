@@ -75,11 +75,12 @@ export function initialize(containerId, overview, dotNetRef) {
     const regionLayer = g.append('g');
     const gridLayer = g.append('g');
     const territoryLayer = g.append('g').attr('class', 'layer-territory').style('display', 'none');
-    const heatmapLayer = g.append('g').attr('class', 'layer-heatmap').style('display', 'none');
     const cellLayer = g.append('g');     // transparent grid click targets (below routes/nebulas)
     const routeLayer = g.append('g');
     const nebulaLayer = g.append('g');
     const contentLayer = g.append('g');  // drill-down content (systems / celestial bodies)
+    // Heatmap + markers on top so event circles receive mouse events
+    const heatmapLayer = g.append('g').attr('class', 'layer-heatmap').style('display', 'none');
     const markerLayer = g.append('g').attr('class', 'layer-markers').style('display', 'none');
 
     // Tooltip
@@ -1085,7 +1086,7 @@ export function initialize(containerId, overview, dotNetRef) {
         getCurrentLevel: () => currentLevel,
         setSystemFilter, setRegionVisibility,
         // Temporal layer state
-        territoryLayer, heatmapLayer, markerLayer, tooltip,
+        territoryLayer, heatmapLayer, markerLayer, tooltip, dotNetRef,
         cellW, cellH, cols, rows, regionCellMap, overview,
         currentYearData: null, selectedLens: 'All',
     };
@@ -1296,21 +1297,23 @@ function _renderHeatmap() {
             .style('cursor', 'pointer')
             .on('mouseover', function (event) {
                 d3.select(this).attr('stroke-width', 2).attr('fill-opacity', 0.25 + intensity * 0.4);
-                const list = cell.events.slice(0, 5).map(e => {
-                    const icon = CATEGORY_ICONS[e.category] || '\u2B50';
-                    return `<div style="margin:2px 0;font-size:11px;">${icon} ${e.title} <span style="color:rgba(255,255,255,0.4);">[${e.lens}]</span></div>`;
-                }).join('');
-                const more = cell.count > 5 ? `<div style="color:rgba(255,255,255,0.4);font-size:10px;">+${cell.count - 5} more</div>` : '';
-                tooltip.html(`<div style="font-weight:bold;margin-bottom:4px;color:${cellColor};">${cell.region || 'Unknown'} \u2022 ${cell.count} event${cell.count !== 1 ? 's' : ''}</div>
-                    <div style="color:rgba(255,255,255,0.4);font-size:10px;margin-bottom:4px;">Grid: ${String.fromCharCode(65 + cell.col)}-${cell.row + 1}</div>
-                    ${list}${more}`).style('visibility', 'visible');
-            })
-            .on('mousemove', function (event) {
-                tooltip.style('left', (event.offsetX + 15) + 'px').style('top', (event.offsetY - 10) + 'px');
+                const rect = _state.container.getBoundingClientRect();
+                const screenX = rect.left + event.offsetX;
+                const screenY = rect.top + event.offsetY;
+                const contMap = { 0: 'Unknown', 1: 'Canon', 2: 'Legends' };
+                const evts = cell.events.map(e => ({
+                    title: e.title, lens: e.lens, category: e.category,
+                    place: e.place, outcome: e.outcome, wikiUrl: e.wikiUrl,
+                    pageId: e.pageId ?? null,
+                    continuity: typeof e.continuity === 'string' ? e.continuity : (contMap[e.continuity] ?? 'Unknown'),
+                }));
+                if (_state.dotNetRef) {
+                    _state.dotNetRef.invokeMethodAsync('OnEventCellHovered', cell.region || 'Unknown', cell.col, cell.row, screenX, screenY, evts);
+                }
             })
             .on('mouseout', function () {
                 d3.select(this).attr('stroke-width', 1).attr('fill-opacity', 0.08 + intensity * 0.4);
-                tooltip.style('visibility', 'hidden');
+                // Don't close immediately — let Blazor handle it when mouse leaves the popover
             });
 
         if (cell.count >= 3) {

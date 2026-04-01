@@ -108,6 +108,9 @@ public class GalaxyYearEventCell
 /// </summary>
 public class GalaxyYearEvent
 {
+    [BsonElement("pageId")]
+    public int? PageId { get; set; }
+
     [BsonElement("title")]
     public string Title { get; set; } = string.Empty;
 
