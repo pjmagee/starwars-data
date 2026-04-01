@@ -26,6 +26,14 @@ public class ArticleChunk
     [BsonElement("heading")]
     public string Heading { get; set; } = string.Empty;
 
+    /// <summary>Wookieepedia URL for the source page.</summary>
+    [BsonElement("wikiUrl")]
+    public string WikiUrl { get; set; } = string.Empty;
+
+    /// <summary>URL-friendly section anchor derived from heading (spaces → underscores).</summary>
+    [BsonElement("section")]
+    public string Section { get; set; } = string.Empty;
+
     /// <summary>Zero-based index of this chunk within the page.</summary>
     [BsonElement("chunkIndex")]
     public int ChunkIndex { get; set; }
