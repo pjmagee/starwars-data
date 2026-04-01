@@ -204,6 +204,14 @@ public class GraphDescriptor
     )]
     public List<string> PeerLabels { get; set; } = [];
 
+    [JsonPropertyName("enabledLabels")]
+    [Description(
+        "Labels to enable by default when the graph renders. Must be a subset of upLabels + downLabels + peerLabels. "
+            + "If omitted, ALL labels are enabled. Use this to focus the initial view on the most relevant relationships "
+            + "(e.g. for a family tree, enable only Parent(s)/Children/Partner(s)/Sibling(s) even if Masters/Apprentices are available)."
+    )]
+    public List<string>? EnabledLabels { get; set; }
+
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
     public List<Reference>? References { get; set; }

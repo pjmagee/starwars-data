@@ -171,7 +171,9 @@
         _downLabels = [..Descriptor.DownLabels];
         _peerLabels = [..Descriptor.PeerLabels];
         _allLabels = [..Descriptor.UpLabels, ..Descriptor.DownLabels, ..Descriptor.PeerLabels];
-        _enabledLabels = [.._allLabels];
+        _enabledLabels = Descriptor.EnabledLabels is { Count: > 0 }
+            ? [..Descriptor.EnabledLabels]
+            : [.._allLabels];
 
         await LoadGraph();
     }

@@ -150,6 +150,12 @@ public class ComponentToolkit
         )]
             List<string>? peerLabels = null,
         [Description(
+            "Labels to enable by default. Must be a subset of upLabels + downLabels + peerLabels. "
+                + "If omitted, all labels are enabled. Use this to focus the graph — e.g. for a family tree, "
+                + "pass all labels but only enable Parent(s)/Children/Partner(s)/Sibling(s)."
+        )]
+            List<string>? enabledLabels = null,
+        [Description(
             "Optional source references (title + wikiUrl) from pages used to answer this query"
         )]
             List<Reference>? references = null
@@ -165,6 +171,7 @@ public class ComponentToolkit
             UpLabels = upLabels ?? [],
             DownLabels = downLabels ?? [],
             PeerLabels = peerLabels ?? [],
+            EnabledLabels = enabledLabels,
             References = references,
         };
         return GraphResult;

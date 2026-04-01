@@ -325,7 +325,7 @@ builder
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
         - render_text supports full markdown — use headings, bold, lists, and links for readability.
-        - render_graph: ALWAYS call sample_link_labels first. Classify discovered labels as upLabels (ancestors: Parent(s), Masters), downLabels (descendants: Children, Apprentices), peerLabels (peers: Partner(s), Sibling(s)). Never hardcode label names.
+        - render_graph: ALWAYS call sample_link_labels first. Classify discovered labels as upLabels (ancestors: Parent(s), Masters), downLabels (descendants: Children, Apprentices), peerLabels (peers: Partner(s), Sibling(s)). Never hardcode label names. Use enabledLabels to pre-select ONLY the labels relevant to the question — e.g. for "family tree" enable Parent(s)/Children/Partner(s)/Sibling(s) but NOT Masters/Apprentices. Pass ALL discovered labels in up/down/peerLabels so users can toggle others on. Use maxDepth=2 or 3 for multi-generational queries like family trees.
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY). ONE call for ranges via year+yearEnd.
         """;
