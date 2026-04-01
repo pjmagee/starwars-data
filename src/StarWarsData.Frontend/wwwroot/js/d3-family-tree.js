@@ -52,9 +52,35 @@ export function renderFamilyTree(containerId, data, dotnetRef) {
     for (const n of data.nodes) {
         nodeMap.set(n.id, {
             ...n,
+            parents: [...(n.parents || [])],
+            children: [...(n.children || [])],
+            partners: [...(n.partners || [])],
+            siblings: [...(n.siblings || [])],
             isRoot: n.id === data.rootId,
             _gen: null, _x: null, _y: null,
         });
+    }
+
+    // Build relationship arrays from edges (the API returns edges but may leave node arrays empty)
+    for (const edge of data.edges) {
+        const from = nodeMap.get(edge.fromId);
+        const to = nodeMap.get(edge.toId);
+        if (!from || !to) continue;
+
+        const label = (edge.label || '').toLowerCase();
+        if (label === 'parent') {
+            if (!from.children.includes(to.id)) from.children.push(to.id);
+            if (!to.parents.includes(from.id)) to.parents.push(from.id);
+        } else if (label === 'children' || label === 'child') {
+            if (!from.children.includes(to.id)) from.children.push(to.id);
+            if (!to.parents.includes(from.id)) to.parents.push(from.id);
+        } else if (label === 'partner' || label === 'spouse') {
+            if (!from.partners.includes(to.id)) from.partners.push(to.id);
+            if (!to.partners.includes(from.id)) to.partners.push(from.id);
+        } else if (label === 'sibling') {
+            if (!from.siblings.includes(to.id)) from.siblings.push(to.id);
+            if (!to.siblings.includes(from.id)) to.siblings.push(from.id);
+        }
     }
 
     // ── Compute generations from parent/child/partner relationships ──
