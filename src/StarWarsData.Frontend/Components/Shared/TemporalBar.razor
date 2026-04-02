@@ -1,0 +1,67 @@
+@* Inline SVG bar showing a node's temporal range relative to a global min/max *@
+
+<div style="width:100%; height:16px; position:relative;" title="@Tooltip">
+    <svg width="100%" height="16" style="display:block;">
+        <!-- Background track -->
+        <rect x="0" y="6" width="100%" height="4" rx="2" fill="var(--mud-palette-lines-default)" opacity="0.3" />
+        <!-- Active range -->
+        @if (_leftPct < _rightPct)
+        {
+            <rect x="@($"{_leftPct:F1}%")" y="4" width="@($"{_rightPct - _leftPct:F1}%")" height="8" rx="3"
+                  fill="@_color" opacity="0.8" />
+        }
+        else
+        {
+            <!-- Point marker for single-date entities -->
+            <circle cx="@($"{_leftPct:F1}%")" cy="8" r="4" fill="@_color" opacity="0.9" />
+        }
+    </svg>
+</div>
+
+@code {
+    [Parameter] public int? StartYear { get; set; }
+    [Parameter] public int? EndYear { get; set; }
+    [Parameter] public int MinYear { get; set; } = -25000;
+    [Parameter] public int MaxYear { get; set; } = 40;
+
+    private double _leftPct;
+    private double _rightPct;
+    private string _color = "var(--mud-palette-primary)";
+
+    private string Tooltip
+    {
+        get
+        {
+            if (StartYear.HasValue && EndYear.HasValue)
+                return $"{FormatYear(StartYear.Value)} – {FormatYear(EndYear.Value)}";
+            if (StartYear.HasValue)
+                return $"From {FormatYear(StartYear.Value)}";
+            if (EndYear.HasValue)
+                return $"Until {FormatYear(EndYear.Value)}";
+            return "";
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        var range = (double)(MaxYear - MinYear);
+        if (range <= 0) range = 1;
+
+        var start = StartYear ?? EndYear ?? MinYear;
+        var end = EndYear ?? StartYear ?? MaxYear;
+
+        _leftPct = Math.Clamp((start - MinYear) / range * 100, 0, 100);
+        _rightPct = Math.Clamp((end - MinYear) / range * 100, 0, 100);
+
+        // Color based on era
+        _color = start switch
+        {
+            <= -1000 => "#7c4dff",  // ancient (purple)
+            <= -100 => "#00bcd4",   // old republic era (teal)
+            <= 0 => "#ff9800",      // prequel/OT era (orange)
+            _ => "#4caf50",         // post-Endor (green)
+        };
+    }
+
+    static string FormatYear(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
+}

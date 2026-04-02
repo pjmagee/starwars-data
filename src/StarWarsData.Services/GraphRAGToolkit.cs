@@ -44,7 +44,7 @@ public class GraphRAGToolkit
             + "properties, and temporal lifecycle. Use this to resolve entity names to PageIds before "
             + "calling other graph tools."
     )]
-    public async Task<string> SearchGraphEntities(
+    public async Task<string> SearchEntities(
         [Description("Entity name to search for (case-insensitive partial match)")] string query,
         [Description("Optional entity type filter (e.g. Character, Organization, CelestialBody)")]
             string? type = null,
@@ -55,10 +55,7 @@ public class GraphRAGToolkit
     {
         var filters = new List<FilterDefinition<GraphNode>>
         {
-            Builders<GraphNode>.Filter.Regex(
-                n => n.Name,
-                new BsonRegularExpression(query, "i")
-            ),
+            Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(query, "i")),
         };
 
         if (!string.IsNullOrWhiteSpace(type))
@@ -84,33 +81,88 @@ public class GraphRAGToolkit
                 wikiUrl = n.WikiUrl,
                 startYear = n.StartYear,
                 endYear = n.EndYear,
+                temporalFacets = n.TemporalFacets.Select(f => new
+                {
+                    f.Field,
+                    f.Semantic,
+                    f.Calendar,
+                    f.Year,
+                    f.Text,
+                }),
             })
         );
     }
 
     [Description(
-        "Query the temporal knowledge graph to find entities that existed at a specific year or period. "
-            + "Use for questions like 'What governments existed during 19 BBY?', 'Who was alive during the Clone Wars?', "
-            + "'What organizations were active in 5 ABY?'. Years use sort-key format: negative = BBY, positive = ABY "
-            + "(e.g. -19 = 19 BBY, 4 = 4 ABY)."
+        "Find entities in the temporal knowledge graph that existed during a year or year range. "
+            + "Pass a single year OR a range (year + yearEnd) to find everything active in that window. "
+            + "Use the optional 'semantic' parameter to filter by temporal dimension: "
+            + "'lifespan' = who was alive, 'conflict' = battles/wars/missions happening, "
+            + "'institutional' = governments/organizations existing, 'construction' = structures/ships built, "
+            + "'creation' = artifacts/devices existing, 'publication' = media released (real-world CE years). "
+            + "Examples: 'Characters alive in 19 BBY' → year=-19, type='Character', semantic='lifespan'. "
+            + "'Wars during 4000-1000 BBY' → year=-4000, yearEnd=-1000, type='War', semantic='conflict'. "
+            + "'Books published in 2015' → year=2015, type='Book', semantic='publication'. "
+            + "Years use sort-key format: negative = BBY, positive = ABY for galactic dates, "
+            + "or CE year (e.g. 2015) for publication dates."
     )]
-    public async Task<string> QueryEntitiesByYear(
-        [Description("The year to query (sort-key: -19 = 19 BBY, 4 = 4 ABY)")] int year,
-        [Description("Entity type filter (e.g. Character, Government, Organization, Battle, War)")] string type,
+    public async Task<string> FindEntitiesByYear(
+        [Description(
+            "Start year or single year (sort-key: -19 = 19 BBY, 4 = 4 ABY, or CE year like 2015 for publications)"
+        )]
+            int year,
+        [Description(
+            "Entity type filter (e.g. Character, Government, Organization, Battle, War, Book)"
+        )]
+            string type,
+        [Description("Optional end year for range queries. Omit to query a single year.")]
+            int? yearEnd = null,
         [Description("Optional continuity filter: Canon, Legends, or omit for all")]
             string? continuity = null,
+        [Description(
+            "Optional temporal dimension: lifespan, conflict, institutional, construction, creation, publication. "
+                + "Filters on temporalFacets.semantic prefix. Omit to use the flat startYear/endYear envelope."
+        )]
+            string? semantic = null,
         [Description("Max results (default 20)")] int limit = 20
     )
     {
+        var rangeStart = Math.Min(year, yearEnd ?? year);
+        var rangeEnd = Math.Max(year, yearEnd ?? year);
+
         var filters = new List<FilterDefinition<GraphNode>>
         {
             Builders<GraphNode>.Filter.Eq(n => n.Type, type),
-            Builders<GraphNode>.Filter.Lte(n => n.StartYear, year),
-            Builders<GraphNode>.Filter.Or(
-                Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null),
-                Builders<GraphNode>.Filter.Gte(n => n.EndYear, year)
-            ),
         };
+
+        if (!string.IsNullOrWhiteSpace(semantic))
+        {
+            // Use facet-level filtering for semantic precision
+            filters.Add(
+                Builders<GraphNode>.Filter.ElemMatch(
+                    n => n.TemporalFacets,
+                    Builders<TemporalFacet>.Filter.And(
+                        Builders<TemporalFacet>.Filter.Regex(
+                            f => f.Semantic,
+                            new BsonRegularExpression($"^{semantic}", "i")
+                        ),
+                        Builders<TemporalFacet>.Filter.Lte(f => f.Year, rangeEnd),
+                        Builders<TemporalFacet>.Filter.Gte(f => f.Year, rangeStart)
+                    )
+                )
+            );
+        }
+        else
+        {
+            // Fall back to envelope-based range query
+            filters.Add(Builders<GraphNode>.Filter.Lte(n => n.StartYear, rangeEnd));
+            filters.Add(
+                Builders<GraphNode>.Filter.Or(
+                    Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null),
+                    Builders<GraphNode>.Filter.Gte(n => n.EndYear, rangeStart)
+                )
+            );
+        }
 
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
@@ -130,8 +182,14 @@ public class GraphRAGToolkit
                 continuity = n.Continuity.ToString(),
                 startYear = n.StartYear,
                 endYear = n.EndYear,
-                startDateText = n.StartDateText,
-                endDateText = n.EndDateText,
+                temporalFacets = n.TemporalFacets.Select(f => new
+                {
+                    f.Field,
+                    f.Semantic,
+                    f.Calendar,
+                    f.Year,
+                    f.Text,
+                }),
                 imageUrl = n.ImageUrl,
                 wikiUrl = n.WikiUrl,
             })
@@ -140,40 +198,49 @@ public class GraphRAGToolkit
 
     [Description(
         "Get properties (attributes) of a knowledge graph entity — height, eye color, classification, etc. "
-            + "Use for factual questions about an entity's characteristics. Call search_graph_entities first to get the PageId."
+            + "Use for factual questions about an entity's characteristics. Call search_entities first to get the PageId."
     )]
     public async Task<string> GetEntityProperties(
-        [Description("The PageId of the entity (from search_graph_entities)")] int entityId
+        [Description("The PageId of the entity (from search_entities)")] int entityId
     )
     {
         var node = await _nodes.Find(n => n.PageId == entityId).FirstOrDefaultAsync();
         if (node is null)
             return JsonSerializer.Serialize(new { error = "Entity not found in knowledge graph." });
 
-        return JsonSerializer.Serialize(new
-        {
-            pageId = node.PageId,
-            name = node.Name,
-            type = node.Type,
-            continuity = node.Continuity.ToString(),
-            properties = node.Properties,
-            startYear = node.StartYear,
-            endYear = node.EndYear,
-            startDateText = node.StartDateText,
-            endDateText = node.EndDateText,
-            imageUrl = node.ImageUrl,
-            wikiUrl = node.WikiUrl,
-        });
+        return JsonSerializer.Serialize(
+            new
+            {
+                pageId = node.PageId,
+                name = node.Name,
+                type = node.Type,
+                continuity = node.Continuity.ToString(),
+                properties = node.Properties,
+                startYear = node.StartYear,
+                endYear = node.EndYear,
+                temporalFacets = node.TemporalFacets.Select(f => new
+                {
+                    f.Field,
+                    f.Semantic,
+                    f.Calendar,
+                    f.Year,
+                    f.Text,
+                    f.Order,
+                }),
+                imageUrl = node.ImageUrl,
+                wikiUrl = node.WikiUrl,
+            }
+        );
     }
 
     [Description(
         "Get all direct relationships for an entity, grouped by relationship label. "
             + "Returns relationship types with their connected entities and supporting evidence. "
             + "Use this to answer questions like 'Who trained X?', 'What are X's relationships?', "
-            + "'Who are X's allies?'. Call search_graph_entities first to get the entity's PageId."
+            + "'Who are X's allies?'. Call search_entities first to get the entity's PageId."
     )]
     public async Task<string> GetEntityRelationships(
-        [Description("The PageId of the entity (from search_graph_entities)")] int entityId,
+        [Description("The PageId of the entity (from search_entities)")] int entityId,
         [Description(
             "Optional comma-separated labels to filter (e.g. 'parent_of,trained_by'). Omit for all."
         )]
@@ -249,8 +316,8 @@ public class GraphRAGToolkit
             + "Returns each relationship label with its count and description. "
             + "Use this to discover what relationship types are available before filtering with get_entity_relationships."
     )]
-    public async Task<string> GetGraphLabelsForEntity(
-        [Description("The PageId of the entity (from search_graph_entities)")] int entityId,
+    public async Task<string> GetRelationshipTypes(
+        [Description("The PageId of the entity (from search_entities)")] int entityId,
         [Description("Optional continuity filter: Canon, Legends, or omit for all")]
             string? continuity = null
     )
@@ -294,8 +361,7 @@ public class GraphRAGToolkit
             + "For simple direct relationships, prefer get_entity_relationships instead."
     )]
     public async Task<string> TraverseGraph(
-        [Description("The PageId of the starting entity (from search_graph_entities)")]
-            int entityId,
+        [Description("The PageId of the starting entity (from search_entities)")] int entityId,
         [Description(
             "Optional comma-separated labels to follow (e.g. 'trained_by,trained'). Omit for all."
         )]
@@ -334,26 +400,27 @@ public class GraphRAGToolkit
         // The $match stage already provides 1 hop (root → X).
         // $graphLookup maxDepth N adds N+1 more hops, so we need maxDepth - 2.
         // When maxDepth <= 1, skip $graphLookup entirely (direct edges only).
-        BsonDocument[] pipeline = maxDepth <= 1
-            ? [new BsonDocument("$match", matchFilter)]
-            :
-            [
-                new BsonDocument("$match", matchFilter),
-                new BsonDocument(
-                    "$graphLookup",
-                    new BsonDocument
-                    {
-                        { "from", Collections.KgEdges },
-                        { "startWith", "$toId" },
-                        { "connectFromField", "toId" },
-                        { "connectToField", "fromId" },
-                        { "as", "network" },
-                        { "maxDepth", maxDepth - 2 },
-                        { "depthField", "depth" },
-                        { "restrictSearchWithMatch", restrictMatch },
-                    }
-                ),
-            ];
+        BsonDocument[] pipeline =
+            maxDepth <= 1
+                ? [new BsonDocument("$match", matchFilter)]
+                :
+                [
+                    new BsonDocument("$match", matchFilter),
+                    new BsonDocument(
+                        "$graphLookup",
+                        new BsonDocument
+                        {
+                            { "from", Collections.KgEdges },
+                            { "startWith", "$toId" },
+                            { "connectFromField", "toId" },
+                            { "connectToField", "fromId" },
+                            { "as", "network" },
+                            { "maxDepth", maxDepth - 2 },
+                            { "depthField", "depth" },
+                            { "restrictSearchWithMatch", restrictMatch },
+                        }
+                    ),
+                ];
 
         var results = await edgesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync();
 
@@ -468,7 +535,7 @@ public class GraphRAGToolkit
             + "Returns the shortest path between them with relationship labels and evidence. "
             + "Use for questions like 'How is Palpatine connected to Luke Skywalker?' or "
             + "'What is the relationship between the Jedi Order and the Republic?'. "
-            + "Call search_graph_entities first to get PageIds for both entities."
+            + "Call search_entities first to get PageIds for both entities."
     )]
     public async Task<string> FindConnections(
         [Description("PageId of the first entity")] int entityId1,
@@ -667,11 +734,12 @@ public class GraphRAGToolkit
     [Description(
         "Search article content using semantic vector search over chunked wiki pages. "
             + "Returns the most relevant article passages based on meaning, not just keyword matching. "
+            + "Each result includes title, wikiUrl, sectionUrl (deep link to the article section), and text — use title + sectionUrl as references. "
             + "Use this for lore questions, historical context, event details, or any question where "
             + "the answer is in article body text rather than structured infobox data. "
             + "Combine with graph tools for comprehensive GraphRAG answers."
     )]
-    public async Task<string> SearchChunks(
+    public async Task<string> SearchArticleContent(
         [Description(
             "Natural language search query (e.g. 'Battle of Endor aftermath', 'Darth Vader's redemption')"
         )]
@@ -721,6 +789,8 @@ public class GraphRAGToolkit
                 { "pageId", 1 },
                 { "title", 1 },
                 { "heading", 1 },
+                { "section", 1 },
+                { "wikiUrl", 1 },
                 { "text", 1 },
                 { "type", 1 },
                 { "continuity", 1 },
@@ -728,7 +798,7 @@ public class GraphRAGToolkit
             }
         );
 
-        var pipeline = new[] { vectorSearchStage, projectStage };
+        var pipeline = new BsonDocument[] { vectorSearchStage, projectStage };
 
         var results = await _chunksRaw.Aggregate<BsonDocument>(pipeline).ToListAsync();
 
@@ -746,15 +816,31 @@ public class GraphRAGToolkit
             new
             {
                 query,
-                results = results.Select(d => new
+                results = results.Select(d =>
                 {
-                    pageId = d["pageId"].AsInt32,
-                    title = d["title"].AsString,
-                    heading = d.Contains("heading") ? d["heading"].AsString : "",
-                    type = d.Contains("type") ? d["type"].AsString : "",
-                    continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
-                    score = d.Contains("score") ? Math.Round(d["score"].AsDouble, 4) : 0,
-                    text = Truncate(d["text"].AsString, 1500),
+                    var wikiUrl =
+                        d.Contains("wikiUrl") && !d["wikiUrl"].IsBsonNull
+                            ? d["wikiUrl"].AsString
+                            : "";
+                    var section =
+                        d.Contains("section") && !d["section"].IsBsonNull
+                            ? d["section"].AsString
+                            : "";
+                    return new
+                    {
+                        pageId = d["pageId"].AsInt32,
+                        title = d["title"].AsString,
+                        heading = d.Contains("heading") ? d["heading"].AsString : "",
+                        type = d.Contains("type") ? d["type"].AsString : "",
+                        continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
+                        score = d.Contains("score") ? Math.Round(d["score"].AsDouble, 4) : 0,
+                        wikiUrl,
+                        sectionUrl = !string.IsNullOrEmpty(wikiUrl)
+                        && !string.IsNullOrEmpty(section)
+                            ? $"{wikiUrl}#{section}"
+                            : wikiUrl,
+                        text = Truncate(d["text"].AsString, 1500),
+                    };
                 }),
                 totalResults = results.Count,
             }
@@ -768,9 +854,9 @@ public class GraphRAGToolkit
 
     [Description(
         "Get a complete snapshot of the galaxy at a specific year: territory control (which factions controlled which regions), "
-        + "events that occurred (battles, wars, treaties, etc. with locations), and era context. Pre-computed data — instant response. "
-        + "Use for questions like 'What was happening in 19 BBY?', 'Who controlled the Outer Rim in 4 ABY?', "
-        + "'What battles occurred in 3996 BBY?'. Years use sort-key: negative = BBY, positive = ABY."
+            + "events that occurred (battles, wars, treaties, etc. with locations), and era context. Pre-computed data — instant response. "
+            + "Use for questions like 'What was happening in 19 BBY?', 'Who controlled the Outer Rim in 4 ABY?', "
+            + "'What battles occurred in 3996 BBY?'. Years use sort-key: negative = BBY, positive = ABY."
     )]
     public async Task<string> GetGalaxyYear(
         [Description("Year in sort-key format (-19 = 19 BBY, 4 = 4 ABY)")] int year
@@ -784,39 +870,66 @@ public class GraphRAGToolkit
                 .Find(Builders<BsonDocument>.Filter.Ne("_id", "overview"))
                 .SortBy(d => d["_id"])
                 .ToListAsync();
-            var available = nearest.Select(d => d["_id"].AsInt32).OrderBy(y => Math.Abs(y - year)).Take(5);
-            return JsonSerializer.Serialize(new { error = $"No data for year {year}.", nearestYears = available });
+            var available = nearest
+                .Select(d => d["_id"].AsInt32)
+                .OrderBy(y => Math.Abs(y - year))
+                .Take(5);
+            return JsonSerializer.Serialize(
+                new { error = $"No data for year {year}.", nearestYears = available }
+            );
         }
 
-        return JsonSerializer.Serialize(new
-        {
-            year = doc.Year,
-            yearDisplay = doc.YearDisplay,
-            era = doc.Era,
-            eraDescription = doc.EraDescription,
-            territoryControl = doc.Regions.Select(r => new
+        return JsonSerializer.Serialize(
+            new
             {
-                region = r.Region,
-                factions = r.Factions.Select(f => new { f.Faction, control = $"{f.Control * 100:0}%", f.Contested })
-            }),
-            eventsOnMap = doc.EventCells.SelectMany(c => c.Events).Select(e => new
-            {
-                e.Title, e.Lens, e.Place, e.Outcome, e.WikiUrl,
-                continuity = e.Continuity.ToString(),
-            }).Take(30),
-            unresolvedEvents = (doc.UnresolvedEvents ?? []).Select(e => new
-            {
-                e.Title, e.Lens, e.WikiUrl,
-                continuity = e.Continuity.ToString(),
-            }).Take(20),
-            totalEvents = doc.EventCells.Sum(c => c.Count) + (doc.UnresolvedEvents?.Count ?? 0),
-        });
+                year = doc.Year,
+                yearDisplay = doc.YearDisplay,
+                era = doc.Era,
+                eraDescription = doc.EraDescription,
+                territoryControl = doc.Regions.Select(r => new
+                {
+                    region = r.Region,
+                    factions = r.Factions.Select(f => new
+                    {
+                        f.Faction,
+                        control = $"{f.Control * 100:0}%",
+                        f.Contested,
+                    }),
+                }),
+                eventsOnMap = doc
+                    .EventCells.SelectMany(c => c.Events)
+                    .Select(e => new
+                    {
+                        e.Title,
+                        e.Lens,
+                        e.Place,
+                        e.Outcome,
+                        e.WikiUrl,
+                        continuity = e.Continuity.ToString(),
+                    })
+                    .Take(30),
+                unresolvedEvents = (doc.UnresolvedEvents ?? [])
+                    .Select(e => new
+                    {
+                        e.Title,
+                        e.Lens,
+                        e.WikiUrl,
+                        continuity = e.Continuity.ToString(),
+                    })
+                    .Take(20),
+                totalEvents = doc.EventCells.Sum(c => c.Count) + (doc.UnresolvedEvents?.Count ?? 0),
+            }
+        );
     }
 
     [Description(
-        "Get the temporal lifecycle of an entity — when it was founded/born, when it ended/died, "
-        + "and the original date text from Wookieepedia. Use for questions like 'When was the Galactic Empire founded?', "
-        + "'How long did the Clone Wars last?', 'When did Yoda die?'. Call search_graph_entities first to get the PageId."
+        "Get the full temporal lifecycle of an entity with rich semantic facets. "
+            + "Returns all temporal data points: birth/death for characters, established/dissolved/reorganized/restored/fragmented "
+            + "for institutions, beginning/end for conflicts, constructed/destroyed for structures, release dates for publications. "
+            + "Each facet includes the semantic dimension (lifespan, conflict, institutional, etc.), calendar system "
+            + "(galactic BBY/ABY or real-world CE), parsed year, and original text. Facets are ordered chronologically. "
+            + "Use for questions like 'When was the Galactic Republic reorganized?', 'What is the full lifecycle of the Jedi Order?', "
+            + "'When did Yoda die?', 'When was this book published?'. Call search_entities first to get the PageId."
     )]
     public async Task<string> GetEntityTimeline(
         [Description("The PageId of the entity")] int entityId
@@ -826,112 +939,113 @@ public class GraphRAGToolkit
         if (node is null)
             return JsonSerializer.Serialize(new { error = "Entity not found." });
 
-        // Get temporal edges (relationships with date context)
-        var edges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, entityId),
-                Builders<RelationshipEdge>.Filter.Ne(e => e.FromYear, null)))
-            .Limit(30)
-            .ToListAsync();
-
-        return JsonSerializer.Serialize(new
-        {
-            pageId = node.PageId,
-            name = node.Name,
-            type = node.Type,
-            continuity = node.Continuity.ToString(),
-            universe = node.Universe.ToString(),
-            startYear = node.StartYear,
-            endYear = node.EndYear,
-            startDateText = node.StartDateText,
-            endDateText = node.EndDateText,
-            duration = node.StartYear.HasValue && node.EndYear.HasValue
-                ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years"
-                : null,
-            wikiUrl = node.WikiUrl,
-            temporalRelationships = edges.Select(e => new
+        return JsonSerializer.Serialize(
+            new
             {
-                label = e.Label,
-                target = e.ToName,
-                fromYear = e.FromYear,
-                toYear = e.ToYear,
-                evidence = e.Evidence,
-            }),
-        });
+                pageId = node.PageId,
+                name = node.Name,
+                type = node.Type,
+                continuity = node.Continuity.ToString(),
+                universe = node.Universe.ToString(),
+                startYear = node.StartYear,
+                endYear = node.EndYear,
+                duration = node.StartYear.HasValue && node.EndYear.HasValue
+                    ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years"
+                    : null,
+                wikiUrl = node.WikiUrl,
+                temporalFacets = node
+                    .TemporalFacets.OrderBy(f => f.Order)
+                    .Select(f => new
+                    {
+                        f.Field,
+                        f.Semantic,
+                        f.Calendar,
+                        f.Year,
+                        f.Text,
+                        f.Order,
+                    }),
+            }
+        );
     }
 
     [Description(
         "List all entity types available in the knowledge graph with counts. Use this to discover valid type values "
-        + "for query_entities_by_year and search_graph_entities. Returns types sorted by count descending."
+            + "for find_entities_by_year and search_entities. Returns types sorted by count descending."
     )]
-    public async Task<string> ListKgTypes(
-        [Description("Only include types that have temporal data (startYear). Default true.")] bool temporalOnly = true
+    public async Task<string> ListEntityTypes(
+        [Description("Only include types that have temporal facets. Default true.")]
+            bool temporalOnly = true
     )
     {
         var matchStage = temporalOnly
-            ? new BsonDocument("$match", new BsonDocument("startYear", new BsonDocument("$ne", BsonNull.Value)))
+            ? new BsonDocument(
+                "$match",
+                new BsonDocument("temporalFacets.0", new BsonDocument("$exists", true))
+            )
             : new BsonDocument("$match", new BsonDocument());
 
         var pipeline = new[]
         {
             matchStage,
-            new BsonDocument("$group", new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument(
+                "$group",
+                new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }
+            ),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        var results = await _nodes.Database
-            .GetCollection<BsonDocument>(Collections.KgNodes)
+        var results = await _nodes
+            .Database.GetCollection<BsonDocument>(Collections.KgNodes)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
 
-        return JsonSerializer.Serialize(docs.Select(d => new
-        {
-            type = d["_id"].AsString,
-            count = d["count"].AsInt32,
-        }));
+        return JsonSerializer.Serialize(
+            docs.Select(d => new { type = d["_id"].AsString, count = d["count"].AsInt32 })
+        );
     }
 
     [Description(
         "List all relationship labels in the knowledge graph with usage counts. Use this to discover what kinds of "
-        + "relationships exist (e.g., 'took_place_at', 'affiliated_with', 'homeworld'). Helps choose label filters "
-        + "for get_entity_relationships and traverse_graph."
+            + "relationships exist (e.g., 'took_place_at', 'affiliated_with', 'homeworld'). Helps choose label filters "
+            + "for get_entity_relationships and traverse_graph."
     )]
-    public async Task<string> ListKgRelationshipLabels(
+    public async Task<string> ListRelationshipLabels(
         [Description("Max results (default 50)")] int limit = 50
     )
     {
         var pipeline = new[]
         {
-            new BsonDocument("$group", new BsonDocument { { "_id", "$label" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument(
+                "$group",
+                new BsonDocument { { "_id", "$label" }, { "count", new BsonDocument("$sum", 1) } }
+            ),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
             new BsonDocument("$limit", limit),
         };
 
-        var results = await _edges.Database
-            .GetCollection<BsonDocument>(Collections.KgEdges)
+        var results = await _edges
+            .Database.GetCollection<BsonDocument>(Collections.KgEdges)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
 
-        return JsonSerializer.Serialize(docs.Select(d => new
-        {
-            label = d["_id"].AsString,
-            count = d["count"].AsInt32,
-        }));
+        return JsonSerializer.Serialize(
+            docs.Select(d => new { label = d["_id"].AsString, count = d["count"].AsInt32 })
+        );
     }
 
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
-            AIFunctionFactory.Create(SearchGraphEntities, "search_graph_entities"),
-            AIFunctionFactory.Create(QueryEntitiesByYear, "query_entities_by_year"),
+            AIFunctionFactory.Create(SearchEntities, "search_entities"),
+            AIFunctionFactory.Create(FindEntitiesByYear, "find_entities_by_year"),
             AIFunctionFactory.Create(GetEntityProperties, "get_entity_properties"),
             AIFunctionFactory.Create(GetEntityTimeline, "get_entity_timeline"),
             AIFunctionFactory.Create(GetEntityRelationships, "get_entity_relationships"),
-            AIFunctionFactory.Create(GetGraphLabelsForEntity, "get_graph_labels"),
+            AIFunctionFactory.Create(GetRelationshipTypes, "get_relationship_types"),
             AIFunctionFactory.Create(TraverseGraph, "traverse_graph"),
             AIFunctionFactory.Create(FindConnections, "find_connections"),
             AIFunctionFactory.Create(GetGalaxyYear, "get_galaxy_year"),
-            AIFunctionFactory.Create(ListKgTypes, "list_kg_types"),
-            AIFunctionFactory.Create(ListKgRelationshipLabels, "list_kg_relationship_labels"),
-            AIFunctionFactory.Create(SearchChunks, "search_chunks"),
+            AIFunctionFactory.Create(ListEntityTypes, "list_entity_types"),
+            AIFunctionFactory.Create(ListRelationshipLabels, "list_relationship_labels"),
+            AIFunctionFactory.Create(SearchArticleContent, "search_article_content"),
         ];
 }

@@ -61,6 +61,10 @@ public class GraphNode
     [BsonIgnoreIfNull]
     public string? EndDateText { get; set; }
 
+    /// <summary>All temporal facets, preserving semantic meaning and lifecycle order.</summary>
+    [BsonElement("temporalFacets")]
+    public List<TemporalFacet> TemporalFacets { get; set; } = [];
+
     /// <summary>Content hash from the Page at time of processing.</summary>
     [BsonElement("contentHash")]
     public string? ContentHash { get; set; }

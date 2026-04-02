@@ -1,0 +1,474 @@
+@page "/knowledge-graph"
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+@inject GlobalFilterService GlobalFilterService
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<PageTitle>Knowledge Graph</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph Nodes</MudText>
+
+    <MudTable T="TemporalNodeDto" ServerData="LoadData" @ref="_table" Dense="true"
+              Hover="true" Bordered="false" Striped="true" Elevation="1"
+              Loading="_loading" LoadingProgressColor="Color.Primary">
+        <ToolBarContent>
+            <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
+                          Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                          Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
+                          Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
+                          Style="max-width:280px;" Class="mr-3" />
+            <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                       @bind-Value:after="OnFilterChanged" Style="max-width:180px;" Clearable="true"
+                       Placeholder="All Types" Class="mr-3">
+                @foreach (var type in _entityTypes)
+                {
+                    <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
+                }
+            </MudSelect>
+            <MudSwitch T="bool" @bind-Value="_temporalOnly" @bind-Value:after="OnFilterChanged"
+                       Color="Color.Primary" Label="Temporal only" Class="mr-3" />
+            <MudSelect T="string" @bind-Value="_selectedSemantic" Variant="Variant.Outlined" Margin="Margin.Dense"
+                       @bind-Value:after="OnFilterChanged" Style="max-width:180px;" Clearable="true"
+                       Placeholder="All Dimensions" Class="mr-3">
+                <MudSelectItem T="string" Value="@("lifespan")">Lifespan</MudSelectItem>
+                <MudSelectItem T="string" Value="@("conflict")">Conflict</MudSelectItem>
+                <MudSelectItem T="string" Value="@("construction")">Construction</MudSelectItem>
+                <MudSelectItem T="string" Value="@("creation")">Creation</MudSelectItem>
+                <MudSelectItem T="string" Value="@("institutional")">Institutional</MudSelectItem>
+                <MudSelectItem T="string" Value="@("publication")">Publication</MudSelectItem>
+                <MudSelectItem T="string" Value="@("usage")">Usage</MudSelectItem>
+            </MudSelect>
+            <MudSelect T="string" @bind-Value="_selectedLabel" Variant="Variant.Outlined" Margin="Margin.Dense"
+                       @bind-Value:after="OnFilterChanged" Style="max-width:200px;" Clearable="true"
+                       Placeholder="All Relationships">
+                @foreach (var lbl in _edgeLabels)
+                {
+                    <MudSelectItem T="string" Value="@lbl">@FormatPropertyKey(lbl)</MudSelectItem>
+                }
+            </MudSelect>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh Style="width:50px"></MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Type</MudTh>
+            <MudTh>Continuity</MudTh>
+            <MudTh>Temporal Data</MudTh>
+            <MudTh Style="width:60px"></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>
+                @if (context.ImageUrl is not null)
+                {
+                    <MudAvatar Size="Size.Small">
+                        <MudImage Src="@StripRevision(context.ImageUrl)" Alt="@context.Name" />
+                    </MudAvatar>
+                }
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudLink Href="@($"/graph-explorer/{context.Id}")" Underline="Underline.Hover">
+                    @context.Name
+                </MudLink>
+            </MudTd>
+            <MudTd DataLabel="Type">
+                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">
+                    @FormatTypeName(context.Type)
+                </MudChip>
+            </MudTd>
+            <MudTd DataLabel="Continuity">
+                @if (context.Continuity == "Canon")
+                {
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary" Style="font-size:10px;">Canon</MudChip>
+                }
+                else if (context.Continuity == "Legends")
+                {
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Style="font-size:10px;">Legends</MudChip>
+                }
+            </MudTd>
+            <MudTd DataLabel="Temporal">
+                @if (context.TemporalFacets.Count > 0)
+                {
+                    <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1" AlignItems="AlignItems.Center">
+                        @foreach (var (facet, idx) in context.TemporalFacets.OrderBy(f => f.Order).Select((f, i) => (f, i)))
+                        {
+                            @if (idx > 0)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small"
+                                         Style="opacity:0.3; font-size:12px;" />
+                            }
+                            <MudTooltip Text="@($"{facet.Semantic} ({facet.Calendar})")">
+                                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                         Color="@GetFacetColor(facet.Semantic)" Style="font-size:11px;">
+                                    @FormatFacetRole(facet.Semantic): @facet.Text
+                                </MudChip>
+                            </MudTooltip>
+                        }
+                    </MudStack>
+                }
+            </MudTd>
+            <MudTd>
+                <MudIconButton Icon="@(_expandedNodeId == context.Id ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                               Size="Size.Small" OnClick="@(() => ToggleDetails(context.Id))" />
+            </MudTd>
+        </RowTemplate>
+        <ChildRowContent>
+            @if (_expandedNodeId == context.Id)
+            {
+                <MudTr>
+                    <td colspan="6">
+                        <MudPaper Class="pa-4 ma-2" Outlined="true">
+                            <MudGrid Spacing="2">
+                                @if (context.ImageUrl is not null)
+                                {
+                                    <MudItem xs="12" sm="3" md="2">
+                                        <MudImage Src="@StripRevision(context.ImageUrl)" Alt="@context.Name"
+                                                  ObjectFit="ObjectFit.Contain" Style="max-height:200px; width:100%;"
+                                                  Class="rounded" />
+                                    </MudItem>
+                                }
+                                <MudItem xs="12" sm="@(context.ImageUrl is not null ? 9 : 12)" md="@(context.ImageUrl is not null ? 10 : 12)">
+                                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2" Spacing="2">
+                                        <MudText Typo="Typo.h6">@context.Name</MudText>
+                                        @if (context.WikiUrl is not null)
+                                        {
+                                            <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small"
+                                                           Href="@context.WikiUrl" Target="_blank" Color="Color.Primary" />
+                                        }
+                                        <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
+                                                       Href="@($"/graph-explorer/{context.Id}")" Color="Color.Secondary"
+                                                       Title="View in Graph Explorer" />
+                                    </MudStack>
+
+                                    @* ── Temporal Facets ── *@
+                                    @if (context.TemporalFacets.Count > 0)
+                                    {
+                                        <MudText Typo="Typo.subtitle2" Class="mb-1">
+                                            <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Class="mr-1" />
+                                            Timeline
+                                        </MudText>
+                                        @foreach (var group in context.TemporalFacets.GroupBy(f => f.Semantic.Split('.')[0]).OrderBy(g => g.Key))
+                                        {
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1" Style="text-transform:capitalize;">
+                                                @group.Key
+                                            </MudText>
+                                            <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1" AlignItems="AlignItems.Center" Class="mb-2">
+                                                @foreach (var (facet, idx) in group.OrderBy(f => f.Order).Select((f, i) => (f, i)))
+                                                {
+                                                    @if (idx > 0)
+                                                    {
+                                                        <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small"
+                                                                 Color="Color.Secondary" Style="opacity:0.5;" />
+                                                    }
+                                                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                             Color="@GetFacetColor(facet.Semantic)">
+                                                        @FormatFacetRole(facet.Semantic): @facet.Text
+                                                        @if (facet.Calendar == "real" && facet.Year.HasValue)
+                                                        {
+                                                            <text> (CE)</text>
+                                                        }
+                                                    </MudChip>
+                                                }
+                                            </MudStack>
+                                        }
+
+                                        @if (context.StartYear.HasValue && context.EndYear.HasValue)
+                                        {
+                                            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Outlined" Class="mb-3">
+                                                Duration: @Math.Abs(context.EndYear.Value - context.StartYear.Value) years
+                                            </MudChip>
+                                        }
+                                    }
+                                    else if (context.StartYear.HasValue || context.EndYear.HasValue)
+                                    {
+                                        <MudStack Row="true" Spacing="2" Class="mb-3">
+                                            @if (context.StartDateText is not null)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined">
+                                                    Start: @context.StartDateText
+                                                </MudChip>
+                                            }
+                                            @if (context.EndDateText is not null)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Color="Color.Error" Variant="Variant.Outlined">
+                                                    End: @context.EndDateText
+                                                </MudChip>
+                                            }
+                                        </MudStack>
+                                    }
+
+                                    @* ── Attributes (scalar properties intrinsic to this node) ── *@
+                                    <MudText Typo="Typo.subtitle2" Class="mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.ListAlt" Size="Size.Small" Class="mr-1" />
+                                        Attributes
+                                    </MudText>
+                                    @if (context.Properties.Count > 0)
+                                    {
+                                        <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="max-width:600px; font-size:13px;" Class="mb-4">
+                                            <tbody>
+                                                @foreach (var kvp in context.Properties.OrderBy(p => p.Key))
+                                                {
+                                                    <tr>
+                                                        <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top; text-transform:capitalize;">
+                                                            @FormatPropertyKey(kvp.Key)
+                                                        </td>
+                                                        <td style="padding:4px 8px;">
+                                                            @string.Join(", ", kvp.Value)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </MudSimpleTable>
+                                    }
+                                    else
+                                    {
+                                        <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">No attributes recorded.</MudText>
+                                    }
+
+                                    @* ── Relationships (edge labels connecting this node to others) ── *@
+                                    <MudText Typo="Typo.subtitle2" Class="mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.Hub" Size="Size.Small" Class="mr-1" />
+                                        Relationships
+                                    </MudText>
+                                    @if (_expandedLabelsLoading)
+                                    {
+                                        <MudProgressLinear Indeterminate="true" Color="Color.Info" Style="max-width:400px;" />
+                                    }
+                                    else if (_expandedLabels is { Count: > 0 })
+                                    {
+                                        <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
+                                            @foreach (var label in _expandedLabels)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Outlined"
+                                                         Href="@($"/graph-explorer/{context.Id}")" Target="_self">
+                                                    @FormatPropertyKey(label)
+                                                </MudChip>
+                                            }
+                                        </MudStack>
+                                    }
+                                    else
+                                    {
+                                        <MudText Typo="Typo.body2" Color="Color.Secondary">No relationships found.</MudText>
+                                    }
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>
+                    </td>
+                </MudTr>
+            }
+        </ChildRowContent>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new[] { 10, 20, 50, 100 }" />
+        </PagerContent>
+        <NoRecordsContent>
+            <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true">
+                No knowledge graph nodes found matching your filters.
+            </MudAlert>
+        </NoRecordsContent>
+    </MudTable>
+
+</MudContainer>
+
+@code {
+    private MudTable<TemporalNodeDto>? _table;
+    private bool _loading;
+    private string _search = "";
+    private string _selectedType = "";
+    private bool _temporalOnly;
+    private string _selectedSemantic = "";
+    private string _selectedLabel = "";
+    private List<string> _entityTypes = [];
+    private List<string> _edgeLabels = [];
+    private int? _expandedNodeId;
+    private List<string>? _expandedLabels;
+    private bool _expandedLabelsLoading;
+
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        GlobalFilterService.OnChange += OnGlobalFilterChanged;
+        await Task.WhenAll(LoadEntityTypes(), LoadEdgeLabels());
+    }
+
+    private async Task LoadEntityTypes()
+    {
+        try
+        {
+            var types = await Api.GetFromJsonAsync<List<string>>("api/RelationshipGraph/entity-types");
+            if (types is { Count: > 0 })
+                _entityTypes = types;
+        }
+        catch { }
+    }
+
+    private async Task LoadEdgeLabels()
+    {
+        try
+        {
+            var labels = await Api.GetFromJsonAsync<List<string>>("api/RelationshipGraph/edge-labels");
+            if (labels is { Count: > 0 })
+                _edgeLabels = labels;
+        }
+        catch { }
+    }
+
+    private async void OnGlobalFilterChanged()
+    {
+        await InvokeAsync(() =>
+        {
+            _table?.ReloadServerData();
+            StateHasChanged();
+        });
+    }
+
+    private async Task<TableData<TemporalNodeDto>> LoadData(TableState state, CancellationToken ct)
+    {
+        _loading = true;
+        try
+        {
+            var page = state.Page + 1;
+            var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            qs["page"] = page.ToString();
+            qs["pageSize"] = state.PageSize.ToString();
+
+            if (!string.IsNullOrWhiteSpace(_selectedType))
+                qs["type"] = _selectedType;
+            if (!string.IsNullOrWhiteSpace(_search))
+                qs["q"] = _search;
+            if (_temporalOnly)
+                qs["temporalOnly"] = "true";
+            if (!string.IsNullOrWhiteSpace(_selectedSemantic))
+                qs["semantic"] = _selectedSemantic;
+            if (!string.IsNullOrWhiteSpace(_selectedLabel))
+                qs["label"] = _selectedLabel;
+
+            var c = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(c))
+                qs["continuity"] = c;
+
+            var result = await Api.GetFromJsonAsync<BrowseTemporalNodesResult>(
+                $"api/RelationshipGraph/temporal-nodes?{qs}", ct);
+
+            return new TableData<TemporalNodeDto>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = (int)(result?.Total ?? 0),
+            };
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load nodes: {ex.Message}", Severity.Error);
+            return new TableData<TemporalNodeDto> { Items = [], TotalItems = 0 };
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void OnSearchChanged(string value)
+    {
+        _search = value;
+        _table?.ReloadServerData();
+    }
+
+    private void OnFilterChanged()
+    {
+        _table?.ReloadServerData();
+    }
+
+    private async Task ToggleDetails(int nodeId)
+    {
+        if (_expandedNodeId == nodeId)
+        {
+            _expandedNodeId = null;
+            _expandedLabels = null;
+            return;
+        }
+
+        _expandedNodeId = nodeId;
+        _expandedLabels = null;
+        _expandedLabelsLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            _expandedLabels = await Api.GetFromJsonAsync<List<string>>(
+                $"api/RelationshipGraph/labels/{nodeId}");
+        }
+        catch
+        {
+            _expandedLabels = [];
+        }
+        finally
+        {
+            _expandedLabelsLoading = false;
+        }
+    }
+
+    static string FormatTypeName(string type) => type switch
+    {
+        "CelestialBody" => "Planet / Body",
+        _ => System.Text.RegularExpressions.Regex.Replace(type, "(?<!^)([A-Z])", " $1"),
+    };
+
+    static string FormatPropertyKey(string key) =>
+        key.Replace("_", " ");
+
+    static string FormatFacetRole(string semantic)
+    {
+        var role = semantic.Contains('.') ? semantic[(semantic.LastIndexOf('.') + 1)..] : semantic;
+        return role switch
+        {
+            "start" => semantic.StartsWith("lifespan") ? "Born" :
+                       semantic.StartsWith("conflict") ? "Began" :
+                       semantic.StartsWith("construction") ? "Built" :
+                       semantic.StartsWith("creation") ? "Created" :
+                       semantic.StartsWith("institutional") ? "Established" :
+                       semantic.StartsWith("publication") ? "Released" : "Start",
+            "end" => semantic.StartsWith("lifespan") ? "Died" :
+                     semantic.StartsWith("conflict") ? "Ended" :
+                     semantic.StartsWith("construction") ? "Destroyed" :
+                     semantic.StartsWith("creation") ? "Destroyed" :
+                     semantic.StartsWith("institutional") ? "Dissolved" :
+                     semantic.StartsWith("publication") ? "Ended" : "End",
+            "point" => "Date",
+            "release" => "Released",
+            "rebuilt" => "Rebuilt",
+            "reorganized" => "Reorganized",
+            "restored" => "Restored",
+            "fragmented" => "Fragmented",
+            "suspended" => "Suspended",
+            "discovered" => "Discovered",
+            _ => System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(role),
+        };
+    }
+
+    static Color GetFacetColor(string semantic)
+    {
+        var role = semantic.Contains('.') ? semantic[(semantic.LastIndexOf('.') + 1)..] : semantic;
+        return role switch
+        {
+            "start" or "release" => Color.Success,
+            "end" => Color.Error,
+            "point" => Color.Primary,
+            "reorganized" or "restored" => Color.Warning,
+            "fragmented" or "suspended" => Color.Secondary,
+            "discovered" or "rebuilt" => Color.Info,
+            _ => Color.Default,
+        };
+    }
+
+    static string StripRevision(string url)
+    {
+        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
+        return idx > 0 ? url[..idx] : url;
+    }
+
+    public void Dispose()
+    {
+        GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+    }
+}

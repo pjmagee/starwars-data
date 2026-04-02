@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -15,14 +16,18 @@ namespace StarWarsData.Services;
 public class InfoboxGraphService(
     IMongoClient mongoClient,
     IOptions<SettingsOptions> settings,
-    ILogger<InfoboxGraphService> logger)
+    ILogger<InfoboxGraphService> logger
+)
 {
     readonly IMongoCollection<Page> _pages = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<Page>(Collections.Pages);
     readonly IMongoCollection<GraphNode> _nodes = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<GraphNode>(Collections.KgNodes);
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<RelationshipEdge>(Collections.KgEdges);
 
     // ── Field classification ──
     // Fields are classified per infobox type. A field is a PROPERTY if it holds scalar
@@ -39,52 +44,98 @@ public class InfoboxGraphService(
     static readonly HashSet<string> AlwaysProperties = new(StringComparer.OrdinalIgnoreCase)
     {
         // Identity / titles
-        "Titles", "Pronouns", "Gender",
-
+        "Titles",
+        "Pronouns",
+        "Gender",
         // Physical attributes (links go to color/unit pages, not entities)
-        "Height", "Mass", "Eye color", "Hair color", "Skin color", "Feather color",
-        "Plating color", "Sensor color", "Color",
-        "Average height", "Average length", "Average mass", "Average lifespan", "Average wingspan",
-
+        "Height",
+        "Mass",
+        "Eye color",
+        "Hair color",
+        "Skin color",
+        "Feather color",
+        "Plating color",
+        "Sensor color",
+        "Color",
+        "Average height",
+        "Average length",
+        "Average mass",
+        "Average lifespan",
+        "Average wingspan",
         // Descriptions / classifications
-        "Class", "Designation", "Classification", "Distinctions", "Demonym",
-        "Organization type", "Model", "Shape", "Purpose",
-
+        "Class",
+        "Designation",
+        "Classification",
+        "Distinctions",
+        "Demonym",
+        "Organization type",
+        "Model",
+        "Shape",
+        "Purpose",
         // Measurements / specs
-        "Length", "Width", "Height/depth", "Diameter", "Weight",
-        "Hyperdrive rating", "Maximum atmospheric speed", "Megalight per hour",
-        "Maximum altitude", "Maximum speed", "Maximum depth",
-        "Passengers", "Population", "Consumables", "Cargo capacity",
-        "Orbital position", "Orbital period", "Rotation period", "Surface water",
-
+        "Length",
+        "Width",
+        "Height/depth",
+        "Diameter",
+        "Weight",
+        "Hyperdrive rating",
+        "Maximum atmospheric speed",
+        "Megalight per hour",
+        "Maximum altitude",
+        "Maximum speed",
+        "Maximum depth",
+        "Passengers",
+        "Population",
+        "Consumables",
+        "Cargo capacity",
+        "Orbital position",
+        "Orbital period",
+        "Rotation period",
+        "Surface water",
         // Publication / media metadata
-        "Pages", "Media type", "Issue number", "Issue #", "Issues", "Format",
-        "Run time", "Number of players", "Ages of players", "Playing time",
-        "Number of books", "Number of audiobooks", "Collected issues",
+        "Pages",
+        "Media type",
+        "Issue number",
+        "Issue #",
+        "Issues",
+        "Format",
+        "Run time",
+        "Number of players",
+        "Ages of players",
+        "Playing time",
+        "Number of books",
+        "Number of audiobooks",
+        "Collected issues",
         "Skills required",
-
-        // Dates as text (stored as property, temporal edges derived separately)
-        "Born", "Died",
-        "Date", "Date established", "Date dissolved", "Date reorganized",
-        "Date restored", "Date fragmented", "Date founded", "Beginning", "End",
-        "Constructed", "Destroyed", "Date created", "Date destroyed", "Date engineered",
-
         // Outcomes / descriptions
-        "Outcome", "Result", "Diet", "Habitat", "Atmosphere", "Terrain", "Climate",
-        "Grid square", "Grid coordinates",
-
+        "Outcome",
+        "Result",
+        "Diet",
+        "Habitat",
+        "Atmosphere",
+        "Terrain",
+        "Climate",
+        "Grid square",
+        "Grid coordinates",
         // Misc scalar
-        "Symptoms", "Transmission type", "Incubation period",
-        "Number infected", "Number killed",
-        "Other markings", "Other systems",
-        "Major exports", "Major imports",
+        "Symptoms",
+        "Transmission type",
+        "Incubation period",
+        "Number infected",
+        "Number killed",
+        "Other markings",
+        "Other systems",
+        "Major exports",
+        "Major imports",
     };
 
     /// <summary>
     /// Fields that are ALWAYS relationships — their linked targets are meaningful entities.
     /// Maps field name → edge label for the relationship.
     /// </summary>
-    static readonly Dictionary<string, string> RelationshipLabels = new(StringComparer.OrdinalIgnoreCase)
+    static readonly Dictionary<string, string> RelationshipLabels = new(
+        StringComparer.OrdinalIgnoreCase
+    )
     {
         // ── Character ──
         ["Species"] = "species",
@@ -280,29 +331,94 @@ public class InfoboxGraphService(
     };
 
     /// <summary>
-    /// Maps infobox field labels to node temporal lifecycle (startYear / endYear).
-    /// These dates are stored as node attributes, NOT as edges.
+    /// Unified map of all temporal infobox fields → (semantic, calendarHint).
+    /// Calendar hint: "galactic" (BBY/ABY), "real" (CE), "auto" (detect from text).
+    /// See eng/design/001-temporal-facets.md for the full design rationale.
     /// </summary>
-    static readonly Dictionary<string, string> StartDateFields = new(StringComparer.OrdinalIgnoreCase)
+    static readonly Dictionary<string, (string semantic, string calendar)> TemporalFieldMap = new(
+        StringComparer.OrdinalIgnoreCase
+    )
     {
-        ["Date established"] = "start",
-        ["Date founded"] = "start",
-        ["Date"] = "start",         // Battle/Duel/Mission/Event date
-        ["Beginning"] = "start",     // War start
-        ["Begin"] = "start",         // Campaign start
-        ["Born"] = "start",          // Character birth
-        ["Constructed"] = "start",   // Structure/ship built date
-        ["Founding"] = "start",
-    };
+        // ── Lifespan (auto: Character=galactic, Person=real) ──
+        ["Born"] = ("lifespan.start", "auto"),
+        ["Died"] = ("lifespan.end", "auto"),
 
-    static readonly Dictionary<string, string> EndDateFields = new(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Date dissolved"] = "end",
-        ["Date fragmented"] = "end",
-        ["End"] = "end",             // War/campaign end
-        ["Died"] = "end",            // Character death
-        ["Destroyed"] = "end",
-        ["Date destroyed"] = "end",
+        // ── Conflict / Event ──
+        ["Beginning"] = ("conflict.start", "galactic"),
+        ["Begin"] = ("conflict.start", "galactic"),
+        ["Begins"] = ("conflict.start", "galactic"),
+        ["End"] = ("conflict.end", "galactic"),
+        ["Ends"] = ("conflict.end", "galactic"),
+        ["Date"] = ("conflict.point", "galactic"),
+
+        // ── Construction ──
+        ["Constructed"] = ("construction.start", "galactic"),
+        ["Commissioned"] = ("construction.start", "galactic"),
+        ["Rebuilt"] = ("construction.rebuilt", "galactic"),
+        ["Destroyed"] = ("construction.end", "galactic"),
+        ["Retired"] = ("construction.end", "galactic"),
+
+        // ── Creation (artifacts, devices, weapons) ──
+        ["Date created"] = ("creation.start", "galactic"),
+        ["Date engineered"] = ("creation.start", "galactic"),
+        ["Date introduced"] = ("creation.start", "galactic"),
+        ["Year introduced"] = ("creation.start", "galactic"),
+        ["Date destroyed"] = ("creation.end", "galactic"),
+        ["Date retired"] = ("creation.end", "galactic"),
+        ["Date discovered"] = ("creation.discovered", "galactic"),
+
+        // ── Institutional lifecycle ──
+        ["Date established"] = ("institutional.start", "galactic"),
+        ["Date founded"] = ("institutional.start", "galactic"),
+        ["Founding"] = ("institutional.start", "galactic"),
+        ["Founded"] = ("institutional.start", "auto"),
+        ["Established"] = ("institutional.start", "galactic"),
+        ["Date dissolved"] = ("institutional.end", "galactic"),
+        ["Dissolved"] = ("institutional.end", "auto"),
+        ["Date abolished"] = ("institutional.end", "galactic"),
+        ["Date of collapse"] = ("institutional.end", "galactic"),
+        ["Closed"] = ("institutional.end", "auto"),
+        ["Date closed"] = ("institutional.end", "auto"),
+        ["Date reorganized"] = ("institutional.reorganized", "galactic"),
+        ["Reorganized"] = ("institutional.reorganized", "galactic"),
+        ["Reorganization"] = ("institutional.reorganized", "galactic"),
+        ["Date restored"] = ("institutional.restored", "galactic"),
+        ["Restored"] = ("institutional.restored", "galactic"),
+        ["Date reestablished"] = ("institutional.restored", "galactic"),
+        ["Date of restoration"] = ("institutional.restored", "galactic"),
+        ["Date fragmented"] = ("institutional.fragmented", "galactic"),
+        ["Fragmented"] = ("institutional.fragmented", "galactic"),
+        ["Fragmentation"] = ("institutional.fragmented", "galactic"),
+        ["Date suspended"] = ("institutional.suspended", "galactic"),
+
+        // ── Publication (always real-world) ──
+        ["Release date"] = ("publication.release", "real"),
+        ["Publication date"] = ("publication.release", "real"),
+        ["Air date"] = ("publication.release", "real"),
+        ["First released"] = ("publication.release", "real"),
+        ["Released"] = ("publication.release", "real"),
+        ["Premiere date"] = ("publication.release", "real"),
+        ["Launched"] = ("publication.release", "real"),
+        ["Start date"] = ("publication.start", "real"),
+        ["First aired"] = ("publication.start", "real"),
+        ["First published"] = ("publication.start", "real"),
+        ["First book published"] = ("publication.start", "real"),
+        ["First media published"] = ("publication.start", "real"),
+        ["First issue"] = ("publication.start", "real"),
+        ["End date"] = ("publication.end", "real"),
+        ["Last aired"] = ("publication.end", "real"),
+        ["Last published"] = ("publication.end", "real"),
+        ["Last book published"] = ("publication.end", "real"),
+        ["Last issue"] = ("publication.end", "real"),
+        ["Closing date"] = ("publication.end", "real"),
+
+        // ── Niche temporal fields ──
+        ["First awarded"] = ("usage.start", "galactic"),
+        ["Last awarded"] = ("usage.end", "galactic"),
+        ["First employed"] = ("usage.start", "galactic"),
+        ["Last employed"] = ("usage.end", "galactic"),
+        ["First played"] = ("usage.start", "galactic"),
+        ["First worshipped"] = ("usage.start", "galactic"),
     };
 
     /// <summary>
@@ -315,22 +431,28 @@ public class InfoboxGraphService(
 
         // Build a PageId lookup from wiki URLs so we can resolve link targets
         var wikiUrlToPageId = await BuildWikiUrlLookupAsync(ct);
-        logger.LogInformation("InfoboxGraph: {Count} wiki URL → PageId mappings", wikiUrlToPageId.Count);
+        logger.LogInformation(
+            "InfoboxGraph: {Count} wiki URL → PageId mappings",
+            wikiUrlToPageId.Count
+        );
 
         // Process all pages with infoboxes
         var filter = Builders<Page>.Filter.Ne(p => p.Infobox, null);
         var totalPages = await _pages.CountDocumentsAsync(filter, cancellationToken: ct);
         logger.LogInformation("InfoboxGraph: {Total} pages with infoboxes to process", totalPages);
 
-        var cursor = await _pages.Find(filter)
-            .Project(Builders<Page>.Projection
-                .Include(p => p.PageId)
-                .Include(p => p.Title)
-                .Include(p => p.Infobox)
-                .Include(p => p.WikiUrl)
-                .Include(p => p.Continuity)
-                .Include(p => p.Universe)
-                .Include(p => p.ContentHash))
+        var cursor = await _pages
+            .Find(filter)
+            .Project(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include(p => p.Title)
+                    .Include(p => p.Infobox)
+                    .Include(p => p.WikiUrl)
+                    .Include(p => p.Continuity)
+                    .Include(p => p.Universe)
+                    .Include(p => p.ContentHash)
+            )
             .ToCursorAsync(ct);
 
         var nodes = new List<GraphNode>();
@@ -344,65 +466,91 @@ public class InfoboxGraphService(
                 var pageId = doc["_id"].AsInt32;
                 var title = doc["title"].AsString;
                 var continuity = doc.Contains("continuity")
-                    ? Enum.TryParse<Continuity>(doc["continuity"].AsString, out var c) ? c : Continuity.Unknown
+                    ? Enum.TryParse<Continuity>(doc["continuity"].AsString, out var c)
+                        ? c
+                        : Continuity.Unknown
                     : Continuity.Unknown;
                 var universe = doc.Contains("universe")
-                    ? Enum.TryParse<Universe>(doc["universe"].AsString, out var u) ? u : Universe.Unknown
+                    ? Enum.TryParse<Universe>(doc["universe"].AsString, out var u)
+                        ? u
+                        : Universe.Unknown
                     : Universe.Unknown;
-                var contentHash = doc.Contains("contentHash") && !doc["contentHash"].IsBsonNull
-                    ? doc["contentHash"].AsString : null;
+                var contentHash =
+                    doc.Contains("contentHash") && !doc["contentHash"].IsBsonNull
+                        ? doc["contentHash"].AsString
+                        : null;
                 var wikiUrl = doc.Contains("wikiUrl") ? doc["wikiUrl"].AsString : null;
 
                 var infoboxDoc = doc["infobox"].AsBsonDocument;
-                var template = infoboxDoc.Contains("Template") && !infoboxDoc["Template"].IsBsonNull
-                    ? infoboxDoc["Template"].AsString : null;
-                var imageUrl = infoboxDoc.Contains("ImageUrl") && !infoboxDoc["ImageUrl"].IsBsonNull
-                    ? infoboxDoc["ImageUrl"].AsString : null;
+                var template =
+                    infoboxDoc.Contains("Template") && !infoboxDoc["Template"].IsBsonNull
+                        ? infoboxDoc["Template"].AsString
+                        : null;
+                var imageUrl =
+                    infoboxDoc.Contains("ImageUrl") && !infoboxDoc["ImageUrl"].IsBsonNull
+                        ? infoboxDoc["ImageUrl"].AsString
+                        : null;
 
                 // Extract type from template URL
                 var type = "Unknown";
                 if (template is not null)
                 {
                     var idx = template.LastIndexOf(':');
-                    if (idx >= 0) type = template[(idx + 1)..];
+                    if (idx >= 0)
+                        type = template[(idx + 1)..];
                 }
 
                 // Parse infobox data items
-                var dataItems = infoboxDoc.Contains("Data") && infoboxDoc["Data"].IsBsonArray
-                    ? infoboxDoc["Data"].AsBsonArray : new BsonArray();
+                var dataItems =
+                    infoboxDoc.Contains("Data") && infoboxDoc["Data"].IsBsonArray
+                        ? infoboxDoc["Data"].AsBsonArray
+                        : new BsonArray();
 
                 var properties = new Dictionary<string, List<string>>();
-                int? startYear = null;
-                int? endYear = null;
-                string? startDateText = null;
-                string? endDateText = null;
+                var facets = new List<TemporalFacet>();
 
                 foreach (var item in dataItems)
                 {
-                    if (item is not BsonDocument itemDoc) continue;
+                    if (item is not BsonDocument itemDoc)
+                        continue;
                     var label = itemDoc.Contains("Label") ? itemDoc["Label"].AsString : null;
-                    if (label is null) continue;
+                    if (label is null)
+                        continue;
 
-                    var values = itemDoc.Contains("Values") && itemDoc["Values"].IsBsonArray
-                        ? itemDoc["Values"].AsBsonArray.Select(v => v.AsString).ToList()
-                        : [];
-                    var links = itemDoc.Contains("Links") && itemDoc["Links"].IsBsonArray
-                        ? itemDoc["Links"].AsBsonArray
-                            .Where(l => l is BsonDocument)
-                            .Select(l => l.AsBsonDocument)
-                            .ToList()
-                        : [];
+                    var values =
+                        itemDoc.Contains("Values") && itemDoc["Values"].IsBsonArray
+                            ? itemDoc["Values"].AsBsonArray.Select(v => v.AsString).ToList()
+                            : [];
+                    var links =
+                        itemDoc.Contains("Links") && itemDoc["Links"].IsBsonArray
+                            ? itemDoc["Links"]
+                                .AsBsonArray.Where(l => l is BsonDocument)
+                                .Select(l => l.AsBsonDocument)
+                                .ToList()
+                            : [];
 
-                    // Extract temporal lifecycle dates from known fields
-                    if (StartDateFields.ContainsKey(label) && values.Count > 0 && startYear is null)
+                    // Extract temporal facets from known temporal fields
+                    if (TemporalFieldMap.TryGetValue(label, out var mapping))
                     {
-                        startDateText = values[0];
-                        startYear = ParseSortKeyYear(values[0]);
-                    }
-                    if (EndDateFields.ContainsKey(label) && values.Count > 0 && endYear is null)
-                    {
-                        endDateText = values[0];
-                        endYear = ParseSortKeyYear(values[0]);
+                        foreach (var val in values)
+                        {
+                            if (string.IsNullOrWhiteSpace(val))
+                                continue;
+                            var (calendar, year) = DetectCalendarAndParse(val, mapping.calendar);
+                            facets.Add(
+                                new TemporalFacet
+                                {
+                                    Field = label,
+                                    Semantic = mapping.semantic,
+                                    Calendar = calendar,
+                                    Year = year,
+                                    Text = val,
+                                }
+                            );
+                        }
+                        // Also store the raw text as a property for display
+                        if (values.Count > 0)
+                            properties[label] = values;
                     }
 
                     // Classify: property or relationship?
@@ -418,26 +566,31 @@ public class InfoboxGraphService(
                         foreach (var link in links)
                         {
                             var href = link.Contains("Href") ? link["Href"].AsString : null;
-                            var content = link.Contains("Content") ? link["Content"].AsString : null;
-                            if (href is null || content is null) continue;
+                            var content = link.Contains("Content")
+                                ? link["Content"].AsString
+                                : null;
+                            if (href is null || content is null)
+                                continue;
 
                             // Resolve the link target to a PageId
                             var targetPageId = ResolveLinkTarget(href, content, wikiUrlToPageId);
 
-                            edges.Add(new RelationshipEdge
-                            {
-                                FromId = pageId,
-                                FromName = title,
-                                FromType = type,
-                                ToId = targetPageId,
-                                ToName = content,
-                                ToType = "", // filled when target node is processed
-                                Label = edgeLabel,
-                                Weight = 1.0,
-                                Evidence = $"Infobox field '{label}'",
-                                SourcePageId = pageId,
-                                Continuity = continuity,
-                            });
+                            edges.Add(
+                                new RelationshipEdge
+                                {
+                                    FromId = pageId,
+                                    FromName = title,
+                                    FromType = type,
+                                    ToId = targetPageId,
+                                    ToName = content,
+                                    ToType = "", // filled when target node is processed
+                                    Label = edgeLabel,
+                                    Weight = 1.0,
+                                    Evidence = $"Infobox field '{label}'",
+                                    SourcePageId = pageId,
+                                    Continuity = continuity,
+                                }
+                            );
                         }
 
                         // If no links but has values, treat as property fallback
@@ -454,24 +607,33 @@ public class InfoboxGraphService(
                             foreach (var link in links)
                             {
                                 var href = link.Contains("Href") ? link["Href"].AsString : null;
-                                var content = link.Contains("Content") ? link["Content"].AsString : null;
-                                if (href is null || content is null) continue;
+                                var content = link.Contains("Content")
+                                    ? link["Content"].AsString
+                                    : null;
+                                if (href is null || content is null)
+                                    continue;
 
-                                var targetPageId = ResolveLinkTarget(href, content, wikiUrlToPageId);
-                                edges.Add(new RelationshipEdge
-                                {
-                                    FromId = pageId,
-                                    FromName = title,
-                                    FromType = type,
-                                    ToId = targetPageId,
-                                    ToName = content,
-                                    ToType = "",
-                                    Label = inferredLabel,
-                                    Weight = 0.8, // lower confidence for inferred labels
-                                    Evidence = $"Infobox field '{label}' (inferred)",
-                                    SourcePageId = pageId,
-                                    Continuity = continuity,
-                                });
+                                var targetPageId = ResolveLinkTarget(
+                                    href,
+                                    content,
+                                    wikiUrlToPageId
+                                );
+                                edges.Add(
+                                    new RelationshipEdge
+                                    {
+                                        FromId = pageId,
+                                        FromName = title,
+                                        FromType = type,
+                                        ToId = targetPageId,
+                                        ToName = content,
+                                        ToType = "",
+                                        Label = inferredLabel,
+                                        Weight = 0.8, // lower confidence for inferred labels
+                                        Evidence = $"Infobox field '{label}' (inferred)",
+                                        SourcePageId = pageId,
+                                        Continuity = continuity,
+                                    }
+                                );
                             }
                         }
                         else if (values.Count > 0)
@@ -481,32 +643,72 @@ public class InfoboxGraphService(
                     }
                 }
 
-                nodes.Add(new GraphNode
-                {
-                    PageId = pageId,
-                    Name = title,
-                    Type = type,
-                    Continuity = continuity,
-                    Universe = universe,
-                    Properties = properties,
-                    ImageUrl = imageUrl,
-                    WikiUrl = wikiUrl,
-                    StartYear = startYear,
-                    EndYear = endYear,
-                    StartDateText = startDateText,
-                    EndDateText = endDateText,
-                    ContentHash = contentHash,
-                    ProcessedAt = DateTime.UtcNow,
-                });
+                // Assign lifecycle ordering within each semantic prefix
+                AssignFacetOrder(facets);
+
+                // Compute envelope from facets for fast range queries
+                var startFacets = facets
+                    .Where(f =>
+                        f.Year.HasValue
+                        && (
+                            f.Semantic.EndsWith(".start")
+                            || f.Semantic.EndsWith(".point")
+                            || f.Semantic.EndsWith(".release")
+                        )
+                    )
+                    .ToList();
+                var endFacets = facets
+                    .Where(f =>
+                        f.Year.HasValue
+                        && (f.Semantic.EndsWith(".end") || f.Semantic.EndsWith(".point"))
+                    )
+                    .ToList();
+
+                var startYear =
+                    startFacets.Count > 0 ? startFacets.Min(f => f.Year!.Value) : (int?)null;
+                var endYear = endFacets.Count > 0 ? endFacets.Max(f => f.Year!.Value) : (int?)null;
+
+                // For backward compat: keep startDateText/endDateText from first start/end facet
+                var startDateText = startFacets.FirstOrDefault()?.Text;
+                var endDateText = endFacets.FirstOrDefault()?.Text;
+
+                nodes.Add(
+                    new GraphNode
+                    {
+                        PageId = pageId,
+                        Name = title,
+                        Type = type,
+                        Continuity = continuity,
+                        Universe = universe,
+                        Properties = properties,
+                        ImageUrl = imageUrl,
+                        WikiUrl = wikiUrl,
+                        StartYear = startYear,
+                        EndYear = endYear,
+                        StartDateText = startDateText,
+                        EndDateText = endDateText,
+                        TemporalFacets = facets,
+                        ContentHash = contentHash,
+                        ProcessedAt = DateTime.UtcNow,
+                    }
+                );
 
                 processed++;
                 if (processed % 10000 == 0)
-                    logger.LogInformation("InfoboxGraph: processed {Count}/{Total} pages", processed, totalPages);
+                    logger.LogInformation(
+                        "InfoboxGraph: processed {Count}/{Total} pages",
+                        processed,
+                        totalPages
+                    );
             }
         }
 
-        logger.LogInformation("InfoboxGraph: processed {Count} pages → {Nodes} nodes, {Edges} edges",
-            processed, nodes.Count, edges.Count);
+        logger.LogInformation(
+            "InfoboxGraph: processed {Count} pages → {Nodes} nodes, {Edges} edges",
+            processed,
+            nodes.Count,
+            edges.Count
+        );
 
         // Write to MongoDB
         logger.LogInformation("InfoboxGraph: writing nodes...");
@@ -524,25 +726,61 @@ public class InfoboxGraphService(
         }
 
         // Create indexes
-        await _nodes.Indexes.CreateManyAsync([
-            new CreateIndexModel<GraphNode>(Builders<GraphNode>.IndexKeys.Ascending(n => n.Type)),
-            new CreateIndexModel<GraphNode>(Builders<GraphNode>.IndexKeys.Ascending(n => n.Name)),
-            new CreateIndexModel<GraphNode>(Builders<GraphNode>.IndexKeys.Ascending(n => n.Continuity)),
-        ], ct);
+        await _nodes.Indexes.CreateManyAsync(
+            [
+                new CreateIndexModel<GraphNode>(
+                    Builders<GraphNode>.IndexKeys.Ascending(n => n.Type)
+                ),
+                new CreateIndexModel<GraphNode>(
+                    Builders<GraphNode>.IndexKeys.Ascending(n => n.Name)
+                ),
+                new CreateIndexModel<GraphNode>(
+                    Builders<GraphNode>.IndexKeys.Ascending(n => n.Continuity)
+                ),
+                new CreateIndexModel<GraphNode>(
+                    Builders<GraphNode>
+                        .IndexKeys.Ascending("temporalFacets.semantic")
+                        .Ascending("temporalFacets.year"),
+                    new CreateIndexOptions { Name = "ix_temporal_semantic_year" }
+                ),
+                new CreateIndexModel<GraphNode>(
+                    Builders<GraphNode>
+                        .IndexKeys.Ascending("temporalFacets.calendar")
+                        .Ascending("temporalFacets.year"),
+                    new CreateIndexOptions { Name = "ix_temporal_calendar_year" }
+                ),
+            ],
+            ct
+        );
 
-        await _edges.Indexes.CreateManyAsync([
-            new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId)),
-            new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.ToId)),
-            new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Label)),
-            new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Continuity)),
-            new CreateIndexModel<RelationshipEdge>(
-                Builders<RelationshipEdge>.IndexKeys
-                    .Ascending(e => e.FromId)
-                    .Ascending(e => e.Label)),
-        ], ct);
+        await _edges.Indexes.CreateManyAsync(
+            [
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId)
+                ),
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.ToId)
+                ),
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Label)
+                ),
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Continuity)
+                ),
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>
+                        .IndexKeys.Ascending(e => e.FromId)
+                        .Ascending(e => e.Label)
+                ),
+            ],
+            ct
+        );
 
-        logger.LogInformation("InfoboxGraph: complete. {Nodes} nodes, {Edges} edges, indexes created.",
-            nodes.Count, edges.Count);
+        logger.LogInformation(
+            "InfoboxGraph: complete. {Nodes} nodes, {Edges} edges, indexes created.",
+            nodes.Count,
+            edges.Count
+        );
     }
 
     /// <summary>
@@ -554,11 +792,14 @@ public class InfoboxGraphService(
     {
         var lookup = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-        var cursor = await _pages.Find(FilterDefinition<Page>.Empty)
-            .Project(Builders<Page>.Projection
-                .Include(p => p.PageId)
-                .Include(p => p.Title)
-                .Include(p => p.WikiUrl))
+        var cursor = await _pages
+            .Find(FilterDefinition<Page>.Empty)
+            .Project(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include(p => p.Title)
+                    .Include(p => p.WikiUrl)
+            )
             .ToCursorAsync(ct);
 
         while (await cursor.MoveNextAsync(ct))
@@ -611,14 +852,72 @@ public class InfoboxGraphService(
     /// Parse a date text like "22 BBY", "c. 5100 BBY", "19 BBY, Felucia" into a sort-key year.
     /// Returns negative for BBY, positive for ABY, null if unparseable.
     /// </summary>
-    static int? ParseSortKeyYear(string text)
+    static int? ParseGalacticYear(string text)
     {
-        // Match patterns like "22 BBY", "c. 5100 BBY", "19 BBY, Felucia", "5 ABY (unofficially)"
-        var match = System.Text.RegularExpressions.Regex.Match(
-            text, @"(\d[\d,]*)\s*(BBY|ABY)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-        if (!match.Success) return null;
-        if (!int.TryParse(match.Groups[1].Value.Replace(",", ""), out var num)) return null;
+        var match = Regex.Match(text, @"(\d[\d,]*)\s*(BBY|ABY)", RegexOptions.IgnoreCase);
+        if (!match.Success)
+            return null;
+        if (!int.TryParse(match.Groups[1].Value.Replace(",", ""), out var num))
+            return null;
         return match.Groups[2].Value.Equals("BBY", StringComparison.OrdinalIgnoreCase) ? -num : num;
+    }
+
+    /// <summary>
+    /// Parse a real-world date text like "October 23, 1959", "September 2017", "2015" into a CE year.
+    /// </summary>
+    static int? ParseRealWorldYear(string text)
+    {
+        // "October 23, 1959" or "November 19, 1983 in" — extract 4-digit year
+        var match = Regex.Match(text, @"\b(1[89]\d{2}|20[0-3]\d)\b");
+        return match.Success && int.TryParse(match.Value, out var year) ? year : null;
+    }
+
+    /// <summary>
+    /// Detect calendar system and parse year from date text.
+    /// Tries galactic (BBY/ABY) first, then real-world, then unknown.
+    /// </summary>
+    static (string calendar, int? year) DetectCalendarAndParse(string text, string calendarHint)
+    {
+        if (calendarHint == "galactic")
+        {
+            var gy = ParseGalacticYear(text);
+            return ("galactic", gy); // null year is fine — vague galactic date
+        }
+
+        if (calendarHint == "real")
+        {
+            var ry = ParseRealWorldYear(text);
+            return ("real", ry);
+        }
+
+        // "auto" — try galactic first (unambiguous), then real-world
+        var galactic = ParseGalacticYear(text);
+        if (galactic.HasValue)
+            return ("galactic", galactic);
+
+        var real = ParseRealWorldYear(text);
+        if (real.HasValue)
+            return ("real", real);
+
+        return ("unknown", null);
+    }
+
+    /// <summary>
+    /// Assign Order values to facets within each semantic dimension prefix.
+    /// Groups by dimension (e.g. "institutional"), sorts by year (nulls last), assigns 0-based order.
+    /// </summary>
+    static void AssignFacetOrder(List<TemporalFacet> facets)
+    {
+        var groups = facets.GroupBy(f => f.Semantic.Split('.')[0]);
+        foreach (var group in groups)
+        {
+            var ordered = group
+                .OrderBy(f => f.Year.HasValue ? 0 : 1) // year-bearing first
+                .ThenBy(f => f.Year ?? int.MaxValue)
+                .ToList();
+            for (var i = 0; i < ordered.Count; i++)
+                ordered[i].Order = i;
+        }
     }
 
     /// <summary>
@@ -627,11 +926,7 @@ public class InfoboxGraphService(
     static string NormaliseLabel(string label)
     {
         // Remove parenthetical suffixes like "(s)" and clean up
-        var clean = label
-            .Replace("(s)", "")
-            .Replace("(", "")
-            .Replace(")", "")
-            .Trim();
+        var clean = label.Replace("(s)", "").Replace("(", "").Replace(")", "").Trim();
 
         // Convert to snake_case
         var result = new System.Text.StringBuilder();
