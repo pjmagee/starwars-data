@@ -16,10 +16,10 @@ const WIKI_THUMB = (url) => {
     return url.split('/revision')[0] + '/revision/latest/scale-to-width-down/50';
 };
 
-const ROW_HEIGHT = 200;
+const ROW_HEIGHT = 240;
 const NODE_RADIUS = 28;
-const NODE_SPACING = 180;
-const PARTNER_GAP = 80;
+const NODE_SPACING = 200;
+const PARTNER_GAP = 120;
 
 let _state = null;
 
@@ -202,27 +202,35 @@ export function renderFamilyTree(containerId, data, dotnetRef) {
                     unit[i]._y = y;
                 }
 
-                // Draw partner connector (dashed line)
+                // Draw partner connector (dashed line with ring symbol)
                 for (let i = 0; i < unit.length - 1; i++) {
                     const a = unit[i], b = unit[i + 1];
+                    const x1 = a._x + NODE_RADIUS + 6;
+                    const x2 = b._x - NODE_RADIUS - 6;
+                    const my = a._y;
+
                     edgeGroup.append('line')
-                        .attr('x1', a._x + NODE_RADIUS + 4)
-                        .attr('y1', a._y)
-                        .attr('x2', b._x - NODE_RADIUS - 4)
-                        .attr('y2', b._y)
+                        .attr('x1', x1).attr('y1', my)
+                        .attr('x2', x2).attr('y2', my)
                         .attr('stroke', '#ff6b9d')
                         .attr('stroke-width', 2)
                         .attr('stroke-dasharray', '6,4');
 
-                    // Heart/ring symbol at midpoint
-                    const mx = (a._x + b._x) / 2;
+                    // Ring symbol at midpoint
+                    const mx = (x1 + x2) / 2;
+                    edgeGroup.append('circle')
+                        .attr('cx', mx).attr('cy', my)
+                        .attr('r', 8)
+                        .attr('fill', '#1e1e38')
+                        .attr('stroke', '#ff6b9d')
+                        .attr('stroke-width', 1.5);
                     edgeGroup.append('text')
-                        .attr('x', mx).attr('y', a._y + 4)
+                        .attr('x', mx).attr('y', my + 4)
                         .attr('text-anchor', 'middle')
                         .attr('fill', '#ff6b9d')
-                        .attr('font-size', '12px')
+                        .attr('font-size', '10px')
                         .style('pointer-events', 'none')
-                        .text('\u2764');
+                        .text('\u{1F48D}');
                 }
 
                 x += groupWidth + NODE_SPACING * 0.5;
@@ -336,13 +344,13 @@ export function renderFamilyTree(containerId, data, dotnetRef) {
 
         // Name
         g.append('text')
-            .attr('dy', r + 16)
+            .attr('dy', r + 18)
             .attr('text-anchor', 'middle')
             .attr('fill', node.isRoot ? '#ffd866' : '#e0e0f0')
-            .attr('font-size', '13px')
+            .attr('font-size', '12px')
             .attr('font-weight', node.isRoot ? '700' : '500')
             .style('pointer-events', 'none')
-            .text(truncate(node.name, 22));
+            .text(truncate(node.name, 18));
 
         // Born/Died — truncated
         const born = shortDate(node.born);
@@ -350,12 +358,12 @@ export function renderFamilyTree(containerId, data, dotnetRef) {
         const lifespan = [born, died].filter(Boolean).join(' \u2013 ');
         if (lifespan) {
             g.append('text')
-                .attr('dy', r + 30)
+                .attr('dy', r + 32)
                 .attr('text-anchor', 'middle')
                 .attr('fill', '#6a6a9a')
-                .attr('font-size', '10px')
+                .attr('font-size', '9px')
                 .style('pointer-events', 'none')
-                .text(truncate(lifespan, 30));
+                .text(truncate(lifespan, 24));
         }
     }
 
