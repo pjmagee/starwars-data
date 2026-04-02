@@ -527,6 +527,6 @@ public class ComponentToolkitTests
         Assert.Contains("render_graph", names);
         Assert.Contains("render_timeline", names);
         Assert.Contains("render_infobox", names);
-        Assert.Contains("render_text", names);
+        Assert.Contains("render_markdown", names);
     }
 }

@@ -264,7 +264,7 @@ builder
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
-        - render_text(sections): markdown-formatted article. Agent writes section content as PROPER MARKDOWN:
+        - render_markdown(sections): markdown-formatted article. Agent writes section content as PROPER MARKDOWN:
           Use ## headings, **bold**, bullet lists (with blank line before the list), [links](url), > blockquotes, and `code`.
           The frontend renders this with a full markdown component — raw text without formatting looks bad.
           Each section has: heading (plain text title), content (markdown body), optional sourcePageTitle.
@@ -272,7 +272,7 @@ builder
         - render_chart(chartType, series): aggregated visualization (Bar, Pie, Line, Donut, Rose, StackedBar, TimeSeries, Radar).
 
         After calling render tools, do NOT repeat or summarize what was rendered. End silently if nothing to add.
-        You CAN call multiple render tools when the answer benefits (e.g., render_text + render_data_table for complex research).
+        You CAN call multiple render tools when the answer benefits (e.g., render_markdown + render_data_table for complex research).
         Every render tool accepts "references" — include page title + sectionUrl/wikiUrl from your tool results.
 
         === DATA TOOLS ===
@@ -331,18 +331,18 @@ builder
         - "Family tree of X" → search_entities to find a CHARACTER (not a Family entity) as root → search_pages_by_name("Character", name) to get PageId → sample_link_labels("Character", pageId) to discover labels → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels: Parent(s), Children, Partner(s), Sibling(s)])
           IMPORTANT: The root entity MUST be a Character, not a Family. "Skywalker family tree" → root on "Anakin Skywalker" (Character), NOT "Skywalker family" (Family).
         - "Master-apprentice lineage of X" → same pattern but enabledLabels=[Masters, Apprentices]
-        - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_text or render_data_table
-        - "How is X related to Y?" → search_entities for both → find_connections → render_text
-        - "X's connections" → search_entities → traverse_graph → render_text or render_graph(layoutMode="force")
+        - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_markdown or render_data_table
+        - "How is X related to Y?" → search_entities for both → find_connections → render_markdown
+        - "X's connections" → search_entities → traverse_graph → render_markdown or render_graph(layoutMode="force")
 
         TEMPORAL & GALAXY (agent-provided):
-        - "What happened in 19 BBY?" → get_galaxy_year(-19) → render_text
-        - "Wars between 4000-1000 BBY" → find_entities_by_year(year=-4000, yearEnd=-1000, type="War", semantic="conflict") → render_data_table or render_text
+        - "What happened in 19 BBY?" → get_galaxy_year(-19) → render_markdown
+        - "Wars between 4000-1000 BBY" → find_entities_by_year(year=-4000, yearEnd=-1000, type="War", semantic="conflict") → render_data_table or render_markdown
         - "Timeline of the Clone Wars" → render_timeline(["Battle","War","Mission"], yearFrom=22, yearFromDemarcation="BBY", yearTo=19, yearToDemarcation="BBY")
-        - "Rise and fall of X government" → search_entities → get_entity_timeline → render_text. The timeline returns the full lifecycle chain (established → fragmented → reorganized → dissolved → restored) with dates — present each step.
-        - "When was X reorganized/restored/fragmented?" → search_entities → get_entity_timeline → read the facet with the matching semantic role → render_text
+        - "Rise and fall of X government" → search_entities → get_entity_timeline → render_markdown. The timeline returns the full lifecycle chain (established → fragmented → reorganized → dissolved → restored) with dates — present each step.
+        - "When was X reorganized/restored/fragmented?" → search_entities → get_entity_timeline → read the facet with the matching semantic role → render_markdown
         - "What Star Wars books came out in 2015?" → find_entities_by_year(year=2015, type="Book", semantic="publication") → render_data_table. Note: use CE year directly, not sort-key.
-        - "When was this movie released?" → search_entities → get_entity_timeline → read the publication.release facet → render_text
+        - "When was this movie released?" → search_entities → get_entity_timeline → read the publication.release facet → render_markdown
 
         CROSS-TEMPORAL QUERIES (multi-step — chain tool calls):
         These require reading temporal data from one entity, then querying others with those dates:
@@ -353,14 +353,14 @@ builder
 
         STATS & AGGREGATION (agent-provided):
         - "Top 10 species by..." → use KG/page tools to gather data → render_chart
-        - "How many X exist?" → list_entity_types or search tools → render_chart or render_text
+        - "How many X exist?" → list_entity_types or search tools → render_chart or render_markdown
 
         LORE & EXPLANATIONS (agent-provided — use article search here):
-        - "Explain X" / "Why did X happen?" / "What was the philosophy of..." → search_article_content → render_text (with sectionUrl references)
-        - For richer answers, combine: KG tools for facts + search_article_content for narrative → render_text
+        - "Explain X" / "Why did X happen?" / "What was the philosophy of..." → search_article_content → render_markdown (with sectionUrl references)
+        - For richer answers, combine: KG tools for facts + search_article_content for narrative → render_markdown
 
         ATTRIBUTE LOOKUPS & COMPARISONS (agent-provided):
-        - "How tall is X?" → search_entities → get_entity_properties → render_text
+        - "How tall is X?" → search_entities → get_entity_properties → render_markdown
         - "Compare specs of X vs Y" → search_entities for both → get_entity_properties for both → render_data_table
         - "Radar chart comparing X, Y, Z attributes" → search_entities for each → get_entity_properties for each → render_chart with ONLY values from the tool results
 
@@ -370,19 +370,19 @@ builder
         - Use get_entity_relationships or traverse_graph to find connected entities
         - Use search_article_content to add narrative depth from wiki articles
         - Chain find_entities_by_year with semantic filters to find overlapping entities across time
-        - Synthesize everything into render_text (with references) or render_data_table
+        - Synthesize everything into render_markdown (with references) or render_data_table
         Example: "How did the fall of the Republic affect the Jedi Order?" →
           1. get_entity_timeline for both Republic and Jedi Order (parallel)
           2. search_article_content("fall of the Republic Jedi Order")
           3. find_entities_by_year(year=-19, type="Battle", semantic="conflict") for context
-          4. render_text combining timeline facts + article narrative + battle context
+          4. render_markdown combining timeline facts + article narrative + battle context
 
         === KEY RULES ===
 
-        - NEVER FABRICATE DATA. Every value in render_chart, render_data_table, and render_text MUST come from a tool result you received in this conversation. If you did not read a value from a tool, you cannot use it. "Agent-provided" means you query tools first, then pass the results — it does NOT mean you make up plausible-sounding numbers.
+        - NEVER FABRICATE DATA. Every value in render_chart, render_data_table, and render_markdown MUST come from a tool result you received in this conversation. If you did not read a value from a tool, you cannot use it. "Agent-provided" means you query tools first, then pass the results — it does NOT mean you make up plausible-sounding numbers.
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
-        - render_text supports full markdown — use headings, bold, lists, and links for readability.
+        - render_markdown supports full markdown — use headings, bold, lists, and links for readability.
         - render_graph: Call sample_link_labels first to discover available infobox labels. Classify as upLabels (Parent(s), Masters), downLabels (Children, Apprentices), peerLabels (Partner(s), Sibling(s)). Use enabledLabels to pre-select ONLY labels relevant to the question. Use layoutMode="tree" for family trees/lineages (hierarchical top-down), "force" for general networks. Use maxDepth=2-3 for multi-generational trees.
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY) for galactic dates, CE years for publication dates. ONE call for ranges via year+yearEnd. Use semantic parameter to distinguish "alive during" from "existed during".

@@ -17,7 +17,9 @@ namespace StarWarsData.Services;
 public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
 {
     IMongoCollection<BsonDocument> Pages =>
-        mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
+        mongoClient
+            .GetDatabase(settings.Value.DatabaseName)
+            .GetCollection<BsonDocument>(Collections.Pages);
 
     static string EscapeRegex(string input) => System.Text.RegularExpressions.Regex.Escape(input);
 
@@ -364,9 +366,12 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
     }
 
     [Description(
-        "Search pages whose Born, Died, or Date infobox.Data label contains a specific BBY/ABY year string. "
+        "Search pages whose temporal infobox.Data labels contain a specific date string. "
+            + "Works with any temporal field: Born, Died, Date, Beginning, End, Date established, "
+            + "Date dissolved, Date reorganized, Constructed, Destroyed, Release date, etc. "
             + "Queries the 'Pages' collection filtered by infobox type and an $elemMatch on the date label. "
-            + "Matches partial strings so '19 BBY' also matches '19 BBY, Polis Massa'."
+            + "Matches partial strings so '19 BBY' also matches '19 BBY, Polis Massa'. "
+            + "For structured temporal queries, prefer find_entities_by_year with semantic filters instead."
     )]
     public async Task<string> SearchByDate(
         [Description(
@@ -377,7 +382,9 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         [Description("The BBY/ABY date string to search for, e.g. '19 BBY', '4 ABY', '0 BBY'")]
             string date,
         [Description(
-            "Which infobox.Data label to search: 'Born', 'Died', or 'Date'. Defaults to 'Date'"
+            "Which infobox.Data label to search. Common values: 'Born', 'Died', 'Date', 'Beginning', 'End', "
+                + "'Date established', 'Date dissolved', 'Date reorganized', 'Date restored', 'Date fragmented', "
+                + "'Constructed', 'Destroyed', 'Release date', 'Publication date', 'Air date'. Defaults to 'Date'"
         )]
             string dateLabel = "Date",
         [Description("Optional continuity filter: 'Canon', 'Legends', or omit for all")]

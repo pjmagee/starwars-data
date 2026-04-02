@@ -870,7 +870,7 @@
             info.Result = contentJson;
 
         // Check if this is a render_* tool and create inline visualization
-        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_text"
+        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_markdown"
             && contentJson is not null)
         {
             var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization };
@@ -902,7 +902,7 @@
                         vizMsg.VisualizationType = "infobox";
                         vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(contentJson, JsonOpts);
                         break;
-                    case "render_text":
+                    case "render_markdown":
                         vizMsg.VisualizationType = "text";
                         vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
                         break;

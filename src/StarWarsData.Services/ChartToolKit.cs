@@ -49,7 +49,10 @@ public class ComponentToolkit
 
     [Description(
         "Render an ad-hoc data table with inline row data you provide. "
-            + "Use when you have custom aggregation results, cross-type queries, or computed data that doesn't map to a single infobox type. "
+            + "Use when you have custom aggregation results, cross-type queries, temporal facet comparisons, "
+            + "or computed data that doesn't map to a single infobox type. "
+            + "Great for cross-temporal queries: e.g. 'Characters alive during the Clone Wars' — "
+            + "query temporal facets, assemble rows with name, born, died, type. "
             + "You MUST query the data first and pass the actual rows."
     )]
     public DataTableDescriptor RenderDataTable(
@@ -191,7 +194,8 @@ public class ComponentToolkit
         "Render a timeline of events. Use for temporal queries like 'battles during the Clone Wars' or 'what happened between 20 BBY and 4 ABY'. "
             + "The frontend fetches paginated timeline data from the timeline.* collections. "
             + "You do NOT need to query timeline events yourself — just provide the category names. "
-            + "For entity-specific timelines (e.g. 'events during Anakin Skywalker's life'), look up the entity's date properties first and pass yearFrom/yearTo to scope the results. "
+            + "For entity-specific timelines, use get_entity_timeline first to read the entity's temporal facets "
+            + "(lifespan.start/end, conflict.start/end, etc.), then pass the year range from those facets to yearFrom/yearTo. "
             + "Use the search parameter to further filter by entity name in event titles."
     )]
     public TimelineDescriptor RenderTimeline(
@@ -267,15 +271,20 @@ public class ComponentToolkit
     }
 
     [Description(
-        "Render text content — article excerpts, summaries, or RAG results from wiki pages. "
-            + "Use when the user asks for information that is best presented as readable text rather than a chart or table. "
-            + "You MUST fetch the page data first using get_page_by_id or search tools, then extract the relevant sections. "
-            + "Can combine text from multiple pages for comparative answers."
+        "Render markdown-formatted text content — articles, summaries, analysis, or RAG results. "
+            + "The frontend renders content with a full markdown component (MudMarkdown). "
+            + "You MUST write section content as proper markdown: use ## headings, **bold**, "
+            + "bullet lists (blank line before the list), [links](url), > blockquotes, and `code`. "
+            + "Raw unformatted text looks bad — always use markdown structure. "
+            + "Fetch page data first using get_page_by_id, search_article_content, or KG tools, then write sections. "
+            + "Can combine text from multiple sources for comprehensive answers."
     )]
     public TextDescriptor RenderText(
         [Description("Descriptive title for the text section")] string title,
         [Description(
-            "Text sections to display — each with heading, content, and optional source page info"
+            "Text sections to display. Each section has: heading (plain text title), "
+                + "content (markdown-formatted body — use headings, bold, lists, links), "
+                + "and optional sourcePageTitle for attribution."
         )]
             List<TextSection> sections,
         [Description(
@@ -301,6 +310,6 @@ public class ComponentToolkit
             AIFunctionFactory.Create(RenderGraph, "render_graph"),
             AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
             AIFunctionFactory.Create(RenderInfobox, "render_infobox"),
-            AIFunctionFactory.Create(RenderText, "render_text"),
+            AIFunctionFactory.Create(RenderText, "render_markdown"),
         ];
 }
