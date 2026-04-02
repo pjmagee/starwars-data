@@ -303,37 +303,34 @@ public class ComponentToolkitTests
             rootEntityId: 1,
             rootEntityName: "Luke Skywalker",
             title: "Skywalker Family Tree",
-            upLabels: ["Parent(s)"],
-            downLabels: ["Children"],
-            peerLabels: ["Sibling(s)", "Partner(s)"]
+            labels: ["child_of", "parent_of", "partner_of", "sibling_of"],
+            layoutMode: "tree"
         );
 
         Assert.NotNull(result);
         Assert.Equal(1, result.RootEntityId);
         Assert.Equal("Luke Skywalker", result.RootEntityName);
-        Assert.Equal("Character", result.Collection); // default
-        Assert.Equal(1, result.MaxDepth); // default
-        Assert.Single(result.UpLabels);
-        Assert.Single(result.DownLabels);
-        Assert.Equal(2, result.PeerLabels.Count);
+        Assert.Equal(2, result.MaxDepth); // default
+        Assert.Equal(4, result.Labels.Count);
+        Assert.Equal("tree", result.LayoutMode);
     }
 
     [Fact]
-    public void RenderGraph_NullLabels_DefaultToEmptyLists()
+    public void RenderGraph_WithContinuity_IsPreserved()
     {
         var toolkit = new ComponentToolkit();
 
         var result = toolkit.RenderGraph(
             rootEntityId: 100,
-            rootEntityName: "Tatooine",
-            title: "Planet Graph",
-            infoboxType: "Planet"
+            rootEntityName: "Galactic Empire",
+            title: "Empire Hierarchy",
+            labels: ["head_of_state", "has_military_branch"],
+            continuity: "Canon"
         );
 
         Assert.NotNull(result);
-        Assert.Empty(result.UpLabels);
-        Assert.Empty(result.DownLabels);
-        Assert.Empty(result.PeerLabels);
+        Assert.Equal("Canon", result.Continuity);
+        Assert.Equal(2, result.Labels.Count);
     }
 
     [Fact]
@@ -345,6 +342,7 @@ public class ComponentToolkitTests
             rootEntityId: 1,
             rootEntityName: "Luke Skywalker",
             title: "Deep Tree",
+            labels: ["child_of"],
             maxDepth: 5
         );
 

@@ -260,7 +260,7 @@ builder
         FRONTEND-FETCHED — these render tools fetch their own data. The agent provides config only (IDs, types, fields). Minimal research needed — just find the right identifiers:
         - render_infobox(pageIds): wiki-style profile cards. Accepts multiple PageIds for side-by-side comparison. Frontend fetches all infobox data.
         - render_table(infoboxType, fields): paginated browsable table. Frontend fetches and paginates. Agent provides type + 3-6 field names.
-        - render_graph(rootEntityId, upLabels, downLabels, peerLabels, layoutMode): relationship network. MUST call sample_link_labels first to discover label names. Frontend fetches and renders the graph. Use layoutMode="tree" for family trees and lineages (hierarchical top-down layout), layoutMode="force" (default) for general relationship exploration.
+        - render_graph(rootEntityId, labels, layoutMode): relationship network powered by kg.edges. Call get_relationship_types(entityId) first to discover available KG edge labels. Pass relevant labels (e.g. child_of, parent_of for family trees; head_of_state, has_military_branch for hierarchies). Frontend fetches and renders the graph. Use layoutMode="tree" for hierarchies, layoutMode="force" (default) for networks.
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
@@ -327,13 +327,14 @@ builder
         - "Show all battles / Browse species" → render_table(infoboxType, fields)
         - "List all wars with dates and outcomes" → render_table("War", ["Date", "Outcome", ...])
 
-        RELATIONSHIPS & NETWORKS (use KG tools, not page tools):
-        - "Family tree of X" → search_entities to find a CHARACTER (not a Family entity) as root → search_pages_by_name("Character", name) to get PageId → sample_link_labels("Character", pageId) to discover labels → render_graph(layoutMode="tree", maxDepth=3, enabledLabels=[family labels: Parent(s), Children, Partner(s), Sibling(s)])
-          IMPORTANT: The root entity MUST be a Character, not a Family. "Skywalker family tree" → root on "Anakin Skywalker" (Character), NOT "Skywalker family" (Family).
-        - "Master-apprentice lineage of X" → same pattern but enabledLabels=[Masters, Apprentices]
+        RELATIONSHIPS & NETWORKS (use KG tools for discovery, render_graph for visualization):
+        - "Family tree of X" → search_entities to find a CHARACTER (not a Family) → get_relationship_types(entityId) to discover labels → render_graph(labels=["child_of","parent_of","partner_of","sibling_of"], layoutMode="tree", maxDepth=3)
+          IMPORTANT: Root MUST be a Character. "Skywalker family tree" → root on "Anakin Skywalker", NOT "Skywalker family".
+        - "Master-apprentice lineage of X" → search_entities → get_relationship_types → render_graph(labels=["apprentice_of","master_of"], layoutMode="tree", maxDepth=3)
+        - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch",...], layoutMode="tree")
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_markdown or render_data_table
         - "How is X related to Y?" → search_entities for both → find_connections → render_markdown
-        - "X's connections" → search_entities → traverse_graph → render_markdown or render_graph(layoutMode="force")
+        - "X's connections" → search_entities → get_relationship_types → render_graph(labels=[relevant labels], layoutMode="force")
 
         TEMPORAL & GALAXY (agent-provided):
         - "What happened in 19 BBY?" → get_galaxy_year(-19) → render_markdown
@@ -383,7 +384,7 @@ builder
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
         - render_markdown supports full markdown — use headings, bold, lists, and links for readability.
-        - render_graph: Call sample_link_labels first to discover available infobox labels. Classify as upLabels (Parent(s), Masters), downLabels (Children, Apprentices), peerLabels (Partner(s), Sibling(s)). Use enabledLabels to pre-select ONLY labels relevant to the question. Use layoutMode="tree" for family trees/lineages (hierarchical top-down), "force" for general networks. Use maxDepth=2-3 for multi-generational trees.
+        - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. Use layoutMode="tree" for family trees/lineages/hierarchies, "force" for general networks. Use maxDepth=2-3 for deep exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with).
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY) for galactic dates, CE years for publication dates. ONE call for ranges via year+yearEnd. Use semantic parameter to distinguish "alive during" from "existed during".
         - get_entity_timeline: returns temporalFacets — read the semantic field to understand what each date means. Present lifecycle chains in order (established → fragmented → reorganized → dissolved → restored).

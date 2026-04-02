@@ -154,10 +154,9 @@ public class ChartDescriptor
 }
 
 [Description(
-    "Relationship graph component configuration — the frontend fetches graph data from the API. "
-        + "The AI must sample the root entity's infobox labels and classify which ones represent relationships, "
-        + "then assign them to upLabels (ancestor/master direction), downLabels (descendant/apprentice direction), "
-        + "or peerLabels (same generation — partners, siblings). Only include labels that have links to other entities of the same collection type."
+    "Relationship graph powered by the knowledge graph (kg.edges). "
+        + "The frontend fetches connected entities via BFS traversal of kg.edges and renders a D3 network or tree. "
+        + "Call get_relationship_types(entityId) first to discover available edge labels."
 )]
 public class GraphDescriptor
 {
@@ -166,58 +165,43 @@ public class GraphDescriptor
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("rootEntityId")]
-    [Description("The entity's integer _id (PageId) from MongoDB")]
+    [Description("The entity's PageId from the knowledge graph")]
     public int RootEntityId { get; set; }
 
     [JsonPropertyName("rootEntityName")]
-    [Description("The entity's PageTitle from MongoDB")]
+    [Description("The entity's display name")]
     public string RootEntityName { get; set; } = string.Empty;
-
-    [JsonPropertyName("collection")]
-    [Description("The MongoDB collection to query (default Character)")]
-    public string Collection { get; set; } = "Character";
 
     [JsonPropertyName("maxDepth")]
     [Description(
-        "How many generations to traverse (default 1). Use 1 for direct relationships, 2+ only for multi-generational family trees."
+        "How many hops to traverse (default 2). Use 1 for direct relationships, 2-3 for multi-hop exploration."
     )]
-    public int MaxDepth { get; set; } = 1;
+    public int MaxDepth { get; set; } = 2;
 
-    [JsonPropertyName("upLabels")]
+    [JsonPropertyName("labels")]
     [Description(
-        "Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). "
-            + "Linked entities are placed one generation above the current node."
+        "KG edge labels to traverse (e.g. child_of, parent_of, head_of_state, affiliated_with). "
+            + "Call get_relationship_types(entityId) to discover available labels. "
+            + "Pass only labels relevant to the question to focus the graph."
     )]
-    public List<string> UpLabels { get; set; } = [];
-
-    [JsonPropertyName("downLabels")]
-    [Description(
-        "Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). "
-            + "Linked entities are placed one generation below the current node."
-    )]
-    public List<string> DownLabels { get; set; } = [];
-
-    [JsonPropertyName("peerLabels")]
-    [Description(
-        "Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). "
-            + "Linked entities are placed on the same generation level."
-    )]
-    public List<string> PeerLabels { get; set; } = [];
+    public List<string> Labels { get; set; } = [];
 
     [JsonPropertyName("enabledLabels")]
     [Description(
-        "Labels to enable by default when the graph renders. Must be a subset of upLabels + downLabels + peerLabels. "
-            + "If omitted, ALL labels are enabled. Use this to focus the initial view on the most relevant relationships "
-            + "(e.g. for a family tree, enable only Parent(s)/Children/Partner(s)/Sibling(s) even if Masters/Apprentices are available)."
+        "Labels to show by default. Subset of labels. If omitted, all labels are enabled."
     )]
     public List<string>? EnabledLabels { get; set; }
 
     [JsonPropertyName("layoutMode")]
     [Description(
-        "Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical family tree. "
-            + "Use 'tree' for family trees, lineages, or master-apprentice hierarchies where generational layout matters."
+        "Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical layout. "
+            + "Use 'tree' for family trees, lineages, or organizational hierarchies."
     )]
     public string LayoutMode { get; set; } = "force";
+
+    [JsonPropertyName("continuity")]
+    [Description("Optional continuity filter: Canon, Legends, or omit for all")]
+    public string? Continuity { get; set; }
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]

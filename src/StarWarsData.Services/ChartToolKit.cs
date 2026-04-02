@@ -121,48 +121,40 @@ public class ComponentToolkit
     }
 
     [Description(
-        "Render a relationship graph (family tree, hierarchy). "
-            + "The frontend fetches graph data from the API. You only need to provide the root entity's PageId and name. "
-            + "Use search_pages_by_name first to find the entity's id."
+        "Render a relationship graph powered by the knowledge graph (kg.edges). "
+            + "The frontend fetches connected entities from the KG and renders a D3 network or tree. "
+            + "Call get_relationship_types(entityId) first to discover available edge labels for the entity. "
+            + "Pass the relevant labels to focus the graph (e.g. child_of, parent_of for family trees; "
+            + "head_of_state, has_military_branch for political hierarchies; affiliated_with for alliances). "
+            + "Use layoutMode='tree' for family trees and hierarchies, 'force' for general relationship networks."
     )]
     public GraphDescriptor RenderGraph(
-        [Description("The entity's integer PageId (_id) from the Pages collection")]
+        [Description("The entity's PageId from the knowledge graph (from search_entities)")]
             int rootEntityId,
-        [Description("The entity's display name (title field from the Pages collection)")]
-            string rootEntityName,
+        [Description("The entity's display name")] string rootEntityName,
         [Description("Descriptive title for the graph")] string title,
         [Description(
-            "The infobox type name (e.g. Character). "
-                + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name. Default: Character"
+            "KG edge labels to traverse. Call get_relationship_types(entityId) to discover available labels. "
+                + "Examples: ['child_of', 'parent_of', 'partner_of'] for family trees, "
+                + "['head_of_state', 'has_military_branch', 'has_executive_branch'] for org hierarchies, "
+                + "['affiliated_with', 'member_of'] for alliance networks."
         )]
-            string infoboxType = "Character",
+            List<string> labels,
         [Description(
-            "How many relationship levels to traverse from the root. Use 1 for direct relationships only (default). Use 2+ only for multi-generational queries like full family trees."
+            "How many hops to traverse from the root (default 2). Use 1 for direct relationships, 2-3 for deeper exploration."
         )]
-            int maxDepth = 1,
+            int maxDepth = 2,
         [Description(
-            "Infobox labels representing upward/ancestor relationships (e.g. Parent(s), Masters). Linked entities are placed one generation above."
-        )]
-            List<string>? upLabels = null,
-        [Description(
-            "Infobox labels representing downward/descendant relationships (e.g. Children, Apprentices). Linked entities are placed one generation below."
-        )]
-            List<string>? downLabels = null,
-        [Description(
-            "Infobox labels representing peer/same-generation relationships (e.g. Partner(s), Sibling(s)). Linked entities are placed on the same level."
-        )]
-            List<string>? peerLabels = null,
-        [Description(
-            "Labels to enable by default. Must be a subset of upLabels + downLabels + peerLabels. "
-                + "If omitted, all labels are enabled. Use this to focus the graph — e.g. for a family tree, "
-                + "pass all labels but only enable Parent(s)/Children/Partner(s)/Sibling(s)."
+            "Labels to show by default. Subset of labels. If omitted, all labels are enabled."
         )]
             List<string>? enabledLabels = null,
         [Description(
-            "Layout mode: 'force' for physics-based network graph, 'tree' for hierarchical family tree. "
-                + "Use 'tree' for family trees, lineages, and generational hierarchies."
+            "Layout mode: 'force' for physics-based network graph, 'tree' for hierarchical layout. "
+                + "Use 'tree' for family trees, lineages, and organizational hierarchies."
         )]
             string layoutMode = "force",
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
+            string? continuity = null,
         [Description(
             "Optional source references (title + wikiUrl) from pages used to answer this query"
         )]
@@ -174,13 +166,11 @@ public class ComponentToolkit
             Title = title,
             RootEntityId = rootEntityId,
             RootEntityName = rootEntityName,
-            Collection = infoboxType,
             MaxDepth = maxDepth,
-            UpLabels = upLabels ?? [],
-            DownLabels = downLabels ?? [],
-            PeerLabels = peerLabels ?? [],
+            Labels = labels,
             EnabledLabels = enabledLabels,
             LayoutMode = layoutMode is "tree" or "force" ? layoutMode : "force",
+            Continuity = continuity,
             References = references,
         };
         return GraphResult;

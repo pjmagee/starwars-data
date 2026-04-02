@@ -22,15 +22,12 @@
         {
             var l = label;
             var enabled = _enabledLabels.Contains(l);
-            var color = _upLabels.Contains(l) ? Color.Info
-                      : _downLabels.Contains(l) ? Color.Success
-                      : Color.Warning;
             <MudChip T="string" Size="Size.Small"
                      Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
-                     Color="@color"
+                     Color="Color.Info"
                      Style="@(enabled ? "" : "opacity:0.4")"
                      OnClick="() => ToggleLabel(l)">
-                @l
+                @FormatLabel(l)
             </MudChip>
         }
     </MudStack>
@@ -122,7 +119,7 @@
                                         Wookieepedia
                                     </MudButton>
                                 }
-                                <MudButton Href="@($"/graph/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
+                                <MudButton Href="@($"/graph-explorer/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
                                            StartIcon="@Icons.Material.Filled.Hub">
                                     Explore Graph
                                 </MudButton>
@@ -153,24 +150,17 @@
     private int _selectedNodeId;
     private bool _loadingNodeDetails;
 
-    // Graph controls — initialized from Descriptor, user can tweak
+    // Graph controls
     private int _maxDepth;
     private HashSet<string> _enabledLabels = [];
-    private HashSet<string> _upLabels = [];
-    private HashSet<string> _downLabels = [];
-    private HashSet<string> _peerLabels = [];
     private List<string> _allLabels = [];
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnParametersSetAsync()
     {
-        // Initialize controls from AI-configured descriptor
         _maxDepth = Descriptor.MaxDepth;
-        _upLabels = [..Descriptor.UpLabels];
-        _downLabels = [..Descriptor.DownLabels];
-        _peerLabels = [..Descriptor.PeerLabels];
-        _allLabels = [..Descriptor.UpLabels, ..Descriptor.DownLabels, ..Descriptor.PeerLabels];
+        _allLabels = [..Descriptor.Labels];
         _enabledLabels = Descriptor.EnabledLabels is { Count: > 0 }
             ? [..Descriptor.EnabledLabels]
             : [.._allLabels];
@@ -190,16 +180,16 @@
 
         try
         {
-            var activeUp = _upLabels.Where(_enabledLabels.Contains).ToList();
-            var activeDown = _downLabels.Where(_enabledLabels.Contains).ToList();
-            var activePeer = _peerLabels.Where(_enabledLabels.Contains).ToList();
+            var activeLabels = _allLabels.Where(_enabledLabels.Contains).ToList();
+            var labelsParam = string.Join(",", activeLabels);
 
-            var collection = Uri.EscapeDataString(Descriptor.Collection);
-            var query = $"relationships/graph/{Descriptor.RootEntityId}?collection={collection}&maxDepth={_maxDepth}";
-            foreach (var l in activeUp)   query += $"&upLabels={Uri.EscapeDataString(l)}";
-            foreach (var l in activeDown) query += $"&downLabels={Uri.EscapeDataString(l)}";
-            foreach (var l in activePeer) query += $"&peerLabels={Uri.EscapeDataString(l)}";
-            var result = await Http.GetFromJsonAsync<GraphResult>(query);
+            var query = $"api/RelationshipGraph/query/{Descriptor.RootEntityId}?maxDepth={_maxDepth}";
+            if (!string.IsNullOrEmpty(labelsParam))
+                query += $"&labels={Uri.EscapeDataString(labelsParam)}";
+            if (!string.IsNullOrEmpty(Descriptor.Continuity))
+                query += $"&continuity={Uri.EscapeDataString(Descriptor.Continuity)}";
+
+            var result = await Http.GetFromJsonAsync<RelationshipGraphResult>(query);
 
             if (generation != _loadGeneration) return;
 
@@ -214,7 +204,7 @@
             }
             else
             {
-                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\".";
+                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\". The graph builder may not have processed this entity yet.";
             }
         }
         catch (Exception ex)
@@ -244,12 +234,11 @@
 
     private string _currentModulePath = "";
 
-    private async Task RenderD3Graph(GraphResult result)
+    private async Task RenderD3Graph(RelationshipGraphResult result)
     {
         var isTree = Descriptor.LayoutMode == "tree";
         var modulePath = isTree ? "./js/d3-family-tree.js" : "./js/d3-graph.js";
 
-        // Re-import if layout mode changed
         if (_currentModulePath != modulePath)
         {
             if (_jsModule is not null)
@@ -260,19 +249,14 @@
             _currentModulePath = modulePath;
         }
 
-        var nodes = result.Nodes.Values.Select(n => new
+        var nodes = result.Nodes.Select(n => new
         {
             id = n.Id,
             name = n.Name,
-            type = "Character",
+            type = n.Type,
             imageUrl = n.ImageUrl ?? "",
-            born = n.Born ?? "",
-            died = n.Died ?? "",
-            generation = n.Generation,
-            parents = n.Parents,
-            partners = n.Partners,
-            siblings = n.Siblings,
-            children = n.Children,
+            born = "",
+            died = "",
         }).ToArray();
 
         var edges = result.Edges.Select(e => new
@@ -280,7 +264,7 @@
             fromId = e.FromId,
             toId = e.ToId,
             label = e.Label,
-            weight = 0.7,
+            weight = e.Weight > 0 ? e.Weight : 0.7,
         }).ToArray();
 
         var data = new { nodes, edges, rootId = result.RootId };
@@ -321,6 +305,10 @@
         _selectedNodeId = 0;
         _loadingNodeDetails = false;
     }
+
+    private static string FormatLabel(string label) =>
+        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
+            label.Replace("_", " "));
 
     private static string StripRevision(string url)
     {
