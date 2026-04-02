@@ -264,7 +264,10 @@ builder
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
-        - render_text(sections): markdown-formatted article with headings, lists, references. Agent writes the content.
+        - render_text(sections): markdown-formatted article. Agent writes section content as PROPER MARKDOWN:
+          Use ## headings, **bold**, bullet lists (with blank line before the list), [links](url), > blockquotes, and `code`.
+          The frontend renders this with a full markdown component — raw text without formatting looks bad.
+          Each section has: heading (plain text title), content (markdown body), optional sourcePageTitle.
         - render_data_table(columns, rows): custom table with rows assembled from multiple queries.
         - render_chart(chartType, series): aggregated visualization (Bar, Pie, Line, Donut, Rose, StackedBar, TimeSeries, Radar).
 
