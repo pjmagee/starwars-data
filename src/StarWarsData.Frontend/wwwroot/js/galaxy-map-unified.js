@@ -164,8 +164,8 @@ export function initialize(containerId, overview, dotNetRef) {
         }
 
         // Hidden label (kept for CSS selection but not displayed)
-        const avgX = region.cells.reduce((s, [c]) => s + c * cellW + cellW / 2, 0) / region.cells.length;
-        const avgY = region.cells.reduce((s, [, r]) => s + r * cellH + cellH / 2, 0) / region.cells.length;
+        const avgX = region.cells.reduce((s, [c]) => s + colX(c) + cellW / 2, 0) / region.cells.length;
+        const avgY = region.cells.reduce((s, [, r]) => s + rowY(r) + cellH / 2, 0) / region.cells.length;
         rg.append('text')
             .attr('x', avgX).attr('y', avgY)
             .attr('text-anchor', 'middle').attr('fill', color)
@@ -297,8 +297,8 @@ export function initialize(containerId, overview, dotNetRef) {
         }
 
         // Label at centroid
-        const avgX = cells.reduce((s, [c]) => s + c * cellW + cellW / 2, 0) / cells.length;
-        const avgY = cells.reduce((s, [, r]) => s + r * cellH + cellH / 2, 0) / cells.length;
+        const avgX = cells.reduce((s, [c]) => s + colX(c) + cellW / 2, 0) / cells.length;
+        const avgY = cells.reduce((s, [, r]) => s + rowY(r) + cellH / 2, 0) / cells.length;
         ng.append('text')
             .attr('x', avgX).attr('y', avgY + cellH * 0.15)
             .attr('text-anchor', 'middle')
@@ -611,7 +611,7 @@ export function initialize(containerId, overview, dotNetRef) {
             // Show overflow badge if systems were capped
             if (cellBuckets[k] && cellBuckets[k].overflow > 0) {
                 contentLayer.append('text')
-                    .attr('x', (c + 1) * cellW - 6).attr('y', r * cellH + 11)
+                    .attr('x', colX(c) + cellW - 6).attr('y', rowY(r) + 11)
                     .attr('text-anchor', 'end')
                     .attr('fill', 'rgba(255,255,255,0.5)')
                     .attr('font-size', '9px')
