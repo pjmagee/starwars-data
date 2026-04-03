@@ -104,71 +104,8 @@ public class GalaxyMapETLService(
         "system.profile",
     };
 
-    /// <summary>
-    /// Lens names that represent real-world media/publications rather than in-universe events.
-    /// These are filtered out when the global "Out of Universe" toggle is off.
-    /// </summary>
-    static readonly HashSet<string> OutOfUniverseLenses = new(StringComparer.OrdinalIgnoreCase)
-    {
-        // Books & print
-        "Book",
-        "BookSeries",
-        "ReferenceBook",
-        "ShortStory",
-        "GraphicNovel",
-        "Script",
-        "ActivityBook",
-        "WebArticle",
-        // Comics
-        "ComicBook",
-        "ComicStory",
-        "ComicSeries",
-        "ComicArc",
-        "ComicCollection",
-        "ComicStrip",
-        "ComicMagazine",
-        // Magazines
-        "MagazineArticle",
-        "MagazineIssue",
-        "MagazineSeries",
-        "MagazineDepartment",
-        "ReferenceMagazine",
-        // Audio/Video
-        "Audiobook",
-        "AudiobookSeries",
-        "Soundtrack",
-        "HomeVideo",
-        "Documentary",
-        "Movie",
-        "Music",
-        "Multimedia",
-        "Webstrip",
-        "LiveShow",
-        // TV
-        "TelevisionEpisode",
-        "TelevisionSeries",
-        "TelevisionSeason",
-        // Games
-        "VideoGame",
-        "VideoGameSeries",
-        "BoardGame",
-        "TabletopGame",
-        "TradingCardSet",
-        "ExpansionPack",
-        // Toys & merchandise
-        "ToyLine",
-        "Store",
-        // Real world
-        "Person",
-        "RealCompany",
-        "RealEvent",
-        "FanPodcast",
-        "FanOrganization",
-        "FilmingLocation",
-        "Website",
-        "InstructionalCourse",
-        "Media",
-    };
+    // Out-of-Universe detection now uses node.Universe field from the KG
+    // instead of a hardcoded list of type names. See lensOutOfUniverse population in BuildGalaxyMapAsync.
 
     public async Task BuildGalaxyMapAsync(CancellationToken ct = default)
     {
@@ -375,7 +312,7 @@ public class GalaxyMapETLService(
         {
             var lens = node.Type;
             lensTotals[lens] = lensTotals.GetValueOrDefault(lens) + 1;
-            lensOutOfUniverse.TryAdd(lens, OutOfUniverseLenses.Contains(lens));
+            lensOutOfUniverse.TryAdd(lens, node.Universe == Universe.OutOfUniverse);
 
             // Use temporal facets for multi-year events (wars, campaigns span their duration)
             var startYear = node.StartYear!.Value;
