@@ -791,6 +791,63 @@ public class InfoboxGraphService(
             filteredEdges.Count
         );
 
+        // ── Derive temporal bounds on edges from node lifecycles ──
+        var nodeLifecycleMap = nodes
+            .Where(n => n.StartYear.HasValue)
+            .ToDictionary(n => n.PageId, n => (start: n.StartYear, end: n.EndYear));
+
+        int derivedCount = 0;
+        foreach (var edge in filteredEdges)
+        {
+            // Skip edges that already have explicit temporal bounds (from Value parsing)
+            if (edge.FromYear.HasValue)
+                continue;
+
+            var hasSrc = nodeLifecycleMap.TryGetValue(edge.FromId, out var src);
+            var hasTgt = nodeLifecycleMap.TryGetValue(edge.ToId, out var tgt);
+
+            if (hasSrc && hasTgt && src.start.HasValue && tgt.start.HasValue)
+            {
+                // Overlap: latest start to earliest end
+                var from = Math.Max(src.start.Value, tgt.start.Value);
+                var to = (src.end, tgt.end) switch
+                {
+                    (int a, int b) => Math.Min(a, b),
+                    (int a, null) => a,
+                    (null, int b) => b,
+                    _ => (int?)null,
+                };
+
+                // Only set if the interval makes sense (start <= end)
+                if (to is null || from <= to)
+                {
+                    edge.FromYear = from;
+                    edge.ToYear = to;
+                    derivedCount++;
+                }
+            }
+            else if (hasSrc && src.start.HasValue && !hasTgt)
+            {
+                // Only source has lifecycle — edge starts with source
+                edge.FromYear = src.start.Value;
+                edge.ToYear = src.end;
+                derivedCount++;
+            }
+            else if (hasTgt && tgt.start.HasValue && !hasSrc)
+            {
+                // Only target has lifecycle — edge starts with target
+                edge.FromYear = tgt.start.Value;
+                edge.ToYear = tgt.end;
+                derivedCount++;
+            }
+        }
+
+        logger.LogInformation(
+            "InfoboxGraph: derived temporal bounds on {Derived} edges (from {Explicit} explicit + node lifecycle overlap)",
+            derivedCount,
+            filteredEdges.Count(e => e.FromYear.HasValue) - derivedCount
+        );
+
         // Write to MongoDB
         logger.LogInformation("InfoboxGraph: writing nodes...");
         if (nodes.Count > 0)
