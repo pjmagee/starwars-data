@@ -9,30 +9,27 @@ using StarWarsData.Models.Entities;
 namespace StarWarsData.Services;
 
 /// <summary>
-/// AI tools that give the Ask AI agent read-only access to the persistent
-/// relationship knowledge graph and article chunk vector search. Enables
-/// GraphRAG-style answers: the agent can resolve entity names, traverse
-/// relationships, find connections between entities, and search article
-/// content via semantic vector search.
+/// AI tools for the Ask AI agent — thin wrapper around KnowledgeGraphQueryService.
+/// Each method is an AITool that queries the KG and returns JSON for LLM consumption.
+/// Non-KG tools (vector search, galaxy year) query their own collections directly.
 /// </summary>
 public class GraphRAGToolkit
 {
-    readonly IMongoCollection<RelationshipEdge> _edges;
-    readonly IMongoCollection<GraphNode> _nodes;
+    readonly KnowledgeGraphQueryService _kg;
     readonly IMongoCollection<BsonDocument> _chunksRaw;
     readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
     readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
     readonly IEmbeddingGenerator<string, Embedding<float>> _embedder;
 
     public GraphRAGToolkit(
+        KnowledgeGraphQueryService kg,
         IMongoClient mongoClient,
         string databaseName,
         IEmbeddingGenerator<string, Embedding<float>> embedder
     )
     {
+        _kg = kg;
         var db = mongoClient.GetDatabase(databaseName);
-        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
-        _nodes = db.GetCollection<GraphNode>(Collections.KgNodes);
         _chunksRaw = db.GetCollection<BsonDocument>(Collections.SearchChunks);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
@@ -53,23 +50,7 @@ public class GraphRAGToolkit
         [Description("Max results to return (default 10)")] int limit = 10
     )
     {
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(query, "i")),
-        };
-
-        if (!string.IsNullOrWhiteSpace(type))
-            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
-
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
-
-        var results = await _nodes
-            .Find(Builders<GraphNode>.Filter.And(filters))
-            .SortBy(n => n.Name)
-            .Limit(Math.Min(limit, 20))
-            .ToListAsync();
-
+        var results = await _kg.SearchNodesAsync(query, type, continuity, Math.Min(limit, 20));
         return JsonSerializer.Serialize(
             results.Select(n => new
             {
@@ -127,52 +108,14 @@ public class GraphRAGToolkit
         [Description("Max results (default 20)")] int limit = 20
     )
     {
-        var rangeStart = Math.Min(year, yearEnd ?? year);
-        var rangeEnd = Math.Max(year, yearEnd ?? year);
-
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Eq(n => n.Type, type),
-        };
-
-        if (!string.IsNullOrWhiteSpace(semantic))
-        {
-            // Use facet-level filtering for semantic precision
-            filters.Add(
-                Builders<GraphNode>.Filter.ElemMatch(
-                    n => n.TemporalFacets,
-                    Builders<TemporalFacet>.Filter.And(
-                        Builders<TemporalFacet>.Filter.Regex(
-                            f => f.Semantic,
-                            new BsonRegularExpression($"^{semantic}", "i")
-                        ),
-                        Builders<TemporalFacet>.Filter.Lte(f => f.Year, rangeEnd),
-                        Builders<TemporalFacet>.Filter.Gte(f => f.Year, rangeStart)
-                    )
-                )
-            );
-        }
-        else
-        {
-            // Fall back to envelope-based range query
-            filters.Add(Builders<GraphNode>.Filter.Lte(n => n.StartYear, rangeEnd));
-            filters.Add(
-                Builders<GraphNode>.Filter.Or(
-                    Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null),
-                    Builders<GraphNode>.Filter.Gte(n => n.EndYear, rangeStart)
-                )
-            );
-        }
-
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
-
-        var results = await _nodes
-            .Find(Builders<GraphNode>.Filter.And(filters))
-            .SortBy(n => n.Name)
-            .Limit(Math.Min(limit, 50))
-            .ToListAsync();
-
+        var results = await _kg.FindNodesByYearAsync(
+            year,
+            type,
+            yearEnd,
+            continuity,
+            semantic,
+            limit
+        );
         return JsonSerializer.Serialize(
             results.Select(n => new
             {
@@ -204,7 +147,7 @@ public class GraphRAGToolkit
         [Description("The PageId of the entity (from search_entities)")] int entityId
     )
     {
-        var node = await _nodes.Find(n => n.PageId == entityId).FirstOrDefaultAsync();
+        var node = await _kg.GetNodeByIdAsync(entityId);
         if (node is null)
             return JsonSerializer.Serialize(new { error = "Entity not found in knowledge graph." });
 
@@ -250,25 +193,7 @@ public class GraphRAGToolkit
         [Description("Max edges to return (default 30)")] int limit = 30
     )
     {
-        var filter = Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, entityId);
-
-        if (!string.IsNullOrWhiteSpace(labelFilter))
-        {
-            var labels = labelFilter.Split(
-                ',',
-                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
-            );
-            filter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, labels);
-        }
-
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            filter &= Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
-
-        var edges = await _edges
-            .Find(filter)
-            .SortByDescending(e => e.Weight)
-            .Limit(Math.Min(limit, 50))
-            .ToListAsync();
+        var edges = await _kg.GetEdgesFromEntityAsync(entityId, labelFilter, continuity, limit);
 
         if (edges.Count == 0)
             return JsonSerializer.Serialize(
@@ -281,7 +206,6 @@ public class GraphRAGToolkit
                 }
             );
 
-        // Group by label for structured LLM consumption
         var grouped = edges
             .GroupBy(e => e.Label)
             .ToDictionary(
@@ -298,13 +222,11 @@ public class GraphRAGToolkit
                         .ToList()
             );
 
-        var entityName = edges.First().FromName;
-
         return JsonSerializer.Serialize(
             new
             {
                 entityId,
-                entityName,
+                entityName = edges.First().FromName,
                 relationships = grouped,
                 totalEdges = edges.Count,
             }
@@ -322,34 +244,13 @@ public class GraphRAGToolkit
             string? continuity = null
     )
     {
-        var matchFilter = new BsonDocument("fromId", entityId);
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            matchFilter["continuity"] = cont.ToString();
-
-        var pipeline = new[]
-        {
-            new BsonDocument("$match", matchFilter),
-            new BsonDocument(
-                "$group",
-                new BsonDocument
-                {
-                    { "_id", "$label" },
-                    { "count", new BsonDocument("$sum", 1) },
-                    { "avgWeight", new BsonDocument("$avg", "$weight") },
-                }
-            ),
-            new BsonDocument("$sort", new BsonDocument("count", -1)),
-        };
-
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
-        var results = await edgesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync();
-
+        var results = await _kg.GetRelationshipTypesAsync(entityId, continuity);
         return JsonSerializer.Serialize(
-            results.Select(d => new
+            results.Select(r => new
             {
-                label = d["_id"].AsString,
-                count = d["count"].AsInt32,
-                avgWeight = Math.Round(d["avgWeight"].AsDouble, 2),
+                label = r.label,
+                count = r.count,
+                avgWeight = Math.Round(r.avgWeight, 2),
             })
         );
     }
@@ -372,160 +273,27 @@ public class GraphRAGToolkit
             string? continuity = null
     )
     {
-        maxDepth = Math.Clamp(maxDepth, 1, 3);
-
-        var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
-
-        var matchFilter = new BsonDocument("fromId", entityId);
-        var restrictMatch = new BsonDocument();
-
-        if (!string.IsNullOrWhiteSpace(labels))
-        {
-            var labelList = labels.Split(
-                ',',
-                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
-            );
-            var labelBson = new BsonDocument("$in", new BsonArray(labelList));
-            matchFilter["label"] = labelBson;
-            restrictMatch["label"] = labelBson;
-        }
-
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-        {
-            matchFilter["continuity"] = cont.ToString();
-            restrictMatch["continuity"] = cont.ToString();
-        }
-
-        // maxDepth represents total hops from root.
-        // The $match stage already provides 1 hop (root → X).
-        // $graphLookup maxDepth N adds N+1 more hops, so we need maxDepth - 2.
-        // When maxDepth <= 1, skip $graphLookup entirely (direct edges only).
-        BsonDocument[] pipeline =
-            maxDepth <= 1
-                ? [new BsonDocument("$match", matchFilter)]
-                :
-                [
-                    new BsonDocument("$match", matchFilter),
-                    new BsonDocument(
-                        "$graphLookup",
-                        new BsonDocument
-                        {
-                            { "from", Collections.KgEdges },
-                            { "startWith", "$toId" },
-                            { "connectFromField", "toId" },
-                            { "connectToField", "fromId" },
-                            { "as", "network" },
-                            { "maxDepth", maxDepth - 2 },
-                            { "depthField", "depth" },
-                            { "restrictSearchWithMatch", restrictMatch },
-                        }
-                    ),
-                ];
-
-        var results = await edgesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync();
-
-        // Collect unique nodes and edges
-        var nodes = new Dictionary<int, (string name, string type, int minDepth)>();
-        var edgeList =
-            new List<(
-                int from,
-                string fromName,
-                int to,
-                string toName,
-                string label,
-                double weight,
-                string evidence,
-                int depth
-            )>();
-        var edgeDedup = new HashSet<(int, int, string)>();
-
-        foreach (var doc in results)
-        {
-            var toId = doc["toId"].AsInt32;
-            var toName = doc["toName"].AsString;
-            var toType = doc["toType"].AsString;
-            var label = doc["label"].AsString;
-            var weight = doc.Contains("weight") ? doc["weight"].ToDouble() : 0.5;
-            var evidence = doc.Contains("evidence") ? doc["evidence"].AsString : "";
-
-            if (!nodes.ContainsKey(toId))
-                nodes[toId] = (toName, toType, 0);
-
-            if (edgeDedup.Add((entityId, toId, label)))
-                edgeList.Add((entityId, "", toId, toName, label, weight, evidence, 0));
-
-            // Network edges from $graphLookup
-            if (doc.Contains("network"))
-            {
-                foreach (var netDoc in doc["network"].AsBsonArray.OfType<BsonDocument>())
-                {
-                    var nFromId = netDoc["fromId"].AsInt32;
-                    var nToId = netDoc["toId"].AsInt32;
-                    var nFromName = netDoc["fromName"].AsString;
-                    var nToName = netDoc["toName"].AsString;
-                    var nFromType = netDoc["fromType"].AsString;
-                    var nToType = netDoc["toType"].AsString;
-                    var nLabel = netDoc["label"].AsString;
-                    var nWeight = netDoc.Contains("weight") ? netDoc["weight"].ToDouble() : 0.5;
-                    var nEvidence = netDoc.Contains("evidence") ? netDoc["evidence"].AsString : "";
-                    var depth = netDoc.Contains("depth") ? (int)netDoc["depth"].ToInt64() + 1 : 1;
-
-                    if (!nodes.ContainsKey(nFromId))
-                        nodes[nFromId] = (nFromName, nFromType, depth);
-                    if (!nodes.ContainsKey(nToId))
-                        nodes[nToId] = (nToName, nToType, depth);
-
-                    if (edgeDedup.Add((nFromId, nToId, nLabel)))
-                        edgeList.Add(
-                            (nFromId, nFromName, nToId, nToName, nLabel, nWeight, nEvidence, depth)
-                        );
-                }
-            }
-        }
-
-        // Cap output to prevent token overflow
-        const int maxNodes = 50;
-        const int maxEdges = 80;
-        var truncated = nodes.Count > maxNodes || edgeList.Count > maxEdges;
-
-        var sortedEdges = edgeList
-            .OrderBy(e => e.depth)
-            .ThenByDescending(e => e.weight)
-            .Take(maxEdges)
-            .ToList();
-
-        var includedNodeIds = new HashSet<int> { entityId };
-        foreach (var e in sortedEdges)
-        {
-            includedNodeIds.Add(e.from);
-            includedNodeIds.Add(e.to);
-        }
+        // Delegate to the service's BFS traversal (same as render_graph uses)
+        var result = await _kg.QueryGraphAsync(entityId, labels, maxDepth, continuity, default);
 
         return JsonSerializer.Serialize(
             new
             {
                 root = new { id = entityId },
-                nodes = nodes
-                    .Where(kv => includedNodeIds.Contains(kv.Key))
-                    .Take(maxNodes)
-                    .Select(kv => new
-                    {
-                        pageId = kv.Key,
-                        name = kv.Value.name,
-                        type = kv.Value.type,
-                        hopsFromRoot = kv.Value.minDepth,
-                    }),
-                edges = sortedEdges.Select(e => new
+                nodes = result.Nodes.Select(n => new
                 {
-                    from = e.fromName,
-                    to = e.toName,
-                    label = e.label,
-                    weight = Math.Round(e.weight, 2),
-                    evidence = Truncate(e.evidence, 150),
-                    depth = e.depth,
+                    pageId = n.Id,
+                    name = n.Name,
+                    type = n.Type,
                 }),
-                summary = $"Found {nodes.Count} connected entities and {edgeList.Count} relationships across {maxDepth} hops",
-                truncated,
+                edges = result.Edges.Select(e => new
+                {
+                    from = e.FromId,
+                    to = e.ToId,
+                    label = e.Label,
+                    weight = Math.Round(e.Weight, 2),
+                }),
+                summary = $"Found {result.Nodes.Count} connected entities and {result.Edges.Count} relationships across {maxDepth} hops",
             }
         );
     }
@@ -545,33 +313,6 @@ public class GraphRAGToolkit
             string? continuity = null
     )
     {
-        maxHops = Math.Clamp(maxHops, 1, 4);
-
-        FilterDefinition<RelationshipEdge>? contFilter = null;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            contFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
-
-        // Bidirectional BFS
-        var frontier1 = new HashSet<int> { entityId1 };
-        var frontier2 = new HashSet<int> { entityId2 };
-        // Maps entityId -> (parent entityId, edge label, edge evidence, direction)
-        var visited1 =
-            new Dictionary<
-                int,
-                (int parent, string label, string evidence, string fromName, string toName)
-            >();
-        var visited2 =
-            new Dictionary<
-                int,
-                (int parent, string label, string evidence, string fromName, string toName)
-            >();
-        visited1[entityId1] = (-1, "", "", "", "");
-        visited2[entityId2] = (-1, "", "", "", "");
-
-        int? meetingPoint = null;
-        int hopsUsed = 0;
-
-        // Check immediate: are they the same entity?
         if (entityId1 == entityId2)
             return JsonSerializer.Serialize(
                 new
@@ -583,104 +324,20 @@ public class GraphRAGToolkit
                 }
             );
 
-        for (int hop = 0; hop < maxHops && meetingPoint is null; hop++)
-        {
-            hopsUsed = hop + 1;
+        var (connected, path) = await _kg.FindConnectionsAsync(
+            entityId1,
+            entityId2,
+            maxHops,
+            continuity
+        );
 
-            // Expand smaller frontier
-            if (frontier1.Count <= frontier2.Count)
-            {
-                frontier1 = await ExpandFrontier(frontier1, visited1, contFilter);
-                meetingPoint = frontier1.FirstOrDefault(id => visited2.ContainsKey(id));
-                if (meetingPoint == 0 && !visited2.ContainsKey(0))
-                    meetingPoint = null;
-            }
-            else
-            {
-                frontier2 = await ExpandFrontier(frontier2, visited2, contFilter);
-                meetingPoint = frontier2.FirstOrDefault(id => visited1.ContainsKey(id));
-                if (meetingPoint == 0 && !visited1.ContainsKey(0))
-                    meetingPoint = null;
-            }
-
-            if (frontier1.Count == 0 && frontier2.Count == 0)
-                break;
-        }
-
-        if (meetingPoint is null)
-        {
+        if (!connected)
             return JsonSerializer.Serialize(
                 new
                 {
                     connected = false,
-                    searchedHops = hopsUsed,
-                    note = $"No connection found within {maxHops} hops. The entities may be unrelated or the graph may not have been fully processed.",
-                }
-            );
-        }
-
-        // Reconstruct path
-        var path = new List<object>();
-
-        // Path from entity1 to meeting point
-        var pathFromE1 =
-            new List<(
-                int from,
-                int to,
-                string label,
-                string evidence,
-                string fromName,
-                string toName
-            )>();
-        var current = meetingPoint.Value;
-        while (current != entityId1 && visited1.ContainsKey(current))
-        {
-            var (parent, label, evidence, fromName, toName) = visited1[current];
-            if (parent == -1)
-                break;
-            pathFromE1.Add((parent, current, label, evidence, fromName, toName));
-            current = parent;
-        }
-        pathFromE1.Reverse();
-
-        // Path from meeting point to entity2
-        current = meetingPoint.Value;
-        var pathFromE2 =
-            new List<(
-                int from,
-                int to,
-                string label,
-                string evidence,
-                string fromName,
-                string toName
-            )>();
-        while (current != entityId2 && visited2.ContainsKey(current))
-        {
-            var (parent, label, evidence, fromName, toName) = visited2[current];
-            if (parent == -1)
-                break;
-            pathFromE2.Add((current, parent, label, evidence, fromName, toName));
-            current = parent;
-        }
-
-        foreach (var step in pathFromE1)
-            path.Add(
-                new
-                {
-                    from = step.fromName,
-                    to = step.toName,
-                    label = step.label,
-                    evidence = Truncate(step.evidence, 200),
-                }
-            );
-        foreach (var step in pathFromE2)
-            path.Add(
-                new
-                {
-                    from = step.fromName,
-                    to = step.toName,
-                    label = step.label,
-                    evidence = Truncate(step.evidence, 200),
+                    searchedHops = maxHops,
+                    note = $"No connection found within {maxHops} hops.",
                 }
             );
 
@@ -689,46 +346,15 @@ public class GraphRAGToolkit
             {
                 connected = true,
                 pathLength = path.Count,
-                path,
+                path = path.Select(s => new
+                {
+                    from = s.fromName,
+                    to = s.toName,
+                    label = s.label,
+                    evidence = Truncate(s.evidence, 200),
+                }),
             }
         );
-    }
-
-    async Task<HashSet<int>> ExpandFrontier(
-        HashSet<int> frontier,
-        Dictionary<
-            int,
-            (int parent, string label, string evidence, string fromName, string toName)
-        > visited,
-        FilterDefinition<RelationshipEdge>? contFilter
-    )
-    {
-        var filter = Builders<RelationshipEdge>.Filter.In(e => e.FromId, frontier);
-        if (contFilter is not null)
-            filter &= contFilter;
-
-        var edges = await _edges
-            .Find(filter)
-            .Limit(500) // Safety cap per frontier expansion
-            .ToListAsync();
-
-        var newFrontier = new HashSet<int>();
-        foreach (var edge in edges)
-        {
-            if (!visited.ContainsKey(edge.ToId))
-            {
-                visited[edge.ToId] = (
-                    edge.FromId,
-                    edge.Label,
-                    edge.Evidence,
-                    edge.FromName,
-                    edge.ToName
-                );
-                newFrontier.Add(edge.ToId);
-            }
-        }
-
-        return newFrontier;
     }
 
     [Description(
@@ -755,11 +381,9 @@ public class GraphRAGToolkit
     {
         limit = Math.Clamp(limit, 1, 10);
 
-        // Generate embedding for the query
         var embeddings = await _embedder.GenerateAsync([query]);
         var queryVector = embeddings[0].Vector.ToArray();
 
-        // Build $vectorSearch pipeline
         var vectorSearchStage = new BsonDocument(
             "$vectorSearch",
             new BsonDocument
@@ -772,7 +396,6 @@ public class GraphRAGToolkit
             }
         );
 
-        // Add pre-filter for type and/or continuity
         var filter = new BsonDocument();
         if (!string.IsNullOrWhiteSpace(type))
             filter["type"] = type;
@@ -798,9 +421,9 @@ public class GraphRAGToolkit
             }
         );
 
-        var pipeline = new BsonDocument[] { vectorSearchStage, projectStage };
-
-        var results = await _chunksRaw.Aggregate<BsonDocument>(pipeline).ToListAsync();
+        var results = await _chunksRaw
+            .Aggregate<BsonDocument>(new BsonDocument[] { vectorSearchStage, projectStage })
+            .ToListAsync();
 
         if (results.Count == 0)
             return JsonSerializer.Serialize(
@@ -808,7 +431,7 @@ public class GraphRAGToolkit
                 {
                     query,
                     results = Array.Empty<object>(),
-                    note = "No matching article chunks found. The chunking job may not have run yet, or try a different query.",
+                    note = "No matching article chunks found.",
                 }
             );
 
@@ -847,16 +470,10 @@ public class GraphRAGToolkit
         );
     }
 
-    static string Truncate(string s, int max) =>
-        string.IsNullOrEmpty(s) ? ""
-        : s.Length > max ? s[..(max - 1)] + "\u2026"
-        : s;
-
     [Description(
-        "Get a complete snapshot of the galaxy at a specific year: territory control (which factions controlled which regions), "
-            + "events that occurred (battles, wars, treaties, etc. with locations), and era context. Pre-computed data — instant response. "
-            + "Use for questions like 'What was happening in 19 BBY?', 'Who controlled the Outer Rim in 4 ABY?', "
-            + "'What battles occurred in 3996 BBY?'. Years use sort-key: negative = BBY, positive = ABY."
+        "Get a complete snapshot of the galaxy at a specific year: territory control, events, and era context. "
+            + "Pre-computed data — instant response. Use for questions like 'What was happening in 19 BBY?'. "
+            + "Years use sort-key: negative = BBY, positive = ABY."
     )]
     public async Task<string> GetGalaxyYear(
         [Description("Year in sort-key format (-19 = 19 BBY, 4 = 4 ABY)")] int year
@@ -865,7 +482,6 @@ public class GraphRAGToolkit
         var doc = await _galaxyYears.Find(d => d.Year == year).FirstOrDefaultAsync();
         if (doc is null)
         {
-            // Find nearest available year
             var nearest = await _galaxyYearsRaw
                 .Find(Builders<BsonDocument>.Filter.Ne("_id", "overview"))
                 .SortBy(d => d["_id"])
@@ -908,15 +524,6 @@ public class GraphRAGToolkit
                         continuity = e.Continuity.ToString(),
                     })
                     .Take(30),
-                unresolvedEvents = (doc.UnresolvedEvents ?? [])
-                    .Select(e => new
-                    {
-                        e.Title,
-                        e.Lens,
-                        e.WikiUrl,
-                        continuity = e.Continuity.ToString(),
-                    })
-                    .Take(20),
                 totalEvents = doc.EventCells.Sum(c => c.Count) + (doc.UnresolvedEvents?.Count ?? 0),
             }
         );
@@ -926,16 +533,15 @@ public class GraphRAGToolkit
         "Get the full temporal lifecycle of an entity with rich semantic facets. "
             + "Returns all temporal data points: birth/death for characters, established/dissolved/reorganized/restored/fragmented "
             + "for institutions, beginning/end for conflicts, constructed/destroyed for structures, release dates for publications. "
-            + "Each facet includes the semantic dimension (lifespan, conflict, institutional, etc.), calendar system "
-            + "(galactic BBY/ABY or real-world CE), parsed year, and original text. Facets are ordered chronologically. "
-            + "Use for questions like 'When was the Galactic Republic reorganized?', 'What is the full lifecycle of the Jedi Order?', "
-            + "'When did Yoda die?', 'When was this book published?'. Call search_entities first to get the PageId."
+            + "Each facet includes the semantic dimension, calendar system, parsed year, and original text. "
+            + "Use for questions like 'When was the Galactic Republic reorganized?', 'When did Yoda die?'. "
+            + "Call search_entities first to get the PageId."
     )]
     public async Task<string> GetEntityTimeline(
         [Description("The PageId of the entity")] int entityId
     )
     {
-        var node = await _nodes.Find(n => n.PageId == entityId).FirstOrDefaultAsync();
+        var node = await _kg.GetNodeByIdAsync(entityId);
         if (node is null)
             return JsonSerializer.Serialize(new { error = "Entity not found." });
 
@@ -977,6 +583,7 @@ public class GraphRAGToolkit
             bool temporalOnly = true
     )
     {
+        // This uses a specific aggregation not in the service — keep inline
         var matchStage = temporalOnly
             ? new BsonDocument(
                 "$match",
@@ -994,7 +601,8 @@ public class GraphRAGToolkit
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        var results = await _nodes
+        // Access the raw collection via the service's mongo client
+        var results = await _chunksRaw
             .Database.GetCollection<BsonDocument>(Collections.KgNodes)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
@@ -1006,8 +614,7 @@ public class GraphRAGToolkit
 
     [Description(
         "List all relationship labels in the knowledge graph with usage counts. Use this to discover what kinds of "
-            + "relationships exist (e.g., 'took_place_at', 'affiliated_with', 'homeworld'). Helps choose label filters "
-            + "for get_entity_relationships and traverse_graph."
+            + "relationships exist. Helps choose label filters for get_entity_relationships and traverse_graph."
     )]
     public async Task<string> ListRelationshipLabels(
         [Description("Max results (default 50)")] int limit = 50
@@ -1023,7 +630,7 @@ public class GraphRAGToolkit
             new BsonDocument("$limit", limit),
         };
 
-        var results = await _edges
+        var results = await _chunksRaw
             .Database.GetCollection<BsonDocument>(Collections.KgEdges)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
@@ -1048,4 +655,9 @@ public class GraphRAGToolkit
             AIFunctionFactory.Create(ListRelationshipLabels, "list_relationship_labels"),
             AIFunctionFactory.Create(SearchArticleContent, "search_article_content"),
         ];
+
+    static string Truncate(string s, int max) =>
+        string.IsNullOrEmpty(s) ? ""
+        : s.Length > max ? s[..(max - 1)] + "\u2026"
+        : s;
 }

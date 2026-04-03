@@ -106,12 +106,13 @@ builder
     .AddSingleton<CollectionFilters>()
     .AddScoped<KnowledgeGraphQueryService>()
     .AddScoped<ChatSessionService>()
-    .AddSingleton<GraphRAGToolkit>(sp =>
+    .AddScoped<GraphRAGToolkit>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         var embedder = sp.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
-        return new GraphRAGToolkit(mongoClient, settings.DatabaseName, embedder);
+        var kgService = sp.GetRequiredService<KnowledgeGraphQueryService>();
+        return new GraphRAGToolkit(kgService, mongoClient, settings.DatabaseName, embedder);
     })
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(

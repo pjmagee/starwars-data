@@ -64,7 +64,8 @@ public class AgentFixture
         var embedder = new NoOpEmbeddingGenerator();
 
         // Build toolkits — same as Program.cs
-        GraphRAG = new GraphRAGToolkit(MongoClient, databaseName, embedder);
+        var kgService = new KnowledgeGraphQueryService(MongoClient, settings);
+        GraphRAG = new GraphRAGToolkit(kgService, MongoClient, databaseName, embedder);
         Components = new ComponentToolkit();
         var dataExplorer = new DataExplorerToolkit(MongoClient, settings);
 
