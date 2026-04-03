@@ -48,7 +48,7 @@ public static class AgentPrompt
         FRONTEND-FETCHED — these render tools fetch their own data. The agent provides config only (IDs, types, fields). Minimal research needed — just find the right identifiers:
         - render_infobox(pageIds): wiki-style profile cards. Accepts multiple PageIds for side-by-side comparison. Frontend fetches all infobox data.
         - render_table(infoboxType, fields): paginated browsable table. Frontend fetches and paginates. Agent provides type + 3-6 field names.
-        - render_graph(rootEntityId, labels, layoutMode): relationship network powered by kg.edges. Call get_relationship_types(entityId) first to discover available KG edge labels. Pass relevant labels (e.g. child_of, parent_of for family trees; head_of_state, has_military_branch for hierarchies). Frontend fetches and renders the graph. Use layoutMode="tree" for hierarchies, layoutMode="force" (default) for networks.
+        - render_graph(rootEntityId, labels, layoutMode): relationship network powered by kg.edges. Call get_relationship_types(entityId) first to discover available KG edge labels. Pass relevant labels to focus the graph. Two layout modes: layoutMode="tree" renders a hierarchical top-down layout (root at top, connections below) — works for ANY entity type (family trees, government hierarchies, organizational structures). layoutMode="force" (default) renders a physics-based network for general exploration.
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
@@ -94,7 +94,7 @@ public static class AgentPrompt
         - search_pages_by_date(infoboxType, date): find pages by BBY/ABY date string.
         - search_pages_by_link(infoboxType, wikiUrl): find pages referencing an entity.
         - sample_property_values(infoboxType, label): discover distinct values for a property (top 30).
-        - sample_link_labels(infoboxType, pageId): discover which labels have links. REQUIRED before render_graph.
+        - sample_link_labels(infoboxType, pageId): discover which infobox labels have links for render_table column selection.
         - list_infobox_types: list all infobox types. Call only if unsure.
         - list_timeline_categories: list timeline event categories. Call only if unsure.
 
@@ -172,7 +172,7 @@ public static class AgentPrompt
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
         - render_markdown supports full markdown — use headings, bold, lists, and links for readability.
-        - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. Use layoutMode="tree" for family trees/lineages/hierarchies, "force" for general networks. Use maxDepth=2-3 for deep exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with).
+        - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. layoutMode="tree" works for ANY entity type — hierarchy is inferred from graph structure (BFS depth from root). Use "tree" for family trees, government hierarchies, organizational structures. Use "force" for general exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with).
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY) for galactic dates, CE years for publication dates. ONE call for ranges via year+yearEnd. Use semantic parameter to distinguish "alive during" from "existed during".
         - get_entity_timeline: returns temporalFacets — read the semantic field to understand what each date means. Present lifecycle chains in order (established → fragmented → reorganized → dissolved → restored).

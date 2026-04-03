@@ -1,5 +1,6 @@
-// D3.js force-directed relationship graph renderer
+// D3.js unified graph renderer — force-directed (default) and hierarchical tree layouts
 // Supports in-place node expansion, navigation history, fullscreen
+// Tree layout: infers hierarchy from BFS depth — works with any edge labels
 
 const TYPE_COLORS = {
     Character: '#7e6fff',
@@ -93,23 +94,41 @@ export function renderForceGraph(containerId, data, dotnetRef) {
 
     addData(data);
 
-    const simulation = d3.forceSimulation(nodesData)
-        .force('link', d3.forceLink(linksData).id(d => d.id).distance(160).strength(0.3))
-        .force('charge', d3.forceManyBody().strength(-350).distanceMax(600))
-        .force('center', d3.forceCenter(width / 2, height / 2).strength(0.05))
-        .force('collision', d3.forceCollide().radius(55))
-        .force('x', d3.forceX(width / 2).strength(0.03))
-        .force('y', d3.forceY(height / 2).strength(0.03));
+    const isTreeLayout = data.layoutMode === 'tree';
+    let simulation = null;
 
-    simulation.on('tick', tick);
+    if (isTreeLayout) {
+        // ── Tree layout: deterministic positions from BFS depth ──
+        computeBfsDepths(nodesData, linksData, data.rootId);
+        layoutTreePositions(nodesData, width, height);
+    } else {
+        // ── Force layout: physics simulation ──
+        simulation = d3.forceSimulation(nodesData)
+            .force('link', d3.forceLink(linksData).id(d => d.id).distance(160).strength(0.3))
+            .force('charge', d3.forceManyBody().strength(-350).distanceMax(600))
+            .force('center', d3.forceCenter(width / 2, height / 2).strength(0.05))
+            .force('collision', d3.forceCollide().radius(55))
+            .force('x', d3.forceX(width / 2).strength(0.03))
+            .force('y', d3.forceY(height / 2).strength(0.03));
+
+        simulation.on('tick', tick);
+    }
 
     _state = {
         container, svg, defs, zoomGroup, zoomBehavior, linkGroup, nodeGroup,
         simulation, nodeMap, edgeSet, nodesData, linksData, dotnetRef,
-        width, height, currentRootId: data.rootId,
+        width, height, currentRootId: data.rootId, isTreeLayout,
     };
 
     updateVisuals();
+
+    if (isTreeLayout) {
+        // For tree layout, position everything immediately then fit to screen
+        drawTreeEdges();
+        nodeGroup.selectAll('g.node')
+            .attr('transform', d => `translate(${d.x},${d.y})`);
+        setTimeout(() => fitToScreen(), 100);
+    }
 
     function addData(data) {
         for (const n of data.nodes) {
@@ -140,6 +159,123 @@ export function renderForceGraph(containerId, data, dotnetRef) {
             .attr('y', d => (d.source.y + d.target.y) / 2);
         nodeGroup.selectAll('g.node')
             .attr('transform', d => `translate(${d.x},${d.y})`);
+    }
+
+    function drawTreeEdges() {
+        // Replace straight lines with elbow connectors for tree layout
+        linkGroup.selectAll('line').remove();
+        linkGroup.selectAll('text').remove();
+
+        linkGroup.selectAll('path.tree-edge')
+            .data(linksData, d => `${d.source.id ?? d.source}-${d.target.id ?? d.target}-${d.label}`)
+            .enter()
+            .append('path')
+            .attr('class', 'tree-edge')
+            .attr('d', d => {
+                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
+                const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
+                if (!src || !tgt) return '';
+                const midY = (src.y + tgt.y) / 2;
+                return `M${src.x},${src.y + 30} L${src.x},${midY} L${tgt.x},${midY} L${tgt.x},${tgt.y - 30}`;
+            })
+            .attr('fill', 'none')
+            .attr('stroke', '#3a3a6a')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-opacity', 0.6)
+            .attr('marker-end', 'url(#arrowhead)');
+
+        // Edge labels at midpoint of the elbow
+        linkGroup.selectAll('text.tree-label')
+            .data(linksData, d => `${d.source.id ?? d.source}-${d.target.id ?? d.target}-${d.label}`)
+            .enter()
+            .append('text')
+            .attr('class', 'tree-label')
+            .attr('x', d => {
+                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
+                const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
+                return src && tgt ? (src.x + tgt.x) / 2 : 0;
+            })
+            .attr('y', d => {
+                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
+                const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
+                return src && tgt ? (src.y + tgt.y) / 2 : 0;
+            })
+            .text(d => formatLabel(d.label))
+            .attr('font-size', '10px')
+            .attr('fill', '#8a8ab0')
+            .attr('text-anchor', 'middle')
+            .attr('dy', -4)
+            .style('pointer-events', 'none');
+    }
+}
+
+/**
+ * Compute BFS depths from root through edges.
+ * Assigns _depth to each node (root=0, connections=1, etc.)
+ */
+function computeBfsDepths(nodes, links, rootId) {
+    const adj = new Map();
+    for (const n of nodes) adj.set(n.id, []);
+
+    for (const link of links) {
+        const srcId = link.source.id ?? link.source;
+        const tgtId = link.target.id ?? link.target;
+        if (adj.has(srcId)) adj.get(srcId).push(tgtId);
+        if (adj.has(tgtId)) adj.get(tgtId).push(srcId);
+    }
+
+    const visited = new Set();
+    const queue = [{ id: rootId, depth: 0 }];
+    const depthMap = new Map();
+    visited.add(rootId);
+    depthMap.set(rootId, 0);
+
+    while (queue.length > 0) {
+        const { id, depth } = queue.shift();
+        for (const neighbor of (adj.get(id) || [])) {
+            if (!visited.has(neighbor)) {
+                visited.add(neighbor);
+                depthMap.set(neighbor, depth + 1);
+                queue.push({ id: neighbor, depth: depth + 1 });
+            }
+        }
+    }
+
+    for (const n of nodes) {
+        n._depth = depthMap.get(n.id) ?? 0;
+    }
+}
+
+/**
+ * Position nodes in rows by BFS depth for tree layout.
+ */
+function layoutTreePositions(nodes, width, height) {
+    const ROW_HEIGHT = 180;
+    const MIN_NODE_SPACING = 160;
+
+    // Group by depth
+    const byDepth = new Map();
+    for (const n of nodes) {
+        const d = n._depth ?? 0;
+        if (!byDepth.has(d)) byDepth.set(d, []);
+        byDepth.get(d).push(n);
+    }
+
+    const maxDepth = Math.max(...byDepth.keys(), 0);
+    const totalHeight = (maxDepth + 1) * ROW_HEIGHT;
+    const startY = Math.max(80, (height - totalHeight) / 2);
+
+    for (const [depth, row] of byDepth) {
+        const rowWidth = row.length * MIN_NODE_SPACING;
+        const startX = (width - rowWidth) / 2 + MIN_NODE_SPACING / 2;
+
+        row.forEach((n, i) => {
+            n.x = startX + i * MIN_NODE_SPACING;
+            n.y = startY + depth * ROW_HEIGHT;
+            // Fix positions so force sim (if ever mixed) doesn't move them
+            n.fx = n.x;
+            n.fy = n.y;
+        });
     }
 }
 
@@ -174,17 +310,21 @@ function updateVisuals() {
 
     let dragMoved = false;
     let dragStartX = 0, dragStartY = 0;
-    const DRAG_THRESHOLD = 5; // pixels — must move this far before it counts as a drag
+    const DRAG_THRESHOLD = 5;
+    const isTree = _state?.isTreeLayout;
 
     const enter = node.enter().append('g')
         .attr('class', 'node')
-        .attr('cursor', 'pointer')
-        .call(d3.drag()
+        .attr('cursor', 'pointer');
+
+    // Only enable drag for force layout (not tree)
+    if (!isTree) {
+        enter.call(d3.drag()
             .on('start', (event, d) => {
                 dragMoved = false;
                 dragStartX = event.x;
                 dragStartY = event.y;
-                if (!event.active) simulation.alphaTarget(0.1).restart();
+                if (!event.active && simulation) simulation.alphaTarget(0.1).restart();
                 d.fx = d.x; d.fy = d.y;
             })
             .on('drag', (event, d) => {
@@ -199,15 +339,11 @@ function updateVisuals() {
                 }
             })
             .on('end', (event, d) => {
-                if (!event.active) simulation.alphaTarget(0);
-                if (!dragMoved) {
-                    // Didn't actually drag — keep node where it was
-                    d.fx = null; d.fy = null;
-                } else {
-                    d.fx = null; d.fy = null;
-                }
+                if (!event.active && simulation) simulation.alphaTarget(0);
+                d.fx = null; d.fy = null;
                 d3.select(event.currentTarget).attr('cursor', 'pointer');
             }));
+    }
 
     // Single click: info panel
     enter.on('click', (event, d) => {
@@ -288,10 +424,12 @@ function updateVisuals() {
         .style('pointer-events', 'none')
         .text('+');
 
-    // Restart simulation
-    simulation.nodes(nodesData);
-    simulation.force('link').links(linksData);
-    simulation.alpha(0.5).restart();
+    // Restart simulation (force layout only)
+    if (simulation) {
+        simulation.nodes(nodesData);
+        simulation.force('link').links(linksData);
+        simulation.alpha(0.5).restart();
+    }
 }
 
 /**

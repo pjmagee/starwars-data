@@ -122,11 +122,13 @@ public class ComponentToolkit
 
     [Description(
         "Render a relationship graph powered by the knowledge graph (kg.edges). "
-            + "The frontend fetches connected entities from the KG and renders a D3 network or tree. "
+            + "The frontend fetches connected entities from the KG and renders a D3 visualization. "
             + "Call get_relationship_types(entityId) first to discover available edge labels for the entity. "
             + "Pass the relevant labels to focus the graph (e.g. child_of, parent_of for family trees; "
             + "head_of_state, has_military_branch for political hierarchies; affiliated_with for alliances). "
-            + "Use layoutMode='tree' for family trees and hierarchies, 'force' for general relationship networks."
+            + "Two layout modes: 'tree' renders a hierarchical top-down layout where depth is inferred from "
+            + "the graph structure (root at top, direct connections below, etc.) — works for ANY entity type "
+            + "(Characters, Governments, Organizations). 'force' (default) renders a physics-based network."
     )]
     public GraphDescriptor RenderGraph(
         [Description("The entity's PageId from the knowledge graph (from search_entities)")]
