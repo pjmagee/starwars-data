@@ -124,10 +124,19 @@
         <MudList Dense="true" T="string">
             <MudListItem Icon="@Icons.Material.Filled.AutoAwesome" IconColor="Color.Warning">
                 <MudText Typo="Typo.body2">
-                    <strong>Ask AI</strong> &mdash; Conversational agent with tool access to the knowledge graph,
-                    semantic search, and structured page data. Renders interactive visualisations inline &mdash;
-                    charts, relationship graphs, timelines, data tables, infobox cards, and formatted articles.
-                    All visualisations query real underlying data; no data points are fabricated.
+                    <strong>Ask AI</strong> &mdash; Conversational agent with 30+ tools across four toolkits.
+                    Queries the knowledge graph, performs semantic search over 800K+ article passages,
+                    and renders results inline as charts, relationship graphs, timelines, data tables,
+                    infobox cards, and formatted research articles. All data comes from real tool calls;
+                    nothing is fabricated.
+                </MudText>
+            </MudListItem>
+            <MudListItem Icon="@Icons.Material.Filled.Search" IconColor="Color.Warning">
+                <MudText Typo="Typo.body2">
+                    <strong>Semantic Search</strong> &mdash; AI-powered vector search finds content by meaning,
+                    not keywords. Ask natural-language questions like &ldquo;why did Anakin turn to the dark side?&rdquo;
+                    and get answers grounded in actual article text with deep-linked source references.
+                    Available in Ask AI and the Galaxy Map.
                 </MudText>
             </MudListItem>
             <MudListItem Icon="@Icons.Material.Filled.Person" IconColor="Color.Warning">
@@ -140,46 +149,44 @@
 
         <MudText Typo="Typo.h6" GutterBottom="true" Class="mt-4">Data Exploration</MudText>
         <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-2">
-            The following features do not use AI at runtime. They are built on structured data
-            extracted from Wookieepedia and the knowledge graph.
+            Built on structured data extracted from Wookieepedia and the temporal knowledge graph.
+            No AI at runtime &mdash; all data is pre-computed.
         </MudText>
 
         <MudList Dense="true" T="string">
             <MudListItem Icon="@Icons.Material.Filled.Hub" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Graph Explorer</strong> &mdash; Browse the temporal knowledge graph connecting
-                    characters, factions, locations, and events. Traverse relationships, explore entity
-                    networks, and visualise connections with an interactive force-directed graph.
+                    <strong>Knowledge Graph</strong> &mdash; Browse 166,000+ entities and 694,000+ relationships.
+                    Rich temporal facets track lifecycles across six semantic dimensions: lifespan, conflict,
+                    institutional, construction, creation, and publication.
                 </MudText>
             </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Timeline" IconColor="Color.Primary">
+            <MudListItem Icon="@Icons.Material.Filled.AccountTree" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Timeline</strong> &mdash; Browse thousands of events across all eras with
-                    category filtering and year range scoping.
-                </MudText>
-            </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.TableView" IconColor="Color.Primary">
-                <MudText Typo="Typo.body2">
-                    <strong>Data Tables</strong> &mdash; Searchable, sortable tables for every infobox
-                    category: characters, ships, weapons, species, planets, and more.
+                    <strong>Graph Explorer</strong> &mdash; Interactive force-directed and hierarchical graph
+                    visualisation. Explore entity networks, traverse relationships by label, expand nodes
+                    on double-click, and navigate with breadcrumb history. Temporal slider filters edges by year.
                 </MudText>
             </MudListItem>
             <MudListItem Icon="@Icons.Material.Filled.Public" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Galaxy Map</strong> &mdash; Interactive galactic map with trade routes,
-                    region boundaries, and drill-down from regions to sectors, systems, and planets.
+                    <strong>Galaxy Map</strong> &mdash; Interactive galactic map with two modes.
+                    <strong>Explore</strong>: drill from regions to systems to planets, with keyword and
+                    AI semantic search to locate places by concept. <strong>Timeline</strong>: animated
+                    playback of galactic events with territory control heatmap, era navigation, and
+                    event density visualisation.
                 </MudText>
             </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Whatshot" IconColor="Color.Primary">
+            <MudListItem Icon="@Icons.Material.Filled.Timeline" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Galaxy Events</strong> &mdash; Heatmap overlay showing the density and
-                    distribution of events across the galaxy.
+                    <strong>Timeline</strong> &mdash; Browse thousands of categorised events across all eras
+                    with category filtering, year range scoping, and BBY/ABY navigation.
                 </MudText>
             </MudListItem>
-            <MudListItem Icon="@Icons.Material.Filled.Map" IconColor="Color.Primary">
+            <MudListItem Icon="@Icons.Material.Filled.TableView" IconColor="Color.Primary">
                 <MudText Typo="Typo.body2">
-                    <strong>Territory Control</strong> &mdash; Temporal map showing which factions
-                    controlled which regions at any point in galactic history.
+                    <strong>Data Tables</strong> &mdash; Searchable, sortable, paginated tables for every infobox
+                    category: characters, ships, weapons, species, planets, governments, and more.
                 </MudText>
             </MudListItem>
         </MudList>
@@ -195,25 +202,28 @@
             workflow. The AI accelerates the work; it does not replace the vision behind it.
         </MudText>
 
-        <MudText Typo="Typo.h6" GutterBottom="true">Technology</MudText>
-        <MudGrid Spacing="2">
-            @foreach (var group in _techGroups)
+        <MudText Typo="Typo.h6" GutterBottom="true">Technology &amp; Credits</MudText>
+        @foreach (var group in _techStack.Concat(_assets))
+        {
+            <MudText Typo="Typo.overline" Color="Color.Secondary" Class="mt-2">@group.Category</MudText>
+            @foreach (var item in group.Items)
             {
-                <MudItem xs="12" sm="6" md="4">
-                    <MudPaper Class="pa-3" Elevation="1" Style="height: 100%;">
-                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2" Style="text-transform: uppercase; letter-spacing: 0.5px;">
-                            @group.Label
-                        </MudText>
-                        <MudStack Row="true" Spacing="1" Wrap="Wrap.Wrap">
-                            @foreach (var chip in group.Chips)
-                            {
-                                <MudChip T="string" Variant="Variant.Outlined" Color="group.Color" Size="Size.Small">@chip</MudChip>
-                            }
-                        </MudStack>
-                    </MudPaper>
-                </MudItem>
+                <MudText Typo="Typo.body2">
+                    @if (item.Url is not null)
+                    {
+                        <MudLink Href="@item.Url" Target="_blank" Underline="Underline.Hover">@item.Name</MudLink>
+                    }
+                    else
+                    {
+                        @item.Name
+                    }
+                    @if (item.Note is not null)
+                    {
+                        <span style="color:var(--mud-palette-text-secondary);"> — @item.Note</span>
+                    }
+                </MudText>
             }
-        </MudGrid>
+        }
 
         <MudDivider />
 
@@ -292,15 +302,54 @@
 </MudContainer>
 
 @code {
-    private record TechGroup(string Label, Color Color, string[] Chips);
+    private record CreditItem(string Name, string? Url = null, string? Note = null);
+    private record CreditGroup(string Category, CreditItem[] Items);
 
-    private static readonly TechGroup[] _techGroups =
+    private static readonly CreditGroup[] _techStack =
     [
-        new("Data", Color.Secondary, ["MongoDB", "Knowledge Graph", "Vector Search"]),
-        new("AI", Color.Warning, ["OpenAI GPT", "Embeddings", "Batch API", "Microsoft.Agents.AI"]),
-        new(".NET", Color.Primary, [".NET Aspire", "ASP.NET Core", "Hangfire"]),
-        new("Frontend", Color.Tertiary, ["Blazor Server", "MudBlazor", "D3.js"]),
-        new("Content", Color.Default, ["Wookieepedia", "MediaWiki API"]),
-        new("Infrastructure", Color.Info, ["Keycloak OIDC", "OpenTelemetry"]),
+        new("Frameworks", [
+            new(".NET 10", "https://dotnet.microsoft.com", "Runtime & SDK"),
+            new(".NET Aspire", "https://learn.microsoft.com/dotnet/aspire", "Orchestration & observability"),
+            new("ASP.NET Core", "https://learn.microsoft.com/aspnet/core", "API & server"),
+            new("Blazor Interactive Server", "https://learn.microsoft.com/aspnet/core/blazor", "Frontend rendering"),
+        ]),
+        new("AI & Search", [
+            new("OpenAI API", "https://platform.openai.com", "GPT models, embeddings, Batch API"),
+            new("Microsoft.Extensions.AI", "https://learn.microsoft.com/dotnet/ai", "AI abstractions"),
+            new("Microsoft.Agents.AI", "https://github.com/microsoft/Agents-for-net", "Agent framework"),
+            new("MongoDB Atlas Vector Search", "https://www.mongodb.com/products/platform/atlas-vector-search", "Semantic search"),
+        ]),
+        new("Database", [
+            new("MongoDB", "https://www.mongodb.com", "Document store & knowledge graph"),
+            new("Hangfire", "https://www.hangfire.io", "Background job processing"),
+        ]),
+        new("Frontend Libraries", [
+            new("MudBlazor", "https://mudblazor.com", "Material Design component library"),
+            new("D3.js", "https://d3js.org", "Interactive data visualisations"),
+            new("Z.Blazor.Diagrams", "https://github.com/Blazor-Diagrams/Blazor.Diagrams", "Diagram components"),
+            new("MudBlazor.Markdown", "https://github.com/AuroraZiling/MudBlazor.Markdown", "Markdown rendering"),
+        ]),
+        new("Infrastructure", [
+            new("Keycloak", "https://www.keycloak.org", "Authentication (OIDC)"),
+            new("OpenTelemetry", "https://opentelemetry.io", "Distributed tracing & metrics"),
+            new("Docker", "https://www.docker.com", "Containerisation"),
+        ]),
+        new("Content", [
+            new("Wookieepedia", "https://starwars.fandom.com", "Star Wars wiki (CC-BY-SA 3.0)"),
+            new("MediaWiki API", "https://www.mediawiki.org/wiki/API:Main_page", "Data sourcing"),
+        ]),
+    ];
+
+    private static readonly CreditGroup[] _assets =
+    [
+        new("Fonts", [
+            new("Roboto", "https://fonts.google.com/specimen/Roboto", "Primary UI font (Google Fonts, Apache 2.0)"),
+            new("Aurebesh", "https://aurekfonts.github.io", "Galactic Basic Standard alphabet (fan-made, open source)"),
+        ]),
+        new("Development Tools", [
+            new("Claude Code", "https://claude.ai/code", "AI-assisted development (Anthropic)"),
+            new("GitHub Copilot", "https://github.com/features/copilot", "AI pair programming"),
+            new("MudMCP", "https://github.com/pjmagee/MudMCP", "MudBlazor MCP documentation server"),
+        ]),
     ];
 }

@@ -1,3 +1,46 @@
+/* Aurebesh (Galactic Basic Standard) — Star Wars alphabet easter egg */
+@font-face {
+    font-family: 'Aurebesh';
+    src: url('/fonts/AurebeshAF-Canon.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Aurebesh preview bar — shows selected text in galactic script */
+.aurebesh-preview {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: rgba(15, 15, 35, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 167, 38, 0.3);
+    padding: 8px 16px;
+    display: none;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+.aurebesh-preview.visible { display: flex; }
+.aurebesh-preview .aurebesh-text {
+    font-family: 'Aurebesh', sans-serif;
+    color: #ffa726;
+    font-size: 1.4em;
+    letter-spacing: 0.05em;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.aurebesh-preview .aurebesh-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
 /* Galaxy Map Page Styles */
 .galactic-grid {
     display: grid;

@@ -4,6 +4,7 @@
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
 @inject LayoutService Layout
+@inject IJSRuntime JS
 @implements IDisposable
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
@@ -21,6 +22,19 @@
         <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
             <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
         </MudLink>
+        <MudMenu Icon="@Icons.Material.Filled.FormatSize" Color="Color.Inherit"
+                 AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+            @foreach (var (label, value) in _fontScales)
+            {
+                var v = value;
+                <MudMenuItem OnClick="@(() => SetFontScale(v))"
+                             Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
+                    @label
+                </MudMenuItem>
+            }
+        </MudMenu>
+        <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
+                       OnClick="ToggleAurebesh" title="@(_aurebesh ? "Switch to Galactic Basic" : "Switch to Aurebesh")" />
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
         <AuthorizeView>
@@ -82,7 +96,18 @@
 @code {
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
-    private MudTheme? _theme = null;
+    private bool _aurebesh;
+    private MudTheme? _theme;
+    private double _fontScale = 1.0;
+
+    private static readonly (string Label, double Value)[] _fontScales =
+    [
+        ("Small", 0.85),
+        ("Default", 1.0),
+        ("Large", 1.15),
+        ("Extra Large", 1.3),
+    ];
+
     private readonly string _version = Assembly.GetExecutingAssembly()
         .GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>()?.InformationalVersion?.Split('+')[0]
         ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
@@ -92,13 +117,76 @@
     {
         base.OnInitialized();
         Layout.OnChange += StateHasChanged;
+        _theme = BuildTheme(_fontScale);
+    }
 
-        _theme = new()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
         {
-            PaletteLight = _lightPalette,
-            PaletteDark = _darkPalette,
-            LayoutProperties = new LayoutProperties()
+            var savedScale = await JS.InvokeAsync<double>("swGetFontScale");
+            if (Math.Abs(savedScale - _fontScale) > 0.01)
+            {
+                _fontScale = savedScale;
+                _theme = BuildTheme(_fontScale);
+                StateHasChanged();
+            }
+
+            _aurebesh = await JS.InvokeAsync<bool>("swGetAurebesh");
+            if (_aurebesh)
+                await JS.InvokeVoidAsync("swSetAurebesh", true);
+        }
+    }
+
+    private async Task SetFontScale(double scale)
+    {
+        _fontScale = scale;
+        _theme = BuildTheme(scale);
+        await JS.InvokeVoidAsync("swSetFontScale", scale);
+    }
+
+    private async Task ToggleAurebesh()
+    {
+        _aurebesh = !_aurebesh;
+        await JS.InvokeVoidAsync("swSetAurebesh", _aurebesh);
+    }
+
+    private MudTheme BuildTheme(double scale) => new()
+    {
+        PaletteLight = _lightPalette,
+        PaletteDark = _darkPalette,
+        LayoutProperties = new LayoutProperties(),
+        Typography = ScaleTypography(scale),
+    };
+
+    private static MudBlazor.Typography ScaleTypography(double scale)
+    {
+        if (Math.Abs(scale - 1.0) < 0.01)
+            return new MudBlazor.Typography();
+
+        return new MudBlazor.Typography
+        {
+            Default = new DefaultTypography { FontSize = ScaleRem(".875rem", scale) },
+            H1 = new H1Typography { FontSize = ScaleRem("6rem", scale) },
+            H2 = new H2Typography { FontSize = ScaleRem("3.75rem", scale) },
+            H3 = new H3Typography { FontSize = ScaleRem("3rem", scale) },
+            H4 = new H4Typography { FontSize = ScaleRem("2.125rem", scale) },
+            H5 = new H5Typography { FontSize = ScaleRem("1.5rem", scale) },
+            H6 = new H6Typography { FontSize = ScaleRem("1.25rem", scale) },
+            Subtitle1 = new Subtitle1Typography { FontSize = ScaleRem("1rem", scale) },
+            Subtitle2 = new Subtitle2Typography { FontSize = ScaleRem(".875rem", scale) },
+            Body1 = new Body1Typography { FontSize = ScaleRem("1rem", scale) },
+            Body2 = new Body2Typography { FontSize = ScaleRem(".875rem", scale) },
+            Button = new ButtonTypography { FontSize = ScaleRem(".875rem", scale) },
+            Caption = new CaptionTypography { FontSize = ScaleRem(".75rem", scale) },
+            Overline = new OverlineTypography { FontSize = ScaleRem(".75rem", scale) },
         };
+    }
+
+    private static string ScaleRem(string rem, double scale)
+    {
+        var num = double.Parse(rem.Replace("rem", ""), System.Globalization.CultureInfo.InvariantCulture);
+        return $"{(num * scale).ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)}rem";
     }
 
     public void Dispose() => Layout.OnChange -= StateHasChanged;

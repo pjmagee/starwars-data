@@ -40,6 +40,41 @@
             // Auto-load if previously accepted
             if (swGetCookieConsent() === 'accepted') swLoadAnalytics();
 
+            // Accessibility: persist font scale preference
+            function swSetFontScale(scale) { localStorage.setItem('sw-font-scale', scale.toString()); }
+            function swGetFontScale() { return parseFloat(localStorage.getItem('sw-font-scale')) || 1.0; }
+
+            // Aurebesh preview: show selected text in galactic script
+            var _aurebeshBar = null;
+            function swSetAurebesh(enabled) {
+                localStorage.setItem('sw-aurebesh', enabled ? 'true' : 'false');
+                if (!enabled && _aurebeshBar) {
+                    _aurebeshBar.classList.remove('visible');
+                    document.removeEventListener('selectionchange', _onSelectionChange);
+                    return;
+                }
+                if (enabled) {
+                    if (!_aurebeshBar) {
+                        _aurebeshBar = document.createElement('div');
+                        _aurebeshBar.className = 'aurebesh-preview';
+                        _aurebeshBar.innerHTML = '<span class="aurebesh-label">Aurebesh</span><span class="aurebesh-text"></span>';
+                        document.body.appendChild(_aurebeshBar);
+                    }
+                    document.addEventListener('selectionchange', _onSelectionChange);
+                }
+            }
+            function _onSelectionChange() {
+                if (!_aurebeshBar) return;
+                var text = (window.getSelection() || '').toString().trim();
+                var textEl = _aurebeshBar.querySelector('.aurebesh-text');
+                if (text.length > 0) {
+                    textEl.textContent = text;
+                    _aurebeshBar.classList.add('visible');
+                } else {
+                    _aurebeshBar.classList.remove('visible');
+                }
+            }
+            function swGetAurebesh() { return localStorage.getItem('sw-aurebesh') === 'true'; }
         </script>
     </head>
     <body>
