@@ -104,12 +104,12 @@ export function renderForceGraph(containerId, data, dotnetRef) {
     } else {
         // ── Force layout: physics simulation ──
         simulation = d3.forceSimulation(nodesData)
-            .force('link', d3.forceLink(linksData).id(d => d.id).distance(160).strength(0.3))
-            .force('charge', d3.forceManyBody().strength(-350).distanceMax(600))
-            .force('center', d3.forceCenter(width / 2, height / 2).strength(0.05))
-            .force('collision', d3.forceCollide().radius(55))
-            .force('x', d3.forceX(width / 2).strength(0.03))
-            .force('y', d3.forceY(height / 2).strength(0.03));
+            .force('link', d3.forceLink(linksData).id(d => d.id).distance(220).strength(0.2))
+            .force('charge', d3.forceManyBody().strength(-600).distanceMax(800))
+            .force('center', d3.forceCenter(width / 2, height / 2).strength(0.03))
+            .force('collision', d3.forceCollide().radius(80))
+            .force('x', d3.forceX(width / 2).strength(0.02))
+            .force('y', d3.forceY(height / 2).strength(0.02));
 
         simulation.on('tick', tick);
     }
