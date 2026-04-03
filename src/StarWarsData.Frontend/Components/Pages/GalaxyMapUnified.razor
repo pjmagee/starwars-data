@@ -149,8 +149,9 @@
                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                         @if (_currentLevel != "overview")
                         {
-                            <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
-                                           Color="Color.Primary" OnClick="GoBack" />
+                            <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Medium"
+                                           Color="Color.Primary" OnClick="GoBack"
+                                           Style="margin-right:4px;" />
                         }
                         <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
                                         Style="padding:0;color:rgba(255,255,255,0.7);" />
@@ -672,7 +673,7 @@
     string _currentLabel = "";
     string _cellLabel = "";
     string _regionLabel = "";
-    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("Galaxy", null, disabled: false)];
+    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: false, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies;
     readonly HashSet<string> _hiddenRegions = new();
     string? _hoveredRegionName;
@@ -919,7 +920,7 @@
 
     void UpdateBreadcrumbs()
     {
-        _breadcrumbs = [new("Galaxy", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Public)];
+        _breadcrumbs = [new("", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Explore)];
         if (!string.IsNullOrEmpty(_regionLabel))
             _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel != "system", icon: Icons.Material.Filled.Map));
         if (!string.IsNullOrEmpty(_cellLabel))
