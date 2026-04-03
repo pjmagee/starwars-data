@@ -47,8 +47,21 @@
     {
         <MudGrid Spacing="2">
             <MudItem xs="12" md="@(_selectedNodePage is not null || _loadingNodeDetails ? 9 : 12)">
-                <div id="@_containerId"
-                     style="width:100%; height:650px; background:#16162e; border-radius:8px; overflow:hidden;">
+                <div style="@($"position:relative; overflow:hidden; border-radius:8px; {(_fullscreen ? "position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; border-radius:0;" : "")}")">
+                    <div style="position:absolute; top:8px; right:8px; z-index:10; display:flex; gap:4px;">
+                        <MudIconButton Icon="@Icons.Material.Filled.ZoomIn" Size="Size.Small"
+                                       OnClick="ZoomIn" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@Icons.Material.Filled.ZoomOut" Size="Size.Small"
+                                       OnClick="ZoomOut" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@Icons.Material.Filled.FitScreen" Size="Size.Small"
+                                       OnClick="FitToScreen" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                        <MudIconButton Icon="@(_fullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                                       Size="Size.Small" OnClick="ToggleFullscreen"
+                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
+                    </div>
+                    <div id="@_containerId"
+                         style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : "height:650px;")}")">
+                    </div>
                 </div>
             </MudItem>
 
@@ -140,6 +153,7 @@
     private bool _loading = true;
     private bool _hasData;
     private string? _error;
+    private bool _fullscreen;
     private int _loadGeneration;
     private IJSObjectReference? _jsModule;
     private DotNetObjectReference<AskGraphView>? _dotnetRef;
@@ -281,6 +295,26 @@
             _loadingNodeDetails = false;
             StateHasChanged();
         }
+    }
+
+    private void ToggleFullscreen() => _fullscreen = !_fullscreen;
+
+    private async Task ZoomIn()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("zoomIn");
+    }
+
+    private async Task ZoomOut()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("zoomOut");
+    }
+
+    private async Task FitToScreen()
+    {
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("fitToScreen");
     }
 
     private void CloseNodePanel()

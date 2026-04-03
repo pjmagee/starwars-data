@@ -26,7 +26,7 @@
         @if (_conversation.Count == 0 && !_loading)
         {
             @* ── Empty state: mode cards + examples ── *@
-            <MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-8">
                 <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Color="Color.Secondary">
                     What would you like to explore?
                 </MudText>
@@ -64,7 +64,7 @@
         else
         {
             @* ── Conversation messages ── *@
-            <MudContainer MaxWidth="MaxWidth.Large" Class="py-4">
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-4">
                 @foreach (var msg in _conversation)
                 {
                     @if (msg.Role == ConversationRole.User)
@@ -213,7 +213,7 @@
 
     @* ── Sticky input area at bottom ── *@
     <div class="ask-chat-input">
-        <MudContainer MaxWidth="MaxWidth.Large" Class="py-2">
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-2">
 
             @* Compact mode chips *@
             <div class="d-flex flex-wrap gap-1 mb-2 justify-center">

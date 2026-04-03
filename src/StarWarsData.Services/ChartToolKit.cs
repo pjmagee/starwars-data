@@ -122,13 +122,14 @@ public class ComponentToolkit
 
     [Description(
         "Render a relationship graph powered by the knowledge graph (kg.edges). "
-            + "The frontend fetches connected entities from the KG and renders a D3 visualization. "
-            + "Call get_relationship_types(entityId) first to discover available edge labels for the entity. "
-            + "Pass the relevant labels to focus the graph (e.g. child_of, parent_of for family trees; "
-            + "head_of_state, has_military_branch for political hierarchies; affiliated_with for alliances). "
-            + "Two layout modes: 'tree' renders a hierarchical top-down layout where depth is inferred from "
-            + "the graph structure (root at top, direct connections below, etc.) — works for ANY entity type "
-            + "(Characters, Governments, Organizations). 'force' (default) renders a physics-based network."
+            + "Call get_relationship_types(entityId) first to discover available edge labels. "
+            + "IMPORTANT: Only pass RELEVANT labels — do NOT include every label from get_relationship_types. "
+            + "For family trees: child_of, parent_of, partner_of, sibling_of. "
+            + "For political hierarchies: head_of_state, has_military_branch, has_executive_branch, has_legislative_branch, has_judicial_branch, commander_in_chief. "
+            + "For alliances: affiliated_with, member_of. "
+            + "Omit ancillary labels (has_capital, uses_currency, has_anthem, etc.) unless specifically asked. "
+            + "Two layout modes: 'tree' = hierarchical top-down (works for ANY entity type — Characters, Governments, Organizations). "
+            + "'force' (default) = physics-based network for general exploration."
     )]
     public GraphDescriptor RenderGraph(
         [Description("The entity's PageId from the knowledge graph (from search_entities)")]
@@ -137,22 +138,24 @@ public class ComponentToolkit
         [Description("Descriptive title for the graph")] string title,
         [Description(
             "KG edge labels to traverse. Call get_relationship_types(entityId) to discover available labels. "
+                + "ONLY pass labels relevant to the question — not all available labels. "
                 + "Examples: ['child_of', 'parent_of', 'partner_of'] for family trees, "
-                + "['head_of_state', 'has_military_branch', 'has_executive_branch'] for org hierarchies, "
-                + "['affiliated_with', 'member_of'] for alliance networks."
+                + "['head_of_state', 'has_military_branch', 'has_executive_branch'] for hierarchies."
         )]
             List<string> labels,
         [Description(
-            "How many hops to traverse from the root (default 2). Use 1 for direct relationships, 2-3 for deeper exploration."
+            "How many hops to traverse from the root. Use 2 for direct + one-hop (default), "
+                + "3 for deeper hierarchies and family trees, 1 for simple direct relationships only."
         )]
             int maxDepth = 2,
         [Description(
-            "Labels to show by default. Subset of labels. If omitted, all labels are enabled."
+            "Labels to enable by default in the UI. Subset of labels. Use this to pre-filter "
+                + "to the most important labels when passing many. If omitted, all labels are enabled."
         )]
             List<string>? enabledLabels = null,
         [Description(
-            "Layout mode: 'force' for physics-based network graph, 'tree' for hierarchical layout. "
-                + "Use 'tree' for family trees, lineages, and organizational hierarchies."
+            "Layout mode: 'tree' for hierarchical top-down layout (family trees, org charts, political hierarchies). "
+                + "'force' (default) for physics-based network. Use 'tree' whenever the question implies a hierarchy."
         )]
             string layoutMode = "force",
         [Description("Optional continuity filter: Canon, Legends, or omit for all")]

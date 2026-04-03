@@ -184,27 +184,24 @@ export function renderForceGraph(containerId, data, dotnetRef) {
             .attr('stroke-opacity', 0.6)
             .attr('marker-end', 'url(#arrowhead)');
 
-        // Edge labels at midpoint of the elbow
+        // Edge labels — position above each target node
         linkGroup.selectAll('text.tree-label')
             .data(linksData, d => `${d.source.id ?? d.source}-${d.target.id ?? d.target}-${d.label}`)
             .enter()
             .append('text')
             .attr('class', 'tree-label')
             .attr('x', d => {
-                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
                 const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
-                return src && tgt ? (src.x + tgt.x) / 2 : 0;
+                return tgt ? tgt.x : 0;
             })
             .attr('y', d => {
-                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
                 const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
-                return src && tgt ? (src.y + tgt.y) / 2 : 0;
+                return tgt ? tgt.y - 42 : 0;
             })
             .text(d => formatLabel(d.label))
-            .attr('font-size', '10px')
+            .attr('font-size', '9px')
             .attr('fill', '#8a8ab0')
             .attr('text-anchor', 'middle')
-            .attr('dy', -4)
             .style('pointer-events', 'none');
     }
 }

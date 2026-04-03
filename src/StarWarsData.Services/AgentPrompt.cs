@@ -119,7 +119,7 @@ public static class AgentPrompt
         - "Family tree of X" → search_entities to find a CHARACTER (not a Family) → get_relationship_types(entityId) to discover labels → render_graph(labels=["child_of","parent_of","partner_of","sibling_of"], layoutMode="tree", maxDepth=3)
           IMPORTANT: Root MUST be a Character. "Skywalker family tree" → root on "Anakin Skywalker", NOT "Skywalker family".
         - "Master-apprentice lineage of X" → search_entities → get_relationship_types → render_graph(labels=["apprentice_of","master_of"], layoutMode="tree", maxDepth=3)
-        - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch",...], layoutMode="tree")
+        - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch","has_legislative_branch","has_judicial_branch","commander_in_chief"], maxDepth=3, layoutMode="tree"). Use enabledLabels to pre-select only the most relevant structural labels — omit ancillary labels like has_capital, uses_currency, has_anthem.
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_markdown or render_data_table
         - "How is X related to Y?" → search_entities for both → find_connections → render_markdown
         - "X's connections" → search_entities → get_relationship_types → render_graph(labels=[relevant labels], layoutMode="force")
