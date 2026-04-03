@@ -83,7 +83,7 @@ public class MapService
             "inner rim" => "Inner Rim",
             "the slice" => "The Slice",
             "the interior" => "The Interior",
-            _ => region
+            _ => region,
         };
     }
 
@@ -716,12 +716,16 @@ public class MapService
     {
         col = 0;
         row = 0;
-        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        if (string.IsNullOrWhiteSpace(gridSquare))
+            return false;
         var parts = gridSquare.Split('-', 2);
-        if (parts.Length != 2) return false;
+        if (parts.Length != 2)
+            return false;
         var letter = parts[0].Trim().ToUpperInvariant();
-        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
-        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z')
+            return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20)
+            return false;
         col = letter[0] - 'A';
         row = num - 1;
         return true;
@@ -731,7 +735,9 @@ public class MapService
     /// Lightweight overview: regions, trade routes, nebulas. No systems.
     /// Called once on page load (~300 elements).
     /// </summary>
-    public async Task<GalaxyMapV2Overview> GetGalaxyMapV2OverviewAsync(Continuity? continuity = null)
+    public async Task<GalaxyMapV2Overview> GetGalaxyMapV2OverviewAsync(
+        Continuity? continuity = null
+    )
     {
         var result = new GalaxyMapV2Overview();
 
@@ -740,16 +746,25 @@ public class MapService
         var sysFilter = InfoboxDataFilter("System", "Grid square");
         if (continuity.HasValue)
             sysFilter = Builders<Page>.Filter.And(
-                sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var sysRecs = await _pages.Find(sysFilter)
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.Title)
-                .Include(p => p.PageId)
-                .Include("infobox.Data"))
+                sysFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+        var sysRecs = await _pages
+            .Find(sysFilter)
+            .Project<Page>(
+                Builders<Page>
+                    .Projection.Include(p => p.Title)
+                    .Include(p => p.PageId)
+                    .Include("infobox.Data")
+            )
             .ToListAsync();
 
-        var nameToGrid = new Dictionary<string, (int col, int row)>(StringComparer.OrdinalIgnoreCase);
-        var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(StringComparer.OrdinalIgnoreCase);
+        var nameToGrid = new Dictionary<string, (int col, int row)>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(
+            StringComparer.OrdinalIgnoreCase
+        );
         // Track per-cell system count and dominant region
         var cellCounts = new Dictionary<(int col, int row), int>();
         var cellRegion = new Dictionary<(int col, int row), Dictionary<string, int>>();
@@ -757,7 +772,8 @@ public class MapService
         foreach (var rec in sysRecs)
         {
             var gridSquare = GetFirstDataValue(rec, "Grid square");
-            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
+            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+                continue;
             nameToGrid.TryAdd(rec.Title, (col, row));
 
             var key = (col, row);
@@ -787,17 +803,19 @@ public class MapService
         var cbFilter = InfoboxDataFilter("CelestialBody", "Grid square");
         if (continuity.HasValue)
             cbFilter = Builders<Page>.Filter.And(
-                cbFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var cbRecs = await _pages.Find(cbFilter)
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.Title)
-                .Include("infobox.Data"))
+                cbFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
+        var cbRecs = await _pages
+            .Find(cbFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
             .ToListAsync();
 
         foreach (var rec in cbRecs)
         {
             var gridSquare = GetFirstDataValue(rec, "Grid square");
-            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
+            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+                continue;
             nameToGrid.TryAdd(rec.Title, (col, row));
 
             var regionRaw = GetFirstDataValue(rec, "Region");
@@ -816,11 +834,13 @@ public class MapService
         // Build regions
         foreach (var (name, cells) in regionCells)
         {
-            result.Regions.Add(new MapV2Region
-            {
-                Name = name,
-                Cells = cells.Select(c => new[] { c.col, c.row }).ToList()
-            });
+            result.Regions.Add(
+                new MapV2Region
+                {
+                    Name = name,
+                    Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
+                }
+            );
         }
 
         // Build cell summaries
@@ -829,19 +849,24 @@ public class MapService
             string? dominantRegion = null;
             if (cellRegion.TryGetValue(key, out var regionCount))
                 dominantRegion = regionCount.MaxBy(kv => kv.Value).Key;
-            result.Cells.Add(new MapV2CellSummary
-            {
-                Col = key.col, Row = key.row,
-                SystemCount = count,
-                Region = dominantRegion
-            });
+            result.Cells.Add(
+                new MapV2CellSummary
+                {
+                    Col = key.col,
+                    Row = key.row,
+                    SystemCount = count,
+                    Region = dominantRegion,
+                }
+            );
         }
 
         // Nebulas — parse multi-grid values like "S-5 and S-6", "T-9/T-10", "E-9, F-9"
         var nebFilter = InfoboxDataFilter("Nebula", "Grid square");
         if (continuity.HasValue)
             nebFilter = Builders<Page>.Filter.And(
-                nebFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+                nebFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
         var nebRecs = await _pages.Find(nebFilter).ToListAsync();
         foreach (var rec in nebRecs)
         {
@@ -857,21 +882,30 @@ public class MapService
                         cells.Add((c, r));
                 }
             }
-            if (cells.Count == 0) continue;
-            result.Nebulas.Add(new MapV2Nebula
-            {
-                Id = rec.PageId, Name = rec.Title,
-                Col = cells[0].col, Row = cells[0].row,
-                Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
-                Region = GetFirstDataValue(rec, "Region") is { } rn ? NormalizeRegionName(rn) : null
-            });
+            if (cells.Count == 0)
+                continue;
+            result.Nebulas.Add(
+                new MapV2Nebula
+                {
+                    Id = rec.PageId,
+                    Name = rec.Title,
+                    Col = cells[0].col,
+                    Row = cells[0].row,
+                    Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
+                    Region = GetFirstDataValue(rec, "Region") is { } rn
+                        ? NormalizeRegionName(rn)
+                        : null,
+                }
+            );
         }
 
         // Trade routes — resolve waypoints via the name→grid lookup
         var trFilter = TemplateFilter("TradeRoute");
         if (continuity.HasValue)
             trFilter = Builders<Page>.Filter.And(
-                trFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+                trFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
         var trRecs = await _pages.Find(trFilter).ToListAsync();
         foreach (var rec in trRecs)
         {
@@ -892,18 +926,39 @@ public class MapService
             {
                 if (nameToGrid.TryGetValue(name, out var grid))
                 {
-                    if (resolved.Count > 0 && resolved[^1].Col == grid.col && resolved[^1].Row == grid.row)
+                    if (
+                        resolved.Count > 0
+                        && resolved[^1].Col == grid.col
+                        && resolved[^1].Row == grid.row
+                    )
                         continue;
-                    resolved.Add(new MapV2Waypoint { Name = name, Col = grid.col, Row = grid.row });
+                    resolved.Add(
+                        new MapV2Waypoint
+                        {
+                            Name = name,
+                            Col = grid.col,
+                            Row = grid.row,
+                        }
+                    );
                 }
             }
             if (resolved.Count >= 2)
-                result.TradeRoutes.Add(new MapV2TradeRoute { Id = rec.PageId, Name = rec.Title, Waypoints = resolved });
+                result.TradeRoutes.Add(
+                    new MapV2TradeRoute
+                    {
+                        Id = rec.PageId,
+                        Name = rec.Title,
+                        Waypoints = resolved,
+                    }
+                );
         }
 
         _logger.LogInformation(
             "GalaxyMap V2 overview: {Regions} regions, {Routes} trade routes, {Nebulas} nebulas",
-            result.Regions.Count, result.TradeRoutes.Count, result.Nebulas.Count);
+            result.Regions.Count,
+            result.TradeRoutes.Count,
+            result.Nebulas.Count
+        );
 
         return result;
     }
@@ -912,19 +967,33 @@ public class MapService
     /// Returns systems (with planets) within a grid range. Called on-demand as user zooms in.
     /// </summary>
     public async Task<GalaxyMapV2Systems> GetSystemsInRangeAsync(
-        int minCol, int maxCol, int minRow, int maxRow, Continuity? continuity = null)
+        int minCol,
+        int maxCol,
+        int minRow,
+        int maxRow,
+        Continuity? continuity = null
+    )
     {
         var sysFilter = InfoboxDataFilter("System", "Grid square");
         if (continuity.HasValue)
             sysFilter = Builders<Page>.Filter.And(
-                sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
+                sysFilter,
+                Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value)
+            );
         var sysRecs = await _pages.Find(sysFilter).ToListAsync();
 
         // Build a name→(id, class) lookup for all celestial bodies to resolve planet IDs
-        var cbLookup = new Dictionary<string, (int id, string? cls)>(StringComparer.OrdinalIgnoreCase);
-        var cbRecs = await _pages.Find(TemplateFilter("CelestialBody"))
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.PageId).Include(p => p.Title).Include("infobox.Data"))
+        var cbLookup = new Dictionary<string, (int id, string? cls)>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        var cbRecs = await _pages
+            .Find(TemplateFilter("CelestialBody"))
+            .Project<Page>(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include(p => p.Title)
+                    .Include("infobox.Data")
+            )
             .ToListAsync();
         foreach (var cb in cbRecs)
         {
@@ -936,8 +1005,10 @@ public class MapService
         foreach (var rec in sysRecs)
         {
             var gridSquare = GetFirstDataValue(rec, "Grid square");
-            if (!TryParseGridSquare(gridSquare, out var col, out var row)) continue;
-            if (col < minCol || col > maxCol || row < minRow || row > maxRow) continue;
+            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+                continue;
+            if (col < minCol || col > maxCol || row < minRow || row > maxRow)
+                continue;
 
             // Collect all orbital body names from all relevant properties
             var bodyNames = new List<string>();
@@ -948,33 +1019,51 @@ public class MapService
             bodyNames.AddRange(GetDataValues(rec, "Other objects"));
             var distinctNames = bodyNames.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 
-            var celestialBodies = distinctNames.Select(n =>
-            {
-                cbLookup.TryGetValue(n, out var info);
-                return new MapV2CelestialBody { Id = info.id, Name = n, Class = info.cls };
-            }).ToList();
+            var celestialBodies = distinctNames
+                .Select(n =>
+                {
+                    cbLookup.TryGetValue(n, out var info);
+                    return new MapV2CelestialBody
+                    {
+                        Id = info.id,
+                        Name = n,
+                        Class = info.cls,
+                    };
+                })
+                .ToList();
 
-            systems.Add(new MapV2System
-            {
-                Id = rec.PageId,
-                Name = rec.Title,
-                Col = col,
-                Row = row,
-                Region = GetFirstDataValue(rec, "Region") is { } rn ? NormalizeRegionName(rn) : null,
-                Sector = GetFirstDataValue(rec, "Sector"),
-                CelestialBodies = celestialBodies
-            });
+            systems.Add(
+                new MapV2System
+                {
+                    Id = rec.PageId,
+                    Name = rec.Title,
+                    Col = col,
+                    Row = row,
+                    Region = GetFirstDataValue(rec, "Region") is { } rn
+                        ? NormalizeRegionName(rn)
+                        : null,
+                    Sector = GetFirstDataValue(rec, "Sector"),
+                    CelestialBodies = celestialBodies,
+                }
+            );
         }
 
         _logger.LogInformation(
             "GalaxyMap V2 systems [{MinCol},{MinRow}]-[{MaxCol},{MaxRow}]: {Count} systems",
-            minCol, minRow, maxCol, maxRow, systems.Count);
+            minCol,
+            minRow,
+            maxCol,
+            maxRow,
+            systems.Count
+        );
 
         return new GalaxyMapV2Systems
         {
-            MinCol = minCol, MaxCol = maxCol,
-            MinRow = minRow, MaxRow = maxRow,
-            Systems = systems
+            MinCol = minCol,
+            MaxCol = maxCol,
+            MinRow = minRow,
+            MaxRow = maxRow,
+            Systems = systems,
         };
     }
 }

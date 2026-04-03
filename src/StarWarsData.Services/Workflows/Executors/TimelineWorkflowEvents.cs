@@ -24,7 +24,12 @@ internal sealed record PageDiscoveredData(
 /// </summary>
 internal sealed class DiscoveryCompleteEvent(DiscoveryCompleteData data) : WorkflowEvent(data);
 
-internal sealed record DiscoveryCompleteData(int TotalPages, int IncomingLinks, int OutgoingLinks);
+internal sealed record DiscoveryCompleteData(
+    int TotalPages,
+    int IncomingLinks,
+    int OutgoingLinks,
+    int KgLinks
+);
 
 /// <summary>
 /// Emitted by EventExtractionExecutor when starting extraction from a page.

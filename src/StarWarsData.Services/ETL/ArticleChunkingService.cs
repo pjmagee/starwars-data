@@ -78,6 +78,7 @@ public partial class ArticleChunkingService
                 {
                     { "_id", 1 },
                     { "title", 1 },
+                    { "wikiUrl", 1 },
                     { "content", 1 },
                     { "continuity", 1 },
                     { "infobox.Template", 1 },
@@ -101,6 +102,10 @@ public partial class ArticleChunkingService
 
             var pageId = doc["_id"].AsInt32;
             var title = doc.Contains("title") ? doc["title"].AsString : $"Page {pageId}";
+            var wikiUrl =
+                doc.Contains("wikiUrl") && !doc["wikiUrl"].IsBsonNull
+                    ? doc["wikiUrl"].AsString
+                    : "";
 
             try
             {
@@ -235,7 +240,9 @@ public partial class ArticleChunkingService
                         {
                             PageId = pageId,
                             Title = title,
+                            WikiUrl = wikiUrl,
                             Heading = chunks[i].heading,
+                            Section = chunks[i].heading.Replace(' ', '_'),
                             ChunkIndex = i,
                             Text = chunks[i].text,
                             Type = template,
@@ -265,7 +272,9 @@ public partial class ArticleChunkingService
                 _logger.LogWarning(
                     ex,
                     "API quota/rate limit hit on page {PageId} ({ConsecutiveErrors} consecutive). Stopping run to avoid wasting requests.",
-                    pageId, consecutiveApiErrors);
+                    pageId,
+                    consecutiveApiErrors
+                );
                 break;
             }
             catch (Exception ex)
@@ -278,7 +287,9 @@ public partial class ArticleChunkingService
                     if (consecutiveApiErrors >= 5)
                     {
                         _logger.LogWarning(
-                            "Stopping chunking run after {Count} consecutive API errors", consecutiveApiErrors);
+                            "Stopping chunking run after {Count} consecutive API errors",
+                            consecutiveApiErrors
+                        );
                         break;
                     }
                 }

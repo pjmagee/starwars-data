@@ -154,7 +154,6 @@ public class CharacterTimelineService
     private readonly ILogger<CharacterTimelineService> _logger;
     private readonly IChatClient _chatClient;
 
-
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -387,10 +386,7 @@ public class CharacterTimelineService
             .Build(validateOrphans: true);
 
         // ── Execute workflow (always fresh — checkpoint resume was unreliable) ─
-        var checkpointStore = new MongoCheckpointStore(
-            _mongoClient,
-            _settings.DatabaseName
-        );
+        var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.DatabaseName);
         var sessionId = $"character-timeline-v2-{characterPageId}";
 
         // Clear any stale checkpoints from previous runs
@@ -524,10 +520,7 @@ public class CharacterTimelineService
             ct
         );
 
-        var checkpointStore = new MongoCheckpointStore(
-            _mongoClient,
-            _settings.DatabaseName
-        );
+        var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.DatabaseName);
         await checkpointStore.ClearSessionAsync($"character-timeline-v2-{characterPageId}");
         await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}"); // clear legacy v1
 
@@ -653,7 +646,7 @@ public class CharacterTimelineService
                 Category = "Discovery",
                 EntryType = "discovery_complete",
                 Summary =
-                    $"Discovery complete: {d.TotalPages} pages ({d.IncomingLinks} incoming, {d.OutgoingLinks} outgoing)",
+                    $"Discovery complete: {d.TotalPages} pages ({d.IncomingLinks} incoming, {d.OutgoingLinks} outgoing, {d.KgLinks} knowledge graph)",
                 Detail = d,
             },
             ExtractionPageStartedEvent e when e.Data is ExtractionPageStartedData d =>
@@ -771,10 +764,7 @@ public class CharacterTimelineService
         CancellationToken ct = default
     )
     {
-        var checkpointStore = new MongoCheckpointStore(
-            _mongoClient,
-            _settings.DatabaseName
-        );
+        var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.DatabaseName);
         var sessionId = $"character-timeline-v2-{characterPageId}";
         var checkpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
         return checkpoints.Count > 0;

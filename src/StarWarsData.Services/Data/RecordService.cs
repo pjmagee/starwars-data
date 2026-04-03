@@ -38,7 +38,9 @@ public class RecordService
     }
 
     IMongoCollection<Page> PagesCollection =>
-        _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
+        _mongoClient
+            .GetDatabase(_settingsOptions.DatabaseName)
+            .GetCollection<Page>(Collections.Pages);
 
     /// <summary>
     /// Returns distinct sanitized template names from Pages that have infoboxes.
@@ -157,9 +159,7 @@ public class RecordService
     public async Task DeleteTimelineCollections(CancellationToken cancellationToken)
     {
         var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
-        var collections = await db.ListCollectionNamesAsync(
-            cancellationToken: cancellationToken
-        );
+        var collections = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         var collectionList = (await collections.ToListAsync(cancellationToken))
             .Where(n => n.StartsWith(Collections.TimelinePrefix))
             .ToList();
@@ -608,7 +608,9 @@ public class RecordService
 
         // Character timelines collection indexes
         {
-            var timelines = timelineDb.GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines);
+            var timelines = timelineDb.GetCollection<CharacterTimeline>(
+                Collections.GenaiCharacterTimelines
+            );
 
             await timelines.Indexes.CreateOneAsync(
                 new CreateIndexModel<CharacterTimeline>(
@@ -696,7 +698,9 @@ public class RecordService
 
     public async Task DeleteOpenAiEmbeddingsAsync(CancellationToken token)
     {
-        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
+        var collection = _mongoClient
+            .GetDatabase(_settingsOptions.DatabaseName)
+            .GetCollection<Page>(Collections.Pages);
         var update = Builders<Page>.Update.Unset(new StringFieldDefinition<Page>("embedding"));
         await collection.UpdateManyAsync(
             FilterDefinition<Page>.Empty,
@@ -711,9 +715,7 @@ public class RecordService
     )
     {
         var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
-        var names = await db.ListCollectionNamesAsync(
-            cancellationToken: cancellationToken
-        );
+        var names = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         List<string> results = (await names.ToListAsync(cancellationToken))
             .Where(n => n.StartsWith(Collections.TimelinePrefix))
             .Select(n => n[Collections.TimelinePrefix.Length..])

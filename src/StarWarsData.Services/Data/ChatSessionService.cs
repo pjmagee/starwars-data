@@ -118,7 +118,10 @@ public class ChatSessionService
         return result.DeletedCount > 0;
     }
 
-    public async Task<List<ChatSession>> GetAllSessionsAsync(string userId, CancellationToken ct = default)
+    public async Task<List<ChatSession>> GetAllSessionsAsync(
+        string userId,
+        CancellationToken ct = default
+    )
     {
         return await _sessions
             .Find(s => s.UserId == userId)

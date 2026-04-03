@@ -37,11 +37,12 @@ public class JobToggleService
     {
         await _toggles.UpdateOneAsync(
             t => t.JobId == jobId,
-            Builders<JobToggle>.Update
-                .Set(t => t.Enabled, enabled)
+            Builders<JobToggle>
+                .Update.Set(t => t.Enabled, enabled)
                 .Set(t => t.UpdatedAt, DateTime.UtcNow),
             new UpdateOptions { IsUpsert = true },
-            ct);
+            ct
+        );
     }
 
     /// <summary>Upsert a job toggle with full details.</summary>
@@ -52,6 +53,7 @@ public class JobToggleService
             t => t.JobId == toggle.JobId,
             toggle,
             new ReplaceOptions { IsUpsert = true },
-            ct);
+            ct
+        );
     }
 }

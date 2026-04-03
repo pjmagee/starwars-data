@@ -40,8 +40,6 @@ public sealed class ByokChatClient : IChatClient
         _logger = logger;
     }
 
-
-
     public async Task<ChatResponse> GetResponseAsync(
         IEnumerable<ChatMessage> chatMessages,
         ChatOptions? options = null,
@@ -59,18 +57,22 @@ public sealed class ByokChatClient : IChatClient
     )
     {
         var client = await ResolveClientAsync(cancellationToken);
-        await foreach (var update in client.GetStreamingResponseAsync(chatMessages, options, cancellationToken))
+        await foreach (
+            var update in client.GetStreamingResponseAsync(chatMessages, options, cancellationToken)
+        )
             yield return update;
     }
 
-    public object? GetService(Type serviceType, object? serviceKey = null)
-        => _serverClient.GetService(serviceType, serviceKey);
+    public object? GetService(Type serviceType, object? serviceKey = null) =>
+        _serverClient.GetService(serviceType, serviceKey);
 
     public void Dispose() { }
 
     async Task<IChatClient> ResolveClientAsync(CancellationToken ct)
     {
-        var userId = _httpContextAccessor.HttpContext?.Request.Headers["X-User-Id"].FirstOrDefault();
+        var userId = _httpContextAccessor
+            .HttpContext?.Request.Headers["X-User-Id"]
+            .FirstOrDefault();
         if (string.IsNullOrEmpty(userId))
             return _serverClient;
 

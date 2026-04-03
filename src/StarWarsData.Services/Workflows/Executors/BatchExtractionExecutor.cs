@@ -347,6 +347,12 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             sb.AppendLine($"Template: {page.Template ?? "unknown"}");
             sb.AppendLine($"URL: {page.WikiUrl}");
             sb.AppendLine();
+            if (!string.IsNullOrWhiteSpace(page.KgContext))
+            {
+                sb.AppendLine("Knowledge Graph Relationships:");
+                sb.AppendLine(page.KgContext);
+                sb.AppendLine();
+            }
             if (!string.IsNullOrWhiteSpace(page.InfoboxText))
             {
                 sb.AppendLine("Infobox Data:");

@@ -317,7 +317,8 @@ public class RelationshipGraphBuilderService
             doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
                 ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
                 : "Unknown";
-        var pageContinuity = doc.Contains("continuity")
+        var pageContinuity =
+            doc.Contains("continuity")
             && Enum.TryParse<Continuity>(doc["continuity"].AsString, true, out var pc)
                 ? pc
                 : Continuity.Unknown;
@@ -425,7 +426,13 @@ public class RelationshipGraphBuilderService
                     storeResult
                 );
 
-                await _toolkit.MarkProcessed(pageId, edgeDtos.Count, title, template, pageContinuity.ToString());
+                await _toolkit.MarkProcessed(
+                    pageId,
+                    edgeDtos.Count,
+                    title,
+                    template,
+                    pageContinuity.ToString()
+                );
             }
             else
             {
@@ -554,11 +561,14 @@ public class RelationshipGraphBuilderService
     static int GetTemplatePriority(BsonDocument doc)
     {
         var categories = _priorityCategories;
-        if (categories.Length == 0) return 0;
+        if (categories.Length == 0)
+            return 0;
 
         var template = doc.GetValue("infobox", BsonNull.Value)
-            .AsBsonDocument?.GetValue("Template", BsonNull.Value).AsString;
-        if (template is null) return 0;
+            .AsBsonDocument?.GetValue("Template", BsonNull.Value)
+            .AsString;
+        if (template is null)
+            return 0;
 
         // Template URLs look like "https://starwars.fandom.com/wiki/Template:Government"
         // Extract the type name after "Template:"
@@ -861,10 +871,7 @@ public class RelationshipGraphBuilderService
             // so those pages become eligible for future batches.
             await _crawlState.DeleteManyAsync(
                 Builders<RelationshipCrawlState>.Filter.And(
-                    Builders<RelationshipCrawlState>.Filter.In(
-                        s => s.PageId,
-                        batchJob.PageIds
-                    ),
+                    Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, batchJob.PageIds),
                     Builders<RelationshipCrawlState>.Filter.Eq(
                         s => s.Status,
                         CrawlStatus.Processing
@@ -958,7 +965,8 @@ public class RelationshipGraphBuilderService
                             status
                         );
                         job.Status = GraphBatchStatus.Completed;
-                        job.Error = $"Batch ended with status: {status} (partial results recovered)";
+                        job.Error =
+                            $"Batch ended with status: {status} (partial results recovered)";
                         await _batchJobs.ReplaceOneAsync(
                             Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
                             job,
@@ -1152,7 +1160,14 @@ public class RelationshipGraphBuilderService
                     // Get page metadata for crawl state
                     var pageDoc = await _pages
                         .Find(new BsonDocument("_id", pageId))
-                        .Project(new BsonDocument { { "title", 1 }, { "infobox.Template", 1 }, { "continuity", 1 } })
+                        .Project(
+                            new BsonDocument
+                            {
+                                { "title", 1 },
+                                { "infobox.Template", 1 },
+                                { "continuity", 1 },
+                            }
+                        )
                         .FirstOrDefaultAsync(ct);
 
                     var title =
@@ -1166,8 +1181,13 @@ public class RelationshipGraphBuilderService
                                 pageDoc["infobox"]["Template"].AsString
                             )
                             : "Unknown";
-                    var batchContinuity = pageDoc?.Contains("continuity") == true
-                        && Enum.TryParse<Continuity>(pageDoc["continuity"].AsString, true, out var bpc)
+                    var batchContinuity =
+                        pageDoc?.Contains("continuity") == true
+                        && Enum.TryParse<Continuity>(
+                            pageDoc["continuity"].AsString,
+                            true,
+                            out var bpc
+                        )
                             ? bpc
                             : Continuity.Unknown;
 
@@ -1197,7 +1217,8 @@ public class RelationshipGraphBuilderService
                     }
 
                     // Extract the response text
-                    var text = outputLine.Response?.Body?.Choices?.FirstOrDefault()
+                    var text = outputLine
+                        .Response?.Body?.Choices?.FirstOrDefault()
                         ?.Message?.Content?.Trim();
 
                     if (string.IsNullOrWhiteSpace(text))
@@ -1251,7 +1272,13 @@ public class RelationshipGraphBuilderService
                             .ToList();
 
                         await _toolkit.StoreEdges(pageId, edgeDtos);
-                        await _toolkit.MarkProcessed(pageId, edgeDtos.Count, title, template, batchContinuity.ToString());
+                        await _toolkit.MarkProcessed(
+                            pageId,
+                            edgeDtos.Count,
+                            title,
+                            template,
+                            batchContinuity.ToString()
+                        );
                         edgesStored += edgeDtos.Count;
                         completed++;
                     }
@@ -1500,18 +1527,28 @@ public class RelationshipGraphBuilderService
         // True total pages per infobox type (from Pages collection, not crawl_state)
         var typeTotalPipeline = new[]
         {
-            new BsonDocument("$match", new BsonDocument("infobox.Template", new BsonDocument("$ne", BsonNull.Value))),
-            new BsonDocument("$project", new BsonDocument("type",
-                new BsonDocument("$arrayElemAt", new BsonArray
-                {
-                    new BsonDocument("$split", new BsonArray { "$infobox.Template", ":" }),
-                    -1
-                }))),
-            new BsonDocument("$group", new BsonDocument
-            {
-                { "_id", "$type" },
-                { "count", new BsonDocument("$sum", 1) },
-            }),
+            new BsonDocument(
+                "$match",
+                new BsonDocument("infobox.Template", new BsonDocument("$ne", BsonNull.Value))
+            ),
+            new BsonDocument(
+                "$project",
+                new BsonDocument(
+                    "type",
+                    new BsonDocument(
+                        "$arrayElemAt",
+                        new BsonArray
+                        {
+                            new BsonDocument("$split", new BsonArray { "$infobox.Template", ":" }),
+                            -1,
+                        }
+                    )
+                )
+            ),
+            new BsonDocument(
+                "$group",
+                new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }
+            ),
         };
 
         var typeTotals = await _pages
@@ -1577,7 +1614,9 @@ public class RelationshipGraphBuilderService
         double pagesPerHour = 0;
         if (recentBatches.Count > 0)
         {
-            var totalPagesInBatches = recentBatches.Sum(b => b.CompletedRequests + b.SkippedRequests);
+            var totalPagesInBatches = recentBatches.Sum(b =>
+                b.CompletedRequests + b.SkippedRequests
+            );
             var oldestBatch = recentBatches.Min(b => b.CreatedAt);
             var hoursSpan = (DateTime.UtcNow - oldestBatch).TotalHours;
             if (hoursSpan > 0)
@@ -1672,34 +1711,35 @@ public class RelationshipGraphBuilderService
         // The $match stage already provides 1 hop (root → X).
         // $graphLookup maxDepth N adds N+1 more hops, so we need maxDepth - 2.
         // When maxDepth <= 1, skip $graphLookup entirely (direct edges only).
-        BsonDocument[] pipeline = maxDepth <= 1
-            ?
-            [
-                new BsonDocument(
-                    "$match",
-                    new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
-                ),
-            ]
-            :
-            [
-                new BsonDocument(
-                    "$match",
-                    new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
-                ),
-                new BsonDocument(
-                    "$graphLookup",
-                    new BsonDocument
-                    {
-                        { "from", Collections.KgEdges },
-                        { "startWith", "$toId" },
-                        { "connectFromField", "toId" },
-                        { "connectToField", "fromId" },
-                        { "as", "network" },
-                        { "maxDepth", maxDepth - 2 },
-                        { "restrictSearchWithMatch", restrictMatch },
-                    }
-                ),
-            ];
+        BsonDocument[] pipeline =
+            maxDepth <= 1
+                ?
+                [
+                    new BsonDocument(
+                        "$match",
+                        new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
+                    ),
+                ]
+                :
+                [
+                    new BsonDocument(
+                        "$match",
+                        new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
+                    ),
+                    new BsonDocument(
+                        "$graphLookup",
+                        new BsonDocument
+                        {
+                            { "from", Collections.KgEdges },
+                            { "startWith", "$toId" },
+                            { "connectFromField", "toId" },
+                            { "connectToField", "fromId" },
+                            { "as", "network" },
+                            { "maxDepth", maxDepth - 2 },
+                            { "restrictSearchWithMatch", restrictMatch },
+                        }
+                    ),
+                ];
 
         var results = await edgesCollection
             .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
@@ -1879,9 +1919,7 @@ public class RelationshipGraphBuilderService
                 .Project(new BsonDocument("_id", 1))
                 .ToListAsync(ct);
             var ids = matchingPageIds.Select(d => d["_id"].AsInt32).ToList();
-            filters.Add(
-                Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, ids)
-            );
+            filters.Add(Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, ids));
         }
 
         if (!string.IsNullOrWhiteSpace(search))

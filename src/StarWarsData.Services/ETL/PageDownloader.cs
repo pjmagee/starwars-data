@@ -937,7 +937,8 @@ public class PageDownloader
     {
         _logger.LogInformation(
             "Content changed for {Count} pages — invalidating downstream pipelines",
-            changedPageIds.Count);
+            changedPageIds.Count
+        );
 
         // Reset relationship graph crawl state → pages will be re-processed by the graph builder
         var graphDb = _mongoDatabase.Client.GetDatabase(_config.DatabaseName);
@@ -945,28 +946,35 @@ public class PageDownloader
 
         var deleteResult = await crawlState.DeleteManyAsync(
             Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, changedPageIds),
-            ct);
+            ct
+        );
 
         if (deleteResult.DeletedCount > 0)
         {
             _logger.LogInformation(
                 "Reset {Count} crawl_state entries for re-processing by graph builder",
-                deleteResult.DeletedCount);
+                deleteResult.DeletedCount
+            );
         }
 
         // Delete article chunks for changed pages → will be re-chunked
-        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>(Collections.SearchChunks);
+        var chunksCollection = graphDb.GetCollection<MongoDB.Bson.BsonDocument>(
+            Collections.SearchChunks
+        );
         var chunkDeleteResult = await chunksCollection.DeleteManyAsync(
-            new MongoDB.Bson.BsonDocument("pageId",
-                new MongoDB.Bson.BsonDocument("$in",
-                    new MongoDB.Bson.BsonArray(changedPageIds))),
-            ct);
+            new MongoDB.Bson.BsonDocument(
+                "pageId",
+                new MongoDB.Bson.BsonDocument("$in", new MongoDB.Bson.BsonArray(changedPageIds))
+            ),
+            ct
+        );
 
         if (chunkDeleteResult.DeletedCount > 0)
         {
             _logger.LogInformation(
                 "Deleted {Count} article chunks for re-processing",
-                chunkDeleteResult.DeletedCount);
+                chunkDeleteResult.DeletedCount
+            );
         }
     }
 }

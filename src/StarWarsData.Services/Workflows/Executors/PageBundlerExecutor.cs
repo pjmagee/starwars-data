@@ -18,11 +18,11 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
     private readonly int _characterPageId;
 
     /// <summary>
-    /// Target characters per batch. Each page contributes infobox + content snippet (~4000-5000 chars).
-    /// At ~30K chars per batch we get ~5-6 pages per call, which keeps each LLM call
-    /// responsive (~30-60s) while still being ~6x more efficient than per-page calls.
+    /// Target characters per batch. Each page contributes infobox + content snippet (~8000-10000 chars
+    /// when using article chunks, ~4000-5000 for raw content fallback). At ~40K chars per batch we get
+    /// ~4-5 pages per call, which keeps each LLM call responsive while maximising extraction quality.
     /// </summary>
-    private const int MaxBatchChars = 30_000;
+    private const int MaxBatchChars = 40_000;
 
     public PageBundlerExecutor(
         ILogger logger,

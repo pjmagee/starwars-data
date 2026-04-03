@@ -16,8 +16,13 @@ public class GalaxyEventsService
     /// </summary>
     static readonly string[] LocationLabels =
     [
-        "Place", "Location", "System", "Headquarters", "Capital",
-        "Grid square", "Celestial body"
+        "Place",
+        "Location",
+        "System",
+        "Headquarters",
+        "Capital",
+        "Grid square",
+        "Celestial body",
     ];
 
     /// <summary>
@@ -25,7 +30,8 @@ public class GalaxyEventsService
     /// </summary>
     static readonly HashSet<string> SkipCollections = new(StringComparer.OrdinalIgnoreCase)
     {
-        "system_profile", "system.profile"
+        "system_profile",
+        "system.profile",
     };
 
     readonly ILogger<GalaxyEventsService> _logger;
@@ -35,7 +41,8 @@ public class GalaxyEventsService
     public GalaxyEventsService(
         ILogger<GalaxyEventsService> logger,
         IOptions<SettingsOptions> settingsOptions,
-        IMongoClient mongoClient)
+        IMongoClient mongoClient
+    )
     {
         _logger = logger;
         var db = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName);
@@ -48,23 +55,31 @@ public class GalaxyEventsService
     /// Continuity is stored as int in the timeline events DB.
     /// </summary>
     static FilterDefinition<TimelineEvent> BuildGlobalFilter(
-        Continuity? continuity, Universe? universe)
+        Continuity? continuity,
+        Universe? universe
+    )
     {
         var filters = new List<FilterDefinition<TimelineEvent>>();
 
         if (continuity is not null && continuity != Continuity.Both)
         {
             // Include events marked as the selected continuity, Both, or Unknown
-            filters.Add(Builders<TimelineEvent>.Filter.In(
-                e => e.Continuity,
-                [continuity.Value, Continuity.Both, Continuity.Unknown]));
+            filters.Add(
+                Builders<TimelineEvent>.Filter.In(
+                    e => e.Continuity,
+                    [continuity.Value, Continuity.Both, Continuity.Unknown]
+                )
+            );
         }
 
         if (universe is not null)
         {
-            filters.Add(Builders<TimelineEvent>.Filter.In(
-                e => e.Universe,
-                [universe.Value, Universe.Unknown]));
+            filters.Add(
+                Builders<TimelineEvent>.Filter.In(
+                    e => e.Universe,
+                    [universe.Value, Universe.Unknown]
+                )
+            );
         }
 
         return filters.Count > 0
@@ -76,10 +91,14 @@ public class GalaxyEventsService
     /// Discover which timeline collections have both Year data AND location-relevant properties.
     /// Returns the collection names and their counts.
     /// </summary>
-    async Task<List<LensSummary>> DiscoverLensesAsync(Continuity? continuity = null, CancellationToken ct = default)
+    async Task<List<LensSummary>> DiscoverLensesAsync(
+        Continuity? continuity = null,
+        CancellationToken ct = default
+    )
     {
         var allNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
-        var collectionNames = allNames.ToList()
+        var collectionNames = allNames
+            .ToList()
             .Where(n => n.StartsWith(Collections.TimelinePrefix) && !SkipCollections.Contains(n))
             .OrderBy(n => n)
             .ToList();
@@ -90,8 +109,18 @@ public class GalaxyEventsService
         BsonDocument? continuityFilter = null;
         if (continuity is not null && continuity != Continuity.Both)
         {
-            continuityFilter = new BsonDocument("Continuity",
-                new BsonDocument("$in", new BsonArray { (int)continuity.Value, (int)Continuity.Both, (int)Continuity.Unknown }));
+            continuityFilter = new BsonDocument(
+                "Continuity",
+                new BsonDocument(
+                    "$in",
+                    new BsonArray
+                    {
+                        (int)continuity.Value,
+                        (int)Continuity.Both,
+                        (int)Continuity.Unknown,
+                    }
+                )
+            );
         }
 
         foreach (var name in collectionNames)
@@ -107,24 +136,36 @@ public class GalaxyEventsService
 
             var withYear = await collection.CountDocumentsAsync(baseFilter, cancellationToken: ct);
 
-            if (withYear == 0) continue;
+            if (withYear == 0)
+                continue;
 
             // Check if collection has any location-relevant properties
-            var locationFilter = new BsonDocument("Properties.Label",
-                new BsonDocument("$in", new BsonArray(LocationLabels)));
+            var locationFilter = new BsonDocument(
+                "Properties.Label",
+                new BsonDocument("$in", new BsonArray(LocationLabels))
+            );
             var withLocationFilter = continuityFilter is not null
-                ? new BsonDocument("$and", new BsonArray { continuityFilter, yearFilter, locationFilter })
+                ? new BsonDocument(
+                    "$and",
+                    new BsonArray { continuityFilter, yearFilter, locationFilter }
+                )
                 : new BsonDocument("$and", new BsonArray { yearFilter, locationFilter });
-            var withLocation = await collection.CountDocumentsAsync(withLocationFilter, cancellationToken: ct);
+            var withLocation = await collection.CountDocumentsAsync(
+                withLocationFilter,
+                cancellationToken: ct
+            );
 
-            if (withLocation == 0) continue;
+            if (withLocation == 0)
+                continue;
 
-            results.Add(new LensSummary
-            {
-                Lens = shortName,
-                TotalCount = (int)withYear,
-                WithLocationCount = (int)withLocation
-            });
+            results.Add(
+                new LensSummary
+                {
+                    Lens = shortName,
+                    TotalCount = (int)withYear,
+                    WithLocationCount = (int)withLocation,
+                }
+            );
         }
 
         results.Sort((a, b) => b.TotalCount.CompareTo(a.TotalCount));
@@ -134,7 +175,10 @@ public class GalaxyEventsService
     /// <summary>
     /// Load eras from the Era timeline collection, grouping start/end year pairs.
     /// </summary>
-    async Task<List<EraRange>> LoadErasAsync(Continuity? continuity = null, CancellationToken ct = default)
+    async Task<List<EraRange>> LoadErasAsync(
+        Continuity? continuity = null,
+        CancellationToken ct = default
+    )
     {
         var eraCollName = Collections.TimelinePrefix + "Era";
         var collectionNames = await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct);
@@ -142,15 +186,13 @@ public class GalaxyEventsService
             return [];
 
         var eraCollection = _timelineDb.GetCollection<TimelineEvent>(eraCollName);
-        var filter = BuildGlobalFilter(continuity, null)
+        var filter =
+            BuildGlobalFilter(continuity, null)
             & Builders<TimelineEvent>.Filter.Ne(e => e.Year, null);
-        var eras = await eraCollection
-            .Find(filter)
-            .ToListAsync(ct);
+        var eras = await eraCollection.Find(filter).ToListAsync(ct);
 
         // Group by title → take min/max year as range
-        var grouped = eras
-            .GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
+        var grouped = eras.GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
             .Where(g => !string.IsNullOrWhiteSpace(g.Key));
 
         var ranges = new List<EraRange>();
@@ -167,9 +209,17 @@ public class GalaxyEventsService
 
             var start = sortKeys.First();
             var end = sortKeys.Last();
-            if (start == end) end = start + 1; // single-point era
+            if (start == end)
+                end = start + 1; // single-point era
 
-            ranges.Add(new EraRange { Name = group.Key, Start = start, End = end });
+            ranges.Add(
+                new EraRange
+                {
+                    Name = group.Key,
+                    Start = start,
+                    End = end,
+                }
+            );
         }
 
         ranges.Sort((a, b) => a.Start.CompareTo(b.Start));
@@ -187,20 +237,28 @@ public class GalaxyEventsService
     /// Build the location name → grid coordinate lookup from Systems and CelestialBodies.
     /// </summary>
     async Task<Dictionary<string, (int col, int row, string? region)>> BuildLocationLookupAsync(
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         var lookup = new Dictionary<string, (int col, int row, string? region)>(
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
 
         // Systems with grid squares
         var sysFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression(":System$", "i")),
+            Builders<Page>.Filter.Regex(
+                "infobox.Template",
+                new BsonRegularExpression(":System$", "i")
+            ),
             Builders<Page>.Filter.ElemMatch<BsonDocument>(
-                "infobox.Data", new BsonDocument("Label", "Grid square")));
+                "infobox.Data",
+                new BsonDocument("Label", "Grid square")
+            )
+        );
 
-        var sysRecs = await _pages.Find(sysFilter)
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.Title).Include("infobox.Data"))
+        var sysRecs = await _pages
+            .Find(sysFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
             .ToListAsync(ct);
 
         foreach (var rec in sysRecs)
@@ -208,20 +266,28 @@ public class GalaxyEventsService
             var grid = GetFirstDataValue(rec, "Grid square");
             if (TryParseGridSquare(grid, out var col, out var row))
             {
-                var region = GetFirstDataValue(rec, "Region") is { } rn ? MapService.NormalizeRegionName(rn) : null;
+                var region = GetFirstDataValue(rec, "Region") is { } rn
+                    ? MapService.NormalizeRegionName(rn)
+                    : null;
                 lookup.TryAdd(rec.Title, (col, row, region));
             }
         }
 
         // CelestialBodies with grid squares
         var cbFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression(":CelestialBody$", "i")),
+            Builders<Page>.Filter.Regex(
+                "infobox.Template",
+                new BsonRegularExpression(":CelestialBody$", "i")
+            ),
             Builders<Page>.Filter.ElemMatch<BsonDocument>(
-                "infobox.Data", new BsonDocument("Label", "Grid square")));
+                "infobox.Data",
+                new BsonDocument("Label", "Grid square")
+            )
+        );
 
-        var cbRecs = await _pages.Find(cbFilter)
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.Title).Include("infobox.Data"))
+        var cbRecs = await _pages
+            .Find(cbFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
             .ToListAsync(ct);
 
         foreach (var rec in cbRecs)
@@ -229,12 +295,17 @@ public class GalaxyEventsService
             var grid = GetFirstDataValue(rec, "Grid square");
             if (TryParseGridSquare(grid, out var col, out var row))
             {
-                var region = GetFirstDataValue(rec, "Region") is { } rn ? MapService.NormalizeRegionName(rn) : null;
+                var region = GetFirstDataValue(rec, "Region") is { } rn
+                    ? MapService.NormalizeRegionName(rn)
+                    : null;
                 lookup.TryAdd(rec.Title, (col, row, region));
             }
         }
 
-        _logger.LogInformation("GalaxyEvents: built location lookup with {Count} entries", lookup.Count);
+        _logger.LogInformation(
+            "GalaxyEvents: built location lookup with {Count} entries",
+            lookup.Count
+        );
         return lookup;
     }
 
@@ -242,28 +313,41 @@ public class GalaxyEventsService
     /// Get the overview: regions, timeline range, available lenses, eras.
     /// </summary>
     public async Task<GalaxyEventsOverview> GetOverviewAsync(
-        Continuity? continuity = null, Universe? universe = null, CancellationToken ct = default)
+        Continuity? continuity = null,
+        Universe? universe = null,
+        CancellationToken ct = default
+    )
     {
         var overview = new GalaxyEventsOverview();
 
         // Regions from systems (same logic as MapService V2)
         var sysFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Regex("infobox.Template", new BsonRegularExpression(":System$", "i")),
+            Builders<Page>.Filter.Regex(
+                "infobox.Template",
+                new BsonRegularExpression(":System$", "i")
+            ),
             Builders<Page>.Filter.ElemMatch<BsonDocument>(
-                "infobox.Data", new BsonDocument("Label", "Grid square")));
+                "infobox.Data",
+                new BsonDocument("Label", "Grid square")
+            )
+        );
 
-        var sysRecs = await _pages.Find(sysFilter)
-            .Project<Page>(Builders<Page>.Projection
-                .Include(p => p.Title).Include("infobox.Data"))
+        var sysRecs = await _pages
+            .Find(sysFilter)
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data"))
             .ToListAsync(ct);
 
-        var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(StringComparer.OrdinalIgnoreCase);
+        var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var rec in sysRecs)
         {
             var grid = GetFirstDataValue(rec, "Grid square");
-            if (!TryParseGridSquare(grid, out var col, out var row)) continue;
+            if (!TryParseGridSquare(grid, out var col, out var row))
+                continue;
             var regionRaw = GetFirstDataValue(rec, "Region");
-            if (string.IsNullOrEmpty(regionRaw)) continue;
+            if (string.IsNullOrEmpty(regionRaw))
+                continue;
             var region = MapService.NormalizeRegionName(regionRaw);
             if (!regionCells.TryGetValue(region, out var cells))
             {
@@ -275,11 +359,13 @@ public class GalaxyEventsService
 
         foreach (var (name, cells) in regionCells)
         {
-            overview.Regions.Add(new MapV2Region
-            {
-                Name = name,
-                Cells = cells.Select(c => new[] { c.col, c.row }).ToList()
-            });
+            overview.Regions.Add(
+                new MapV2Region
+                {
+                    Name = name,
+                    Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
+                }
+            );
         }
 
         // Discover lenses dynamically
@@ -296,25 +382,47 @@ public class GalaxyEventsService
         var yearMatchDoc = new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value));
         if (continuity is not null && continuity != Continuity.Both)
         {
-            yearMatchDoc["Continuity"] = new BsonDocument("$in",
-                new BsonArray { (int)continuity.Value, (int)Continuity.Both, (int)Continuity.Unknown });
+            yearMatchDoc["Continuity"] = new BsonDocument(
+                "$in",
+                new BsonArray
+                {
+                    (int)continuity.Value,
+                    (int)Continuity.Both,
+                    (int)Continuity.Unknown,
+                }
+            );
         }
 
         foreach (var lens in overview.AvailableLenses)
         {
-            var collection = _timelineDb.GetCollection<BsonDocument>(Collections.TimelinePrefix + lens);
+            var collection = _timelineDb.GetCollection<BsonDocument>(
+                Collections.TimelinePrefix + lens
+            );
 
             var pipeline = new[]
             {
                 new BsonDocument("$match", yearMatchDoc),
-                new BsonDocument("$group", new BsonDocument
-                {
-                    { "_id", new BsonDocument { { "Year", new BsonDocument("$toInt", "$Year") }, { "Demarcation", "$Demarcation" } } },
-                    { "count", new BsonDocument("$sum", 1) }
-                })
+                new BsonDocument(
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            "_id",
+                            new BsonDocument
+                            {
+                                { "Year", new BsonDocument("$toInt", "$Year") },
+                                { "Demarcation", "$Demarcation" },
+                            }
+                        },
+                        { "count", new BsonDocument("$sum", 1) },
+                    }
+                ),
             };
 
-            var cursor = await collection.AggregateAsync<BsonDocument>(pipeline, cancellationToken: ct);
+            var cursor = await collection.AggregateAsync<BsonDocument>(
+                pipeline,
+                cancellationToken: ct
+            );
             var results = await cursor.ToListAsync(ct);
 
             foreach (var doc in results)
@@ -322,30 +430,36 @@ public class GalaxyEventsService
                 var id = doc["_id"].AsBsonDocument;
                 var year = id["Year"].AsInt32;
                 var demarcationRaw = id["Demarcation"];
-                var demarcation = demarcationRaw.BsonType == BsonType.String
-                    ? demarcationRaw.AsString
-                    : demarcationRaw.AsInt32 == (int)Demarcation.Bby ? "Bby" : "Aby";
+                var demarcation =
+                    demarcationRaw.BsonType == BsonType.String ? demarcationRaw.AsString
+                    : demarcationRaw.AsInt32 == (int)Demarcation.Bby ? "Bby"
+                    : "Aby";
 
-                var isBby = demarcation.Equals("Bby", StringComparison.OrdinalIgnoreCase)
-                         || demarcation.Equals("BBY", StringComparison.OrdinalIgnoreCase);
+                var isBby =
+                    demarcation.Equals("Bby", StringComparison.OrdinalIgnoreCase)
+                    || demarcation.Equals("BBY", StringComparison.OrdinalIgnoreCase);
 
                 var sortKey = isBby ? -year : year;
                 var displayDemarcation = isBby ? "BBY" : "ABY";
 
-                var existing = allYears.Find(y => y.Year == year && y.Demarcation == displayDemarcation);
+                var existing = allYears.Find(y =>
+                    y.Year == year && y.Demarcation == displayDemarcation
+                );
                 if (existing != null)
                 {
                     existing.EventCount += doc["count"].AsInt32;
                 }
                 else
                 {
-                    allYears.Add(new TimelineYearEntry
-                    {
-                        Year = year,
-                        Demarcation = displayDemarcation,
-                        SortKey = sortKey,
-                        EventCount = doc["count"].AsInt32
-                    });
+                    allYears.Add(
+                        new TimelineYearEntry
+                        {
+                            Year = year,
+                            Demarcation = displayDemarcation,
+                            SortKey = sortKey,
+                            EventCount = doc["count"].AsInt32,
+                        }
+                    );
                 }
             }
         }
@@ -357,13 +471,16 @@ public class GalaxyEventsService
         {
             MinYear = allYears.FirstOrDefault()?.SortKey ?? -1000,
             MaxYear = allYears.LastOrDefault()?.SortKey ?? 150,
-            Years = allYears
+            Years = allYears,
         };
 
         _logger.LogInformation(
             "GalaxyEvents overview: {Regions} regions, {Lenses} lenses, {Eras} eras, {Years} distinct years",
-            overview.Regions.Count, overview.AvailableLenses.Count,
-            overview.Eras.Count, allYears.Count);
+            overview.Regions.Count,
+            overview.AvailableLenses.Count,
+            overview.Eras.Count,
+            allYears.Count
+        );
 
         return overview;
     }
@@ -372,18 +489,25 @@ public class GalaxyEventsService
     /// Get event layer data for a specific lens and time window.
     /// </summary>
     public async Task<GalaxyEventLayer> GetEventLayerAsync(
-        string lens, int yearStart, int yearEnd,
-        Continuity? continuity = null, Universe? universe = null, CancellationToken ct = default)
+        string lens,
+        int yearStart,
+        int yearEnd,
+        Continuity? continuity = null,
+        Universe? universe = null,
+        CancellationToken ct = default
+    )
     {
         var layer = new GalaxyEventLayer
         {
             Lens = lens,
             YearStart = yearStart,
-            YearEnd = yearEnd
+            YearEnd = yearEnd,
         };
 
         var locationLookup = await BuildLocationLookupAsync(ct);
-        var collectionNames = (await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)).ToList();
+        var collectionNames = (
+            await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)
+        ).ToList();
 
         // Determine which collections to query
         List<string> lensCollections;
@@ -402,40 +526,52 @@ public class GalaxyEventsService
 
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + collName);
+            var collection = _timelineDb.GetCollection<TimelineEvent>(
+                Collections.TimelinePrefix + collName
+            );
 
             var filters = new List<FilterDefinition<TimelineEvent>>
             {
                 Builders<TimelineEvent>.Filter.Ne(e => e.Year, null),
-                BuildGlobalFilter(continuity, universe)
+                BuildGlobalFilter(continuity, universe),
             };
 
             if (yearStart < 0 && yearEnd < 0)
             {
-                filters.Add(Builders<TimelineEvent>.Filter.And(
-                    Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Bby),
-                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)Math.Abs(yearStart)),
-                    Builders<TimelineEvent>.Filter.Gte(e => e.Year, (float)Math.Abs(yearEnd))));
+                filters.Add(
+                    Builders<TimelineEvent>.Filter.And(
+                        Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Bby),
+                        Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)Math.Abs(yearStart)),
+                        Builders<TimelineEvent>.Filter.Gte(e => e.Year, (float)Math.Abs(yearEnd))
+                    )
+                );
             }
             else if (yearStart >= 0 && yearEnd >= 0)
             {
-                filters.Add(Builders<TimelineEvent>.Filter.And(
-                    Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Aby),
-                    Builders<TimelineEvent>.Filter.Gte(e => e.Year, (float)yearStart),
-                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)yearEnd)));
+                filters.Add(
+                    Builders<TimelineEvent>.Filter.And(
+                        Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Aby),
+                        Builders<TimelineEvent>.Filter.Gte(e => e.Year, (float)yearStart),
+                        Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)yearEnd)
+                    )
+                );
             }
             else
             {
                 var bbyPart = Builders<TimelineEvent>.Filter.And(
                     Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Bby),
-                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)Math.Abs(yearStart)));
+                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)Math.Abs(yearStart))
+                );
                 var abyPart = Builders<TimelineEvent>.Filter.And(
                     Builders<TimelineEvent>.Filter.Eq(e => e.Demarcation, Demarcation.Aby),
-                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)yearEnd));
+                    Builders<TimelineEvent>.Filter.Lte(e => e.Year, (float)yearEnd)
+                );
                 filters.Add(Builders<TimelineEvent>.Filter.Or(bbyPart, abyPart));
             }
 
-            var events = await collection.Find(Builders<TimelineEvent>.Filter.And(filters)).ToListAsync(ct);
+            var events = await collection
+                .Find(Builders<TimelineEvent>.Filter.And(filters))
+                .ToListAsync(ct);
             foreach (var evt in events)
                 allEvents.Add((evt, collName));
         }
@@ -457,7 +593,9 @@ public class GalaxyEventsService
                     {
                         cell = new GalaxyEventCell
                         {
-                            Col = loc.col, Row = loc.row, Region = loc.region
+                            Col = loc.col,
+                            Row = loc.row,
+                            Region = loc.region,
                         };
                         cellMap[key] = cell;
                     }
@@ -465,23 +603,27 @@ public class GalaxyEventsService
                     cell.Count++;
                     if (cell.Events.Count < 10)
                     {
-                        cell.Events.Add(new GalaxyEventMarker
-                        {
-                            Title = evt.Title ?? "Unknown",
-                            Collection = collName,
-                            Year = (int)(evt.Year ?? 0),
-                            Demarcation = evt.Demarcation == Demarcation.Bby ? "BBY" : "ABY",
-                            Place = placeName,
-                            Outcome = evt.Properties
-                                .FirstOrDefault(p => p.Label == "Outcome")?.Values.FirstOrDefault(),
-                            ImageUrl = evt.ImageUrl
-                        });
+                        cell.Events.Add(
+                            new GalaxyEventMarker
+                            {
+                                Title = evt.Title ?? "Unknown",
+                                Collection = collName,
+                                Year = (int)(evt.Year ?? 0),
+                                Demarcation = evt.Demarcation == Demarcation.Bby ? "BBY" : "ABY",
+                                Place = placeName,
+                                Outcome = evt
+                                    .Properties.FirstOrDefault(p => p.Label == "Outcome")
+                                    ?.Values.FirstOrDefault(),
+                                ImageUrl = evt.ImageUrl,
+                            }
+                        );
                     }
                     mapped = true;
                     break;
                 }
             }
-            if (mapped) layer.MappedEvents++;
+            if (mapped)
+                layer.MappedEvents++;
         }
 
         var maxCount = cellMap.Values.Count > 0 ? cellMap.Values.Max(c => c.Count) : 1;
@@ -492,7 +634,13 @@ public class GalaxyEventsService
 
         _logger.LogInformation(
             "GalaxyEvents layer [{Lens}] years [{Start},{End}]: {Total} events, {Mapped} mapped to {Cells} cells",
-            lens, yearStart, yearEnd, layer.TotalEvents, layer.MappedEvents, layer.Cells.Count);
+            lens,
+            yearStart,
+            yearEnd,
+            layer.TotalEvents,
+            layer.MappedEvents,
+            layer.Cells.Count
+        );
 
         return layer;
     }
@@ -501,10 +649,16 @@ public class GalaxyEventsService
     /// Get per-year event density for a specific lens.
     /// </summary>
     public async Task<LensDensity> GetLensDensityAsync(
-        string lens, Continuity? continuity = null, Universe? universe = null, CancellationToken ct = default)
+        string lens,
+        Continuity? continuity = null,
+        Universe? universe = null,
+        CancellationToken ct = default
+    )
     {
         var density = new LensDensity { Lens = lens };
-        var collectionNames = (await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)).ToList();
+        var collectionNames = (
+            await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)
+        ).ToList();
 
         List<string> lensCollections;
         if (lens == "All")
@@ -521,19 +675,37 @@ public class GalaxyEventsService
         var yearCounts = new Dictionary<int, int>();
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<BsonDocument>(Collections.TimelinePrefix + collName);
+            var collection = _timelineDb.GetCollection<BsonDocument>(
+                Collections.TimelinePrefix + collName
+            );
 
             var pipeline = new[]
             {
-                new BsonDocument("$match", new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value))),
-                new BsonDocument("$group", new BsonDocument
-                {
-                    { "_id", new BsonDocument { { "Year", new BsonDocument("$toInt", "$Year") }, { "Demarcation", "$Demarcation" } } },
-                    { "count", new BsonDocument("$sum", 1) }
-                })
+                new BsonDocument(
+                    "$match",
+                    new BsonDocument("Year", new BsonDocument("$ne", BsonNull.Value))
+                ),
+                new BsonDocument(
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            "_id",
+                            new BsonDocument
+                            {
+                                { "Year", new BsonDocument("$toInt", "$Year") },
+                                { "Demarcation", "$Demarcation" },
+                            }
+                        },
+                        { "count", new BsonDocument("$sum", 1) },
+                    }
+                ),
             };
 
-            var cursor = await collection.AggregateAsync<BsonDocument>(pipeline, cancellationToken: ct);
+            var cursor = await collection.AggregateAsync<BsonDocument>(
+                pipeline,
+                cancellationToken: ct
+            );
             var results = await cursor.ToListAsync(ct);
 
             foreach (var doc in results)
@@ -541,12 +713,14 @@ public class GalaxyEventsService
                 var id = doc["_id"].AsBsonDocument;
                 var year = id["Year"].AsInt32;
                 var demarcationRaw = id["Demarcation"];
-                var demStr = demarcationRaw.BsonType == BsonType.String
-                    ? demarcationRaw.AsString
-                    : demarcationRaw.AsInt32 == (int)Demarcation.Bby ? "Bby" : "Aby";
+                var demStr =
+                    demarcationRaw.BsonType == BsonType.String ? demarcationRaw.AsString
+                    : demarcationRaw.AsInt32 == (int)Demarcation.Bby ? "Bby"
+                    : "Aby";
 
-                var isBby = demStr.Equals("Bby", StringComparison.OrdinalIgnoreCase)
-                         || demStr.Equals("BBY", StringComparison.OrdinalIgnoreCase);
+                var isBby =
+                    demStr.Equals("Bby", StringComparison.OrdinalIgnoreCase)
+                    || demStr.Equals("BBY", StringComparison.OrdinalIgnoreCase);
                 var sortKey = isBby ? -year : year;
 
                 yearCounts[sortKey] = yearCounts.GetValueOrDefault(sortKey) + doc["count"].AsInt32;
@@ -560,7 +734,7 @@ public class GalaxyEventsService
             {
                 SortKey = kv.Key,
                 Count = kv.Value,
-                Intensity = maxCount > 0 ? (double)kv.Value / maxCount : 0
+                Intensity = maxCount > 0 ? (double)kv.Value / maxCount : 0,
             })
             .ToList();
 
@@ -571,11 +745,24 @@ public class GalaxyEventsService
     /// Get a paginated, searchable list of events for the event browser.
     /// </summary>
     public async Task<GalaxyEventList> GetEventListAsync(
-        string lens, string? search, int page, int pageSize,
-        Continuity? continuity = null, Universe? universe = null, CancellationToken ct = default)
+        string lens,
+        string? search,
+        int page,
+        int pageSize,
+        Continuity? continuity = null,
+        Universe? universe = null,
+        CancellationToken ct = default
+    )
     {
-        var result = new GalaxyEventList { Lens = lens, Page = page, PageSize = pageSize };
-        var collectionNames = (await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)).ToList();
+        var result = new GalaxyEventList
+        {
+            Lens = lens,
+            Page = page,
+            PageSize = pageSize,
+        };
+        var collectionNames = (
+            await _timelineDb.ListCollectionNamesAsync(cancellationToken: ct)
+        ).ToList();
 
         List<string> lensCollections;
         if (lens == "All")
@@ -594,24 +781,34 @@ public class GalaxyEventsService
 
         foreach (var collName in lensCollections)
         {
-            var collection = _timelineDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + collName);
+            var collection = _timelineDb.GetCollection<TimelineEvent>(
+                Collections.TimelinePrefix + collName
+            );
 
             var filter = Builders<TimelineEvent>.Filter.And(
                 Builders<TimelineEvent>.Filter.Ne(e => e.Year, null),
-                BuildGlobalFilter(continuity, universe));
+                BuildGlobalFilter(continuity, universe)
+            );
             if (!string.IsNullOrWhiteSpace(search))
             {
-                filter = Builders<TimelineEvent>.Filter.And(filter,
+                filter = Builders<TimelineEvent>.Filter.And(
+                    filter,
                     Builders<TimelineEvent>.Filter.Regex(
-                        e => e.Title, new BsonRegularExpression(search, "i")));
+                        e => e.Title,
+                        new BsonRegularExpression(search, "i")
+                    )
+                );
             }
 
-            var events = await collection.Find(filter)
-                .Project(Builders<TimelineEvent>.Projection
-                    .Include(e => e.Title)
-                    .Include(e => e.Year)
-                    .Include(e => e.Demarcation)
-                    .Include(e => e.Properties))
+            var events = await collection
+                .Find(filter)
+                .Project(
+                    Builders<TimelineEvent>
+                        .Projection.Include(e => e.Title)
+                        .Include(e => e.Year)
+                        .Include(e => e.Demarcation)
+                        .Include(e => e.Properties)
+                )
                 .As<TimelineEvent>()
                 .ToListAsync(ct);
 
@@ -625,16 +822,18 @@ public class GalaxyEventsService
                 var firstPlace = placeNames.FirstOrDefault();
                 var hasLocation = placeNames.Any(p => locationLookup.ContainsKey(p));
 
-                allItems.Add(new GalaxyEventListItem
-                {
-                    Title = evt.Title ?? "Unknown",
-                    Year = yearInt,
-                    Demarcation = isBby ? "BBY" : "ABY",
-                    SortKey = sortKey,
-                    Place = firstPlace,
-                    Collection = collName,
-                    HasLocation = hasLocation
-                });
+                allItems.Add(
+                    new GalaxyEventListItem
+                    {
+                        Title = evt.Title ?? "Unknown",
+                        Year = yearInt,
+                        Demarcation = isBby ? "BBY" : "ABY",
+                        SortKey = sortKey,
+                        Place = firstPlace,
+                        Collection = collName,
+                        HasLocation = hasLocation,
+                    }
+                );
             }
         }
 
@@ -652,7 +851,8 @@ public class GalaxyEventsService
         var places = new List<string>();
         foreach (var prop in evt.Properties)
         {
-            if (prop.Label == null) continue;
+            if (prop.Label == null)
+                continue;
 
             // Check against all location-relevant labels
             var isLocationLabel = false;
@@ -664,7 +864,8 @@ public class GalaxyEventsService
                     break;
                 }
             }
-            if (!isLocationLabel) continue;
+            if (!isLocationLabel)
+                continue;
 
             // Prefer link content (canonical names) over raw values
             foreach (var link in prop.Links)
@@ -693,12 +894,16 @@ public class GalaxyEventsService
     {
         col = 0;
         row = 0;
-        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        if (string.IsNullOrWhiteSpace(gridSquare))
+            return false;
         var parts = gridSquare.Split('-', 2);
-        if (parts.Length != 2) return false;
+        if (parts.Length != 2)
+            return false;
         var letter = parts[0].Trim().ToUpperInvariant();
-        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
-        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z')
+            return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20)
+            return false;
         col = letter[0] - 'A';
         row = num - 1;
         return true;

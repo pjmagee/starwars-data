@@ -29,17 +29,16 @@ public class UserSettingsService
 
     public async Task<bool> HasOpenAiKeyAsync(string userId, CancellationToken ct = default)
     {
-        var settings = await _collection
-            .Find(s => s.UserId == userId)
-            .FirstOrDefaultAsync(ct);
+        var settings = await _collection.Find(s => s.UserId == userId).FirstOrDefaultAsync(ct);
         return settings?.OpenAiKeySet == true;
     }
 
-    public async Task<string?> GetDecryptedOpenAiKeyAsync(string userId, CancellationToken ct = default)
+    public async Task<string?> GetDecryptedOpenAiKeyAsync(
+        string userId,
+        CancellationToken ct = default
+    )
     {
-        var settings = await _collection
-            .Find(s => s.UserId == userId)
-            .FirstOrDefaultAsync(ct);
+        var settings = await _collection.Find(s => s.UserId == userId).FirstOrDefaultAsync(ct);
 
         if (settings?.EncryptedOpenAiKey is null)
             return null;
@@ -55,15 +54,19 @@ public class UserSettingsService
         }
     }
 
-    public async Task SetOpenAiKeyAsync(string userId, string apiKey, CancellationToken ct = default)
+    public async Task SetOpenAiKeyAsync(
+        string userId,
+        string apiKey,
+        CancellationToken ct = default
+    )
     {
         var encrypted = _protector.Protect(apiKey);
         var now = DateTime.UtcNow;
 
         await _collection.UpdateOneAsync(
             s => s.UserId == userId,
-            Builders<UserSettings>.Update
-                .Set(s => s.EncryptedOpenAiKey, encrypted)
+            Builders<UserSettings>
+                .Update.Set(s => s.EncryptedOpenAiKey, encrypted)
                 .Set(s => s.OpenAiKeySet, true)
                 .Set(s => s.UpdatedAt, now)
                 .SetOnInsert(s => s.CreatedAt, now)
@@ -77,8 +80,8 @@ public class UserSettingsService
     {
         await _collection.UpdateOneAsync(
             s => s.UserId == userId,
-            Builders<UserSettings>.Update
-                .Set(s => s.EncryptedOpenAiKey, (string?)null)
+            Builders<UserSettings>
+                .Update.Set(s => s.EncryptedOpenAiKey, (string?)null)
                 .Set(s => s.OpenAiKeySet, false)
                 .Set(s => s.UpdatedAt, DateTime.UtcNow),
             cancellationToken: ct
@@ -92,8 +95,6 @@ public class UserSettingsService
 
     public async Task<UserSettings?> GetAsync(string userId, CancellationToken ct = default)
     {
-        return await _collection
-            .Find(s => s.UserId == userId)
-            .FirstOrDefaultAsync(ct);
+        return await _collection.Find(s => s.UserId == userId).FirstOrDefaultAsync(ct);
     }
 }

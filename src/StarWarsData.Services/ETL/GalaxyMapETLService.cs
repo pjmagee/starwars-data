@@ -16,15 +16,19 @@ namespace StarWarsData.Services;
 public class GalaxyMapETLService(
     IMongoClient mongoClient,
     IOptions<SettingsOptions> settings,
-    ILogger<GalaxyMapETLService> logger)
+    ILogger<GalaxyMapETLService> logger
+)
 {
     readonly IMongoDatabase _db = mongoClient.GetDatabase(settings.Value.DatabaseName);
     readonly IMongoCollection<GraphNode> _nodes = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<GraphNode>(Collections.KgNodes);
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<RelationshipEdge>(Collections.KgEdges);
     readonly IMongoCollection<Page> _pages = mongoClient
-        .GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
+        .GetDatabase(settings.Value.DatabaseName)
+        .GetCollection<Page>(Collections.Pages);
 
     static readonly Dictionary<string, string> FactionColors = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -42,25 +46,63 @@ public class GalaxyMapETLService(
 
     static readonly string[] ColorPalette =
     [
-        "#3b82f6", "#ef4444", "#6b7280", "#f97316", "#22c55e",
-        "#991b1b", "#f59e0b", "#a8722a", "#1e3a5f", "#8b5cf6",
-        "#ec4899", "#14b8a6", "#84cc16", "#d946ef", "#06b6d4",
+        "#3b82f6",
+        "#ef4444",
+        "#6b7280",
+        "#f97316",
+        "#22c55e",
+        "#991b1b",
+        "#f59e0b",
+        "#a8722a",
+        "#1e3a5f",
+        "#8b5cf6",
+        "#ec4899",
+        "#14b8a6",
+        "#84cc16",
+        "#d946ef",
+        "#06b6d4",
     ];
 
     static readonly string[] GalacticRegions =
     [
-        "Deep Core", "Core Worlds", "Colonies", "Inner Rim",
-        "Expansion Region", "Mid Rim", "Outer Rim Territories",
-        "Hutt Space", "Unknown Regions", "Wild Space",
+        "Deep Core",
+        "Core Worlds",
+        "Colonies",
+        "Inner Rim",
+        "Expansion Region",
+        "Mid Rim",
+        "Outer Rim Territories",
+        "Hutt Space",
+        "Unknown Regions",
+        "Wild Space",
     ];
 
-    static readonly string[] EventNodeTypes = ["Battle", "War", "Campaign", "Government", "Treaty", "Event"];
+    static readonly string[] EventNodeTypes =
+    [
+        "Battle",
+        "War",
+        "Campaign",
+        "Government",
+        "Treaty",
+        "Event",
+    ];
 
     static readonly string[] LocationLabels =
-        ["Place", "Location", "System", "Headquarters", "Capital", "Grid square", "Celestial body"];
+    [
+        "Place",
+        "Location",
+        "System",
+        "Headquarters",
+        "Capital",
+        "Grid square",
+        "Celestial body",
+    ];
 
     static readonly HashSet<string> SkipCollections = new(StringComparer.OrdinalIgnoreCase)
-        { "system_profile", "system.profile" };
+    {
+        "system_profile",
+        "system.profile",
+    };
 
     /// <summary>
     /// Lens names that represent real-world media/publications rather than in-universe events.
@@ -68,9 +110,22 @@ public class GalaxyMapETLService(
     /// </summary>
     static readonly HashSet<string> OutOfUniverseLenses = new(StringComparer.OrdinalIgnoreCase)
     {
-        "Book", "ComicBook", "ComicStory", "ShortStory", "TelevisionEpisode",
-        "Audiobook", "AudioDrama", "VideoGame", "Magazine", "WebComic",
-        "Film", "Television", "TvSeason", "Toy", "BoardGame", "CardGame",
+        "Book",
+        "ComicBook",
+        "ComicStory",
+        "ShortStory",
+        "TelevisionEpisode",
+        "Audiobook",
+        "AudioDrama",
+        "VideoGame",
+        "Magazine",
+        "WebComic",
+        "Film",
+        "Television",
+        "TvSeason",
+        "Toy",
+        "BoardGame",
+        "CardGame",
     };
 
     public async Task BuildGalaxyMapAsync(CancellationToken ct = default)
@@ -80,63 +135,97 @@ public class GalaxyMapETLService(
         // ── Step 1: Load territory data from knowledge graph ──
 
         var governments = await _nodes
-            .Find(Builders<GraphNode>.Filter.And(
-                Builders<GraphNode>.Filter.Eq(n => n.Type, "Government"),
-                Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon)))
+            .Find(
+                Builders<GraphNode>.Filter.And(
+                    Builders<GraphNode>.Filter.Eq(n => n.Type, "Government"),
+                    Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon)
+                )
+            )
             .ToListAsync(ct);
         var govWithDates = governments.Where(g => g.StartYear.HasValue).ToList();
 
         // Planet → region from in_region edges
         var planetToRegion = new Dictionary<int, string>();
         var regionEdges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "in_region"),
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
-            .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "in_region"),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)
+                )
+            )
+            .Project(
+                Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName)
+            )
             .ToListAsync(ct);
         foreach (var edge in regionEdges)
         {
             var region = NormaliseRegion(edge["toName"].AsString);
-            if (region is not null) planetToRegion.TryAdd(edge["fromId"].AsInt32, region);
+            if (region is not null)
+                planetToRegion.TryAdd(edge["fromId"].AsInt32, region);
         }
 
         // Faction → planets per region from affiliated_with edges
-        var factionRegionPlanets = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase);
+        var factionRegionPlanets = new Dictionary<string, Dictionary<string, int>>(
+            StringComparer.OrdinalIgnoreCase
+        );
         var affiliationEdges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "affiliated_with"),
-                Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)))
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "affiliated_with"),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, Continuity.Canon)
+                )
+            )
             .ToListAsync(ct);
         foreach (var edge in affiliationEdges)
         {
-            if (!planetToRegion.TryGetValue(edge.FromId, out var region)) continue;
+            if (!planetToRegion.TryGetValue(edge.FromId, out var region))
+                continue;
             if (!factionRegionPlanets.TryGetValue(edge.ToName, out var regionCounts))
                 factionRegionPlanets[edge.ToName] = regionCounts = new();
             regionCounts[region] = regionCounts.GetValueOrDefault(region) + 1;
         }
 
-        logger.LogInformation("Galaxy map ETL: {Govs} govs, {Planets} planet-regions, {Factions} factions",
-            govWithDates.Count, planetToRegion.Count, factionRegionPlanets.Count);
+        logger.LogInformation(
+            "Galaxy map ETL: {Govs} govs, {Planets} planet-regions, {Factions} factions",
+            govWithDates.Count,
+            planetToRegion.Count,
+            factionRegionPlanets.Count
+        );
 
         // ── Step 2: Build spatial lookups ──
 
         // Planet → grid from Pages infobox
         var planetToGrid = new Dictionary<int, (int col, int row)>();
-        var nameToGrid = new Dictionary<string, (int col, int row, string? region)>(StringComparer.OrdinalIgnoreCase);
-        var gridFilter = BsonDocument.Parse("{ 'infobox.Data': { $elemMatch: { Label: 'Grid square' } } }");
-        var gridPages = await _pages.Find(gridFilter)
-            .Project(Builders<Page>.Projection.Include(p => p.PageId).Include("title").Include("infobox.Data"))
+        var nameToGrid = new Dictionary<string, (int col, int row, string? region)>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        var gridFilter = BsonDocument.Parse(
+            "{ 'infobox.Data': { $elemMatch: { Label: 'Grid square' } } }"
+        );
+        var gridPages = await _pages
+            .Find(gridFilter)
+            .Project(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include("title")
+                    .Include("infobox.Data")
+            )
             .ToListAsync(ct);
 
         foreach (var doc in gridPages)
         {
             var pageId = doc["_id"].AsInt32;
             var title = doc.Contains("title") ? doc["title"].AsString : null;
-            var data = doc.Contains("infobox") && doc["infobox"].IsBsonDocument
-                ? doc["infobox"].AsBsonDocument : null;
-            if (data is null) continue;
-            var dataArr = data.Contains("Data") && data["Data"].IsBsonArray ? data["Data"].AsBsonArray : null;
-            if (dataArr is null) continue;
+            var data =
+                doc.Contains("infobox") && doc["infobox"].IsBsonDocument
+                    ? doc["infobox"].AsBsonDocument
+                    : null;
+            if (data is null)
+                continue;
+            var dataArr =
+                data.Contains("Data") && data["Data"].IsBsonArray ? data["Data"].AsBsonArray : null;
+            if (dataArr is null)
+                continue;
 
             string? gridStr = null;
             string? regionStr = null;
@@ -144,31 +233,47 @@ public class GalaxyMapETLService(
             foreach (var item in dataArr.OfType<BsonDocument>())
             {
                 var label = item.GetValue("Label", "").AsString;
-                var vals = item.Contains("Values") && item["Values"].IsBsonArray ? item["Values"].AsBsonArray : null;
+                var vals =
+                    item.Contains("Values") && item["Values"].IsBsonArray
+                        ? item["Values"].AsBsonArray
+                        : null;
                 var firstVal = vals?.FirstOrDefault()?.AsString;
 
-                if (label == "Grid square" && gridStr is null) gridStr = firstVal;
-                if (label == "Region" && regionStr is null) regionStr = firstVal;
+                if (label == "Grid square" && gridStr is null)
+                    gridStr = firstVal;
+                if (label == "Region" && regionStr is null)
+                    regionStr = firstVal;
             }
 
             if (gridStr is not null && TryParseGridSquare(gridStr, out var col, out var row))
             {
                 planetToGrid.TryAdd(pageId, (col, row));
-                var normRegion = regionStr is not null ? NormaliseRegion(regionStr) ?? MapService.NormalizeRegionName(regionStr) : null;
-                if (title is not null) nameToGrid.TryAdd(title, (col, row, normRegion));
+                var normRegion = regionStr is not null
+                    ? NormaliseRegion(regionStr) ?? MapService.NormalizeRegionName(regionStr)
+                    : null;
+                if (title is not null)
+                    nameToGrid.TryAdd(title, (col, row, normRegion));
             }
         }
 
-        logger.LogInformation("Galaxy map ETL: {GridById} planets with grid (by ID), {GridByName} (by name)",
-            planetToGrid.Count, nameToGrid.Count);
+        logger.LogInformation(
+            "Galaxy map ETL: {GridById} planets with grid (by ID), {GridByName} (by name)",
+            planetToGrid.Count,
+            nameToGrid.Count
+        );
 
         // ── Step 3: Build adjacency list from ALL edges for BFS ──
         // Include all continuities — Legends pages can link to Canon locations and vice versa
 
         var allEdges = await _edges
             .Find(FilterDefinition<RelationshipEdge>.Empty)
-            .Project(Builders<RelationshipEdge>.Projection
-                .Include(e => e.FromId).Include(e => e.ToId).Include(e => e.ToName).Include(e => e.Label))
+            .Project(
+                Builders<RelationshipEdge>
+                    .Projection.Include(e => e.FromId)
+                    .Include(e => e.ToId)
+                    .Include(e => e.ToName)
+                    .Include(e => e.Label)
+            )
             .ToListAsync(ct);
 
         var adjacency = new Dictionary<int, List<(int toId, string toName, string label)>>();
@@ -183,7 +288,10 @@ public class GalaxyMapETLService(
             list.Add((toId, toName, label));
         }
 
-        logger.LogInformation("Galaxy map ETL: adjacency list from {Count} edges (all continuities)", allEdges.Count);
+        logger.LogInformation(
+            "Galaxy map ETL: adjacency list from {Count} edges (all continuities)",
+            allEdges.Count
+        );
 
         // ── Step 4: Load ALL nodes from the knowledge graph with temporal data ──
 
@@ -192,10 +300,20 @@ public class GalaxyMapETLService(
             .ToListAsync(ct);
 
         // Debug: check continuity deserialization
-        var contCounts = eventKgNodes.GroupBy(n => n.Continuity).ToDictionary(g => g.Key, g => g.Count());
-        var univCounts = eventKgNodes.GroupBy(n => n.Universe).ToDictionary(g => g.Key, g => g.Count());
-        logger.LogInformation("Galaxy map ETL: continuity breakdown: {Counts}", string.Join(", ", contCounts.Select(kv => $"{kv.Key}={kv.Value}")));
-        logger.LogInformation("Galaxy map ETL: universe breakdown: {Counts}", string.Join(", ", univCounts.Select(kv => $"{kv.Key}={kv.Value}")));
+        var contCounts = eventKgNodes
+            .GroupBy(n => n.Continuity)
+            .ToDictionary(g => g.Key, g => g.Count());
+        var univCounts = eventKgNodes
+            .GroupBy(n => n.Universe)
+            .ToDictionary(g => g.Key, g => g.Count());
+        logger.LogInformation(
+            "Galaxy map ETL: continuity breakdown: {Counts}",
+            string.Join(", ", contCounts.Select(kv => $"{kv.Key}={kv.Value}"))
+        );
+        logger.LogInformation(
+            "Galaxy map ETL: universe breakdown: {Counts}",
+            string.Join(", ", univCounts.Select(kv => $"{kv.Key}={kv.Value}"))
+        );
 
         // Group by type (= lens) and by year
         var lensTotals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -220,16 +338,23 @@ public class GalaxyMapETLService(
                 lensWithLocation[lens] = lensWithLocation.GetValueOrDefault(lens) + 1;
         }
 
-        logger.LogInformation("Galaxy map ETL: {Nodes} KG nodes with dates, {Types} types, {Years} distinct years",
-            eventKgNodes.Count, lensTotals.Count, eventsByYear.Count);
+        logger.LogInformation(
+            "Galaxy map ETL: {Nodes} KG nodes with dates, {Types} types, {Years} distinct years",
+            eventKgNodes.Count,
+            lensTotals.Count,
+            eventsByYear.Count
+        );
 
         // ── Step 6: Load era nodes ──
 
         var eraNodes = await _nodes
-            .Find(Builders<GraphNode>.Filter.And(
-                Builders<GraphNode>.Filter.Eq(n => n.Type, "Era"),
-                Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon),
-                Builders<GraphNode>.Filter.Ne(n => n.StartYear, null)))
+            .Find(
+                Builders<GraphNode>.Filter.And(
+                    Builders<GraphNode>.Filter.Eq(n => n.Type, "Era"),
+                    Builders<GraphNode>.Filter.Eq(n => n.Continuity, Continuity.Canon),
+                    Builders<GraphNode>.Filter.Ne(n => n.StartYear, null)
+                )
+            )
             .ToListAsync(ct);
 
         var eras = eraNodes
@@ -248,23 +373,37 @@ public class GalaxyMapETLService(
         var allYears = new SortedSet<int>();
         foreach (var gov in govWithDates)
         {
-            if (gov.StartYear.HasValue) allYears.Add(gov.StartYear.Value);
-            if (gov.EndYear.HasValue) allYears.Add(gov.EndYear.Value);
+            if (gov.StartYear.HasValue)
+                allYears.Add(gov.StartYear.Value);
+            if (gov.EndYear.HasValue)
+                allYears.Add(gov.EndYear.Value);
         }
-        foreach (var yr in eventsByYear.Keys) allYears.Add(yr);
+        foreach (var yr in eventsByYear.Keys)
+            allYears.Add(yr);
 
-        if (allYears.Count == 0) { logger.LogWarning("Galaxy map ETL: no years found"); return; }
+        if (allYears.Count == 0)
+        {
+            logger.LogWarning("Galaxy map ETL: no years found");
+            return;
+        }
         logger.LogInformation("Galaxy map ETL: {Count} total years to process", allYears.Count);
 
         // ── Step 8: Build faction metadata ──
 
         var allFactionNames = factionRegionPlanets.Keys.ToList();
         var factionPages = await _pages
-            .Find(Builders<Page>.Filter.And(
-                Builders<Page>.Filter.In(p => p.Title, allFactionNames),
-                Builders<Page>.Filter.Eq(p => p.Continuity, Continuity.Canon)))
+            .Find(
+                Builders<Page>.Filter.And(
+                    Builders<Page>.Filter.In(p => p.Title, allFactionNames),
+                    Builders<Page>.Filter.Eq(p => p.Continuity, Continuity.Canon)
+                )
+            )
             .ToListAsync(ct);
-        var factionPageMap = factionPages.ToDictionary(p => p.Title, p => p, StringComparer.OrdinalIgnoreCase);
+        var factionPageMap = factionPages.ToDictionary(
+            p => p.Title,
+            p => p,
+            StringComparer.OrdinalIgnoreCase
+        );
 
         var factionInfoList = allFactionNames
             .Where(f => factionRegionPlanets[f].Values.Sum() >= 3)
@@ -279,7 +418,9 @@ public class GalaxyMapETLService(
                     IconUrl = page?.Infobox?.ImageUrl,
                 };
             })
-            .OrderByDescending(f => factionRegionPlanets.GetValueOrDefault(f.Name)?.Values.Sum() ?? 0)
+            .OrderByDescending(f =>
+                factionRegionPlanets.GetValueOrDefault(f.Name)?.Values.Sum() ?? 0
+            )
             .ToList();
 
         // ── Step 9: Build year documents ──
@@ -315,24 +456,33 @@ public class GalaxyMapETLService(
 
                     // Resolve grid location via BFS from the node's pageId (direct, no title-matching)
                     var (place, region, col, row) = ResolveLocationByTraversal(
-                        node.PageId, adjacency, planetToRegion, planetToGrid, maxDepth: 3);
+                        node.PageId,
+                        adjacency,
+                        planetToRegion,
+                        planetToGrid,
+                        maxDepth: 3
+                    );
 
                     // Fallback: check property values for location names
                     if (col is null)
                     {
                         foreach (var label in LocationLabels)
                         {
-                            if (!node.Properties.TryGetValue(label, out var vals)) continue;
+                            if (!node.Properties.TryGetValue(label, out var vals))
+                                continue;
                             foreach (var val in vals)
                             {
                                 if (nameToGrid.TryGetValue(val, out var loc))
                                 {
-                                    col = loc.col; row = loc.row;
-                                    place = val; region = loc.region;
+                                    col = loc.col;
+                                    row = loc.row;
+                                    place = val;
+                                    region = loc.region;
                                     break;
                                 }
                             }
-                            if (col is not null) break;
+                            if (col is not null)
+                                break;
                         }
                     }
 
@@ -341,20 +491,24 @@ public class GalaxyMapETLService(
                         totalUnresolved++;
                         if (unresolvedEvents.Count < 30)
                         {
-                            var outcome = node.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
-                            unresolvedEvents.Add(new GalaxyYearEvent
-                            {
-                                PageId = node.PageId,
-                                Title = node.Name,
-                                Lens = lens,
-                                Category = MapEventCategory(lens),
-                                Place = place,
-                                Outcome = outcome,
-                                WikiUrl = node.WikiUrl,
-                                ImageUrl = node.ImageUrl,
-                                Continuity = node.Continuity,
-                                Universe = node.Universe,
-                            });
+                            var outcome = node
+                                .Properties.GetValueOrDefault("Outcome")
+                                ?.FirstOrDefault();
+                            unresolvedEvents.Add(
+                                new GalaxyYearEvent
+                                {
+                                    PageId = node.PageId,
+                                    Title = node.Name,
+                                    Lens = lens,
+                                    Category = MapEventCategory(lens),
+                                    Place = place,
+                                    Outcome = outcome,
+                                    WikiUrl = node.WikiUrl,
+                                    ImageUrl = node.ImageUrl,
+                                    Continuity = node.Continuity,
+                                    Universe = node.Universe,
+                                }
+                            );
                         }
                         continue;
                     }
@@ -367,7 +521,7 @@ public class GalaxyMapETLService(
                         {
                             Col = col.Value,
                             Row = row.Value,
-                            Region = region
+                            Region = region,
                         };
                         cellMap[key] = cell;
                     }
@@ -375,21 +529,25 @@ public class GalaxyMapETLService(
                     cell.Count++;
                     if (cell.Events.Count < 15)
                     {
-                        var outcome = node.Properties.GetValueOrDefault("Outcome")?.FirstOrDefault();
+                        var outcome = node
+                            .Properties.GetValueOrDefault("Outcome")
+                            ?.FirstOrDefault();
 
-                        cell.Events.Add(new GalaxyYearEvent
-                        {
-                            PageId = node.PageId,
-                            Title = node.Name,
-                            Lens = lens,
-                            Category = MapEventCategory(lens),
-                            Place = place,
-                            Outcome = outcome,
-                            WikiUrl = node.WikiUrl,
-                            ImageUrl = node.ImageUrl,
-                            Continuity = node.Continuity,
-                            Universe = node.Universe,
-                        });
+                        cell.Events.Add(
+                            new GalaxyYearEvent
+                            {
+                                PageId = node.PageId,
+                                Title = node.Name,
+                                Lens = lens,
+                                Category = MapEventCategory(lens),
+                                Place = place,
+                                Outcome = outcome,
+                                WikiUrl = node.WikiUrl,
+                                ImageUrl = node.ImageUrl,
+                                Continuity = node.Continuity,
+                                Universe = node.Universe,
+                            }
+                        );
                     }
                 }
             }
@@ -397,17 +555,19 @@ public class GalaxyMapETLService(
             // Era for this year
             var era = eras.FirstOrDefault(e => year >= e.StartYear && year <= e.EndYear);
 
-            yearDocs.Add(new GalaxyYearDocument
-            {
-                Year = year,
-                YearDisplay = year <= 0 ? $"{Math.Abs(year)} BBY" : $"{year} ABY",
-                Era = era?.Name,
-                EraDescription = era?.Description,
-                Regions = regionControls,
-                EventCells = cellMap.Values.OrderByDescending(c => c.Count).ToList(),
-                UnresolvedEvents = unresolvedEvents,
-                LensCounts = lensCounts,
-            });
+            yearDocs.Add(
+                new GalaxyYearDocument
+                {
+                    Year = year,
+                    YearDisplay = year <= 0 ? $"{Math.Abs(year)} BBY" : $"{year} ABY",
+                    Era = era?.Name,
+                    EraDescription = era?.Description,
+                    Regions = regionControls,
+                    EventCells = cellMap.Values.OrderByDescending(c => c.Count).ToList(),
+                    UnresolvedEvents = unresolvedEvents,
+                    LensCounts = lensCounts,
+                }
+            );
 
             yearDensityMap[year] = new GalaxyYearDensity
             {
@@ -419,8 +579,11 @@ public class GalaxyMapETLService(
             };
         }
 
-        logger.LogInformation("Galaxy map ETL: {Resolved} events resolved, {Unresolved} unresolved",
-            totalResolved, totalUnresolved);
+        logger.LogInformation(
+            "Galaxy map ETL: {Resolved} events resolved, {Unresolved} unresolved",
+            totalResolved,
+            totalUnresolved
+        );
 
         // ── Step 10: Build lens summaries for overview ──
 
@@ -439,8 +602,11 @@ public class GalaxyMapETLService(
         // ── Step 11: Build trade routes from KG edges ──
 
         var tradeRoutes = await BuildTradeRoutesAsync(adjacency, planetToRegion, planetToGrid, ct);
-        logger.LogInformation("Galaxy map ETL: {Count} trade routes built, {WithWaypoints} with 2+ grid waypoints",
-            tradeRoutes.Count, tradeRoutes.Count(r => r.Waypoints.Count(w => w.Col.HasValue) >= 2));
+        logger.LogInformation(
+            "Galaxy map ETL: {Count} trade routes built, {WithWaypoints} with 2+ grid waypoints",
+            tradeRoutes.Count,
+            tradeRoutes.Count(r => r.Waypoints.Count(w => w.Col.HasValue) >= 2)
+        );
 
         // ── Step 12: Build overview document ──
 
@@ -454,8 +620,11 @@ public class GalaxyMapETLService(
             Eras = eras,
             TradeRoutes = tradeRoutes,
             Lenses = lensSummaries,
-            YearDensity = allYears.Select(y => yearDensityMap.GetValueOrDefault(y)
-                ?? new GalaxyYearDensity { Year = y }).ToList(),
+            YearDensity = allYears
+                .Select(y =>
+                    yearDensityMap.GetValueOrDefault(y) ?? new GalaxyYearDensity { Year = y }
+                )
+                .ToList(),
         };
 
         // ── Step 13: Write to MongoDB ──
@@ -471,21 +640,31 @@ public class GalaxyMapETLService(
 
         await overviewColl.ReplaceOneAsync(
             Builders<GalaxyOverviewDocument>.Filter.Eq(o => o.Id, "overview"),
-            overview, new ReplaceOptions { IsUpsert = true }, ct);
+            overview,
+            new ReplaceOptions { IsUpsert = true },
+            ct
+        );
 
         await yearColl.Indexes.CreateOneAsync(
             new CreateIndexModel<GalaxyYearDocument>(
-                Builders<GalaxyYearDocument>.IndexKeys.Ascending(d => d.Year)),
-            cancellationToken: ct);
+                Builders<GalaxyYearDocument>.IndexKeys.Ascending(d => d.Year)
+            ),
+            cancellationToken: ct
+        );
 
         logger.LogInformation(
             "Galaxy map ETL: complete. {Years} year docs, {Lenses} lenses, {Factions} factions, overview stored",
-            yearDocs.Count, lensSummaries.Count, factionInfoList.Count);
+            yearDocs.Count,
+            lensSummaries.Count,
+            factionInfoList.Count
+        );
     }
 
     List<TerritoryRegionControl> ComputeRegionControls(
-        int year, HashSet<string> activeGovs,
-        Dictionary<string, Dictionary<string, int>> factionRegionPlanets)
+        int year,
+        HashSet<string> activeGovs,
+        Dictionary<string, Dictionary<string, int>> factionRegionPlanets
+    )
     {
         var regionControls = new List<TerritoryRegionControl>();
 
@@ -503,11 +682,21 @@ public class GalaxyMapETLService(
                 var def = GetDefaultFaction(year);
                 if (def is not null && activeGovs.Contains(def))
                 {
-                    regionControls.Add(new TerritoryRegionControl
-                    {
-                        Region = region,
-                        Factions = [new() { Faction = def, Control = 1.0, Color = GetColor(def) }]
-                    });
+                    regionControls.Add(
+                        new TerritoryRegionControl
+                        {
+                            Region = region,
+                            Factions =
+                            [
+                                new()
+                                {
+                                    Faction = def,
+                                    Control = 1.0,
+                                    Color = GetColor(def),
+                                },
+                            ],
+                        }
+                    );
                 }
                 continue;
             }
@@ -519,7 +708,13 @@ public class GalaxyMapETLService(
 
             var factions = new List<TerritoryFactionControl>
             {
-                new() { Faction = dominant.Faction, Control = Math.Max(0.3, control), Contested = contested, Color = GetColor(dominant.Faction) }
+                new()
+                {
+                    Faction = dominant.Faction,
+                    Control = Math.Max(0.3, control),
+                    Contested = contested,
+                    Color = GetColor(dominant.Faction),
+                },
             };
 
             if (contested)
@@ -527,7 +722,15 @@ public class GalaxyMapETLService(
                 foreach (var (f, c) in regionFactions.Skip(1))
                 {
                     var oc = Math.Max(0.1, (double)c / total);
-                    factions.Add(new() { Faction = f, Control = oc, Contested = true, Color = GetColor(f) });
+                    factions.Add(
+                        new()
+                        {
+                            Faction = f,
+                            Control = oc,
+                            Contested = true,
+                            Color = GetColor(f),
+                        }
+                    );
                 }
             }
 
@@ -545,14 +748,27 @@ public class GalaxyMapETLService(
         Dictionary<int, List<(int toId, string toName, string label)>> adjacency,
         Dictionary<int, string> planetToRegion,
         Dictionary<int, (int col, int row)> planetToGrid,
-        CancellationToken ct)
+        CancellationToken ct
+    )
     {
         // Load all trade route edges from KG
         var tradeRouteEdges = await _edges
-            .Find(Builders<RelationshipEdge>.Filter.And(
-                Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, "TradeRoute"),
-                Builders<RelationshipEdge>.Filter.In(e => e.Label,
-                    new[] { "end_points", "transit_points", "has_object", "junctions", "regions" })))
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, "TradeRoute"),
+                    Builders<RelationshipEdge>.Filter.In(
+                        e => e.Label,
+                        new[]
+                        {
+                            "end_points",
+                            "transit_points",
+                            "has_object",
+                            "junctions",
+                            "regions",
+                        }
+                    )
+                )
+            )
             .ToListAsync(ct);
 
         // Group edges by route
@@ -564,11 +780,7 @@ public class GalaxyMapETLService(
 
         foreach (var ((routeId, routeName), edges) in routeEdges)
         {
-            var route = new GalaxyTradeRoute
-            {
-                Name = routeName,
-                PageId = routeId,
-            };
+            var route = new GalaxyTradeRoute { Name = routeName, PageId = routeId };
 
             // Regions
             route.Regions = edges
@@ -589,18 +801,24 @@ public class GalaxyMapETLService(
             // Endpoints — resolve to grid coords
             route.Endpoints = edges
                 .Where(e => e.Label == "end_points")
-                .Select(e => ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid))
+                .Select(e =>
+                    ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid)
+                )
                 .ToList();
 
             // Waypoints: transit_points first (they're ordered), then has_object as fallback
             var transitPoints = edges
                 .Where(e => e.Label == "transit_points")
-                .Select(e => ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid))
+                .Select(e =>
+                    ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid)
+                )
                 .ToList();
 
             var otherObjects = edges
                 .Where(e => e.Label == "has_object")
-                .Select(e => ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid))
+                .Select(e =>
+                    ResolveWaypoint(e.ToId, e.ToName, adjacency, planetToRegion, planetToGrid)
+                )
                 .ToList();
 
             // Prefer transit_points (explicit waypoint ordering); use has_object if no transit points
@@ -616,10 +834,12 @@ public class GalaxyMapETLService(
     }
 
     static GalaxyTradeRouteWaypoint ResolveWaypoint(
-        int pageId, string name,
+        int pageId,
+        string name,
         Dictionary<int, List<(int toId, string toName, string label)>> adjacency,
         Dictionary<int, string> planetToRegion,
-        Dictionary<int, (int col, int row)> planetToGrid)
+        Dictionary<int, (int col, int row)> planetToGrid
+    )
     {
         var wp = new GalaxyTradeRouteWaypoint { Name = name, PageId = pageId };
 
@@ -628,13 +848,19 @@ public class GalaxyMapETLService(
         {
             wp.Col = grid.col;
             wp.Row = grid.row;
-            if (planetToRegion.TryGetValue(pageId, out var region)) wp.Region = region;
+            if (planetToRegion.TryGetValue(pageId, out var region))
+                wp.Region = region;
             return wp;
         }
 
         // BFS through adjacency to find grid coords (2 hops — enough for system→planet)
         var (place, region2, col, row) = ResolveLocationByTraversal(
-            pageId, adjacency, planetToRegion, planetToGrid, maxDepth: 2);
+            pageId,
+            adjacency,
+            planetToRegion,
+            planetToGrid,
+            maxDepth: 2
+        );
         wp.Col = col;
         wp.Row = row;
         wp.Region = region2;
@@ -642,48 +868,64 @@ public class GalaxyMapETLService(
         return wp;
     }
 
-    static string? GetDefaultFaction(int year) => year switch
-    {
-        <= -19 => "Galactic Republic",
-        <= 4 => "Galactic Empire",
-        <= 34 => "New Republic",
-        <= 35 => "First Order",
-        _ => null,
-    };
+    static string? GetDefaultFaction(int year) =>
+        year switch
+        {
+            <= -19 => "Galactic Republic",
+            <= 4 => "Galactic Empire",
+            <= 34 => "New Republic",
+            <= 35 => "First Order",
+            _ => null,
+        };
 
     static string? NormaliseRegion(string raw)
     {
         var lower = raw.ToLowerInvariant().Trim();
         foreach (var region in GalacticRegions)
-            if (lower == region.ToLowerInvariant()) return region;
-        if (lower.Contains("outer rim")) return "Outer Rim Territories";
-        if (lower.Contains("mid rim")) return "Mid Rim";
-        if (lower.Contains("inner rim")) return "Inner Rim";
-        if (lower.Contains("core world")) return "Core Worlds";
-        if (lower.Contains("deep core")) return "Deep Core";
-        if (lower.Contains("colonies")) return "Colonies";
-        if (lower.Contains("expansion")) return "Expansion Region";
-        if (lower.Contains("hutt space")) return "Hutt Space";
-        if (lower.Contains("unknown region")) return "Unknown Regions";
-        if (lower.Contains("wild space")) return "Wild Space";
+            if (lower == region.ToLowerInvariant())
+                return region;
+        if (lower.Contains("outer rim"))
+            return "Outer Rim Territories";
+        if (lower.Contains("mid rim"))
+            return "Mid Rim";
+        if (lower.Contains("inner rim"))
+            return "Inner Rim";
+        if (lower.Contains("core world"))
+            return "Core Worlds";
+        if (lower.Contains("deep core"))
+            return "Deep Core";
+        if (lower.Contains("colonies"))
+            return "Colonies";
+        if (lower.Contains("expansion"))
+            return "Expansion Region";
+        if (lower.Contains("hutt space"))
+            return "Hutt Space";
+        if (lower.Contains("unknown region"))
+            return "Unknown Regions";
+        if (lower.Contains("wild space"))
+            return "Wild Space";
         return null;
     }
 
     static string GetColor(string faction)
     {
-        if (FactionColors.TryGetValue(faction, out var color)) return color;
-        return ColorPalette[Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase)) % ColorPalette.Length];
+        if (FactionColors.TryGetValue(faction, out var color))
+            return color;
+        return ColorPalette[
+            Math.Abs(faction.GetHashCode(StringComparison.OrdinalIgnoreCase)) % ColorPalette.Length
+        ];
     }
 
-    static string? MapEventCategory(string lens) => lens switch
-    {
-        "Battle" or "Duel" => "Battle",
-        "War" or "Campaign" => "War",
-        "Treaty" => "Treaty",
-        "Government" or "Organization" => "Government",
-        "Mission" => "Campaign",
-        _ => "Event",
-    };
+    static string? MapEventCategory(string lens) =>
+        lens switch
+        {
+            "Battle" or "Duel" => "Battle",
+            "War" or "Campaign" => "War",
+            "Treaty" => "Treaty",
+            "Government" or "Organization" => "Government",
+            "Mission" => "Campaign",
+            _ => "Event",
+        };
 
     /// <summary>
     /// BFS from an entity node through the knowledge graph, looking for the nearest
@@ -694,10 +936,13 @@ public class GalaxyMapETLService(
         Dictionary<int, List<(int toId, string toName, string label)>> adjacency,
         Dictionary<int, string> planetToRegion,
         Dictionary<int, (int col, int row)> planetToGrid,
-        int maxDepth = 3)
+        int maxDepth = 3
+    )
     {
-        string? place = null, region = null;
-        int? col = null, row = null;
+        string? place = null,
+            region = null;
+        int? col = null,
+            row = null;
 
         var visited = new HashSet<int> { entityId };
         var frontier = new List<int> { entityId };
@@ -708,18 +953,21 @@ public class GalaxyMapETLService(
 
             foreach (var nodeId in frontier)
             {
-                if (!adjacency.TryGetValue(nodeId, out var neighbors)) continue;
+                if (!adjacency.TryGetValue(nodeId, out var neighbors))
+                    continue;
 
                 foreach (var (toId, toName, label) in neighbors)
                 {
-                    if (toId <= 0 || !visited.Add(toId)) continue;
+                    if (toId <= 0 || !visited.Add(toId))
+                        continue;
 
                     if (planetToGrid.TryGetValue(toId, out var grid))
                     {
                         col = grid.col;
                         row = grid.row;
                         place = toName;
-                        if (planetToRegion.TryGetValue(toId, out var r)) region = r;
+                        if (planetToRegion.TryGetValue(toId, out var r))
+                            region = r;
                         return (place, region, col, row);
                     }
 
@@ -739,17 +987,20 @@ public class GalaxyMapETLService(
         return (place, region, col, row);
     }
 
-
-
     static bool TryParseGridSquare(string gridSquare, out int col, out int row)
     {
-        col = 0; row = 0;
-        if (string.IsNullOrWhiteSpace(gridSquare)) return false;
+        col = 0;
+        row = 0;
+        if (string.IsNullOrWhiteSpace(gridSquare))
+            return false;
         var parts = gridSquare.Split('-', 2);
-        if (parts.Length != 2) return false;
+        if (parts.Length != 2)
+            return false;
         var letter = parts[0].Trim().ToUpperInvariant();
-        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z') return false;
-        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20) return false;
+        if (letter.Length != 1 || letter[0] < 'A' || letter[0] > 'Z')
+            return false;
+        if (!int.TryParse(parts[1].Trim(), out var num) || num < 1 || num > 20)
+            return false;
         col = letter[0] - 'A';
         row = num - 1;
         return true;

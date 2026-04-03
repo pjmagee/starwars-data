@@ -84,15 +84,12 @@ public class OpenAiStatusService
         var anyRateLimited = callers.Any(c => c.IsRateLimited);
         var errorsLastHour = errors.Count;
 
-        var overallStatus = anyQuotaBlocked
-            ? HealthStatus.QuotaExceeded
-            : anyRateLimited
-                ? HealthStatus.RateLimited
-                : errorsLastHour > 10
-                    ? HealthStatus.Degraded
-                    : callers.Count == 0
-                        ? HealthStatus.Unknown
-                        : HealthStatus.Healthy;
+        var overallStatus =
+            anyQuotaBlocked ? HealthStatus.QuotaExceeded
+            : anyRateLimited ? HealthStatus.RateLimited
+            : errorsLastHour > 10 ? HealthStatus.Degraded
+            : callers.Count == 0 ? HealthStatus.Unknown
+            : HealthStatus.Healthy;
 
         return new OpenAiHealthReport
         {
@@ -106,26 +103,29 @@ public class OpenAiStatusService
                 {
                     Time = e.time,
                     Caller = e.caller,
-                    Message = TruncateError(e.error)
+                    Message = TruncateError(e.error),
                 })
-                .ToList()
+                .ToList(),
         };
     }
 
     static bool IsQuotaError(Exception ex) =>
         ex.Message.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase)
-        || (ex.Message.Contains("429", StringComparison.Ordinal)
-            && ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase))
+        || (
+            ex.Message.Contains("429", StringComparison.Ordinal)
+            && ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase)
+        )
         || (ex.InnerException != null && IsQuotaError(ex.InnerException));
 
     static bool IsRateLimitError(Exception ex) =>
-        (ex.Message.Contains("429", StringComparison.Ordinal)
-         && !ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase))
+        (
+            ex.Message.Contains("429", StringComparison.Ordinal)
+            && !ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase)
+        )
         || ex.Message.Contains("rate_limit", StringComparison.OrdinalIgnoreCase)
         || (ex.InnerException != null && IsRateLimitError(ex.InnerException));
 
-    static string TruncateError(string msg) =>
-        msg.Length > 200 ? msg[..200] + "..." : msg;
+    static string TruncateError(string msg) => msg.Length > 200 ? msg[..200] + "..." : msg;
 }
 
 public enum HealthStatus
@@ -134,7 +134,7 @@ public enum HealthStatus
     Healthy,
     Degraded,
     RateLimited,
-    QuotaExceeded
+    QuotaExceeded,
 }
 
 public class CallerStatus

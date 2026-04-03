@@ -164,7 +164,9 @@ public class TimelineService
         // Union all other collections into the base
         for (int i = 1; i < collectionsToQuery.Count; i++)
         {
-            pipeline.Add(new BsonDocument("$unionWith", Collections.TimelinePrefix + collectionsToQuery[i]));
+            pipeline.Add(
+                new BsonDocument("$unionWith", Collections.TimelinePrefix + collectionsToQuery[i])
+            );
         }
 
         // Match (filter)
@@ -272,7 +274,9 @@ public class TimelineService
         int pageSize = 20
     )
     {
-        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + category);
+        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(
+            Collections.TimelinePrefix + category
+        );
 
         // Build combined filter
         var continuityFilter = BuildContinuityFilter(continuity);
@@ -369,17 +373,20 @@ public class TimelineService
     /// </summary>
     public async Task<List<Era>> GetErasAsync(CancellationToken ct = default)
     {
-        var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(cancellationToken: ct);
+        var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(
+            cancellationToken: ct
+        );
         if (!collectionNames.ToList().Contains(Collections.TimelinePrefix + "Era"))
             return [];
 
-        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + "Era");
+        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>(
+            Collections.TimelinePrefix + "Era"
+        );
         var docs = await eraCollection
             .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
             .ToListAsync(ct);
 
-        var grouped = docs
-            .GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
+        var grouped = docs.GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
             .Where(g => !string.IsNullOrWhiteSpace(g.Key));
 
         var eras = new List<Era>();
@@ -393,20 +400,24 @@ public class TimelineService
             var start = entries.First();
             var end = entries.Last();
 
-            eras.Add(new Era
-            {
-                Name = group.Key,
-                StartYear = start.year,
-                StartDemarcation = start.dem,
-                EndYear = end.year,
-                EndDemarcation = end.dem
-            });
+            eras.Add(
+                new Era
+                {
+                    Name = group.Key,
+                    StartYear = start.year,
+                    StartDemarcation = start.dem,
+                    EndYear = end.year,
+                    EndDemarcation = end.dem,
+                }
+            );
         }
 
         // Sort chronologically
-        eras.Sort((a, b) =>
-            ToLinearYear(a.StartYear, a.StartDemarcation)
-                .CompareTo(ToLinearYear(b.StartYear, b.StartDemarcation)));
+        eras.Sort(
+            (a, b) =>
+                ToLinearYear(a.StartYear, a.StartDemarcation)
+                    .CompareTo(ToLinearYear(b.StartYear, b.StartDemarcation))
+        );
 
         return eras;
     }

@@ -21,7 +21,8 @@ public class TerritoryControlService
     public TerritoryControlService(
         IMongoClient mongoClient,
         IOptions<SettingsOptions> settings,
-        ILogger<TerritoryControlService> logger)
+        ILogger<TerritoryControlService> logger
+    )
     {
         var db = mongoClient.GetDatabase(settings.Value.DatabaseName);
         _yearDocs = db.GetCollection<TerritoryYearDocument>(Collections.TerritoryYears);
@@ -76,13 +77,16 @@ public class TerritoryControlService
     }
 
     /// <summary>Read pre-computed faction metadata from the overview document.</summary>
-    public async Task<Dictionary<string, FactionInfo>> GetFactionInfoAsync(CancellationToken ct = default)
+    public async Task<Dictionary<string, FactionInfo>> GetFactionInfoAsync(
+        CancellationToken ct = default
+    )
     {
         var doc = await _overviewColl
             .Find(Builders<TerritoryOverviewDocument>.Filter.Eq(o => o.Id, "overview"))
             .FirstOrDefaultAsync(ct);
 
-        if (doc is null) return new();
+        if (doc is null)
+            return new();
 
         return doc.Factions.ToDictionary(
             f => f.Name,
@@ -92,7 +96,8 @@ public class TerritoryControlService
                 WikiUrl = f.WikiUrl,
                 IconUrl = f.IconUrl,
             },
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     public record FactionInfo
