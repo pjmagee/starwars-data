@@ -54,6 +54,20 @@ public class GalaxyOverviewDocument
     [BsonElement("maxYear")]
     public int MaxYear { get; set; }
 
+    // ── Grid bounds (computed from actual data) ──
+
+    [BsonElement("gridColumns")]
+    public int GridColumns { get; set; } = 26;
+
+    [BsonElement("gridRows")]
+    public int GridRows { get; set; } = 21;
+
+    [BsonElement("gridStartCol")]
+    public int GridStartCol { get; set; }
+
+    [BsonElement("gridStartRow")]
+    public int GridStartRow { get; set; }
+
     [BsonElement("availableYears")]
     public List<int> AvailableYears { get; set; } = [];
 

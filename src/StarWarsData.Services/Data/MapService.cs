@@ -860,6 +860,17 @@ public class MapService
             );
         }
 
+        // Compute actual grid bounds from data
+        if (cellCounts.Count > 0)
+        {
+            var cols = cellCounts.Keys.Select(k => k.col).ToList();
+            var rows = cellCounts.Keys.Select(k => k.row).ToList();
+            result.GridStartCol = cols.Min();
+            result.GridStartRow = rows.Min();
+            result.GridColumns = cols.Max() - cols.Min() + 1;
+            result.GridRows = rows.Max() - rows.Min() + 1;
+        }
+
         // Nebulas — parse multi-grid values like "S-5 and S-6", "T-9/T-10", "E-9, F-9"
         var nebFilter = InfoboxDataFilter("Nebula", "Grid square");
         if (continuity.HasValue)

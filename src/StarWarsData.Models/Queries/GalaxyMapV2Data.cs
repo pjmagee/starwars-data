@@ -7,10 +7,13 @@ namespace StarWarsData.Models.Queries;
 public class GalaxyMapV2Overview
 {
     public int GridColumns { get; set; } = 26;
-    public int GridRows { get; set; } = 20;
+    public int GridRows { get; set; } = 21;
+    public int GridStartCol { get; set; }
+    public int GridStartRow { get; set; }
     public List<MapV2Region> Regions { get; set; } = [];
     public List<MapV2TradeRoute> TradeRoutes { get; set; } = [];
     public List<MapV2Nebula> Nebulas { get; set; } = [];
+
     /// <summary>
     /// Per-cell system counts for the overview heatmap. Only populated cells included.
     /// </summary>
@@ -41,8 +44,8 @@ public class MapV2System
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
-    public int Col { get; set; }   // 0-25 (A=0, Z=25)
-    public int Row { get; set; }   // 0-19 (grid 1=row 0, grid 20=row 19)
+    public int Col { get; set; } // 0-25 (A=0, Z=25)
+    public int Row { get; set; } // 0-19 (grid 1=row 0, grid 20=row 19)
     public string? Region { get; set; }
     public string? Sector { get; set; }
     public List<MapV2CelestialBody> CelestialBodies { get; set; } = [];
@@ -58,6 +61,7 @@ public class MapV2CelestialBody
 public class MapV2Region
 {
     public string Name { get; set; } = "";
+
     /// <summary>
     /// Grid cells belonging to this region, as [col, row] pairs (0-indexed)
     /// </summary>
@@ -84,6 +88,7 @@ public class MapV2Nebula
     public string Name { get; set; } = "";
     public int Col { get; set; }
     public int Row { get; set; }
+
     /// <summary>
     /// All grid cells this nebula spans. First entry matches Col/Row.
     /// </summary>

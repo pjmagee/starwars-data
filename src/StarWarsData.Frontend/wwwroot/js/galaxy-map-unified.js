@@ -47,6 +47,8 @@ export function initialize(containerId, overview, dotNetRef) {
     const height = container.clientHeight || 800;
     const cols = overview.gridColumns;
     const rows = overview.gridRows;
+    const startCol = overview.gridStartCol ?? 0;
+    const startRow = overview.gridStartRow ?? 0;
 
     // World coordinates
     const worldW = 2600;
@@ -125,13 +127,13 @@ export function initialize(containerId, overview, dotNetRef) {
         gridLayer.append('text')
             .attr('x', c * cellW + cellW / 2).attr('y', -8)
             .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.35)')
-            .attr('font-size', '13px').attr('font-weight', '600').text(String.fromCharCode(65 + c));
+            .attr('font-size', '13px').attr('font-weight', '600').text(String.fromCharCode(65 + startCol + c));
     }
     for (let r = 0; r < rows; r++) {
         gridLayer.append('text')
             .attr('x', -14).attr('y', r * cellH + cellH / 2 + 4)
             .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.35)')
-            .attr('font-size', '13px').attr('font-weight', '600').text(r + 1);
+            .attr('font-size', '13px').attr('font-weight', '600').text(r + startRow + 1);
     }
 
     // === REGIONS (cell-based, no overlap) ===

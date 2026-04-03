@@ -242,10 +242,26 @@ public class GalaxyMapETLService(
             }
         }
 
+        // Compute actual grid bounds from data
+        var allCols = planetToGrid.Values.Select(g => g.col).ToList();
+        var allRows = planetToGrid.Values.Select(g => g.row).ToList();
+        var gridStartCol = allCols.Count > 0 ? allCols.Min() : 0;
+        var gridStartRow = allRows.Count > 0 ? allRows.Min() : 0;
+        var gridEndCol = allCols.Count > 0 ? allCols.Max() : 25;
+        var gridEndRow = allRows.Count > 0 ? allRows.Max() : 20;
+        var gridColumns = gridEndCol - gridStartCol + 1;
+        var gridRows = gridEndRow - gridStartRow + 1;
+
         logger.LogInformation(
-            "Galaxy map ETL: {GridById} planets with grid (by ID), {GridByName} (by name)",
+            "Galaxy map ETL: {GridById} planets with grid (by ID), {GridByName} (by name). Grid bounds: col {StartCol}-{EndCol} ({Cols} cols), row {StartRow}-{EndRow} ({Rows} rows)",
             planetToGrid.Count,
-            nameToGrid.Count
+            nameToGrid.Count,
+            gridStartCol,
+            gridEndCol,
+            gridColumns,
+            gridStartRow,
+            gridEndRow,
+            gridRows
         );
 
         // ── Step 3: Build adjacency list from ALL edges for BFS ──
@@ -627,6 +643,10 @@ public class GalaxyMapETLService(
         {
             MinYear = allYears.Min,
             MaxYear = allYears.Max,
+            GridColumns = gridColumns,
+            GridRows = gridRows,
+            GridStartCol = gridStartCol,
+            GridStartRow = gridStartRow,
             AvailableYears = allYears.ToList(),
             Factions = factionInfoList,
             GalacticRegions = GalacticRegions.ToList(),
