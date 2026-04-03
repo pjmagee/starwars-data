@@ -250,7 +250,7 @@
 
     private IReadOnlyCollection<string> _selectedCategories = new List<string>();
     private IReadOnlyCollection<string> _selectedEraNames = new List<string>();
-    private Dictionary<string, string> _templateColorMap = new();
+    private Dictionary<string, string> _templateColorMap = new(StringComparer.OrdinalIgnoreCase);
 
     private int _pages = 1;
     private int _pageSize = 15;
@@ -575,7 +575,7 @@
     {
         var lastColon = template.LastIndexOf(':');
         var name = lastColon >= 0 ? template[(lastColon + 1)..] : template;
-        return name.Replace("_infobox", "").ToLower();
+        return name.Replace("_infobox", "", StringComparison.OrdinalIgnoreCase);
     }
 
     private string GetColor(StarWarsData.Models.Entities.TimelineEvent timelineEvent)
@@ -630,8 +630,11 @@
             .ThenBy(c => c, StringComparer.OrdinalIgnoreCase);
     }
 
-    private static string FormatCategoryName(string category) =>
-        CleanTemplateName(category).Replace("_", " ").Trim();
+    private static string FormatCategoryName(string category)
+    {
+        var cleaned = CleanTemplateName(category).Replace("_", " ").Trim();
+        return System.Text.RegularExpressions.Regex.Replace(cleaned, "(?<!^)([A-Z])", " $1");
+    }
 
     private static string FormatYear(float year, Demarcation dem) =>
         $"{year:0.##} {dem.ToString().ToUpper()}";
