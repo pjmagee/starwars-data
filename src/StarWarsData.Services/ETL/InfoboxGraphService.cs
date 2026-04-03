@@ -560,50 +560,75 @@ public class InfoboxGraphService(
                         if (values.Count > 0)
                             properties[label] = values;
                     }
-                    else if (RelationshipLabels.TryGetValue(label, out var edgeLabel))
+                    else if (
+                        RelationshipLabels.TryGetValue(label, out var edgeLabel)
+                        || links.Count > 0
+                    )
                     {
-                        // Create edges for each link target
+                        edgeLabel ??= NormaliseLabel(label);
+                        var weight = RelationshipLabels.ContainsKey(label) ? 1.0 : 0.8;
+
+                        // Build link lookup: content text → (href, content)
+                        var linkLookup = new Dictionary<string, BsonDocument>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                         foreach (var link in links)
                         {
-                            var href = link.Contains("Href") ? link["Href"].AsString : null;
                             var content = link.Contains("Content")
                                 ? link["Content"].AsString
                                 : null;
-                            if (href is null || content is null)
-                                continue;
-
-                            // Resolve the link target to a PageId
-                            var targetPageId = ResolveLinkTarget(href, content, wikiUrlToPageId);
-
-                            edges.Add(
-                                new RelationshipEdge
-                                {
-                                    FromId = pageId,
-                                    FromName = title,
-                                    FromType = type,
-                                    ToId = targetPageId,
-                                    ToName = content,
-                                    ToType = "", // filled when target node is processed
-                                    Label = edgeLabel,
-                                    Weight = 1.0,
-                                    Evidence = $"Infobox field '{label}'",
-                                    SourcePageId = pageId,
-                                    Continuity = continuity,
-                                }
-                            );
+                            if (content is not null)
+                                linkLookup.TryAdd(content, link);
                         }
 
-                        // If no links but has values, treat as property fallback
-                        if (links.Count == 0 && values.Count > 0)
-                            properties[label] = values;
-                    }
-                    else
-                    {
-                        // Unknown field — use heuristic: if it has links, create relationships;
-                        // otherwise store as property
-                        if (links.Count > 0)
+                        // Match each Value to its primary link (text before parenthetical)
+                        var primaryLinks = ExtractPrimaryLinks(values, linkLookup);
+
+                        if (primaryLinks.Count > 0)
                         {
-                            var inferredLabel = NormaliseLabel(label);
+                            // Create edges only for primary entities from Values
+                            foreach (var (linkDoc, qualifier, fromYear, toYear) in primaryLinks)
+                            {
+                                var href = linkDoc.Contains("Href")
+                                    ? linkDoc["Href"].AsString
+                                    : null;
+                                var content = linkDoc.Contains("Content")
+                                    ? linkDoc["Content"].AsString
+                                    : null;
+                                if (href is null || content is null)
+                                    continue;
+
+                                var targetPageId = ResolveLinkTarget(
+                                    href,
+                                    content,
+                                    wikiUrlToPageId
+                                );
+
+                                edges.Add(
+                                    new RelationshipEdge
+                                    {
+                                        FromId = pageId,
+                                        FromName = title,
+                                        FromType = type,
+                                        ToId = targetPageId,
+                                        ToName = content,
+                                        ToType = "",
+                                        Label = edgeLabel,
+                                        Weight = weight,
+                                        Evidence = qualifier is not null
+                                            ? $"Infobox field '{label}': {content} ({qualifier})"
+                                            : $"Infobox field '{label}'",
+                                        SourcePageId = pageId,
+                                        Continuity = continuity,
+                                        FromYear = fromYear,
+                                        ToYear = toYear,
+                                    }
+                                );
+                            }
+                        }
+                        else
+                        {
+                            // Fallback: no Values or no matches — create edges for all links
                             foreach (var link in links)
                             {
                                 var href = link.Contains("Href") ? link["Href"].AsString : null;
@@ -627,19 +652,19 @@ public class InfoboxGraphService(
                                         ToId = targetPageId,
                                         ToName = content,
                                         ToType = "",
-                                        Label = inferredLabel,
-                                        Weight = 0.8, // lower confidence for inferred labels
-                                        Evidence = $"Infobox field '{label}' (inferred)",
+                                        Label = edgeLabel,
+                                        Weight = weight * 0.8,
+                                        Evidence = $"Infobox field '{label}' (fallback)",
                                         SourcePageId = pageId,
                                         Continuity = continuity,
                                     }
                                 );
                             }
                         }
-                        else if (values.Count > 0)
-                        {
+
+                        // If no links at all, store as property
+                        if (links.Count == 0 && values.Count > 0)
                             properties[label] = values;
-                        }
                     }
                 }
 
@@ -907,6 +932,99 @@ public class InfoboxGraphService(
         }
 
         return 0; // unresolved
+    }
+
+    /// <summary>
+    /// Match each Value string to its primary link from the link lookup.
+    /// The primary entity is the text before the first '(' in the Value.
+    /// Parenthetical text is treated as qualifier metadata, and temporal bounds are parsed from it.
+    /// </summary>
+    static List<(
+        BsonDocument link,
+        string? qualifier,
+        int? fromYear,
+        int? toYear
+    )> ExtractPrimaryLinks(List<string> values, Dictionary<string, BsonDocument> linkLookup)
+    {
+        var results =
+            new List<(BsonDocument link, string? qualifier, int? fromYear, int? toYear)>();
+        if (values.Count == 0 || linkLookup.Count == 0)
+            return results;
+
+        foreach (var value in values)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                continue;
+
+            // Extract primary name: text before first '('
+            var parenIdx = value.IndexOf('(');
+            var primaryName = (parenIdx > 0 ? value[..parenIdx] : value).Trim().TrimEnd(',');
+
+            // Extract qualifier: text inside parentheses
+            string? qualifier = null;
+            int? fromYear = null;
+            int? toYear = null;
+
+            if (parenIdx > 0)
+            {
+                var closeIdx = value.LastIndexOf(')');
+                if (closeIdx > parenIdx)
+                {
+                    qualifier = value[(parenIdx + 1)..closeIdx].Trim();
+
+                    // Parse temporal bounds from qualifier: "19 BBY–4 ABY", "5 ABY, officially"
+                    var yearMatches = Regex.Matches(
+                        qualifier,
+                        @"(\d[\d,]*)\s*(BBY|ABY)",
+                        RegexOptions.IgnoreCase
+                    );
+                    if (yearMatches.Count >= 1)
+                    {
+                        var y1 = ParseGalacticYear(yearMatches[0].Value);
+                        fromYear = y1;
+                    }
+                    if (yearMatches.Count >= 2)
+                    {
+                        var y2 = ParseGalacticYear(yearMatches[1].Value);
+                        toYear = y2;
+                    }
+                }
+            }
+
+            // Try to match primary name to a link (case-insensitive)
+            if (linkLookup.TryGetValue(primaryName, out var matchedLink))
+            {
+                results.Add((matchedLink, qualifier, fromYear, toYear));
+            }
+            else
+            {
+                // Fallback: try matching the full value text (for simple cases without parens)
+                if (linkLookup.TryGetValue(value.Trim(), out var fullMatch))
+                {
+                    results.Add((fullMatch, null, null, null));
+                }
+                // Last resort: if Value starts with a link content, use it
+                else
+                {
+                    foreach (var (linkContent, linkDoc) in linkLookup)
+                    {
+                        if (
+                            primaryName.StartsWith(linkContent, StringComparison.OrdinalIgnoreCase)
+                            || linkContent.StartsWith(
+                                primaryName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        {
+                            results.Add((linkDoc, qualifier, fromYear, toYear));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return results;
     }
 
     /// <summary>
