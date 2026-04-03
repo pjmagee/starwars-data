@@ -162,6 +162,22 @@
             </MudStack>
         }
 
+        @if (_hasTemporalData)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:rgba(255,255,255,0.5);" />
+                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Year</MudText>
+                <MudSlider T="int" Value="_selectedYear" ValueChanged="OnYearChanged"
+                           Min="_minYear" Max="_maxYear" Step="1"
+                           Style="max-width:400px;" Color="Color.Warning" />
+                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning">
+                    @FormatYear(_selectedYear)
+                </MudChip>
+                <MudButton Variant="Variant.Text" Size="Size.Small" Color="Color.Secondary"
+                           OnClick="ClearYearFilter">Show All</MudButton>
+            </MudStack>
+        }
+
         <MudGrid Spacing="2" Class="mb-4">
             <MudItem xs="12" md="@(_selectedNodePage is not null ? 9 : 12)">
                 <MudPaper Outlined="true" Style="@($"overflow:hidden; border-radius:8px; position:relative; {(_fullscreen ? "position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; border-radius:0;" : "")}")">
@@ -324,6 +340,13 @@
     // Navigation & fullscreen
     private List<(int Id, string Name)> _history = [];
     private bool _fullscreen;
+
+    // Temporal slider
+    private bool _hasTemporalData;
+    private int _minYear;
+    private int _maxYear;
+    private int _selectedYear;
+    private bool _yearFilterActive;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -576,7 +599,21 @@
             toId = e.ToId,
             label = e.Label,
             weight = e.Weight > 0 ? e.Weight : 0.5,
+            fromYear = e.FromYear,
+            toYear = e.ToYear,
         }).ToArray();
+
+        // Compute temporal range for slider
+        var temporalEdges = result.Edges.Where(e => e.FromYear.HasValue).ToList();
+        _hasTemporalData = temporalEdges.Count > 0;
+        if (_hasTemporalData)
+        {
+            _minYear = temporalEdges.Min(e => e.FromYear!.Value);
+            _maxYear = temporalEdges.Max(e => e.ToYear ?? e.FromYear!.Value);
+            if (_minYear == _maxYear) { _minYear -= 10; _maxYear += 10; }
+            _selectedYear = _maxYear;
+            _yearFilterActive = false;
+        }
 
         var data = new { nodes, edges, rootId = result.RootId };
 
@@ -764,6 +801,23 @@
             StateHasChanged();
         });
     }
+
+    private async Task OnYearChanged(int value)
+    {
+        _selectedYear = value;
+        _yearFilterActive = true;
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("filterByYear", _selectedYear);
+    }
+
+    private async Task ClearYearFilter()
+    {
+        _yearFilterActive = false;
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("filterByYear", (int?)null);
+    }
+
+    private static string FormatYear(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
 
     private static string FormatLabel(string label) =>
         System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
