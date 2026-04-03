@@ -50,11 +50,12 @@ export function initialize(containerId, overview, dotNetRef) {
     const startCol = overview.gridStartCol ?? 0;
     const startRow = overview.gridStartRow ?? 0;
 
-    // World coordinates
-    const worldW = 2600;
-    const worldH = 2000;
-    const cellW = worldW / cols;
-    const cellH = worldH / rows;
+    // World coordinates — cell size fixed at 100px, world scales to fit grid
+    const cellSize = 100;
+    const worldW = cols * cellSize;
+    const worldH = rows * cellSize;
+    const cellW = cellSize;
+    const cellH = cellSize;
 
     // Convert absolute grid coordinates to local pixel position
     const colX = (col) => (col - startCol) * cellW;
