@@ -104,9 +104,9 @@ builder
         );
     })
     .AddSingleton<CollectionFilters>()
-    .AddScoped<KnowledgeGraphQueryService>()
+    .AddSingleton<KnowledgeGraphQueryService>()
     .AddScoped<ChatSessionService>()
-    .AddScoped<GraphRAGToolkit>(sp =>
+    .AddSingleton<GraphRAGToolkit>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
