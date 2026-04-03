@@ -411,7 +411,7 @@ function updateVisuals() {
         .attr('fill', d => getTypeColor(d.type))
         .attr('font-size', '10px')
         .style('pointer-events', 'none').style('user-select', 'none')
-        .text(d => d.type || '');
+        .text(d => formatType(d.type));
 
     // Expand indicator (+) for unexpanded nodes
     enter.filter(d => !d.expanded && !d.isRoot)
@@ -716,6 +716,11 @@ export function destroyGraph(containerId) {
 function formatLabel(label) {
     if (!label) return '';
     return label.replace(/_/g, ' ');
+}
+
+function formatType(type) {
+    if (!type) return '';
+    return type.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2');
 }
 
 function truncate(str, max) {

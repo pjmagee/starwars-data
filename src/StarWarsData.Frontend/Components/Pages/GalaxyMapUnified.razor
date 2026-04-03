@@ -224,7 +224,7 @@
                                          Variant="@(isActive ? Variant.Filled : Variant.Outlined)"
                                          OnClick="() => OnLensChanged(l.Lens)"
                                          Style="@chipStyle">
-                                    @l.Lens @l.TotalCount
+                                    @FormatType(l.Lens) @l.TotalCount
                                 </MudChip>
                             }
                         </MudStack>
@@ -478,7 +478,7 @@
                         <div style="display:flex;justify-content:space-between;align-items:center;">
                             <span style="font-size:12px;font-weight:500;">@evt.Title</span>
                             <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
-                                     Style="@($"border-color:{lensColor};color:{lensColor};font-size:9px;height:16px;")">@evt.Lens</MudChip>
+                                     Style="@($"border-color:{lensColor};color:{lensColor};font-size:9px;height:16px;")">@FormatType(evt.Lens)</MudChip>
                         </div>
                     </div>
                 }
@@ -513,7 +513,7 @@
                 <div style="padding:12px 16px;display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;">
                 <MudStack Row="true" Spacing="1" Class="mb-2">
                     <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
-                             Style="@($"border-color:{GetLensColorCss(_hoveredEvent.Lens)};color:{GetLensColorCss(_hoveredEvent.Lens)};")">@_hoveredEvent.Lens</MudChip>
+                             Style="@($"border-color:{GetLensColorCss(_hoveredEvent.Lens)};color:{GetLensColorCss(_hoveredEvent.Lens)};")">@FormatType(_hoveredEvent.Lens)</MudChip>
                     @if (_hoveredEvent.Place is not null)
                     {
                         <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default"
@@ -1156,6 +1156,10 @@
         var c = GetRegionColor(name);
         return visible ? $"background-color:{c};color:#fff;" : $"border-color:{c};color:{c};opacity:0.5;";
     }
+
+    static string FormatType(string type) =>
+        System.Text.RegularExpressions.Regex.Replace(
+            type.Replace("_", " "), "(?<!^)([A-Z])", " $1");
 
     static string GetLensColorCss(string lens)
     {
