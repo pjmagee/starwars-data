@@ -104,6 +104,7 @@ builder
         );
     })
     .AddSingleton<CollectionFilters>()
+    .AddScoped<KnowledgeGraphQueryService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {
