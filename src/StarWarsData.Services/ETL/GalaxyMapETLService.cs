@@ -164,10 +164,14 @@ public class GalaxyMapETLService(
                 planetToRegion.TryAdd(edge["fromId"].AsInt32, region);
         }
 
-        // Faction → planets per region from affiliated_with edges
+        // Faction → planets per region from affiliated_with edges (with temporal bounds)
         var factionRegionPlanets = new Dictionary<string, Dictionary<string, int>>(
             StringComparer.OrdinalIgnoreCase
         );
+        // Store raw affiliations with temporal bounds for per-year filtering
+        var temporalAffiliations =
+            new List<(string faction, string region, int? fromYear, int? toYear)>();
+
         var affiliationEdges = await _edges
             .Find(
                 Builders<RelationshipEdge>.Filter.And(
@@ -180,9 +184,12 @@ public class GalaxyMapETLService(
         {
             if (!planetToRegion.TryGetValue(edge.FromId, out var region))
                 continue;
+            // Static totals (for faction discovery)
             if (!factionRegionPlanets.TryGetValue(edge.ToName, out var regionCounts))
                 factionRegionPlanets[edge.ToName] = regionCounts = new();
             regionCounts[region] = regionCounts.GetValueOrDefault(region) + 1;
+            // Track temporal bounds for per-year filtering
+            temporalAffiliations.Add((edge.ToName, region, edge.FromYear, edge.ToYear));
         }
 
         logger.LogInformation(
@@ -328,10 +335,32 @@ public class GalaxyMapETLService(
             lensTotals[lens] = lensTotals.GetValueOrDefault(lens) + 1;
             lensOutOfUniverse.TryAdd(lens, OutOfUniverseLenses.Contains(lens));
 
-            var year = node.StartYear!.Value;
-            if (!eventsByYear.TryGetValue(year, out var yearList))
-                eventsByYear[year] = yearList = [];
-            yearList.Add(node);
+            // Use temporal facets for multi-year events (wars, campaigns span their duration)
+            var startYear = node.StartYear!.Value;
+            var endYear = node.EndYear ?? startYear;
+
+            // For conflict/institutional types with both start and end, span all years
+            var semanticPrefix = node.TemporalFacets.FirstOrDefault()?.Semantic.Split('.')[0];
+            var spanYears =
+                semanticPrefix is "conflict" or "institutional"
+                && endYear > startYear
+                && (endYear - startYear) <= 100; // cap to prevent huge ranges
+
+            if (spanYears)
+            {
+                for (var y = startYear; y <= endYear; y++)
+                {
+                    if (!eventsByYear.TryGetValue(y, out var yl))
+                        eventsByYear[y] = yl = [];
+                    yl.Add(node);
+                }
+            }
+            else
+            {
+                if (!eventsByYear.TryGetValue(startYear, out var yearList))
+                    eventsByYear[startYear] = yearList = [];
+                yearList.Add(node);
+            }
 
             // Count events with resolvable locations
             if (planetToGrid.ContainsKey(node.PageId) || adjacency.ContainsKey(node.PageId))
@@ -438,7 +467,12 @@ public class GalaxyMapETLService(
                 .Select(g => g.Name)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            var regionControls = ComputeRegionControls(year, activeGovs, factionRegionPlanets);
+            var regionControls = ComputeRegionControls(
+                year,
+                activeGovs,
+                factionRegionPlanets,
+                temporalAffiliations
+            );
 
             // ── Events: resolve locations and build cells ──
             var cellMap = new Dictionary<(int col, int row), GalaxyYearEventCell>();
@@ -663,14 +697,34 @@ public class GalaxyMapETLService(
     List<TerritoryRegionControl> ComputeRegionControls(
         int year,
         HashSet<string> activeGovs,
-        Dictionary<string, Dictionary<string, int>> factionRegionPlanets
+        Dictionary<string, Dictionary<string, int>> factionRegionPlanets,
+        List<(string faction, string region, int? fromYear, int? toYear)> temporalAffiliations
     )
     {
         var regionControls = new List<TerritoryRegionControl>();
 
+        // Build per-year faction-region counts from temporal affiliations
+        var yearFactionRegion = new Dictionary<string, Dictionary<string, int>>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        foreach (var (faction, region, fromY, toY) in temporalAffiliations)
+        {
+            // Edge is active at this year if: no temporal bounds OR year is within [from, to]
+            var active = fromY is null || (year >= fromY && (toY is null || year <= toY));
+            if (!active || !activeGovs.Contains(faction))
+                continue;
+            if (!yearFactionRegion.TryGetValue(faction, out var rc))
+                yearFactionRegion[faction] = rc = new();
+            rc[region] = rc.GetValueOrDefault(region) + 1;
+        }
+
+        // Use temporal counts if we have them, otherwise fall back to static
+        var effectiveCounts =
+            yearFactionRegion.Count > 0 ? yearFactionRegion : factionRegionPlanets;
+
         foreach (var region in GalacticRegions)
         {
-            var regionFactions = factionRegionPlanets
+            var regionFactions = effectiveCounts
                 .Where(kv => activeGovs.Contains(kv.Key))
                 .Where(kv => kv.Value.ContainsKey(region))
                 .Select(kv => (Faction: kv.Key, Count: kv.Value[region]))
