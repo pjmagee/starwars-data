@@ -123,7 +123,7 @@
     @if (_geography is not null)
     {
         <div class="galaxy-nav-panel">
-            <MudPaper Elevation="8" Class="pa-2" Style="background:rgba(15,15,35,0.9);backdrop-filter:blur(8px);">
+            <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:300px;">
                 <MudStack Row="false" Spacing="1">
                     <!-- Mode toggle + fullscreen -->
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
@@ -132,8 +132,9 @@
                         <MudToggleItem Value="@("timeline")" Text="Timeline" />
                     </MudToggleGroup>
                     <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
-                                   Size="Size.Small" Color="Color.Inherit" OnClick="ToggleFullscreen"
-                                   Title="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")" />
+                                   Size="Size.Medium" Color="Color.Inherit" OnClick="ToggleFullscreen"
+                                   Title="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")"
+                                   Style="color:rgba(255,255,255,0.8);" />
                     </MudStack>
 
                     <!-- Breadcrumbs -->
@@ -166,11 +167,11 @@
 
                     <!-- Region filter -->
                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">Regions</MudText>
+                        <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.7);font-weight:600;">Regions</MudText>
                         <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="ShowAllRegions"
-                                   Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">All</MudButton>
+                                   Style="color:rgba(255,255,255,0.6);min-width:auto;padding:0 6px;text-transform:none;font-size:12px;">All</MudButton>
                         <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="HideAllRegions"
-                                   Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">None</MudButton>
+                                   Style="color:rgba(255,255,255,0.6);min-width:auto;padding:0 6px;text-transform:none;font-size:12px;">None</MudButton>
                     </MudStack>
                     <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:140px;overflow-y:auto;">
                         @foreach (var region in _geography.Regions)
@@ -189,11 +190,11 @@
                     {
                         <MudDivider Style="border-color:rgba(255,255,255,0.1);" />
                         <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">Events</MudText>
+                            <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.7);font-weight:600;">Events</MudText>
                             <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="@(() => OnLensChanged("All"))"
-                                       Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">All</MudButton>
+                                       Style="color:rgba(255,255,255,0.6);min-width:auto;padding:0 6px;text-transform:none;font-size:12px;">All</MudButton>
                             <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="@(() => OnLensChanged("None"))"
-                                       Style="color:rgba(255,255,255,0.4);min-width:auto;padding:0 4px;text-transform:none;font-size:11px;">None</MudButton>
+                                       Style="color:rgba(255,255,255,0.6);min-width:auto;padding:0 6px;text-transform:none;font-size:12px;">None</MudButton>
                         </MudStack>
                         <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:140px;overflow-y:auto;">
                             @foreach (var lens in FilteredLenses)
