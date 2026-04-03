@@ -12,6 +12,29 @@
         <link href=@Assets["style.css"] rel="stylesheet"/>
         <ImportMap/>
         <link rel="icon" type="image/ico" href="favicon.ico"/>
+
+        <!-- SEO: global defaults (pages override via HeadContent) -->
+        <meta name="description" content="Explore the Star Wars universe through a temporal knowledge graph of 166,000+ entities, AI-powered semantic search, interactive galaxy map, and relationship visualizations — all sourced from Wookieepedia." />
+        <meta name="keywords" content="Star Wars, Wookieepedia, knowledge graph, galaxy map, timeline, AI, semantic search, characters, planets, relationships, Canon, Legends" />
+        <meta name="author" content="Patrick Magee" />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Star Wars Data Explorer" />
+        <meta property="og:title" content="Star Wars Data Explorer" />
+        <meta property="og:description" content="AI-powered exploration of the Star Wars universe — 166K entities, 694K relationships, semantic search over 800K article passages, interactive galaxy map, and more." />
+        <meta property="og:url" content="https://swdata.ai" />
+        <meta property="og:locale" content="en_US" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Star Wars Data Explorer" />
+        <meta name="twitter:description" content="AI-powered exploration of the Star Wars universe — knowledge graph, semantic search, galaxy map, and interactive visualizations." />
+
+        <!-- Canonical -->
+        <link rel="canonical" href="https://swdata.ai" />
+
         <HeadOutlet />
         <!-- Google Analytics — loaded only after cookie consent -->
         <script>
