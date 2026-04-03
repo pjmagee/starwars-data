@@ -1,12 +1,9 @@
-@using WikiPage = StarWarsData.Models.Entities.Page
 @inject IHttpClientFactory HttpClientFactory
-@inject IJSRuntime JS
-@implements IAsyncDisposable
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
     <MudText Typo="Typo.h6" Class="mb-2">@Descriptor.Title</MudText>
 
-    @* Graph controls toolbar *@
+    @* Label controls *@
     <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2 flex-wrap">
         <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5)">Depth</MudText>
         <MudSlider T="int" Value="_maxDepth" ValueChanged="OnDepthChanged"
@@ -32,22 +29,6 @@
         }
     </MudStack>
 
-    @if (_hasTemporalData)
-    {
-        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
-            <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:rgba(255,255,255,0.5);" />
-            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Year</MudText>
-            <MudSlider T="int" Value="_selectedYear" ValueChanged="OnYearChanged"
-                       Min="_minYear" Max="_maxYear" Step="1"
-                       Style="max-width:300px;" Color="Color.Warning" />
-            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning">
-                @FormatYearDisplay(_selectedYear)
-            </MudChip>
-            <MudButton Variant="Variant.Text" Size="Size.Small" Color="Color.Secondary"
-                       OnClick="ClearYearFilter">Show All</MudButton>
-        </MudStack>
-    }
-
     @if (_loading)
     {
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
@@ -59,106 +40,11 @@
     {
         <MudAlert Severity="Severity.Error">@_error</MudAlert>
     }
-    else if (_hasData)
+    else if (_graphData is not null)
     {
-        <MudGrid Spacing="2">
-            <MudItem xs="12" md="@(_selectedNodePage is not null || _loadingNodeDetails ? 9 : 12)">
-                <div style="@($"position:relative; overflow:hidden; border-radius:8px; {(_fullscreen ? "position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; border-radius:0;" : "")}")">
-                    <div style="position:absolute; top:8px; right:8px; z-index:10; display:flex; gap:4px;">
-                        <MudIconButton Icon="@Icons.Material.Filled.ZoomIn" Size="Size.Small"
-                                       OnClick="ZoomIn" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
-                        <MudIconButton Icon="@Icons.Material.Filled.ZoomOut" Size="Size.Small"
-                                       OnClick="ZoomOut" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
-                        <MudIconButton Icon="@Icons.Material.Filled.FitScreen" Size="Size.Small"
-                                       OnClick="FitToScreen" Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
-                        <MudIconButton Icon="@(_fullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
-                                       Size="Size.Small" OnClick="ToggleFullscreen"
-                                       Style="background:rgba(30,30,56,0.8); color:#e0e0f0;" />
-                    </div>
-                    <div id="@_containerId"
-                         style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : "height:650px;")}")">
-                    </div>
-                </div>
-            </MudItem>
-
-            @if (_loadingNodeDetails)
-            {
-                <MudItem xs="12" md="3">
-                    <MudPaper Class="pa-4" Style="height:650px; overflow-y:auto;">
-                        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
-                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
-                            <MudText Typo="Typo.body2" Color="Color.Secondary">Loading details...</MudText>
-                        </MudStack>
-                    </MudPaper>
-                </MudItem>
-            }
-            else if (_selectedNodePage is not null)
-            {
-                <MudItem xs="12" md="3">
-                    <MudPaper Class="pa-0" Style="height:650px; overflow-y:auto; border-radius:8px;">
-                        <MudCard Elevation="0">
-                            @if (_selectedNodePage.Infobox?.ImageUrl is not null)
-                            {
-                                <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="200" />
-                            }
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
-                                    @if (_selectedNodePage.Infobox?.Template is not null)
-                                    {
-                                        <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                            @SanitizeTemplate(_selectedNodePage.Infobox.Template)
-                                        </MudText>
-                                    }
-                                </CardHeaderContent>
-                                <CardHeaderActions>
-                                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small"
-                                                   OnClick="CloseNodePanel" />
-                                </CardHeaderActions>
-                            </MudCardHeader>
-                            <MudCardContent>
-                                @if (_selectedNodePage.Infobox?.Data is not null)
-                                {
-                                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
-                                        <tbody>
-                                            @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
-                                            {
-                                                <tr>
-                                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
-                                                        @prop.Label
-                                                    </td>
-                                                    <td style="padding:6px 12px;">
-                                                        @foreach (var link in prop.Links)
-                                                        {
-                                                            <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
-                                                        }
-                                                        @GetPlainValues(prop)
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </MudSimpleTable>
-                                }
-                            </MudCardContent>
-                            <MudCardActions>
-                                @if (_selectedNodePage.WikiUrl is not null)
-                                {
-                                    <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
-                                               StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
-                                        Wookieepedia
-                                    </MudButton>
-                                }
-                                <MudButton Href="@($"/graph-explorer/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
-                                           StartIcon="@Icons.Material.Filled.Hub">
-                                    Explore Graph
-                                </MudButton>
-                            </MudCardActions>
-                        </MudCard>
-                    </MudPaper>
-                </MudItem>
-            }
-        </MudGrid>
+        <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode" />
     }
+
     <AskReferencesSection References="@Descriptor.References" />
 </MudPaper>
 
@@ -167,30 +53,14 @@
     public GraphDescriptor Descriptor { get; set; } = null!;
 
     private bool _loading = true;
-    private bool _hasData;
     private string? _error;
-    private bool _fullscreen;
     private int _loadGeneration;
-    private IJSObjectReference? _jsModule;
-    private DotNetObjectReference<AskGraphView>? _dotnetRef;
-    private readonly string _containerId = $"d3-graph-{Guid.NewGuid():N}";
+    private RelationshipGraphResult? _graphData;
 
-    // Node detail panel state
-    private WikiPage? _selectedNodePage;
-    private int _selectedNodeId;
-    private bool _loadingNodeDetails;
-
-    // Graph controls
+    // Controls
     private int _maxDepth;
     private HashSet<string> _enabledLabels = [];
     private List<string> _allLabels = [];
-
-    // Temporal slider
-    private bool _hasTemporalData;
-    private int _minYear;
-    private int _maxYear;
-    private int _selectedYear;
-    private bool _yearFilterActive;
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -205,14 +75,12 @@
         await LoadGraph();
     }
 
-    private async Task LoadGraph()
+    async Task LoadGraph()
     {
         var generation = ++_loadGeneration;
-
         _loading = true;
         _error = null;
-        _hasData = false;
-        CloseNodePanel();
+        _graphData = null;
         StateHasChanged();
 
         try
@@ -231,18 +99,9 @@
             if (generation != _loadGeneration) return;
 
             if (result?.Nodes is { Count: > 0 })
-            {
-                _hasData = true;
-                _loading = false;
-                StateHasChanged();
-
-                await Task.Delay(50);
-                await RenderD3Graph(result);
-            }
+                _graphData = result;
             else
-            {
-                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\". The graph builder may not have processed this entity yet.";
-            }
+                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\".";
         }
         catch (Exception ex)
         {
@@ -251,170 +110,24 @@
         }
         finally
         {
-            if (generation == _loadGeneration)
-                _loading = false;
+            if (generation == _loadGeneration) _loading = false;
         }
     }
 
-    private async Task OnDepthChanged(int value)
+    async Task OnDepthChanged(int value)
     {
         _maxDepth = value;
         await LoadGraph();
     }
 
-    private async Task ToggleLabel(string label)
+    async Task ToggleLabel(string label)
     {
         if (!_enabledLabels.Remove(label))
             _enabledLabels.Add(label);
         await LoadGraph();
     }
 
-    private async Task OnYearChanged(int value)
-    {
-        _selectedYear = value;
-        _yearFilterActive = true;
-        if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("filterByYear", _selectedYear);
-    }
-
-    private async Task ClearYearFilter()
-    {
-        _yearFilterActive = false;
-        if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("filterByYear", (int?)null);
-    }
-
-    static string FormatYearDisplay(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
-
-    private async Task RenderD3Graph(RelationshipGraphResult result)
-    {
-        _jsModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/d3-graph.js");
-
-        var nodes = result.Nodes.Select(n => new
-        {
-            id = n.Id,
-            name = n.Name,
-            type = n.Type,
-            imageUrl = n.ImageUrl ?? "",
-        }).ToArray();
-
-        // Compute temporal range for slider
-        var temporalEdges = result.Edges.Where(e => e.FromYear.HasValue).ToList();
-        _hasTemporalData = temporalEdges.Count > 0;
-        if (_hasTemporalData)
-        {
-            _minYear = temporalEdges.Min(e => e.FromYear!.Value);
-            _maxYear = temporalEdges.Max(e => e.ToYear ?? e.FromYear!.Value);
-            if (_minYear == _maxYear) { _minYear -= 10; _maxYear += 10; }
-            _selectedYear = _maxYear; // default to latest
-            _yearFilterActive = false;
-        }
-
-        var edges = result.Edges.Select(e => new
-        {
-            fromId = e.FromId,
-            toId = e.ToId,
-            label = e.Label,
-            weight = e.Weight > 0 ? e.Weight : 0.7,
-            fromYear = e.FromYear,
-            toYear = e.ToYear,
-        }).ToArray();
-
-        var data = new { nodes, edges, rootId = result.RootId, layoutMode = Descriptor.LayoutMode };
-
-        _dotnetRef?.Dispose();
-        _dotnetRef = DotNetObjectReference.Create(this);
-
-        await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
-    }
-
-    [JSInvokable]
-    public async Task OnNodeClicked(int id, string name, string type)
-    {
-        _selectedNodeId = id;
-        _selectedNodePage = null;
-        _loadingNodeDetails = true;
-        StateHasChanged();
-
-        try
-        {
-            _selectedNodePage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{id}");
-        }
-        catch
-        {
-            _selectedNodePage = null;
-        }
-        finally
-        {
-            _loadingNodeDetails = false;
-            StateHasChanged();
-        }
-    }
-
-    private void ToggleFullscreen() => _fullscreen = !_fullscreen;
-
-    private async Task ZoomIn()
-    {
-        if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("zoomIn");
-    }
-
-    private async Task ZoomOut()
-    {
-        if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("zoomOut");
-    }
-
-    private async Task FitToScreen()
-    {
-        if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("fitToScreen");
-    }
-
-    private void CloseNodePanel()
-    {
-        _selectedNodePage = null;
-        _selectedNodeId = 0;
-        _loadingNodeDetails = false;
-    }
-
-    private static string FormatLabel(string label) =>
+    static string FormatLabel(string label) =>
         System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
             label.Replace("_", " "));
-
-    private static string StripRevision(string url)
-    {
-        var idx = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase);
-        return idx > 0 ? url[..idx] : url;
-    }
-
-    private static string SanitizeTemplate(string template)
-    {
-        var last = template.Split(':').LastOrDefault() ?? template;
-        return last.Replace("_", " ");
-    }
-
-    private static bool HasInfoboxContent(InfoboxProperty prop) =>
-        prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
-
-    private static string GetPlainValues(InfoboxProperty prop)
-    {
-        var linkTexts = prop.Links.Select(l => l.Content).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        return string.Join(", ", prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !linkTexts.Contains(v)));
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        _dotnetRef?.Dispose();
-
-        if (_jsModule is not null)
-        {
-            try
-            {
-                await _jsModule.InvokeVoidAsync("destroyGraph", _containerId);
-                await _jsModule.DisposeAsync();
-            }
-            catch (Exception) { }
-        }
-    }
 }
