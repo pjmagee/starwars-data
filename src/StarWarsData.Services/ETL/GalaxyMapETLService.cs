@@ -110,22 +110,64 @@ public class GalaxyMapETLService(
     /// </summary>
     static readonly HashSet<string> OutOfUniverseLenses = new(StringComparer.OrdinalIgnoreCase)
     {
+        // Books & print
         "Book",
+        "BookSeries",
+        "ReferenceBook",
+        "ShortStory",
+        "GraphicNovel",
+        "Script",
+        "ActivityBook",
+        "WebArticle",
+        // Comics
         "ComicBook",
         "ComicStory",
-        "ShortStory",
-        "TelevisionEpisode",
+        "ComicSeries",
+        "ComicArc",
+        "ComicCollection",
+        "ComicStrip",
+        "ComicMagazine",
+        // Magazines
+        "MagazineArticle",
+        "MagazineIssue",
+        "MagazineSeries",
+        "MagazineDepartment",
+        "ReferenceMagazine",
+        // Audio/Video
         "Audiobook",
-        "AudioDrama",
+        "AudiobookSeries",
+        "Soundtrack",
+        "HomeVideo",
+        "Documentary",
+        "Movie",
+        "Music",
+        "Multimedia",
+        "Webstrip",
+        "LiveShow",
+        // TV
+        "TelevisionEpisode",
+        "TelevisionSeries",
+        "TelevisionSeason",
+        // Games
         "VideoGame",
-        "Magazine",
-        "WebComic",
-        "Film",
-        "Television",
-        "TvSeason",
-        "Toy",
+        "VideoGameSeries",
         "BoardGame",
-        "CardGame",
+        "TabletopGame",
+        "TradingCardSet",
+        "ExpansionPack",
+        // Toys & merchandise
+        "ToyLine",
+        "Store",
+        // Real world
+        "Person",
+        "RealCompany",
+        "RealEvent",
+        "FanPodcast",
+        "FanOrganization",
+        "FilmingLocation",
+        "Website",
+        "InstructionalCourse",
+        "Media",
     };
 
     public async Task BuildGalaxyMapAsync(CancellationToken ct = default)
