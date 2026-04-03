@@ -40,19 +40,9 @@
             // Auto-load if previously accepted
             if (swGetCookieConsent() === 'accepted') swLoadAnalytics();
 
-            // UI scale accessibility
-            function swSetUiScale(pct) {
-                document.body.style.zoom = pct + '%';
-            }
         </script>
     </head>
     <body>
-        <script>
-            (function() {
-                var s = localStorage.getItem('ui-scale');
-                if (s) swSetUiScale(parseFloat(s) * 100);
-            })();
-        </script>
         <Routes @rendermode="InteractiveServer" />
         <script src="_framework/blazor.web.js"></script>
         <script src=@Assets["_content/MudBlazor/MudBlazor.min.js"]></script>
