@@ -24,8 +24,11 @@ BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
 
 // Ensure all enums are serialized as strings (not integers) across all documents
-ConventionRegistry.Register("EnumAsString",
-    new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
+ConventionRegistry.Register(
+    "EnumAsString",
+    new ConventionPack { new EnumRepresentationConvention(BsonType.String) },
+    _ => true
+);
 
 builder.AddServiceDefaults();
 
@@ -100,7 +103,6 @@ builder
     })
     .AddScoped<CharacterTimelineService>()
     .AddSingleton<CharacterTimelineTracker>()
-    .AddScoped<RelationshipGraphService>()
     .AddScoped<RelationshipGraphBuilderService>()
     .AddScoped<ArticleChunkingService>()
     .AddSingleton<JobToggleService>()
@@ -146,7 +148,9 @@ builder.Services.AddHangfire(
 
         // Toggle filter: disabled jobs are skipped silently
         var toggleSvc = provider.GetRequiredService<JobToggleService>();
-        var filterLogger = provider.GetRequiredService<ILogger<StarWarsData.Admin.JobToggleFilter>>();
+        var filterLogger = provider.GetRequiredService<
+            ILogger<StarWarsData.Admin.JobToggleFilter>
+        >();
         config.UseFilter(new StarWarsData.Admin.JobToggleFilter(toggleSvc, filterLogger));
     }
 );

@@ -13,7 +13,7 @@ namespace StarWarsData.Tests;
 /// <summary>
 /// Shared MongoDB container fixture for service-level integration tests.
 /// Seeds a Pages collection with diverse infobox types for testing
-/// RecordService, RelationshipGraphService, and RelationshipAnalystToolkit.
+/// RecordService and RelationshipAnalystToolkit.
 /// </summary>
 public sealed class ApiFixture : IAsyncLifetime
 {
@@ -21,7 +21,6 @@ public sealed class ApiFixture : IAsyncLifetime
 
     public IMongoClient MongoClient { get; private set; } = null!;
     public RecordService RecordService { get; private set; } = null!;
-    public RelationshipGraphService RelationshipGraphService { get; private set; } = null!;
     public RelationshipAnalystToolkit RelationshipAnalystToolkit { get; private set; } = null!;
 
     public const string DatabaseName = "test-starwars";
@@ -34,7 +33,9 @@ public sealed class ApiFixture : IAsyncLifetime
 
         MongoClient = new MongoClient(_container.GetConnectionString());
 
-        var pagesCollection = MongoClient.GetDatabase(DatabaseName).GetCollection<Page>(Collections.Pages);
+        var pagesCollection = MongoClient
+            .GetDatabase(DatabaseName)
+            .GetCollection<Page>(Collections.Pages);
         await pagesCollection.InsertManyAsync(BuildSeedData());
 
         // Create text index on title + content — required by RecordService.GetSearchResult
@@ -71,16 +72,7 @@ public sealed class ApiFixture : IAsyncLifetime
             transformer
         );
 
-        RelationshipGraphService = new RelationshipGraphService(
-            NullLogger<RelationshipGraphService>.Instance,
-            settings,
-            MongoClient
-        );
-
-        RelationshipAnalystToolkit = new RelationshipAnalystToolkit(
-            MongoClient,
-            DatabaseName
-        );
+        RelationshipAnalystToolkit = new RelationshipAnalystToolkit(MongoClient, DatabaseName);
     }
 
     public async Task DisposeAsync() => await _container.DisposeAsync();
