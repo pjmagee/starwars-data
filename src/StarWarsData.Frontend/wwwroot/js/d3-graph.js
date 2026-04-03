@@ -145,6 +145,7 @@ export function renderForceGraph(containerId, data, dotnetRef) {
                 linksData.push({
                     source: e.fromId, target: e.toId,
                     label: e.label || '', weight: e.weight || 0.5,
+                    fromYear: e.fromYear ?? null, toYear: e.toYear ?? null,
                 });
             }
         }
@@ -547,6 +548,87 @@ function highlightNode(id) {
     _state.nodeGroup.selectAll('g.node circle')
         .attr('stroke', d => d.id === id ? '#ffffff' : (d.isRoot ? '#c8a832' : getTypeColor(d.type)))
         .attr('stroke-width', d => d.id === id ? 5 : (d.isRoot ? 3 : 2));
+}
+
+/**
+ * Filter graph visibility by year. Edges with temporal bounds outside the year are hidden.
+ * Nodes only connected by hidden edges are also hidden.
+ * Pass null to show all.
+ */
+export function filterByYear(year) {
+    if (!_state) return;
+    const { nodeGroup, linkGroup, linksData, nodesData, nodeMap, isTreeLayout } = _state;
+
+    if (year === null || year === undefined) {
+        // Show all
+        nodeGroup.selectAll('g.node').style('opacity', 1).style('display', null);
+        linkGroup.selectAll('line').style('opacity', 0.6).style('display', null);
+        linkGroup.selectAll('text').style('display', null);
+        linkGroup.selectAll('path.tree-edge').style('opacity', 0.6).style('display', null);
+        linkGroup.selectAll('text.tree-label').style('display', null);
+        return;
+    }
+
+    // Determine which edges are active at this year
+    const activeEdges = new Set();
+    const activeNodeIds = new Set();
+
+    // Always show root
+    if (_state.currentRootId) activeNodeIds.add(_state.currentRootId);
+
+    for (const link of linksData) {
+        const fromYear = link.fromYear ?? null;
+        const toYear = link.toYear ?? null;
+
+        // Edge is active if: no temporal data (always show) OR year is within [fromYear, toYear]
+        const active = (fromYear === null) ||
+            (year >= fromYear && (toYear === null || year <= toYear));
+
+        if (active) {
+            const srcId = link.source.id ?? link.source;
+            const tgtId = link.target.id ?? link.target;
+            activeEdges.add(`${srcId}-${tgtId}-${link.label}`);
+            activeNodeIds.add(srcId);
+            activeNodeIds.add(tgtId);
+        }
+    }
+
+    // Apply visibility
+    nodeGroup.selectAll('g.node')
+        .style('opacity', d => activeNodeIds.has(d.id) ? 1 : 0.1)
+        .style('display', null);
+
+    if (isTreeLayout) {
+        linkGroup.selectAll('path.tree-edge')
+            .style('opacity', d => {
+                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
+                const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
+                if (!src || !tgt) return 0.1;
+                const key = `${src.id ?? d.source}-${tgt.id ?? d.target}-${d.label}`;
+                return activeEdges.has(key) ? 0.6 : 0.05;
+            });
+        linkGroup.selectAll('text.tree-label')
+            .style('opacity', d => {
+                const src = typeof d.source === 'object' ? d.source : nodeMap.get(d.source);
+                const tgt = typeof d.target === 'object' ? d.target : nodeMap.get(d.target);
+                if (!src || !tgt) return 0;
+                const key = `${src.id ?? d.source}-${tgt.id ?? d.target}-${d.label}`;
+                return activeEdges.has(key) ? 1 : 0;
+            });
+    } else {
+        linkGroup.selectAll('line')
+            .style('opacity', d => {
+                const srcId = d.source.id ?? d.source;
+                const tgtId = d.target.id ?? d.target;
+                return activeEdges.has(`${srcId}-${tgtId}-${d.label}`) ? 0.6 : 0.05;
+            });
+        linkGroup.selectAll('text')
+            .style('opacity', d => {
+                const srcId = d.source.id ?? d.source;
+                const tgtId = d.target.id ?? d.target;
+                return activeEdges.has(`${srcId}-${tgtId}-${d.label}`) ? 1 : 0;
+            });
+    }
 }
 
 export function fitToScreen() {

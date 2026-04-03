@@ -272,7 +272,9 @@ public class KnowledgeGraphQueryService(
                 int to,
                 string toName,
                 string label,
-                double weight
+                double weight,
+                int? fromYear,
+                int? toYear
             )>();
         var frontier = new HashSet<int> { pageId };
 
@@ -304,7 +306,11 @@ public class KnowledgeGraphQueryService(
                         toId,
                         e["toName"].AsString,
                         e["label"].AsString,
-                        e.Contains("weight") ? e["weight"].ToDouble() : 0.8
+                        e.Contains("weight") ? e["weight"].ToDouble() : 0.8,
+                        e.Contains("fromYear") && !e["fromYear"].IsBsonNull
+                            ? e["fromYear"].AsInt32
+                            : null,
+                        e.Contains("toYear") && !e["toYear"].IsBsonNull ? e["toYear"].AsInt32 : null
                     )
                 );
 
@@ -360,6 +366,8 @@ public class KnowledgeGraphQueryService(
                 ToId = e.to,
                 Label = e.label,
                 Weight = e.weight,
+                FromYear = e.fromYear,
+                ToYear = e.toYear,
             })
             .ToList();
 

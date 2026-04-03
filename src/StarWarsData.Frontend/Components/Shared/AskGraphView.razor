@@ -32,6 +32,22 @@
         }
     </MudStack>
 
+    @if (_hasTemporalData)
+    {
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+            <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:rgba(255,255,255,0.5);" />
+            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Year</MudText>
+            <MudSlider T="int" Value="_selectedYear" ValueChanged="OnYearChanged"
+                       Min="_minYear" Max="_maxYear" Step="1"
+                       Style="max-width:300px;" Color="Color.Warning" />
+            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning">
+                @FormatYearDisplay(_selectedYear)
+            </MudChip>
+            <MudButton Variant="Variant.Text" Size="Size.Small" Color="Color.Secondary"
+                       OnClick="ClearYearFilter">Show All</MudButton>
+        </MudStack>
+    }
+
     @if (_loading)
     {
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
@@ -169,6 +185,13 @@
     private HashSet<string> _enabledLabels = [];
     private List<string> _allLabels = [];
 
+    // Temporal slider
+    private bool _hasTemporalData;
+    private int _minYear;
+    private int _maxYear;
+    private int _selectedYear;
+    private bool _yearFilterActive;
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnParametersSetAsync()
@@ -246,6 +269,23 @@
         await LoadGraph();
     }
 
+    private async Task OnYearChanged(int value)
+    {
+        _selectedYear = value;
+        _yearFilterActive = true;
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("filterByYear", _selectedYear);
+    }
+
+    private async Task ClearYearFilter()
+    {
+        _yearFilterActive = false;
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("filterByYear", (int?)null);
+    }
+
+    static string FormatYearDisplay(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
+
     private async Task RenderD3Graph(RelationshipGraphResult result)
     {
         _jsModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/d3-graph.js");
@@ -258,12 +298,26 @@
             imageUrl = n.ImageUrl ?? "",
         }).ToArray();
 
+        // Compute temporal range for slider
+        var temporalEdges = result.Edges.Where(e => e.FromYear.HasValue).ToList();
+        _hasTemporalData = temporalEdges.Count > 0;
+        if (_hasTemporalData)
+        {
+            _minYear = temporalEdges.Min(e => e.FromYear!.Value);
+            _maxYear = temporalEdges.Max(e => e.ToYear ?? e.FromYear!.Value);
+            if (_minYear == _maxYear) { _minYear -= 10; _maxYear += 10; }
+            _selectedYear = _maxYear; // default to latest
+            _yearFilterActive = false;
+        }
+
         var edges = result.Edges.Select(e => new
         {
             fromId = e.FromId,
             toId = e.ToId,
             label = e.Label,
             weight = e.Weight > 0 ? e.Weight : 0.7,
+            fromYear = e.FromYear,
+            toYear = e.ToYear,
         }).ToArray();
 
         var data = new { nodes, edges, rootId = result.RootId, layoutMode = Descriptor.LayoutMode };

@@ -66,6 +66,8 @@ public class RelationshipGraphEdge
     public int ToId { get; init; }
     public string Label { get; init; } = string.Empty;
     public double Weight { get; init; }
+    public int? FromYear { get; init; }
+    public int? ToYear { get; init; }
 }
 
 /// <summary>
