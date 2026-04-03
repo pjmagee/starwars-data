@@ -1219,7 +1219,7 @@ export function setupPanelHoverListeners(panelId) {
 
 function _renderTerritory() {
     if (!_state) return;
-    const { territoryLayer, cellW, cellH, regionCellMap, currentYearData } = _state;
+    const { territoryLayer, cellW, cellH, colX, rowY, regionCellMap, currentYearData } = _state;
     territoryLayer.selectAll('*').remove();
     if (!currentYearData || !currentYearData.regions) return;
 
@@ -1259,7 +1259,7 @@ function _renderTerritory() {
 
 function _renderHeatmap() {
     if (!_state) return;
-    const { heatmapLayer, markerLayer, tooltip, cellW, cellH, currentYearData, selectedLens } = _state;
+    const { heatmapLayer, markerLayer, tooltip, cellW, cellH, colX, rowY, currentYearData, selectedLens } = _state;
     heatmapLayer.selectAll('*').remove();
     markerLayer.selectAll('*').remove();
     if (!currentYearData || !currentYearData.eventCells) return;
