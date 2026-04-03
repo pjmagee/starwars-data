@@ -270,6 +270,8 @@ public class ComponentToolkit
             + "The frontend renders content with a full markdown component (MudMarkdown). "
             + "You MUST write section content as proper markdown: use ## headings, **bold**, "
             + "bullet lists (blank line before the list), [links](url), > blockquotes, and `code`. "
+            + "For hyperlinks, use correct markdown format: [display text](full URL). "
+            + "Use wikiUrl from tool results for Wookieepedia links, e.g. [Darth Vader](https://starwars.fandom.com/wiki/Darth_Vader). "
             + "Raw unformatted text looks bad — always use markdown structure. "
             + "Fetch page data first using get_page_by_id, search_article_content, or KG tools, then write sections. "
             + "Can combine text from multiple sources for comprehensive answers."
