@@ -1,74 +1,88 @@
 # Star Wars Data
 
-A .NET Aspire application that scrapes Wookieepedia, processes Star Wars universe data into MongoDB, and serves it through an AI-powered Blazor frontend with interactive visualizations.
+A .NET Aspire application that processes Wookieepedia content into a temporal knowledge graph, powers AI-assisted exploration through semantic search and 30+ agent tools, and serves it all through an interactive Blazor frontend.
 
 ## Features
 
-### AI Assistant (Ask Page)
+### AI Assistant
 
-An AI chat interface powered by OpenAI with tool-calling capabilities. The agent can query the database and render results as:
+Conversational agent powered by OpenAI with tool-calling across four toolkits:
 
-- **Charts** - Bar, Line, Pie, Donut, Stacked Bar, Radar, and Time Series
-- **Tables** - Paginated browsing by infobox type, or ad-hoc data tables with inline data
-- **Relationship Graphs** - Family trees and master/apprentice hierarchies
-- **Timelines** - Temporal events scoped by era, date range, or entity lifetime
-- **Infobox Cards** - Wiki-style info cards for specific entities
-- **Text Summaries** - Article excerpts and lore via wiki search RAG
+- **Charts** — Bar, Line, Pie, Donut, Stacked Bar, Radar, Rose, and Time Series
+- **Relationship Graphs** — Family trees, political hierarchies, master-apprentice lineages (force + tree layout)
+- **Timelines** — Temporal events scoped by era, date range, or entity lifetime
+- **Data Tables** — Cross-referenced data assembled from multiple queries
+- **Infobox Cards** — Wiki-style profiles with side-by-side comparison
+- **Research Articles** — Formatted markdown with source citations from semantic search
 
-All visualizations include source references linking back to Wookieepedia.
+All visualizations are grounded in real tool call results — no data is fabricated.
 
-### Galactic Map
+### Semantic Search
 
-Interactive 26x20 grid map of the Star Wars galaxy featuring:
+AI-powered vector search over 800,000+ article passages using OpenAI embeddings and MongoDB Atlas Vector Search. Finds content by meaning, not keywords — ask "why did Anakin turn to the dark side?" and get answers from actual article text with deep-linked source references. Available in Ask AI and the Galaxy Map.
 
-- Color-coded regions with filtering
-- Drill-down into sectors, systems, planets, and nebulas
-- Detail panes for selected entities
+### Knowledge Graph
+
+166,000+ entities and 694,000+ relationships extracted deterministically from Wookieepedia infobox data. Rich temporal facets track entity lifecycles across six semantic dimensions: lifespan, conflict, institutional, construction, creation, and publication. Two calendar systems (Galactic BBY/ABY and real-world CE).
+
+### Graph Explorer
+
+Interactive graph visualization with force-directed and hierarchical tree layouts. Browse entities, traverse relationships by label, expand nodes on double-click, navigate with breadcrumb history, and filter edges temporally with a year slider.
+
+### Galaxy Map
+
+Unified interactive galactic map with two modes:
+
+- **Explore** — Drill from regions to systems to planets. Keyword and AI semantic search to locate places by concept (e.g., "planet where Anakin lost his legs" → Mustafar).
+- **Timeline** — Animated playback of galactic events with territory control heatmap, era navigation, faction overlays, and event density visualization.
 
 ### Timeline Browser
 
-Browse events across the Star Wars timeline with category filtering, year range scoping, and pagination.
+Browse thousands of categorized events across all Star Wars eras with category filtering, year range scoping, and BBY/ABY navigation.
 
 ### Data Tables
 
-Browse all infobox categories (Characters, Planets, Species, Starships, etc.) as paginated tables with dynamic columns.
+Searchable, sortable, paginated tables for every infobox category: characters, ships, weapons, species, planets, governments, and more.
 
-### Wiki Search (RAG)
+### Character Timelines
 
-On-demand text search against the full wiki page corpus using MongoDB regex matching. The AI agent uses this to answer lore and history questions with cited sources.
+AI-generated biographical timelines synthesized from full wiki articles and linked pages.
 
 ## Architecture
 
 ```text
 StarWarsData.AppHost          # .NET Aspire orchestrator
 StarWarsData.ApiService       # ASP.NET Core API + AI agent + Hangfire
+StarWarsData.Admin            # Admin dashboard + ETL job triggers
 StarWarsData.Frontend         # Blazor Interactive Server UI
-StarWarsData.Services         # Business logic, toolkits, ETL
+StarWarsData.Services         # Business logic, toolkits, ETL, search
 StarWarsData.Models           # Shared entities and DTOs
 StarWarsData.ServiceDefaults  # OpenTelemetry, health checks, resilience
+StarWarsData.Tests            # Integration tests (xUnit + Testcontainers)
+StarWarsData.AgentTests       # AI agent evaluation tests (MSTest)
 ```
 
 ### Data Flow
 
-1. **ETL Pipeline** - Hangfire jobs scrape Wookieepedia pages via the MediaWiki API, parse infoboxes, and store raw pages in MongoDB
-2. **Processing** - Additional jobs create template-based views, timeline events, indexes, and OpenAI embeddings
-3. **Daily Sync** - A recurring job at 03:00 UTC incrementally syncs changed wiki pages
-4. **AI Queries** - The AI agent uses tool-calling to query MongoDB (via direct tools + MCP server) and renders results through the frontend
+1. **ETL Pipeline** — Hangfire jobs download pages from Wookieepedia via the MediaWiki API, parse infobox data, and store raw pages in MongoDB
+2. **Knowledge Graph** — Deterministic extraction builds kg.nodes + kg.edges from infobox links with temporal facets and edge weights
+3. **Article Chunking** — Pages are split into semantic chunks and embedded with OpenAI text-embedding-3-small (1536 dimensions)
+4. **Galaxy Map** — Pre-computes galaxy.years with territory control, event heatmaps, and trade routes from the knowledge graph
+5. **Daily Sync** — Recurring job at 03:00 UTC incrementally syncs changed wiki pages
+6. **AI Queries** — Agent uses tool-calling to query the KG, run semantic search, and render results via the frontend
 
 ### AI Agent Pipeline
 
-The agent is built with the Microsoft Agents AI framework and streams responses via the AGUI protocol (SSE):
+Built with the Microsoft Agents AI framework, streaming via the AGUI protocol (SSE):
 
-- **Topic Guardrail** - Lightweight classifier rejects off-topic queries
-- **Tool Registry** - ComponentToolkit (7 render tools), DataExplorerToolkit (search/query tools), WikiSearchProvider (RAG), and MongoDB MCP tools (find, aggregate, count)
-- **References** - All render tools support source references with Wookieepedia URLs
+- **Topic Guardrail** — Lightweight classifier rejects off-topic queries
+- **Tool Registry** — GraphRAGToolkit (KG traversal + semantic search), DataExplorerToolkit (page queries), ComponentToolkit (render tools), WikiSearchProvider (keyword fallback), MongoDB MCP tools
+- **Semantic Search** — Shared SemanticSearchService used by the agent and galaxy map
+- **References** — All render tools support source references with Wookieepedia URLs
 
 ### Authentication
 
-Keycloak provides OpenID Connect authentication with optional social login providers:
-
-- Google, Microsoft, Facebook (requires client ID/secret configuration)
-- Chat session history is stored per-user in MongoDB
+Keycloak provides OpenID Connect authentication. Admin role bypasses rate limiting. User identity forwarded via X-User-Id/X-User-Roles headers from the Blazor frontend.
 
 ## Tech Stack
 
@@ -76,32 +90,39 @@ Keycloak provides OpenID Connect authentication with optional social login provi
 | ----- | ---------- |
 | Orchestration | .NET Aspire |
 | Backend | ASP.NET Core, .NET 10 |
-| Frontend | Blazor Interactive Server, MudBlazor |
-| Database | MongoDB |
-| AI | OpenAI (GPT, Embeddings), Microsoft.Agents.AI, AGUI |
-| MCP | MongoDB MCP Server (`@mongodb-js/mongodb-mcp-server`) |
+| Frontend | Blazor Interactive Server, MudBlazor, D3.js |
+| Database | MongoDB (Atlas Community Edition) |
+| AI | OpenAI (GPT, Embeddings, Batch API), Microsoft.Extensions.AI, Microsoft.Agents.AI |
+| Search | MongoDB Atlas Vector Search (semantic), MongoDB $text (keyword) |
+| MCP | MongoDB MCP Server |
 | Background Jobs | Hangfire with MongoDB persistence |
 | Auth | Keycloak (OpenID Connect) |
-| Diagrams | Z.Blazor.Diagrams |
 | Observability | OpenTelemetry (traces, metrics, logs) |
-| Analytics | Google Analytics 4 |
 
-## MongoDB Databases
+## MongoDB Collections
 
-All application data lives in a single unified database with namespaced collections:
+All data lives in a single unified database (`starwars`) with namespaced collections:
 
-| Database | Purpose |
-| -------- | ------- |
-| `starwars` | All application data — raw pages (`raw.*`), timeline events (`timeline.*`), knowledge graph (`kg.*`), article chunks (`search.*`), AI-generated content (`genai.*`), chat sessions (`chat.*`), territory control (`territory.*`), galaxy map (`galaxy.*`), admin settings (`admin.*`) |
-| `starwars-hangfire` | Hangfire job/queue storage |
+| Namespace | Collections | Purpose |
+| --------- | ----------- | ------- |
+| `raw.*` | `raw.pages` | Downloaded Wookieepedia pages with infobox data |
+| `kg.*` | `kg.nodes`, `kg.edges` | Knowledge graph entities and relationships |
+| `search.*` | `search.chunks` | Article chunks with vector embeddings (1536-dim) |
+| `timeline.*` | `timeline.{category}` | Categorized timeline events |
+| `galaxy.*` | `galaxy.years` | Pre-computed galaxy map temporal data |
+| `genai.*` | `genai.character_timelines` | AI-generated character timelines |
+| `chat.*` | `chat.sessions` | User chat session history |
+| `admin.*` | `admin.*` | Job toggles, user settings |
+
+Hangfire uses a separate `starwars-hangfire` database.
 
 ## Getting Started
 
 ### Prerequisites
 
 - .NET 10 SDK
-- Node.js (for MongoDB MCP server via npx)
-- MongoDB instance
+- Docker (for MongoDB MCP sidecar and Testcontainers)
+- MongoDB instance (Atlas Community Edition or Atlas)
 - OpenAI API key
 
 ### Configuration
@@ -113,19 +134,10 @@ Set the following in `appsettings.json` or environment variables:
   "Settings": {
     "OpenAiKey": "<your-openai-api-key>",
     "OpenAiModel": "gpt-5-mini",
-    "StarWarsBaseUrl": "https://starwars.fandom.com/api.php",
     "DatabaseName": "starwars",
     "HangfireDb": "starwars-hangfire"
   }
 }
-```
-
-For Keycloak social login, set environment variables:
-
-```bash
-GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
-MICROSOFT_CLIENT_ID / MICROSOFT_CLIENT_SECRET
-FACEBOOK_CLIENT_ID / FACEBOOK_CLIENT_SECRET
 ```
 
 ### Running
@@ -135,29 +147,19 @@ cd src/StarWarsData.AppHost
 dotnet run
 ```
 
-The Aspire dashboard will show all resources. The Hangfire dashboard is available at `/hangfire` on the API service.
+The Aspire dashboard will show all resources. ETL pipeline phases are available as HTTP commands in the Aspire dashboard on the Admin resource.
 
-## API Endpoints
+### Post-Deployment
 
-| Controller | Path | Purpose |
-| ---------- | ---- | ------- |
-| Admin | `/api/admin/*` | ETL job triggers, index management |
-| Pages | `/pages/{id}`, `/pages/batch` | Page retrieval |
-| Categories | `/categories/{type}` | Paginated infobox browsing |
-| Search | `/search` | Full-text page search |
-| Timeline | `/timeline/events`, `/timeline/eras` | Timeline data |
-| GalaxyMap | `/galaxymap/grid`, `/galaxymap/sectors` | Galaxy map data |
-| Relationships | `/relationships/graph/{id}` | Relationship graphs |
-| ChatSessions | `/api/ChatSessions` | User chat history |
-| AI (AGUI) | `/kernel/stream` | AI agent SSE streaming |
+After deploying, run **"Ensure All Indexes"** from the Aspire dashboard (Admin resource). This chains all index creation jobs: page indexes → chunk indexes → vector search index → KG graph indexes. The vector search index is required for semantic search to work.
 
 ## Support
 
 This project is built and maintained as a solo effort. Significant time and cost go into running AI models during development and for the live application:
 
-- **Claude** (Anthropic) — used extensively for development via Claude Code, including architecture, code generation, debugging, and test authoring
-- **OpenAI** (GPT-4o, GPT-4o-mini, GPT-5-mini) — powers the in-app AI assistant, relationship graph extraction agent, and embedding generation
+- **Claude** (Anthropic) — used extensively for development via Claude Code
+- **OpenAI** (GPT-5-mini, GPT-4o-mini) — powers the in-app AI assistant, relationship extraction, and embeddings
 
-If you find this project useful or interesting, consider buying me a coffee to help offset the API costs:
+If you find this project useful or interesting:
 
 <a href="https://www.buymeacoffee.com/pjmagee"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>

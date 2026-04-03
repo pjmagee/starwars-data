@@ -3,6 +3,14 @@ name: Build & Publish
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "eng/**"
+      - ".claude/**"
+      - ".agents/**"
+      - ".editorconfig"
+      - "NOTES.md"
+      - "LICENSE"
   workflow_dispatch:
 
 permissions:
