@@ -11,8 +11,8 @@ namespace StarWarsData.Services;
 public class AskRateLimiter
 {
     static readonly TimeSpan Window = TimeSpan.FromMinutes(30);
-    const int AnonymousLimit = 1;
-    const int AuthenticatedLimit = 6;
+    const int AnonymousLimit = 3;
+    const int AuthenticatedLimit = 10;
 
     readonly ConcurrentDictionary<string, List<DateTime>> _requests = new();
 
