@@ -272,6 +272,7 @@
         _dotnetRef?.Dispose();
         _dotnetRef = DotNetObjectReference.Create(this);
 
+        if (_jsModule is null) return;
         var entryPoint = isTree ? "renderFamilyTree" : "renderForceGraph";
         await _jsModule.InvokeVoidAsync(entryPoint, _containerId, data, _dotnetRef);
     }
