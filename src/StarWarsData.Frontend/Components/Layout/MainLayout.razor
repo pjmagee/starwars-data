@@ -47,17 +47,25 @@
         @Body
         @if (!Layout.IsFullscreen)
         {
-        <footer class="d-flex justify-center align-center gap-3 pa-3 flex-wrap mt-4">
-            <MudText Typo="Typo.caption" Color="Color.Secondary">
-                Made with ❤️ by
-                <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
-                &copy; @DateTime.UtcNow.Year
+        <footer class="d-flex flex-column align-center gap-2 pa-4 mt-4">
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="flex-wrap">
+                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                    Made with ❤️ by
+                    <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
+                    &copy; @DateTime.UtcNow.Year
+                </MudText>
+                <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+                <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
+                <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
+                <MudLink Href="/about" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">About</MudLink>
+                <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+                <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+            </MudStack>
+            <MudText Typo="Typo.caption" Style="color:rgba(146,146,159,0.6); font-size:11px; text-align:center; max-width:600px;">
+                Not affiliated with or endorsed by Wookieepedia, Fandom, Disney, or Lucasfilm.
+                Star Wars and all related properties are trademarks of Disney/Lucasfilm Ltd.
+                This is an independent fan project. <MudLink Href="/about" Style="font-size:11px;" Color="Color.Secondary" Underline="Underline.Hover">Learn more</MudLink>
             </MudText>
-            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
-            <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
-            <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
-            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
-            <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
         </footer>
         }
     </MudMainContent>
