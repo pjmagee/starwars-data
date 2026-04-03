@@ -704,10 +704,66 @@ public class InfoboxGraphService(
         }
 
         logger.LogInformation(
-            "InfoboxGraph: processed {Count} pages → {Nodes} nodes, {Edges} edges",
+            "InfoboxGraph: processed {Count} pages → {Nodes} nodes, {RawEdges} raw edges",
             processed,
             nodes.Count,
             edges.Count
+        );
+
+        // ── Post-processing: filter noise edges and enrich with target type ──
+        var nodeTypeMap = nodes.ToDictionary(n => n.PageId, n => n.Type);
+
+        var filteredEdges = new List<RelationshipEdge>(edges.Count);
+        int droppedUnresolved = 0,
+            droppedYear = 0,
+            droppedQualifier = 0;
+
+        foreach (var edge in edges)
+        {
+            // Drop unresolved targets (link didn't match any page)
+            if (edge.ToId == 0)
+            {
+                droppedUnresolved++;
+                continue;
+            }
+
+            // Look up target type
+            var targetType = nodeTypeMap.GetValueOrDefault(edge.ToId, "");
+            edge.ToType = targetType;
+
+            // Drop edges to Year/Era entities — these are temporal metadata, not relationships
+            if (targetType is "Year" or "Era")
+            {
+                droppedYear++;
+                continue;
+            }
+
+            // Drop qualifier edges: TitleOrPosition targets on person-relationship labels
+            if (targetType == "TitleOrPosition" && IsPersonRelationshipLabel(edge.Label))
+            {
+                droppedQualifier++;
+                continue;
+            }
+
+            // Drop ForcePower/LightsaberForm targets on person-relationship labels
+            if (
+                targetType is "ForcePower" or "LightsaberForm"
+                && IsPersonRelationshipLabel(edge.Label)
+            )
+            {
+                droppedQualifier++;
+                continue;
+            }
+
+            filteredEdges.Add(edge);
+        }
+
+        logger.LogInformation(
+            "InfoboxGraph: edge filtering — dropped {Unresolved} unresolved, {Year} temporal, {Qualifier} qualifier → {Clean} clean edges",
+            droppedUnresolved,
+            droppedYear,
+            droppedQualifier,
+            filteredEdges.Count
         );
 
         // Write to MongoDB
@@ -719,10 +775,14 @@ public class InfoboxGraphService(
         }
 
         logger.LogInformation("InfoboxGraph: writing edges...");
-        if (edges.Count > 0)
+        if (filteredEdges.Count > 0)
         {
             await _edges.DeleteManyAsync(FilterDefinition<RelationshipEdge>.Empty, ct);
-            await _edges.InsertManyAsync(edges, new InsertManyOptions { IsOrdered = false }, ct);
+            await _edges.InsertManyAsync(
+                filteredEdges,
+                new InsertManyOptions { IsOrdered = false },
+                ct
+            );
         }
 
         // Create indexes
@@ -777,8 +837,9 @@ public class InfoboxGraphService(
         );
 
         logger.LogInformation(
-            "InfoboxGraph: complete. {Nodes} nodes, {Edges} edges, indexes created.",
+            "InfoboxGraph: complete. {Nodes} nodes, {Edges} edges (from {RawEdges} raw), indexes created.",
             nodes.Count,
+            filteredEdges.Count,
             edges.Count
         );
     }
@@ -847,6 +908,36 @@ public class InfoboxGraphService(
 
         return 0; // unresolved
     }
+
+    /// <summary>
+    /// Edge labels that imply the target should be a person/character, not a title or rank.
+    /// Used to filter qualifier noise (e.g. apprentice_of → "Jedi Master" instead of the actual person).
+    /// </summary>
+    static bool IsPersonRelationshipLabel(string label) =>
+        label
+            is "apprentice_of"
+                or "master_of"
+                or "led_by"
+                or "commanded_by"
+                or "head_of_state"
+                or "head_of_government"
+                or "commander_in_chief"
+                or "child_of"
+                or "parent_of"
+                or "sibling_of"
+                or "partner_of"
+                or "owned_by"
+                or "founded_by"
+                or "created_by"
+                or "authored_by"
+                or "written_by"
+                or "illustrated_by"
+                or "narrated_by"
+                or "directed_by"
+                or "organized_by"
+                or "hosted_by"
+                or "has_notable_member"
+                or "has_competitor";
 
     /// <summary>
     /// Parse a date text like "22 BBY", "c. 5100 BBY", "19 BBY, Felucia" into a sort-key year.
