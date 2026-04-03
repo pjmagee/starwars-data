@@ -56,6 +56,10 @@ export function initialize(containerId, overview, dotNetRef) {
     const cellW = worldW / cols;
     const cellH = worldH / rows;
 
+    // Convert absolute grid coordinates to local pixel position
+    const colX = (col) => (col - startCol) * cellW;
+    const rowY = (row) => (row - startRow) * cellH;
+
     const svg = d3.select(container)
         .append('svg')
         .attr('width', width)
@@ -152,7 +156,7 @@ export function initialize(containerId, overview, dotNetRef) {
         for (const [col, row] of region.cells) {
             rg.append('rect')
                 .attr('class', 'region-cell')
-                .attr('x', col * cellW).attr('y', row * cellH)
+                .attr('x', colX(col)).attr('y', rowY(row))
                 .attr('width', cellW).attr('height', cellH)
                 .attr('fill', color).attr('fill-opacity', 0.07)
                 .attr('stroke', color).attr('stroke-opacity', 0.12).attr('stroke-width', 0.5);
@@ -202,8 +206,8 @@ export function initialize(containerId, overview, dotNetRef) {
 
     // Trade routes — with wide invisible hit area for easy hovering/clicking
     const routeLine = d3.line()
-        .x(d => d.col * cellW + cellW / 2)
-        .y(d => d.row * cellH + cellH / 2)
+        .x(d => colX(d.col) + cellW / 2)
+        .y(d => rowY(d.row) + cellH / 2)
         .curve(d3.curveCatmullRom.alpha(0.5));
     overview.tradeRoutes.forEach(route => {
         if (route.waypoints.length < 2) return;
@@ -263,8 +267,8 @@ export function initialize(containerId, overview, dotNetRef) {
 
         if (cells.length === 1) {
             // Single-cell nebula: ellipse
-            const cx = cells[0][0] * cellW + cellW / 2;
-            const cy = cells[0][1] * cellH + cellH / 2;
+            const cx = colX(cells[0][0]) + cellW / 2;
+            const cy = rowY(cells[0][1]) + cellH / 2;
             ng.append('ellipse')
                 .attr('cx', cx).attr('cy', cy)
                 .attr('rx', cellW * 0.3).attr('ry', cellH * 0.2)
@@ -278,7 +282,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 minC = Math.min(minC, c); maxC = Math.max(maxC, c);
                 minR = Math.min(minR, r); maxR = Math.max(maxR, r);
             }
-            const x1 = minC * cellW, y1 = minR * cellH;
+            const x1 = colX(minC), y1 = rowY(minR);
             const w = (maxC - minC + 1) * cellW;
             const h = (maxR - minR + 1) * cellH;
             const cx = x1 + w / 2, cy = y1 + h / 2;
@@ -345,7 +349,7 @@ export function initialize(containerId, overview, dotNetRef) {
     for (let c = 0; c < cols; c++) {
         for (let r = 0; r < rows; r++) {
             cellLayer.append('rect')
-                .attr('x', c * cellW).attr('y', r * cellH)
+                .attr('x', colX(c)).attr('y', rowY(r))
                 .attr('width', cellW).attr('height', cellH)
                 .attr('fill', 'transparent')
                 .attr('class', 'grid-click-target')
@@ -385,8 +389,8 @@ export function initialize(containerId, overview, dotNetRef) {
     const maxCount = Math.max(1, ...overview.cells.map(c => c.systemCount));
 
     overview.cells.forEach(cell => {
-        const cx = cell.col * cellW + cellW / 2;
-        const cy = cell.row * cellH + cellH / 2;
+        const cx = colX(cell.col) + cellW / 2;
+        const cy = rowY(cell.row) + cellH / 2;
         const color = cell.region ? getRegionColor(cell.region, overview.regions) : '#ffffff';
         const sizeScale = 3 + (cell.systemCount / maxCount) * 12;
 
@@ -461,7 +465,7 @@ export function initialize(containerId, overview, dotNetRef) {
         }
 
         // Zoom to fit the region
-        const x1 = minCol * cellW, y1 = minRow * cellH;
+        const x1 = colX(minCol), y1 = rowY(minRow);
         const rw = (maxCol - minCol + 1) * cellW;
         const rh = (maxRow - minRow + 1) * cellH;
         const targetScale = Math.min(width / rw, height / rh) * 0.8;
@@ -523,7 +527,7 @@ export function initialize(containerId, overview, dotNetRef) {
             : inRegion;
 
         if (bodyFilter.length === 0) {
-            const pts = region.cells.map(([col, row]) => [col * cellW + cellW / 2, row * cellH + cellH / 2]);
+            const pts = region.cells.map(([col, row]) => [colX(col) + cellW / 2, rowY(row) + cellH / 2]);
             const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
             const cy = pts.reduce((s, p) => s + p[1], 0) / pts.length;
             contentLayer.append('text')
@@ -559,14 +563,14 @@ export function initialize(containerId, overview, dotNetRef) {
 
         const nodes = filtered.map(sys => ({
             ...sys,
-            x: sys.col * cellW + cellW / 2 + (Math.random() - 0.5) * cellW * 0.6,
-            y: sys.row * cellH + cellH / 2 + (Math.random() - 0.5) * cellH * 0.6,
+            x: colX(sys.col) + cellW / 2 + (Math.random() - 0.5) * cellW * 0.6,
+            y: rowY(sys.row) + cellH / 2 + (Math.random() - 0.5) * cellH * 0.6,
         }));
 
         const collideR = cellW * 0.04;
         const sim = d3.forceSimulation(nodes)
-            .force('x', d3.forceX(d => d.col * cellW + cellW / 2).strength(0.15))
-            .force('y', d3.forceY(d => d.row * cellH + cellH / 2).strength(0.15))
+            .force('x', d3.forceX(d => colX(d.col) + cellW / 2).strength(0.15))
+            .force('y', d3.forceY(d => rowY(d.row) + cellH / 2).strength(0.15))
             .force('collide', d3.forceCollide(collideR).strength(0.9).iterations(4))
             .stop();
         for (let i = 0; i < 150; i++) sim.tick();
@@ -574,8 +578,8 @@ export function initialize(containerId, overview, dotNetRef) {
         // Clamp to cell boundaries
         const pad = cellW * 0.05;
         nodes.forEach(n => {
-            const xMin = n.col * cellW + pad, xMax = (n.col + 1) * cellW - pad;
-            const yMin = n.row * cellH + pad, yMax = (n.row + 1) * cellH - pad;
+            const xMin = colX(n.col) + pad, xMax = colX(n.col) + cellW - pad;
+            const yMin = rowY(n.row) + pad, yMax = rowY(n.row) + cellH - pad;
             n.x = Math.max(xMin, Math.min(xMax, n.x));
             n.y = Math.max(yMin, Math.min(yMax, n.y));
         });
@@ -585,7 +589,7 @@ export function initialize(containerId, overview, dotNetRef) {
             const [c, r] = k.split(',').map(Number);
             const total = cellBuckets[k] ? cellBuckets[k].shown.length + cellBuckets[k].overflow : 0;
             contentLayer.insert('rect', ':first-child')
-                .attr('x', c * cellW).attr('y', r * cellH)
+                .attr('x', colX(c)).attr('y', rowY(r))
                 .attr('width', cellW).attr('height', cellH)
                 .attr('fill', 'transparent')
                 .style('cursor', 'pointer')
@@ -684,8 +688,8 @@ export function initialize(containerId, overview, dotNetRef) {
         dotNetRef.invokeMethodAsync('OnLevelChanged', 'cell', `${String.fromCharCode(65 + col)}-${row + 1}`);
 
         // Animate zoom to cell
-        const targetX = col * cellW;
-        const targetY = row * cellH;
+        const targetX = colX(col);
+        const targetY = rowY(row);
         const targetScale = Math.min(width / cellW, height / cellH) * 0.85;
         const tx = width / 2 - (targetX + cellW / 2) * targetScale;
         const ty = height / 2 - (targetY + cellH / 2) * targetScale;
@@ -715,8 +719,8 @@ export function initialize(containerId, overview, dotNetRef) {
             ? systems.filter(s => s.celestialBodies && s.celestialBodies.length > 0)
             : systems;
 
-        const cx = col * cellW + cellW / 2;
-        const cy = row * cellH + cellH / 2;
+        const cx = colX(col) + cellW / 2;
+        const cy = rowY(row) + cellH / 2;
 
         if (filtered.length === 0) {
             contentLayer.append('text')
@@ -734,8 +738,8 @@ export function initialize(containerId, overview, dotNetRef) {
         const padX = cellW * 0.08, padY = cellH * 0.08;
         const slotW = (cellW - padX * 2) / gridCols;
         const slotH = (cellH - padY * 2) / gridRows;
-        const startX = col * cellW + padX + slotW / 2;
-        const startY = row * cellH + padY + slotH / 2;
+        const startX = colX(col) + padX + slotW / 2;
+        const startY = rowY(row) + padY + slotH / 2;
 
         const nodes = filtered.map((sys, i) => ({
             ...sys,
@@ -745,7 +749,7 @@ export function initialize(containerId, overview, dotNetRef) {
 
         // Highlight current cell
         contentLayer.append('rect')
-            .attr('x', col * cellW + 1).attr('y', row * cellH + 1)
+            .attr('x', colX(col) + 1).attr('y', rowY(row) + 1)
             .attr('width', cellW - 2).attr('height', cellH - 2)
             .attr('fill', 'rgba(255,255,255,0.03)')
             .attr('stroke', 'rgba(255,255,255,0.15)').attr('stroke-width', 0.5)
@@ -942,8 +946,8 @@ export function initialize(containerId, overview, dotNetRef) {
                 const cs = Math.min(width / cellW, height / cellH) * 0.85;
                 svg.transition().duration(600).ease(d3.easeCubicInOut)
                     .call(zoom.transform, d3.zoomIdentity.translate(
-                        width / 2 - (currentCell.col * cellW + cellW / 2) * cs,
-                        height / 2 - (currentCell.row * cellH + cellH / 2) * cs
+                        width / 2 - (colX(currentCell.col) + cellW / 2) * cs,
+                        height / 2 - (rowY(currentCell.row) + cellH / 2) * cs
                     ).scale(cs));
 
                 contentLayer.selectAll('*').remove();
@@ -973,8 +977,8 @@ export function initialize(containerId, overview, dotNetRef) {
                 const rw = (maxCol - minCol + 1) * cellW;
                 const rh = (maxRow - minRow + 1) * cellH;
                 const rs = Math.min(width / rw, height / rh) * 0.8;
-                const rcx = minCol * cellW + rw / 2;
-                const rcy = minRow * cellH + rh / 2;
+                const rcx = colX(minCol) + rw / 2;
+                const rcy = rowY(minRow) + rh / 2;
                 svg.transition().duration(600).ease(d3.easeCubicInOut)
                     .call(zoom.transform, d3.zoomIdentity.translate(
                         width / 2 - rcx * rs,
@@ -1089,7 +1093,7 @@ export function initialize(containerId, overview, dotNetRef) {
         setSystemFilter, setRegionVisibility,
         // Temporal layer state
         territoryLayer, heatmapLayer, markerLayer, tooltip, dotNetRef,
-        cellW, cellH, cols, rows, regionCellMap, overview,
+        cellW, cellH, cols, rows, startCol, startRow, colX, rowY, regionCellMap, overview,
         currentYearData: null, selectedLens: 'All',
     };
 }
@@ -1226,7 +1230,7 @@ function _renderTerritory() {
 
         for (const [col, row] of cells) {
             territoryLayer.append('rect')
-                .attr('x', col * cellW).attr('y', row * cellH)
+                .attr('x', colX(col)).attr('y', rowY(row))
                 .attr('width', cellW).attr('height', cellH)
                 .attr('fill', dom.color)
                 .attr('fill-opacity', 0.1 + dom.control * 0.25)
@@ -1242,7 +1246,7 @@ function _renderTerritory() {
                 const subset = cells.filter((_, idx) => idx % regionCtrl.factions.length === i);
                 for (const [col, row] of subset) {
                     territoryLayer.append('rect')
-                        .attr('x', col * cellW).attr('y', row * cellH)
+                        .attr('x', colX(col)).attr('y', rowY(row))
                         .attr('width', cellW).attr('height', cellH)
                         .attr('fill', f.color).attr('fill-opacity', f.control * 0.3)
                         .style('pointer-events', 'none');
@@ -1271,8 +1275,8 @@ function _renderHeatmap() {
     const maxCount = Math.max(...filteredCells.map(c => c.count), 1);
 
     for (const cell of filteredCells) {
-        const cx = cell.col * cellW + cellW / 2;
-        const cy = cell.row * cellH + cellH / 2;
+        const cx = colX(cell.col) + cellW / 2;
+        const cy = rowY(cell.row) + cellH / 2;
         const intensity = cell.count / maxCount;
         const radius = cellW * 0.3 + cellW * 0.5 * intensity;
 
@@ -1333,8 +1337,8 @@ function _renderHeatmap() {
     // Pulse animation for top hotspots
     filteredCells.slice(0, 5).forEach(cell => {
         if (cell.count / maxCount < 0.3) return;
-        const cx = cell.col * cellW + cellW / 2;
-        const cy = cell.row * cellH + cellH / 2;
+        const cx = colX(cell.col) + cellW / 2;
+        const cy = rowY(cell.row) + cellH / 2;
         const radius = cellW * 0.3 + cellW * 0.5 * (cell.count / maxCount);
         const counts = {};
         cell.events.forEach(e => { counts[e.lens] = (counts[e.lens] || 0) + 1; });
