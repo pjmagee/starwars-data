@@ -13,10 +13,12 @@
         {
             <div style="display:flex; align-items:center; gap:6px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px;">
                 <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:#ffa726;" />
-                <MudSlider T="int" Value="_selectedYear" ValueChanged="OnYearChanged"
-                           Min="_minYear" Max="_maxYear" Step="1"
+                <MudSlider T="int" Value="_selectedTickIndex" ValueChanged="OnTickChanged"
+                           Min="0" Max="@(_temporalTicks.Count - 1)" Step="1"
                            Style="max-width:250px; min-width:120px;" Color="Color.Warning" />
-                <MudText Typo="Typo.caption" Style="color:#ffa726; white-space:nowrap;">@FormatYear(_selectedYear)</MudText>
+                <MudText Typo="Typo.caption" Style="color:#ffa726; white-space:nowrap;">
+                    @FormatYear(_temporalTicks[_selectedTickIndex])
+                </MudText>
                 <MudIconButton Icon="@Icons.Material.Filled.RestartAlt" Size="Size.Small"
                                OnClick="ClearYearFilter" Style="color:#aaa;" />
             </div>
@@ -127,7 +129,8 @@ else if (_selectedNodePage is not null)
     private bool _loadingNodeDetails;
 
     private bool _hasTemporalData;
-    private int _minYear, _maxYear, _selectedYear;
+    private List<int> _temporalTicks = [];
+    private int _selectedTickIndex;
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -153,14 +156,18 @@ else if (_selectedNodePage is not null)
             fromYear = e.FromYear, toYear = e.ToYear,
         }).ToArray();
 
-        var temporalEdges = GraphData.Edges.Where(e => e.FromYear.HasValue).ToList();
-        _hasTemporalData = temporalEdges.Count > 0;
+        // Collect distinct years where edges change state (start or end)
+        var yearSet = new SortedSet<int>();
+        foreach (var e in GraphData.Edges)
+        {
+            if (e.FromYear.HasValue) yearSet.Add(e.FromYear.Value);
+            if (e.ToYear.HasValue) yearSet.Add(e.ToYear.Value);
+        }
+        _temporalTicks = [.. yearSet];
+        _hasTemporalData = _temporalTicks.Count > 1;
         if (_hasTemporalData)
         {
-            _minYear = temporalEdges.Min(e => e.FromYear!.Value);
-            _maxYear = temporalEdges.Max(e => e.ToYear ?? e.FromYear!.Value);
-            if (_minYear == _maxYear) { _minYear -= 10; _maxYear += 10; }
-            _selectedYear = _maxYear;
+            _selectedTickIndex = _temporalTicks.Count - 1; // default to latest
         }
 
         var data = new { nodes, edges, rootId = GraphData.RootId, layoutMode = LayoutMode };
@@ -194,10 +201,11 @@ else if (_selectedNodePage is not null)
     async Task ZoomOut() { if (_jsModule is not null) await _jsModule.InvokeVoidAsync("zoomOut"); }
     async Task FitToScreen() { if (_jsModule is not null) await _jsModule.InvokeVoidAsync("fitToScreen"); }
 
-    async Task OnYearChanged(int value)
+    async Task OnTickChanged(int tickIndex)
     {
-        _selectedYear = value;
-        if (_jsModule is not null) await _jsModule.InvokeVoidAsync("filterByYear", _selectedYear);
+        _selectedTickIndex = tickIndex;
+        var year = _temporalTicks[tickIndex];
+        if (_jsModule is not null) await _jsModule.InvokeVoidAsync("filterByYear", year);
     }
 
     async Task ClearYearFilter()

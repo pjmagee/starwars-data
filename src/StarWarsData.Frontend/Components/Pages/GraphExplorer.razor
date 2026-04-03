@@ -167,11 +167,11 @@
             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
                 <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:rgba(255,255,255,0.5);" />
                 <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Year</MudText>
-                <MudSlider T="int" Value="_selectedYear" ValueChanged="OnYearChanged"
-                           Min="_minYear" Max="_maxYear" Step="1"
+                <MudSlider T="int" Value="_selectedTickIndex" ValueChanged="OnTickChanged"
+                           Min="0" Max="@(_temporalTicks.Count - 1)" Step="1"
                            Style="max-width:400px;" Color="Color.Warning" />
                 <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning">
-                    @FormatYear(_selectedYear)
+                    @FormatYear(_temporalTicks[_selectedTickIndex])
                 </MudChip>
                 <MudButton Variant="Variant.Text" Size="Size.Small" Color="Color.Secondary"
                            OnClick="ClearYearFilter">Show All</MudButton>
@@ -343,10 +343,8 @@
 
     // Temporal slider
     private bool _hasTemporalData;
-    private int _minYear;
-    private int _maxYear;
-    private int _selectedYear;
-    private bool _yearFilterActive;
+    private List<int> _temporalTicks = [];
+    private int _selectedTickIndex;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -603,17 +601,17 @@
             toYear = e.ToYear,
         }).ToArray();
 
-        // Compute temporal range for slider
-        var temporalEdges = result.Edges.Where(e => e.FromYear.HasValue).ToList();
-        _hasTemporalData = temporalEdges.Count > 0;
-        if (_hasTemporalData)
+        // Collect distinct years where edges change state
+        var yearSet = new SortedSet<int>();
+        foreach (var e in result.Edges)
         {
-            _minYear = temporalEdges.Min(e => e.FromYear!.Value);
-            _maxYear = temporalEdges.Max(e => e.ToYear ?? e.FromYear!.Value);
-            if (_minYear == _maxYear) { _minYear -= 10; _maxYear += 10; }
-            _selectedYear = _maxYear;
-            _yearFilterActive = false;
+            if (e.FromYear.HasValue) yearSet.Add(e.FromYear.Value);
+            if (e.ToYear.HasValue) yearSet.Add(e.ToYear.Value);
         }
+        _temporalTicks = [.. yearSet];
+        _hasTemporalData = _temporalTicks.Count > 1;
+        if (_hasTemporalData)
+            _selectedTickIndex = _temporalTicks.Count - 1;
 
         var data = new { nodes, edges, rootId = result.RootId };
 
@@ -802,17 +800,16 @@
         });
     }
 
-    private async Task OnYearChanged(int value)
+    private async Task OnTickChanged(int tickIndex)
     {
-        _selectedYear = value;
-        _yearFilterActive = true;
+        _selectedTickIndex = tickIndex;
+        var year = _temporalTicks[tickIndex];
         if (_jsModule is not null)
-            await _jsModule.InvokeVoidAsync("filterByYear", _selectedYear);
+            await _jsModule.InvokeVoidAsync("filterByYear", year);
     }
 
     private async Task ClearYearFilter()
     {
-        _yearFilterActive = false;
         if (_jsModule is not null)
             await _jsModule.InvokeVoidAsync("filterByYear", (int?)null);
     }
