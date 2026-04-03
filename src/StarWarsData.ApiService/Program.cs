@@ -105,14 +105,15 @@ builder
     })
     .AddSingleton<CollectionFilters>()
     .AddSingleton<KnowledgeGraphQueryService>()
+    .AddSingleton<SemanticSearchService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        var embedder = sp.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
         var kgService = sp.GetRequiredService<KnowledgeGraphQueryService>();
-        return new GraphRAGToolkit(kgService, mongoClient, settings.DatabaseName, embedder);
+        var search = sp.GetRequiredService<SemanticSearchService>();
+        return new GraphRAGToolkit(kgService, search, mongoClient, settings.DatabaseName);
     })
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(
@@ -197,9 +198,9 @@ builder
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                "search_wiki",
-                "Search Star Wars wiki pages for background context, lore, and article text. "
-                    + "Use when the user asks about history, events, explanations, or lore that goes beyond structured infobox data."
+                "keyword_search",
+                "Keyword search over wiki page titles and content. Fast, no AI cost. "
+                    + "Best for exact name lookups. For why/how/explain questions, use semantic_search instead."
             )
         );
         if (mcpClient is not null)
@@ -294,8 +295,15 @@ app.Use(
                 context.Items["HasByok"] = hasByok;
             }
 
-            // BYOK users skip rate limiting entirely
-            if (!hasByok)
+            // BYOK users and admins skip rate limiting entirely
+            var isAdmin =
+                context
+                    .Request.Headers["X-User-Roles"]
+                    .FirstOrDefault()
+                    ?.Split(',', StringSplitOptions.TrimEntries)
+                    .Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
+
+            if (!hasByok && !isAdmin)
             {
                 var clientIp =
                     context

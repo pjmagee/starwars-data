@@ -3,32 +3,6 @@
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
     <MudText Typo="Typo.h6" Class="mb-2">@Descriptor.Title</MudText>
 
-    @* Label controls *@
-    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2 flex-wrap">
-        <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5)">Depth</MudText>
-        <MudSlider T="int" Value="_maxDepth" ValueChanged="OnDepthChanged"
-                   Min="1" Max="4" Step="1" Style="max-width:120px"
-                   Color="Color.Primary" />
-        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">
-            @_maxDepth
-        </MudChip>
-
-        <MudDivider Vertical="true" FlexItem="true" Style="height:24px" />
-
-        @foreach (var label in _allLabels)
-        {
-            var l = label;
-            var enabled = _enabledLabels.Contains(l);
-            <MudChip T="string" Size="Size.Small"
-                     Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
-                     Color="Color.Info"
-                     Style="@(enabled ? "" : "opacity:0.4")"
-                     OnClick="() => ToggleLabel(l)">
-                @FormatLabel(l)
-            </MudChip>
-        }
-    </MudStack>
-
     @if (_loading)
     {
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
@@ -42,7 +16,10 @@
     }
     else if (_graphData is not null)
     {
-        <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode" />
+        <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode"
+                     Labels="_allLabels" EnabledLabels="_enabledLabels"
+                     OnLabelToggled="ToggleLabel"
+                     MaxDepth="_maxDepth" OnDepthChanged="OnDepthChanged" />
     }
 
     <AskReferencesSection References="@Descriptor.References" />
@@ -57,7 +34,6 @@
     private int _loadGeneration;
     private RelationshipGraphResult? _graphData;
 
-    // Controls
     private int _maxDepth;
     private HashSet<string> _enabledLabels = [];
     private List<string> _allLabels = [];
@@ -126,8 +102,4 @@
             _enabledLabels.Add(label);
         await LoadGraph();
     }
-
-    static string FormatLabel(string label) =>
-        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
-            label.Replace("_", " "));
 }

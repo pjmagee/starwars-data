@@ -4,6 +4,7 @@
 @using StarWarsData.Frontend.Services
 @inherits LayoutComponentBase
 @inject LayoutService Layout
+@inject UiScaleService UiScale
 @implements IDisposable
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
@@ -21,6 +22,17 @@
         <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
             <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
         </MudLink>
+        <MudMenu Icon="@Icons.Material.Filled.TextFields" Color="Color.Inherit" title="UI Scale"
+                 AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+            @foreach (var (label, value) in UiScaleService.Presets)
+            {
+                var v = value;
+                <MudMenuItem OnClick="@(() => UiScale.SetScaleAsync(v))"
+                             Icon="@(Math.Abs(UiScale.Scale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
+                    @label (@((int)(v * 100))%)
+                </MudMenuItem>
+            }
+        </MudMenu>
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
         <AuthorizeView>
@@ -92,6 +104,7 @@
     {
         base.OnInitialized();
         Layout.OnChange += StateHasChanged;
+        UiScale.OnChange += StateHasChanged;
 
         _theme = new()
         {
@@ -101,7 +114,17 @@
         };
     }
 
-    public void Dispose() => Layout.OnChange -= StateHasChanged;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await UiScale.InitializeAsync();
+    }
+
+    public void Dispose()
+    {
+        Layout.OnChange -= StateHasChanged;
+        UiScale.OnChange -= StateHasChanged;
+    }
 
     private void DrawerToggle()
     {

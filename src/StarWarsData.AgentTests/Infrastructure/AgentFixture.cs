@@ -60,12 +60,22 @@ public class AgentFixture
             }
         );
 
-        // Embedding generator (no-op for tests — vector search won't be tested)
-        var embedder = new NoOpEmbeddingGenerator();
-
         // Build toolkits — same as Program.cs
         var kgService = new KnowledgeGraphQueryService(MongoClient, settings);
-        GraphRAG = new GraphRAGToolkit(kgService, MongoClient, databaseName, embedder);
+        var embedder = new NoOpEmbeddingGenerator();
+        var searchLogger = Microsoft
+            .Extensions
+            .Logging
+            .Abstractions
+            .NullLogger<SemanticSearchService>
+            .Instance;
+        var semanticSearch = new SemanticSearchService(
+            MongoClient,
+            settings,
+            embedder,
+            searchLogger
+        );
+        GraphRAG = new GraphRAGToolkit(kgService, semanticSearch, MongoClient, databaseName);
         Components = new ComponentToolkit();
         var dataExplorer = new DataExplorerToolkit(MongoClient, settings);
 
@@ -85,8 +95,8 @@ public class AgentFixture
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                "search_wiki",
-                "Search Star Wars wiki pages for background context, lore, and article text."
+                "keyword_search",
+                "Keyword search over wiki page titles and content. For conceptual questions use semantic_search."
             )
         );
         Tools = tools;

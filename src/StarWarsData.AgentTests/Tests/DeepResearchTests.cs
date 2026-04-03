@@ -41,7 +41,7 @@ public class DeepResearchTests
             capture.HasToolCall("get_entity_relationships")
                 || capture.HasToolCall("traverse_graph")
                 || capture.HasToolCall("find_connections")
-                || capture.HasToolCall("search_article_content"),
+                || capture.HasToolCall("semantic_search"),
             "Should use relationship or article search tools to trace the chain"
         );
 
@@ -75,7 +75,7 @@ public class DeepResearchTests
             The agent should:
             - Search for multiple entities across different types (not just Characters)
             - Use get_entity_timeline or get_entity_relationships to trace connections
-            - Use search_article_content for narrative depth on the chain of events
+            - Use semantic_search for narrative depth on the chain of events
             - Use temporal data (institutional.reorganized facets on the Republic, conflict.point on battles)
             - Present a coherent narrative connecting ancient Sith knowledge to galactic political change
 

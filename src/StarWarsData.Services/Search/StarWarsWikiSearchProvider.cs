@@ -32,9 +32,10 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         [
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => SearchAsync(query, ct),
-                "search_wiki",
-                "Search Star Wars wiki pages for background context, lore, and article text. "
-                    + "Use when the user asks about history, events, explanations, or lore that goes beyond structured infobox data."
+                "keyword_search",
+                "Keyword search over wiki page titles and content. Fast, no AI cost. "
+                    + "Best for exact name lookups and specific title matches. "
+                    + "For WHY/HOW/EXPLAIN questions, use semantic_search instead — it understands meaning."
             ),
         ];
     }

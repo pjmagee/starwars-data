@@ -8,6 +8,35 @@
     @* ── Controls overlay (top-left, inside canvas) ── *@
     <div style="position:absolute; top:8px; left:8px; z-index:10; display:flex; flex-direction:column; gap:6px; max-width:calc(100% - 80px);">
 
+        @* Breadcrumbs *@
+        @if (History is { Count: > 0 })
+        {
+            <div style="display:flex; align-items:center; gap:4px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px; flex-wrap:wrap;">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
+                               Style="color:#e0e0f0;" OnClick="@(() => OnNavigateBack.InvokeAsync())" />
+                @foreach (var crumb in History)
+                {
+                    var c = crumb;
+                    <MudLink Style="color:#90caf9; font-size:12px; cursor:pointer;"
+                             OnClick="@(() => OnBreadcrumbClicked.InvokeAsync(c))">@c.Name</MudLink>
+                    <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">›</MudText>
+                }
+                <MudText Typo="Typo.caption" Style="color:#ffa726; font-weight:600;">@CurrentEntityName</MudText>
+            </div>
+        }
+
+        @* Depth control *@
+        @if (MaxDepth.HasValue)
+        {
+            <div style="display:flex; align-items:center; gap:6px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px;">
+                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Depth</MudText>
+                <MudSlider T="int" Value="MaxDepth.Value" ValueChanged="@(v => OnDepthChanged.InvokeAsync(v))"
+                           Min="1" Max="4" Step="1" Style="max-width:120px; min-width:80px;"
+                           Color="Color.Primary" />
+                <MudText Typo="Typo.caption" Style="color:#90caf9;">@MaxDepth.Value</MudText>
+            </div>
+        }
+
         @* Temporal slider *@
         @if (_hasTemporalData)
         {
@@ -21,6 +50,25 @@
                 </MudText>
                 <MudIconButton Icon="@Icons.Material.Filled.RestartAlt" Size="Size.Small"
                                OnClick="ClearYearFilter" Style="color:#aaa;" />
+            </div>
+        }
+
+        @* Label chips *@
+        @if (Labels is { Count: > 0 })
+        {
+            <div style="display:flex; align-items:center; gap:4px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px; flex-wrap:wrap;">
+                @foreach (var label in Labels)
+                {
+                    var l = label;
+                    var enabled = EnabledLabels?.Contains(l) ?? true;
+                    <MudChip T="string" Size="Size.Small"
+                             Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
+                             Color="Color.Info"
+                             Style="@(enabled ? "" : "opacity:0.4")"
+                             OnClick="@(() => OnLabelToggled.InvokeAsync(l))">
+                        @FormatLabel(l)
+                    </MudChip>
+                }
             </div>
         }
 
@@ -48,69 +96,112 @@
     <div id="@_containerId"
          style="@($"width:100%; background:#16162e; {(_fullscreen ? "height:100vh;" : $"height:{Height}px;")}")">
     </div>
+
+    @* ── Node detail panel (inside, right overlay) ── *@
+    @if (_loadingNodeDetails)
+    {
+        <div style="position:absolute; top:0; right:0; width:320px; height:100%; z-index:20; background:var(--mud-palette-surface); border-left:1px solid var(--mud-palette-lines-default); overflow-y:auto;">
+            <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:100%">
+                <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            </MudStack>
+        </div>
+    }
+    else if (_selectedNodePage is not null)
+    {
+        <div style="position:absolute; top:0; right:0; width:320px; height:100%; z-index:20; background:var(--mud-palette-surface); border-left:1px solid var(--mud-palette-lines-default); overflow-y:auto;">
+            <MudCard Elevation="0">
+                @if (_selectedNodePage.Infobox?.ImageUrl is not null)
+                {
+                    <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="180" />
+                }
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
+                        @if (_selectedNodePage.Infobox?.Template is not null)
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                @SanitizeTemplate(_selectedNodePage.Infobox.Template)
+                            </MudText>
+                        }
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="CloseNodePanel" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    @if (_selectedNodePage.Infobox?.Data is not null)
+                    {
+                        <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto; font-size:12px;">
+                            <tbody>
+                                @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
+                                {
+                                    <tr>
+                                        <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top;">@prop.Label</td>
+                                        <td style="padding:4px 8px;">
+                                            @foreach (var link in prop.Links)
+                                            {
+                                                <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                            }
+                                            @GetPlainValues(prop)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </MudSimpleTable>
+                    }
+                </MudCardContent>
+                <MudCardActions>
+                    @if (_selectedNodePage.WikiUrl is not null)
+                    {
+                        <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">Wookieepedia</MudButton>
+                    }
+                    @if (OnNodeExpandRequested.HasDelegate)
+                    {
+                        <MudButton Variant="Variant.Text" Color="Color.Secondary" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.Hub"
+                                   OnClick="@(() => OnNodeExpandRequested.InvokeAsync((_selectedNodeId, _selectedNodePage.Title)))">
+                            Explore Graph
+                        </MudButton>
+                    }
+                    else
+                    {
+                        <MudButton Href="@($"/graph-explorer/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary"
+                                   Size="Size.Small" StartIcon="@Icons.Material.Filled.Hub">Explore</MudButton>
+                    }
+                </MudCardActions>
+            </MudCard>
+        </div>
+    }
+
+    @* ── Keyboard hints (bottom-left) ── *@
+    @if (EnableKeyboardShortcuts)
+    {
+        <div style="position:absolute; bottom:8px; left:8px; z-index:10;">
+            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4); font-size:13px;">
+                Double-click: expand &bull; Backspace: back &bull; F: fullscreen &bull; Esc: close/exit
+            </MudText>
+        </div>
+    }
+
+    @* ── Stats overlay (bottom-right) ── *@
+    @if (Stats is not null)
+    {
+        <div style="position:absolute; bottom:8px; right:8px; z-index:10; display:flex; gap:8px;">
+            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text"
+                     Style="background:rgba(30,30,56,0.8);">
+                @Stats.Value.nodes nodes
+            </MudChip>
+            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Text"
+                     Style="background:rgba(30,30,56,0.8);">
+                @Stats.Value.edges edges
+            </MudChip>
+        </div>
+    }
 </div>
 
-@* ── Node detail panel (below the graph) ── *@
-@if (_loadingNodeDetails)
-{
-    <MudPaper Class="pa-4 mt-2" Style="max-height:350px; overflow-y:auto;">
-        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="height:150px">
-            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
-        </MudStack>
-    </MudPaper>
-}
-else if (_selectedNodePage is not null)
-{
-    <MudPaper Class="pa-0 mt-2" Style="max-height:350px; overflow-y:auto; border-radius:8px;">
-        <MudCard Elevation="0">
-            @if (_selectedNodePage.Infobox?.ImageUrl is not null)
-            {
-                <MudCardMedia Image="@StripRevision(_selectedNodePage.Infobox.ImageUrl)" Height="150" />
-            }
-            <MudCardHeader>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h6">@_selectedNodePage.Title</MudText>
-                </CardHeaderContent>
-                <CardHeaderActions>
-                    <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="CloseNodePanel" />
-                </CardHeaderActions>
-            </MudCardHeader>
-            <MudCardContent>
-                @if (_selectedNodePage.Infobox?.Data is not null)
-                {
-                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto; font-size:12px;">
-                        <tbody>
-                            @foreach (var prop in _selectedNodePage.Infobox.Data.Where(HasInfoboxContent))
-                            {
-                                <tr>
-                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top;">@prop.Label</td>
-                                    <td style="padding:4px 8px;">
-                                        @foreach (var link in prop.Links)
-                                        {
-                                            <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
-                                        }
-                                        @GetPlainValues(prop)
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </MudSimpleTable>
-                }
-            </MudCardContent>
-            <MudCardActions>
-                @if (_selectedNodePage.WikiUrl is not null)
-                {
-                    <MudButton Href="@_selectedNodePage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
-                               StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">Wookieepedia</MudButton>
-                }
-                <MudButton Href="@($"/graph-explorer/{_selectedNodeId}")" Variant="Variant.Text" Color="Color.Secondary"
-                           Size="Size.Small" StartIcon="@Icons.Material.Filled.Hub">Explore</MudButton>
-            </MudCardActions>
-        </MudCard>
-    </MudPaper>
-}
-
 @code {
+    // ── Core parameters ──
     [Parameter, EditorRequired]
     public RelationshipGraphResult GraphData { get; set; } = null!;
 
@@ -118,6 +209,27 @@ else if (_selectedNodePage is not null)
     [Parameter] public int Height { get; set; } = 650;
     [Parameter] public string? Hint { get; set; }
     [Parameter] public EventCallback<(int id, string name)> OnNodeExpandRequested { get; set; }
+
+    // ── Label toggles (optional) ──
+    [Parameter] public List<string>? Labels { get; set; }
+    [Parameter] public HashSet<string>? EnabledLabels { get; set; }
+    [Parameter] public EventCallback<string> OnLabelToggled { get; set; }
+
+    // ── Depth control (optional) ──
+    [Parameter] public int? MaxDepth { get; set; }
+    [Parameter] public EventCallback<int> OnDepthChanged { get; set; }
+
+    // ── Navigation breadcrumbs (optional) ──
+    [Parameter] public List<(int Id, string Name)>? History { get; set; }
+    [Parameter] public string? CurrentEntityName { get; set; }
+    [Parameter] public EventCallback OnNavigateBack { get; set; }
+    [Parameter] public EventCallback<(int Id, string Name)> OnBreadcrumbClicked { get; set; }
+
+    // ── Stats (optional) ──
+    [Parameter] public (int nodes, int edges)? Stats { get; set; }
+
+    // ── Keyboard shortcuts (optional) ──
+    [Parameter] public bool EnableKeyboardShortcuts { get; set; }
 
     private IJSObjectReference? _jsModule;
     private DotNetObjectReference<GraphViewer>? _dotnetRef;
@@ -132,12 +244,17 @@ else if (_selectedNodePage is not null)
     private List<int> _temporalTicks = [];
     private int _selectedTickIndex;
 
+    private RelationshipGraphResult? _lastRenderedData;
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnParametersSetAsync()
     {
-        if (GraphData?.Nodes is { Count: > 0 })
+        if (GraphData?.Nodes is { Count: > 0 } && !ReferenceEquals(GraphData, _lastRenderedData))
+        {
+            _lastRenderedData = GraphData;
             await RenderGraph();
+        }
     }
 
     async Task RenderGraph()
@@ -156,7 +273,6 @@ else if (_selectedNodePage is not null)
             fromYear = e.FromYear, toYear = e.ToYear,
         }).ToArray();
 
-        // Collect distinct years where edges change state (start or end)
         var yearSet = new SortedSet<int>();
         foreach (var e in GraphData.Edges)
         {
@@ -166,16 +282,46 @@ else if (_selectedNodePage is not null)
         _temporalTicks = [.. yearSet];
         _hasTemporalData = _temporalTicks.Count > 1;
         if (_hasTemporalData)
-        {
-            _selectedTickIndex = _temporalTicks.Count - 1; // default to latest
-        }
+            _selectedTickIndex = _temporalTicks.Count - 1;
 
         var data = new { nodes, edges, rootId = GraphData.RootId, layoutMode = LayoutMode };
 
         _dotnetRef?.Dispose();
         _dotnetRef = DotNetObjectReference.Create(this);
         await _jsModule.InvokeVoidAsync("renderForceGraph", _containerId, data, _dotnetRef);
+
+        if (EnableKeyboardShortcuts)
+            await _jsModule.InvokeVoidAsync("registerKeyboardShortcuts", _dotnetRef);
     }
+
+    /// <summary>
+    /// Merge new nodes/edges into the existing graph (expand-on-double-click or navigate back).
+    /// Returns the updated (nodes, edges) stats.
+    /// </summary>
+    public async Task<(int nodes, int edges)> ExpandWithDataAsync(RelationshipGraphResult data, int newRootId)
+    {
+        if (_jsModule is null) return (0, 0);
+
+        var payload = new
+        {
+            nodes = data.Nodes.Select(n => new
+            {
+                id = n.Id, name = n.Name, type = n.Type, imageUrl = n.ImageUrl ?? "",
+            }).ToArray(),
+            edges = data.Edges.Select(e => new
+            {
+                fromId = e.FromId, toId = e.ToId,
+                label = e.Label, weight = e.Weight > 0 ? e.Weight : 0.5,
+            }).ToArray(),
+            rootId = newRootId,
+        };
+
+        await _jsModule.InvokeVoidAsync("expandNode", payload);
+        var stats = await _jsModule.InvokeAsync<GraphStatsDto>("getStats");
+        return (stats.Nodes, stats.Edges);
+    }
+
+    record GraphStatsDto(int Nodes, int Edges);
 
     [JSInvokable]
     public async Task OnNodeClicked(int id, string name, string type)
@@ -194,6 +340,29 @@ else if (_selectedNodePage is not null)
     {
         if (OnNodeExpandRequested.HasDelegate)
             await OnNodeExpandRequested.InvokeAsync((id, name));
+    }
+
+    [JSInvokable]
+    public void OnKeyAction(string action)
+    {
+        InvokeAsync(async () =>
+        {
+            switch (action)
+            {
+                case "back":
+                    if (OnNavigateBack.HasDelegate)
+                        await OnNavigateBack.InvokeAsync();
+                    break;
+                case "fullscreen":
+                    ToggleFullscreen();
+                    break;
+                case "escape":
+                    if (_fullscreen) ToggleFullscreen();
+                    else CloseNodePanel();
+                    break;
+            }
+            StateHasChanged();
+        });
     }
 
     void ToggleFullscreen() => _fullscreen = !_fullscreen;
@@ -216,7 +385,10 @@ else if (_selectedNodePage is not null)
     void CloseNodePanel() { _selectedNodePage = null; _selectedNodeId = 0; _loadingNodeDetails = false; }
 
     static string FormatYear(int y) => y <= 0 ? $"{Math.Abs(y)} BBY" : $"{y} ABY";
+    static string FormatLabel(string label) =>
+        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(label.Replace("_", " "));
     static string StripRevision(string url) { var i = url.IndexOf("/revision", StringComparison.OrdinalIgnoreCase); return i > 0 ? url[..i] : url; }
+    static string SanitizeTemplate(string template) { var last = template.Split(':').LastOrDefault() ?? template; return last.Replace("_", " "); }
     static bool HasInfoboxContent(InfoboxProperty prop) => prop.Links.Count > 0 || prop.Values.Any(v => !string.IsNullOrWhiteSpace(v));
     static string GetPlainValues(InfoboxProperty prop)
     {
@@ -229,7 +401,13 @@ else if (_selectedNodePage is not null)
         _dotnetRef?.Dispose();
         if (_jsModule is not null)
         {
-            try { await _jsModule.InvokeVoidAsync("destroyGraph", _containerId); await _jsModule.DisposeAsync(); }
+            try
+            {
+                if (EnableKeyboardShortcuts)
+                    await _jsModule.InvokeVoidAsync("unregisterKeyboardShortcuts");
+                await _jsModule.InvokeVoidAsync("destroyGraph", _containerId);
+                await _jsModule.DisposeAsync();
+            }
             catch { }
         }
     }

@@ -16,24 +16,22 @@ namespace StarWarsData.Services;
 public class GraphRAGToolkit
 {
     readonly KnowledgeGraphQueryService _kg;
-    readonly IMongoCollection<BsonDocument> _chunksRaw;
+    readonly SemanticSearchService _search;
     readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
     readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
-    readonly IEmbeddingGenerator<string, Embedding<float>> _embedder;
 
     public GraphRAGToolkit(
         KnowledgeGraphQueryService kg,
+        SemanticSearchService search,
         IMongoClient mongoClient,
-        string databaseName,
-        IEmbeddingGenerator<string, Embedding<float>> embedder
+        string databaseName
     )
     {
         _kg = kg;
+        _search = search;
         var db = mongoClient.GetDatabase(databaseName);
-        _chunksRaw = db.GetCollection<BsonDocument>(Collections.SearchChunks);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
-        _embedder = embedder;
     }
 
     [Description(
@@ -358,14 +356,13 @@ public class GraphRAGToolkit
     }
 
     [Description(
-        "Search article content using semantic vector search over chunked wiki pages. "
-            + "Returns the most relevant article passages based on meaning, not just keyword matching. "
-            + "Each result includes title, wikiUrl, sectionUrl (deep link to the article section), and text — use title + sectionUrl as references. "
-            + "Use this for lore questions, historical context, event details, or any question where "
-            + "the answer is in article body text rather than structured infobox data. "
-            + "Combine with graph tools for comprehensive GraphRAG answers."
+        "Semantic search over 800K+ wiki article passages using AI embeddings. "
+            + "Finds content by MEANING, not keywords — understands concepts, paraphrases, and indirect references. "
+            + "Returns the most relevant passages with title, wikiUrl, sectionUrl (deep link), and text — use title + sectionUrl as references. "
+            + "PREFER THIS over keyword_search for: why/how questions, lore, philosophy, motivations, consequences, narrative context. "
+            + "Combine with KG tools for comprehensive answers: KG for structured facts + semantic_search for narrative depth."
     )]
-    public async Task<string> SearchArticleContent(
+    public async Task<string> SemanticSearch(
         [Description(
             "Natural language search query (e.g. 'Battle of Endor aftermath', 'Darth Vader's redemption')"
         )]
@@ -381,49 +378,13 @@ public class GraphRAGToolkit
     {
         limit = Math.Clamp(limit, 1, 10);
 
-        var embeddings = await _embedder.GenerateAsync([query]);
-        var queryVector = embeddings[0].Vector.ToArray();
+        var types = !string.IsNullOrWhiteSpace(type) ? new[] { type } : null;
+        Continuity? cont =
+            continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c)
+                ? c
+                : null;
 
-        var vectorSearchStage = new BsonDocument(
-            "$vectorSearch",
-            new BsonDocument
-            {
-                { "index", "chunks_vector_index" },
-                { "path", "embedding" },
-                { "queryVector", new BsonArray(queryVector.Select(f => (double)f)) },
-                { "numCandidates", limit * 20 },
-                { "limit", limit },
-            }
-        );
-
-        var filter = new BsonDocument();
-        if (!string.IsNullOrWhiteSpace(type))
-            filter["type"] = type;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            filter["continuity"] = cont.ToString();
-        if (filter.ElementCount > 0)
-            vectorSearchStage["$vectorSearch"]["filter"] = filter;
-
-        var projectStage = new BsonDocument(
-            "$project",
-            new BsonDocument
-            {
-                { "_id", 0 },
-                { "pageId", 1 },
-                { "title", 1 },
-                { "heading", 1 },
-                { "section", 1 },
-                { "wikiUrl", 1 },
-                { "text", 1 },
-                { "type", 1 },
-                { "continuity", 1 },
-                { "score", new BsonDocument("$meta", "vectorSearchScore") },
-            }
-        );
-
-        var results = await _chunksRaw
-            .Aggregate<BsonDocument>(new BsonDocument[] { vectorSearchStage, projectStage })
-            .ToListAsync();
+        var results = await _search.SearchAsync(query, types, cont, limit);
 
         if (results.Count == 0)
             return JsonSerializer.Serialize(
@@ -439,31 +400,17 @@ public class GraphRAGToolkit
             new
             {
                 query,
-                results = results.Select(d =>
+                results = results.Select(r => new
                 {
-                    var wikiUrl =
-                        d.Contains("wikiUrl") && !d["wikiUrl"].IsBsonNull
-                            ? d["wikiUrl"].AsString
-                            : "";
-                    var section =
-                        d.Contains("section") && !d["section"].IsBsonNull
-                            ? d["section"].AsString
-                            : "";
-                    return new
-                    {
-                        pageId = d["pageId"].AsInt32,
-                        title = d["title"].AsString,
-                        heading = d.Contains("heading") ? d["heading"].AsString : "",
-                        type = d.Contains("type") ? d["type"].AsString : "",
-                        continuity = d.Contains("continuity") ? d["continuity"].AsString : "",
-                        score = d.Contains("score") ? Math.Round(d["score"].AsDouble, 4) : 0,
-                        wikiUrl,
-                        sectionUrl = !string.IsNullOrEmpty(wikiUrl)
-                        && !string.IsNullOrEmpty(section)
-                            ? $"{wikiUrl}#{section}"
-                            : wikiUrl,
-                        text = Truncate(d["text"].AsString, 1500),
-                    };
+                    pageId = r.PageId,
+                    title = r.Title,
+                    heading = r.Heading,
+                    type = r.Type,
+                    continuity = r.Continuity,
+                    score = Math.Round(r.Score, 4),
+                    wikiUrl = r.WikiUrl,
+                    sectionUrl = r.SectionUrl,
+                    text = Truncate(r.Text, 1500),
                 }),
                 totalResults = results.Count,
             }
@@ -601,8 +548,7 @@ public class GraphRAGToolkit
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        // Access the raw collection via the service's mongo client
-        var results = await _chunksRaw
+        var results = await _galaxyYearsRaw
             .Database.GetCollection<BsonDocument>(Collections.KgNodes)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
@@ -630,7 +576,7 @@ public class GraphRAGToolkit
             new BsonDocument("$limit", limit),
         };
 
-        var results = await _chunksRaw
+        var results = await _galaxyYearsRaw
             .Database.GetCollection<BsonDocument>(Collections.KgEdges)
             .AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
@@ -653,7 +599,7 @@ public class GraphRAGToolkit
             AIFunctionFactory.Create(GetGalaxyYear, "get_galaxy_year"),
             AIFunctionFactory.Create(ListEntityTypes, "list_entity_types"),
             AIFunctionFactory.Create(ListRelationshipLabels, "list_relationship_labels"),
-            AIFunctionFactory.Create(SearchArticleContent, "search_article_content"),
+            AIFunctionFactory.Create(SemanticSearch, "semantic_search"),
         ];
 
     static string Truncate(string s, int max) =>

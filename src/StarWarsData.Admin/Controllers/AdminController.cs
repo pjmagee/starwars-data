@@ -494,15 +494,56 @@ public class AdminController(
         }
     }
 
+    [HttpPost("mongo/ensure-all-indexes")]
+    public ActionResult<string> EnqueueEnsureAllIndexes()
+    {
+        // Chain all index jobs sequentially via Hangfire continuations
+        var pageIndexJob = BackgroundJob.Enqueue<RecordService>(s =>
+            s.EnsureIndexesAsync(CancellationToken.None)
+        );
+
+        var chunkIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(
+            pageIndexJob,
+            s => s.EnsureIndexesAsync(CancellationToken.None)
+        );
+
+        var vectorIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(
+            chunkIndexJob,
+            s => s.CreateVectorIndexAsync(CancellationToken.None)
+        );
+
+        var graphIndexJob = BackgroundJob.ContinueJobWith<RelationshipGraphBuilderService>(
+            vectorIndexJob,
+            s => s.EnsureIndexesAsync(CancellationToken.None)
+        );
+
+        return Ok(
+            new
+            {
+                jobs = new
+                {
+                    pageIndexJob,
+                    chunkIndexJob,
+                    vectorIndexJob,
+                    graphIndexJob,
+                },
+                message = "All index jobs queued (pages → chunks → vector search → KG graph)",
+            }
+        );
+    }
+
     [HttpGet("graph/priority-categories")]
-    public ActionResult<string[]> GetPriorityCategories()
-        => Ok(RelationshipGraphBuilderService.GetPriorityCategories());
+    public ActionResult<string[]> GetPriorityCategories() =>
+        Ok(RelationshipGraphBuilderService.GetPriorityCategories());
 
     [HttpPost("graph/priority-categories")]
     public ActionResult SetPriorityCategories([FromBody] string[] categories)
     {
         RelationshipGraphBuilderService.SetPriorityCategories(categories);
-        logger.LogInformation("Graph builder priority categories set: {Categories}", string.Join(", ", categories));
+        logger.LogInformation(
+            "Graph builder priority categories set: {Categories}",
+            string.Join(", ", categories)
+        );
         return Ok(new { message = $"Priority set: {string.Join(", ", categories)}" });
     }
 
@@ -548,11 +589,16 @@ public class AdminController(
     // === Job Toggles ===
 
     [HttpGet("jobs")]
-    public async Task<List<StarWarsData.Models.Entities.JobToggle>> GetJobToggles(CancellationToken ct)
-        => await jobToggleService.GetAllAsync(ct);
+    public async Task<List<StarWarsData.Models.Entities.JobToggle>> GetJobToggles(
+        CancellationToken ct
+    ) => await jobToggleService.GetAllAsync(ct);
 
     [HttpPost("jobs/{jobId}/toggle")]
-    public async Task<ActionResult> ToggleJob(string jobId, [FromQuery] bool enabled, CancellationToken ct)
+    public async Task<ActionResult> ToggleJob(
+        string jobId,
+        [FromQuery] bool enabled,
+        CancellationToken ct
+    )
     {
         await jobToggleService.SetEnabledAsync(jobId, enabled, ct);
         logger.LogInformation("Job {JobId} {State}", jobId, enabled ? "enabled" : "disabled");

@@ -98,9 +98,9 @@ public static class AgentPrompt
         - list_infobox_types: list all infobox types. Call only if unsure.
         - list_timeline_categories: list timeline event categories. Call only if unsure.
 
-        ARTICLE SEARCH (semantic vector search over 800K+ article passages):
-        - search_article_content(query, type): vector search for narrative depth, lore, and explanations. Returns wikiUrl and sectionUrl for citations.
-        - search_wiki(query): full-text fallback if vector search returns nothing.
+        SEMANTIC & KEYWORD SEARCH (over 800K+ article passages):
+        - semantic_search(query, type): AI-powered vector search — finds content by MEANING. Use for why/how/explain questions, lore, philosophy, motivations, consequences. Returns wikiUrl and sectionUrl for citations. PREFER THIS for any natural language question.
+        - keyword_search(query): fast keyword/title matching. Use for exact name lookups when you know the title. No AI cost. For narrative questions, use semantic_search instead.
 
         === WHEN TO USE WHAT ===
 
@@ -144,9 +144,10 @@ public static class AgentPrompt
         - "Top 10 species by..." → use KG/page tools to gather data → render_chart
         - "How many X exist?" → list_entity_types or search tools → render_chart or render_markdown
 
-        LORE & EXPLANATIONS (agent-provided — use article search here):
-        - "Explain X" / "Why did X happen?" / "What was the philosophy of..." → search_article_content → render_markdown (with sectionUrl references)
-        - For richer answers, combine: KG tools for facts + search_article_content for narrative → render_markdown
+        LORE & EXPLANATIONS (agent-provided — ALWAYS use semantic_search here):
+        - "Explain X" / "Why did X happen?" / "What was the philosophy of..." → semantic_search → render_markdown (with sectionUrl references)
+        - "What motivated X?" / "What were the consequences of..." / "How did X lead to Y?" → semantic_search → render_markdown
+        - For richer answers, combine: KG tools for structured facts + semantic_search for narrative depth → render_markdown
 
         ATTRIBUTE LOOKUPS & COMPARISONS (agent-provided):
         - "How tall is X?" → search_entities → get_entity_properties → render_markdown
@@ -157,12 +158,12 @@ public static class AgentPrompt
         For complex questions spanning multiple entities, combine tools:
         - Use search_entities + get_entity_timeline to gather temporal context from multiple entities
         - Use get_entity_relationships or traverse_graph to find connected entities
-        - Use search_article_content to add narrative depth from wiki articles
+        - Use semantic_search to add narrative depth from wiki articles
         - Chain find_entities_by_year with semantic filters to find overlapping entities across time
         - Synthesize everything into render_markdown (with references) or render_data_table
         Example: "How did the fall of the Republic affect the Jedi Order?" →
           1. get_entity_timeline for both Republic and Jedi Order (parallel)
-          2. search_article_content("fall of the Republic Jedi Order")
+          2. semantic_search("fall of the Republic Jedi Order")
           3. find_entities_by_year(year=-19, type="Battle", semantic="conflict") for context
           4. render_markdown combining timeline facts + article narrative + battle context
 
@@ -170,7 +171,8 @@ public static class AgentPrompt
 
         - NEVER FABRICATE DATA. Every value in render_chart, render_data_table, and render_markdown MUST come from a tool result you received in this conversation. If you did not read a value from a tool, you cannot use it. "Agent-provided" means you query tools first, then pass the results — it does NOT mean you make up plausible-sounding numbers.
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
-        - Article search (search_article_content) adds narrative depth and citations. Use it for lore, history, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have better tools.
+        - semantic_search finds content by meaning — ALWAYS use it for lore, history, motivations, consequences, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have faster dedicated tools.
+        - keyword_search is for exact title/name lookups only. If the question is conceptual or asks why/how, use semantic_search instead.
         - render_markdown supports full markdown — use headings, bold, lists, and links for readability.
         - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. layoutMode="tree" works for ANY entity type — hierarchy is inferred from graph structure (BFS depth from root). Use "tree" for family trees, government hierarchies, organizational structures. Use "force" for general exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with).
         - render_timeline: use list_timeline_categories if you don't know valid category names.

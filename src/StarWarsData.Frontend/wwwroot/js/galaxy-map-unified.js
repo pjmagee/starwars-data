@@ -346,9 +346,14 @@ export function initialize(containerId, overview, dotNetRef) {
     const cellDataMap = {};
     overview.cells.forEach(c => { cellDataMap[`${c.col},${c.row}`] = c; });
 
-    // Render a transparent clickable rect for EVERY grid cell
-    for (let c = 0; c < cols; c++) {
-        for (let r = 0; r < rows; r++) {
+    // Render transparent clickable rects only for cells that have data
+    for (let c = startCol; c < startCol + cols; c++) {
+        for (let r = startRow; r < startRow + rows; r++) {
+            const info = cellDataMap[`${c},${r}`];
+            if (!info || info.systemCount === 0) continue;
+
+            const region = info.region;
+            const color = region ? getRegionColor(region, overview.regions) : '#ffffff';
             cellLayer.append('rect')
                 .attr('x', colX(c)).attr('y', rowY(r))
                 .attr('width', cellW).attr('height', cellH)
@@ -357,18 +362,12 @@ export function initialize(containerId, overview, dotNetRef) {
                 .style('cursor', 'pointer')
                 .datum({ col: c, row: r })
                 .on('mouseover', function (event, d) {
-                    const info = cellDataMap[`${d.col},${d.row}`];
-                    const count = info ? info.systemCount : 0;
-                    const region = info ? info.region : null;
-                    const color = region ? getRegionColor(region, overview.regions) : '#ffffff';
                     tooltip.html(
                         `<strong>Grid ${String.fromCharCode(65 + d.col)}-${d.row + 1}</strong>` +
-                        `<br>${count} system${count !== 1 ? 's' : ''}` +
+                        `<br>${info.systemCount} system${info.systemCount !== 1 ? 's' : ''}` +
                         (region ? `<br><span style="color:${color}">${region}</span>` : '') +
                         `<br><span style="color:#888">Click to explore</span>`
                     ).style('visibility', 'visible');
-
-                    // Highlight the cell border
                     d3.select(this).attr('stroke', 'rgba(255,255,255,0.25)').attr('stroke-width', 1);
                 })
                 .on('mousemove', (event) => {

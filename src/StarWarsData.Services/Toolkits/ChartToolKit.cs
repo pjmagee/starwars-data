@@ -273,7 +273,7 @@ public class ComponentToolkit
             + "For hyperlinks, use correct markdown format: [display text](full URL). "
             + "Use wikiUrl from tool results for Wookieepedia links, e.g. [Darth Vader](https://starwars.fandom.com/wiki/Darth_Vader). "
             + "Raw unformatted text looks bad — always use markdown structure. "
-            + "Fetch page data first using get_page_by_id, search_article_content, or KG tools, then write sections. "
+            + "Fetch page data first using get_page_by_id, semantic_search, or KG tools, then write sections. "
             + "Can combine text from multiple sources for comprehensive answers."
     )]
     public TextDescriptor RenderText(

@@ -13,17 +13,20 @@ public class MapService
 {
     readonly ILogger<MapService> _logger;
     readonly IMongoCollection<Page> _pages;
+    readonly SemanticSearchService _semanticSearch;
 
     public MapService(
         ILogger<MapService> logger,
         IOptions<SettingsOptions> settingsOptions,
-        IMongoClient mongoClient
+        IMongoClient mongoClient,
+        SemanticSearchService semanticSearch
     )
     {
         _logger = logger;
         _pages = mongoClient
             .GetDatabase(settingsOptions.Value.DatabaseName)
             .GetCollection<Page>(Collections.Pages);
+        _semanticSearch = semanticSearch;
     }
 
     static FilterDefinition<Page> TemplateFilter(string type) =>
@@ -710,6 +713,195 @@ public class MapService
         }
 
         return results;
+    }
+
+    /// <summary>
+    /// Semantic search for the galaxy map: delegates to SemanticSearchService,
+    /// then resolves results to grid-square-placeable entities.
+    /// </summary>
+    public async Task<List<MapSearchResult>> SemanticSearchGridAsync(
+        string query,
+        Continuity? continuity = null,
+        int limit = 10
+    )
+    {
+        // Fetch more results than needed — many won't have grid squares.
+        // minScore 0.6 filters out low-relevance noise.
+        const double minScore = 0.6;
+        var spatialResults = await _semanticSearch.SearchAsync(
+            query,
+            ["System", "CelestialBody"],
+            continuity,
+            limit * 2,
+            minScore
+        );
+        var allResults = await _semanticSearch.SearchAsync(
+            query,
+            null,
+            continuity,
+            limit * 3,
+            minScore
+        );
+
+        _logger.LogInformation(
+            "SemanticSearchGridAsync: query={Query}, spatialHits={Spatial}, allHits={All}",
+            query,
+            spatialResults.Count,
+            allResults.Count
+        );
+
+        // Merge, spatial first (higher priority for map placement)
+        var pageScores = new Dictionary<int, SemanticSearchResult>();
+        foreach (var r in spatialResults.Concat(allResults))
+        {
+            pageScores.TryAdd(r.PageId, r);
+        }
+
+        if (pageScores.Count == 0)
+            return [];
+
+        // ── Resolve to grid squares ──
+        var pageIds = pageScores.Keys.ToList();
+        var gridFilter = Builders<Page>.Filter.And(
+            Builders<Page>.Filter.In(p => p.PageId, pageIds),
+            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                "infobox.Data",
+                new BsonDocument("Label", "Grid square")
+            )
+        );
+        var pagesWithGrid = await _pages
+            .Find(gridFilter)
+            .Project<Page>(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include(p => p.Title)
+                    .Include("infobox.Data")
+                    .Include("infobox.Template")
+            )
+            .ToListAsync();
+
+        var results = new List<MapSearchResult>();
+        var seenPages = new HashSet<int>();
+
+        foreach (var page in pagesWithGrid)
+        {
+            var gridSquare = GetFirstDataValue(page, "Grid square");
+            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+                continue;
+            if (!pageScores.TryGetValue(page.PageId, out var info))
+                continue;
+
+            seenPages.Add(page.PageId);
+            var text = info.Text;
+            results.Add(
+                new MapSearchResult
+                {
+                    GridKey = $"{(char)('A' + col)}-{row + 1}",
+                    PageId = page.PageId,
+                    MatchedName = page.Title,
+                    Template = page.Infobox?.Template?.Split(':').LastOrDefault(),
+                    MatchType = "semantic",
+                    Snippet = text.Length > 200 ? text[..200] + "..." : text,
+                    Score = info.Score,
+                }
+            );
+        }
+
+        // Indirect: pages without grid squares → follow infobox location links
+        var pagesWithoutGrid = pageIds.Where(id => !seenPages.Contains(id)).ToList();
+        if (pagesWithoutGrid.Count > 0)
+        {
+            var noGridPages = await _pages
+                .Find(Builders<Page>.Filter.In(p => p.PageId, pagesWithoutGrid))
+                .Project<Page>(
+                    Builders<Page>
+                        .Projection.Include(p => p.PageId)
+                        .Include(p => p.Title)
+                        .Include("infobox.Data")
+                )
+                .ToListAsync();
+
+            var locationNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var page in noGridPages)
+            {
+                if (page.Infobox?.Data is null)
+                    continue;
+                foreach (var prop in page.Infobox.Data.Where(d => LocationLabels.Contains(d.Label)))
+                foreach (var link in prop.Links)
+                    locationNames.Add(link.Content);
+            }
+
+            if (locationNames.Count > 0)
+            {
+                var locPages = await _pages
+                    .Find(
+                        Builders<Page>.Filter.And(
+                            Builders<Page>.Filter.In("title", locationNames),
+                            Builders<Page>.Filter.ElemMatch<BsonDocument>(
+                                "infobox.Data",
+                                new BsonDocument("Label", "Grid square")
+                            )
+                        )
+                    )
+                    .Project<Page>(
+                        Builders<Page>
+                            .Projection.Include(p => p.PageId)
+                            .Include(p => p.Title)
+                            .Include("infobox.Data")
+                            .Include("infobox.Template")
+                    )
+                    .ToListAsync();
+
+                foreach (var locPage in locPages)
+                {
+                    if (seenPages.Contains(locPage.PageId))
+                        continue;
+                    var gridSquare = GetFirstDataValue(locPage, "Grid square");
+                    if (!TryParseGridSquare(gridSquare, out var col, out var row))
+                        continue;
+
+                    var sourcePage = noGridPages.FirstOrDefault(p =>
+                        p.Infobox?.Data?.Any(d =>
+                            LocationLabels.Contains(d.Label)
+                            && d.Links.Any(l =>
+                                l.Content.Equals(locPage.Title, StringComparison.OrdinalIgnoreCase)
+                            )
+                        ) == true
+                    );
+                    if (
+                        sourcePage is null
+                        || !pageScores.TryGetValue(sourcePage.PageId, out var info)
+                    )
+                        continue;
+
+                    seenPages.Add(locPage.PageId);
+                    var text = info.Text;
+                    results.Add(
+                        new MapSearchResult
+                        {
+                            GridKey = $"{(char)('A' + col)}-{row + 1}",
+                            PageId = locPage.PageId,
+                            MatchedName = locPage.Title,
+                            Template = locPage.Infobox?.Template?.Split(':').LastOrDefault(),
+                            MatchType = "semantic-linked",
+                            LinkedVia = sourcePage.Title,
+                            SourcePageId = sourcePage.PageId,
+                            SourceName = sourcePage.Title,
+                            Snippet = text.Length > 200 ? text[..200] + "..." : text,
+                            Score = info.Score,
+                        }
+                    );
+                }
+            }
+        }
+
+        // Direct semantic matches (the entity's own article matched) rank above
+        // indirect linked matches (a related entity's article matched and linked here)
+        return results
+            .OrderByDescending(r => r.MatchType == "semantic" ? 1 : 0)
+            .ThenByDescending(r => r.Score)
+            .Take(limit)
+            .ToList();
     }
 
     static bool TryParseGridSquare(string? gridSquare, out int col, out int row)

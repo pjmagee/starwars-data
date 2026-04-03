@@ -6,6 +6,7 @@
         <base href="/"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
         <link href=@Assets["_content/MudBlazor/MudBlazor.min.css"] rel="stylesheet"/>
+        <link href=@Assets["_content/MudBlazor.Markdown/MudBlazor.Markdown.min.css"] rel="stylesheet"/>
         <link href=@Assets["_content/Z.Blazor.Diagrams/style.min.css"] rel="stylesheet"/>
         <link href=@Assets["_content/Z.Blazor.Diagrams/default.styles.min.css"] rel="stylesheet"/>
         <link href=@Assets["style.css"] rel="stylesheet"/>
@@ -38,12 +39,24 @@
 
             // Auto-load if previously accepted
             if (swGetCookieConsent() === 'accepted') swLoadAnalytics();
+
+            // UI scale accessibility
+            function swSetUiScale(pct) {
+                document.body.style.zoom = pct + '%';
+            }
         </script>
     </head>
     <body>
+        <script>
+            (function() {
+                var s = localStorage.getItem('ui-scale');
+                if (s) swSetUiScale(parseFloat(s) * 100);
+            })();
+        </script>
         <Routes @rendermode="InteractiveServer" />
         <script src="_framework/blazor.web.js"></script>
         <script src=@Assets["_content/MudBlazor/MudBlazor.min.js"]></script>
+        <script src=@Assets["_content/MudBlazor.Markdown/MudBlazor.Markdown.min.js"]></script>
         <script src=@Assets["_content/Z.Blazor.Diagrams/script.min.js"]></script>
         <script src="https://d3js.org/d3.v7.min.js"></script>
     </body>
