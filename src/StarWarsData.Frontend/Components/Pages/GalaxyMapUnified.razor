@@ -392,7 +392,11 @@
 
                 @{
                     var mappedEvents = FilteredEventCells.SelectMany(c => c.Events.Select(e => (evt: e, region: c.Region))).ToList();
+                    var oouLenses = GlobalFilterService.SelectedUniverse == Universe.InUniverse
+                        ? (_overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new())
+                        : new HashSet<string>();
                     var unresolvedFiltered = (_yearData.UnresolvedEvents ?? [])
+                        .Where(e => !oouLenses.Contains(e.Lens))
                         .Where(e => _selectedLens == "All" || e.Lens == _selectedLens).ToList();
                     var totalAll = mappedEvents.Count + unresolvedFiltered.Count;
                 }
@@ -687,15 +691,32 @@
     HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
     string ContinuityQuery => GlobalFilterService.GetContinuityQueryParam() is { } c ? $"continuity={c}" : "";
 
-    IEnumerable<GalaxyYearEventCell> FilteredEventCells =>
-        _yearData?.EventCells
-            .Select(c => new GalaxyYearEventCell
-            {
-                Col = c.Col, Row = c.Row, Region = c.Region,
-                Events = _selectedLens == "All" ? c.Events : c.Events.Where(e => e.Lens == _selectedLens).ToList(),
-                Count = _selectedLens == "All" ? c.Count : c.Events.Count(e => e.Lens == _selectedLens),
-            })
-            .Where(c => c.Events.Count > 0) ?? [];
+    IEnumerable<GalaxyYearEventCell> FilteredEventCells
+    {
+        get
+        {
+            if (_yearData?.EventCells is null) return [];
+
+            // Build set of OOU lenses to exclude when universe filter is InUniverse
+            var hiddenLenses = GlobalFilterService.SelectedUniverse == Universe.InUniverse
+                ? (_overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? [])
+                : new HashSet<string>();
+
+            return _yearData.EventCells
+                .Select(c => new GalaxyYearEventCell
+                {
+                    Col = c.Col, Row = c.Row, Region = c.Region,
+                    Events = c.Events
+                        .Where(e => !hiddenLenses.Contains(e.Lens))
+                        .Where(e => _selectedLens == "All" || e.Lens == _selectedLens)
+                        .ToList(),
+                    Count = c.Events
+                        .Count(e => !hiddenLenses.Contains(e.Lens)
+                            && (_selectedLens == "All" || e.Lens == _selectedLens)),
+                })
+                .Where(c => c.Events.Count > 0);
+        }
+    }
 
     int FilteredEventCount => FilteredEventCells.Sum(c => c.Events.Count);
 
