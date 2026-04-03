@@ -166,6 +166,20 @@
                                    ValueChanged="OnCelestialBodyFilterChanged" T="bool" />
                     }
 
+                    <!-- Display toggles -->
+                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="flex-wrap">
+                        <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.7);font-weight:600;">Display</MudText>
+                        <MudSwitch Value="_showBackground" Color="Color.Default" Size="Size.Small"
+                                   Label="Background" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                   ValueChanged="OnToggleBackground" T="bool" />
+                        <MudSwitch Value="_showTradeRoutes" Color="Color.Warning" Size="Size.Small"
+                                   Label="Routes" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                   ValueChanged="OnToggleTradeRoutes" T="bool" />
+                        <MudSwitch Value="_showNebulae" Color="Color.Info" Size="Size.Small"
+                                   Label="Nebulae" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                   ValueChanged="OnToggleNebulae" T="bool" />
+                    </MudStack>
+
                     <!-- Region filter -->
                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                         <MudText Typo="Typo.body2" Style="color:rgba(255,255,255,0.7);font-weight:600;">Regions</MudText>
@@ -667,6 +681,9 @@
     string _regionLabel = "";
     List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: false, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies;
+    bool _showBackground = true;
+    bool _showTradeRoutes = true;
+    bool _showNebulae = true;
     readonly HashSet<string> _hiddenRegions = new();
     string? _hoveredRegionName;
     int _hoveredRegionCellCount;
@@ -951,6 +968,24 @@
     {
         _onlyWithBodies = value;
         if (_module is not null) await _module.InvokeVoidAsync("setSystemFilter", value);
+    }
+
+    async Task OnToggleBackground(bool value)
+    {
+        _showBackground = value;
+        if (_module is not null) await _module.InvokeVoidAsync("toggleBackground", value);
+    }
+
+    async Task OnToggleTradeRoutes(bool value)
+    {
+        _showTradeRoutes = value;
+        if (_module is not null) await _module.InvokeVoidAsync("toggleTradeRoutes", value);
+    }
+
+    async Task OnToggleNebulae(bool value)
+    {
+        _showNebulae = value;
+        if (_module is not null) await _module.InvokeVoidAsync("toggleNebulae", value);
     }
 
     async Task ToggleRegion(string name)

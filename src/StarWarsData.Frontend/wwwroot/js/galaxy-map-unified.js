@@ -71,13 +71,13 @@ export function initialize(containerId, overview, dotNetRef) {
     const g = svg.append('g');
 
     // Layers (order = z-order, bottom to top)
-    const bgLayer = g.append('g');
+    const bgLayer = g.append('g').attr('class', 'layer-bg');
     const regionLayer = g.append('g');
     const gridLayer = g.append('g');
     const territoryLayer = g.append('g').attr('class', 'layer-territory').style('display', 'none');
     const cellLayer = g.append('g');     // transparent grid click targets (below routes/nebulas)
-    const routeLayer = g.append('g');
-    const nebulaLayer = g.append('g');
+    const routeLayer = g.append('g').attr('class', 'layer-routes');
+    const nebulaLayer = g.append('g').attr('class', 'layer-nebulae');
     const contentLayer = g.append('g');  // drill-down content (systems / celestial bodies)
     // Heatmap + markers on top so event circles receive mouse events
     const heatmapLayer = g.append('g').attr('class', 'layer-heatmap').style('display', 'none');
@@ -1346,4 +1346,19 @@ function _renderHeatmap() {
         pulse.append('animate').attr('attributeName', 'r').attr('from', radius).attr('to', radius * 1.8).attr('dur', '2s').attr('repeatCount', 'indefinite');
         pulse.append('animate').attr('attributeName', 'stroke-opacity').attr('from', '0.5').attr('to', '0').attr('dur', '2s').attr('repeatCount', 'indefinite');
     });
+}
+
+export function toggleBackground(visible) {
+    if (!_state) return;
+    _state.svg.select('.layer-bg').style('display', visible ? null : 'none');
+}
+
+export function toggleTradeRoutes(visible) {
+    if (!_state) return;
+    _state.svg.select('.layer-routes').style('display', visible ? null : 'none');
+}
+
+export function toggleNebulae(visible) {
+    if (!_state) return;
+    _state.svg.select('.layer-nebulae').style('display', visible ? null : 'none');
 }
