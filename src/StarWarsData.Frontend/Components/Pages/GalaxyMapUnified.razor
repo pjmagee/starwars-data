@@ -392,11 +392,14 @@
 
                 @{
                     var mappedEvents = FilteredEventCells.SelectMany(c => c.Events.Select(e => (evt: e, region: c.Region))).ToList();
-                    var oouLenses = GlobalFilterService.SelectedUniverse == Universe.InUniverse
-                        ? (_overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new())
-                        : new HashSet<string>();
+                    var unresolvedHidden = GlobalFilterService.SelectedUniverse switch
+                    {
+                        Universe.InUniverse => _overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
+                        Universe.OutOfUniverse => _overview?.Lenses.Where(l => !l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
+                        _ => new HashSet<string>(),
+                    };
                     var unresolvedFiltered = (_yearData.UnresolvedEvents ?? [])
-                        .Where(e => !oouLenses.Contains(e.Lens))
+                        .Where(e => !unresolvedHidden.Contains(e.Lens))
                         .Where(e => _selectedLens == "All" || e.Lens == _selectedLens).ToList();
                     var totalAll = mappedEvents.Count + unresolvedFiltered.Count;
                 }
@@ -697,10 +700,16 @@
         {
             if (_yearData?.EventCells is null) return [];
 
-            // Build set of OOU lenses to exclude when universe filter is InUniverse
-            var hiddenLenses = GlobalFilterService.SelectedUniverse == Universe.InUniverse
-                ? (_overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? [])
-                : new HashSet<string>();
+            var oouLenses = _overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+            var iuLenses = _overview?.Lenses.Where(l => !l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+
+            // Determine which lenses to hide based on universe filter
+            var hiddenLenses = GlobalFilterService.SelectedUniverse switch
+            {
+                Universe.InUniverse => oouLenses,       // hide out-of-universe
+                Universe.OutOfUniverse => iuLenses,      // hide in-universe
+                _ => new HashSet<string>(),               // null = show both
+            };
 
             return _yearData.EventCells
                 .Select(c => new GalaxyYearEventCell
@@ -749,9 +758,12 @@
         ?? Enumerable.Empty<string>();
 
     IEnumerable<GalaxyLensSummary> FilteredLenses =>
-        _overview?.Lenses.Where(l =>
-            GlobalFilterService.SelectedUniverse != Universe.InUniverse || !l.OutOfUniverse)
-        ?? [];
+        _overview?.Lenses.Where(l => GlobalFilterService.SelectedUniverse switch
+        {
+            Universe.InUniverse => !l.OutOfUniverse,
+            Universe.OutOfUniverse => l.OutOfUniverse,
+            _ => true, // null = show both
+        }) ?? [];
 
     // ══════════ LIFECYCLE ══════════
 
