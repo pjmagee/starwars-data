@@ -125,15 +125,8 @@
         <div class="galaxy-nav-panel">
             <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:300px;">
                 <MudStack Row="false" Spacing="1">
-                    <!-- Title + Mode toggle + fullscreen -->
+                    <!-- Mode toggle + fullscreen -->
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                    <svg width="22" height="22" viewBox="0 0 24 24" style="flex-shrink:0;" title="Galaxy Map">
-                        <ellipse cx="12" cy="12" rx="10" ry="5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2" transform="rotate(-30 12 12)"/>
-                        <ellipse cx="12" cy="12" rx="10" ry="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" transform="rotate(20 12 12)"/>
-                        <ellipse cx="12" cy="12" rx="6" ry="3" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" transform="rotate(-30 12 12)"/>
-                        <circle cx="12" cy="12" r="1.5" fill="rgba(255,200,100,0.8)"/>
-                    </svg>
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                     <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
                         <MudToggleItem Value="@("explore")" Text="Explore" />
                         <MudToggleItem Value="@("timeline")" Text="Timeline" />
@@ -142,7 +135,6 @@
                                    Size="Size.Medium" Color="Color.Inherit" OnClick="ToggleFullscreen"
                                    Title="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")"
                                    Style="color:rgba(255,255,255,0.8);" />
-                    </MudStack>
                     </MudStack>
 
                     <!-- Breadcrumbs -->
