@@ -290,6 +290,13 @@ public class ComponentToolkit
             List<Reference>? references = null
     )
     {
+        // Sanitize markdown content from common AI formatting issues
+        foreach (var section in sections)
+        {
+            if (section.Content is not null)
+                section.Content = SanitizeMarkdown(section.Content);
+        }
+
         TextResult = new TextDescriptor
         {
             Title = title,
@@ -297,6 +304,32 @@ public class ComponentToolkit
             References = references,
         };
         return TextResult;
+    }
+
+    /// <summary>
+    /// Fix common AI markdown formatting issues so MudMarkdown renders correctly.
+    /// </summary>
+    static string SanitizeMarkdown(string md)
+    {
+        // Ensure blank line before bullet lists (required for markdown parsers)
+        md = System.Text.RegularExpressions.Regex.Replace(
+            md,
+            @"([^\n])\n(- |\* |\d+\. )",
+            "$1\n\n$2"
+        );
+
+        // Fix headings missing space after # (e.g. ##Title → ## Title)
+        md = System.Text.RegularExpressions.Regex.Replace(
+            md,
+            @"^(#{1,6})([^ #\n])",
+            "$1 $2",
+            System.Text.RegularExpressions.RegexOptions.Multiline
+        );
+
+        // Fix broken links with space before paren: [text] (url) → [text](url)
+        md = System.Text.RegularExpressions.Regex.Replace(md, @"\]\s+\(", "](");
+
+        return md;
     }
 
     public List<AITool> AsAIFunctions() =>
