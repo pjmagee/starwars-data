@@ -41,6 +41,23 @@
     white-space: nowrap;
 }
 
+/* Aurebesh content — renders paragraph text in Star Wars script, headings stay readable */
+.aurebesh-content p, .aurebesh-content li, .aurebesh-content blockquote,
+.aurebesh-content td, .aurebesh-content code {
+    font-family: 'Aurebesh', sans-serif;
+    color: #ffa726;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+.aurebesh-content a {
+    color: #ffa726;
+    text-decoration: underline;
+}
+.aurebesh-content strong, .aurebesh-content b {
+    color: #ffcc02;
+}
+
 /* Galaxy Map Page Styles */
 .galactic-grid {
     display: grid;

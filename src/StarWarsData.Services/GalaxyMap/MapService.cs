@@ -732,15 +732,15 @@ public class MapService
             query,
             ["System", "CelestialBody"],
             continuity,
-            limit * 2,
-            minScore
+            limit: limit * 2,
+            minScore: minScore
         );
         var allResults = await _semanticSearch.SearchAsync(
             query,
             null,
             continuity,
-            limit * 3,
-            minScore
+            limit: limit * 3,
+            minScore: minScore
         );
 
         _logger.LogInformation(

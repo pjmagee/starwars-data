@@ -384,7 +384,7 @@ public class GraphRAGToolkit
                 ? c
                 : null;
 
-        var results = await _search.SearchAsync(query, types, cont, limit);
+        var results = await _search.SearchAsync(query, types, cont, limit: limit);
 
         if (results.Count == 0)
             return JsonSerializer.Serialize(

@@ -94,10 +94,30 @@
             }
             function _onSelectionChange() {
                 if (!_aurebeshBar) return;
-                var text = (window.getSelection() || '').toString().trim();
+                var sel = window.getSelection();
+                var text = (sel || '').toString().trim();
                 var textEl = _aurebeshBar.querySelector('.aurebesh-text');
+                var labelEl = _aurebeshBar.querySelector('.aurebesh-label');
                 if (text.length > 0) {
+                    // Check if selection is inside aurebesh-content (already rendered as Aurebesh)
+                    var node = sel.anchorNode;
+                    var inAurebesh = false;
+                    while (node) {
+                        if (node.nodeType === 1 && node.classList && node.classList.contains('aurebesh-content')) {
+                            inAurebesh = true;
+                            break;
+                        }
+                        node = node.parentElement;
+                    }
+                    // If selecting Aurebesh text, show translation in English; otherwise show in Aurebesh
                     textEl.textContent = text;
+                    if (inAurebesh) {
+                        textEl.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        labelEl.textContent = 'Translation';
+                    } else {
+                        textEl.style.fontFamily = "'Aurebesh', sans-serif";
+                        labelEl.textContent = 'Aurebesh';
+                    }
                     _aurebeshBar.classList.add('visible');
                 } else {
                     _aurebeshBar.classList.remove('visible');

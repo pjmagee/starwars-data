@@ -81,6 +81,7 @@ public partial class ArticleChunkingService
                     { "wikiUrl", 1 },
                     { "content", 1 },
                     { "continuity", 1 },
+                    { "universe", 1 },
                     { "infobox.Template", 1 },
                 }
             )
@@ -127,6 +128,13 @@ public partial class ArticleChunkingService
                             ? c
                             : Continuity.Unknown
                         : Continuity.Unknown;
+
+                var universe =
+                    doc.Contains("universe") && !doc["universe"].IsBsonNull
+                        ? Enum.TryParse<Universe>(doc["universe"].AsString, true, out var u)
+                            ? u
+                            : Universe.Unknown
+                        : Universe.Unknown;
 
                 // Split content into chunks
                 var sections = SplitByMarkdownHeadings(content);
@@ -247,6 +255,7 @@ public partial class ArticleChunkingService
                             Text = chunks[i].text,
                             Type = template,
                             Continuity = continuity,
+                            Universe = universe,
                             Embedding = vec,
                         }
                     );
@@ -557,6 +566,7 @@ public partial class ArticleChunkingService
                     },
                     new BsonDocument { { "type", "filter" }, { "path", "type" } },
                     new BsonDocument { { "type", "filter" }, { "path", "continuity" } },
+                    new BsonDocument { { "type", "filter" }, { "path", "universe" } },
                 }
             },
         };

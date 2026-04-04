@@ -179,6 +179,9 @@
                                 case "text" when msg.TextDescriptor is not null:
                                     <AskTextView Descriptor="msg.TextDescriptor" />
                                     break;
+                                case "aurebesh" when msg.AurebeshDescriptor is not null:
+                                    <AskAurebeshView Descriptor="msg.AurebeshDescriptor" />
+                                    break;
                             }
                         </div>
                     }
@@ -340,6 +343,7 @@
         public TimelineDescriptor? TimelineDescriptor { get; set; }
         public InfoboxDescriptor? InfoboxDescriptor { get; set; }
         public TextDescriptor? TextDescriptor { get; set; }
+        public AurebeshDescriptor? AurebeshDescriptor { get; set; }
     }
 
     // ── AGUI message replay (sent to /kernel/stream each turn) ──
@@ -874,7 +878,7 @@
             info.Result = contentJson;
 
         // Check if this is a render_* tool and create inline visualization
-        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_markdown"
+        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_markdown" or "render_aurebesh"
             && contentJson is not null)
         {
             var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization };
@@ -909,6 +913,10 @@
                     case "render_markdown":
                         vizMsg.VisualizationType = "text";
                         vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
+                        break;
+                    case "render_aurebesh":
+                        vizMsg.VisualizationType = "aurebesh";
+                        vizMsg.AurebeshDescriptor = JsonSerializer.Deserialize<AurebeshDescriptor>(contentJson, JsonOpts);
                         break;
                 }
                 _conversation.Add(vizMsg);

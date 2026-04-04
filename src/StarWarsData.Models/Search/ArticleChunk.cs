@@ -50,6 +50,10 @@ public class ArticleChunk
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
+    [BsonElement("universe")]
+    [BsonRepresentation(BsonType.String)]
+    public Universe Universe { get; set; } = Universe.Unknown;
+
     /// <summary>The embedding vector (text-embedding-3-small, 1536 dimensions).</summary>
     [BsonElement("embedding")]
     public float[] Embedding { get; set; } = [];

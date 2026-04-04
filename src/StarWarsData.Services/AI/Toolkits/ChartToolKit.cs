@@ -332,6 +332,34 @@ public class ComponentToolkit
         return md;
     }
 
+    [Description(
+        "Auto-convert English text to Aurebesh (the Star Wars alphabet). "
+            + "Write everything in plain English — the frontend automatically converts it to Aurebesh visually. "
+            + "Do NOT attempt to write Aurebesh characters yourself. Just write normal English. "
+            + "Supports full markdown. Use when the user asks to see something in Aurebesh or Star Wars script."
+    )]
+    public AurebeshDescriptor RenderAurebesh(
+        [Description("Title shown above the Aurebesh output (displayed in normal English font)")]
+            string title,
+        [Description(
+            "Plain English text (with optional markdown formatting). "
+                + "This is automatically rendered as Aurebesh by the frontend. Do NOT transliterate — just write English."
+        )]
+            string text,
+        [Description("Optional source references")] List<Reference>? references = null
+    )
+    {
+        if (text is not null)
+            text = SanitizeMarkdown(text);
+
+        return new AurebeshDescriptor
+        {
+            Title = title,
+            Text = text ?? "",
+            References = references,
+        };
+    }
+
     public List<AITool> AsAIFunctions() =>
         [
             AIFunctionFactory.Create(RenderTable, "render_table"),
@@ -341,5 +369,6 @@ public class ComponentToolkit
             AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
             AIFunctionFactory.Create(RenderInfobox, "render_infobox"),
             AIFunctionFactory.Create(RenderText, "render_markdown"),
+            AIFunctionFactory.Create(RenderAurebesh, "render_aurebesh"),
         ];
 }

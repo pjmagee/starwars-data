@@ -1,0 +1,325 @@
+@page "/search"
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using System.Web
+@inject IHttpClientFactory HttpClientFactory
+@inject GlobalFilterService GlobalFilterService
+@inject ISnackbar Snackbar
+@implements IDisposable
+
+<PageTitle>Search — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Search across 800K+ Star Wars article passages using keyword, semantic vector, or hybrid search. Find relevant content from Wookieepedia ranked by relevance." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-4 px-4">
+
+    <MudText Typo="Typo.h5" Class="mb-2">Search</MudText>
+    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
+        @(_mode switch
+        {
+            "keyword" => "Full-text keyword search across wiki page titles and content.",
+            "hybrid" => "Combined keyword and semantic search for the best of both strategies.",
+            _ => "AI-powered semantic similarity search across 800K+ article passages.",
+        })
+    </MudText>
+
+    @* ── Search input + filters ── *@
+    <MudPaper Outlined="true" Class="pa-4 mb-4">
+        <MudGrid Spacing="2">
+            <MudItem xs="12">
+                <MudToggleGroup T="string" @bind-Value="_mode" Color="Color.Primary"
+                                Outline="true" Dense="true" Class="mb-2">
+                    <MudToggleItem T="string" Value="@("semantic")" Text="Semantic"
+                                   Icon="@Icons.Material.Filled.Psychology" />
+                    <MudToggleItem T="string" Value="@("keyword")" Text="Keyword"
+                                   Icon="@Icons.Material.Filled.TextFields" />
+                    <MudToggleItem T="string" Value="@("hybrid")" Text="Hybrid"
+                                   Icon="@Icons.Material.Filled.JoinInner" />
+                </MudToggleGroup>
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField T="string" @bind-Value="_query" Label="Search the Star Wars universe..."
+                              Variant="Variant.Outlined" Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              OnKeyDown="OnSearchKeyDown" Immediate="true"
+                              Disabled="_loading" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined"
+                           Margin="Margin.Dense" Clearable="true" Placeholder="All Types" Label="Entity Type">
+                    @foreach (var type in _entityTypes)
+                    {
+                        <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudSelect T="string" @bind-Value="_selectedContinuity" Variant="Variant.Outlined"
+                           Margin="Margin.Dense" Clearable="true" Placeholder="All Continuities" Label="Continuity">
+                    <MudSelectItem T="string" Value="@("Canon")">Canon</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("Legends")">Legends</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="d-flex align-end">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true"
+                           OnClick="ExecuteSearch" Disabled="_loading || string.IsNullOrWhiteSpace(_query)"
+                           StartIcon="@Icons.Material.Filled.Search">
+                    @(_loading ? "Searching..." : "Search")
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    @* ── Rate limit warning ── *@
+    @if (_rateLimited)
+    {
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4" Dense="true">
+            @_rateLimitMessage
+        </MudAlert>
+    }
+
+    @* ── Loading indicator ── *@
+    @if (_loading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="mb-4" />
+    }
+
+    @* ── Results ── *@
+    @if (_results is not null)
+    {
+        <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mb-3">
+            @_results.Count result@(_results.Count != 1 ? "s" : "") for "@_searchedQuery"
+            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default" Class="ml-2">
+                @(_searchedMode switch
+                {
+                    "keyword" => "Keyword",
+                    "hybrid" => "Hybrid",
+                    _ => "Semantic",
+                })
+            </MudChip>
+        </MudText>
+
+        @if (_results.Count == 0)
+        {
+            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
+                No results found. Try a different query or broaden your filters.
+            </MudAlert>
+        }
+
+        @foreach (var result in _results)
+        {
+            <MudPaper Outlined="true" Class="pa-4 mb-3">
+                <div class="d-flex justify-space-between align-center mb-2">
+                    <div class="d-flex align-center gap-2 flex-wrap">
+                        <MudText Typo="Typo.h6">@result.Title</MudText>
+                        @if (!string.IsNullOrEmpty(result.Type))
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">
+                                @FormatTypeName(result.Type)
+                            </MudChip>
+                        }
+                        @if (!string.IsNullOrEmpty(result.Continuity))
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                     Color="@(result.Continuity == "Canon" ? Color.Info : Color.Warning)">
+                                @result.Continuity
+                            </MudChip>
+                        }
+                    </div>
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                             Color="@ScoreColor(result.Score)">
+                        @($"{result.Score:P0}")
+                    </MudChip>
+                </div>
+
+                @* ── Relevance bar ── *@
+                <MudProgressLinear Value="@(result.Score * 100)" Color="@ScoreColor(result.Score)"
+                                   Size="Size.Small" Rounded="true" Class="mb-2" />
+
+                @if (!string.IsNullOrEmpty(result.Heading))
+                {
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mb-1">
+                        @result.Heading
+                    </MudText>
+                }
+
+                <MudMarkdown Value="@result.Snippet" />
+
+                <div class="d-flex gap-2 mt-2">
+                    @if (!string.IsNullOrEmpty(result.SectionUrl))
+                    {
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.OpenInNew"
+                                   Href="@result.SectionUrl" Target="_blank">
+                            Read on Wookieepedia
+                        </MudButton>
+                    }
+                    else if (!string.IsNullOrEmpty(result.WikiUrl))
+                    {
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.OpenInNew"
+                                   Href="@result.WikiUrl" Target="_blank">
+                            Read on Wookieepedia
+                        </MudButton>
+                    }
+                    <MudButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Hub"
+                               Href="@($"/graph-explorer/{result.PageId}")">
+                        View in Graph Explorer
+                    </MudButton>
+                </div>
+            </MudPaper>
+        }
+    }
+
+</MudContainer>
+
+@code {
+    private string _query = "";
+    private string _searchedQuery = "";
+    private string _mode = "semantic";
+    private string _searchedMode = "semantic";
+    private string _selectedType = "";
+    private string _selectedContinuity = "";
+    private bool _loading;
+    private bool _rateLimited;
+    private string _rateLimitMessage = "";
+    private List<SearchResult>? _results;
+    private List<string> _entityTypes = [];
+
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync()
+    {
+        GlobalFilterService.OnChange += OnGlobalFilterChanged;
+        await LoadEntityTypes();
+    }
+
+    private async Task LoadEntityTypes()
+    {
+        try
+        {
+            var types = await Api.GetFromJsonAsync<List<string>>("api/RelationshipGraph/entity-types");
+            if (types is { Count: > 0 })
+                _entityTypes = types;
+        }
+        catch { }
+    }
+
+    private async Task OnSearchKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(_query) && !_loading)
+            await ExecuteSearch();
+    }
+
+    private async Task ExecuteSearch()
+    {
+        if (string.IsNullOrWhiteSpace(_query) || _loading)
+            return;
+
+        _loading = true;
+        _rateLimited = false;
+        _results = null;
+        _searchedQuery = _query;
+        _searchedMode = _mode;
+        StateHasChanged();
+
+        try
+        {
+            var qs = $"api/SemanticSearch?query={HttpUtility.UrlEncode(_query)}&mode={_mode}&limit=10";
+            if (!string.IsNullOrEmpty(_selectedType))
+                qs += $"&type={HttpUtility.UrlEncode(_selectedType)}";
+
+            var continuity = _selectedContinuity;
+            if (string.IsNullOrEmpty(continuity))
+                continuity = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuity))
+                qs += $"&continuity={HttpUtility.UrlEncode(continuity)}";
+
+            var universe = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(universe))
+                qs += $"&universe={HttpUtility.UrlEncode(universe)}";
+
+            var response = await Api.GetAsync(qs);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+            {
+                var body = await response.Content.ReadFromJsonAsync<RateLimitResponse>();
+                var retryMinutes = Math.Ceiling((body?.RetryAfterSeconds ?? 1800) / 60.0);
+                var limit = body?.Limit ?? (body?.IsAuthenticated == true ? 10 : 3);
+
+                _rateLimited = true;
+                _rateLimitMessage = body?.IsAuthenticated == true
+                    ? $"You have used all {limit} of your search requests. Try again in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
+                    : $"Anonymous users are limited to {limit} searches per window. Try again in {retryMinutes:0} minutes. Sign in for more, or add your own OpenAI API key for unlimited access.";
+                return;
+            }
+
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadFromJsonAsync<SearchResponse>(JsonOptions);
+            _results = result?.Results ?? [];
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Search failed: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void OnGlobalFilterChanged() => InvokeAsync(StateHasChanged);
+
+    private static Color ScoreColor(double score) => score switch
+    {
+        >= 0.8 => Color.Success,
+        >= 0.6 => Color.Info,
+        >= 0.4 => Color.Warning,
+        _ => Color.Default,
+    };
+
+    private static string FormatTypeName(string type) => type switch
+    {
+        "CelestialBody" => "Planet / Body",
+        _ => System.Text.RegularExpressions.Regex.Replace(type, "(?<!^)([A-Z])", " $1"),
+    };
+
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
+
+    public void Dispose()
+    {
+        GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+    }
+
+    record RateLimitResponse(
+        [property: JsonPropertyName("limit")] int? Limit,
+        [property: JsonPropertyName("isAuthenticated")] bool? IsAuthenticated,
+        [property: JsonPropertyName("retryAfterSeconds")] int? RetryAfterSeconds
+    );
+
+    record SearchResponse(
+        [property: JsonPropertyName("query")] string Query,
+        [property: JsonPropertyName("count")] int Count,
+        [property: JsonPropertyName("results")] List<SearchResult> Results
+    );
+
+    record SearchResult(
+        [property: JsonPropertyName("pageId")] int PageId,
+        [property: JsonPropertyName("title")] string Title,
+        [property: JsonPropertyName("heading")] string Heading,
+        [property: JsonPropertyName("section")] string Section,
+        [property: JsonPropertyName("wikiUrl")] string WikiUrl,
+        [property: JsonPropertyName("type")] string Type,
+        [property: JsonPropertyName("continuity")] string Continuity,
+        [property: JsonPropertyName("score")] double Score,
+        [property: JsonPropertyName("snippet")] string Snippet,
+        [property: JsonPropertyName("sectionUrl")] string SectionUrl
+    );
+}

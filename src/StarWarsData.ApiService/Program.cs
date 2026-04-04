@@ -53,6 +53,7 @@ builder
     .AddDataProtection()
     .Services.AddSingleton<OpenAiStatusService>()
     .AddSingleton<AskRateLimiter>()
+    .AddSingleton<SearchRateLimiter>()
     .AddSingleton<UserSettingsService>()
     .AddSingleton<ByokChatClient>(sp =>
     {
@@ -106,6 +107,7 @@ builder
     .AddSingleton<CollectionFilters>()
     .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<SemanticSearchService>()
+    .AddSingleton<KeywordSearchService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {

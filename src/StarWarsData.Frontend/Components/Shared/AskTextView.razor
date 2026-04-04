@@ -13,7 +13,7 @@
                     <MudText Typo="Typo.h6" Class="mb-2">@textSection.Heading</MudText>
                 }
 
-                <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@textSection.Content</MudText>
+                <MudMarkdown Value="@textSection.Content" />
 
                 @if (textSection.SourcePageTitle is not null)
                 {

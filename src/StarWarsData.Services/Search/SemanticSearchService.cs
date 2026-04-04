@@ -38,21 +38,24 @@ public class SemanticSearchService
     /// <param name="query">Natural language query to embed and search.</param>
     /// <param name="types">Optional entity type filter (e.g. "System", "CelestialBody"). Multiple types are OR'd.</param>
     /// <param name="continuity">Optional continuity filter.</param>
+    /// <param name="universe">Optional universe filter.</param>
     /// <param name="limit">Max results to return.</param>
     /// <param name="minScore">Minimum cosine similarity score (0-1). Results below this are discarded.</param>
     public async Task<List<SemanticSearchResult>> SearchAsync(
         string query,
         string[]? types = null,
         Continuity? continuity = null,
+        Universe? universe = null,
         int limit = 10,
         double minScore = 0.0
     )
     {
         _logger.LogInformation(
-            "SemanticSearch: embedding query ({Length} chars), types={Types}, continuity={Continuity}",
+            "SemanticSearch: embedding query ({Length} chars), types={Types}, continuity={Continuity}, universe={Universe}",
             query.Length,
             types is not null ? string.Join(",", types) : "all",
-            continuity?.ToString() ?? "all"
+            continuity?.ToString() ?? "all",
+            universe?.ToString() ?? "all"
         );
 
         var embeddings = await _embedder.GenerateAsync([query]);
@@ -67,7 +70,14 @@ public class SemanticSearchService
         );
 
         var queryVector = new BsonArray(vector.Select(f => (double)f));
-        var results = await SearchByVectorAsync(queryVector, types, continuity, limit, minScore);
+        var results = await SearchByVectorAsync(
+            queryVector,
+            types,
+            continuity,
+            universe,
+            limit,
+            minScore
+        );
 
         _logger.LogInformation("SemanticSearch: {Count} results returned", results.Count);
         return results;
@@ -80,6 +90,7 @@ public class SemanticSearchService
         BsonArray queryVector,
         string[]? types = null,
         Continuity? continuity = null,
+        Universe? universe = null,
         int limit = 10,
         double minScore = 0.0
     )
@@ -103,6 +114,8 @@ public class SemanticSearchService
         }
         if (continuity.HasValue)
             filter["continuity"] = continuity.Value.ToString();
+        if (universe.HasValue)
+            filter["universe"] = universe.Value.ToString();
         if (filter.ElementCount > 0)
             searchDoc["filter"] = filter;
 
@@ -120,6 +133,7 @@ public class SemanticSearchService
                 { "wikiUrl", 1 },
                 { "type", 1 },
                 { "continuity", 1 },
+                { "universe", 1 },
                 { "text", 1 },
                 { "score", new BsonDocument("$meta", "vectorSearchScore") },
             }
@@ -150,6 +164,10 @@ public class SemanticSearchService
                     d.Contains("continuity") && !d["continuity"].IsBsonNull
                         ? d["continuity"].AsString
                         : "",
+                Universe =
+                    d.Contains("universe") && !d["universe"].IsBsonNull
+                        ? d["universe"].AsString
+                        : "",
                 Text = d["text"].AsString,
                 Score = d.Contains("score") ? d["score"].AsDouble : 0,
             })
@@ -166,6 +184,7 @@ public class SemanticSearchResult
     public string WikiUrl { get; set; } = "";
     public string Type { get; set; } = "";
     public string Continuity { get; set; } = "";
+    public string Universe { get; set; } = "";
     public string Text { get; set; } = "";
     public double Score { get; set; }
 

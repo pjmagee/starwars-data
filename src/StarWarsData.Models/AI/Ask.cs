@@ -305,6 +305,26 @@ public class TextSection
     public string? SourcePageTitle { get; set; }
 }
 
+[Description(
+    "English-to-Aurebesh auto-converter. Write plain English — the frontend renders it as Aurebesh."
+)]
+public class AurebeshDescriptor
+{
+    [JsonPropertyName("title")]
+    [Description("Title shown in normal English font above the Aurebesh output")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("text")]
+    [Description(
+        "Plain English text (with optional markdown). Automatically displayed as Aurebesh."
+    )]
+    public string Text { get; set; } = string.Empty;
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references")]
+    public List<Reference>? References { get; set; }
+}
+
 // ── References ────────────────────────────────────────────────────────
 
 [Description("A source reference link from a wiki page")]

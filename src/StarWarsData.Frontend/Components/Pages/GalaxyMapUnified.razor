@@ -16,6 +16,10 @@
 </HeadContent>
 
 <style>
+    /* Prevent the parent MudMainContent from scrolling to the footer on re-render */
+    .mud-main-content:has(.galaxy-map-container) {
+        overflow: hidden;
+    }
     .galaxy-map-container {
         position: relative;
         width: 100%;

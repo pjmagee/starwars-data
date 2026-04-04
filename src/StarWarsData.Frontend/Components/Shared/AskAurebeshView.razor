@@ -1,0 +1,29 @@
+@using StarWarsData.Models.Queries
+
+@if (!string.IsNullOrWhiteSpace(Descriptor?.Text))
+{
+    <MudText Typo="Typo.h5" Class="mt-6 mb-3">@Descriptor.Title</MudText>
+
+    <MudPaper Outlined="true" Class="pa-4" Style="border-color: rgba(255, 167, 38, 0.3);">
+        <div class="d-flex justify-end mb-2">
+            <MudButton Variant="Variant.Outlined" Size="Size.Small"
+                       StartIcon="@Icons.Material.Filled.Translate"
+                       OnClick="() => _translated = !_translated"
+                       Style="@(_translated ? "" : "border-color: rgba(255, 167, 38, 0.4); color: #ffa726;")">
+                @(_translated ? "Show Aurebesh" : "Translate")
+            </MudButton>
+        </div>
+        <div class="@(_translated ? "" : "aurebesh-content")">
+            <MudMarkdown Value="@Descriptor.Text" />
+        </div>
+    </MudPaper>
+
+    <AskReferencesSection References="@Descriptor.References" />
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public AurebeshDescriptor Descriptor { get; set; } = default!;
+
+    private bool _translated;
+}
