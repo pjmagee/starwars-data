@@ -52,14 +52,6 @@ public class SettingsOptions
 
     /// <summary>Separate database for Hangfire (it creates its own collections).</summary>
     public string HangfireDb { get; set; } = "starwars-hangfire";
-
-    // ── Legacy DB names (kept for backward compat during migration) ──
-    [Obsolete("Use DatabaseName")] public string PagesDb { get => DatabaseName; set { } }
-    [Obsolete("Use DatabaseName")] public string TimelineEventsDb { get => DatabaseName; set { } }
-    [Obsolete("Use DatabaseName")] public string ChatSessionsDb { get => DatabaseName; set { } }
-    [Obsolete("Use DatabaseName")] public string CharacterTimelinesDb { get => DatabaseName; set { } }
-    [Obsolete("Use DatabaseName")] public string RelationshipGraphDb { get => DatabaseName; set { } }
-    [Obsolete("Use DatabaseName")] public string TerritoryControlDb { get => DatabaseName; set { } }
 }
 
 /// <summary>
@@ -83,7 +75,6 @@ public static class Collections
     public const string KgBatchJobs = "kg.batch_jobs";
     public const string KgLabels = "kg.labels";
     public const string SearchChunks = "search.chunks";
-
 
     // ── AI-generated content ──
     public const string GenaiCharacterTimelines = "genai.character_timelines";
